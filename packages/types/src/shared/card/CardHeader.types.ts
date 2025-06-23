@@ -30,7 +30,7 @@ export interface CardHeaderPassThrough {
 /**
  * Defines valid properties in CardHeader component.
  */
-export interface CardHeaderProps extends BaseComponentProps<CardHeaderInstance, unknown, 'div'> {}
+export interface CardHeaderProps extends BaseComponentProps<CardHeaderInstance, unknown, CardHeaderPassThrough, 'div'> {}
 
 /**
  * Defines valid state in CardHeader component.
@@ -50,4 +50,4 @@ export interface CardHeaderExposes {
 /**
  * Instance of CardHeader component.
  */
-export type CardHeaderInstance = ComponentInstance<CardHeaderProps, CardHeaderState, CardHeaderExposes, CardHeaderPassThrough>;
+export type CardHeaderInstance = ComponentInstance<CardHeaderProps, CardHeaderState, CardHeaderExposes>;

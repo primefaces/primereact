@@ -30,7 +30,7 @@ export interface FieldsetLegendPassThrough {
 /**
  * Defines valid properties in FieldsetLegend component.
  */
-export interface FieldsetLegendProps extends BaseComponentProps<FieldsetLegendInstance> {}
+export interface FieldsetLegendProps extends BaseComponentProps<FieldsetLegendInstance, unknown, FieldsetLegendPassThrough> {}
 
 /**
  * Defines valid state in FieldsetLegend component.
@@ -50,4 +50,4 @@ export interface FieldsetLegendExposes {
 /**
  * Instance of FieldsetLegend component.
  */
-export type FieldsetLegendInstance = ComponentInstance<FieldsetLegendProps, FieldsetLegendState, FieldsetLegendExposes, FieldsetLegendPassThrough>;
+export type FieldsetLegendInstance = ComponentInstance<FieldsetLegendProps, FieldsetLegendState, FieldsetLegendExposes>;

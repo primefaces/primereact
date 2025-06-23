@@ -30,7 +30,7 @@ export interface PanelCollapsePassThrough {
 /**
  * Defines valid properties in PanelCollapse component.
  */
-export interface PanelCollapseProps extends BaseComponentProps<PanelCollapseInstance> {
+export interface PanelCollapseProps extends BaseComponentProps<PanelCollapseInstance, unknown, PanelCollapsePassThrough> {
     /**
      * Whether to show the PanelCollapse with a borderless style.
      * @default true
@@ -71,4 +71,4 @@ export interface PanelCollapseExposes {
 /**
  * Instance of PanelCollapse component.
  */
-export type PanelCollapseInstance = ComponentInstance<PanelCollapseProps, PanelCollapseState, PanelCollapseExposes, PanelCollapsePassThrough>;
+export type PanelCollapseInstance = ComponentInstance<PanelCollapseProps, PanelCollapseState, PanelCollapseExposes>;

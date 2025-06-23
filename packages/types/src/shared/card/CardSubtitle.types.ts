@@ -30,7 +30,7 @@ export interface CardSubtitlePassThrough {
 /**
  * Defines valid properties in CardSubtitle component.
  */
-export interface CardSubtitleProps extends BaseComponentProps<CardSubtitleInstance, unknown, 'div'> {}
+export interface CardSubtitleProps extends BaseComponentProps<CardSubtitleInstance, unknown, CardSubtitlePassThrough, 'div'> {}
 
 /**
  * Defines valid state in CardSubtitle component.
@@ -50,4 +50,4 @@ export interface CardSubtitleExposes {
 /**
  * Instance of CardSubtitle component.
  */
-export type CardSubtitleInstance = ComponentInstance<CardSubtitleProps, CardSubtitleState, CardSubtitleExposes, CardSubtitlePassThrough>;
+export type CardSubtitleInstance = ComponentInstance<CardSubtitleProps, CardSubtitleState, CardSubtitleExposes>;

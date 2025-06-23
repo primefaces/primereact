@@ -30,7 +30,7 @@ export interface SplitterThumbPassThrough {
 /**
  * Defines valid properties in SplitterThumb component.
  */
-export interface SplitterThumbProps extends BaseComponentProps<SplitterThumbInstance> {}
+export interface SplitterThumbProps extends BaseComponentProps<SplitterThumbInstance, unknown, SplitterThumbPassThrough> {}
 
 /**
  * Defines valid state in SplitterThumb component.
@@ -50,4 +50,4 @@ export interface SplitterThumbExposes {
 /**
  * Instance of SplitterThumb component.
  */
-export type SplitterThumbInstance = ComponentInstance<SplitterThumbProps, SplitterThumbState, SplitterThumbExposes, SplitterThumbPassThrough>;
+export type SplitterThumbInstance = ComponentInstance<SplitterThumbProps, SplitterThumbState, SplitterThumbExposes>;

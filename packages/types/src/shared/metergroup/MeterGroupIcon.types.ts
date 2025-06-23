@@ -30,7 +30,7 @@ export interface MeterGroupIconPassThrough {
 /**
  * Defines valid properties in MeterGroupIcon component.
  */
-export interface MeterGroupIconProps extends BaseComponentProps<MeterGroupIconInstance> {}
+export interface MeterGroupIconProps extends BaseComponentProps<MeterGroupIconInstance, unknown, MeterGroupIconPassThrough> {}
 
 /**
  * Defines valid state in MeterGroupIcon component.
@@ -50,4 +50,4 @@ export interface MeterGroupIconExposes {
 /**
  * Instance of MeterGroupIcon component.
  */
-export type MeterGroupIconInstance = ComponentInstance<MeterGroupIconProps, MeterGroupIconState, MeterGroupIconExposes, MeterGroupIconPassThrough>;
+export type MeterGroupIconInstance = ComponentInstance<MeterGroupIconProps, MeterGroupIconState, MeterGroupIconExposes>;

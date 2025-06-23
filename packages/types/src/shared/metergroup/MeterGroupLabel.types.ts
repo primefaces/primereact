@@ -30,7 +30,7 @@ export interface MeterGroupLabelPassThrough {
 /**
  * Defines valid properties in MeterGroupLabel component.
  */
-export interface MeterGroupLabelProps extends BaseComponentProps<MeterGroupLabelInstance> {
+export interface MeterGroupLabelProps extends BaseComponentProps<MeterGroupLabelInstance, unknown, MeterGroupLabelPassThrough> {
     /**
      * Defines the color of the label.
      */
@@ -55,4 +55,4 @@ export interface MeterGroupLabelExposes {
 /**
  * Instance of MeterGroupLabel component.
  */
-export type MeterGroupLabelInstance = ComponentInstance<MeterGroupLabelProps, MeterGroupLabelState, MeterGroupLabelExposes, MeterGroupLabelPassThrough>;
+export type MeterGroupLabelInstance = ComponentInstance<MeterGroupLabelProps, MeterGroupLabelState, MeterGroupLabelExposes>;

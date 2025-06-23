@@ -32,7 +32,7 @@ export interface StepperHeaderPassThrough {
 /**
  * Defines valid properties in StepperHeader component.
  */
-export interface StepperHeaderProps extends BaseComponentProps<StepperHeaderInstance> {}
+export interface StepperHeaderProps extends BaseComponentProps<StepperHeaderInstance, unknown, StepperHeaderPassThrough> {}
 
 /**
  * Defines valid state in StepperHeader component.
@@ -68,4 +68,4 @@ export interface StepperHeaderExposes {
 /**
  * Instance of StepperHeader component.
  */
-export type StepperHeaderInstance = ComponentInstance<StepperHeaderProps, StepperHeaderState, StepperHeaderExposes, StepperHeaderPassThrough>;
+export type StepperHeaderInstance = ComponentInstance<StepperHeaderProps, StepperHeaderState, StepperHeaderExposes>;

@@ -30,7 +30,7 @@ export interface ToolbarEndPassThrough {
 /**
  * Defines valid properties in ToolbarEnd component.
  */
-export interface ToolbarEndProps extends BaseComponentProps<ToolbarEndInstance> {}
+export interface ToolbarEndProps extends BaseComponentProps<ToolbarEndInstance, unknown, ToolbarEndPassThrough> {}
 
 /**
  * Defines valid state in ToolbarEnd component.
@@ -65,4 +65,4 @@ export type ToolbarEndClassNamesType = (typeof ToolbarEndClassNames)[keyof typeo
 /**
  * Instance of ToolbarEnd component.
  */
-export type ToolbarEndInstance = ComponentInstance<ToolbarEndProps, ToolbarEndState, ToolbarEndExposes, ToolbarEndPassThrough>;
+export type ToolbarEndInstance = ComponentInstance<ToolbarEndProps, ToolbarEndState, ToolbarEndExposes>;

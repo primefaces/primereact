@@ -60,7 +60,7 @@ export interface PanelToggleEvent extends usePanelToggleEvent {}
 /**
  * Defines valid properties in Panel component.
  */
-export interface PanelProps extends BaseComponentProps<PanelInstance, Omit<usePanelProps, 'onToggle'>> {
+export interface PanelProps extends BaseComponentProps<PanelInstance, Omit<usePanelProps, 'onToggle'>, PanelPassThrough> {
     /**
      * When enabled, the content of panel can be expanded and collapsed by clicking the header.
      * @default false
@@ -128,4 +128,4 @@ export type PanelClassNamesType = (typeof PanelClassNames)[keyof typeof PanelCla
 /**
  * Instance of Panel component.
  */
-export type PanelInstance = ComponentInstance<PanelProps, PanelState, PanelExposes, PanelPassThrough>;
+export type PanelInstance = ComponentInstance<PanelProps, PanelState, PanelExposes>;

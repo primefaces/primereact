@@ -30,7 +30,7 @@ export interface CardBodyPassThrough {
 /**
  * Defines valid properties in CardBody component.
  */
-export interface CardBodyProps extends BaseComponentProps<CardBodyInstance, unknown, 'div'> {}
+export interface CardBodyProps extends BaseComponentProps<CardBodyInstance, unknown, CardBodyPassThrough, 'div'> {}
 
 /**
  * Defines valid state in CardBody component.
@@ -50,4 +50,4 @@ export interface CardBodyExposes {
 /**
  * Instance of CardBody component.
  */
-export type CardBodyInstance = ComponentInstance<CardBodyProps, CardBodyState, CardBodyExposes, CardBodyPassThrough>;
+export type CardBodyInstance = ComponentInstance<CardBodyProps, CardBodyState, CardBodyExposes>;

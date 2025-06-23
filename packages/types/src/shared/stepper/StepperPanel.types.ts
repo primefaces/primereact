@@ -31,7 +31,7 @@ export interface StepperPanelPassThrough {
 /**
  * Defines valid properties in StepperPanel component.
  */
-export interface StepperPanelProps extends BaseComponentProps<StepperPanelInstance> {
+export interface StepperPanelProps extends BaseComponentProps<StepperPanelInstance, unknown, StepperPanelPassThrough> {
     /**
      * Value of the step.
      * @default null
@@ -69,4 +69,4 @@ export interface StepperPanelExposes {
 /**
  * Instance of StepperPanel component.
  */
-export type StepperPanelInstance = ComponentInstance<StepperPanelProps, StepperPanelState, StepperPanelExposes, StepperPanelPassThrough>;
+export type StepperPanelInstance = ComponentInstance<StepperPanelProps, StepperPanelState, StepperPanelExposes>;

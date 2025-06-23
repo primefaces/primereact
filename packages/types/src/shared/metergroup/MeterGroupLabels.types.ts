@@ -30,7 +30,7 @@ export interface MeterGroupLabelsPassThrough {
 /**
  * Defines valid properties in MeterGroupLabels component.
  */
-export interface MeterGroupLabelsProps extends BaseComponentProps<MeterGroupLabelsInstance> {
+export interface MeterGroupLabelsProps extends BaseComponentProps<MeterGroupLabelsInstance, unknown, MeterGroupLabelsPassThrough> {
     /**
      * Specifies the label orientation of the component.
      * @default horizontal
@@ -56,4 +56,4 @@ export interface MeterGroupLabelsExposes {
 /**
  * Instance of MeterGroupLabels component.
  */
-export type MeterGroupLabelsInstance = ComponentInstance<MeterGroupLabelsProps, MeterGroupLabelsState, MeterGroupLabelsExposes, MeterGroupLabelsPassThrough>;
+export type MeterGroupLabelsInstance = ComponentInstance<MeterGroupLabelsProps, MeterGroupLabelsState, MeterGroupLabelsExposes>;

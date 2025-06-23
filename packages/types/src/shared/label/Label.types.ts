@@ -38,7 +38,7 @@ export interface LabelPassThrough {
 /**
  * Defines valid properties in Label component.
  */
-export interface LabelProps extends BaseComponentProps<LabelInstance, useLabelProps> {}
+export interface LabelProps extends BaseComponentProps<LabelInstance, useLabelProps, LabelPassThrough> {}
 
 /**
  * Defines valid state in Label component.
@@ -78,4 +78,4 @@ export type LabelClassNamesType = (typeof LabelClassNames)[keyof typeof LabelCla
 /**
  * Instance of Label component.
  */
-export type LabelInstance = ComponentInstance<LabelProps, LabelState, LabelExposes, LabelPassThrough>;
+export type LabelInstance = ComponentInstance<LabelProps, LabelState, LabelExposes>;

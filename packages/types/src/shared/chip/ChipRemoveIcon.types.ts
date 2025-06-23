@@ -30,7 +30,7 @@ export interface ChipRemoveIconPassThrough {
 /**
  * Defines valid properties in ChipRemoveIcon component.
  */
-export interface ChipRemoveIconProps extends BaseComponentProps<ChipRemoveIconInstance> {}
+export interface ChipRemoveIconProps extends BaseComponentProps<ChipRemoveIconInstance, unknown, ChipRemoveIconPassThrough> {}
 
 /**
  * Defines valid state in ChipRemoveIcon component.
@@ -50,4 +50,4 @@ export interface ChipRemoveIconExposes {
 /**
  * Instance of ChipRemoveIcon component.
  */
-export type ChipRemoveIconInstance = ComponentInstance<ChipRemoveIconProps, ChipRemoveIconState, ChipRemoveIconExposes, ChipRemoveIconPassThrough>;
+export type ChipRemoveIconInstance = ComponentInstance<ChipRemoveIconProps, ChipRemoveIconState, ChipRemoveIconExposes>;

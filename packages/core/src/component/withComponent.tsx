@@ -31,10 +31,12 @@ export function withComponent<IProps, DProps, Exposes extends Record<PropertyKey
     setup,
     render
 }: withComponentOptions<IProps, DProps, Exposes, Styles, CData>) {
-    const BaseComponent = <I extends ComponentInstance, T extends React.ElementType>(inProps?: BaseComponentProps<I, IProps, T> & DProps) => {
-        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useComponentOptions<BaseComponentProps<I, IProps, T> & DProps, DProps, Exposes, Styles>);
+    type InProps<I extends ComponentInstance, T extends React.ElementType> = BaseComponentProps<I, IProps, unknown, T> & DProps;
 
-        type RenderedComponentProps = InComponentInstance<typeof instance.props, BaseComponentProps<I, IProps, T> & DProps, typeof instance.state, Exposes>;
+    const BaseComponent = <I extends ComponentInstance, T extends React.ElementType>(inProps?: InProps<I, T>) => {
+        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useComponentOptions<InProps<I, T>, DProps, Exposes, Styles>);
+
+        type RenderedComponentProps = InComponentInstance<typeof instance.props, InProps<I, T>, typeof instance.state, Exposes>;
 
         const RenderedComponent = (render as React.FC<RenderedComponentProps>) ?? (() => null);
 

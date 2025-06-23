@@ -38,7 +38,7 @@ export interface FieldsetPassThrough {
 /**
  * Defines valid properties in Fieldset component.
  */
-export interface FieldsetProps extends BaseComponentProps<FieldsetInstance, useFieldsetProps> {}
+export interface FieldsetProps extends BaseComponentProps<FieldsetInstance, useFieldsetProps, FieldsetPassThrough> {}
 
 /**
  * Defines valid state in Fieldset component.
@@ -78,4 +78,4 @@ export type FieldsetClassNamesType = (typeof FieldsetClassNames)[keyof typeof Fi
 /**
  * Instance of Fieldset component.
  */
-export type FieldsetInstance = ComponentInstance<FieldsetProps, FieldsetState, FieldsetExposes, FieldsetPassThrough>;
+export type FieldsetInstance = ComponentInstance<FieldsetProps, FieldsetState, FieldsetExposes>;

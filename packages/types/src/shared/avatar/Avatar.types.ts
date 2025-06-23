@@ -38,7 +38,7 @@ export interface AvatarPassThrough {
 /**
  * Defines valid properties in Avatar component.
  */
-export interface AvatarProps extends BaseComponentProps<AvatarInstance, useAvatarProps> {
+export interface AvatarProps extends BaseComponentProps<AvatarInstance, useAvatarProps, AvatarPassThrough> {
     /**
      * Defines the size of the avatar.
      * @default normal
@@ -89,4 +89,4 @@ export type AvatarClassNamesType = (typeof AvatarClassNames)[keyof typeof Avatar
 /**
  * Instance of Avatar component.
  */
-export type AvatarInstance = ComponentInstance<AvatarProps, AvatarState, AvatarExposes, AvatarPassThrough>;
+export type AvatarInstance = ComponentInstance<AvatarProps, AvatarState, AvatarExposes>;

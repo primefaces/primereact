@@ -30,7 +30,7 @@ export interface ProgressBarLabelPassThrough {
 /**
  * Defines valid properties in ProgressBarLabel component.
  */
-export interface ProgressBarLabelProps extends BaseComponentProps<ProgressBarLabelInstance> {}
+export interface ProgressBarLabelProps extends BaseComponentProps<ProgressBarLabelInstance, unknown, ProgressBarLabelPassThrough> {}
 
 /**
  * Defines valid state in ProgressBarLabel component.
@@ -50,4 +50,4 @@ export interface ProgressBarLabelExposes {
 /**
  * Instance of ProgressBarLabel component.
  */
-export type ProgressBarLabelInstance = ComponentInstance<ProgressBarLabelProps, ProgressBarLabelState, ProgressBarLabelExposes, ProgressBarLabelPassThrough>;
+export type ProgressBarLabelInstance = ComponentInstance<ProgressBarLabelProps, ProgressBarLabelState, ProgressBarLabelExposes>;

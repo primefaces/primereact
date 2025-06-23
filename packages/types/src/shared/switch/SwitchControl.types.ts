@@ -30,7 +30,7 @@ export interface SwitchControlPassThrough {
 /**
  * Defines valid properties in SwitchControl component.
  */
-export interface SwitchControlProps extends BaseComponentProps<SwitchControlInstance> {}
+export interface SwitchControlProps extends BaseComponentProps<SwitchControlInstance, unknown, SwitchControlPassThrough> {}
 
 /**
  * Defines valid state in SwitchControl component.
@@ -50,4 +50,4 @@ export interface SwitchControlExposes {
 /**
  * Instance of SwitchControl component.
  */
-export type SwitchControlInstance = ComponentInstance<SwitchControlProps, SwitchControlState, SwitchControlExposes, SwitchControlPassThrough>;
+export type SwitchControlInstance = ComponentInstance<SwitchControlProps, SwitchControlState, SwitchControlExposes>;

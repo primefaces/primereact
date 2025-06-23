@@ -30,7 +30,7 @@ export interface AvatarFallbackPassThrough {
 /**
  * Defines valid properties in AvatarFallback component.
  */
-export interface AvatarFallbackProps extends BaseComponentProps<AvatarFallbackInstance> {}
+export interface AvatarFallbackProps extends BaseComponentProps<AvatarFallbackInstance, unknown, AvatarFallbackPassThrough> {}
 
 /**
  * Defines valid state in AvatarFallback component.
@@ -50,4 +50,4 @@ export interface AvatarFallbackExposes {
 /**
  * Instance of AvatarFallback component.
  */
-export type AvatarFallbackInstance = ComponentInstance<AvatarFallbackProps, AvatarFallbackState, AvatarFallbackExposes, AvatarFallbackPassThrough>;
+export type AvatarFallbackInstance = ComponentInstance<AvatarFallbackProps, AvatarFallbackState, AvatarFallbackExposes>;

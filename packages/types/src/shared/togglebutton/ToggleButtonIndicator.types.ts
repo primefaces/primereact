@@ -30,7 +30,7 @@ export interface ToggleButtonIndicatorPassThrough {
 /**
  * Defines valid properties in ToggleButtonIndicator component.
  */
-export interface ToggleButtonIndicatorProps extends BaseComponentProps<ToggleButtonIndicatorInstance> {}
+export interface ToggleButtonIndicatorProps extends BaseComponentProps<ToggleButtonIndicatorInstance, unknown, ToggleButtonIndicatorPassThrough> {}
 
 /**
  * Defines valid state in ToggleButtonIndicator component.
@@ -50,4 +50,4 @@ export interface ToggleButtonIndicatorExposes {
 /**
  * Instance of ToggleButtonIndicator component.
  */
-export type ToggleButtonIndicatorInstance = ComponentInstance<ToggleButtonIndicatorProps, ToggleButtonIndicatorState, ToggleButtonIndicatorExposes, ToggleButtonIndicatorPassThrough>;
+export type ToggleButtonIndicatorInstance = ComponentInstance<ToggleButtonIndicatorProps, ToggleButtonIndicatorState, ToggleButtonIndicatorExposes>;

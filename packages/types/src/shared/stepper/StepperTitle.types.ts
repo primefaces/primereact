@@ -30,7 +30,7 @@ export interface StepperTitlePassThrough {
 /**
  * Defines valid properties in StepperTitle component.
  */
-export interface StepperTitleProps extends BaseComponentProps<StepperTitleInstance> {}
+export interface StepperTitleProps extends BaseComponentProps<StepperTitleInstance, unknown, StepperTitlePassThrough> {}
 
 /**
  * Defines valid state in StepperTitle component.
@@ -50,4 +50,4 @@ export interface StepperTitleExposes {
 /**
  * Instance of StepperTitle component.
  */
-export type StepperTitleInstance = ComponentInstance<StepperTitleProps, StepperTitleState, StepperTitleExposes, StepperTitlePassThrough>;
+export type StepperTitleInstance = ComponentInstance<StepperTitleProps, StepperTitleState, StepperTitleExposes>;

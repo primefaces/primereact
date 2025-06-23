@@ -29,7 +29,7 @@ export interface PanelHeaderPassThrough {
 /**
  * Defines valid properties in PanelHeadercomponent.
  */
-export interface PanelHeaderProps extends BaseComponentProps<PanelHeaderInstance> {}
+export interface PanelHeaderProps extends BaseComponentProps<PanelHeaderInstance, unknown, PanelHeaderPassThrough> {}
 
 /**
  * Defines valid state in PanelHeadercomponent.
@@ -44,4 +44,4 @@ export interface PanelHeaderExposes {}
 /**
  * Instance of PanelHeadercomponent.
  */
-export type PanelHeaderInstance = ComponentInstance<PanelHeaderProps, PanelHeaderState, PanelHeaderExposes, PanelHeaderPassThrough>;
+export type PanelHeaderInstance = ComponentInstance<PanelHeaderProps, PanelHeaderState, PanelHeaderExposes>;

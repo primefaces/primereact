@@ -30,7 +30,7 @@ export interface SwitchThumbPassThrough {
 /**
  * Defines valid properties in SwitchThumb component.
  */
-export interface SwitchThumbProps extends BaseComponentProps<SwitchThumbInstance> {}
+export interface SwitchThumbProps extends BaseComponentProps<SwitchThumbInstance, unknown, SwitchThumbPassThrough> {}
 
 /**
  * Defines valid state in SwitchThumb component.
@@ -50,4 +50,4 @@ export interface SwitchThumbExposes {
 /**
  * Instance of SwitchThumb component.
  */
-export type SwitchThumbInstance = ComponentInstance<SwitchThumbProps, SwitchThumbState, SwitchThumbExposes, SwitchThumbPassThrough>;
+export type SwitchThumbInstance = ComponentInstance<SwitchThumbProps, SwitchThumbState, SwitchThumbExposes>;

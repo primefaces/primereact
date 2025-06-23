@@ -30,7 +30,7 @@ export interface ChipImagePassThrough {
 /**
  * Defines valid properties in ChipImage component.
  */
-export interface ChipImageProps extends BaseComponentProps<ChipImageInstance> {}
+export interface ChipImageProps extends BaseComponentProps<ChipImageInstance, unknown, ChipImagePassThrough> {}
 
 /**
  * Defines valid state in ChipImage component.
@@ -50,4 +50,4 @@ export interface ChipImageExposes {
 /**
  * Instance of ChipImage component.
  */
-export type ChipImageInstance = ComponentInstance<ChipImageProps, ChipImageState, ChipImageExposes, ChipImagePassThrough>;
+export type ChipImageInstance = ComponentInstance<ChipImageProps, ChipImageState, ChipImageExposes>;

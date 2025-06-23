@@ -30,7 +30,7 @@ export interface StepperPanelsPassThrough {
 /**
  * Defines valid properties in StepperPanels component.
  */
-export interface StepperPanelsProps extends BaseComponentProps<StepperPanelsInstance> {}
+export interface StepperPanelsProps extends BaseComponentProps<StepperPanelsInstance, unknown, StepperPanelsPassThrough> {}
 
 /**
  * Defines valid state in StepperPanels component.
@@ -50,4 +50,4 @@ export interface StepperPanelsExposes {
 /**
  * Instance of StepperPanels component.
  */
-export type StepperPanelsInstance = ComponentInstance<StepperPanelsProps, StepperPanelsState, StepperPanelsExposes, StepperPanelsPassThrough>;
+export type StepperPanelsInstance = ComponentInstance<StepperPanelsProps, StepperPanelsState, StepperPanelsExposes>;

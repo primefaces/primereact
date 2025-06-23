@@ -30,7 +30,7 @@ export interface DividerContentPassThrough {
 /**
  * Defines valid properties in DividerContent component.
  */
-export interface DividerContentProps extends BaseComponentProps<DividerContentInstance> {}
+export interface DividerContentProps extends BaseComponentProps<DividerContentInstance, unknown, DividerContentPassThrough> {}
 
 /**
  * Defines valid state in DividerContent component.
@@ -50,4 +50,4 @@ export interface DividerContentExposes {
 /**
  * Instance of DividerContent component.
  */
-export type DividerContentInstance = ComponentInstance<DividerContentProps, DividerContentState, DividerContentExposes, DividerContentPassThrough>;
+export type DividerContentInstance = ComponentInstance<DividerContentProps, DividerContentState, DividerContentExposes>;

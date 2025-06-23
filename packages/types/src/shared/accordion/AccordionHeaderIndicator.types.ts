@@ -31,7 +31,7 @@ export interface AccordionHeaderIndicatorPassThrough {
 /**
  * Defines valid properties in AccordionHeaderIndicator component.
  */
-export interface AccordionHeaderIndicatorProps extends BaseComponentProps<AccordionHeaderIndicatorInstance> {}
+export interface AccordionHeaderIndicatorProps extends BaseComponentProps<AccordionHeaderIndicatorInstance, unknown, AccordionHeaderIndicatorPassThrough> {}
 
 /**
  * Defines valid state in AccordionHeaderIndicator component.
@@ -55,4 +55,4 @@ export interface AccordionHeaderIndicatorExposes {
 /**
  * Instance of AccordionHeaderIndicator component.
  */
-export type AccordionHeaderIndicatorInstance = ComponentInstance<AccordionHeaderIndicatorProps, AccordionHeaderIndicatorState, AccordionHeaderIndicatorExposes, AccordionHeaderIndicatorPassThrough>;
+export type AccordionHeaderIndicatorInstance = ComponentInstance<AccordionHeaderIndicatorProps, AccordionHeaderIndicatorState, AccordionHeaderIndicatorExposes>;

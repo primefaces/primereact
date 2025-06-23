@@ -30,7 +30,7 @@ export interface InplaceContentPassThrough {
 /**
  * Defines valid properties in InplaceContent component.
  */
-export interface InplaceContentProps extends BaseComponentProps<InplaceContentInstance> {}
+export interface InplaceContentProps extends BaseComponentProps<InplaceContentInstance, unknown, InplaceContentPassThrough> {}
 
 /**
  * Defines valid state in InplaceContent component.
@@ -50,4 +50,4 @@ export interface InplaceContentExposes {
 /**
  * Instance of InplaceContent component.
  */
-export type InplaceContentInstance = ComponentInstance<InplaceContentProps, InplaceContentState, InplaceContentExposes, InplaceContentPassThrough>;
+export type InplaceContentInstance = ComponentInstance<InplaceContentProps, InplaceContentState, InplaceContentExposes>;

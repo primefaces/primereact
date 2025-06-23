@@ -34,7 +34,7 @@ export interface ProgressBarPassThrough {
 /**
  * Defines valid properties in ProgressBar component.
  */
-export interface ProgressBarProps extends BaseComponentProps<ProgressBarInstance, useProgressBarProps> {
+export interface ProgressBarProps extends BaseComponentProps<ProgressBarInstance, useProgressBarProps, ProgressBarPassThrough> {
     /**
      * Defines the mode of the progress
      * @default determinate
@@ -80,4 +80,4 @@ export type ProgressBarClassNamesType = (typeof ProgressBarClassNames)[keyof typ
 /**
  * Instance of ProgressBar component.
  */
-export type ProgressBarInstance = ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes, ProgressBarPassThrough>;
+export type ProgressBarInstance = ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes>;

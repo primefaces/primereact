@@ -30,7 +30,7 @@ export interface MeterGroupMarkerPassThrough {
 /**
  * Defines valid properties in MeterGroupMarker component.
  */
-export interface MeterGroupMarkerProps extends BaseComponentProps<MeterGroupMarkerInstance> {
+export interface MeterGroupMarkerProps extends BaseComponentProps<MeterGroupMarkerInstance, unknown, MeterGroupMarkerPassThrough> {
     /**
      * Defines the color of the marker.
      */
@@ -59,4 +59,4 @@ export interface MeterGroupMarkerExposes {
 /**
  * Instance of MeterGroupMarker component.
  */
-export type MeterGroupMarkerInstance = ComponentInstance<MeterGroupMarkerProps, MeterGroupMarkerState, MeterGroupMarkerExposes, MeterGroupMarkerPassThrough>;
+export type MeterGroupMarkerInstance = ComponentInstance<MeterGroupMarkerProps, MeterGroupMarkerState, MeterGroupMarkerExposes>;

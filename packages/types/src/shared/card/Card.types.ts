@@ -30,7 +30,7 @@ export interface CardPassThrough {
 /**
  * Defines valid properties in Card component.
  */
-export interface CardProps extends BaseComponentProps<CardInstance, useCardProps> {}
+export interface CardProps extends BaseComponentProps<CardInstance, useCardProps, CardPassThrough> {}
 
 /**
  * Defines valid state in Card component.
@@ -90,4 +90,4 @@ export type CardClassNamesType = (typeof CardClassNames)[keyof typeof CardClassN
 /**
  * Instance of Card component.
  */
-export type CardInstance = ComponentInstance<CardProps, CardState, CardExposes, CardPassThrough>;
+export type CardInstance = ComponentInstance<CardProps, CardState, CardExposes>;

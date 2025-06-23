@@ -29,7 +29,7 @@ export interface ButtonGroupPassThrough {
 /**
  * Defines valid properties in ButtonGroup component.
  */
-export interface ButtonGroupProps extends BaseComponentProps<ButtonGroupInstance> {}
+export interface ButtonGroupProps extends BaseComponentProps<ButtonGroupInstance, unknown, ButtonGroupPassThrough> {}
 
 /**
  * Defines valid state in ButtonGroup component.
@@ -59,4 +59,4 @@ export type ButtonGroupClassNamesType = (typeof ButtonGroupClassNames)[keyof typ
 /**
  * Instance of ButtonGroup component.
  */
-export type ButtonGroupInstance = ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes, ButtonGroupPassThrough>;
+export type ButtonGroupInstance = ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes>;

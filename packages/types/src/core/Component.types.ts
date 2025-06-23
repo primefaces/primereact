@@ -6,7 +6,7 @@ import type { PassThroughOptions } from './PassThrough.types';
 /**
  * Defines the global props of the components.
  */
-export interface GlobalComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> {
+export interface GlobalComponentProps<I extends ComponentInstance = ComponentInstance, P = unknown, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> {
     /**
      * The reference to the component instance.
      */
@@ -37,7 +37,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     /**
      * The pass-through props to pass to the component
      */
-    pt?: I['_pt_'] | undefined;
+    pt?: SafeRecord<P> | undefined;
     /**
      * The pass-through options to pass to the component
      */
@@ -93,7 +93,8 @@ export type GlobalComponentPTProps<PassThrough = Record<string, unknown>> = {
         : never;
 };
 
-export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> extends Omit<GlobalComponentProps<I, T, R, D>, 'pt' | 'ptOptions' | 'dt' | 'styles'> {
+export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown>
+    extends Omit<GlobalComponentProps<I, unknown, T, R, D>, 'pt' | 'ptOptions' | 'dt' | 'styles'> {
     /**
      * The instance of the component.
      * This is a reference to the component instance.
@@ -180,14 +181,7 @@ export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = R
     useComponentPTReturnType &
     useComponentStyleReturnType;
 
-export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>, PassThrough = Record<string, unknown>> = InComponentInstance<
-    SafeRecord<Props>,
-    SafeRecord<Props>,
-    SafeRecord<State>,
-    SafeRecord<Exposes>
-> & {
-    _pt_?: SafeRecord<PassThrough>;
-};
+export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<SafeRecord<Props>, SafeRecord<Props>, SafeRecord<State>, SafeRecord<Exposes>>;
 
 export type InferComponentInstance<I> =
     I extends ComponentInstance<infer Props, infer State, infer Exposes>

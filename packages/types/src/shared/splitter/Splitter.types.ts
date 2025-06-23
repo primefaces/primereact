@@ -42,7 +42,7 @@ export interface SplitterPassThrough {
 /**
  * Defines valid properties in Splitter component.
  */
-export interface SplitterProps extends BaseComponentProps<SplitterInstance, useSplitterProps> {}
+export interface SplitterProps extends BaseComponentProps<SplitterInstance, useSplitterProps, SplitterPassThrough> {}
 
 /**
  * Defines valid state in Splitter component.
@@ -86,4 +86,4 @@ export type SplitterClassNamesType = (typeof SplitterClassNames)[keyof typeof Sp
 /**
  * Instance of Splitter component.
  */
-export type SplitterInstance = ComponentInstance<SplitterProps, SplitterState, SplitterExposes, SplitterPassThrough>;
+export type SplitterInstance = ComponentInstance<SplitterProps, SplitterState, SplitterExposes>;

@@ -46,7 +46,7 @@ export interface ToggleButtonChangeEvent extends useToggleButtonChangeEvent<Reac
 /**
  * Defines valid properties in ToggleButton component.
  */
-export interface ToggleButtonProps extends BaseComponentProps<ToggleButtonInstance, Omit<useToggleButtonProps, 'onPressedChange'>> {
+export interface ToggleButtonProps extends BaseComponentProps<ToggleButtonInstance, Omit<useToggleButtonProps, 'onPressedChange'>, ToggleButtonPassThrough> {
     /**
      * Value of the ToggleButton.
      */
@@ -114,4 +114,4 @@ export type ToggleButtonClassNamesType = (typeof ToggleButtonClassNames)[keyof t
 /**
  * Instance of ToggleButton component.
  */
-export type ToggleButtonInstance = ComponentInstance<ToggleButtonProps, ToggleButtonState, ToggleButtonExposes, ToggleButtonPassThrough>;
+export type ToggleButtonInstance = ComponentInstance<ToggleButtonProps, ToggleButtonState, ToggleButtonExposes>;

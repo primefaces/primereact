@@ -30,7 +30,7 @@ export interface TagLabelPassThrough {
 /**
  * Defines valid properties in TagLabel component.
  */
-export interface TagLabelProps extends BaseComponentProps<TagLabelInstance> {}
+export interface TagLabelProps extends BaseComponentProps<TagLabelInstance, unknown, TagLabelPassThrough> {}
 
 /**
  * Defines valid state in TagLabel component.
@@ -50,4 +50,4 @@ export interface TagLabelExposes {
 /**
  * Instance of TagLabel component.
  */
-export type TagLabelInstance = ComponentInstance<TagLabelProps, TagLabelState, TagLabelExposes, TagLabelPassThrough>;
+export type TagLabelInstance = ComponentInstance<TagLabelProps, TagLabelState, TagLabelExposes>;

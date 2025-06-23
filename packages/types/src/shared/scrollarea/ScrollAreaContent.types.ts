@@ -30,7 +30,7 @@ export interface ScrollAreaContentPassThrough {
 /**
  * Defines valid properties in ScrollAreaContent component.
  */
-export interface ScrollAreaContentProps extends BaseComponentProps<ScrollAreaContentInstance> {}
+export interface ScrollAreaContentProps extends BaseComponentProps<ScrollAreaContentInstance, unknown, ScrollAreaContentPassThrough> {}
 
 /**
  * Defines valid state in ScrollAreaContent component.
@@ -50,4 +50,4 @@ export interface ScrollAreaContentExposes {
 /**
  * Instance of ScrollAreaContent component.
  */
-export type ScrollAreaContentInstance = ComponentInstance<ScrollAreaContentProps, ScrollAreaContentState, ScrollAreaContentExposes, ScrollAreaContentPassThrough>;
+export type ScrollAreaContentInstance = ComponentInstance<ScrollAreaContentProps, ScrollAreaContentState, ScrollAreaContentExposes>;

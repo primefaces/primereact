@@ -30,7 +30,7 @@ export interface TabsIndicatorPassThrough {
 /**
  * Defines valid properties in TabsIndicator component.
  */
-export interface TabsIndicatorProps extends BaseComponentProps<TabsIndicatorInstance> {
+export interface TabsIndicatorProps extends BaseComponentProps<TabsIndicatorInstance, unknown, TabsIndicatorPassThrough> {
     /**
      * Value of the tabsindicator.
      */
@@ -55,4 +55,4 @@ export interface TabsIndicatorExposes {
 /**
  * Instance of TabsIndicator component.
  */
-export type TabsIndicatorInstance = ComponentInstance<TabsIndicatorProps, TabsIndicatorState, TabsIndicatorExposes, TabsIndicatorPassThrough>;
+export type TabsIndicatorInstance = ComponentInstance<TabsIndicatorProps, TabsIndicatorState, TabsIndicatorExposes>;

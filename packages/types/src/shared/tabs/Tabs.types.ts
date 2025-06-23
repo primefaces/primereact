@@ -30,7 +30,7 @@ export interface TabsPassThrough {
 /**
  * Defines valid properties in Tabs component.
  */
-export interface TabsProps extends BaseComponentProps<TabsInstance, useTabsProps> {
+export interface TabsProps extends BaseComponentProps<TabsInstance, useTabsProps, TabsPassThrough> {
     /**
      * When enabled, hidden tabs are not rendered at all. Defaults to false that hides tabs with css.
      * @default false
@@ -101,4 +101,4 @@ export type TabsClassNamesType = (typeof TabsClassNames)[keyof typeof TabsClassN
 /**
  * Instance of Switch component.
  */
-export type TabsInstance = ComponentInstance<TabsProps, TabsState, TabsExposes, TabsPassThrough>;
+export type TabsInstance = ComponentInstance<TabsProps, TabsState, TabsExposes>;

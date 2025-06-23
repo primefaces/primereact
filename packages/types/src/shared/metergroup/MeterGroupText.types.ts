@@ -30,7 +30,7 @@ export interface MeterGroupTextPassThrough {
 /**
  * Defines valid properties in MeterGroupText component.
  */
-export interface MeterGroupTextProps extends BaseComponentProps<MeterGroupTextInstance> {}
+export interface MeterGroupTextProps extends BaseComponentProps<MeterGroupTextInstance, unknown, MeterGroupTextPassThrough> {}
 
 /**
  * Defines valid state in MeterGroupText component.
@@ -50,4 +50,4 @@ export interface MeterGroupTextExposes {
 /**
  * Instance of MeterGroupText component.
  */
-export type MeterGroupTextInstance = ComponentInstance<MeterGroupTextProps, MeterGroupTextState, MeterGroupTextExposes, MeterGroupTextPassThrough>;
+export type MeterGroupTextInstance = ComponentInstance<MeterGroupTextProps, MeterGroupTextState, MeterGroupTextExposes>;

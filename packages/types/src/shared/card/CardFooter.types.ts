@@ -30,7 +30,7 @@ export interface CardFooterPassThrough {
 /**
  * Defines valid properties in CardFooter component.
  */
-export interface CardFooterProps extends BaseComponentProps<CardFooterInstance, unknown, 'div'> {}
+export interface CardFooterProps extends BaseComponentProps<CardFooterInstance, unknown, CardFooterPassThrough, 'div'> {}
 
 /**
  * Defines valid state in CardFooter component.
@@ -50,4 +50,4 @@ export interface CardFooterExposes {
 /**
  * Instance of CardFooter component.
  */
-export type CardFooterInstance = ComponentInstance<CardFooterProps, CardFooterState, CardFooterExposes, CardFooterPassThrough>;
+export type CardFooterInstance = ComponentInstance<CardFooterProps, CardFooterState, CardFooterExposes>;

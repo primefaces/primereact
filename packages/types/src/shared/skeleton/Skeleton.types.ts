@@ -30,7 +30,7 @@ export interface SkeletonPassThrough {
 /**
  * Defines valid properties in Skeleton component.
  */
-export interface SkeletonProps extends BaseComponentProps<SkeletonInstance, useSkeletonProps> {
+export interface SkeletonProps extends BaseComponentProps<SkeletonInstance, useSkeletonProps, SkeletonPassThrough> {
     /**
      * Shape of the element.
      * @default rectangle
@@ -91,4 +91,4 @@ export type SkeletonClassNamesType = (typeof SkeletonClassNames)[keyof typeof Sk
 /**
  * Instance of Skeleton component.
  */
-export type SkeletonInstance = ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes, SkeletonPassThrough>;
+export type SkeletonInstance = ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes>;

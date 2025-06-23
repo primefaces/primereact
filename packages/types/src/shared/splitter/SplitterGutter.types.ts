@@ -30,7 +30,7 @@ export interface SplitterGutterPassThrough {
 /**
  * Defines valid properties in SplitterGutter component.
  */
-export interface SplitterGutterProps extends BaseComponentProps<SplitterGutterInstance> {}
+export interface SplitterGutterProps extends BaseComponentProps<SplitterGutterInstance, unknown, SplitterGutterPassThrough> {}
 
 /**
  * Defines valid state in SplitterGutter component.
@@ -50,4 +50,4 @@ export interface SplitterGutterExposes {
 /**
  * Instance of SplitterGutter component.
  */
-export type SplitterGutterInstance = ComponentInstance<SplitterGutterProps, SplitterGutterState, SplitterGutterExposes, SplitterGutterPassThrough>;
+export type SplitterGutterInstance = ComponentInstance<SplitterGutterProps, SplitterGutterState, SplitterGutterExposes>;

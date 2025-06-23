@@ -46,7 +46,7 @@ export interface AccordionPassThrough {
 /**
  * Defines valid properties in Accordion component.
  */
-export interface AccordionProps extends BaseComponentProps<AccordionInstance, useAccordionProps> {
+export interface AccordionProps extends BaseComponentProps<AccordionInstance, useAccordionProps, AccordionPassThrough> {
     /**
      * When enabled, hidden tabs are not rendered at all. Defaults to false that hides tabs with css.
      * @default false
@@ -105,4 +105,4 @@ export type AccordionClassNamesType = (typeof AccordionClassNames)[keyof typeof 
 /**
  * Instance of Avatar component.
  */
-export type AccordionInstance = ComponentInstance<AccordionProps, AccordionState, AccordionExposes, AccordionPassThrough>;
+export type AccordionInstance = ComponentInstance<AccordionProps, AccordionState, AccordionExposes>;

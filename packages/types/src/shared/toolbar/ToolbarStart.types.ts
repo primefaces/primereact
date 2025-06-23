@@ -30,7 +30,7 @@ export interface ToolbarStartPassThrough {
 /**
  * Defines valid properties in ToolbarStart component.
  */
-export interface ToolbarStartProps extends BaseComponentProps<ToolbarStartInstance> {}
+export interface ToolbarStartProps extends BaseComponentProps<ToolbarStartInstance, unknown, ToolbarStartPassThrough> {}
 
 /**
  * Defines valid state in ToolbarStart component.
@@ -65,4 +65,4 @@ export type ToolbarStartClassNamesType = (typeof ToolbarStartClassNames)[keyof t
 /**
  * Instance of ToolbarStart component.
  */
-export type ToolbarStartInstance = ComponentInstance<ToolbarStartProps, ToolbarStartState, ToolbarStartExposes, ToolbarStartPassThrough>;
+export type ToolbarStartInstance = ComponentInstance<ToolbarStartProps, ToolbarStartState, ToolbarStartExposes>;

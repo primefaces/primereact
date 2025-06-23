@@ -30,7 +30,7 @@ export interface AvatarImagePassThrough {
 /**
  * Defines valid properties in AvatarImage component.
  */
-export interface AvatarImageProps extends BaseComponentProps<AvatarImageInstance, unknown, 'img'> {
+export interface AvatarImageProps extends BaseComponentProps<AvatarImageInstance, unknown, AvatarImagePassThrough, 'img'> {
     /**
      * Specifies the path to the image to display.
      * @defaultValue undefined
@@ -56,4 +56,4 @@ export interface AvatarImageExposes {
 /**
  * Instance of AvatarImage component.
  */
-export type AvatarImageInstance = ComponentInstance<AvatarImageProps, AvatarImageState, AvatarImageExposes, AvatarImagePassThrough>;
+export type AvatarImageInstance = ComponentInstance<AvatarImageProps, AvatarImageState, AvatarImageExposes>;

@@ -30,7 +30,7 @@ export interface ScrollAreaThumbYPassThrough {
 /**
  * Defines valid properties in ScrollAreaThumbY component.
  */
-export interface ScrollAreaThumbYProps extends BaseComponentProps<ScrollAreaThumbYInstance> {}
+export interface ScrollAreaThumbYProps extends BaseComponentProps<ScrollAreaThumbYInstance, unknown, ScrollAreaThumbYPassThrough> {}
 
 /**
  * Defines valid state in ScrollAreaThumbY component.
@@ -50,4 +50,4 @@ export interface ScrollAreaThumbYExposes {
 /**
  * Instance of ScrollAreaThumbY component.
  */
-export type ScrollAreaThumbYInstance = ComponentInstance<ScrollAreaThumbYProps, ScrollAreaThumbYState, ScrollAreaThumbYExposes, ScrollAreaThumbYPassThrough>;
+export type ScrollAreaThumbYInstance = ComponentInstance<ScrollAreaThumbYProps, ScrollAreaThumbYState, ScrollAreaThumbYExposes>;

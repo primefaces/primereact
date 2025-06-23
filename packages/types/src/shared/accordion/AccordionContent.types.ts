@@ -30,7 +30,7 @@ export interface AccordionContentPassThrough {
 /**
  * Defines valid properties in AccordionContent component.
  */
-export interface AccordionContentProps extends BaseComponentProps<AccordionContentInstance> {}
+export interface AccordionContentProps extends BaseComponentProps<AccordionContentInstance, unknown, AccordionContentPassThrough> {}
 
 /**
  * Defines valid state in AccordionContent component.
@@ -50,4 +50,4 @@ export interface AccordionContentExposes {
 /**
  * Instance of AccordionContent component.
  */
-export type AccordionContentInstance = ComponentInstance<AccordionContentProps, AccordionContentState, AccordionContentExposes, AccordionContentPassThrough>;
+export type AccordionContentInstance = ComponentInstance<AccordionContentProps, AccordionContentState, AccordionContentExposes>;

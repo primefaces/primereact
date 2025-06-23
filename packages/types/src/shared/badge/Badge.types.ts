@@ -30,7 +30,7 @@ export interface BadgePassThrough {
 /**
  * Defines valid properties in Badge component.
  */
-export interface BadgeProps extends BaseComponentProps<BadgeInstance, useBadgeProps> {
+export interface BadgeProps extends BaseComponentProps<BadgeInstance, useBadgeProps, BadgePassThrough> {
     /**
      * Defines the shape of the badge.
      */
@@ -73,4 +73,4 @@ export type BadgeClassNamesType = (typeof BadgeClassNames)[keyof typeof BadgeCla
 /**
  * Instance of Badge component.
  */
-export type BadgeInstance = ComponentInstance<BadgeProps, BadgeState, BadgeExposes, BadgePassThrough>;
+export type BadgeInstance = ComponentInstance<BadgeProps, BadgeState, BadgeExposes>;

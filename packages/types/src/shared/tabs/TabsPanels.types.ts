@@ -30,7 +30,7 @@ export interface TabsPanelsPassThrough {
 /**
  * Defines valid properties in TabsPanels component.
  */
-export interface TabsPanelsProps extends BaseComponentProps<TabsPanelsInstance> {}
+export interface TabsPanelsProps extends BaseComponentProps<TabsPanelsInstance, unknown, TabsPanelsPassThrough> {}
 
 /**
  * Defines valid state in TabsPanels component.
@@ -50,4 +50,4 @@ export interface TabsPanelsExposes {
 /**
  * Instance of TabsPanels component.
  */
-export type TabsPanelsInstance = ComponentInstance<TabsPanelsProps, TabsPanelsState, TabsPanelsExposes, TabsPanelsPassThrough>;
+export type TabsPanelsInstance = ComponentInstance<TabsPanelsProps, TabsPanelsState, TabsPanelsExposes>;

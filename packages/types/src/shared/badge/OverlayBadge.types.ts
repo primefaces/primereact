@@ -29,7 +29,7 @@ export interface OverlayBadgePassThrough {
 /**
  * Defines valid properties in OverlayBadge component.
  */
-export interface OverlayBadgeProps extends BaseComponentProps<OverlayBadgeInstance> {}
+export interface OverlayBadgeProps extends BaseComponentProps<OverlayBadgeInstance, unknown, OverlayBadgePassThrough> {}
 
 /**
  * Defines valid state in OverlayBadge component.
@@ -59,4 +59,4 @@ export type OverlayBadgeClassNamesType = (typeof OverlayBadgeClassNames)[keyof t
 /**
  * Instance of OverlayBadge component.
  */
-export type OverlayBadgeInstance = ComponentInstance<OverlayBadgeProps, OverlayBadgeState, OverlayBadgeExposes, OverlayBadgePassThrough>;
+export type OverlayBadgeInstance = ComponentInstance<OverlayBadgeProps, OverlayBadgeState, OverlayBadgeExposes>;

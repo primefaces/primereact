@@ -42,7 +42,7 @@ export interface ToolbarPassThrough {
 /**
  * Defines valid properties in Toolbar component.
  */
-export interface ToolbarProps extends BaseComponentProps<ToolbarInstance, useToolbarProps> {}
+export interface ToolbarProps extends BaseComponentProps<ToolbarInstance, useToolbarProps, ToolbarPassThrough> {}
 
 /**
  * Defines valid state in Toolbar component.
@@ -86,4 +86,4 @@ export type ToolbarClassNamesType = (typeof ToolbarClassNames)[keyof typeof Tool
 /**
  * Instance of Toolbar component.
  */
-export type ToolbarInstance = ComponentInstance<ToolbarProps, ToolbarState, ToolbarExposes, ToolbarPassThrough>;
+export type ToolbarInstance = ComponentInstance<ToolbarProps, ToolbarState, ToolbarExposes>;

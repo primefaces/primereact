@@ -53,7 +53,7 @@ export interface SwitchChangeEvent extends useSwitchChangeEvent<React.ChangeEven
 /**
  * Defines valid properties in Switch component.
  */
-export interface SwitchProps extends BaseComponentProps<SwitchInstance, Omit<useSwitchProps, 'onCheckedChange'>> {
+export interface SwitchProps extends BaseComponentProps<SwitchInstance, Omit<useSwitchProps, 'onCheckedChange'>, SwitchPassThrough> {
     /**
      * Value of the switch.
      */
@@ -153,4 +153,4 @@ export type SwitchClassNamesType = (typeof SwitchClassNames)[keyof typeof Switch
 /**
  * Instance of Switch component.
  */
-export type SwitchInstance = ComponentInstance<SwitchProps, SwitchState, SwitchExposes, SwitchPassThrough>;
+export type SwitchInstance = ComponentInstance<SwitchProps, SwitchState, SwitchExposes>;

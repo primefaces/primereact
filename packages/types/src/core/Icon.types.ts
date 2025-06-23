@@ -29,7 +29,7 @@ export interface IconPassThrough {
 /**
  * Defines valid properties in Icon component.
  */
-export interface IconProps extends BaseComponentProps<IconInstance> {
+export interface IconProps extends BaseComponentProps<IconInstance, unknown, IconPassThrough> {
     /**
      * Defines the size of the icon.
      */
@@ -84,7 +84,7 @@ export type IconClassNamesType = (typeof IconClassNames)[keyof typeof IconClassN
 /**
  * Instance of Icon component.
  */
-export type IconInstance = ComponentInstance<IconProps, IconState, IconExposes, IconPassThrough>;
+export type IconInstance = ComponentInstance<IconProps, IconState, IconExposes>;
 
 export type withBaseIconOptions = {
     /**

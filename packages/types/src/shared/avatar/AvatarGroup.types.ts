@@ -29,7 +29,7 @@ export interface AvatarGroupPassThrough {
 /**
  * Defines valid properties in AvatarGroup component.
  */
-export interface AvatarGroupProps extends BaseComponentProps<AvatarGroupInstance> {}
+export interface AvatarGroupProps extends BaseComponentProps<AvatarGroupInstance, unknown, AvatarGroupPassThrough> {}
 
 /**
  * Defines valid state in AvatarGroup component.
@@ -59,4 +59,4 @@ export type AvatarGroupClassNamesType = (typeof AvatarGroupClassNames)[keyof typ
 /**
  * Instance of AvatarGroup component.
  */
-export type AvatarGroupInstance = ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes, AvatarGroupPassThrough>;
+export type AvatarGroupInstance = ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes>;

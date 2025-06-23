@@ -31,7 +31,7 @@ export interface StepperStepPassThrough {
 /**
  * Defines valid properties in StepperStep component.
  */
-export interface StepperStepProps extends BaseComponentProps<StepperStepInstance> {
+export interface StepperStepProps extends BaseComponentProps<StepperStepInstance, unknown, StepperStepPassThrough> {
     /**
      * Value of the step.
      * @default null
@@ -78,4 +78,4 @@ export interface StepperStepExposes {
 /**
  * Instance of StepperStep component.
  */
-export type StepperStepInstance = ComponentInstance<StepperStepProps, StepperStepState, StepperStepExposes, StepperStepPassThrough>;
+export type StepperStepInstance = ComponentInstance<StepperStepProps, StepperStepState, StepperStepExposes>;

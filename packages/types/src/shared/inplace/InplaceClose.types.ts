@@ -30,7 +30,7 @@ export interface InplaceClosePassThrough {
 /**
  * Defines valid properties in InplaceClose component.
  */
-export interface InplaceCloseProps extends BaseComponentProps<InplaceCloseInstance> {}
+export interface InplaceCloseProps extends BaseComponentProps<InplaceCloseInstance, unknown, InplaceClosePassThrough> {}
 
 /**
  * Defines valid state in InplaceClose component.
@@ -50,4 +50,4 @@ export interface InplaceCloseExposes {
 /**
  * Instance of InplaceClose component.
  */
-export type InplaceCloseInstance = ComponentInstance<InplaceCloseProps, InplaceCloseState, InplaceCloseExposes, InplaceClosePassThrough>;
+export type InplaceCloseInstance = ComponentInstance<InplaceCloseProps, InplaceCloseState, InplaceCloseExposes>;

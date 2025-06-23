@@ -30,7 +30,7 @@ export interface ButtonPassThrough {
 /**
  * Defines valid properties in Button component.
  */
-export interface ButtonProps extends BaseComponentProps<ButtonInstance, useButtonProps> {
+export interface ButtonProps extends BaseComponentProps<ButtonInstance, useButtonProps, ButtonPassThrough> {
     /**
      * Size of the Button.
      */
@@ -107,4 +107,4 @@ export type ButtonClassNamesType = (typeof ButtonClassNames)[keyof typeof Button
 /**
  * Instance of Button component.
  */
-export type ButtonInstance = ComponentInstance<ButtonProps, ButtonState, ButtonExposes, ButtonPassThrough>;
+export type ButtonInstance = ComponentInstance<ButtonProps, ButtonState, ButtonExposes>;

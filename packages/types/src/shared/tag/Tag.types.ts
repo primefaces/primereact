@@ -38,7 +38,7 @@ export interface TagPassThrough {
 /**
  * Defines valid properties in Tag component.
  */
-export interface TagProps extends BaseComponentProps<TagInstance, useTagProps> {
+export interface TagProps extends BaseComponentProps<TagInstance, useTagProps, TagPassThrough> {
     /**
      * Severity type of the tag.
      */
@@ -88,4 +88,4 @@ export type TagClassNamesType = (typeof TagClassNames)[keyof typeof TagClassName
 /**
  * Instance of Tag component.
  */
-export type TagInstance = ComponentInstance<TagProps, TagState, TagExposes, TagPassThrough>;
+export type TagInstance = ComponentInstance<TagProps, TagState, TagExposes>;

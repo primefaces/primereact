@@ -54,7 +54,7 @@ export interface RadioButtonChangeEvent extends useRadioButtonChangeEvent<React.
 /**
  * Defines valid properties in RadioButton component.
  */
-export interface RadioButtonProps extends BaseComponentProps<RadioButtonInstance, Omit<useRadioButtonProps, 'onCheckedChange'>> {
+export interface RadioButtonProps extends BaseComponentProps<RadioButtonInstance, Omit<useRadioButtonProps, 'onCheckedChange'>, RadioButtonPassThrough> {
     /**
      * Value of the radio button.
      */
@@ -176,4 +176,4 @@ export type RadioButtonClassNamesType = (typeof RadioButtonClassNames)[keyof typ
 /**
  * Instance of RadioButton component.
  */
-export type RadioButtonInstance = ComponentInstance<RadioButtonProps, RadioButtonState, RadioButtonExposes, RadioButtonPassThrough>;
+export type RadioButtonInstance = ComponentInstance<RadioButtonProps, RadioButtonState, RadioButtonExposes>;

@@ -30,7 +30,7 @@ export interface TagIconPassThrough {
 /**
  * Defines valid properties in TagIcon component.
  */
-export interface TagIconProps extends BaseComponentProps<TagIconInstance> {}
+export interface TagIconProps extends BaseComponentProps<TagIconInstance, unknown, TagIconPassThrough> {}
 
 /**
  * Defines valid state in TagIcon component.
@@ -50,4 +50,4 @@ export interface TagIconExposes {
 /**
  * Instance of TagIcon component.
  */
-export type TagIconInstance = ComponentInstance<TagIconProps, TagIconState, TagIconExposes, TagIconPassThrough>;
+export type TagIconInstance = ComponentInstance<TagIconProps, TagIconState, TagIconExposes>;

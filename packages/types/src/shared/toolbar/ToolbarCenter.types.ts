@@ -30,7 +30,7 @@ export interface ToolbarCenterPassThrough {
 /**
  * Defines valid properties in ToolbarCenter component.
  */
-export interface ToolbarCenterProps extends BaseComponentProps<ToolbarCenterInstance> {}
+export interface ToolbarCenterProps extends BaseComponentProps<ToolbarCenterInstance, unknown, ToolbarCenterPassThrough> {}
 
 /**
  * Defines valid state in ToolbarCenter component.
@@ -65,4 +65,4 @@ export type ToolbarCenterClassNamesType = (typeof ToolbarCenterClassNames)[keyof
 /**
  * Instance of ToolbarCenter component.
  */
-export type ToolbarCenterInstance = ComponentInstance<ToolbarCenterProps, ToolbarCenterState, ToolbarCenterExposes, ToolbarCenterPassThrough>;
+export type ToolbarCenterInstance = ComponentInstance<ToolbarCenterProps, ToolbarCenterState, ToolbarCenterExposes>;

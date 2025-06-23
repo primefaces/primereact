@@ -30,7 +30,7 @@ export interface ScrollAreaViewportPassThrough {
 /**
  * Defines valid properties in ScrollAreaViewport component.
  */
-export interface ScrollAreaViewportProps extends BaseComponentProps<ScrollAreaViewportInstance> {}
+export interface ScrollAreaViewportProps extends BaseComponentProps<ScrollAreaViewportInstance, unknown, ScrollAreaViewportPassThrough> {}
 
 /**
  * Defines valid state in ScrollAreaViewport component.
@@ -50,4 +50,4 @@ export interface ScrollAreaViewportExposes {
 /**
  * Instance of ScrollAreaViewport component.
  */
-export type ScrollAreaViewportInstance = ComponentInstance<ScrollAreaViewportProps, ScrollAreaViewportState, ScrollAreaViewportExposes, ScrollAreaViewportPassThrough>;
+export type ScrollAreaViewportInstance = ComponentInstance<ScrollAreaViewportProps, ScrollAreaViewportState, ScrollAreaViewportExposes>;

@@ -30,7 +30,7 @@ export interface MotionPassThrough {
 /**
  * Defines valid properties in Motion component.
  */
-export interface MotionProps extends BaseComponentProps<MotionInstance, useMotionProps> {
+export interface MotionProps extends BaseComponentProps<MotionInstance, useMotionProps, MotionPassThrough> {
     /**
      * Whether the motion should be applied to the component.
      * When set to true, the component will animate in.
@@ -76,4 +76,4 @@ export type MotionClassNamesType = (typeof MotionClassNames)[keyof typeof Motion
 /**
  * Instance of Motion component.
  */
-export type MotionInstance = ComponentInstance<MotionProps, MotionState, MotionExposes, MotionPassThrough>;
+export type MotionInstance = ComponentInstance<MotionProps, MotionState, MotionExposes>;

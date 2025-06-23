@@ -54,7 +54,7 @@ export interface CheckboxChangeEvent extends useCheckboxChangeEvent<React.Change
 /**
  * Defines valid properties in Checkbox component.
  */
-export interface CheckboxProps extends BaseComponentProps<CheckboxInstance, Omit<useCheckboxProps, 'onCheckedChange'>> {
+export interface CheckboxProps extends BaseComponentProps<CheckboxInstance, Omit<useCheckboxProps, 'onCheckedChange'>, CheckboxPassThrough> {
     /**
      * Value of the checkbox.
      */
@@ -176,4 +176,4 @@ export type CheckboxClassNamesType = (typeof CheckboxClassNames)[keyof typeof Ch
 /**
  * Instance of Checkbox component.
  */
-export type CheckboxInstance = ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes, CheckboxPassThrough>;
+export type CheckboxInstance = ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes>;

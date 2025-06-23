@@ -30,7 +30,7 @@ export interface ProgressBarTrackPassThrough {
 /**
  * Defines valid properties in ProgressBarTrack component.
  */
-export interface ProgressBarTrackProps extends BaseComponentProps<ProgressBarTrackInstance> {}
+export interface ProgressBarTrackProps extends BaseComponentProps<ProgressBarTrackInstance, unknown, ProgressBarTrackPassThrough> {}
 
 /**
  * Defines valid state in ProgressBarTrack component.
@@ -50,4 +50,4 @@ export interface ProgressBarTrackExposes {
 /**
  * Instance of ProgressBarTrack component.
  */
-export type ProgressBarTrackInstance = ComponentInstance<ProgressBarTrackProps, ProgressBarTrackState, ProgressBarTrackExposes, ProgressBarTrackPassThrough>;
+export type ProgressBarTrackInstance = ComponentInstance<ProgressBarTrackProps, ProgressBarTrackState, ProgressBarTrackExposes>;

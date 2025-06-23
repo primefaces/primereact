@@ -30,7 +30,7 @@ export interface SplitterPanelPassThrough {
 /**
  * Defines valid properties in SplitterPanel component.
  */
-export interface SplitterPanelProps extends BaseComponentProps<SplitterPanelInstance> {
+export interface SplitterPanelProps extends BaseComponentProps<SplitterPanelInstance, unknown, SplitterPanelPassThrough> {
     /**
      * Size of the element relative to 100%.
      */
@@ -59,4 +59,4 @@ export interface SplitterPanelExposes {
 /**
  * Instance of SplitterPanel component.
  */
-export type SplitterPanelInstance = ComponentInstance<SplitterPanelProps, SplitterPanelState, SplitterPanelExposes, SplitterPanelPassThrough>;
+export type SplitterPanelInstance = ComponentInstance<SplitterPanelProps, SplitterPanelState, SplitterPanelExposes>;

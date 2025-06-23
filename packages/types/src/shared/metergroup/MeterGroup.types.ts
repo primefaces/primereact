@@ -58,7 +58,7 @@ export interface MeterGroupPassThrough {
 /**
  * Defines valid properties in MeterGroup component.
  */
-export interface MeterGroupProps extends BaseComponentProps<MeterGroupInstance, useMeterGroupProps> {
+export interface MeterGroupProps extends BaseComponentProps<MeterGroupInstance, useMeterGroupProps, MeterGroupPassThrough> {
     /**
      * Specifies the layout of the component.
      * @default horizontal
@@ -130,4 +130,4 @@ export type MeterGroupClassNamesType = (typeof MeterGroupClassNames)[keyof typeo
 /**
  * Instance of MeterGroup component.
  */
-export type MeterGroupInstance = ComponentInstance<MeterGroupProps, MeterGroupState, MeterGroupExposes, MeterGroupPassThrough>;
+export type MeterGroupInstance = ComponentInstance<MeterGroupProps, MeterGroupState, MeterGroupExposes>;

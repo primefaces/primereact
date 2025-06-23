@@ -70,7 +70,7 @@ export interface StepperPassThrough {
 /**
  * Defines valid properties in Stepper component.
  */
-export interface StepperProps extends BaseComponentProps<StepperInstance, useStepperProps> {}
+export interface StepperProps extends BaseComponentProps<StepperInstance, useStepperProps, StepperPassThrough> {}
 
 /**
  * Defines valid state in Stepper component.
@@ -138,4 +138,4 @@ export type StepperClassNamesType = (typeof StepperClassNames)[keyof typeof Step
 /**
  * Instance of Stepper component.
  */
-export type StepperInstance = ComponentInstance<StepperProps, StepperState, StepperExposes, StepperPassThrough>;
+export type StepperInstance = ComponentInstance<StepperProps, StepperState, StepperExposes>;

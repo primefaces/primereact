@@ -1,4 +1,4 @@
-import type { ComponentInstance, GlobalComponentProps, InferComponentInstance } from '@primereact/types/core';
+import type { ComponentInstance, GlobalComponentProps, GlobalComponentPTProps, InferComponentInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
@@ -11,20 +11,24 @@ export type ExtractProps<T extends React.ElementType> = T extends keyof React.JS
 /**
  * Defines the common properties of the PrimeReact components.
  *
+ * @template I - The instance of the component.
  * @template H - The properties of the headless component.
+ * @template P - The passthrough properties of the component.
  * @template T - The element type of the component.
  */
-export declare type CommonComponentProps<I extends ComponentInstance, H, T extends React.ElementType> = H & GlobalComponentProps<I, T>;
+export declare type CommonComponentProps<I extends ComponentInstance, H, P, T extends React.ElementType> = H & GlobalComponentProps<I, P, T> & GlobalComponentPTProps<P>;
 
 /**
  * Defines the base properties of the components.
  *
+ * @template I - The instance of the component.
  * @template H - The properties of the headless component.
+ * @template P - The passthrough properties of the component.
  * @template T - The element type of the component.
  * @template O - The properties to omit from the component.
  */
-export declare type BaseComponentProps<I extends ComponentInstance = ComponentInstance, H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<I, H, T> &
-    Omit<ExtractProps<T>, keyof CommonComponentProps<I, H, T> | O[number]>;
+export declare type BaseComponentProps<I extends ComponentInstance = ComponentInstance, H = unknown, P = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<I, H, P, T> &
+    Omit<ExtractProps<T>, keyof CommonComponentProps<I, H, P, T> | O[number]>;
 
 export type PassThroughType<I, Attrs = React.HTMLAttributes<HTMLElement>> = Attrs | ((options: PassThroughMethodOptions<I>) => Attrs | string) | string | null | undefined;
 

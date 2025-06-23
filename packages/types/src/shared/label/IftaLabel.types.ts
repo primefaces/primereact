@@ -29,7 +29,7 @@ export interface IftaLabelPassThrough {
 /**
  * Defines valid properties in IftaLabel component.
  */
-export interface IftaLabelProps extends BaseComponentProps<IftaLabelInstance> {}
+export interface IftaLabelProps extends BaseComponentProps<IftaLabelInstance, unknown, IftaLabelPassThrough> {}
 
 /**
  * Defines valid state in IftaLabel component.
@@ -59,4 +59,4 @@ export type IftaLabelClassNamesType = (typeof IftaLabelClassNames)[keyof typeof 
 /**
  * Instance of IftaLabel component.
  */
-export type IftaLabelInstance = ComponentInstance<IftaLabelProps, IftaLabelState, IftaLabelExposes, IftaLabelPassThrough>;
+export type IftaLabelInstance = ComponentInstance<IftaLabelProps, IftaLabelState, IftaLabelExposes>;

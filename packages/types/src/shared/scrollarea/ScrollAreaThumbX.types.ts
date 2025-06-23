@@ -30,7 +30,7 @@ export interface ScrollAreaThumbXPassThrough {
 /**
  * Defines valid properties in ScrollAreaThumbX component.
  */
-export interface ScrollAreaThumbXProps extends BaseComponentProps<ScrollAreaThumbXInstance> {}
+export interface ScrollAreaThumbXProps extends BaseComponentProps<ScrollAreaThumbXInstance, unknown, ScrollAreaThumbXPassThrough> {}
 
 /**
  * Defines valid state in ScrollAreaThumbX component.
@@ -50,4 +50,4 @@ export interface ScrollAreaThumbXExposes {
 /**
  * Instance of ScrollAreaThumbX component.
  */
-export type ScrollAreaThumbXInstance = ComponentInstance<ScrollAreaThumbXProps, ScrollAreaThumbXState, ScrollAreaThumbXExposes, ScrollAreaThumbXPassThrough>;
+export type ScrollAreaThumbXInstance = ComponentInstance<ScrollAreaThumbXProps, ScrollAreaThumbXState, ScrollAreaThumbXExposes>;

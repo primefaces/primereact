@@ -30,7 +30,7 @@ export interface StepperItemPassThrough {
 /**
  * Defines valid properties in StepperItem component.
  */
-export interface StepperItemProps extends BaseComponentProps<StepperItemInstance> {
+export interface StepperItemProps extends BaseComponentProps<StepperItemInstance, unknown, StepperItemPassThrough> {
     /**
      * Value of the step.
      * @default null
@@ -60,4 +60,4 @@ export interface StepperItemExposes {
 /**
  * Instance of StepperItem component.
  */
-export type StepperItemInstance = ComponentInstance<StepperItemProps, StepperItemState, StepperItemExposes, StepperItemPassThrough>;
+export type StepperItemInstance = ComponentInstance<StepperItemProps, StepperItemState, StepperItemExposes>;

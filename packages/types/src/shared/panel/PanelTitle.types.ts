@@ -29,7 +29,7 @@ export interface PanelTitlePassThrough {
 /**
  * Defines valid properties in PanelTitlecomponent.
  */
-export interface PanelTitleProps extends BaseComponentProps<PanelTitleInstance> {}
+export interface PanelTitleProps extends BaseComponentProps<PanelTitleInstance, unknown, PanelTitlePassThrough> {}
 
 /**
  * Defines valid state in PanelTitlecomponent.
@@ -44,4 +44,4 @@ export interface PanelTitleExposes {}
 /**
  * Instance of PanelTitlecomponent.
  */
-export type PanelTitleInstance = ComponentInstance<PanelTitleProps, PanelTitleState, PanelTitleExposes, PanelTitlePassThrough>;
+export type PanelTitleInstance = ComponentInstance<PanelTitleProps, PanelTitleState, PanelTitleExposes>;

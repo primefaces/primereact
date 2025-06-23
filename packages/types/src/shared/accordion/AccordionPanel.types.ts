@@ -30,7 +30,7 @@ export interface AccordionPanelPassThrough {
 /**
  * Defines valid properties in AccordionPanel component.
  */
-export interface AccordionPanelProps extends BaseComponentProps<AccordionPanelInstance> {
+export interface AccordionPanelProps extends BaseComponentProps<AccordionPanelInstance, unknown, AccordionPanelPassThrough> {
     /**
      * Unique value of item.
      * @default null
@@ -65,4 +65,4 @@ export interface AccordionPanelExposes {
 /**
  * Instance of AccordionPanel component.
  */
-export type AccordionPanelInstance = ComponentInstance<AccordionPanelProps, AccordionPanelState, AccordionPanelExposes, AccordionPanelPassThrough>;
+export type AccordionPanelInstance = ComponentInstance<AccordionPanelProps, AccordionPanelState, AccordionPanelExposes>;

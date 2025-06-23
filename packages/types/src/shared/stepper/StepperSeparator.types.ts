@@ -30,7 +30,7 @@ export interface StepperSeparatorPassThrough {
 /**
  * Defines valid properties in StepperSeparator component.
  */
-export interface StepperSeparatorProps extends BaseComponentProps<StepperSeparatorInstance> {}
+export interface StepperSeparatorProps extends BaseComponentProps<StepperSeparatorInstance, unknown, StepperSeparatorPassThrough> {}
 
 /**
  * Defines valid state in StepperSeparator component.
@@ -50,4 +50,4 @@ export interface StepperSeparatorExposes {
 /**
  * Instance of StepperSeparator component.
  */
-export type StepperSeparatorInstance = ComponentInstance<StepperSeparatorProps, StepperSeparatorState, StepperSeparatorExposes, StepperSeparatorPassThrough>;
+export type StepperSeparatorInstance = ComponentInstance<StepperSeparatorProps, StepperSeparatorState, StepperSeparatorExposes>;

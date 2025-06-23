@@ -34,7 +34,7 @@ export interface DividerPassThrough {
 /**
  * Defines valid properties in Divider component.
  */
-export interface DividerProps extends BaseComponentProps<DividerInstance, useDividerProps> {
+export interface DividerProps extends BaseComponentProps<DividerInstance, useDividerProps, DividerPassThrough> {
     /**
      * Alignment of the content.
      */
@@ -85,4 +85,4 @@ export type DividerClassNamesType = (typeof DividerClassNames)[keyof typeof Divi
 /**
  * Instance of Divider component.
  */
-export type DividerInstance = ComponentInstance<DividerProps, DividerState, DividerExposes, DividerPassThrough>;
+export type DividerInstance = ComponentInstance<DividerProps, DividerState, DividerExposes>;

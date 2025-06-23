@@ -46,7 +46,7 @@ export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {}
 /**
  * Defines valid properties in CheckboxGroup component.
  */
-export interface CheckboxGroupProps extends BaseComponentProps<CheckboxGroupInstance> {
+export interface CheckboxGroupProps extends BaseComponentProps<CheckboxGroupInstance, unknown, CheckboxGroupPassThrough> {
     /**
      * Value of the checkbox group.
      */
@@ -121,4 +121,4 @@ export type CheckboxGroupClassNamesType = (typeof CheckboxGroupClassNames)[keyof
 /**
  * Instance of CheckboxGroup component.
  */
-export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes, CheckboxGroupPassThrough>;
+export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes>;

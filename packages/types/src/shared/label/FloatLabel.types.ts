@@ -29,7 +29,7 @@ export interface FloatLabelPassThrough {
 /**
  * Defines valid properties in FloatLabel component.
  */
-export interface FloatLabelProps extends BaseComponentProps<FloatLabelInstance> {
+export interface FloatLabelProps extends BaseComponentProps<FloatLabelInstance, unknown, FloatLabelPassThrough> {
     /**
      * Defines the positioning of the label relative to the input.
      * @default over
@@ -65,4 +65,4 @@ export type FloatLabelClassNamesType = (typeof FloatLabelClassNames)[keyof typeo
 /**
  * Instance of FloatLabel component.
  */
-export type FloatLabelInstance = ComponentInstance<FloatLabelProps, FloatLabelState, FloatLabelExposes, FloatLabelPassThrough>;
+export type FloatLabelInstance = ComponentInstance<FloatLabelProps, FloatLabelState, FloatLabelExposes>;

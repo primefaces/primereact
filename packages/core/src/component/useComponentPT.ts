@@ -114,9 +114,9 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
         return Object.entries(attrs || {})
             .filter(([key]) => key?.startsWith('pt-'))
             .reduce<Record<string, unknown>>((result, [key, value]) => {
-                const [, ...rest] = key.split('-');
+                const [, slot, ...rest] = key.split('-');
 
-                rest?.reduce((currentObj, nestedKey, index, array) => {
+                [slot, rest?.join('-')]?.reduce((currentObj, nestedKey, index, array) => {
                     if (!currentObj[nestedKey]) {
                         currentObj[nestedKey] = index === array.length - 1 ? value : {};
                     }

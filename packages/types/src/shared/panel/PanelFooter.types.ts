@@ -29,7 +29,7 @@ export interface PanelFooterPassThrough {
 /**
  * Defines valid properties in PanelFooter component.
  */
-export interface PanelFooterProps extends BaseComponentProps<PanelFooterInstance> {}
+export interface PanelFooterProps extends BaseComponentProps<PanelFooterInstance, unknown, PanelFooterPassThrough> {}
 
 /**
  * Defines valid state in PanelFooter component.
@@ -44,4 +44,4 @@ export interface PanelFooterExposes {}
 /**
  * Instance of PanelFooter component.
  */
-export type PanelFooterInstance = ComponentInstance<PanelFooterProps, PanelFooterState, PanelFooterExposes, PanelFooterPassThrough>;
+export type PanelFooterInstance = ComponentInstance<PanelFooterProps, PanelFooterState, PanelFooterExposes>;

@@ -46,7 +46,7 @@ export interface ToggleButtonGroupUpdateChangeEvent extends ToggleButtonChangeEv
 /**
  * Defines valid properties in ToggleButtonGroup component.
  */
-export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonGroupInstance> {
+export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonGroupInstance, unknown, ToggleButtonGroupPassThrough> {
     /**
      * Value of the ToggleButton group.
      */
@@ -139,4 +139,4 @@ export type ToggleButtonGroupClassNamesType = (typeof ToggleButtonGroupClassName
 /**
  * Instance of ToggleButtonGroup component.
  */
-export type ToggleButtonGroupInstance = ComponentInstance<ToggleButtonGroupProps, ToggleButtonGroupState, ToggleButtonGroupExposes, ToggleButtonGroupPassThrough>;
+export type ToggleButtonGroupInstance = ComponentInstance<ToggleButtonGroupProps, ToggleButtonGroupState, ToggleButtonGroupExposes>;

@@ -53,7 +53,7 @@ export interface InplaceChangeEvent extends useInplaceChangeEvent {
 /**
  * Defines valid properties in Inplace component.
  */
-export interface InplaceProps extends BaseComponentProps<InplaceInstance, useInplaceProps> {
+export interface InplaceProps extends BaseComponentProps<InplaceInstance, useInplaceProps, InplacePassThrough> {
     /**
      * When present, it specifies that the element should be disabled.
      * @default false
@@ -99,4 +99,4 @@ export type InplaceClassNamesType = (typeof InplaceClassNames)[keyof typeof Inpl
 /**
  * Instance of Inplace component.
  */
-export type InplaceInstance = ComponentInstance<InplaceProps, InplaceState, InplaceExposes, InplacePassThrough>;
+export type InplaceInstance = ComponentInstance<InplaceProps, InplaceState, InplaceExposes>;

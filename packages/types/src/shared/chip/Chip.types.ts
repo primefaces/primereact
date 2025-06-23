@@ -46,7 +46,7 @@ export interface ChipPassThrough {
 /**
  * Defines valid properties in Chip component.
  */
-export interface ChipProps extends BaseComponentProps<ChipInstance, useChipProps> {}
+export interface ChipProps extends BaseComponentProps<ChipInstance, useChipProps, ChipPassThrough> {}
 
 /**
  * Defines valid state in Chip component.
@@ -94,4 +94,4 @@ export type ChipClassNamesType = (typeof ChipClassNames)[keyof typeof ChipClassN
 /**
  * Instance of Chip component.
  */
-export type ChipInstance = ComponentInstance<ChipProps, ChipState, ChipExposes, ChipPassThrough>;
+export type ChipInstance = ComponentInstance<ChipProps, ChipState, ChipExposes>;
