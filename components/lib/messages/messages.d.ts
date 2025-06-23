@@ -22,6 +22,9 @@ export declare type MessagesPassThroughTransitionType = ReactCSSTransitionProps 
  */
 export interface MessagesPassThroughMethodOptions {
     props: MessagesProps;
+    state: MessagesState;
+    hostName?: string;
+    index?: number;
 }
 
 /**
@@ -66,6 +69,19 @@ export interface MessagesPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: MessagesPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in Messages component.
+ */
+export interface MessagesState {
+    /**
+     * Array of messages
+     */
+    messages: Array<{
+        _pId: number;
+        message: MessagesMessage;
+    }>;
 }
 
 export interface MessagesMessage {
@@ -163,6 +179,11 @@ export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {PassThroughOptions}
      */
     ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
@@ -198,7 +219,7 @@ export declare class Messages extends React.Component<MessagesProps, any> {
     public remove(message: MessagesMessage | MessagesMessage[]): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

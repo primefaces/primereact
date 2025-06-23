@@ -11,9 +11,10 @@ const classes = {
             'p-invalid': props.invalid,
             'p-inputwrapper-focus': focusedState
         }),
-    container: ({ props }) =>
+    container: ({ props, context }) =>
         classNames('p-autocomplete-multiple-container p-component p-inputtext', {
-            'p-disabled': props.disabled
+            'p-disabled': props.disabled,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
         }),
     loadingIcon: 'p-autocomplete-loader',
     dropdownButton: 'p-autocomplete-dropdown',
@@ -21,19 +22,20 @@ const classes = {
     token: 'p-autocomplete-token p-highlight',
     tokenLabel: 'p-autocomplete-token-label',
     inputToken: 'p-autocomplete-input-token',
-    input: ({ props }) =>
+    input: ({ props, context }) =>
         classNames('p-autocomplete-input', {
-            'p-autocomplete-dd-input': props.dropdown
+            'p-autocomplete-dd-input': props.dropdown,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
         }),
     panel: ({ context }) =>
         classNames('p-autocomplete-panel p-component', {
-            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
     listWrapper: 'p-autocomplete-items-wrapper',
     list: ({ virtualScrollerOptions, options }) => (virtualScrollerOptions ? classNames('p-autocomplete-items', options.className) : 'p-autocomplete-items'),
     emptyMessage: 'p-autocomplete-item',
-    item: ({ suggestion, optionGroupLabel }) => (optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled })),
+    item: ({ suggestion, optionGroupLabel, selected }) =>
+        optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }, { selected: selected }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }, { 'p-highlight': selected }),
     itemGroup: 'p-autocomplete-item-group',
     footer: 'p-autocomplete-footer',
     transition: 'p-connected-overlay'
@@ -166,6 +168,7 @@ export const AutoCompleteBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         inputStyle: null,
+        variant: null,
         invalid: false,
         itemTemplate: null,
         loadingIcon: null,

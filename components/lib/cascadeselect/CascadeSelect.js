@@ -1,13 +1,14 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SpinnerIcon } from '../icons/spinner';
+import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
 
@@ -40,12 +41,19 @@ export const CascadeSelect = React.memo(
         const styleElementRef = React.useRef(null);
         const dirty = React.useRef(false);
         const selectionPath = React.useRef(null);
+        const selfChange = React.useRef(null);
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
-            listener: (event, { valid }) => {
-                valid && hide();
+            listener: (event, { valid, type }) => {
+                if (valid) {
+                    if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
+                }
             },
             when: overlayVisibleState
         });
@@ -62,6 +70,7 @@ export const CascadeSelect = React.memo(
 
         const onOptionSelect = (event) => {
             if (props.onChange) {
+                selfChange.current = true;
                 props.onChange({
                     originalEvent: event,
                     value: event.value
@@ -200,7 +209,7 @@ export const CascadeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
 
@@ -341,6 +350,55 @@ export const CascadeSelect = React.memo(
             );
         };
 
+        const clear = (event) => {
+            if (props.onChange) {
+                selfChange.current = true;
+
+                props.onChange({
+                    originalEvent: event,
+                    value: undefined,
+                    stopPropagation: () => {
+                        event?.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event?.preventDefault();
+                    },
+                    target: {
+                        name: props.name,
+                        id: props.id,
+                        value: undefined
+                    }
+                });
+            }
+        };
+
+        const onClearIconKeyDown = (event) => {
+            if (event.key === 'Enter' || event.code === 'Space') {
+                clear(event);
+                event.preventDefault();
+            }
+        };
+
+        const createClearIcon = () => {
+            if (props.value != null && props.showClear && !props.disabled) {
+                const clearIconProps = mergeProps(
+                    {
+                        className: cx('clearIcon'),
+                        onPointerUp: clear,
+                        tabIndex: props.tabIndex || '0',
+                        onKeyDown: onClearIconKeyDown,
+                        'aria-label': localeOption('clear')
+                    },
+                    ptm('clearIcon')
+                );
+                const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
+
+                return IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
+            }
+
+            return null;
+        };
+
         const createLabel = () => {
             const label = props.value ? getOptionLabel(props.value) : props.placeholder || 'p-emptylabel';
 
@@ -409,7 +467,8 @@ export const CascadeSelect = React.memo(
         const panelProps = mergeProps(
             {
                 ref: overlayRef,
-                className: cx('panel'),
+                className: classNames(props.panelClassName, cx('panel')),
+                style: props.panelStyle,
                 onClick: (e) => onPanelClick(e)
             },
             ptm('panel')
@@ -465,13 +524,14 @@ export const CascadeSelect = React.memo(
         const createElement = () => {
             const keyboardHelper = createKeyboardHelper();
             const labelElement = createLabel();
+            const clearIcon = createClearIcon();
             const dropdownIcon = props.loading ? createLoadingIcon() : createDropdownIcon();
             const overlay = createOverlay();
             const rootProps = mergeProps(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className: cx('root', { focusedState, overlayVisibleState }),
+                    className: classNames(props.className, cx('root', { focusedState, overlayVisibleState, context })),
                     style: props.style,
                     onClick: (e) => onClick(e)
                 },
@@ -483,6 +543,7 @@ export const CascadeSelect = React.memo(
                 <div {...rootProps}>
                     {keyboardHelper}
                     {labelElement}
+                    {clearIcon}
                     {dropdownIcon}
                     {overlay}
                 </div>

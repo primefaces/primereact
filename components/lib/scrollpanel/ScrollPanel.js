@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { DomHandler, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, classNames } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
@@ -38,10 +38,10 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const calculateContainerHeight = () => {
         const containerStyles = getComputedStyle(containerRef.current);
         const xBarStyles = getComputedStyle(xBarRef.current);
-        const pureContainerHeight = DomHandler.getHeight(containerRef.current) - parseInt(xBarStyles['height'], 10);
+        const pureContainerHeight = DomHandler.getHeight(containerRef.current) - parseInt(xBarStyles.height, 10);
 
         if (containerStyles['max-height'] !== 'none' && pureContainerHeight === 0) {
-            if (contentRef.current.offsetHeight + parseInt(xBarStyles['height'], 10) > parseInt(containerStyles['max-height'], 10)) {
+            if (contentRef.current.offsetHeight + parseInt(xBarStyles.height, 10) > parseInt(containerStyles['max-height'], 10)) {
                 containerRef.current.style.height = containerStyles['max-height'];
             } else {
                 containerRef.current.style.height =
@@ -51,6 +51,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     };
 
     const moveBar = () => {
+        if (!contentRef.current) return;
         // horizontal scroll
         const totalWidth = contentRef.current.scrollWidth;
         const ownWidth = contentRef.current.clientWidth;
@@ -70,14 +71,22 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                 DomHandler.addClass(xBarRef.current, 'p-scrollpanel-hidden');
             } else {
                 DomHandler.removeClass(xBarRef.current, 'p-scrollpanel-hidden');
-                xBarRef.current.style.cssText = 'width:' + Math.max(scrollXRatio.current * 100, 10) + '%; left:' + (contentRef.current.scrollLeft / totalWidth) * 100 + '%;bottom:' + bottom + 'px;';
+                DomHandler.applyStyle(xBarRef.current, {
+                    width: Math.max(scrollXRatio.current * 100, 10) + '%',
+                    left: (contentRef.current.scrollLeft / totalWidth) * 100 + '%',
+                    bottom: bottom + 'px'
+                });
             }
 
             if (scrollYRatio.current >= 1) {
                 DomHandler.addClass(yBarRef.current, 'p-scrollpanel-hidden');
             } else {
                 DomHandler.removeClass(yBarRef.current, 'p-scrollpanel-hidden');
-                yBarRef.current.style.cssText = 'height:' + Math.max(scrollYRatio.current * 100, 10) + '%; top: calc(' + (contentRef.current.scrollTop / totalHeight) * 100 + '% - ' + xBarRef.current.clientHeight + 'px);right:' + right + 'px;';
+                DomHandler.applyStyle(yBarRef.current, {
+                    height: Math.max(scrollYRatio.current * 100, 10) + '%',
+                    top: 'calc(' + (contentRef.current.scrollTop / totalHeight) * 100 + '% - ' + xBarRef.current.clientHeight + 'px)',
+                    right: right + 'px'
+                });
             }
         });
     };
@@ -287,7 +296,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
             id: props.id,
             ref: containerRef,
             style: props.style,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         ScrollPanelBase.getOtherProps(props),
         ptm('root')
@@ -352,8 +361,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                     {props.children}
                 </div>
             </div>
-            <div {...barXProps}></div>
-            <div {...barYProps}></div>
+            <div {...barXProps} />
+            <div {...barYProps} />
         </div>
     );
 });

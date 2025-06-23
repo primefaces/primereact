@@ -1,12 +1,9 @@
 import { AccessibilityDoc } from '@/components/doc/colorpicker/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/colorpicker/basicdoc';
 import { DisabledDoc } from '@/components/doc/colorpicker/disableddoc';
-import { FormikDoc } from '@/components/doc/colorpicker/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/colorpicker/form/hookformdoc';
 import { FormatDoc } from '@/components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '@/components/doc/colorpicker/importdoc';
 import { InlineDoc } from '@/components/doc/colorpicker/inlinedoc';
-import { PTDoc } from '@/components/doc/colorpicker/pt/ptdoc';
 import { Wireframe } from '@/components/doc/colorpicker/pt/wireframe';
 import { StyledDoc } from '@/components/doc/colorpicker/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/colorpicker/theming/tailwinddoc';
@@ -41,24 +38,6 @@ const ColorPickerDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
-        {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
@@ -74,11 +53,6 @@ const ColorPickerDemo = () => {
             id: 'pt.colorpicker.options',
             label: 'ColorPicker PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

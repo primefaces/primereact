@@ -1,9 +1,9 @@
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateLicense from '@/components/templates/TemplateLicense';
-import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
+import Link from 'next/link';
 import AvalonLogo from './AvalonLogo';
 import AvalonSeparator from './AvalonSeparator';
 
@@ -20,8 +20,9 @@ const features2Data = [
         darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
-        title: 'Lifetime Support',
-        description: 'Diamond has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
+        title: 'Support',
+        description:
+            'PrimeTek offers assistance with account management and licensing issues, with the expectation that users have the necessary technical knowledge to use our products, as we do not offer technical support or consulting. Users can seek assistance in our community via our public Discord and Forum.',
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
@@ -43,21 +44,6 @@ const features2Data = [
     }
 ];
 
-const relatedData = [
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
-        href: '/templates/babylon'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
-        href: '/templates/apollo'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/roma-react.jpg',
-        href: '/templates/roma'
-    }
-];
-
 const animationFeaturesData1 = [
     {
         id: 1,
@@ -70,15 +56,8 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>
-                , choose from the wide range of blocks and customize the way you like. Note that{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>{' '}
-                is not included in the template and requires a separate purchase.
+                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
+                the template and requires a separate purchase.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -95,14 +74,8 @@ const animationFeaturesData1 = [
         description: (
             <>
                 Avalon uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
-                <a href="https://www.figma.com/file/LuzEn29BAxr03T2vMQ5A1y/Preview-%7C-Avalon-1.0.0?type=design&mode=design&t=ME7xK2sAYOLoKCrT-1" target="_blank">
-                    preview the Figma file
-                </a>{' '}
-                before the purchase. Note that PrimeReact UI components are excluded from the Avalon Figma file as they are available in{' '}
-                <a href="/uikit" target="_blank">
-                    PrimeOne for Figma
-                </a>{' '}
-                only.
+                <a href="https://www.figma.com/file/LuzEn29BAxr03T2vMQ5A1y/Preview-%7C-Avalon-1.0.0?type=design&mode=design&t=ME7xK2sAYOLoKCrT-1">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the
+                Avalon Figma file as they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/features-animation-figma.png'
@@ -195,16 +168,19 @@ const features1Data = [
 const license = {
     documentLink: 'https://avalon.primereact.org/documentation',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    showDiscount: false,
     licenseDetails: [
         {
             title: 'Basic License',
             price: '$49',
-            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
+            discountPrice: '$29',
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', '1 Year Free Updates']
         },
         {
             title: 'Extended License',
             price: '$490',
-            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+            discountPrice: '$290',
+            included: ['Commercial Usage', 'Multiple End Products', '1 Year Free Updates']
         }
     ]
 };
@@ -239,8 +215,6 @@ const AvalonPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <AvalonSeparator />
             <TemplateFeatures featuresData={features2Data} displayType="vertical" />
-            <AvalonSeparator />
-            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

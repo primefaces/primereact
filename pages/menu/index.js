@@ -6,7 +6,6 @@ import { CommandDoc } from '@/components/doc/menu/commanddoc';
 import { GroupDoc } from '@/components/doc/menu/groupdoc';
 import { ImportDoc } from '@/components/doc/menu/importdoc';
 import { PopupDoc } from '@/components/doc/menu/popupdoc';
-import { PTDoc } from '@/components/doc/menu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/menu/pt/wireframe';
 import { RouterDoc } from '@/components/doc/menu/routerdoc';
 import { TemplateDoc } from '@/components/doc/menu/templatedoc';
@@ -66,11 +65,6 @@ const MenuDemo = () => {
             id: 'pt.menu.options',
             label: 'Menu PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

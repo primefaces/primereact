@@ -199,12 +199,12 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 export declare class Fieldset extends React.Component<FieldsetProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLFieldSetElement} Container element
+     * @return {HTMLFieldSetElement | null} Container element
      */
-    public getElement(): HTMLFieldSetElement;
+    public getElement(): HTMLFieldSetElement | null;
     /**
      * Used to get the content element of the fieldset.
-     * @return {HTMLDivElement} Content element
+     * @return {HTMLDivElement | null} Content element
      */
-    public getContent(): HTMLDivElement;
+    public getContent(): HTMLDivElement | null;
 }

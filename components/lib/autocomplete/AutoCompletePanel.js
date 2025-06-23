@@ -33,6 +33,10 @@ export const AutoCompletePanel = React.memo(
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
         };
 
+        const getOptionRenderKey = (option) => {
+            return ObjectUtils.resolveFieldData(option, props.field);
+        };
+
         const createFooter = () => {
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
@@ -49,33 +53,74 @@ export const AutoCompletePanel = React.memo(
             return null;
         };
 
-        const createGroupChildren = (optionGroup, i, style) => {
+        const findKeyIndex = (array, key, value) => {
+            return array.findIndex((obj) => obj[key] === value);
+        };
+
+        const latestKey = React.useRef({ key: null, index: 0, keyIndex: 0 });
+
+        const createLabelItem = (item, key, index, labelItemProps) => {
+            const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, item, index) : props.getOptionGroupLabel(item) || item;
+            const itemGroupProps = mergeProps(
+                {
+                    index,
+                    className: cx('itemGroup'),
+                    'data-p-highlight': false,
+                    ...labelItemProps
+                },
+                _ptm('itemGroup')
+            );
+
+            return (
+                <li {...itemGroupProps} key={key ? key : null}>
+                    {content}
+                </li>
+            );
+        };
+
+        const isOptionSelected = (item) => {
+            if (props.selectedItem && props.selectedItem.current && Array.isArray(props.selectedItem.current)) {
+                return props.selectedItem.current.some((selectedItem) => ObjectUtils.deepEquals(selectedItem, item));
+            } else {
+                return ObjectUtils.deepEquals(props.selectedItem.current, item);
+            }
+        };
+
+        const createListItem = (item, key, index, listItemProps) => {
+            const selected = isOptionSelected(item);
+            const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, index) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
+            const itemProps = mergeProps(
+                {
+                    index: index,
+                    role: 'option',
+                    className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item, selected: selected }),
+                    onClick: (e) => props.onItemClick(e, item),
+                    'aria-selected': selected,
+                    ...listItemProps
+                },
+                getPTOptions(item, 'item')
+            );
+
+            return (
+                <li key={key} {...itemProps}>
+                    {content}
+                    <Ripple />
+                </li>
+            );
+        };
+
+        const createGroupChildren = (optionGroup, i) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
             return groupChildren.map((item, j) => {
                 const key = i + '_' + j;
-                const selected = props.selectedItem === item;
-                const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
-                const itemProps = mergeProps(
-                    {
-                        role: 'option',
-                        className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
-                        style,
-                        onClick: (e) => props.onItemClick(e, item),
-                        'aria-selected': selected,
-                        'data-group': i,
-                        'data-index': j,
-                        'data-p-disabled': item.disabled
-                    },
-                    getPTOptions(item, 'item')
-                );
+                const itemProps = mergeProps({
+                    'data-group': i,
+                    'data-index': j,
+                    'data-p-disabled': item.disabled
+                });
 
-                return (
-                    <li key={key} {...itemProps}>
-                        {content}
-                        <Ripple />
-                    </li>
-                );
+                return createListItem(item, key, j, itemProps);
             });
         };
 
@@ -83,50 +128,58 @@ export const AutoCompletePanel = React.memo(
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
             if (props.optionGroupLabel) {
-                const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
+                if (props.virtualScrollerOptions) {
+                    const keyIndex = findKeyIndex(props.suggestions, props.optionGroupLabel, suggestion);
+
+                    if (keyIndex !== -1) {
+                        latestKey.current = { key: suggestion, index, keyIndex };
+                        const key = index + '_' + getOptionGroupRenderKey(suggestion);
+
+                        return createLabelItem(suggestion, key, index, { style });
+                    }
+
+                    const key = index + '_' + latestKey.current.keyIndex;
+                    const itemProps = mergeProps({
+                        style,
+                        'data-group': latestKey.current.keyIndex,
+                        'data-index': index - latestKey.current.index - 1,
+                        'data-p-disabled': suggestion.disabled
+                    });
+
+                    return createListItem(suggestion, key, index, itemProps);
+                }
+
                 const childrenContent = createGroupChildren(suggestion, index, style);
                 const key = index + '_' + getOptionGroupRenderKey(suggestion);
-                const itemGroupProps = mergeProps(
-                    {
-                        className: cx('itemGroup'),
-                        style,
-                        'data-p-highlight': false
-                    },
-                    _ptm('itemGroup')
-                );
 
                 return (
                     <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{content}</li>
+                        {createLabelItem(suggestion, undefined, index, { style })}
                         {childrenContent}
                     </React.Fragment>
                 );
-            } else {
-                const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
-                const itemProps = mergeProps(
-                    {
-                        index,
-                        role: 'option',
-                        className: cx('item', { suggestion }),
-                        style,
-                        onClick: (e) => props.onItemClick(e, suggestion),
-                        'aria-selected': props.selectedItem.current === suggestion,
-                        'data-p-disabled': suggestion.disabled
-                    },
-                    getPTOptions(suggestion, 'item')
-                );
-
-                return (
-                    <li key={index} {...itemProps}>
-                        {content}
-                        <Ripple />
-                    </li>
-                );
             }
+
+            const key = `${index}_${ObjectUtils.isObject(suggestion) ? getOptionRenderKey(suggestion) : suggestion}`;
+            const itemProps = mergeProps(
+                {
+                    style,
+                    'data-p-disabled': suggestion.disabled
+                },
+                getPTOptions(suggestion, 'item')
+            );
+
+            return createListItem(suggestion, key, index, itemProps);
         };
 
         const createItems = () => {
             return props.suggestions ? props.suggestions.map(createItem) : null;
+        };
+
+        const flattenGroupedItems = (items) => {
+            try {
+                return items?.map((item) => [item?.[props?.optionGroupLabel], ...item?.[props?.optionGroupChildren]]).flat();
+            } catch (e) {}
         };
 
         const createContent = () => {
@@ -136,7 +189,7 @@ export const AutoCompletePanel = React.memo(
                     {
                         className: cx('emptyMessage')
                     },
-                    _ptm('emptyMesage')
+                    _ptm('emptyMessage')
                 );
 
                 const listProps = mergeProps(
@@ -154,12 +207,13 @@ export const AutoCompletePanel = React.memo(
             }
 
             if (props.virtualScrollerOptions) {
+                const items = props.suggestions ? (props.optionGroupLabel ? flattenGroupedItems(props?.suggestions) : props.suggestions) : null;
                 const virtualScrollerProps = {
                     ...props.virtualScrollerOptions,
                     ...{
                         style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
                         autoSize: true,
-                        items: props.suggestions,
+                        items: items,
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
                             const listProps = mergeProps(
@@ -179,31 +233,31 @@ export const AutoCompletePanel = React.memo(
                 };
 
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={_ptm('virtualScroller')} __parentMetadata={{ parent: props.metaData }} />;
-            } else {
-                const items = createItems();
-                const listProps = mergeProps(
-                    {
-                        id: props.listId,
-                        className: cx('list'),
-                        role: 'listbox'
-                    },
-                    _ptm('list')
-                );
-
-                const listWrapperProps = mergeProps(
-                    {
-                        className: cx('listWrapper'),
-                        style: { maxHeight: props.scrollHeight || 'auto' }
-                    },
-                    _ptm('listWrapper')
-                );
-
-                return (
-                    <div {...listWrapperProps}>
-                        <ul {...listProps}>{items}</ul>
-                    </div>
-                );
             }
+
+            const items = createItems();
+            const listProps = mergeProps(
+                {
+                    id: props.listId,
+                    className: cx('list'),
+                    role: 'listbox'
+                },
+                _ptm('list')
+            );
+
+            const listWrapperProps = mergeProps(
+                {
+                    className: cx('listWrapper'),
+                    style: { maxHeight: props.scrollHeight || 'auto' }
+                },
+                _ptm('listWrapper')
+            );
+
+            return (
+                <div {...listWrapperProps}>
+                    <ul {...listProps}>{items}</ul>
+                </div>
+            );
         };
 
         const createElement = () => {

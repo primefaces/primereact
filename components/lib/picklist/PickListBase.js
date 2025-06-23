@@ -55,6 +55,10 @@ const styles = `
         position: relative;
     }
 
+    .p-picklist-item .p-ink {
+        pointer-events: none;
+    }
+
     .p-picklist-filter {
         position: relative;
     }
@@ -115,6 +119,7 @@ export const PickListBase = ComponentBase.extend({
         tabIndex: 0,
         dataKey: null,
         autoOptionFocus: true,
+        focusOnHover: true,
         breakpoint: '960px',
         itemTemplate: null,
         sourceItemTemplate: null,

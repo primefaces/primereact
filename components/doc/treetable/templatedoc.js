@@ -17,8 +17,8 @@ export function TemplateDoc(props) {
     const actionTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button type="button" icon="pi pi-search" rounded></Button>
-                <Button type="button" icon="pi pi-pencil" severity="success" rounded></Button>
+                <Button type="button" icon="pi pi-search" rounded />
+                <Button type="button" icon="pi pi-pencil" severity="success" rounded />
             </div>
         );
     };
@@ -36,7 +36,7 @@ export function TemplateDoc(props) {
 
         return (
             <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
-                <span className={iconClassName} aria-hidden="true"></span>
+                <span className={iconClassName} aria-hidden="true" />
             </button>
         );
     };
@@ -181,26 +181,61 @@ export default function TemplateDemo() {
         data: `
 {
     key: '0',
-    label: 'Documents',
-    data: 'Documents Folder',
-    icon: 'pi pi-fw pi-inbox',
+    data: {
+        name: 'Applications',
+        size: '100kb',
+        type: 'Folder'
+    },
     children: [
         {
             key: '0-0',
-            label: 'Work',
-            data: 'Work Folder',
-            icon: 'pi pi-fw pi-cog',
+            data: {
+                name: 'React',
+                size: '25kb',
+                type: 'Folder'
+            },
             children: [
-                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+                {
+                    key: '0-0-0',
+                    data: {
+                        name: 'react.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-1',
+                    data: {
+                        name: 'native.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-2',
+                    data: {
+                        name: 'mobile.app',
+                        size: '5kb',
+                        type: 'Application'
+                    }
+                }
             ]
         },
         {
             key: '0-1',
-            label: 'Home',
-            data: 'Home Folder',
-            icon: 'pi pi-fw pi-home',
-            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+            data: {
+                name: 'editor.app',
+                size: '25kb',
+                type: 'Application'
+            }
+        },
+        {
+            key: '0-2',
+            data: {
+                name: 'settings.app',
+                size: '50kb',
+                type: 'Application'
+            }
         }
     ]
 },
@@ -217,9 +252,9 @@ export default function TemplateDemo() {
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} header={header} footer={footer} togglerTemplate={togglerTemplate} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
+                    <Column field="name" header="Name" expander />
+                    <Column field="size" header="Size" />
+                    <Column field="type" header="Type" />
                     <Column body={actionTemplate} headerClassName="w-10rem" />
                 </TreeTable>
             </div>

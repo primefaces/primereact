@@ -2,12 +2,10 @@ import { AccessibilityDoc } from '@/components/doc/checkbox/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '@/components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '@/components/doc/checkbox/dynamicdoc';
-import { FormikDoc } from '@/components/doc/checkbox/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/checkbox/form/hookformdoc';
+import { FilledDoc } from '@/components/doc/checkbox/filleddoc';
 import { GroupDoc } from '@/components/doc/checkbox/groupdoc';
 import { ImportDoc } from '@/components/doc/checkbox/importdoc';
 import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
-import { PTDoc } from '@/components/doc/checkbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/checkbox/pt/wireframe';
 import { StyledDoc } from '@/components/doc/checkbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/checkbox/theming/tailwinddoc';
@@ -42,28 +40,15 @@ const CheckboxDemo = () => {
             component: InvalidDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -81,11 +66,6 @@ const CheckboxDemo = () => {
             id: 'pt.checkbox.options',
             label: 'Checkbox PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

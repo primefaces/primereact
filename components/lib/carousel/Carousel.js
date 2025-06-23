@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -92,15 +92,15 @@ export const Carousel = React.memo(
                 totalShiftedItems = numScrollState * page * -1;
 
                 if (isCircular) {
-                    totalShiftedItems -= numVisibleState;
+                    totalShiftedItems = totalShiftedItems - numVisibleState;
                 }
 
                 isRemainingItemsAdded.current = false;
             } else {
-                totalShiftedItems += numScrollState * dir;
+                totalShiftedItems = totalShiftedItems + numScrollState * dir;
 
                 if (isRemainingItemsAdded.current) {
-                    totalShiftedItems += remainingItems.current - numScrollState * dir;
+                    totalShiftedItems = totalShiftedItems + (remainingItems.current - numScrollState * dir);
                     isRemainingItemsAdded.current = false;
                 }
 
@@ -116,7 +116,7 @@ export const Carousel = React.memo(
                 totalShiftedItems = 0;
                 page = totalIndicators - 1;
             } else if (page === totalIndicators - 1 && remainingItems.current > 0) {
-                totalShiftedItems += remainingItems.current * -1 - numScrollState * dir;
+                totalShiftedItems = totalShiftedItems + (remainingItems.current * -1 - numScrollState * dir);
                 isRemainingItemsAdded.current = true;
             }
 
@@ -151,7 +151,7 @@ export const Carousel = React.memo(
                     let totalShiftedItems = matchedResponsiveData.numScroll * page * -1;
 
                     if (isCircular) {
-                        totalShiftedItems -= matchedResponsiveData.numVisible;
+                        totalShiftedItems = totalShiftedItems - matchedResponsiveData.numVisible;
                     }
 
                     setTotalShiftedItemsState(totalShiftedItems);
@@ -375,7 +375,9 @@ export const Carousel = React.memo(
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
                     let res = responsiveOptions.current[i];
 
-                    innerHTML += `
+                    innerHTML =
+                        innerHTML +
+                        `
                     @media screen and (max-width: ${res.breakpoint}) {
                         .p-carousel[${attributeSelector.current}] .p-carousel-item {
                             flex: 1 0 ${100 / res.numVisible}%
@@ -451,11 +453,11 @@ export const Carousel = React.memo(
                 totalShiftedItems = page * numScrollState * -1;
 
                 if (isCircular) {
-                    totalShiftedItems -= numVisibleState;
+                    totalShiftedItems = totalShiftedItems - numVisibleState;
                 }
 
                 if (page === totalIndicators - 1 && remainingItems.current > 0) {
-                    totalShiftedItems += -1 * remainingItems.current + numScrollState;
+                    totalShiftedItems = totalShiftedItems + (-1 * remainingItems.current + numScrollState);
                     isRemainingItemsAdded.current = true;
                 } else {
                     isRemainingItemsAdded.current = false;
@@ -508,7 +510,7 @@ export const Carousel = React.memo(
         });
 
         const ariaSlideNumber = (value) => {
-            return localeOption('aria') ? localeOption('aria').slideNumber.replace(/{slideNumber}/g, value) : undefined;
+            return ariaLabel('slideNumber', { slideNumber: value });
         };
 
         const createItems = () => {
@@ -670,7 +672,7 @@ export const Carousel = React.memo(
                         className: cx('previousButton', { isDisabled }),
                         onClick: (e) => navBackward(e),
                         disabled: isDisabled,
-                        'aria-label': localeOption('aria') ? localeOption('aria').previousPageLabel : undefined,
+                        'aria-label': localeOption('aria') ? localeOption('aria').prevPageLabel : undefined,
                         'data-pc-group-section': 'navigator'
                     },
                     ptm('previousButton')
@@ -722,7 +724,7 @@ export const Carousel = React.memo(
         };
 
         const ariaPageLabel = (value) => {
-            return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
+            return ariaLabel('pageLabel', { page: value });
         };
 
         const createIndicator = (index) => {
@@ -739,7 +741,6 @@ export const Carousel = React.memo(
             const key = 'carousel-indicator-' + index;
             const indicatorProps = mergeProps(
                 {
-                    key,
                     className: cx('indicator', { isActive }),
                     'data-p-highlight': isActive
                 },
@@ -758,7 +759,7 @@ export const Carousel = React.memo(
             );
 
             return (
-                <li {...indicatorProps}>
+                <li {...indicatorProps} key={key}>
                     <button {...indicatorButtonProps}>
                         <Ripple />
                     </button>

@@ -187,7 +187,7 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
 export declare class Rating extends React.Component<RatingProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

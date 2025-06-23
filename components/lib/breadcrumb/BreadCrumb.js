@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
@@ -48,7 +48,7 @@ export const BreadCrumb = React.memo(
             return url === lastPath ? 'page' : undefined;
         };
 
-        const createHome = (index) => {
+        const createHome = () => {
             const home = props.home;
 
             if (home) {
@@ -106,14 +106,17 @@ export const BreadCrumb = React.memo(
                 const menuitemProps = mergeProps(
                     {
                         id: key,
-                        key,
                         className: cx('home', { _className, disabled }),
                         style
                     },
                     ptm('home')
                 );
 
-                return <li {...menuitemProps}>{content}</li>;
+                return (
+                    <li {...menuitemProps} key={key}>
+                        {content}
+                    </li>
+                );
             }
 
             return null;
@@ -133,14 +136,17 @@ export const BreadCrumb = React.memo(
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 ptm('separator')
             );
 
-            return <li {...separatorProps}>{separatorIcon}</li>;
+            return (
+                <li {...separatorProps} key={key}>
+                    {separatorIcon}
+                </li>
+            );
         };
 
         const createMenuitem = (item, index) => {
@@ -162,7 +168,8 @@ export const BreadCrumb = React.memo(
                     target: item.target,
                     'aria-current': isCurrent(item.url),
                     onClick: (event) => itemClick(event, item),
-                    'aria-disabled': item.disabled
+                    'aria-disabled': item.disabled,
+                    tabIndex: item.disabled ? -1 : undefined
                 },
                 ptm('action')
             );
@@ -184,14 +191,17 @@ export const BreadCrumb = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('menuitem', { item }),
                     style: item.style
                 },
                 ptm('menuitem')
             );
 
-            return <li {...menuitemProps}>{content}</li>;
+            return (
+                <li {...menuitemProps} key={key}>
+                    {content}
+                </li>
+            );
         };
 
         const createMenuitems = () => {
@@ -243,7 +253,7 @@ export const BreadCrumb = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             BreadCrumbBase.getOtherProps(props),
@@ -254,7 +264,7 @@ export const BreadCrumb = React.memo(
             <nav {...rootProps}>
                 <ol {...menuProps}>
                     {home}
-                    {separator}
+                    {home && !!items?.length && separator}
                     {items}
                 </ol>
             </nav>

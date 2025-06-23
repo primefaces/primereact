@@ -58,10 +58,10 @@ export default function ButtonDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
                 <Button type="button" label="Emails">
-                    <Badge value="8"></Badge>
+                    <Badge value="8" />
                 </Button>
                 <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
-                    <Badge value="8" severity="danger"></Badge>
+                    <Badge value="8" severity="danger" />
                 </Button>
             </div>
             <DocSectionCode code={code} />

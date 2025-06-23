@@ -10,7 +10,7 @@ import { MeterGroup } from 'primereact/metergroup';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );

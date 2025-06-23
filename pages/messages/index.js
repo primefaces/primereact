@@ -3,13 +3,12 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/messages/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/messages/basicdoc';
 import { ClosableDoc } from '@/components/doc/messages/closeabledoc';
+import { CustomIcon } from '@/components/doc/messages/customicon';
 import { DynamicDoc } from '@/components/doc/messages/dynamicdoc';
 import { ImportDoc } from '@/components/doc/messages/importdoc';
-import { PTDoc } from '@/components/doc/messages/pt/ptdoc';
 import { Wireframe } from '@/components/doc/messages/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/messages/severitydoc';
 import { StickyDoc } from '@/components/doc/messages/stickydoc';
-import { CustomIcon } from '@/components/doc/messages/customicon';
 import { TemplateDoc } from '@/components/doc/messages/templatedoc';
 import { StyledDoc } from '@/components/doc/messages/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/messages/theming/tailwinddoc';
@@ -72,11 +71,6 @@ const MessagesDemo = () => {
             id: 'pt.messages.options',
             label: 'Messages PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

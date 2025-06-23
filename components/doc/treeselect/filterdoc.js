@@ -101,7 +101,7 @@ export default function FilterDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} filter className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} filter className="md:w-20rem w-full" placeholder="Select Item" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

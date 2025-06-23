@@ -4,7 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
@@ -21,7 +21,7 @@ export const ToggleButton = React.memo(
 
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
         const hasIcon = props.onIcon && props.offIcon;
-        const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
+        const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '\u00A0';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
         const toggle = (e) => {
@@ -101,7 +101,7 @@ export const ToggleButton = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { hasIcon, hasLabel }),
+                className: classNames(props.className, cx('root', { hasIcon, hasLabel })),
                 'data-p-highlight': props.checked,
                 'data-p-disabled': props.disabled
             },
@@ -119,21 +119,21 @@ export const ToggleButton = React.memo(
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
                 tabIndex: tabIndex,
-                role: 'switch',
                 type: 'checkbox',
-                'aria-pressed': props.checked,
                 'aria-invalid': props.invalid,
                 disabled: props.disabled,
-                readonly: props.readonly,
+                readOnly: props.readonly,
                 value: props.checked,
-                checked: props.checked
+                checked: props.checked,
+                'aria-label': props['aria-label'],
+                'aria-labelledby': props['aria-labelledby']
             },
             ptm('input')
         );
 
         const boxProps = mergeProps(
             {
-                className: cx('box', { hasIcon, hasLabel })
+                className: classNames(props.className, cx('box', { hasIcon, hasLabel }))
             },
             ptm('box')
         );

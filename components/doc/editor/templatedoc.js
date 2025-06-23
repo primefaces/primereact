@@ -9,9 +9,9 @@ export function TemplateDoc(props) {
     const renderHeader = () => {
         return (
             <span className="ql-formats">
-                <button className="ql-bold" aria-label="Bold"></button>
-                <button className="ql-italic" aria-label="Italic"></button>
-                <button className="ql-underline" aria-label="Underline"></button>
+                <button className="ql-bold" aria-label="Bold" />
+                <button className="ql-italic" aria-label="Italic" />
+                <button className="ql-underline" aria-label="Underline" />
             </span>
         );
     };
@@ -86,7 +86,7 @@ export default function TemplateDemo() {
             <div className="card">
                 <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
             </div>
-            <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }} />
+            <DocSectionCode code={code} dependencies={{ quill: '2.0.0' }} />
         </>
     );
 }

@@ -183,8 +183,13 @@ export declare class OverlayPanel extends React.Component<OverlayPanelProps, any
      */
     public align(): void;
     /**
-     * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * Checks whether the overlay is currently visible.
+     * @returns {boolean} A boolean value indicating whether the overlay is visible.
      */
-    public getElement(): HTMLDivElement;
+    public isVisible(): boolean;
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement | null} Container element
+     */
+    public getElement(): HTMLDivElement | null;
 }

@@ -59,13 +59,13 @@ export default function SeverityDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
-                <Badge value="2"></Badge>
-                <Badge value="8" severity="success"></Badge>
-                <Badge value="4" severity="info"></Badge>
-                <Badge value="12" severity="warning"></Badge>
-                <Badge value="3" severity="danger"></Badge>
-                <Badge value="7" severity="secondary"></Badge>
-                <Badge value="5" severity="contrast"></Badge>
+                <Badge value="2" />
+                <Badge value="8" severity="success" />
+                <Badge value="4" severity="info" />
+                <Badge value="12" severity="warning" />
+                <Badge value="3" severity="danger" />
+                <Badge value="7" severity="secondary" />
+                <Badge value="5" severity="contrast" />
             </div>
             <DocSectionCode code={code} />
         </>

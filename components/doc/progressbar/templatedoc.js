@@ -66,7 +66,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <ProgressBar value={40} displayValueTemplate={valueTemplate}></ProgressBar>
+                <ProgressBar value={40} displayValueTemplate={valueTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -10,7 +10,7 @@ const GetStartedSection = () => {
             <div className="flex flex-column md:flex-row align-items-center justify-content-center">
                 <Link href="/installation">
                     <a className="linkbox active font-semibold py-3 px-4 fadeinleft animation-duration-2000 animation-ease-out">
-                        Get Started <i className="pi pi-arrow-right ml-3"></i>
+                        Get Started <i className="pi pi-arrow-right ml-3" />
                     </a>
                 </Link>
                 <div
@@ -25,7 +25,7 @@ const GetStartedSection = () => {
                         }, 2000);
                     }}
                 >
-                    <i className={downloadIcon}></i>
+                    <i className={downloadIcon} />
                     <span className="font-bold select-all" style={{ fontFamily: 'monaco, monospace' }}>
                         {npmText}
                     </span>

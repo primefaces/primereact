@@ -121,7 +121,9 @@ export const Image = React.memo(
             event.stopPropagation();
 
             setScaleState((prevScale) => {
-                if (zoomInDisabled) return prevScale;
+                if (zoomInDisabled) {
+                    return prevScale;
+                }
 
                 return prevScale + 0.1;
             });
@@ -131,14 +133,16 @@ export const Image = React.memo(
             event.stopPropagation();
 
             setScaleState((prevScale) => {
-                if (zoomOutDisabled) return prevScale;
+                if (zoomOutDisabled) {
+                    return prevScale;
+                }
 
                 return prevScale - 0.1;
             });
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
         };
 
         const onEntered = () => {
@@ -380,7 +384,7 @@ export const Image = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             ImageBase.getOtherProps(props),
             ptm('root')

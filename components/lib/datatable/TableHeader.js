@@ -7,6 +7,7 @@ import { classNames } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
+import { PrimeReactContext } from '../api/Api';
 
 export const TableHeader = React.memo((props) => {
     const [sortableDisabledFieldsState, setSortableDisabledFieldsState] = React.useState([]);
@@ -16,6 +17,7 @@ export const TableHeader = React.memo((props) => {
     const isMultipleSort = props.sortMode === 'multiple';
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
     const { ptm, ptmo, cx } = props.ptCallbacks;
+    const context = React.useContext(PrimeReactContext);
 
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
@@ -168,11 +170,11 @@ export const TableHeader = React.memo((props) => {
         });
     };
 
-    const createCheckbox = (selectionMode) => {
+    const createCheckbox = (column, selectionMode) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
+            return <HeaderCheckbox hostName={props.hostName} column={column} checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} unstyled={props.unstyled} />;
         }
 
         return null;
@@ -209,20 +211,19 @@ export const TableHeader = React.memo((props) => {
                 const { filterHeaderStyle, style, filterHeaderClassName, className, frozen, columnKey, field, selectionMode, filter } = ColumnBase.getCProps(col);
                 const colStyle = { ...(filterHeaderStyle || {}), ...(style || {}) };
                 const colKey = columnKey || field || i;
-                const checkbox = createCheckbox(selectionMode);
+                const checkbox = createCheckbox(col, selectionMode);
                 const filterRow = createFilter(col, filter);
                 const headerCellProps = mergeProps(
                     {
                         style: colStyle,
-                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col })),
-                        key: colKey
+                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col }))
                     },
                     getColumnPTOptions(col, 'root'),
                     getColumnPTOptions(col, 'headerCell')
                 );
 
                 return (
-                    <th {...headerCellProps}>
+                    <th key={colKey} {...headerCellProps}>
                         {checkbox}
                         {filterRow}
                     </th>
@@ -238,10 +239,13 @@ export const TableHeader = React.memo((props) => {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
             return rows.map((row, i) => {
+                const { unstyled, __TYPE, ptOptions, ...rest } = RowBase.getProps(row.props, context);
+
                 const headerRowProps = mergeProps(
                     {
                         role: 'row'
                     },
+                    unstyled ? { unstyled, ...rest } : rest,
                     getRowPTOptions(row, 'root')
                 );
 
@@ -251,23 +255,23 @@ export const TableHeader = React.memo((props) => {
                     </tr>
                 );
             });
-        } else {
-            const headerRowProps = mergeProps(
-                {
-                    role: 'row'
-                },
-                ptm('headerRow', { hostName: props.hostName })
-            );
-            const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
-            const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
-
-            return (
-                <>
-                    {headerRow}
-                    {filterRow}
-                </>
-            );
         }
+
+        const headerRowProps = mergeProps(
+            {
+                role: 'row'
+            },
+            ptm('headerRow', { hostName: props.hostName })
+        );
+        const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
+        const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
+
+        return (
+            <>
+                {headerRow}
+                {filterRow}
+            </>
+        );
     };
 
     const content = createContent();

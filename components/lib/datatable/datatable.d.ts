@@ -91,7 +91,7 @@ interface DataTableFilterMetaData {
     /**
      * Type of filter match.
      */
-    matchMode: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom' | undefined;
+    matchMode: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom' | undefined;
 }
 
 /**
@@ -943,7 +943,15 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the rowgroup footer's DOM element.
      */
-    rowgroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    rowGroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup toggler's DOM element.
+     */
+    rowGroupToggler?: DataTablePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup toggler icon's DOM element.
+     */
+    rowGroupTogglerIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
@@ -1004,6 +1012,71 @@ export interface DataTablePassThroughOptions {
     hooks?: ComponentHooks;
 }
 
+/**
+ * Defines current options in DataTable BodyRow which is the table <TR> element.
+ */
+export interface DataTableBodyRowContext {
+    /**
+     * Whether the row is selected.
+     */
+    selected: boolean;
+    /**
+     * Whether the row is selectable.
+     */
+    selectable: boolean;
+    /**
+     * Whether the rows have striped styling.
+     */
+    stripedRows: boolean;
+    /**
+     * Index of the row. Note: this is not the index of the value array its the index of the row <TR in the table.
+     */
+    index: number;
+}
+
+/**
+ * Defines current inline state in DataTable BodyRow which is the table <TR> element.
+ */
+export interface DataTableBodyRowState {
+    /**
+     * Whether the row is in editing mode.
+     */
+    editing: boolean;
+}
+
+/**
+ * Custom passthrough(pt) option method for BodyRow which is the table <TR> element.
+ */
+export interface DataTableBodyRowPassThroughMethodOptions<TValue extends DataTableValueArray> {
+    /**
+     * Name of the component.
+     */
+    hostName: string;
+    /**
+     * Current context of the bodyRow.
+     */
+    context: DataTableBodyRowContext;
+    /**
+     * Parent options.
+     */
+    parent: DataTablePassThroughMethodOptions<TValue>;
+    /**
+     * Component props.
+     */
+    props: DataTableBaseProps<TValue>;
+    /**
+     * Current state of the bodyRow.
+     */
+    state: DataTableBodyRowState;
+}
+
+/**
+ * Type for sort order values.
+ * - 1: Ascending order
+ * - 0: No sorting
+ * - -1: Descending order
+ * - null or undefined: No sorting
+ */
 type SortOrder = 1 | 0 | -1 | null | undefined;
 
 /**
@@ -1022,12 +1095,51 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Whether to show it even there is only one page.
      * @defaultValue true
      */
-    alwaysShowPaginator?: boolean | undefined;
+    alwaysShowPaginator?: boolean;
     /**
      * The breakpoint to define the maximum width boundary when using stack responsive layout.
      * @defaultValue 960px
      */
     breakpoint?: string | undefined;
+    /**
+     * Whether to enable cell memoization.
+     *
+     * When the memoization is enabled, be sure to:
+     *      1- Update the value prop (i.e., row data) to trigger a re-render of the cells of a given row.
+     *      2- Where necessary, use the spread operator (...) when updating the value prop objs which creates new fresh
+     *      objects and avoids mutating the same objects.
+     *
+     * When the memoization is disabled, a re-render of the datatable will trigger a re-render of all cells, which can
+     * lead to performance issues with large datasets and is therefore not recommended.
+     * @defaultValue true
+     */
+    cellMemo?: boolean;
+    /**
+     * The cell props to be checked at memoization.
+     *
+     * Possible cell props are:
+     *     'hostName', 'allowCellSelection', 'cellMemo', 'cellMemoProps', 'cellMemoPropsDepth', 'cellClassName', 'checkIcon', 'collapsedRowIcon',
+     *     'field', 'resolveFieldData', 'column', 'cProps', 'dataKey', 'editMode', 'editing', 'editingMeta', 'onEditingMetaChange', 'editingKey',
+     *     'getEditingRowData', 'expanded', 'expandedRowIcon', 'frozenRow', 'frozenCol', 'alignFrozenCol', 'index', 'isSelectable', 'onCheckboxChange',
+     *     'onClick', 'onMouseDown', 'onMouseUp', 'onRadioChange', 'onRowEditCancel', 'onRowEditInit', 'onRowEditSave', 'onRowToggle', 'responsiveLayout',
+     *     'rowData', 'rowEditorCancelIcon', 'rowEditorInitIcon', 'rowEditorSaveIcon', 'rowIndex', 'rowSpan', 'selectOnEdit', 'isRowSelected', 'isCellSelected',
+     *     'selectionAriaLabel', 'showRowReorderElement', 'showSelectionElement', 'tabIndex', 'getTabIndex', 'tableProps', 'tableSelector', 'value',
+     *     'getVirtualScrollerOption', 'ptCallbacks', 'metaData', 'unstyled', 'findNextSelectableCell', 'findPrevSelectableCell', 'findDownSelectableCell',
+     *     'findUpSelectableCell', 'focusOnElement', 'focusOnInit', 'updateStickyPosition'
+     *
+     * IMPORTANT: Including a function to be checked will in general disable the memoization in practice, since functions are
+     * compared by reference.
+     *
+     * @defaultValue ['rowData', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex',
+     * 'editing', 'expanded', 'editingMeta', 'frozenCol', 'alignFrozenCol']
+     */
+    cellMemoProps?: string[];
+    /**
+     * The comparison depth when checking cell props (e.g., rowData) at memoization.
+     *
+     * @defaultValue 1
+     */
+    cellMemoPropsDepth?: number;
     /**
      * Icon to display in the checkbox.
      */
@@ -1068,7 +1180,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
-    dataKey?: string | undefined;
+    dataKey?: string | undefined | ((data: any) => string);
     /**
      * Default sort order of an unsorted column.
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
@@ -1078,10 +1190,10 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * When enabled, a rectangle that can be dragged can be used to make a range selection.
      * @defaultValue false
      */
-    dragSelection?: boolean | undefined;
+    dragSelection?: boolean;
     /**
      * Defines editing mode, options are "cell" and "row".
-     * @defaultValue cell
+     * @defaultValue null
      */
     editMode?: string | undefined;
     /**
@@ -1097,7 +1209,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Makes row groups toggleable, default is false.
      * @defaultValue false
      */
-    expandableRowGroups?: boolean | undefined;
+    expandableRowGroups?: boolean;
     /**
      * Icon of the row toggler to display the row as expanded.
      */
@@ -1173,10 +1285,10 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     globalFilterFields?: string[] | undefined;
     /**
-     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
+     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      * @defaultValue contains
      */
-    globalFilterMatchMode?: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
+    globalFilterMatchMode?: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
     /**
      * Used for either be grouped by a separate grouping row or using rowspan.
      */
@@ -1193,12 +1305,12 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Defines if data is loaded and interacted with in lazy manner.
      * @defaultValue false
      */
-    lazy?: boolean | undefined;
+    lazy?: boolean;
     /**
      * Displays a loader to indicate data load is in progress.
      * @defaultValue false
      */
-    loading?: boolean | undefined;
+    loading?: boolean;
     /**
      * The icon to show while indicating data load is in progress.
      */
@@ -1207,7 +1319,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
      */
-    metaKeySelection?: boolean | undefined;
+    metaKeySelection?: boolean;
     /**
      * An array of SortMeta objects to sort the data by default in multiple sort mode.
      */
@@ -1221,7 +1333,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * When specified as true, enables the pagination.
      * @defaultValue false
      */
-    paginator?: boolean | undefined;
+    paginator?: boolean;
     /**
      * Style class of the paginator element.
      */
@@ -1253,17 +1365,17 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * When enabled, columns can have an un-sorted state.
      * @defaultValue false
      */
-    removableSort?: boolean | undefined;
+    removableSort?: boolean;
     /**
      * When enabled, columns can be reordered using drag and drop.
      * @defaultValue false
      */
-    reorderableColumns?: boolean | undefined;
+    reorderableColumns?: boolean;
     /**
      * When enabled, rows can be reordered using drag and drop.
      * @defaultValue false
      */
-    reorderableRows?: boolean | undefined;
+    reorderableRows?: boolean;
     /**
      * Defines the reorder indicator down icon.
      */
@@ -1276,7 +1388,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
      */
-    resizableColumns?: boolean | undefined;
+    resizableColumns?: boolean;
     /**
      * Defines the responsive mode, valid options are "stack" and "scroll".
      * @defaultValue scroll
@@ -1310,7 +1422,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     /**
      * When enabled, background of the rows change on hover.
      */
-    rowHover?: boolean | undefined;
+    rowHover?: boolean;
     /**
      * Number of rows to display per page.
      */
@@ -1327,22 +1439,22 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * When specified, enables horizontal and/or vertical scrolling.
      * @defaultValue false
      */
-    scrollable?: boolean | undefined;
+    scrollable?: boolean;
     /**
      * When specified, selects all rows on page.
      * @defaultValue false
      */
-    selectAll?: boolean | undefined;
+    selectAll?: boolean;
     /**
      * Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.
      * @defaultValue true
      */
-    selectOnEdit?: boolean | undefined;
+    selectOnEdit?: boolean;
     /**
      * When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.
      * @defaultValue true
      */
-    selectionAutoFocus?: boolean | undefined;
+    selectionAutoFocus?: boolean;
     /**
      * A field property from the row to add Select &#123;field&#125; and Unselect &#123;field&#125; ARIA labels to checkbox/radio buttons.
      */
@@ -1351,21 +1463,21 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.
      * @defaultValue false
      */
-    selectionPageOnly?: boolean | undefined;
+    selectionPageOnly?: boolean;
     /**
      * Whether to show grid lines between cells.
      * @defaultValue false
      */
-    showGridlines?: boolean | undefined;
+    showGridlines?: boolean;
     /**
      * Whether to show headers.
      * @defaultValue true
      */
-    showHeaders?: boolean | undefined;
+    showHeaders?: boolean;
     /**
      * Whether to show the select all checkbox inside the datatable's header.
      */
-    showSelectAll?: boolean | undefined;
+    showSelectAll?: boolean;
     /**
      * Define to set alternative sizes. Valid values: "small", "normal" and "large".
      * @defaultValue normal
@@ -1401,7 +1513,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Whether to displays rows with alternating colors.
      * @defaultValue false
      */
-    stripedRows?: boolean | undefined;
+    stripedRows?: boolean;
     /**
      * Inline style of the component.
      */
@@ -1454,7 +1566,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Function that returns a boolean to decide whether the data should be selectable.
      * @param {DataTableDataSelectableEvent<TValue>} event - Custom data selectable event.
      */
-    isDataSelectable?(event: DataTableDataSelectableEvent): boolean | undefined | null;
+    isDataSelectable?(event: DataTableDataSelectableEvent): boolean | null;
     /**
      * Callback to invoke when all rows are selected using the header checkbox.
      * @param {DataTableSelectEvent} event - Custom select event.
@@ -1634,7 +1746,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Callback to invoke to validate the editing row when the save icon is clicked on row editing mode.
      * @param {DataTableRowData<TValue>} data - Editing row data.
      */
-    rowEditValidator?(data: DataTableRowData<TValue>, options: DataTableRowEditValidatorOptions<TValue>): boolean | undefined;
+    rowEditValidator?(data: DataTableRowData<TValue>, options: DataTableRowEditValidatorOptions<TValue>): boolean;
     /**
      * Function that receives the row data as the parameter and returns the expanded row content. You can override the rendering of the content by setting options.customRendering = true.
      * @param {DataTableRowData<TValue>} data - Editing row data.
@@ -1646,13 +1758,13 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * @param {DataTableRowData<TValue>} data - Editing row data.
      * @param {DataTableShowRowReorderElementOptions} options - Options for the row reorder element.
      */
-    showRowReorderElement?(data: DataTableRowData<TValue>, options: DataTableShowRowReorderElementOptions<TValue>): boolean | undefined | null;
+    showRowReorderElement?(data: DataTableRowData<TValue>, options: DataTableShowRowReorderElementOptions<TValue>): boolean | null;
     /**
      * Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row.
      * @param {DataTableRowData<TValue>} data - Editing row data.
      * @param {DataTableShowSelectionElementOptions} options - Options for the row reorder element.
      */
-    showSelectionElement?(data: DataTableRowData<TValue>, options: DataTableShowSelectionElementOptions<TValue>): boolean | undefined | null;
+    showSelectionElement?(data: DataTableRowData<TValue>, options: DataTableShowSelectionElementOptions<TValue>): boolean | null;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -1684,7 +1796,7 @@ interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataT
      * Whether to cell selection is enabled or not.
      * @defaultValue false
      */
-    cellSelection?: false | undefined;
+    cellSelection?: boolean;
     /**
      * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
      */
@@ -1714,7 +1826,7 @@ interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends Dat
      * Whether to cell selection is enabled or not.
      * @defaultValue false
      */
-    cellSelection?: false | undefined;
+    cellSelection?: boolean;
     /**
      * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
      */
@@ -1804,7 +1916,7 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      * Filters the data.
      * @param {T} value - The filter value
      * @param {string} field - The filter field
-     * @param {'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom'} mode - Filter match mode
+     * @param {'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom'} mode - Filter match mode
      * @param  {number} index - Index of the filter
      */
     public filter<T>(
@@ -1819,7 +1931,7 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
         /**
          * Filter match mode.
          */
-        mode: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom',
+        mode: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom',
         /**
          * Index of the filter.
          */
@@ -1859,17 +1971,40 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      */
     public saveState(): void;
     /**
-     * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * Retrieves the currently applied filters for the data table.
+     * @returns {DataTableFilterMeta | undefined} The currently applied filters, if any, or undefined if no filters are set.
      */
-    public getElement(): HTMLDivElement;
+    public getFilterMeta(): DataTableFilterMeta | undefined;
+    /**
+     * Sets the filters for the data table.
+     * @param {DataTableFilterMeta} filters - The filters to be applied to the data table.
+     * @returns {void}
+     */
+    public setFilterMeta(filters: DataTableFilterMeta): void;
+    /**
+     * Retrieves the currently applied multiple sort metadata for the data table.
+     * @returns {DataTableSortMeta[] | undefined} The currently applied sorts, if any, or undefined if no sorts are set.
+     */
+    public getSortMeta(): DataTableSortMeta[] | undefined;
+    /**
+     * Sets the multiple sort metadata for the data table.
+     * @param {DataTableSortMeta[]} sorts - The sorts to be applied to the data table.
+     * @returns {void}
+     */
+    public setSortMeta(sorts: DataTableSortMeta[]): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getTable(): HTMLTableElement;
+    public getElement(): HTMLDivElement | null;
+    /**
+     * Used to get container element.
+     * @return {HTMLTableElement | null} Container element
+     */
+    public getTable(): HTMLTableElement | null;
     /**
      * Used to get the virtual scroller.
+     * @return {VirtualScroller | null} Virtual scroller instance
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

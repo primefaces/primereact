@@ -3,11 +3,9 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/tristatecheckbox/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/tristatecheckbox/basicdoc';
 import { DisabledDoc } from '@/components/doc/tristatecheckbox/disableddoc';
-import { FormikDoc } from '@/components/doc/tristatecheckbox/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/tristatecheckbox/form/hookformdoc';
+import { FilledDoc } from '@/components/doc/tristatecheckbox/filleddoc';
 import { ImportDoc } from '@/components/doc/tristatecheckbox/importdoc';
 import { InvalidDoc } from '@/components/doc/tristatecheckbox/invaliddoc';
-import { PTDoc } from '@/components/doc/tristatecheckbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tristatecheckbox/pt/wireframe';
 import { StyledDoc } from '@/components/doc/tristatecheckbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tristatecheckbox/theming/tailwinddoc';
@@ -25,6 +23,11 @@ const TriStateCheckboxDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -34,24 +37,6 @@ const TriStateCheckboxDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -68,11 +53,6 @@ const TriStateCheckboxDemo = () => {
             id: 'pt.tristatecheckbox.options',
             label: 'TriStateCheckbox PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

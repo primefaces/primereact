@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/image/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/image/basicdoc';
 import { ImportDoc } from '@/components/doc/image/importdoc';
 import { PreviewDoc } from '@/components/doc/image/previewdoc';
-import { PTDoc } from '@/components/doc/image/pt/ptdoc';
 import { Wireframe } from '@/components/doc/image/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/image/templatedoc';
 import { StyledDoc } from '@/components/doc/image/theming/styleddoc';
@@ -55,11 +54,6 @@ const ImageDemo = () => {
             id: 'pt.image.options',
             label: 'Image PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -166,9 +166,10 @@ interface ResizeEventOptions {
 
 /**
  * Custom hook to get the previous value of a property.
- * @param {*} value - The value to compare.
+ * @param {V} value - The current value whose previous state is needed
+ * @returns {V | undefined} Returns undefined on first render, then returns the previous value on subsequent renders
  */
-export declare function usePrevious(value: any): any;
+export declare function usePrevious<V>(value: V): V | undefined;
 /**
  * Custom hook to run a mount effect only once.
  * @param {React.EffectCallback} effect - The effect to run.

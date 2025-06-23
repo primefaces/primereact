@@ -32,13 +32,13 @@ export function TemplateDoc(props) {
         return (
             <div className={className}>
                 <div className="flex align-items-center gap-2">
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" size="large" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" size="large" shape="circle" />
                     <span className="font-bold">Amy Elsner</span>
                 </div>
                 <div>
                     <Menu model={items} popup ref={configMenu} id="config_menu" />
                     <button className="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
-                        <span className="pi pi-cog"></span>
+                        <span className="pi pi-cog" />
                     </button>
                     {options.togglerElement}
                 </div>
@@ -52,8 +52,8 @@ export function TemplateDoc(props) {
         return (
             <div className={className}>
                 <div className="flex align-items-center gap-2">
-                    <Button icon="pi pi-user" rounded text></Button>
-                    <Button icon="pi pi-bookmark" severity="secondary" rounded text></Button>
+                    <Button icon="pi pi-user" rounded text />
+                    <Button icon="pi pi-bookmark" severity="secondary" rounded text />
                 </div>
                 <span className="p-text-secondary">Updated 2 hours ago</span>
             </div>
@@ -102,7 +102,7 @@ export default function TemplateDemo() {
         return (
             <div className={className}>
                 <div className="flex align-items-center gap-2">
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" size="large" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" size="large" shape="circle" />
                     <span className="font-bold">Amy Elsner</span>
                 </div>
                 <div>
@@ -173,7 +173,7 @@ export default function TemplateDemo() {
         return (
             <div className={className}>
                 <div className="flex align-items-center gap-2">
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" size="large" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" size="large" shape="circle" />
                     <span className="font-bold">Amy Elsner</span>
                 </div>
                 <div>

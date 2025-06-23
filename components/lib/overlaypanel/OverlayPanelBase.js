@@ -4,7 +4,7 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, context }) =>
-        classNames('p-overlaypanel p-component', props.className, {
+        classNames('p-overlaypanel p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
@@ -25,7 +25,7 @@ const styles = `
     }
     
     .p-overlaypanel-flipped {
-        margin-top: 0;
+        margin-top: -10px;
         margin-bottom: 10px;
     }
     

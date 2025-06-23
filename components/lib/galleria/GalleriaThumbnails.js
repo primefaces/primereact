@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useMergeProps, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -27,11 +27,11 @@ const GalleriaThumbnailItem = React.memo((props) => {
     };
 
     const ariaPageLabel = (value) => {
-        return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
+        return ariaLabel('pageLabel', { page: value });
     };
 
     const onThumbnailKeydown = (event) => {
-        if (event.code === 'Enter' || event.code === 'Space') {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
             props.onItemClick({
                 originalEvent: event,
                 index: props.index
@@ -131,7 +131,6 @@ const GalleriaThumbnailItem = React.memo((props) => {
     const thumbnailItemProps = mergeProps(
         {
             className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
-            key: 'p-galleria-thumbnail-item-' + props.index,
             role: 'tab',
             'data-p-active': props.current,
             'aria-selected': props.current,
@@ -157,7 +156,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
     );
 
     return (
-        <div {...thumbnailItemProps}>
+        <div {...thumbnailItemProps} key={props.index + '_galleriathumbnailitem'}>
             <div {...thumbnailItemContentProps}>{content}</div>
         </div>
     );
@@ -371,7 +370,9 @@ export const GalleriaThumbnails = React.memo(
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
                     let res = responsiveOptions.current[i];
 
-                    innerHTML += `
+                    innerHTML =
+                        innerHTML +
+                        `
                     @media screen and (max-width: ${res.breakpoint}) {
                         [data-pc-section="thumbnailitems"][${attributeSelector.current}] {
                             [data-pc-section="thumbnailitem"] {
@@ -495,7 +496,7 @@ export const GalleriaThumbnails = React.memo(
                         type: 'button',
                         disabled: isDisabled,
                         'data-p-disabled': isDisabled,
-                        'aria-label': localeOption('aria') ? localeOption('aria').previousPageLabel : undefined,
+                        'aria-label': localeOption('aria') ? localeOption('aria').prevPageLabel : undefined,
                         'data-pc-group-section': 'thumbnailnavigator'
                     },
                     getPTOptions('previousThumbnailButton')

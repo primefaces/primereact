@@ -3,15 +3,11 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props }) =>
-        classNames(
-            'p-togglebutton p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-highlight': props.checked,
-                'p-invalid': props.invalid
-            },
-            props.className
-        ),
+        classNames('p-togglebutton p-component', {
+            'p-disabled': props.disabled,
+            'p-highlight': props.checked,
+            'p-invalid': props.invalid
+        }),
     input: 'p-togglebutton-input',
     box: ({ hasIcon, hasLabel }) =>
         classNames('p-button p-component', {

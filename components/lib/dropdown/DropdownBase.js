@@ -1,13 +1,14 @@
 import PrimeReact from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState }) =>
+    root: ({ props, focusedState, overlayVisibleState, context }) =>
         classNames('p-dropdown p-component p-inputwrapper', {
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
             'p-focus': focusedState,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
             'p-dropdown-clearable': props.showClear && !props.disabled,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
             'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -32,7 +33,10 @@ const classes = {
     filterIcon: 'p-dropdown-filter-icon',
     filterClearIcon: 'p-dropdown-filter-clear-icon',
     filterContainer: ({ clearIcon }) => classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon }),
-    filterInput: 'p-dropdown-filter p-inputtext p-component',
+    filterInput: ({ props, context }) =>
+        classNames('p-dropdown-filter p-inputtext p-component', {
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
+        }),
     list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? 'p-dropdown-items' : 'p-dropdown-items'),
     panel: ({ context }) =>
         classNames('p-dropdown-panel p-component', {
@@ -132,6 +136,7 @@ const styles = `
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
+        right: 2rem;
     }
     
     .p-fluid .p-dropdown {
@@ -146,9 +151,9 @@ const styles = `
 
 const inlineStyles = {
     wrapper: ({ props }) => ({ maxHeight: props.scrollHeight || 'auto' }),
-    panel: ({ props }) => {
-        props.panelStyle;
-    }
+    panel: ({ props }) => ({
+        ...props.panelStyle
+    })
 };
 
 export const DropdownBase = ComponentBase.extend({
@@ -159,27 +164,31 @@ export const DropdownBase = ComponentBase.extend({
         ariaLabel: null,
         ariaLabelledBy: null,
         autoFocus: false,
+        autoOptionFocus: false,
+        checkmark: false,
         children: undefined,
         className: null,
         clearIcon: null,
+        collapseIcon: null,
         dataKey: null,
         disabled: false,
         dropdownIcon: null,
         editable: false,
         emptyFilterMessage: null,
-        highlightOnSelect: true,
-        checkmark: false,
         emptyMessage: null,
         filter: false,
         filterBy: null,
         filterClearIcon: null,
+        filterDelay: 300,
         filterIcon: null,
-        filterInputAutoFocus: true,
+        filterInputAutoFocus: false,
         filterLocale: undefined,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterTemplate: null,
         focusInputRef: null,
+        focusOnHover: true,
+        highlightOnSelect: true,
         id: null,
         inputId: null,
         inputRef: null,
@@ -191,6 +200,7 @@ export const DropdownBase = ComponentBase.extend({
         name: null,
         onBlur: null,
         onChange: null,
+        onClick: null,
         onContextMenu: null,
         onFilter: null,
         onFocus: null,
@@ -199,13 +209,11 @@ export const DropdownBase = ComponentBase.extend({
         onShow: null,
         optionDisabled: null,
         optionGroupChildren: 'items',
-        selectOnFocus: false,
-        autoOptionFocus: false,
         optionGroupLabel: null,
         optionGroupTemplate: null,
         optionLabel: null,
-        optionValue: null,
         options: null,
+        optionValue: null,
         panelClassName: null,
         panelFooterTemplate: null,
         panelStyle: null,
@@ -213,6 +221,7 @@ export const DropdownBase = ComponentBase.extend({
         required: false,
         resetFilterOnHide: false,
         scrollHeight: '200px',
+        selectOnFocus: false,
         showClear: false,
         showFilterClear: false,
         showOnFocus: false,
@@ -221,8 +230,10 @@ export const DropdownBase = ComponentBase.extend({
         tooltip: null,
         tooltipOptions: null,
         transitionOptions: null,
+        useOptionAsValue: false,
         value: null,
         valueTemplate: null,
+        variant: null,
         virtualScrollerOptions: null
     },
     css: {

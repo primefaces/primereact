@@ -124,7 +124,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
             id: props.id,
             ref: elementRef,
             style: props.containerStyle,
-            className: cx('root'),
+            className: classNames(props.containerClassName, cx('root')),
             'aria-busy': props.blocked
         },
         BlockUIBase.getOtherProps(props),

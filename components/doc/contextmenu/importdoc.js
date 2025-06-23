@@ -10,7 +10,7 @@ import { ContextMenu } from 'primereact/contextmenu';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

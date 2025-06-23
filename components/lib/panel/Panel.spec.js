@@ -13,7 +13,7 @@ const template = (options) => {
     return (
         <div className={className}>
             <button className={options.togglerClassName} onClick={options.onTogglerClick}>
-                <span className={toggleIcon}></span>
+                <span className={toggleIcon} />
             </button>
             <span className={titleClassName}>Header</span>
         </div>

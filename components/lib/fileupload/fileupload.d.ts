@@ -66,6 +66,10 @@ export interface FileUploadPassThroughOptions {
      */
     cancelButton?: ButtonPassThroughOptions;
     /**
+     * Uses to pass attributes to the cancel icon's DOM element.
+     */
+    cancelIcon?: FileUploadPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the content's DOM element.
      */
     content?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -133,13 +137,18 @@ export interface FileUploadPassThroughOptions {
 }
 
 /**
+ * Defines a custom File type extended with objectURL
+ */
+type FileUploadFile = File & { objectURL: string };
+
+/**
  * Defines current inline state in FileUpload component.
  */
 export interface FileUploadState {
     /**
      * Current files.
      */
-    files: any[];
+    files: FileUploadFile[];
     /**
      * Current uplaoding state as a boolean.
      * @defaultValue false
@@ -158,7 +167,7 @@ export interface FileUploadState {
     /**
      * Current uploaded files.
      */
-    uploadedFiles: any[];
+    uploadedFiles: FileUploadFile[];
 }
 
 /**
@@ -266,7 +275,7 @@ interface ItemTemplateOptions {
     /**
      * Array of files.
      */
-    files: File[];
+    files: FileUploadFile[];
     /**
      * Index of the file.
      */
@@ -313,7 +322,7 @@ interface FileUploadFilesEvent {
     /**
      * Uploaded files.
      */
-    files: File[];
+    files: FileUploadFile[];
 }
 
 /**
@@ -493,6 +502,10 @@ interface FileUploadProps {
      */
     chooseLabel?: string | undefined;
     /**
+     * Label of the choose button after a file is selected.
+     */
+    selectedFileLabel?: string | undefined;
+    /**
      * Label of the upload button. Defaults to global value in Locale configuration.
      */
     uploadLabel?: string | undefined;
@@ -662,32 +675,32 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public onFileSelect(event: FileUploadSelectEvent): void;
     /**
      * Used to get container element.
-     * @return {HTMLElement} Container element
+     * @return {HTMLElement | null} Container element
      */
-    public getElement(): HTMLElement;
+    public getElement(): HTMLElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Gets the current files list.
-     * @return {File[]} Current files.
+     * @return {FileUploadFile[]} Current files.
      */
-    public getFiles(): File[];
+    public getFiles(): FileUploadFile[];
     /**
      * Sets the current files list.
-     * @param {File[]} files - Current files.
+     * @param {FileUploadFile[]} files - Current files.
      */
-    public setFiles(files: File[]): void;
+    public setFiles(files: FileUploadFile[]): void;
     /**
      * Gets the current uploaded files list.
-     * @return {File[]} Current uploaded files.
+     * @return {FileUploadFile[]} Current uploaded files.
      */
-    public getUploadedFiles(): File[];
+    public getUploadedFiles(): FileUploadFile[];
     /**
      * Sets the current uploaded files list.
-     * @param {File[]} files - Current uploaded files.
+     * @param {FileUploadFile[]} files - Current uploaded files.
      */
-    public setUploadedFiles(files: File[]): void;
+    public setUploadedFiles(files: FileUploadFile[]): void;
 }

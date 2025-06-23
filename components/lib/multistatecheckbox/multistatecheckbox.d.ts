@@ -243,6 +243,16 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * When present, it specifies that the component has invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * Specifies the input variant of the component.
+     * @defaultValue null
+     */
+    variant?: 'filled' | string | undefined;
 }
 
 /**
@@ -263,7 +273,7 @@ export declare class MultiStateCheckbox extends React.Component<MultiStateCheckb
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

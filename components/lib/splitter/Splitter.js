@@ -82,8 +82,13 @@ export const Splitter = React.memo(
         };
 
         const validateResize = (newPrevPanelSize, newNextPanelSize) => {
-            if (newPrevPanelSize > 100 || newPrevPanelSize < 0) return false;
-            if (newNextPanelSize > 100 || newNextPanelSize < 0) return false;
+            if (newPrevPanelSize > 100 || newPrevPanelSize < 0) {
+                return false;
+            }
+
+            if (newNextPanelSize > 100 || newNextPanelSize < 0) {
+                return false;
+            }
 
             if (props.children[prevPanelIndex.current].props && props.children[prevPanelIndex.current].props.minSize && props.children[prevPanelIndex.current].props.minSize > newPrevPanelSize) {
                 return false;
@@ -131,7 +136,9 @@ export const Splitter = React.memo(
         const restoreState = React.useCallback(() => {
             const stateString = getStorage().getItem(props.stateKey);
 
-            if (stateString) setPanelSizes(JSON.parse(stateString));
+            if (stateString) {
+                setPanelSizes(JSON.parse(stateString));
+            }
         }, [getStorage, props.stateKey]);
 
         const onResizeStart = (event, index, isKeyDown) => {
@@ -163,7 +170,9 @@ export const Splitter = React.memo(
         };
 
         const onResize = (event, step = 0, isKeyDown = false) => {
-            let newPos, newNextPanelSize, newPrevPanelSize;
+            let newPos;
+            let newNextPanelSize;
+            let newPrevPanelSize;
             const pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
             const pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
 
@@ -176,8 +185,11 @@ export const Splitter = React.memo(
                     newNextPanelSize = (100 * (nextPanelSize.current + step)) / size.current;
                 }
             } else {
-                if (horizontal) newPos = (pageX * 100) / size.current - (startPos.current * 100) / size.current;
-                else newPos = (pageY * 100) / size.current - (startPos.current * 100) / size.current;
+                if (horizontal) {
+                    newPos = (pageX * 100) / size.current - (startPos.current * 100) / size.current;
+                } else {
+                    newPos = (pageY * 100) / size.current - (startPos.current * 100) / size.current;
+                }
 
                 newPrevPanelSize = prevPanelSize.current + newPos;
                 newNextPanelSize = nextPanelSize.current - newPos;
@@ -187,7 +199,10 @@ export const Splitter = React.memo(
         };
 
         const onResizeEnd = (event) => {
-            const sizes = [prevPanelSizeNew.current, nextPanelSizeNew.current];
+            let sizes = [...panelSizes];
+
+            sizes[prevPanelIndex.current] = prevPanelSizeNew.current;
+            sizes[prevPanelIndex.current + 1] = nextPanelSizeNew.current;
 
             if (props.onResizeEnd) {
                 props.onResizeEnd({
@@ -196,7 +211,9 @@ export const Splitter = React.memo(
                 });
             }
 
-            if (isStateful) saveState(sizes);
+            if (isStateful) {
+                saveState(sizes);
+            }
 
             setPanelSizes(sizes);
 
@@ -265,6 +282,8 @@ export const Splitter = React.memo(
                     event.preventDefault();
                     break;
                 }
+
+                case 'NumpadEnter':
 
                 case 'Enter': {
                     if (prevSize.current >= 100 - (minSize || 5)) {
@@ -355,8 +374,11 @@ export const Splitter = React.memo(
         React.useEffect(() => {
             const panelElements = [...elementRef.current.children].filter((child) => DomHandler.getAttribute(child, 'data-pc-section') === 'splitterpanel.root');
 
+            let _panelSizes = [];
+
             panelElements.map((panelElement, i) => {
                 prevSize.current = panelSize(panelSizes, 0);
+                _panelSizes[i] = panelSize(panelSizes, i);
 
                 if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-name='splitter']") && DomHandler.find(panelElement, "[data-pc-section='root']"))) {
                     !isUnstyled() && DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
@@ -364,11 +386,15 @@ export const Splitter = React.memo(
                     setNested(true);
                 }
             });
+
+            setPanelSizes(_panelSizes);
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
         React.useEffect(() => {
-            if (isStateful) restoreState();
+            if (isStateful) {
+                restoreState();
+            }
         }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
@@ -410,7 +436,7 @@ export const Splitter = React.memo(
 
             const gutter = index !== props.children.length - 1 && (
                 <div {...gutterProps}>
-                    <div {...gutterHandlerProps}></div>
+                    <div {...gutterHandlerProps} />
                 </div>
             );
 
@@ -423,7 +449,8 @@ export const Splitter = React.memo(
                     className: panelClassName,
                     style: { ...getPanelProp(panel, 'style'), flexBasis },
                     role: 'presentation',
-                    'data-p-splitter-panel-nested': false
+                    'data-p-splitter-panel-nested': false,
+                    onClick: getPanelProp(panel, 'onClick')
                 },
                 getPanelPT('splitterpanel.root')
             );

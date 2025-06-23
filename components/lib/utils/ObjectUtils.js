@@ -14,48 +14,79 @@ export default class ObjectUtils {
      * @returns true if equals, false it not
      */
     static deepEquals(a, b) {
-        if (a === b) return true;
+        if (a === b) {
+            return true;
+        }
 
-        if (a && b && typeof a == 'object' && typeof b == 'object') {
-            let arrA = Array.isArray(a),
-                arrB = Array.isArray(b),
-                i,
-                length,
-                key;
+        if (a && b && typeof a === 'object' && typeof b === 'object') {
+            let arrA = Array.isArray(a);
+            let arrB = Array.isArray(b);
+            let i;
+            let length;
+            let key;
 
             if (arrA && arrB) {
                 length = a.length;
-                if (length !== b.length) return false;
-                for (i = length; i-- !== 0; ) if (!this.deepEquals(a[i], b[i])) return false;
+
+                if (length !== b.length) {
+                    return false;
+                }
+
+                for (i = length; i-- !== 0; ) {
+                    if (!this.deepEquals(a[i], b[i])) {
+                        return false;
+                    }
+                }
 
                 return true;
             }
 
-            if (arrA !== arrB) return false;
+            if (arrA !== arrB) {
+                return false;
+            }
 
-            let dateA = a instanceof Date,
-                dateB = b instanceof Date;
+            let dateA = a instanceof Date;
+            let dateB = b instanceof Date;
 
-            if (dateA !== dateB) return false;
-            if (dateA && dateB) return a.getTime() === b.getTime();
+            if (dateA !== dateB) {
+                return false;
+            }
 
-            let regexpA = a instanceof RegExp,
-                regexpB = b instanceof RegExp;
+            if (dateA && dateB) {
+                return a.getTime() === b.getTime();
+            }
 
-            if (regexpA !== regexpB) return false;
-            if (regexpA && regexpB) return a.toString() === b.toString();
+            let regexpA = a instanceof RegExp;
+            let regexpB = b instanceof RegExp;
+
+            if (regexpA !== regexpB) {
+                return false;
+            }
+
+            if (regexpA && regexpB) {
+                return a.toString() === b.toString();
+            }
 
             let keys = Object.keys(a);
 
             length = keys.length;
 
-            if (length !== Object.keys(b).length) return false;
+            if (length !== Object.keys(b).length) {
+                return false;
+            }
 
-            for (i = length; i-- !== 0; ) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+            for (i = length; i-- !== 0; ) {
+                if (!Object.prototype.hasOwnProperty.call(b, keys[i])) {
+                    return false;
+                }
+            }
 
             for (i = length; i-- !== 0; ) {
                 key = keys[i];
-                if (!this.deepEquals(a[key], b[key])) return false;
+
+                if (!this.deepEquals(a[key], b[key])) {
+                    return false;
+                }
             }
 
             return true;
@@ -74,7 +105,9 @@ export default class ObjectUtils {
         try {
             const value = data[field];
 
-            if (this.isNotEmpty(value)) return value;
+            if (this.isNotEmpty(value)) {
+                return value;
+            }
         } catch {
             // Performance optimization: https://github.com/primefaces/primereact/issues/4797
             // do nothing and continue to other methods to resolve field data
@@ -87,20 +120,20 @@ export default class ObjectUtils {
                 return data[field];
             } else if (field.indexOf('.') === -1) {
                 return data[field];
-            } else {
-                let fields = field.split('.');
-                let value = data;
+            }
 
-                for (var i = 0, len = fields.length; i < len; ++i) {
-                    if (value == null) {
-                        return null;
-                    }
+            let fields = field.split('.');
+            let value = data;
 
-                    value = value[fields[i]];
+            for (let i = 0, len = fields.length; i < len; ++i) {
+                if (value == null) {
+                    return null;
                 }
 
-                return value;
+                value = value[fields[i]];
             }
+
+            return value;
         }
 
         return null;
@@ -147,8 +180,8 @@ export default class ObjectUtils {
     static reorderArray(value, from, to) {
         if (value && from !== to) {
             if (to >= value.length) {
-                to %= value.length;
-                from %= value.length;
+                to = to % value.length;
+                from = from % value.length;
             }
 
             value.splice(to, 0, value.splice(from, 1)[0]);
@@ -203,8 +236,29 @@ export default class ObjectUtils {
         return this.findDiffKeys(props, defaultProps);
     }
 
+    /**
+     * Gets the value of a property which can be a function or a direct value.
+     * If the property is a function, it will be invoked with the provided parameters.
+     * @param {*} obj - The object to get the value from
+     * @param {...*} params - Parameters to pass to the function if obj is a function
+     * @returns {*} The resolved value
+     */
     static getPropValue(obj, ...params) {
-        return this.isFunction(obj) ? obj(...params) : obj;
+        // If obj is not a function, return it directly
+        if (!this.isFunction(obj)) {
+            return obj;
+        }
+
+        // Handle function invocation
+        if (params.length === 1) {
+            // For single parameter case, unwrap array if needed to avoid extra nesting
+            const param = params[0];
+
+            return obj(Array.isArray(param) ? param[0] : param);
+        }
+
+        // Pass all parameters to function
+        return obj(...params);
     }
 
     static getComponentProp(component, prop = '', defaultProps = {}) {
@@ -353,6 +407,10 @@ export default class ObjectUtils {
         return /^[a-zA-Z\u00C0-\u017F]$/.test(char);
     }
 
+    static isScalar(value) {
+        return value != null && (typeof value === 'string' || typeof value === 'number' || typeof value === 'bigint' || typeof value === 'boolean');
+    }
+
     /**
      * Firefox-v103 does not currently support the "findLast" method. It is stated that this method will be supported with Firefox-v104.
      * https://caniuse.com/mdn-javascript_builtins_array_findlast
@@ -406,11 +464,17 @@ export default class ObjectUtils {
         const emptyValue1 = this.isEmpty(value1);
         const emptyValue2 = this.isEmpty(value2);
 
-        if (emptyValue1 && emptyValue2) result = 0;
-        else if (emptyValue1) result = order;
-        else if (emptyValue2) result = -order;
-        else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparator(value1, value2);
-        else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        if (emptyValue1 && emptyValue2) {
+            result = 0;
+        } else if (emptyValue1) {
+            result = order;
+        } else if (emptyValue2) {
+            result = -order;
+        } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+            result = comparator(value1, value2);
+        } else {
+            result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        }
 
         return result;
     }
@@ -472,7 +536,7 @@ export default class ObjectUtils {
         const fields = field.split('.');
         let obj = data;
 
-        for (var i = 0, len = fields.length; i < len; ++i) {
+        for (let i = 0, len = fields.length; i < len; ++i) {
             // Check if we are on the last field
             if (i + 1 - len === 0) {
                 obj[fields[i]] = value;
@@ -485,5 +549,111 @@ export default class ObjectUtils {
 
             obj = obj[fields[i]];
         }
+    }
+
+    /**
+     * This helper function takes an object and a dot-separated key path. It traverses the object based on the path,
+     * returning the value at the specified depth. If any part of the path is missing or undefined, it returns undefined.
+     *
+     * Example:
+     * const obj = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const path = 'address.city';
+     * const result = ObjectUtils.getNestedValue(obj, path);
+     * console.log(result); // Output: "Wonderland"
+     *
+     * @param {object} obj - The object to traverse.
+     * @param {string} path - The dot-separated key path.
+     * @returns {*} The value at the specified depth, or undefined if any part of the path is missing or undefined.
+     */
+    static getNestedValue(obj, path) {
+        return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
+    }
+
+    /**
+     * This function takes an object and a dot-separated key path. It traverses the object based on the path,
+     * returning the value at the specified depth. If any part of the path is missing or undefined, it returns undefined.
+     *
+     * Example:
+     * const objA = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const objB = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const result = ObjectUtils.absoluteCompare(objA, objB);
+     * console.log(result); // Output: true
+     *
+     * const objC = { name: 'Alice', address: { city: 'Wonderland', zip: 12346 } };
+     * const result2 = ObjectUtils.absoluteCompare(objA, objC);
+     * console.log(result2); // Output: false
+     *
+     * @param {object} objA - The first object to compare.
+     * @param {object} objB - The second object to compare.
+     * @param {number} [maxDepth=1] - The maximum depth to compare.
+     * @param {number} [currentDepth=0] - The current depth (used internally for recursion).
+     * @returns {boolean} True if the objects are equal within the specified depth, false otherwise.
+     *
+     */
+    static absoluteCompare(objA, objB, maxDepth = 1, currentDepth = 0) {
+        if (!objA || !objB) return true;
+        if (currentDepth > maxDepth) return true;
+
+        if (typeof objA !== typeof objB) return false;
+
+        const aKeys = Object.keys(objA);
+        const bKeys = Object.keys(objB);
+
+        if (aKeys.length !== bKeys.length) return false;
+
+        for (const key of aKeys) {
+            const aValue = objA[key];
+            const bValue = objB[key];
+
+            // Skip comparison if values are objects
+            const isObject = ObjectUtils.isObject(aValue) && ObjectUtils.isObject(bValue);
+            const isFunction = ObjectUtils.isFunction(aValue) && ObjectUtils.isFunction(bValue);
+
+            if ((isObject || isFunction) && !this.absoluteCompare(aValue, bValue, maxDepth, currentDepth + 1)) return false;
+            if (!isObject && aValue !== bValue) return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * This helper function takes two objects and a list of keys to compare. It compares the values of the specified keys
+     * in both objects. If any comparison fails, it returns false. If all specified properties are equal, it returns true.
+     * It performs a shallow comparison using absoluteCompare if no keys are provided.
+     *
+     * Example:
+     * const objA = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const objB = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const keysToCompare = ['name', 'address.city', 'address.zip'];
+     * const result = ObjectUtils.selectiveCompare(objA, objB, keysToCompare);
+     * console.log(result); // Output: true
+     *
+     * const objC = { name: 'Alice', address: { city: 'Wonderland', zip: 12346 } };
+     * const result2 = ObjectUtils.selectiveCompare(objA, objC, keysToCompare);
+     * console.log(result2); // Output: false
+     *
+     * @param {object} a - The first object to compare.
+     * @param {object} b - The second object to compare.
+     * @param {string[]} [keysToCompare] - The keys to compare. If not provided, performs a shallow comparison using absoluteCompare.
+     * @param {number} [maxDepth=1] - The maximum depth to compare if the variables are objects.
+     * @returns {boolean} True if all specified properties are equal, false otherwise.
+     */
+    static selectiveCompare(a, b, keysToCompare, maxDepth = 1) {
+        if (a === b) return true;
+        if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
+        if (!keysToCompare) return this.absoluteCompare(a, b, 1); // If no keys are provided, the comparison is limited to one depth level.
+
+        for (const key of keysToCompare) {
+            const aValue = this.getNestedValue(a, key);
+            const bValue = this.getNestedValue(b, key);
+
+            const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
+
+            // If the current key is an object, they are compared in one further level only.
+            if (isObject && !this.absoluteCompare(aValue, bValue, maxDepth)) return false;
+            if (!isObject && aValue !== bValue) return false;
+        }
+
+        return true;
     }
 }

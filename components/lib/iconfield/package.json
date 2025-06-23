@@ -1,0 +1,7 @@
+{
+    "main": "./iconfield.cjs.js",
+    "module": "./iconfield.esm.js",
+    "unpkg": "./iconfield.min.js",
+    "types": "./iconfield.d.ts",
+    "sideEffects": false
+}

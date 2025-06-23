@@ -179,7 +179,7 @@ export default function RaisedTextDemo() {
                 <p>Text buttons can be displayed as raised as well for elevation.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} raised text />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" raised text />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" raised text />

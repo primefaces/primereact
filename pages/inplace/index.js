@@ -6,7 +6,6 @@ import { ImageDoc } from '@/components/doc/inplace/imagedoc';
 import { ImportDoc } from '@/components/doc/inplace/importdoc';
 import { InputDoc } from '@/components/doc/inplace/inputdoc';
 import { LazyDoc } from '@/components/doc/inplace/lazydoc';
-import { PTDoc } from '@/components/doc/inplace/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inplace/pt/wireframe';
 import { StyledDoc } from '@/components/doc/inplace/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inplace/theming/tailwinddoc';
@@ -56,11 +55,6 @@ const ChipDemo = () => {
             id: 'pt.Inplace.options',
             label: 'Inplace PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

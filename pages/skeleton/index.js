@@ -5,7 +5,6 @@ import { CardDoc } from '@/components/doc/skeleton/carddoc';
 import { DataTableDoc } from '@/components/doc/skeleton/datatabledoc';
 import { ImportDoc } from '@/components/doc/skeleton/importdoc';
 import { ListDoc } from '@/components/doc/skeleton/listdoc';
-import { PTDoc } from '@/components/doc/skeleton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/skeleton/pt/wireframe';
 import { ShapesDoc } from '@/components/doc/skeleton/shapesdoc';
 import { StyledDoc } from '@/components/doc/skeleton/theming/styleddoc';
@@ -56,11 +55,6 @@ const SkeletonDemo = () => {
             id: 'pt.skeleton.options',
             label: 'Skeleton PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

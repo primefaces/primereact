@@ -155,7 +155,7 @@ export const ContextMenu = React.memo(
             DomHandler.addStyles(menuRef.current, { position: 'absolute' });
 
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             }
 
             position(currentEvent.current);
@@ -190,12 +190,12 @@ export const ContextMenu = React.memo(
 
                 //flip
                 if (left + width - document.body.scrollLeft > viewport.width) {
-                    left -= width;
+                    left = left - width;
                 }
 
                 //flip
                 if (top + height - document.body.scrollTop > viewport.height) {
-                    top -= height;
+                    top = top - height;
                 }
 
                 //fit
@@ -229,7 +229,7 @@ export const ContextMenu = React.memo(
                         parentKey
                     };
 
-                    newItem['items'] = createProcessedItems(item.items, level + 1, newItem, key);
+                    newItem.items = createProcessedItems(item.items, level + 1, newItem, key);
                     processedItems.push(newItem);
                 });
 
@@ -384,6 +384,7 @@ export const ContextMenu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 
@@ -415,7 +416,9 @@ export const ContextMenu = React.memo(
         const onItemChange = (event) => {
             const { processedItem, isFocus, updateState = true } = event;
 
-            if (ObjectUtils.isEmpty(processedItem)) return;
+            if (ObjectUtils.isEmpty(processedItem)) {
+                return;
+            }
 
             const { index, key, level, parentKey, items } = processedItem;
             const grouped = ObjectUtils.isNotEmpty(items);

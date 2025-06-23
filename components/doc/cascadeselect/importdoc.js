@@ -10,7 +10,7 @@ import { CascadeSelect } from 'primereact/cascadeselect';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

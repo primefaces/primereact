@@ -9,7 +9,6 @@ import { EventsDoc } from '@/components/doc/tree/eventsdoc';
 import { FilterDoc } from '@/components/doc/tree/filterdoc';
 import { ImportDoc } from '@/components/doc/tree/importdoc';
 import { LazyDoc } from '@/components/doc/tree/lazydoc';
-import { PTDoc } from '@/components/doc/tree/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tree/pt/wireframe';
 import { CheckboxSelectionDoc } from '@/components/doc/tree/selection/checkboxselectiondoc';
 import { MultipleSelectionDoc } from '@/components/doc/tree/selection/multipleselectiondoc';
@@ -104,11 +103,6 @@ const TreeDemo = () => {
             id: 'pt.tree.options',
             label: 'Tree PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

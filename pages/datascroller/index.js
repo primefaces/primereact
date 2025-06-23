@@ -5,10 +5,9 @@ import { BasicDoc } from '@/components/doc/datascroller/basicdoc';
 import { ImportDoc } from '@/components/doc/datascroller/importdoc';
 import { InlineDataScrollerDoc } from '@/components/doc/datascroller/inlinedoc';
 import { LoaderDataScrollerDoc } from '@/components/doc/datascroller/loaderdoc';
-import { PTDoc } from '@/components/doc/datascroller/pt/ptdoc';
 import { StyledDoc } from '@/components/doc/datascroller/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/datascroller/theming/tailwinddoc';
-import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
+import { Wireframe } from '@/components/doc/datascroller/pt/wireframe';
 
 const DataScrollerDemo = () => {
     const docs = [
@@ -49,11 +48,6 @@ const DataScrollerDemo = () => {
             id: 'pt.datascroller.options',
             label: 'DataScroller PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

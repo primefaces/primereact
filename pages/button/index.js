@@ -1,7 +1,7 @@
 import { AccessibilityDoc } from '@/components/doc/button/accessibilitydoc';
 import { BadgesDoc } from '@/components/doc/button/badgesdoc';
 import { BasicDoc } from '@/components/doc/button/basicdoc';
-import { ButtonSetDoc } from '@/components/doc/button/buttonsetdoc';
+import { ButtonGroupDoc } from '@/components/doc/button/buttongroupdoc';
 import { DisabledDoc } from '@/components/doc/button/disableddoc';
 import { IconOnlyDoc } from '@/components/doc/button/icononlydoc';
 import { IconsDoc } from '@/components/doc/button/iconsdoc';
@@ -9,7 +9,6 @@ import { ImportDoc } from '@/components/doc/button/importdoc';
 import { LinkDoc } from '@/components/doc/button/linkdoc';
 import { LoadingDoc } from '@/components/doc/button/loadingdoc';
 import { OutlinedDoc } from '@/components/doc/button/outlineddoc';
-import { PTDoc } from '@/components/doc/button/pt/ptdoc';
 import { Wireframe } from '@/components/doc/button/pt/wireframe';
 import { RaisedDoc } from '@/components/doc/button/raiseddoc';
 import { RaisedTextDoc } from '@/components/doc/button/raisedtextdoc';
@@ -96,9 +95,9 @@ const ButtonDemo = () => {
             component: BadgesDoc
         },
         {
-            id: 'buttonset',
-            label: 'Button Set',
-            component: ButtonSetDoc
+            id: 'buttongroup',
+            label: 'Button Group',
+            component: ButtonGroupDoc
         },
         {
             id: 'sizes',
@@ -128,11 +127,6 @@ const ButtonDemo = () => {
             id: 'pt.button.options',
             label: 'Button PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

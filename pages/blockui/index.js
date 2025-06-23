@@ -2,7 +2,6 @@ import { AccessibilityDoc } from '@/components/doc/blockui/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/blockui/basicdoc';
 import { DocumentDoc } from '@/components/doc/blockui/documentdoc';
 import { ImportDoc } from '@/components/doc/blockui/importdoc';
-import { PTDoc } from '@/components/doc/blockui/pt/ptdoc';
 import { Wireframe } from '@/components/doc/blockui/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/blockui/templatedoc';
 import { StyledDoc } from '@/components/doc/blockui/theming/styleddoc';
@@ -50,11 +49,6 @@ const BlockUIDemo = () => {
             id: 'pt.blockui.options',
             label: 'BlockUI PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

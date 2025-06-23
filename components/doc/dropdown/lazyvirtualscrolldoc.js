@@ -141,7 +141,7 @@ export default function LazyVirtualScrollDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p></p>
+                <p />
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Dropdown

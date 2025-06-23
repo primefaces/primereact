@@ -48,7 +48,15 @@ export const AutoComplete = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? !isInputClicked(event) && hide() : hide();
+                    if (type === 'outside') {
+                        if (!isInputClicked(event)) {
+                            hide();
+                        }
+                    } else if (context.hideOverlaysOnDocumentScrolling) {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
                 }
             },
             when: overlayVisibleState
@@ -73,14 +81,12 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isEmpty(query)) {
                 hide();
                 props.onClear && props.onClear(event);
+            } else if (query.length >= props.minLength) {
+                timeout.current = setTimeout(() => {
+                    search(event, query, 'input');
+                }, props.delay);
             } else {
-                if (query.length >= props.minLength) {
-                    timeout.current = setTimeout(() => {
-                        search(event, query, 'input');
-                    }, props.delay);
-                } else {
-                    hide();
-                }
+                hide();
             }
         };
 
@@ -133,11 +139,6 @@ export const AutoComplete = React.memo(
         };
 
         const updateModel = (event, value) => {
-            // #2176 only call change if value actually changed
-            if (selectedItem.current && ObjectUtils.deepEquals(selectedItem.current, value)) {
-                return;
-            }
-
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
@@ -160,23 +161,21 @@ export const AutoComplete = React.memo(
         };
 
         const formatValue = (value) => {
-            if (ObjectUtils.isNotEmpty(value)) {
-                if (typeof value === 'string') {
-                    return value;
-                } else if (props.selectedItemTemplate) {
-                    const resolvedFieldData = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+            if (ObjectUtils.isEmpty(value)) return '';
 
-                    return resolvedFieldData ? resolvedFieldData : value;
-                } else if (props.field) {
-                    const resolvedFieldData = ObjectUtils.resolveFieldData(value, props.field);
+            if (typeof value === 'string') return value;
 
-                    return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
-                } else {
-                    return value;
-                }
+            if (props.selectedItemTemplate) {
+                const valueFromTemplate = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+
+                return props.multiple || typeof valueFromTemplate === 'string' ? valueFromTemplate : value;
             }
 
-            return '';
+            if (props.field) {
+                return ObjectUtils.resolveFieldData(value, props.field) ?? value;
+            }
+
+            return value;
         };
 
         const updateInputField = (value) => {
@@ -193,19 +192,23 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-                const element = getScrollableElement().firstChild.firstChild;
+                autoHighlightFirstOption();
+            }
+        };
 
-                if (element) {
-                    !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
-                    element.setAttribute('data-p-highlight', true);
-                }
+        const autoHighlightFirstOption = () => {
+            const element = getScrollableElement()?.firstChild?.firstChild;
+
+            if (element) {
+                !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
+                element.setAttribute('data-p-highlight', true);
             }
         };
 
@@ -242,8 +245,11 @@ export const AutoComplete = React.memo(
                 DomHandler.focus(inputRef.current, props.dropdownAutoFocus);
             }
 
-            if (props.dropdownMode === 'blank') search(event, '', 'dropdown');
-            else if (props.dropdownMode === 'current') search(event, inputRef.current.value, 'dropdown');
+            if (props.dropdownMode === 'blank') {
+                search(event, '', 'dropdown');
+            } else if (props.dropdownMode === 'current') {
+                search(event, inputRef.current.value, 'dropdown');
+            }
 
             if (props.onDropdownClick) {
                 props.onDropdownClick({
@@ -254,6 +260,10 @@ export const AutoComplete = React.memo(
         };
 
         const removeItem = (event, index) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
             const removedValue = props.value[index];
             const newValue = props.value.filter((_, i) => index !== i);
 
@@ -407,11 +417,16 @@ export const AutoComplete = React.memo(
                 return;
             }
 
-            const inputValue = ObjectUtils.trim(event.target.value);
-            const item = (props.suggestions || []).find((it) => {
-                const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+            const inputValue = ObjectUtils.trim(event.target.value).toLowerCase();
+            const allItems = (props.suggestions || []).flatMap((group) => {
+                return group.items ? group.items : [group];
+            });
 
-                return value && inputValue === ObjectUtils.trim(value);
+            const item = allItems.find((it) => {
+                const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+                const trimmedValue = value ? ObjectUtils.trim(value).toLowerCase() : '';
+
+                return trimmedValue && inputValue === trimmedValue;
             });
 
             if (item) {
@@ -456,12 +471,8 @@ export const AutoComplete = React.memo(
             return props.value ? props.value.some((v) => ObjectUtils.equals(v, val)) : false;
         };
 
-        const findOptionIndex = (option) => {
-            return props.suggestions ? props.suggestions.findIndex((s) => ObjectUtils.equals(s, option)) : -1;
-        };
-
         const getScrollableElement = () => {
-            return overlayRef.current.firstChild;
+            return overlayRef?.current?.firstChild;
         };
 
         const getOptionGroupLabel = (optionGroup) => {
@@ -480,6 +491,12 @@ export const AutoComplete = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        React.useEffect(() => {
+            if (ObjectUtils.isNotEmpty(props.value)) {
+                selectedItem.current = props.value;
+            }
+        }, [props.value]);
+
         useMountEffect(() => {
             if (!idState) {
                 setIdState(UniqueComponentId());
@@ -491,6 +508,12 @@ export const AutoComplete = React.memo(
 
             alignOverlay();
         });
+
+        useUpdateEffect(() => {
+            if (searchingState && props.autoHighlight && props.suggestions && props.suggestions.length) {
+                autoHighlightFirstOption();
+            }
+        }, [searchingState]);
 
         useUpdateEffect(() => {
             if (searchingState) {
@@ -545,7 +568,7 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    className={classNames(props.inputClassName, cx('input'))}
+                    className={classNames(props.inputClassName, cx('input', { context }))}
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
@@ -566,10 +589,23 @@ export const AutoComplete = React.memo(
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
                     pt={ptm('input')}
+                    unstyled={props.unstyled}
                     {...ariaProps}
                     __parentMetadata={{ parent: metaData }}
                 />
             );
+        };
+
+        const onRemoveTokenIconKeyDown = (event, val) => {
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    removeItem(event, val);
+                    event.preventDefault();
+                    event.stopPropagation();
+                    break;
+            }
         };
 
         const createChips = () => {
@@ -579,7 +615,10 @@ export const AutoComplete = React.memo(
                     const removeTokenIconProps = mergeProps(
                         {
                             className: cx('removeTokenIcon'),
-                            onClick: (e) => removeItem(e, index)
+                            onClick: (e) => removeItem(e, index),
+                            tabIndex: props.tabIndex || '0',
+                            'aria-label': localeOption('clear'),
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, index)
                         },
                         ptm('removeTokenIcon')
                     );
@@ -665,7 +704,7 @@ export const AutoComplete = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: multiContainerRef,
-                    className: cx('container'),
+                    className: cx('container', { context }),
                     onClick: allowMoreValues ? onMultiContainerClick : undefined,
                     onContextMenu: props.onContextMenu,
                     onMouseDown: props.onMouseDown,
@@ -758,6 +797,7 @@ export const AutoComplete = React.memo(
                         listId={listId}
                         onItemClick={selectItem}
                         selectedItem={selectedItem}
+                        onOverlayHide={hide}
                         onClick={onPanelClick}
                         getOptionGroupLabel={getOptionGroupLabel}
                         getOptionGroupChildren={getOptionGroupChildren}

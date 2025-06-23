@@ -1,13 +1,11 @@
 import { AccessibilityDoc } from '@/components/doc/chips/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/chips/basicdoc';
 import { DisabledDoc } from '@/components/doc/chips/disableddoc';
+import { FilledDoc } from '@/components/doc/chips/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/chips/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/chips/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/chips/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/chips/importdoc';
 import { InvalidDoc } from '@/components/doc/chips/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/chips/keyfilterdoc';
-import { PTDoc } from '@/components/doc/chips/pt/ptdoc';
 import { Wireframe } from '@/components/doc/chips/pt/wireframe';
 import { SeparatorDoc } from '@/components/doc/chips/separatordoc';
 import { TemplateDoc } from '@/components/doc/chips/templatedoc';
@@ -49,6 +47,11 @@ const ChipsDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -58,24 +61,6 @@ const ChipsDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -92,11 +77,6 @@ const ChipsDemo = () => {
             id: 'pt.chips.options',
             label: 'Chips PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -10,7 +10,7 @@ import { PanelMenu } from 'primereact/panelmenu';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

@@ -214,7 +214,7 @@ export default function ControlledDemo() {
                     expandedKeys={expandedKeys}
                     onToggle={(e) => setExpandedKeys(e.value)}
                     panelHeaderTemplate={headerTemplate}
-                ></TreeSelect>
+                />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

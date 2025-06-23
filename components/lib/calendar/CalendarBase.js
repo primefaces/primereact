@@ -186,6 +186,10 @@ const classes = {
             'p-inputwrapper-focus': focusedState,
             'p-focus': focusedState || panelVisible
         }),
+    input: ({ props, context }) =>
+        classNames('p-inputtext p-component', {
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
+        }),
     dropdownButton: 'p-datepicker-trigger',
     buttonbar: 'p-datepicker-buttonbar',
     todayButton: 'p-button-text',
@@ -262,6 +266,7 @@ export const CalendarBase = ComponentBase.extend({
         inputMode: 'none',
         inputRef: null,
         inputStyle: null,
+        variant: null,
         invalid: false,
         keepInvalid: false,
         locale: null,

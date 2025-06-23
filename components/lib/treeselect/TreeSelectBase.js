@@ -3,20 +3,17 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState, isValueEmpty }) =>
-        classNames(
-            'p-treeselect p-component p-inputwrapper',
-            {
-                'p-treeselect-chip': props.display === 'chip',
-                'p-treeselect-clearable': props.showClear && !props.disabled,
-                'p-disabled': props.disabled,
-                'p-invalid': props.invalid,
-                'p-focus': focusedState,
-                'p-inputwrapper-filled': !isValueEmpty,
-                'p-inputwrapper-focus': focusedState || overlayVisibleState
-            },
-            props.className
-        ),
+    root: ({ props, focusedState, context, overlayVisibleState, isValueEmpty }) =>
+        classNames('p-treeselect p-component p-inputwrapper', {
+            'p-treeselect-chip': props.display === 'chip',
+            'p-treeselect-clearable': props.showClear && !props.disabled,
+            'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
+            'p-focus': focusedState,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
+            'p-inputwrapper-filled': !isValueEmpty,
+            'p-inputwrapper-focus': focusedState || overlayVisibleState
+        }),
     label: ({ props, isValueEmpty, getLabel }) =>
         classNames('p-treeselect-label', {
             'p-placeholder': getLabel() === props.placeholder,
@@ -153,6 +150,7 @@ export const TreeSelectBase = ComponentBase.extend({
         expandedKeys: null,
         filter: false,
         filterBy: 'label',
+        filterDelay: 300,
         filterIcon: null,
         filterInputAutoFocus: true,
         filterLocale: undefined,
@@ -163,6 +161,7 @@ export const TreeSelectBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         metaKeySelection: false,
         name: null,
         nodeTemplate: null,
@@ -171,7 +170,9 @@ export const TreeSelectBase = ComponentBase.extend({
         onBlur: null,
         onFilterValueChange: null,
         onHide: null,
+        onNodeClick: null,
         onNodeCollapse: null,
+        onNodeDoubleClick: null,
         onNodeExpand: null,
         onNodeSelect: null,
         onNodeUnselect: null,

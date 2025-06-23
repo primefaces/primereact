@@ -8,17 +8,10 @@
  *
  */
 import * as React from 'react';
-import { ComponentType, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { CSSTransitionProps } from '../csstransition/csstransition';
 import { PassThroughOptions } from '../passthrough';
-import { SelectItemOptionsType } from '../selectitem/selectitem';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
-import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType, PassThroughType } from '../utils/utils';
-import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
+import { PassThroughType } from '../utils/utils';
 
 export declare type MeterGroupPassThroughType<T> = PassThroughType<T, MeterGroupPassThroughMethodOptions>;
 export declare type MeterGroupPassThroughTransitionType = ReactCSSTransitionProps | ((options: MeterGroupPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
@@ -85,7 +78,7 @@ interface MeterGroupValue {
 }
 
 interface CustomRenderProps {
-    totaLPercent: number;
+    totalPercent: number;
     percentages: number[];
     values: MeterGroupValue[];
 }

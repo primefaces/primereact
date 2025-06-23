@@ -58,6 +58,16 @@
                             "to": "/editor"
                         },
                         {
+                            "name": "FloatLabel",
+                            "to": "/floatlabel",
+                            "badge": "NEW"
+                        },
+                        {
+                            "name": "IconField",
+                            "to": "/iconfield",
+                            "badge": "NEW"
+                        },
+                        {
                             "name": "InputGroup",
                             "to": "/inputgroup"
                         },
@@ -72,6 +82,11 @@
                         {
                             "name": "InputNumber",
                             "to": "/inputnumber"
+                        },
+                        {
+                            "name": "InputOtp",
+                            "to": "/inputotp",
+                            "badge": "NEW"
                         },
                         {
                             "name": "InputText",
@@ -241,6 +256,11 @@
                             "to": "/splitter"
                         },
                         {
+                            "name": "Stepper",
+                            "to": "/stepper",
+                            "badge": "NEW"
+                        },
+                        {
                             "name": "TabView",
                             "to": "/tabview"
                         },
@@ -400,6 +420,10 @@
                             "to": "/inplace"
                         },
                         {
+                            "name": "MeterGroup",
+                            "to": "/metergroup"
+                        },
+                        {
                             "name": "ScrollTop",
                             "to": "/scrolltop"
                         },
@@ -491,7 +515,8 @@
             "children": [
                 {
                     "name": "Prime Icons",
-                    "to": "/icons"
+                    "to": "/icons",
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Custom Icons",
@@ -608,9 +633,10 @@
             "to": "/templates"
         },
         {
-            "name": "PrimeBlocks",
+            "name": "New PrimeBlocks",
             "icon": "pi pi-server",
-            "href": "https://blocks.primereact.org"
+            "href": "https://primeblocks.org",
+            "badge": "Soon"
         },
         {
             "name": "PrimeFlex CSS",
@@ -650,10 +676,15 @@
                     "href": "https://github.com/orgs/primefaces/discussions"
                 },
                 {
-                    "name": "PRO",
+                    "name": "PRO Support",
                     "to": "/support"
                 }
             ]
+        },
+        {
+            "name": "Contribution",
+            "to": "/contribution",
+            "icon": "pi pi-users"
         },
         {
             "name": "Discover",

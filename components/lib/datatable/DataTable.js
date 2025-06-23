@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { getStorage } from '../../utils/utils';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
@@ -27,6 +28,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [columnOrderState, setColumnOrderState] = React.useState([]);
     const [groupRowsSortMetaState, setGroupRowsSortMetaState] = React.useState(null);
     const [editingMetaState, setEditingMetaState] = React.useState({});
+    const [frozenEditingMetaState, setFrozenEditingMetaState] = React.useState({});
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
     const metaData = {
@@ -41,6 +43,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             columnOrder: columnOrderState,
             groupRowsSortMeta: groupRowsSortMetaState,
             editingMeta: editingMetaState,
+            frozenEditingMeta: frozenEditingMetaState,
             d_rows: d_rowsState,
             d_filters: d_filtersState
         },
@@ -86,23 +89,28 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setD_rowsState(props.rows);
     }
 
+    const columnResizeStartListener = (event) => columnResizing.current && onColumnResize(event);
+
+    const columnResizeEndListener = () => columnResizing.current && ((columnResizing.current = false), onColumnResizeEnd());
+
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
         type: 'mousemove',
-        listener: (event) => {
-            if (columnResizing.current) {
-                onColumnResize(event);
-            }
-        }
+        listener: columnResizeStartListener
     });
 
     const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
         type: 'mouseup',
-        listener: () => {
-            if (columnResizing.current) {
-                columnResizing.current = false;
-                onColumnResizeEnd();
-            }
-        }
+        listener: columnResizeEndListener
+    });
+
+    const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({
+        type: 'touchmove',
+        listener: columnResizeStartListener
+    });
+
+    const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({
+        type: 'touchend',
+        listener: columnResizeEndListener
     });
 
     const isCustomStateStorage = () => {
@@ -175,24 +183,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return columns;
     };
 
-    const getStorage = () => {
-        switch (props.stateStorage) {
-            case 'local':
-                return window.localStorage;
-
-            case 'session':
-                return window.sessionStorage;
-
-            case 'custom':
-                return null;
-
-            default:
-                throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
-        }
-    };
-
     const saveState = () => {
-        let state = {};
+        const state = {};
 
         if (props.paginator) {
             state.first = getFirst();
@@ -237,7 +229,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 props.customSaveState(state);
             }
         } else {
-            const storage = getStorage();
+            const storage = getStorage(props.stateStorage);
 
             if (ObjectUtils.isNotEmpty(state)) {
                 storage.setItem(props.stateKey, JSON.stringify(state));
@@ -250,7 +242,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const clearState = () => {
-        const storage = getStorage();
+        const storage = getStorage(props.stateStorage);
 
         if (storage && props.stateKey) {
             storage.removeItem(props.stateKey);
@@ -265,7 +257,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 restoredState = props.customRestoreState();
             }
         } else {
-            const storage = getStorage();
+            const storage = getStorage(props.stateStorage);
             const stateString = storage.getItem(props.stateKey);
             const dateFormat = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
 
@@ -392,7 +384,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         widths.forEach((width, index) => {
             let style = `width: ${width}px !important; max-width: ${width}px !important`;
 
-            innerHTML += `
+            innerHTML =
+                innerHTML +
+                `
                 ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
@@ -422,16 +416,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const findParentHeader = (element) => {
         if (element.nodeName === 'TH') {
             return element;
-        } else {
-            let parent = element.parentElement;
-
-            while (parent.nodeName !== 'TH') {
-                parent = parent.parentElement;
-                if (!parent) break;
-            }
-
-            return parent;
         }
+
+        let parent = element.parentElement;
+
+        while (parent.nodeName !== 'TH') {
+            parent = parent.parentElement;
+
+            if (!parent) {
+                break;
+            }
+        }
+
+        return parent;
     };
 
     const getGroupRowSortField = () => {
@@ -443,8 +440,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             return val.filter((data, index) => {
                 let isSelectable = true;
 
-                if (props.showSelectionElement) isSelectable = props.showSelectionElement({ rowIndex: index, props });
-                if (props.isDataSelectable && isSelectable) isSelectable = props.isDataSelectable({ data, index });
+                if (props.showSelectionElement) {
+                    isSelectable = props.showSelectionElement({ rowIndex: index, props });
+                }
+
+                if (props.isDataSelectable && isSelectable) {
+                    isSelectable = props.isDataSelectable({ data, index });
+                }
 
                 return isSelectable;
             });
@@ -456,13 +458,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const allRowsSelected = (processedData) => {
         if (props.onSelectAllChange) {
             return props.selectAll;
-        } else {
-            const data = props.selectionPageOnly ? dataToRender(processedData) : processedData;
-            const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
-            const selectableVal = getSelectableData(val);
-
-            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => ObjectUtils.isArray(props.selection) && props.selection.some((s) => isEquals(s, sv)));
         }
+
+        const data = props.selectionPageOnly ? dataToRender(processedData) : processedData;
+        const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
+        const selectableVal = getSelectableData(val);
+
+        return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => ObjectUtils.isArray(props.selection) && props.selection.some((s) => isEquals(s, sv)));
     };
 
     const getSelectionModeInColumn = (columns) => {
@@ -490,11 +492,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         if (editing) {
             !meta && (meta = editingMeta[editingKey] = { data: { ...rowData }, fields: [] });
-            meta['fields'].push(field);
+            meta.fields.push(field);
         } else if (meta) {
-            const fields = meta['fields'].filter((f) => f !== field);
+            const fields = meta.fields.filter((f) => f !== field);
 
-            !fields.length ? delete editingMeta[editingKey] : (meta['fields'] = fields);
+            !fields.length ? delete editingMeta[editingKey] : (meta.fields = fields);
         }
 
         setEditingMetaState(editingMeta);
@@ -506,15 +508,41 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const onFrozenEditingMetaChange = (e) => {
+        const { rowData, field, editingKey, editing } = e;
+        let frozenEditingMeta = { ...frozenEditingMetaState };
+        let meta = frozenEditingMeta[editingKey];
+
+        if (editing) {
+            !meta && (meta = frozenEditingMeta[editingKey] = { data: { ...rowData }, fields: [] });
+            meta.fields.push(field);
+        } else if (meta) {
+            const fields = meta.fields.filter((f) => f !== field);
+
+            !fields.length ? delete frozenEditingMeta[editingKey] : (meta.fields = fields);
+        }
+
+        setFrozenEditingMetaState(frozenEditingMeta);
+    };
+
+    const clearFrozenEditingMetaData = () => {
+        if (props.editMode && ObjectUtils.isNotEmpty(frozenEditingMetaState)) {
+            setFrozenEditingMetaState({});
+        }
+    };
+
     const onColumnResizeStart = (e) => {
         createBeforeResizeStyleElement();
         const { originalEvent: event, column } = e;
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
         resizeColumn.current = column;
+
         resizeColumnElement.current = event.currentTarget.parentElement;
+
         columnResizing.current = true;
-        lastResizeHelperX.current = event.pageX - containerLeft + elementRef.current.scrollLeft;
+
+        lastResizeHelperX.current = (event.type === 'touchstart' ? event.changedTouches[0].clientX : event.pageX) - containerLeft + elementRef.current.scrollLeft;
 
         bindColumnResizeEvents();
     };
@@ -526,7 +554,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
-        resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
+
+        resizeHelperRef.current.style.left = (event.type === 'touchmove' ? event.changedTouches[0].clientX : event.pageX) - containerLeft + elementRef.current.scrollLeft + 'px';
 
         resizeHelperRef.current.style.display = 'block';
     };
@@ -604,7 +633,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
             let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
-            innerHTML += `
+            innerHTML =
+                innerHTML +
+                `
                  ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
@@ -619,11 +650,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const bindColumnResizeEvents = () => {
         bindDocumentMouseMoveListener();
         bindDocumentMouseUpListener();
+        bindDocumentTouchMoveListener();
+        bindDocumentTouchEndListener();
     };
 
     const unbindColumnResizeEvents = () => {
         unbindDocumentMouseMoveListener();
         unbindDocumentMouseUpListener();
+        unbindDocumentTouchMoveListener();
+        unbindDocumentTouchEndListener();
     };
 
     const onColumnHeaderMouseDown = (e) => {
@@ -632,8 +667,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const { originalEvent: event, column } = e;
 
         if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false && !getColumnProp(column, 'frozen')) {
-            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.getAttribute(event.target, '[data-pc-section="columnresizer"]')) event.currentTarget.draggable = false;
-            else event.currentTarget.draggable = true;
+            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.getAttribute(event.target, '[data-pc-section="columnresizer"]')) {
+                event.currentTarget.draggable = false;
+            } else {
+                event.currentTarget.draggable = true;
+            }
         }
     };
 
@@ -673,7 +711,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             return;
         }
 
-        if (!props.reorderableColumns) return;
+        if (!props.reorderableColumns) {
+            return;
+        }
 
         colReorderIconWidth.current = DomHandler.getHiddenElementOuterWidth(reorderIndicatorUpRef.current);
         colReorderIconHeight.current = DomHandler.getHiddenElementOuterHeight(reorderIndicatorUpRef.current);
@@ -863,6 +903,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const onPageChange = (e) => {
         clearEditingMetaData();
+        clearFrozenEditingMetaData();
 
         if (props.onPage) {
             props.onPage(createEvent(e));
@@ -878,6 +919,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const onSortChange = (e) => {
         clearEditingMetaData();
+        clearFrozenEditingMetaData();
 
         const { originalEvent: event, column, sortableDisabledFields } = e;
         let sortField = getColumnProp(column, 'sortField') || getColumnProp(column, 'field');
@@ -955,8 +997,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const addSortMeta = (meta, multiSortMeta) => {
         const index = multiSortMeta.findIndex((sortMeta) => sortMeta.field === meta.field);
 
-        if (index >= 0) multiSortMeta[index] = meta;
-        else multiSortMeta.push(meta);
+        if (index >= 0) {
+            multiSortMeta[index] = meta;
+        } else {
+            multiSortMeta.push(meta);
+        }
     };
 
     const removeSortMeta = (meta, multiSortMeta) => {
@@ -1054,6 +1099,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const onFilterChange = (filters) => {
         clearEditingMetaData();
+        clearFrozenEditingMetaData();
 
         setD_filtersState(filters);
     };
@@ -1098,14 +1144,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const filterLocal = (data, filters) => {
-        if (!data) return;
+        if (!data) {
+            return;
+        }
 
         let activeFilters = filters ? getActiveFilters(filters) : {};
 
         let columns = getColumns();
         let filteredValue = [];
 
-        let isGlobalFilter = activeFilters['global'] || props.globalFilter;
+        let isGlobalFilter = activeFilters.global || props.globalFilter;
         let globalFilterFieldsArray;
 
         if (isGlobalFilter) {
@@ -1150,8 +1198,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             if (localMatch && isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
                 for (let j = 0; j < globalFilterFieldsArray.length; j++) {
                     let globalFilterField = globalFilterFieldsArray[j];
-                    let matchMode = activeFilters['global'] ? activeFilters['global'].matchMode : props.globalFilterMatchMode;
-                    let value = activeFilters['global'] ? activeFilters['global'].value : props.globalFilter;
+                    let matchMode = activeFilters.global ? activeFilters.global.matchMode : props.globalFilterMatchMode;
+                    let value = activeFilters.global ? activeFilters.global.value : props.globalFilter;
 
                     globalMatch = FilterService.filters[matchMode](ObjectUtils.resolveFieldData(data[i], globalFilterField), value, props.filterLocale);
 
@@ -1249,6 +1297,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setD_filtersState(cloneFilters(props.filters));
         setGroupRowsSortMetaState(null);
         setEditingMetaState({});
+        setFrozenEditingMetaState({});
 
         if (!props.onPage) {
             setFirstState(props.first);
@@ -1298,7 +1347,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const exportCSV = (options) => {
         let data;
         let csv = '\ufeff';
-        let columns = getColumns();
 
         if (options && options.selectionOnly) {
             data = props.selection || [];
@@ -1306,46 +1354,58 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             data = [...(props.frozenValue || []), ...(processedData() || [])];
         }
 
-        //headers
-        columns.forEach((column, i) => {
-            const [field, header, exportHeader, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader'), getColumnProp(column, 'exportable')];
+        // First build collection of exportable columns
+        const exportableColumns = getColumns().filter((column) => {
+            const exportable = getColumnProp(column, 'exportable');
+            const field = getColumnProp(column, 'field');
 
-            if (exportable && field) {
-                const columnHeader = String(exportHeader || header || field)
-                    .replace(/"/g, '""')
-                    .replace(/\n/g, '\u2028');
+            // Column must be exportable (or undefined/not set) and have a field defined
+            return exportable !== false && field;
+        });
 
-                csv += '"' + columnHeader + '"';
+        // headers
+        exportableColumns.forEach((column, i) => {
+            const [field, header, exportHeader] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader')];
 
-                if (i < columns.length - 1) {
-                    csv += props.csvSeparator;
-                }
+            const columnHeader = String(exportHeader || header || field)
+                .replace(/"/g, '""')
+                .replace(/\n/g, '\u2028');
+
+            csv = csv + ('"' + columnHeader + '"');
+
+            if (i < exportableColumns.length - 1) {
+                csv = csv + props.csvSeparator;
             }
         });
 
-        //body
+        // body
         data.forEach((record) => {
-            csv += '\n';
-            columns.forEach((column, i) => {
-                const [colField, exportField, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'exportField'), getColumnProp(column, 'exportable')];
+            csv = csv + '\n';
+            exportableColumns.forEach((column, i) => {
+                const [colField, exportField] = [getColumnProp(column, 'field'), getColumnProp(column, 'exportField')];
                 const field = exportField || colField;
 
-                if (exportable && field) {
-                    let cellData = ObjectUtils.resolveFieldData(record, field);
+                let cellData = ObjectUtils.resolveFieldData(record, field);
 
-                    if (cellData != null) {
-                        if (props.exportFunction) {
-                            cellData = props.exportFunction({ data: cellData, field, rowData: record, column });
-                        } else {
-                            cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
-                        }
-                    } else cellData = '';
-
-                    csv += '"' + cellData + '"';
-
-                    if (i < columns.length - 1) {
-                        csv += props.csvSeparator;
+                if (cellData != null) {
+                    if (props.exportFunction) {
+                        cellData = props.exportFunction({
+                            data: cellData,
+                            field,
+                            rowData: record,
+                            column
+                        });
+                    } else {
+                        cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
                     }
+                } else {
+                    cellData = '';
+                }
+
+                csv = csv + ('"' + cellData + '"');
+
+                if (i < exportableColumns.length - 1) {
+                    csv = csv + props.csvSeparator;
                 }
             });
         });
@@ -1401,8 +1461,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 }
 
                 if (sortField || ObjectUtils.isNotEmpty(multiSortMeta)) {
-                    if (props.sortMode === 'single') data = sortSingle(data, sortField, sortOrder);
-                    else if (props.sortMode === 'multiple') data = sortMultiple(data, multiSortMeta);
+                    if (props.sortMode === 'single') {
+                        data = sortSingle(data, sortField, sortOrder);
+                    } else if (props.sortMode === 'multiple') {
+                        data = sortMultiple(data, multiSortMeta);
+                    }
                 }
             }
         }
@@ -1478,7 +1541,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             filter(props.globalFilter, 'global', props.globalFilterMatchMode);
         } else {
             // #3819 was filtering but now reset filter state
-            setFiltersState(props.filters);
+            if (d_filtersState['global']) {
+                let filters = { ...d_filtersState };
+
+                delete filters['global'];
+                setD_filtersState(filters);
+                onFilterApply(filters);
+            }
         }
     }, [props.globalFilter, props.globalFilterMatchMode]);
 
@@ -1504,6 +1573,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         restoreState,
         restoreTableState,
         saveState,
+        getFilterMeta: () => filtersState,
+        setFilterMeta: (filters) => setFiltersState(filters),
+        getSortMeta: () => multiSortMetaState,
+        setSortMeta: (sorts) => setMultiSortMetaState(sorts),
         getElement: () => elementRef.current,
         getTable: () => tableRef.current,
         getVirtualScroller: () => virtualScrollerRef.current
@@ -1607,7 +1680,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         );
     };
 
-    const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled) => {
+    const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled, processedData) => {
         const first = getFirst();
         const { rows, columns, contentRef, style, className, spacerStyle, itemSize } = options;
 
@@ -1615,6 +1688,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             <TableBody
                 hostName="DataTable"
                 ref={frozenBodyRef}
+                cellMemo={props.cellMemo}
+                cellMemoProps={props.cellMemoProps}
+                cellMemoPropsDepth={props.cellMemoPropsDepth}
                 cellClassName={props.cellClassName}
                 cellSelection={props.cellSelection}
                 checkIcon={props.checkIcon}
@@ -1626,7 +1702,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 dataKey={props.dataKey}
                 dragSelection={props.dragSelection}
                 editMode={props.editMode}
-                editingMeta={editingMetaState}
+                editingMeta={frozenEditingMetaState}
                 editingRows={props.editingRows}
                 emptyMessage={props.emptyMessage}
                 expandableRowGroups={props.expandableRowGroups}
@@ -1645,7 +1721,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onCellUnselect={props.onCellUnselect}
                 onContextMenu={props.onContextMenu}
                 onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                onEditingMetaChange={onEditingMetaChange}
+                onEditingMetaChange={onFrozenEditingMetaChange}
                 onRowClick={props.onRowClick}
                 onRowCollapse={props.onRowCollapse}
                 onRowDoubleClick={props.onRowDoubleClick}
@@ -1665,6 +1741,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onRowUnselect={props.onRowUnselect}
                 onSelectionChange={props.onSelectionChange}
                 paginator={props.paginator}
+                // pass processedData #7546
+                processedData={processedData}
                 reorderableRows={props.reorderableRows}
                 responsiveLayout={props.responsiveLayout}
                 rowClassName={props.rowClassName}
@@ -1691,12 +1769,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerOptions={options}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
+                unstyled={props.unstyled}
             />
         );
         const body = (
             <TableBody
                 hostName="DataTable"
                 ref={bodyRef}
+                cellMemo={props.cellMemo}
+                cellMemoProps={props.cellMemoProps}
+                cellMemoPropsDepth={props.cellMemoPropsDepth}
                 cellClassName={props.cellClassName}
                 cellSelection={props.cellSelection}
                 checkIcon={props.checkIcon}
@@ -1748,6 +1830,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onRowUnselect={props.onRowUnselect}
                 onSelectionChange={props.onSelectionChange}
                 paginator={props.paginator}
+                // pass processedData #7546
+                processedData={processedData}
                 reorderableRows={props.reorderableRows}
                 responsiveLayout={props.responsiveLayout}
                 rowClassName={props.rowClassName}
@@ -1776,10 +1860,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerOptions={options}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
+                unstyled={props.unstyled}
             />
         );
         const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
-            <TableBody hostName="DataTable" style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
+            <TableBody hostName="DataTable" style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} unstyled={props.unstyled} />
         ) : null;
 
         return (
@@ -1794,11 +1879,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createTableFooter = (options) => {
         const { columns } = options;
 
-        return <TableFooter hostName="DataTable" tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
+        return <TableFooter hostName="DataTable" tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} unstyled={props.unstyled} />;
     };
 
     const createContent = (processedData, columns, selectionModeInColumn, empty) => {
-        if (!columns) return;
+        if (!columns) {
+            return;
+        }
 
         const _isVirtualScrollerDisabled = isVirtualScrollerDisabled();
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
@@ -1826,6 +1913,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     pt={ptCallbacks.ptm('virtualScroller')}
                     __parentMetadata={{ parent: metaData }}
                     showSpacer={false}
+                    unstyled={props.unstyled}
                     contentTemplate={(options) => {
                         const ref = (el) => {
                             tableRef.current = el;
@@ -1833,7 +1921,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         };
 
                         const tableHeader = createTableHeader(options, empty, _isVirtualScrollerDisabled);
-                        const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
+                        const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled, processedData);
                         const tableFooter = createTableFooter(options);
                         const tableProps = mergeProps(
                             {
@@ -1922,7 +2010,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 ptCallbacks.ptm('resizeHelper')
             );
 
-            return <div ref={resizeHelperRef} {...resizeHelperProps}></div>;
+            return <div ref={resizeHelperRef} {...resizeHelperProps} />;
         }
 
         return null;

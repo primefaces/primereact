@@ -4,11 +4,8 @@ import { AccessibilityDoc } from '@/components/doc/knob/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/knob/basicdoc';
 import { ColorDoc } from '@/components/doc/knob/colordoc';
 import { DisabledDoc } from '@/components/doc/knob/disableddoc';
-import { FormikDoc } from '@/components/doc/knob/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/knob/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/knob/importdoc';
 import { MinMaxDoc } from '@/components/doc/knob/minmaxdoc';
-import { PTDoc } from '@/components/doc/knob/pt/ptdoc';
 import { Wireframe } from '@/components/doc/knob/pt/wireframe';
 import { ReactiveDoc } from '@/components/doc/knob/reactivedoc';
 import { ReadOnlyDoc } from '@/components/doc/knob/readonlydoc';
@@ -77,24 +74,6 @@ const KnobDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
-        {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
@@ -110,11 +89,6 @@ const KnobDemo = () => {
             id: 'pt.knob.options',
             label: 'Knob PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

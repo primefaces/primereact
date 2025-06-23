@@ -139,7 +139,7 @@ export default function GroupDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <Menu model={items} />

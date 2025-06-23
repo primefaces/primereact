@@ -11,9 +11,13 @@ export function DocComponent(props) {
     const router = useRouter();
     let header;
 
-    if (props.header.startsWith('use')) header = 'HOOK';
-    else if (props.header === 'PassThrough' || props.header === 'Configuration') header = 'OVERVIEW';
-    else header = 'FEATURES';
+    if (props.header.startsWith('use')) {
+        header = 'HOOK';
+    } else if (props.header === 'PassThrough' || props.header === 'Configuration') {
+        header = 'OVERVIEW';
+    } else {
+        header = 'FEATURES';
+    }
 
     const activateTab = (i) => {
         setTab(i);
@@ -21,8 +25,13 @@ export function DocComponent(props) {
     };
 
     useEffect(() => {
-        if (router.asPath.includes('#api')) setTab(1);
-        if (router.asPath.includes('#pt')) setTab(3);
+        if (router.asPath.includes('#api')) {
+            setTab(1);
+        }
+
+        if (router.asPath.includes('#pt')) {
+            setTab(3);
+        }
     }, [router.asPath]);
 
     return (
@@ -65,7 +74,7 @@ export function DocComponent(props) {
                         <div className="doc-main">
                             <div className="doc-intro">
                                 <h1>{props.header}</h1>
-                                <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
+                                <p dangerouslySetInnerHTML={{ __html: props.description }} />
                             </div>
                             <DocSections docs={props.componentDocs} />
                         </div>

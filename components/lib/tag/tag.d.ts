@@ -58,7 +58,7 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
      * Severity type of the tag.
      * @defaultValue null
      */
-    severity?: 'success' | 'info' | 'warning' | 'danger' | null | undefined;
+    severity?: 'success' | 'info' | 'warning' | 'danger' | 'secondary' | 'contrast' | null | undefined;
     /**
      * Whether the corners of the tag are rounded.
      * @defaultValue false
@@ -104,7 +104,7 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
 export declare class Tag extends React.Component<TagProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLSpanElement;
+    public getElement(): HTMLSpanElement | null;
 }

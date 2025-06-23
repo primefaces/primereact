@@ -40,7 +40,7 @@ const classes = {
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
     menu: 'p-menu-list p-reset',
-    content: 'p-menuitem-content',
+    content: ({ item }) => classNames('p-menuitem-content', { 'p-disabled': item.disabled }),
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     menuitem: ({ focused }) => classNames('p-menuitem', { 'p-focus': focused }),
     submenuHeader: ({ submenu }) =>

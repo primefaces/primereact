@@ -13,13 +13,13 @@ import '../styles/layout/layout.scss';
 function AppContent({ component: Component, pageProps }) {
     if (Component.getLayout) {
         return Component.getLayout(<Component {...pageProps} />);
-    } else {
-        return (
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-        );
     }
+
+    return (
+        <Layout>
+            <Component {...pageProps} />
+        </Layout>
+    );
 }
 
 export default function MyApp({ Component, pageProps }) {
@@ -52,7 +52,8 @@ export default function MyApp({ Component, pageProps }) {
     };
 
     const primereactConfig = {
-        ripple: true
+        ripple: true,
+        hideOverlaysOnDocumentScrolling: false
     };
 
     return (

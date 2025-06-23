@@ -21,7 +21,7 @@ const BulmaDemo = () => {
     <a href="https://bulma.io/" className="font-medium hover:underline text-primary">Bulma</a> is a free, open source framework that provides ready-to-use frontend components and utilities.
     `;
 
-    return <DocComponent title="Bulma - PrimeReact" header="Bulma" description={description} componentDocs={docs} hideTabMenu></DocComponent>;
+    return <DocComponent title="Bulma - PrimeReact" header="Bulma" description={description} componentDocs={docs} hideTabMenu />;
 };
 
 export default BulmaDemo;

@@ -14,7 +14,7 @@ export function HeadlessDoc(props) {
 <Dialog
     visible={visible}
     modal
-    onHide={() => setVisible(false)}
+    onHide={() => {if (!visible) return; setVisible(false); }}
     content={({ hide }) => (
         <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
             <...>
@@ -36,7 +36,7 @@ export default function HeadlessDemo() {
             <Dialog
                 visible={visible}
                 modal
-                onHide={() => setVisible(false)}
+                onHide={() => {if (!visible) return; setVisible(false); }}
                 content={({ hide }) => (
                     <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="block mx-auto">
@@ -96,7 +96,7 @@ export default function HeadlessDemo() {
             <Dialog
                 visible={visible}
                 modal
-                onHide={() => setVisible(false)}
+                onHide={() => {if (!visible) return; setVisible(false); }}
                 content={({ hide }) => (
                     <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="block mx-auto">
@@ -156,7 +156,10 @@ export default function HeadlessDemo() {
                 <Dialog
                     visible={visible}
                     modal
-                    onHide={() => setVisible(false)}
+                    onHide={() => {
+                        if (!visible) return;
+                        setVisible(false);
+                    }}
                     content={({ hide }) => (
                         <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="block mx-auto">
@@ -183,21 +186,21 @@ export default function HeadlessDemo() {
                                 <label htmlFor="username" className="text-primary-50 font-semibold">
                                     Username
                                 </label>
-                                <InputText id="username" label="Username" className="bg-white-alpha-20 border-none p-3 text-primary-50"></InputText>
+                                <InputText id="username" label="Username" className="bg-white-alpha-20 border-none p-3 text-primary-50" />
                             </div>
                             <div className="inline-flex flex-column gap-2">
                                 <label htmlFor="username" className="text-primary-50 font-semibold">
                                     Username
                                 </label>
-                                <InputText id="password" label="Password" className="bg-white-alpha-20 border-none p-3 text-primary-50" type="password"></InputText>
+                                <InputText id="password" label="Password" className="bg-white-alpha-20 border-none p-3 text-primary-50" type="password" />
                             </div>
                             <div className="flex align-items-center gap-2">
-                                <Button label="Sign-In" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
-                                <Button label="Cancel" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
+                                <Button label="Sign-In" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" />
+                                <Button label="Cancel" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" />
                             </div>
                         </div>
                     )}
-                ></Dialog>
+                />
             </div>
             <DocSectionCode code={code} />
         </>

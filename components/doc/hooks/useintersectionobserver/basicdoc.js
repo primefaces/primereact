@@ -71,7 +71,7 @@ export default function BasicDemo() {
                 <div className="border-dashed surface-border border-round w-20rem overflow-y-scroll p-3" style={{ height: '300px' }}>
                     <div className="flex align-items-center" style={{ height: '900px' }}>
                         <div ref={elementRef} className={classNames('w-full h-8rem border-round p-3 text-white font-bold bg-primary flex align-items-center justify-content-center')}>
-                            <i className="pi pi-prime text-4xl"></i>
+                            <i className="pi pi-prime text-4xl" />
                         </div>
                     </div>
                 </div>

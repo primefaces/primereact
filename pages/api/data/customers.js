@@ -8,9 +8,9 @@ function getSlice(queryObject, customers) {
         let rows = parseInt(queryObject.rows);
 
         return customers.slice(first, first + rows);
-    } else {
-        return customers;
     }
+
+    return customers;
 }
 
 function sort(queryObject, customers) {
@@ -19,11 +19,17 @@ function sort(queryObject, customers) {
         let value2 = resolveFieldData(data2, queryObject.sortField);
         let result = null;
 
-        if (value1 == null && value2 != null) result = -1;
-        else if (value1 != null && value2 == null) result = 1;
-        else if (value1 == null && value2 == null) result = 0;
-        else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2);
-        else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        if (value1 == null && value2 != null) {
+            result = -1;
+        } else if (value1 != null && value2 == null) {
+            result = 1;
+        } else if (value1 == null && value2 == null) {
+            result = 0;
+        } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+            result = value1.localeCompare(value2);
+        } else {
+            result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        }
 
         return queryObject.sortOrder * result;
     });
@@ -101,8 +107,11 @@ const filters = {
             return false;
         }
 
-        if (value.getTime && filter.getTime) return value.getTime() === filter.getTime();
-        else return removeAccents(value.toString()).toLocaleLowerCase() == removeAccents(filter.toString()).toLocaleLowerCase();
+        if (value.getTime && filter.getTime) {
+            return value.getTime() === filter.getTime();
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase() == removeAccents(filter.toString()).toLocaleLowerCase();
     },
 
     notEquals: (value, filter) => {
@@ -114,8 +123,11 @@ const filters = {
             return true;
         }
 
-        if (value.getTime && filter.getTime) return value.getTime() !== filter.getTime();
-        else return removeAccents(value.toString()).toLocaleLowerCase() != removeAccents(filter.toString()).toLocaleLowerCase();
+        if (value.getTime && filter.getTime) {
+            return value.getTime() !== filter.getTime();
+        }
+
+        return removeAccents(value.toString()).toLocaleLowerCase() != removeAccents(filter.toString()).toLocaleLowerCase();
     },
 
     in: (value, filter) => {
@@ -150,22 +162,35 @@ function filter(value, field, filterValue, filterMatchMode) {
 }
 
 function equals(obj1, obj2) {
-    if (obj1 === obj2) return true;
+    if (obj1 === obj2) {
+        return true;
+    }
 
-    if (obj1 && obj2 && typeof obj1 == 'object' && typeof obj2 == 'object') {
-        let i, length, key;
+    if (obj1 && obj2 && typeof obj1 === 'object' && typeof obj2 === 'object') {
+        let i;
+        let length;
+        let key;
 
         let keys = Object.keys(obj1);
 
         length = keys.length;
 
-        if (length !== Object.keys(obj2).length) return false;
+        if (length !== Object.keys(obj2).length) {
+            return false;
+        }
 
-        for (i = length; i-- !== 0; ) if (!Object.prototype.hasOwnProperty.call(obj2, keys[i])) return false;
+        for (i = length; i-- !== 0; ) {
+            if (!Object.prototype.hasOwnProperty.call(obj2, keys[i])) {
+                return false;
+            }
+        }
 
         for (i = length; i-- !== 0; ) {
             key = keys[i];
-            if (!equals(obj1[key], obj2[key])) return false;
+
+            if (!equals(obj1[key], obj2[key])) {
+                return false;
+            }
         }
 
         return true;
@@ -207,23 +232,23 @@ function resolveFieldData(data, field) {
     if (data && field) {
         if (field.indexOf('.') == -1) {
             return data[field];
-        } else {
-            let fields = field.split('.');
-            let value = data;
+        }
 
-            for (let i = 0, len = fields.length; i < len; ++i) {
-                if (value == null) {
-                    return null;
-                }
+        let fields = field.split('.');
+        let value = data;
 
-                value = value[fields[i]];
+        for (let i = 0, len = fields.length; i < len; ++i) {
+            if (value == null) {
+                return null;
             }
 
-            return value;
+            value = value[fields[i]];
         }
-    } else {
-        return null;
+
+        return value;
     }
+
+    return null;
 }
 
 export default async function handler(req, res) {

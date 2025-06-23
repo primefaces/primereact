@@ -30,9 +30,9 @@ export interface ListBoxPassThroughMethodOptions {
 
 /**
  * Custom passthrough(pt) options.
- * @see {@link ListboxProps.pt}
+ * @see {@link ListBoxProps.pt}
  */
-export interface ListboxPassThroughOptions {
+export interface ListBoxPassThroughOptions {
     /**
      * Uses to pass attributes to the root's DOM element.
      */
@@ -301,10 +301,10 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     filterLocale?: string | undefined;
     /**
-     * Defines how the items are filtered, valid values are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
-    filterMatchMode?: string | undefined;
+    filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
     /**
      * Placeholder text to show when filter input is empty.
      */
@@ -339,16 +339,6 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      * @defaultValue true
      */
     metaKeySelection?: boolean | undefined;
-    /**
-     * When enabled, the focused tab is activated.
-     * @defaultValue false
-     */
-    selectOnFocus?: false;
-    /**
-     * Whether to focus on the first visible or selected element.
-     * @defaultValue false
-     */
-    autoOptionFocus?: false;
     /**
      * When specified, allows selecting multiple values.
      * @defaultValue false
@@ -400,10 +390,25 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
     /**
-     * Uses to pass attributes to DOM elements inside the component.
-     * @type {ListboxPassThroughOptions}
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
      */
-    pt?: ListboxPassThroughOptions;
+    autoOptionFocus?: boolean | undefined;
+    /**
+     * When enabled, the focused option is selected.
+     * @defaultValue false
+     */
+    selectOnFocus?: boolean | undefined;
+    /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ListBoxPassThroughOptions}
+     */
+    pt?: ListBoxPassThroughOptions;
     /**
      * Used to configure passthrough(pt) options of the component.
      * @type {PassThroughOptions}
@@ -445,12 +450,12 @@ export declare class ListBox extends React.Component<ListBoxProps, any> {
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get the virtual scroller instance.
-     * @return {VirtualScroller} Virtual Scroller instance
+     * @return {VirtualScroller | null} Virtual Scroller instance
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

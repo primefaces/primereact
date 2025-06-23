@@ -9,11 +9,13 @@
  */
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import { ColumnProps } from '../column';
+import { Column, ColumnPassThroughOptions } from '../column';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
 import { PassThroughOptions } from '../passthrough';
+import { RowPassThroughOptions } from '../row/row';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -212,6 +214,19 @@ export interface TreeTablePassThroughOptions {
      */
     hiddenInput?: TreeTablePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
+     * Used to pass attributes to the Row helper components.
+     */
+    row?: RowPassThroughOptions;
+    /**
+     * Used to pass attributes to the Column helper components.
+     */
+    column?: ColumnPassThroughOptions;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
      */
@@ -396,7 +411,7 @@ interface TreeTableFilterMetaData {
     /**
      * Type of filter match.
      */
-    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
+    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
 }
 
 /**
@@ -478,7 +493,7 @@ interface TreeTablePageEvent {
     /**
      * Total number of pages.
      */
-    pageCount: number;
+    totalPages: number;
 }
 
 /**
@@ -514,7 +529,7 @@ interface TreeTableSelectionEvent {
     /**
      * Selected node key.
      */
-    value: TreeTableSelectionKeysType;
+    value: TreeTableSelectionKeysType | string;
 }
 
 /**
@@ -530,7 +545,7 @@ interface TreeTableColumnResizeEndEvent {
     /**
      * Properties of the resized column.
      */
-    column: ColumnProps;
+    column: Column;
     /**
      * Change in column width.
      */
@@ -565,7 +580,7 @@ interface TreeTableColReorderEvent {
  * Defines valid properties in TreeTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
+export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
     /**
      * Whether to show it even there is only one page.
      * @defaultValue true
@@ -676,10 +691,10 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     globalFilter?: string | undefined | null;
     /**
-     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
+     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      * @defaultValue contains
      */
-    globalFilterMatchMode?: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom' | undefined;
+    globalFilterMatchMode?: 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom' | undefined;
     /**
      * Header content of the table.
      */
@@ -843,6 +858,15 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     sortOrder?: 1 | 0 | -1 | undefined | null;
     /**
+     * Unique identifier of a stateful table to use in state storage.
+     */
+    stateKey?: string | undefined;
+    /**
+     * Defines where a stateful table keeps its state, valid values are "session" for sessionStorage, "local" for localStorage and "custom".
+     * @defaultValue session
+     */
+    stateStorage?: 'session' | 'local' | 'custom' | undefined;
+    /**
      * Whether to displays rows with alternating colors.
      * @defaultValue false
      */
@@ -877,6 +901,16 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     value?: TreeNode[] | undefined;
     /**
+     * A function to implement custom restoreState with stateStorage="custom". Need to return state object.
+     * @return {object | undefined} Returns the state object.
+     */
+    customRestoreState?(): object | undefined;
+    /**
+     * A function to implement custom saveState with stateStorage="custom".
+     * @param {object} state - The object to be stored.
+     */
+    customSaveState?(state: object): void;
+    /**
      * Callback to invoke when a column is reordered.
      * @param {TreeTableColReorderEvent} event - Custom column reorder event.
      */
@@ -908,9 +942,9 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onExpand?(event: TreeTableEvent): void;
     /**
      * Callback to invoke on filtering.
-     * @param {TreeTableFilterMeta[]} filters - Custom treetable event.
+     * @param {TreeTableFilterMeta} filters - Custom treetable event.
      */
-    onFilter?(filters: TreeTableFilterMeta[]): void;
+    onFilter?(filters: TreeTableFilterMeta): void;
     /**
      * Callback to invoke on pagination.
      * @param {TreeTablePageEvent} event - Custom page event.
@@ -946,6 +980,16 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @param {TreeTableSortEvent} event - Custom sort event.
      */
     onSort?(event: TreeTableSortEvent): void;
+    /**
+     * Callback to invoke table state is restored.
+     * @param {object} state - Table state.
+     */
+    onStateRestore?(state: object): void;
+    /**
+     * Callback to invoke table state is saved.
+     * @param {object} state - Table state.
+     */
+    onStateSave?(state: object): void;
     /**
      * Callback to invoke when a node is toggled.
      * @param {TreeTableToggleEvent} event - Custom toggle event.
@@ -998,11 +1042,11 @@ export declare class TreeTable extends React.Component<TreeTableProps, any> {
         /**
          * Filter match mode.
          */
-        mode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined
+        mode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined
     ): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

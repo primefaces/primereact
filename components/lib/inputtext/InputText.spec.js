@@ -45,7 +45,7 @@ describe('InputText', () => {
     });
     test('when input is is set for validation only', () => {
         // Arrange
-        const { container } = render(<InputText validateOnly keyfilter={`alpha`} />);
+        const { container } = render(<InputText validateOnly keyfilter={'alpha'} />);
         const input = container.getElementsByTagName('input')[0];
 
         // Act

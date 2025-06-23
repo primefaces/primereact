@@ -12,8 +12,12 @@ export const Checkbox = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = CheckboxBase.getProps(inProps, context);
+        const [focusedState, setFocusedState] = React.useState(false);
         const { ptm, cx, isUnstyled } = CheckboxBase.setMetaData({
             props,
+            state: {
+                focused: focusedState
+            },
             context: {
                 checked: props.checked === props.trueValue,
                 disabled: props.disabled
@@ -30,7 +34,7 @@ export const Checkbox = React.memo(
         };
 
         const onChange = (event) => {
-            if (props.disabled || props.readonly) {
+            if (props.disabled || props.readOnly) {
                 return;
             }
 
@@ -42,10 +46,10 @@ export const Checkbox = React.memo(
                     value: props.value,
                     checked: value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         type: 'checkbox',
@@ -56,7 +60,7 @@ export const Checkbox = React.memo(
                     }
                 };
 
-                props.onChange && props.onChange(eventData);
+                props?.onChange?.(eventData);
 
                 // do not continue if the user defined click wants to prevent
                 if (event.defaultPrevented) {
@@ -67,12 +71,14 @@ export const Checkbox = React.memo(
             }
         };
 
-        const onFocus = () => {
-            props?.onFocus?.();
+        const onFocus = (event) => {
+            setFocusedState(true);
+            props?.onFocus?.(event);
         };
 
-        const onBlur = () => {
-            props?.onBlur?.();
+        const onBlur = (event) => {
+            setFocusedState(false);
+            props?.onBlur?.(event);
         };
 
         React.useImperativeHandle(ref, () => ({
@@ -102,7 +108,7 @@ export const Checkbox = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: classNames(props.className, cx('root', { checked })),
+                className: classNames(props.className, cx('root', { checked, context })),
                 style: props.style,
                 'data-p-highlight': checked,
                 'data-p-disabled': props.disabled,
@@ -122,7 +128,6 @@ export const Checkbox = React.memo(
                     className: cx('input'),
                     name: props.name,
                     tabIndex: props.tabIndex,
-                    defaultChecked: checked,
                     onFocus: (e) => onFocus(e),
                     onBlur: (e) => onBlur(e),
                     onChange: (e) => onChange(e),
@@ -130,7 +135,7 @@ export const Checkbox = React.memo(
                     readOnly: props.readOnly,
                     required: props.required,
                     'aria-invalid': props.invalid,
-                    checked: isChecked(),
+                    checked: checked,
                     ...ariaProps
                 },
                 ptm('input')

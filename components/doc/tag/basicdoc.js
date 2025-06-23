@@ -41,7 +41,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Tag value="New"></Tag>
+                <Tag value="New" />
             </div>
             <DocSectionCode code={code} />
         </>

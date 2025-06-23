@@ -19,7 +19,7 @@ export function TemplateDoc(props) {
             return (
                 <a className="flex align-items-center p-3 cursor-pointer mb-2 gap-2 ">
                     <span className="inline-flex align-items-center justify-content-center border-circle bg-primary w-3rem h-3rem">
-                        <i className={`${item.icon} text-lg`}></i>
+                        <i className={`${item.icon} text-lg`} />
                     </span>
                     <span className="inline-flex flex-column gap-1">
                         <span className="font-medium text-lg text-900">{item.label}</span>
@@ -27,15 +27,15 @@ export function TemplateDoc(props) {
                     </span>
                 </a>
             );
-        } else {
-            return (
-                <div className="flex flex-column align-items-start gap-3">
-                    <img alt="megamenu-demo" src={item.image} className="w-full" />
-                    <span>{item.subtext}</span>
-                    <Button className="p-button p-component p-button-outlined" label={item.label} />
-                </div>
-            );
         }
+
+        return (
+            <div className="flex flex-column align-items-start gap-3">
+                <img alt="megamenu-demo" src={item.image} className="w-full" />
+                <span>{item.subtext}</span>
+                <Button className="p-button p-component p-button-outlined" label={item.label} />
+            </div>
+        );
     };
 
     const items = [
@@ -73,7 +73,7 @@ export function TemplateDoc(props) {
                 ],
                 [
                     {
-                        items: [{ image: 'https://primefaces.org/cdn/primevue/images/uikit/uikit-system.png', label: 'GET STARTED', subtext: 'Build spectacular apps in no time.', template: itemRenderer }]
+                        items: [{ image: 'https://primefaces.org/cdn/primereact/images/uikit/uikit-system.png', label: 'GET STARTED', subtext: 'Build spectacular apps in no time.', template: itemRenderer }]
                     }
                 ]
             ]
@@ -112,7 +112,7 @@ export function TemplateDoc(props) {
             <path d="M12.1762 10.1789L8.4462 9.794L10.8145 7.09967H13.5378L12.1762 10.1789Z" fill="var(--primary-color)" />
         </svg>
     );
-    const end = <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />;
+    const end = <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />;
 
     const code = {
         basic: `
@@ -193,7 +193,7 @@ export default function TemplateDemo() {
                 ],
                 [
                     {
-                        items: [{ image: 'https://primefaces.org/cdn/primevue/images/uikit/uikit-system.png', label: 'GET STARTED', subtext: 'Build spectacular apps in no time.', template: itemRenderer }]
+                        items: [{ image: 'https://primefaces.org/cdn/primereact/images/uikit/uikit-system.png', label: 'GET STARTED', subtext: 'Build spectacular apps in no time.', template: itemRenderer }]
                     }
                 ]
             ]
@@ -237,7 +237,7 @@ export default function TemplateDemo() {
             <path d="M12.1762 10.1789L8.4462 9.794L10.8145 7.09967H13.5378L12.1762 10.1789Z" fill="var(--primary-color)" />
         </svg>
     );
-    const end = <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />;
+    const end = <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />;
 
     return (
         <div className="card">
@@ -322,7 +322,7 @@ export default function TemplateDemo() {
                 ],
                 [
                     {
-                        items: [{ image: 'https://primefaces.org/cdn/primevue/images/uikit/uikit-system.png', label: 'GET STARTED', subtext: 'Build spectacular apps in no time.', template: itemRenderer }]
+                        items: [{ image: 'https://primefaces.org/cdn/primereact/images/uikit/uikit-system.png', label: 'GET STARTED', subtext: 'Build spectacular apps in no time.', template: itemRenderer }]
                     }
                 ]
             ]
@@ -361,7 +361,7 @@ export default function TemplateDemo() {
             <path d="M12.1762 10.1789L8.4462 9.794L10.8145 7.09967H13.5378L12.1762 10.1789Z" fill="var(--primary-color)" />
         </svg>
     );
-    const end = <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />;
+    const end = <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />;
 
     return (
         <div className="card">

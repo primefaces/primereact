@@ -3,14 +3,13 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/confirmpopup/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/confirmpopup/basicdoc';
 import { DeclarativeDoc } from '@/components/doc/confirmpopup/declarativedoc';
+import { HeadlessDoc } from '@/components/doc/confirmpopup/headlessdoc';
 import { ImportDoc } from '@/components/doc/confirmpopup/importdoc';
-import { PTDoc } from '@/components/doc/confirmpopup/pt/ptdoc';
 import { Wireframe } from '@/components/doc/confirmpopup/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/confirmpopup/templatedoc';
 import { StyledDoc } from '@/components/doc/confirmpopup/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/confirmpopup/theming/tailwinddoc';
 import { ConfirmPopup } from '@/components/lib/confirmpopup/ConfirmPopup';
-import { TemplateDoc } from '@/components/doc/confirmpopup/templatedoc';
-import { HeadlessDoc } from '@/components/doc/confirmpopup/headlessdoc';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -56,11 +55,6 @@ const ConfirmPopupDemo = () => {
             id: 'pt.confirmpopup.options',
             label: 'ConfirmPopup PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

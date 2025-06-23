@@ -14,7 +14,6 @@ import { ImportDoc } from '@/components/doc/treetable/importdoc';
 import { LazyLoadDoc } from '@/components/doc/treetable/lazyloaddoc';
 import { PaginatorBasicDoc } from '@/components/doc/treetable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '@/components/doc/treetable/paginator/templatedoc';
-import { PTDoc } from '@/components/doc/treetable/pt/ptdoc';
 import { Wireframe } from '@/components/doc/treetable/pt/wireframe';
 import { ReorderDoc } from '@/components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '@/components/doc/treetable/resize/expandmodedoc';
@@ -31,6 +30,7 @@ import { SingleColumnDoc } from '@/components/doc/treetable/sort/singlecolumndoc
 import { TemplateDoc } from '@/components/doc/treetable/templatedoc';
 import { StyledDoc } from '@/components/doc/treetable/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/treetable/theming/tailwinddoc';
+import { StatefulDoc } from '@/components/doc/treetable/statefuldoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -194,7 +194,11 @@ const TreeTableDemo = () => {
             label: 'Context Menu',
             component: ContextMenuDoc
         },
-
+        {
+            id: 'stateful',
+            label: 'Stateful',
+            component: StatefulDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -216,11 +220,6 @@ const TreeTableDemo = () => {
             id: 'pt.column.options',
             label: 'Column PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

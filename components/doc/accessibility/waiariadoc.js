@@ -54,14 +54,14 @@ export function WAIAriaDoc(props) {
 
             <p className="doc-section-description">
                 However the best practice is combining semantic HTML for accessibility while keeping the design for UX. This approach involves hiding a native checkbox for accessibility and using javascript events to update its state. Notice the
-                usage of <i>p-sr-only</i>
+                usage of <i>p-hidden-accessible</i>
                 that hides the elements from the user but not from the screen reader.
             </p>
             <CodeHighlight>
                 {`
 <label htmlFor="chkbox">Remember Me</label>
 <div className="fancy-checkbox" onClick="() => toggle()">
-    <input className="p-sr-only" type="checkbox" id="chkbox" onFocus="() => updateParentVisuals()" onBlur="() => updateParentVisuals()"
+    <input className="p-hidden-accessible" type="checkbox" id="chkbox" onFocus="() => updateParentVisuals()" onBlur="() => updateParentVisuals()"
         onKeyDown="(e) => e.keyCode === 32 && updateParentVisuals()">
     {checked && <i className="checked-icon"></i>}
 </div>

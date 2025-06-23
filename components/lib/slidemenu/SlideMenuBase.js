@@ -9,13 +9,9 @@ const classes = {
             'p-slidemenu-separator': levelState > 0
         }),
     root: ({ props }) =>
-        classNames(
-            'p-slidemenu p-component',
-            {
-                'p-slidemenu-overlay': props.popup
-            },
-            props.className
-        ),
+        classNames('p-slidemenu p-component', {
+            'p-slidemenu-overlay': props.popup
+        }),
     wrapper: 'p-slidemenu-wrapper',
     content: 'p-slidemenu-content',
     separator: 'p-slidemenu-separator',

@@ -10,11 +10,11 @@
  */
 import * as React from 'react';
 import { FilterMatchMode } from '../api/api';
-import { ButtonPassThroughOptions } from '../button/button';
+import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
-import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { PassThroughOptions } from '../passthrough';
+import { RadioButtonPassThroughOptions } from '../radiobutton/radiobutton';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -163,17 +163,9 @@ export interface ColumnPassThroughOptions {
      */
     sortBadge?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the checkbox wrapper's DOM element.
+     * Uses to pass attributes to the header checkbox's component.
      */
-    headerCheckboxWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the header checkbox's DOM element.
-     */
-    headerCheckbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the header checkbox icon's DOM element.
-     */
-    headerCheckboxIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    headerCheckbox?: CheckboxPassThroughOptions;
     /**
      * Uses to pass attributes to the column filter's DOM element.
      */
@@ -216,9 +208,8 @@ export interface ColumnPassThroughOptions {
     filterOperator?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Dropdown component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterOperatorDropdown?: DropdownPassThroughOptions;
+    filterOperatorDropdown?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the filter constraints' DOM element.
      */
@@ -229,45 +220,44 @@ export interface ColumnPassThroughOptions {
     filterConstraint?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Dropdown component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterMatchModeDropdown?: DropdownPassThroughOptions;
+    filterMatchModeDropdown?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the filter remove button container's DOM element.
      */
     filterRemove?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterRemoveButton?: DropdownPassThroughOptions;
+    filterRemoveButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the filter add rule's DOM element.
      */
     filterAddRule?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterAddRuleButton?: DropdownPassThroughOptions;
+    filterAddRuleButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the filter buttonbar's DOM element.
      */
     filterButtonbar?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    filterClearButton?: ButtonPassThroughOptions;
+    filterClearButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    filterApplyButton?: ButtonPassThroughOptions;
+    filterApplyButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the body cell's DOM element.
      */
     bodyCell?: ColumnPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the footer cell's DOM element.
+     */
+    footerCell?: ColumnPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the rowgroup toggler's DOM element.
      */
@@ -280,30 +270,6 @@ export interface ColumnPassThroughOptions {
      * Uses to pass attributes to the column title's DOM element.
      */
     columnTitle?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton wrapper's DOM element.
-     */
-    radiobuttonWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton's DOM element.
-     */
-    radiobutton?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton icon's DOM element.
-     */
-    radiobuttonIcon?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox wrapper's DOM element.
-     */
-    checkboxWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox's DOM element.
-     */
-    checkbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox icon's DOM element.
-     */
-    checkboxIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the rowtoggler's DOM element.
      */
@@ -345,17 +311,17 @@ export interface ColumnPassThroughOptions {
      */
     rowEditorCancelIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     * Uses to pass attributes to the row reorder icon's DOM element.
      */
-    hiddenHeaderInputWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowReorderIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     * Uses to pass attributes to the row radiobutton component.
      */
-    hiddenInputWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowRadioButton?: RadioButtonPassThroughOptions;
     /**
-     * Uses to pass attributes to the hidden input's DOM element.
+     * Uses to pass attributes to the row checkbox component.
      */
-    hiddenInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    rowCheckbox?: CheckboxPassThroughOptions;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
@@ -680,9 +646,9 @@ interface ColumnFilterMetaData {
      */
     value: any;
     /**
-     * Type of filter match.
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+    matchMode: FilterMatchMode | string;
 }
 
 interface ColumnFilterMetaDataWithConstraint {
@@ -723,9 +689,9 @@ interface ColumnFilterMatchModeChangeEvent {
      */
     field: string;
     /**
-     * Type of filter match.
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: FilterMatchMode;
+    matchMode: FilterMatchMode | string;
 }
 
 /**
@@ -818,7 +784,7 @@ interface ColumnFilterMatchModeOptions {
      */
     label: string;
     /**
-     * The match mode type
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
     value: FilterMatchMode | string;
 }
@@ -852,6 +818,12 @@ export interface ColumnProps {
      * Inline style of the body.
      */
     bodyStyle?: React.CSSProperties | undefined;
+    /**
+     * When enabled and cellEditorValidator is set, force to call cellEditorValidator
+     * before cell editor is closed. If cellEditorValidator returns false, editor stays open.
+     * @defaultValue false
+     */
+    cellEditValidateOnClose?: boolean | undefined;
     /**
      * Event to trigger the validation, possible values are "click" and "blur".
      * @defaultValue click
@@ -962,9 +934,9 @@ export interface ColumnProps {
      */
     filterHeaderStyle?: React.CSSProperties | undefined;
     /**
-     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
+     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    filterMatchMode?: FilterMatchMode | undefined;
+    filterMatchMode?: FilterMatchMode | string | undefined;
     /**
      * An array of label-value pairs to override the global match mode options.
      */

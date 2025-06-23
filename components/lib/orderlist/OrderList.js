@@ -24,6 +24,7 @@ export const OrderList = React.memo(
         const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
         const listElementRef = React.useRef(null);
+        const reorderedListElementRef = React.useRef(null);
         const metaData = {
             props,
             state: {
@@ -65,8 +66,11 @@ export const OrderList = React.memo(
             const selected = selectedIndex !== -1;
             let newSelection;
 
-            if (selected) newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
-            else newSelection = metaKey ? [...selectionState, value] : [value];
+            if (selected) {
+                newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
+            } else {
+                newSelection = metaKey ? [...selectionState, value] : [value];
+            }
 
             setSelectionState(newSelection);
         };
@@ -75,8 +79,11 @@ export const OrderList = React.memo(
             const item = visibleList[index];
             const selected = ObjectUtils.findIndexInList(item, selectionState) !== -1;
 
-            if (selected) setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
-            else setSelectionState([...selectionState, item]);
+            if (selected) {
+                setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
+            } else {
+                setSelectionState([...selectionState, item]);
+            }
         };
 
         const findCurrentFocusedIndex = (listElement) => {
@@ -286,15 +293,48 @@ export const OrderList = React.memo(
 
             setFocusedOptionIndex(_focusedOptionIndex);
 
-            scrollInView(_focusedOptionIndex);
+            scrollInViewWithFocus(_focusedOptionIndex);
         };
 
-        const scrollInView = (id) => {
+        const scrollInViewWithFocus = (id) => {
             const listElement = getListElement();
             const element = DomHandler.findSingle(listElement, `[data-pc-section="item"][id="${id}"]`);
 
             if (element) {
                 element.scrollIntoView && element.scrollIntoView({ block: 'nearest', inline: 'start' });
+            }
+        };
+
+        const scrollInView = (listContainer, direction = 1) => {
+            let selectedItems = listContainer.getElementsByClassName('p-highlight');
+
+            if (ObjectUtils.isNotEmpty(selectedItems)) {
+                DomHandler.scrollInView(listContainer, direction === -1 ? selectedItems[0] : selectedItems[selectedItems.length - 1]);
+            }
+        };
+
+        const handleScrollPosition = (listElement, direction) => {
+            if (listElement) {
+                switch (direction) {
+                    case 'up':
+                        scrollInView(listElement, -1);
+                        break;
+
+                    case 'top':
+                        listElement.scrollTop = 0;
+                        break;
+
+                    case 'down':
+                        scrollInView(listElement, 1);
+                        break;
+
+                    case 'bottom':
+                        setTimeout(() => (listElement.scrollTop = listElement.scrollHeight), 100);
+                        break;
+
+                    default:
+                        break;
+                }
             }
         };
 
@@ -350,6 +390,7 @@ export const OrderList = React.memo(
             }
 
             reorderDirection.current = event.direction;
+            reorderedListElementRef.current = getListElement();
         };
 
         const createStyle = () => {
@@ -413,7 +454,9 @@ export const OrderList = React.memo(
         }, [focusedOptionIndex]);
 
         useUpdateEffect(() => {
-            if (reorderDirection.current) {
+            if (reorderedListElementRef.current) {
+                handleScrollPosition(reorderedListElementRef.current, reorderDirection.current);
+                reorderedListElementRef.current = null;
                 reorderDirection.current = null;
             }
         });
@@ -449,34 +492,37 @@ export const OrderList = React.memo(
                 <OrderListSubList
                     ref={listElementRef}
                     hostName="OrderList"
-                    focused={focused}
+                    {...props}
                     ariaLabel={props.ariaLabel}
                     ariaLabelledBy={props.ariaLabelledBy}
-                    value={visibleList}
-                    selection={selectionState}
-                    onItemClick={onItemClick}
-                    onOptionMouseDown={onOptionMouseDown}
-                    focusedOptionId={focusedOptionId}
-                    onListKeyDown={onListKeyDown}
-                    onListFocus={onListFocus}
-                    onListBlur={onListBlur}
-                    onFilterInputChange={onFilterInputChange}
-                    itemTemplate={props.itemTemplate}
-                    filter={props.filter}
-                    onFilter={onFilter}
-                    resetFilter={resetFilter}
-                    filterTemplate={props.filterTemplate}
-                    header={props.header}
-                    parentId={attributeSelectorState}
-                    listStyle={props.listStyle}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    cx={cx}
                     dataKey={props.dataKey}
                     dragdrop={props.dragdrop}
-                    onChange={props.onChange}
-                    tabIndex={props.tabIndex}
+                    filter={props.filter}
                     filterIcon={props.filterIcon}
+                    filterPlaceholder={props.filterPlaceholder}
+                    filterTemplate={props.filterTemplate}
+                    focused={focused}
+                    focusedOptionId={focusedOptionId}
+                    header={props.header}
                     isUnstyled={isUnstyled}
+                    itemTemplate={props.itemTemplate}
+                    listStyle={props.listStyle}
+                    onChange={props.onChange}
+                    onFilter={onFilter}
+                    onFilterInputChange={onFilterInputChange}
+                    onItemClick={onItemClick}
+                    onListBlur={onListBlur}
+                    onListFocus={onListFocus}
+                    onListKeyDown={onListKeyDown}
+                    onOptionMouseDown={onOptionMouseDown}
+                    parentId={attributeSelectorState}
                     ptm={ptm}
-                    cx={cx}
+                    resetFilter={resetFilter}
+                    selection={selectionState}
+                    tabIndex={props.tabIndex}
+                    value={visibleList}
                 />
             </div>
         );

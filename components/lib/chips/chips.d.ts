@@ -184,6 +184,11 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that the element should be read-only.
      * @defaultValue false
      */
@@ -304,9 +309,9 @@ export declare class Chips extends React.Component<ChipsProps, any> {
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
      * @return {HTMLInputElement} Input element

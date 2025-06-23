@@ -47,6 +47,10 @@ const styles = `
         position: relative;
     }
 
+    .p-orderlist-item .p-ink {
+        pointer-events: none;
+    }
+
     .p-orderlist-filter {
         position: relative;
     }
@@ -100,6 +104,7 @@ export const OrderListBase = ComponentBase.extend({
         moveBottomIcon: null,
         dataKey: null,
         autoOptionFocus: true,
+        focusOnHover: true,
         breakpoint: '960px',
         onChange: null,
         itemTemplate: null,

@@ -6,7 +6,6 @@ import { CommandDoc } from '@/components/doc/panelmenu/commanddoc';
 import { ControlledDoc } from '@/components/doc/panelmenu/controlleddoc';
 import { ImportDoc } from '@/components/doc/panelmenu/importdoc';
 import { MultipleDoc } from '@/components/doc/panelmenu/multipledoc';
-import { PTDoc } from '@/components/doc/panelmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/panelmenu/pt/wireframe';
 import { RouterDoc } from '@/components/doc/panelmenu/routerdoc';
 import { TemplateDoc } from '@/components/doc/panelmenu/templatedoc';
@@ -66,11 +65,6 @@ const PanelMenuDemo = () => {
             id: 'pt.panelmenu.options',
             label: 'PanelMenu PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

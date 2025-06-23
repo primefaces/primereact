@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption, PrimeReactContext } from '../api/Api';
+import { ariaLabel, localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
@@ -14,10 +14,10 @@ export const DropdownPanel = React.memo(
         const mergeProps = useMergeProps();
         const { ptm, cx, sx } = props;
         const context = React.useContext(PrimeReactContext);
-        const virtualScrollerRef = React.useRef(null);
 
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
+        const ariaSetSize = props.visibleOptions ? props.visibleOptions.length : 0;
         const filterOptions = {
             filter: (e) => onFilterInputChange(e),
             reset: () => props.resetFilter()
@@ -51,7 +51,6 @@ export const DropdownPanel = React.memo(
         };
 
         const onFilterInputChange = (event) => {
-            props.virtualScrollerRef.current && props.virtualScrollerRef.current.scrollToIndex(0);
             props.onFilterInputChange && props.onFilterInputChange(event);
         };
 
@@ -71,33 +70,10 @@ export const DropdownPanel = React.memo(
             return null;
         };
 
-        const createGroupChildren = (optionGroup, style) => {
-            const groupChildren = props.getOptionGroupChildren(optionGroup);
-
-            return groupChildren.map((option, j) => {
-                const optionLabel = props.getOptionLabel(option);
-                const optionKey = j + '_' + props.getOptionRenderKey(option);
-                const disabled = props.isOptionDisabled(option);
-
-                return (
-                    <DropdownItem
-                        key={optionKey}
-                        index={j}
-                        focusedOptionIndex={props.focusedOptionIndex}
-                        label={optionLabel}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={props.isSelected(option)}
-                        highlightOnSelect={props.highlightOnSelect}
-                        disabled={disabled}
-                        onClick={props.onOptionClick}
-                        ptm={ptm}
-                        cx={cx}
-                        checkmark={props.checkmark}
-                    />
-                );
-            });
+        const changeFocusedItemOnHover = (event, index) => {
+            if (props.focusOnHover) {
+                props?.changeFocusedOptionIndex?.(event, index);
+            }
         };
 
         const createEmptyMessage = (emptyMessage, isFilter) => {
@@ -117,10 +93,9 @@ export const DropdownPanel = React.memo(
 
             style = { ...style, ...option.style };
 
-            if (props.optionGroupLabel) {
+            if (option.group && props.optionGroupLabel) {
                 const { optionGroupLabel } = props;
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
@@ -138,37 +113,37 @@ export const DropdownPanel = React.memo(
                 );
 
                 return (
-                    <React.Fragment key={key}>
-                        <li {...itemGroupProps}>
-                            <span {...itemGroupLabelProps}>{groupContent}</span>
-                        </li>
-                        {groupChildrenContent}
-                    </React.Fragment>
-                );
-            } else {
-                const optionLabel = props.getOptionLabel(option);
-                const optionKey = index + '_' + props.getOptionRenderKey(option);
-                const disabled = props.isOptionDisabled(option);
-
-                return (
-                    <DropdownItem
-                        key={optionKey}
-                        label={optionLabel}
-                        index={index}
-                        focusedOptionIndex={props.focusedOptionIndex}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={props.isSelected(option)}
-                        highlightOnSelect={props.highlightOnSelect}
-                        disabled={disabled}
-                        onClick={props.onOptionClick}
-                        ptm={ptm}
-                        cx={cx}
-                        checkmark={props.checkmark}
-                    />
+                    <li key={key} {...itemGroupProps}>
+                        <span {...itemGroupLabelProps}>{groupContent}</span>
+                    </li>
                 );
             }
+
+            const optionKey = props.getOptionRenderKey(option) + '_' + index;
+            const optionLabel = props.getOptionLabel(option);
+            const disabled = props.isOptionDisabled(option);
+
+            return (
+                <DropdownItem
+                    key={optionKey}
+                    label={optionLabel}
+                    index={index}
+                    focusedOptionIndex={props.focusedOptionIndex}
+                    option={option}
+                    ariaSetSize={ariaSetSize}
+                    onInputKeyDown={props.onInputKeyDown}
+                    style={style}
+                    template={props.itemTemplate}
+                    selected={props.isSelected(option)}
+                    highlightOnSelect={props.highlightOnSelect}
+                    disabled={disabled}
+                    onClick={props.onOptionClick}
+                    onMouseMove={changeFocusedItemOnHover}
+                    ptm={ptm}
+                    cx={cx}
+                    checkmark={props.checkmark}
+                />
+            );
         };
 
         const createItems = () => {
@@ -183,11 +158,11 @@ export const DropdownPanel = React.memo(
 
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
-                const ariaLabel = localeOption('clear');
+                const ariaLabelFilterClear = localeOption('clear');
                 const clearIconProps = mergeProps(
                     {
                         className: cx('filterClearIcon'),
-                        'aria-label': ariaLabel,
+                        'aria-label': ariaLabelFilterClear,
                         onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
                     },
                     getPTOptions('filterClearIcon')
@@ -223,7 +198,7 @@ export const DropdownPanel = React.memo(
                         ref: filterInputRef,
                         type: 'text',
                         autoComplete: 'off',
-                        className: cx('filterInput'),
+                        className: cx('filterInput', { context }),
                         placeholder: props.filterPlaceholder,
                         onKeyDown: props.onFilterInputKeyDown,
                         onChange: (e) => onFilterInputChange(e),
@@ -286,7 +261,8 @@ export const DropdownPanel = React.memo(
                                     ref: options.contentRef,
                                     style: options.style,
                                     className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
-                                    role: 'listbox'
+                                    role: 'listbox',
+                                    'aria-label': ariaLabel('listLabel')
                                 },
                                 getPTOptions('list')
                             );
@@ -297,30 +273,31 @@ export const DropdownPanel = React.memo(
                 };
 
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
-            } else {
-                const items = createItems();
-                const wrapperProps = mergeProps(
-                    {
-                        className: cx('wrapper'),
-                        style: sx('wrapper')
-                    },
-                    getPTOptions('wrapper')
-                );
-
-                const listProps = mergeProps(
-                    {
-                        className: cx('list'),
-                        role: 'listbox'
-                    },
-                    getPTOptions('list')
-                );
-
-                return (
-                    <div {...wrapperProps}>
-                        <ul {...listProps}>{items}</ul>
-                    </div>
-                );
             }
+
+            const items = createItems();
+            const wrapperProps = mergeProps(
+                {
+                    className: cx('wrapper'),
+                    style: sx('wrapper')
+                },
+                getPTOptions('wrapper')
+            );
+
+            const listProps = mergeProps(
+                {
+                    className: cx('list'),
+                    role: 'listbox',
+                    'aria-label': ariaLabel('listLabel')
+                },
+                getPTOptions('list')
+            );
+
+            return (
+                <div {...wrapperProps}>
+                    <ul {...listProps}>{items}</ul>
+                </div>
+            );
         };
 
         const createElement = () => {

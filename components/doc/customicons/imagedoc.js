@@ -11,7 +11,7 @@ export function ImageDoc(props) {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Any time of image can be used as an icon.</p>
+                <p>Any type of image can be used as an icon.</p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>

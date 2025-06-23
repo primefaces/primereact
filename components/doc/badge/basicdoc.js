@@ -41,7 +41,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Badge value="2"></Badge>
+                <Badge value="2" />
             </div>
             <DocSectionCode code={code} />
         </>

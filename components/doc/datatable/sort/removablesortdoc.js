@@ -112,10 +112,10 @@ export default function RemovableSortDemo() {
             <DeferredDemo onLoad={loadDemoData}>
                 <div className="card">
                     <DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
-                        <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
-                        <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
-                        <Column field="quantity" header="Quantity" sortable style={{ width: '25%' }}></Column>
+                        <Column field="code" header="Code" sortable style={{ width: '25%' }} />
+                        <Column field="name" header="Name" sortable style={{ width: '25%' }} />
+                        <Column field="category" header="Category" sortable style={{ width: '25%' }} />
+                        <Column field="quantity" header="Quantity" sortable style={{ width: '25%' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

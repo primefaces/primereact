@@ -73,6 +73,11 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
      */
     invalid?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Format definition of the keys to block.
      */
     keyfilter?: KeyFilterType;

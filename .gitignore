@@ -40,3 +40,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# next version
+/apps
+/packages

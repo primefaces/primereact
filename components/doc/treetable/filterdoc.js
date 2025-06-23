@@ -1,6 +1,8 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Column } from '@/components/lib/column/Column';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { TreeTable } from '@/components/lib/treetable/TreeTable';
@@ -23,10 +25,10 @@ export function FilterDoc(props) {
     const getHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <div className="p-input-icon-left">
-                    <i className="pi pi-search"></i>
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
-                </div>
+                </IconField>
             </div>
         );
     };
@@ -48,6 +50,8 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { SelectButton } from 'primereact/selectbutton';
 import { NodeService } from './service/NodeService';
 
@@ -67,10 +71,10 @@ export default function FilterDemo() {
     const getHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <div className="p-input-icon-left">
-                    <i className="pi pi-search"></i>
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
-                </div>
+                </IconField>
             </div>
         );
     };
@@ -96,6 +100,8 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { SelectButton } from 'primereact/selectbutton';
 import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
@@ -121,10 +127,10 @@ export default function FilterDemo() {
     const getHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <div className="p-input-icon-left">
-                    <i className="pi pi-search"></i>
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
-                </div>
+                </IconField>
             </div>
         );
     };
@@ -148,26 +154,61 @@ export default function FilterDemo() {
         data: `
 {
     key: '0',
-    label: 'Documents',
-    data: 'Documents Folder',
-    icon: 'pi pi-fw pi-inbox',
+    data: {
+        name: 'Applications',
+        size: '100kb',
+        type: 'Folder'
+    },
     children: [
         {
             key: '0-0',
-            label: 'Work',
-            data: 'Work Folder',
-            icon: 'pi pi-fw pi-cog',
+            data: {
+                name: 'React',
+                size: '25kb',
+                type: 'Folder'
+            },
             children: [
-                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+                {
+                    key: '0-0-0',
+                    data: {
+                        name: 'react.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-1',
+                    data: {
+                        name: 'native.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-2',
+                    data: {
+                        name: 'mobile.app',
+                        size: '5kb',
+                        type: 'Application'
+                    }
+                }
             ]
         },
         {
             key: '0-1',
-            label: 'Home',
-            data: 'Home Folder',
-            icon: 'pi pi-fw pi-home',
-            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+            data: {
+                name: 'editor.app',
+                size: '25kb',
+                type: 'Application'
+            }
+        },
+        {
+            key: '0-2',
+            data: {
+                name: 'settings.app',
+                size: '50kb',
+                type: 'Application'
+            }
         }
     ]
 },
@@ -189,9 +230,9 @@ export default function FilterDemo() {
                     <SelectButton value={filterMode} onChange={(e) => setFilterMode(e.value)} options={filterOptions} />
                 </div>
                 <TreeTable value={nodes} globalFilter={globalFilter} header={header} filterMode={filterMode} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
-                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
-                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name" />
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size" />
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type" />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

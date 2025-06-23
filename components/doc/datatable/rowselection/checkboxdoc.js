@@ -143,11 +143,11 @@ export default function CheckboxRowSelectionDemo() {
                         <label htmlFor="input-rowclick">Row Click</label>
                     </div>
                     <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
-                        <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                        <Column field="code" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="category" header="Category"></Column>
-                        <Column field="quantity" header="Quantity"></Column>
+                        <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} />
+                        <Column field="code" header="Code" />
+                        <Column field="name" header="Name" />
+                        <Column field="category" header="Category" />
+                        <Column field="quantity" header="Quantity" />
                     </DataTable>
                 </div>
             </DeferredDemo>

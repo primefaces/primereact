@@ -281,14 +281,14 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 export declare class Panel extends React.Component<PanelProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get content of the panel.
-     * @return {HTMLDivElement} Content element
+     * @return {HTMLDivElement | null} Content element
      */
-    public getContent(): HTMLDivElement;
+    public getContent(): HTMLDivElement | null;
     /**
      * Toggle the panel if toggleable.
      * @param {React.SyntheticEvent | undefined} event - Browser event.

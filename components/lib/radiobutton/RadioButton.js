@@ -26,7 +26,7 @@ export const RadioButton = React.memo(
         };
 
         const onChange = (event) => {
-            if (props.disabled || props.readonly) {
+            if (props.disabled || props.readOnly) {
                 return;
             }
 
@@ -43,10 +43,10 @@ export const RadioButton = React.memo(
                     value: props.value,
                     checked: value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         type: 'radio',
@@ -57,15 +57,13 @@ export const RadioButton = React.memo(
                     }
                 };
 
-                props?.onChange?.(eventData);
-
-                // do not continue if the user defined click wants to prevent
-                if (event.defaultPrevented) {
-                    return;
-                }
-
                 if (isInputToggled || isRadioToggled) {
                     props?.onChange?.(eventData);
+
+                    // do not continue if the user defined click wants to prevent
+                    if (event.defaultPrevented) {
+                        return;
+                    }
 
                     if (isRadioToggled) {
                         inputRef.current.checked = value;
@@ -114,13 +112,17 @@ export const RadioButton = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 'data-p-checked': props.checked
             },
-            RadioButtonBase.getOtherProps(props),
+            otherProps,
             ptm('root')
         );
+
+        delete rootProps.input;
+        delete rootProps.box;
+        delete rootProps.icon;
 
         const createInputElement = () => {
             const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
@@ -134,12 +136,13 @@ export const RadioButton = React.memo(
                     onBlur: onBlur,
                     onChange: onChange,
                     disabled: props.disabled,
-                    readonly: props.readonly,
+                    readOnly: props.readOnly,
                     required: props.required,
                     tabIndex: props.tabIndex,
                     className: cx('input'),
                     ...ariaProps
                 },
+                inProps.input,
                 ptm('input')
             );
 
@@ -151,6 +154,7 @@ export const RadioButton = React.memo(
                 {
                     className: cx('box')
                 },
+                inProps.box,
                 ptm('box')
             );
 
@@ -158,12 +162,13 @@ export const RadioButton = React.memo(
                 {
                     className: cx('icon')
                 },
+                inProps.icon,
                 ptm('icon')
             );
 
             return (
                 <div {...boxProps}>
-                    <div {...iconProps}></div>
+                    <div {...iconProps} />
                 </div>
             );
         };

@@ -81,7 +81,7 @@ export default function TargetDemo() {
                     data-pr-my="left center-2"
                     style={{ fontSize: '2rem', cursor: 'pointer' }}
                 >
-                    <Badge severity="danger"></Badge>
+                    <Badge severity="danger" />
                 </i>
             </div>
             <DocSectionCode code={code} />

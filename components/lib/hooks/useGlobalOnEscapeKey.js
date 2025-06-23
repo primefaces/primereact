@@ -14,7 +14,8 @@ export const ESC_KEY_HANDLING_PRIORITIES = {
     PASSWORD: 700,
     CASCADE_SELECT: 800,
     SPLIT_BUTTON: 900,
-    SPEED_DIAL: 1000
+    SPEED_DIAL: 1000,
+    TOOLTIP: 1200
 };
 
 /**
@@ -42,7 +43,9 @@ const globalEscKeyHandlingLogic = {
      */
     onGlobalKeyDown(event) {
         // Do nothing if not an "esc" key is pressed:
-        if (event.code !== 'Escape') return;
+        if (event.code !== 'Escape') {
+            return;
+        }
 
         const escKeyListeners = globalEscKeyHandlingLogic.escKeyListeners;
         const maxPrimaryPriority = Math.max(...escKeyListeners.keys());
@@ -101,7 +104,9 @@ const globalEscKeyHandlingLogic = {
 
 export const useGlobalOnEscapeKey = ({ callback, when, priority }) => {
     useEffect(() => {
-        if (!when) return;
+        if (!when) {
+            return;
+        }
 
         return globalEscKeyHandlingLogic.addListener(callback, priority);
     }, [callback, when, priority]);

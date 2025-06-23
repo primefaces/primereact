@@ -115,16 +115,7 @@ export default function CheckboxDemo() {
             </DocSectionText>
             <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card flex justify-content-center">
-                <TreeSelect
-                    value={selectedNodeKeys}
-                    onChange={(e) => setSelectedNodeKeys(e.value)}
-                    options={nodes}
-                    metaKeySelection={false}
-                    className="md:w-20rem w-full"
-                    selectionMode="checkbox"
-                    display="chip"
-                    placeholder="Select Items"
-                ></TreeSelect>
+                <TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} metaKeySelection={false} className="md:w-20rem w-full" selectionMode="checkbox" display="chip" placeholder="Select Items" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

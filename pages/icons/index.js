@@ -7,6 +7,7 @@ import { ImportDoc } from '@/components/doc/icons/importdoc';
 import { ListDoc } from '@/components/doc/icons/listdoc';
 import { SizeDoc } from '@/components/doc/icons/sizedoc';
 import { SpinDoc } from '@/components/doc/icons/spindoc';
+import { FigmaDoc } from '@/components/doc/icons/figmadoc';
 
 const IconsDoc = () => {
     const docs = [
@@ -19,6 +20,11 @@ const IconsDoc = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'figma',
+            label: 'Figma',
+            component: FigmaDoc
         },
         {
             id: 'basic',

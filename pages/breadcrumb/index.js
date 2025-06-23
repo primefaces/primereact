@@ -1,14 +1,13 @@
 import { AccessibilityDoc } from '@/components/doc/breadcrumb/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/breadcrumb/basicdoc';
 import { ImportDoc } from '@/components/doc/breadcrumb/importdoc';
-import { PTDoc } from '@/components/doc/breadcrumb/pt/ptdoc';
 import { Wireframe } from '@/components/doc/breadcrumb/pt/wireframe';
+import { RouterDoc } from '@/components/doc/breadcrumb/routerdoc';
 import { TemplateDoc } from '@/components/doc/breadcrumb/templatedoc';
 import { StyledDoc } from '@/components/doc/breadcrumb/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/breadcrumb/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
-import { RouterDoc } from '@/components/doc/breadcrumb/routerdoc';
 
 const BreadCrumbDemo = () => {
     const docs = [
@@ -49,11 +48,6 @@ const BreadCrumbDemo = () => {
             id: 'pt.breadcrumb.options',
             label: 'BreadCrumb PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

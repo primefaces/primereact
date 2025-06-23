@@ -145,10 +145,10 @@ export default function DisabledRowSelectionDemo() {
                         rowClassName={rowClassName}
                         tableStyle={{ minWidth: '50rem' }}
                     >
-                        <Column field="code" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="category" header="Category"></Column>
-                        <Column field="quantity" header="Quantity"></Column>
+                        <Column field="code" header="Code" />
+                        <Column field="name" header="Name" />
+                        <Column field="category" header="Category" />
+                        <Column field="quantity" header="Quantity" />
                     </DataTable>
                 </div>
             </DeferredDemo>

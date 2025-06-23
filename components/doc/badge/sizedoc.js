@@ -47,9 +47,9 @@ export default function SizeDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center align-items-end gap-2">
-                <Badge value="6" size="xlarge" severity="success"></Badge>
-                <Badge value="4" size="large" severity="warning"></Badge>
-                <Badge value="2"></Badge>
+                <Badge value="6" size="xlarge" severity="success" />
+                <Badge value="4" size="large" severity="warning" />
+                <Badge value="2" />
             </div>
             <DocSectionCode code={code} />
         </>

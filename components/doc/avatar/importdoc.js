@@ -11,7 +11,7 @@ import { AvatarGroup } from 'primereact/avatargroup';   //Optional for grouping
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

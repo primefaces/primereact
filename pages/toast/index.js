@@ -6,7 +6,6 @@ import { HeadlessDoc } from '@/components/doc/toast/headlessdoc';
 import { ImportDoc } from '@/components/doc/toast/importdoc';
 import { MultipleDoc } from '@/components/doc/toast/multipledoc';
 import { PositionDoc } from '@/components/doc/toast/positiondoc';
-import { PTDoc } from '@/components/doc/toast/pt/ptdoc';
 import { Wireframe } from '@/components/doc/toast/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/toast/severitydoc';
 import { StickyDoc } from '@/components/doc/toast/stickydoc';
@@ -72,11 +71,6 @@ const ToastDemo = () => {
             id: 'pt.toast.options',
             label: 'Toast PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

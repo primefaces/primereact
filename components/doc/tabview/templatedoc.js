@@ -8,7 +8,7 @@ export function TemplateDoc(props) {
     const tab1HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Amy Elsner</span>
             </div>
         );
@@ -17,7 +17,7 @@ export function TemplateDoc(props) {
     const tab2HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Onyama Limba</span>
             </div>
         );
@@ -26,7 +26,7 @@ export function TemplateDoc(props) {
     const tab3HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                 <Badge value="2" />
             </div>
@@ -73,7 +73,7 @@ export default function TemplateDemo() {
     const tab1HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Amy Elsner</span>
             </div>
         );
@@ -82,7 +82,7 @@ export default function TemplateDemo() {
     const tab2HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Onyama Limba</span>
             </div>
         )
@@ -91,7 +91,7 @@ export default function TemplateDemo() {
     const tab3HeaderTemplate = (options) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                 <Badge value="2" />
             </div>
@@ -141,7 +141,7 @@ export default function TemplateDemo() {
     const tab1HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Amy Elsner</span>
             </div>
         );
@@ -150,7 +150,7 @@ export default function TemplateDemo() {
     const tab2HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Onyama Limba</span>
             </div>
         )
@@ -159,7 +159,7 @@ export default function TemplateDemo() {
     const tab3HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
             <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                 <Badge value="2" />
             </div>

@@ -27,8 +27,11 @@ export function ContextMenuDoc(props) {
             command: () => {
                 let _expandedKeys = { ...expandedKeys };
 
-                if (_expandedKeys[selectedNodeKey]) delete _expandedKeys[selectedNodeKey];
-                else _expandedKeys[selectedNodeKey] = true;
+                if (_expandedKeys[selectedNodeKey]) {
+                    delete _expandedKeys[selectedNodeKey];
+                } else {
+                    _expandedKeys[selectedNodeKey] = true;
+                }
 
                 setExpandedKeys(_expandedKeys);
             }
@@ -210,9 +213,9 @@ export default function ContextMenuDemo() {
                     onContextMenu={(event) => cm.current.show(event.originalEvent)}
                     tableStyle={{ minWidth: '50rem' }}
                 >
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
+                    <Column field="name" header="Name" expander />
+                    <Column field="size" header="Size" />
+                    <Column field="type" header="Type" />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

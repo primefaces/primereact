@@ -55,7 +55,7 @@ export declare class DomHandler {
     static flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
     static findCollisionPosition(position: string): void;
     static getParents(el: HTMLElement, parents?: any[]): any[];
-    static getScrollableParents(el: HTMLElement, hideOverlaysOnDocumentScrolling?: boolean): any[];
+    static getScrollableParents(el: HTMLElement): any[];
     static getHiddenElementOuterHeight(el: HTMLElement): number;
     static getHiddenElementOuterWidth(el: HTMLElement): number;
     static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number };
@@ -70,6 +70,7 @@ export declare class DomHandler {
     static appendChild(el: HTMLElement, target: HTMLElement): void;
     static removeChild(el: HTMLElement, target: HTMLElement): void;
     static isElement(obj: any): boolean;
+    static isDocument(obj: any): boolean;
     static scrollInView(container: HTMLElement, item: HTMLElement): void;
     static clearSelection(): void;
     static calculateScrollbarWidth(el: HTMLElement): number;
@@ -87,7 +88,7 @@ export declare class DomHandler {
     static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any };
     static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
     static isClickable(el: HTMLElement): boolean;
-    static applyStyle(el: HTMLElement, style: any): void;
+    static applyStyle(el: HTMLElement, style: React.CSSProperties | string): void;
     static exportCSV(csv: any, filename: string): void;
     static saveAs(file: { name: string; url: any }): boolean;
     static createInlineStyle(nonce?: string, styleContainer?: ShadowRoot | HTMLElement): HTMLStyleElement;
@@ -146,9 +147,13 @@ export declare class ObjectUtils {
     static isString(value: any): boolean;
     static isPrintableCharacter(char: string): boolean;
     static isLetter(char: string): boolean;
+    static isScalar(value: any): boolean;
     static findLast(value: any[], callback: () => any): any;
     static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
+    static getNestedValue(obj: object, path: string): any;
+    static absoluteCompare(objA: object, objB: object, maxDepth?: number, currentDepth?: number): boolean;
+    static selectiveCompare(a: object, b: object, keysToCompare?: string[], maxDepth?: number): boolean;
 }
 
 /**
@@ -177,20 +182,23 @@ export declare namespace ZIndexUtils {
 
 /**
  * Icon options passed to any icon.
- * ComponentProps are props from the owning component.
- * AdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example.
+ * @template ComponentProps Props from the owning component.
+ * @template AdditionalProps Any custom properties of an icon like SortIcon of the Datatable for example.
  */
-export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
+export type IconOptions<ComponentProps, AdditionalProps = NonNullable<unknown>> = AdditionalProps & {
     /**
-     * Icon specific properties.
+     * Icon specific properties. Size property allows FontAwesome to work properly.
+     * @type {(React.HTMLProps<unknown> & { size?: string }) | (React.SVGProps<unknown> & { size?: string })}
      */
-    iconProps: React.HTMLProps<any> | React.SVGProps<any>;
+    iconProps: (React.HTMLProps<unknown> & { size?: string }) | (React.SVGProps<unknown> & { size?: string });
     /**
      * The element representing the icon.
+     * @type {React.ReactNode}
      */
     element: React.ReactNode;
     /**
      * Properties of the owning component.
+     * @type {ComponentProps}
      */
     props?: ComponentProps;
     [key: string]: any;

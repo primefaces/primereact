@@ -15,6 +15,10 @@ gulp.task('build-themes', function () {
     );
 });
 
+gulp.task('copy-fonts', function () {
+    return gulp.src(['public/themes/**/fonts/*'], { encoding: false }).pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources/themes'));
+});
+
 /** @deprecated */
 gulp.task('images', function () {
     return gulp

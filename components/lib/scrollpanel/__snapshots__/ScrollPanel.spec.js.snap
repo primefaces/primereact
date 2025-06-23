@@ -3,7 +3,7 @@
 exports[`ScrollPanel ScrollPanel full settings 1`] = `
 <div>
   <div
-    class="p-scrollpanel p-component jest"
+    class="jest p-scrollpanel p-component"
     data-pc-name="scrollpanel"
     data-pc-section="root"
     id="scrollpanel"
@@ -49,7 +49,7 @@ exports[`ScrollPanel ScrollPanel full settings 1`] = `
 exports[`ScrollPanel refresh method 1`] = `
 <div>
   <div
-    class="p-scrollpanel p-component jest"
+    class="jest p-scrollpanel p-component"
     data-pc-name="scrollpanel"
     data-pc-section="root"
     id="scrollpanel"

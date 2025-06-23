@@ -7,12 +7,12 @@ export function ValidationDoc(props) {
     const code = {
         basic: `
 <div className="flex flex-wrap align-items-center mb-3 gap-2">
-    <label htmlFor="username" className="p-sr-only">Username</label>
+    <label htmlFor="username" className="p-hidden-accessible">Username</label>
     <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
     <Message severity="error" text="Username is required" />
 </div>
 <div className="flex flex-wrap align-items-center gap-2">
-    <label htmlFor="email" className="p-sr-only">Email</label>
+    <label htmlFor="email" className="p-hidden-accessible">Email</label>
     <InputText id="email" placeholder="Email" className="p-invalid mr-2" />
     <Message severity="error" />
 </div>
@@ -26,12 +26,12 @@ export default function ValidationDemo() {
     return (
         <div className="card">
             <div className="flex flex-wrap align-items-center mb-3 gap-2">
-                <label htmlFor="username" className="p-sr-only">Username</label>
+                <label htmlFor="username" className="p-hidden-accessible">Username</label>
                 <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
                 <Message severity="error" text="Username is required" />
             </div>
             <div className="flex flex-wrap align-items-center gap-2">
-                <label htmlFor="email" className="p-sr-only">Email</label>
+                <label htmlFor="email" className="p-hidden-accessible">Email</label>
                 <InputText id="email" placeholder="Email" className="p-invalid mr-2" />
                 <Message severity="error" />
             </div>
@@ -48,12 +48,12 @@ export default function ValidationDemo() {
     return (
         <div className="card">
             <div className="flex flex-wrap align-items-center mb-3 gap-2">
-                <label htmlFor="username" className="p-sr-only">Username</label>
+                <label htmlFor="username" className="p-hidden-accessible">Username</label>
                 <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
                 <Message severity="error" text="Username is required" />
             </div>
             <div className="flex flex-wrap align-items-center gap-2">
-                <label htmlFor="email" className="p-sr-only">Email</label>
+                <label htmlFor="email" className="p-hidden-accessible">Email</label>
                 <InputText id="email" placeholder="Email" className="p-invalid mr-2" />
                 <Message severity="error" />
             </div>
@@ -70,14 +70,14 @@ export default function ValidationDemo() {
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-wrap align-items-center mb-3 gap-2">
-                    <label htmlFor="username" className="p-sr-only">
+                    <label htmlFor="username" className="p-hidden-accessible">
                         Username
                     </label>
                     <InputText id="username" placeholder="Username" className="p-invalid mr-2" />
                     <Message severity="error" text="Username is required" />
                 </div>
                 <div className="flex flex-wrap align-items-center gap-2">
-                    <label htmlFor="email" className="p-sr-only">
+                    <label htmlFor="email" className="p-hidden-accessible">
                         Email
                     </label>
                     <InputText id="email" placeholder="Email" className="p-invalid mr-2" />

@@ -78,7 +78,7 @@ export const Button = React.memo(
                 return <span {...labelProps}>{props.label}</span>;
             }
 
-            return !props.children && !props.label && <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
+            return !props.children && !props.label && <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />;
         };
 
         const createBadge = () => {
@@ -116,6 +116,7 @@ export const Button = React.memo(
             {
                 ref: elementRef,
                 'aria-label': defaultAriaLabel,
+                'data-pc-autofocus': props.autoFocus,
                 className: classNames(props.className, cx('root', { size, disabled })),
                 disabled: disabled
             },

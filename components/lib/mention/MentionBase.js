@@ -10,14 +10,10 @@ const classes = {
     panel: ({ props }) => classNames('p-mention-panel p-component', props.panelClassName),
     input: ({ props }) => classNames('p-mention-input', props.inputClassName),
     root: ({ props, isFilled, focusedState }) =>
-        classNames(
-            'p-mention p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        ),
+        classNames('p-mention p-component p-inputwrapper', {
+            'p-inputwrapper-filled': isFilled,
+            'p-inputwrapper-focus': focusedState
+        }),
     transition: 'p-connected-overlay'
 };
 
@@ -68,6 +64,7 @@ export const MentionBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Mention',
         autoHighlight: true,
+        autoResize: false,
         className: null,
         delay: 0,
         field: null,
@@ -79,13 +76,6 @@ export const MentionBase = ComponentBase.extend({
         inputRef: null,
         inputStyle: null,
         itemTemplate: null,
-        panelClassName: null,
-        panelStyle: null,
-        scrollHeight: '200px',
-        style: null,
-        suggestions: null,
-        transitionOptions: null,
-        trigger: '@',
         onBlur: null,
         onChange: null,
         onFocus: null,
@@ -94,6 +84,14 @@ export const MentionBase = ComponentBase.extend({
         onSearch: null,
         onSelect: null,
         onShow: null,
+        panelClassName: null,
+        panelStyle: null,
+        scrollHeight: '200px',
+        style: null,
+        suggestions: null,
+        transitionOptions: null,
+        trigger: '@',
+        variant: null,
         children: undefined
     },
     css: {

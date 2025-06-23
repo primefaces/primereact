@@ -74,13 +74,9 @@ export interface TreePassThroughOptions {
      */
     togglerIcon?: TreePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Uses to pass attributes to the checkbox container's DOM element.
+     * Uses to pass attributes to the node checkbox's DOM element.
      */
-    checkboxContainer?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox's DOM element.
-     */
-    checkbox?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    nodeCheckbox?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the checkbox icon's DOM element.
      */
@@ -149,6 +145,11 @@ export interface TreeContext {
      * @defaultValue false
      */
     checked: boolean;
+    /**
+     * Whether the node is a leaf node.
+     * @defaultValue false
+     */
+    leaf: boolean;
 }
 
 /**
@@ -547,11 +548,16 @@ export interface TreeProps {
      */
     filter?: boolean | undefined;
     /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
      * Icon of the filter.
      */
     filterIcon?: IconType<TreeProps> | string;
     /**
-     * When filtering is enabled, the value of input field.
+     * When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.
      */
     filterValue?: string | undefined;
     /**
@@ -696,7 +702,7 @@ export declare class Tree extends React.Component<TreeProps, any> {
     public filter<T>(value: T): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

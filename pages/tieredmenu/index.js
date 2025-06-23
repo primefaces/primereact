@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/tieredmenu/basicdoc';
 import { CommandDoc } from '@/components/doc/tieredmenu/commanddoc';
 import { ImportDoc } from '@/components/doc/tieredmenu/importdoc';
 import { PopupDoc } from '@/components/doc/tieredmenu/popupdoc';
-import { PTDoc } from '@/components/doc/tieredmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tieredmenu/pt/wireframe';
 import { RouterDoc } from '@/components/doc/tieredmenu/routerdoc';
 import { TemplateDoc } from '@/components/doc/tieredmenu/templatedoc';
@@ -60,11 +59,6 @@ const TieredMenuDemo = () => {
             id: 'pt.tieredmenu.options',
             label: 'TieredMenu PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

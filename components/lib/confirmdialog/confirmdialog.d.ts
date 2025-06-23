@@ -9,7 +9,6 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { DialogProps } from '../dialog';
 import { PassThroughOptions } from '../passthrough';
@@ -73,14 +72,12 @@ export interface ConfirmDialogPassThroughOptions {
     footer?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    rejectButton?: ButtonPassThroughOptions;
+    rejectButton?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    acceptButton?: ButtonPassThroughOptions;
+    acceptButton?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
@@ -162,6 +159,10 @@ interface ConfirmDialogOptions {
  * @group Properties
  */
 export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer' | 'pt'> {
+    /**
+     * Optional key to match the key of the confirmation, useful to target a specific confirm dialog instance.
+     */
+    group?: string | undefined;
     /**
      * Unique tag key used to separate the confirmDialog components in the page.
      */

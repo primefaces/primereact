@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
 
 export const Chip = React.memo(
@@ -13,6 +13,7 @@ export const Chip = React.memo(
         const props = ChipBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
+        const [idState, setIdState] = React.useState(props.id);
         const { ptm, cx, isUnstyled } = ChipBase.setMetaData({
             props
         });
@@ -20,19 +21,24 @@ export const Chip = React.memo(
         useHandleStyle(ChipBase.css.styles, isUnstyled, { name: 'chip' });
 
         const onKeyDown = (event) => {
-            if (event.code === 'Enter' || event.code === 'Backspace') {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Backspace') {
                 close(event);
             }
         };
 
         const close = (event) => {
-            setVisibleState(false);
+            let result = true;
 
             if (props.onRemove) {
-                props.onRemove({
+                event.stopPropagation();
+                result = props.onRemove({
                     originalEvent: event,
                     value: props.label || props.image || props.icon
                 });
+            }
+
+            if (result !== false) {
+                setVisibleState(false);
             }
         };
 
@@ -41,7 +47,6 @@ export const Chip = React.memo(
 
             const removeIconProps = mergeProps(
                 {
-                    key: 'removeIcon',
                     role: 'button',
                     tabIndex: 0,
                     className: cx('removeIcon'),
@@ -51,23 +56,21 @@ export const Chip = React.memo(
                 ptm('removeIcon')
             );
 
-            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} />;
+            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} key={`${idState}-removeIcon`} />;
 
             if (props.image) {
                 const imageProps = mergeProps(
                     {
-                        key: 'image',
                         src: props.image,
                         onError: props.onImageError
                     },
                     ptm('image')
                 );
 
-                content.push(<img alt={props.imageAlt} {...imageProps}></img>);
+                content.push(<img alt={props.imageAlt} {...imageProps} key={`${idState}-image`} />);
             } else if (props.icon) {
                 const chipIconProps = mergeProps(
                     {
-                        key: 'icon',
                         className: cx('icon')
                     },
                     ptm('icon')
@@ -79,13 +82,16 @@ export const Chip = React.memo(
             if (props.label) {
                 const labelProps = mergeProps(
                     {
-                        key: 'label',
                         className: cx('label')
                     },
                     ptm('label')
                 );
 
-                content.push(<span {...labelProps}>{props.label}</span>);
+                content.push(
+                    <span {...labelProps} key={UniqueComponentId('label')}>
+                        {props.label}
+                    </span>
+                );
             }
 
             if (props.removable) {
@@ -109,13 +115,29 @@ export const Chip = React.memo(
                 ptm('root')
             );
 
-            return <div {...rootProps}>{content}</div>;
+            return (
+                <div {...rootProps} key={UniqueComponentId('chip')}>
+                    {content}
+                </div>
+            );
         };
 
         React.useImperativeHandle(ref, () => ({
             props,
+            getVisible: () => visibleState,
+            setVisible: (visible) => setVisibleState(visible),
             getElement: () => elementRef.current
         }));
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
+
+        if (!idState) {
+            return null;
+        }
 
         return visibleState && createElement();
     })

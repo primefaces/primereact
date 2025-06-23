@@ -5,7 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMatchMedia, useMergeProps, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
 
@@ -26,14 +26,16 @@ export const TieredMenu = React.memo(
         const [visibleItems, setVisibleItems] = React.useState([]);
         const [focusTrigger, setFocusTrigger] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm, cx, sx, isUnstyled } = TieredMenuBase.setMetaData({
+        const metaData = {
             props,
+            ...props.__parentMetadata,
             state: {
                 id: idState,
                 visible: visibleState,
                 attributeSelector: attributeSelectorState
             }
-        });
+        };
+        const { ptm, cx, sx, isUnstyled } = TieredMenuBase.setMetaData(metaData);
 
         useHandleStyle(TieredMenuBase.css.styles, isUnstyled, { name: 'tieredmenu' });
 
@@ -153,6 +155,7 @@ export const TieredMenu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 
@@ -185,7 +188,9 @@ export const TieredMenu = React.memo(
         const onItemChange = (event) => {
             const { processedItem, isFocus } = event;
 
-            if (ObjectUtils.isEmpty(processedItem)) return;
+            if (ObjectUtils.isEmpty(processedItem)) {
+                return;
+            }
 
             const { index, key, level, parentKey, items } = processedItem;
             const grouped = ObjectUtils.isNotEmpty(items);
@@ -232,17 +237,15 @@ export const TieredMenu = React.memo(
                         setDirty(true);
                     }
                 }, 0);
+            } else if (grouped) {
+                DomHandler.focus(menuElement);
+                onItemChange(event);
             } else {
-                if (grouped) {
-                    DomHandler.focus(menuElement);
-                    onItemChange(event);
-                } else {
-                    const rootProcessedItem = root ? processedItem : activeItemPath.find((p) => p.parentKey === '');
-                    const rootProcessedItemIndex = rootProcessedItem ? rootProcessedItem.index : -1;
+                const rootProcessedItem = root ? processedItem : activeItemPath.find((p) => p.parentKey === '');
+                const rootProcessedItemIndex = rootProcessedItem ? rootProcessedItem.index : -1;
 
-                    hide(originalEvent, true);
-                    setFocusedItemInfo({ index: rootProcessedItemIndex, parentKey: rootProcessedItem ? rootProcessedItem.parentKey : '' });
-                }
+                hide(originalEvent, true);
+                setFocusedItemInfo({ index: rootProcessedItemIndex, parentKey: rootProcessedItem ? rootProcessedItem.parentKey : '' });
             }
         };
 
@@ -512,7 +515,7 @@ export const TieredMenu = React.memo(
                         parentKey
                     };
 
-                    newItem['items'] = createProcessedItems(item.items, level + 1, newItem, key);
+                    newItem.items = createProcessedItems(item.items, level + 1, newItem, key);
                     processedItems.push(newItem);
                 });
 
@@ -570,7 +573,7 @@ export const TieredMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', containerRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', containerRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             }
 
             DomHandler.addStyles(containerRef.current, { position: 'absolute', top: '0', left: '0' });
@@ -681,7 +684,7 @@ export const TieredMenu = React.memo(
                 {
                     ref: containerRef,
                     id: props.id,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style,
                     onClick: onPanelClick
                 },

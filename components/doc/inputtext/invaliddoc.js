@@ -5,7 +5,7 @@ import { InputText } from '@/components/lib/inputtext/InputText';
 export function InvalidDoc(props) {
     const code = {
         basic: `
-<InputText className="p-invalid" />
+<InputText invalid />
         `,
         javascript: `
 import React from 'react'; 
@@ -14,7 +14,7 @@ import { InputText } from "primereact/inputtext";
 export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <InputText className="p-invalid" />
+            <InputText invalid />
         </div>
     )
 }
@@ -26,7 +26,7 @@ import { InputText } from "primereact/inputtext";
 export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <InputText className="p-invalid" />
+            <InputText invalid />
         </div>
     )
 }
@@ -37,11 +37,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputText className="p-invalid" />
+                <InputText invalid />
             </div>
             <DocSectionCode code={code} />
         </>

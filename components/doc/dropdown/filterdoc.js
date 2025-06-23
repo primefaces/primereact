@@ -89,7 +89,7 @@ export default function FilterDemo() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-                filter valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+                filter filterDelay={400} valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
         </div>    
     )
 }
@@ -143,7 +143,7 @@ export default function FilterDemo() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCountry} onChange={(e: DropdownChangeEvent) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-                filter valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+                filter filterDelay={400} valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
         </div>    
     )
 }
@@ -165,6 +165,7 @@ export default function FilterDemo() {
                     optionLabel="name"
                     placeholder="Select a Country"
                     filter
+                    filterDelay={400}
                     showClear
                     valueTemplate={selectedCountryTemplate}
                     itemTemplate={countryOptionTemplate}

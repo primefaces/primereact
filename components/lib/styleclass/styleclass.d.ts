@@ -86,12 +86,12 @@ export interface StyleClassProps {
 export declare class StyleClass extends React.Component<StyleClassProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLElement} Container element
+     * @return {HTMLElement | null} Container element
      */
-    public getElement(): HTMLElement;
+    public getElement(): HTMLElement | null;
     /**
      * Used to get target element.
-     * @return {HTMLElement} Container element
+     * @return {HTMLElement | null} Container element
      */
-    public getTarget(): HTMLElement;
+    public getTarget(): HTMLElement | null;
 }

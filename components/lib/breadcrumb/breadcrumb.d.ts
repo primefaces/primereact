@@ -118,7 +118,7 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
 export declare class BreadCrumb extends React.Component<BreadCrumbProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLElement} Container element
+     * @return {HTMLElement | null} Container element
      */
-    public getElement(): HTMLElement;
+    public getElement(): HTMLElement | null;
 }

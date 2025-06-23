@@ -73,10 +73,18 @@ export const ConfirmPopup = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? props.dismissable && !isPanelClicked.current && hide('hide') : hide('hide');
-                }
+                    if (type === 'outside') {
+                        if (props.dismissable && !isPanelClicked.current) {
+                            hide('hide');
+                        }
 
-                isPanelClicked.current = false;
+                        isPanelClicked.current = false;
+                    } else if (context.hideOverlaysOnDocumentScrolling) {
+                        hide('hide');
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        align();
+                    }
+                }
             },
             when: visibleState
         });
@@ -141,8 +149,8 @@ export const ConfirmPopup = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
-            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '50%', left: '50%', marginTop: '10px' });
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             align();
         };
 
@@ -353,7 +361,7 @@ export const ConfirmPopup = React.memo(
             {
                 ref: overlayRef,
                 id: getPropValue('id'),
-                className: cx('root', { context, getPropValue }),
+                className: classNames(props.className, cx('root', { context, getPropValue })),
                 style: getPropValue('style'),
                 onClick: onPanelClick
             },

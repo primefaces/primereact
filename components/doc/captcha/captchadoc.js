@@ -18,7 +18,7 @@ export function CaptchaDoc(props) {
         `,
         javascript: `
 import React, { useRef } from 'react';
-import { Ripple } from 'primereact/ripple';
+import { Toast } from 'primereact/toast';
 import { Captcha } from 'primereact/captcha';
 
 export default function CaptchaDoc() {
@@ -38,7 +38,7 @@ export default function CaptchaDoc() {
         `,
         typescript: `
 import React, { useRef } from 'react';
-import { Ripple } from 'primereact/ripple';
+import { Toast } from 'primereact/toast';
 import { Captcha } from 'primereact/captcha';
 
 export default function CaptchaDoc() {
@@ -64,7 +64,7 @@ export default function CaptchaDoc() {
                 <p>Styling Demo Content.</p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
             </div>
             <DocSectionCode code={code} />

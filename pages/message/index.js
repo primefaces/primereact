@@ -3,7 +3,6 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/message/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/message/basicdoc';
 import { ImportDoc } from '@/components/doc/message/importdoc';
-import { PTDoc } from '@/components/doc/message/pt/ptdoc';
 import { Wireframe } from '@/components/doc/message/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/message/severitydoc';
 import { TemplateDoc } from '@/components/doc/message/templatedoc';
@@ -55,11 +54,6 @@ const MessageDemo = () => {
             id: 'pt.message.options',
             label: 'Message PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

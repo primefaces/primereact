@@ -24,7 +24,9 @@ export const useDisplayOrder = (group, isVisible = true) => {
                 const lastIndex = groupToDisplayedElements[group].length - 1;
                 const lastOrder = ObjectUtils.findLastIndex(groupToDisplayedElements[group], (el) => el !== undefined);
 
-                if (lastOrder !== lastIndex) groupToDisplayedElements[group].splice(lastOrder + 1);
+                if (lastOrder !== lastIndex) {
+                    groupToDisplayedElements[group].splice(lastOrder + 1);
+                }
 
                 setDisplayOrder(undefined);
             };

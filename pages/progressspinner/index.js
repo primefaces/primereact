@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/progressspinner/accessibility
 import { BasicDoc } from '@/components/doc/progressspinner/basicdoc';
 import { CustomDoc } from '@/components/doc/progressspinner/customdoc';
 import { ImportDoc } from '@/components/doc/progressspinner/importdoc';
-import { PTDoc } from '@/components/doc/progressspinner/pt/ptdoc';
 import { Wireframe } from '@/components/doc/progressspinner/pt/wireframe';
 import { StyledDoc } from '@/components/doc/progressspinner/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/progressspinner/theming/tailwinddoc';
@@ -44,11 +43,6 @@ const SkeletonDemo = () => {
             id: 'pt.progressspinner.options',
             label: 'ProgressSpinner PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

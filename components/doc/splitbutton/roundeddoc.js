@@ -182,7 +182,7 @@ export default function RoundedDemo() {
                 <p>Rounded buttons have a circular border radius.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} rounded />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" rounded />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" rounded />

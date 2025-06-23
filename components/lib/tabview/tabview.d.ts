@@ -346,7 +346,7 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the previous button's DOM element.
      */
-    previousButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    prevButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the previous button icon's DOM element.
      */
@@ -363,6 +363,10 @@ export interface TabViewPassThroughOptions {
      * Uses to pass attributes to the panel's DOM element.
      */
     panelContainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to accordion tabs.
+     */
+    tab?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -455,7 +459,7 @@ export declare class TabView extends React.Component<TabViewProps, any> {
     public reset(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

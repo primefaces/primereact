@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/picklist/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/picklist/basicdoc';
 import { FilterDoc } from '@/components/doc/picklist/filterdoc';
 import { ImportDoc } from '@/components/doc/picklist/importdoc';
-import { PTDoc } from '@/components/doc/picklist/pt/ptdoc';
 import { Wireframe } from '@/components/doc/picklist/pt/wireframe';
 import { StyledDoc } from '@/components/doc/picklist/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/picklist/theming/tailwinddoc';
@@ -43,11 +42,6 @@ const PickListDemo = () => {
             id: 'pt.picklist.options',
             label: 'PickList PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

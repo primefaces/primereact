@@ -94,8 +94,11 @@ export const FilterService = {
                 return false;
             }
 
-            if (value.getTime && filter.getTime) return value.getTime() === filter.getTime();
-            else return ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale) === ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+            if (value.getTime && filter.getTime) {
+                return value.getTime() === filter.getTime();
+            }
+
+            return ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale) === ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
         },
         notEquals(value, filter, filterLocale) {
             if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
@@ -106,8 +109,11 @@ export const FilterService = {
                 return true;
             }
 
-            if (value.getTime && filter.getTime) return value.getTime() !== filter.getTime();
-            else return ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale) !== ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+            if (value.getTime && filter.getTime) {
+                return value.getTime() !== filter.getTime();
+            }
+
+            return ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale) !== ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
         },
         in(value, filter) {
             if (filter === undefined || filter === null || filter.length === 0) {
@@ -122,6 +128,19 @@ export const FilterService = {
 
             return false;
         },
+        notIn(value, filter) {
+            if (filter === undefined || filter === null || filter.length === 0) {
+                return true;
+            }
+
+            for (let i = 0; i < filter.length; i++) {
+                if (ObjectUtils.equals(value, filter[i])) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
         between(value, filter) {
             if (filter == null || filter[0] == null || filter[1] == null) {
                 return true;
@@ -131,8 +150,11 @@ export const FilterService = {
                 return false;
             }
 
-            if (value.getTime) return filter[0].getTime() <= value.getTime() && value.getTime() <= filter[1].getTime();
-            else return filter[0] <= value && value <= filter[1];
+            if (value.getTime) {
+                return filter[0].getTime() <= value.getTime() && value.getTime() <= filter[1].getTime();
+            }
+
+            return filter[0] <= value && value <= filter[1];
         },
         lt(value, filter) {
             if (filter === undefined || filter === null) {
@@ -143,8 +165,11 @@ export const FilterService = {
                 return false;
             }
 
-            if (value.getTime && filter.getTime) return value.getTime() < filter.getTime();
-            else return value < filter;
+            if (value.getTime && filter.getTime) {
+                return value.getTime() < filter.getTime();
+            }
+
+            return value < filter;
         },
         lte(value, filter) {
             if (filter === undefined || filter === null) {
@@ -155,8 +180,11 @@ export const FilterService = {
                 return false;
             }
 
-            if (value.getTime && filter.getTime) return value.getTime() <= filter.getTime();
-            else return value <= filter;
+            if (value.getTime && filter.getTime) {
+                return value.getTime() <= filter.getTime();
+            }
+
+            return value <= filter;
         },
         gt(value, filter) {
             if (filter === undefined || filter === null) {
@@ -167,8 +195,11 @@ export const FilterService = {
                 return false;
             }
 
-            if (value.getTime && filter.getTime) return value.getTime() > filter.getTime();
-            else return value > filter;
+            if (value.getTime && filter.getTime) {
+                return value.getTime() > filter.getTime();
+            }
+
+            return value > filter;
         },
         gte(value, filter) {
             if (filter === undefined || filter === null) {
@@ -179,8 +210,11 @@ export const FilterService = {
                 return false;
             }
 
-            if (value.getTime && filter.getTime) return value.getTime() >= filter.getTime();
-            else return value >= filter;
+            if (value.getTime && filter.getTime) {
+                return value.getTime() >= filter.getTime();
+            }
+
+            return value >= filter;
         },
         dateIs(value, filter) {
             if (filter === undefined || filter === null) {

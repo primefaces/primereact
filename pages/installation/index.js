@@ -29,7 +29,7 @@ const InstallationPage = () => {
         {
             id: 'theming',
             label: 'Theming',
-            description: 'PrimeReact has two theming has modes; styled or unstyled.',
+            description: 'PrimeReact has two theming modes; styled or unstyled.',
             children: [
                 {
                     id: 'styled',

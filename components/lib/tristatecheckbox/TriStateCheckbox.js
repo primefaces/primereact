@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
@@ -14,6 +15,7 @@ export const TriStateCheckbox = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TriStateCheckboxBase.getProps(inProps, context);
 
+        const [checkBoxValue, setCheckBoxValue] = useState(null);
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = TriStateCheckboxBase.setMetaData({
@@ -22,6 +24,14 @@ export const TriStateCheckbox = React.memo(
 
         useHandleStyle(TriStateCheckboxBase.css.styles, isUnstyled, { name: 'tristatecheckbox' });
 
+        useEffect(() => {
+            if ([true, false, null].includes(props.value)) {
+                setCheckBoxValue(props.value);
+            } else {
+                setCheckBoxValue(null);
+            }
+        }, [props.value]);
+
         const onChange = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
@@ -29,19 +39,23 @@ export const TriStateCheckbox = React.memo(
 
             let newValue;
 
-            if (props.value === null || props.value === undefined) newValue = true;
-            else if (props.value === true) newValue = false;
-            else if (props.value === false) newValue = null;
+            if (checkBoxValue === null) {
+                newValue = true;
+            } else if (checkBoxValue === true) {
+                newValue = false;
+            } else if (checkBoxValue === false) {
+                newValue = null;
+            }
 
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -61,7 +75,7 @@ export const TriStateCheckbox = React.memo(
         };
 
         const onKeyDown = (e) => {
-            if (e.code === 'Enter' || e.code === 'Space') {
+            if (e.code === 'Enter' || e.code === 'NumpadEnter' || e.code === 'Space') {
                 onChange(e);
                 e.preventDefault();
             }
@@ -97,19 +111,20 @@ export const TriStateCheckbox = React.memo(
 
         let icon;
 
-        if (props.value === false) {
+        if (checkBoxValue === false) {
             icon = props.uncheckIcon || <TimesIcon {...uncheckIconProps} />;
-        } else if (props.value === true) {
+        } else if (checkBoxValue === true) {
             icon = props.checkIcon || <CheckIcon {...checkIconProps} />;
         }
 
         const checkIcon = IconUtils.getJSXIcon(icon, { ...checkIconProps }, { props });
 
-        const ariaValueLabel = props.value ? ariaLabel('trueLabel') : props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
-        const ariaChecked = props.value ? 'true' : 'false';
+        const ariaValueLabel = checkBoxValue ? ariaLabel('trueLabel') : checkBoxValue === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
+        const ariaChecked = checkBoxValue ? 'true' : 'false';
 
         const boxProps = mergeProps(
             {
+                id: props.id + '_box',
                 className: cx('box'),
                 tabIndex: props.disabled ? '-1' : props.tabIndex,
                 onFocus: onFocus,
@@ -124,7 +139,7 @@ export const TriStateCheckbox = React.memo(
 
         const srOnlyAriaProps = mergeProps(
             {
-                className: 'p-sr-only p-hidden-accessible',
+                className: 'p-hidden-accessible',
                 'aria-live': 'polite'
             },
             ptm('srOnlyAria')
@@ -132,7 +147,7 @@ export const TriStateCheckbox = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 'data-p-disabled': props.disabled
             },
@@ -140,17 +155,20 @@ export const TriStateCheckbox = React.memo(
             ptm('root')
         );
 
-        const inputProps = mergeProps({
-            id: props.inputId,
-            className: cx('input'),
-            type: 'checkbox',
-            'aria-invalid': props.invalid,
-            disabled: props.disabled,
-            readonly: props.readOnly,
-            value: props.value,
-            checked: props.value,
-            onChange: onChange
-        });
+        const inputProps = mergeProps(
+            {
+                id: props.inputId,
+                className: cx('input'),
+                type: 'checkbox',
+                'aria-invalid': props.invalid,
+                disabled: props.disabled,
+                readOnly: props.readOnly,
+                value: checkBoxValue,
+                checked: checkBoxValue,
+                onChange: onChange
+            },
+            ptm('input')
+        );
 
         return (
             <>

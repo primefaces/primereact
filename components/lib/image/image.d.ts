@@ -294,12 +294,12 @@ export declare class Image extends React.Component<ImageProps, any> {
     public hide(): void;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLSpanElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get image element
-     * @return {HTMLImageElement} Image element
+     * @return {HTMLImageElement | null} Image element
      */
-    public getImage(): HTMLImageElement;
+    public getImage(): HTMLImageElement | null;
 }

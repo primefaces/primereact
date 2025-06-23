@@ -56,7 +56,11 @@ const styles = `
     .p-datatable-scrollable-table > .p-datatable-thead {
         position: sticky;
         top: 0;
-        z-index: 1;
+        z-index: 2;
+    }
+
+    .p-datatable.p-datatable-gridlines .p-datatable-scrollable-table > .p-datatable-thead {
+        top: -1px;
     }
 
     .p-datatable-scrollable-table > .p-datatable-frozen-tbody {
@@ -317,6 +321,7 @@ const classes = {
     thead: 'p-datatable-thead',
     tfoot: 'p-datatable-tfoot',
     footer: 'p-datatable-footer',
+    checkIcon: 'p-checkbox-icon',
     resizeHelper: 'p-column-resizer-helper',
     reorderIndicatorUp: 'p-datatable-reorder-indicator-up',
     reorderIndicatorDown: 'p-datatable-reorder-indicator-down',
@@ -389,21 +394,7 @@ const classes = {
     emptyMessage: 'p-datatable-emptymessage',
     sortBadge: 'p-sortable-column-badge',
     sortIcon: 'p-sortable-column-icon',
-    checkboxWrapper: ({ rowProps: props, focusedState }) => classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState, 'p-disabled': props.disabled }),
-    checkbox: ({ rowProps: props, focusedState }) => classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState }),
-    checkboxIcon: 'p-checkbox-icon',
-    radiobuttonWrapper: ({ rowProps: props, focusedState }) => classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState, 'p-disabled': props.disabled }),
-    radiobutton: ({ rowProps: props, focusedState }) => classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState }),
-    radiobuttonIcon: 'p-radiobutton-icon',
     headerTitle: 'p-column-title',
-    headerCheckboxWrapper: 'p-checkbox p-component',
-    headerCheckbox: ({ headerProps: props, focusedState }) =>
-        classNames('p-checkbox-box p-component', {
-            'p-highlight': props.checked,
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
-        }),
-    headerCheckboxIcon: 'p-checkbox-icon',
     headerContent: 'p-column-header-content',
     headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }) =>
         ObjectUtils.isEmpty(props)

@@ -37,6 +37,10 @@ const styles = `
         text-decoration: none;
     }
 
+    .p-speeddial-action-icon {
+        pointer-events: none;
+    }
+
     .p-speeddial-circle .p-speeddial-item,
     .p-speeddial-semi-circle .p-speeddial-item,
     .p-speeddial-quarter-circle .p-speeddial-item {

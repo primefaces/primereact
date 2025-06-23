@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Locale';
+import { ariaLabel } from '../api/Api';
 import { useMergeProps, useTimeout } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
@@ -88,14 +88,13 @@ export const ToastMessage = React.memo(
 
             const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
             const closeIcon = IconUtils.getJSXIcon(icon, { ...buttonIconProps }, { props });
-            const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
             const closeButtonProps = mergeProps(
                 {
                     type: 'button',
                     className: cx('message.closeButton'),
                     onClick: onClose,
-                    'aria-label': ariaLabel
+                    'aria-label': props.ariaCloseLabel || ariaLabel('close')
                 },
                 getPTOptions('closeButton', parentParams),
                 ptmo(pt, 'closeButton', { ...params, hostName: props.hostName })

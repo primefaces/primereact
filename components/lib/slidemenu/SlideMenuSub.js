@@ -59,7 +59,7 @@ export const SlideMenuSub = React.memo((props) => {
             ptm('separator', { hostName: props.hostName })
         );
 
-        return <li {...separatorProps}></li>;
+        return <li {...separatorProps} />;
     };
 
     const createSubmenu = (item, index) => {
@@ -174,6 +174,10 @@ export const SlideMenuSub = React.memo((props) => {
     };
 
     const createItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
+
         return item.separator ? createSeparator(index) : createMenuitem(item, index);
     };
 

@@ -141,7 +141,7 @@ export interface ScrollTopProps {
 export declare class ScrollTop extends React.Component<ScrollTopProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLButtonElement} Container element
+     * @return {HTMLButtonElement | null} Container element
      */
-    public getElement(): HTMLButtonElement;
+    public getElement(): HTMLButtonElement | null;
 }

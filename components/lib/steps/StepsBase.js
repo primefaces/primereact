@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 const classes = {
     icon: ({ item }) => classNames('p-menuitem-icon', item.icon),
@@ -12,13 +12,9 @@ const classes = {
             'p-disabled': disabled
         }),
     root: ({ props }) =>
-        classNames(
-            'p-steps p-component',
-            {
-                'p-readonly': props.readOnly
-            },
-            props.className
-        )
+        classNames('p-steps p-component', {
+            'p-readonly': props.readOnly
+        })
 };
 
 const styles = `
@@ -88,5 +84,6 @@ export const StepsBase = ComponentBase.extend({
     css: {
         classes,
         styles
-    }
+    },
+    getCProp: (step, name) => ObjectUtils.getComponentProp(step, name, StepsBase.defaultProps)
 });

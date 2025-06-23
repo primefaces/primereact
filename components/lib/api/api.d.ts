@@ -38,15 +38,17 @@ import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { EditorPassThroughOptions } from '../editor/editor';
 import { FieldsetPassThroughOptions } from '../fieldset/fieldset';
 import { FileUploadPassThroughOptions } from '../fileupload/fileupload';
+import { FloatLabelPassThroughOptions } from '../floatlabel/floatlabel';
 import { GalleriaPassThroughOptions } from '../galleria/galleria';
 import { ImagePassThroughOptions } from '../image/image';
 import { InplacePassThroughOptions } from '../inplace/inplace';
 import { InputNumberPassThroughOptions } from '../inputnumber/inputnumber';
+import { InputOtpPassThroughOptions } from '../inputotp/inputotp';
 import { InputSwitchPassThroughOptions } from '../inputswitch/inputswitch';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { InputTextareaPassThroughOptions } from '../inputtextarea/inputtextarea';
 import { KnobPassThroughOptions } from '../knob/knob';
-import { ListboxPassThroughOptions } from '../listbox/listbox';
+import { ListBoxPassThroughOptions } from '../listbox/listbox';
 import { MegaMenuPassThroughOptions } from '../megamenu/megamenu';
 import { MentionPassThroughOptions } from '../mention/mention';
 import { MenuPassThroughOptions } from '../menu/menu';
@@ -68,6 +70,7 @@ import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
 import { ProgressSpinnerPassThroughOptions } from '../progressspinner/progressspinner';
 import { RadioButtonPassThroughOptions } from '../radiobutton/radiobutton';
 import { RatingPassThroughOptions } from '../rating/rating';
+import { RipplePassThroughOptions } from '../ripple/ripple';
 import { RowPassThroughOptions } from '../row/row';
 import { ScrollPanelPassThroughOptions } from '../scrollpanel/scrollpanel';
 import { ScrollTopPassThroughOptions } from '../scrolltop/scrolltop';
@@ -226,10 +229,10 @@ export interface APIOptions {
     unstyled?: boolean;
     /**
      * This method is used to change the theme dynamically.
-     * @param {string} theme - The name of the theme to be applied.
-     * @param {string} newTheme - The name of the new theme to be applied.
+     * @param {string} currentTheme - The name of the current theme. Example 'lara-light-blue'
+     * @param {string} newTheme - The name of the new theme to be applied. Example 'md-dark-deeppurple'
      * @param {string} linkElementId - The id of the link element to be updated.
-     * @param callback - Callback to invoke when the theme change is completed.
+     * @param {() => void} [callback] - Callback to invoke when the theme change is completed.
      */
     changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
     /**
@@ -427,6 +430,10 @@ export interface PrimeReactPTOptions {
      */
     fileupload?: FileUploadPassThroughOptions;
     /**
+     * Custom passthrough(pt) options for FloatLabel.
+     */
+    floatlabel?: FloatLabelPassThroughOptions;
+    /**
      * Custom passthrough(pt) options for FullCalendar.
      */
     galleria?: GalleriaPassThroughOptions;
@@ -447,6 +454,10 @@ export interface PrimeReactPTOptions {
      */
     inputnumber?: InputNumberPassThroughOptions;
     /**
+     * Custom passthrough(pt) options for InputOtp.
+     */
+    inputotp?: InputOtpPassThroughOptions;
+    /**
      * Custom passthrough(pt) options for InputSwitch.
      */
     inputswitch?: InputSwitchPassThroughOptions;
@@ -465,7 +476,7 @@ export interface PrimeReactPTOptions {
     /**
      * Custom passthrough(pt) options for Listbox.
      */
-    listbox?: ListboxPassThroughOptions;
+    listbox?: ListBoxPassThroughOptions;
     /**
      * Custom passthrough(pt) options for MegaMenu.
      */
@@ -546,6 +557,10 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for Rating.
      */
     rating?: RatingPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for Ripple.
+     */
+    ripple?: RipplePassThroughOptions;
     /**
      * Custom passthrough(pt) options for Row.
      */
@@ -705,7 +720,8 @@ export declare function addLocale(locale: string, options: LocaleOptions): void;
  * @param {*} value - Option value.
  * @param {string} locale - Locale string.
  */
-export declare function updateLocaleOption(key: string, value: any, locale: string): void;
+export declare function updateLocaleOption<Key extends keyof LocaleOptions>(key: Key, value: Key extends keyof LocaleOptions ? LocaleOptions[Key] : any, locale: string): void;
+export declare function updateLocaleOption<Key extends string>(key: Key, value: Key extends keyof LocaleOptions ? LocaleOptions[Key] : any, locale: string): void;
 /**
  * Changes the option values of a locale.
  * @param {LocaleOptions} options - Locale options.
@@ -717,12 +733,21 @@ export declare function updateLocaleOptions(options: object, locale: string): vo
  * @param {string} key - Option key.
  * @param {string} locale - Locale string.
  */
+export declare function localeOption<Key extends keyof LocaleOptions>(key: Key, locale: string): LocaleOptions[Key];
 export declare function localeOption(key: string, locale: string): any;
 /**
  * Returns the values of locale options.
  * @param {string} locale - Locale string.
  */
 export declare function localeOptions(locale: string): object;
+
+/**
+ * Finds an ARIA label in the locale by key and replaces options if provided.
+ * @param {string} ariaKey - Key of the ARIA label to look up in the locale.
+ * @param {Object} options - JSON options like { page: 2, user: "John", role: "Admin" }.
+ * @returns {string} The ARIA label with replaced values.
+ */
+export declare function ariaLabel(ariaKey: string, options: any): string;
 
 // Locale Options
 export interface LocaleOptions {
@@ -1089,7 +1114,7 @@ export interface LocaleOptions {
         /**
          * Previous Page
          */
-        previousPageLabel?: string;
+        prevPageLabel?: string;
         /**
          * Rows per page
          */
@@ -1182,6 +1207,10 @@ export interface LocaleOptions {
          * Rotate Left
          */
         rotateLeft?: string;
+        /**
+         * Options List Label
+         */
+        listLabel?: string;
     };
 }
 
@@ -1446,6 +1475,7 @@ export declare enum FilterMatchMode {
     EQUALS = 'equals',
     NOT_EQUALS = 'notEquals',
     IN = 'in',
+    NOT_IN = 'notIn',
     LESS_THAN = 'lt',
     LESS_THAN_OR_EQUAL_TO = 'lte',
     GREATER_THAN = 'gt',

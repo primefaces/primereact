@@ -1,10 +1,12 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption, ariaLabel } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { IconField } from '../iconfield/IconField';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
+import { InputIcon } from '../inputicon/InputIcon';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
@@ -59,8 +61,14 @@ export const Password = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
-            listener: (event, { valid }) => {
-                valid && hide();
+            listener: (event, { valid, type }) => {
+                if (valid) {
+                    if (type === 'outside' || context.hideOverlaysOnDocumentScrolling) {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
+                }
             },
             when: overlayVisibleState
         });
@@ -92,10 +100,8 @@ export const Password = React.memo(
                 if (label && infoTextState !== label) {
                     setInfoTextState(label);
                 }
-            } else {
-                if (infoTextState !== promptLabel) {
-                    setInfoTextState(promptLabel);
-                }
+            } else if (infoTextState !== promptLabel) {
+                setInfoTextState(promptLabel);
             }
         };
 
@@ -173,7 +179,7 @@ export const Password = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
@@ -299,11 +305,14 @@ export const Password = React.memo(
         };
 
         const createIcon = () => {
+            if (!props.toggleMask) {
+                return null;
+            }
+
             let icon;
 
             const hideIconProps = mergeProps(
                 {
-                    key: 'hideIcon',
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('hideIcon'),
@@ -317,7 +326,6 @@ export const Password = React.memo(
 
             const showIconProps = mergeProps(
                 {
-                    key: 'showIcon',
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),
@@ -337,24 +345,20 @@ export const Password = React.memo(
 
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
-            if (props.toggleMask) {
-                let content = eyeIcon;
+            let content = eyeIcon;
 
-                if (props.icon) {
-                    const defaultIconOptions = {
-                        onClick: toggleMask,
-                        className,
-                        element: content,
-                        props
-                    };
+            if (props.icon) {
+                const defaultIconOptions = {
+                    onClick: toggleMask,
+                    className,
+                    element: content,
+                    props
+                };
 
-                    content = ObjectUtils.getJSXElement(props.icon, defaultIconOptions);
-                }
-
-                return content;
+                content = ObjectUtils.getJSXElement(props.icon, defaultIconOptions);
             }
 
-            return null;
+            return content;
         };
 
         const createPanel = () => {
@@ -395,7 +399,7 @@ export const Password = React.memo(
             ) : (
                 <>
                     <div {...meterProps}>
-                        <div {...meterLabelProps}></div>
+                        <div {...meterLabelProps} />
                     </div>
                     <div {...infoProps}>{infoTextState}</div>
                 </>
@@ -447,7 +451,7 @@ export const Password = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { isFilled, focusedState }),
+                className: classNames(props.className, cx('root', { isFilled, focusedState })),
                 style: props.style
             },
             ptm('root')
@@ -464,8 +468,10 @@ export const Password = React.memo(
                 onInput: onInput,
                 onKeyUp: onKeyup,
                 invalid: props.invalid,
+                variant: props.variant,
                 style: props.inputStyle,
-                tabIndex: props.tabIndex,
+                unstyled: props.unstyled,
+                tabIndex: props.tabIndex || '0',
                 tooltip: props.tooltip,
                 tooltipOptions: props.tooltipOptions,
                 type: type,
@@ -477,10 +483,22 @@ export const Password = React.memo(
             ptm('input')
         );
 
+        let input = <InputText {...inputTextProps} />;
+
+        if (icon) {
+            input = (
+                <IconField className={cx('iconField')} pt={ptm('iconField')} __parentMetadata={{ parent: metaData }}>
+                    {input}
+                    <InputIcon className={cx('inputIcon')} pt={ptm('inputIcon')} __parentMetadata={{ parent: metaData }}>
+                        {icon}
+                    </InputIcon>
+                </IconField>
+            );
+        }
+
         return (
             <div {...rootProps}>
-                <InputText {...inputTextProps} />
-                {icon}
+                {input}
                 {panel}
             </div>
         );

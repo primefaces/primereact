@@ -100,7 +100,7 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
 export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

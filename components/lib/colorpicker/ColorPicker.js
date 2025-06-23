@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
 
@@ -20,8 +20,17 @@ export const ColorPicker = React.memo(
                 overlayVisible: overlayVisibleState
             }
         });
+        const isCloseOnEscape = overlayVisibleState && props.closeOnEscape;
+        const overlayDisplayOrder = useDisplayOrder('overlay-panel', isCloseOnEscape);
 
         useHandleStyle(ColorPickerBase.css.styles, isUnstyled, { name: 'colorpicker' });
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState && overlayDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayDisplayOrder]
+        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -36,8 +45,14 @@ export const ColorPicker = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
-            listener: (event, { valid }) => {
-                valid && hide();
+            listener: (event, { valid, type }) => {
+                if (valid) {
+                    if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
+                }
             },
             when: overlayVisibleState
         });
@@ -86,15 +101,24 @@ export const ColorPicker = React.memo(
             hueDragging.current = true;
             pickHue(event);
             !isUnstyled && DomHandler.addClass(elementRef.current, 'p-colorpicker-dragging');
+            event.preventDefault();
+        };
+
+        const getPositionY = (event) => {
+            if (event.pageY !== undefined) return event.pageY;
+            else if (event.changedTouches !== undefined) return event.changedTouches[0].pageY;
+            else return 0;
         };
 
         const pickHue = (event) => {
-            const top = hueViewRef.current.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+            const top = hueViewRef.current.getBoundingClientRect().top + (window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0);
+            const yPos = getPositionY(event);
+            const hue = Math.floor((360 * (150 - Math.max(0, Math.min(150, yPos - top)))) / 150);
 
             hsbValue.current = validateHSB({
-                h: Math.floor((360 * (150 - Math.max(0, Math.min(150, (event.pageY || event.changedTouches[0].pageY) - top)))) / 150),
-                s: 100,
-                b: 100
+                h: hue,
+                s: hsbValue.current.s,
+                b: hsbValue.current.b
             });
 
             updateColorSelector();
@@ -219,10 +243,6 @@ export const ColorPicker = React.memo(
             hsbValue.current = toHSB(value);
         };
 
-        const areHSBEqual = (val1, val2) => {
-            return val1.h === val2.h && val1.s === val2.s && val1.b === val2.b;
-        };
-
         const onChange = (value) => {
             if (props.onChange) {
                 props.onChange({
@@ -280,7 +300,7 @@ export const ColorPicker = React.memo(
         const onOverlayEnter = () => {
             const styles = !props.inline ? { position: 'absolute', top: '0', left: '0' } : undefined;
 
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, styles);
             alignOverlay();
         };
@@ -336,31 +356,6 @@ export const ColorPicker = React.memo(
             };
         };
 
-        const validateRGB = (rgb) => {
-            return {
-                r: Math.min(255, Math.max(0, rgb.r)),
-                g: Math.min(255, Math.max(0, rgb.g)),
-                b: Math.min(255, Math.max(0, rgb.b))
-            };
-        };
-
-        const validateHEX = (hex) => {
-            let len = 6 - hex.length;
-
-            if (len > 0) {
-                let o = [];
-
-                for (let i = 0; i < len; i++) {
-                    o.push('0');
-                }
-
-                o.push(hex);
-                hex = o.join('');
-            }
-
-            return hex;
-        };
-
         const HEXtoRGB = (hex) => {
             const hexValue = parseInt(hex.indexOf('#') > -1 ? hex.substring(1) : hex, 16);
 
@@ -396,14 +391,14 @@ export const ColorPicker = React.memo(
                 hsb.h = -1;
             }
 
-            hsb.h *= 60;
+            hsb.h = hsb.h * 60;
 
             if (hsb.h < 0) {
-                hsb.h += 360;
+                hsb.h = hsb.h + 360;
             }
 
-            hsb.s *= 100 / 255;
-            hsb.b *= 100 / 255;
+            hsb.s = hsb.s * (100 / 255);
+            hsb.b = hsb.b * (100 / 255);
 
             return hsb;
         };
@@ -429,7 +424,9 @@ export const ColorPicker = React.memo(
                 let t2 = ((255 - s) * v) / 255;
                 let t3 = ((t1 - t2) * (h % 60)) / 60;
 
-                if (h === 360) h = 0;
+                if (h === 360) {
+                    h = 0;
+                }
 
                 if (h < 60) {
                     rgb.r = t1;
@@ -564,7 +561,7 @@ export const ColorPicker = React.memo(
             return (
                 <div {...selectorProps}>
                     <div {...colorProps}>
-                        <div {...colorHandlerProps}></div>
+                        <div {...colorHandlerProps} />
                     </div>
                 </div>
             );
@@ -591,7 +588,7 @@ export const ColorPicker = React.memo(
 
             return (
                 <div ref={hueViewRef} {...hueProps}>
-                    <div ref={hueHandleRef} {...hueHandlerProps}></div>
+                    <div ref={hueHandleRef} {...hueHandlerProps} />
                 </div>
             );
         };
@@ -648,7 +645,7 @@ export const ColorPicker = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             ColorPickerBase.getOtherProps(props),
             ptm('root')

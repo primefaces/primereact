@@ -57,6 +57,7 @@ export const PickListItem = React.memo((props) => {
             onKeyDown,
             onFocus,
             onMouseDown,
+            onMouseMove: props.onMouseMove,
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,

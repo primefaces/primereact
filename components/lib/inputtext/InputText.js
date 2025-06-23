@@ -4,7 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
 
 export const InputText = React.memo(
@@ -17,7 +17,8 @@ export const InputText = React.memo(
             props,
             ...props.__parentMetadata,
             context: {
-                disabled: props.disabled
+                disabled: props.disabled,
+                iconPosition: props.iconPosition
             }
         });
 
@@ -69,9 +70,17 @@ export const InputText = React.memo(
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
+        React.useEffect(() => {
+            if (isFilled || elementRef.current?.value) {
+                DomHandler.addClass(elementRef.current, 'p-filled');
+            } else {
+                DomHandler.removeClass(elementRef.current, 'p-filled');
+            }
+        }, [props.disabled, isFilled]);
+
         const rootProps = mergeProps(
             {
-                className: cx('root', { isFilled }),
+                className: classNames(props.className, cx('root', { context, isFilled })),
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onKeyDown: onKeyDown,

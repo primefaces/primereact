@@ -4,9 +4,12 @@ import { classNames } from '../utils/Utils';
 
 const styles = `
 @layer primereact {
+   .p-confirm-popup {
+        margin-top: 10px;       
+    }
+
     .p-confirm-popup-flipped {
-        margin-top: 0;
-        margin-bottom: 10px;
+        margin-top: -10px;
     }
     
     .p-confirm-popup:after, .p-confirm-popup:before {

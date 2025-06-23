@@ -29,6 +29,10 @@ export const Menu = React.memo(
             }
         });
 
+        const getMenuItemPTOptions = (key, menuContext) => {
+            return ptm(key, { context: menuContext });
+        };
+
         useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -47,10 +51,14 @@ export const Menu = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
             overlay: menuRef,
-            listener: (event, { valid }) => {
+            listener: (event, { valid, type }) => {
                 if (valid) {
-                    hide(event);
-                    setFocusedOptionIndex(-1);
+                    if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
+                        hide(event);
+                        setFocusedOptionIndex(-1);
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
+                    }
                 }
             },
             when: visibleState
@@ -93,6 +101,12 @@ export const Menu = React.memo(
             }
         };
 
+        const onItemMouseMove = (event, key) => {
+            if (event && props.popup && focusedOptionIndex !== key) {
+                setFocusedOptionIndex(key);
+            }
+        };
+
         const onListFocus = (event) => {
             setFocused(true);
 
@@ -100,13 +114,19 @@ export const Menu = React.memo(
                 if (selectedOptionIndex !== -1) {
                     changeFocusedOptionIndex(selectedOptionIndex);
                     setSelectedOptionIndex(-1);
-                } else changeFocusedOptionIndex(0);
+                } else {
+                    changeFocusedOptionIndex(0);
+                }
             }
 
             props.onFocus && props.onFocus(event);
         };
 
         const onListBlur = (event) => {
+            const { currentTarget, relatedTarget } = event;
+
+            if (relatedTarget && currentTarget.contains(relatedTarget)) return;
+
             setFocused(false);
             setFocusedOptionIndex(-1);
             props.onBlur && props.onBlur(event);
@@ -131,6 +151,7 @@ export const Menu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 
@@ -242,7 +263,7 @@ export const Menu = React.memo(
 
         const onEnter = () => {
             DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
-            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
 
             if (props.popup) {
@@ -289,7 +310,6 @@ export const Menu = React.memo(
             const submenuHeaderProps = mergeProps(
                 {
                     id: key,
-                    key,
                     role: 'none',
                     className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: sx('submenuHeader', { submenu }),
@@ -300,25 +320,30 @@ export const Menu = React.memo(
 
             return (
                 <React.Fragment key={key}>
-                    <li {...submenuHeaderProps}>{submenu.label}</li>
+                    <li {...submenuHeaderProps} key={key}>
+                        {submenu.label}
+                    </li>
                     {items}
                 </React.Fragment>
             );
         };
 
-        const createSeparator = (index) => {
+        const createSeparator = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
+
             const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
-                    className: cx('separator'),
+                    className: classNames(item.className, cx('separator')),
                     role: 'separator'
                 },
                 ptm('separator')
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createMenuItem = (item, index, parentId = null) => {
@@ -326,29 +351,31 @@ export const Menu = React.memo(
                 return null;
             }
 
+            const menuContext = { item, index, parentId };
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                ptm('icon')
+                getMenuItemPTOptions('icon', menuContext)
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
                     className: cx('label')
                 },
-                ptm('label')
+                getMenuItemPTOptions('label', menuContext)
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const key = item.id || (parentId || idState) + '_' + index;
             const contentProps = mergeProps(
                 {
                     onClick: (event) => onItemClick(event, item, key),
-                    className: cx('content')
+                    onMouseMove: (event) => onItemMouseMove(event, key),
+                    className: cx('content', { item })
                 },
-                ptm('content')
+                getMenuItemPTOptions('content', menuContext)
             );
 
             const actionProps = mergeProps(
@@ -359,11 +386,10 @@ export const Menu = React.memo(
                     target: item.target,
                     tabIndex: '-1',
                     'aria-label': item.label,
-                    'aria-hidden': true,
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },
-                ptm('action')
+                getMenuItemPTOptions('action', menuContext)
             );
 
             let content = (
@@ -379,6 +405,7 @@ export const Menu = React.memo(
             if (item.template) {
                 const defaultContentOptions = {
                     onClick: (event) => onItemClick(event, item, key),
+                    onMouseMove: (event) => onItemMouseMove(event, key),
                     className: linkClassName,
                     tabIndex: '-1',
                     labelClassName: 'p-menuitem-text',
@@ -393,8 +420,8 @@ export const Menu = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: classNames(item.className, cx('menuitem', { focused: focusedOptionIndex === key })),
+                    onClick: (event) => onItemClick(event, item, key),
                     style: sx('menuitem', { item }),
                     role: 'menuitem',
                     'aria-label': item.label,
@@ -402,14 +429,22 @@ export const Menu = React.memo(
                     'data-p-focused': focusedOptionId() === key,
                     'data-p-disabled': item.disabled || false
                 },
-                ptm('menuitem')
+                getMenuItemPTOptions('menuitem', menuContext)
             );
 
-            return <li {...menuitemProps}>{content}</li>;
+            return (
+                <li {...menuitemProps} key={key}>
+                    {content}
+                </li>
+            );
         };
 
         const createItem = (item, index) => {
-            return item.separator ? createSeparator(index) : item.items ? createSubmenu(item, index) : createMenuItem(item, index);
+            if (item.visible === false) {
+                return null;
+            }
+
+            return item.separator ? createSeparator(item, index) : item.items ? createSubmenu(item, index) : createMenuItem(item, index);
         };
 
         const createMenu = () => {

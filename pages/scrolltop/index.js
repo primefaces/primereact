@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/scrolltop/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/scrolltop/basicdoc';
 import { ElementDoc } from '@/components/doc/scrolltop/elementdoc';
 import { ImportDoc } from '@/components/doc/scrolltop/importdoc';
-import { PTDoc } from '@/components/doc/scrolltop/pt/ptdoc';
 import { Wireframe } from '@/components/doc/scrolltop/pt/wireframe';
 import { StyledDoc } from '@/components/doc/scrolltop/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/scrolltop/theming/tailwinddoc';
@@ -44,11 +43,6 @@ const ScrollTopDemo = () => {
             id: 'pt.scrolltop.options',
             label: 'ScrollTop PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

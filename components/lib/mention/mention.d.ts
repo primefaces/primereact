@@ -235,6 +235,11 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      */
     trigger?: string | string[] | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {MentionPassThroughOptions}
      */
@@ -306,18 +311,26 @@ export declare class Mention extends React.Component<MentionProps, any> {
      */
     public focus(): void;
     /**
-     * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * Show the mention.
      */
-    public getElement(): HTMLDivElement;
+    public show(): void;
+    /**
+     * Hide the mention.
+     */
+    public hide(): void;
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement | null} Container element
+     */
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {InputTextarea} Input element
+     * @return {InputTextarea | null} Input element
      */
-    public getInput(): typeof InputTextarea;
+    public getInput(): typeof InputTextarea | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
 }

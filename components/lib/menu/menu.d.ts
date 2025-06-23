@@ -24,6 +24,25 @@ export declare type MenuPassThroughTransitionType = ReactCSSTransitionProps | ((
 export interface MenuPassThroughMethodOptions {
     props: MenuProps;
     state: MenuState;
+    context: MenuContext;
+}
+
+/**
+ * Defines current options in Menu component.
+ */
+export interface MenuContext {
+    /**
+     * Current menuitem
+     */
+    item: MenuItem;
+    /**
+     * Index of the menuitem
+     */
+    index: number;
+    /**
+     * Id of the submenu header containing the menuitem
+     */
+    parentId: string | null;
 }
 
 /**
@@ -39,6 +58,10 @@ export interface MenuPassThroughOptions {
      * Uses to pass attributes to the list's DOM element.
      */
     menu?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the submenu header's DOM element.
      */
@@ -79,10 +102,20 @@ export interface MenuPassThroughOptions {
  */
 export interface MenuState {
     /**
+     * Current element id.
+     * @defaultValue false
+     */
+    id: string;
+    /**
      * Current visible state as a boolean.
      * @defaultValue true
      */
     visible: boolean;
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
 }
 
 /**
@@ -204,9 +237,9 @@ export declare class Menu extends React.Component<MenuProps, any> {
     public hide(event: React.SyntheticEvent): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get target element.
      * @return {EventTarget} Target element

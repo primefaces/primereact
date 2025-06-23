@@ -145,7 +145,7 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Available options and the selected options support templating with <i>itemTemplate</i> and <i>valueTemplate</i> properties respectively. In addition, header, footer and filter sections can be templated as well.
+                    Available options and the selected options support templating with <i>itemTemplate</i> and <i>selectedItemTemplate</i> properties respectively. In addition, header, footer and filter sections can be templated as well.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

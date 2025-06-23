@@ -1,5 +1,4 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
 
 export const ScrollPanelBase = ComponentBase.extend({
     defaultProps: {
@@ -12,7 +11,7 @@ export const ScrollPanelBase = ComponentBase.extend({
     },
     css: {
         classes: {
-            root: ({ props }) => classNames('p-scrollpanel p-component', props.className),
+            root: 'p-scrollpanel p-component',
             wrapper: 'p-scrollpanel-wrapper',
             content: 'p-scrollpanel-content',
             barx: 'p-scrollpanel-bar p-scrollpanel-bar-x',

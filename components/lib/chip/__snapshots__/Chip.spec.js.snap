@@ -85,7 +85,6 @@ exports[`Chip when removable is true it returns with remove icon: before remove 
     data-pc-section="root"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-chip-remove-icon"
       data-pc-section="removeicon"
       fill="none"
@@ -117,7 +116,6 @@ exports[`Chip when removable is true the chip is removed when ENTER is pressed: 
     data-pc-section="root"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-chip-remove-icon"
       data-pc-section="removeicon"
       fill="none"

@@ -6,7 +6,6 @@ import { DeclarativeDoc } from '@/components/doc/confirmdialog/declarativedoc';
 import { HeadlessDoc } from '@/components/doc/confirmdialog/headlessdoc';
 import { ImportDoc } from '@/components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '@/components/doc/confirmdialog/positiondoc';
-import { PTDoc } from '@/components/doc/confirmdialog/pt/ptdoc';
 import { Wireframe } from '@/components/doc/confirmdialog/pt/wireframe';
 import { ResponsiveDoc } from '@/components/doc/confirmdialog/responsivedoc';
 import { TemplateDoc } from '@/components/doc/confirmdialog/templatedoc';
@@ -68,11 +67,6 @@ const ConfirmDialogDemo = () => {
             id: 'pt.confirmdialog.options',
             label: 'ConfirmDialog PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

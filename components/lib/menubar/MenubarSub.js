@@ -103,11 +103,10 @@ export const MenubarSub = React.memo(
             return index - props.model.slice(0, index).filter((processedItem) => isItemVisible(processedItem) && getItemProp(processedItem, 'separator')).length + 1;
         };
 
-        const createSeparator = (index) => {
-            const key = props.id + '_separator_' + index;
+        const createSeparator = (processedItem, index) => {
+            const key = props.id + '_separator_' + index + '_' + processedItem.key;
             const separatorProps = mergeProps(
                 {
-                    key,
                     'data-id': key,
                     className: cx('separator'),
                     role: 'separator'
@@ -115,7 +114,7 @@ export const MenubarSub = React.memo(
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenu = (processedItem) => {
@@ -194,7 +193,6 @@ export const MenubarSub = React.memo(
                 {
                     href: item.url || '#',
                     tabIndex: '-1',
-                    'aria-hidden': 'true',
                     className: cx('action', { disabled }),
                     onFocus: (event) => event.stopPropagation(),
                     target: getItemProp(processedItem, 'target'),
@@ -239,14 +237,12 @@ export const MenubarSub = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id,
-                    key: dataId,
                     'data-id': dataId,
                     role: 'menuitem',
                     'aria-label': item.label,
                     'aria-disabled': disabled,
                     'aria-expanded': group ? active : undefined,
                     'aria-haspopup': group && !item.url ? 'menu' : undefined,
-                    'aria-level': props.level + 1,
                     'aria-setsize': getAriaSetSize(),
                     'aria-posinset': getAriaPosInset(index),
                     'data-p-highlight': active,
@@ -259,7 +255,7 @@ export const MenubarSub = React.memo(
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={`${dataId}`}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>
@@ -267,7 +263,11 @@ export const MenubarSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
-            return getItemProp(processedItem, 'separator') ? createSeparator(index) : createMenuitem(processedItem, index);
+            if (processedItem.visible === false) {
+                return null;
+            }
+
+            return getItemProp(processedItem, 'separator') ? createSeparator(processedItem, index) : createMenuitem(processedItem, index);
         };
 
         const createMenu = () => {

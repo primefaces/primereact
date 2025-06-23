@@ -1,8 +1,7 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-card p-component', props.className),
+    root: 'p-card p-component',
     header: 'p-card-header',
     title: 'p-card-title',
     subTitle: 'p-card-subtitle',

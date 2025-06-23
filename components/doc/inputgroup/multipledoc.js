@@ -71,10 +71,10 @@ export default function MultipleDemo() {
             <div className="card flex justify-content-center">
                 <div className="p-inputgroup w-full md:w-30rem">
                     <span className="p-inputgroup-addon">
-                        <i className="pi pi-clock"></i>
+                        <i className="pi pi-clock" />
                     </span>
                     <span className="p-inputgroup-addon">
-                        <i className="pi pi-star-fill"></i>
+                        <i className="pi pi-star-fill" />
                     </span>
                     <InputNumber placeholder="Price" />
                     <span className="p-inputgroup-addon">$</span>

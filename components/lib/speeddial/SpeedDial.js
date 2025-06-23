@@ -106,6 +106,7 @@ export const SpeedDial = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     onEnterKey(event);
                     break;
@@ -465,17 +466,19 @@ export const SpeedDial = React.memo(
 
             const menuItemProps = mergeProps(
                 {
-                    key: index,
                     id: `${idState}_${index}`,
                     className: cx('menuitem', { active: isItemActive(`${idState}_${index}`) }),
                     style: getItemStyle(index),
-                    'aria-controls': idState + '_item',
                     role: 'menuitem'
                 },
                 ptm('menuitem')
             );
 
-            return <li {...menuItemProps}>{content}</li>;
+            return (
+                <li {...menuItemProps} key={`${idState}_${index}`}>
+                    {content}
+                </li>
+            );
         };
 
         const createItems = () => {
@@ -529,7 +532,7 @@ export const SpeedDial = React.memo(
                 'aria-label': props['aria-label'],
                 'aria-expanded': visible,
                 'aria-haspopup': true,
-                'aria-controls': idState + '_list',
+                'aria-controls': getAriaControls,
                 'aria-labelledby': props.ariaLabelledby,
                 pt: ptm('button'),
                 unstyled: props.unstyled,
@@ -555,6 +558,16 @@ export const SpeedDial = React.memo(
             return content;
         };
 
+        const getAriaControls = () => {
+            let ariaControls = '';
+
+            for (let index = 0; index < props.model.length; index++) {
+                ariaControls = ariaControls + `${idState}_${index} `;
+            }
+
+            return ariaControls.trim();
+        };
+
         const createMask = () => {
             if (props.mask) {
                 const maskProps = mergeProps(
@@ -565,7 +578,7 @@ export const SpeedDial = React.memo(
                     ptm('mask')
                 );
 
-                return <div {...maskProps}></div>;
+                return <div {...maskProps} />;
             }
 
             return null;

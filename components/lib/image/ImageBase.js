@@ -14,7 +14,7 @@ const classes = {
     preview: 'p-image-preview',
     icon: 'p-image-preview-icon',
     root: ({ props }) =>
-        classNames('p-image p-component', props.className, {
+        classNames('p-image p-component', {
             'p-image-preview-container': props.preview
         }),
     transition: 'p-image-preview'

@@ -28,10 +28,10 @@ export const InputSwitch = React.memo(
                     originalEvent: event,
                     value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -114,7 +114,7 @@ export const InputSwitch = React.memo(
             <>
                 <div id={props.id} ref={elementRef} {...rootProps}>
                     <input ref={inputRef} {...inputProps} />
-                    <span {...sliderProps}></span>
+                    <span {...sliderProps} />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>

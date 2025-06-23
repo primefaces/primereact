@@ -413,7 +413,7 @@ export declare class Galleria extends React.Component<GalleriaProps, any> {
     public stopSlideShow(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

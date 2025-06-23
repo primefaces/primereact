@@ -8,7 +8,7 @@ export function MultipleMonthsDoc(props) {
 
     const code = {
         basic: `
-<Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ export default function MultipleMonthsDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
         </div>
     )
 }
@@ -34,7 +34,7 @@ export default function MultipleMonthsDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
         </div>
     )
 }
@@ -49,7 +49,7 @@ export default function MultipleMonthsDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
             </div>
             <DocSectionCode code={code} />
         </>

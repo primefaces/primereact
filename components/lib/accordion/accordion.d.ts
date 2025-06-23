@@ -241,6 +241,10 @@ export interface AccordionPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: AccordionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to accordion tabs.
+     */
+    accordiontab?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -332,7 +336,7 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 export declare class Accordion extends React.Component<AccordionProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

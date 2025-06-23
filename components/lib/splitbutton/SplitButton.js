@@ -16,7 +16,7 @@ export const SplitButton = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SplitButtonBase.getProps(inProps, context);
 
-        const [idState, setIdState] = React.useState(props.id);
+        const [idState, setIdState] = React.useState(props.id ?? UniqueComponentId);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const menuRef = React.useRef(null);
@@ -202,11 +202,14 @@ export const SplitButton = React.memo(
                         style={props.menuStyle}
                         autoZIndex={props.autoZIndex}
                         baseZIndex={props.baseZIndex}
-                        className={props.menuClassName}
+                        className={classNames(props.menuClassName, cx('menu'))}
                         onClick={onPanelClick}
                         onShow={onMenuShow}
                         onHide={onMenuHide}
                         pt={ptm('menu')}
+                        __parentMetadata={{
+                            parent: metaData
+                        }}
                     />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}

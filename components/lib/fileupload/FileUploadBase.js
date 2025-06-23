@@ -105,6 +105,7 @@ export const FileUploadBase = ComponentBase.extend({
         withCredentials: false,
         previewWidth: 50,
         chooseLabel: null,
+        selectedFileLabel: null,
         uploadLabel: null,
         cancelLabel: null,
         chooseOptions: {

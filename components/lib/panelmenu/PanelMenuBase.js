@@ -10,7 +10,7 @@ const classes = {
     header: ({ active, item }) => classNames('p-component p-panelmenu-header', { 'p-highlight': active && !!item.items, 'p-disabled': item.disabled }),
     headerContent: 'p-panelmenu-header-content',
     menuContent: 'p-panelmenu-content',
-    root: ({ props }) => classNames('p-panelmenu p-component', props.className),
+    root: 'p-panelmenu p-component',
     separator: 'p-menuitem-separator',
     toggleableContent: ({ active }) =>
         classNames('p-toggleable-content', {
@@ -75,7 +75,6 @@ export const PanelMenuBase = ComponentBase.extend({
         id: null,
         model: null,
         style: null,
-        submenuIcon: null,
         expandedKeys: null,
         className: null,
         onExpandedKeysChange: null,
@@ -83,6 +82,8 @@ export const PanelMenuBase = ComponentBase.extend({
         onClose: null,
         multiple: false,
         transitionOptions: null,
+        expandIcon: null,
+        collapseIcon: null,
         children: undefined
     },
     css: {

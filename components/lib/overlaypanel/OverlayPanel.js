@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
@@ -7,7 +7,7 @@ import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
@@ -37,19 +37,18 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         overlay: overlayRef,
         listener: (event, { type, valid }) => {
             if (valid) {
-                switch (type) {
-                    case 'outside':
-                        props.dismissable && !isPanelClicked.current && hide();
-                        break;
-                    case 'resize':
-                    case 'scroll':
-                    case 'orientationchange':
-                        align();
-                        break;
+                if (type === 'outside') {
+                    if (props.dismissable && !isPanelClicked.current) {
+                        hide();
+                    }
+
+                    isPanelClicked.current = false;
+                } else if (context.hideOverlaysOnDocumentScrolling) {
+                    hide();
+                } else if (!DomHandler.isDocument(event.target)) {
+                    align();
                 }
             }
-
-            isPanelClicked.current = false;
         },
         when: visibleState
     });
@@ -133,7 +132,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
-        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         align();
     };
@@ -185,7 +184,9 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             let innerHTML = '';
 
             for (let breakpoint in props.breakpoints) {
-                innerHTML += `
+                innerHTML =
+                    innerHTML +
+                    `
                     @media screen and (max-width: ${breakpoint}) {
                         .p-overlaypanel[${attributeSelector.current}] {
                             width: ${props.breakpoints[breakpoint]};
@@ -223,6 +224,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         show,
         hide,
         align,
+        isVisible: () => visibleState,
         getElement: () => overlayRef.current
     }));
 
@@ -236,13 +238,12 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         );
         const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
         const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
-        const ariaLabel = props.ariaCloseLabel || localeOption('close');
         const closeButtonProps = mergeProps(
             {
                 type: 'button',
                 className: cx('closeButton'),
                 onClick: (e) => onCloseClick(e),
-                'aria-label': ariaLabel
+                'aria-label': props.ariaCloseLabel || ariaLabel('close')
             },
             ptm('closeButton')
         );
@@ -264,7 +265,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: cx('root', { context }),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 onClick: (e) => onPanelClick(e)
             },

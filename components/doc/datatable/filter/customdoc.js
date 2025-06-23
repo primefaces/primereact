@@ -5,6 +5,8 @@ import { FilterMatchMode, FilterService } from '@/components/lib/api/Api';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
@@ -18,9 +20,17 @@ import { CustomerService } from '../../../../service/CustomerService';
 FilterService.register('custom_activity', (value, filters) => {
     const [from, to] = filters ?? [null, null];
 
-    if (from === null && to === null) return true;
-    if (from !== null && to === null) return from <= value;
-    if (from === null && to !== null) return value <= to;
+    if (from === null && to === null) {
+        return true;
+    }
+
+    if (from !== null && to === null) {
+        return from <= value;
+    }
+
+    if (from === null && to !== null) {
+        return value <= to;
+    }
 
     return from <= value && value <= to;
 });
@@ -91,7 +101,7 @@ export function CustomFilterDoc(props) {
         const value = e.target.value;
         let _filters = { ...filters };
 
-        _filters['global'].value = value;
+        _filters.global.value = value;
 
         setFilters(_filters);
         setGlobalFilterValue(value);
@@ -100,10 +110,10 @@ export function CustomFilterDoc(props) {
     const renderHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -146,7 +156,7 @@ export function CustomFilterDoc(props) {
     };
 
     const verifiedBodyTemplate = (rowData) => {
-        return <i className={classNames('pi', { 'true-icon pi-check-circle': rowData.verified, 'false-icon pi-times-circle': !rowData.verified })}></i>;
+        return <i className={classNames('pi', { 'true-icon pi-check-circle': rowData.verified, 'false-icon pi-times-circle': !rowData.verified })} />;
     };
 
     const representativeRowFilterTemplate = (options) => {
@@ -214,15 +224,17 @@ FilterService.register('custom_activity', (value, filters) => {
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterService } from 'primereact/api';
-import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
-import { Tag } from 'primereact/tag';
-import { TriStateCheckbox, TriStateCheckboxChangeEvent} from 'primereact/tristatecheckbox';
-import { CustomerService } from './service/CustomerService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { MultiSelect } from 'primereact/multiselect';
+import { Tag } from 'primereact/tag';
+import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import { CustomerService } from './service/CustomerService';
 
 // The rule argument should be a string in the format "custom_[field]".
 FilterService.register('custom_activity', (value, filters) => {
@@ -308,10 +320,10 @@ export default function CustomFilterDemo() {
     const renderHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -415,15 +427,17 @@ export default function CustomFilterDemo() {
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterService } from 'primereact/api';
-import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
-import { Tag } from 'primereact/tag';
-import { TriStateCheckbox, TriStateCheckboxChangeEvent} from 'primereact/tristatecheckbox';
-import { CustomerService } from './service/CustomerService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { MultiSelect } from 'primereact/multiselect';
+import { Tag } from 'primereact/tag';
+import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import { CustomerService } from './service/CustomerService';
 
 interface Representative {
   name: string;
@@ -534,10 +548,10 @@ export default function CustomFilterDemo() {
     const renderHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -630,6 +644,7 @@ export default function CustomFilterDemo() {
                 <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                 <Column header="Agent" filterField="representative" showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }}
                     body={representativeBodyTemplate} filter filterElement={representativeRowFilterTemplate} />
+                <Column header="Activity(Custom Filter)" field="activity" showFilterMenu={false} showClearButton={false} style={{ minWidth: "14rem" }} filter filterElement={activityRowFilterTemplate} />
                 <Column field="status" header="Status" showFilterMenu={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusRowFilterTemplate} />
                 <Column field="verified" header="Verified" dataType="boolean" style={{ minWidth: '6rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedRowFilterTemplate} />
             </DataTable>

@@ -1,14 +1,15 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import FocusTrap from '../focustrap/FocusTrap';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
@@ -60,14 +61,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
-    const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
     const [bindDocumentResizeEndListener, unbindDocumentResizEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onResizeEnd(event) });
     const [bindDocumentDragListener, unbindDocumentDragListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onDrag(event) });
     const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
-        props.onHide();
+        props.onHide(event);
         event.preventDefault();
     };
 
@@ -75,7 +75,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.closable && props.showHeader && closeRef.current) {
+        if (!isActiveElementInDialog && props.closable && props.showCloseIcon && props.showHeader && closeRef.current) {
             closeRef.current.focus();
         }
     };
@@ -107,45 +107,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         event.preventDefault();
     };
 
-    const onKeyDown = (event) => {
-        const currentTarget = event.currentTarget;
-
-        if (!currentTarget || !currentTarget.primeDialogParams) {
-            return;
-        }
-
-        const params = currentTarget.primeDialogParams;
-        const paramLength = params.length;
-        const dialogId = params[paramLength - 1] ? params[paramLength - 1].id : undefined;
-
-        if (dialogId !== idState) {
-            return;
-        }
-
-        const dialog = document.getElementById(dialogId);
-
-        if (event.key === 'Tab') {
-            event.preventDefault();
-            const focusableElements = DomHandler.getFocusableElements(dialog);
-
-            if (focusableElements && focusableElements.length > 0) {
-                if (!document.activeElement) {
-                    focusableElements[0].focus();
-                } else {
-                    const focusedIndex = focusableElements.indexOf(document.activeElement);
-
-                    if (event.shiftKey) {
-                        if (focusedIndex === -1 || focusedIndex === 0) focusableElements[focusableElements.length - 1].focus();
-                        else focusableElements[focusedIndex - 1].focus();
-                    } else {
-                        if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) focusableElements[0].focus();
-                        else focusableElements[focusedIndex + 1].focus();
-                    }
-                }
-            }
-        }
-    };
-
     const onDragStart = (event) => {
         if (DomHandler.hasClass(event.target, 'p-dialog-header-icon') || DomHandler.hasClass(event.target.parentElement, 'p-dialog-header-icon')) {
             return;
@@ -155,7 +116,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             dragging.current = true;
             lastPageX.current = event.pageX;
             lastPageY.current = event.pageY;
-            dialogRef.current.style.margin = '0';
             DomHandler.addClass(document.body, 'p-unselectable-text');
 
             props.onDragStart && props.onDragStart(event);
@@ -184,7 +144,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 }
 
-                if (topPos >= props.minY && topPos + height < viewport.height) {
+                if (topPos >= props.minY && (deltaY < 0 || topPos + height < viewport.height)) {
                     lastPageY.current = event.pageY;
                     dialogRef.current.style.top = topPos - topMargin + 'px';
                 }
@@ -247,15 +207,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             let newHeight = height + deltaY;
 
             if (hasBeenDragged) {
-                newWidth += deltaX;
-                newHeight += deltaY;
+                newWidth = newWidth + deltaX;
+                newHeight = newHeight + deltaY;
             }
 
-            if ((!minWidth || newWidth > minWidth) && offset.left + newWidth < viewport.width) {
+            if ((!minWidth || newWidth > minWidth) && (deltaX < 0 || offset.left + newWidth < viewport.width)) {
                 dialogRef.current.style.width = newWidth + 'px';
             }
 
-            if ((!minHeight || newHeight > minHeight) && offset.top + newHeight < viewport.height) {
+            if ((!minHeight || newHeight > minHeight) && (deltaY < 0 || offset.top + newHeight < viewport.height)) {
                 dialogRef.current.style.height = newHeight + 'px';
             }
 
@@ -370,8 +330,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             bindDocumentResizeListener();
             bindDocumentResizeEndListener();
         }
-
-        bindDocumentKeyDownListener();
     };
 
     const unbindGlobalListeners = () => {
@@ -379,7 +337,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         unbindDocumentDragEndListener();
         unbindDocumentResizeListener();
         unbindDocumentResizEndListener();
-        unbindDocumentKeyDownListener();
     };
 
     const createStyle = () => {
@@ -388,7 +345,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         let innerHTML = '';
 
         for (let breakpoint in props.breakpoints) {
-            innerHTML += `
+            innerHTML =
+                innerHTML +
+                `
                 @media screen and (max-width: ${breakpoint}) {
                      [data-pc-name="dialog"][${attributeSelector.current}] {
                         width: ${props.breakpoints[breakpoint]} !important;
@@ -441,7 +400,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -469,8 +428,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     }));
 
     const createCloseIcon = () => {
-        if (props.closable) {
-            const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+        if (props.closable && props.showCloseIcon) {
+            const labelAria = props.ariaCloseIconLabel || ariaLabel('close');
 
             const closeButtonIconProps = mergeProps(
                 {
@@ -488,8 +447,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     ref: closeRef,
                     type: 'button',
                     className: cx('closeButton'),
-                    'aria-label': ariaLabel,
-                    onClick: onClose
+                    'aria-label': labelAria,
+                    onClick: onClose,
+                    onKeyDown: (ev) => {
+                        if (ev.key !== 'Escape') {
+                            ev.stopPropagation();
+                        }
+                    }
                 },
                 ptm('closeButton')
             );
@@ -623,7 +587,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const createResizer = () => {
         if (props.resizable) {
-            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></span>;
+            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart} />;
         }
 
         return null;
@@ -647,7 +611,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         return undefined;
     };
 
-    const createTemplateElement = ({ maskProps, rootProps, transitionProps }) => {
+    const createTemplateElement = () => {
         const messageProps = {
             header: props.header,
             content: props.message,
@@ -656,32 +620,22 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         const templateElementProps = { headerRef, contentRef, footerRef, closeRef, hide: onClose, message: messageProps };
 
-        return (
-            <div {...maskProps}>
-                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
-                    <div {...rootProps}>{ObjectUtils.getJSXElement(inProps.content, templateElementProps)}</div>
-                </CSSTransition>
-            </div>
-        );
+        return ObjectUtils.getJSXElement(inProps.content, templateElementProps);
     };
 
-    const createElement = ({ maskProps, rootProps, transitionProps }) => {
+    const createElement = () => {
         const header = createHeader();
         const content = createContent();
         const footer = createFooter();
         const resizer = createResizer();
 
         return (
-            <div {...maskProps}>
-                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
-                    <div {...rootProps}>
-                        {header}
-                        {content}
-                        {footer}
-                        {resizer}
-                    </div>
-                </CSSTransition>
-            </div>
+            <>
+                {header}
+                {content}
+                {footer}
+                {resizer}
+            </>
         );
     };
 
@@ -708,7 +662,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             {
                 ref: dialogRef,
                 id: idState,
-                className: cx('root', { props, maximized, context }),
+                className: classNames(props.className, cx('root', { props, maximized, context })),
                 style: props.style,
                 onClick: props.onClick,
                 role: 'dialog',
@@ -736,15 +690,25 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             ptm('transition')
         );
 
+        let contentElement = null;
+
         if (inProps?.content) {
-            const templateElement = createTemplateElement({ maskProps, rootProps, transitionProps });
-
-            return <Portal element={templateElement} appendTo={props.appendTo} visible />;
+            contentElement = createTemplateElement();
         } else {
-            const element = createElement({ maskProps, rootProps, transitionProps });
-
-            return <Portal element={element} appendTo={props.appendTo} visible />;
+            contentElement = createElement();
         }
+
+        const rootElement = (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
+                    <div {...rootProps}>
+                        <FocusTrap autoFocus={props.focusOnShow}>{contentElement}</FocusTrap>
+                    </div>
+                </CSSTransition>
+            </div>
+        );
+
+        return <Portal element={rootElement} appendTo={props.appendTo} visible />;
     };
 
     return maskVisibleState && createDialog();

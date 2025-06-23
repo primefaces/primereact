@@ -57,7 +57,7 @@ export const ScrollTop = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', scrollElementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', scrollElementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         };
 
         const onEntered = () => {
@@ -76,8 +76,11 @@ export const ScrollTop = React.memo(
         }));
 
         React.useEffect(() => {
-            if (props.target === 'window') bindDocumentScrollListener();
-            else if (props.target === 'parent') bindParentScrollListener();
+            if (props.target === 'window') {
+                bindDocumentScrollListener();
+            } else if (props.target === 'parent') {
+                bindParentScrollListener();
+            }
         }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
         useUnmountEffect(() => {
@@ -128,7 +131,7 @@ export const ScrollTop = React.memo(
                         <Ripple />
                     </button>
                 </CSSTransition>
-                {isTargetParent && <span ref={helperRef} className="p-scrolltop-helper"></span>}
+                {isTargetParent && <span ref={helperRef} className="p-scrolltop-helper" />}
             </>
         );
     })

@@ -1,12 +1,13 @@
 import * as React from 'react';
+import { Checkbox } from '../checkbox/Checkbox';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
-import { Checkbox } from '../checkbox/Checkbox';
 import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const checkboxRef = React.useRef(null);
     const mergeProps = useMergeProps();
     const { ptm, cx, isUnstyled } = props;
 
@@ -25,6 +26,7 @@ export const MultiSelectItem = React.memo((props) => {
 
     const onFocus = (event) => {
         setFocusedState(true);
+        checkboxRef?.current?.getInput().focus();
     };
 
     const onBlur = (event) => {
@@ -44,14 +46,13 @@ export const MultiSelectItem = React.memo((props) => {
         {
             className: cx('checkboxIcon')
         },
-        getPTOptions('checkboxIcon')
+        getPTOptions('checkbox.icon')
     );
 
     const icon = props.checkboxIcon || <CheckIcon {...checkboxIconProps} />;
     const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { selected: props.selected }) : null;
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
-    const tabIndex = props.disabled ? -1 : props.tabIndex;
 
     const checkboxContainerProps = mergeProps(
         {
@@ -67,7 +68,7 @@ export const MultiSelectItem = React.memo((props) => {
             onClick: onClick,
             onFocus: onFocus,
             onBlur: onBlur,
-            tabIndex: tabIndex,
+            onMouseMove: (e) => props?.onMouseMove(e, props.index),
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
@@ -79,7 +80,7 @@ export const MultiSelectItem = React.memo((props) => {
     return (
         <li {...itemProps}>
             <div {...checkboxContainerProps}>
-                <Checkbox checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
+                <Checkbox ref={checkboxRef} checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} tabIndex={-1} />
             </div>
             <span>{content}</span>
             <Ripple />

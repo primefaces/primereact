@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/splitter/accessibilitydoc';
 import { HorizontalDoc } from '@/components/doc/splitter/horizontaldoc';
 import { ImportDoc } from '@/components/doc/splitter/importdoc';
 import { NestedDoc } from '@/components/doc/splitter/nesteddoc';
-import { PTDoc } from '@/components/doc/splitter/pt/ptdoc';
 import { Wireframe } from '@/components/doc/splitter/pt/wireframe';
 import { SizeDoc } from '@/components/doc/splitter/sizedoc';
 import { StyledDoc } from '@/components/doc/splitter/theming/styleddoc';
@@ -61,11 +60,6 @@ const SplitterDemo = () => {
             id: 'pt.splitterpanel.options',
             label: 'SplitterPanel PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

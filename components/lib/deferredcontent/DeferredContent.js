@@ -32,12 +32,12 @@ export const DeferredContent = React.forwardRef((inProps, ref) => {
     const shouldLoad = () => {
         if (loadedState) {
             return false;
-        } else {
-            const rect = elementRef.current.getBoundingClientRect();
-            const winHeight = document.documentElement.clientHeight;
-
-            return winHeight >= rect.top;
         }
+
+        const rect = elementRef.current.getBoundingClientRect();
+        const winHeight = document.documentElement.clientHeight;
+
+        return winHeight >= rect.top;
     };
 
     const load = (event) => {

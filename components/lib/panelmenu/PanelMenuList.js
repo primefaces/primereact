@@ -48,9 +48,6 @@ export const PanelMenuList = React.memo((props) => {
 
     const onFocus = (event) => {
         setFocused(true);
-        const _focusedItem = focusedItem || (isElementInPanel(event, event.relatedTarget) ? findFirstItem() : findLastItem());
-
-        setFocusedItem(_focusedItem);
     };
 
     const onBlur = () => {
@@ -331,17 +328,23 @@ export const PanelMenuList = React.memo((props) => {
     const findProcessedItemByItemKey = (key, processed, level = 0) => {
         const _processedItems = processed ? processed : level === 0 && props.model;
 
-        if (!_processedItems) return null;
+        if (!_processedItems) {
+            return null;
+        }
 
         for (let i = 0; i < _processedItems.length; i++) {
             const processedItem = _processedItems[i];
             const processedKey = getItemProp(processedItem, 'key') || processedItem.key;
 
-            if (processedKey === key) return processedItem;
+            if (processedKey === key) {
+                return processedItem;
+            }
 
             const matchedItem = findProcessedItemByItemKey(key, processedItem.items, level + 1);
 
-            if (matchedItem) return matchedItem;
+            if (matchedItem) {
+                return matchedItem;
+            }
         }
     };
 
@@ -360,7 +363,7 @@ export const PanelMenuList = React.memo((props) => {
                     parentKey
                 };
 
-                newItem['items'] = createProcessedItems(item.items, level + 1, newItem, key);
+                newItem.items = createProcessedItems(item.items, level + 1, newItem, key);
                 processedItems.push(newItem);
             });
 
@@ -423,7 +426,8 @@ export const PanelMenuList = React.memo((props) => {
             onItemToggle={onItemToggle}
             level={0}
             className={cx('submenu')}
-            submenuIcon={props.submenuIcon}
+            expandIcon={props.expandIcon}
+            collapseIcon={props.collapseIcon}
             root
             ptm={ptm}
             cx={cx}

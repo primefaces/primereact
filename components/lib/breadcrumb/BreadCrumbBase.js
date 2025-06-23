@@ -10,13 +10,14 @@ const classes = {
     separator: 'p-menuitem-separator',
     menuitem: ({ item }) => classNames('p-menuitem', item.className, { 'p-disabled': item.disabled }),
     menu: 'p-breadcrumb-list',
-    root: ({ props }) => classNames('p-breadcrumb p-component', props.className)
+    root: 'p-breadcrumb p-component'
 };
 
 const styles = `
 @layer primereact {
     .p-breadcrumb {
         overflow-x: auto;
+        display: flex;
     }
 
     .p-breadcrumb ol {

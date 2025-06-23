@@ -1,27 +1,12 @@
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateLicense from '@/components/templates/TemplateLicense';
-import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
+import Link from 'next/link';
 import ApolloLogo from './ApolloLogo';
-
-const apolloRelatedData = [
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond-react.jpg',
-        href: '/templates/diamond'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon-react.jpg',
-        href: '/templates/avalon'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
-        href: '/templates/babylon'
-    }
-];
 
 const apolloFeatures2Data = [
     {
@@ -30,8 +15,9 @@ const apolloFeatures2Data = [
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-responsive.png'
     },
     {
-        title: 'Lifetime Support',
-        description: 'Apollo has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
+        title: 'Support',
+        description:
+            'PrimeTek offers assistance with account management and licensing issues, with the expectation that users have the necessary technical knowledge to use our products, as we do not offer technical support or consulting. Users can seek assistance in our community via our public Discord and Forum.',
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
@@ -71,15 +57,8 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>
-                , choose from the wide range of blocks and customize the way you like. Note that{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>{' '}
-                is not included in the template and requires a separate purchase.
+                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
+                the template and requires a separate purchase.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -96,14 +75,8 @@ const animationFeaturesData1 = [
         description: (
             <>
                 Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
-                <a href="https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/" target="_blank">
-                    preview the Figma file
-                </a>{' '}
-                before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in{' '}
-                <a href="/uikit" target="_blank">
-                    PrimeOne for Figma
-                </a>{' '}
-                only.
+                <a href="https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the
+                Apollo Figma file as they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-figma.png'
@@ -196,16 +169,19 @@ const animationFeaturesData2 = [
 const license = {
     documentLink: 'https://apollo.primereact.org/documentation/',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    showDiscount: false,
     licenseDetails: [
         {
             title: 'Basic License',
             price: '$59',
-            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
+            discountPrice: '$39',
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', '1 Year Free Updates']
         },
         {
             title: 'Extended License',
             price: '$590',
-            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+            discountPrice: '$390',
+            included: ['Commercial Usage', 'Multiple End Products', '1 Year Free Updates']
         }
     ]
 };
@@ -255,8 +231,6 @@ const ApolloPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <ApolloSeparator />
             <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
-            <ApolloSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
         </div>
     );
 };

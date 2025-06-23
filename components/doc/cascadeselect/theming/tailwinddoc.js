@@ -7,10 +7,13 @@ export function TailwindDoc(props) {
         basic: `
 const TRANSITIONS = {
     overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
+        timeout: 150,
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-0',
+            exitActive: 'transition-opacity duration-150 ease-linear'
+        }
     }
 };
 
@@ -27,8 +30,8 @@ const Tailwind = {
         dropdownButton: {
             className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
         },
-        panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
-        list: 'm-0 sm:p-0 list-none',
+        panel: { className: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md' },
+        list: { className: 'm-0 sm:p-0 list-none' },
         sublist: {
             className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
         },
@@ -41,7 +44,7 @@ const Tailwind = {
         content: {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
-        optionGroupIcon: 'ml-auto',
+        optionGroupIcon: { className: 'ml-auto' },
         transition: TRANSITIONS.overlay
     }
 }

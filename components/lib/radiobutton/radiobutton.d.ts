@@ -108,10 +108,15 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that an input field is read-only.
      * @default false
      */
-    readonly?: boolean | undefined;
+    readOnly?: boolean | undefined;
     /**
      * When present, it specifies that an input field must be filled out before submitting the form.
      * @defaultValue false
@@ -175,12 +180,12 @@ export declare class RadioButton extends React.Component<RadioButtonProps, any> 
     public select(event?: React.SyntheticEvent): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
 }

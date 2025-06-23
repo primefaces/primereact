@@ -132,7 +132,7 @@ export function RouterDemo(props: any) {
             </DocSectionText>
             <div className="card flex md:justify-content-center">
                 <span className="inline-flex align-items-center justify-content-center border-2 border-primary border-round w-4rem h-4rem" onContextMenu={(event) => onRightClick(event)} aria-haspopup="true">
-                    <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40"></img>
+                    <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" />
                 </span>
                 <ContextMenu model={items} ref={cm} />
             </div>

@@ -34,7 +34,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
                 ptm('image')
             );
 
-            return <img alt={props.imageAlt} {...imageProps}></img>;
+            return <img alt={props.imageAlt} {...imageProps} />;
         } else if (props.label) {
             const labelProps = mergeProps(
                 {

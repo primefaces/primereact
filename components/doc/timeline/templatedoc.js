@@ -15,7 +15,7 @@ export function TemplateDoc(props) {
     const customizedMarker = (item) => {
         return (
             <span className="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" style={{ backgroundColor: item.color }}>
-                <i className={item.icon}></i>
+                <i className={item.icon} />
             </span>
         );
     };
@@ -28,7 +28,7 @@ export function TemplateDoc(props) {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                     quas!
                 </p>
-                <Button label="Read more" className="p-button-text"></Button>
+                <Button label="Read more" className="p-button-text" />
             </Card>
         );
     };

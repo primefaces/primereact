@@ -7,26 +7,21 @@ const styles = `
     .p-treetable {
         position: relative;
     }
-    
     .p-treetable > .p-treetable-wrapper {
         overflow: auto;
     }
-    
     .p-treetable table {
         border-collapse: collapse;
         width: 100%;
         table-layout: fixed;
     }
-    
     .p-treetable .p-sortable-column {
         cursor: pointer;
         user-select: none;
     }
-    
     .p-treetable-selectable .p-treetable-tbody > tr {
         cursor: pointer;
     }
-    
     .p-treetable-toggler {
         cursor: pointer;
         user-select: none;
@@ -38,35 +33,28 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
     .p-treetable-toggler + .p-checkbox {
         vertical-align: middle;
     }
-    
     .p-treetable-toggler + .p-checkbox + span {
         vertical-align: middle;
     }
-    
     /* Resizable */
     .p-treetable-resizable > .p-treetable-wrapper {
         overflow-x: auto;
     }
-    
     .p-treetable-resizable .p-treetable-thead > tr > th,
     .p-treetable-resizable .p-treetable-tfoot > tr > td,
     .p-treetable-resizable .p-treetable-tbody > tr > td {
         overflow: hidden;
     }
-    
     .p-treetable-resizable .p-resizable-column {
         background-clip: padding-box;
         position: relative;
     }
-    
     .p-treetable-resizable-fit .p-resizable-column:last-child .p-column-resizer {
         display: none;
     }
-    
     .p-treetable .p-column-resizer {
         display: block;
         position: absolute;
@@ -79,14 +67,12 @@ const styles = `
         cursor: col-resize;
         border: 1px solid transparent;
     }
-    
     .p-treetable .p-column-resizer-helper {
         width: 1px;
         position: absolute;
         z-index: 10;
         display: none;
     }
-    
     /* Scrollable */
     .p-treetable-scrollable-wrapper {
         position: relative;
@@ -96,34 +82,28 @@ const styles = `
         overflow: hidden;
         border: 0 none;
     }
-    
     .p-treetable-scrollable-body {
         overflow: auto;
         position: relative;
     }
-    
     .p-treetable-virtual-table {
         position: absolute;
     }
-    
     /* Frozen Columns */
     .p-treetable-frozen-view .p-treetable-scrollable-body {
         overflow: hidden;
     }
-    
     .p-treetable-unfrozen-view {
         position: absolute;
         top: 0px;
         left: 0px;
     }
-    
     /* Reorder */
     .p-treetable-reorder-indicator-up,
     .p-treetable-reorder-indicator-down {
         position: absolute;
         display: none;
     }
-    
     /* Loader */
     .p-treetable .p-treetable-loading-overlay {
         position: absolute;
@@ -132,7 +112,6 @@ const styles = `
         justify-content: center;
         z-index: 2;
     }
-
     /* Alignment */
     .p-treetable .p-treetable-thead > tr > th.p-align-left > .p-column-header-content,
     .p-treetable .p-treetable-tbody > tr > td.p-align-left,
@@ -169,6 +148,7 @@ const classes = {
     loadingWrapper: 'p-treetable-loading',
     loadingOverlay: 'p-treetable-loading-overlay p-component-overlay',
     header: 'p-treetable-header',
+    checkIcon: 'p-checkbox-icon',
     footer: 'p-treetable-footer',
     resizeHelper: 'p-column-resizer-helper',
     reorderIndicatorUp: 'p-treetable-reorder-indicator-up',
@@ -210,11 +190,9 @@ const classes = {
     row: ({ isSelected, rowProps: props }) => ({
         'p-highlight': isSelected(),
         'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
-        'p-row-odd': props.rowIndex % 2 !== 0
+        'p-row-odd': parseInt(String(props.rowIndex).split('_').pop(), 10) % 2 !== 0
     }),
-    checkboxWrapper: 'p-checkbox p-treetable-checkbox p-component',
-    checkbox: ({ checked, partialChecked }) => classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked }),
-    checkboxIcon: 'p-checkbox-icon p-c',
+    rowCheckbox: ({ partialChecked }) => classNames('p-treetable-checkbox', { 'p-indeterminate': partialChecked }),
     rowToggler: 'p-treetable-toggler p-link p-unselectable-text',
     rowTogglerIcon: 'p-treetable-toggler-icon',
     scrollableBody: 'p-treetable-scrollable-body',
@@ -238,6 +216,8 @@ export const TreeTableBase = ComponentBase.extend({
         columnResizeMode: 'fit',
         contextMenuSelectionKey: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
+        customRestoreState: null,
+        customSaveState: null,
         defaultSortOrder: 1,
         emptyMessage: null,
         expandedKeys: null,
@@ -275,6 +255,8 @@ export const TreeTableBase = ComponentBase.extend({
         onSelect: null,
         onSelectionChange: null,
         onSort: null,
+        onStateRestore: null,
+        onStateSave: null,
         onToggle: null,
         onUnselect: null,
         onValueChange: null,
@@ -307,6 +289,8 @@ export const TreeTableBase = ComponentBase.extend({
         sortIcon: null,
         sortMode: 'single',
         sortOrder: null,
+        stateKey: null,
+        stateStorage: null,
         stripedRows: false,
         style: null,
         tabIndex: 0,
@@ -314,7 +298,8 @@ export const TreeTableBase = ComponentBase.extend({
         tableStyle: null,
         totalRecords: null,
         value: null,
-        children: undefined
+        children: undefined,
+        togglerTemplate: null
     },
     css: {
         classes,

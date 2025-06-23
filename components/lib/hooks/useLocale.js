@@ -5,125 +5,135 @@ import PrimeReact from '../api/Api';
 
 let locales = {
     en: {
-        startsWith: 'Starts with',
+        accept: 'Yes',
+        addRule: 'Add Rule',
+        am: 'AM',
+        apply: 'Apply',
+        cancel: 'Cancel',
+        choose: 'Choose',
+        chooseDate: 'Choose Date',
+        chooseMonth: 'Choose Month',
+        chooseYear: 'Choose Year',
+        clear: 'Clear',
+        completed: 'Completed',
         contains: 'Contains',
-        notContains: 'Not contains',
-        endsWith: 'Ends with',
-        equals: 'Equals',
-        notEquals: 'Not equals',
-        noFilter: 'No Filter',
-        filter: 'Filter',
-        lt: 'Less than',
-        lte: 'Less than or equal to',
-        gt: 'Greater than',
-        gte: 'Greater than or equal to',
+        custom: 'Custom',
+        dateAfter: 'Date is after',
+        dateBefore: 'Date is before',
+        dateFormat: 'mm/dd/yy',
         dateIs: 'Date is',
         dateIsNot: 'Date is not',
-        dateBefore: 'Date is before',
-        dateAfter: 'Date is after',
-        custom: 'Custom',
-        clear: 'Clear',
-        close: 'Close',
-        apply: 'Apply',
+        dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        emptyFilterMessage: 'No results found',
+        emptyMessage: 'No available options',
+        emptySearchMessage: 'No results found',
+        emptySelectionMessage: 'No selected item',
+        endsWith: 'Ends with',
+        equals: 'Equals',
+        fileChosenMessage: '{0} files',
+        fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        filter: 'Filter',
+        firstDayOfWeek: 0,
+        gt: 'Greater than',
+        gte: 'Greater than or equal to',
+        lt: 'Less than',
+        lte: 'Less than or equal to',
         matchAll: 'Match All',
         matchAny: 'Match Any',
-        addRule: 'Add Rule',
-        removeRule: 'Remove Rule',
-        accept: 'Yes',
-        reject: 'No',
-        choose: 'Choose',
-        upload: 'Upload',
-        cancel: 'Cancel',
-        pending: 'Pending',
-        fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-        dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        medium: 'Medium',
         monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        chooseYear: 'Choose Year',
-        chooseMonth: 'Choose Month',
-        chooseDate: 'Choose Date',
-        prevDecade: 'Previous Decade',
         nextDecade: 'Next Decade',
-        prevYear: 'Previous Year',
-        nextYear: 'Next Year',
-        prevMonth: 'Previous Month',
-        nextMonth: 'Next Month',
-        prevHour: 'Previous Hour',
         nextHour: 'Next Hour',
-        prevMinute: 'Previous Minute',
         nextMinute: 'Next Minute',
-        prevSecond: 'Previous Second',
+        nextMonth: 'Next Month',
         nextSecond: 'Next Second',
-        prevMilliSecond: 'Previous Second',
-        nextMilliSecond: 'Next Second',
-        am: 'am',
-        pm: 'pm',
-        today: 'Today',
-        weekHeader: 'Wk',
-        firstDayOfWeek: 0,
-        showMonthAfterYear: true,
-        dateFormat: 'mm/dd/yy',
-        weak: 'Weak',
-        medium: 'Medium',
-        strong: 'Strong',
+        nextYear: 'Next Year',
+        noFileChosenMessage: 'No file chosen',
+        noFilter: 'No Filter',
+        notContains: 'Not contains',
+        notEquals: 'Not equals',
+        now: 'Now',
         passwordPrompt: 'Enter a password',
-        emptyFilterMessage: 'No available options',
-        emptyMessage: 'No results found',
+        pending: 'Pending',
+        pm: 'PM',
+        prevDecade: 'Previous Decade',
+        prevHour: 'Previous Hour',
+        prevMinute: 'Previous Minute',
+        prevMonth: 'Previous Month',
+        prevSecond: 'Previous Second',
+        prevYear: 'Previous Year',
+        reject: 'No',
+        removeRule: 'Remove Rule',
+        searchMessage: '{0} results are available',
+        selectionMessage: '{0} items selected',
+        showMonthAfterYear: false,
+        startsWith: 'Starts with',
+        strong: 'Strong',
+        today: 'Today',
+        upload: 'Upload',
+        weak: 'Weak',
+        weekHeader: 'Wk',
         aria: {
-            trueLabel: 'True',
-            falseLabel: 'False',
-            nullLabel: 'Not Selected',
-            star: '1 star',
-            stars: '{star} stars',
-            selectAll: 'All items selected',
-            unselectAll: 'All items unselected',
+            cancelEdit: 'Cancel Edit',
             close: 'Close',
-            previous: 'Previous',
-            next: 'Next',
-            navigation: 'Navigation',
-            scrollTop: 'Scroll Top',
-            moveTop: 'Move Top',
-            moveUp: 'Move Up',
-            moveDown: 'Move Down',
-            moveBottom: 'Move Bottom',
-            moveToTarget: 'Move to Target',
-            moveToSource: 'Move to Source',
-            moveAllToTarget: 'Move All to Target',
-            moveAllToSource: 'Move All to Source',
-            pageLabel: 'Page {page}',
+            collapseLabel: 'Collapse',
+            collapseRow: 'Row Collapsed',
+            editRow: 'Edit Row',
+            expandLabel: 'Expand',
+            expandRow: 'Row Expanded',
+            falseLabel: 'False',
+            filterConstraint: 'Filter Constraint',
+            filterOperator: 'Filter Operator',
             firstPageLabel: 'First Page',
-            lastPageLabel: 'Last Page',
-            nextPageLabel: 'Next Page',
-            previousPageLabel: 'Previous Page',
-            rowsPerPageLabel: 'Rows per page',
+            gridView: 'Grid View',
+            hideFilterMenu: 'Hide Filter Menu',
             jumpToPageDropdownLabel: 'Jump to Page Dropdown',
             jumpToPageInputLabel: 'Jump to Page Input',
-            selectRow: 'Row Selected',
-            unselectRow: 'Row Unselected',
-            expandRow: 'Row Expanded',
-            collapseRow: 'Row Collapsed',
-            showFilterMenu: 'Show Filter Menu',
-            hideFilterMenu: 'Hide Filter Menu',
-            filterOperator: 'Filter Operator',
-            filterConstraint: 'Filter Constraint',
-            editRow: 'Row Edit',
-            saveEdit: 'Save Edit',
-            cancelEdit: 'Cancel Edit',
+            lastPageLabel: 'Last Page',
+            listLabel: 'Option List',
             listView: 'List View',
-            gridView: 'Grid View',
+            moveAllToSource: 'Move All to Source',
+            moveAllToTarget: 'Move All to Target',
+            moveBottom: 'Move Bottom',
+            moveDown: 'Move Down',
+            moveToSource: 'Move to Source',
+            moveToTarget: 'Move to Target',
+            moveTop: 'Move Top',
+            moveUp: 'Move Up',
+            navigation: 'Navigation',
+            next: 'Next',
+            nextPageLabel: 'Next Page',
+            nullLabel: 'Not Selected',
+            otpLabel: 'Please enter one time password character {0}',
+            pageLabel: 'Page {page}',
+            passwordHide: 'Hide Password',
+            passwordShow: 'Show Password',
+            previous: 'Previous',
+            prevPageLabel: 'Previous Page',
+            removeLabel: 'Remove',
+            rotateLeft: 'Rotate Left',
+            rotateRight: 'Rotate Right',
+            rowsPerPageLabel: 'Rows per page',
+            saveEdit: 'Save Edit',
+            scrollTop: 'Scroll Top',
+            selectAll: 'All items selected',
+            selectLabel: 'Select',
+            selectRow: 'Row Selected',
+            showFilterMenu: 'Show Filter Menu',
             slide: 'Slide',
             slideNumber: '{slideNumber}',
+            star: '1 star',
+            stars: '{star} stars',
+            trueLabel: 'True',
+            unselectAll: 'All items unselected',
+            unselectLabel: 'Unselect',
+            unselectRow: 'Row Unselected',
             zoomImage: 'Zoom Image',
             zoomIn: 'Zoom In',
-            zoomOut: 'Zoom Out',
-            rotateRight: 'Rotate Right',
-            rotateLeft: 'Rotate Left',
-            selectLabel: 'Select',
-            unselectLabel: 'Unselect',
-            expandLabel: 'Expand',
-            collapseLabel: 'Collapse'
+            zoomOut: 'Zoom Out'
         }
     }
 };
@@ -144,20 +154,34 @@ export const useLocale = () => {
     };
 
     const addLocale = (locale, options) => {
+        if (locale.includes('__proto__') || locale.includes('prototype')) {
+            throw new Error('Unsafe locale detected');
+        }
         locales[locale] = { ...locales['en'], ...options };
     };
 
     const updateLocaleOption = (key, value, locale) => {
+        if (key.includes('__proto__') || key.includes('prototype')) {
+            throw new Error('Unsafe key detected');
+        }
+
         localeOptions(locale)[key] = value;
     };
 
     const updateLocaleOptions = (options, locale) => {
+        if (locale.includes('__proto__') || locale.includes('prototype')) {
+            throw new Error('Unsafe locale detected');
+        }
         const _locale = locale || (context && context.locale) || PrimeReact.locale;
 
         locales[_locale] = { ...locales[_locale], ...options };
     };
 
     const localeOption = (key, locale) => {
+        if (key.includes('__proto__') || key.includes('prototype')) {
+            throw new Error('Unsafe key detected');
+        }
+
         const _locale = locale || (context && context.locale) || PrimeReact.locale;
 
         try {
@@ -180,6 +204,9 @@ export const useLocale = () => {
      * @returns the ARIA label with replaced values
      */
     const ariaLabel = (ariaKey, options) => {
+        if (ariaKey.includes('__proto__') || ariaKey.includes('prototype')) {
+            throw new Error('Unsafe ariaKey detected');
+        }
         const _locale = (context && context.locale) || PrimeReact.locale;
 
         try {
@@ -201,6 +228,9 @@ export const useLocale = () => {
 
     const localeOptions = (locale) => {
         const _locale = locale || (context && context.locale) || PrimeReact.locale;
+        if (_locale.includes('__proto__') || _locale.includes('prototype')) {
+            throw new Error('Unsafe locale detected');
+        }
 
         return locales[_locale];
     };

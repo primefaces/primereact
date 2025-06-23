@@ -238,6 +238,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * A property to uniquely identify an option.
      */
     dataKey?: string | undefined;
@@ -276,6 +281,20 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @defaultValue 400px
      */
     scrollHeight?: string | undefined;
+    /**
+     * When enabled, a clear icon is displayed to clear the value.
+     * @defaultValue false
+     */
+    showClear?: boolean;
+    /**
+     * Display loading icon.
+     * @defaultValue false
+     */
+    loading?: boolean | undefined;
+    /**
+     * Name of the loading icon or JSX.Element for loading icon.
+     */
+    loadingIcon?: IconType<CascadeSelectProps> | undefined;
     /**
      * Callback to invoke on value change
      * @param {CascadeSelectChangeEvent} event - Custom change event
@@ -322,6 +341,14 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Style class of the cascadeselect panel.
+     */
+    panelClassName?: string | undefined;
+    /**
+     * Inline style of the cascadeselect panel.
+     */
+    panelStyle?: React.CSSProperties | undefined;
 }
 
 /**
@@ -342,22 +369,22 @@ export declare class CascadeSelect extends React.Component<CascadeSelectProps, a
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to get label element.
-     * @return {HTMLSpanElement} Label element
+     * @return {HTMLSpanElement | null} Label element
      */
-    public getLabel(): HTMLSpanElement;
+    public getLabel(): HTMLSpanElement | null;
 }

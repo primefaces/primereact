@@ -3,12 +3,9 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/selectbutton/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/selectbutton/basicdoc';
 import { DisabledDoc } from '@/components/doc/selectbutton/disableddoc';
-import { FormikDoc } from '@/components/doc/selectbutton/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/selectbutton/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/selectbutton/importdoc';
 import { InvalidDoc } from '@/components/doc/selectbutton/invaliddoc';
 import { MultipleDoc } from '@/components/doc/selectbutton/multipledoc';
-import { PTDoc } from '@/components/doc/selectbutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/selectbutton/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/selectbutton/templatedoc';
 import { StyledDoc } from '@/components/doc/selectbutton/theming/styleddoc';
@@ -47,23 +44,6 @@ const SelectButtonDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-        {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
@@ -79,11 +59,6 @@ const SelectButtonDemo = () => {
             id: 'pt.selectbutton.options',
             label: 'SelectButton PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

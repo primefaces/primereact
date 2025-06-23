@@ -5,7 +5,6 @@ import { DisabledDoc } from '@/components/doc/accordion/disableddoc';
 import { DynamicDoc } from '@/components/doc/accordion/dynamicdoc';
 import { ImportDoc } from '@/components/doc/accordion/importdoc';
 import { MultipleDoc } from '@/components/doc/accordion/multipledoc';
-import { PTDoc } from '@/components/doc/accordion/pt/ptdoc';
 import { Wireframe } from '@/components/doc/accordion/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/accordion/templatedoc';
 import { StyledDoc } from '@/components/doc/accordion/theming/styleddoc';
@@ -73,11 +72,6 @@ const AccordionDemo = () => {
             id: 'pt.accordiontab.options',
             label: 'AccordionTab PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

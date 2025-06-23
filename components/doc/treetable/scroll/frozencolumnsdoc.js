@@ -84,26 +84,61 @@ export default function FrozenColumnsDemo() {
         data: `
 {
     key: '0',
-    label: 'Documents',
-    data: 'Documents Folder',
-    icon: 'pi pi-fw pi-inbox',
+    data: {
+        name: 'Applications',
+        size: '100kb',
+        type: 'Folder'
+    },
     children: [
         {
             key: '0-0',
-            label: 'Work',
-            data: 'Work Folder',
-            icon: 'pi pi-fw pi-cog',
+            data: {
+                name: 'React',
+                size: '25kb',
+                type: 'Folder'
+            },
             children: [
-                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+                {
+                    key: '0-0-0',
+                    data: {
+                        name: 'react.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-1',
+                    data: {
+                        name: 'native.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-2',
+                    data: {
+                        name: 'mobile.app',
+                        size: '5kb',
+                        type: 'Application'
+                    }
+                }
             ]
         },
         {
             key: '0-1',
-            label: 'Home',
-            data: 'Home Folder',
-            icon: 'pi pi-fw pi-home',
-            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+            data: {
+                name: 'editor.app',
+                size: '25kb',
+                type: 'Application'
+            }
+        },
+        {
+            key: '0-2',
+            data: {
+                name: 'settings.app',
+                size: '50kb',
+                type: 'Application'
+            }
         }
     ]
 },
@@ -120,13 +155,13 @@ export default function FrozenColumnsDemo() {
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} scrollable frozenWidth="200px" scrollHeight="250px">
-                    <Column field="name" header="Name" expander frozen style={{ width: '250px', height: '57px' }}></Column>
-                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_0"></Column>
-                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_0"></Column>
-                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_1"></Column>
-                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_1"></Column>
-                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_2"></Column>
-                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_2"></Column>
+                    <Column field="name" header="Name" expander frozen style={{ width: '250px', height: '57px' }} />
+                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_0" />
+                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_0" />
+                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_1" />
+                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_1" />
+                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_2" />
+                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_2" />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

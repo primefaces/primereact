@@ -3,7 +3,7 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
     root: 'p-accordion p-component',
-    tab: {
+    accordiontab: {
         root: ({ selected }) =>
             classNames('p-accordion-tab', {
                 'p-accordion-tab-active': selected

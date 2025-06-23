@@ -87,9 +87,13 @@ export const HeaderCell = React.memo((props) => {
 
     const getAriaSort = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            if (sorted && sortOrder < 0) return 'descending';
-            else if (sorted && sortOrder > 0) return 'ascending';
-            else return 'none';
+            if (sorted && sortOrder < 0) {
+                return 'descending';
+            } else if (sorted && sortOrder > 0) {
+                return 'ascending';
+            }
+
+            return 'none';
         }
 
         return null;
@@ -104,20 +108,20 @@ export const HeaderCell = React.memo((props) => {
                 let right = 0;
                 let next = elementRef.current.nextElementSibling;
 
-                if (next) {
+                if (next && next.classList.contains('p-frozen-column')) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
 
-                styleObject['right'] = right + 'px';
+                styleObject.right = right + 'px';
             } else {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
 
-                if (prev) {
+                if (prev && prev.classList.contains('p-frozen-column')) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
 
-                styleObject['left'] = left + 'px';
+                styleObject.left = left + 'px';
             }
 
             let filterRow = elementRef.current.parentElement.nextElementSibling;
@@ -125,11 +129,11 @@ export const HeaderCell = React.memo((props) => {
             if (filterRow) {
                 let index = DomHandler.index(elementRef.current);
 
-                filterRow.children[index].style.left = styleObject['left'];
-                filterRow.children[index].style.right = styleObject['right'];
+                filterRow.children[index].style.left = styleObject.left;
+                filterRow.children[index].style.right = styleObject.right;
             }
 
-            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            const isSameStyle = styleObjectState.left === styleObject.left && styleObjectState.right === styleObject.right;
 
             !isSameStyle && setStyleObjectState(styleObject);
         }
@@ -169,7 +173,7 @@ export const HeaderCell = React.memo((props) => {
     };
 
     const onKeyDown = (event) => {
-        if ((event.code == 'Enter' || event.code == 'Space') && event.currentTarget === elementRef.current && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column') === 'true') {
+        if ((event.code == 'Enter' || event.code === 'NumpadEnter' || event.code == 'Space') && event.target === elementRef.current && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column') === true) {
             onClick(event);
 
             event.preventDefault();
@@ -192,7 +196,7 @@ export const HeaderCell = React.memo((props) => {
         props.onColumnDrop({ originalEvent: event, column: props.column });
     };
 
-    const onResizerMouseDown = (event) => {
+    const onResizeStart = (event) => {
         props.onColumnResizeStart({ originalEvent: event, column: props.column });
     };
 
@@ -233,14 +237,15 @@ export const HeaderCell = React.memo((props) => {
             const columnResizerProps = mergeProps(
                 {
                     className: cx('columnResizer'),
-                    onMouseDown: (e) => onResizerMouseDown(e),
+                    onMouseDown: (e) => onResizeStart(e),
+                    onTouchStart: (e) => onResizeStart(e),
                     onClick: (e) => onResizerClick(e),
                     onDoubleClick: (e) => onResizerDoubleClick(e)
                 },
                 getColumnPTOptions('columnResizer')
             );
 
-            return <span {...columnResizerProps}></span>;
+            return <span {...columnResizerProps} />;
         }
 
         return null;
@@ -299,7 +304,9 @@ export const HeaderCell = React.memo((props) => {
         if (props.showSelectAll && getColumnProp('selectionMode') === 'multiple' && props.filterDisplay !== 'row') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} />;
+            return (
+                <HeaderCheckbox hostName={props.hostName} column={props.column} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} unstyled={props.unstyled} />
+            );
         }
 
         return null;

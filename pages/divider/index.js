@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/divider/basicdoc';
 import { ContentDoc } from '@/components/doc/divider/contentdoc';
 import { ImportDoc } from '@/components/doc/divider/importdoc';
 import { LoginDoc } from '@/components/doc/divider/logindoc';
-import { PTDoc } from '@/components/doc/divider/pt/ptdoc';
 import { Wireframe } from '@/components/doc/divider/pt/wireframe';
 import { TailwindDoc } from '@/components/doc/divider/theming/tailwinddoc';
 import { TypeDoc } from '@/components/doc/divider/typedoc';
@@ -62,11 +61,6 @@ const DividerDemo = () => {
             id: 'pt.divider.options',
             label: 'Divider PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

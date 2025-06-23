@@ -22,6 +22,7 @@ export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPa
  */
 export interface InputTextPassThroughMethodOptions {
     props: InputTextProps;
+    parent: InputTextPassThroughMethodOptions;
     context: InputTextContext;
 }
 
@@ -81,6 +82,11 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     invalid?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;
@@ -97,7 +103,7 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
     /**
      * The value of component
      */
-    value?: string | undefined;
+    value?: string | null | undefined;
     /**
      * Callback to invoke while typing value on input
      * @param {React.FormEvent<HTMLInputElement>} event - Browser event

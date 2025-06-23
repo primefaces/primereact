@@ -10,7 +10,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

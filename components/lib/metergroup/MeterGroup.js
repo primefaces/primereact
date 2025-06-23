@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { useMergeProps } from '../hooks/Hooks';
+import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { MeterGroupBase } from './MeterGroupBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { MeterGroupBase } from './MeterGroupBase';
 
 export const MeterGroup = (inProps) => {
-    const context = useContext(PrimeReactContext);
+    const context = React.useContext(PrimeReactContext);
     const props = MeterGroupBase.getProps(inProps, context);
     const { values, min, max, orientation, labelPosition, start, end, meter, labelList } = props;
 
@@ -19,14 +19,14 @@ export const MeterGroup = (inProps) => {
         }
     });
 
-    useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'progressbar' });
+    useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'metergroup' });
 
     let totalPercent = 0;
-    let precentages = [];
+    let percentages = [];
 
     values.map((item) => {
-        totalPercent += item.value;
-        precentages.push(Math.round((item.value / totalPercent) * 100));
+        totalPercent = totalPercent + item.value;
+        percentages.push(Math.round((item.value / totalPercent) * 100));
     });
 
     const calculatePercentage = (meterValue = 0) => {
@@ -69,9 +69,9 @@ export const MeterGroup = (inProps) => {
                 );
 
                 return ObjectUtils.getJSXElement(item.meterTemplate || meter, { ...item, percentage: calculatedPercantage, index }, meterTemplateProps);
-            } else {
-                return <span key={index} {...meterProps} />;
             }
+
+            return <span key={index} {...meterProps} />;
         });
 
         const meterContainerProps = mergeProps(
@@ -126,12 +126,13 @@ export const MeterGroup = (inProps) => {
                     );
 
                     const labelIcon = item.icon ? <i {...labelIconProps} /> : <span {...labelListIconProps} />;
+                    const itemPercentage = calculatePercentage(item.value);
 
                     return (
                         <li key={index} {...labelItemProps}>
                             {labelIcon}
                             <span {...labelProps}>
-                                {item?.label} {item?.value && `(${item?.value}%)`}
+                                {item?.label} {`(${itemPercentage}%)`}
                             </span>
                         </li>
                     );
@@ -142,11 +143,12 @@ export const MeterGroup = (inProps) => {
 
     const templateProps = {
         totalPercent,
-        precentages,
+        percentages,
         values
     };
 
-    const labelElement = ObjectUtils.getJSXElement(labelList || createLabelList, { values, totalPercent });
+    const labelListContent = labelList || createLabelList();
+    const labelElement = ObjectUtils.getJSXElement(labelListContent, { values, totalPercent });
 
     return (
         <div {...rootProps} role="meter" aria-valuemin={min} aria-valuemax={max} aria-valuenow={totalPercent}>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { Checkbox } from '../checkbox/Checkbox';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
@@ -61,10 +62,10 @@ export const MultiStateCheckbox = React.memo(
                     originalEvent: event,
                     value: newValue,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -91,7 +92,8 @@ export const MultiStateCheckbox = React.memo(
         };
 
         const getSelectedOptionMap = () => {
-            let option, index;
+            let option;
+            let index;
 
             if (props.options) {
                 index = props.options.findIndex((option) => ObjectUtils.equals(props.value, getOptionValue(option), equalityKey));
@@ -151,8 +153,7 @@ export const MultiStateCheckbox = React.memo(
         const otherProps = MultiStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const icon = createIcon();
-        const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
-        const ariaChecked = !!selectedOption ? 'true' : 'false';
+        const ariaValueLabel = selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
 
         const rootProps = mergeProps(
             {
@@ -168,14 +169,17 @@ export const MultiStateCheckbox = React.memo(
 
         const checkboxProps = mergeProps(
             {
-                className: cx('checkbox', { focusedState, selectedOption }),
+                id: props.id + '_checkbox',
+                className: cx('checkbox'),
                 style: sx('checkbox', { selectedOption }),
                 tabIndex: props.tabIndex,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
-                role: 'checkbox',
-                'aria-checked': ariaChecked,
+                onChange: onClick,
+                checked: !!selectedOption,
+                disabled: props?.disabled,
+                icon,
                 ...ariaProps
             },
             ptm('checkbox')
@@ -183,7 +187,7 @@ export const MultiStateCheckbox = React.memo(
 
         const srOnlyAriaProps = mergeProps(
             {
-                className: 'p-sr-only p-hidden-accessible',
+                className: 'p-hidden-accessible',
                 'aria-live': 'polite'
             },
             ptm('srOnlyAria')
@@ -192,7 +196,7 @@ export const MultiStateCheckbox = React.memo(
         return (
             <>
                 <div {...rootProps}>
-                    <div {...checkboxProps}>{icon}</div>
+                    <Checkbox {...checkboxProps} />
                     {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}

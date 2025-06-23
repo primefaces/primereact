@@ -94,7 +94,7 @@ export default function BasicDemo() {
             <div className="card flex flex-column md:flex-row gap-3">
                 <div className="p-inputgroup flex-1">
                     <span className="p-inputgroup-addon">
-                        <i className="pi pi-user"></i>
+                        <i className="pi pi-user" />
                     </span>
                     <InputText placeholder="Username" />
                 </div>

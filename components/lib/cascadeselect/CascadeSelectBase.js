@@ -1,30 +1,22 @@
-import PrimeReact from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState }) =>
-        classNames(
-            'p-cascadeselect p-component p-inputwrapper',
-            {
-                'p-disabled': props.disabled,
-                'p-invalid': props.invalid,
-                'p-focus': focusedState,
-                'p-inputwrapper-filled': props.value,
-                'p-inputwrapper-focus': focusedState || overlayVisibleState
-            },
-            props.className
-        ),
+    root: ({ props, focusedState, overlayVisibleState, context }) =>
+        classNames('p-cascadeselect p-component p-inputwrapper', {
+            'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
+            'p-focus': focusedState,
+            'p-inputwrapper-filled': props.value,
+            'p-inputwrapper-focus': focusedState || overlayVisibleState
+        }),
     label: ({ props, label }) =>
         classNames('p-cascadeselect-label ', {
             'p-placeholder': label === props.placeholder,
             'p-cascadeselect-label-empty': !props.value && label === 'p-emptylabel'
         }),
-    list: ({ context }) =>
-        classNames('p-cascadeselect-panel p-cascadeselect-items', {
-            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-        }),
+    list: 'p-cascadeselect-panel p-cascadeselect-items',
     sublistWrapper: 'p-cascadeselect-sublist-wrapper',
     sublist: 'p-cascadeselect-panel p-cascadeselect-items p-cascadeselect-sublist',
     item: ({ option, isGroup, isSelected }) =>
@@ -33,6 +25,7 @@ const classes = {
             'p-cascadeselect-item-active p-highlight': isSelected
         }),
     dropdownIcon: 'p-cascadeselect-trigger-icon',
+    clearIcon: 'p-cascadeselect-clear-icon p-clickable',
     loadingIcon: 'p-cascadeselect-trigger-icon',
     dropdownButton: 'p-cascadeselect-trigger',
     loadingButton: 'p-cascadeselect-trigger',
@@ -127,6 +120,12 @@ const styles = `
         left: 100%;
         top: 0;
     }
+    .p-cascadeselect-clear-icon {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5rem;
+        right: 3rem;
+    }
 }
 `;
 
@@ -142,10 +141,12 @@ export const CascadeSelectBase = ComponentBase.extend({
         disabled: false,
         loadingIcon: null,
         dropdownIcon: null,
+        loading: false,
         id: null,
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         itemTemplate: null,
         name: null,
         onBeforeHide: null,
@@ -160,6 +161,8 @@ export const CascadeSelectBase = ComponentBase.extend({
         optionLabel: null,
         optionValue: null,
         options: null,
+        panelClassName: null,
+        panelStyle: null,
         placeholder: null,
         scrollHeight: '400px',
         style: null,

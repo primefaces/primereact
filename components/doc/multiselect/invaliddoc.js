@@ -15,8 +15,8 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
-    placeholder="Select Cities" maxSelectedLabels={3} className="p-invalid w-full md:w-20rem" />
+<MultiSelect invalid value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
+    placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -34,8 +34,8 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
-                placeholder="Select Cities" maxSelectedLabels={3} className="p-invalid w-full md:w-20rem" />
+            <MultiSelect invalid value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>
     );
 }
@@ -61,8 +61,8 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <MultiSelect value={selectedCities} onChange={(e: MultiSelectChangeEvent) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
-                placeholder="Select Cities" maxSelectedLabels={3} className="p-invalid w-full md:w-20rem" />
+            <MultiSelect invalid value={selectedCities} onChange={(e: MultiSelectChangeEvent) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>
     );
 }
@@ -73,11 +73,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="p-invalid w-full md:w-20rem" />
+                <MultiSelect invalid value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
             </div>
             <DocSectionCode code={code} />
         </>

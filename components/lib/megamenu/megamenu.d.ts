@@ -250,7 +250,7 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 export declare class MegaMenu extends React.Component<MegaMenuProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

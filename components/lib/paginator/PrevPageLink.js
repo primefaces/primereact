@@ -38,7 +38,7 @@ export const PrevPageLink = React.memo((inProps) => {
             className: cx('prevPageButton', { disabled: props.disabled }),
             onClick: props.onClick,
             disabled: props.disabled,
-            'aria-label': ariaLabel('previousPageLabel')
+            'aria-label': ariaLabel('prevPageLabel')
         },
         getPTOptions('prevPageButton')
     );

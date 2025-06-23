@@ -19,10 +19,10 @@ export function ColorDoc(props) {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center align-items-center gap-3">
-                <i className="pi pi-check" style={{ color: 'slateblue' }}></i>
-                <i className="pi pi-times" style={{ color: 'green' }}></i>
-                <i className="pi pi-search" style={{ color: 'var(--primary-color)' }}></i>
-                <i className="pi pi-user" style={{ color: '#708090' }}></i>
+                <i className="pi pi-check" style={{ color: 'slateblue' }} />
+                <i className="pi pi-times" style={{ color: 'green' }} />
+                <i className="pi pi-search" style={{ color: 'var(--primary-color)' }} />
+                <i className="pi pi-user" style={{ color: '#708090' }} />
             </div>
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>

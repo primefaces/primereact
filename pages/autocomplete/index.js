@@ -2,16 +2,14 @@ import { AccessibilityDoc } from '@/components/doc/autocomplete/accessibilitydoc
 import { BasicDoc } from '@/components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '@/components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '@/components/doc/autocomplete/dropdowndoc';
+import { FilledDoc } from '@/components/doc/autocomplete/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '@/components/doc/autocomplete/forceselectiondoc';
-import { FormikDoc } from '@/components/doc/autocomplete/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/autocomplete/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '@/components/doc/autocomplete/importdoc';
 import { InvalidDoc } from '@/components/doc/autocomplete/invaliddoc';
 import { MultipleDoc } from '@/components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '@/components/doc/autocomplete/objectsdoc';
-import { PTDoc } from '@/components/doc/autocomplete/pt/ptdoc';
 import { Wireframe } from '@/components/doc/autocomplete/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/autocomplete/templatedoc';
 import { StyledDoc } from '@/components/doc/autocomplete/theming/styleddoc';
@@ -73,6 +71,11 @@ const AutoCompleteDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -81,23 +84,6 @@ const AutoCompleteDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
         },
         {
             id: 'accessibility',
@@ -115,11 +101,6 @@ const AutoCompleteDemo = () => {
             id: 'pt.autocomplete.options',
             label: 'AutoComplete PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

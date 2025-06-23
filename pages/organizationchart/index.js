@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/organizationchart/accessibili
 import { BasicDoc } from '@/components/doc/organizationchart/basicdoc';
 import { ColoredDoc } from '@/components/doc/organizationchart/coloreddoc';
 import { ImportDoc } from '@/components/doc/organizationchart/importdoc';
-import { PTDoc } from '@/components/doc/organizationchart/pt/ptdoc';
 import { Wireframe } from '@/components/doc/organizationchart/pt/wireframe';
 import { SelectionDoc } from '@/components/doc/organizationchart/selectiondoc';
 import { TemplateDoc } from '@/components/doc/organizationchart/templatedoc';
@@ -55,11 +54,6 @@ const OrganizationChartDemo = () => {
             id: 'pt.organizationchart.options',
             label: 'OrganizationChart PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

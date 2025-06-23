@@ -22,7 +22,7 @@ const BootstrapDemo = () => {
     is a well-known CSS library to build responsive and mobile first web projects.
     `;
 
-    return <DocComponent title="Bootstrap - PrimeReact" header="Bootstrap" description={description} componentDocs={docs} hideTabMenu></DocComponent>;
+    return <DocComponent title="Bootstrap - PrimeReact" header="Bootstrap" description={description} componentDocs={docs} hideTabMenu />;
 };
 
 export default BootstrapDemo;

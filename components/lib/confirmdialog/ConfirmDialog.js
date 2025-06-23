@@ -92,10 +92,16 @@ export const ConfirmDialog = React.memo(
         };
 
         const hide = (result = 'cancel') => {
-            setVisibleState(false);
-            callbackFromProp('onHide', { result });
-            DomHandler.focus(focusElementOnHide.current);
-            focusElementOnHide.current = null;
+            if (visibleState) {
+                if (typeof result !== 'string') {
+                    result = 'cancel';
+                }
+
+                setVisibleState(false);
+                callbackFromProp('onHide', result);
+                DomHandler.focus(focusElementOnHide.current);
+                focusElementOnHide.current = null;
+            }
         };
 
         const confirm = (updatedProps) => {
@@ -154,18 +160,21 @@ export const ConfirmDialog = React.memo(
                 getPropValue('rejectClassName')
             );
 
-            const rejectButtonProps = {
-                label: rejectLabel,
-                autoFocus: defaultFocus === 'reject',
-                icon: getPropValue('rejectIcon'),
-                className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
-                onClick: reject,
-                pt: ptm('rejectButton'),
-                unstyled: props.unstyled,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            };
+            const rejectButtonProps = mergeProps(
+                {
+                    label: rejectLabel,
+                    autoFocus: defaultFocus === 'reject',
+                    icon: getPropValue('rejectIcon'),
+                    className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
+                    onClick: reject,
+                    pt: ptm('rejectButton'),
+                    unstyled: props.unstyled,
+                    __parentMetadata: {
+                        parent: metaData
+                    }
+                },
+                ptm('rejectButton')
+            );
 
             const acceptButtonProps = mergeProps(
                 {

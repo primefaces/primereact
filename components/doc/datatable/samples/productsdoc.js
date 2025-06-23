@@ -1,9 +1,12 @@
+import DeferredDemo from '@/components/demo/DeferredDemo';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dialog } from '@/components/lib/dialog/Dialog';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { InputTextarea } from '@/components/lib/inputtextarea/InputTextarea';
@@ -13,9 +16,8 @@ import { Tag } from '@/components/lib/tag/Tag';
 import { Toast } from '@/components/lib/toast/Toast';
 import { Toolbar } from '@/components/lib/toolbar/Toolbar';
 import { classNames } from '@/components/lib/utils/Utils';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
-import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ProductsDoc(props) {
     let emptyProduct = {
@@ -130,7 +132,7 @@ export function ProductsDoc(props) {
         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
         for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
+            id = id + chars.charAt(Math.floor(Math.random() * chars.length));
         }
 
         return id;
@@ -156,7 +158,7 @@ export function ProductsDoc(props) {
     const onCategoryChange = (e) => {
         let _product = { ...product };
 
-        _product['category'] = e.value;
+        _product.category = e.value;
         setProduct(_product);
     };
 
@@ -204,7 +206,7 @@ export function ProductsDoc(props) {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData)}></Tag>;
+        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData)} />;
     };
 
     const actionBodyTemplate = (rowData) => {
@@ -235,10 +237,10 @@ export function ProductsDoc(props) {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage Products</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
-            </span>
+            </IconField>
         </div>
     );
     const productDialogFooter = (
@@ -290,6 +292,8 @@ import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
@@ -514,10 +518,10 @@ export default function ProductsDemo() {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage Products</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
-            </span>
+            </IconField>
         </div>
     );
     const productDialogFooter = (
@@ -648,6 +652,8 @@ import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { RadioButton, RadioButtonChangeEvent } from 'primereact/radiobutton';
 import { InputNumber,InputNumberValueChangeEvent } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
@@ -855,7 +861,7 @@ export default function ProductsDemo() {
     };
 
     const imageBodyTemplate = (rowData: Product) => {
-        return <img src={https://primefaces.org/cdn/primereact/images/product/\${rowData.image}} alt={rowData.image!} className="shadow-2 border-round" style={{ width: '64px' }} />;
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image!} className="shadow-2 border-round" style={{ width: '64px' }} />;
     };
 
     const priceBodyTemplate = (rowData: Product) => {
@@ -898,10 +904,10 @@ export default function ProductsDemo() {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage Products</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" placeholder="Search..." onInput={(e) => {const target = e.target as HTMLInputElement; setGlobalFilter(target.value);}}  />
-            </span>
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
+                 <InputText type="search" placeholder="Search..." onInput={(e) => {const target = e.target as HTMLInputElement; setGlobalFilter(target.value);}}  />
+            </IconField>
         </div>
     );
     const productDialogFooter = (
@@ -953,7 +959,7 @@ export default function ProductsDemo() {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={https://primefaces.org/cdn/primereact/images/product/\${product.image}} alt={product.image} className="product-image block m-auto pb-3" />}
+                {product.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.image} className="product-image block m-auto pb-3" />}
                 <div className="field">
                     <label htmlFor="name" className="font-bold">
                         Name
@@ -1053,7 +1059,7 @@ export default function ProductsDemo() {
             <Toast ref={toast} />
             <DeferredDemo onLoad={loadDemoData}>
                 <div className="card">
-                    <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                    <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate} />
 
                     <DataTable
                         ref={dt}
@@ -1069,15 +1075,15 @@ export default function ProductsDemo() {
                         globalFilter={globalFilter}
                         header={header}
                     >
-                        <Column selectionMode="multiple" exportable={false}></Column>
-                        <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
-                        <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
-                        <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                        <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
-                        <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
-                        <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                        <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                        <Column selectionMode="multiple" exportable={false} />
+                        <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }} />
+                        <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }} />
+                        <Column field="image" header="Image" body={imageBodyTemplate} />
+                        <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }} />
+                        <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }} />
+                        <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }} />
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }} />
+                        <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

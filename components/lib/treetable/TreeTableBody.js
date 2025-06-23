@@ -108,49 +108,45 @@ export const TreeTableBody = React.memo((props) => {
                             });
                         }
                     }
-                } else {
-                    if (isSingleSelectionMode) {
-                        if (selected) {
-                            selectionKeys = null;
+                } else if (isSingleSelectionMode) {
+                    if (selected) {
+                        selectionKeys = null;
 
-                            if (props.onUnselect) {
-                                props.onUnselect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
-                        } else {
-                            selectionKeys = node.key;
-
-                            if (props.onSelect) {
-                                props.onSelect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
+                        if (props.onUnselect) {
+                            props.onUnselect({
+                                originalEvent: event,
+                                node: node
+                            });
                         }
                     } else {
-                        if (selected) {
-                            selectionKeys = { ...props.selectionKeys };
-                            delete selectionKeys[node.key];
+                        selectionKeys = node.key;
 
-                            if (props.onUnselect) {
-                                props.onUnselect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
-                        } else {
-                            selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
-                            selectionKeys[node.key] = true;
-
-                            if (props.onSelect) {
-                                props.onSelect({
-                                    originalEvent: event,
-                                    node: node
-                                });
-                            }
+                        if (props.onSelect) {
+                            props.onSelect({
+                                originalEvent: event,
+                                node: node
+                            });
                         }
+                    }
+                } else if (selected) {
+                    selectionKeys = { ...props.selectionKeys };
+                    delete selectionKeys[node.key];
+
+                    if (props.onUnselect) {
+                        props.onUnselect({
+                            originalEvent: event,
+                            node: node
+                        });
+                    }
+                } else {
+                    selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
+                    selectionKeys[node.key] = true;
+
+                    if (props.onSelect) {
+                        props.onSelect({
+                            originalEvent: event,
+                            node: node
+                        });
                     }
                 }
             }
@@ -165,8 +161,11 @@ export const TreeTableBody = React.memo((props) => {
     };
 
     const isSelected = (node) => {
-        if ((isSingleSelectionMode || isMultipleSelectionMode) && props.selectionKeys) return isSingleSelectionMode ? props.selectionKeys === node.key : props.selectionKeys[node.key] !== undefined;
-        else return false;
+        if ((isSingleSelectionMode || isMultipleSelectionMode) && props.selectionKeys) {
+            return isSingleSelectionMode ? props.selectionKeys === node.key : props.selectionKeys[node.key] !== undefined;
+        }
+
+        return false;
     };
 
     const createRow = (node, index) => {
@@ -219,41 +218,44 @@ export const TreeTableBody = React.memo((props) => {
             for (let i = startIndex; i < endIndex; i++) {
                 let rowData = props.value[i];
 
-                if (rowData) rows.push(createRow(props.value[i]));
-                else break;
+                if (rowData) {
+                    rows.push(createRow(props.value[i]));
+                } else {
+                    break;
+                }
             }
 
             return rows;
-        } else {
-            return props.value.map(createRow);
         }
+
+        return props.value.map(createRow);
     };
 
     const createEmptyMessage = () => {
         if (props.loading) {
             return null;
-        } else {
-            const colSpan = props.columns ? props.columns.length : null;
-            const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps }) || localeOption('emptyMessage');
-            const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                getPTOptions('emptyMessage')
-            );
-            const emptyMessageCellProps = mergeProps(
-                {
-                    colSpan
-                },
-                getPTOptions('emptyMessageCell')
-            );
-
-            return (
-                <tr {...emptyMessageProps}>
-                    <td {...emptyMessageCellProps}>{content}</td>
-                </tr>
-            );
         }
+
+        const colSpan = props.columns ? props.columns.length : null;
+        const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps }) || localeOption('emptyMessage');
+        const emptyMessageProps = mergeProps(
+            {
+                className: cx('emptyMessage')
+            },
+            getPTOptions('emptyMessage')
+        );
+        const emptyMessageCellProps = mergeProps(
+            {
+                colSpan
+            },
+            getPTOptions('emptyMessageCell')
+        );
+
+        return (
+            <tr {...emptyMessageProps}>
+                <td {...emptyMessageCellProps}>{content}</td>
+            </tr>
+        );
     };
 
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();

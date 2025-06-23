@@ -42,15 +42,8 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>
-                , choose from the wide range of blocks and customize the way you like. Note that{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>{' '}
-                is not included in the template and requires a separate purchase.
+                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
+                the template and requires a separate purchase.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-blocks.png'

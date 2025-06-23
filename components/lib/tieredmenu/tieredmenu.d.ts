@@ -213,7 +213,7 @@ export declare class TieredMenu extends React.Component<TieredMenuProps, any> {
     public toggle(event: React.SyntheticEvent): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

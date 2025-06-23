@@ -8,7 +8,6 @@ import { EventDoc } from '@/components/doc/tooltip/eventdoc';
 import { ImportDoc } from '@/components/doc/tooltip/importdoc';
 import { MouseTrackDoc } from '@/components/doc/tooltip/mousetrackdoc';
 import { PositionDoc } from '@/components/doc/tooltip/positiondoc';
-import { PTDoc } from '@/components/doc/tooltip/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tooltip/pt/wireframe';
 import { ReactiveDoc } from '@/components/doc/tooltip/reactivedoc';
 import { TargetDoc } from '@/components/doc/tooltip/targetdoc';
@@ -85,11 +84,6 @@ const TooltipDemo = () => {
             id: 'pt.tooltip.options',
             label: 'Tooltip PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

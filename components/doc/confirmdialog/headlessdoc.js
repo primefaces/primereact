@@ -233,7 +233,7 @@ export default function HeadlessDemo() {
                 content={({ headerRef, contentRef, footerRef, hide, message }) => (
                     <div className="flex flex-column align-items-center p-5 surface-overlay border-round">
                         <div className="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
-                            <i className="pi pi-question text-5xl"></i>
+                            <i className="pi pi-question text-5xl" />
                         </div>
                         <span className="font-bold text-2xl block mb-2 mt-4" ref={headerRef}>
                             {message.header}
@@ -249,7 +249,7 @@ export default function HeadlessDemo() {
                                     accept();
                                 }}
                                 className="w-8rem"
-                            ></Button>
+                            />
                             <Button
                                 label="Cancel"
                                 outlined
@@ -258,13 +258,13 @@ export default function HeadlessDemo() {
                                     reject();
                                 }}
                                 className="w-8rem"
-                            ></Button>
+                            />
                         </div>
                     </div>
                 )}
             />
             <div className="card flex flex-wrap gap-2 justify-content-center">
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" />
             </div>
             <DocSectionCode code={code} />
         </div>

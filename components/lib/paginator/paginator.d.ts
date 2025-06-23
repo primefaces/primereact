@@ -740,7 +740,7 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 export declare class Paginator extends React.Component<PaginatorProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

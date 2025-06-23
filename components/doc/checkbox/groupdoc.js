@@ -9,8 +9,11 @@ export function GroupDoc(props) {
     const onIngredientsChange = (e) => {
         let _ingredients = [...ingredients];
 
-        if (e.checked) _ingredients.push(e.value);
-        else _ingredients.splice(_ingredients.indexOf(e.value), 1);
+        if (e.checked) {
+            _ingredients.push(e.value);
+        } else {
+            _ingredients.splice(_ingredients.indexOf(e.value), 1);
+        }
 
         setIngredients(_ingredients);
     };

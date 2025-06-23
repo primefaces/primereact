@@ -31,13 +31,9 @@ export const KnobBase = ComponentBase.extend({
             value: 'p-knob-value',
             label: 'p-knob-text',
             root: ({ props }) =>
-                classNames(
-                    'p-knob p-component',
-                    {
-                        'p-disabled': props.disabled
-                    },
-                    props.className
-                )
+                classNames('p-knob p-component', {
+                    'p-disabled': props.disabled
+                })
         },
         styles: `
         @keyframes dash-frame {
@@ -49,6 +45,7 @@ export const KnobBase = ComponentBase.extend({
             .p-knob-range {
                 fill: none;
                 transition: stroke .1s ease-in;
+                cursor: pointer;
             }
             .p-knob-value {
                 animation-name: dash-frame;

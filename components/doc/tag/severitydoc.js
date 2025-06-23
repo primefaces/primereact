@@ -59,13 +59,13 @@ export default function SeverityDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
-                <Tag value="Primary"></Tag>
-                <Tag severity="success" value="Success"></Tag>
-                <Tag severity="info" value="Info"></Tag>
-                <Tag severity="warning" value="Warning"></Tag>
-                <Tag severity="danger" value="Danger"></Tag>
-                <Tag severity="secondary" value="Secondary"></Tag>
-                <Tag severity="contrast" value="Contrast"></Tag>
+                <Tag value="Primary" />
+                <Tag severity="success" value="Success" />
+                <Tag severity="info" value="Info" />
+                <Tag severity="warning" value="Warning" />
+                <Tag severity="danger" value="Danger" />
+                <Tag severity="secondary" value="Secondary" />
+                <Tag severity="contrast" value="Contrast" />
             </div>
             <DocSectionCode code={code} />
         </>

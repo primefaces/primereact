@@ -39,18 +39,18 @@ export function BasicDoc(props) {
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <Rating value={product.rating} readOnly cancel={false} />
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
+                                    <i className="pi pi-tag" />
                                     <span className="font-semibold">{product.category}</span>
                                 </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                                <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <span className="text-2xl font-semibold">${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'} />
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,9 @@ export function BasicDoc(props) {
     };
 
     const listTemplate = (items) => {
-        if (!items || items.length === 0) return null;
+        if (!items || items.length === 0) {
+            return null;
+        }
 
         let list = items.map((product, index) => {
             return itemTemplate(product, index);

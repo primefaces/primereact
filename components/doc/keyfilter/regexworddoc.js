@@ -29,7 +29,7 @@ export function RegexWordDoc(props) {
 
     const code = {
         basic: `
-<InputText id="numkeys" keyfilter={/^[+]?(\d{1,12})?$/} validateOnly onInput={validateInput} />
+<InputText id="numkeys" keyfilter={/^[+]?(\\d{1,12})?$/} validateOnly onInput={validateInput} />
         `,
         javascript: `
 import React, { useState }  from 'react'; 
@@ -65,7 +65,7 @@ export default function RegexDemo() {
                 <label htmlFor="numkeys" className="font-bold block mb-2">
                     Block Numeric (allow "+" only once at start)
                 </label>
-                <InputText id="numkeys" keyfilter={/^[+]?(\d{1,12})?$/} validateOnly onInput={validateInput} />
+                <InputText id="numkeys" keyfilter={/^[+]?(\\d{1,12})?$/} validateOnly onInput={validateInput} />
             </div>
         </div>
     )
@@ -105,7 +105,7 @@ export default function RegexDemo() {
                 <label htmlFor="numkeys" className="font-bold block mb-2">
                     Block Numeric (allow "+" only once at start)
                 </label>
-                <InputText id="numkeys" keyfilter={/^[+]?(\d{1,12})?$/} validateOnly onInput={validateInput} />
+                <InputText id="numkeys" keyfilter={/^[+]?(\\d{1,12})?$/} validateOnly onInput={validateInput} />
             </div>
         </div>
     )

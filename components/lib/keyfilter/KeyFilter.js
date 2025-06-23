@@ -34,7 +34,7 @@ export const KeyFilter = {
             return;
         }
 
-        if (e.ctrlKey || e.altKey) {
+        if (e.ctrlKey || e.altKey || e.metaKey) {
             return;
         }
 
@@ -64,7 +64,8 @@ export const KeyFilter = {
             return;
         }
 
-        const isPrintableKey = key.length === 1;
+        // some AZERTY keys come in with 2 chars like ´ç if Dead key is pressed first
+        const isPrintableKey = key.length <= 2;
 
         if (!isPrintableKey) {
             return;
@@ -78,8 +79,8 @@ export const KeyFilter = {
     },
 
     validate(e, keyfilter) {
-        let value = e.target.value,
-            validatePattern = true;
+        let value = e.target.value;
+        let validatePattern = true;
 
         const regex = this.getRegex(keyfilter);
 

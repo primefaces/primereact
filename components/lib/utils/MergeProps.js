@@ -8,30 +8,34 @@
  * @returns the single properties value after merging
  */
 export function mergeProps(props, options = {}) {
-    if (!props) return undefined;
+    if (!props) {
+        return undefined;
+    }
 
     const isFunction = (obj) => typeof obj === 'function';
     const { classNameMergeFunction } = options;
     const hasMergeFunction = isFunction(classNameMergeFunction);
 
     return props.reduce((merged, ps) => {
-        if (!ps) return merged;
+        if (!ps) {
+            return merged;
+        }
 
         for (const key in ps) {
             const value = ps[key];
 
             if (key === 'style') {
-                merged['style'] = { ...merged['style'], ...ps['style'] };
+                merged.style = { ...merged.style, ...ps.style };
             } else if (key === 'className') {
                 let newClassName = '';
 
                 if (hasMergeFunction) {
-                    newClassName = classNameMergeFunction(merged['className'], ps['className']);
+                    newClassName = classNameMergeFunction(merged.className, ps.className);
                 } else {
-                    newClassName = [merged['className'], ps['className']].join(' ').trim();
+                    newClassName = [merged.className, ps.className].join(' ').trim();
                 }
 
-                merged['className'] = newClassName || undefined;
+                merged.className = newClassName || undefined;
             } else if (isFunction(value)) {
                 const existingFn = merged[key];
 

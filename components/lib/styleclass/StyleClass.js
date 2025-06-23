@@ -63,8 +63,11 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
             targetRef.current = resolveTarget();
 
             if (props.toggleClassName) {
-                if (DomHandler.hasClass(targetRef.current, props.toggleClassName)) DomHandler.removeClass(targetRef.current, props.toggleClassName);
-                else DomHandler.addClass(targetRef.current, props.toggleClassName);
+                if (DomHandler.hasClass(targetRef.current, props.toggleClassName)) {
+                    DomHandler.removeClass(targetRef.current, props.toggleClassName);
+                } else {
+                    DomHandler.addClass(targetRef.current, props.toggleClassName);
+                }
             } else {
                 DomHandler.isVisible(targetRef.current) ? leave() : enter();
             }

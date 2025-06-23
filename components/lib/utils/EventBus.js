@@ -5,8 +5,11 @@ export default function EventBus() {
         on(type, handler) {
             let handlers = allHandlers.get(type);
 
-            if (!handlers) handlers = [handler];
-            else handlers.push(handler);
+            if (!handlers) {
+                handlers = [handler];
+            } else {
+                handlers.push(handler);
+            }
 
             allHandlers.set(type, handlers);
         },

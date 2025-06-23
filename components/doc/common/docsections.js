@@ -12,7 +12,10 @@ export function DocSections({ docs }) {
             for (const parentKey in APIDocs) {
                 if (APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`]) {
                     values = APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`] || null;
-                    if (values) break;
+
+                    if (values) {
+                        break;
+                    }
                 }
             }
         }

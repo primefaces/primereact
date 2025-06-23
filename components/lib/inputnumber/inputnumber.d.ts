@@ -238,6 +238,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that the element must be filled out before submitting the form.
      * @defaultValue false
      */
@@ -362,12 +367,12 @@ export declare class InputNumber extends React.Component<InputNumberProps, any> 
     public getFormatter(): any;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLSpanElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get input element.
-     * @return {InputText} Input element
+     * @return {InputText | null} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): typeof InputText | null;
 }

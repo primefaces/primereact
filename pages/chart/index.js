@@ -10,7 +10,6 @@ import { LineStylesDoc } from '@/components/doc/chart/linestylesdoc';
 import { MultiAxisDoc } from '@/components/doc/chart/multiaxisdoc';
 import { PieChartDoc } from '@/components/doc/chart/piechartdoc';
 import { PolarAreaDoc } from '@/components/doc/chart/polarareadoc';
-import { PTDoc } from '@/components/doc/chart/pt/ptdoc';
 import { Wireframe } from '@/components/doc/chart/pt/wireframe';
 import { RadarDoc } from '@/components/doc/chart/radardoc';
 import { StackedBarDoc } from '@/components/doc/chart/stackedbardoc';
@@ -108,11 +107,6 @@ const ChartDemo = () => {
             id: 'pt.chart.options',
             label: 'Chart PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

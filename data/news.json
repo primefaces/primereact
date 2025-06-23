@@ -1,6 +1,7 @@
 {
-    "id": 46,
-    "content": "Apollo | Next.js Admin Template!",
+    "id": 52,
+    "content": "Introducing Genesis Template 🚀",
     "linkText": "View Demo",
-    "linkHref": "https://apollo.primereact.org"
+    "linkHref": "https://genesis.primereact.org",
+    "target": "_blank"
 }

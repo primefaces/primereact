@@ -121,7 +121,7 @@ export const OrganizationChartNode = React.memo((props) => {
             <tr {...linesProps}>
                 {node.children && node.children.length === 1 && (
                     <td {...lineCellProps}>
-                        <div {...lineDownProps}></div>
+                        <div {...lineDownProps} />
                     </td>
                 )}
                 {node.children &&
@@ -179,7 +179,7 @@ export const OrganizationChartNode = React.memo((props) => {
         return (
             <tr {...linesProps}>
                 <td {...lineCellProps}>
-                    <div {...lineDownProps}></div>
+                    <div {...lineDownProps} />
                 </td>
             </tr>
         );

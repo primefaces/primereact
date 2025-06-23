@@ -360,6 +360,29 @@ interface TreeSelectFilterOptions {
 }
 
 /**
+ * Custom click event
+ * @see {@link TreeSelectProps.onNodeClick}
+ */
+interface TreeSelectNodeClickEvent {
+    /**
+     * Browser event
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * The current node
+     */
+    node: TreeNode;
+}
+
+/**
+ * Custom double click event.
+ * @see {@link TreeSelectProps.onNodeDoubleClick}
+ * @extends {TreeSelectNodeClickEvent}
+ * @event
+ */
+interface TreeSelectNodeDoubleClickEvent extends TreeSelectNodeClickEvent {}
+
+/**
  * Defines valid properties in TreeSelect component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -411,8 +434,9 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     dropdownIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * Text to display when there is no data.
+     * @defaultValue No available options
      */
-    emptyMessage?: string | undefined;
+    emptyMessage?: React.ReactNode | ((props: TreeSelectProps) => React.ReactNode) | undefined;
     /**
      * An array of keys to represent the state of the treeselect expansion state in controlled mode.
      */
@@ -427,6 +451,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @defaultValue label
      */
     filterBy?: string | undefined;
+    /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
     /**
      * Icon of the filter.
      */
@@ -455,7 +484,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
     /**
-     * When filtering is enabled, the value of input field.
+     * When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.
      */
     filterValue?: string | undefined;
     /**
@@ -504,6 +533,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * Hint text for the input field.
      */
     placeholder?: string | undefined;
+    /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
     /**
      * When present, it specifies that the component should have invalid state style.
      * @defaultValue false
@@ -585,10 +619,20 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     onHide?(): void;
     /**
+     * Callback to invoke when the node is clicked.
+     * @param {TreeSelectNodeClickEvent} event - Custom click event.
+     */
+    onNodeClick?(event: TreeSelectNodeClickEvent): void;
+    /**
      * Callback to invoke when a node is collapsed.
      * @param {TreeSelectEventNodeEvent} event - Custom change event.
      */
     onNodeCollapse?(event: TreeSelectEventNodeEvent): void;
+    /**
+     * Callback to invoke when the node is double-clicked.
+     * @param {TreeSelectNodeDoubleClickEvent} event - Custom doubleclick event.
+     */
+    onNodeDoubleClick?(event: TreeSelectNodeDoubleClickEvent): void;
     /**
      * Callback to invoke when a node is expanded.
      * @param {TreeSelectEventNodeEvent} event - Custom change event.
@@ -645,7 +689,7 @@ export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
     public hide(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

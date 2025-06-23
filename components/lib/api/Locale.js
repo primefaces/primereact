@@ -29,6 +29,7 @@ let locales = {
         emptySelectionMessage: 'No selected item',
         endsWith: 'Ends with',
         equals: 'Equals',
+        fileChosenMessage: '{0} files',
         fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
         filter: 'Filter',
         firstDayOfWeek: 0,
@@ -47,6 +48,7 @@ let locales = {
         nextMonth: 'Next Month',
         nextSecond: 'Next Second',
         nextYear: 'Next Year',
+        noFileChosenMessage: 'No file chosen',
         noFilter: 'No Filter',
         notContains: 'Not contains',
         notEquals: 'Not equals',
@@ -74,8 +76,10 @@ let locales = {
         aria: {
             cancelEdit: 'Cancel Edit',
             close: 'Close',
+            collapseLabel: 'Collapse',
             collapseRow: 'Row Collapsed',
             editRow: 'Edit Row',
+            expandLabel: 'Expand',
             expandRow: 'Row Expanded',
             falseLabel: 'False',
             filterConstraint: 'Filter Constraint',
@@ -86,6 +90,7 @@ let locales = {
             jumpToPageDropdownLabel: 'Jump to Page Dropdown',
             jumpToPageInputLabel: 'Jump to Page Input',
             lastPageLabel: 'Last Page',
+            listLabel: 'Option List',
             listView: 'List View',
             moveAllToSource: 'Move All to Source',
             moveAllToTarget: 'Move All to Target',
@@ -99,18 +104,20 @@ let locales = {
             next: 'Next',
             nextPageLabel: 'Next Page',
             nullLabel: 'Not Selected',
-            pageLabel: 'Page {page}',
             otpLabel: 'Please enter one time password character {0}',
+            pageLabel: 'Page {page}',
             passwordHide: 'Hide Password',
             passwordShow: 'Show Password',
             previous: 'Previous',
-            previousPageLabel: 'Previous Page',
+            prevPageLabel: 'Previous Page',
+            removeLabel: 'Remove',
             rotateLeft: 'Rotate Left',
             rotateRight: 'Rotate Right',
             rowsPerPageLabel: 'Rows per page',
             saveEdit: 'Save Edit',
             scrollTop: 'Scroll Top',
             selectAll: 'All items selected',
+            selectLabel: 'Select',
             selectRow: 'Row Selected',
             showFilterMenu: 'Show Filter Menu',
             slide: 'Slide',
@@ -119,6 +126,7 @@ let locales = {
             stars: '{star} stars',
             trueLabel: 'True',
             unselectAll: 'All items unselected',
+            unselectLabel: 'Unselect',
             unselectRow: 'Row Unselected',
             zoomImage: 'Zoom Image',
             zoomIn: 'Zoom In',
@@ -137,20 +145,36 @@ function locale(locale) {
 }
 
 function addLocale(locale, options) {
-    locales[locale] = { ...locales['en'], ...options };
+    if (locale.includes('__proto__') || locale.includes('prototype')) {
+        throw new Error('Unsafe locale detected');
+    }
+
+    locales[locale] = { ...locales.en, ...options };
 }
 
 function updateLocaleOption(key, value, locale) {
+    if (key.includes('__proto__') || key.includes('prototype')) {
+        throw new Error('Unsafe key detected');
+    }
+
     localeOptions(locale)[key] = value;
 }
 
 function updateLocaleOptions(options, locale) {
+    if (locale.includes('__proto__') || locale.includes('prototype')) {
+        throw new Error('Unsafe locale detected');
+    }
+
     const _locale = locale || PrimeReact.locale;
 
     locales[_locale] = { ...locales[_locale], ...options };
 }
 
 function localeOption(key, locale) {
+    if (key.includes('__proto__') || key.includes('prototype')) {
+        throw new Error('Unsafe key detected');
+    }
+
     const _locale = locale || PrimeReact.locale;
 
     try {
@@ -173,10 +197,14 @@ function localeOption(key, locale) {
  * @returns the ARIA label with replaced values
  */
 function ariaLabel(ariaKey, options) {
+    if (ariaKey.includes('__proto__') || ariaKey.includes('prototype')) {
+        throw new Error('Unsafe ariaKey detected');
+    }
+
     const _locale = PrimeReact.locale;
 
     try {
-        let ariaLabel = localeOptions(_locale)['aria'][ariaKey];
+        let ariaLabel = localeOptions(_locale).aria[ariaKey];
 
         if (ariaLabel) {
             for (const key in options) {
@@ -194,6 +222,10 @@ function ariaLabel(ariaKey, options) {
 
 function localeOptions(locale) {
     const _locale = locale || PrimeReact.locale;
+
+    if (_locale.includes('__proto__') || _locale.includes('prototype')) {
+        throw new Error('Unsafe locale detected');
+    }
 
     return locales[_locale];
 }

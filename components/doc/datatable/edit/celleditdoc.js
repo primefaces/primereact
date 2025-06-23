@@ -43,20 +43,31 @@ export function CellEditDoc(props) {
         switch (field) {
             case 'quantity':
             case 'price':
-                if (isPositiveInteger(newValue)) rowData[field] = newValue;
-                else event.preventDefault();
+                if (isPositiveInteger(newValue)) {
+                    rowData[field] = newValue;
+                } else {
+                    event.preventDefault();
+                }
+
                 break;
 
             default:
-                if (newValue.trim().length > 0) rowData[field] = newValue;
-                else event.preventDefault();
+                if (newValue.trim().length > 0) {
+                    rowData[field] = newValue;
+                } else {
+                    event.preventDefault();
+                }
+
                 break;
         }
     };
 
     const cellEditor = (options) => {
-        if (options.field === 'price') return priceEditor(options);
-        else return textEditor(options);
+        if (options.field === 'price') {
+            return priceEditor(options);
+        }
+
+        return textEditor(options);
     };
 
     const textEditor = (options) => {

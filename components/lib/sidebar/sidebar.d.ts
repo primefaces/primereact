@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { Button } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
@@ -40,6 +41,10 @@ export interface SidebarPassThroughOptions {
     header?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: SidebarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the close button icon's DOM element.
      */
     closeButtonIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
@@ -88,7 +93,7 @@ interface ContentProps {
     /**
      * Allows you to specify the close button of the sidebar.
      */
-    closeIconRef: React.RefObject<HTMLButtonElement | HTMLElement>;
+    closeIconRef: React.RefObject<HTMLButtonElement | HTMLElement | Button>;
     /**
      * Callback for hiding the sidebar.
      * @param {React.SyntheticEvent} event - Used to get the event of the element.
@@ -233,17 +238,17 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Sidebar extends React.Component<SidebarProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get mask element.
-     * @return {HTMLElement} Mask element
+     * @return {HTMLElement | null} Mask element
      */
-    public getMask(): HTMLElement;
+    public getMask(): HTMLElement | null;
     /**
      * Used to get close icon element.
-     * @return {HTMLButtonElement} Close icon element
+     * @return {HTMLButtonElement | null} Close icon element
      */
-    public getCloseIcon(): HTMLButtonElement;
+    public getCloseIcon(): HTMLButtonElement | null;
 }

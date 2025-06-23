@@ -5,11 +5,8 @@ import { AutoResizeDoc } from '@/components/doc/mention/autoresizedoc';
 import { BasicDoc } from '@/components/doc/mention/basicdoc';
 import { DisabledDoc } from '@/components/doc/mention/disableddoc';
 import { FloatLabelDoc } from '@/components/doc/mention/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/mention/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/mention/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/mention/importdoc';
 import { InvalidDoc } from '@/components/doc/mention/invaliddoc';
-import { PTDoc } from '@/components/doc/mention/pt/ptdoc';
 import { Wireframe } from '@/components/doc/mention/pt/wireframe';
 import { StyledDoc } from '@/components/doc/mention/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/mention/theming/tailwinddoc';
@@ -53,24 +50,6 @@ const MentionDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
-        {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
@@ -86,11 +65,6 @@ const MentionDemo = () => {
             id: 'pt.mention.options',
             label: 'Mention PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -35,7 +35,7 @@ export default function FilterDemo() {
     return (
         <div className="card flex justify-content-center">
             <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
-                filter placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                filter filterDelay={400} placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>
     );
 }
@@ -62,7 +62,7 @@ export default function FilterDemo() {
     return (
         <div className="card flex justify-content-center">
             <MultiSelect value={selectedCities} onChange={(e: MultiSelectChangeEvent) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
-                filter placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                filter filterDelay={400} placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>
     );
 }
@@ -77,7 +77,7 @@ export default function FilterDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" filter placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" filter filterDelay={400} placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
             </div>
             <DocSectionCode code={code} />
         </>

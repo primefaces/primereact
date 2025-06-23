@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
@@ -12,8 +12,11 @@ export const Tooltip = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TooltipBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(false);
-        const [positionState, setPositionState] = React.useState(props.position);
+        const [positionState, setPositionState] = React.useState(props.position || 'right');
         const [classNameState, setClassNameState] = React.useState('');
+        const [multipleFocusEvents, setMultipleFocusEvents] = React.useState(false);
+        const isCloseOnEscape = visibleState && props.closeOnEscape;
+        const overlayDisplayOrder = useDisplayOrder('tooltip', isCloseOnEscape);
         const metaData = {
             props,
             state: {
@@ -32,6 +35,13 @@ export const Tooltip = React.memo(
         const { ptm, cx, sx, isUnstyled } = TooltipBase.setMetaData(metaData);
 
         useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: isCloseOnEscape,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.TOOLTIP, overlayDisplayOrder]
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -103,7 +113,7 @@ export const Tooltip = React.memo(
 
                 if (event === 'both') {
                     showEvents = ['focus', 'mouseenter'];
-                    hideEvents = ['blur', 'mouseleave'];
+                    hideEvents = multipleFocusEvents ? ['blur'] : ['mouseleave', 'blur'];
                 }
             }
 
@@ -140,7 +150,7 @@ export const Tooltip = React.memo(
                 const { pageX: x, pageY: y } = currentMouseEvent.current;
 
                 if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
-                    ZIndexUtils.set('tooltip', elementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['tooltip']) || PrimeReact.zIndex['tooltip']);
+                    ZIndexUtils.set('tooltip', elementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.tooltip) || PrimeReact.zIndex.tooltip);
                 }
 
                 elementRef.current.style.left = '';
@@ -165,6 +175,8 @@ export const Tooltip = React.memo(
         };
 
         const show = (e) => {
+            if (e.type && e.type === 'focus') setMultipleFocusEvents(true);
+
             currentTargetRef.current = e.currentTarget;
             const disabled = isDisabled(currentTargetRef.current);
             const empty = isContentEmpty(isShowOnDisabled(currentTargetRef.current) && disabled ? currentTargetRef.current.firstChild : currentTargetRef.current);
@@ -191,6 +203,8 @@ export const Tooltip = React.memo(
         };
 
         const hide = (e) => {
+            if (e && e.type === 'blur') setMultipleFocusEvents(false);
+
             clearTimeouts();
 
             if (visibleState) {
@@ -209,13 +223,16 @@ export const Tooltip = React.memo(
                         sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
                     });
                 }
+            } else if (!props.onBeforeHide && !getDelay('hideDelay')) {
+                // handles the case when visibleState change from mouseenter was queued and mouseleave handler was called earlier than queued re-render
+                setVisibleState(false);
             }
         };
 
         const align = (target, coordinate, position) => {
-            let left = 0,
-                top = 0,
-                currentPosition = position || positionState;
+            let left = 0;
+            let top = 0;
+            let currentPosition = position || positionState;
 
             if ((isMouseTrack(target) || currentPosition == 'mouse') && coordinate) {
                 const _containerSize = {
@@ -230,21 +247,21 @@ export const Tooltip = React.memo(
 
                 switch (currentPosition) {
                     case 'left':
-                        left -= _containerSize.width + mouseTrackLeft;
-                        top -= _containerSize.height / 2 - mouseTrackTop;
+                        left = left - (_containerSize.width + mouseTrackLeft);
+                        top = top - (_containerSize.height / 2 - mouseTrackTop);
                         break;
                     case 'right':
                     case 'mouse':
-                        left += mouseTrackLeft;
-                        top -= _containerSize.height / 2 - mouseTrackTop;
+                        left = left + mouseTrackLeft;
+                        top = top - (_containerSize.height / 2 - mouseTrackTop);
                         break;
                     case 'top':
-                        left -= _containerSize.width / 2 - mouseTrackLeft;
-                        top -= _containerSize.height + mouseTrackTop;
+                        left = left - (_containerSize.width / 2 - mouseTrackLeft);
+                        top = top - (_containerSize.height + mouseTrackTop);
                         break;
                     case 'bottom':
-                        left -= _containerSize.width / 2 - mouseTrackLeft;
-                        top += mouseTrackTop;
+                        left = left - (_containerSize.width / 2 - mouseTrackLeft);
+                        top = top + mouseTrackTop;
                         break;
                     default:
                         break;
@@ -285,8 +302,11 @@ export const Tooltip = React.memo(
             if (elementRef.current) {
                 const style = getComputedStyle(elementRef.current);
 
-                if (position === 'left') elementRef.current.style.left = parseFloat(style.left) - parseFloat(style.paddingLeft) * 2 + 'px';
-                else if (position === 'top') elementRef.current.style.top = parseFloat(style.top) - parseFloat(style.paddingTop) * 2 + 'px';
+                if (position === 'left') {
+                    elementRef.current.style.left = parseFloat(style.left) - parseFloat(style.paddingLeft) * 2 + 'px';
+                } else if (position === 'top') {
+                    elementRef.current.style.top = parseFloat(style.top) - parseFloat(style.paddingTop) * 2 + 'px';
+                }
             }
         };
 
@@ -323,12 +343,16 @@ export const Tooltip = React.memo(
             }
         };
 
+        const getDelay = (delayProp) => {
+            return getTargetOption(currentTargetRef.current, delayProp.toLowerCase()) || props[delayProp];
+        };
+
         const applyDelay = (delayProp, callback) => {
             clearTimeouts();
 
-            const delay = getTargetOption(currentTargetRef.current, delayProp.toLowerCase()) || props[delayProp];
+            const delay = getDelay(delayProp);
 
-            !!delay ? (timeouts.current[`${delayProp}`] = setTimeout(() => callback(), delay)) : callback();
+            delay ? (timeouts.current[`${delayProp}`] = setTimeout(() => callback(), delay)) : callback();
         };
 
         const sendCallback = (callback, ...params) => {
@@ -357,7 +381,7 @@ export const Tooltip = React.memo(
                         const isInputElement = target.nodeName === 'INPUT';
 
                         if (isInputElement) {
-                            DomHandler.addMultipleClasses(wrapper, `p-tooltip-target-wrapper p-inputwrapper`);
+                            DomHandler.addMultipleClasses(wrapper, 'p-tooltip-target-wrapper p-inputwrapper');
                         } else {
                             DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
                         }
@@ -367,9 +391,9 @@ export const Tooltip = React.memo(
                         target.hasWrapper = true;
 
                         return wrapper;
-                    } else {
-                        return target.parentElement;
                     }
+
+                    return target.parentElement;
                 } else if (target.hasWrapper) {
                     target.parentElement.replaceWith(...target.parentElement.childNodes);
                     delete target.hasWrapper;
@@ -446,7 +470,7 @@ export const Tooltip = React.memo(
                 bindWindowResizeListener();
                 bindOverlayScrollListener();
             } else {
-                setPositionState(props.position);
+                setPositionState(props.position || 'right');
                 setClassNameState('');
                 currentTargetRef.current = null;
                 containerSize.current = null;
@@ -460,7 +484,9 @@ export const Tooltip = React.memo(
         }, [visibleState]);
 
         useUpdateEffect(() => {
-            if (visibleState) {
+            const position = getPosition(currentTargetRef.current);
+
+            if (visibleState && position !== 'mouse') {
                 applyDelay('updateDelay', () => {
                     updateText(currentTargetRef.current, () => {
                         align(currentTargetRef.current);
@@ -518,7 +544,7 @@ export const Tooltip = React.memo(
 
             return (
                 <div ref={elementRef} {...rootProps}>
-                    <div {...arrowProps}></div>
+                    <div {...arrowProps} />
                     <div ref={textRef} {...textProps}>
                         {empty && props.children}
                     </div>

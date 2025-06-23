@@ -3,14 +3,12 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/inputmask/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/inputmask/basicdoc';
 import { DisabledDoc } from '@/components/doc/inputmask/disableddoc';
+import { FilledDoc } from '@/components/doc/inputmask/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/inputmask/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/inputmask/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/inputmask/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/inputmask/importdoc';
 import { InvalidDoc } from '@/components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '@/components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '@/components/doc/inputmask/optionaldoc';
-import { PTDoc } from '@/components/doc/inputmask/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputmask/pt/wireframe';
 import { SlotCharDoc } from '@/components/doc/inputmask/slotchardoc';
 import { StyledDoc } from '@/components/doc/inputmask/theming/styleddoc';
@@ -50,6 +48,11 @@ const InputMaskDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -59,24 +62,6 @@ const InputMaskDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -93,11 +78,6 @@ const InputMaskDemo = () => {
             id: 'pt.inputmask.options',
             label: 'InputMask PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

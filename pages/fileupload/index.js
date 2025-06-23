@@ -6,7 +6,6 @@ import { AutoDoc } from '@/components/doc/fileupload/autodoc';
 import { BasicDoc } from '@/components/doc/fileupload/basicdoc';
 import { CustomUploadDoc } from '@/components/doc/fileupload/customuploaddoc';
 import { ImportDoc } from '@/components/doc/fileupload/importdoc';
-import { PTDoc } from '@/components/doc/fileupload/pt/ptdoc';
 import { Wireframe } from '@/components/doc/fileupload/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/fileupload/templatedoc';
 import { StyledDoc } from '@/components/doc/fileupload/theming/styleddoc';
@@ -61,11 +60,6 @@ const FileUploadDemo = () => {
             id: 'pt.fileupload.options',
             label: 'FileUpload PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

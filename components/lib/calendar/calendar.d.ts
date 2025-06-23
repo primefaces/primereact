@@ -9,10 +9,8 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent, Nullable } from '../ts-helpers';
@@ -41,14 +39,12 @@ export interface CalendarPassThroughOptions {
     root?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the InputText component.
-     * @see {@link InputTextPassThroughOptions}
      */
-    input?: InputTextPassThroughOptions;
+    input?: CalendarPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    dropdownButton?: ButtonPassThroughOptions;
+    dropdownButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the panel's DOM element.
      */
@@ -239,14 +235,14 @@ export interface CalendarPassThroughOptions {
     buttonbar?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     * @see {@link CalendarPassThroughType}
      */
-    todayButton?: ButtonPassThroughOptions;
+    todayButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     * @see {@link CalendarPassThroughType}
      */
-    clearButton?: ButtonPassThroughOptions;
+    clearButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the select's DOM element.
      */
@@ -576,6 +572,11 @@ interface CalendarBaseProps {
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Array with dates to disable.
      */
     disabledDates?: Date[] | undefined;
@@ -736,7 +737,7 @@ interface CalendarBaseProps {
      */
     showMillisec?: boolean | undefined;
     /**
-     * Whether to allow navigation past min/max dates.
+     * Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range.
      * @defaultValue false
      */
     showMinMaxRange?: boolean | undefined;
@@ -964,76 +965,30 @@ interface CalendarBaseProps {
      */
     unstyled?: boolean;
 }
-/**
- * Defines valid properties in single Calendar component.
- * @group Properties
- */
-interface CalendarPropsSingle extends CalendarBaseProps {
-    /**
-     * Specifies the selection mode either "single", "range", or "multiple";
-     * @defaultValue single
-     */
-    selectionMode?: 'single' | undefined;
-    /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Nullable<Date>;
-    /**
-     * Callback to invoke when value changes.
-     * @param { FormEvent<Date>} event - Custom change event
-     */
-    onChange?(event: FormEvent<Date>): void;
-}
-/**
- * Defines valid properties in range Calendar component.
- * @group Properties
- */
-interface CalendarPropsRange extends CalendarBaseProps {
-    /**
-     * Specifies the selection mode either "single", "range", or "multiple";
-     * @defaultValue single
-     */
-    selectionMode: 'range';
-    /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Nullable<(Date | null)[]>;
-    /**
-     * Callback to invoke when value changes.
-     * @param { FormEvent<(Date | null)[]>} event - Custom change event
-     */
-    onChange?(event: FormEvent<(Date | null)[]>): void;
-}
 
-/**
- * Defines valid properties in multiple Calendar component.
- * @group Properties
- */
-interface CalendarPropsMultiple extends CalendarBaseProps {
-    /**
-     * Specifies the selection mode either "single", "range", or "multiple";
-     * @defaultValue single
-     */
-    selectionMode: 'multiple';
-    /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Nullable<Date[]>;
-    /**
-     * Callback to invoke when value changes.
-     * @param {FormEvent<Date[]>} event - Custom change event
-     */
-    onChange?(event: FormEvent<Date[]>): void;
-}
+export type CalendarSelectionMode = 'single' | 'range' | 'multiple';
 
 /**
  * Defines valid properties in Calendar component.
  * @group Properties
  */
-export type CalendarProps = CalendarPropsRange | CalendarPropsMultiple | CalendarPropsSingle;
+export interface CalendarProps<TMode extends CalendarSelectionMode = 'single', TValue = TMode extends 'multiple' ? Date[] : TMode extends 'range' ? (Date | null)[] : Date> extends CalendarBaseProps {
+    /**
+     * Specifies the selection mode either "single", "range", or "multiple";
+     * @defaultValue single
+     */
+    selectionMode?: TMode;
+    /**
+     * Value of the component.
+     * @defaultValue null
+     */
+    value?: Nullable<TValue>;
+    /**
+     * Callback to invoke when value changes.
+     * @param {FormEvent<TValue>} event - Custom change event
+     */
+    onChange?(event: FormEvent<TValue>): void;
+}
 
 /**
  * **PrimeReact - Calendar**
@@ -1046,7 +1001,7 @@ export type CalendarProps = CalendarPropsRange | CalendarPropsMultiple | Calenda
  *
  * @group Component
  */
-export declare class Calendar extends React.Component<CalendarProps, any> {
+export declare class Calendar<TMode extends CalendarSelectionMode = 'single', TValue = TMode extends 'multiple' ? Date[] : TMode extends 'range' ? (Date | null)[] : Date> extends React.Component<CalendarProps<TMode>, any> {
     /**
      * Used to show the overlay.
      */
@@ -1061,33 +1016,33 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
     public focus(): void;
     /**
      * Used to get the current date.
-     * @return {Date | Date[]} Current Date
+     * @return {TValue} Current Date
      */
-    public getCurrentDateTime(): Date | Date[];
+    public getCurrentDateTime(): TValue;
     /**
      * Used to get the view date.
-     * @return {Date | Date[]} View Date
+     * @return {TValue} View Date
      */
-    public getViewDate(): Date | Date[];
+    public getViewDate(): TValue;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLSpanElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to update the current view date.
      * @param {React.SyntheticEvent | null} event - Browser event.
-     * @param {Date | Date[] | null} value - New date.
+     * @param {TValue | null} value - New date.
      */
-    public updateViewDate(event: React.SyntheticEvent | null, value: Nullable<Date | Date[]>): void;
+    public updateViewDate(event: React.SyntheticEvent | null, value: Nullable<TValue>): void;
 }

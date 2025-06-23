@@ -41,7 +41,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <ProgressBar value={50}></ProgressBar>
+                <ProgressBar value={50} />
             </div>
             <DocSectionCode code={code} />
         </>

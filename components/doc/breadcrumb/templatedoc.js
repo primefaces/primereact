@@ -6,7 +6,7 @@ export function TemplateDoc(props) {
     const iconItemTemplate = (item, options) => {
         return (
             <a className={options.className}>
-                <span className={item.icon}></span>
+                <span className={item.icon} />
             </a>
         );
     };

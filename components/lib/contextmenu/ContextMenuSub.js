@@ -150,7 +150,7 @@ export const ContextMenuSub = React.memo(
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createSubmenu = (item, index) => {
@@ -222,7 +222,6 @@ export const ContextMenuSub = React.memo(
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    'aria-hidden': true,
                     tabIndex: -1,
                     className: cx('action', { item }),
                     target: item.target
@@ -293,6 +292,10 @@ export const ContextMenuSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
+            if (processedItem.visible === false) {
+                return null;
+            }
+
             return processedItem.separator ? createSeparator(index) : createMenuItem(processedItem, index);
         };
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useInterval, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
+import { useInterval, useMergeProps, useUnmountEffect, ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -40,6 +40,14 @@ export const Galleria = React.memo(
 
         useHandleStyle(GalleriaBase.css.styles, isUnstyled, { name: 'galleria' });
 
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: props.closeOnEscape && props.fullScreen,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.IMAGE, 0]
+        });
+
         useInterval(
             () => {
                 onActiveItemChange({ index: props.circular && props.value.length - 1 === activeItemIndex ? 0 : activeItemIndex + 1 });
@@ -76,7 +84,7 @@ export const Galleria = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
             !isUnstyled() && DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
@@ -309,6 +317,7 @@ export const Galleria = React.memo(
                         timeout: { enter: 150, exit: 150 },
                         options: props.transitionOptions,
                         unmountOnExit: true,
+                        appear: true,
                         onEnter,
                         onEntering,
                         onEntered,

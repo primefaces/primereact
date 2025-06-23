@@ -15,8 +15,8 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
-    className="w-full md:w-14rem p-invalid" />
+<ListBox invalid value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+    className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -34,8 +34,8 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">  
-            <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
-                className="w-full md:w-14rem p-invalid" />
+            <ListBox invalid value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                className="w-full md:w-14rem" />
         </div>
     )
 }
@@ -61,8 +61,8 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">  
-            <ListBox value={selectedCity} onChange={(e: ListBoxChangeEvent) => setSelectedCity(e.value)} 
-                options={cities} optionLabel="name"  className="w-full md:w-14rem p-invalid" />
+            <ListBox invalid value={selectedCity} onChange={(e: ListBoxChangeEvent) => setSelectedCity(e.value)} 
+                options={cities} optionLabel="name"  className="w-full md:w-14rem" />
         </div>
     )
 }
@@ -73,11 +73,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem p-invalid" />
+                <ListBox invalid value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

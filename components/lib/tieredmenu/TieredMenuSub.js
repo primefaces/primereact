@@ -65,6 +65,10 @@ export const TieredMenuSub = React.memo(
         };
 
         const getItemId = (processedItem) => {
+            if (processedItem.item && processedItem.item.id) {
+                return processedItem.item.id;
+            }
+
             return `${props.menuId}_${processedItem.key}`;
         };
 
@@ -126,7 +130,7 @@ export const TieredMenuSub = React.memo(
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createSubmenu = (processedItem, index) => {
@@ -201,7 +205,6 @@ export const TieredMenuSub = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    'aria-hidden': true,
                     tabIndex: '-1',
                     onFocus: (event) => event.stopPropagation(),
                     className: cx('action'),
@@ -251,7 +254,6 @@ export const TieredMenuSub = React.memo(
                     'aria-disabled': disabled,
                     'aria-expanded': grouped ? active : undefined,
                     'aria-haspopup': grouped && !url ? 'menu' : undefined,
-                    'aria-level': props.level + 1,
                     'aria-setsize': getAriaSetSize(),
                     'aria-posinset': getAriaPosInset(index),
                     'data-p-highlight': active,
@@ -274,6 +276,10 @@ export const TieredMenuSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
+            if (processedItem.visible === false) {
+                return null;
+            }
+
             return getItemProp(processedItem, 'separator') ? createSeparator(index) : createMenuItem(processedItem, index);
         };
 

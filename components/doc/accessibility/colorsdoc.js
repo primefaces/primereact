@@ -35,11 +35,11 @@ export function ColorsDoc(props) {
             <div className="flex">
                 <div className="h-8rem w-8rem flex flex-column justify-content-center align-items-center mr-5 font-bold bg-gray-900" style={{ borderRadius: '10px' }}>
                     <span className="text-indigo-500">Indigo 500</span>
-                    <i className="text-indigo-500 pi pi-times-circle mt-3 text-xl"></i>
+                    <i className="text-indigo-500 pi pi-times-circle mt-3 text-xl" />
                 </div>
                 <div className="h-8rem w-8rem flex flex-column justify-content-center align-items-center mr-5 font-bold bg-gray-900" style={{ borderRadius: '10px' }}>
                     <span className="text-indigo-200">Indigo 200</span>
-                    <i className="text-indigo-200 pi pi-check-circle mt-3 text-xl"></i>
+                    <i className="text-indigo-200 pi pi-check-circle mt-3 text-xl" />
                 </div>
             </div>
         </>

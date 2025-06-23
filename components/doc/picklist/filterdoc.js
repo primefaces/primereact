@@ -24,7 +24,7 @@ export function FilterDoc(props) {
                 <div className="flex-1 flex flex-column gap-2">
                     <span className="font-bold">{item.name}</span>
                     <div className="flex align-items-center gap-2">
-                        <i className="pi pi-tag text-sm"></i>
+                        <i className="pi pi-tag text-sm" />
                         <span>{item.category}</span>
                     </div>
                 </div>
@@ -101,8 +101,8 @@ interface Product {
 }
 
 export default function FilterDemo() {
-    const [source, setSource] = useState<Product>([]);
-    const [target, setTarget] = useState<Product>([]);
+    const [source, setSource] = useState<Product[]>([]);
+    const [target, setTarget] = useState<Product[]>([]);
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setSource(data));

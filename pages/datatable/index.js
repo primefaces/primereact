@@ -24,7 +24,6 @@ import { ImportDoc } from '@/components/doc/datatable/importdoc';
 import { LazyLoadDoc } from '@/components/doc/datatable/lazyloaddoc';
 import { PaginatorBasicDoc } from '@/components/doc/datatable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '@/components/doc/datatable/paginator/templatedoc';
-import { PTDoc } from '@/components/doc/datatable/pt/ptdoc';
 import { Wireframe } from '@/components/doc/datatable/pt/wireframe';
 import { ReorderDoc } from '@/components/doc/datatable/reorderdoc';
 import { RowExpansionDoc } from '@/components/doc/datatable/rowexpansiondoc';
@@ -412,11 +411,6 @@ const DataTableDemo = () => {
             id: 'pt.row.options',
             label: 'Row PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

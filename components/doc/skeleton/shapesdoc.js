@@ -138,36 +138,36 @@ export default function ShapesDemo() {
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-6 p-3">
                         <h5>Rectangle</h5>
-                        <Skeleton className="mb-2"></Skeleton>
-                        <Skeleton width="10rem" className="mb-2"></Skeleton>
-                        <Skeleton width="5rem" className="mb-2"></Skeleton>
-                        <Skeleton height="2rem" className="mb-2"></Skeleton>
-                        <Skeleton width="10rem" height="4rem"></Skeleton>
+                        <Skeleton className="mb-2" />
+                        <Skeleton width="10rem" className="mb-2" />
+                        <Skeleton width="5rem" className="mb-2" />
+                        <Skeleton height="2rem" className="mb-2" />
+                        <Skeleton width="10rem" height="4rem" />
                     </div>
                     <div className="w-full md:w-6 p-3">
                         <h5>Rounded</h5>
-                        <Skeleton className="mb-2" borderRadius="16px"></Skeleton>
-                        <Skeleton width="10rem" className="mb-2" borderRadius="16px"></Skeleton>
-                        <Skeleton width="5rem" borderRadius="16px" className="mb-2"></Skeleton>
-                        <Skeleton height="2rem" className="mb-2" borderRadius="16px"></Skeleton>
-                        <Skeleton width="10rem" height="4rem" borderRadius="16px"></Skeleton>
+                        <Skeleton className="mb-2" borderRadius="16px" />
+                        <Skeleton width="10rem" className="mb-2" borderRadius="16px" />
+                        <Skeleton width="5rem" borderRadius="16px" className="mb-2" />
+                        <Skeleton height="2rem" className="mb-2" borderRadius="16px" />
+                        <Skeleton width="10rem" height="4rem" borderRadius="16px" />
                     </div>
                     <div className="w-full md:w-6 p-3">
                         <h5>Square</h5>
                         <div className="flex align-items-end">
-                            <Skeleton size="2rem" className="mr-2"></Skeleton>
-                            <Skeleton size="3rem" className="mr-2"></Skeleton>
-                            <Skeleton size="4rem" className="mr-2"></Skeleton>
-                            <Skeleton size="5rem"></Skeleton>
+                            <Skeleton size="2rem" className="mr-2" />
+                            <Skeleton size="3rem" className="mr-2" />
+                            <Skeleton size="4rem" className="mr-2" />
+                            <Skeleton size="5rem" />
                         </div>
                     </div>
                     <div className="w-full md:w-6 p-3">
                         <h5>Circle</h5>
                         <div className="flex align-items-end">
-                            <Skeleton shape="circle" size="2rem" className="mr-2"></Skeleton>
-                            <Skeleton shape="circle" size="3rem" className="mr-2"></Skeleton>
-                            <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>
-                            <Skeleton shape="circle" size="5rem"></Skeleton>
+                            <Skeleton shape="circle" size="2rem" className="mr-2" />
+                            <Skeleton shape="circle" size="3rem" className="mr-2" />
+                            <Skeleton shape="circle" size="4rem" className="mr-2" />
+                            <Skeleton shape="circle" size="5rem" />
                         </div>
                     </div>
                 </div>

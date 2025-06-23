@@ -8,7 +8,6 @@ import { HorizontalDoc } from '@/components/doc/virtualscroller/horizontaldoc';
 import { ImportDoc } from '@/components/doc/virtualscroller/importdoc';
 import { LazyDoc } from '@/components/doc/virtualscroller/lazydoc';
 import { LoadingDoc } from '@/components/doc/virtualscroller/loadingdoc';
-import { PTDoc } from '@/components/doc/virtualscroller/pt/ptdoc';
 import { Wireframe } from '@/components/doc/virtualscroller/pt/wireframe';
 import { StyledDoc } from '@/components/doc/virtualscroller/theming/styleddoc';
 
@@ -66,11 +65,6 @@ const VirtualScrollerDemo = () => {
             id: 'pt.virtualscroller.options',
             label: 'VirtualScroller PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -77,6 +77,10 @@ export interface DropdownPassThroughOptions {
      */
     filterIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the filter clear icon's DOM element.
+     */
+    filterClearIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the wrapper's DOM element.
      */
     wrapper?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -249,7 +253,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
      */
-    autoFocus?: boolean | undefined;
+    autoFocus?: boolean;
     /**
      * Style class of the component.
      */
@@ -266,46 +270,55 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, it specifies that the component should have invalid state style.
      * @defaultValue false
      */
-    invalid?: boolean | undefined;
+    invalid?: boolean;
     /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */
-    disabled?: boolean | undefined;
+    disabled?: boolean;
+    /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
     /**
      * Icon of the dropdown.
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
+     * Icon of collapse action.
+     */
+    collapseIcon?: IconType<DropdownProps> | undefined;
+    /**
      * When present, custom value instead of predefined options can be entered using the editable input field.
      * @defaultValue false
      */
-    editable?: boolean | undefined;
+    editable?: boolean;
     /**
      *  Whether the selected option will be add highlight class.
      *  @defaultValue true
      */
-    highlightOnSelect?: boolean | undefined;
+    highlightOnSelect?: boolean;
     /**
      *  Whether the selected option will be shown with a check mark.
      *  @defaultValue false
      */
-    checkmark?: boolean | undefined;
+    checkmark?: boolean;
     /**
      * Template to display when filtering does not return any results.
-     * @defaultValue No available options
+     * @defaultValue No results found
      */
     emptyFilterMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
      * Text to display when there are no options available.
-     * @defaultValue No results found
+     * @defaultValue No available options
      */
     emptyMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue false
      */
-    filter?: boolean | undefined;
+    filter?: boolean;
     /**
      * Icon of the filter to search.
      */
@@ -320,16 +333,21 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
-     * When the panel is opened, it specifies that the filter input should focus automatically.
-     * @defaultValue true
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
      */
-    filterInputAutoFocus?: boolean | undefined;
+    filterDelay?: number | undefined;
+    /**
+     * When the panel is opened, it specifies that the filter input should focus automatically.
+     * @defaultValue false
+     */
+    filterInputAutoFocus?: boolean;
     /**
      * Locale to use in filtering. The default locale is the host environment's current locale.
      */
     filterLocale?: string | undefined;
     /**
-     * Defines how the items are filtered.
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
     filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
@@ -354,12 +372,17 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When enabled, the focused tab is activated.
      * @defaultValue false
      */
-    selectOnFocus?: false;
+    selectOnFocus?: boolean;
+    /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean;
     /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false
      */
-    autoOptionFocus?: false;
+    autoOptionFocus?: boolean;
     /**
      * Identifier of the focusable input.
      */
@@ -376,7 +399,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Displays a loader to indicate data load is in progress.
      * @defaultValue false
      */
-    loading?: boolean | undefined;
+    loading?: boolean;
     /**
      * The icon to show while indicating data load is in progress.
      */
@@ -393,6 +416,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.
      */
     optionDisabled?: string | ((option: any) => boolean) | undefined;
+    /**
+     * Whether the option should be used as the value for the select element.
+     */
+    useOptionAsValue?: boolean;
     /**
      * Property name or getter function that refers to the children options of option group.
      * @defaultValue items
@@ -439,12 +466,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, it specifies that an input field must be filled out before submitting the form.
      * @defaultValue false
      */
-    required?: boolean | undefined;
+    required?: boolean;
     /**
      * Clears the filter value when hiding the dropdown.
      * @defaultValue false
      */
-    resetFilterOnHide?: boolean | undefined;
+    resetFilterOnHide?: boolean;
     /**
      * Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.
      * @defaultValue 200px
@@ -454,17 +481,17 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When enabled, a clear icon is displayed to clear the value.
      * @defaultValue false
      */
-    showClear?: boolean | undefined;
+    showClear?: boolean;
     /**
      * When enabled, a clear icon is displayed to clear the filtered value.
      * @defaultValue false
      */
-    showFilterClear?: boolean | undefined;
+    showFilterClear?: boolean;
     /**
      * When enabled, overlay panel will be visible with input focus.
      * @defaultValue false
      */
-    showOnFocus?: boolean | undefined;
+    showOnFocus?: boolean;
     /**
      * Inline style of the element.
      */
@@ -590,27 +617,27 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
     public hide(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Used to get focusable input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getFocusInput(): HTMLInputElement;
+    public getFocusInput(): HTMLInputElement | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to get the options of inline virtualScroller component.
-     * @return {VirtualScroller} VirtualScroller component
+     * @return {VirtualScroller | null} VirtualScroller component
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

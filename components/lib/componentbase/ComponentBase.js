@@ -8,15 +8,13 @@ const baseStyle = `
     clip: rect(0 0 0 0);
     height: 1px;
     margin: -1px;
+    opacity: 0;
     overflow: hidden;
     padding: 0;
+    pointer-events: none;
     position: absolute;
+    white-space: nowrap;
     width: 1px;
-}
-
-.p-hidden-accessible input,
-.p-hidden-accessible select {
-    transform: scale(0);
 }
 
 .p-overflow-hidden {
@@ -68,31 +66,41 @@ const buttonStyles = `
     order: 2;
 }
 
-.p-buttonset .p-button {
+.p-button-group .p-button {
     margin: 0;
 }
 
-.p-buttonset .p-button:not(:last-child) {
+.p-button-group .p-button:not(:last-child) {
     border-right: 0 none;
 }
 
-.p-buttonset .p-button:not(:first-of-type):not(:last-of-type) {
+.p-button-group .p-button:not(:first-of-type):not(:last-of-type) {
     border-radius: 0;
 }
 
-.p-buttonset .p-button:first-of-type {
+.p-button-group .p-button:first-of-type {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.p-buttonset .p-button:last-of-type {
+.p-button-group .p-button:last-of-type {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.p-buttonset .p-button:focus {
+.p-button-group .p-button:focus {
     position: relative;
     z-index: 1;
+}
+
+.p-button-group-single .p-button:first-of-type {
+    border-top-right-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius) !important;
+}
+
+.p-button-group-single .p-button:last-of-type {
+    border-top-left-radius: var(--border-radius) !important;
+    border-bottom-left-radius: var(--border-radius) !important;
 }
 `;
 const inputTextStyles = `
@@ -473,8 +481,13 @@ export const ComponentBase = {
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
 
-                if (Array.isArray(value)) return { className: classNames(...value) };
-                if (ObjectUtils.isString(value)) return { className: value };
+                if (Array.isArray(value)) {
+                    return { className: classNames(...value) };
+                }
+
+                if (ObjectUtils.isString(value)) {
+                    return { className: value };
+                }
 
                 if (value?.hasOwnProperty('className') && Array.isArray(value.className)) {
                     return { className: classNames(...value.className) };
@@ -544,7 +557,7 @@ const getOptionValue = (obj, key = '', params = {}) => {
 };
 
 const _getPT = (pt, key = '', callback) => {
-    const _usept = pt?.['_usept'];
+    const _usept = pt?._usept;
 
     const getValue = (value, checkSameKey = false) => {
         const _value = callback ? callback(value) : value;
@@ -566,13 +579,17 @@ const _usePT = (pt, callback, key, params) => {
     const fn = (value) => callback(value, key, params);
 
     if (pt?.hasOwnProperty('_usept')) {
-        const { mergeSections = true, mergeProps: useMergeProps = false, classNameMergeFunction } = pt['_usept'] || ComponentBase.context.ptOptions || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false, classNameMergeFunction } = pt._usept || ComponentBase.context.ptOptions || {};
         const originalValue = fn(pt.originalValue);
         const value = fn(pt.value);
 
-        if (originalValue === undefined && value === undefined) return undefined;
-        else if (ObjectUtils.isString(value)) return value;
-        else if (ObjectUtils.isString(originalValue)) return originalValue;
+        if (originalValue === undefined && value === undefined) {
+            return undefined;
+        } else if (ObjectUtils.isString(value)) {
+            return value;
+        } else if (ObjectUtils.isString(originalValue)) {
+            return originalValue;
+        }
 
         return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps([originalValue, value], { classNameMergeFunction }) : { ...originalValue, ...value }) : value;
     }
@@ -605,7 +622,7 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
     const { load: loadBaseStyle } = useStyle(baseStyle, { name: 'base', manual: true });
     const { load: loadCommonStyle } = useStyle(commonStyle, { name: 'common', manual: true });
     const { load: loadGlobalStyle } = useStyle(globalCSS, { name: 'global', manual: true });
-    const { load } = useStyle(styles, { name: name, manual: true });
+    const { load: loadComponentStyle } = useStyle(styles, { name: name, manual: true });
 
     const hook = (hookName) => {
         if (!hostName) {
@@ -619,10 +636,20 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
 
     hook('useMountEffect');
     useMountEffect(() => {
+        // Load base and global styles first as they are always needed
         loadBaseStyle();
         loadGlobalStyle();
-        loadCommonStyle();
-        if (!styled) load();
+
+        // Only load additional styles if component is styled
+        if (!_isUnstyled()) {
+            // Load common styles shared across components
+            loadCommonStyle();
+
+            // Load component-specific styles if not explicitly styled
+            if (!styled) {
+                loadComponentStyle();
+            }
+        }
     });
 
     useUpdateEffect(() => {

@@ -4,9 +4,9 @@ const TemplateConfiguration = ({ title = '', description = '' }) => {
             <div className="template-configuration">
                 <div className="template-configuration-screen">
                     <div className="template-configuration-screen-top">
-                        <div className="template-configuration-screen-top-close template-configuration-screen-top-circle"></div>
-                        <div className="template-configuration-screen-top-minimize template-configuration-screen-top-circle"></div>
-                        <div className="template-configuration-screen-top-zoom template-configuration-screen-top-circle"></div>
+                        <div className="template-configuration-screen-top-close template-configuration-screen-top-circle" />
+                        <div className="template-configuration-screen-top-minimize template-configuration-screen-top-circle" />
+                        <div className="template-configuration-screen-top-zoom template-configuration-screen-top-circle" />
                     </div>
                     <div className="template-configuration-screen-bottom">
                         <p>

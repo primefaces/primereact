@@ -1,15 +1,17 @@
+import DeferredDemo from '@/components/demo/DeferredDemo';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { FilterMatchMode, FilterOperator } from '@/components/lib/api/Api';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
 import { Tag } from '@/components/lib/tag/Tag';
 import { useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
-import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function StatefulDoc(props) {
     const [customers, setCustomers] = useState(null);
@@ -108,19 +110,19 @@ export function StatefulDoc(props) {
         const value = event.target.value;
         let _filters = { ...filters };
 
-        _filters['global'].value = value;
+        _filters.global.value = value;
 
         setFilters(_filters);
     };
 
     const renderHeader = () => {
-        const value = filters['global'] ? filters['global'].value : '';
+        const value = filters.global ? filters.global.value : '';
 
         return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e)} placeholder="Global Search" />
-            </span>
+            </IconField>
         );
     };
 
@@ -144,6 +146,8 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
 import { Tag } from 'primereact/tag';
@@ -255,10 +259,10 @@ export default function BasicDemo() {
         const value = filters['global'] ? filters['global'].value : '';
 
         return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e)} placeholder="Global Search" />
-            </span>
+            </IconField>
         );
     };
 
@@ -285,6 +289,8 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
 import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { Tag } from 'primereact/tag';
@@ -414,10 +420,10 @@ export default function BasicDemo() {
         const value = filters['global'] ? filters['global'].value : '';
 
         return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e)} placeholder="Global Search" />
-            </span>
+            </IconField>
         );
     };
 
@@ -489,8 +495,8 @@ export default function BasicDemo() {
                         emptyMessage="No customers found."
                         tableStyle={{ minWidth: '50rem' }}
                     >
-                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search" style={{ width: '25%' }}></Column>
-                        <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search" style={{ width: '25%' }}></Column>
+                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search" style={{ width: '25%' }} />
+                        <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search" style={{ width: '25%' }} />
                         <Column
                             header="Agent"
                             body={representativeBodyTemplate}
@@ -502,8 +508,8 @@ export default function BasicDemo() {
                             filterElement={representativeFilterTemplate}
                             filterMenuStyle={{ width: '14rem' }}
                             style={{ width: '25%' }}
-                        ></Column>
-                        <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }} style={{ width: '25%' }}></Column>
+                        />
+                        <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }} style={{ width: '25%' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

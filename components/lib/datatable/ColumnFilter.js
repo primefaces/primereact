@@ -6,7 +6,7 @@ import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
 import FocusTrap from '../focustrap/FocusTrap';
-import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { FilterIcon } from '../icons/filter';
 import { FilterSlashIcon } from '../icons/filterslash';
 import { PlusIcon } from '../icons/plus';
@@ -20,7 +20,7 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } fr
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
     const overlayRef = React.useRef(null);
-    const overlayId = React.useRef(() => UniqueComponentId());
+    const overlayId = React.useRef(null);
     const iconRef = React.useRef(null);
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
@@ -55,16 +55,26 @@ export const ColumnFilter = React.memo((props) => {
         overlay: overlayRef,
         listener: (event, { type, valid }) => {
             if (valid) {
-                type === 'outside' ? !selfClick.current && !isTargetClicked(event.target) && hide() : hide();
-            }
+                if (type === 'outside') {
+                    if (!selfClick.current && !isTargetClicked(event.target)) {
+                        hide();
+                    }
 
-            selfClick.current = false;
+                    selfClick.current = false;
+                } else if (context.hideOverlaysOnDocumentScrolling) {
+                    hide();
+                } else if (!DomHandler.isDocument(event.target)) {
+                    DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
+                }
+            }
         },
         when: overlayVisibleState
     });
 
     const hasFilter = () => {
-        if (!filterStoreModel || !filterModel) return false;
+        if (!filterStoreModel || !filterModel) {
+            return false;
+        }
 
         return filterStoreModel.operator ? !isFilterBlank(filterModel.constraints[0].value) : !isFilterBlank(filterModel.value);
     };
@@ -128,11 +138,11 @@ export const ColumnFilter = React.memo((props) => {
                     matchMode: filterStoreModel.constraints[0].matchMode,
                     operator: filterStoreModel.operator
                 };
-            } else {
-                return {
-                    matchMode: filterStoreModel.matchMode
-                };
             }
+
+            return {
+                matchMode: filterStoreModel.matchMode
+            };
         }
     };
 
@@ -385,7 +395,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const onOverlayEnter = () => {
-        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
 
@@ -476,6 +486,12 @@ export const ColumnFilter = React.memo((props) => {
         }
     });
 
+    useMountEffect(() => {
+        if (!overlayId.current) {
+            overlayId.current = UniqueComponentId();
+        }
+    });
+
     useUnmountEffect(() => {
         if (overlayEventListener.current) {
             OverlayService.off('overlay-click', overlayEventListener.current);
@@ -551,7 +567,7 @@ export const ColumnFilter = React.memo((props) => {
                 'aria-haspopup': true,
                 'aria-expanded': overlayVisibleState,
                 'aria-label': label,
-                'aria-controls': overlayId.current,
+                'aria-controls': overlayVisibleState ? overlayId.current : undefined,
                 onClick: (e) => toggleMenu(e),
                 onKeyDown: (e) => onToggleButtonKeyDown(e)
             },
@@ -659,7 +675,7 @@ export const ColumnFilter = React.memo((props) => {
                             </li>
                         );
                     })}
-                    <li {...filterSeparatorProps}></li>
+                    <li {...filterSeparatorProps} />
                     <li {...filterRowItemProps}>{_noFilterLabel}</li>
                 </ul>
             );

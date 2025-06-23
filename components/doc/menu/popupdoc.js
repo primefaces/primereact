@@ -22,6 +22,18 @@ export function PopupDoc(props) {
                 {
                     label: 'Export',
                     icon: 'pi pi-upload'
+                },
+                {
+                    label: 'Custom template',
+                    template: (item, options) => {
+                        return (
+                            <div className="p-menuitem-content" data-pc-section="content" onMouseMove={(e) => options.onMouseMove(e)}>
+                                <a href="#" className="p-menuitem-link">
+                                    Lorem ipsum
+                                </a>
+                            </div>
+                        );
+                    }
                 }
             ]
         }
@@ -56,6 +68,18 @@ export default function PopupDoc() {
                 {
                     label: 'Export',
                     icon: 'pi pi-upload'
+                },
+                {
+                    label: 'Custom template',
+                    template: (item, options) => {
+                        return (
+                            <div className="p-menuitem-content" data-pc-section="content" onMouseMove={(e) => options.onMouseMove(e)}>
+                                <a href="#" className="p-menuitem-link">
+                                    Lorem ipsum
+                                </a>
+                            </div>
+                        );
+                    }
                 }
             ]
         }
@@ -94,6 +118,18 @@ export default function PopupDoc() {
                 {
                     label: 'Export',
                     icon: 'pi pi-upload'
+                },
+                {
+                    label: 'Custom template',
+                    template: (item, options) => {
+                        return (
+                            <div className="p-menuitem-content" data-pc-section="content" onMouseMove={(e) => options.onMouseMove(e)}>
+                                <a href="#" className="p-menuitem-link">
+                                    Lorem ipsum
+                                </a>
+                            </div>
+                        );
+                    }
                 }
             ]
         }
@@ -120,7 +156,7 @@ export default function PopupDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
                 <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
                 <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />

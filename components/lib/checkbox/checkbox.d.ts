@@ -23,6 +23,7 @@ export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPass
 export interface CheckboxPassThroughMethodOptions {
     props: CheckboxProps;
     context: CheckboxContext;
+    state: CheckboxState;
 }
 
 /**
@@ -75,6 +76,17 @@ export interface CheckboxContext {
 }
 
 /**
+ * Defines current inline state in Checkbox component.
+ */
+export interface CheckboxState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
+
+/**
  * Custom change event.
  * @see {@link CheckboxProps.onChange}
  * @extends {FormEvent }
@@ -86,7 +98,7 @@ interface CheckboxChangeEvent extends FormEvent {}
  * Defines valid properties in Checkbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
     /**
      * Unique identifier of the element.
      */
@@ -146,6 +158,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that an input field must be filled out before submitting the form.
      * @defaultValue false
      */
@@ -173,6 +190,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {TooltipOptions}
      */
     tooltipOptions?: TooltipOptions | undefined;
+    /**
+     * Callback to invoke on click.
+     * @param {React.MouseEvent<HTMLInputElement> & { target: HTMLInputElement }} event - click event
+     */
+    onClick?(event: React.MouseEvent<HTMLInputElement> & { target: HTMLInputElement }): void;
     /**
      * Callback to invoke on value change
      * @param {CheckboxChangeEvent} event - Custom change event
@@ -228,12 +250,12 @@ export declare class Checkbox extends React.Component<CheckboxProps, any> {
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
 }

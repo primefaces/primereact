@@ -18,7 +18,6 @@ import { HoverDoc } from '@/components/doc/galleria/navigator/hoverdoc';
 import { IndicatorsDoc } from '@/components/doc/galleria/navigator/indicatorsdoc';
 import { ItemThumbnailsDoc } from '@/components/doc/galleria/navigator/itemthumbnailsdoc';
 import { ItemWithoutThumbnailsDoc } from '@/components/doc/galleria/navigator/itemwithouthumbnailsdoc';
-import { PTDoc } from '@/components/doc/galleria/pt/ptdoc';
 import { Wireframe } from '@/components/doc/galleria/pt/wireframe';
 import { ResponsiveDoc } from '@/components/doc/galleria/responsivedoc';
 import { StyledDoc } from '@/components/doc/galleria/theming/styleddoc';
@@ -160,11 +159,6 @@ const GalleriaDemo = () => {
             id: 'pt.galleria.options',
             label: 'Galleria PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

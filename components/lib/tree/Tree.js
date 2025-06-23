@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
-import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { useDebounce, useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
@@ -15,14 +14,20 @@ export const Tree = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TreeBase.getProps(inProps, context);
 
-        const [filterValueState, setFilterValueState] = React.useState('');
+        const [filterValue, filterValueState, setFilterValueState] = useDebounce('', props.filterDelay || 0);
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
+        const [filterExpandedKeys, setFilterExpandedKeys] = React.useState({});
+
         const elementRef = React.useRef(null);
         const filteredNodes = React.useRef([]);
         const dragState = React.useRef(null);
         const filterChanged = React.useRef(false);
+
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
-        const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const isFiltering = props.filter && filteredValue;
+        const expandedKeys = isFiltering ? filterExpandedKeys : props.onToggle ? props.expandedKeys : expandedKeysState;
+        const currentFilterExpandedKeys = {};
+
         const childFocusEvent = React.useRef(null);
         const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
             props,
@@ -53,7 +58,11 @@ export const Tree = React.memo(
                     childFocusEvent.current = originalEvent;
                 }
 
-                setExpandedKeysState(value);
+                if (isFiltering) {
+                    setFilterExpandedKeys(value);
+                } else {
+                    setExpandedKeysState(value);
+                }
             }
         };
 
@@ -68,7 +77,8 @@ export const Tree = React.memo(
                         nodeElement.tabIndex = '-1';
                     }
 
-                    const childElement = listElement.children[0];
+                    //skip droppoint
+                    const childElement = props.dragdropScope ? listElement.children[1] : listElement.children[0];
 
                     if (childElement) {
                         childElement.tabIndex = '0';
@@ -79,6 +89,11 @@ export const Tree = React.memo(
                 childFocusEvent.current = null;
             }
         }, [expandedKeys]);
+
+        React.useEffect(() => {
+            if (props.filter) _filter();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [filteredValue, props.value, props.filter]);
 
         const onDragStart = (event) => {
             dragState.current = {
@@ -111,12 +126,14 @@ export const Tree = React.memo(
                 }
 
                 return result;
-            } else return value;
+            }
+
+            return value;
         };
 
         const onDrop = (event) => {
             if (validateDropNode(dragState.current?.path, event.path)) {
-                const value = cloneValue(props.value);
+                const value = cloneValue(getRootNode());
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -125,11 +142,17 @@ export const Tree = React.memo(
                 let dragNode = dragNodeParent ? dragNodeParent.children[dragState.current.index] : value[dragState.current.index];
                 let dropNode = findNode(value, event.path.split('-'));
 
-                if (dropNode.children) dropNode.children.push(dragNode);
-                else dropNode.children = [dragNode];
+                if (dropNode.children) {
+                    dropNode.children.push(dragNode);
+                } else {
+                    dropNode.children = [dragNode];
+                }
 
-                if (dragNodeParent) dragNodeParent.children.splice(dragState.current.index, 1);
-                else value.splice(dragState.current.index, 1);
+                if (dragNodeParent) {
+                    dragNodeParent.children.splice(dragState.current.index, 1);
+                } else {
+                    value.splice(dragState.current.index, 1);
+                }
 
                 if (props.onDragDrop) {
                     props.onDragDrop({
@@ -145,7 +168,7 @@ export const Tree = React.memo(
 
         const onDropPoint = (event) => {
             if (validateDropPoint(event)) {
-                const value = cloneValue(props.value);
+                const value = cloneValue(getRootNode());
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -159,17 +182,24 @@ export const Tree = React.memo(
                 let dragNode = dragNodeParent ? dragNodeParent.children[dragState.current.index] : value[dragState.current.index];
                 let siblings = areSiblings(dragState.current.path, event.path);
 
-                if (dragNodeParent) dragNodeParent.children.splice(dragState.current.index, 1);
-                else value.splice(dragState.current.index, 1);
+                if (dragNodeParent) {
+                    dragNodeParent.children.splice(dragState.current.index, 1);
+                } else {
+                    value.splice(dragState.current.index, 1);
+                }
 
                 if (event.position < 0) {
                     let dropIndex = siblings ? (dragState.current.index > event.index ? event.index : event.index - 1) : event.index;
 
-                    if (dropNodeParent) dropNodeParent.children.splice(dropIndex, 0, dragNode);
-                    else value.splice(dropIndex, 0, dragNode);
+                    if (dropNodeParent) {
+                        dropNodeParent.children.splice(dropIndex, 0, dragNode);
+                    } else {
+                        value.splice(dropIndex, 0, dragNode);
+                    }
+                } else if (dropNodeParent) {
+                    dropNodeParent.children.push(dragNode);
                 } else {
-                    if (dropNodeParent) dropNodeParent.children.push(dragNode);
-                    else value.push(dragNode);
+                    value.push(dragNode);
                 }
 
                 if (props.onDragDrop) {
@@ -187,19 +217,19 @@ export const Tree = React.memo(
         const validateDrop = (dragPath, dropPath) => {
             if (!dragPath) {
                 return false;
-            } else {
-                //same node
-                if (dragPath === dropPath) {
-                    return false;
-                }
-
-                //parent dropped on an descendant
-                if (dropPath.indexOf(dragPath) === 0) {
-                    return false;
-                }
-
-                return true;
             }
+
+            //same node
+            if (dragPath === dropPath) {
+                return false;
+            }
+
+            //parent dropped on an descendant
+            if (dropPath.indexOf(dragPath) === 0) {
+                return false;
+            }
+
+            return true;
         };
 
         const validateDropNode = (dragPath, dropPath) => {
@@ -212,9 +242,9 @@ export const Tree = React.memo(
                 }
 
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         };
 
         const validateDropPoint = (event) => {
@@ -227,31 +257,34 @@ export const Tree = React.memo(
                 }
 
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         };
 
         const areSiblings = (path1, path2) => {
-            if (path1.length === 1 && path2.length === 1) return true;
-            else return path1.substring(0, path1.lastIndexOf('-')) === path2.substring(0, path2.lastIndexOf('-'));
+            if (path1.length === 1 && path2.length === 1) {
+                return true;
+            }
+
+            return path1.substring(0, path1.lastIndexOf('-')) === path2.substring(0, path2.lastIndexOf('-'));
         };
 
         const findNode = (value, path) => {
             if (path.length === 0) {
                 return null;
-            } else {
-                const index = parseInt(path[0], 10);
-                const nextSearchRoot = value.children ? value.children[index] : value[index];
-
-                if (path.length === 1) {
-                    return nextSearchRoot;
-                } else {
-                    path.shift();
-
-                    return findNode(nextSearchRoot, path);
-                }
             }
+
+            const index = parseInt(path[0], 10);
+            const nextSearchRoot = value.children ? value.children[index] : value[index];
+
+            if (path.length === 1) {
+                return nextSearchRoot;
+            }
+
+            path.shift();
+
+            return findNode(nextSearchRoot, path);
         };
 
         const isNodeLeaf = (node) => {
@@ -281,20 +314,18 @@ export const Tree = React.memo(
 
         const filter = (value) => {
             setFilterValueState(ObjectUtils.isNotEmpty(value) ? value : '');
-            _filter();
         };
 
         const childNodeFocus = (node) => {};
 
         const _filter = () => {
-            if (!filterChanged.current) {
-                return;
-            }
+            if (!filterChanged.current) return;
 
             if (ObjectUtils.isEmpty(filteredValue)) {
                 filteredNodes.current = props.value;
             } else {
                 filteredNodes.current = [];
+
                 const searchFields = props.filterBy.split(',');
                 const filterText = filteredValue.toLocaleLowerCase(props.filterLocale);
                 const isStrictMode = props.filterMode === 'strict';
@@ -312,6 +343,7 @@ export const Tree = React.memo(
                 }
             }
 
+            setFilterExpandedKeys(currentFilterExpandedKeys);
             filterChanged.current = false;
         };
 
@@ -335,7 +367,7 @@ export const Tree = React.memo(
                 }
 
                 if (matched) {
-                    node.expanded = true;
+                    currentFilterExpandedKeys[node.key] = true;
 
                     return true;
                 }
@@ -389,6 +421,7 @@ export const Tree = React.memo(
                     dragdropScope={props.dragdropScope}
                     expandIcon={props.expandIcon}
                     expandedKeys={expandedKeys}
+                    isFiltering={isFiltering}
                     isNodeLeaf={isNodeLeaf}
                     metaKeySelection={props.metaKeySelection}
                     nodeTemplate={props.nodeTemplate}
@@ -412,6 +445,7 @@ export const Tree = React.memo(
                     selectionKeys={props.selectionKeys}
                     selectionMode={props.selectionMode}
                     togglerTemplate={props.togglerTemplate}
+                    isUnstyled={isUnstyled}
                 />
             );
         };
@@ -456,10 +490,7 @@ export const Tree = React.memo(
 
         const createModel = () => {
             if (props.value) {
-                if (props.filter) {
-                    filterChanged.current = true;
-                    _filter();
-                }
+                if (props.filter) filterChanged.current = true;
 
                 const value = getRootNode();
 
@@ -467,11 +498,11 @@ export const Tree = React.memo(
                     const rootNodes = createRootChildren(value);
 
                     return createRootChildrenContainer(rootNodes);
-                } else {
-                    const emptyMessageNode = createEmptyMessageNode();
-
-                    return createRootChildrenContainer(emptyMessageNode);
                 }
+
+                const emptyMessageNode = createEmptyMessageNode();
+
+                return createRootChildrenContainer(emptyMessageNode);
             }
 
             return null;
@@ -503,7 +534,9 @@ export const Tree = React.memo(
 
         const createFilter = () => {
             if (props.filter) {
-                const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                let value = props.onFilterValueChange ? props.filterValue : filterValue;
+
+                value = ObjectUtils.isNotEmpty(value) ? value : '';
                 const searchIconProps = mergeProps(
                     {
                         className: cx('searchIcon')

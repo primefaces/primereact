@@ -10,6 +10,7 @@ export const ColumnBase = ComponentBase.extend({
         body: null,
         bodyClassName: null,
         bodyStyle: null,
+        cellEditValidateOnClose: false,
         cellEditValidator: null,
         cellEditValidatorEvent: 'click',
         className: null,

@@ -227,22 +227,22 @@ export default function HeadlessDemo() {
                     position="top-center"
                     content={({ message }) => (
                         <section className="flex p-3 gap-3 w-full bg-black-alpha-90 shadow-2 fadeindown" style={{ borderRadius: '10px' }}>
-                            <i className="pi pi-cloud-upload text-primary-500 text-2xl"></i>
+                            <i className="pi pi-cloud-upload text-primary-500 text-2xl" />
                             <div className="flex flex-column gap-3 w-full">
                                 <p className="m-0 font-semibold text-base text-white">{message.summary}</p>
                                 <p className="m-0 text-base text-700">{message.detail}</p>
                                 <div className="flex flex-column gap-2">
-                                    <ProgressBar value={progress} showValue={false} style={{ height: '4px' }}></ProgressBar>
+                                    <ProgressBar value={progress} showValue={false} style={{ height: '4px' }} />
                                     <label className="text-right text-xs text-white">{progress}% uploaded...</label>
                                 </div>
                                 <div className="flex gap-3 mb-3">
-                                    <Button label="Another Upload?" text className="p-0" onClick={clear}></Button>
-                                    <Button label="Cancel" text className="text-white p-0" onClick={clear}></Button>
+                                    <Button label="Another Upload?" text className="p-0" onClick={clear} />
+                                    <Button label="Cancel" text className="text-white p-0" onClick={clear} />
                                 </div>
                             </div>
                         </section>
                     )}
-                ></Toast>
+                />
                 <Button onClick={show} label="View" />
             </div>
             <DocSectionCode code={code} />

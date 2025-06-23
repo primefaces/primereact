@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { ariaLabel } from '../api/Api';
 import { useTimeout } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
@@ -7,10 +7,12 @@ import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps } from '../utils/Utils';
+import { classNames, IconUtils } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const {
             message: messageInfo,
             metaData: parentMetaData,
@@ -51,8 +53,6 @@ export const UIMessage = React.memo(
 
         const createCloseIcon = () => {
             if (closable !== false) {
-                const ariaLabel = localeOption('close');
-
                 const buttonIconProps = mergeProps(
                     {
                         className: cx('uimessage.buttonicon')
@@ -68,7 +68,7 @@ export const UIMessage = React.memo(
                     {
                         type: 'button',
                         className: cx('uimessage.button'),
-                        'aria-label': ariaLabel,
+                        'aria-label': ariaLabel('close'),
                         onClick: onClose
                     },
                     getPTOptions('button', parentParams),

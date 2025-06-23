@@ -3,7 +3,6 @@ import { BasicDoc } from '@/components/doc/carousel/basicdoc';
 import { CircularDoc } from '@/components/doc/carousel/circulardoc';
 import { ImportDoc } from '@/components/doc/carousel/importdoc';
 import { NumScrollDoc } from '@/components/doc/carousel/numscrolldoc';
-import { PTDoc } from '@/components/doc/carousel/pt/ptdoc';
 import { Wireframe } from '@/components/doc/carousel/pt/wireframe';
 import { ResponsiveDoc } from '@/components/doc/carousel/responsivedoc';
 import { StyledDoc } from '@/components/doc/carousel/theming/styleddoc';
@@ -61,11 +60,6 @@ const CarouselDemo = () => {
             id: 'pt.carousel.options',
             label: 'Carousel PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

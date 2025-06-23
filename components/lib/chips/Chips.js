@@ -30,12 +30,12 @@ export const Chips = React.memo(
         const inputRef = React.useRef(props.inputRef);
 
         const removeItem = (event, index) => {
-            if (props.disabled && props.readOnly) {
+            if (props.disabled || props.readOnly) {
                 return;
             }
 
             let values = [...props.value];
-            const removedItem = values.splice(index, 1);
+            const removedItem = values.splice(index, 1)[0];
 
             if (!isRemovable(removedItem, index)) {
                 return;
@@ -53,10 +53,10 @@ export const Chips = React.memo(
                     originalEvent: event,
                     value: values,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -118,7 +118,10 @@ export const Chips = React.memo(
 
             if (inputRef.current.value.length === 0 && props.value && props.value.length > 0) {
                 focusIndex = focusIndex === null ? props.value.length - 1 : focusIndex - 1;
-                if (focusIndex < 0) focusIndex = 0;
+
+                if (focusIndex < 0) {
+                    focusIndex = 0;
+                }
             }
 
             setFocusedIndex(focusIndex);
@@ -200,10 +203,10 @@ export const Chips = React.memo(
                     originalEvent: event,
                     value: items,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -236,7 +239,7 @@ export const Chips = React.memo(
         const onPaste = (event) => {
             if (props.separator) {
                 let separator = props.separator.replace('\\n', '\n').replace('\\r', '\r').replace('\\t', '\t');
-                let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
+                let pastedData = (event.clipboardData || window.clipboardData).getData('Text');
 
                 if (props.keyfilter) {
                     KeyFilter.onPaste(event, props.keyfilter);
@@ -254,7 +257,7 @@ export const Chips = React.memo(
             }
         };
 
-        const onContainerFocus = (event) => {
+        const onContainerFocus = () => {
             setFocusedState(true);
         };
 
@@ -316,18 +319,18 @@ export const Chips = React.memo(
         };
 
         const createRemoveIcon = (value, index) => {
-            const iconProps = mergeProps(
-                {
-                    className: cx('removeTokenIcon'),
-                    onClick: (event) => removeItem(event, index),
-                    'aria-hidden': 'true'
-                },
-                ptm('removeTokenIcon')
-            );
-            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
-            const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
-
             if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
+                const iconProps = mergeProps(
+                    {
+                        className: cx('removeTokenIcon'),
+                        onClick: (event) => removeItem(event, index),
+                        'aria-hidden': 'true'
+                    },
+                    ptm('removeTokenIcon')
+                );
+                const icon = props.removeIcon || <TimesCircleIcon {...iconProps} key={`${index}_icon`} />;
+                const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
                 return removeIcon;
             }
 
@@ -342,11 +345,14 @@ export const Chips = React.memo(
                 },
                 ptm('label')
             );
-            const label = <span {...labelProps}>{content}</span>;
+            const label = (
+                <span {...labelProps} key={`${index}_${value}_span`}>
+                    {content}
+                </span>
+            );
             const icon = createRemoveIcon(value, index);
             const tokenProps = mergeProps(
                 {
-                    key: `${index}_${value}`,
                     id: props.inputId + '_chips_item_' + index,
                     role: 'option',
                     'aria-label': value,
@@ -361,7 +367,7 @@ export const Chips = React.memo(
             );
 
             return (
-                <li {...tokenProps}>
+                <li {...tokenProps} key={`${index}_${value}`}>
                     {label}
                     {icon}
                 </li>
@@ -397,7 +403,7 @@ export const Chips = React.memo(
             );
 
             return (
-                <li {...inputTokenProps}>
+                <li {...inputTokenProps} key={props.inputId + '_chips_input'}>
                     <input {...inputProps} />
                 </li>
             );
@@ -413,7 +419,7 @@ export const Chips = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx('container', { isFilled }),
+                    className: cx('container', { context }),
                     onClick: (e) => onWrapperClick(e),
                     onKeyDown: (e) => onContainerKeyDown(e),
                     tabIndex: -1,
@@ -454,7 +460,9 @@ export const Chips = React.memo(
 
         return (
             <>
-                <div {...rootProps}>{list}</div>
+                <div {...rootProps} key="chips">
+                    {list}
+                </div>
                 {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );

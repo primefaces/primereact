@@ -11,6 +11,10 @@ const classes = {
             'p-inputnumber-buttons-vertical': vertical,
             'p-invalid': props.invalid
         }),
+    input: ({ props, context }) =>
+        classNames('p-inputnumber-input', {
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
+        }),
     buttonGroup: 'p-inputnumber-button-group',
     incrementButton: ({ props }) =>
         classNames('p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component', {
@@ -153,6 +157,7 @@ export const InputNumberBase = ComponentBase.extend({
         inputRef: null,
         inputStyle: null,
         invalid: false,
+        variant: null,
         locale: undefined,
         localeMatcher: undefined,
         max: null,

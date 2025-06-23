@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/progressbar/basicdoc';
 import { DynamicDoc } from '@/components/doc/progressbar/dynamicdoc';
 import { ImportDoc } from '@/components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '@/components/doc/progressbar/indeterminatedoc';
-import { PTDoc } from '@/components/doc/progressbar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/progressbar/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/progressbar/templatedoc';
 import { StyledDoc } from '@/components/doc/progressbar/theming/styleddoc';
@@ -56,11 +55,6 @@ const ProgressBarDemo = () => {
             id: 'pt.progressbar.options',
             label: 'ProgressBar PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

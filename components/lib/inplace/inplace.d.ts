@@ -91,7 +91,7 @@ interface InplaceToggleEvent {
  */
 export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
-     * Whether the content is displayed or not.
+     * Whether the content is displayed or not. To use in controlled mode you must implement `onToggle` callback at a minimum.
      * @defaultValue false
      */
     active?: boolean | undefined;
@@ -164,9 +164,9 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Inplace extends React.Component<InplaceProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }
 
 /**

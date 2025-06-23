@@ -51,11 +51,6 @@ export interface PasswordPassThroughOptions {
      */
     showIcon?: PasswordPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * When present, it specifies that the component should have invalid state style.
-     * @defaultValue false
-     */
-    invalid?: boolean | undefined;
-    /**
      * Uses to pass attributes to the panel's DOM element.
      */
     panel?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -80,6 +75,10 @@ export interface PasswordPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: PasswordPassThroughTransitionType;
+    /**
+     * Uses to pass attributes to the IconField component
+     */
+    iconField?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -168,6 +167,16 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Style class of the input field.
      */
     inputClassName?: string | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
     /**
      * Hide icon template.
      */
@@ -319,17 +328,17 @@ export declare class Password extends React.Component<PasswordProps, any> {
     public toggleMask(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): typeof InputText | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
 }

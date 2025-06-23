@@ -3,15 +3,14 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/sidebar/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/sidebar/basicdoc';
 import { FullScreenDoc } from '@/components/doc/sidebar/fullscreendoc';
+import { HeadlessDoc } from '@/components/doc/sidebar/headlessdoc';
 import { ImportDoc } from '@/components/doc/sidebar/importdoc';
 import { PositionDoc } from '@/components/doc/sidebar/positiondoc';
-import { PTDoc } from '@/components/doc/sidebar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/sidebar/pt/wireframe';
 import { SizeDoc } from '@/components/doc/sidebar/sizedoc';
 import { TemplateDoc } from '@/components/doc/sidebar/templatedoc';
 import { StyledDoc } from '@/components/doc/sidebar/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/sidebar/theming/tailwinddoc';
-import { HeadlessDoc } from '@/components/doc/sidebar/headlessdoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -67,11 +66,6 @@ const SidebarDemo = () => {
             id: 'pt.sidebar.options',
             label: 'Sidebar PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

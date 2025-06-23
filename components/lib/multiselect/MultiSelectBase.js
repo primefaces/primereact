@@ -3,11 +3,12 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState }) =>
+    root: ({ props, context, focusedState, overlayVisibleState }) =>
         classNames('p-multiselect p-component p-inputwrapper', {
-            'p-multiselect-chip': props.display === 'chip',
+            'p-multiselect-chip': props.display === 'chip' && (props.maxSelectedLabels == null ? true : props.value?.length <= props.maxSelectedLabels),
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
             'p-multiselect-clearable': props.showClear && !props.disabled,
             'p-focus': focusedState,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
@@ -17,7 +18,7 @@ const classes = {
         classNames('p-multiselect-label', {
             'p-placeholder': empty && props.placeholder,
             'p-multiselect-label-empty': empty && !props.placeholder && !props.selectedItemTemplate,
-            'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value.length > props.maxSelectedLabels
+            'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value?.length > props.maxSelectedLabels
         }),
     panel: ({ panelProps: props, context, allowOptionSelect }) =>
         classNames('p-multiselect-panel p-component', {
@@ -52,7 +53,7 @@ const classes = {
             'p-disabled': props.disabled,
             'p-focus': props.focusedOptionIndex === props.index
         }),
-    checkboxContainer: 'p-checkbox p-component',
+    checkboxContainer: 'p-multiselect-checkbox',
     checkboxIcon: 'p-checkbox-icon p-c',
     transition: 'p-connected-overlay'
 };
@@ -218,9 +219,11 @@ export const MultiSelectBase = ComponentBase.extend({
         emptyMessage: null,
         filter: false,
         filterBy: null,
+        filterDelay: 300,
         filterInputAutoFocus: true,
         filterLocale: undefined,
         selectOnFocus: false,
+        focusOnHover: true,
         autoOptionFocus: false,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
@@ -232,6 +235,7 @@ export const MultiSelectBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         itemCheckboxIcon: null,
         itemClassName: null,
         itemTemplate: null,
@@ -267,7 +271,7 @@ export const MultiSelectBase = ComponentBase.extend({
         selectAll: false,
         selectAllLabel: null,
         selectedItemTemplate: null,
-        selectedItemsLabel: '{0} items selected',
+        selectedItemsLabel: undefined,
         selectionLimit: null,
         showClear: false,
         showSelectAll: true,
