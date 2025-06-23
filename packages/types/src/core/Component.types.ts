@@ -37,7 +37,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     /**
      * The pass-through props to pass to the component
      */
-    pt?: I['_dt_'] | undefined;
+    pt?: I['_pt_'] | undefined;
     /**
      * The pass-through options to pass to the component
      */
@@ -59,6 +59,39 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
      */
     children?: React.ReactNode | ((instance: I) => React.ReactNode) | undefined;
 }
+
+/**
+ * Defines the global pass-through props of the components.
+ * @example
+ * ```typescript
+ * <Component pt-root-id="custom-id" pt-root-className="custom-class" />
+ * ```
+ */
+export type GlobalComponentPTProps<PassThrough = Record<string, unknown>> = {
+    // pt-root="CLASS_NAME" or pt-root={{ id: 'custom-id', className: 'custom-class' }}
+    [Slot in keyof PassThrough & string as `pt-${Slot}`]?: string | PassThrough[Slot];
+} & {
+    // pt-root-id, pt-root-className, ...
+    [Key in {
+        [Slot in keyof PassThrough & string]: Extract<PassThrough[Slot], object> extends infer Obj
+            ? Obj extends object
+                ? {
+                      [Attr in keyof Obj & string]: `pt-${Slot}-${Attr}`;
+                  }[keyof Obj & string]
+                : never
+            : never;
+    }[keyof PassThrough & string]]?: Key extends `pt-${infer Slot}-${infer Attr}`
+        ? Slot extends keyof PassThrough
+            ? Extract<PassThrough[Slot], object> extends infer Obj
+                ? Obj extends object
+                    ? Attr extends keyof Obj
+                        ? Obj[Attr]
+                        : never
+                    : never
+                : never
+            : never
+        : never;
+};
 
 export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> extends Omit<GlobalComponentProps<I, T, R, D>, 'pt' | 'ptOptions' | 'dt' | 'styles'> {
     /**
@@ -153,7 +186,7 @@ export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Reco
     SafeRecord<State>,
     SafeRecord<Exposes>
 > & {
-    _dt_?: SafeRecord<PassThrough>;
+    _pt_?: SafeRecord<PassThrough>;
 };
 
 export type InferComponentInstance<I> =

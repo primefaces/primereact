@@ -112,9 +112,9 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
     const $defaultPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => getKeyValue(value as Record<string, unknown>, name, instance) || resolve(value, instance)), [$primereact?.config?.pt]);
     const $attrsPT = React.useMemo(() => {
         return Object.entries(attrs || {})
-            .filter(([key]) => key?.startsWith('pt:'))
+            .filter(([key]) => key?.startsWith('pt-'))
             .reduce<Record<string, unknown>>((result, [key, value]) => {
-                const [, ...rest] = key.split(':');
+                const [, ...rest] = key.split('-');
 
                 rest?.reduce((currentObj, nestedKey, index, array) => {
                     if (!currentObj[nestedKey]) {
@@ -129,7 +129,7 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
     }, [attrs]);
     const $attrsWithoutPT = React.useMemo(() => {
         return Object.entries(attrs || {})
-            .filter(([key]) => !key?.startsWith('pt:'))
+            .filter(([key]) => !key?.startsWith('pt-'))
             .reduce<Record<string, unknown>>((acc, [key, value]) => {
                 acc[key] = value;
 

@@ -8,7 +8,7 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
+import type { ComponentInstance, GlobalComponentPTProps } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { useInputTextExposes, useInputTextProps, useInputTextState } from './useInputText.types';
 
@@ -30,7 +30,7 @@ export interface InputTextPassThrough {
 /**
  * Defines valid properties in InputText component.
  */
-export interface InputTextProps extends BaseComponentProps<InputTextInstance, useInputTextProps> {
+export interface InputTextProps extends BaseComponentProps<InputTextInstance, useInputTextProps>, GlobalComponentPTProps<InputTextPassThrough> {
     /**
      * Defines the size of the InputText.
      */
