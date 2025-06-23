@@ -50,7 +50,7 @@ export interface PrimeReactProps {
     /**
      * @todo Define the type.
      */
-    defaults?: unknown;
+    defaults?: Record<string, { props: Record<string, unknown> }> | undefined;
     /**
      * Defines the filter match mode options.
      */

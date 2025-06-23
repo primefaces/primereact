@@ -14,10 +14,13 @@ export function PrimeReactProvider(inProps: React.PropsWithChildren<PrimeReactPr
 
     // states
     const [inputVariant, setInputVariant] = React.useState(props.inputVariant);
+    const [defaults, setDefaults] = React.useState(props.defaults);
 
     const value = {
         inputVariant,
-        setInputVariant
+        setInputVariant,
+        defaults,
+        setDefaults
     };
 
     return (

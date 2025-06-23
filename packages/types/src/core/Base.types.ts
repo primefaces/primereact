@@ -31,7 +31,7 @@ export interface useBaseOptions<IProps, DProps, Exposes> {
     setup?: BaseSetup<DProps, IProps, Exposes>;
 }
 
-export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props, Ref = unknown, ERef = HTMLElement> = {
+export type BaseInstance<IProps = Record<PropertyKey, unknown>, Ref = unknown, ERef = HTMLElement> = {
     /**
      * The reference to the component.
      */
@@ -49,14 +49,6 @@ export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props,
      */
     name?: string | undefined;
     /**
-     * The headless/component props.
-     */
-    props: SafeRecord<Props>;
-    /**
-     * The headless/component attributes.
-     */
-    attrs: Omit<SafeRecord<IProps>, keyof Props> & Record<PropertyKey, unknown>;
-    /**
      * The headless/component props that are passed by the user.
      */
     inProps?: SafeRecord<IProps> | undefined;
@@ -68,6 +60,17 @@ export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props,
      * The PrimeReact contexts.
      */
     $primereact: Contexts;
+};
+
+export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props, Ref = unknown, ERef = HTMLElement> = BaseInstance<IProps, Ref, ERef> & {
+    /**
+     * The headless/component props.
+     */
+    props: SafeRecord<Props>;
+    /**
+     * The headless/component attributes.
+     */
+    attrs: Omit<SafeRecord<IProps>, keyof Props> & Record<PropertyKey, unknown>;
 };
 
 /**
