@@ -2814,6 +2814,12 @@
                             "type": "string"
                         },
                         {
+                            "name": "HEADPHONES",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
                             "name": "HEART",
                             "optional": false,
                             "readonly": true,
@@ -2923,6 +2929,12 @@
                         },
                         {
                             "name": "MAP_MARKER",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
+                            "name": "MARS",
                             "optional": false,
                             "readonly": true,
                             "type": "string"
@@ -3480,6 +3492,12 @@
                             "type": "string"
                         },
                         {
+                            "name": "VENUS",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
                             "name": "VIDEO",
                             "optional": false,
                             "readonly": true,
@@ -3511,6 +3529,12 @@
                         },
                         {
                             "name": "WALLET",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
+                            "name": "WAVE_PULSE",
                             "optional": false,
                             "readonly": true,
                             "type": "string"
