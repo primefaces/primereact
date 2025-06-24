@@ -1,6 +1,56 @@
 {
     "data": [
         {
+            "name": "Getting Started",
+            "icon": "pi pi-home",
+            "children": [
+                {
+                    "name": "Introduction",
+                    "to": "/docs/gettingstarted/introduction"
+                },
+                {
+                    "name": "Setup",
+                    "to": "/docs/gettingstarted/setup"
+                }
+            ]
+        },
+        {
+            "name": "Installation",
+            "icon": "pi pi-cloud-download",
+            "children": [
+                {
+                    "name": "Vite",
+                    "to": "/docs/installation/vite"
+                },
+                {
+                    "name": "Next.js",
+                    "to": "/docs/installation/nextjs"
+                },
+                {
+                    "name": "CDN",
+                    "to": "/docs/installation/cdn"
+                },
+                {
+                    "name": "Gatsby",
+                    "to": "/docs/installation/gatsby"
+                },
+                {
+                    "name": "Storybook",
+                    "to": "/docs/installation/storybook"
+                }
+            ]
+        },
+        {
+            "name": "Configuration",
+            "icon": "pi pi-cog",
+            "children": [
+                {
+                    "name": "Options",
+                    "to": "/docs/configuration/options"
+                }
+            ]
+        },
+        {
             "name": "Theming",
             "icon": "pi pi-palette",
             "children": [

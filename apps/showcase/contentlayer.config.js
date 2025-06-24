@@ -10,7 +10,7 @@ import remarkGfm from 'remark-gfm';
 import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
 import { Store } from './__store__/index.mjs';
-import { getPTOptions, getStyleOptions, getTokenOptions } from './lib/utils/getComponentOptions';
+import { getPTOptions, getStyleOptions, getTokenOptions } from './utils/getComponentOptions';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',

@@ -1,5 +1,5 @@
 'use client';
-import { getPTOptions } from '@/lib/utils/getComponentOptions';
+import { getPTOptions } from '@/utils/getComponentOptions';
 import { addClass, find, removeClass } from '@primeuix/utils/dom';
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';

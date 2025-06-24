@@ -1,6 +1,6 @@
 import { useApp } from '@/hooks/useApp';
-import { getApiDocs, getPTOptions, getStyleOptions, getTokenOptions } from '@/lib/utils/getComponentOptions';
 import { ApiChild, ApiData, ApiDataItem, NestedApiData } from '@/types/Doc.types';
+import { getApiDocs, getPTOptions, getStyleOptions, getTokenOptions } from '@/utils/getComponentOptions';
 import { cn } from '@primeuix/utils';
 import Link from 'next/link';
 import React, { useMemo } from 'react';

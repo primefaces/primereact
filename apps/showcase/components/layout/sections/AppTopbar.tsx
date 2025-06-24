@@ -28,8 +28,6 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
         //app.setDarkTheme(isDark);
     };
 
-    const toggleDesigner = () => {};
-
     return (
         <div className={cn('layout-topbar', y > 10 && 'layout-topbar-sticky')}>
             <div className="layout-topbar-inner">
@@ -150,7 +148,7 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
 
                         <AppConfigurator />
                     </li>
-                    <li>
+                    {/*<li>
                         <button type="button" className="topbar-item relative group overflow-hidden !border-transparent" onClick={toggleDesigner} aria-label="Toggle Designer">
                             <span
                                 style={{
@@ -162,7 +160,7 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
                             <span style={{ inset: '1px', borderRadius: '4px' }} className="absolute z-2 bg-surface-0 dark:bg-surface-900 transition-all"></span>
                             <i className="pi pi-cog z-10"></i>
                         </button>
-                    </li>
+                    </li>*/}
                     <li>
                         <StyleClass
                             as="button"
