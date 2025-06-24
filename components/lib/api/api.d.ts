@@ -1330,6 +1330,7 @@ export interface PrimeIconsOptions {
     readonly GLOBE: string;
     readonly GOOGLE: string;
     readonly HASHTAG: string;
+    readonly HEADPHONES: string;
     readonly HEART: string;
     readonly HEART_FILL: string;
     readonly HISTORY: string;
@@ -1349,6 +1350,7 @@ export interface PrimeIconsOptions {
     readonly LOCK_OPEN: string;
     readonly MAP: string;
     readonly MAP_MARKER: string;
+    readonly MARS: string;
     readonly MICROSOFT: string;
     readonly MINUS: string;
     readonly MINUS_CIRCLE: string;
@@ -1441,12 +1443,14 @@ export interface PrimeIconsOptions {
     readonly USER_MINUS: string;
     readonly USER_PLUS: string;
     readonly USERS: string;
+    readonly VENUS: string;
     readonly VIDEO: string;
     readonly VIMEO: string;
     readonly VOLUME_DOWN: string;
     readonly VOLUME_OFF: string;
     readonly VOLUME_UP: string;
     readonly WALLET: string;
+    readonly WAVE_PULSE: string;
     readonly WHATSAPP: string;
     readonly WIFI: string;
     readonly WINDOW_MAXIMIZE: string;
