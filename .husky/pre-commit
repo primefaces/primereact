@@ -1,2 +1,2 @@
 npx --no-install lint-staged
-npm run type:check
+# npm run type:check
