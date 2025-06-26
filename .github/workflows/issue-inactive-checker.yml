@@ -2,7 +2,7 @@ name: Issue Inactive Checker
 
 on:
   schedule:
-    - cron: "0 13 * * *" # Every Monday at 1PM UTC (9AM EST)
+    - cron: '0 13 * * *' # Every Monday at 1PM UTC (9AM EST)
 
 permissions:
   contents: read
@@ -17,18 +17,18 @@ jobs:
       - name: Cannot Replicate
         uses: actions-cool/issues-helper@v3
         with:
-          actions: "close-issues"
-          labels: "Resolution: Cannot Replicate"
+          actions: 'close-issues'
+          labels: 'Resolution: Cannot Replicate'
           inactive-day: 20
       - name: Needs Reproducer
         uses: actions-cool/issues-helper@v3
         with:
-          actions: "close-issues"
-          labels: "Status: Needs Reproducer"
+          actions: 'close-issues'
+          labels: 'Status: Needs Reproducer'
           inactive-day: 20
       - name: Duplicate
         uses: actions-cool/issues-helper@v3
         with:
-          actions: "close-issues"
-          labels: "Resolution: Duplicate"
+          actions: 'close-issues'
+          labels: 'Resolution: Duplicate'
           inactive-day: 20

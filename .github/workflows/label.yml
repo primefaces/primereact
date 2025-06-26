@@ -2,9 +2,9 @@ name: Label To Issues and PRs
 
 on:
   issues:
-    types: [opened,reopened]
+    types: [opened, reopened]
   pull_request:
-    types: [opened,reopened]
+    types: [opened, reopened]
 
 permissions:
   contents: read

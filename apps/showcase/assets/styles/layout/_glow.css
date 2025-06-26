@@ -1,4 +1,5 @@
-.landing, .layout-wrapper {
+.landing,
+.layout-wrapper {
     background-blend-mode: var(--glow-blend);
     background-image: var(--glow-image);
     background-position: top;

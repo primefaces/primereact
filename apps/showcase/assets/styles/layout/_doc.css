@@ -23,7 +23,7 @@
         bottom: 0;
         width: 100%;
         border-bottom: 1px solid var(--border-color);
-        content: '';
+        content: "";
     }
 
     li {
@@ -417,7 +417,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -429,7 +429,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -454,7 +454,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -501,7 +501,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -528,7 +528,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -539,7 +539,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -551,7 +551,7 @@
                 font-family:
                     ui-monospace,
                     SFMono-Regular,
-                    'SF Mono',
+                    "SF Mono",
                     Menlo,
                     Consolas,
                     Liberation Mono,
@@ -634,7 +634,7 @@
             font-family:
                 ui-monospace,
                 SFMono-Regular,
-                'SF Mono',
+                "SF Mono",
                 Menlo,
                 Consolas,
                 Liberation Mono,

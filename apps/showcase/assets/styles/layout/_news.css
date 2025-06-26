@@ -44,15 +44,15 @@
     .layout-news-link,
     .layout-news-link:visited,
     .layout-news-link:active {
-        color:var(--primary-contrast-color);
-        font-weight:700;
+        color: var(--primary-contrast-color);
+        font-weight: 700;
     }
     .layout-news-link:hover {
         text-decoration: underline;
     }
 
     .layout-news-close {
-        color:var(--primary-contrast-color);
+        color: var(--primary-contrast-color);
         line-height: 1.5;
         cursor: pointer;
         display: inline-flex;

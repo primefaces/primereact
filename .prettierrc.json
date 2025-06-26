@@ -19,6 +19,32 @@
             "options": {
                 "parser": "json"
             }
+        },
+        {
+            "files": ["*.mdx"],
+            "options": {
+                "parser": "markdown"
+            }
+        },
+        {
+            "files": ["*.js", "*.jsx", "*.mjs"],
+            "options": {
+                "parser": "babel"
+            }
+        },
+        {
+            "files": ["*.css", "*.scss"],
+            "options": {
+                "parser": "scss",
+                "singleQuote": false
+            }
+        },
+        {
+            "files": ["*.yml", "*.yaml"],
+            "options": {
+                "parser": "yaml",
+                "tabWidth": 2
+            }
         }
     ]
 }

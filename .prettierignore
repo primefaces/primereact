@@ -6,8 +6,14 @@ out
 public
 node_modules
 .vscode
-*.md
-*.yml
+.husky
 /tsconfig.json
 **/source.auto.ts
 **/__store__
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+.prettierignore
+.npmrc
+.editorconfig
+.gitattributes

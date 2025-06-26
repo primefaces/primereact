@@ -3,59 +3,59 @@ description: Create a report to help PrimeReact improve.
 title: 'Replace_With_Component_Name: Brief_Bug_Description'
 labels: ['Status: Needs Triage']
 body:
-    - type: markdown
-      attributes:
-          # yamllint disable rule:line-length
-          value: >
-              ### There is no guarantee in receiving an immediate response in GitHub Issue Tracker, If you'd like to secure our response, you may consider *PrimeReact PRO Support* where support is provided within 4 business hours
-          # yamllint enable rule:line-length
-    - type: textarea
-      id: description
-      attributes:
-          label: Describe the bug
-          description: A clear and concise description of what the bug is.
-      validations:
-          required: true
-    - type: input
-      id: reproducer
-      attributes:
-          label: Reproducer
-          placeholder: https://stackblitz.com/edit/vitejs-vite-daiajq
-          description: |
-              Please fork [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
-      validations:
-          required: false
-    - type: textarea
-      id: system-info
-      attributes:
-          label: System Information
-          description: Output of `npx envinfo --system --npmPackages primereact,react,tailwindcss --binaries --browsers`
-          render: Shell
-          placeholder: >
-              System:...
-              Binaries:...
-              Browsers: ...
-              npmPackages:
-                 primereact: 10.7.0 => 10.7.0
-                 react: 18.3.1 => 18.3.1
-      validations:
-          required: true
-    - type: textarea
-      id: reproduce-steps
-      attributes:
-          label: Steps to reproduce the behavior
-          description: A clear and concise description of how to make the issue happen.
-          placeholder: >
-              1. Go to '...'
-              2. Click on '....'
-              3. Scroll down to '....'
-              4. See error
-      validations:
-          required: false
-    - type: textarea
-      id: expected-behavior
-      attributes:
-          label: Expected behavior
-          description: A clear and concise description of what you expected to happen.
-      validations:
-          required: false
+  - type: markdown
+    attributes:
+      # yamllint disable rule:line-length
+      value: >
+        ### There is no guarantee in receiving an immediate response in GitHub Issue Tracker, If you'd like to secure our response, you may consider *PrimeReact PRO Support* where support is provided within 4 business hours
+      # yamllint enable rule:line-length
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: input
+    id: reproducer
+    attributes:
+      label: Reproducer
+      placeholder: https://stackblitz.com/edit/vitejs-vite-daiajq
+      description: |
+        Please fork [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
+    validations:
+      required: false
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System Information
+      description: Output of `npx envinfo --system --npmPackages primereact,react,tailwindcss --binaries --browsers`
+      render: Shell
+      placeholder: >
+        System:...
+        Binaries:...
+        Browsers: ...
+        npmPackages:
+           primereact: 10.7.0 => 10.7.0
+           react: 18.3.1 => 18.3.1
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: Steps to reproduce the behavior
+      description: A clear and concise description of how to make the issue happen.
+      placeholder: >
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: false

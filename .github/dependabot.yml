@@ -1,14 +1,14 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     ignore:
-      - dependency-name: "react"
-      - dependency-name: "react-dom"
-      - dependency-name: "typedoc"
-  - package-ecosystem: "github-actions"
-    directory: "/"
+      - dependency-name: 'react'
+      - dependency-name: 'react-dom'
+      - dependency-name: 'typedoc'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'

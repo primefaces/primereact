@@ -199,7 +199,7 @@ const main = async () => {
             await fs.mkdir(outputPath, { recursive: true });
         }
 
-        await fs.writeFile(path.resolve(outputPath, 'index.json'), JSON.stringify({ ...inlineDocs }, null, 4));
+        await fs.writeFile(path.resolve(outputPath, 'index.json'), JSON.stringify({ ...inlineDocs }, null, 4) + '\n', 'utf8');
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Main process error:', error);
