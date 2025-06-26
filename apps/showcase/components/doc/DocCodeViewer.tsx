@@ -22,7 +22,7 @@ const DocCodeViewer = ({ className, children, __rawString__, __spec__, ...props 
                 {children}
             </pre>
             <div className="absolute flex items-center top-3 right-3 p-0.5 rounded-[10px] bg-white/10 backdrop-blur-[6px] border border-[hsla(0,0%,100%,.1)] group-hover/pre:opacity-100 opacity-0 transition-opacity duration-150 ">
-                {__spec__ === 'DocComponentViewer' && (
+                {__spec__ === 'DocDemoViewer' && (
                     <>
                         <DocCodeViewerConfigButton onClick={() => setIsExpanded(!isExpanded)}>
                             <i className={cn('pi', isExpanded ? 'pi-arrow-down-left-and-arrow-up-right-to-center' : 'pi-arrow-up-right-and-arrow-down-left-from-center')}></i>
@@ -33,7 +33,7 @@ const DocCodeViewer = ({ className, children, __rawString__, __spec__, ...props 
                     </>
                 )}
                 {__rawString__ && (
-                    <DocCodeViewerConfigButton onClick={handleCopy}>
+                    <DocCodeViewerConfigButton disabled={isCopied} onClick={handleCopy}>
                         <i className={cn('pi pi-copy', isCopied && 'pi pi-check !text-sm')}></i>
                     </DocCodeViewerConfigButton>
                 )}

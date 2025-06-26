@@ -3,12 +3,12 @@ import { Store } from '@/__store__/index.mjs';
 import { cn } from '@primeuix/utils';
 import * as React from 'react';
 
-type DocComponentViewerProps = {
+type DocDemoViewerProps = {
     name: string;
     hideCode?: boolean;
 };
 
-const DocComponentViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocComponentViewerProps> = ({ name, hideCode = false, children, className, ...props }) => {
+const DocDemoViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocDemoViewerProps> = ({ name, hideCode = false, children, className, ...props }) => {
     const Component = React.useMemo(() => {
         const [component, demo] = name.split(':');
 
@@ -36,4 +36,4 @@ const DocComponentViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocCom
     );
 };
 
-export default DocComponentViewer;
+export default DocDemoViewer;

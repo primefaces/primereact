@@ -1,0 +1,81 @@
+---
+title: Message
+description: Message component is used to display inline messages.
+---
+
+## Usage
+
+```tsx
+import { Message } from 'primereact/message';
+```
+
+```tsx
+<Message>
+    <Message.Content>
+        <Message.Text>Message</Message.Text>
+    </Message.Content>
+</Message>
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="message:basic-demo" />
+
+### Severity
+
+The `severity` option specifies the type of the message.
+
+<DocDemoViewer name="message:severity-demo" />
+
+### Icon
+
+`Message.Icon` is used to display an icon.
+
+<DocDemoViewer name="message:icon-demo" />
+
+### Variant
+
+Configure the `variant` value as `outlined` or `simple`.
+
+<DocDemoViewer name="message:variant-demo" />
+
+### Sizes
+
+Message provides `small` and `large` sizes as alternatives to the base.
+
+<DocDemoViewer name="message:sizes-demo" />
+
+### Dynamic
+
+Multiple messages can be displayed.
+
+<DocDemoViewer name="message:dynamic-demo" />
+
+### Closable
+
+`Message.Close` is a triggerable element used to close the message.
+
+<DocDemoViewer name="message:closable-demo" />
+
+### Life
+
+Messages can disappear automatically by defined the `life` in milliseconds.
+
+<DocDemoViewer name="message:life-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Message component uses `alert` role that implicitly defines `aria-live` as "assertive" and `aria-atomic` as "true". Since any attribute is passed to the root element, attributes like `aria-labelledby` and `aria-label` can optionally be used as well.
+
+Close element is a `button` with an `aria-label` that refers to the `aria.close` property of the locale API by default, you may use `closeButtonProps` to customize the element and override the default `aria-label`.
+
+### Close Button Keyboard Support
+
+| Key     | Function            |
+| ------- | ------------------- |
+| `enter` | Closes the message. |
+| `space` | Closes the message. |
