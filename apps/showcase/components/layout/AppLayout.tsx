@@ -1,6 +1,6 @@
 'use client';
 import { useApp } from '@/hooks/useApp';
-import { blockBodyScroll, cn, unblockBodyScroll } from '@primeuix/utils';
+import { cn } from '@primeuix/utils';
 import * as React from 'react';
 import { AppFooter, AppMenu, AppNews, AppTopbar } from './sections';
 
@@ -9,31 +9,15 @@ export default function AppLayout({
 }: Readonly<{
     children?: React.ReactNode;
 }>) {
-    const app = useApp();
-    const [sidebarActive, setSidebarActive] = React.useState(false);
-
-    const onMenuButtonClick = () => {
-        if (sidebarActive) {
-            setSidebarActive(false);
-            unblockBodyScroll('blocked-scroll');
-        } else {
-            setSidebarActive(true);
-            blockBodyScroll('blocked-scroll');
-        }
-    };
-
-    const onMaskClick = () => {
-        setSidebarActive(false);
-        unblockBodyScroll('blocked-scroll');
-    };
+    const { isNewsActive, preset, onMaskClick, sidebarActive } = useApp();
 
     return (
-        <div className={cn('layout-wrapper', { 'layout-news-active': app.isNewsActive })} data-p-theme={app.preset}>
+        <div className={cn('layout-wrapper', { 'layout-news-active': isNewsActive })} data-p-theme={preset}>
             <AppNews />
-            <AppTopbar onMenuButtonClick={onMenuButtonClick} />
+            <AppTopbar />
             <div className={cn('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={onMaskClick}></div>
             <div className="layout-content">
-                <AppMenu active={sidebarActive} />
+                <AppMenu />
                 <div className="layout-content-slot">{children}</div>
             </div>
             <AppFooter />

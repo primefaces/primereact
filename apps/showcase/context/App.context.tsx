@@ -1,6 +1,6 @@
 'use client';
 import type { AppContextProps, AppProviderProps } from '@/types/App.types';
-import { toValue } from '@primeuix/utils';
+import { blockBodyScroll, toValue, unblockBodyScroll } from '@primeuix/utils';
 import * as React from 'react';
 
 export const AppContext = React.createContext<AppProviderProps | null>(null);
@@ -12,7 +12,23 @@ export function AppProvider(props: AppContextProps) {
     const [isDarkTheme, setDarkTheme] = React.useState(props.isDarkTheme ?? false);
     const [isNewsActive, setNewsActive] = React.useState(props.isNewsActive ?? false);
     const [isRTL, setRTL] = React.useState(props.isRTL ?? false);
+    const [sidebarActive, setSidebarActive] = React.useState(false);
     const storageKey = React.useRef(props.storageKey || '');
+
+    const onMenuButtonClick = () => {
+        if (sidebarActive) {
+            setSidebarActive(false);
+            unblockBodyScroll('blocked-scroll');
+        } else {
+            setSidebarActive(true);
+            blockBodyScroll('blocked-scroll');
+        }
+    };
+
+    const onMaskClick = () => {
+        setSidebarActive(false);
+        unblockBodyScroll('blocked-scroll');
+    };
 
     const handleChangePrimary = (primary: string) => {
         setPrimary(primary);
@@ -55,7 +71,10 @@ export function AppProvider(props: AppContextProps) {
         storageKey: toValue(storageKey) as string,
         handleChangePrimary,
         handleChangeSurface,
-        handleChangeDarkTheme
+        handleChangeDarkTheme,
+        sidebarActive,
+        onMenuButtonClick,
+        onMaskClick
     };
 
     return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;

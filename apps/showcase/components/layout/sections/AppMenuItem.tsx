@@ -1,3 +1,4 @@
+import { useApp } from '@/hooks/useApp';
 import type { AppMenuItemData, AppMenuItemProps } from '@/types/App.types';
 import { cn } from '@primeuix/utils';
 import Link from 'next/link';
@@ -8,6 +9,7 @@ import * as React from 'react';
 export default React.memo(
     function AppMenuItem({ root = true, menu = [] }: AppMenuItemProps) {
         let pathname = usePathname();
+        const { sidebarActive, onMenuButtonClick } = useApp();
 
         if (pathname.startsWith('/docs/components/')) {
             pathname = pathname.replace(/\/api$|\/pt$|\/theming$/, '');
@@ -15,6 +17,12 @@ export default React.memo(
 
         const isActiveRootmenuItem = (menuitem: AppMenuItemData) => {
             return menuitem.children && !menuitem.children.some((item) => item.to === `/${pathname.replaceAll('-', '/')}` || (item.children && item.children.some((it) => it.to === `/${pathname}`)));
+        };
+
+        const handleClick = () => {
+            if (sidebarActive) {
+                onMenuButtonClick?.();
+            }
         };
 
         return menu.map((menuitem, index) => (
@@ -42,7 +50,7 @@ export default React.memo(
                 )}
 
                 {menuitem.to && (
-                    <Link href={menuitem.to} className={cn({ 'router-link-active': menuitem.to === pathname })}>
+                    <Link href={menuitem.to} className={cn({ 'router-link-active': menuitem.to === pathname })} onClick={handleClick}>
                         {menuitem.icon && root && (
                             <span className="menu-icon">
                                 <i className={menuitem.icon}></i>
