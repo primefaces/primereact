@@ -1,0 +1,96 @@
+---
+title: Install PrimeReact with Vite
+description: Setting up PrimeReact in a Vite project.
+---
+
+## Install Packages
+
+Install PrimeReact and a theme package using your favorite package manager:
+
+```bash
+# npm
+npm install primereact @primeuix/themes
+# yarn
+yarn add primereact @primeuix/themes
+# pnpm
+pnpm add primereact @primeuix/themes
+```
+
+## Getting Started
+
+### Provider
+
+Wrap your app with `PrimeProvider` in your main file (like `main.jsx` or `App.jsx`). This enables PrimeReact features everywhere in your app:
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { PrimeProvider } from '@primereact/core';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider>
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
+
+### Theme
+
+PrimeReact supports many themes. To use the Aura theme, import it and pass it to the provider:
+
+```jsx
+import Aura from '@primeuix/themes/aura';
+import { PrimeProvider } from '@primereact/core';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider theme={Aura}>
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
+
+### Verify
+
+To verify that PrimeReact is installed correctly, you can create a simple component such as [Button](/button) and render it in your application.
+Each component can be imported and registered individually so that you only include what you use for bundle optimization. Import path is available in the documentation of the corresponding component.
+
+```jsx
+import React from 'react';
+import { Button } from 'primereact/button';
+
+export default function VerifyInstallation() {
+    return (
+        <div>
+            <h2>Verify Installation</h2>
+            <Button label="Click Me" />
+        </div>
+    );
+}
+```
+
+## More Tips
+
+- You can import and use only the components you need for a smaller bundle size.
+- For icons, custom themes, and advanced setup, see the [PrimeReact documentation](https://primefaces.org/primereact/setup).
+
+## Troubleshooting
+
+If you encounter issues during installation or setup, check the following:
+
+- Ensure that you have the latest version of Vite and Node.js installed.
+- Verify that your project structure is correct and that the `PrimeProvider` is properly wrapped around your application.
+- Check the browser console for any errors related to PrimeReact components or themes.
+- If you are using TypeScript, ensure that you have the necessary type definitions installed.
+- Refer to the [PrimeReact GitHub repository](https://github.com/primefaces/primereact) for more information and support.
+
+## Example Project
+
+See a full working example in the [PrimeReact Showcase](https://primefaces.org/primereact/showcase).

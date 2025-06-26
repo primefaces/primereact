@@ -1,5 +1,4 @@
 'use client';
-
 import useScroll from '@/hooks/useScroll';
 import { cn } from '@primeuix/utils';
 import { Button } from 'primereact/button';
@@ -13,6 +12,7 @@ function useActiveItem(itemIds: (string | undefined)[]) {
     React.useEffect(() => {
         setActiveId(itemIds?.[0] ?? null);
     }, [itemIds]);
+
     React.useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {

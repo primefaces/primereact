@@ -57,19 +57,18 @@ export const Docs = defineDocumentType(() => ({
             resolve: async (doc) => {
                 const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
                 const slugger = new GithubSlugger();
+                const raw = doc.body.raw;
 
-                const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(({ groups }) => {
-                    const flag = groups?.flag;
-                    const content = groups?.content;
+                const codeBlocks = [...raw.matchAll(/```[\s\S]*?```/g)].map((m) => [m.index, m.index + m[0].length]);
+                const isInCode = (pos) => codeBlocks.some(([s, e]) => pos >= s && pos < e);
 
-                    return {
-                        level: flag.length,
-                        text: content,
-                        slug: content ? slugger.slug(content) : undefined
-                    };
-                });
-
-                return headings;
+                return [...raw.matchAll(regXHeader)]
+                    .filter((m) => !isInCode(m.index))
+                    .map((m) => ({
+                        level: m.groups.flag.length,
+                        text: m.groups.content,
+                        slug: m.groups.content ? slugger.slug(m.groups.content) : undefined
+                    }));
             }
         }
     }
