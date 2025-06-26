@@ -1,3 +1,4 @@
+import DocCopyMarkdown from '@/components/doc/DocCopyMarkdown';
 import { DocMdx } from '@/components/doc/DocMdx';
 import DocTabs from '@/components/doc/DocTabs';
 import DocToc from '@/components/doc/DocToc';
@@ -60,23 +61,17 @@ async function DocsPage({ params }: PageProps) {
         notFound();
     }
 
-    if (doc.hideTabAndToc) {
-        return (
-            <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
-                <div className="flex-1 overflow-hidden pb-12">
-                    <DocMdx code={doc.body.code} />
-                </div>
-            </div>
-        );
-    }
-
     return (
         <>
             {doc.component && <DocTabs componentName={doc.component} />}
             <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
                 <div className="flex-1 overflow-hidden pb-12">
-                    <h1 className="text-4xl font-semibold leading-[1.2] text-(--high-contrast-text-color) mb-2">{doc.title}</h1>
+                    <div className="flex items-start justify-between">
+                        <h1 className="text-4xl font-semibold leading-[1.2] text-(--high-contrast-text-color) mb-2">{doc.title}</h1>
+                        <DocCopyMarkdown llm={doc.llm} component={doc.component} />
+                    </div>
                     <p className="text-xl leading-[1.625]">{doc.description}</p>
+
                     <DocMdx code={doc.body.code} />
                 </div>
                 <DocToc toc={doc.toc} />

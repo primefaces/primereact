@@ -47,6 +47,14 @@ const nextConfig: NextConfig = {
             ...componentRedirects
         ];
     },
+    async rewrites() {
+        return [
+            {
+                source: '/docs/:path*.md',
+                destination: '/raw/docs/:path*'
+            }
+        ];
+    },
     eslint: {
         //ignoreDuringBuilds: true
     },
