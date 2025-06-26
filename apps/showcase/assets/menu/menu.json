@@ -206,18 +206,18 @@
             "children": [
                 {
                     "name": "Prime Icons",
-                    "to": "/docs/icons"
+                    "to": "/docs/icons/primeicons"
                 },
                 {
                     "name": "Custom Icons",
-                    "to": "/docs/customicons"
+                    "to": "/docs/icons/customicons"
                 }
             ]
         },
         {
             "name": "Figma UI Kit",
             "icon": "pi pi-pencil",
-            "to": "/docs/uikit"
+            "to": "/uikit"
         },
         {
             "name": "PrimeBlocks",
@@ -256,7 +256,7 @@
                 },
                 {
                     "name": "PRO Support",
-                    "to": "/docs/support"
+                    "to": "/support"
                 }
             ]
         },
@@ -266,7 +266,7 @@
             "children": [
                 {
                     "name": "About Us",
-                    "to": "/docs/team"
+                    "to": "/team"
                 },
                 {
                     "name": "Source Code",
@@ -278,7 +278,7 @@
                 },
                 {
                     "name": "Contribution",
-                    "to": "/docs/contribution",
+                    "to": "/docs/discover/contribution",
                     "icon": "pi pi-users"
                 },
                 {
