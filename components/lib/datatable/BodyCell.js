@@ -367,6 +367,7 @@ export const Cell = (props) => {
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
         }
+
         if (editingRowDataStateRef.current) {
             editingRowDataStateRef.current = null;
         }
