@@ -122,7 +122,6 @@ export const Cell = (props) => {
             unbindDocumentClickListener();
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
-            editingRowDataStateRef.current = null;
             selfClick.current = false;
         }, 1);
     };
@@ -367,6 +366,10 @@ export const Cell = (props) => {
         if (overlayEventListener.current) {
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
+        }
+
+        if (editingRowDataStateRef.current) {
+            editingRowDataStateRef.current = null;
         }
     });
 
