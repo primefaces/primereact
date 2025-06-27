@@ -3,8 +3,8 @@ packages:
   - 'apps/*'
 
 catalog:
-  '@primeuix/styled': ^0.7.0-beta.1
-  '@primeuix/utils': ^0.6.0-beta.1
+  '@primeuix/styled': ^0.7.0-beta.2
+  '@primeuix/utils': ^0.6.0-beta.2
   '@primeuix/locale': ^0.0.2
   '@primeuix/motion': ^0.0.3
   '@primeuix/styles': ^1.2.0-beta.2
