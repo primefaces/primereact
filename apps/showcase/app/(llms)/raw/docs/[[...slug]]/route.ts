@@ -6,7 +6,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
     const { slug } = await params;
 
     if (!slug || slug.length === 0) {
-        let content = '<SYSTEM>Documentation for all components in PrimeReact.</SYSTEM>\n\n';
+        let content = '';
 
         const componentDocs = allDocs.filter((doc) => doc.componentSlug.startsWith('components'));
 

@@ -3,11 +3,10 @@ import { allDocs } from '@/.contentlayer/generated';
 export const dynamic = 'force-static';
 
 export async function GET() {
-    let content = '# PrimeReact\n\n## Docs\n\n';
-    const baseUrl = 'https://www.primereact.org';
+    let content = '# PrimeReact\n\n';
 
     for (const doc of allDocs) {
-        content += `- [${doc.title}](${baseUrl}${doc.slug}.md): ${doc.description}\n`;
+        content += `${doc.llm}\n\n`;
     }
 
     return new Response(content, {

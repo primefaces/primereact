@@ -4,6 +4,7 @@ import { cn } from '@primeuix/utils';
 import { useMDXComponent } from 'next-contentlayer2/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from 'primereact/button';
 import * as React from 'react';
 import DocCodeViewer from './DocCodeViewer';
 import DocDemoViewer from './DocDemoViewer';
@@ -45,7 +46,7 @@ const components = {
     td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => <td className={cn('py-3 px-4 whitespace-pre-line', className)} {...props} />,
     Image,
     Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => <Link className={cn('font-medium underline underline-offset-4', className)} {...props} />,
-    em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <em className={cn('relative rounded-md bg-[var(--mark-background)] font-medium text-[var(--mark-text)] not-italic py-0.5 px-1.25', className)} {...props} />,
+    em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <em className={cn('text-base relative rounded-md bg-[var(--mark-background)] font-medium text-[var(--mark-text)] not-italic py-0.5 px-1.25', className)} {...props} />,
     DocDemoViewer,
     DocPTViewer,
     DocNotification,
@@ -55,7 +56,8 @@ const components = {
         const isInlineCode = !className?.includes('language-');
 
         return <code className={cn(isInlineCode ? 'text-base bg-(--mark-background) text-surface-900 dark:text-surface-0 rounded-md px-1.25 py-0.5 tracking-tight' : '', className)} {...props} />;
-    }
+    },
+    Button
 };
 
 interface DocMdxProps {

@@ -61,6 +61,11 @@
             ]
         },
         {
+            "name": "LLMs.txt",
+            "icon": "pi pi-file",
+            "to": "/docs/llms"
+        },
+        {
             "name": "Components",
             "icon": "pi pi-compass",
             "children": [
