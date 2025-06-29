@@ -13,13 +13,15 @@ export function EditDoc(props) {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onEditorValueChange = (options, value) => {
-        let newNodes = JSON.parse(JSON.stringify(nodes));
-        let editedNode = findNodeByKey(newNodes, options.node.key);
+    const onEditComplete = (event) => {
+        setNodes((nodes) => {
+            let newNodes = JSON.parse(JSON.stringify(nodes));
+            let editedNode = findNodeByKey(newNodes, event.props.node.key);
 
-        editedNode.data[options.field] = value;
+            editedNode.data[event.field] = event.newValue;
 
-        setNodes(newNodes);
+            return newNodes;
+        });
     };
 
     const findNodeByKey = (nodes, key) => {
@@ -37,7 +39,7 @@ export function EditDoc(props) {
     };
 
     const inputTextEditor = (options) => {
-        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(event) => options.editorCallback(event.target.value)} />;
     };
 
     const sizeEditor = (options) => {
@@ -49,8 +51,7 @@ export function EditDoc(props) {
     };
 
     const requiredValidator = (e) => {
-        let props = e.columnProps;
-        let value = props.node.data[props.field];
+        let value = e.newValue;
 
         return value && value.length > 0;
     };
@@ -77,13 +78,14 @@ export default function EditDemo() {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []);
 
-    const onEditorValueChange = (options, value) => {
-        let newNodes = JSON.parse(JSON.stringify(nodes));
-        let editedNode = findNodeByKey(newNodes, options.node.key);
+    const onEditComplete = (event) => {
+        setNodes((nodes) => {
+            let newNodes = JSON.parse(JSON.stringify(nodes));
+            let editedNode = findNodeByKey(newNodes, event.props.node.key);
 
-        editedNode.data[options.field] = value;
-
-        setNodes(newNodes);
+            editedNode.data[event.field] = event.newValue;
+            return newNodes;
+        });
     };
 
     const findNodeByKey = (nodes, key) => {
@@ -101,7 +103,7 @@ export default function EditDemo() {
     };
 
     const inputTextEditor = (options) => {
-        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(event) => options.editorCallback(event.target.value)} />;
     };
 
     const sizeEditor = (options) => {
@@ -123,8 +125,8 @@ export default function EditDemo() {
         <div className="card">
             <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
-                <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
-                <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
+                <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} onCellEditComplete={onEditComplete} style={{ height: '3.5rem' }}></Column>
+                <Column field="type" header="Type" editor={typeEditor} onCellEditComplete={onEditComplete} style={{ height: '3.5rem' }}></Column>
             </TreeTable>
         </div>
     );
@@ -145,13 +147,14 @@ export default function EditDemo() {
         NodeService.getTreeTableNodes().then((data) => setNodes(data));
     }, []);
 
-    const onEditorValueChange = (options: ColumnEditorOptions, value: string) => {
-        let newNodes = JSON.parse(JSON.stringify(nodes));
-        let editedNode = findNodeByKey(newNodes, options.node.key);
+    const onEditComplete = (event) => {
+        setNodes((nodes) => {
+            let newNodes = JSON.parse(JSON.stringify(nodes));
+            let editedNode = findNodeByKey(newNodes, event.props.node.key);
 
-        editedNode.data[options.field] = value;
-
-        setNodes(newNodes);
+            editedNode.data[event.field] = event.newValue;
+            return newNodes;
+        });
     };
 
     const findNodeByKey = (nodes: TreeNode[], key: string) => {
@@ -169,7 +172,7 @@ export default function EditDemo() {
     };
 
     const inputTextEditor = (options: ColumnEditorOptions) => {
-        return <InputText type="text" value={options.rowData[options.field]} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onEditorValueChange(options, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(event) => options.editorCallback(event.target.value)} />;
     };
 
     const sizeEditor = (options: ColumnEditorOptions) => {
@@ -181,7 +184,7 @@ export default function EditDemo() {
     };
 
     const requiredValidator = (e: ColumnEvent) => {
-        let props = e.columnProps;
+        let props = e.props;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -191,8 +194,8 @@ export default function EditDemo() {
         <div className="card">
             <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
-                <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
-                <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
+                <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} onCellEditComplete={onEditComplete} style={{ height: '3.5rem' }}></Column>
+                <Column field="type" header="Type" editor={typeEditor} onCellEditComplete={onEditComplete} style={{ height: '3.5rem' }}></Column>
             </TreeTable>
         </div>
     );
@@ -267,14 +270,15 @@ export default function EditDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Incell editing is enabled by defining input elements with <i>editor</i> property of a Column.
+                    Incell editing is enabled by defining input elements with <i>editor</i> property of a Column and implementing <i>onCellEditComplete</i> to update the state. When updating the state from React's useState hook, use a callback format
+                    to always work on the up-to-date state.
                 </p>
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander style={{ height: '3.5rem' }} />
-                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }} />
-                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }} />
+                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} onCellEditComplete={onEditComplete} style={{ height: '3.5rem' }} />
+                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }} onCellEditComplete={onEditComplete} />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
