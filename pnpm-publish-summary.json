@@ -1,0 +1,32 @@
+{
+    "publishedPackages": [
+        {
+            "name": "@primereact/hooks",
+            "version": "11.0.0-alpha.1"
+        },
+        {
+            "name": "@primereact/styles",
+            "version": "11.0.0-alpha.1"
+        },
+        {
+            "name": "@primereact/types",
+            "version": "11.0.0-alpha.1"
+        },
+        {
+            "name": "@primereact/core",
+            "version": "11.0.0-alpha.1"
+        },
+        {
+            "name": "@primereact/headless",
+            "version": "11.0.0-alpha.1"
+        },
+        {
+            "name": "@primereact/icons",
+            "version": "11.0.0-alpha.1"
+        },
+        {
+            "name": "primereact",
+            "version": "11.0.0-alpha.1"
+        }
+    ]
+}
