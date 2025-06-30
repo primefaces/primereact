@@ -1,6 +1,6 @@
 {
     "name": "showcase",
-    "version": "11.0.0",
+    "version": "11.0.0-alpha.1",
     "scripts": {
         "dev": "npm run dev:init && next dev --turbopack",
         "dev2": "npm run dev:init && next dev --turbopack --port 3001",
