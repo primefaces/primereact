@@ -1,7 +1,6 @@
 'use client';
 import useScroll from '@/hooks/useScroll';
 import { cn } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 
 function useActiveItem(itemIds: (string | undefined)[]) {
@@ -156,22 +155,22 @@ export default function DocToc({ toc }: DocTocProps) {
     return (
         <div className="w-[236px] sticky top-34 lg:block hidden">
             <DocTocList toc={toc} />
-            <DocTocAd />
+            {/* <DocTocAd /> */}
         </div>
     );
 }
 
-function DocTocAd() {
-    return (
-        <div className="rounded-lg border border-surface-200 dark:border-surface-800 px-4 py-6 bg-surface-0 dark:bg-surface-900">
-            <div className="text-2xl font-semibold flex flex-col gap-2 text-center">
-                <span className="leading-none">Build Faster </span>
-                <span className="leading-none  text-primary">Design Better</span>
-            </div>
-            <div className="text-center text-[14px] mt-4 text-surface-500">490+ ready to use UI blocks to build spectacular applications in no time</div>
-            <Button as={'a'} href="https://primeblocks.org/" target="_blank" rounded variant="outlined" className="!mx-auto mt-4 !flex !w-fit">
-                Browse Components
-            </Button>
-        </div>
-    );
-}
+// function DocTocAd() {
+//     return (
+//         <div className="rounded-lg border border-surface-200 dark:border-surface-800 px-4 py-6 bg-surface-0 dark:bg-surface-900">
+//             <div className="text-2xl font-semibold flex flex-col gap-2 text-center">
+//                 <span className="leading-none">Build Faster </span>
+//                 <span className="leading-none  text-primary">Design Better</span>
+//             </div>
+//             <div className="text-center text-[14px] mt-4 text-surface-500">490+ ready to use UI blocks to build spectacular applications in no time</div>
+//             <Button as={'a'} href="https://primeblocks.org/" target="_blank" rounded variant="outlined" className="!mx-auto mt-4 !flex !w-fit">
+//                 Browse Components
+//             </Button>
+//         </div>
+//     );
+// }

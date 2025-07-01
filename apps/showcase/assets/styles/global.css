@@ -3,3 +3,56 @@
 /*@import '@docsearch/css/dist/style.css';*/
 @import "./tailwind/main.css";
 @import "./layout/layout.css";
+
+code[data-line-numbers] {
+    counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+
+    /* Other styling */
+    display: inline-block;
+    width: 0.75rem;
+    margin-left: -0.15rem;
+    margin-right: 1.15rem;
+    text-align: right;
+    color: var(--color-surface-500);
+    opacity: 0.75;
+    z-index: 1;
+}
+
+code[data-line-numbers-max-digits="2"] > [data-line]::before {
+    width: 1.25rem;
+}
+
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+    width: 1.75rem;
+}
+
+code[data-line-numbers-max-digits="4"] > [data-line]::before {
+    width: 2.25rem;
+}
+
+code > span[data-highlighted-line] {
+    position: relative;
+}
+
+code > span[data-highlighted-line] > span {
+    position: relative;
+    z-index: 1;
+}
+
+code > span[data-highlighted-line]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    right: -1rem;
+    height: 100%;
+    background-color: color-mix(in srgb, var(--color-surface-500) 30%, transparent);
+    border-left: 2px solid color-mix(in srgb, var(--color-surface-0) 40%, transparent);
+    pointer-events: none;
+    z-index: 0;
+}

@@ -1,80 +1,106 @@
 ---
-title: Install PrimeReact with Vite
+title: With Vite
 description: Setting up PrimeReact in a Vite project.
 ---
 
-## Install Packages
+## Working Example
+
+<DocLinkCard href='https://github.com/primefaces/primereact-examples/tree/main/vite-quickstart-nextgen'>
+    <span className='text-2xl font-semibold'>Quickstart your project with our PrimeReact + Vite template</span>
+    <div>Use this Vite template pre-configured with PrimeReact to quickly start building your app with ready-to-use UI components and styles.</div>
+    <div className='flex items-center gap-2 text-surface-500 dark:text-surface-400'>
+        <i className='pi pi-github opacity-75' />
+        <span>github.com/primefaces/primereact-examples</span>
+    </div>
+</DocLinkCard>
+
+## Installation
+
+<DocStepper>
+<DocStep>
+
+### Install Packages
 
 Install PrimeReact and a theme package using your favorite package manager:
 
 ```bash
-# npm
-npm install primereact @primeuix/themes
-# yarn
-yarn add primereact @primeuix/themes
-# pnpm
-pnpm add primereact @primeuix/themes
+npm install primereact@11.0.0-alpha.1 @primeuix/themes
 ```
 
-## Getting Started
+</DocStep>
+    <DocStep>
+### PrimeReactProvider
 
-### Provider
+Wrap your app with `PrimeReactProvider` in your main file (like `main.tsx` or `App.tsx`). This enables PrimeReact features everywhere in your app:
 
-Wrap your app with `PrimeProvider` in your main file (like `main.jsx` or `App.jsx`). This enables PrimeReact features everywhere in your app:
+```tsx showLineNumbers {5,11-13}
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+import { PrimeReactProvider } from "@primereact/core/config";
 
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { PrimeProvider } from '@primereact/core';
-import App from './App';
+...
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <PrimeProvider>
-            <App />
-        </PrimeProvider>
-    </React.StrictMode>
-);
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <PrimeReactProvider>
+        <App />
+    </PrimeReactProvider>
+  </StrictMode>,
+)
 ```
+
+    </DocStep>
+    <DocStep>
 
 ### Theme
 
 PrimeReact supports many themes. To use the Aura theme, import it and pass it to the provider:
 
-```jsx
+```tsx showLineNumbers {1,7-9,13}
 import Aura from '@primeuix/themes/aura';
 import { PrimeProvider } from '@primereact/core';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
+const theme = {
+    preset: Aura
+};
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider theme={Aura}>
+        <PrimeProvider theme={theme}>
             <App />
         </PrimeProvider>
     </React.StrictMode>
 );
 ```
 
-### Verify
+    </DocStep>
+    <DocStep>
+     ### Verify
 
 To verify that PrimeReact is installed correctly, you can create a simple component such as [Button](/button) and render it in your application.
 Each component can be imported and registered individually so that you only include what you use for bundle optimization. Import path is available in the documentation of the corresponding component.
 
-```jsx
-import React from 'react';
+```tsx showLineNumbers {1,7}
 import { Button } from 'primereact/button';
 
 export default function VerifyInstallation() {
     return (
         <div>
             <h2>Verify Installation</h2>
-            <Button label="Click Me" />
+            <Button>Click Me</Button>
         </div>
     );
 }
 ```
+
+    </DocStep>
+
+</DocStepper>
 
 ## More Tips
 
@@ -90,7 +116,3 @@ If you encounter issues during installation or setup, check the following:
 - Check the browser console for any errors related to PrimeReact components or themes.
 - If you are using TypeScript, ensure that you have the necessary type definitions installed.
 - Refer to the [PrimeReact GitHub repository](https://github.com/primefaces/primereact) for more information and support.
-
-## Example Project
-
-See a full working example in the [PrimeReact Showcase](https://primefaces.org/primereact/showcase).

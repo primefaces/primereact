@@ -66,11 +66,11 @@ async function DocsPage({ params }: PageProps) {
             {doc.component && <DocTabs componentName={doc.component} />}
             <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
                 <div className="flex-1 overflow-hidden pb-12">
-                    <div className="flex items-start justify-between">
-                        <h1 className="text-4xl font-semibold leading-[1.2] text-(--high-contrast-text-color) mb-2">{doc.title}</h1>
-                        <DocCopyMarkdown llm={doc.llm} component={doc.component} />
+                    <div className="grid grid-cols-[1fr_auto] gap-2 items-start">
+                        <h1 className="text-4xl font-semibold leading-[1.2] text-(--high-contrast-text-color)">{doc.title}</h1>
+                        <DocCopyMarkdown className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />
+                        <p className="text-xl leading-[1.625] col-span-2">{doc.description}</p>
                     </div>
-                    <p className="text-xl leading-[1.625]">{doc.description}</p>
 
                     <DocMdx code={doc.body.code} />
                 </div>

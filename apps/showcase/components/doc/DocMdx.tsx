@@ -8,7 +8,9 @@ import { Button } from 'primereact/button';
 import * as React from 'react';
 import DocCodeViewer from './DocCodeViewer';
 import DocDemoViewer from './DocDemoViewer';
+import DocLinkCard from './DocLinkCard';
 import DocNotification from './DocNotification';
+import DocStepper, { DocStep } from './DocStepper';
 import DocTable from './DocTable';
 
 const components = {
@@ -51,6 +53,9 @@ const components = {
     DocPTViewer,
     DocNotification,
     DocTable,
+    DocStepper,
+    DocStep,
+    DocLinkCard,
     pre: DocCodeViewer,
     code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
         const isInlineCode = !className?.includes('language-');

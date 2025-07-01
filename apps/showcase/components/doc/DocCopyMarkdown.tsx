@@ -1,10 +1,12 @@
 'use client';
+import { cn } from '@primeuix/utils';
 import { allDocs } from 'contentlayer/generated';
 import { useParams } from 'next/navigation';
+import { Button } from 'primereact/button';
 import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
 
-export default function DocCopyMarkdown({ llm, component }: { llm: string; component?: string }) {
+const DocCopyMarkdown: React.FC<React.HTMLAttributes<HTMLDivElement> & { llm: string; component?: string }> = ({ llm, component, className, ...props }) => {
     const params = useParams();
     const [isCopied, setIsCopied] = React.useState(false);
     const [isMarkdownLinkCopied, setIsMarkdownLinkCopied] = React.useState(false);
@@ -89,7 +91,8 @@ export default function DocCopyMarkdown({ llm, component }: { llm: string; compo
     };
 
     return (
-        <div className="flex items-center gap-4 relative">
+        <div className={cn('flex items-center gap-4 relative', className)} {...props}>
+            <Button className="hidden opacity-0 absolute w-0 h-0"></Button>
             <div className="rounded-border border border-surface flex divide-x divide-(--p-content-border-color) bg-(--p-button-secondary-background) overflow-hidden text-(--p-button-secondary-color) font-(--p-button-label-font-weight)">
                 <button onClick={handleCopy} disabled={isCopied} className="px-3 py-2 flex items-center gap-2 hover:bg-(--p-button-secondary-hover-background)/60 transition-colors cursor-pointer disabled:opacity-50 disabled:pointer-events-none">
                     {isCopied ? <i className="pi pi-check"></i> : <i className="pi pi-copy"></i>}
@@ -165,4 +168,6 @@ export default function DocCopyMarkdown({ llm, component }: { llm: string; compo
             </div>
         </div>
     );
-}
+};
+
+export default DocCopyMarkdown;
