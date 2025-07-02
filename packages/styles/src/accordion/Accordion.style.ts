@@ -9,6 +9,15 @@ export const styles = createStyles<AccordionInstance>({
         root: 'p-accordion p-component',
         content: 'p-accordioncontent p-accordioncontent-content',
         header: 'p-accordionheader',
-        toggleicon: 'p-accordionheader-toggle-icon'
+        toggleicon: 'p-accordionheader-toggle-icon',
+        panel: ({ context }) => {
+            return [
+                'p-accordionpanel',
+                {
+                    'p-accordionpanel-active': context.active,
+                    'p-disabled': context.disabled
+                }
+            ];
+        }
     }
 });

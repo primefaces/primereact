@@ -1,6 +1,5 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { panelStyles } from '@primereact/styles/accordion';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -11,7 +10,6 @@ import { defaultPanelProps } from './AccordionPanel.props';
 export const AccordionPanel = withComponent({
     name: 'AccordionPanel',
     defaultProps: defaultPanelProps,
-    styles: panelStyles,
     setup({ props }) {
         const accordion = useAccordionContext();
 
@@ -25,14 +23,15 @@ export const AccordionPanel = withComponent({
         };
     },
     render(instance) {
-        const { props, ptmi, active, cx } = instance;
+        const { props, ptmi, active, accordion } = instance;
 
         const rootProps = mergeProps(
             {
-                className: cx('root'),
+                className: accordion?.cx('panel', { active }),
                 'data-p-disabled': props.disabled,
                 'data-p-active': active
             },
+            accordion?.ptm('panel'),
             ptmi('root')
         );
 

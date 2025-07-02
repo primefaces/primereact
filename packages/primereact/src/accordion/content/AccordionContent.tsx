@@ -1,5 +1,6 @@
 'use client';
 import { Component } from '@primereact/core/component';
+import { Motion } from '@primereact/core/motion';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -22,9 +23,6 @@ export const AccordionContent = withComponent({
         const rootProps = mergeProps(
             {
                 className: accordion?.cx('content'),
-                style: {
-                    display: accordionpanel?.active ? 'block' : 'none'
-                },
                 role: 'region',
                 'data-p-active': accordionpanel?.active,
                 'data-p-disabled': accordionpanel?.props.disabled
@@ -33,6 +31,10 @@ export const AccordionContent = withComponent({
             ptmi('root')
         );
 
-        return <Component pIf={accordion?.props.lazy ? accordionpanel?.active : true} instance={instance} attrs={rootProps} children={props.children} />;
+        return (
+            <Motion pIf={accordion?.props.lazy ? accordionpanel?.active : true} in={accordionpanel?.active} name="p-toggleable-content">
+                <Component instance={instance} attrs={rootProps} children={props.children} />
+            </Motion>
+        );
     }
 });
