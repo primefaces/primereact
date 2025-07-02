@@ -18,21 +18,10 @@ Panel is a container component with a _Panel.Header_ and _Panel.Content_.
 
 ## Toggleable
 
-When the _toggleable_ property is enabled, content can be expanded and collapsed using the _Panel.Header_ interaction.
+Panel can be made toggleable by using the _Motion_ component or an animation library to animate the visibility of the content.
+The _Panel.Header_ contains a button to toggle the visibility of the content, and the _Panel.Content_ is wrapped inside the _Motion_ component to handle the animation.
 
 <DocDemoViewer name="panel:toggleable-demo" />
-
-## Controlled
-
-A controlled Panel requires managing the collapsed state with a state variable and handling the toggle event manually. This allows for complete control over the Panel's behavior.
-
-<DocDemoViewer name="panel:controlled-demo" />
-
-## Uncontrolled
-
-An uncontrolled Panel manages its own collapsed state internally. You can simply use the `toggleable` property without controlling the collapsed state, letting the component handle all toggle behavior automatically.
-
-<DocDemoViewer name="panel:uncontrolled-demo" />
 
 ## Template
 

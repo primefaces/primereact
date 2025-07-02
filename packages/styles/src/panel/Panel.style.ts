@@ -18,10 +18,5 @@ export const styles = createStyles<PanelInstance>({
         collapse: 'p-panel-toggle-button',
         content: 'p-panel-content',
         footer: 'p-panel-footer'
-    },
-    inlineStyles: {
-        content: ({ state }) => ({
-            display: state?.collapsed ? 'none' : 'block'
-        })
     }
 });

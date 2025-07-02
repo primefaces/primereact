@@ -16,19 +16,19 @@ const icons = [
                 </g>
                 <defs>
                     <linearGradient id="paint0_linear_1399_2309" x1="44.706" y1="47.2476" x2="59.1032" y2="65.0921" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white" />
-                        <stop offset="1" stop-color="white" stop-opacity="0" />
+                        <stop stopColor="white" />
+                        <stop offset="1" stopColor="white" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="paint1_linear_1399_2309" x1="49.5722" y1="21.9004" x2="49.4907" y2="43.3442" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white" />
-                        <stop offset="1" stop-color="white" stop-opacity="0" />
+                        <stop stopColor="white" />
+                        <stop offset="1" stopColor="white" stopOpacity="0" />
                     </linearGradient>
                 </defs>
             </svg>
         ),
         icon2: () => (
             <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_1399_2310)">
+                <g clipPath="url(#clip0_1399_2310)">
                     <mask id="mask0_1399_2310" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="74" height="73">
                         <path d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z" fill="black" />
                     </mask>
@@ -40,12 +40,12 @@ const icons = [
                 </g>
                 <defs>
                     <linearGradient id="paint0_linear_1399_2310" x1="44.705" y1="47.2476" x2="59.1022" y2="65.0921" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white" />
-                        <stop offset="1" stop-color="white" stop-opacity="0" />
+                        <stop stopColor="white" />
+                        <stop offset="1" stopColor="white" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="paint1_linear_1399_2310" x1="49.572" y1="21.9004" x2="49.4905" y2="43.3442" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="white" />
-                        <stop offset="1" stop-color="white" stop-opacity="0" />
+                        <stop stopColor="white" />
+                        <stop offset="1" stopColor="white" stopOpacity="0" />
                     </linearGradient>
                     <clipPath id="clip0_1399_2310">
                         <rect width="74" height="73" fill="white" />
@@ -59,7 +59,7 @@ const icons = [
         to: '/docs/installation/vite',
         icon1: () => (
             <svg data-v-051284a2="" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g data-v-051284a2="" id="vite" clip-path="url(#clip0_3_57)">
+                <g data-v-051284a2="" id="vite" clipPath="url(#clip0_3_57)">
                     <path
                         data-v-051284a2=""
                         id="Vector"
@@ -82,7 +82,7 @@ const icons = [
         ),
         icon2: () => (
             <svg data-v-051284a2="" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg" className="original">
-                <g data-v-051284a2="" id="vite" clip-path="url(#clip0_1_67)">
+                <g data-v-051284a2="" id="vite" clipPath="url(#clip0_1_67)">
                     <path
                         data-v-051284a2=""
                         id="Vector"
@@ -98,13 +98,13 @@ const icons = [
                 </g>
                 <defs data-v-051284a2="">
                     <linearGradient data-v-051284a2="" id="paint0_linear_1_67" x1="1.30015" y1="5.5644" x2="36.5943" y2="52.7953" gradientUnits="userSpaceOnUse">
-                        <stop data-v-051284a2="" stop-color="#41D1FF"></stop>
-                        <stop data-v-051284a2="" offset="1" stop-color="#BD34FE"></stop>
+                        <stop data-v-051284a2="" stopColor="#41D1FF"></stop>
+                        <stop data-v-051284a2="" offset="1" stopColor="#BD34FE"></stop>
                     </linearGradient>
                     <linearGradient data-v-051284a2="" id="paint1_linear_1_67" x1="29.8279" y1="1.85329" x2="36.2756" y2="45.4365" gradientUnits="userSpaceOnUse">
-                        <stop data-v-051284a2="" stop-color="#FFEA83"></stop>
-                        <stop data-v-051284a2="" offset="0.0833333" stop-color="#FFDD35"></stop>
-                        <stop data-v-051284a2="" offset="1" stop-color="#FFA800"></stop>
+                        <stop data-v-051284a2="" stopColor="#FFEA83"></stop>
+                        <stop data-v-051284a2="" offset="0.0833333" stopColor="#FFDD35"></stop>
+                        <stop data-v-051284a2="" offset="1" stopColor="#FFA800"></stop>
                     </linearGradient>
                     <clipPath data-v-051284a2="" id="clip0_1_67">
                         <rect data-v-051284a2="" width="62" height="62" fill="white" transform="translate(0.392822 0.5)"></rect>
@@ -112,9 +112,9 @@ const icons = [
                 </defs>
             </svg>
         )
-    },
+    }
 
-    {
+    /*{
         name: 'CDN',
         to: '/docs/installation/cdn',
         icon1: () => (
@@ -130,7 +130,7 @@ const icons = [
         ),
         icon2: () => (
             <svg data-v-051284a2="" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg" className="original">
-                <g data-v-051284a2="" id="Frame" clip-path="url(#clip0_3_69)">
+                <g data-v-051284a2="" id="Frame" clipPath="url(#clip0_3_69)">
                     <path data-v-051284a2="" id="Vector" d="M8.91734 54.595L3.99609 0.5H58.8661L53.8286 54.5562L31.3536 60.5625" fill="#E44D26"></path>
                     <path data-v-051284a2="" id="Vector_2" d="M31.3926 55.9512V4.91748H53.8288L49.5663 51.0687" fill="#F16529"></path>
                     <path
@@ -148,7 +148,7 @@ const icons = [
                 </defs>
             </svg>
         )
-    }
+    }*/
 ];
 
 function SetupDemo() {

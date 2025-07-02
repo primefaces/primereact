@@ -25,18 +25,6 @@
                 {
                     "name": "Next.js",
                     "to": "/docs/installation/nextjs"
-                },
-                {
-                    "name": "CDN",
-                    "to": "/docs/installation/cdn"
-                },
-                {
-                    "name": "Gatsby",
-                    "to": "/docs/installation/gatsby"
-                },
-                {
-                    "name": "Storybook",
-                    "to": "/docs/installation/storybook"
                 }
             ]
         },
