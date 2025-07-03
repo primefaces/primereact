@@ -598,9 +598,9 @@ export const Store = {
         },
     },
     'styled': {
-        'colors-demo': {
-            'component': React.lazy(() => import('demo/styled/colors-demo.tsx')),
-            'filePath': 'demo/styled/colors-demo.tsx',
+        'colors-list': {
+            'component': React.lazy(() => import('demo/styled/colors-list.tsx')),
+            'filePath': 'demo/styled/colors-list.tsx',
         },
         'css-modules-demo': {
             'component': React.lazy(() => import('demo/styled/css-modules-demo.tsx')),

@@ -105,7 +105,7 @@ var(--p-blue-500)
 $dt('blue.500').value
 ```
 
-<DocDemoViewer name="theming:colors-list" hideCode />
+<DocDemoViewer name="styled:colors-list" hideCode />
 
 ## Dark Mode
 
@@ -113,14 +113,28 @@ PrimeReact uses the `system` as the default `darkModeSelector` in theme configur
 seamlessly with your color scheme.
 
 ```tsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { PrimeReactProvider } from '@primereact/core/config';
 import Aura from '@primeuix/themes/aura';
 
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
+const primereact = {
+    theme: {
+        preset: Aura,
+        options: {
+            darkModeSelector: '.my-app-dark'
+        }
     }
-}
+};
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <PrimeReactProvider {...primereact}>
+            <App />
+        </PrimeReactProvider>
+    </StrictMode>
+);
 ```
 
 Following is a very basic example implementation of a dark mode switch, you may extend it further by involving `prefers-color-scheme` to retrieve it from the system initially and use `localStorage` to make it stateful. See this [article](https://dev.to/abbeyperini/dark-mode-toggle-and-prefers-color-scheme-4f3m) for more information.
@@ -158,9 +172,56 @@ theme: {
 
 The `definePreset` utility is used to customize an existing preset during the PrimeReact setup. The first parameter is the preset to customize and the second is the design tokens to override.
 
+```tsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { PrimeReactProvider } from '@primereact/core/config';
+import { definePreset } from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
+
+const MyPreset = definePreset(Aura, {
+    //Your customizations, see the following sections for examples
+});
+
+const primereact = {
+    theme: {
+        preset: MyPreset
+    }
+};
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <PrimeReactProvider {...primereact}>
+            <App />
+        </PrimeReactProvider>
+    </StrictMode>
+);
+```
+
 ### Primary
 
 The `primary` defines the main color palette, default value maps to the `emerald` primitive token. Let's setup to use `indigo` instead.
+
+```tsx
+const MyPreset = definePreset(Aura, {
+    semantic: {
+        primary: {
+            50: '{indigo.50}',
+            100: '{indigo.100}',
+            200: '{indigo.200}',
+            300: '{indigo.300}',
+            400: '{indigo.400}',
+            500: '{indigo.500}',
+            600: '{indigo.600}',
+            700: '{indigo.700}',
+            800: '{indigo.800}',
+            900: '{indigo.900}',
+            950: '{indigo.950}'
+        }
+    }
+});
+```
 
 ### Surface
 
