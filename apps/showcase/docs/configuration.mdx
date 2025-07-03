@@ -32,7 +32,7 @@ Style mode offers theming based on a design token based architecture. See the <L
 ```tsx showLineNumbers {2,5-12,16}
 ...
 import Aura from '@primeuix/themes/aura';
-import { PrimeProvider } from '@primereact/core';
+import { PrimeReactProvider } from '@primereact/core';
 
 const theme = {
     preset: Aura,
@@ -45,9 +45,9 @@ const theme = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider theme={theme}>
+        <PrimeReactProvider theme={theme}>
             <App />
-        </PrimeProvider>
+        </PrimeReactProvider>
     </React.StrictMode>
 );
 ```
@@ -57,14 +57,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Unstyled mode instructs the components not to add any built-in style classes so that they can be styled using custom css or libraries like Tailwind and Bootstrap. Visit Unstyled mode documentation for more information.
 
 ```tsx showLineNumbers {6}
-import { PrimeProvider } from '@primereact/core';
+import { PrimeReactProvider } from '@primereact/core';
 ...
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider unstyled>
+        <PrimeReactProvider unstyled>
             <App />
-        </PrimeProvider>
+        </PrimeReactProvider>
     </React.StrictMode>
 );
 ```
@@ -74,7 +74,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Defines the shared pass through properties per component type. Visit the <Link href="/docs/passthrough">Pass Through Props</Link> documentation for more information.
 
 ```tsx showLineNumbers {4-8,12}
-import { PrimeProvider } from '@primereact/core';
+import { PrimeReactProvider } from '@primereact/core';
 ...
 
 const pt = {
@@ -85,9 +85,9 @@ const pt = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider pt={pt}>
+        <PrimeReactProvider pt={pt}>
             <App />
-        </PrimeProvider>
+        </PrimeReactProvider>
     </React.StrictMode>
 );
 ```
@@ -98,7 +98,7 @@ Used to configure the `ptOptions` properties of components. The `mergeSections` 
 Defaults are `true` for `mergeSections` and `false` for `mergeProps`.
 
 ```tsx showLineNumbers {4-7,11}
-import { PrimeProvider } from '@primereact/core';
+import { PrimeReactProvider } from '@primereact/core';
 ...
 
 const ptOptions = {
@@ -108,9 +108,9 @@ const ptOptions = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider ptOptions={ptOptions}>
+        <PrimeReactProvider ptOptions={ptOptions}>
             <App />
-        </PrimeProvider>
+        </PrimeReactProvider>
     </React.StrictMode>
 );
 ```
@@ -123,14 +123,14 @@ Note that in case you add it to the application element, components that are tel
 to resolve this case set inputVariant to `filled` at PrimeReactProvider as well.
 
 ```tsx showLineNumbers {6}
-import { PrimeProvider } from '@primereact/core';
+import { PrimeReactProvider } from '@primereact/core';
 ...
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider inputVariant="filled">
+        <PrimeReactProvider inputVariant="filled">
             <App />
-        </PrimeProvider>
+        </PrimeReactProvider>
     </React.StrictMode>
 );
 ```

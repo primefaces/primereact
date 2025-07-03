@@ -17,7 +17,7 @@ description: Setting up PrimeReact in a Vite project.
 ## Installation
 
 <DocStepper>
-<DocStep>
+    <DocStep>
 
 ### Install Packages
 
@@ -27,8 +27,9 @@ Install PrimeReact and a theme package using your favorite package manager:
 npm install primereact@11.0.0-alpha.1 @primeuix/themes
 ```
 
-</DocStep>
+    </DocStep>
     <DocStep>
+
 ### PrimeReactProvider
 
 Wrap your app with `PrimeReactProvider` in your main file (like `main.tsx` or `App.tsx`). This enables PrimeReact features everywhere in your app:
@@ -60,7 +61,7 @@ PrimeReact supports many themes. To use the Aura theme, import it and pass it to
 
 ```tsx showLineNumbers {1,7-9,13}
 import Aura from '@primeuix/themes/aura';
-import { PrimeProvider } from '@primereact/core';
+import { PrimeReactProvider } from '@primereact/core';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -71,34 +72,34 @@ const theme = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <PrimeProvider theme={theme}>
+        <PrimeReactProvider theme={theme}>
             <App />
-        </PrimeProvider>
+        </PrimeReactProvider>
     </React.StrictMode>
 );
 ```
 
     </DocStep>
     <DocStep>
-     ### Verify
+
+### Verify
 
 To verify that PrimeReact is installed correctly, you can create a simple component such as [Button](/button) and render it in your application.
 Each component can be imported and registered individually so that you only include what you use for bundle optimization. Import path is available in the documentation of the corresponding component.
+
+<DocDemoViewer name="button:verify-demo" hideCode/>
 
 ```tsx showLineNumbers {1,7}
 import { Button } from 'primereact/button';
 
 export default function VerifyInstallation() {
     return (
-        <div>
-            <h2>Verify Installation</h2>
+        <div className="card flex justify-center">
             <Button>Verify</Button>
         </div>
     );
 }
 ```
-
-<DocDemoViewer name="button:verify-demo" hideCode/>
 
     </DocStep>
 
@@ -107,14 +108,14 @@ export default function VerifyInstallation() {
 ## More Tips
 
 - You can import and use only the components you need for a smaller bundle size.
-- For icons, custom themes, and advanced setup, see the [PrimeReact documentation](https://primefaces.org/primereact/setup).
+- For icons, custom themes, and advanced setup, see the [PrimeReact documentation](https://v11.primereact.org/setup).
 
 ## Troubleshooting
 
 If you encounter issues during installation or setup, check the following:
 
 - Ensure that you have the latest version of Vite and Node.js installed.
-- Verify that your project structure is correct and that the `PrimeProvider` is properly wrapped around your application.
+- Verify that your project structure is correct and that the `PrimeReactProvider` is properly wrapped around your application.
 - Check the browser console for any errors related to PrimeReact components or themes.
 - If you are using TypeScript, ensure that you have the necessary type definitions installed.
 - Refer to the [PrimeReact GitHub repository](https://github.com/primefaces/primereact) for more information and support.
