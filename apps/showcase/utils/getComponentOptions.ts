@@ -156,10 +156,10 @@ export const setPropsData = (props: PropItem[]): PropItem[] => {
 
     if (hasPassThroughProps) {
         data.push({
-            name: 'pt-*',
+            name: 'pt-{optionName}-*',
             type: '-',
             default: '',
-            description: 'Pass through attributes for customizing component.',
+            description: 'Pass through attributes for customizing component. For more info, see Pass Through tab.',
             deprecated: false
         });
     }
