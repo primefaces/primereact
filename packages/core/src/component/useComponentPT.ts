@@ -33,7 +33,8 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
     const _getPTValue = React.useCallback(
         (obj = {}, key = '', params: Record<string, unknown> = {}, searchInDefaultPT = true) => {
             const searchOut = /./g.test(key) && !!params[key.split('.')[0]];
-            const { mergeSections = true, mergeProps: useMergeProps = false } = props?.ptOptions || $primereact.config?.ptOptions || {};
+            // @ts-expect-error - @todo
+            const { mergeSections = true, mergeProps: useMergeProps = false } = props?.ptOptions || $primereact.passthrough?.options || {};
             const global = searchInDefaultPT ? (searchOut ? _useGlobalPT(_getPTClassValue, key, params) : _useDefaultPT(_getPTClassValue, key, params)) : undefined;
             const self = searchOut ? undefined : _getPTSelf(obj, _getPTClassValue, key, { ...params, global: global || {} });
             const datasets = _getPTDatasets(key);
@@ -91,7 +92,8 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
             const vfn = (value: unknown) => (fn as (...args: unknown[]) => unknown)(value, key, params);
 
             if (pt && Object.hasOwn(pt, '_usept')) {
-                const { mergeSections = true, mergeProps: useMergeProps = false } = (pt['_usept'] || $primereact.config?.ptOptions || {}) as PassThroughOptions;
+                // @ts-expect-error - @todo
+                const { mergeSections = true, mergeProps: useMergeProps = false } = (pt['_usept'] || $primereact.passthrough?.options || {}) as PassThroughOptions;
                 const originalValue = vfn(pt.originalValue);
                 const value = vfn(pt.value);
 
@@ -104,12 +106,15 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
 
             return vfn(pt);
         },
-        [$primereact.config?.ptOptions, _mergeProps]
+        // @ts-expect-error - @todo
+        [$primereact.passthrough?.options, _mergeProps]
     );
 
     // computed values
-    const $globalPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => resolve(value, instance)), [$primereact?.config?.pt]);
-    const $defaultPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => getKeyValue(value as Record<string, unknown>, name, instance) || resolve(value, instance)), [$primereact?.config?.pt]);
+    // @ts-expect-error - @todo
+    const $globalPT = React.useMemo(() => _getPT($primereact?.passthrough?.value, undefined, (value) => resolve(value, instance)), [$primereact?.passthrough?.value]);
+    // @ts-expect-error - @todo
+    const $defaultPT = React.useMemo(() => _getPT($primereact?.passthrough?.value, undefined, (value) => getKeyValue(value as Record<string, unknown>, name, instance) || resolve(value, instance)), [$primereact?.passthrough?.value]);
     const $attrsPT = React.useMemo(() => {
         return Object.entries(attrs || {})
             .filter(([key]) => key?.startsWith('pt-'))
