@@ -91,15 +91,29 @@ variant for seamless integration. Note that, this particular configuration isn't
 
 Suppose that, the darkModeSelector is set as `my-app-dark` in PrimeReact.
 
-```tsx
+```tsx showLineNumbers
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { PrimeReactProvider } from '@primereact/core/config';
 import Aura from '@primeuix/themes/aura';
 
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
+const primereact = {
+    theme: {
+        preset: Aura,
+        options: {
+            darkModeSelector: '.my-app-dark'
+        }
     }
-}
+};
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <PrimeReactProvider {...primereact}>
+            <App />
+        </PrimeReactProvider>
+    </StrictMode>
+);
 ```
 
 ### Tailwind v4
@@ -137,27 +151,13 @@ Use the `!` as a prefix to enforce the styling. This is not the recommend approa
 ##### Tailwind v4
 
 ```tsx
-import Aura from '@primeuix/themes/aura';
-
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
-    }
-}
+<InputText placeholder="Overriden" className="p-8!" />
 ```
 
 ##### Tailwind v3
 
 ```tsx
-import Aura from '@primeuix/themes/aura';
-
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
-    }
-}
+<InputText placeholder="Overriden" className="!p-8" />
 ```
 
 ### CSS Layer
@@ -168,66 +168,85 @@ CSS Layer provides control over the css specificity so that Tailwind utilities c
 
 Ensure `primereact` layer is after `theme` and `base`, but before the other Tailwind layers such as `utilities`.
 
-```tsx
+```tsx showLineNumbers
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { PrimeReactProvider } from '@primereact/core/config';
 import Aura from '@primeuix/themes/aura';
 
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
+const primereact = {
+    theme: {
+        preset: Aura,
+        options: {
+            cssLayer: {
+                name: 'primereact',
+                order: 'theme, base, primereact'
+            }
+        }
     }
-}
+};
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <PrimeReactProvider {...primereact}>
+            <App />
+        </PrimeReactProvider>
+    </StrictMode>
+);
 ```
 
 No change in the CSS configuration is required.
 
-```tsx
-import Aura from '@primeuix/themes/aura';
-
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
-    }
-}
+```css
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
 ```
 
 ##### Tailwind v3
 
 The `primereact` layer should be between base and utilities.
 
-```tsx
+```tsx showLineNumbers
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { PrimeReactProvider } from '@primereact/core/config';
 import Aura from '@primeuix/themes/aura';
 
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
+const primereact = {
+    theme: {
+        preset: Aura,
+        options: {
+            cssLayer: {
+                name: 'primereact',
+                order: 'tailwind-base, primereact, tailwind-utilities'
+            }
+        }
     }
-}
-```
+};
 
-```tsx
-import Aura from '@primeuix/themes/aura';
-
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
-    }
-}
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <PrimeReactProvider {...primereact}>
+            <App />
+        </PrimeReactProvider>
+    </StrictMode>
+);
 ```
 
 Tailwind v3 does not use native `layer` so needs to be defined with CSS.
 
-```tsx
-import Aura from '@primeuix/themes/aura';
+```css
+@layer tailwind-base, primevue, tailwind-utilities;
 
-theme: {
-    preset: Aura,
-    options: {
-        darkModeSelector: '.my-app-dark',
-    }
+@layer tailwind-base {
+    @tailwind base;
+}
+
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
 }
 ```
 
@@ -239,30 +258,7 @@ Example uses cases with PrimeReact and Tailwind CSS.
 
 PrimeReact color palette as utility classes.
 
-<div className="card">
-    <div className="flex flex-col gap-12">
-        <ul className="p-0 m-0 list-none flex sm:flex-col gap-4 flex-wrap sm:flex-nowrap">
-            {['primary', 'surface'].map((color, i) => (
-                <li key={i} className="flex-auto" style={{ minWidth: '6rem' }}>
-                    <span className="font-medium capitalize block mb-2 text-center sm:text-left">{color}</span>
-                    <div className="flex gap-4 flex-auto flex-col sm:flex-row">
-                        {[0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade, j) => (
-                            <div key={shade} className={`flex flex-col items-center gap-1 flex-1 ${color === 'primary' && shade === 0 ? 'invisible' : ''}`}>
-                                <div className="rounded h-8 w-full" style={{ backgroundColor: `var(--p-${color}-${shade})` }}></div>
-                                <span className="text-sm text-surface-500 dark:text-surface-400 font-medium">{shade}</span>
-                            </div>
-                        ))}
-                    </div>
-                </li>
-            ))}
-        </ul>
-        <div className="flex gap-6 flex-wrap">
-            <div className="rounded-border p-4 border border-transparent flex items-center justify-center bg-primary hover:bg-primary-emphasis text-primary-contrast font-medium flex-auto transition-colors">primary</div>
-            <div className="rounded-border p-4 border border-transparent flex items-center justify-center bg-highlight hover:bg-highlight-emphasis font-medium flex-auto transition-colors">highlight</div>
-            <div className="rounded-border p-4 border border-surface flex items-center justify-center text-muted-color hover:text-color hover:bg-emphasis font-medium flex-auto transition-colors">box</div>
-        </div>
-    </div>
-</div>
+<DocDemoViewer name="tailwind:color-palette-demo" hideCode />
 
 ```tsx
 <div className="flex flex-col gap-12">
@@ -276,7 +272,7 @@ PrimeReact color palette as utility classes.
 
 ### Starter
 
-The Tailwind v4 and PrimeReact [starter example](https://github.com/primefaces/primereact-examples/tree/main/vite-tailwindv4) is available to demonstrate the integration setup with an example dashboard.
+The Tailwind v4 and PrimeReact [starter example](https://github.com/primefaces/primereact-examples/tree/main/vite-quickstart-nextgen) is available to demonstrate the integration setup with an example dashboard.
 
 ## Animations
 

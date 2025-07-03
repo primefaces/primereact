@@ -701,6 +701,12 @@ export const Store = {
             'filePath': 'demo/tag/template-demo.tsx',
         },
     },
+    'tailwind': {
+        'color-palette-demo': {
+            'component': React.lazy(() => import('demo/tailwind/color-palette-demo.tsx')),
+            'filePath': 'demo/tailwind/color-palette-demo.tsx',
+        },
+    },
     'togglebutton': {
         'all-demo': {
             'component': React.lazy(() => import('demo/togglebutton/all-demo.tsx')),
