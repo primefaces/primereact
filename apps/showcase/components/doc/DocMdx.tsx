@@ -20,14 +20,20 @@ const components = {
     h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h4 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-lg leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
     h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h5 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-base leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
     h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h6 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-sm leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
-    a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
+    a: ({ className, href, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
         const isAnchorLink = className?.includes('heading-anchor-link');
 
         if (isAnchorLink) {
-            return <a className={className} {...props} />;
+            return <Link href={href ?? ''} className={className} {...props} />;
         }
 
-        return <a className={cn('font-medium text-(--primary-text-color) hover:!underline', className)} target="_blank" rel="noopener noreferrer" {...props} />;
+        const isExternal = /^https?:\/\//.test(href ?? '');
+
+        if (!isExternal) {
+            return <Link href={href ?? ''} className={cn('font-medium text-(--primary-text-color) hover:!underline', className)} {...props} />;
+        }
+
+        return <a href={href ?? ''} target="_blank" rel="noopener noreferrer" className={cn('font-medium text-(--primary-text-color) hover:!underline', className)} {...props} />;
     },
     p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => <p className={cn('leading-[1.625rem] mb-4 text-lg', className)} {...props} />,
     strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <strong className={cn('font-semibold', className)} {...props} />,
