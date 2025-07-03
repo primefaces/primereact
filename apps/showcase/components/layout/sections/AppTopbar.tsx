@@ -187,7 +187,7 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
                                 {config.versions?.map((version) => (
                                     <li key={version.name} role="none">
                                         <a href={version.url}>
-                                            <span>PrimeReact {version.name}</span>
+                                            <span>{version.name}</span>
                                         </a>
                                     </li>
                                 ))}
