@@ -1,12 +1,13 @@
 import News from '@/assets/data/news.json';
 import { useApp } from '@/hooks/useApp';
+import Link from 'next/link';
 import * as React from 'react';
 
 export interface Announcement {
     id: number | string;
     content?: string;
     linkText?: string;
-    linkHref?: string;
+    linkHref: string;
     target?: string;
     backgroundStyle?: React.CSSProperties;
     textStyle?: React.CSSProperties;
@@ -43,9 +44,9 @@ export default function AppNews() {
                     <span className="layout-news-text" style={announcement.textStyle}>
                         {announcement.content}
                     </span>
-                    <a className="layout-news-link" href={announcement.linkHref} target={announcement.target} rel="noopener noreferrer">
+                    <Link className="layout-news-link" href={announcement.linkHref} target={announcement.target} rel={announcement.target === '_blank' ? 'noopener noreferrer' : undefined}>
                         {announcement.linkText}
-                    </a>
+                    </Link>
                 </div>
                 <a className="layout-news-close" style={announcement.textStyle} onClick={onClose}>
                     <span className="pi pi-times"></span>

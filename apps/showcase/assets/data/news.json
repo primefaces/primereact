@@ -1,7 +1,6 @@
 {
     "id": 1,
-    "content": "PrimeBlocks Q1 2025 Update is here with 500+ Components! 🎉",
+    "content": "Introducing PrimeReact v11-alpha 🎉",
     "linkText": "Discover Now",
-    "linkHref": "https://primeblocks.org",
-    "target": "_blank"
+    "linkHref": "/docs/gettingstarted/introduction"
 }
