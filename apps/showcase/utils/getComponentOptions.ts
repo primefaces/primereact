@@ -133,16 +133,34 @@ export const getApiDocs = (component: string): ApiDoc[] => {
     return newDocs;
 };
 
-export const setPropsData = (props: PropItem[]): unknown[] => {
-    const data = [];
+export const setPropsData = (props: PropItem[]): PropItem[] => {
+    let hasPassThroughProps = false;
 
-    for (const prop of props) {
-        data.push({
+    const data = props.reduce<PropItem[]>((acc, prop) => {
+        if (prop.name.includes('pt-')) {
+            hasPassThroughProps = true;
+
+            return acc;
+        }
+
+        acc.push({
             name: prop.name,
             type: prop.type,
             default: prop.default,
             description: prop.description,
             deprecated: prop.deprecated
+        });
+
+        return acc;
+    }, []);
+
+    if (hasPassThroughProps) {
+        data.push({
+            name: 'pt-*',
+            type: '-',
+            default: '',
+            description: 'Pass through attributes for customizing component.',
+            deprecated: false
         });
     }
 

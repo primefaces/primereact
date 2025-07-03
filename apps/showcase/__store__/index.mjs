@@ -598,9 +598,9 @@ export const Store = {
         },
     },
     'styled': {
-        'colors-demo': {
-            'component': React.lazy(() => import('demo/styled/colors-demo.tsx')),
-            'filePath': 'demo/styled/colors-demo.tsx',
+        'colors-list': {
+            'component': React.lazy(() => import('demo/styled/colors-list.tsx')),
+            'filePath': 'demo/styled/colors-list.tsx',
         },
         'css-modules-demo': {
             'component': React.lazy(() => import('demo/styled/css-modules-demo.tsx')),
@@ -701,6 +701,12 @@ export const Store = {
             'filePath': 'demo/tag/template-demo.tsx',
         },
     },
+    'tailwind': {
+        'color-palette-demo': {
+            'component': React.lazy(() => import('demo/tailwind/color-palette-demo.tsx')),
+            'filePath': 'demo/tailwind/color-palette-demo.tsx',
+        },
+    },
     'togglebutton': {
         'all-demo': {
             'component': React.lazy(() => import('demo/togglebutton/all-demo.tsx')),
@@ -777,6 +783,20 @@ export const Store = {
         'basic-demo': {
             'component': React.lazy(() => import('demo/uikit/basic-demo.tsx')),
             'filePath': 'demo/uikit/basic-demo.tsx',
+        },
+    },
+    'unstyled': {
+        'alternative-button-demo': {
+            'component': React.lazy(() => import('demo/unstyled/alternative-button-demo.tsx')),
+            'filePath': 'demo/unstyled/alternative-button-demo.tsx',
+        },
+        'button-demo': {
+            'component': React.lazy(() => import('demo/unstyled/button-demo.tsx')),
+            'filePath': 'demo/unstyled/button-demo.tsx',
+        },
+        'checkbox-demo': {
+            'component': React.lazy(() => import('demo/unstyled/checkbox-demo.tsx')),
+            'filePath': 'demo/unstyled/checkbox-demo.tsx',
         },
     },
 };
