@@ -1,6 +1,6 @@
 'use client';
 import appConfig from '@/app.config';
-import { PrimeReactProvider } from '@primereact/core/config';
+import { PrimeReactProvider } from '@primereact/core';
 import { PrimeReactStyleSheet } from '@primereact/core/stylesheet';
 import { useServerInsertedHTML } from 'next/navigation';
 import * as React from 'react';

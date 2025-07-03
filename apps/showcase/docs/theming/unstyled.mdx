@@ -19,7 +19,7 @@ Unstyled mode is enabled for the whole suite by enabling `unstyled` option durin
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { PrimeReactProvider } from '@primereact/core/config';
+import { PrimeReactProvider } from '@primereact/core';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -50,7 +50,7 @@ its own `pt` property.
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { PrimeReactProvider } from '@primereact/core/config';
+import { PrimeReactProvider } from '@primereact/core';
 
 const globalPT = {
     button: {

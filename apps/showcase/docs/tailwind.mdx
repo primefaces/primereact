@@ -95,7 +95,7 @@ Suppose that, the darkModeSelector is set as `my-app-dark` in PrimeReact.
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { PrimeReactProvider } from '@primereact/core/config';
+import { PrimeReactProvider } from '@primereact/core';
 import Aura from '@primeuix/themes/aura';
 
 const primereact = {
@@ -172,7 +172,7 @@ Ensure `primereact` layer is after `theme` and `base`, but before the other Tail
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { PrimeReactProvider } from '@primereact/core/config';
+import { PrimeReactProvider } from '@primereact/core';
 import Aura from '@primeuix/themes/aura';
 
 const primereact = {
@@ -211,7 +211,7 @@ The `primereact` layer should be between base and utilities.
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { PrimeReactProvider } from '@primereact/core/config';
+import { PrimeReactProvider } from '@primereact/core';
 import Aura from '@primeuix/themes/aura';
 
 const primereact = {
