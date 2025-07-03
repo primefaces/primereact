@@ -38,11 +38,11 @@
             "icon": "pi pi-palette",
             "children": [
                 {
-                    "name": "Styled",
+                    "name": "Styled Mode",
                     "to": "/docs/theming/styled"
                 },
                 {
-                    "name": "Unstyled",
+                    "name": "Unstyled Mode",
                     "to": "/docs/theming/unstyled"
                 }
             ]
