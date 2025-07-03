@@ -16,7 +16,7 @@ export const styles = createStyles<InputTextInstance>({
                 'p-invalid': props.invalid,
                 'p-variant-filled': props.variant === 'filled',
                 'p-inputtext-fluid': props.fluid,
-                'p-filled': isNotEmpty(attrs?.value)
+                'p-filled': isNotEmpty(attrs?.value ?? attrs?.defaultValue)
             }
         ]
     }
