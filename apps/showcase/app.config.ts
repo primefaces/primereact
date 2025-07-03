@@ -11,7 +11,15 @@ const appConfig: AppConfig = {
     versions: [
         {
             name: 'v11',
+            url: 'https://v11.primereact.org'
+        },
+        {
+            name: 'v10',
             url: 'https://primereact.org'
+        },
+        {
+            name: 'v9',
+            url: 'https://v9.primereact.org'
         }
     ],
     primereact: {
