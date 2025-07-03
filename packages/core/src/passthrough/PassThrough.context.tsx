@@ -7,8 +7,13 @@ import { defaultPTProps } from './PassThrough.props';
 export const PassThroughContext = React.createContext<PassThroughProps | undefined>(undefined);
 
 export const PassThroughProvider = (inProps: React.PropsWithChildren<PassThroughProps> = {}) => {
-    const { attrs } = useProps(inProps, defaultPTProps as PassThroughProps);
-    const value = undefined;
+    const { props, attrs } = useProps(inProps, defaultPTProps as PassThroughProps);
+    const { value, ...rest } = props;
 
-    return <PassThroughContext.Provider value={value}>{resolve(attrs.children, value)}</PassThroughContext.Provider>;
+    const pt = {
+        value,
+        options: rest
+    };
+
+    return <PassThroughContext.Provider value={pt}>{resolve(attrs.children, pt)}</PassThroughContext.Provider>;
 };
