@@ -9,6 +9,6 @@
 
 [![PrimeReact Hero](https://www.primefaces.org/static/social/primereact-preview.jpg)](https://www.primereact.org)
 
-# PrimeReact
+# PrimeReact v11
 
 PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://primereact.org/) for live showcase and documentation.
