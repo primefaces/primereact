@@ -5,10 +5,11 @@ import * as React from 'react';
 
 type DocDemoViewerProps = {
     name: string;
+    full?: boolean;
     hideCode?: boolean;
 };
 
-const DocDemoViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocDemoViewerProps> = ({ name, hideCode = false, children, className, ...props }) => {
+const DocDemoViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocDemoViewerProps> = ({ name, full = false, hideCode = false, children, className, ...props }) => {
     const Component = React.useMemo(() => {
         const [component, demo] = name.split(':');
 
@@ -31,7 +32,7 @@ const DocDemoViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocDemoView
         <div className={cn('group/component-viewer mb-8', className)} data-component-viewer="true" {...props}>
             <React.Suspense fallback={<div className="card flex items-center justify-center text-surface-500">Loading...</div>}>{Component}</React.Suspense>
 
-            {!hideCode && <div className={cn('relative w-full overflow-hidden ')}>{children}</div>}
+            {!hideCode && <div className={cn('relative w-full overflow-hidden', full)}>{children}</div>}
         </div>
     );
 };

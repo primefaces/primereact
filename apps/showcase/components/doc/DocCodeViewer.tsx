@@ -7,13 +7,14 @@ const DocCodeViewer = ({
     className,
     children,
     __syntaxSource__,
+    __full__,
     __spec__,
     __npmInstall__,
     __yarnInstall__,
     __pnpmInstall__,
     __bunInstall__,
     ...props
-}: React.HTMLAttributes<HTMLPreElement> & { __syntaxSource__?: string; __spec__?: string; __npmInstall__?: string; __yarnInstall__?: string; __pnpmInstall__?: string; __bunInstall__?: string }) => {
+}: React.HTMLAttributes<HTMLPreElement> & { __syntaxSource__?: string; __full__?: string; __spec__?: string; __npmInstall__?: string; __yarnInstall__?: string; __pnpmInstall__?: string; __bunInstall__?: string }) => {
     const isNpmInstall = Boolean(
         (typeof __npmInstall__ !== 'undefined' && __npmInstall__) ||
             (typeof __yarnInstall__ !== 'undefined' && __yarnInstall__) ||
@@ -43,7 +44,7 @@ const DocCodeViewer = ({
             <pre
                 className={cn(
                     'relative rounded-xl p-4 overflow-auto border border-transparent dark:border-surface-800 !bg-surface-950 transition-[max-height] duration-150',
-                    __spec__ !== 'DocDemoViewer' ? 'max-h-[calc(50vh-10rem)]' : isExpanded ? 'max-h-[400px]' : 'max-h-[160px]',
+                    __full__ === 'true' ? undefined : __spec__ !== 'DocDemoViewer' ? 'max-h-[calc(50vh-10rem)]' : isExpanded ? 'max-h-[400px]' : 'max-h-[160px]',
                     className
                 )}
                 {...props}

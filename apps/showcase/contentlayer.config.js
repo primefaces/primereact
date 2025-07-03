@@ -86,7 +86,8 @@ export default makeSource({
                 visit(tree, (node) => {
                     if (node.name === 'DocDemoViewer') {
                         const name = getNodeAttributeByName(node, 'name')?.value;
-                        const hideCode = getNodeAttributeByName(node, 'hideCode')?.value === 'true';
+                        const hideCode = getNodeAttributeByName(node, 'hideCode', 'boolean')?.value;
+                        const full = getNodeAttributeByName(node, 'full', 'boolean')?.value;
 
                         if (!name) {
                             return null;
@@ -117,7 +118,8 @@ export default makeSource({
                                         tagName: 'pre',
                                         properties: {
                                             __src__: filePath,
-                                            __spec__: 'DocDemoViewer'
+                                            __spec__: 'DocDemoViewer',
+                                            __full__: `${full}`
                                         },
                                         children: [
                                             u('element', {
@@ -166,6 +168,7 @@ export default makeSource({
                         node.__src__ = node.properties?.__src__;
                         node.__style__ = node.properties?.__style__;
                         node.__spec__ = node.properties?.__spec__;
+                        node.__full__ = node.properties?.__full__;
                     }
                 });
             },
@@ -211,6 +214,10 @@ export default makeSource({
                         }
 
                         codeElement.properties['className'] = ['language-tsx'];
+
+                        if (codeElement.data?.meta?.includes('full') || node.__full__ === 'true') {
+                            preElement.properties['__full__'] = 'true';
+                        }
                     }
                 });
             },
@@ -240,6 +247,12 @@ export default makeSource({
     }
 });
 
-function getNodeAttributeByName(node, name) {
-    return node.attributes?.find((attribute) => attribute.name === name);
+function getNodeAttributeByName(node, name, type = 'string') {
+    const attribute = node.attributes?.find((attribute) => attribute.name === name);
+
+    if (type === 'boolean') {
+        return { value: attribute?.value?.value === 'true' || attribute?.value === null };
+    }
+
+    return attribute;
 }
