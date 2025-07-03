@@ -11,4 +11,4 @@
 
 # PrimeReact v11
 
-PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://primereact.org/) for live showcase and documentation.
+PrimeReact is a rich set of open source UI Components for React.js. See [PrimeReact homepage](https://primereact.org/) for live showcase and documentation.
