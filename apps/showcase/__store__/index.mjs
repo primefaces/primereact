@@ -37,6 +37,12 @@ export const Store = {
             'filePath': 'demo/accordion/use-with-radiobutton.tsx',
         },
     },
+    'animateonscroll': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/animateonscroll/basic-demo.tsx')),
+            'filePath': 'demo/animateonscroll/basic-demo.tsx',
+        },
+    },
     'avatar': {
         'avatar-pt': {
             'component': React.lazy(() => import('demo/avatar/avatar-pt.tsx')),
@@ -157,6 +163,10 @@ export const Store = {
         'text-demo': {
             'component': React.lazy(() => import('demo/button/text-demo.tsx')),
             'filePath': 'demo/button/text-demo.tsx',
+        },
+        'verify-demo': {
+            'component': React.lazy(() => import('demo/button/verify-demo.tsx')),
+            'filePath': 'demo/button/verify-demo.tsx',
         },
     },
     'card': {
@@ -311,6 +321,16 @@ export const Store = {
             'filePath': 'demo/iftalabel/invalid-demo.tsx',
         },
     },
+    'imagecompare': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/imagecompare/basic-demo.tsx')),
+            'filePath': 'demo/imagecompare/basic-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/imagecompare/template-demo.tsx')),
+            'filePath': 'demo/imagecompare/template-demo.tsx',
+        },
+    },
     'inplace': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/inplace/basic-demo.tsx')),
@@ -353,6 +373,40 @@ export const Store = {
         'sizes-demo': {
             'component': React.lazy(() => import('demo/inputtext/sizes-demo.tsx')),
             'filePath': 'demo/inputtext/sizes-demo.tsx',
+        },
+    },
+    'message': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/message/basic-demo.tsx')),
+            'filePath': 'demo/message/basic-demo.tsx',
+        },
+        'closable-demo': {
+            'component': React.lazy(() => import('demo/message/closable-demo.tsx')),
+            'filePath': 'demo/message/closable-demo.tsx',
+        },
+        'dynamic-demo': {
+            'component': React.lazy(() => import('demo/message/dynamic-demo.tsx')),
+            'filePath': 'demo/message/dynamic-demo.tsx',
+        },
+        'icon-demo': {
+            'component': React.lazy(() => import('demo/message/icon-demo.tsx')),
+            'filePath': 'demo/message/icon-demo.tsx',
+        },
+        'life-demo': {
+            'component': React.lazy(() => import('demo/message/life-demo.tsx')),
+            'filePath': 'demo/message/life-demo.tsx',
+        },
+        'severity-demo': {
+            'component': React.lazy(() => import('demo/message/severity-demo.tsx')),
+            'filePath': 'demo/message/severity-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/message/sizes-demo.tsx')),
+            'filePath': 'demo/message/sizes-demo.tsx',
+        },
+        'variant-demo': {
+            'component': React.lazy(() => import('demo/message/variant-demo.tsx')),
+            'filePath': 'demo/message/variant-demo.tsx',
         },
     },
     'metergroup': {
@@ -419,6 +473,12 @@ export const Store = {
         'basic-demo': {
             'component': React.lazy(() => import('demo/passthrough/basic-demo.tsx')),
             'filePath': 'demo/passthrough/basic-demo.tsx',
+        },
+    },
+    'popover': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/popover/basic-demo.tsx')),
+            'filePath': 'demo/popover/basic-demo.tsx',
         },
     },
     'primeicons': {
