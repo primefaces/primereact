@@ -31,12 +31,7 @@
         {
             "name": "Configuration",
             "icon": "pi pi-cog",
-            "children": [
-                {
-                    "name": "Options",
-                    "to": "/docs/configuration/options"
-                }
-            ]
+            "to": "/docs/configuration"
         },
         {
             "name": "Theming",

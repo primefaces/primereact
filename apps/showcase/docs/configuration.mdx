@@ -1,0 +1,136 @@
+---
+title: Configuration
+description: Application wide configuration for PrimeReact.
+---
+
+## Provider
+
+Wrap your app with `PrimeReactProvider` in your main file (like `main.tsx` or `App.tsx`). This enables PrimeReact features everywhere in your app:
+
+```tsx showLineNumbers {10, 12}
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.tsx'
+import { PrimeReactProvider } from "@primereact/core";
+
+...
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <PrimeReactProvider>
+        <App />
+    </PrimeReactProvider>
+  </StrictMode>,
+)
+
+```
+
+## Theme
+
+Style mode offers theming based on a design token based architecture. See the <Link href="/docs/theming/styled">styled mode</Link> documentation for details such as building your own theme.
+
+```tsx showLineNumbers {2,5-12,16}
+...
+import Aura from '@primeuix/themes/aura';
+import { PrimeProvider } from '@primereact/core';
+
+const theme = {
+    preset: Aura,
+    options: {
+        prefix: 'p',
+        darkModeSelector: 'system',
+        cssLayer: false
+    }
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider theme={theme}>
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
+
+## Unstyled
+
+Unstyled mode instructs the components not to add any built-in style classes so that they can be styled using custom css or libraries like Tailwind and Bootstrap. Visit Unstyled mode documentation for more information.
+
+```tsx showLineNumbers {6}
+import { PrimeProvider } from '@primereact/core';
+...
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider unstyled>
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
+
+## PassThrough
+
+Defines the shared pass through properties per component type. Visit the <Link href="/docs/passthrough">Pass Through Props</Link> documentation for more information.
+
+```tsx showLineNumbers {4-8,12}
+import { PrimeProvider } from '@primereact/core';
+...
+
+const pt = {
+    slider: {
+        handle: { className: 'bg-primary text-primary-contrast' }
+    }
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider pt={pt}>
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
+
+## PassThrough Options
+
+Used to configure the `ptOptions` properties of components. The `mergeSections` defines whether the sections from the main configuration gets added and the `mergeProps` controls whether to override or merge the defined props.
+Defaults are `true` for `mergeSections` and `false` for `mergeProps`.
+
+```tsx showLineNumbers {4-7,11}
+import { PrimeProvider } from '@primereact/core';
+...
+
+const ptOptions = {
+    mergeSections: true,
+    mergeProps: false
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider ptOptions={ptOptions}>
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
+
+## InputVariant
+
+Input fields come in two styles, default is `outlined` with borders around the field whereas `filled` alternative adds a background color to the field.
+Applying `p-variant-filled` to an ancestor of an input enables the filled style. If you prefer to use filled inputs in the entire application, use a global container such as the document body or the application element to apply the style class.
+Note that in case you add it to the application element, components that are teleported to the document body such as Dialog will not be able to display filled inputs as they are not a descendant of the application root element in the DOM tree,
+to resolve this case set inputVariant to `filled` at PrimeReactProvider as well.
+
+```tsx showLineNumbers {6}
+import { PrimeProvider } from '@primereact/core';
+...
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <PrimeProvider inputVariant="filled">
+            <App />
+        </PrimeProvider>
+    </React.StrictMode>
+);
+```
