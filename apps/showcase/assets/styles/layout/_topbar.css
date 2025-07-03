@@ -219,6 +219,7 @@
 
                 a {
                     display: inline-flex;
+                    justify-content: center;
                     padding: 0.5rem 0.75rem;
                     border-radius: 6px;
                     width: 100%;
