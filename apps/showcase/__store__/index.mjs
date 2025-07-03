@@ -779,4 +779,18 @@ export const Store = {
             'filePath': 'demo/uikit/basic-demo.tsx',
         },
     },
+    'unstyled': {
+        'alternative-button-demo': {
+            'component': React.lazy(() => import('demo/unstyled/alternative-button-demo.tsx')),
+            'filePath': 'demo/unstyled/alternative-button-demo.tsx',
+        },
+        'button-demo': {
+            'component': React.lazy(() => import('demo/unstyled/button-demo.tsx')),
+            'filePath': 'demo/unstyled/button-demo.tsx',
+        },
+        'checkbox-demo': {
+            'component': React.lazy(() => import('demo/unstyled/checkbox-demo.tsx')),
+            'filePath': 'demo/unstyled/checkbox-demo.tsx',
+        },
+    },
 };
