@@ -27,47 +27,47 @@ export default function TeamPage() {
             <div className="card p-20">
                 <div className="flex flex-wrap gap-20">
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/cagatay.jpg" width={150} height={150} className="rounded-full mb-6" alt="Cagatay Civici" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/cagatay.jpg" width={150} height={150} className="rounded-full mb-6" alt="Cagatay Civici" />
                         <span className="mb-2 text-xl font-bold">Çağatay Çivici</span>
                         <span>Founder</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/mert.jpg" width={150} height={150} className="rounded-full mb-6" alt="Mert Sincan" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/mert.jpg" width={150} height={150} className="rounded-full mb-6" alt="Mert Sincan" />
                         <span className="mb-2 text-xl font-bold">Mert Sincan</span>
                         <span>CTO</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/onur.jpg" width={150} height={150} className="rounded-full mb-6" alt="Onur Şentüre" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/onur.jpg" width={150} height={150} className="rounded-full mb-6" alt="Onur Şentüre" />
                         <span className="mb-2 text-xl font-bold">Onur Şentüre</span>
                         <span>Design Lead</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/dilara.jpg" width={150} height={150} className="rounded-full mb-6" alt="Dilara Can" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/dilara.jpg" width={150} height={150} className="rounded-full mb-6" alt="Dilara Can" />
                         <span className="mb-2 text-xl font-bold">Dilara Güngenci</span>
                         <span>Business Administration</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/cetin.jpg" width={150} height={150} className="rounded-full mb-6" alt="Çetin Çakıroğlu" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/cetin.jpg" width={150} height={150} className="rounded-full mb-6" alt="Çetin Çakıroğlu" />
                         <span className="mb-2 text-xl font-bold">Çetin Çakıroğlu</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/tugce.jpg" width={150} height={150} className="rounded-full mb-6" alt="Tuğçe Küçükoğlu" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/tugce.jpg" width={150} height={150} className="rounded-full mb-6" alt="Tuğçe Küçükoğlu" />
                         <span className="mb-2 text-xl font-bold">Tuğçe Küçükoğlu</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/atakan.jpg" width={150} height={150} className="rounded-full mb-6" alt="Atakan Tepe" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/atakan.jpg" width={150} height={150} className="rounded-full mb-6" alt="Atakan Tepe" />
                         <span className="mb-2 text-xl font-bold">Atakan Tepe</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/mehmet.jpg" width={150} height={150} className="rounded-full mb-6" alt="Mehmet Çetin" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/mehmet.jpg" width={150} height={150} className="rounded-full mb-6" alt="Mehmet Çetin" />
                         <span className="mb-2 text-xl font-bold">Mehmet Çetin</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-col items-center flex-auto">
-                        <Image src="https://primefaces.org/cdn/primevue/images/team/taner.jpg" width={150} height={150} className="rounded-full mb-6" alt="Taner Engin" />
+                        <Image src="https://primefaces.org/cdn/primereact/images/team/taner.jpg" width={150} height={150} className="rounded-full mb-6" alt="Taner Engin" />
                         <span className="mb-2 text-xl font-bold">Taner Engin</span>
                         <span>Front-End Developer</span>
                     </div>
