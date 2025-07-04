@@ -704,6 +704,7 @@ export const BodyCell = React.memo(
     },
     (prevProps, nextProps) => {
         if (nextProps.cellMemo === false) return false;
+        if (ColumnBase.getCProp(prevProps.column, 'body') !== ColumnBase.getCProp(nextProps.column, 'body')) return false;
 
         const memoProps = nextProps.cellMemoProps;
         const keysToCompare = Array.isArray(memoProps) && memoProps.every((prop) => typeof prop === 'string') ? memoProps : defaultKeysToCompare;
