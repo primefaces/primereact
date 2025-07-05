@@ -8,7 +8,6 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { PencilIcon } from '../icons/pencil';
 import { TimesIcon } from '../icons/times';
-import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
@@ -21,13 +20,10 @@ export const Cell = (props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const keyHelperRef = React.useRef(null);
-    const overlayEventListener = React.useRef(null);
-    const selfClick = React.useRef(false);
     const focusTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
     const editingRowDataStateRef = React.useRef(null);
     const { ptm, ptmo, cx } = props.ptCallbacks;
-
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
 
     const getColumnPTOptions = (key) => {
@@ -58,18 +54,18 @@ export const Cell = (props) => {
         return getColumnProp('cellEditValidateOnClose');
     };
 
+    const isIgnoredElement = (element) => {
+        const isOverlay = (el) => el.getAttribute && el.getAttribute('data-pr-is-overlay');
+
+        return isOverlay(element) || DomHandler.getParents(element).find((el) => isOverlay(el));
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
-            setTimeout(() => {
-                if (!selfClick.current && isOutsideClicked(e.target)) {
-                    // #2666 for overlay components and outside is clicked
-
-                    switchCellToViewMode(e, true);
-                }
-            }, 0);
-
-            selfClick.current = false;
+            if (!isIgnoredElement(e.target) && isOutsideClicked(e.target)) {
+                switchCellToViewMode(e, true);
+            }
         },
         options: true,
         when: isEditable()
@@ -120,9 +116,6 @@ export const Cell = (props) => {
         setTimeout(() => {
             setEditingState(false);
             unbindDocumentClickListener();
-            OverlayService.off('overlay-click', overlayEventListener.current);
-            overlayEventListener.current = null;
-            selfClick.current = false;
         }, 1);
     };
 
@@ -175,7 +168,7 @@ export const Cell = (props) => {
     };
 
     const onClick = (event) => {
-        props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, selfClick, props.column, bindDocumentClickListener, overlayEventListener, isOutsideClicked);
+        props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, props.column, bindDocumentClickListener);
     };
 
     const onMouseDown = (event) => {
@@ -276,8 +269,6 @@ export const Cell = (props) => {
     };
 
     const onBlur = (event) => {
-        selfClick.current = false;
-
         if (props.editMode !== 'row' && editingState && getColumnProp('cellEditValidatorEvent') === 'blur') {
             switchCellToViewMode(event, true);
         }
@@ -363,11 +354,6 @@ export const Cell = (props) => {
     }, [editingState]);
 
     useUnmountEffect(() => {
-        if (overlayEventListener.current) {
-            OverlayService.off('overlay-click', overlayEventListener.current);
-            overlayEventListener.current = null;
-        }
-
         if (editingRowDataStateRef.current) {
             editingRowDataStateRef.current = null;
         }
