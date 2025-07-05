@@ -318,6 +318,24 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         })
                     );
                 } else {
+                    const lastMeta = restoredState.multiSortMeta[restoredState.multiSortMeta.length - 1];
+                    const field = lastMeta && lastMeta.field ? lastMeta.field : null;
+
+                    if (field) {
+                        const sortColumn = findColumnByKey(getColumns(), field);
+
+                        if (sortColumn) {
+                            const sortFunction = getColumnProp(sortColumn, 'sortFunction');
+                            const sortable = getColumnProp(sortColumn, 'sortable');
+
+                            if (sortFunction && sortable) {
+                                columnSortFunction.current = sortFunction;
+                                columnSortable.current = sortable;
+                                columnField.current = field;
+                            }
+                        }
+                    }
+
                     setMultiSortMetaState(restoredState.multiSortMeta);
                 }
             }
