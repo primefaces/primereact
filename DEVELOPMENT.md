@@ -27,23 +27,17 @@ This will alter the bundler to only emit non-minified esm modules. The aliasing 
 
 > Note: The build will be finished when the terminal displays: `[20xx-xx-xx 00:00:00] waiting for changes...`.
 
-You will now `cd` into the `primereact/dist` directory and run:
+This will create a local copy of the package that is used instead of the registry version.
+Unlike `npm link`, `yalc` does not use symlinks, which avoids common module resolution issues.
 
-```shell
-~/primereact/dist/ $ npm link
+### Open a new terminal and navigate to the `primereact/dist/` directory
+
+Run yalc publish
+
+```shell 
+~/primereact/ $ cd dist
+~/primereact/dist/ $ npx yalc publish
 ```
-
-This will create a symlink in your global npm scope so that other local packages will rely on this version of primereact when built. You can verify that the package is linked by running this from the `primereact` directory.
-
-```shell
-~/primereact/ $ npm ls -g --depth=0 --link=true
-
-/opt/homebrew/lib
-└── primereact@XX.X.XX -> ./../../../Users/${user}/primereact/dist     # <-- this must be in the dist/ dir !!!
-```
-
-> [!WARNING]
-> Reminder! The XX.X.XX version must be a [valid semantic version](https://docs.npmjs.com/about-semantic-versioning) that you are using in your local project
 
 ### Now change your directory to your local project you are developing on!
 
@@ -52,10 +46,10 @@ This will create a symlink in your global npm scope so that other local packages
 ~/my-cool-project/ $
 ```
 
-The goal now is to link your primereact dependency to the symlink that we configured earlier:
+The goal now is to link your primereact dependency to the yalc package that we configured earlier:
 
 ```shell
-~/my-cool-project/ $ npm link primereact
+~/my-cool-project/ $ npx yalc add primereact
 ```
 
 As long at the dependencies version that you symlinked satisfies the version that is specified in `my-cool-project/package.json` then the link should have worked.
@@ -63,11 +57,24 @@ As long at the dependencies version that you symlinked satisfies the version tha
 You can validate that by running:
 
 ```shell
-~/my-cool-project/ $  npm ls --link=true
+~/my-cool-project/ $  npx yalc check
 
-my-cool-project@0.0.0 /Users/${user}/my-cool-project
-└── primereact@npm:dist@xx.x.xx -> ./../../primereact/dist             # <-- this must be in the dist/ dir !!!
+Yalc dependencies found: [ 'primereact' ]
 ```
+
+After doing your changes in the `primereact/` directory, you can publish the changes to your local project by running:
+
+```shell
+~/primereact/dist/ $ npx yalc push
+```
+
+## Live Development
+If you want to push your changes automatically to your local project, you can use the following:
+
+```shell
+~/primereact $ npm run dev:link -- -- --watch.onEnd="cd dist && npx yalc push"
+```
+This command will watch for changes in the `primereact/` directory and automatically push updates to your local project whenever you save a file. (note the double -- before `watch.onEnd`)
 
 ### Congratulations!
 
@@ -78,5 +85,10 @@ You can now live develop in the `primereact/` directory and your changes should 
 Once done, you can clean up with:
 
 ```shell
-~/primereact/ $ npm unlink
+~/my-cool-project/ $ yalc remove primereact
+~/my-cool-project/ $ rm -rf yalc.lock .yalc
+~/my-cool-project/ $ npm install primereact@latest
 ```
+
+> Note: `yalc` stores the published package in `~/.yalc/primereact` and uses file references in your project.  
+> This avoids typical pitfalls of `npm link`, such as duplicated React versions or broken module scopes.
