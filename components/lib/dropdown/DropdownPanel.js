@@ -254,8 +254,9 @@ export const DropdownPanel = React.memo(
                         onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
+                            const children = options.children || [];
                             const emptyMessage = props.hasFilter ? props.emptyFilterMessage : props.emptyMessage;
-                            const content = isEmptyFilter ? createEmptyMessage(emptyMessage) : options.children;
+                            const content = isEmptyFilter || children?.length === 0 ? createEmptyMessage(emptyMessage) : children;
                             const listProps = mergeProps(
                                 {
                                     ref: options.contentRef,
