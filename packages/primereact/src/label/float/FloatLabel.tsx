@@ -5,7 +5,6 @@ import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useLabelContext } from '../Label.context';
-import { FloatLabelProvider } from './FloatLabel.context';
 import { defaultFloatProps } from './FloatLabel.props';
 
 export const FloatLabel = withComponent({
@@ -28,10 +27,6 @@ export const FloatLabel = withComponent({
             ptmi('root')
         );
 
-        return (
-            <FloatLabelProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </FloatLabelProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

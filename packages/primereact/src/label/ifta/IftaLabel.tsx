@@ -5,7 +5,6 @@ import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useLabelContext } from '../Label.context';
-import { IftaLabelProvider } from './IftaLabel.context';
 import { defaultIftaProps } from './IftaLabel.props';
 
 export const IftaLabel = withComponent({
@@ -28,10 +27,6 @@ export const IftaLabel = withComponent({
             ptmi('root')
         );
 
-        return (
-            <IftaLabelProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </IftaLabelProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });
