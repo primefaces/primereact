@@ -4,7 +4,6 @@ import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useDividerContext } from '../Divider.context';
-import { DividerContentProvider } from './DividerContent.context';
 import { defaultContentProps } from './DividerContent.props';
 
 export const DividerContent = withComponent({
@@ -26,10 +25,6 @@ export const DividerContent = withComponent({
             ptmi('root')
         );
 
-        return (
-            <DividerContentProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </DividerContentProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });
