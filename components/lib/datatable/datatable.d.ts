@@ -363,11 +363,11 @@ interface DataTableSelectionSingleChangeEvent<TValue extends DataTableValueArray
 }
 
 /**
- * Custom cell selection change event.
+ * Custom cell single selection change event.
  * @see {@link DataTableProps.onSelectionChange}
  * @event
  */
-interface DataTableSelectionCellChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableSelectionCellSingleChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -376,6 +376,30 @@ interface DataTableSelectionCellChangeEvent<TValue extends DataTableValueArray> 
      * Selection objects.
      */
     value: DataTableCellSelection<TValue>;
+    /**
+     * Type of the selection.
+     */
+    type?: 'cell';
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
+ * Custom cell multiple selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionCellMultipleChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: Array<DataTableCellSelection<TValue>>;
     /**
      * Type of the selection.
      */
@@ -1851,7 +1875,7 @@ interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends Dat
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+interface DataTablePropsCellSingle<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
     /**
      * Whether to cell selection is enabled or not.
      * @defaultValue false
@@ -1860,7 +1884,7 @@ interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTab
     /**
      * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
      */
-    selectionMode: 'single' | 'multiple';
+    selectionMode: 'single';
     /**
      * Selected cells.
      */
@@ -1872,16 +1896,46 @@ interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTab
     onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke when selection changes.
-     * @param {DataTableSelectionCellChangeEvent<TValue>} event - Custom selection change event.
+     * @param {DataTableSelectionCellSingleChangeEvent<TValue>} event - Custom selection change event.
      */
-    onSelectionChange?(event: DataTableSelectionCellChangeEvent<TValue>): void;
+    onSelectionChange?(event: DataTableSelectionCellSingleChangeEvent<TValue>): void;
 }
 
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export type DataTableProps<TValue extends DataTableValueArray> = DataTablePropsSingle<TValue> | DataTablePropsCell<TValue> | DataTablePropsMultiple<TValue>;
+interface DataTablePropsCellMultiple<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection: true;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode: 'multiple';
+    /**
+     * Selected cells.
+     */
+    selection: Array<DataTableCellSelection<TValue>> | null;
+    /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionCellMultipleChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionCellMultipleChangeEvent<TValue>): void;
+}
+
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
+export type DataTableProps<TValue extends DataTableValueArray> = DataTablePropsSingle<TValue> | DataTablePropsCellSingle<TValue> | DataTablePropsMultiple<TValue> | DataTablePropsCellMultiple<TValue>;
 
 /**
  * **PrimeReact - DataTable<TValue**
