@@ -1734,6 +1734,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 lazy={props.lazy}
                 loading={props.loading}
                 metaKeySelection={props.metaKeySelection}
+                multiPageRangeSelection={props.multiPageRangeSelection}
                 onCellClick={props.onCellClick}
                 onCellSelect={props.onCellSelect}
                 onCellUnselect={props.onCellUnselect}
@@ -1823,6 +1824,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 lazy={props.lazy}
                 loading={props.loading}
                 metaKeySelection={props.metaKeySelection}
+                multiPageRangeSelection={props.multiPageRangeSelection}
                 onCellClick={props.onCellClick}
                 onCellSelect={props.onCellSelect}
                 onCellUnselect={props.onCellUnselect}
