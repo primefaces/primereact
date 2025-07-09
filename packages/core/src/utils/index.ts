@@ -1,4 +1,5 @@
 export * from './combinedRefs';
+export * from './ConnectedOverlayScrollHandler';
 export * from './createContext';
 export * from './styleRegistry';
 
