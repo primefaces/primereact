@@ -1,0 +1,68 @@
+---
+title: Drawer
+description: Drawer is a panel component displayed as an overlay at the edges of the screen.
+component: drawer
+---
+
+## Usage
+
+```tsx
+import { Drawer } from 'primereact/drawer';
+```
+
+```tsx
+<Drawer>
+    <Drawer.Trigger />
+    <Drawer.Portal>
+        <Drawer.Header>
+            <Drawer.Title />
+            <Drawer.Close />
+        </Drawer.Header>
+        <Drawer.Content />
+        <Drawer.Footer />
+    </Drawer.Portal>
+</Drawer>
+```
+
+## Examples
+
+### Basic
+
+Drawer is defined using `Drawer`, `Drawer.Trigger`, `Drawer.Portal`, `Drawer.Header`, `Drawer.Content`, and `Drawer.Footer` components.
+
+<DocDemoViewer name="drawer:basic-demo" />
+
+### Position
+
+The position of the drawer can be customized with the `position` property. The available values are `left`, `right`, `top` and `bottom`.
+
+<DocDemoViewer name="drawer:position-demo" />
+
+### Full Screen
+
+The full screen mode is enabled when position property is set as `full`.
+
+<DocDemoViewer name="drawer:full-screen-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Drawer component uses `complementary` role by default, since any attribute is passed to the root element aria role can be changed depending on your use case and additional attributes like `aria-labelledby` can be added. In addition `aria-modal` is added since focus is kept within the drawer when opened.
+
+Trigger element also has aria-expanded and aria-controls to be handled explicitly.
+
+### Overlay Keyboard Support
+
+| Key         | Function                                                             |
+| ----------- | -------------------------------------------------------------------- |
+| tab         | Moves focus to the next the focusable element within the drawer.     |
+| shift + tab | Moves focus to the previous the focusable element within the drawer. |
+| escape      | Closes the drawer.                                                   |
+
+### Close Button Keyboard Support
+
+| Key   | Function           |
+| ----- | ------------------ |
+| enter | Closes the drawer. |
+| space | Closes the drawer. |

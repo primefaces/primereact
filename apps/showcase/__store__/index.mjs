@@ -263,6 +263,24 @@ export const Store = {
             'filePath': 'demo/divider/vertical-demo.tsx',
         },
     },
+    'drawer': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/drawer/basic-demo.tsx')),
+            'filePath': 'demo/drawer/basic-demo.tsx',
+        },
+        'drawer-pt': {
+            'component': React.lazy(() => import('demo/drawer/drawer-pt.tsx')),
+            'filePath': 'demo/drawer/drawer-pt.tsx',
+        },
+        'full-screen-demo': {
+            'component': React.lazy(() => import('demo/drawer/full-screen-demo.tsx')),
+            'filePath': 'demo/drawer/full-screen-demo.tsx',
+        },
+        'position-demo': {
+            'component': React.lazy(() => import('demo/drawer/position-demo.tsx')),
+            'filePath': 'demo/drawer/position-demo.tsx',
+        },
+    },
     'fieldset': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/fieldset/basic-demo.tsx')),

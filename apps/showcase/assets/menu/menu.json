@@ -140,6 +140,15 @@
                     ]
                 },
                 {
+                    "name": "Overlay",
+                    "children": [
+                        {
+                            "name": "Drawer",
+                            "to": "/docs/components/drawer"
+                        }
+                    ]
+                },
+                {
                     "name": "Misc",
                     "children": [
                         {
