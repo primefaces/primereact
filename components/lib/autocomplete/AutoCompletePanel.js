@@ -268,7 +268,8 @@ export const AutoCompletePanel = React.memo(
                 {
                     className: classNames(props.panelClassName, cx('panel', { context })),
                     style,
-                    onClick: (e) => props.onClick(e)
+                    onClick: (e) => props.onClick(e),
+                    'data-pr-is-overlay': true
                 },
                 _ptm('panel')
             );

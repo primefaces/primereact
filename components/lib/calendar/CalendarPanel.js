@@ -18,7 +18,8 @@ export const CalendarPanel = React.forwardRef((props, ref) => {
                 'aria-label': localeOption('chooseDate', props.locale),
                 'aria-modal': props.inline ? null : 'true',
                 onClick: props.onClick,
-                onMouseUp: props.onMouseUp
+                onMouseUp: props.onMouseUp,
+                'data-pr-is-overlay': true
             },
             props.ptm('panel', { hostName: props.hostName })
         );
