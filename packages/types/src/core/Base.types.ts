@@ -16,6 +16,12 @@ export interface Contexts {
         unstyled?: boolean;
         inputVariant?: string;
         stylesheet?: unknown;
+        zIndex?: {
+            modal?: number;
+            overlay?: number;
+            menu?: number;
+            tooltip?: number;
+        };
     };
     locale?: unknown;
     passthrough?: unknown;
