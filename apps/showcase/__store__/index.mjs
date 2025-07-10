@@ -313,6 +313,12 @@ export const Store = {
             'filePath': 'demo/floatlabel/variants-demo.tsx',
         },
     },
+    'focustrap': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/focustrap/basic-demo.tsx')),
+            'filePath': 'demo/focustrap/basic-demo.tsx',
+        },
+    },
     'gettingstarted': {
         'setup-demo': {
             'component': React.lazy(() => import('demo/gettingstarted/setup-demo.tsx')),

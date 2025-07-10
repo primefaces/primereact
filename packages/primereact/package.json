@@ -58,6 +58,7 @@
         "@primereact/styles": "workspace:*",
         "@primeuix/styled": "catalog:",
         "@primeuix/styles": "catalog:",
-        "@primeuix/utils": "catalog:"
+        "@primeuix/utils": "catalog:",
+        "@primeuix/motion": "catalog:"
     }
 }
