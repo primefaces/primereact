@@ -3,7 +3,6 @@ import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyCell, RadioCheckCell } from './BodyCell';
-import { OverlayService } from '../overlayservice/OverlayService';
 import { Fragment } from 'react';
 
 export const BodyRow = React.memo((props) => {
@@ -534,10 +533,8 @@ export const BodyRow = React.memo((props) => {
         }
     }, []);
 
-    const onCellClick = (event, params, isEditable, editingState, setEditingState, selfClick, column, bindDocumentClickListener, overlayEventListener, isOutsideClicked) => {
+    const onCellClick = (event, params, isEditable, editingState, setEditingState, column, bindDocumentClickListener) => {
         if (props.editMode !== 'row' && isEditable && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.isRowSelected))) {
-            selfClick.current = true;
-
             const onBeforeCellEditShow = getColumnProp(column, 'onBeforeCellEditShow');
             const onCellEditInit = getColumnProp(column, 'onCellEditInit');
             const cellEditValidatorEvent = getColumnProp(column, 'cellEditValidatorEvent');
@@ -571,14 +568,6 @@ export const BodyRow = React.memo((props) => {
 
                 if (cellEditValidatorEvent === 'click') {
                     bindDocumentClickListener();
-
-                    overlayEventListener.current = (e) => {
-                        if (!isOutsideClicked(e.target)) {
-                            selfClick.current = true;
-                        }
-                    };
-
-                    OverlayService.on('overlay-click', overlayEventListener.current);
                 }
             }, 1);
         }

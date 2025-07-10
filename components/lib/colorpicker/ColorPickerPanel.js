@@ -14,7 +14,8 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
             {
                 className: cx('panel', { panelProps: props, context }),
                 style: props.panelStyle,
-                onClick: props.onClick
+                onClick: props.onClick,
+                'data-pr-is-overlay': true
             },
             ptm('panel', { hostName: props.hostName })
         );

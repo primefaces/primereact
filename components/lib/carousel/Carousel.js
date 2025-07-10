@@ -422,7 +422,17 @@ export const Carousel = React.memo(
 
             if (!carouselStyle.current) {
                 calculatePosition();
-                changePosition(totalShiftedItemsState);
+
+                // Workaround: force correct initial position for circular
+                if (isCircular) {
+                    const initialPosition = -1 * numVisibleState;
+
+                    setTotalShiftedItemsState(initialPosition);
+                    changePosition(initialPosition);
+                } else {
+                    changePosition(totalShiftedItemsState);
+                }
+
                 bindWindowResizeListener();
             }
         });
