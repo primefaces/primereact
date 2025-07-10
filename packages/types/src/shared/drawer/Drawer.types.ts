@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useDrawerExposes, useDrawerProps, useDrawerState } from './useDrawer.types';
+import type { useDrawerChangeEvent, useDrawerExposes, useDrawerProps, useDrawerState } from './useDrawer.types';
 
 /**
  * Defines passthrough(pt) options type in Drawer component.
@@ -60,6 +60,12 @@ export interface DrawerPassThrough {
 }
 
 /**
+ * Event fired when the drawer's open state changes.
+ * @extends useDrawerChangeEvent
+ */
+export interface DrawerChangeEvent extends useDrawerChangeEvent {}
+
+/**
  * Defines valid properties in Drawer component.
  */
 export interface DrawerProps extends BaseComponentProps<DrawerInstance, Omit<useDrawerProps, 'onOpenChange'>, DrawerPassThrough> {
@@ -68,6 +74,14 @@ export interface DrawerProps extends BaseComponentProps<DrawerInstance, Omit<use
      * @default left
      */
     position?: 'left' | 'right' | 'top' | 'bottom' | 'full' | undefined;
+    /**
+     * Callback function that is called when the trigger is clicked.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The open value of the drawer.
+     * @returns void
+     */
+    onOpenChange?: (event: DrawerChangeEvent) => void;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { useDrawerChangeEvent } from '@primereact/types/shared/drawer';
+import { DrawerChangeEvent } from '@primereact/types/shared/drawer';
 import { Button } from 'primereact/button';
 import { Drawer } from 'primereact/drawer';
 import * as React from 'react';
@@ -26,7 +26,7 @@ export default function PositionDemo() {
                 </Button>
             </div>
 
-            <Drawer open={visibleLeft} onOpenChange={(e: useDrawerChangeEvent) => setVisibleLeft(e.value as boolean)}>
+            <Drawer open={visibleLeft} onOpenChange={(e: DrawerChangeEvent) => setVisibleLeft(e.value as boolean)}>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Left Drawer</Drawer.Title>
@@ -41,7 +41,7 @@ export default function PositionDemo() {
                 </Drawer.Portal>
             </Drawer>
 
-            <Drawer position="right" open={visibleRight} onOpenChange={(e: useDrawerChangeEvent) => setVisibleRight(e.value as boolean)}>
+            <Drawer position="right" open={visibleRight} onOpenChange={(e: DrawerChangeEvent) => setVisibleRight(e.value as boolean)}>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Right Drawer</Drawer.Title>
@@ -56,7 +56,7 @@ export default function PositionDemo() {
                 </Drawer.Portal>
             </Drawer>
 
-            <Drawer position="top" open={visibleTop} onOpenChange={(e: useDrawerChangeEvent) => setVisibleTop(e.value as boolean)} style={{ height: 'auto' }}>
+            <Drawer position="top" open={visibleTop} onOpenChange={(e: DrawerChangeEvent) => setVisibleTop(e.value as boolean)} style={{ height: 'auto' }}>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Top Drawer</Drawer.Title>
@@ -71,7 +71,7 @@ export default function PositionDemo() {
                 </Drawer.Portal>
             </Drawer>
 
-            <Drawer position="bottom" open={visibleBottom} onOpenChange={(e: useDrawerChangeEvent) => setVisibleBottom(e.value as boolean)} style={{ height: 'auto' }}>
+            <Drawer position="bottom" open={visibleBottom} onOpenChange={(e: DrawerChangeEvent) => setVisibleBottom(e.value as boolean)} style={{ height: 'auto' }}>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Bottom Drawer</Drawer.Title>
