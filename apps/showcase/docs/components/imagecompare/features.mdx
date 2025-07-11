@@ -11,6 +11,8 @@ import { ImageCompare } from 'primereact/imagecompare';
 
 ```tsx
 <ImageCompare>
+    <ImageCompare.Left src="" />
+    <ImageCompare.Right src="" />
     <ImageCompare.Slider />
 </ImageCompare>
 ```
@@ -19,8 +21,39 @@ import { ImageCompare } from 'primereact/imagecompare';
 
 ### Basic
 
+Images are defined using `ImageCompare.Left` and `ImageCompare.Right`. Use the `style` or `className` properties to define the size of the container.
+
 <DocDemoViewer name="imagecompare:basic-demo" />
 
 ### Template
 
 <DocDemoViewer name="imagecompare:template-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+ImageCompare component uses a native range slider internally. Value to describe the component can be defined using `aria-labelledby` and `aria-label` props.
+
+```tsx
+<span id="image_label">Compare Images</span>
+<ImageCompare className="shadow-lg rounded-2xl" aria-labelledby="image-label">
+    ...
+</ImageCompare>
+
+<ImageCompare className="shadow-lg rounded-2xl" aria-label="Compare Images">
+    ...
+</ImageCompare>
+```
+
+### Keyboard Support
+
+| Key                        | Function                          |
+| -------------------------- | --------------------------------- |
+| `tab`                      | Moves focus to the component.     |
+| `left arrow` `up arrow`    | Decrements the value.             |
+| `right arrow` `down arrow` | Increments the value.             |
+| `home`                     | Set the minimum value.            |
+| `end`                      | Set the maximum value.            |
+| `page up`                  | Increments the value by 10 steps. |
+| `page down`                | Decrements the value by 10 steps. |
