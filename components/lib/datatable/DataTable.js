@@ -31,6 +31,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [frozenEditingMetaState, setFrozenEditingMetaState] = React.useState({});
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+    const [filteredValueState, setFilteredValueState] = React.useState([]);
     const metaData = {
         props,
         state: {
@@ -1122,6 +1123,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setD_filtersState(filters);
     };
 
+    const isFiltersEmpty = (filters) => {
+        return Object.values(filters).every(filter => !filter || !filter.value || filter.value.length === 0);
+    };
+
     const onFilterApply = (filtersToApply) => {
         clearTimeout(filterTimeout.current);
         filterTimeout.current = setTimeout(() => {
@@ -1133,9 +1138,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 setFirstState(0);
                 setFiltersState(filters);
             }
+            const processed = processedData({ filters });
 
             if (props.onValueChange) {
                 props.onValueChange(processedData({ filters }));
+            }
+
+            if (ObjectUtils.isNotEmpty(filters) && !isFiltersEmpty(filters)) {
+                setFilteredValueState(processed);
+            } else {
+                setFilteredValueState(undefined);
             }
         }, props.filterDelay);
     };
@@ -1458,7 +1470,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const processedData = (localState) => {
-        let data = props.value || [];
+        let data = (filteredValueState?.length ? filteredValueState : props.value) || [];
 
         if (!props.lazy) {
             if (data && data.length) {
