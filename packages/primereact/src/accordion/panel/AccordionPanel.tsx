@@ -27,7 +27,7 @@ export const AccordionPanel = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: accordion?.cx('panel', { active }),
+                className: accordion?.cx('panel', { active, disabled: props.disabled || accordion?.props.disabled }),
                 'data-p-disabled': props.disabled,
                 'data-p-active': active
             },
