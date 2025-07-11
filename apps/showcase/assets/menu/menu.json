@@ -134,6 +134,10 @@
                             "to": "/docs/components/stepper"
                         },
                         {
+                            "name": "Tabs",
+                            "to": "/docs/components/tabs"
+                        },
+                        {
                             "name": "Toolbar",
                             "to": "/docs/components/toolbar"
                         }
@@ -149,8 +153,30 @@
                     ]
                 },
                 {
+                    "name": "Messages",
+                    "children": [
+                        {
+                            "name": "Message",
+                            "to": "/docs/components/message"
+                        }
+                    ]
+                },
+                {
+                    "name": "Media",
+                    "children": [
+                        {
+                            "name": "ImageCompare",
+                            "to": "/docs/components/imagecompare"
+                        }
+                    ]
+                },
+                {
                     "name": "Misc",
                     "children": [
+                        {
+                            "name": "AnimteOnScroll",
+                            "to": "/docs/components/animateonscroll"
+                        },
                         {
                             "name": "Avatar",
                             "to": "/docs/components/avatar"
