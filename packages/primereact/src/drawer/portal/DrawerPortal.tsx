@@ -4,7 +4,7 @@ import { Motion } from '@primereact/core/motion';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
-import { Portal } from '../../portal/Portal';
+import { Portal } from '../../portal';
 import { useDrawerContext } from '../Drawer.context';
 import { defaultPortalProps } from './DrawerPortal.props';
 
