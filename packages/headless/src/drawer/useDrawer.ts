@@ -10,7 +10,7 @@ export const useDrawer = withHeadless({
     defaultProps,
     setup: ({ props, elementRef, $primereact, isUnstyled }) => {
         const [openState, setOpenState] = React.useState<boolean>(props.open ?? false);
-        const [maskVisibleState, setMaskVisibleState] = React.useState(false);
+        const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? false);
         const maskRef = React.useRef<HTMLDivElement | null>(null);
         const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
         const closeButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
@@ -62,7 +62,7 @@ export const useDrawer = withHeadless({
                 setMaskVisibleState(true);
             }
 
-            setOpenState(newOpenState);
+            //setOpenState(newOpenState);
 
             props?.onOpenChange?.({
                 value: newOpenState
