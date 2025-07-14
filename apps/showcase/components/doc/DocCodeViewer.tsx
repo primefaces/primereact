@@ -44,7 +44,7 @@ const DocCodeViewer = ({
             <pre
                 className={cn(
                     'relative rounded-xl p-4 overflow-auto border border-transparent dark:border-surface-800 !bg-surface-950 transition-[max-height] duration-150',
-                    __full__ === 'true' ? undefined : __spec__ !== 'DocDemoViewer' ? 'max-h-[calc(50vh-10rem)]' : isExpanded ? 'max-h-[400px]' : 'max-h-[160px]',
+                    __full__ === 'true' ? undefined : __spec__ !== 'DocDemoViewer' ? 'max-h-[calc(50vh-10rem)]' : isExpanded ? 'max-h-[600px]' : 'max-h-[400px]',
                     className
                 )}
                 {...props}
