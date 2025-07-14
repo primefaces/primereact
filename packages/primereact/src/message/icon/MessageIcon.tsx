@@ -1,6 +1,6 @@
 'use client';
+import { Component } from '@primereact/core/component';
 import { Icon } from '@primereact/core/icon';
-import type { IconProps } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -26,6 +26,6 @@ export const MessageIcon = withComponent({
             ptmi('root')
         );
 
-        return <Icon {...(props as IconProps)} {...rootProps} />;
+        return <Component as={Icon} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

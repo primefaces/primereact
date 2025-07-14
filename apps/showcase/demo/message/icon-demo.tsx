@@ -6,7 +6,7 @@ export default function IconDemo() {
         <div className="card flex justify-center gap-4">
             <Message severity="info">
                 <Message.Content>
-                    <Message.Icon icon="pi pi-info-circle" />
+                    <Message.Icon className="pi pi-info-circle" />
                     <Message.Text>Info Message</Message.Text>
                 </Message.Content>
             </Message>

@@ -5,19 +5,19 @@ export default function SizesDemo() {
         <div className="card flex flex-col items-center gap-4">
             <Message size="small">
                 <Message.Content>
-                    <Message.Icon icon="pi pi-send" />
+                    <Message.Icon className="pi pi-send" />
                     <Message.Text>Small Message</Message.Text>
                 </Message.Content>
             </Message>
-            <Message icon="pi pi-user">
+            <Message>
                 <Message.Content>
-                    <Message.Icon icon="pi pi-send" />
+                    <Message.Icon className="pi pi-send" />
                     <Message.Text>Normal Message</Message.Text>
                 </Message.Content>
             </Message>
             <Message size="large">
                 <Message.Content>
-                    <Message.Icon icon="pi pi-send" />
+                    <Message.Icon className="pi pi-send" />
                     <Message.Text>Large Message</Message.Text>
                 </Message.Content>
             </Message>
