@@ -1,0 +1,42 @@
+name: Type Check
+
+on:
+  push:
+    branches: [v11]
+    paths:
+      - '**/**/*.d.ts'
+      - '**/**/*.ts'
+      - '**/**/*.tsx'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ts-check:
+    if: github.repository == 'primefaces/primereact'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+
+      - name: Check types
+        run: |
+          pnpm run type:check
