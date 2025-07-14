@@ -1,6 +1,6 @@
 'use client';
 import { usePortal } from '@primereact/headless/portal';
-import { PortalProps } from '@Primereact/types/shared/portal';
+import { PortalProps } from '@primereact/types/shared/portal';
 import { resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { createPortal } from 'react-dom';
