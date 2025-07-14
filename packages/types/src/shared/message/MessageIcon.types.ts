@@ -30,7 +30,7 @@ export interface MessageIconPassThrough {
 /**
  * Defines valid properties in MessageIcon component.
  */
-export interface MessageIconProps extends BaseComponentProps<MessageIconInstance> {}
+export interface MessageIconProps extends BaseComponentProps<MessageIconInstance, unknown, MessageIconPassThrough> {}
 
 /**
  * Defines valid state in MessageIcon component.
@@ -50,4 +50,4 @@ export interface MessageIconExposes {
 /**
  * Instance of MessageIcon component.
  */
-export type MessageIconInstance = ComponentInstance<MessageIconProps, MessageIconState, MessageIconExposes, MessageIconPassThrough>;
+export type MessageIconInstance = ComponentInstance<MessageIconProps, MessageIconState, MessageIconExposes>;

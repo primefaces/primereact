@@ -30,7 +30,7 @@ export interface ImageCompareLeftPassThrough {
 /**
  * Defines valid properties in ImageCompareLeft component.
  */
-export interface ImageCompareLeftProps extends BaseComponentProps<ImageCompareLeftInstance> {}
+export interface ImageCompareLeftProps extends BaseComponentProps<ImageCompareLeftInstance, unknown, ImageCompareLeftPassThrough> {}
 
 /**
  * Defines valid state in ImageCompareLeft component.
@@ -50,4 +50,4 @@ export interface ImageCompareLeftExposes {
 /**
  * Instance of ImageCompareLeft component.
  */
-export type ImageCompareLeftInstance = ComponentInstance<ImageCompareLeftProps, ImageCompareLeftState, ImageCompareLeftExposes, ImageCompareLeftPassThrough>;
+export type ImageCompareLeftInstance = ComponentInstance<ImageCompareLeftProps, ImageCompareLeftState, ImageCompareLeftExposes>;

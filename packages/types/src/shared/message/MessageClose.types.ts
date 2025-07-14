@@ -30,7 +30,7 @@ export interface MessageClosePassThrough {
 /**
  * Defines valid properties in MessageClose component.
  */
-export interface MessageCloseProps extends BaseComponentProps<MessageCloseInstance> {}
+export interface MessageCloseProps extends BaseComponentProps<MessageCloseInstance, unknown, MessageClosePassThrough> {}
 
 /**
  * Defines valid state in MessageClose component.
@@ -50,4 +50,4 @@ export interface MessageCloseExposes {
 /**
  * Instance of MessageClose component.
  */
-export type MessageCloseInstance = ComponentInstance<MessageCloseProps, MessageCloseState, MessageCloseExposes, MessageClosePassThrough>;
+export type MessageCloseInstance = ComponentInstance<MessageCloseProps, MessageCloseState, MessageCloseExposes>;

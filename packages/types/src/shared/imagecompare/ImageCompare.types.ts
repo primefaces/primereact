@@ -30,7 +30,7 @@ export interface ImageComparePassThrough {
 /**
  * Defines valid properties in ImageCompare component.
  */
-export interface ImageCompareProps extends BaseComponentProps<ImageCompareInstance, useImageCompareProps> {}
+export interface ImageCompareProps extends BaseComponentProps<ImageCompareInstance, useImageCompareProps, ImageComparePassThrough> {}
 
 /**
  * Defines valid state in ImageCompare component.

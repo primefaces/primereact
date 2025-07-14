@@ -30,7 +30,7 @@ export interface MessagePassThrough {
 /**
  * Defines valid properties in Message component.
  */
-export interface MessageProps extends BaseComponentProps<MessageInstance, useMessageProps> {
+export interface MessageProps extends BaseComponentProps<MessageInstance, useMessageProps, MessagePassThrough> {
     /**
      * Severity level of the message.
      * @default info

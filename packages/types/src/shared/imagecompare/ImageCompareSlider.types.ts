@@ -30,7 +30,7 @@ export interface ImageCompareSliderPassThrough {
 /**
  * Defines valid properties in ImageCompareSlider component.
  */
-export interface ImageCompareSliderProps extends BaseComponentProps<ImageCompareSliderInstance> {}
+export interface ImageCompareSliderProps extends BaseComponentProps<ImageCompareSliderInstance, unknown, ImageCompareSliderPassThrough> {}
 
 /**
  * Defines valid state in ImageCompareSlider component.
@@ -50,4 +50,4 @@ export interface ImageCompareSliderExposes {
 /**
  * Instance of ImageCompareSlider component.
  */
-export type ImageCompareSliderInstance = ComponentInstance<ImageCompareSliderProps, ImageCompareSliderState, ImageCompareSliderExposes, ImageCompareSliderPassThrough>;
+export type ImageCompareSliderInstance = ComponentInstance<ImageCompareSliderProps, ImageCompareSliderState, ImageCompareSliderExposes>;

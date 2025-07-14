@@ -8,7 +8,7 @@ import { defaultProps } from './useDrawer.props';
 export const useDrawer = withHeadless({
     name: 'useDrawer',
     defaultProps,
-    setup: ({ props, elementRef, $primereact, isUnstyled }) => {
+    setup: ({ props, elementRef, $primereact }) => {
         const [openState, setOpenState] = React.useState<boolean>(props.open ?? false);
         const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? false);
         const maskRef = React.useRef<HTMLDivElement | null>(null);
@@ -89,7 +89,8 @@ export const useDrawer = withHeadless({
         };
 
         const onMotionBeforeLeave = () => {
-            if (props.modal && !isUnstyled) {
+            if (props.modal) {
+                // && !isUnstyled
                 addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave');
             }
         };

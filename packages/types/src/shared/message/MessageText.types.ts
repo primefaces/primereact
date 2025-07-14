@@ -30,7 +30,7 @@ export interface MessageTextPassThrough {
 /**
  * Defines valid properties in MessageText component.
  */
-export interface MessageTextProps extends BaseComponentProps<MessageTextInstance> {}
+export interface MessageTextProps extends BaseComponentProps<MessageTextInstance, unknown, MessageTextPassThrough> {}
 
 /**
  * Defines valid state in MessageText component.
@@ -50,4 +50,4 @@ export interface MessageTextExposes {
 /**
  * Instance of MessageContent component.
  */
-export type MessageTextInstance = ComponentInstance<MessageTextProps, MessageTextState, MessageTextExposes, MessageTextPassThrough>;
+export type MessageTextInstance = ComponentInstance<MessageTextProps, MessageTextState, MessageTextExposes>;
