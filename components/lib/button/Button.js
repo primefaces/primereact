@@ -45,7 +45,8 @@ export const Button = React.memo(
 
             const iconsProps = mergeProps(
                 {
-                    className: cx('icon')
+                    className: cx('icon'),
+                    style: { pointerEvents: 'none' }
                 },
                 ptm('icon')
             );
