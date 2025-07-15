@@ -213,6 +213,10 @@ export const InputNumber = React.memo(
             return null;
         };
 
+        const addWithPrecision = (base, increment, precision = 10) => {
+            return Math.round((base + increment) * precision) / precision;
+        };
+
         const repeat = (event, interval, dir) => {
             let i = interval || 500;
 
@@ -228,7 +232,7 @@ export const InputNumber = React.memo(
             if (inputRef.current) {
                 let step = props.step * dir;
                 let currentValue = parseValue(inputRef.current.value) || 0;
-                let newValue = validateValue(currentValue + step);
+                let newValue = validateValue(addWithPrecision(currentValue, step));
 
                 if (props.maxLength && props.maxLength < formatValue(newValue).length) {
                     return;
