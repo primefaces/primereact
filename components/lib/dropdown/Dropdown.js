@@ -406,6 +406,7 @@ export const Dropdown = React.memo(
             if (focusedOptionIndex !== index) {
                 setFocusedOptionIndex(index);
                 scrollInView(event);
+
                 if (props.selectOnFocus) {
                     onOptionSelect(event, visibleOptions[index], false);
                 }
