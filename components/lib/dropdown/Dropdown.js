@@ -405,18 +405,11 @@ export const Dropdown = React.memo(
         const changeFocusedOptionIndex = (event, index) => {
             if (focusedOptionIndex !== index) {
                 setFocusedOptionIndex(index);
-                focusOnItem(index);
-
+                scrollInView(event);
                 if (props.selectOnFocus) {
                     onOptionSelect(event, visibleOptions[index], false);
                 }
             }
-        };
-
-        const focusOnItem = (index) => {
-            const focusedItem = DomHandler.findSingle(overlayRef.current, `li[id="dropdownItem_${index}"]`);
-
-            focusedItem && focusedItem.focus();
         };
 
         const onArrowDownKey = (event) => {
