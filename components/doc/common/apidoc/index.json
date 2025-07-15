@@ -2814,6 +2814,12 @@
                             "type": "string"
                         },
                         {
+                            "name": "HEADPHONES",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
                             "name": "HEART",
                             "optional": false,
                             "readonly": true,
@@ -2923,6 +2929,12 @@
                         },
                         {
                             "name": "MAP_MARKER",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
+                            "name": "MARS",
                             "optional": false,
                             "readonly": true,
                             "type": "string"
@@ -3480,6 +3492,12 @@
                             "type": "string"
                         },
                         {
+                            "name": "VENUS",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
                             "name": "VIDEO",
                             "optional": false,
                             "readonly": true,
@@ -3511,6 +3529,12 @@
                         },
                         {
                             "name": "WALLET",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string"
+                        },
+                        {
+                            "name": "WAVE_PULSE",
                             "optional": false,
                             "readonly": true,
                             "type": "string"
@@ -16631,9 +16655,9 @@
                         },
                         {
                             "name": "cellSelection",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
-                            "type": "boolean",
+                            "type": "true",
                             "default": "false",
                             "description": "Whether to cell selection is enabled or not."
                         },
@@ -17218,9 +17242,9 @@
                             "name": "selection",
                             "optional": false,
                             "readonly": false,
-                            "type": "TValue",
+                            "type": "null | DataTableCellSelection<TValue>[]",
                             "default": "",
-                            "description": "Selected array of values."
+                            "description": "Selected cells."
                         },
                         {
                             "name": "selectionAriaLabel",
@@ -17242,7 +17266,7 @@
                             "name": "selectionMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "null | \"multiple\" | \"checkbox\"",
+                            "type": "\"multiple\"",
                             "default": "",
                             "description": "Specifies the selection mode, valid values are \"single\", \"multiple\", \"radiobutton\" and \"checkbox\"."
                         },
@@ -17892,7 +17916,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableSelectionMultipleChangeEvent<TValue>",
+                                    "type": "DataTableSelectionCellMultipleChangeEvent<TValue>",
                                     "description": "Custom selection change event."
                                 }
                             ],
@@ -18371,8 +18395,8 @@
                         }
                     ]
                 },
-                "DataTableSelectionCellChangeEvent": {
-                    "description": "Custom cell selection change event.",
+                "DataTableSelectionCellSingleChangeEvent": {
+                    "description": "Custom cell single selection change event.",
                     "relatedProp": "DataTableProps.onSelectionChange",
                     "props": [
                         {
@@ -18387,6 +18411,33 @@
                             "optional": false,
                             "readonly": false,
                             "type": "DataTableCellSelection<TValue>",
+                            "description": "Selection objects."
+                        },
+                        {
+                            "name": "type",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"cell\"",
+                            "description": "Type of the selection."
+                        }
+                    ]
+                },
+                "DataTableSelectionCellMultipleChangeEvent": {
+                    "description": "Custom cell multiple selection change event.",
+                    "relatedProp": "DataTableProps.onSelectionChange",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableCellSelection<TValue>[]",
                             "description": "Selection objects."
                         },
                         {
@@ -21089,7 +21140,7 @@
                             "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row."
                         }
                     ],
-                    "extendedBy": "DataTablePropsSingle,DataTablePropsMultiple,DataTablePropsCell",
+                    "extendedBy": "DataTablePropsSingle,DataTablePropsMultiple,DataTablePropsCellSingle,DataTablePropsCellMultiple",
                     "extendedTypes": "Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"size\" | \"onContextMenu\" | \"ref\" | \"value\">"
                 }
             }
