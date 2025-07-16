@@ -1,7 +1,7 @@
 'use client';
+import { Component } from '@primereact/core/component';
 import { TimesIcon } from '@primereact/icons';
-import type { ButtonProps } from '@primereact/types/shared/button';
-import { mergeProps, resolve } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { Button } from 'primereact/button';
 import * as React from 'react';
@@ -21,19 +21,20 @@ export const DrawerClose = withComponent({
 
         const rootProps = mergeProps(
             {
-                ref: drawer?.closeButtonRef,
                 type: 'button',
                 className: drawer?.cx('close'),
                 onClick: drawer?.close
             },
-            drawer?.ptm('close'),
             ptmi('root')
         );
 
-        return (
-            <Button {...(props as ButtonProps)} {...rootProps}>
-                {props.children ? resolve(props.children, instance) : <TimesIcon />}
-            </Button>
-        );
+        const createIconElement = () => {
+            return <TimesIcon pt={drawer?.ptm('closeIcon')} />;
+        };
+
+        const icon = createIconElement();
+
+        // @ts-expect-error: Button expects a type prop, but we are using it as a close button.
+        return <Component ref={drawer?.closeButtonRef} as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={drawer?.ptm('close')} children={props.children ?? icon} />;
     }
 });

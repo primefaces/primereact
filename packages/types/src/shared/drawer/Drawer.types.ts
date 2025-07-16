@@ -34,6 +34,10 @@ export interface DrawerPassThrough {
      */
     trigger?: DrawerPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
+     * Used to pass attributes to the trigger icon's DOM element.
+     */
+    triggerIcon?: DrawerPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    /**
      * Used to pass attributes to the portal's DOM element.
      */
     portal?: DrawerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -49,6 +53,10 @@ export interface DrawerPassThrough {
      * Used to pass attributes to the close's DOM element.
      */
     close?: DrawerPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: DrawerPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
      * Used to pass attributes to the content's DOM element.
      */
