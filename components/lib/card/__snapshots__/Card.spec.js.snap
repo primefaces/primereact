@@ -56,6 +56,7 @@ exports[`Card advanced 1`] = `
             <span
               class="p-button-icon p-c p-button-icon-left pi pi-check"
               data-pc-section="icon"
+              style="pointer-events: none;"
             />
             <span
               class="p-button-label p-c"
@@ -73,6 +74,7 @@ exports[`Card advanced 1`] = `
             <span
               class="p-button-icon p-c p-button-icon-left pi pi-times"
               data-pc-section="icon"
+              style="pointer-events: none;"
             />
             <span
               class="p-button-label p-c"
