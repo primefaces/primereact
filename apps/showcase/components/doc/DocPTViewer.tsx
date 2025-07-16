@@ -59,7 +59,7 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
             elements = find(container.current, selector) as HTMLElement[];
 
             if (!elements || elements.length === 0) {
-                selector = `[data-pc-section="${item.toLowerCase()}"]`;
+                selector = `[data-pc-name="${item.toLowerCase()}"]`;
                 elements = find(container.current, selector) as HTMLElement[];
             }
         }
