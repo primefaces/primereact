@@ -40,6 +40,10 @@ const buttonStyles = `
     flex: 1 1 auto;
 }
 
+.p-button-icon {
+    pointer-events: none;
+}
+
 .p-button-icon-right {
     order: 1;
 }
