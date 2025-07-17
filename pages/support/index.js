@@ -78,7 +78,7 @@ const SupportPage = () => {
                             </ul>
                         </div>
                         <a
-                            href="mailto:primetek.com.tr?subject=PrimeReact%20PRO%20Support"
+                            href="mailto:contact@primetek.com.tr?subject=PrimeReact%20PRO%20Support"
                             className="block mt-4 w-full bg-primary border-round py-2 px-3 text-center transition-all duration-300 text-primary-contrast font-semibold text-lg leading-none"
                         >
                             Buy Now
