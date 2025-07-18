@@ -48,19 +48,25 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
 
     const enterSection = (enteredItem: PTNameType) => {
         const { name, item } = enteredItem;
+        const nameToLower = name.toLowerCase();
+        const itemToLower = item.toLowerCase();
         let elements: HTMLElement[] = [];
-        let selector = `[data-pc-name="${name.toLowerCase()}${item.toLowerCase()}"]`;
 
-        if (item === 'root') {
-            selector = `[data-pc-name="${name.toLowerCase()}"]`;
-        }
+        const selectors = [item === 'root' ? `[data-pc-name="${nameToLower}"]` : `[data-pc-name="${nameToLower}${itemToLower}"]`, `[data-pc-section="${itemToLower}"]`, `[data-pc-name="${itemToLower}"]`];
 
-        if (container.current) {
-            elements = find(container.current, selector) as HTMLElement[];
+        const searchContexts = [container.current, document.querySelector('body')].filter(Boolean) as HTMLElement[];
 
-            if (!elements || elements.length === 0) {
-                selector = `[data-pc-name="${item.toLowerCase()}"]`;
-                elements = find(container.current, selector) as HTMLElement[];
+        for (const selector of selectors) {
+            for (const context of searchContexts) {
+                elements = find(context, selector) as HTMLElement[];
+
+                if (elements && elements.length > 0) {
+                    break;
+                }
+            }
+
+            if (elements && elements.length > 0) {
+                break;
             }
         }
 
