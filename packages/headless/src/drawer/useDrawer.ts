@@ -42,7 +42,7 @@ export const useDrawer = withHeadless({
             setMaskVisibleState(false);
 
             if (props.autoZIndex) {
-                ZIndex.clear(maskRef?.current as HTMLDivElement);
+                ZIndex.clear(maskRef.current as HTMLDivElement);
             }
         });
 
@@ -76,7 +76,7 @@ export const useDrawer = withHeadless({
         };
 
         const onMotionEnter = () => {
-            focusElement();
+            enableDocumentSettings();
             bindDocumentKeyDownListener();
 
             if (props.autoZIndex) {
@@ -85,7 +85,7 @@ export const useDrawer = withHeadless({
         };
 
         const onMotionAfterEnter = () => {
-            enableDocumentSettings();
+            focusElement();
         };
 
         const onMotionBeforeLeave = () => {
@@ -173,7 +173,6 @@ export const useDrawer = withHeadless({
 
         return {
             state,
-
             // refs
             maskRef,
             motionRef,
