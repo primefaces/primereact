@@ -1,0 +1,64 @@
+---
+title: ConfirmDialog
+description: ConfirmDialog uses a Dialog UI
+component: confirmdialog
+---
+
+## Usage
+
+```tsx
+import { ConfirmDialog } from 'primereact/confirmdialog';
+```
+
+```tsx
+<ConfirmDialog>
+    <ConfirmDialog.Trigger />
+    <ConfirmDialog.Portal>
+        <ConfirmDialog.Header>
+            <ConfirmDialog.Title />
+            <ConfirmDialog.HeaderActions>
+                <ConfirmDialog.Close />
+            </ConfirmDialog.HeaderActions>
+        </ConfirmDialog.Header>
+        <ConfirmDialog.Content />
+        <ConfirmDialog.Footer />
+    </ConfirmDialog.Portal>
+</ConfirmDialog>
+```
+
+## Examples
+
+### Basic
+
+ConfirmDialog is defined using `ConfirmDialog`, `ConfirmDialog.Trigger`, `ConfirmDialog.Portal`, `ConfirmDialog.Header`, `ConfirmDialog.Content` and `ConfirmDialog.Footer` components.
+
+<DocDemoViewer name="confirmdialog:basic-demo" />
+
+### Position
+
+The position of the confirmdialog can be customized with the `position` property. The available values are `top`, `top-left`, `top-right`, `bottom`, `bottom-left`, `bottom-right`, `left`, `right`, and `center`.
+
+<DocDemoViewer name="confirmdialog:position-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+ConfirmDialog component uses `confirmdialog` role along with `aria-labelledby` referring to the header element however any attribute is passed to the root element so you may use `aria-labelledby` to override this default behavior. In addition `aria-modal` is added since focus is kept within the popup.
+
+Trigger element also has aria-expanded and aria-controls to be handled explicitly.
+
+### Overlay Keyboard Support
+
+| Key         | Function                                                                                                                                                  |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tab         | Moves focus to the next the focusable element within the confirmdialog if `modal` is true. Otherwise, the focusable element in the page tab sequence.     |
+| shift + tab | Moves focus to the previous the focusable element within the confirmdialog if `modal` is true. Otherwise, the focusable element in the page tab sequence. |
+| escape      | Closes the confirmdialog if `closeOnEscape` is true.                                                                                                      |
+
+### Close Button Keyboard Support
+
+| Key   | Function                  |
+| ----- | ------------------------- |
+| enter | Closes the confirmdialog. |
+| space | Closes the confirmdialog. |
