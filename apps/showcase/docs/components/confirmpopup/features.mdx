@@ -1,0 +1,62 @@
+---
+title: ConfirmPopup
+description: ConfirmPopup uses a Dialog UI
+component: confirmpopup
+---
+
+## Usage
+
+```tsx
+import { ConfirmPopup } from 'primereact/confirmpopup';
+```
+
+```tsx
+<ConfirmPopup>
+    <ConfirmPopup.Trigger />
+    <ConfirmPopup.Portal>
+        <ConfirmPopup.Content>
+            <ConfirmPopup.Icon />
+            <ConfirmPopup.Message />
+        </ConfirmPopup.Content>
+        <ConfirmPopup.Footer>
+            <ConfirmPopup.Reject />
+            <ConfirmPopup.Accept />
+        </ConfirmPopup.Footer>
+    </ConfirmPopup.Portal>
+</ConfirmPopup>
+```
+
+## Examples
+
+### Basic
+
+ConfirmPopup is defined using `ConfirmPopup`, `ConfirmPopup.Trigger`, `ConfirmPopup.Portal`, `ConfirmPopup.Content`, `ConfirmPopup.Footer`, `ConfirmPopup.Reject` and `ConfirmPopup.Accept` components.
+
+<DocDemoViewer name="confirmpopup:basic-demo" />
+
+### Template
+
+ConfirmPopup can be customized with templates. The `ConfirmPopup.Content` can be used to define the content of the popup, while `ConfirmPopup.Footer` can be used to define the footer actions.
+
+<DocDemoViewer name="confirmpopup:template-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+ConfirmPopup component uses `alertdialog` role and since any attribute is passed to the root element you may define attributes like `aria-label` or `aria-labelledby` to describe the popup contents. In addition `aria-modal` is added since focus is kept within the popup.
+
+### Overlay Keyboard Support
+
+| Key         | Function                                                                   |
+| ----------- | -------------------------------------------------------------------------- |
+| tab         | Moves focus to the next the focusable element within the confirmpopup.     |
+| shift + tab | Moves focus to the previous the focusable element within the confirmpopup. |
+| escape      | Closes the popup and moves focus to the trigger.                           |
+
+### Close Button Keyboard Support
+
+| Key   | Function                                                              |
+| ----- | --------------------------------------------------------------------- |
+| enter | Triggers the action, closes the popup and moves focus to the trigger. |
+| space | Triggers the action, closes the popup and moves focus to the trigger. |
