@@ -38,7 +38,7 @@ export const ConfirmPopup = withComponent({
         );
 
         return (
-            <ConfirmPopupProvider value={instance as unknown as ConfirmPopupInstance}>
+            <ConfirmPopupProvider value={instance as ConfirmPopupInstance}>
                 <Component instance={instance} attrs={rootProps} children={props.children} />
             </ConfirmPopupProvider>
         );
