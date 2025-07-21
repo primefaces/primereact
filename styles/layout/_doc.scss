@@ -19,7 +19,7 @@
     li {
         position: relative;
         z-index: 1;
-        
+
         button {
             background-color: transparent;
             border: 0 none;
@@ -177,21 +177,28 @@
     }
 }
 
-.doc-section-nav {
+.doc-section-nav-container {
     position: sticky;
     top: 6rem;
     right: 0;
     width: 14rem;
-    max-height: calc(100vh - 15rem);
-    list-style: none;
     margin: 0;
-    padding: 0.25rem 0;
-    margin-left: 4rem;
-    overflow-y: auto;
-    overflow-x: hidden;
+    padding-block: 0.25rem;
+    padding-inline: 0;
+    margin-inline-start: 4rem;
+    display: flex;
+    flex-direction: column;
     align-self: flex-start;
+    max-height: calc(100vh - 14rem);
+}
 
-    > .navbar-item {
+.doc-section-nav {
+    list-style: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0;
+
+    >.navbar-item {
         .navbar-item-content {
             border-left: 1px solid var(--surface-border);
             padding-left: .25rem;
@@ -204,7 +211,7 @@
     }
 
     .navbar-item {
-        > .navbar-item-content {
+        >.navbar-item-content {
             display: flex;
 
             .px-link {
@@ -249,9 +256,9 @@
     }
 }
 
-.doc-section-code { 
+.doc-section-code {
     position: relative;
-    
+
     div {
         &::-webkit-scrollbar {
             width: 5px;
@@ -283,7 +290,7 @@
     padding: 2px;
     backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, .1);
-    
+
     button {
         outline: 0 none;
         border-radius: 8px;
