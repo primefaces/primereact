@@ -116,14 +116,14 @@ export const Toast = React.memo(
 
         const createElement = () => {
             const rootProps = mergeProps(
+                ptCallbacks.ptm('root'),
                 {
                     ref: containerRef,
                     id: props.id,
                     className: ptCallbacks.cx('root', { context }),
                     style: ptCallbacks.sx('root')
                 },
-                ToastBase.getOtherProps(props),
-                ptCallbacks.ptm('root')
+                ToastBase.getOtherProps(props)
             );
 
             const transitionProps = mergeProps(

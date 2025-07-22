@@ -97,6 +97,7 @@ export const ScrollTop = React.memo(
         const scrollIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
         const scrollTopAriaLabel = localeOption('aria') ? localeOption('aria').scrollTop : undefined;
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: scrollElementRef,
                 type: 'button',
@@ -105,8 +106,7 @@ export const ScrollTop = React.memo(
                 onClick,
                 'aria-label': scrollTopAriaLabel
             },
-            ScrollTopBase.getOtherProps(props),
-            ptm('root')
+            ScrollTopBase.getOtherProps(props)
         );
 
         const transitionProps = mergeProps(

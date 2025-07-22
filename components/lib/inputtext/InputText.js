@@ -79,6 +79,7 @@ export const InputText = React.memo(
         }, [props.disabled, isFilled]);
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(props.className, cx('root', { context, isFilled })),
                 onBeforeInput: onBeforeInput,
@@ -86,8 +87,7 @@ export const InputText = React.memo(
                 onKeyDown: onKeyDown,
                 onPaste: onPaste
             },
-            InputTextBase.getOtherProps(props),
-            ptm('root')
+            InputTextBase.getOtherProps(props)
         );
 
         return (
