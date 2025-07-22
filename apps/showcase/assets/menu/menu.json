@@ -147,6 +147,18 @@
                     "name": "Overlay",
                     "children": [
                         {
+                            "name": "ConfirmDialog",
+                            "to": "/docs/components/confirmdialog"
+                        },
+                        {
+                            "name": "ConfirmPopup",
+                            "to": "/docs/components/confirmpopup"
+                        },
+                        {
+                            "name": "Dialog",
+                            "to": "/docs/components/dialog"
+                        },
+                        {
                             "name": "Drawer",
                             "to": "/docs/components/drawer"
                         }

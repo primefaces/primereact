@@ -243,6 +243,56 @@ export const Store = {
             'filePath': 'demo/chip/template-demo.tsx',
         },
     },
+    'confirmdialog': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/confirmdialog/basic-demo.tsx')),
+            'filePath': 'demo/confirmdialog/basic-demo.tsx',
+        },
+        'confirmdialog-pt': {
+            'component': React.lazy(() => import('demo/confirmdialog/confirmdialog-pt.tsx')),
+            'filePath': 'demo/confirmdialog/confirmdialog-pt.tsx',
+        },
+        'position-demo': {
+            'component': React.lazy(() => import('demo/confirmdialog/position-demo.tsx')),
+            'filePath': 'demo/confirmdialog/position-demo.tsx',
+        },
+    },
+    'confirmpopup': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/confirmpopup/basic-demo.tsx')),
+            'filePath': 'demo/confirmpopup/basic-demo.tsx',
+        },
+        'confirmpopup-pt': {
+            'component': React.lazy(() => import('demo/confirmpopup/confirmpopup-pt.tsx')),
+            'filePath': 'demo/confirmpopup/confirmpopup-pt.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/confirmpopup/template-demo.tsx')),
+            'filePath': 'demo/confirmpopup/template-demo.tsx',
+        },
+    },
+    'dialog': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/dialog/basic-demo.tsx')),
+            'filePath': 'demo/dialog/basic-demo.tsx',
+        },
+        'dialog-pt': {
+            'component': React.lazy(() => import('demo/dialog/dialog-pt.tsx')),
+            'filePath': 'demo/dialog/dialog-pt.tsx',
+        },
+        'maximizable-demo': {
+            'component': React.lazy(() => import('demo/dialog/maximizable-demo.tsx')),
+            'filePath': 'demo/dialog/maximizable-demo.tsx',
+        },
+        'position-demo': {
+            'component': React.lazy(() => import('demo/dialog/position-demo.tsx')),
+            'filePath': 'demo/dialog/position-demo.tsx',
+        },
+        'without-modal-demo': {
+            'component': React.lazy(() => import('demo/dialog/without-modal-demo.tsx')),
+            'filePath': 'demo/dialog/without-modal-demo.tsx',
+        },
+    },
     'divider': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/divider/basic-demo.tsx')),
