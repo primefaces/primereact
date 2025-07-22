@@ -528,6 +528,7 @@ export const CascadeSelect = React.memo(
             const dropdownIcon = props.loading ? createLoadingIcon() : createDropdownIcon();
             const overlay = createOverlay();
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     id: props.id,
                     ref: elementRef,
@@ -535,8 +536,7 @@ export const CascadeSelect = React.memo(
                     style: props.style,
                     onClick: (e) => onClick(e)
                 },
-                otherProps,
-                ptm('root')
+                otherProps
             );
 
             return (

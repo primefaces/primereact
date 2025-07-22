@@ -559,14 +559,14 @@ export const Mention = React.memo(
         );
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
                 className: classNames(props.className, cx('root', { focusedState, isFilled })),
                 style: props.style
             },
-            MentionBase.getOtherProps(props),
-            ptm('root')
+            MentionBase.getOtherProps(props)
         );
 
         return (

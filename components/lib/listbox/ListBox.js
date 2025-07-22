@@ -876,14 +876,14 @@ export const ListBox = React.memo(
         );
 
         const rootProps = mergeProps(
+            ptCallbacks.ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
                 className: ptCallbacks.cx('root'),
                 style: props.style
             },
-            ListBoxBase.getOtherProps(props),
-            ptCallbacks.ptm('root')
+            ListBoxBase.getOtherProps(props)
         );
 
         const hiddenFirstElement = mergeProps(

@@ -239,13 +239,13 @@ export const DataScroller = React.memo(
         const content = createContent();
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 className: classNames(props.className, cx('root'))
             },
-            DataScrollerBase.getOtherProps(props),
-            ptm('root')
+            DataScrollerBase.getOtherProps(props)
         );
 
         return (
