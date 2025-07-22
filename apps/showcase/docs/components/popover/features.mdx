@@ -1,0 +1,54 @@
+---
+title: Popover
+description: Popover is a container component that can overlay other components on page.
+component: popover
+---
+
+## Import
+
+```tsx
+import { Popover } from 'primereact/popover';
+```
+
+```tsx
+<Popover>
+    <Popover.Trigger></Popover.Trigger>
+    <Popover.Portal>
+        <Popover.Content>
+            <Popover.Close />
+        </Popover.Content>
+    </Popover.Portal>
+</Popover>
+```
+
+## Basic
+
+<DocDemoViewer name="popover:basic-demo" />
+
+## Controlled
+
+Use the `open` and `onOpenChange` props to control the popover state.
+
+<DocDemoViewer name="popover:controlled-demo" />
+
+## Select Data
+
+<DocDemoViewer name="popover:select-data-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Popover component uses dialog role and since any attribute is passed to the root element you may define attributes like aria-label or aria-labelledby to describe the popup contents. In addition aria-modal is added since focus is kept within the popup.
+
+Popover adds aria-expanded state attribute and aria-controls to the trigger so that the relation between the trigger and the popup is defined.
+
+### Popover Keyboard Support
+
+When the popup gets opened, the first focusable element receives the focus and this can be customized by adding autofocus to an element within the popup.
+
+| Key           | Function                                                            |
+| ------------- | ------------------------------------------------------------------- |
+| `tab`         | Moves focus to the next the focusable element within the popup.     |
+| `shift + tab` | Moves focus to the previous the focusable element within the popup. |
+| `escape`      | Closes the popup and moves focus to the trigger.                    |
