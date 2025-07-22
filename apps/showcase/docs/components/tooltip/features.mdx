@@ -1,0 +1,52 @@
+---
+title: Tooltip
+description: Tooltip is a component that displays a tooltip when the user hovers over an element.
+component: tooltip
+---
+
+## Usage
+
+```tsx
+import { Tooltip } from 'primereact/tooltip';
+```
+
+```tsx
+<Tooltip.Group>
+    <Tooltip>
+        <Tooltip.Trigger></Tooltip.Trigger>
+        <Tooltip.Portal>
+            <Tooltip.Content>
+                <Tooltip.Arrow />
+            </Tooltip.Content>
+        </Tooltip.Portal>
+    </Tooltip>
+</Tooltip.Group>
+```
+
+## Examples
+
+### Arrow
+
+<DocDemoViewer name="tooltip:arrow-demo" />
+
+### Placement
+
+Use `side` and `align` to control the placement of the tooltip.
+
+<DocDemoViewer name="tooltip:placement-demo" />
+
+### Offset
+
+Use `sideOffset` and `alignOffset` to control the offset of the tooltip.
+
+<DocDemoViewer name="tooltip:offset-demo" />
+
+### Delay
+
+Use `showDelayDuration` and `hideDelayDuration` to control the delay of the tooltip. For `Tooltip.Group`, use `timeout` and `skipTimeout` instead.
+
+<DocDemoViewer name="tooltip:delay-demo" />
+
+### With ToggleButton
+
+<DocDemoViewer name="tooltip:with-togglebutton-demo" />
