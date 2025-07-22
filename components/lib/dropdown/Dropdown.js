@@ -1198,6 +1198,7 @@ export const Dropdown = React.memo(
         const dropdownIcon = props.loading ? createLoadingIcon() : createDropdownIcon();
         const clearIcon = createClearIcon();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
@@ -1211,8 +1212,7 @@ export const Dropdown = React.memo(
                 'data-p-focus': focusedState,
                 'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined
             },
-            otherProps,
-            ptm('root')
+            otherProps
         );
 
         const firstHiddenFocusableElementProps = mergeProps(

@@ -25,6 +25,7 @@ export const ProgressSpinner = React.memo(
         }));
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
@@ -33,8 +34,7 @@ export const ProgressSpinner = React.memo(
                 role: 'progressbar',
                 'aria-busy': true
             },
-            ProgressSpinnerBase.getOtherProps(props),
-            ptm('root')
+            ProgressSpinnerBase.getOtherProps(props)
         );
 
         const spinnerProps = mergeProps(

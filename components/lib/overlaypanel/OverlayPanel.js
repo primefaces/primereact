@@ -263,14 +263,14 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const createElement = () => {
         const closeIcon = createCloseIcon();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 onClick: (e) => onPanelClick(e)
             },
-            OverlayPanelBase.getOtherProps(props),
-            ptm('root')
+            OverlayPanelBase.getOtherProps(props)
         );
 
         const contentProps = mergeProps(

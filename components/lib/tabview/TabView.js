@@ -578,14 +578,14 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: idState,
             ref: elementRef,
             style: props.style,
             className: classNames(props.className, cx('root'))
         },
-        TabViewBase.getOtherProps(props),
-        ptm('root')
+        TabViewBase.getOtherProps(props)
     );
 
     const navContainerProps = mergeProps(

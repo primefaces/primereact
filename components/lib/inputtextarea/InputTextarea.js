@@ -136,6 +136,7 @@ export const InputTextarea = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root', { context, isFilled })),
@@ -147,8 +148,7 @@ export const InputTextarea = React.memo(
                 onInput: onInput,
                 onPaste: onPaste
             },
-            InputTextareaBase.getOtherProps(props),
-            ptm('root')
+            InputTextareaBase.getOtherProps(props)
         );
 
         return (

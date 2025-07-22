@@ -98,12 +98,12 @@ export const Timeline = React.memo(
         const events = createEvents();
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root'))
             },
-            TimelineBase.getOtherProps(props),
-            ptm('root')
+            TimelineBase.getOtherProps(props)
         );
 
         return <div {...rootProps}>{events}</div>;

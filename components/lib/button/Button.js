@@ -113,6 +113,7 @@ export const Button = React.memo(
         const defaultAriaLabel = props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label'];
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 'aria-label': defaultAriaLabel,
@@ -120,8 +121,7 @@ export const Button = React.memo(
                 className: classNames(props.className, cx('root', { size, disabled })),
                 disabled: disabled
             },
-            ButtonBase.getOtherProps(props),
-            ptm('root')
+            ButtonBase.getOtherProps(props)
         );
 
         return (

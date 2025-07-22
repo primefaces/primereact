@@ -151,13 +151,13 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const children = createChildren();
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             ref: elementRef,
             className: classNames(props.className, cx('root')),
             'aria-live': 'polite'
         },
-        InplaceBase.getOtherProps(props),
-        ptm('root')
+        InplaceBase.getOtherProps(props)
     );
 
     return <div {...rootProps}>{children}</div>;
