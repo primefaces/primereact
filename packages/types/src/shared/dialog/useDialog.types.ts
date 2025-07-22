@@ -123,7 +123,7 @@ export interface useDialogExposes {
     /**
      * Reference to the mask element.
      */
-    maskRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement> } | null>;
+    maskRef?: React.RefObject<HTMLDivElement | null>;
     /**
      * Reference to the close button element.
      */
