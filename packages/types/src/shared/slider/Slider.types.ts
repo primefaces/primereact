@@ -50,6 +50,11 @@ export interface SliderChangeEvent extends useSliderChangeEvent<React.SyntheticE
  */
 export interface SliderProps extends BaseComponentProps<SliderInstance, Omit<useSliderProps, 'onValueChange'>, SliderPassThrough> {
     /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
      * Callback fired when the ToggleButton's pressed state changes.
      * @param event The event that triggered the change.
      * @param event.originalEvent The original event that triggered the change.

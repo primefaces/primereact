@@ -25,7 +25,8 @@ export const Slider = withComponent({
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                onClick: instance.onBarClick
             },
             ptmi('root')
         );

@@ -1,7 +1,7 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useEventListener } from '@primereact/hooks';
 import { useSliderProps } from '@primereact/types/shared/slider';
-import { focus, getWindowScrollLeft, getWindowScrollTop, isRTL } from '@primeuix/utils';
+import { focus, getAttribute, getWindowScrollLeft, getWindowScrollTop, isRTL } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useSlider.props';
 
@@ -216,6 +216,17 @@ export const useSlider = withHeadless({
             }
         };
 
+        const onBarClick = (event: React.MouseEvent) => {
+            if (props.disabled) {
+                return;
+            }
+
+            if (getAttribute(event.target as Element, 'data-pc-name') !== 'sliderthumb') {
+                updateDomData();
+                handleValue(event);
+            }
+        };
+
         const [bindThumbMouseMoveListener, unbindThumbMouseMoveListener] = useEventListener({
             type: 'mousemove',
             listener: (event: Event) => onDrag(event as unknown as React.MouseEvent)
@@ -372,6 +383,7 @@ export const useSlider = withHeadless({
             onDragEnd,
             onMouseDown,
             onKeyDown,
+            onBarClick,
             rangeStyle,
             handleThumbStyle,
             rangeStartHandleStyle,

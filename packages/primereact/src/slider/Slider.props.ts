@@ -3,5 +3,6 @@ import type { SliderProps } from '@primereact/types/shared/slider';
 
 export const defaultProps: SliderProps = {
     ...HeadlessSlider.defaultProps,
-    as: 'div'
+    as: 'div',
+    disabled: undefined
 };
