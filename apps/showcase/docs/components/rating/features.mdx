@@ -1,0 +1,64 @@
+---
+title: Rating
+description: Rating component is a star based selection input.
+component: rating
+---
+
+## Usage
+
+```tsx
+import { Rating } from 'primereact/rating';
+```
+
+```tsx
+<Rating />
+```
+
+## Examples
+
+### Basic
+
+Rating is used with the `modelValue` property.
+
+<DocDemoViewer name="rating:basic-demo" />
+
+### Number of Stars
+
+Number of stars to display is defined with `stars` property.
+
+<DocDemoViewer name="rating:stars-demo" />
+
+### Template
+
+Custom icons are used to override the default icons with `onIcon` and `offIcon` properties.
+
+<DocDemoViewer name="rating:template-demo" />
+
+### ReadOnly
+
+When `readOnly` is present, value cannot be edited.
+
+<DocDemoViewer name="rating:readonly-demo" />
+
+### Disabled
+
+When `disabled` is present, value cannot be edited.
+
+<DocDemoViewer name="rating:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the [locale](/docs/configuration#locale) API via `star` and `stars` of the `aria` property.
+
+### Keyboard Support
+
+Keyboard interaction is derived from the native browser handling of radio buttons in a group.
+
+| Key                        | Function                                                                                             |
+| -------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `tab`                      | Moves focus to the star representing the value, if there is none then first star receives the focus. |
+| `left arrow` `up arrow`    | Moves focus to the previous star, if there is none then last radio button receives the focus.        |
+| `right arrow` `down arrow` | Moves focus to the next star, if there is none then first star receives the focus.                   |
+| `space`                    | If the focused star does not represent the value, changes the value to the star value.               |
