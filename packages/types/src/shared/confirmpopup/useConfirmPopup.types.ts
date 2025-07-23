@@ -30,7 +30,12 @@ export interface useConfirmPopupProps {
      */
     open?: boolean | undefined;
     /**
-     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * Specifies the default visibility of the confirmpopup.
+     * @default false
+     */
+    defaultOpen?: boolean | undefined;
+    /**
+     * Element to receive the focus when the confirmpopup gets visible, valid values are "accept" and "reject".
      * @default undefined
      */
     defaultFocus?: 'accept' | 'reject' | undefined;

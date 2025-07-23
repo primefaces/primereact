@@ -9,9 +9,9 @@ export const useDialog = withHeadless({
     name: 'useDialog',
     defaultProps,
     setup: ({ props, $primereact }) => {
-        const [openState, setOpenState] = React.useState<boolean>(props.open ?? false);
+        const [openState, setOpenState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
         const [maximizedState, setMaximizedState] = React.useState<boolean>(false);
-        const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? false);
+        const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
         const maskRef = React.useRef<HTMLDivElement | null>(null);
         const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
         const maximizableButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
@@ -29,16 +29,16 @@ export const useDialog = withHeadless({
         };
 
         useMountEffect(() => {
-            if (props.open) {
+            if (props.open || props.defaultOpen) {
                 setMaskVisibleState(true);
             }
         });
 
         useUpdateEffect(() => {
-            if (props.open && !maskVisibleState) {
+            if (props.open || (props.defaultOpen && !maskVisibleState)) {
                 setMaskVisibleState(true);
             }
-        }, [props.open]);
+        }, [props.open, props.defaultOpen]);
 
         useUpdateEffect(() => {
             if (maskVisibleState && !openState) {

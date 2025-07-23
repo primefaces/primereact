@@ -10,7 +10,7 @@ export const useConfirmPopup = withHeadless({
     name: 'useConfirmPopup',
     defaultProps,
     setup: ({ props, $primereact }) => {
-        const [openState, setOpenState] = React.useState<boolean>(props.open ?? false);
+        const [openState, setOpenState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
         const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
         const triggerRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
         const acceptRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
@@ -21,11 +21,25 @@ export const useConfirmPopup = withHeadless({
             opened: openState
         };
 
+        React.useEffect(() => {
+            if (props.defaultOpen) {
+                open();
+            }
+        }, [props.defaultOpen]);
+
         useUnmountEffect(() => {
             ZIndex.clear(motionRef.current?.elementRef.current as HTMLDivElement);
         });
 
         //methods
+        const open = () => {
+            setOpenState(true);
+
+            props?.onOpenChange?.({
+                value: true
+            });
+        };
+
         const close = () => {
             setOpenState(false);
 

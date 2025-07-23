@@ -30,6 +30,11 @@ export interface useDrawerProps {
      */
     open?: boolean | undefined;
     /**
+     * Specifies the default visibility of the drawer.
+     * @default false
+     */
+    defaultOpen?: boolean | undefined;
+    /**
      * Defines if background should be blocked when drawer is displayed.
      * @default undefined
      */

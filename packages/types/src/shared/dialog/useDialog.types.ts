@@ -30,6 +30,11 @@ export interface useDialogProps {
      */
     open?: boolean | undefined;
     /**
+     * Specifies the default visibility of the dialog.
+     * @default false
+     */
+    defaultOpen?: boolean | undefined;
+    /**
      * Enables dragging to change the position using header.
      * @default true
      */
