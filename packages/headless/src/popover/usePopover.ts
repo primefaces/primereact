@@ -12,7 +12,7 @@ import { defaultProps } from './usePopover.props';
 export const usePopover = withHeadless({
     name: 'usePopover',
     defaultProps,
-    setup: ({ props }) => {
+    setup: ({ props, $attrSelector }) => {
         const { dismissable, baseZIndex = 0, autoZIndex, closeOnEscape, defaultOpen, open, onOpenChange, breakpoints } = props;
         const [visibleState, setVisibleState] = React.useState(false);
         const selfClick = React.useRef(false);
@@ -264,7 +264,7 @@ export const usePopover = withHeadless({
                 for (const breakpoint in breakpoints) {
                     innerHTML += `
                         @media screen and (max-width: ${breakpoint}) {
-                            .p-popover {
+                            .p-popover[${$attrSelector}] {
                                 width: ${breakpoints[breakpoint]} !important;
                             }
                         }
