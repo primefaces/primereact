@@ -10,7 +10,6 @@ export const styles = createStyles<SliderInstance>({
             'p-slider p-component',
             {
                 'p-disabled': props.disabled,
-                // 'p-invalid': instance.$invalid,
                 'p-slider-horizontal': props.orientation === 'horizontal',
                 'p-slider-vertical': props.orientation === 'vertical'
             }
