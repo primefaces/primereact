@@ -80,6 +80,10 @@
                             "to": "/docs/components/radiobutton"
                         },
                         {
+                            "name": "Rating",
+                            "to": "/docs/components/rating"
+                        },
+                        {
                             "name": "Slider",
                             "to": "/docs/components/slider"
                         },
@@ -165,6 +169,14 @@
                         {
                             "name": "Drawer",
                             "to": "/docs/components/drawer"
+                        },
+                        {
+                            "name": "Popover",
+                            "to": "/docs/components/popover"
+                        },
+                        {
+                            "name": "Tooltip",
+                            "to": "/docs/components/tooltip"
                         }
                     ]
                 },

@@ -549,6 +549,20 @@ export const Store = {
             'filePath': 'demo/passthrough/basic-demo.tsx',
         },
     },
+    'popover': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/popover/basic-demo.tsx')),
+            'filePath': 'demo/popover/basic-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/popover/controlled-demo.tsx')),
+            'filePath': 'demo/popover/controlled-demo.tsx',
+        },
+        'select-data-demo': {
+            'component': React.lazy(() => import('demo/popover/select-data-demo.tsx')),
+            'filePath': 'demo/popover/select-data-demo.tsx',
+        },
+    },
     'primeicons': {
         'list-demo': {
             'component': React.lazy(() => import('demo/primeicons/list-demo.tsx')),
@@ -631,6 +645,28 @@ export const Store = {
         'sizes-demo': {
             'component': React.lazy(() => import('demo/radiobutton/sizes-demo.tsx')),
             'filePath': 'demo/radiobutton/sizes-demo.tsx',
+        },
+    },
+    'rating': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/rating/basic-demo.tsx')),
+            'filePath': 'demo/rating/basic-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/rating/disabled-demo.tsx')),
+            'filePath': 'demo/rating/disabled-demo.tsx',
+        },
+        'readonly-demo': {
+            'component': React.lazy(() => import('demo/rating/readonly-demo.tsx')),
+            'filePath': 'demo/rating/readonly-demo.tsx',
+        },
+        'stars-demo': {
+            'component': React.lazy(() => import('demo/rating/stars-demo.tsx')),
+            'filePath': 'demo/rating/stars-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/rating/template-demo.tsx')),
+            'filePath': 'demo/rating/template-demo.tsx',
         },
     },
     'scrollarea': {
@@ -935,6 +971,28 @@ export const Store = {
         'toolbar-pt': {
             'component': React.lazy(() => import('demo/toolbar/toolbar-pt.tsx')),
             'filePath': 'demo/toolbar/toolbar-pt.tsx',
+        },
+    },
+    'tooltip': {
+        'arrow-demo': {
+            'component': React.lazy(() => import('demo/tooltip/arrow-demo.tsx')),
+            'filePath': 'demo/tooltip/arrow-demo.tsx',
+        },
+        'delay-demo': {
+            'component': React.lazy(() => import('demo/tooltip/delay-demo.tsx')),
+            'filePath': 'demo/tooltip/delay-demo.tsx',
+        },
+        'offset-demo': {
+            'component': React.lazy(() => import('demo/tooltip/offset-demo.tsx')),
+            'filePath': 'demo/tooltip/offset-demo.tsx',
+        },
+        'placement-demo': {
+            'component': React.lazy(() => import('demo/tooltip/placement-demo.tsx')),
+            'filePath': 'demo/tooltip/placement-demo.tsx',
+        },
+        'with-togglebutton-demo': {
+            'component': React.lazy(() => import('demo/tooltip/with-togglebutton-demo.tsx')),
+            'filePath': 'demo/tooltip/with-togglebutton-demo.tsx',
         },
     },
     'uikit': {
