@@ -46,11 +46,11 @@ export interface usePlacerState {
     /**
      * The effective side of the placer.
      */
-    effectiveSide: SideType;
+    effectiveSide: SideType | null | undefined;
     /**
      * The effective align of the placer.
      */
-    effectiveAlign: AlignType;
+    effectiveAlign: AlignType | null | undefined;
 }
 
 /**

@@ -43,6 +43,26 @@ const style = `
     .p-tooltip2-arrow[data-side='bottom'] {
         transform: translateY(50%) rotate(135deg);
     }
+
+    .p-placer-content-enter-from,
+    .p-placer-content-leave-to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    .p-placer-content-enter-to,
+    .p-placer-content-leave-from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .p-placer-content-leave-active,
+    .p-placer-content-enter-active {
+        transition:
+            opacity 250ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
 `;
 
 export const styles = createStyles<TooltipInstance>({
