@@ -677,6 +677,36 @@ export const Store = {
             'filePath': 'demo/skeleton/skeleton-pt.tsx',
         },
     },
+    'slider': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/slider/basic-demo.tsx')),
+            'filePath': 'demo/slider/basic-demo.tsx',
+        },
+        'filter-demo': {
+            'component': React.lazy(() => import('demo/slider/filter-demo.tsx')),
+            'filePath': 'demo/slider/filter-demo.tsx',
+        },
+        'input-demo': {
+            'component': React.lazy(() => import('demo/slider/input-demo.tsx')),
+            'filePath': 'demo/slider/input-demo.tsx',
+        },
+        'range-demo': {
+            'component': React.lazy(() => import('demo/slider/range-demo.tsx')),
+            'filePath': 'demo/slider/range-demo.tsx',
+        },
+        'slider-pt': {
+            'component': React.lazy(() => import('demo/slider/slider-pt.tsx')),
+            'filePath': 'demo/slider/slider-pt.tsx',
+        },
+        'step-demo': {
+            'component': React.lazy(() => import('demo/slider/step-demo.tsx')),
+            'filePath': 'demo/slider/step-demo.tsx',
+        },
+        'vertical-demo': {
+            'component': React.lazy(() => import('demo/slider/vertical-demo.tsx')),
+            'filePath': 'demo/slider/vertical-demo.tsx',
+        },
+    },
     'splitter': {
         'horizontal-demo': {
             'component': React.lazy(() => import('demo/splitter/horizontal-demo.tsx')),

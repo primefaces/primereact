@@ -80,6 +80,10 @@
                             "to": "/docs/components/radiobutton"
                         },
                         {
+                            "name": "Slider",
+                            "to": "/docs/components/slider"
+                        },
+                        {
                             "name": "Switch",
                             "to": "/docs/components/switch"
                         },
