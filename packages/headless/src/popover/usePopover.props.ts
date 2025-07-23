@@ -9,7 +9,5 @@ export const defaultProps: usePopoverProps = {
     closeOnEscape: true,
     defaultOpen: undefined,
     open: undefined,
-    onOpenChange: undefined,
-    triggerRef: undefined,
-    containerRef: undefined
+    onOpenChange: undefined
 };

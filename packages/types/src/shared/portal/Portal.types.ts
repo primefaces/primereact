@@ -29,7 +29,7 @@ export interface PortalProps extends BaseComponentProps<PortalInstance, usePorta
     /**
      * The element to be rendered as the portal.
      */
-    element: React.ReactNode;
+    element?: React.ReactNode;
     /**
      * The DOM element where the portal should be appended to.
      * @default 'body'
