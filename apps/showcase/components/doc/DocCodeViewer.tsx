@@ -51,7 +51,7 @@ const DocCodeViewer = ({
             >
                 {children}
             </pre>
-            <div className="absolute flex items-center top-3 right-3 p-0.5 rounded-[10px] bg-white/10 backdrop-blur-[6px] border border-[hsla(0,0%,100%,.1)] group-hover/pre:opacity-100 opacity-0 transition-opacity duration-150 ">
+            <div className="absolute flex items-center top-2 right-2 p-0.5 rounded-[10px] bg-white/10 backdrop-blur-[6px] border border-[hsla(0,0%,100%,.1)] group-hover/pre:opacity-100 opacity-0 transition-opacity duration-150 ">
                 {__spec__ === 'DocDemoViewer' && (
                     <>
                         <DocCodeViewerConfigButton onClick={() => setIsExpanded(!isExpanded)}>
