@@ -547,8 +547,8 @@ export const Calendar = React.memo(
             const timeMeta = {
                 hours: today.getHours(),
                 minutes: today.getMinutes(),
-                seconds: today.getSeconds(),
-                milliseconds: today.getMilliseconds()
+                seconds: props.showSeconds ? today.getSeconds() : 0,
+                milliseconds: props.showMillisec ? today.getMilliseconds() : 0
             };
 
             updateViewDate(event, today);
@@ -1702,7 +1702,7 @@ export const Calendar = React.memo(
                 } else {
                     let time = getCurrentDateTime();
 
-                    [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()];
+                    [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), props.showSeconds ? time.getSeconds() : 0, props.showMillisec ? time.getMilliseconds() : 0];
                 }
 
                 date.setHours(hours);
