@@ -1,4 +1,4 @@
-import * as HeadlessToolbar from '@primereact/headless/label';
+import * as HeadlessToolbar from '@primereact/headless/toolbar';
 import type { ToolbarProps } from '@primereact/types/shared/toolbar';
 
 export const defaultProps: ToolbarProps = {
