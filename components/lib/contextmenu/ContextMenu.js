@@ -686,6 +686,7 @@ export const ContextMenu = React.memo(
 
         const createContextMenu = () => {
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     id: props.id,
                     className: classNames(props.className, cx('root', { context })),
@@ -694,7 +695,6 @@ export const ContextMenu = React.memo(
                     onMouseEnter: (e) => onMenuMouseEnter(e)
                 },
                 ContextMenuBase.getOtherProps(props),
-                ptm('root')
             );
 
             const transitionProps = mergeProps(

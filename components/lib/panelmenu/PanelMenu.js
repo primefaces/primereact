@@ -431,14 +431,14 @@ export const PanelMenu = React.memo(
 
         const panels = createPanels();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 id: props.id,
                 style: props.style
             },
-            PanelMenuBase.getOtherProps(props),
-            ptm('root')
+            PanelMenuBase.getOtherProps(props)
         );
 
         return <div {...rootProps}>{panels}</div>;
