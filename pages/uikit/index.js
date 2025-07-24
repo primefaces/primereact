@@ -192,7 +192,8 @@ const UIKitPage = (props) => {
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
-                                                <span className="inline-flex items-center gap-2">1 Year Free Updates <Badge className="badge1" value="?" severity="secondary" data-pr-tooltip="$99 for + 1 Year" style={{ cursor: 'pointer' }} />
+                                                <span className="inline-flex items-center gap-2">
+                                                    1 Year Free Updates <Badge className="badge1" value="?" severity="secondary" data-pr-tooltip="$99 for + 1 Year" style={{ cursor: 'pointer' }} />
                                                     <Tooltip target=".badge1" />
                                                 </span>
                                             </li>
@@ -238,7 +239,8 @@ const UIKitPage = (props) => {
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
-                                                <span className="inline-flex items-center gap-2">1 Year Free Updates <Badge className="badge2" value="?" severity="secondary" data-pr-tooltip="$249 for + 1 Year" style={{ cursor: 'pointer' }} />
+                                                <span className="inline-flex items-center gap-2">
+                                                    1 Year Free Updates <Badge className="badge2" value="?" severity="secondary" data-pr-tooltip="$249 for + 1 Year" style={{ cursor: 'pointer' }} />
                                                     <Tooltip target=".badge2" />
                                                 </span>
                                             </li>
@@ -284,7 +286,8 @@ const UIKitPage = (props) => {
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
-                                                <span className="inline-flex items-center gap-2">1 Year Free Updates <Badge className="badge3" value="?" severity="secondary" data-pr-tooltip="Contact Us" style={{ cursor: 'pointer' }} />
+                                                <span className="inline-flex items-center gap-2">
+                                                    1 Year Free Updates <Badge className="badge3" value="?" severity="secondary" data-pr-tooltip="Contact Us" style={{ cursor: 'pointer' }} />
                                                     <Tooltip target=".badge3" />
                                                 </span>
                                             </li>

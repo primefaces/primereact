@@ -1702,12 +1702,7 @@ export const Calendar = React.memo(
                 } else {
                     let time = getCurrentDateTime();
 
-                    [hours, minutes, seconds, milliseconds] = [
-                        time.getHours(),
-                        time.getMinutes(),
-                        props.showSeconds ? time.getSeconds() : 0,
-                        props.showMillisec ? time.getMilliseconds() : 0
-                    ];
+                    [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), props.showSeconds ? time.getSeconds() : 0, props.showMillisec ? time.getMilliseconds() : 0];
                 }
 
                 date.setHours(hours);
