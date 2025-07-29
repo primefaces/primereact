@@ -36,6 +36,7 @@ export const SliderThumb = withComponent({
                 'aria-labelledby': props.ariaLabelledby,
                 'aria-label': props.ariaLabel,
                 'aria-orientation': slider?.props.orientation,
+                'data-pc-index': index,
                 onTouchStart: (e: React.TouchEvent<HTMLElement>) => slider?.onTouchStart(e, index),
                 onTouchMove: slider?.onDrag,
                 onTouchEnd: slider?.onDragEnd,

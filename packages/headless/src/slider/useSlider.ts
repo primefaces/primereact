@@ -36,6 +36,14 @@ export const useSlider = withHeadless({
             return index;
         }, []);
 
+        React.useEffect(() => {
+            thumbCounter.current = 0;
+
+            return () => {
+                thumbCounter.current = 0;
+            };
+        }, []);
+
         const range = React.useCallback(() => {
             return Array.isArray(state.value) || thumbCounter.current > 1;
         }, [state.value]);
