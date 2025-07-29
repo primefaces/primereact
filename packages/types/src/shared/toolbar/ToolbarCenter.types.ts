@@ -48,21 +48,6 @@ export interface ToolbarCenterExposes {
 }
 
 /**
- * Defines the CSS class names used in the ToolbarCenter component.
- */
-export const ToolbarCenterClassNames = {
-    /**
-     * Class name of the root element
-     */
-    root: 'p-toolbar-center'
-} as const;
-
-/**
- * Type representing the CSS class names used in the ToolbarCenter component.
- */
-export type ToolbarCenterClassNamesType = (typeof ToolbarCenterClassNames)[keyof typeof ToolbarCenterClassNames];
-
-/**
  * Instance of ToolbarCenter component.
  */
 export type ToolbarCenterInstance = ComponentInstance<ToolbarCenterProps, ToolbarCenterState, ToolbarCenterExposes>;

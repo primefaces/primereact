@@ -48,21 +48,6 @@ export interface ToolbarStartExposes {
 }
 
 /**
- * Defines the CSS class names used in the ToolbarStart component.
- */
-export const ToolbarStartClassNames = {
-    /**
-     * Class name of the root element
-     */
-    root: 'p-toolbar-start'
-} as const;
-
-/**
- * Type representing the CSS class names used in the ToolbarStart component.
- */
-export type ToolbarStartClassNamesType = (typeof ToolbarStartClassNames)[keyof typeof ToolbarStartClassNames];
-
-/**
  * Instance of ToolbarStart component.
  */
 export type ToolbarStartInstance = ComponentInstance<ToolbarStartProps, ToolbarStartState, ToolbarStartExposes>;

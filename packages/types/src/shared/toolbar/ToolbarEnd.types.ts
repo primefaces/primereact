@@ -48,21 +48,6 @@ export interface ToolbarEndExposes {
 }
 
 /**
- * Defines the CSS class names used in the ToolbarEnd component.
- */
-export const ToolbarEndClassNames = {
-    /**
-     * Class name of the root element
-     */
-    root: 'p-toolbar-end'
-} as const;
-
-/**
- * Type representing the CSS class names used in the ToolbarEnd component.
- */
-export type ToolbarEndClassNamesType = (typeof ToolbarEndClassNames)[keyof typeof ToolbarEndClassNames];
-
-/**
  * Instance of ToolbarEnd component.
  */
 export type ToolbarEndInstance = ComponentInstance<ToolbarEndProps, ToolbarEndState, ToolbarEndExposes>;
