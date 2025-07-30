@@ -45,7 +45,7 @@ export const FooterCell = React.memo((props) => {
 
             if (align === 'right') {
                 let right = 0;
-                let next = elementRef.current.nextElementSibling;
+                let next = elementRef.current && elementRef.current.nextElementSibling;
 
                 if (next && next.classList.contains('p-frozen-column')) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
@@ -54,10 +54,16 @@ export const FooterCell = React.memo((props) => {
                 styleObject.right = right + 'px';
             } else {
                 let left = 0;
-                let prev = elementRef.current.previousElementSibling;
+                let prev = elementRef.current && elementRef.current.previousElementSibling;
 
-                if (prev && prev.classList.contains('p-frozen-column')) {
-                    left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
+                while (prev) {
+                    if (prev && prev.classList.contains('p-frozen-column')) {
+                        left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
+                        elementRef.current.style.left = left + 'px';
+                        break;
+                    }
+
+                    prev = prev.previousElementSibling;
                 }
 
                 styleObject.left = left + 'px';
