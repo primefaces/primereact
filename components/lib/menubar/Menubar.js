@@ -42,10 +42,12 @@ export const Menubar = React.memo(
         const [bindOutsideClickListener, unbindOutsideClickListener] = useEventListener({
             type: 'click',
             listener: (event) => {
-                const isOutsideButton = menuButtonRef.current && !menuButtonRef.current.contains(event.target);
+                if (isOutsideClicked(event)) {
+                    const isOutsideContainer = elementRef.current && !elementRef.current.contains(event.target);
 
-                if (isOutsideButton) {
-                    hide();
+                    if (isOutsideContainer) {
+                        hide();
+                    }
                 }
             },
             options: { capture: true }
@@ -96,6 +98,10 @@ export const Menubar = React.memo(
 
         const menuButtonKeydown = (event) => {
             (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') && toggle(event);
+        };
+
+        const isOutsideClicked = (event) => {
+            return rootMenuRef.current !== event.target && !rootMenuRef.current.contains(event.target) && menuButtonRef.current !== event.target && !menuButtonRef.current.contains(event.target);
         };
 
         const getItemProp = (item, name) => {
