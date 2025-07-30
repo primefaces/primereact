@@ -423,6 +423,40 @@ export const Store = {
             'filePath': 'demo/inplace/inplace-pt.tsx',
         },
     },
+    'inputotp': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/inputotp/basic-demo.tsx')),
+            'filePath': 'demo/inputotp/basic-demo.tsx',
+        },
+        'custom-demo': {
+            'component': React.lazy(() => import('demo/inputotp/custom-demo.tsx')),
+            'filePath': 'demo/inputotp/custom-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/inputotp/filled-demo.tsx')),
+            'filePath': 'demo/inputotp/filled-demo.tsx',
+        },
+        'inputotp-pt': {
+            'component': React.lazy(() => import('demo/inputotp/inputotp-pt.tsx')),
+            'filePath': 'demo/inputotp/inputotp-pt.tsx',
+        },
+        'integer-only-demo': {
+            'component': React.lazy(() => import('demo/inputotp/integer-only-demo.tsx')),
+            'filePath': 'demo/inputotp/integer-only-demo.tsx',
+        },
+        'mask-demo': {
+            'component': React.lazy(() => import('demo/inputotp/mask-demo.tsx')),
+            'filePath': 'demo/inputotp/mask-demo.tsx',
+        },
+        'sample-demo': {
+            'component': React.lazy(() => import('demo/inputotp/sample-demo.tsx')),
+            'filePath': 'demo/inputotp/sample-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/inputotp/sizes-demo.tsx')),
+            'filePath': 'demo/inputotp/sizes-demo.tsx',
+        },
+    },
     'inputtext': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/inputtext/basic-demo.tsx')),
@@ -899,6 +933,58 @@ export const Store = {
         'color-palette-demo': {
             'component': React.lazy(() => import('demo/tailwind/color-palette-demo.tsx')),
             'filePath': 'demo/tailwind/color-palette-demo.tsx',
+        },
+    },
+    'terminal': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/terminal/basic-demo.tsx')),
+            'filePath': 'demo/terminal/basic-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/terminal/template-demo.tsx')),
+            'filePath': 'demo/terminal/template-demo.tsx',
+        },
+        'terminal-pt': {
+            'component': React.lazy(() => import('demo/terminal/terminal-pt.tsx')),
+            'filePath': 'demo/terminal/terminal-pt.tsx',
+        },
+    },
+    'textarea': {
+        'auto-resize-demo': {
+            'component': React.lazy(() => import('demo/textarea/auto-resize-demo.tsx')),
+            'filePath': 'demo/textarea/auto-resize-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/textarea/basic-demo.tsx')),
+            'filePath': 'demo/textarea/basic-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/textarea/disabled-demo.tsx')),
+            'filePath': 'demo/textarea/disabled-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/textarea/filled-demo.tsx')),
+            'filePath': 'demo/textarea/filled-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/textarea/float-label-demo.tsx')),
+            'filePath': 'demo/textarea/float-label-demo.tsx',
+        },
+        'ifta-label-demo': {
+            'component': React.lazy(() => import('demo/textarea/ifta-label-demo.tsx')),
+            'filePath': 'demo/textarea/ifta-label-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/textarea/invalid-demo.tsx')),
+            'filePath': 'demo/textarea/invalid-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/textarea/sizes-demo.tsx')),
+            'filePath': 'demo/textarea/sizes-demo.tsx',
+        },
+        'textarea-pt': {
+            'component': React.lazy(() => import('demo/textarea/textarea-pt.tsx')),
+            'filePath': 'demo/textarea/textarea-pt.tsx',
         },
     },
     'togglebutton': {
