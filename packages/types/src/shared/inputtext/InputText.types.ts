@@ -43,6 +43,11 @@ export interface InputTextProps extends BaseComponentProps<InputTextInstance, us
      * When enabled, the component will stretch to occupy the full width of its container.
      */
     fluid?: boolean | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @default false
+     */
+    invalid?: boolean | undefined;
 }
 
 /**

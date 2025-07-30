@@ -10,7 +10,6 @@ export const styles = createStyles<InputTextInstance>({
         root: ({ props, attrs }) => [
             'p-inputtext p-component',
             {
-                //'p-filled': props.variant === 'filled',
                 'p-inputtext-sm p-inputfield-sm': props.size === 'small',
                 'p-inputtext-lg p-inputfield-lg': props.size === 'large',
                 'p-invalid': props.invalid,
