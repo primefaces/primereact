@@ -1,0 +1,76 @@
+---
+title: InputOtp
+description: InputOtp is used to enter one time passwords.
+component: inputotp
+---
+
+## Usage
+
+```tsx
+import { InputOtp } from 'primereact/inputotp';
+```
+
+```tsx
+<InputOtp>
+    <InputOtp.Text />
+</InputOtp>
+```
+
+## Examples
+
+### Basic
+
+`InputOtp` requires a `InputOtp.Text` component to display the input fields.
+
+<DocDemoViewer name="inputotp:basic-demo" />
+
+### Mask
+
+Enable the `mas,k option to hide the values in the input fields.
+
+<DocDemoViewer name="inputotp:mask-demo" />
+
+### Integer Only
+
+When `integerOnly` is present, only integers can be accepted as input.
+
+<DocDemoViewer name="inputotp:integer-only-demo" />
+
+### Filled
+
+Specify the `variant` property as `filled` to display the component with a higher visual emphasis than the default `outlined` style.
+
+<DocDemoViewer name="inputotp:filled-demo" />
+
+### Sizes
+
+InputOtp provides `small` and `large` sizes as alternatives to the base.
+
+<DocDemoViewer name="inputotp:sizes-demo" />
+
+### Custom
+
+Define a template with your own UI elements with bindings to the provided events and attributes to replace the default design.
+
+<DocDemoViewer name="inputotp:custom-demo" />
+
+### Sample
+
+A sample UI implementation with templating and additional elements.
+
+<DocDemoViewer name="inputotp:sample-demo" />
+
+### Accessibility
+
+#### Screen Reader Support
+
+Input OTP uses a set of InputText components, refer to the InputText component for more information about the screen reader support.
+
+#### Keyboard Support
+
+| Key           | Function                                                         |
+| ------------- | ---------------------------------------------------------------- |
+| `tab`         | Moves focus to the input otp.                                    |
+| `right arrow` | Moves focus to the next input element.                           |
+| `left arrow`  | Moves focus to the previous input element.                       |
+| `backspace`   | Deletes the input and moves focus to the previous input element. |
