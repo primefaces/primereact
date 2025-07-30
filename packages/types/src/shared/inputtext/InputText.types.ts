@@ -34,7 +34,7 @@ export interface InputTextProps extends BaseComponentProps<InputTextInstance, us
     /**
      * Defines the size of the InputText.
      */
-    size?: 'small' | 'normal' | 'large' | undefined;
+    size?: 'small' | 'large' | undefined;
     /**
      * Specifies the input variant of the component.
      */

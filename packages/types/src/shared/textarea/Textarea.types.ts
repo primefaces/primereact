@@ -34,7 +34,7 @@ export interface TextareaProps extends BaseComponentProps<TextareaInstance, useT
     /**
      * Defines the size of the Textarea.
      */
-    size?: 'small' | 'normal' | 'large' | undefined;
+    size?: 'small' | 'large' | undefined;
     /**
      * Specifies the input variant of the component.
      */

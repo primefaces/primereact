@@ -38,7 +38,7 @@ export interface InputOtpProps extends BaseComponentProps<InputOtpInstance, useI
     /**
      * Defines the size of the InputText.
      */
-    size?: 'small' | 'normal' | 'large' | undefined;
+    size?: 'small' | 'large' | undefined;
     /**
      * Specifies the input variant of the component.
      */
