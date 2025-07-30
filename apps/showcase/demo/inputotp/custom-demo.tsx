@@ -4,25 +4,6 @@ import { InputOtp } from 'primereact/inputotp';
 export default function CustomDemo() {
     return (
         <div className="card flex justify-center">
-            <style scoped>
-                {`
-                    .custom-otp-input {
-                        width: 40px;
-                        font-size: 36px;
-                        border: 0 none;
-                        appearance: none;
-                        text-align: center;
-                        transition: all 0.2s;
-                        background: transparent;
-                        border-bottom: 2px solid var(--p-inputtext-border-color);
-                    }
-
-                    .custom-otp-input:focus {
-                        outline: 0 none;
-                        border-bottom-color: var(--p-primary-color);
-                    }
-                `}
-            </style>
             <InputOtp defaultValue={''}>
                 {(instance: InputOtpInstance) => {
                     const { onInput, onClick, onKeyDown, onPaste, state, registerText } = instance;
@@ -38,7 +19,7 @@ export default function CustomDemo() {
                                         key={index}
                                         type="text"
                                         inputMode="text"
-                                        className="custom-otp-input"
+                                        className="w-10 text-4xl border-0 appearance-none text-center transition-all duration-200 bg-transparent border-b-2 border-b-[var(--p-inputtext-border-color)] focus:outline-none focus:border-b-[var(--p-primary-color)]"
                                         maxLength={1}
                                         onInput={(e) => onInput(e, index)}
                                         onClick={onClick}
