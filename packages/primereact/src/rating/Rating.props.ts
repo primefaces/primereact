@@ -5,9 +5,5 @@ export const defaultProps: RatingProps = {
     ...HeadlessRating.defaultProps,
     as: 'div',
     name: undefined,
-    invalid: false,
-    onFocus: undefined,
-    onBlur: undefined,
-    onIcon: undefined,
-    offIcon: undefined
+    invalid: false
 };

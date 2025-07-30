@@ -34,6 +34,11 @@ export interface useRatingProps {
      */
     defaultValue?: number | undefined;
     /**
+     * Whether to allow half stars.
+     * @default true
+     */
+    allowHalf?: boolean | undefined;
+    /**
      * Number of stars.
      * @default 5
      */
@@ -51,16 +56,29 @@ export interface useRatingProps {
     /**
      * Callback function that is called when the value changes.
      */
-    onChange?: (event: useRatingChangeEvent) => void;
+    onValueChange?: (event: useRatingChangeEvent) => void;
 }
 
 /**
  * Defines valid state in useRating.
  */
 export interface useRatingState {
+    /**
+     * The value of the rating.
+     */
     value: number | undefined;
+    /**
+     * The hover value of the rating.
+     */
+    hoverValue: number | undefined;
+    /**
+     * The focused option index of the rating.
+     */
     focusedOptionIndex: number | undefined;
-    isFocusVisibleItem: boolean | undefined;
+    /**
+     * Whether the focus is visible item of the rating.
+     */
+    isFocusVisibleItem: boolean;
 }
 
 /**
@@ -71,6 +89,30 @@ export interface useRatingExposes {
      * Current state of the rating.
      */
     state: useRatingState;
+    /**
+     * Get the state of a star.
+     */
+    getOptionState: (value: number) => string;
+    /**
+     * Handle input focus event.
+     */
+    onInputFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Handle input blur event.
+     */
+    onInputBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Handle input change event.
+     */
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    /**
+     * Handle option click event.
+     */
+    onOptionClick: (event: React.MouseEvent<HTMLDivElement>, value: number) => void;
+    /**
+     * Handle option hover event.
+     */
+    onOptionHover: (event: React.PointerEvent<HTMLDivElement>, value: number) => void;
 }
 
 /**

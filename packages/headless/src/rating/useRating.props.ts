@@ -6,5 +6,6 @@ export const defaultProps: useRatingProps = {
     stars: 5,
     disabled: false,
     readOnly: false,
-    onChange: undefined
+    allowHalf: true,
+    onValueChange: undefined
 };
