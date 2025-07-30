@@ -3,5 +3,8 @@ import type { InputOtpProps } from '@primereact/types/shared/inputotp';
 
 export const defaultProps: InputOtpProps = {
     ...HeadlessInputOtp.defaultProps,
-    as: 'div'
+    as: 'div',
+    size: undefined,
+    variant: undefined,
+    disabled: false
 };

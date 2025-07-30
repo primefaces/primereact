@@ -34,7 +34,21 @@ export interface InputOtpPassThrough {
 /**
  * Defines valid properties in InputOtp component.
  */
-export interface InputOtpProps extends BaseComponentProps<InputOtpInstance, useInputOtpProps, InputOtpPassThrough> {}
+export interface InputOtpProps extends BaseComponentProps<InputOtpInstance, useInputOtpProps, InputOtpPassThrough> {
+    /**
+     * Defines the size of the InputText.
+     */
+    size?: 'small' | 'normal' | 'large' | undefined;
+    /**
+     * Specifies the input variant of the component.
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+}
 
 /**
  * Defines valid state in InputOtp component.
