@@ -46,26 +46,6 @@ export default function CustomDemo() {
                                         onPaste={onPaste}
                                     />
                                 );
-                                // return (
-                                //     <input
-                                //         value={state.tokens[index] ?? ''}
-                                //         key={index}
-                                //         type="text"
-                                //         className="custom-otp-input"
-                                //         onInput={(e) => {
-                                //             const target = e.target as HTMLInputElement;
-
-                                //             if (target.value.length > 1) {
-                                //                 target.value = target.value.slice(0, 1);
-                                //             }
-
-                                //             onInput(e, index);
-                                //         }}
-                                //         onClick={onClick}
-                                //         onKeyDown={onKeyDown}
-                                //         onPaste={onPaste}
-                                //     />
-                                // );
                             })}
                         </>
                     );

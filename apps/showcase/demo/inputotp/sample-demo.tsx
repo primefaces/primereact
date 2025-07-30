@@ -2,6 +2,7 @@ import { MinusIcon } from '@primereact/icons';
 import { InputOtpInstance } from '@primereact/types/shared/inputotp';
 import { Button } from 'primereact/button';
 import { InputOtp } from 'primereact/inputotp';
+import * as React from 'react';
 
 export default function SampleDemo() {
     return (
@@ -58,10 +59,9 @@ export default function SampleDemo() {
                                     registerText();
 
                                     return (
-                                        <>
+                                        <React.Fragment key={index}>
                                             <input
                                                 value={state.tokens[index] ?? ''}
-                                                key={index}
                                                 type="text"
                                                 inputMode="text"
                                                 className="custom-otp-input-sample"
@@ -76,7 +76,7 @@ export default function SampleDemo() {
                                                     <MinusIcon />
                                                 </div>
                                             )}
-                                        </>
+                                        </React.Fragment>
                                     );
                                 })}
                             </>

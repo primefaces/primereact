@@ -29,14 +29,6 @@ export const useInputOtp = withHeadless({
             return index;
         }, []);
 
-        // React.useEffect(() => {
-        //     textCounter.current = 0;
-
-        //     return () => {
-        //         textCounter.current = 0;
-        //     };
-        // }, []);
-
         const inputMode = React.useCallback(() => {
             return props.integerOnly ? 'numeric' : 'text';
         }, [props.integerOnly]);
