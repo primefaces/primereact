@@ -1,0 +1,43 @@
+---
+title: Terminal
+description: Terminal is a grouping component for buttons and other content.
+component: terminal
+---
+
+## Usage
+
+```tsx
+import { Terminal } from 'primereact/terminal';
+```
+
+```tsx
+<Terminal>
+    <Terminal.Welcome />
+    <Terminal.CommandList />
+</Terminal>
+```
+
+## Examples
+
+### Basic
+
+Terminal provides `Terminal.Welcome` and `Terminal.CommandList` components to place content at these sections.
+
+<DocDemoViewer name="terminal:basic-demo" />
+
+### Template
+
+<DocDemoViewer name="terminal:template-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+The element that lists the previous commands has `aria-live` so that changes are received by the screen reader.
+
+### Keyboard Support
+
+| Key     | Function                                                 |
+| ------- | -------------------------------------------------------- |
+| `tab`   | Moves focus through the input element.                   |
+| `enter` | Executes the command when focus in on the input element. |

@@ -76,6 +76,10 @@
                             "to": "/docs/components/iftalabel"
                         },
                         {
+                            "name": "InputOtp",
+                            "to": "/docs/components/inputotp"
+                        },
+                        {
                             "name": "RadioButton",
                             "to": "/docs/components/radiobutton"
                         },
@@ -90,6 +94,10 @@
                         {
                             "name": "Switch",
                             "to": "/docs/components/switch"
+                        },
+                        {
+                            "name": "Textarea",
+                            "to": "/docs/components/textarea"
                         },
                         {
                             "name": "ToggleButton",
@@ -240,6 +248,10 @@
                         {
                             "name": "Tag",
                             "to": "/docs/components/tag"
+                        },
+                        {
+                            "name": "Terminal",
+                            "to": "/docs/components/terminal"
                         }
                     ]
                 }
