@@ -28,7 +28,7 @@ export interface useRatingProps {
     /**
      * Value of the rating.
      */
-    modelValue?: number | undefined;
+    value?: number | undefined;
     /**
      * The default value for the input when not controlled by `modelValue`.
      */

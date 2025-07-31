@@ -8,7 +8,7 @@ export const useRating = withHeadless({
     defaultProps,
     setup: ({ props, elementRef }) => {
         const { readOnly, disabled } = props;
-        const [valueState, setValueState] = React.useState(props.allowHalf ? (props.defaultValue ?? props.modelValue) : Math.ceil(props.defaultValue ?? props.modelValue ?? 0));
+        const [valueState, setValueState] = React.useState(props.allowHalf ? (props.defaultValue ?? props.value) : Math.ceil(props.defaultValue ?? props.value ?? 0));
         const [hoverValueState, setHoverValueState] = React.useState<number | undefined>(undefined);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState<number | undefined>(undefined);
         const [isFocusVisibleItem, setIsFocusVisibleItem] = React.useState(false);
@@ -47,7 +47,6 @@ export const useRating = withHeadless({
             }
 
             setFocusedOptionIndex(undefined);
-            //            formField.onBlur?.();
         };
 
         const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,6 +108,10 @@ export const useRating = withHeadless({
         React.useEffect(() => {
             props?.onValueChange?.({ value: valueState, originalEvent: null });
         }, [valueState]);
+
+        React.useEffect(() => {
+            setValueState(props.allowHalf ? (props.defaultValue ?? props.value) : Math.ceil(props.defaultValue ?? props.value ?? 0));
+        }, [props.value, props.defaultValue, props.allowHalf]);
 
         return {
             state,

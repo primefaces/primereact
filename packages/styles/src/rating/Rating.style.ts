@@ -1,21 +1,11 @@
 import { createStyles } from '@primereact/styles/utils';
 import type { RatingInstance } from '@primereact/types/shared/rating';
+import { style } from '@primeuix/styles/rating';
 
-const customStyle = `
-        .p-rating {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: dt('rating.gap');
-        }
-
+const theme = `
+        ${style}
         .p-rating-option {
             position: relative; /* new added */
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            outline-color: transparent;
-            border-radius: 50%;
             transition:
                 background dt('rating.transition.duration'),
                 color dt('rating.transition.duration'),
@@ -25,52 +15,12 @@ const customStyle = `
                 transform 0.1s ease-in-out; /* new added */;
         }
 
-        /* new added */
         .p-rating-option:hover{
             transform: scale(1.2);
         }
-        /* new added */
         .p-rating-option:active{
             transform: scale(0.95);
         }
-
-        .p-rating-option.p-focus-visible {
-            box-shadow: dt('rating.focus.ring.shadow');
-            outline: dt('rating.focus.ring.width') dt('rating.focus.ring.style') dt('rating.focus.ring.color');
-            outline-offset: dt('rating.focus.ring.offset');
-        }
-
-        /* not used */
-        .p-rating-icon {
-            color: dt('rating.icon.color');
-            transition:
-                background dt('rating.transition.duration'),
-                color dt('rating.transition.duration'),
-                border-color dt('rating.transition.duration'),
-                outline-color dt('rating.transition.duration'),
-                box-shadow dt('rating.transition.duration');
-            font-size: dt('rating.icon.size');
-            width: dt('rating.icon.size');
-            height: dt('rating.icon.size');
-        }
-
-        /* not used */
-        .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-option:hover .p-rating-icon {
-            color: dt('rating.icon.hover.color');
-        }   
-
-        /* not used */
-        .p-rating-option-active .p-rating-icon {
-            color: dt('rating.icon.active.color');
-        }
-
-        /* not used */
-        .p-rating-icon.p-invalid {
-            /* @todo */
-            stroke: dt('rating.invalid.icon.color');
-        }
-
-        /* new added - from now */
         .p-rating.p-readonly .p-rating-option {
             cursor: not-allowed;
         }
@@ -121,7 +71,7 @@ const customStyle = `
 
 export const styles = createStyles<RatingInstance>({
     name: 'rating',
-    style: customStyle,
+    style: theme,
     classes: {
         root: ({ props }) => [
             'p-rating',
@@ -147,17 +97,5 @@ export const styles = createStyles<RatingInstance>({
                 'p-invalid': props.invalid
             }
         ]
-        // onIcon: ({ instance }) => [
-        //     'p-rating-icon p-rating-on-icon',
-        //     {
-        //         'p-invalid': instance.props.invalid
-        //     }
-        // ],
-        // offIcon: ({ instance }) => [
-        //     'p-rating-icon p-rating-off-icon',
-        //     {
-        //         'p-invalid': instance.props.invalid
-        //     }
-        // ]
     }
 });

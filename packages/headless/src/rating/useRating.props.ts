@@ -1,7 +1,7 @@
 import type { useRatingProps } from '@primereact/types/shared/rating';
 
 export const defaultProps: useRatingProps = {
-    modelValue: undefined,
+    value: undefined,
     defaultValue: undefined,
     stars: 5,
     disabled: false,
