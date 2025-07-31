@@ -131,14 +131,14 @@ export const SplitButton = React.memo(
         };
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: idState,
                 className: classNames(props.className, cx('root', { size })),
                 style: props.style
             },
-            SplitButtonBase.getOtherProps(props),
-            ptm('root')
+            SplitButtonBase.getOtherProps(props)
         );
 
         return (

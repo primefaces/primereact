@@ -462,14 +462,14 @@ export const OrderList = React.memo(
         });
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            OrderListBase.getOtherProps(props),
-            ptm('root')
+            OrderListBase.getOtherProps(props)
         );
 
         return (

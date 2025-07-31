@@ -1155,6 +1155,7 @@ export const MultiSelect = React.memo(
         const clearIcon = !props.inline && createClearIcon();
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
@@ -1163,8 +1164,7 @@ export const MultiSelect = React.memo(
                 ...otherProps,
                 onClick: onClick
             },
-            MultiSelectBase.getOtherProps(props),
-            ptm('root')
+            MultiSelectBase.getOtherProps(props)
         );
 
         const hiddenInputWrapperProps = mergeProps(
