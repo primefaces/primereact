@@ -210,7 +210,7 @@
                     "name": "Misc",
                     "children": [
                         {
-                            "name": "AnimteOnScroll",
+                            "name": "AnimateOnScroll",
                             "to": "/docs/components/animateonscroll"
                         },
                         {

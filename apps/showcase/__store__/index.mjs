@@ -682,9 +682,17 @@ export const Store = {
         },
     },
     'rating': {
+        'allow-half-demo': {
+            'component': React.lazy(() => import('demo/rating/allow-half-demo.tsx')),
+            'filePath': 'demo/rating/allow-half-demo.tsx',
+        },
         'basic-demo': {
             'component': React.lazy(() => import('demo/rating/basic-demo.tsx')),
             'filePath': 'demo/rating/basic-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/rating/controlled-demo.tsx')),
+            'filePath': 'demo/rating/controlled-demo.tsx',
         },
         'disabled-demo': {
             'component': React.lazy(() => import('demo/rating/disabled-demo.tsx')),
