@@ -40,14 +40,6 @@ export interface RatingProps extends BaseComponentProps<RatingInstance, useRatin
      * @default false
      */
     invalid?: boolean | undefined;
-    /**
-     * Icon for the on state.
-     */
-    onIcon?: string | undefined | React.ReactNode;
-    /**
-     * Icon for the off state.
-     */
-    offIcon?: string | undefined | React.ReactNode;
 }
 
 /**

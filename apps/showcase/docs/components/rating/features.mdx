@@ -11,16 +11,30 @@ import { Rating } from 'primereact/rating';
 ```
 
 ```tsx
-<Rating />
+<Rating>
+    <Rating.Option value={1} />
+</Rating>
 ```
 
 ## Examples
 
 ### Basic
 
-Rating is used with the `modelValue` property.
+Rating is used with the `value` property.
 
 <DocDemoViewer name="rating:basic-demo" />
+
+### Half Stars
+
+Use `allowHalf` property to allow half stars.
+
+<DocDemoViewer name="rating:allow-half-demo" />
+
+### Controlled
+
+Use `onValueChange` to listen to value changes.
+
+<DocDemoViewer name="rating:controlled-demo" />
 
 ### Number of Stars
 

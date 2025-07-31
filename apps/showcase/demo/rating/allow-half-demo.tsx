@@ -1,13 +1,13 @@
 import { Rating } from 'primereact/rating';
 
-function StarsDemo() {
+function AllowHalfDemo() {
     return (
         <div className="card flex justify-center">
-            <Rating stars={10}>
+            <Rating value={3} allowHalf={false}>
                 <Rating.Option />
             </Rating>
         </div>
     );
 }
 
-export default StarsDemo;
+export default AllowHalfDemo;
