@@ -27,12 +27,7 @@ export const styles = createStyles<TabsInstance>({
             }
         ],
         list: 'p-tablist',
-        content: ({ context }) => [
-            'p-tablist-content',
-            {
-                'p-tablist-viewport': context.scrollable
-            }
-        ],
+        content: 'p-tablist-content p-tablist-viewport',
         tabList: 'p-tablist-tab-list',
         activeBar: 'p-tablist-active-bar',
         prevButton: 'p-tablist-prev-button p-tablist-nav-button',
