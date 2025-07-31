@@ -230,6 +230,10 @@
                             "to": "/docs/components/chip"
                         },
                         {
+                            "name": "FocusTrap",
+                            "to": "/docs/components/focustrap"
+                        },
+                        {
                             "name": "MeterGroup",
                             "to": "/docs/components/metergroup"
                         },
