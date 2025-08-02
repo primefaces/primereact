@@ -16513,6 +16513,12 @@
                             "description": "Retrieves the currently applied filters for the data table."
                         },
                         {
+                            "name": "getProcessedData",
+                            "parameters": [],
+                            "returnType": "TValue",
+                            "description": "Used to get the processed data."
+                        },
+                        {
                             "name": "getSortMeta",
                             "parameters": [],
                             "returnType": "undefined | DataTableSortMeta[]",
