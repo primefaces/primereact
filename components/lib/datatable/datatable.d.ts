@@ -2061,4 +2061,9 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      * @return {VirtualScroller | null} Virtual scroller instance
      */
     public getVirtualScroller(): VirtualScroller | null;
+    /**
+     * Used to get the processed data.
+     * @return {TValue} sorted and filtered data
+     */
+    public getProcessedData(): TValue;
 }

@@ -1597,7 +1597,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setSortMeta: (sorts) => setMultiSortMetaState(sorts),
         getElement: () => elementRef.current,
         getTable: () => tableRef.current,
-        getVirtualScroller: () => virtualScrollerRef.current
+        getVirtualScroller: () => virtualScrollerRef.current,
+        getProcessedData: () => processedData()
     }));
 
     const createLoader = () => {
