@@ -788,7 +788,7 @@ export const Dropdown = React.memo(
         };
 
         const show = () => {
-            setFocusedOptionIndex(focusedOptionIndex !== -1 ? focusedOptionIndex : props.autoOptionFocus ? findFirstFocusedOptionIndex() : props.editable ? -1 : findSelectedOptionIndex());
+            setFocusedOptionIndex(focusedOptionIndex !== -1 ? focusedOptionIndex : props.autoOptionFocus ? findFirstFocusedOptionIndex() : -1);
             setOverlayVisibleState(true);
         };
 
