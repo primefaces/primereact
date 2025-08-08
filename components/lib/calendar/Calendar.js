@@ -1266,6 +1266,7 @@ export const Calendar = React.memo(
                     let prevCell = cell.previousElementSibling;
 
                     if (prevCell) {
+                        // Try to focus previous enabled cell in the row
                         const cells = Array.from(cell.parentElement.children);
                         const prevCells = cells.slice(0, cellIndex).reverse();
 
@@ -1281,10 +1282,33 @@ export const Calendar = React.memo(
                             focusCell.tabIndex = '0';
                             focusCell.focus();
                         } else {
-                            navigateToMonth(true, groupIndex, event);
+                            // If no enabled cell in this row, move to previous row's last enabled cell
+                            let prevRow = cell.parentElement.previousElementSibling;
+                            if (prevRow) {
+                                const prevRowCells = Array.from(prevRow.children).reverse();
+                                let focusCell = prevRowCells.find((el) => !DomHandler.getAttribute(el.children[0], 'data-p-disabled'));
+                                if (focusCell) {
+                                    focusCell.children[0].tabIndex = '0';
+                                    focusCell.children[0].focus();
+                                }
+                            } else {
+                                // If no previous row, navigate to previous month
+                                navigateToMonth(true, groupIndex, event);
+                            }
                         }
                     } else {
-                        navigateToMonth(true, groupIndex, event);
+                        // If at the first cell, move to previous row's last enabled cell or previous month
+                        let prevRow = cell.parentElement.previousElementSibling;
+                        if (prevRow) {
+                            const prevRowCells = Array.from(prevRow.children).reverse();
+                            let focusCell = prevRowCells.find((el) => !DomHandler.getAttribute(el.children[0], 'data-p-disabled'));
+                            if (focusCell) {
+                                focusCell.children[0].tabIndex = '0';
+                                focusCell.children[0].focus();
+                            }
+                        } else {
+                            navigateToMonth(true, groupIndex, event);
+                        }
                     }
 
                     event.preventDefault();
@@ -1296,6 +1320,7 @@ export const Calendar = React.memo(
                     let nextCell = cell.nextElementSibling;
 
                     if (nextCell) {
+                        // Try to focus next enabled cell in the row
                         const cells = Array.from(cell.parentElement.children);
                         const nextCells = cells.slice(cellIndex + 1);
                         let hasNextFocusableDate = nextCells.find((el) => {
@@ -1310,10 +1335,33 @@ export const Calendar = React.memo(
                             focusCell.tabIndex = '0';
                             focusCell.focus();
                         } else {
-                            navigateToMonth(false, groupIndex, event);
+                            // If no enabled cell in this row, move to next row's first enabled cell
+                            let nextRow = cell.parentElement.nextElementSibling;
+                            if (nextRow) {
+                                const nextRowCells = Array.from(nextRow.children);
+                                let focusCell = nextRowCells.find((el) => !DomHandler.getAttribute(el.children[0], 'data-p-disabled'));
+                                if (focusCell) {
+                                    focusCell.children[0].tabIndex = '0';
+                                    focusCell.children[0].focus();
+                                }
+                            } else {
+                                // If no next row, navigate to next month
+                                navigateToMonth(false, groupIndex, event);
+                            }
                         }
                     } else {
-                        navigateToMonth(false, groupIndex, event);
+                        // If at the last cell, move to next row's first enabled cell or next month
+                        let nextRow = cell.parentElement.nextElementSibling;
+                        if (nextRow) {
+                            const nextRowCells = Array.from(nextRow.children);
+                            let focusCell = nextRowCells.find((el) => !DomHandler.getAttribute(el.children[0], 'data-p-disabled'));
+                            if (focusCell) {
+                                focusCell.children[0].tabIndex = '0';
+                                focusCell.children[0].focus();
+                            }
+                        } else {
+                            navigateToMonth(false, groupIndex, event);
+                        }
                     }
 
                     event.preventDefault();
