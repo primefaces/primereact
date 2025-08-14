@@ -527,7 +527,7 @@ export const MultiSelect = React.memo(
 
         const show = () => {
             setOverlayVisibleState(true);
-            setFocusedOptionIndex(focusedOptionIndex !== -1 ? focusedOptionIndex : props.autoOptionFocus ? findFirstFocusedOptionIndex() : -1);
+            setFocusedOptionIndex(focusedOptionIndex !== -1 ? focusedOptionIndex : props.autoOptionFocus ? findFirstFocusedOptionIndex() : findSelectedOptionIndex());
             DomHandler.focus(inputRef.current);
         };
 
