@@ -9,7 +9,7 @@ export default function SampleDemo() {
             <div className="flex flex-col items-center">
                 <div className="font-bold text-xl mb-2">Authenticate Your Account</div>
                 <p className="text-surface-500 dark:text-surface-400 block mb-8">Please enter the code sent to your phone.</p>
-                <InputOtp defaultValue={''} className="gap-0">
+                <InputOtp className="gap-0">
                     {Array.from({ length: 6 }, (_, index) => {
                         const inputClasses = [
                             'w-12 h-12 text-2xl appearance-none text-center transition-all duration-200',

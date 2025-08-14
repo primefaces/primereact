@@ -3,19 +3,19 @@ import { InputOtp } from 'primereact/inputotp';
 export default function SizesDemo() {
     return (
         <div className="card flex flex-col items-center gap-4">
-            <InputOtp defaultValue={''} size="small">
+            <InputOtp size="small">
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
             </InputOtp>
-            <InputOtp defaultValue={''}>
+            <InputOtp>
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
             </InputOtp>
-            <InputOtp defaultValue={''} size="large">
+            <InputOtp size="large">
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />

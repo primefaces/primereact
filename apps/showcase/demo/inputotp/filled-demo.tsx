@@ -3,7 +3,7 @@ import { InputOtp } from 'primereact/inputotp';
 export default function FilledDemo() {
     return (
         <div className="card flex justify-center">
-            <InputOtp defaultValue={''} variant="filled">
+            <InputOtp variant="filled">
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
