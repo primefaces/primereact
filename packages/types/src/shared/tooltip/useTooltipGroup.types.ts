@@ -16,12 +16,12 @@ import type { HeadlessInstance } from '@primereact/types/core';
 export interface useTooltipGroupProps {
     /**
      * The delay time to keep group active when switching between tooltips.
-     * @defaultValue 700
+     * @default 700
      */
     timeout?: number;
     /**
      * The delay time to skip the timeout when switching between tooltips.
-     * @defaultValue 300
+     * @default 300
      */
     skipTimeout?: number;
 }

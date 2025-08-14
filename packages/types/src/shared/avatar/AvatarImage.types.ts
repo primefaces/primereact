@@ -33,7 +33,7 @@ export interface AvatarImagePassThrough {
 export interface AvatarImageProps extends BaseComponentProps<AvatarImageInstance, unknown, AvatarImagePassThrough, 'img'> {
     /**
      * Specifies the path to the image to display.
-     * @defaultValue undefined
+     * @default undefined
      */
     src?: string | undefined;
 }
