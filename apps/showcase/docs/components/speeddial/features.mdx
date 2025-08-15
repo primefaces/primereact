@@ -1,0 +1,88 @@
+---
+title: SpeedDial
+description: SpeedDial component is used to categorize content.
+component: speeddial
+---
+
+## Usage
+
+```tsx
+import { SpeedDial } from 'primereact/speeddial';
+```
+
+```tsx
+<SpeedDial>
+    <SpeedDial.Button />
+    <SpeedDial.List>
+        <SpeedDial.Item>
+            <SpeedDial.Action />
+        </SpeedDial.Item>
+    </SpeedDial.List>
+</SpeedDial>
+```
+
+## Examples
+
+### Linear
+
+<DocDemoViewer name="speeddial:linear-demo" />
+
+### Circle
+
+Items can be displayed around the button when _type_ is set to _circle_. Additional _radius_ property defines the radius of the circle.
+
+<DocDemoViewer name="speeddial:circle-demo" />
+
+### Semi Circle
+
+When _type_ is defined as _semi-circle_, items are displayed in a half-circle around the button.
+
+<DocDemoViewer name="speeddial:semicircle-demo" />
+
+### Quarter Circle
+
+Setting _type_ as _quarter-circle_ displays the items at one of four corners of a button based on the _direction_.
+
+<DocDemoViewer name="speeddial:quartercircle-demo" />
+
+### Template
+
+<DocDemoViewer name="speeddial:template-demo" />
+
+### Tooltip
+
+<DocDemoViewer name="speeddial:tooltip-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+SpeedDial component renders a native button element that implicitly includes any passed prop. Text to describe the button can be defined with the <i>aria-labelledby</i> or <i>aria-label</i> props. Addititonally the button includes
+<i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button. can be added to implement custom key handlers.
+
+The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the button.
+
+### Keyboard Support
+
+#### Menu Button Keyboard Support
+
+| Key           | Function                                          |
+| ------------- | ------------------------------------------------- |
+| `enter`       | Toggles the visibility of the menu.               |
+| `space`       | Toggles the visibility of the menu.               |
+| `down arrow`  | Opens the menu and moves focus to the first item. |
+| `up arrow`    | Opens the menu and moves focus to the last item.  |
+| `right arrow` | Opens the menu and moves focus to the last item.  |
+| `left arrow`  | Opens the menu and moves focus to the first item. |
+| `escape`      | Closes the menu.                                  |
+
+#### Menu Keyboard Support
+
+| Key          | Function                                                                 |
+| ------------ | ------------------------------------------------------------------------ |
+| `enter`      | Actives the menuitem, closes the menu and sets focus on the menu button. |
+| `space`      | Actives the menuitem, closes the menu and sets focus on the menu button. |
+| `escape`     | Closes the menu and sets focus on the menu button.                       |
+| `arrow keys` | Navigates between the menu items.                                        |
+| `home`       | Moves focus to the first item.                                           |
+| `end`        | Moves focus to the last item.                                            |
