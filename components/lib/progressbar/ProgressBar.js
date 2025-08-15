@@ -31,6 +31,7 @@ export const ProgressBar = React.memo(
         const createDeterminate = () => {
             const label = createLabel();
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     className: classNames(props.className, cx('root')),
                     style: props.style,
@@ -39,8 +40,7 @@ export const ProgressBar = React.memo(
                     'aria-valuenow': props.value,
                     'aria-valuemax': '100'
                 },
-                ProgressBarBase.getOtherProps(props),
-                ptm('root')
+                ProgressBarBase.getOtherProps(props)
             );
             const valueProps = mergeProps(
                 {
@@ -66,6 +66,7 @@ export const ProgressBar = React.memo(
 
         const createIndeterminate = () => {
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     className: classNames(props.className, cx('root')),
                     style: props.style,
@@ -74,8 +75,7 @@ export const ProgressBar = React.memo(
                     'aria-valuenow': props.value,
                     'aria-valuemax': '100'
                 },
-                ProgressBarBase.getOtherProps(props),
-                ptm('root')
+                ProgressBarBase.getOtherProps(props)
             );
 
             const containerProps = mergeProps(

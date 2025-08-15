@@ -98,6 +98,7 @@ export const ToggleButton = React.memo(
         );
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
@@ -105,8 +106,7 @@ export const ToggleButton = React.memo(
                 'data-p-highlight': props.checked,
                 'data-p-disabled': props.disabled
             },
-            ToggleButtonBase.getOtherProps(props),
-            ptm('root')
+            ToggleButtonBase.getOtherProps(props)
         );
 
         const inputProps = mergeProps(

@@ -305,13 +305,13 @@ export const Paginator = React.memo(
         );
         const rightElement = rightContent && <div {...endProps}>{rightContent}</div>;
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            PaginatorBase.getOtherProps(props),
-            ptm('root')
+            PaginatorBase.getOtherProps(props)
         );
 
         return (

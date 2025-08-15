@@ -94,13 +94,13 @@ export const Messages = React.memo(
         }));
 
         const rootProps = mergeProps(
+            ptCallbacks.ptm('root'),
             {
                 id: props.id,
                 className: props.className,
                 style: props.style
             },
-            MessagesBase.getOtherProps(props),
-            ptCallbacks.ptm('root')
+            MessagesBase.getOtherProps(props)
         );
 
         const transitionProps = mergeProps(
