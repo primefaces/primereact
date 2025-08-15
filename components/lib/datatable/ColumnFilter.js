@@ -262,6 +262,7 @@ export const ColumnFilter = React.memo((props) => {
         props.onFilterChange(filters);
         props.onFilterApply();
         hide();
+        iconRef.current?.focus();
     };
 
     const onRowMatchModeKeyDown = (event, matchMode, clear) => {
