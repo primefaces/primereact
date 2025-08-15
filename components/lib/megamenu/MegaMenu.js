@@ -936,7 +936,6 @@ export const MegaMenu = React.memo(
 
             const columnProps = mergeProps(
                 {
-
                     className: cx('column', { category })
                 },
                 ptm('column')
@@ -964,11 +963,7 @@ export const MegaMenu = React.memo(
         const createColumns = (category) => {
             if (category.items) {
                 return category.items.map((column, index) => {
-                    return (
-                        <React.Fragment key={index}>
-                            {createColumn(category, column, index)}
-                        </React.Fragment>
-                    );
+                    return <React.Fragment key={index}>{createColumn(category, column, index)}</React.Fragment>;
                 });
             }
 
@@ -1203,11 +1198,7 @@ export const MegaMenu = React.memo(
                 return (
                     <ul {...menuProps}>
                         {processedItems.map((item, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    {createCategory(item, index, true)}
-                                </React.Fragment>
-                            );
+                            return <React.Fragment key={index}>{createCategory(item, index, true)}</React.Fragment>;
                         })}
                     </ul>
                 );

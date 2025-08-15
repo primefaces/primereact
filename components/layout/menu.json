@@ -59,13 +59,11 @@
                         },
                         {
                             "name": "FloatLabel",
-                            "to": "/floatlabel",
-                            "badge": "NEW"
+                            "to": "/floatlabel"
                         },
                         {
                             "name": "IconField",
-                            "to": "/iconfield",
-                            "badge": "NEW"
+                            "to": "/iconfield"
                         },
                         {
                             "name": "InputGroup",
@@ -85,8 +83,7 @@
                         },
                         {
                             "name": "InputOtp",
-                            "to": "/inputotp",
-                            "badge": "NEW"
+                            "to": "/inputotp"
                         },
                         {
                             "name": "InputText",
@@ -257,8 +254,7 @@
                         },
                         {
                             "name": "Stepper",
-                            "to": "/stepper",
-                            "badge": "NEW"
+                            "to": "/stepper"
                         },
                         {
                             "name": "TabView",

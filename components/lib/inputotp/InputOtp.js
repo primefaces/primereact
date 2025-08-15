@@ -227,7 +227,7 @@ export const InputOtp = React.memo(
                 autoFocus: props?.autoFocus && inputElementIndex === 0,
                 'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
                 'data-index': inputElementIndex,
-                className: cx('input'),
+                className: cx('input')
             };
             const inputElement = props?.inputTemplate ? (
                 ObjectUtils.getJSXElement(props?.inputTemplate, {
