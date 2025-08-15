@@ -1,0 +1,54 @@
+---
+title: Timeline
+description: Timeline visualizes a series of chained events.
+component: timeline
+---
+
+## Usage
+
+```tsx
+import { Timeline } from 'primereact/timeline';
+```
+
+```tsx
+<Timeline>
+    <Timeline.Event>
+        <Timeline.Opposite />
+        <Timeline.Separator>
+            <Timeline.Marker />
+            <Timeline.Connector />
+        </Timeline.Separator>
+        <Timeline.Content />
+    </Timeline.Event>
+</Timeline>
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="timeline:basic-demo" />
+
+### Alignment
+
+Content location relative the line is defined with the _align_ property.
+
+<DocDemoViewer name="timeline:alignment-demo" />
+
+### Opposite
+
+Additional content at the other side of the line can be provided with the _opposite_ property.
+
+<DocDemoViewer name="timeline:opposite-demo" />
+
+### Horizontal
+
+TimeLine orientation is controlled with the _orientation_ property, default is _vertical_ having _horizontal_ as the alternative.
+
+<DocDemoViewer name="timeline:horizontal-demo" />
+
+### Custom
+
+Sample implementation with custom content and styled markers.
+
+<DocDemoViewer name="timeline:custom-demo" />
