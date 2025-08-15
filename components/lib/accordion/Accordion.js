@@ -306,7 +306,6 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
             const rootProps = mergeProps(
                 {
-                    key,
                     className: cx('accordiontab.root', { selected })
                 },
                 AccordionTabBase.getCOtherProps(tab),
@@ -314,7 +313,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             );
 
             return (
-                <div {...rootProps}>
+                <div {...rootProps} key={key}>
                     {tabHeader}
                     {tabContent}
                 </div>
