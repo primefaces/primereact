@@ -1,0 +1,65 @@
+---
+title: InputGroup
+description: InputGroup displays text, icon, buttons and other content can be grouped next to an input.
+component: inputgroup
+---
+
+## Usage
+
+```tsx
+import { InputGroup } from 'primereact/inputgroup';
+```
+
+```tsx
+<InputGroup>
+    <InputGroup.Addon />
+</InputGroup>
+```
+
+## Examples
+
+### Basic
+
+A group is created by wrapping the input and add-ons with the `InputGroup` component. Each add-on element is defined as a child of `InputGroup.Addon` component.
+
+<DocDemoViewer name="inputgroup:basic-demo" />
+
+### Multiple
+
+Multiple add-ons can be placed inside the same group.
+
+<DocDemoViewer name="inputgroup:multiple-demo" />
+
+### Button
+
+Buttons can be placed at either side of an input element.
+
+<DocDemoViewer name="inputgroup:button-demo" />
+
+### Checkbox & Radio
+
+Checkbox and RadioButton components can be combined with an input element under the same group.
+
+<DocDemoViewer name="inputgroup:checkbox-radio-demo" />
+
+### Float Label
+
+FloatLabel visually integrates a label with its form element. Visit [FloatLabel](/docs/components/floatlabel) documentation for more information.
+
+<DocDemoViewer name="inputgroup:float-label-demo" />
+
+### Ifta Label
+
+IftaLabel is used to create infield top aligned labels. Visit [IftaLabel](/docs/components/iftalabel) documentation for more information.
+
+<DocDemoViewer name="inputgroup:ifta-label-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+InputGroup and InputGroupAddon do not require any roles and attributes.
+
+### Keyboard Support
+
+Components does not include any interactive elements.
