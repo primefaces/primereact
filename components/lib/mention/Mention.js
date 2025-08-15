@@ -451,7 +451,6 @@ export const Mention = React.memo(
 
             const itemProps = mergeProps(
                 {
-                    key: key,
                     className: cx('item', { isSelected }),
                     onClick: (e) => onItemClick(e, suggestion),
                     'data-p-highlight': isSelected
@@ -460,7 +459,7 @@ export const Mention = React.memo(
             );
 
             return (
-                <li {...itemProps}>
+                <li {...itemProps} key={key}>
                     {content}
                     <Ripple />
                 </li>

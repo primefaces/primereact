@@ -769,14 +769,13 @@ export const MegaMenu = React.memo(
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 ptm('separator')
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenuIcon = (item) => {
@@ -843,7 +842,6 @@ export const MegaMenu = React.memo(
 
             const submenuItemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     'aria-label': getItemLabel(processedItem),
                     'aria-disabled': isDisabled,
@@ -891,7 +889,7 @@ export const MegaMenu = React.memo(
             }
 
             return (
-                <li {...submenuItemProps}>
+                <li {...submenuItemProps} key={key}>
                     <div {...contentProps}>{content}</div>
                 </li>
             );
@@ -911,7 +909,6 @@ export const MegaMenu = React.memo(
             const submenuHeaderProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: classNames(submenu.className, cx('submenuHeader', { disabled: isDisabled })),
                     style: submenu.style,
                     role: 'presentation',
@@ -928,7 +925,7 @@ export const MegaMenu = React.memo(
             );
         };
 
-        const createSubmenus = (column) => {
+        const createSubmenus = (column, index) => {
             return column.map(createSubmenu);
         };
 
@@ -939,7 +936,7 @@ export const MegaMenu = React.memo(
 
             const columnProps = mergeProps(
                 {
-                    key: key,
+
                     className: cx('column', { category })
                 },
                 ptm('column')
@@ -958,7 +955,7 @@ export const MegaMenu = React.memo(
             );
 
             return (
-                <div {...columnProps}>
+                <div {...columnProps} key={key}>
                     <ul {...submenuProps}>{submenus}</ul>
                 </div>
             );
@@ -967,7 +964,11 @@ export const MegaMenu = React.memo(
         const createColumns = (category) => {
             if (category.items) {
                 return category.items.map((column, index) => {
-                    return createColumn(category, column, index);
+                    return (
+                        <React.Fragment key={index}>
+                            {createColumn(category, column, index)}
+                        </React.Fragment>
+                    );
                 });
             }
 
@@ -1143,7 +1144,6 @@ export const MegaMenu = React.memo(
             const isDisabled = isItemDisabled(processedItem);
             const menuItemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     className: classNames(category.className, cx('menuitem', { category, activeItemState, focused: isFocused, disabled: isDisabled })),
                     'aria-label': getItemLabel(category),
@@ -1173,7 +1173,7 @@ export const MegaMenu = React.memo(
             );
 
             return (
-                <li {...menuItemProps}>
+                <li {...menuItemProps} key={key}>
                     <div {...contentProps}>{itemContent}</div>
                     {panel}
                 </li>
@@ -1203,7 +1203,11 @@ export const MegaMenu = React.memo(
                 return (
                     <ul {...menuProps}>
                         {processedItems.map((item, index) => {
-                            return createCategory(item, index, true);
+                            return (
+                                <React.Fragment key={index}>
+                                    {createCategory(item, index, true)}
+                                </React.Fragment>
+                            );
                         })}
                     </ul>
                 );

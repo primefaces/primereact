@@ -123,14 +123,13 @@ export const TieredMenuSub = React.memo(
 
             const separatorProps = mergeProps(
                 {
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenu = (processedItem, index) => {
@@ -248,7 +247,6 @@ export const TieredMenuSub = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     'aria-label': item.label,
                     'aria-disabled': disabled,
@@ -268,7 +266,7 @@ export const TieredMenuSub = React.memo(
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={key}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>

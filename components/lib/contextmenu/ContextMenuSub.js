@@ -143,14 +143,13 @@ export const ContextMenuSub = React.memo(
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenu = (item, index) => {
@@ -264,7 +263,6 @@ export const ContextMenuSub = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id: key,
-                    key,
                     role: 'menuitem',
                     'aria-label': item.label,
                     'aria-disabled': disabled,
@@ -277,14 +275,13 @@ export const ContextMenuSub = React.memo(
                     'data-p-focused': focused,
                     'data-p-disabled': disabled,
                     className: cx('menuitem', { item, active, focused, disabled: isItemDisabled(item) }),
-                    style: item.style,
-                    key
+                    style: item.style
                 },
                 getPTOptions(processedItem, 'menuitem', index)
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={key}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>

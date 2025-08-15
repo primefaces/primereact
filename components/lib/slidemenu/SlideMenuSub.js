@@ -52,14 +52,13 @@ export const SlideMenuSub = React.memo((props) => {
         const separatorProps = mergeProps(
             {
                 id: key,
-                key,
                 className: cx('separator'),
                 role: 'separator'
             },
             ptm('separator', { hostName: props.hostName })
         );
 
-        return <li {...separatorProps} />;
+        return <li {...separatorProps} key={key} />;
     };
 
     const createSubmenu = (item, index) => {
@@ -158,7 +157,6 @@ export const SlideMenuSub = React.memo((props) => {
         const menuitemProps = mergeProps(
             {
                 id: key,
-                key,
                 className: cx('menuitem', { active, item }),
                 style: item.style
             },
@@ -166,7 +164,7 @@ export const SlideMenuSub = React.memo((props) => {
         );
 
         return (
-            <li {...menuitemProps}>
+            <li {...menuitemProps} key={key}>
                 {content}
                 {submenu}
             </li>

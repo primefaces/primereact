@@ -11,7 +11,7 @@ export function SampleDoc(props) {
         return (
             <>
                 <input {...events} {...attr} type="text" className="custom-otp-input-sample" />
-                {attr.id === 2 && (
+                {attr['data-index'] === 2 && (
                     <div className="px-3">
                         <i className="pi pi-minus" />
                     </div>
@@ -42,7 +42,7 @@ export default function SampleDemo() {
 
     const customInput = ({events, props}) => {
         return <><input {...events} {...props} type="text" className="custom-otp-input-sample" />
-            {props.id === 2 && <div className="px-3">
+            {props['data-index'] === 2 && <div className="px-3">
                 <i className="pi pi-minus" />
             </div>}
         </>
@@ -114,12 +114,12 @@ interface CustomInputProps extends InputOtpProps {
 
 export default function SampleDemo() {
     const [token, setTokens] = useState<string | number | undefined>();
-      
+
     const customInput: FunctionComponent<CustomInputProps> = ({ events, props }) => {
         return (
           <>
             <input {...events} {...props} type="text" className="custom-otp-input-sample" />
-            {props?.id === 2 && (
+            {props?.['data-index'] === 2 && (
               <div className="px-3">
                 <i className="pi pi-minus" />
               </div>
