@@ -50,7 +50,7 @@ export function GroupDoc(props) {
     const code = {
         basic: `
 <MultiSelect value={selectedCities} options={groupedCities} onChange={(e) => setSelectedCities(e.value)} optionLabel="label" 
-    optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate}
+    optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} optionGroupCollapsable
     placeholder="Select Cities" display="chip" className="w-full md:w-20rem" />
         `,
         javascript: `
@@ -104,7 +104,7 @@ export default function GroupedDoc() {
     return (
         <div className="card flex justify-content-center">
             <MultiSelect value={selectedCities} options={groupedCities} onChange={(e) => setSelectedCities(e.value)} optionLabel="label" 
-                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate}
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupCollapsable optionGroupTemplate={groupedItemTemplate}
                 placeholder="Select Cities" display="chip" className="w-full md:w-20rem" />
         </div>
     );
@@ -172,7 +172,7 @@ export default function GroupedDoc() {
     return (
         <div className="card flex justify-content-center">
             <MultiSelect value={selectedCities} options={groupedCities} onChange={(e) => setSelectedCities(e.value)} optionLabel="label" 
-                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate}
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupCollapsable optionGroupTemplate={groupedItemTemplate}
                 placeholder="Select Cities" display="chip" className="w-full md:w-20rem" />
         </div>
     );
@@ -185,7 +185,7 @@ export default function GroupedDoc() {
             <DocSectionText {...props}>
                 <p>
                     Options can be grouped when a nested data structures is provided. To define the label of a group <i>optionGroupLabel</i> property is needed and also <i>optionGroupChildren</i> is required to define the property that refers to the
-                    children of a group.
+                    children of a group. Also you can provide a <i>optionGroupCollapsable</i> property to collapse the groups by default.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
@@ -200,6 +200,7 @@ export default function GroupedDoc() {
                     placeholder="Select Cities"
                     display="chip"
                     className="w-full md:w-20rem"
+                    optionGroupCollapsable
                 />
             </div>
             <DocSectionCode code={code} />
