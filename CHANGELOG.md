@@ -1,5 +1,44 @@
 # Changelog
 
+## [10.9.7](https://github.com/primefaces/primereact/tree/10.9.7) (2025-08-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.9.6...10.9.7)
+
+**Enhancements:**
+
+- Add in Multiselect filterInputKeyDown to filterTemplate options for consistency with Dropdown [#8199](https://github.com/primefaces/primereact/pull/8199)
+
+**Fixed Bugs:**
+
+- Dropdown: show emptyMessage when Dropdown with VirtualScroller has no data [#8125](https://github.com/primefaces/primereact/pull/8125)
+- fix(menubar): clicking submenu header inside dropdown [#8175](https://github.com/primefaces/primereact/pull/8175)
+- Datatable: onRowSelect and onRowUnselect callbacks inconsistent when clicking checkbox in DataTable (v10.9.5) [#8096](https://github.com/primefaces/primereact/issues/8096)
+- Missing Icons in API [#8095](https://github.com/primefaces/primereact/issues/8095)
+- SplitButton: Null id and custom menu items id [#8075](https://github.com/primefaces/primereact/issues/8075)
+- Data Table: Custom Fields documentation example is wrong [#8121](https://github.com/primefaces/primereact/issues/8121)
+- Datatable ignores Column sortFunction on initial sort [#7405](https://github.com/primefaces/primereact/issues/7405)
+- ToggleButton - Accessibility bug [#8021](https://github.com/primefaces/primereact/issues/8021)
+- Dialog: When out of the viewport, dialog cannot be esaily dragged back [#8090](https://github.com/primefaces/primereact/issues/8090)
+- MultiStateCheckbox: missing invalid and variant props in TypeScript interface [#8085](https://github.com/primefaces/primereact/issues/8085)
+- DataTable: Wrong TypeScript definition for cell selection [#8115](https://github.com/primefaces/primereact/issues/8115)
+- DataTable: Cell Editing and Dropdown Filter Interaction [#7158](https://github.com/primefaces/primereact/issues/7158)
+- Dropdown: Item list immediately closes after opening [#8080](https://github.com/primefaces/primereact/issues/8080)
+- Clear filter button not working when filters prop is not provided [#8138](https://github.com/primefaces/primereact/issues/8138)
+- InputNumber: wrong internal value for decimal numbers using the spin [#8132](https://github.com/primefaces/primereact/issues/8132)
+- DataTable changes data in another row when you changes something in a row [#8079](https://github.com/primefaces/primereact/issues/8079)
+- DataTable: Memo props leak to DOM - React does not recognize the ... prop on DOM element. [#8120](https://github.com/primefaces/primereact/issues/8120)
+- Button: When using a Button inside of a OrderList itemTemplate component, only outside of icon is clickable [#8145](https://github.com/primefaces/primereact/issues/8145)
+- Carousel: Broken when running without React.StrictMode [#3985](https://github.com/primefaces/primereact/issues/3985)
+- TreeSelect Filter Mode not Lenient [#8005](https://github.com/primefaces/primereact/issues/8005)
+- TreeSelect: Wrong position openning upward and using filter [#8089](https://github.com/primefaces/primereact/issues/8089)
+- DatePicker setting seconds when showTime is true and showSeconds is false [#8140](https://github.com/primefaces/primereact/issues/8140)
+- DataTable: Multiple frozen columns - Headers freeze but data columns don't align properly [#8107](https://github.com/primefaces/primereact/issues/8107)
+- TreeSelect: Collapse/Expand not working if filter is applied [#8197](https://github.com/primefaces/primereact/issues/8197)
+- Calendar: incorrect value via arrorws and month picker when use callback onMonthChange [#8201](https://github.com/primefaces/primereact/issues/8201)
+- DataTable: dissapearing values when clicking quickly [#8099](https://github.com/primefaces/primereact/issues/8099)
+- MultiSelect: missing filterInputKeyDown handler in filterTemplate options (unlike Dropdown) [#8152](https://github.com/primefaces/primereact/issues/8145)
+- Column Filter Accessibility issue in DataTable [#8219](https://github.com/primefaces/primereact/issues/8219)
+
 ## [10.9.6](https://github.com/primefaces/primereact/tree/10.9.6) (2025-06-02)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.9.5...10.9.6)
