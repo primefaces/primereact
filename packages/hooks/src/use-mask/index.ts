@@ -54,14 +54,64 @@ export interface UseMaskOptions {
 }
 
 export interface UseMaskExposes {
+    /**
+     * Handles input events for the masked input field.
+     * Processes character input and composition events while applying the mask pattern.
+     * @param event - The form or composition event from the input element
+     */
     onMaskInput: (event: React.FormEvent<HTMLInputElement> | React.CompositionEvent<HTMLInputElement>) => void;
+    /**
+     * Handles keydown events for special key operations.
+     * Manages backspace, delete, escape, and enter key behaviors.
+     * @param event - The keyboard event from the input element
+     */
     onMaskKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    /**
+     * Handles keypress events for character input validation.
+     * Validates and places characters according to the mask pattern.
+     * @param event - The keyboard event from the input element
+     */
     onMaskKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    /**
+     * Handles focus events when the input gains focus.
+     * Initializes the mask display and sets the cursor position.
+     * @param event - The focus event from the input element
+     */
     onMaskFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Handles blur events when the input loses focus.
+     * Validates the final value and triggers change events if needed.
+     * @param event - The focus event from the input element
+     */
     onMaskBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Handles paste events for clipboard content insertion.
+     * Processes pasted content according to the mask pattern.
+     * @param event - The clipboard event from the input element
+     */
     onMaskPaste: (event: React.ClipboardEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * useMask hook is used to enter input in a certain format such as numeric, date, currency, email and phone.
+ *
+ * @param {UseMaskOptions} options - The options for the mask.
+ * @returns {UseMaskExposes} - The exposed methods for the mask.
+ *
+ * @example
+ * ```tsx
+ * const { onMaskInput, onMaskKeyDown, onMaskKeyPress, onMaskFocus, onMaskBlur, onMaskPaste } = useMask({
+ *        mask: '99/99/9999',
+ *        onMaskChange: (event: UseMaskChangeEvent) => setValue(event.value ?? ''),
+ *        inputRef: ref
+ *    });
+ *
+ *    return (
+ *       <div className="card flex justify-center">
+ *           <InputText ref={ref} value={value} placeholder="99/99/9999" onInput={onMaskInput} onKeyDown={onMaskKeyDown} onKeyPress={onMaskKeyPress} onFocus={onMaskFocus} onBlur={onMaskBlur} onPaste={onMaskPaste} />
+ *       </div>
+ *    );
+ */
 export function useMask(options: UseMaskOptions): UseMaskExposes {
     const { mask, unmask, slotChar = '_', autoClear = true, readOnly = false, onMaskChange, inputRef } = options;
 

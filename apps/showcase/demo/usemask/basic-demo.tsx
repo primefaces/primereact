@@ -6,14 +6,14 @@ export default function BasicDemo() {
     const ref = React.useRef(null);
     const [value, setValue] = React.useState('');
     const { onMaskInput, onMaskKeyDown, onMaskKeyPress, onMaskFocus, onMaskBlur, onMaskPaste } = useMask({
-        mask: '99/99/9999',
+        mask: '99-999999',
         onMaskChange: (event: UseMaskChangeEvent) => setValue(event.value ?? ''),
         inputRef: ref
     });
 
     return (
         <div className="card flex justify-center">
-            <InputText ref={ref} value={value} placeholder="99/99/9999" onInput={onMaskInput} onKeyDown={onMaskKeyDown} onKeyPress={onMaskKeyPress} onFocus={onMaskFocus} onBlur={onMaskBlur} onPaste={onMaskPaste} />
+            <InputText ref={ref} value={value} placeholder="99-999999" onInput={onMaskInput} onKeyDown={onMaskKeyDown} onKeyPress={onMaskKeyPress} onFocus={onMaskFocus} onBlur={onMaskBlur} onPaste={onMaskPaste} />
         </div>
     );
 }
