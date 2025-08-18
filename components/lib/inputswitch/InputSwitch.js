@@ -72,6 +72,7 @@ export const InputSwitch = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(props.className, cx('root', { checked })),
                 style: props.style,
@@ -80,8 +81,7 @@ export const InputSwitch = React.memo(
                 'data-p-highlight': checked,
                 'data-p-disabled': props.disabled
             },
-            otherProps,
-            ptm('root')
+            otherProps
         );
 
         const inputProps = mergeProps(

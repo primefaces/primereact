@@ -1277,13 +1277,13 @@ export const MegaMenu = React.memo(
         };
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(props.className, cx('root', { mobileActiveState })),
                 id: idState,
                 style: props.style
             },
-            MegaMenuBase.getOtherProps(props),
-            ptm('root')
+            MegaMenuBase.getOtherProps(props)
         );
 
         const menu = createMenu();

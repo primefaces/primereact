@@ -773,14 +773,14 @@ export const AutoComplete = React.memo(
         const input = createInput();
         const dropdown = createDropdown();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: idState,
                 ref: elementRef,
                 style: props.style,
                 className: classNames(props.className, cx('root', { focusedState }))
             },
-            otherProps,
-            ptm('root')
+            otherProps
         );
 
         return (

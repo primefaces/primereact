@@ -358,6 +358,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: overlayRef,
                 id: getPropValue('id'),
@@ -365,8 +366,7 @@ export const ConfirmPopup = React.memo(
                 style: getPropValue('style'),
                 onClick: onPanelClick
             },
-            ConfirmPopupBase.getOtherProps(props),
-            ptm('root')
+            ConfirmPopupBase.getOtherProps(props)
         );
 
         const transitionProps = mergeProps(

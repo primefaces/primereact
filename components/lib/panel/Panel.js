@@ -244,14 +244,14 @@ export const Panel = React.forwardRef((inProps, ref) => {
     };
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: idState,
             ref: elementRef,
             style: props.style,
             className: classNames(props.className, cx('root'))
         },
-        PanelBase.getOtherProps(props),
-        ptm('root')
+        PanelBase.getOtherProps(props)
     );
     const header = createHeader();
     const content = createContent();
