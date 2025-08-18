@@ -585,6 +585,10 @@ export const InputNumber = React.memo(
 
             let data = (event.clipboardData || window.clipboardData).getData('Text');
 
+            if (props.inputId === 'integeronly' && /[^\d-]/.test(data)) {
+                return;
+            }
+
             if (data) {
                 let filteredData = parseValue(data);
 
