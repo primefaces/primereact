@@ -44,7 +44,6 @@ export const RowCheckbox = React.memo((props) => {
 
     const checkboxProps = {
         role: 'checkbox',
-        'aria-checked': props.checked,
         tabIndex: tabIndex,
         onChange: onChange,
         'aria-label': props.ariaLabel,

@@ -50,7 +50,6 @@ export const HeaderCheckbox = React.memo((props) => {
 
     const headerCheckboxProps = {
         role: 'checkbox',
-        'aria-checked': props.checked,
         'aria-label': props.checked ? ariaLabel('selectAll') : ariaLabel('unselectAll'),
         tabIndex: tabIndex,
         onChange: onChange,
