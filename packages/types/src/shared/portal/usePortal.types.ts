@@ -16,7 +16,7 @@ import type { HeadlessInstance } from '@primereact/types/core';
 export interface usePortalProps {
     /**
      * Whether the portal is visible or not.
-     * @defaultValue false
+     * @default false
      */
     visible?: boolean | undefined;
     /**

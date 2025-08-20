@@ -381,6 +381,28 @@ export const Store = {
             'filePath': 'demo/gettingstarted/setup-demo.tsx',
         },
     },
+    'iconfield': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/iconfield/basic-demo.tsx')),
+            'filePath': 'demo/iconfield/basic-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/iconfield/float-label-demo.tsx')),
+            'filePath': 'demo/iconfield/float-label-demo.tsx',
+        },
+        'iconfield-pt': {
+            'component': React.lazy(() => import('demo/iconfield/iconfield-pt.tsx')),
+            'filePath': 'demo/iconfield/iconfield-pt.tsx',
+        },
+        'ifta-label-demo': {
+            'component': React.lazy(() => import('demo/iconfield/ifta-label-demo.tsx')),
+            'filePath': 'demo/iconfield/ifta-label-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/iconfield/sizes-demo.tsx')),
+            'filePath': 'demo/iconfield/sizes-demo.tsx',
+        },
+    },
     'iftalabel': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/iftalabel/basic-demo.tsx')),
@@ -421,6 +443,36 @@ export const Store = {
         'inplace-pt': {
             'component': React.lazy(() => import('demo/inplace/inplace-pt.tsx')),
             'filePath': 'demo/inplace/inplace-pt.tsx',
+        },
+    },
+    'inputgroup': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/inputgroup/basic-demo.tsx')),
+            'filePath': 'demo/inputgroup/basic-demo.tsx',
+        },
+        'button-demo': {
+            'component': React.lazy(() => import('demo/inputgroup/button-demo.tsx')),
+            'filePath': 'demo/inputgroup/button-demo.tsx',
+        },
+        'checkbox-radio-demo': {
+            'component': React.lazy(() => import('demo/inputgroup/checkbox-radio-demo.tsx')),
+            'filePath': 'demo/inputgroup/checkbox-radio-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/inputgroup/float-label-demo.tsx')),
+            'filePath': 'demo/inputgroup/float-label-demo.tsx',
+        },
+        'ifta-label-demo': {
+            'component': React.lazy(() => import('demo/inputgroup/ifta-label-demo.tsx')),
+            'filePath': 'demo/inputgroup/ifta-label-demo.tsx',
+        },
+        'inputgroup-pt': {
+            'component': React.lazy(() => import('demo/inputgroup/inputgroup-pt.tsx')),
+            'filePath': 'demo/inputgroup/inputgroup-pt.tsx',
+        },
+        'multiple-demo': {
+            'component': React.lazy(() => import('demo/inputgroup/multiple-demo.tsx')),
+            'filePath': 'demo/inputgroup/multiple-demo.tsx',
         },
     },
     'inputotp': {
@@ -481,6 +533,52 @@ export const Store = {
         'sizes-demo': {
             'component': React.lazy(() => import('demo/inputtext/sizes-demo.tsx')),
             'filePath': 'demo/inputtext/sizes-demo.tsx',
+        },
+    },
+    'knob': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/knob/basic-demo.tsx')),
+            'filePath': 'demo/knob/basic-demo.tsx',
+        },
+        'color-demo': {
+            'component': React.lazy(() => import('demo/knob/color-demo.tsx')),
+            'filePath': 'demo/knob/color-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/knob/disabled-demo.tsx')),
+            'filePath': 'demo/knob/disabled-demo.tsx',
+        },
+        'knob-pt': {
+            'component': React.lazy(() => import('demo/knob/knob-pt.tsx')),
+            'filePath': 'demo/knob/knob-pt.tsx',
+        },
+        'min-max-demo': {
+            'component': React.lazy(() => import('demo/knob/min-max-demo.tsx')),
+            'filePath': 'demo/knob/min-max-demo.tsx',
+        },
+        'reactive-demo': {
+            'component': React.lazy(() => import('demo/knob/reactive-demo.tsx')),
+            'filePath': 'demo/knob/reactive-demo.tsx',
+        },
+        'read-only-demo': {
+            'component': React.lazy(() => import('demo/knob/read-only-demo.tsx')),
+            'filePath': 'demo/knob/read-only-demo.tsx',
+        },
+        'size-demo': {
+            'component': React.lazy(() => import('demo/knob/size-demo.tsx')),
+            'filePath': 'demo/knob/size-demo.tsx',
+        },
+        'step-demo': {
+            'component': React.lazy(() => import('demo/knob/step-demo.tsx')),
+            'filePath': 'demo/knob/step-demo.tsx',
+        },
+        'stroke-demo': {
+            'component': React.lazy(() => import('demo/knob/stroke-demo.tsx')),
+            'filePath': 'demo/knob/stroke-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/knob/template-demo.tsx')),
+            'filePath': 'demo/knob/template-demo.tsx',
         },
     },
     'message': {
@@ -785,6 +883,36 @@ export const Store = {
             'filePath': 'demo/slider/vertical-demo.tsx',
         },
     },
+    'speeddial': {
+        'circle-demo': {
+            'component': React.lazy(() => import('demo/speeddial/circle-demo.tsx')),
+            'filePath': 'demo/speeddial/circle-demo.tsx',
+        },
+        'linear-demo': {
+            'component': React.lazy(() => import('demo/speeddial/linear-demo.tsx')),
+            'filePath': 'demo/speeddial/linear-demo.tsx',
+        },
+        'quartercircle-demo': {
+            'component': React.lazy(() => import('demo/speeddial/quartercircle-demo.tsx')),
+            'filePath': 'demo/speeddial/quartercircle-demo.tsx',
+        },
+        'semicircle-demo': {
+            'component': React.lazy(() => import('demo/speeddial/semicircle-demo.tsx')),
+            'filePath': 'demo/speeddial/semicircle-demo.tsx',
+        },
+        'speeddial-pt': {
+            'component': React.lazy(() => import('demo/speeddial/speeddial-pt.tsx')),
+            'filePath': 'demo/speeddial/speeddial-pt.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/speeddial/template-demo.tsx')),
+            'filePath': 'demo/speeddial/template-demo.tsx',
+        },
+        'tooltip-demo': {
+            'component': React.lazy(() => import('demo/speeddial/tooltip-demo.tsx')),
+            'filePath': 'demo/speeddial/tooltip-demo.tsx',
+        },
+    },
     'splitter': {
         'horizontal-demo': {
             'component': React.lazy(() => import('demo/splitter/horizontal-demo.tsx')),
@@ -995,6 +1123,32 @@ export const Store = {
             'filePath': 'demo/textarea/textarea-pt.tsx',
         },
     },
+    'timeline': {
+        'alignment-demo': {
+            'component': React.lazy(() => import('demo/timeline/alignment-demo.tsx')),
+            'filePath': 'demo/timeline/alignment-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/timeline/basic-demo.tsx')),
+            'filePath': 'demo/timeline/basic-demo.tsx',
+        },
+        'custom-demo': {
+            'component': React.lazy(() => import('demo/timeline/custom-demo.tsx')),
+            'filePath': 'demo/timeline/custom-demo.tsx',
+        },
+        'horizontal-demo': {
+            'component': React.lazy(() => import('demo/timeline/horizontal-demo.tsx')),
+            'filePath': 'demo/timeline/horizontal-demo.tsx',
+        },
+        'opposite-demo': {
+            'component': React.lazy(() => import('demo/timeline/opposite-demo.tsx')),
+            'filePath': 'demo/timeline/opposite-demo.tsx',
+        },
+        'timeline-pt': {
+            'component': React.lazy(() => import('demo/timeline/timeline-pt.tsx')),
+            'filePath': 'demo/timeline/timeline-pt.tsx',
+        },
+    },
     'togglebutton': {
         'all-demo': {
             'component': React.lazy(() => import('demo/togglebutton/all-demo.tsx')),
@@ -1107,6 +1261,38 @@ export const Store = {
         'checkbox-demo': {
             'component': React.lazy(() => import('demo/unstyled/checkbox-demo.tsx')),
             'filePath': 'demo/unstyled/checkbox-demo.tsx',
+        },
+    },
+    'usekeyfilter': {
+        'pattern-demo': {
+            'component': React.lazy(() => import('demo/usekeyfilter/pattern-demo.tsx')),
+            'filePath': 'demo/usekeyfilter/pattern-demo.tsx',
+        },
+        'regex-demo': {
+            'component': React.lazy(() => import('demo/usekeyfilter/regex-demo.tsx')),
+            'filePath': 'demo/usekeyfilter/regex-demo.tsx',
+        },
+        'regex-word-demo': {
+            'component': React.lazy(() => import('demo/usekeyfilter/regex-word-demo.tsx')),
+            'filePath': 'demo/usekeyfilter/regex-word-demo.tsx',
+        },
+    },
+    'usemask': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/usemask/basic-demo.tsx')),
+            'filePath': 'demo/usemask/basic-demo.tsx',
+        },
+        'format-patterns-demo': {
+            'component': React.lazy(() => import('demo/usemask/format-patterns-demo.tsx')),
+            'filePath': 'demo/usemask/format-patterns-demo.tsx',
+        },
+        'optional-demo': {
+            'component': React.lazy(() => import('demo/usemask/optional-demo.tsx')),
+            'filePath': 'demo/usemask/optional-demo.tsx',
+        },
+        'slot-char-demo': {
+            'component': React.lazy(() => import('demo/usemask/slot-char-demo.tsx')),
+            'filePath': 'demo/usemask/slot-char-demo.tsx',
         },
     },
 };

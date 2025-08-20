@@ -17,27 +17,27 @@ import type { usePlacerInstance } from '@primereact/types/shared/placer';
 export interface useTooltipProps {
     /**
      * Show delay duration in milliseconds.
-     * @defaultValue 400
+     * @default 400
      */
     showDelayDuration?: number;
     /**
      * Hide delay duration in milliseconds.
-     * @defaultValue 0
+     * @default 0
      */
     hideDelayDuration?: number;
     /**
      * Whether to hide tooltip when hovering over tooltip content.
-     * @defaultValue false
+     * @default false
      */
     autoHide?: boolean | undefined;
     /**
      * Whether to automatically manage z-index.
-     * @defaultValue true
+     * @default true
      */
     autoZIndex?: boolean;
     /**
      * Base z-index value to use in auto mode.
-     * @defaultValue 0
+     * @default 0
      */
     baseZIndex?: number;
     /**
@@ -62,37 +62,37 @@ export interface useTooltipProps {
     onOpenChange?: (event: { value: boolean }) => void;
     /**
      * Whether the tooltip is open by default.
-     * @defaultValue false
+     * @default false
      */
     defaultOpen?: boolean;
     /**
      * Whether to close on escape key press.
-     * @defaultValue true
+     * @default true
      */
     closeOnEscape?: boolean;
     /**
      * The preferred side of the trigger to render against.
-     * @defaultValue 'top'
+     * @default 'top'
      */
     side?: 'top' | 'right' | 'bottom' | 'left';
     /**
      * The distance in pixels from the trigger.
-     * @defaultValue 2
+     * @default 2
      */
     sideOffset?: number;
     /**
      * The preferred alignment against the trigger.
-     * @defaultValue 'center'
+     * @default 'center'
      */
     align?: 'start' | 'center' | 'end';
     /**
      * An offset in pixels from the alignment.
-     * @defaultValue 0
+     * @default 0
      */
     alignOffset?: number;
     /**
      * Whether the tooltip is disabled.
-     * @defaultValue false
+     * @default false
      */
     disabled?: boolean;
 }

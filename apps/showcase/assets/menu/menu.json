@@ -72,12 +72,24 @@
                             "to": "/docs/components/floatlabel"
                         },
                         {
+                            "name": "IconField",
+                            "to": "/docs/components/iconfield"
+                        },
+                        {
                             "name": "IftaLabel",
                             "to": "/docs/components/iftalabel"
                         },
                         {
+                            "name": "InputGroup",
+                            "to": "/docs/components/inputgroup"
+                        },
+                        {
                             "name": "InputOtp",
                             "to": "/docs/components/inputotp"
+                        },
+                        {
+                            "name": "Knob",
+                            "to": "/docs/components/knob"
                         },
                         {
                             "name": "RadioButton",
@@ -111,6 +123,19 @@
                         {
                             "name": "Button",
                             "to": "/docs/components/button"
+                        },
+                        {
+                            "name": "SpeedDial",
+                            "to": "/docs/components/speeddial"
+                        }
+                    ]
+                },
+                {
+                    "name": "Data",
+                    "children": [
+                        {
+                            "name": "Timeline",
+                            "to": "/docs/components/timeline"
                         }
                     ]
                 },
@@ -229,6 +254,7 @@
                             "name": "Chip",
                             "to": "/docs/components/chip"
                         },
+
                         {
                             "name": "FocusTrap",
                             "to": "/docs/components/focustrap"
@@ -258,6 +284,20 @@
                             "to": "/docs/components/terminal"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Hooks",
+            "icon": "pi pi-hammer",
+            "children": [
+                {
+                    "name": "useMask",
+                    "to": "/docs/hooks/usemask"
+                },
+                {
+                    "name": "useKeyFilter",
+                    "to": "/docs/hooks/usekeyfilter"
                 }
             ]
         },
