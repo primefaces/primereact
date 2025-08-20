@@ -11,7 +11,6 @@ import { SpeedDialAction } from './action';
 import { SpeedDialButton } from './button';
 import { SpeedDialItem } from './item';
 import { SpeedDialList } from './list';
-import { SpeedDialMask } from './mask';
 
 export const SpeedDial = withComponent({
     name: 'SpeedDial',
@@ -44,7 +43,6 @@ export const SpeedDial = withComponent({
         Action: SpeedDialAction,
         Button: SpeedDialButton,
         Item: SpeedDialItem,
-        List: SpeedDialList,
-        Mask: SpeedDialMask
+        List: SpeedDialList
     }
 });

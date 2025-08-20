@@ -23,13 +23,7 @@ export const styles = createStyles<SpeedDialInstance>({
         list: 'p-speeddial-list',
         item: 'p-speeddial-item',
         action: 'p-speeddial-action',
-        actionIcon: 'p-speeddial-action-icon',
-        mask: ({ state }) => [
-            'p-speeddial-mask',
-            {
-                'p-speeddial-mask-visible': state.visible
-            }
-        ]
+        actionIcon: 'p-speeddial-action-icon'
     },
     inlineStyles: {
         root: ({ props }) => ({
