@@ -2,7 +2,7 @@ export * from './use-attr-selector';
 export * from './use-controlled-state';
 export * from './use-event-listener';
 export * from './use-id';
-export * from './use-mask';
+export * from './use-key-filter';
 export * from './use-match-media';
 export * from './use-mount-effect';
 export * from './use-previous';
