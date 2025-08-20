@@ -1,0 +1,95 @@
+---
+title: Knob
+description: Knob is a form component to define number inputs with a dial.
+component: knob
+---
+
+## Usage
+
+```tsx
+import { Knob } from 'primereact/knob';
+```
+
+```tsx
+<Knob>
+    <Knob.Range />
+    <Knob.Value />
+    <Knob.Text />
+</Knob>
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="knob:basic-demo" />
+
+### Min/Max
+
+Boundaries are configured with the _min_ and _max_ values whose defaults are 0 and 100 respectively.
+
+<DocDemoViewer name="knob:min-max-demo" />
+
+### Step
+
+Step factor is 1 by default and can be customized with _step_ option.
+
+<DocDemoViewer name="knob:step-demo" />
+
+### Template
+
+<DocDemoViewer name="knob:template-demo" />
+
+### Stroke
+
+The border size is specified with the _stroke_ property as a number in pixels.
+
+<DocDemoViewer name="knob:stroke-demo" />
+
+### Size
+
+Diameter of the knob is defined in pixels using the _size_ property.
+
+<DocDemoViewer name="knob:size-demo" />
+
+### Color
+
+Each of the three components (Knob.Range, Knob.Value, Knob.Text) accepts a color prop to customize their appearance. In addition, _strokeWidth_ is used to determine the width of the stroke of range and value sections.
+
+<DocDemoViewer name="knob:color-demo" />
+
+### Reactive
+
+Knob can be controlled with custom controls as well.
+
+<DocDemoViewer name="knob:reactive-demo" />
+
+### ReadOnly
+
+When _readOnly_ is present, value cannot be edited.
+
+<DocDemoViewer name="knob:read-only-demo" />
+
+### Disabled
+
+When _disabled_ is present, a visual hint is applied to indicate that the Knob cannot be interacted with.
+
+<DocDemoViewer name="knob:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Knob element component uses slider role in addition to the _aria-valuemin_, _aria-valuemax_ and _aria-valuenow_ attributes. Value to describe the component can be defined using _aria-labelledby_ and _aria-label_ props.
+
+### Keyboard Support
+
+| Key               | Function                          |
+| ----------------- | --------------------------------- |
+| `tab`             | Moves focus to the knob.          |
+| `left/down arrow` | Decrements the value.             |
+| `right/up arrow`  | Increments the value.             |
+| `home`            | Set the minimum value.            |
+| `end`             | Set the maximum value.            |
+| `page up`         | Increments the value by 10 steps. |
+| `page down`       | Decrements the value by 10 steps. |
