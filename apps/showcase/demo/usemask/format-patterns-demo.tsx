@@ -1,15 +1,33 @@
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
+import { InputTextInstance } from '@primereact/types/shared/inputtext';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import * as React from 'react';
 
 export default function FormatPatternsDemo() {
-    const input1 = React.useRef(null);
-    const input2 = React.useRef(null);
-    const input3 = React.useRef(null);
     const [value1, setValue1] = React.useState('');
     const [value2, setValue2] = React.useState('');
     const [value3, setValue3] = React.useState('');
+    const input1 = React.useRef<InputTextInstance>(null);
+    const input2 = React.useRef<InputTextInstance>(null);
+    const input3 = React.useRef<InputTextInstance>(null);
+    const [target1, setTarget1] = React.useState<HTMLInputElement | null>(null);
+    const [target2, setTarget2] = React.useState<HTMLInputElement | null>(null);
+    const [target3, setTarget3] = React.useState<HTMLInputElement | null>(null);
+
+    React.useEffect(() => {
+        if (input1.current?.elementRef?.current) {
+            setTarget1(input1.current.elementRef.current as HTMLInputElement);
+        }
+
+        if (input2.current?.elementRef?.current) {
+            setTarget2(input2.current.elementRef.current as HTMLInputElement);
+        }
+
+        if (input3.current?.elementRef?.current) {
+            setTarget3(input3.current.elementRef.current as HTMLInputElement);
+        }
+    }, []);
 
     // SSN Mask
     const {
@@ -22,7 +40,7 @@ export default function FormatPatternsDemo() {
     } = useMask({
         mask: '999-99-9999',
         onMaskChange: (event: UseMaskChangeEvent) => setValue1(event.value ?? ''),
-        inputRef: input1
+        target: target1 as HTMLInputElement
     });
 
     // Phone Mask
@@ -36,7 +54,7 @@ export default function FormatPatternsDemo() {
     } = useMask({
         mask: '(999) 999-9999',
         onMaskChange: (event: UseMaskChangeEvent) => setValue2(event.value ?? ''),
-        inputRef: input2
+        target: target2 as HTMLInputElement
     });
 
     // Serial Mask
@@ -50,7 +68,7 @@ export default function FormatPatternsDemo() {
     } = useMask({
         mask: 'a*-999-a999',
         onMaskChange: (event: UseMaskChangeEvent) => setValue3(event.value ?? ''),
-        inputRef: input3
+        target: target3 as HTMLInputElement
     });
 
     return (

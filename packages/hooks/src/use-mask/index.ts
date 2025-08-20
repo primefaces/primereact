@@ -50,7 +50,7 @@ export interface UseMaskOptions {
     /**
      * Reference to the mask element.
      */
-    inputRef: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
+    target: HTMLInputElement;
 }
 
 export interface UseMaskExposes {
@@ -103,7 +103,7 @@ export interface UseMaskExposes {
  * const { onMaskInput, onMaskKeyDown, onMaskKeyPress, onMaskFocus, onMaskBlur, onMaskPaste } = useMask({
  *        mask: '99/99/9999',
  *        onMaskChange: (event: UseMaskChangeEvent) => setValue(event.value ?? ''),
- *        inputRef: ref
+ *        target: ref
  *    });
  *
  *    return (
@@ -113,7 +113,7 @@ export interface UseMaskExposes {
  *    );
  */
 export function useMask(options: UseMaskOptions): UseMaskExposes {
-    const { mask, unmask, slotChar = '_', autoClear = true, readOnly = false, onMaskChange, inputRef } = options;
+    const { mask, unmask, slotChar = '_', autoClear = true, readOnly = false, onMaskChange, target } = options;
 
     const len = React.useRef(0);
     const tests = React.useRef<Array<RegExp | null>>([]);
@@ -149,7 +149,7 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
         let pos, begin, end;
         const iPhone = /iphone/i.test(getUserAgent());
 
-        oldVal.current = inputRef.current?.elementRef.current?.value as string;
+        oldVal.current = target?.value as string;
 
         //backspace, delete, and escape get special treatment
         if (k === 'Backspace' || k === 'Delete' || (iPhone && k === 'Escape')) {
@@ -174,12 +174,12 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
             event.preventDefault();
         } else if (k === 'Enter') {
             // enter
-            inputRef.current?.elementRef.current?.blur();
+            target.blur();
             updateModelValue((event.target as HTMLInputElement).value);
         } else if (k === 'Escape') {
             // escape
-            if (inputRef.current?.elementRef.current) {
-                inputRef.current.elementRef.current.value = focusText.current ?? '';
+            if (target) {
+                target.value = focusText.current ?? '';
             }
 
             caret(0, checkVal());
@@ -251,11 +251,11 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
         }
 
         focus.current = true;
-        focusText.current = inputRef.current?.elementRef.current?.value as string;
+        focusText.current = target.value as string;
 
-        if (!inputRef.current?.elementRef.current?.value || inputRef.current.elementRef.current.value === defaultBuffer.current) {
+        if (!target.value || target.value === defaultBuffer.current) {
             requestAnimationFrame(() => {
-                if (inputRef.current?.elementRef.current === document.activeElement) {
+                if (target === document.activeElement) {
                     caret(0, 0);
                 }
             });
@@ -263,7 +263,7 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
             const pos = checkVal();
 
             caretTimeoutId.current = setTimeout(() => {
-                if (inputRef.current?.elementRef.current !== document.activeElement) {
+                if (target !== document.activeElement) {
                     return;
                 }
 
@@ -283,10 +283,10 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
         checkVal();
         updateModelValue(event.target.value);
 
-        if (inputRef.current?.elementRef.current?.value !== focusText.current) {
+        if (target.value !== focusText.current) {
             const e = new Event('change', { bubbles: true, cancelable: false });
 
-            inputRef.current?.elementRef.current?.dispatchEvent(e);
+            target.dispatchEvent(e);
         }
     };
 
@@ -302,11 +302,11 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
             begin = first;
             end = typeof last === 'number' ? last : begin;
 
-            inputRef.current?.elementRef.current?.setSelectionRange(begin, end);
+            target.setSelectionRange(begin, end);
         } else {
-            if (inputRef.current?.elementRef.current) {
-                begin = inputRef.current.elementRef.current.selectionStart ?? 0;
-                end = inputRef.current.elementRef.current.selectionEnd ?? 0;
+            if (target) {
+                begin = target.selectionStart ?? 0;
+                end = target.selectionEnd ?? 0;
             }
         }
 
@@ -376,7 +376,7 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
     };
 
     const handleAndroidInput = () => {
-        const curVal = inputRef.current?.elementRef.current?.value as string;
+        const curVal = target.value as string;
         const pos = caret();
 
         if (!pos) {
@@ -412,14 +412,14 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
     };
 
     const writeBuffer = () => {
-        if (inputRef.current?.elementRef.current) {
-            inputRef.current.elementRef.current.value = buffer.current.join('');
+        if (target) {
+            target.value = buffer.current.join('');
         }
     };
 
     const checkVal = (allow = false): number => {
         //try to place characters where they belong
-        const test = inputRef.current?.elementRef.current?.value;
+        const test = target.value;
         let lastMatch = -1,
             i,
             c,
@@ -462,8 +462,8 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
             if (autoClear || buffer.current.join('') === defaultBuffer.current) {
                 // Invalid value. Remove it and replace it with the
                 // mask, which is the default behavior.
-                if (inputRef.current?.elementRef.current?.value) {
-                    inputRef.current.elementRef.current.value = '';
+                if (target.value) {
+                    target.value = '';
                 }
 
                 clearBuffer(0, len.current);
@@ -475,8 +475,8 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
         } else {
             writeBuffer();
 
-            if (inputRef.current?.elementRef.current) {
-                inputRef.current.elementRef.current.value = inputRef.current.elementRef.current.value.substring(0, lastMatch + 1);
+            if (target) {
+                target.value = target.value.substring(0, lastMatch + 1);
             }
         }
 
@@ -519,8 +519,8 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
 
         currentVal.current = value;
 
-        if (inputRef.current?.elementRef.current) {
-            inputRef.current.elementRef.current.value = finalValue;
+        if (target) {
+            target.value = finalValue;
         }
 
         // Call the onMaskChange callback to update React state
@@ -530,9 +530,9 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
     };
 
     const updateValue = (updateModel = true) => {
-        if (inputRef.current?.elementRef.current) {
-            if (inputRef.current.elementRef.current.value == null) {
-                inputRef.current.elementRef.current.value = '';
+        if (target) {
+            if (target.value == null) {
+                target.value = '';
 
                 if (updateModel) {
                     updateModelValue('');
@@ -541,16 +541,16 @@ export function useMask(options: UseMaskOptions): UseMaskExposes {
                 checkVal();
 
                 setTimeout(() => {
-                    if (inputRef.current?.elementRef.current) {
+                    if (target) {
                         writeBuffer();
                         checkVal();
 
-                        if (updateModel) updateModelValue(inputRef.current.elementRef.current.value);
+                        if (updateModel) updateModelValue(target.value);
                     }
                 }, 10);
             }
 
-            focusText.current = inputRef.current.elementRef.current.value;
+            focusText.current = target.value;
         }
     };
 

@@ -1,14 +1,23 @@
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
+import { InputTextInstance } from '@primereact/types/shared/inputtext';
 import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 
 export default function OptionalDemo() {
-    const ref = React.useRef(null);
     const [value, setValue] = React.useState('');
+    const ref = React.useRef<InputTextInstance>(null);
+    const [target, setTarget] = React.useState<HTMLInputElement | null>(null);
+
+    React.useEffect(() => {
+        if (ref.current?.elementRef?.current) {
+            setTarget(ref.current.elementRef.current as HTMLInputElement);
+        }
+    }, []);
+
     const { onMaskInput, onMaskKeyDown, onMaskKeyPress, onMaskFocus, onMaskBlur, onMaskPaste } = useMask({
         mask: '(999) 999-9999? x99999',
         onMaskChange: (event: UseMaskChangeEvent) => setValue(event.value ?? ''),
-        inputRef: ref
+        target: target as HTMLInputElement
     });
 
     return (
