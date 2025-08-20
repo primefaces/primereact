@@ -7,7 +7,9 @@ export default function IftaLabelDemo() {
         <div className="card flex justify-center">
             <Label.Ifta>
                 <IconField>
-                    <IconField.Icon className="pi pi-user" />
+                    <IconField.Icon>
+                        <i className="pi pi-user" />
+                    </IconField.Icon>
                     <InputText id="username" autoComplete="off" variant="filled" />
                 </IconField>
                 <Label htmlFor="username">Username</Label>

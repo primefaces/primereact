@@ -4,7 +4,9 @@ import { InputText } from 'primereact/inputtext';
 export default function IconFieldPTDemo() {
     return (
         <IconField>
-            <IconField.Icon className="pi pi-search" />
+            <IconField.Icon>
+                <i className="pi pi-search" />
+            </IconField.Icon>
             <InputText placeholder="Search" />
         </IconField>
     );

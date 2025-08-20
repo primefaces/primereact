@@ -12,7 +12,9 @@ export default function FloatLabelDemo() {
         <div className="card flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
                 <IconField>
-                    <IconField.Icon className="pi pi-search" />
+                    <IconField.Icon>
+                        <i className="pi pi-search" />
+                    </IconField.Icon>
                     <InputText value={value1} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)} id="over_label" autoComplete="off" />
                 </IconField>
                 <Label htmlFor="over_label">Over Label</Label>
@@ -20,7 +22,9 @@ export default function FloatLabelDemo() {
 
             <Label.Float variant="in">
                 <IconField>
-                    <IconField.Icon className="pi pi-search" />
+                    <IconField.Icon>
+                        <i className="pi pi-search" />
+                    </IconField.Icon>
                     <InputText value={value2} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)} id="in_label" autoComplete="off" variant="filled" />
                 </IconField>
                 <Label htmlFor="in_label">In Label</Label>
@@ -28,7 +32,9 @@ export default function FloatLabelDemo() {
 
             <Label.Float variant="on">
                 <IconField>
-                    <IconField.Icon className="pi pi-search" />
+                    <IconField.Icon>
+                        <i className="pi pi-search" />
+                    </IconField.Icon>
                     <InputText value={value3} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue3(e.currentTarget.value)} id="on_label" autoComplete="off" />
                 </IconField>
                 <Label htmlFor="on_label">On Label</Label>

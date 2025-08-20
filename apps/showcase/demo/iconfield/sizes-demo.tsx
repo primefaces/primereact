@@ -5,19 +5,27 @@ export default function SizesDemo() {
     return (
         <div className="card flex flex-col items-center gap-4">
             <IconField>
-                <IconField.Icon className="pi pi-search" />
+                <IconField.Icon>
+                    <i className="pi pi-search" />
+                </IconField.Icon>
                 <InputText placeholder="Small" size="small" />
             </IconField>
 
             <IconField>
                 <InputText placeholder="Normal" />
-                <IconField.Icon className="pi pi-user" />
+                <IconField.Icon>
+                    <i className="pi pi-user" />
+                </IconField.Icon>
             </IconField>
 
             <IconField>
-                <IconField.Icon className="pi pi-lock" />
+                <IconField.Icon>
+                    <i className="pi pi-lock" />
+                </IconField.Icon>
                 <InputText placeholder="Large" size="large" />
-                <IconField.Icon className="pi pi-spin pi-spinner" />
+                <IconField.Icon>
+                    <i className="pi pi-spin pi-spinner" />
+                </IconField.Icon>
             </IconField>
         </div>
     );
