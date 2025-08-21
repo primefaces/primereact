@@ -134,6 +134,10 @@
                     "name": "Data",
                     "children": [
                         {
+                            "name": "Paginator",
+                            "to": "/docs/components/paginator"
+                        },
+                        {
                             "name": "Timeline",
                             "to": "/docs/components/timeline"
                         }

@@ -649,6 +649,40 @@ export const Store = {
             'filePath': 'demo/metergroup/vertical-demo.tsx',
         },
     },
+    'paginator': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/paginator/basic-demo.tsx')),
+            'filePath': 'demo/paginator/basic-demo.tsx',
+        },
+        'custom-text-demo': {
+            'component': React.lazy(() => import('demo/paginator/custom-text-demo.tsx')),
+            'filePath': 'demo/paginator/custom-text-demo.tsx',
+        },
+        'customization-demo': {
+            'component': React.lazy(() => import('demo/paginator/customization-demo.tsx')),
+            'filePath': 'demo/paginator/customization-demo.tsx',
+        },
+        'edges-demo': {
+            'component': React.lazy(() => import('demo/paginator/edges-demo.tsx')),
+            'filePath': 'demo/paginator/edges-demo.tsx',
+        },
+        'show-ellipsis-demo': {
+            'component': React.lazy(() => import('demo/paginator/show-ellipsis-demo.tsx')),
+            'filePath': 'demo/paginator/show-ellipsis-demo.tsx',
+        },
+        'siblings-demo': {
+            'component': React.lazy(() => import('demo/paginator/siblings-demo.tsx')),
+            'filePath': 'demo/paginator/siblings-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/paginator/template-demo.tsx')),
+            'filePath': 'demo/paginator/template-demo.tsx',
+        },
+        'with-input-demo': {
+            'component': React.lazy(() => import('demo/paginator/with-input-demo.tsx')),
+            'filePath': 'demo/paginator/with-input-demo.tsx',
+        },
+    },
     'panel': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/panel/basic-demo.tsx')),
@@ -1147,6 +1181,28 @@ export const Store = {
         'timeline-pt': {
             'component': React.lazy(() => import('demo/timeline/timeline-pt.tsx')),
             'filePath': 'demo/timeline/timeline-pt.tsx',
+        },
+    },
+    'toast': {
+        'action-demo': {
+            'component': React.lazy(() => import('demo/toast/action-demo.tsx')),
+            'filePath': 'demo/toast/action-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/toast/basic-demo.tsx')),
+            'filePath': 'demo/toast/basic-demo.tsx',
+        },
+        'position-demo': {
+            'component': React.lazy(() => import('demo/toast/position-demo.tsx')),
+            'filePath': 'demo/toast/position-demo.tsx',
+        },
+        'rich-colors-demo': {
+            'component': React.lazy(() => import('demo/toast/rich-colors-demo.tsx')),
+            'filePath': 'demo/toast/rich-colors-demo.tsx',
+        },
+        'variants-demo': {
+            'component': React.lazy(() => import('demo/toast/variants-demo.tsx')),
+            'filePath': 'demo/toast/variants-demo.tsx',
         },
     },
     'togglebutton': {
