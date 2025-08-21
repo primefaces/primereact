@@ -45,8 +45,32 @@ code > span[data-highlighted-line]::after {
     left: -1rem;
     right: -1rem;
     height: 100%;
-    background-color: color-mix(in srgb, var(--color-surface-500) 30%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface-500) 20%, transparent);
     border-left: 2px solid color-mix(in srgb, var(--color-surface-0) 40%, transparent);
     pointer-events: none;
     z-index: 0;
+}
+
+code > span > mark[data-highlighted-chars] {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    padding: 0rem 0.25rem;
+}
+
+code > span > mark[data-highlighted-chars]::after {
+    content: "";
+    position: absolute;
+    top: -0.125rem;
+    bottom: -0.125rem;
+    left: 0;
+    right: 0;
+    background-color: color-mix(in srgb, var(--color-surface-500) 30%, transparent);
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 0.25rem;
+}
+
+code > span {
+    padding: 0.15rem 0;
 }
