@@ -1,0 +1,89 @@
+---
+title: Paginator
+description: Paginator displays data in paged format and provides navigation between pages.
+component: paginator
+---
+
+## Usage
+
+```tsx
+import { Paginator } from 'primereact/paginator';
+```
+
+```tsx
+<Paginator>
+    <Paginator.Content>
+        <Paginator.First />
+        <Paginator.Prev />
+        <Paginator.Pages />
+        <Paginator.Next />
+        <Paginator.Last />
+    </Paginator.Content>
+</Paginator>
+```
+
+## Examples
+
+### Basic
+
+Use `total` prop to define the total number of items and `itemsPerPage` to define the number of items per page.
+
+<DocDemoViewer name="paginator:basic-demo" />
+
+### Siblings
+
+Use `siblings` prop to define the number of siblings to display. Siblings is the number of pages to display before and after the current page.
+
+<DocDemoViewer name="paginator:siblings-demo" />
+
+### Edges
+
+Use `edges` prop to define the number of edges to display. Edges is the number of pages to display first and last of the paginator.
+
+<DocDemoViewer name="paginator:edges-demo" />
+
+### Show Ellipsis
+
+Use `showEllipsis` prop to define whether to show ellipsis. If `showEllipsis` is `false`, `edges` prop is ignored.
+
+<DocDemoViewer name="paginator:show-ellipsis-demo" />
+
+### Template
+
+Here are the available elements that can be placed inside a paginator in any order.
+
+<DocDemoViewer name="paginator:template-demo" />
+
+### Custom Text
+
+Use `onPageChange` event to define the custom text to display.
+
+<DocDemoViewer name="paginator:custom-text-demo" />
+
+### Customization
+
+Pass an icon as a child to the element to override the default icon or use className to customize the element.
+
+<DocDemoViewer name="paginator:customization-demo" />
+
+### With Input
+
+<DocDemoViewer name="paginator:with-input-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Paginator is placed inside a nav element to indicate a navigation section. All of the paginator elements can be customized using templating however the default behavious is listed below.
+
+First, previous, next and last page navigators elements with `aria-label` attributes referring to the `aria.firstPageLabel`, `aria.prevPageLabel`, `aria.nextPageLabel` and `aria.lastPageLabel` properties of the locale API respectively.
+
+Page links are also button elements with an `aria-label` attribute derived from the `aria.pageLabel` of the locale API. Current page is marked with `aria-current` set to "page" as well.
+
+### Keyboard Support
+
+| Key     | Function                                    |
+| ------- | ------------------------------------------- |
+| `tab`   | Moves focus through the paginator elements. |
+| `enter` | Executes the paginator element action.      |
+| `space` | Executes the paginator element action.      |
