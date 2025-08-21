@@ -8,7 +8,7 @@ import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
 
@@ -1174,7 +1174,9 @@ export const MultiSelect = React.memo(
             },
             ptm('hiddenInputWrapper')
         );
-
+        const inputId = React.useMemo(() => {
+            return props.inputId ?? UniqueComponentId();
+        }, [props.inputId]);
         const inputProps = mergeProps(
             {
                 ref: inputRef,
@@ -1186,6 +1188,7 @@ export const MultiSelect = React.memo(
                 onKeyDown: onKeyDown,
                 role: 'combobox',
                 'aria-expanded': overlayVisibleState,
+                'aria-controls': `${inputId}-multi-selectbox`,
                 disabled: props.disabled,
                 tabIndex: !props.disabled ? props.tabIndex : -1,
                 value: getLabel(),
@@ -1213,6 +1216,7 @@ export const MultiSelect = React.memo(
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
                         {...props}
+                        listId={`${inputId}-multi-selectbox`}
                         onClick={onPanelClick}
                         onOverlayHide={hide}
                         filterValue={filterValue}

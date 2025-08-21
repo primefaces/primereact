@@ -217,7 +217,8 @@ export const MultiSelectPanel = React.memo(
                                     style: options.style,
                                     className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
                                     role: 'listbox',
-                                    'aria-multiselectable': true
+                                    'aria-multiselectable': true,
+                                    id: props.listId
                                 },
                                 getPTOptions('list')
                             );
@@ -244,7 +245,8 @@ export const MultiSelectPanel = React.memo(
                 {
                     className: cx('list'),
                     role: 'listbox',
-                    'aria-multiselectable': true
+                    'aria-multiselectable': true,
+                    id: props.listId
                 },
                 getPTOptions('list')
             );
