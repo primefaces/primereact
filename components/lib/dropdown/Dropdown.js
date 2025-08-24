@@ -222,11 +222,11 @@ export const Dropdown = React.memo(
                     break;
 
                 case 'Home':
-                    onHomeKey(event);
+                    onHomeKey(event, props.editable);
                     break;
 
                 case 'End':
-                    onEndKey(event);
+                    onEndKey(event, props.editable);
                     break;
 
                 case 'PageDown':
@@ -451,12 +451,16 @@ export const Dropdown = React.memo(
         };
 
         const onArrowLeftKey = (event, pressedInInputText = false) => {
-            pressedInInputText && setFocusedOptionIndex(-1);
+            if (pressedInInputText) {
+                DomHandler.focus(inputRef.current);
+                setFocusedOptionIndex(-1);
+            }
         };
 
         const onHomeKey = (event, pressedInInputText = false) => {
             if (pressedInInputText) {
-                event.currentTarget.setSelectionRange(0, 0);
+                DomHandler.focus(inputRef.current);
+                inputRef.current.setSelectionRange(0, 0);
                 setFocusedOptionIndex(-1);
             } else {
                 changeFocusedOptionIndex(event, findFirstOptionIndex());
@@ -469,9 +473,10 @@ export const Dropdown = React.memo(
 
         const onEndKey = (event, pressedInInputText = false) => {
             if (pressedInInputText) {
-                const target = event.currentTarget;
+                const target = inputRef.current;
                 const len = target.value.length;
 
+                DomHandler.focus(target);
                 target.setSelectionRange(len, len);
                 setFocusedOptionIndex(-1);
             } else {
