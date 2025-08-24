@@ -451,10 +451,10 @@ export const Dropdown = React.memo(
         };
 
         const onArrowLeftKey = (event, pressedInInputText = false) => {
-            if (pressedInInputText) {
-                DomHandler.focus(inputRef.current);
-                setFocusedOptionIndex(-1);
-            }
+            if (!pressedInInputText) return;
+
+            props.editable && DomHandler.focus(inputRef.current);
+            setFocusedOptionIndex(-1);
         };
 
         const onHomeKey = (event, pressedInInputText = false) => {
