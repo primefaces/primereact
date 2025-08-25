@@ -20,5 +20,7 @@ export const defaultProps: useInputNumberProps = {
     step: 1,
     allowEmpty: true,
     highlightOnFocus: false,
-    onValueChange: undefined
+    target: undefined,
+    onValueChange: undefined,
+    onChange: undefined
 };

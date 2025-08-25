@@ -34,7 +34,7 @@ export const InputNumber = withComponent({
         const createText = () => {
             const textProps = mergeProps(
                 {
-                    value: state.value,
+                    defaultValue: state.value,
                     id: props.inputId,
                     className: cx('text'),
                     role: 'spinbutton',
@@ -85,7 +85,7 @@ export const InputNumber = withComponent({
             <InputNumberProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {text}
-                    {props.buttonLayout === 'stacked' ? buttonGroup : resolve(props.children, instance)}
+                    {props.buttonLayout === 'stacked' && props.children ? buttonGroup : resolve(props.children, instance)}
                 </Component>
             </InputNumberProvider>
         );

@@ -129,7 +129,16 @@ export interface useInputNumberProps {
      */
     highlightOnFocus?: boolean | undefined;
     /**
+     * Reference to external input element for InputGroup integration.
+     */
+    target?: HTMLInputElement | React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
+    /**
      * Callback to invoke when value changes.
+     * @param {useInputNumberValueChangeEvent} event - Custom change event.
+     */
+    onChange?: (event: useInputNumberValueChangeEvent) => void;
+    /**
+     * Callback to invoke after validation check and value change.
      * @param {useInputNumberValueChangeEvent} event - Custom value change event.
      */
     onValueChange?: (event: useInputNumberValueChangeEvent) => void;
