@@ -7,7 +7,7 @@ export const styles = createStyles<TextareaInstance>({
     name: 'textarea',
     style,
     classes: {
-        root: ({ props, attrs }) => [
+        root: ({ props, attrs, context }) => [
             'p-textarea p-component',
             {
                 'p-filled': isNotEmpty(attrs?.value ?? attrs?.defaultValue),
@@ -16,7 +16,7 @@ export const styles = createStyles<TextareaInstance>({
                 'p-textarea-lg p-inputfield-lg': props.size === 'large',
                 'p-invalid': props.invalid,
                 'p-variant-filled': props.variant === 'filled',
-                'p-textarea-fluid': props.fluid
+                'p-textarea-fluid': props.fluid ?? context.$fluid
             }
         ]
     }

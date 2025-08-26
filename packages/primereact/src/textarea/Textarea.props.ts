@@ -6,6 +6,6 @@ export const defaultProps: TextareaProps = {
     as: 'textarea',
     size: undefined,
     variant: undefined,
-    fluid: false,
+    fluid: undefined,
     invalid: false
 };
