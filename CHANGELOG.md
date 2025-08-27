@@ -1,11 +1,12 @@
 # Changelog
 
-## [11.0.0-alpha.5](https://github.com/primefaces/primevue/tree/11.0.0-alpha.5) (2025-08-25)
+## [11.0.0-alpha.5](https://github.com/primefaces/primevue/tree/11.0.0-alpha.5) (2025-08-27)
 
 [Full Changelog](https://github.com/primefaces/primevue/compare/11.0.0-alpha.4...11.0.0-alpha.5)
 
 **Implemented New Features and Enhancements:**
 
+- New Component: Fluid [\#8246](https://github.com/primefaces/primevue/issues/8246)
 - New Component: Paginator [\#8236](https://github.com/primefaces/primevue/issues/8236)
 - New Hook: useKeyFilter [\#8231](https://github.com/primefaces/primevue/issues/8231)
 - New Component: Knob [\#8228](https://github.com/primefaces/primevue/issues/8228)
