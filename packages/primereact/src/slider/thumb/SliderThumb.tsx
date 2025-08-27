@@ -22,7 +22,7 @@ export const SliderThumb = withComponent({
             indexRef.current = slider?.registerThumb();
         }
 
-        const index = indexRef.current !== null ? indexRef.current : 0;
+        const index = indexRef.current ?? 0;
 
         const rootProps = mergeProps(
             {

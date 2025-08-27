@@ -23,7 +23,7 @@ export const InputOtpText = withComponent({
             indexRef.current = inputotp?.registerText();
         }
 
-        const index = indexRef.current !== null ? indexRef.current : 0;
+        const index = indexRef.current ?? 0;
 
         const rootProps = mergeProps(
             {

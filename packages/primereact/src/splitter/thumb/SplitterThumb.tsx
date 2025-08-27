@@ -23,7 +23,7 @@ export const SplitterThumb = withComponent({
             indexRef.current = splitter?.registerThumb();
         }
 
-        const index = indexRef.current !== null ? indexRef.current : 0;
+        const index = indexRef.current ?? 0;
 
         React.useEffect(() => {
             if (splitter?.prevSize !== undefined) {

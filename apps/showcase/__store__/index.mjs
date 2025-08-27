@@ -1183,28 +1183,6 @@ export const Store = {
             'filePath': 'demo/timeline/timeline-pt.tsx',
         },
     },
-    'toast': {
-        'action-demo': {
-            'component': React.lazy(() => import('demo/toast/action-demo.tsx')),
-            'filePath': 'demo/toast/action-demo.tsx',
-        },
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/toast/basic-demo.tsx')),
-            'filePath': 'demo/toast/basic-demo.tsx',
-        },
-        'position-demo': {
-            'component': React.lazy(() => import('demo/toast/position-demo.tsx')),
-            'filePath': 'demo/toast/position-demo.tsx',
-        },
-        'rich-colors-demo': {
-            'component': React.lazy(() => import('demo/toast/rich-colors-demo.tsx')),
-            'filePath': 'demo/toast/rich-colors-demo.tsx',
-        },
-        'variants-demo': {
-            'component': React.lazy(() => import('demo/toast/variants-demo.tsx')),
-            'filePath': 'demo/toast/variants-demo.tsx',
-        },
-    },
     'togglebutton': {
         'all-demo': {
             'component': React.lazy(() => import('demo/togglebutton/all-demo.tsx')),
