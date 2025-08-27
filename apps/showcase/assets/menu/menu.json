@@ -258,7 +258,10 @@
                             "name": "Chip",
                             "to": "/docs/components/chip"
                         },
-
+                        {
+                            "name": "Fluid",
+                            "to": "/docs/components/fluid"
+                        },
                         {
                             "name": "FocusTrap",
                             "to": "/docs/components/focustrap"

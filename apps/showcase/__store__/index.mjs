@@ -369,6 +369,16 @@ export const Store = {
             'filePath': 'demo/floatlabel/variants-demo.tsx',
         },
     },
+    'fluid': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/fluid/basic-demo.tsx')),
+            'filePath': 'demo/fluid/basic-demo.tsx',
+        },
+        'fluid-pt': {
+            'component': React.lazy(() => import('demo/fluid/fluid-pt.tsx')),
+            'filePath': 'demo/fluid/fluid-pt.tsx',
+        },
+    },
     'focustrap': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/focustrap/basic-demo.tsx')),
