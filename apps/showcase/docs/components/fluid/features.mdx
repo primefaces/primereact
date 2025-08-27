@@ -1,0 +1,35 @@
+---
+title: Fluid
+description: Fluid is a layout component to make descendant components span full width of their container.
+component: fluid
+---
+
+## Usage
+
+```tsx
+import { Fluid } from 'primereact/fluid';
+```
+
+```tsx
+<Fluid></Fluid>
+```
+
+## Examples
+
+### Basic
+
+Components with the _fluid_ option like _InputText_ have the ability to span the full width of their component. Enabling the _fluid_ for each component individually may be cumbersome so wrap the content with _Fluid_ to instead for an easier alternative.
+
+Any component that has the _fluid_ property can be nested inside the _Fluid_ component. The fluid property of a child component has higher precedence than the _fluid_ container as shown in the last sample.
+
+<DocDemoViewer name="fluid:basic-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Fluid does not require any roles and attributes.
+
+### Keyboard Support
+
+Component does not include any interactive elements.

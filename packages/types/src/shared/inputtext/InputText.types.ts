@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import { FluidInstance } from '../fluid/Fluid.types';
 import type { useInputTextExposes, useInputTextProps, useInputTextState } from './useInputText.types';
 
 /**
@@ -60,7 +61,12 @@ export interface InputTextState extends useInputTextState {}
  * Defines the methods and properties exposed by InputText component.
  * @extends useInputTextExposes
  */
-export interface InputTextExposes extends useInputTextExposes {}
+export interface InputTextExposes extends useInputTextExposes {
+    /**
+     * The Fluid component instance.
+     */
+    fluid: FluidInstance | undefined | null;
+}
 
 /**
  * Defines the CSS class names used in the InputText component.

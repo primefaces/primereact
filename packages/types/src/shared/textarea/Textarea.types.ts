@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import { FluidInstance } from '../fluid/Fluid.types';
 import type { useTextareaExposes, useTextareaProps, useTextareaState } from './useTextarea.types';
 
 /**
@@ -60,7 +61,12 @@ export interface TextareaState extends useTextareaState {}
  * Defines the methods and properties exposed by Textarea component.
  * @extends useTextareaExposes
  */
-export interface TextareaExposes extends useTextareaExposes {}
+export interface TextareaExposes extends useTextareaExposes {
+    /**
+     * The Fluid component instance.
+     */
+    fluid: FluidInstance | undefined | null;
+}
 
 /**
  * Defines the CSS class names used in the Textarea component.

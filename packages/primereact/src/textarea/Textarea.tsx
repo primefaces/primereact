@@ -4,6 +4,7 @@ import { useTextarea } from '@primereact/headless/textarea';
 import { styles } from '@primereact/styles/textarea';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
+import { useFluidContext } from 'primereact/fluid';
 import * as React from 'react';
 import { TextareaProvider } from './Textarea.context';
 import { defaultProps } from './Textarea.props';
@@ -14,16 +15,17 @@ export const Textarea = withComponent({
     styles,
     setup(instance) {
         const textarea = useTextarea(instance?.inProps);
+        const fluid = useFluidContext();
 
-        return textarea;
+        return { ...textarea, fluid };
     },
     render(instance) {
-        const { id, props, ptmi, cx, onInput } = instance;
+        const { id, props, ptmi, cx, onInput, fluid } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root'),
+                className: cx('root', { $fluid: !!fluid }),
                 onInput
             },
             ptmi('root')
