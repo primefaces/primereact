@@ -4,7 +4,6 @@ export const defaultProps: useInputNumberProps = {
     value: undefined,
     defaultValue: undefined,
     format: true,
-    buttonLayout: 'stacked',
     locale: undefined,
     mode: 'decimal',
     prefix: undefined,

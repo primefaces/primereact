@@ -8,8 +8,6 @@ import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { InputNumberProvider } from './InputNumber.context';
 import { defaultProps } from './InputNumber.props';
-import { InputNumberDecrement } from './decrement';
-import { InputNumberIncrement } from './increment';
 
 export const InputNumber = withComponent({
     name: 'InputNumber',
@@ -67,31 +65,15 @@ export const InputNumber = withComponent({
             return <InputText ref={inputRef} {...textProps} />;
         };
 
-        const createButtonGroup = () => {
-            const buttonGroupProps = mergeProps(
-                {
-                    className: cx('buttonGroup')
-                },
-                ptmi('buttonGroup')
-            );
-
-            return <span {...buttonGroupProps}>{resolve(props.children, instance)}</span>;
-        };
-
         const text = createText();
-        const buttonGroup = createButtonGroup();
 
         return (
             <InputNumberProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {text}
-                    {props.buttonLayout === 'stacked' && props.children ? buttonGroup : resolve(props.children, instance)}
+                    {resolve(props.children, instance)}
                 </Component>
             </InputNumberProvider>
         );
-    },
-    components: {
-        Decrement: InputNumberDecrement,
-        Increment: InputNumberIncrement
     }
 });

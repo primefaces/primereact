@@ -18,7 +18,7 @@ export interface useInputNumberValueChangeEvent {
     /**
      * Original browser event.
      */
-    originalEvent: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | null;
+    originalEvent: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | null;
     /**
      * New value.
      */
@@ -48,11 +48,6 @@ export interface useInputNumberProps {
      * @default true
      */
     format?: boolean | undefined;
-    /**
-     * Layout of the buttons.
-     * @default stacked
-     */
-    buttonLayout?: 'stacked' | 'horizontal' | 'vertical' | undefined;
     /**
      * Locale to be used in formatting.
      */
@@ -195,46 +190,6 @@ export interface useInputNumberExposes {
      */
     onInputBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
     /**
-     * Up button mouse down event handler.
-     */
-    onUpButtonMouseDown: (event: React.MouseEvent<HTMLInputElement>) => void;
-    /**
-     * Up button mouse up event handler.
-     */
-    onUpButtonMouseUp: () => void;
-    /**
-     * Up button mouse leave event handler.
-     */
-    onUpButtonMouseLeave: () => void;
-    /**
-     * Up button key up event handler.
-     */
-    onUpButtonKeyUp: () => void;
-    /**
-     * Up button key down event handler.
-     */
-    onUpButtonKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-    /**
-     * Down button mouse down event handler.
-     */
-    onDownButtonMouseDown: (event: React.MouseEvent<HTMLInputElement>) => void;
-    /**
-     * Down button mouse up event handler.
-     */
-    onDownButtonMouseUp: () => void;
-    /**
-     * Down button mouse leave event handler.
-     */
-    onDownButtonMouseLeave: () => void;
-    /**
-     * Down button key up event handler.
-     */
-    onDownButtonKeyUp: () => void;
-    /**
-     * Down button key down event handler.
-     */
-    onDownButtonKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-    /**
      * Checks if the maximum boundary is reached.
      * @returns True if the value has reached the maximum boundary.
      */
@@ -244,6 +199,22 @@ export interface useInputNumberExposes {
      * @returns True if the value has reached the minimum boundary.
      */
     minBoundry: () => boolean;
+    /**
+     * Increments the input number value.
+     * @param {React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>} event - Browser event.
+     * @param {number} dir - Direction value for increment.
+     */
+    increment: (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => void;
+    /**
+     * Decrements the input number value.
+     * @param {React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>} event - Browser event.
+     * @param {number} dir - Direction value for decrement.
+     */
+    decrement: (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => void;
+    /**
+     * Stops the spinning/repeating increment/decrement actions.
+     */
+    stopSpin: () => void;
 }
 
 /**

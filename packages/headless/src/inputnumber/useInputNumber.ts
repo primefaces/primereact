@@ -224,34 +224,6 @@ export const useInputNumber = withHeadless({
             return null;
         };
 
-        const repeat = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | null, interval: number | undefined, dir: number) => {
-            if (props.readOnly) {
-                return;
-            }
-
-            const i = interval || 500;
-
-            clearTimer();
-            timer.current = setTimeout(() => {
-                repeat(event, 40, dir);
-            }, i);
-
-            spin(event, dir);
-        };
-
-        const addWithPrecision = (base: number, increment: number) => {
-            const baseStr = base.toString();
-            const stepStr = increment.toString();
-
-            const baseDecimalPlaces = baseStr.includes('.') ? baseStr.split('.')[1].length : 0;
-            const stepDecimalPlaces = stepStr.includes('.') ? stepStr.split('.')[1].length : 0;
-
-            const maxDecimalPlaces = Math.max(baseDecimalPlaces, stepDecimalPlaces);
-            const precision = Math.pow(10, maxDecimalPlaces);
-
-            return Math.round((base + increment) * precision) / precision;
-        };
-
         const getInputElement = (): HTMLInputElement | null => {
             const extractHTMLInput = (ref: HTMLInputElement | { elementRef?: React.RefObject<HTMLInputElement>; inputRef?: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> }> } | null): HTMLInputElement | null => {
                 if (!ref) return null;
@@ -282,7 +254,35 @@ export const useInputNumber = withHeadless({
             return extractHTMLInput(refToUse);
         };
 
-        const spin = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | null, dir: number) => {
+        const addWithPrecision = (base: number, increment: number) => {
+            const baseStr = base.toString();
+            const stepStr = increment.toString();
+
+            const baseDecimalPlaces = baseStr.includes('.') ? baseStr.split('.')[1].length : 0;
+            const stepDecimalPlaces = stepStr.includes('.') ? stepStr.split('.')[1].length : 0;
+
+            const maxDecimalPlaces = Math.max(baseDecimalPlaces, stepDecimalPlaces);
+            const precision = Math.pow(10, maxDecimalPlaces);
+
+            return Math.round((base + increment) * precision) / precision;
+        };
+
+        const repeat = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | null, interval: number | undefined, dir: number) => {
+            if (props.readOnly) {
+                return;
+            }
+
+            const i = interval || 500;
+
+            clearTimer();
+            timer.current = setTimeout(() => {
+                repeat(event, 40, dir);
+            }, i);
+
+            spin(event, dir);
+        };
+
+        const spin = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | null, dir: number) => {
             const inputEl = getInputElement();
 
             if (inputEl) {
@@ -296,7 +296,7 @@ export const useInputNumber = withHeadless({
             }
         };
 
-        const onUpButtonMouseDown = (event: React.MouseEvent<HTMLInputElement>) => {
+        const increment = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => {
             if (!props.disabled) {
                 const inputEl = getInputElement();
 
@@ -304,36 +304,12 @@ export const useInputNumber = withHeadless({
                     inputEl.focus();
                 }
 
-                repeat(event, undefined, 1);
+                repeat(event, undefined, dir ?? props.step ?? 1);
                 event.preventDefault();
             }
         };
 
-        const onUpButtonMouseUp = () => {
-            if (!props.disabled) {
-                clearTimer();
-            }
-        };
-
-        const onUpButtonMouseLeave = () => {
-            if (!props.disabled) {
-                clearTimer();
-            }
-        };
-
-        const onUpButtonKeyUp = () => {
-            if (!props.disabled) {
-                clearTimer();
-            }
-        };
-
-        const onUpButtonKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            if (event.code === 'Space' || event.code === 'Enter' || event.code === 'NumpadEnter') {
-                repeat(event, undefined, 1);
-            }
-        };
-
-        const onDownButtonMouseDown = (event: React.MouseEvent<HTMLInputElement>) => {
+        const decrement = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => {
             if (!props.disabled) {
                 const inputEl = getInputElement();
 
@@ -341,32 +317,14 @@ export const useInputNumber = withHeadless({
                     inputEl.focus();
                 }
 
-                repeat(event, undefined, -1);
+                repeat(event, undefined, dir ?? (props.step ?? 1) * -1);
                 event.preventDefault();
             }
         };
 
-        const onDownButtonMouseUp = () => {
+        const stopSpin = () => {
             if (!props.disabled) {
                 clearTimer();
-            }
-        };
-
-        const onDownButtonMouseLeave = () => {
-            if (!props.disabled) {
-                clearTimer();
-            }
-        };
-
-        const onDownButtonKeyUp = () => {
-            if (!props.disabled) {
-                clearTimer();
-            }
-        };
-
-        const onDownButtonKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            if (event.code === 'Space' || event.code === 'Enter' || event.code === 'NumpadEnter') {
-                repeat(event, undefined, -1);
             }
         };
 
@@ -449,7 +407,6 @@ export const useInputNumber = withHeadless({
 
                 case 'Backspace': {
                     event.preventDefault();
-                    //
 
                     if (selectionStart === selectionEnd) {
                         if (selectionStart >= inputValue.length && suffixChar.current !== null) {
@@ -691,7 +648,6 @@ export const useInputNumber = withHeadless({
                 return;
             }
 
-            //
             const selectionStart = (event.target as HTMLInputElement).selectionStart ?? 0;
             const selectionEnd = (event.target as HTMLInputElement).selectionEnd ?? 0;
             const inputValue = (event.target as HTMLInputElement).value.trim();
@@ -904,7 +860,7 @@ export const useInputNumber = withHeadless({
         };
 
         const handleOnInput = (
-            event: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.ClipboardEvent<HTMLInputElement> | null,
+            event: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.ClipboardEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | null,
             currentValue: string,
             newValue: number | string | null
         ) => {
@@ -1089,9 +1045,12 @@ export const useInputNumber = withHeadless({
             return 0;
         };
 
-        const updateModel = (event: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | null, value: useInputNumberProps['value']) => {
+        const updateModel = (
+            event: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | React.PointerEvent<HTMLButtonElement> | null,
+            value: useInputNumberProps['value']
+        ) => {
             if (props.onValueChange) {
-                let originalEvent: React.FormEvent<HTMLInputElement>;
+                let originalEvent;
 
                 if (event) {
                     originalEvent = event;
@@ -1196,19 +1155,12 @@ export const useInputNumber = withHeadless({
             onPaste,
             onInputFocus,
             onInputBlur,
-            onUpButtonMouseDown,
-            onUpButtonMouseUp,
-            onUpButtonMouseLeave,
-            onUpButtonKeyUp,
-            onUpButtonKeyDown,
-            onDownButtonMouseDown,
-            onDownButtonMouseUp,
-            onDownButtonMouseLeave,
-            onDownButtonKeyUp,
-            onDownButtonKeyDown,
-            onValueChange: props.onValueChange, //TODO:
+            onValueChange: props.onValueChange,
             maxBoundry,
-            minBoundry
+            minBoundry,
+            increment,
+            decrement,
+            stopSpin
         };
     }
 });

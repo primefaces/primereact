@@ -29,18 +29,6 @@ export interface InputNumberPassThrough {
      * Used to pass attributes to the input's DOM element.
      */
     input?: InputNumberPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
-    /**
-     * Used to pass attributes to the button group's DOM element.
-     */
-    buttonGroup?: InputNumberPassThroughType<React.InputHTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Used to pass attributes to the increment's DOM element.
-     */
-    increment?: InputNumberPassThroughType<React.InputHTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the decrement's DOM element.
-     */
-    decrement?: InputNumberPassThroughType<React.InputHTMLAttributes<HTMLButtonElement>>;
 }
 
 /**
@@ -124,19 +112,7 @@ export const InputNumberClassNames = {
     /**
      * Class name of the text element
      */
-    text: 'p-inputnumber-text',
-    /**
-     * Class name of the button group element
-     */
-    buttonGroup: 'p-inputnumber-button-group',
-    /**
-     * Class name of the increment element
-     */
-    increment: 'p-inputnumber-increment-button',
-    /**
-     * Class name of the decrement element
-     */
-    decrement: 'p-inputnumber-decrement-button'
+    text: 'p-inputnumber-text'
 } as const;
 
 /**
