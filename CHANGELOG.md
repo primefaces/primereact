@@ -1,6 +1,6 @@
 # Changelog
 
-## [11.0.0-alpha.5](https://github.com/primefaces/primevue/tree/11.0.0-alpha.5) (2025-08-27)
+## [11.0.0-alpha.5](https://github.com/primefaces/primevue/tree/11.0.0-alpha.5) (2025-08-28)
 
 [Full Changelog](https://github.com/primefaces/primevue/compare/11.0.0-alpha.4...11.0.0-alpha.5)
 
