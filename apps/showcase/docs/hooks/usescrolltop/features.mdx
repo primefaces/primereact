@@ -1,0 +1,29 @@
+---
+title: useScrollTop
+description: useScrollTop is a hook that provides a way to scroll to the top of a container.
+component: usescrolltop
+---
+
+## Usage
+
+```tsx
+import { useScrollTop } from '@primereact/hooks';
+```
+
+```tsx
+const scrollTop = useScrollTop();
+```
+
+## Examples
+
+### Basic
+
+useScrollTop listens window scroll by default.
+
+<DocDemoViewer name="usescrolltop:basic-demo" />
+
+Setting the _target_ option binds useScrollTop to this element that has scrolling content.
+
+### Element
+
+<DocDemoViewer name="usescrolltop:element-demo" />
