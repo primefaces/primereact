@@ -308,6 +308,9 @@ export const TabView = React.forwardRef((inProps, ref) => {
         if (!idState) {
             setIdState(UniqueComponentId());
         }
+
+        contentRef.current.style.scrollPaddingInline = Math.max(DomHandler.getWidth(prevBtnRef.current), DomHandler.getWidth(nextBtnRef.current), 0) + 'px';
+        updateScrollBar({ index: props.activeIndex });
     });
 
     useUpdateEffect(() => {
