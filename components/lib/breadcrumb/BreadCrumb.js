@@ -250,14 +250,14 @@ export const BreadCrumb = React.memo(
             ptm('menu')
         );
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            BreadCrumbBase.getOtherProps(props),
-            ptm('root')
+            BreadCrumbBase.getOtherProps(props)
         );
 
         return (

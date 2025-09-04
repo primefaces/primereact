@@ -31,13 +31,13 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const listIcon = IconUtils.getJSXIcon(props.listIcon || <BarsIcon {...listIconProps} />, { ...listIconProps }, { props });
     const gridIcon = IconUtils.getJSXIcon(props.gridIcon || <ThLargeIcon {...gridIconProps} />, { ...gridIconProps }, { props });
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: props.id,
             style: props.style,
             className: classNames(props.className, cx('root'))
         },
-        DataViewLayoutOptionsBase.getOtherProps(props),
-        ptm('root')
+        DataViewLayoutOptionsBase.getOtherProps(props)
     );
 
     const listButtonProps = mergeProps(
@@ -329,14 +329,14 @@ export const DataView = React.memo(
         const footer = createFooter();
         const content = createContent(data);
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
                 className: classNames(props.className, cx('root'))
             },
-            DataViewBase.getOtherProps(props),
-            ptm('root')
+            DataViewBase.getOtherProps(props)
         );
 
         return (

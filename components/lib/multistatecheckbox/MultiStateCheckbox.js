@@ -156,6 +156,7 @@ export const MultiStateCheckbox = React.memo(
         const ariaValueLabel = selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
@@ -163,8 +164,7 @@ export const MultiStateCheckbox = React.memo(
                 style: props.style,
                 onClick: onClick
             },
-            MultiStateCheckboxBase.getOtherProps(props),
-            ptm('root')
+            MultiStateCheckboxBase.getOtherProps(props)
         );
 
         const checkboxProps = mergeProps(
