@@ -56,8 +56,7 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
-                the template and requires a separate purchase.
+                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -166,9 +165,9 @@ const templateHeroData = {
     pattern: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/atlantis-hero-pattern.png',
     dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/atlantis-hero-dashboard1.png',
     dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/atlantis-hero-dashboard2.png',
-    description: 'Prepare to be amazed by the remastered Atlantis for PrimeReact featuring a new gorgeous dark mode for the entire layout, 5 menu modes, reusable css widgets, utilities, modern icons and many more.',
-    liveHref: 'https://www.primefaces.org/atlantis-react/',
-    docHref: 'https://www.primefaces.org/atlantis-react/documentation/'
+    description: 'Prepare to be amazed by the remastered Atlantis for PrimeReact featuring a new gorgeous dark mode for the entire layout, 7 menu modes, reusable css widgets, utilities, modern icons and many more.',
+    liveHref: 'https://atlantis.primereact.org/',
+    docHref: 'https://atlantis.primereact.org/documentation'
 };
 
 const AtlantisSeperator = () => {

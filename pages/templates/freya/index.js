@@ -56,8 +56,7 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
-                the template and requires a separate purchase.
+                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -92,7 +91,7 @@ const animationFeaturesData2 = [
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Freya offers 16 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
+        description: 'Freya offers 20 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
         src: 'https://primefaces.org/cdn/primereact/images/templates/freya/features-animation-component-themes.png'
     },
     {
@@ -167,7 +166,7 @@ const templateHeroData = {
     dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/freya/freya-hero-dashboard1.png',
     dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/freya/freya-hero-dashboard2.png',
     description: 'Freya is a modern admin template for developers and IT professionals. It comes with a huge collection of reusable UI components and dozens of built-in layouts for various purposes.',
-    liveHref: 'https://www.primefaces.org/freya-react/',
+    liveHref: 'https://freya.primereact.org/',
     docHref: 'https://freya.primereact.org/documentation'
 };
 
@@ -200,9 +199,9 @@ const FreyaPage = () => {
             <FreyaSeparator />
             <TemplateConfiguration title="React based on Next.JS" description="Freya is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript." />
             <FreyaSeparator />
-            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
-            <FreyaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
+            <FreyaSeparator />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
         </div>
     );
 };

@@ -67,8 +67,7 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
-                the template and requires a separate purchase.
+                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'

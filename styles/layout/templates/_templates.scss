@@ -843,6 +843,7 @@
                     background: var(--surface-0);
                     padding: 0.25rem;
                     width: 90%;
+                    overflow: auto;
 
                     button {
                         flex: 1;
@@ -853,7 +854,7 @@
                         background: var(--surface-0);
                         border: none;
                         outline: none;
-                        font-size: 1rem;;
+                        font-size: 0.75rem;;
                         font-weight: 500;
                         line-height: 1rem;
                         letter-spacing: -0.015rem;
