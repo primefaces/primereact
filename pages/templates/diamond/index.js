@@ -56,8 +56,7 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
-                the template and requires a separate purchase.
+                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -194,7 +193,7 @@ const templateHeroData = {
     pattern: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-hero-pattern.png',
     dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-hero-dashboard1.png',
     dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-hero-dashboard2.png',
-    description: 'An amazing application template for React based on the popular NextJS framework with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 30 PrimeReact themes.',
+    description: 'An amazing application template for React based on the popular NextJS framework with light-dim-dark modes, 7 menu layouts, various menu themes, sample apps, ready to use template pages and 30 PrimeReact themes.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'
 };
