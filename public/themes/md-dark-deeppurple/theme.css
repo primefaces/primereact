@@ -1377,10 +1377,16 @@
   .p-icon-field-left > .p-inputtext {
     padding-left: 3rem;
   }
+  .p-icon-field-left > .p-autocomplete .p-inputtext {
+    padding-left: 3rem;
+  }
   .p-icon-field-left.p-float-label > label {
     left: 3rem;
   }
   .p-icon-field-right > .p-inputtext {
+    padding-right: 3rem;
+  }
+  .p-icon-field-right > .p-autocomplete .p-inputtext {
     padding-right: 3rem;
   }
   ::-webkit-input-placeholder {
@@ -1424,13 +1430,15 @@
   .p-fluid .p-icon-field-right {
     width: 100%;
   }
-  .p-icon-field-left > .p-input-icon:first-of-type {
+  .p-icon-field-left > .p-input-icon {
     left: 1rem;
     color: rgba(255, 255, 255, 0.6);
+    z-index: 1;
   }
-  .p-icon-field-right > .p-input-icon:last-of-type {
+  .p-icon-field-right > .p-input-icon {
     right: 1rem;
     color: rgba(255, 255, 255, 0.6);
+    z-index: 1;
   }
   .p-inputotp {
     display: flex;
