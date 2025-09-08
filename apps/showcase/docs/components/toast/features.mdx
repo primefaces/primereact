@@ -1,0 +1,206 @@
+---
+title: Toast
+description: Toast is a component that displays a message to the user.
+---
+
+## Usage
+
+```tsx
+import { Toast } from 'primereact/toast';
+```
+
+```tsx
+<Toast>
+    <Toast.Portal>
+        <Toast.Region>
+            {({ toast }) =>
+                toast?.state.toasts.map((toast) => (
+                    <Toast.Item key={toast.id} data={toast}>
+                        <Toast.Icon />
+                        <Toast.Title />
+                        <Toast.Description />
+                        <Toast.Action />
+                        <Toast.Close />
+                    </Toast.Item>
+                ))
+            }
+        </Toast.Region>
+    </Toast.Portal>
+</Toast>
+```
+
+## Examples
+
+### Basic
+
+Use `toast` function to create a toast.
+
+<DocDemoViewer name="toast:basic-demo" />
+
+### Variants
+
+Use `toast` function to create a toast with different variants.
+
+<DocDemoViewer name="toast:variants-demo" />
+
+### Position
+
+Use `position` prop to change the position of the toast.
+
+<DocDemoViewer name="toast:position-demo" />
+
+### Rich Colors
+
+Use `richColors` prop to enable rich colors for the toast.
+
+<DocDemoViewer name="toast:rich-colors-demo" />
+
+### Action
+
+Use the `action` prop to add an interactive button to the toast.
+
+<DocDemoViewer name="toast:action-demo" />
+
+## toast function
+
+### remove method
+
+The `remove` method removes a toast by its ID by animating it out. If id is not provided, it will remove all toasts.
+
+```tsx showLineNumbers "id"
+toast.remove(id);
+```
+
+### delete method
+
+The `delete` method removes a toast by its ID without animating it out. If id is not provided, it will remove all toasts.
+
+```tsx showLineNumbers "id"
+toast.delete(id);
+```
+
+### update method
+
+The `update` method updates a toast by its ID. It accepts an object with the properties you want to update.
+
+```tsx showLineNumbers "id"
+const id = toast.loading({
+    title: 'Please wait.',
+    description: 'This will take a moment'
+    // ...
+});
+```
+
+Change the toast options by its ID.
+
+```tsx showLineNumbers "id"
+toast.update(id, {
+    title: 'Success',
+    description: 'The operation was successful',
+    variant: 'success'
+    // ...
+});
+```
+
+### promise method
+
+The `promise` method is a wrapper around the `toast` function that allows you to create a toast that is based on the result of a promise. Each state has its own toast configuration.
+
+```tsx showLineNumbers {2,7,12}
+toast.promise(Promise, {
+    loading: {
+        title: '',
+        description: ''
+        // ...
+    },
+    success: {
+        title: '',
+        description: ''
+        // ...
+    },
+    error: {
+        title: '',
+        description: ''
+        // ...
+    }
+});
+```
+
+### custom method
+
+The `custom` method creates a toast that is based on a custom component. Also, it accepts other props from `toast` function.
+
+```tsx showLineNumbers
+toast.custom(<div>Hello</div>, {
+    duration: 1000
+    // ...
+});
+```
+
+### action prop
+
+The `action` prop accepts all `Toast.Action` component properties - any props you pass will be directly forwarded to the underlying `Toast.Action` component, including `children`, `onClick`, `className`, and other Button-specific properties.
+
+```tsx showLineNumbers {4-9}
+toast({
+    title: '',
+    description: '',
+    action: {
+        children: '',
+        onClick: () => {},
+        className: ''
+        // ...
+    }
+});
+```
+
+### duration prop
+
+The `duration` prop is the duration of the toast in milliseconds. If you pass `Infinity`, the toast will stay visible until the user removes it manually.
+
+```tsx showLineNumbers {2}
+toast({
+    duration: 1000
+    // ...
+});
+```
+
+### icon prop
+
+The `icon` prop accepts a React node or a function that returns a React node.
+
+```tsx showLineNumbers {2}
+toast({
+    icon: <CheckIcon />
+    // ...
+});
+```
+
+### close callbacks
+
+`onDismiss` and `onTimeout` callbacks are called when the toast is dismissed or timed out.
+
+```tsx showLineNumbers
+toast({
+    onDismiss: () => {},
+    onTimeout: () => {}
+    // ...
+});
+```
+
+### group prop
+
+Add group to the toast to group it with other toasts.
+
+```tsx showLineNumbers {2}
+toast({
+    group: 'group-1'
+    // ...
+});
+```
+
+## Accessibility
+
+### Screen Reader
+
+Toast component use alert role that implicitly defines `aria-live` as "assertive" and `aria-atomic` as "true".
