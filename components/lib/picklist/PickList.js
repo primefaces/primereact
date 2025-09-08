@@ -434,12 +434,12 @@ export const PickList = React.memo(
                 const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
                 const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);
 
-                selection = [...listItems].slice(Math.min(selectedItemIndex, matchedOptionIndex), Math.max(selectedItemIndex, matchedOptionIndex) + 1);
+                const rangeSelection = [...listItems].slice(Math.min(selectedItemIndex, matchedOptionIndex), Math.max(selectedItemIndex, matchedOptionIndex) + 1);
 
                 if (isSource) {
-                    onSelectionChange({ originalEvent: event, value: selection }, 'sourceSelection', props.onSourceSelectionChange);
+                    onSelectionChange({ originalEvent: event, value: rangeSelection }, 'sourceSelection', props.onSourceSelectionChange);
                 } else {
-                    onSelectionChange({ originalEvent: event, value: selection }, 'targetSelection', props.onTargetSelectionChange);
+                    onSelectionChange({ originalEvent: event, value: rangeSelection }, 'targetSelection', props.onTargetSelectionChange);
                 }
             } else {
                 onEnterKey(event, type);
