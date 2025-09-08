@@ -112,13 +112,13 @@ export interface useCarouselExposes {
     /**
      * Ref to the main carousel container DOM element.
      */
-    carouselRef: React.RefObject<HTMLDivElement>;
+    carouselRef: React.RefObject<HTMLDivElement | null>;
     /**
      * Adds a reference to a slide element.
-     * @param item The slide element to add.
+     * @param el The slide element to add.
      * @returns void
      */
-    addSlideRef: (item: React.ReactNode) => void;
+    addSlideRef: (el: HTMLDivElement | null) => void;
     /**
      * Scrolls the carousel to a specific slide index.
      * @param index The index of the slide to scroll to.
@@ -130,32 +130,32 @@ export interface useCarouselExposes {
      * Handles pointer release events.
      * @returns void
      */
-    handlePointerUp: (event: React.PointerEvent) => void;
+    handlePointerUp: (event: PointerEvent) => void;
     /**
      * Handles pointer down events.
      * @returns void
      */
-    handlePointerDown: (event: React.PointerEvent) => void;
+    handlePointerDown: (event: PointerEvent) => void;
     /**
      * Handles pointer move events.
      * @returns void
      */
-    handlePointerMove: (event: React.PointerEvent) => void;
+    handlePointerMove: (event: PointerEvent) => void;
     /**
      * Handles previous button click events.
      * @returns void
      */
-    handlePrev: (event: React.PointerEvent) => void;
+    handlePrev: () => void;
     /**
      * Handles next button click events.
      * @returns void
      */
-    handleNext: (event: React.PointerEvent) => void;
+    handleNext: () => void;
     /**
      * Handles carousel container click events.
      * @returns void
      */
-    handleClick: (event: React.PointerEvent) => void;
+    handleClick: (event: MouseEvent) => void;
 }
 
 /**
