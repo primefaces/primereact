@@ -22,12 +22,12 @@ export const FloatLabel = React.memo(
         }, [elementRef, ref]);
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(cx('root'))
             },
-            FloatLabelBase.getOtherProps(props),
-            ptm('root')
+            FloatLabelBase.getOtherProps(props)
         );
 
         return <span {...rootProps}>{props.children}</span>;

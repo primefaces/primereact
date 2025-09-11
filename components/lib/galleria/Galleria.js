@@ -216,6 +216,7 @@ export const Galleria = React.memo(
             const footer = createFooter();
 
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     ref: elementRef,
                     id: id,
@@ -223,8 +224,7 @@ export const Galleria = React.memo(
                     style: props.style,
                     role: 'region'
                 },
-                GalleriaBase.getOtherProps(props),
-                ptm('root')
+                GalleriaBase.getOtherProps(props)
             );
 
             const contentProps = mergeProps(
