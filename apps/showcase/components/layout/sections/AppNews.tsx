@@ -18,7 +18,16 @@ const announcement = News as Announcement;
 export default function AppNews() {
     const app = useApp();
 
-    const onClose = () => {};
+    const onClose = () => {
+        app.setNewsActive(false);
+        const item = {
+            hiddenNews: announcement.id
+        };
+
+        if (!app.storageKey) return;
+
+        localStorage.setItem(app.storageKey, JSON.stringify(item));
+    };
 
     React.useEffect(() => {
         const itemString = app.storageKey ? localStorage.getItem(app.storageKey) : null;
