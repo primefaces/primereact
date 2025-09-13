@@ -1,0 +1,105 @@
+---
+title: InputNumber
+description: InputNumber is used to enter numeric values.
+component: inputnumber
+---
+
+## Usage
+
+```tsx
+import { InputNumber } from 'primereact/inputnumber';
+```
+
+```tsx
+<InputNumber></InputNumber>
+```
+
+## Examples
+
+### Numerals
+
+InputNumber supports decimal numbers with precision control.
+
+<DocDemoViewer name="inputnumber:numerals-demo" />
+
+### Locale
+
+Localization information such as grouping and decimal symbols are defined with the `locale` property which defaults to the user locale.
+
+<DocDemoViewer name="inputnumber:locale-demo" />
+
+### Currency
+
+Monetary values are enabled by setting `mode` property as `currency`. In this setting, `currency` property also needs to be defined using ISO 4217 standard such as "USD" for the US dollar.
+
+<DocDemoViewer name="inputnumber:currency-demo" />
+
+### Prefix & Suffix
+
+Custom texts e.g. units can be placed before or after the input section with the `prefix` and `suffix` properties.
+
+<DocDemoViewer name="inputnumber:prefix-suffix-demo" />
+
+### Buttons
+
+Spinner buttons are enabled using the `InputGroup` or `IconField` components.
+
+<DocDemoViewer name="inputnumber:buttons-demo" />
+
+### Vertical
+
+Buttons can also placed vertically.
+
+<DocDemoViewer name="inputnumber:vertical-demo" />
+
+### Filled
+
+Specify the `variant` property as `filled` to display the component with a higher visual emphasis than the default `outlined` style.
+
+<DocDemoViewer name="inputnumber:filled-demo" />
+
+### Float Label
+
+A floating label appears on top of the input field when focused. Visit [FloatLabel](/docs/components/floatlabel) documentation for more information.
+
+<DocDemoViewer name="inputnumber:float-label-demo" />
+
+### Ifta Label
+
+IftaLabel is used to create infield top aligned labels. Visit [IftaLabel](/docs/components/iftalabel) documentation for more information.
+
+<DocDemoViewer name="inputnumber:ifta-label-demo" />
+
+### Sizes
+
+Textarea provides `small` and `large` sizes as alternatives to the base by setting the `size` property.
+
+<DocDemoViewer name="inputnumber:sizes-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocDemoViewer name="inputnumber:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused.
+
+<DocDemoViewer name="inputnumber:disabled-demo" />
+
+### Accessibility
+
+#### Screen Reader Support
+
+Value to describe the component can either be provided via label tag combined with `inputId` prop or using `aria-labelledby`, `aria-label` props. The input element uses `spinbutton` role in addition to the `aria-valuemin`, `aria-valuemax` and `aria-valuenow` attributes.
+
+#### Keyboard Support
+
+| Key          | Function                           |
+| ------------ | ---------------------------------- |
+| `tab`        | Moves focus to the input.          |
+| `up arrow`   | Increments the value.              |
+| `down arrow` | Decrements the value.              |
+| `home`       | Set the minimum value if provided. |
+| `end`        | Set the maximum value if provided. |
