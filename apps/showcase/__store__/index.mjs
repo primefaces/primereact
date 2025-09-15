@@ -485,6 +485,60 @@ export const Store = {
             'filePath': 'demo/inputgroup/multiple-demo.tsx',
         },
     },
+    'inputnumber': {
+        'buttons-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/buttons-demo.tsx')),
+            'filePath': 'demo/inputnumber/buttons-demo.tsx',
+        },
+        'currency-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/currency-demo.tsx')),
+            'filePath': 'demo/inputnumber/currency-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/disabled-demo.tsx')),
+            'filePath': 'demo/inputnumber/disabled-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/filled-demo.tsx')),
+            'filePath': 'demo/inputnumber/filled-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/float-label-demo.tsx')),
+            'filePath': 'demo/inputnumber/float-label-demo.tsx',
+        },
+        'ifta-label-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/ifta-label-demo.tsx')),
+            'filePath': 'demo/inputnumber/ifta-label-demo.tsx',
+        },
+        'inputnumber-pt': {
+            'component': React.lazy(() => import('demo/inputnumber/inputnumber-pt.tsx')),
+            'filePath': 'demo/inputnumber/inputnumber-pt.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/invalid-demo.tsx')),
+            'filePath': 'demo/inputnumber/invalid-demo.tsx',
+        },
+        'locale-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/locale-demo.tsx')),
+            'filePath': 'demo/inputnumber/locale-demo.tsx',
+        },
+        'numerals-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/numerals-demo.tsx')),
+            'filePath': 'demo/inputnumber/numerals-demo.tsx',
+        },
+        'prefix-suffix-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/prefix-suffix-demo.tsx')),
+            'filePath': 'demo/inputnumber/prefix-suffix-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/sizes-demo.tsx')),
+            'filePath': 'demo/inputnumber/sizes-demo.tsx',
+        },
+        'vertical-demo': {
+            'component': React.lazy(() => import('demo/inputnumber/vertical-demo.tsx')),
+            'filePath': 'demo/inputnumber/vertical-demo.tsx',
+        },
+    },
     'inputotp': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/inputotp/basic-demo.tsx')),
@@ -1337,6 +1391,16 @@ export const Store = {
         'slot-char-demo': {
             'component': React.lazy(() => import('demo/usemask/slot-char-demo.tsx')),
             'filePath': 'demo/usemask/slot-char-demo.tsx',
+        },
+    },
+    'usescrolltop': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/usescrolltop/basic-demo.tsx')),
+            'filePath': 'demo/usescrolltop/basic-demo.tsx',
+        },
+        'element-demo': {
+            'component': React.lazy(() => import('demo/usescrolltop/element-demo.tsx')),
+            'filePath': 'demo/usescrolltop/element-demo.tsx',
         },
     },
 };

@@ -12,7 +12,7 @@ export default function ElementDemo() {
 
     return (
         <div className="card flex justify-center">
-            <div ref={setTarget} className="overflow-scroll" style={{ width: '250px', height: '200px', scrollbarWidth: 'thin' }}>
+            <div ref={setTarget} className="overflow-y-scroll" style={{ width: '250px', height: '200px', scrollbarWidth: 'thin' }}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam. Ultricies mi quis hendrerit dolor magna eget est lorem. Amet consectetur
                     adipiscing elit ut. Nam libero justo laoreet sit amet. Pharetra massa massa ultricies mi quis hendrerit dolor magna. Est ultricies integer quis auctor elit sed vulputate. Consequat ac felis donec et. Tellus orci ac auctor augue

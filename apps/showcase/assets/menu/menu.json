@@ -84,6 +84,10 @@
                             "to": "/docs/components/inputgroup"
                         },
                         {
+                            "name": "InputNumber",
+                            "to": "/docs/components/inputnumber"
+                        },
+                        {
                             "name": "InputOtp",
                             "to": "/docs/components/inputotp"
                         },
@@ -299,12 +303,16 @@
             "icon": "pi pi-hammer",
             "children": [
                 {
+                    "name": "useKeyFilter",
+                    "to": "/docs/hooks/usekeyfilter"
+                },
+                {
                     "name": "useMask",
                     "to": "/docs/hooks/usemask"
                 },
                 {
-                    "name": "useKeyFilter",
-                    "to": "/docs/hooks/usekeyfilter"
+                    "name": "useScrollTop",
+                    "to": "/docs/hooks/usescrolltop"
                 }
             ]
         },
