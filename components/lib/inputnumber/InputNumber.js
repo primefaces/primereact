@@ -1135,12 +1135,15 @@ export const InputNumber = React.memo(
         const changeValue = () => {
             const val = validateValueByLimit(props.value);
 
+            const currentValue = inputRef.current.value;
+
             updateInputValue(props.format ? val : replaceDecimalSeparator(val));
 
             const newValue = validateValue(props.value);
 
-            if (props.value !== null && props.value !== newValue) {
+            if (props.value !== null && currentValue !== newValue) {
                 updateModel(null, newValue);
+                handleOnChange(null, currentValue, newValue);
             }
         };
 
