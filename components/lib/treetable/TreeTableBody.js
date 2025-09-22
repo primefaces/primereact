@@ -232,10 +232,6 @@ export const TreeTableBody = React.memo((props) => {
     };
 
     const createEmptyMessage = () => {
-        if (props.loading) {
-            return null;
-        }
-
         const colSpan = props.columns ? props.columns.length : null;
         const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps }) || localeOption('emptyMessage');
         const emptyMessageProps = mergeProps(

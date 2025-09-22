@@ -910,34 +910,30 @@ export const TableBody = React.memo(
         });
 
         const createEmptyContent = () => {
-            if (!props.loading) {
-                const colSpan = getColumnsLength();
-                const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps, frozen: props.frozenRow }) || localeOption('emptyMessage');
-                const emptyMessageProps = mergeProps(
-                    {
-                        className: cx('emptyMessage'),
-                        role: 'row'
-                    },
-                    ptm('emptyMessage')
-                );
+            const colSpan = getColumnsLength();
+            const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps, frozen: props.frozenRow }) || localeOption('emptyMessage');
+            const emptyMessageProps = mergeProps(
+                {
+                    className: cx('emptyMessage'),
+                    role: 'row'
+                },
+                ptm('emptyMessage')
+            );
 
-                const bodyCellProps = mergeProps(
-                    {
-                        colSpan,
-                        role: 'cell'
-                    },
-                    getColumnPTOptions('root'),
-                    getColumnPTOptions('bodyCell')
-                );
+            const bodyCellProps = mergeProps(
+                {
+                    colSpan,
+                    role: 'cell'
+                },
+                getColumnPTOptions('root'),
+                getColumnPTOptions('bodyCell')
+            );
 
-                return (
-                    <tr {...emptyMessageProps}>
-                        <td {...bodyCellProps}>{content}</td>
-                    </tr>
-                );
-            }
-
-            return null;
+            return (
+                <tr {...emptyMessageProps}>
+                    <td {...bodyCellProps}>{content}</td>
+                </tr>
+            );
         };
 
         const createGroupHeader = (rowData, rowIndex, expanded, colSpan) => {
