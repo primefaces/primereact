@@ -189,6 +189,7 @@ export const InputOtp = React.memo(
                     const hasSelection = target.selectionStart !== target.selectionEnd;
                     const isAtMaxLength = tokens.join('').length >= props.length;
                     const isValidKey = props.integerOnly ? /^[0-9]$/.test(event.key) : true;
+
                     if (!isValidKey || (isAtMaxLength && event.code !== 'Delete' && !hasSelection)) {
                         event.preventDefault();
                     }
