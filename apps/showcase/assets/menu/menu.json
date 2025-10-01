@@ -85,7 +85,8 @@
                         },
                         {
                             "name": "InputNumber",
-                            "to": "/docs/components/inputnumber"
+                            "to": "/docs/components/inputnumber",
+                            "badge": "New"
                         },
                         {
                             "name": "InputOtp",
@@ -227,6 +228,11 @@
                         {
                             "name": "Message",
                             "to": "/docs/components/message"
+                        },
+                        {
+                            "name": "Toast",
+                            "to": "/docs/components/toast",
+                            "badge": "New"
                         }
                     ]
                 },
@@ -236,6 +242,11 @@
                         {
                             "name": "ImageCompare",
                             "to": "/docs/components/imagecompare"
+                        },
+                        {
+                            "name": "Carousel",
+                            "to": "/docs/components/carousel",
+                            "badge": "New"
                         }
                     ]
                 },
