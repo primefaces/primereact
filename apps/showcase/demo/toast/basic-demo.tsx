@@ -4,7 +4,7 @@ import { toast, Toast } from 'primereact/toast';
 
 function BasicToast() {
     return (
-        <Toast richColors>
+        <Toast>
             <Toast.Portal>
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>

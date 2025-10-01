@@ -139,7 +139,6 @@
     outline: none;
     position: absolute;
     transform: translateX(var(--p-swipe-amount-x)) translateY(calc(var(--p-swipe-amount-y) + calc(var(--p-toast-index) * calc(20px * var(--raise-factor))))) scale(calc(max(0, 1-(var(--p-toast-index) * 0.1))));
-    overflow-wrap: anywhere;
     z-index: calc(100 - var(--p-toast-index));
     touch-action: none;
     box-shadow:
