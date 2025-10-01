@@ -125,6 +125,7 @@ export const useCarousel = withHeadless({
         const swipeStartTimeRef = React.useRef<number | null>(null);
         const swipeStartPointerRef = React.useRef<{ x: number; y: number } | null>(null);
         const prevSwipeAmountRef = React.useRef<number>(0);
+        const recentSwipeRef = React.useRef<{ time: number; startX: number; startY: number; moved: boolean } | null>(null);
 
         const previousPosition = React.useRef(0);
         const position = React.useRef(0);
@@ -475,13 +476,26 @@ export const useCarousel = withHeadless({
 
             setIsSwiping(true);
 
-            swipeStartTimeRef.current = new Date().getTime();
+            const time = new Date().getTime();
+
+            swipeStartTimeRef.current = time;
             swipeStartPointerRef.current = { x: event.clientX, y: event.clientY };
             prevSwipeAmountRef.current = getSwipeAmount();
+
+            recentSwipeRef.current = {
+                time,
+                startX: event.clientX,
+                startY: event.clientY,
+                moved: false
+            };
         };
 
         const handlePointerMove = (event: PointerEvent) => {
             if (!isSwiping || !swipeStartPointerRef.current || !swipeStartTimeRef.current || !carouselRef.current) return;
+
+            if (recentSwipeRef.current) {
+                recentSwipeRef.current.moved = true;
+            }
 
             const delta = isVertical ? event.clientY - swipeStartPointerRef.current.y : event.clientX - swipeStartPointerRef.current.x;
 
@@ -531,12 +545,36 @@ export const useCarousel = withHeadless({
             setIsSwiping(false);
             swipeStartPointerRef.current = null;
             swipeStartTimeRef.current = null;
+
+            setTimeout(() => {
+                recentSwipeRef.current = null;
+            }, 100);
         };
 
         const handleClick = (event: MouseEvent) => {
             if (isSwiping) {
                 event.preventDefault();
                 event.stopPropagation();
+
+                return;
+            }
+
+            if (recentSwipeRef.current) {
+                const elapsed = Date.now() - recentSwipeRef.current.time;
+                const deltaX = Math.abs(event.clientX - recentSwipeRef.current.startX);
+                const deltaY = Math.abs(event.clientY - recentSwipeRef.current.startY);
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                const significantMovement = recentSwipeRef.current.moved && elapsed > 150;
+                const tooLong = elapsed > 500;
+                const tooFar = distance > 25;
+
+                if (significantMovement || tooLong || tooFar) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    return;
+                }
             }
         };
 

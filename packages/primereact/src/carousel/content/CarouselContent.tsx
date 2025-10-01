@@ -30,7 +30,8 @@ export const CarouselContent = withComponent({
                 onPointerDown: carousel?.handlePointerDown,
                 onPointerMove: carousel?.handlePointerMove,
                 onPointerUp: carousel?.handlePointerUp,
-                onClick: carousel?.handleClick
+                onClick: carousel?.handleClick,
+                onClickCapture: carousel?.handleClick
             },
             carousel?.ptm('content'),
             ptmi('root')
