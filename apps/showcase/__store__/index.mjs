@@ -179,6 +179,32 @@ export const Store = {
             'filePath': 'demo/card/basic-demo.tsx',
         },
     },
+    'carousel': {
+        'alignment-demo': {
+            'component': React.lazy(() => import('demo/carousel/alignment-demo.tsx')),
+            'filePath': 'demo/carousel/alignment-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/carousel/basic-demo.tsx')),
+            'filePath': 'demo/carousel/basic-demo.tsx',
+        },
+        'gallery-demo': {
+            'component': React.lazy(() => import('demo/carousel/gallery-demo.tsx')),
+            'filePath': 'demo/carousel/gallery-demo.tsx',
+        },
+        'loop-demo': {
+            'component': React.lazy(() => import('demo/carousel/loop-demo.tsx')),
+            'filePath': 'demo/carousel/loop-demo.tsx',
+        },
+        'orientation-demo': {
+            'component': React.lazy(() => import('demo/carousel/orientation-demo.tsx')),
+            'filePath': 'demo/carousel/orientation-demo.tsx',
+        },
+        'size-demo': {
+            'component': React.lazy(() => import('demo/carousel/size-demo.tsx')),
+            'filePath': 'demo/carousel/size-demo.tsx',
+        },
+    },
     'checkbox': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/checkbox/basic-demo.tsx')),
@@ -1245,6 +1271,28 @@ export const Store = {
         'timeline-pt': {
             'component': React.lazy(() => import('demo/timeline/timeline-pt.tsx')),
             'filePath': 'demo/timeline/timeline-pt.tsx',
+        },
+    },
+    'toast': {
+        'action-demo': {
+            'component': React.lazy(() => import('demo/toast/action-demo.tsx')),
+            'filePath': 'demo/toast/action-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/toast/basic-demo.tsx')),
+            'filePath': 'demo/toast/basic-demo.tsx',
+        },
+        'position-demo': {
+            'component': React.lazy(() => import('demo/toast/position-demo.tsx')),
+            'filePath': 'demo/toast/position-demo.tsx',
+        },
+        'rich-colors-demo': {
+            'component': React.lazy(() => import('demo/toast/rich-colors-demo.tsx')),
+            'filePath': 'demo/toast/rich-colors-demo.tsx',
+        },
+        'variants-demo': {
+            'component': React.lazy(() => import('demo/toast/variants-demo.tsx')),
+            'filePath': 'demo/toast/variants-demo.tsx',
         },
     },
     'togglebutton': {

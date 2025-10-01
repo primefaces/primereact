@@ -26,6 +26,20 @@ export const CarouselIndicators = withComponent({
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={contentProps} children={props.children ?? <>{carousel?.state?.snapPoints.map((snap, i) => <CarouselIndicator key={i} snap={snap} index={i} />)}</>} />;
+        return (
+            <Component
+                instance={instance}
+                attrs={contentProps}
+                children={
+                    props.children ?? (
+                        <>
+                            {carousel?.state?.snapPoints.map((snap, i) => (
+                                <CarouselIndicator key={i} snap={snap} index={i} />
+                            ))}
+                        </>
+                    )
+                }
+            />
+        );
     }
 });
