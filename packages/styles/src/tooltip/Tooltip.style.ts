@@ -3,8 +3,8 @@ import type { TooltipInstance } from '@primereact/types/shared/tooltip';
 
 const style = `
     .p-tooltip2 {
-        transform: scale(0.95);
-        opacity: 0;
+        /*transform: scale(0.95);*/
+        /*opacity: 0;*/
         transform-origin: var(--placer-transform-origin);
         max-width: dt('tooltip.max.width');
         background: dt('tooltip.background');
@@ -35,7 +35,7 @@ const style = `
     .p-tooltip2-arrow[data-side='left'] {
         transform: translateX(-50%) rotate(-135deg);
     }
-    
+
     .p-tooltip2-arrow[data-side='top'] {
         transform: translateY(-50%) rotate(-45deg);
     }

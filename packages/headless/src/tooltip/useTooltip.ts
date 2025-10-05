@@ -1,7 +1,7 @@
 import { withHeadless } from '@primereact/core/headless';
 import { usePlacer } from '@primereact/headless/placer';
 import { useUnmountEffect } from '@primereact/hooks/use-unmount-effect';
-import { addStyle, isClient } from '@primeuix/utils/dom';
+import { isClient } from '@primeuix/utils/dom';
 import { ZIndex } from '@primeuix/utils/zindex';
 import { useTooltipGroupContext } from 'primereact/tooltip/group';
 import * as React from 'react';
@@ -320,7 +320,7 @@ export const useTooltip = withHeadless({
 
             if (!container) return;
 
-            addStyle(container, { opacity: '' });
+            //addStyle(container, { opacity: '' });
         };
 
         const onBeforeEnter = () => {
@@ -363,7 +363,7 @@ export const useTooltip = withHeadless({
 
             if (!content) return;
 
-            addStyle(content, { opacity: '1', transform: 'scale(1)' });
+            //addStyle(content, { opacity: '1', transform: 'scale(1)' });
         };
 
         const onContentLeave = () => {
@@ -371,7 +371,7 @@ export const useTooltip = withHeadless({
 
             if (!content) return;
 
-            addStyle(content, { opacity: '0', transform: 'scale(0.95)' });
+            //addStyle(content, { opacity: '0', transform: 'scale(0.95)' });
         };
 
         const bindOutsideClickListener = () => {
