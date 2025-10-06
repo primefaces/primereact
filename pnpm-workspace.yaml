@@ -3,7 +3,7 @@ packages:
   - 'apps/*'
 
 catalog:
-  '@primeuix/styled': ^0.7.2
+  '@primeuix/styled': ^0.7.4
   '@primeuix/utils': ^0.6.1
   '@primeuix/locale': ^0.0.2
   '@primeuix/motion': ^0.0.4
