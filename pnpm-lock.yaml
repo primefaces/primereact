@@ -10,7 +10,7 @@ catalogs:
       specifier: ^0.0.4
       version: 0.0.4
     '@primeuix/styled':
-      specifier: ^0.7.2
+      specifier: ^0.7.4
       version: 0.7.4
     '@primeuix/styles':
       specifier: ^1.2.5
