@@ -9,6 +9,7 @@ const css = /*css*/ `
     width: dt('icon.size');
     height: dt('icon.size');
     transform: rotate(dt('icon.rotate'));
+    flex-shrink: 0;
 }
 
 .p-icon-flip-horizontal {
