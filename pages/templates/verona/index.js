@@ -198,6 +198,7 @@ const VeronaPage = () => {
                 dashboard2={'https://primefaces.org/cdn/primereact/images/templates/verona/verona-hero-dashboard2.png'}
                 liveHref={'https://verona.primereact.org/'}
                 docHref={'https://verona.primereact.org/documentation'}
+                storeHref={'https://primeui.store/templates/react/verona'}
             />
             <VeronaSeperator />
             <TemplateLicense license={license} />

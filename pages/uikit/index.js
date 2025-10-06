@@ -203,7 +203,7 @@ const UIKitPage = (props) => {
                                             </li>
                                         </ul>
                                         <hr className="mb-3 mx-0 border-top-1 border-none surface-border mt-auto" />
-                                        <a href="https://www.primefaces.org/store/uikit.xhtml" className="bg-blue-500 text-white hover:bg-blue-400 p-3 w-full border-round text-center transition-colors transition-duration-300 font-bold">
+                                        <a href="https://primeui.store/uikit" className="bg-blue-500 text-white hover:bg-blue-400 p-3 w-full border-round text-center transition-colors transition-duration-300 font-bold">
                                             Buy Now
                                         </a>
                                     </div>
@@ -250,7 +250,7 @@ const UIKitPage = (props) => {
                                             </li>
                                         </ul>
                                         <hr className="mb-3 mx-0 border-top-1 border-none surface-border" />
-                                        <a href="https://www.primefaces.org/store/uikit.xhtml" className="bg-purple-500 text-white hover:bg-purple-400 p-3 w-full border-round text-center transition-colors transition-duration-300 font-bold">
+                                        <a href="https://primeui.store/uikit" className="bg-purple-500 text-white hover:bg-purple-400 p-3 w-full border-round text-center transition-colors transition-duration-300 font-bold">
                                             Buy Now
                                         </a>
                                     </div>

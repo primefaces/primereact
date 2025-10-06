@@ -163,7 +163,8 @@ const templateHeroData = {
     dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/freya/freya-hero-dashboard2.png',
     description: 'Freya is a modern admin template for developers and IT professionals. It comes with a huge collection of reusable UI components and dozens of built-in layouts for various purposes.',
     liveHref: 'https://freya.primereact.org/',
-    docHref: 'https://freya.primereact.org/documentation'
+    docHref: 'https://freya.primereact.org/documentation',
+    storeHref: 'https://primeui.store/templates/react/freya'
 };
 
 const FreyaSeparator = () => {
