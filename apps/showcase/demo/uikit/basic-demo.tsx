@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { useApp } from '@/hooks/useApp';
 import Image from 'next/image';
+import * as React from 'react';
 
 export default function BasicDemo() {
     const { isDarkTheme } = useApp();
@@ -245,7 +245,7 @@ export default function BasicDemo() {
                                     </li>
                                 </ul>
                                 <hr className="mb-4 mx-0 border-t border-0 border-surface-200 dark:border-surface-700 mt-auto" />
-                                <a href="https://www.primefaces.org/store/uikit.xhtml" className="bg-blue-500 text-white hover:bg-blue-400 p-4 w-full rounded text-center transition-colors duration-300 font-bold p-ripple">
+                                <a href="https://primeui.store/uikit" className="bg-blue-500 text-white hover:bg-blue-400 p-4 w-full rounded text-center transition-colors duration-300 font-bold p-ripple">
                                     Buy Now
                                 </a>
                             </div>
@@ -289,7 +289,7 @@ export default function BasicDemo() {
                                     </li>
                                 </ul>
                                 <hr className="mb-4 mx-0 border-t border-0 border-surface-200 dark:border-surface-700" />
-                                <a href="https://www.primefaces.org/store/uikit.xhtml" className="bg-purple-500 text-white hover:bg-purple-400 p-4 w-full rounded text-center transition-colors duration-300 font-bold p-ripple">
+                                <a href="https://primeui.store/uikit" className="bg-purple-500 text-white hover:bg-purple-400 p-4 w-full rounded text-center transition-colors duration-300 font-bold p-ripple">
                                     Buy Now
                                 </a>
                             </div>
