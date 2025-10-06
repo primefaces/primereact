@@ -137,7 +137,7 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
     theme?: string | undefined;
     /**
      * Whether to show the header of editor.
-     * @defaultValue false
+     * @defaultValue true
      */
     showHeader?: boolean | undefined;
     /**
