@@ -24414,7 +24414,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "true",
+                            "default": "false",
                             "description": "Whether to show the header of editor."
                         },
                         {
