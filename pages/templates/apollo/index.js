@@ -55,11 +55,7 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: (
-            <>
-                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
-            </>
-        ),
+        description: <>Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.</>,
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -191,7 +187,8 @@ const templateHeroData = {
     dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-hero-dashboard2.png',
     description: 'Application template for React based on the popular NextJS framework with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 24 PrimeReact themes.',
     liveHref: 'https://apollo.primereact.org',
-    docHref: 'https://apollo.primereact.org/documentation'
+    docHref: 'https://apollo.primereact.org/documentation',
+    storeHref: 'https://primeui.store/templates/react/apollo'
 };
 
 const ApolloSeparator = () => {

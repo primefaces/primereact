@@ -18,7 +18,7 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
                     <a href={liveHref} target="_blank" className="template-hero-card-buttons-btn1 p-button ">
                         Live Demo
                     </a>
-                    <a href={storeHref ?? 'https://www.primefaces.org/store/'} target="_blank" className="template-hero-card-buttons-btn2 p-button">
+                    <a href={storeHref ?? 'https://primeui.store/templates'} target="_blank" className="template-hero-card-buttons-btn2 p-button">
                         {free ? 'Source Code' : 'Buy Now'}
                     </a>
                 </div>

@@ -49,7 +49,7 @@ const FooterSection = () => {
                                 </a>
                             </li>
                             <li className="mb-4">
-                                <a href="https://www.primefaces.org/store/" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150" target="_blank" rel="noopener noreferrer">
+                                <a href="https://primeui.store" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150" target="_blank" rel="noopener noreferrer">
                                     Store
                                 </a>
                             </li>

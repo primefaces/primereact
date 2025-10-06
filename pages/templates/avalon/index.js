@@ -54,11 +54,7 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: (
-            <>
-                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
-            </>
-        ),
+        description: <>Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.</>,
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -193,7 +189,8 @@ const templateHeroData = {
     dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-hero-dashboard2.png',
     description: 'A modern and easy to use premium application template with highly customizable layout features. Based on a bootstrap styling, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.',
     liveHref: 'https://avalon.primereact.org/',
-    docHref: 'https://avalon.primereact.org/documentation'
+    docHref: 'https://avalon.primereact.org/documentation',
+    storeHref: 'https://primeui.store/templates/react/avalon'
 };
 
 const AvalonPage = () => {

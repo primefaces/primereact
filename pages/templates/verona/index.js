@@ -54,11 +54,7 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: (
-            <>
-                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
-            </>
-        ),
+        description: <>Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.</>,
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -202,6 +198,7 @@ const VeronaPage = () => {
                 dashboard2={'https://primefaces.org/cdn/primereact/images/templates/verona/verona-hero-dashboard2.png'}
                 liveHref={'https://verona.primereact.org/'}
                 docHref={'https://verona.primereact.org/documentation'}
+                storeHref={'https://primeui.store/templates/react/verona'}
             />
             <VeronaSeperator />
             <TemplateLicense license={license} />

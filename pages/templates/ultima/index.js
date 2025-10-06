@@ -54,11 +54,7 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: (
-            <>
-                Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.
-            </>
-        ),
+        description: <>Designed to be fully compatible with upcoming next-gen PrimeBlocks, choose from the extensive range of blocks and customize the way you like.</>,
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -190,6 +186,7 @@ const UltimaPage = () => {
                 dashboard2={'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
                 docHref={'https://ultima.primereact.org/documentation'}
+                storeHref={'https://primeui.store/templates/react/ultima'}
             />
             <UltimaSeperator />
             <TemplateLicense license={license} />
