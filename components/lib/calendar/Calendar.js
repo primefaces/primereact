@@ -205,7 +205,7 @@ export const Calendar = React.memo(
             let isValid = true;
 
             if (isSingleSelection()) {
-                if (!(isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false) && isSelectableTime(value))) {
+                if (!(isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false) && (!props.showTime || isSelectableTime(value)))) {
                     isValid = false;
                 }
             } else if (value.every((v) => isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && isSelectableTime(v))) {
@@ -2315,11 +2315,13 @@ export const Calendar = React.memo(
                     if (props.minDate.getMinutes() > value.getMinutes()) {
                         validMin = false;
                     } else if (props.minDate.getMinutes() === value.getMinutes()) {
-                        if (props.minDate.getSeconds() > value.getSeconds()) {
-                            validMin = false;
-                        } else if (props.minDate.getSeconds() === value.getSeconds()) {
-                            if (props.minDate.getMilliseconds() > value.getMilliseconds()) {
+                        if (props.showSeconds) {
+                            if (props.minDate.getSeconds() > value.getSeconds()) {
                                 validMin = false;
+                            } else if (props.minDate.getSeconds() === value.getSeconds()) {
+                                if (!props.showMillisec || props.minDate.getMilliseconds() > value.getMilliseconds()) {
+                                    validMin = false;
+                                }
                             }
                         }
                     }
@@ -2333,11 +2335,13 @@ export const Calendar = React.memo(
                     if (props.maxDate.getMinutes() < value.getMinutes()) {
                         validMax = false;
                     } else if (props.maxDate.getMinutes() === value.getMinutes()) {
-                        if (props.maxDate.getSeconds() < value.getSeconds()) {
-                            validMax = false;
-                        } else if (props.maxDate.getSeconds() === value.getSeconds()) {
-                            if (props.maxDate.getMilliseconds() < value.getMilliseconds()) {
+                        if (props.showSeconds) {
+                            if (props.maxDate.getSeconds() < value.getSeconds()) {
                                 validMax = false;
+                            } else if (props.maxDate.getSeconds() === value.getSeconds()) {
+                                if (!props.showMillisec || props.maxDate.getMilliseconds() < value.getMilliseconds()) {
+                                    validMax = false;
+                                }
                             }
                         }
                     }
