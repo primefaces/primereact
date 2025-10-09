@@ -39,7 +39,7 @@ function BasicDemo() {
             </div>
             <Portal>
                 {present && (
-                    <div ref={ref} className={`w-full h-[100dvh] top-0 left-0 !fixed z-[100000] ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}>
+                    <div ref={ref as React.RefObject<HTMLDivElement>} className={`w-full h-[100dvh] top-0 left-0 !fixed z-[100000] ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}>
                         <Gallery className="w-full h-full" activeIndex={activeIndex} onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}>
                             <Gallery.Backdrop />
                             <Gallery.Prev>
