@@ -281,7 +281,7 @@ export const Menubar = React.memo(
 
         const onArrowUpKey = (event) => {
             const processedItem = visibleItems[focusedItemInfo.index];
-            const root = ObjectUtils.isEmpty(processedItem.parent);
+            const root = processedItem ? ObjectUtils.isEmpty(processedItem.parent) : null;
 
             if (root) {
                 const grouped = isProccessedItemGroup(processedItem);
