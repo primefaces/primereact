@@ -83,11 +83,17 @@ export const useSpeedDial = withHeadless({
             }
         };
 
-        const onItemClick = (event: React.MouseEvent) => {
+        const onItemClick = (event: React.MouseEvent | React.KeyboardEvent) => {
             hide();
 
             isItemClicked.current = true;
-            event.preventDefault();
+            event.preventDefault?.();
+        };
+
+        const onItemKeyDown = (event: React.KeyboardEvent) => {
+            if (event.code === 'Enter') {
+                onItemClick(event);
+            }
         };
 
         const onClick = () => {
@@ -420,7 +426,8 @@ export const useSpeedDial = withHeadless({
             onKeyDown,
             onClick,
             onTogglerKeydown,
-            onItemClick
+            onItemClick,
+            onItemKeyDown
         };
     }
 });

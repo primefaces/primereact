@@ -24,7 +24,8 @@ export const SpeedDialAction = withComponent({
                 className: speeddial?.cx('action'),
                 tabIndex: -1,
                 role: 'menuitem',
-                onClick: speeddial?.onItemClick
+                onClick: speeddial?.onItemClick,
+                onKeyDown: speeddial?.onItemKeyDown
             },
             ptmi('root')
         );
