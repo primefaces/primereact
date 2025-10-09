@@ -133,7 +133,13 @@ export interface useSpeedDialExposes {
      * @param event - Click event
      * @returns void
      */
-    onItemClick: (e: React.MouseEvent) => void;
+    onItemClick: (e: React.MouseEvent | React.KeyboardEvent) => void;
+    /**
+     * Handler for keydown event on items.
+     * @param event - Keyboard event
+     * @returns void
+     */
+    onItemKeyDown: (e: React.KeyboardEvent) => void;
 }
 
 /**
