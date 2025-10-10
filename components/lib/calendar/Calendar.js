@@ -1679,7 +1679,9 @@ export const Calendar = React.memo(
                 setTimeout(() => {
                     hide('dateselect');
 
-                    reFocusInputField();
+                    if (props.selectionMode !== 'single') {
+                        reFocusInputField();
+                    }
                 }, 100);
 
                 if (touchUIMask.current) {

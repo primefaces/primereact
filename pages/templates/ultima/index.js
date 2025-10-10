@@ -186,6 +186,7 @@ const UltimaPage = () => {
                 dashboard2={'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
                 docHref={'https://ultima.primereact.org/documentation'}
+                storeHref={'https://primeui.store/templates/react/ultima'}
             />
             <UltimaSeperator />
             <TemplateLicense license={license} />

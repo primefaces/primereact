@@ -5056,7 +5056,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | \"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "null | \"success\" | \"warning\" | \"info\" | \"secondary\" | \"danger\" | \"contrast\"",
                             "default": "null",
                             "description": "Severity type of the badge."
                         },
@@ -5677,7 +5677,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"info\" | \"secondary\" | \"danger\" | \"contrast\"",
                             "default": "",
                             "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"help\", \"contrast\"."
                         },
@@ -24414,7 +24414,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "false",
+                            "default": "true",
                             "description": "Whether to show the header of editor."
                         },
                         {
@@ -35653,7 +35653,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"info\" | \"warn\" | \"secondary\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -36011,7 +36011,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"info\" | \"warn\" | \"secondary\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -47022,7 +47022,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"info\" | \"secondary\" | \"danger\" | \"contrast\"",
                             "default": "",
                             "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\", \"help\"."
                         },
@@ -49686,7 +49686,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | \"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "null | \"success\" | \"warning\" | \"info\" | \"secondary\" | \"danger\" | \"contrast\"",
                             "default": "null",
                             "description": "Severity type of the tag."
                         },
@@ -50925,7 +50925,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"info\" | \"warn\" | \"secondary\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {
@@ -51030,7 +51030,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"info\" | \"warn\" | \"secondary\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {

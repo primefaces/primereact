@@ -25,7 +25,7 @@ const TemplateSection = () => {
             <div className="section-header relative z-3">Templates</div>
             <p className="section-detail relative z-3">Professionally designed highly customizable application templates to get started in style.</p>
             <div className="flex justify-content-center relative mt-4 z-3">
-                <a href="https://www.primefaces.org/store" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                <a href="https://primeui.store/templates" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                     <span>Explore All</span>
                     <i className="pi pi-arrow-right ml-2" />
                 </a>
