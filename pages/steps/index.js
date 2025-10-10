@@ -85,7 +85,7 @@ const StepsDemo = () => {
 
     return (
         <DocComponent
-            title="React Stepper Component"
+            title="React Steps Component"
             header="Steps"
             description="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design."
             componentDocs={docs}
