@@ -138,7 +138,7 @@ const DropdownDemo = () => {
 
     return (
         <DocComponent
-            title="React Select Component"
+            title="React Dropdown Component"
             header="Dropdown"
             description="Dropdown also known as Select, is used to choose an item from a collection of options."
             componentDocs={docs}
