@@ -498,6 +498,11 @@ interface FileUploadProps {
      */
     previewWidth?: number | undefined;
     /**
+     * Length of the maximum file name characters that can be displayed.
+     * @defaultValue 40
+     */
+    filenameTruncateLength?: number | undefined;
+    /**
      * Label of the choose button. Defaults to global value in Locale configuration.
      */
     chooseLabel?: string | undefined;
