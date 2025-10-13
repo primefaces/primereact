@@ -152,8 +152,6 @@ export const HeaderCell = React.memo((props) => {
                             left = candidate.offsetLeft + DomHandler.getOuterWidth(candidate) - scrollLeft;
                         }
                     }
-
-                    elementRef.current.style.left = left + 'px';
                 }
 
                 styleObject.left = left + 'px';
