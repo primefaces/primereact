@@ -258,7 +258,7 @@ export const TieredMenu = React.memo(
                 return;
             }
 
-            if (dirty && !props.popup) {
+            if (dirty) {
                 onItemChange(event);
             }
         };
