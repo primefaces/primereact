@@ -1,0 +1,47 @@
+---
+title: FileUpload
+description: FileUpload is a layout component to make descendant components span full width of their container.
+component: fileupload
+---
+
+## Usage
+
+```tsx
+import { FileUpload } from 'primereact/fileupload';
+```
+
+```tsx
+<FileUpload></FileUpload>
+```
+
+## Examples
+
+### Basic
+
+FileUpload provides a customizable interface for file selection and uploading.
+
+<DocDemoViewer name="fileupload:basic-demo" />
+
+### Auto
+
+When _auto_ property is enabled, a file gets uploaded instantly after selection.
+
+<DocDemoViewer name="fileupload:auto-demo" />
+
+### Advanced
+
+Advanced uploader provides dragdrop support, multi file uploads, auto uploading, progress tracking and validations.
+
+<DocDemoViewer name="fileupload:advanced-demo" />
+
+### Template
+
+Uploader UI can be customized with templating.
+
+<DocDemoViewer name="fileupload:template-demo" />
+
+### Custom Upload
+
+Uploading implementation can be overridden by enabling _customUpload_ property. This sample, displays the image on the client side with a grayscale filter.
+
+<DocDemoViewer name="fileupload:custom-upload-demo" />
