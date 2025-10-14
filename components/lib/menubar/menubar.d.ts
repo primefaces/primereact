@@ -112,6 +112,28 @@ export interface MenubarContext {
      * @defaultValue false
      */
     active: boolean;
+    /**
+     * Current menuitem
+     */
+    item: any;
+    /**
+     * Current index of the menuitem.
+     */
+    index: number;
+    /**
+     * Current focused state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current disabled state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+    /**
+     * Current level of the menuitem.
+     */
+    level: number;
 }
 
 /**
