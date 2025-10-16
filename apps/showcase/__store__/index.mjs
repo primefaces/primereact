@@ -463,6 +463,16 @@ export const Store = {
             'filePath': 'demo/focustrap/basic-demo.tsx',
         },
     },
+    'gallery': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/gallery/basic-demo.tsx')),
+            'filePath': 'demo/gallery/basic-demo.tsx',
+        },
+        'grid-demo': {
+            'component': React.lazy(() => import('demo/gallery/grid-demo.tsx')),
+            'filePath': 'demo/gallery/grid-demo.tsx',
+        },
+    },
     'gettingstarted': {
         'setup-demo': {
             'component': React.lazy(() => import('demo/gettingstarted/setup-demo.tsx')),
