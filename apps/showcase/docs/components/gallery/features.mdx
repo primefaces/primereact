@@ -1,0 +1,42 @@
+---
+title: Gallery
+description: Gallery is a component to display a collection of images in a gallery.
+component: gallery
+---
+
+## Usage
+
+```tsx
+import { Gallery } from 'primereact/gallery';
+```
+
+```tsx
+<Gallery>
+    <Gallery.Backdrop />
+    <Gallery.Prev></Gallery.Prev>
+    <Gallery.Next></Gallery.Next>
+    <Gallery.Toolbar>
+        <Gallery.ToolbarItem action=""></Gallery.ToolbarItem>
+    </Gallery.Toolbar>
+    <Gallery.Content>
+        <Gallery.Item>
+            <img />
+        </Gallery.Item>
+    </Gallery.Content>
+    <Gallery.Thumbnail>
+        <Gallery.ThumbnailContent>
+            <Gallery.ThumbnailItem></Gallery.ThumbnailItem>
+        </Gallery.ThumbnailContent>
+    </Gallery.Thumbnail>
+</Gallery>
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="gallery:basic-demo" />
+
+### Grid
+
+<DocDemoViewer name="gallery:grid-demo" />
