@@ -22,7 +22,7 @@ interface Product {
 
 export default function LayoutDemo() {
     const [products, setProducts] = React.useState<Product[]>([]);
-    const [value, setValue] = React.useState<string>('list');
+    const [value, setValue] = React.useState<string>('grid');
 
     React.useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 12)));

@@ -5,7 +5,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
 export default function LayoutDemo() {
-    const [value, setValue] = React.useState<string>('list');
+    const [value, setValue] = React.useState<string>('grid');
 
     const listLayout = () => {
         return (

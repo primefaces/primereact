@@ -297,6 +297,32 @@ export const Store = {
             'filePath': 'demo/confirmpopup/template-demo.tsx',
         },
     },
+    'dataview': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/dataview/basic-demo.tsx')),
+            'filePath': 'demo/dataview/basic-demo.tsx',
+        },
+        'dataview-pt': {
+            'component': React.lazy(() => import('demo/dataview/dataview-pt.tsx')),
+            'filePath': 'demo/dataview/dataview-pt.tsx',
+        },
+        'layout-demo': {
+            'component': React.lazy(() => import('demo/dataview/layout-demo.tsx')),
+            'filePath': 'demo/dataview/layout-demo.tsx',
+        },
+        'loading-demo': {
+            'component': React.lazy(() => import('demo/dataview/loading-demo.tsx')),
+            'filePath': 'demo/dataview/loading-demo.tsx',
+        },
+        'pagination-demo': {
+            'component': React.lazy(() => import('demo/dataview/pagination-demo.tsx')),
+            'filePath': 'demo/dataview/pagination-demo.tsx',
+        },
+        'sort-demo': {
+            'component': React.lazy(() => import('demo/dataview/sort-demo.tsx')),
+            'filePath': 'demo/dataview/sort-demo.tsx',
+        },
+    },
     'dialog': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/dialog/basic-demo.tsx')),
@@ -375,6 +401,32 @@ export const Store = {
         'toggleable-demo': {
             'component': React.lazy(() => import('demo/fieldset/toggleable-demo.tsx')),
             'filePath': 'demo/fieldset/toggleable-demo.tsx',
+        },
+    },
+    'fileupload': {
+        'advanced-demo': {
+            'component': React.lazy(() => import('demo/fileupload/advanced-demo.tsx')),
+            'filePath': 'demo/fileupload/advanced-demo.tsx',
+        },
+        'auto-demo': {
+            'component': React.lazy(() => import('demo/fileupload/auto-demo.tsx')),
+            'filePath': 'demo/fileupload/auto-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/fileupload/basic-demo.tsx')),
+            'filePath': 'demo/fileupload/basic-demo.tsx',
+        },
+        'custom-upload-demo': {
+            'component': React.lazy(() => import('demo/fileupload/custom-upload-demo.tsx')),
+            'filePath': 'demo/fileupload/custom-upload-demo.tsx',
+        },
+        'fileupload-pt': {
+            'component': React.lazy(() => import('demo/fileupload/fileupload-pt.tsx')),
+            'filePath': 'demo/fileupload/fileupload-pt.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/fileupload/template-demo.tsx')),
+            'filePath': 'demo/fileupload/template-demo.tsx',
         },
     },
     'floatlabel': {

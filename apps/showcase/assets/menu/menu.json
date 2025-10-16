@@ -139,6 +139,10 @@
                     "name": "Data",
                     "children": [
                         {
+                            "name": "DataView",
+                            "to": "/docs/components/dataview"
+                        },
+                        {
                             "name": "Paginator",
                             "to": "/docs/components/paginator"
                         },
@@ -219,6 +223,15 @@
                         {
                             "name": "Tooltip",
                             "to": "/docs/components/tooltip"
+                        }
+                    ]
+                },
+                {
+                    "name": "File",
+                    "children": [
+                        {
+                            "name": "Upload",
+                            "to": "/docs/components/fileupload"
                         }
                     ]
                 },
