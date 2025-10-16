@@ -9,6 +9,7 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
+import { Carousel } from 'primereact/carousel';
 
 /**s
  * Event fired when the gallery's active index changes.
@@ -126,15 +127,15 @@ export interface useGalleryExposes {
     /**
      * Ref to the content element.
      */
-    contentRef: React.RefObject<HTMLDivElement | null>;
+    contentRef: React.RefObject<HTMLElement | null>;
     /**
      * Ref to the toolbar element.
      */
-    toolbarRef: React.RefObject<HTMLDivElement | null>;
+    toolbarRef: React.RefObject<HTMLElement | null>;
     /**
      * Ref to the thumbnail element.
      */
-    thumbnailRef: React.RefObject<React.RefObject<HTMLDivElement> | null>;
+    thumbnailRef: React.RefObject<React.RefObject<typeof Carousel> | null>;
     /**
      * Ref to the previous button element.
      */
