@@ -1,5 +1,15 @@
 # Changelog
 
+## [11.0.0-alpha.7](https://github.com/primefaces/primereact/tree/11.0.0-alpha.7) (2025-10-16)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.6...11.0.0-alpha.7)
+
+**Implemented New Features and Enhancements:**
+
+- New Component: Gallery[\#8339](https://github.com/primefaces/primereact/issues/8339)
+- New FileUpload Component [\#8336](https://github.com/primefaces/primereact/issues/8336)
+- New DataView Component [\#8325](https://github.com/primefaces/primereact/issues/8325)
+
 ## [11.0.0-alpha.6](https://github.com/primefaces/primereact/tree/11.0.0-alpha.6) (2025-10-06)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.5...11.0.0-alpha.6)
