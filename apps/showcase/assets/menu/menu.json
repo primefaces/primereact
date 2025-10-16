@@ -260,6 +260,11 @@
                             "name": "Carousel",
                             "to": "/docs/components/carousel",
                             "badge": "New"
+                        },
+                        {
+                            "name": "Gallery",
+                            "to": "/docs/components/gallery",
+                            "badge": "New"
                         }
                     ]
                 },
