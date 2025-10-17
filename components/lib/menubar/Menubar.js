@@ -559,7 +559,7 @@ export const Menubar = React.memo(
 
         useUpdateEffect(() => {
             if (focusTrigger) {
-                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : reverseTrigger.current ? findLastItemIndex() : findFirstFocusedItemIndex();
+                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : reverseTrigger.current ? findLastItemIndex() : findFirstItemIndex();
 
                 changeFocusedItemIndex(itemIndex);
                 reverseTrigger.current = false;
