@@ -8,6 +8,7 @@ export const CascadeSelectSub = React.memo((props) => {
     const mergeProps = useMergeProps();
     const [activeOptionState, setActiveOptionState] = React.useState(null);
     const elementRef = React.useRef(null);
+    const shouldFocusSubmenu = React.useRef(false);
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
@@ -64,6 +65,7 @@ export const CascadeSelectSub = React.memo((props) => {
                     if (activeOptionState === option) {
                         listItem.children[1].children[0].children[0].focus();
                     } else {
+                        shouldFocusSubmenu.current = true;
                         setActiveOptionState(option);
                     }
                 }
@@ -74,10 +76,16 @@ export const CascadeSelectSub = React.memo((props) => {
             case 'ArrowLeft':
                 setActiveOptionState(null);
 
-                const parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
+                const currentList = event.currentTarget.parentElement.parentElement;
+                const wrapperDiv = currentList.parentElement;
+                const parentListItem = wrapperDiv.parentElement;
 
-                if (parentList) {
-                    parentList.focus();
+                if (parentListItem && parentListItem.tagName === 'LI') {
+                    const parentContent = parentListItem.querySelector('[data-pc-section="content"]');
+
+                    if (parentContent) {
+                        parentContent.focus();
+                    }
                 }
 
                 break;
@@ -177,6 +185,25 @@ export const CascadeSelectSub = React.memo((props) => {
             setActiveOptionState(null);
         }
     }, [props.parentActive]);
+
+    useUpdateEffect(() => {
+        if (shouldFocusSubmenu.current && activeOptionState && elementRef.current) {
+            shouldFocusSubmenu.current = false;
+
+            setTimeout(() => {
+                const activeItem = elementRef.current.querySelector('[data-p-highlight="true"]');
+
+                if (activeItem && activeItem.children.length > 1) {
+                    const submenuWrapper = activeItem.children[1];
+                    const firstFocusable = submenuWrapper.querySelector('div[tabindex="0"]');
+
+                    if (firstFocusable) {
+                        firstFocusable.focus();
+                    }
+                }
+            }, 150);
+        }
+    }, [activeOptionState]);
 
     const createSubmenu = (option) => {
         if (isOptionGroup(option) && activeOptionState === option) {
