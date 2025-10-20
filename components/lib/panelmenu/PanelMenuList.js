@@ -48,6 +48,16 @@ export const PanelMenuList = React.memo((props) => {
 
     const onFocus = (event) => {
         setFocused(true);
+
+        if (ObjectUtils.isEmpty(focusedItem)) {
+            setTimeout(() => {
+                const firstItem = findFirstItem();
+
+                if (firstItem) {
+                    setFocusedItem(firstItem);
+                }
+            }, 0);
+        }
     };
 
     const onBlur = () => {
