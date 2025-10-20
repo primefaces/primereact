@@ -52,7 +52,7 @@ export const PanelMenuList = React.memo((props) => {
         if (ObjectUtils.isEmpty(focusedItem)) {
             setTimeout(() => {
                 const firstItem = findFirstItem();
-                
+
                 if (firstItem) {
                     setFocusedItem(firstItem);
                 }
