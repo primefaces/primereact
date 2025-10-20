@@ -1,0 +1,81 @@
+---
+title: Listbox
+description: Listbox displays a list of options for selection.
+component: listbox
+---
+
+## Usage
+
+```tsx
+import { Listbox } from 'primereact/listbox';
+```
+
+```tsx
+...
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="listbox:basic-demo" />
+
+### Option
+
+<DocDemoViewer name="listbox:option-demo" />
+
+### Selection
+
+#### Checkmark
+
+<DocDemoViewer name="listbox:checkmark-selection-demo" />
+
+#### Multiple
+
+<DocDemoViewer name="listbox:multiple-selection-demo" />
+
+#### Checkbox
+
+<DocDemoViewer name="listbox:checkbox-selection-demo" />
+
+#### Custom
+
+<DocDemoViewer name="listbox:custom-selection-demo" />
+
+### Group
+
+<DocDemoViewer name="listbox:group-demo" />
+
+### Filter
+
+<DocDemoViewer name="listbox:filter-demo" />
+
+### Invalid
+
+When _invalid_ is present, a visual hint is applied to indicate that the Listbox is in an invalid state.
+
+<DocDemoViewer name="listbox:invalid-demo" />
+
+### Disabled
+
+When _disabled_ is present, a visual hint is applied to indicate that the Listbox cannot be interacted with.
+
+<DocDemoViewer name="listbox:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Knob element component uses slider role in addition to the _aria-valuemin_, _aria-valuemax_ and _aria-valuenow_ attributes. Value to describe the component can be defined using _aria-labelledby_ and _aria-label_ props.
+
+### Keyboard Support
+
+| Key               | Function                          |
+| ----------------- | --------------------------------- |
+| `tab`             | Moves focus to the knob.          |
+| `left/down arrow` | Decrements the value.             |
+| `right/up arrow`  | Increments the value.             |
+| `home`            | Set the minimum value.            |
+| `end`             | Set the maximum value.            |
+| `page up`         | Increments the value by 10 steps. |
+| `page down`       | Decrements the value by 10 steps. |

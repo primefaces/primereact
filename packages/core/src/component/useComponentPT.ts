@@ -121,7 +121,7 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
             .reduce<Record<string, unknown>>((result, [key, value]) => {
                 const [, slot, ...rest] = key.split('-');
 
-                [slot, rest?.join('-')]?.reduce((currentObj, nestedKey, index, array) => {
+                [slot, rest?.join('-')]?.filter(Boolean).reduce((currentObj, nestedKey, index, array) => {
                     if (!currentObj[nestedKey]) {
                         currentObj[nestedKey] = index === array.length - 1 ? value : {};
                     }

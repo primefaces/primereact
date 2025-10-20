@@ -8,6 +8,7 @@ export const defaultProps: CheckboxProps = {
     name: undefined,
     size: undefined,
     variant: undefined,
+    tabIndex: undefined,
     disabled: false,
     readOnly: false,
     required: false,

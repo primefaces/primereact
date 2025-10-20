@@ -23,11 +23,17 @@ export const RadioButton = withComponent({
                   ...inProps,
                   checked: equals(group.props.value, props.value),
                   defaultChecked: equals(group.props.defaultValue, props.value),
-                  onCheckedChange: React.useCallback((event: RadioButtonChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
+                  onCheckedChange: React.useCallback(
+                      (event: RadioButtonChangeEvent) => group.updateChange({ ...event, value: props.value }),
+                      [group.updateChange]
+                  )
               }
             : {
                   ...inProps,
-                  onCheckedChange: React.useCallback((event: RadioButtonChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }), [props.onCheckedChange])
+                  onCheckedChange: React.useCallback(
+                      (event: RadioButtonChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }),
+                      [props.onCheckedChange]
+                  )
               };
 
         const radioButton = useRadioButton(useRadioButtonProps);
@@ -69,7 +75,7 @@ export const RadioButton = withComponent({
                     'aria-invalid': props.invalid || group?.props.invalid || undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
-                    onChange
+                    onChange: !props.readOnly ? onChange : undefined
                 },
                 ptm('input')
             );
