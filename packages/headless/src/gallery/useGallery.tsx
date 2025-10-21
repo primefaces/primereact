@@ -1,5 +1,5 @@
 import { withHeadless } from '@primereact/core/headless';
-import { Carousel } from 'primereact/carousel';
+import type { CarouselInstance } from '@primereact/types/shared/carousel';
 import * as React from 'react';
 import { defaultProps } from './useGallery.props';
 
@@ -11,7 +11,7 @@ export const useGallery = withHeadless({
         const contentRef = React.useRef<HTMLDivElement>(null);
         const itemsRef = React.useRef<React.RefObject<HTMLDivElement>[]>([]);
         const toolbarRef = React.useRef<HTMLDivElement>(null);
-        const thumbnailRef = React.useRef<React.RefObject<typeof Carousel>>(null);
+        const thumbnailRef = React.useRef<CarouselInstance | null>(null);
         const prevRef = React.useRef<HTMLButtonElement>(null);
         const nextRef = React.useRef<HTMLButtonElement>(null);
         const [, forceUpdate] = React.useState(0);
