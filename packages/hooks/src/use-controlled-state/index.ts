@@ -68,5 +68,11 @@ export function useControlledState<T = unknown, E = T>({ value, defaultValue, on
         [computedValue, isControlled, onChange]
     );
 
+    React.useEffect(() => {
+        if (!isControlled) {
+            setValueState(defaultValue);
+        }
+    }, [defaultValue, isControlled]);
+
     return [computedValue, setValue, isControlled];
 }

@@ -27,7 +27,10 @@ export default function DataViewPTDemo() {
         <DataView>
             <div className="flex flex-col">
                 {products.map((product, index) => (
-                    <div key={index} className={`flex flex-col sm:flex-row sm:items-center p-6 gap-4 ${index !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}>
+                    <div
+                        key={index}
+                        className={`flex flex-col sm:flex-row sm:items-center p-6 gap-4 ${index !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}
+                    >
                         <div className="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
                             <div className="flex flex-row md:flex-col justify-between items-start gap-2">
                                 <div>
@@ -53,7 +56,10 @@ export default function DataViewPTDemo() {
                                     <Button variant="outlined">
                                         <i className="pi pi-heart"></i>
                                     </Button>
-                                    <Button disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto md:flex-initial whitespace-nowrap">
+                                    <Button
+                                        disabled={product.inventoryStatus === 'OUTOFSTOCK'}
+                                        className="flex-auto md:flex-initial whitespace-nowrap"
+                                    >
                                         <i className="pi pi-shopping-cart"></i>
                                         Buy Now
                                     </Button>

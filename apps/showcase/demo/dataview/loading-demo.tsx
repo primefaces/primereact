@@ -11,7 +11,10 @@ export default function LayoutDemo() {
         return (
             <div className="flex flex-col">
                 {Array.from({ length: 6 }, (_, i) => (
-                    <div key={i} className={`flex flex-col xl:flex-row xl:items-start p-6 gap-6 ${i !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}>
+                    <div
+                        key={i}
+                        className={`flex flex-col xl:flex-row xl:items-start p-6 gap-6 ${i !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}
+                    >
                         <Skeleton className="!w-9/12 sm:!w-64 xl:!w-40 !h-24 mx-auto" />
                         <div className="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-6">
                             <div className="flex flex-col items-center sm:items-start gap-4">
@@ -67,7 +70,11 @@ export default function LayoutDemo() {
         <div className="card">
             <DataView>
                 <div className="flex justify-end border-b border-surface-200 dark:border-surface-700 pb-4">
-                    <ToggleButton.Group value={value} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)} allowEmpty={false}>
+                    <ToggleButton.Group
+                        value={value}
+                        onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)}
+                        allowEmpty={false}
+                    >
                         <ToggleButton value="list">
                             <ToggleButton.Indicator>
                                 <i className="pi pi-bars"></i>

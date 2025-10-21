@@ -18,7 +18,14 @@ function RichColorsToast() {
                                         <Toast.Action as={Button} size="small" className="mt-4" />
                                     </div>
                                 </div>
-                                <Toast.Close as={Button} iconOnly severity={toastItem.variant ?? 'secondary'} variant="text" size="small" className={'absolute top-2 right-2'}>
+                                <Toast.Close
+                                    as={Button}
+                                    iconOnly
+                                    severity={toastItem.variant ?? 'secondary'}
+                                    variant="text"
+                                    size="small"
+                                    className={'absolute top-2 right-2'}
+                                >
                                     <i className="pi pi-times"></i>
                                 </Toast.Close>
                             </Toast.Item>
@@ -33,7 +40,11 @@ function RichColorsToast() {
 function RichColorsDemo() {
     return (
         <div className="card flex flex-wrap items-center justify-center gap-4">
-            <Button variant="outlined" severity="info" onClick={() => toast.info({ title: 'Info', description: 'This is an info toast', group: 'rich-colors' })}>
+            <Button
+                variant="outlined"
+                severity="info"
+                onClick={() => toast.info({ title: 'Info', description: 'This is an info toast', group: 'rich-colors' })}
+            >
                 Info
             </Button>
             <Button
@@ -49,10 +60,18 @@ function RichColorsDemo() {
             >
                 Success
             </Button>
-            <Button variant="outlined" severity="danger" onClick={() => toast.danger({ title: 'Error', description: 'This is an error toast', group: 'rich-colors' })}>
+            <Button
+                variant="outlined"
+                severity="danger"
+                onClick={() => toast.danger({ title: 'Error', description: 'This is an error toast', group: 'rich-colors' })}
+            >
                 Danger
             </Button>
-            <Button variant="outlined" severity="warn" onClick={() => toast.warn({ title: 'Warning', description: 'This is a warning toast', group: 'rich-colors' })}>
+            <Button
+                variant="outlined"
+                severity="warn"
+                onClick={() => toast.warn({ title: 'Warning', description: 'This is a warning toast', group: 'rich-colors' })}
+            >
                 Warn
             </Button>
             <RichColorsToast />

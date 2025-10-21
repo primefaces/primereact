@@ -22,7 +22,17 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-center">
-            <InputText ref={ref} value={value} placeholder="99-999999" onInput={onMaskInput} onKeyDown={onMaskKeyDown} onKeyPress={onMaskKeyPress} onFocus={onMaskFocus} onBlur={onMaskBlur} onPaste={onMaskPaste} />
+            <InputText
+                ref={ref}
+                value={value}
+                placeholder="99-999999"
+                onInput={onMaskInput}
+                onKeyDown={onMaskKeyDown}
+                onKeyPress={onMaskKeyPress}
+                onFocus={onMaskFocus}
+                onBlur={onMaskBlur}
+                onPaste={onMaskPaste}
+            />
         </div>
     );
 }

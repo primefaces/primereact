@@ -35,7 +35,10 @@ export default function BasicDemo() {
                     <span className="text-2xl font-bold">Team</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
                 </AnimateOnScroll>
-                <AnimateOnScroll className="flex flex-col border border-surface shadow-lg justify-center items-center max-w-80 rounded-2xl p-8 gap-4" enterClassName="animate-enter fade-in-10 slide-in-from-r-8 animate-duration-1000">
+                <AnimateOnScroll
+                    className="flex flex-col border border-surface shadow-lg justify-center items-center max-w-80 rounded-2xl p-8 gap-4"
+                    enterClassName="animate-enter fade-in-10 slide-in-from-r-8 animate-duration-1000"
+                >
                     <div className="rounded-full bg-primary text-primary-contrast w-12 h-12 flex items-center justify-center">
                         <i className="pi pi-building !text-2xl"></i>
                     </div>
@@ -148,13 +151,26 @@ export default function BasicDemo() {
             </div>
             <div className="h-[30rem]"></div>
             <div className="flex flex-col items-center gap-8 w-full">
-                <AnimateOnScroll enterClassName="animate-enter fade-in-10 slide-in-from-b-16 animate-duration-1000" leaveClassName="animate-leave fade-out-0 animate-duration-100">
-                    <div className="text-5xl lg:text-7xl text-center font-bold max-w-lg lg:max-w-3xl text-surface-900 dark:text-surface-50">Discover real-world design inspiration.</div>
+                <AnimateOnScroll
+                    enterClassName="animate-enter fade-in-10 slide-in-from-b-16 animate-duration-1000"
+                    leaveClassName="animate-leave fade-out-0 animate-duration-100"
+                >
+                    <div className="text-5xl lg:text-7xl text-center font-bold max-w-lg lg:max-w-3xl text-surface-900 dark:text-surface-50">
+                        Discover real-world design inspiration.
+                    </div>
                 </AnimateOnScroll>
-                <AnimateOnScroll enterClassName="animate-enter fade-in-10 slide-in-from-b-16 animate-duration-1000" leaveClassName="animate-leave fade-out-0 animate-duration-100">
-                    <div className="max-w-md lg:max-w-2xl text-lg lg:text-xl text-center text-muted-color">Featuring over 400.000 screens and 1,000 iOS, Android & Web apps — New content weekly.</div>
+                <AnimateOnScroll
+                    enterClassName="animate-enter fade-in-10 slide-in-from-b-16 animate-duration-1000"
+                    leaveClassName="animate-leave fade-out-0 animate-duration-100"
+                >
+                    <div className="max-w-md lg:max-w-2xl text-lg lg:text-xl text-center text-muted-color">
+                        Featuring over 400.000 screens and 1,000 iOS, Android & Web apps — New content weekly.
+                    </div>
                 </AnimateOnScroll>
-                <AnimateOnScroll enterClassName="animate-enter fade-in-10 slide-in-from-b-16 animate-duration-1000" leaveClassName="animate-leave fade-out-0 animate-duration-100">
+                <AnimateOnScroll
+                    enterClassName="animate-enter fade-in-10 slide-in-from-b-16 animate-duration-1000"
+                    leaveClassName="animate-leave fade-out-0 animate-duration-100"
+                >
                     <div className="flex items-center justify-center gap-4">
                         <Button size="large" rounded>
                             Join for free

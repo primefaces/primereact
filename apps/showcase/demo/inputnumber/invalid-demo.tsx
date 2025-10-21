@@ -8,8 +8,23 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex flex-wrap justify-center gap-4">
-            <InputNumber value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} invalid={value1 === null} mode="decimal" minFractionDigits={2} placeholder="Amount" />
-            <InputNumber value={value2} onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)} invalid={value2 === null} mode="decimal" minFractionDigits={2} variant="filled" placeholder="Amount" />
+            <InputNumber
+                value={value1}
+                onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)}
+                invalid={value1 === null}
+                mode="decimal"
+                minFractionDigits={2}
+                placeholder="Amount"
+            />
+            <InputNumber
+                value={value2}
+                onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)}
+                invalid={value2 === null}
+                mode="decimal"
+                minFractionDigits={2}
+                variant="filled"
+                placeholder="Amount"
+            />
         </div>
     );
 }

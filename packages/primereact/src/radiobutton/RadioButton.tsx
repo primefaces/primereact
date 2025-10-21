@@ -69,7 +69,7 @@ export const RadioButton = withComponent({
                     'aria-invalid': props.invalid || group?.props.invalid || undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
-                    onChange
+                    onChange: !props.readOnly ? onChange : undefined
                 },
                 ptm('input')
             );

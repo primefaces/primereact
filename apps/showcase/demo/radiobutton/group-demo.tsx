@@ -8,7 +8,11 @@ export default function GroupDemo() {
 
     return (
         <div className="card flex items-center justify-center">
-            <RadioButton.Group className="flex flex-wrap gap-4" value={ingredient} onValueChange={(e: RadioButtonGroupValueChangeEvent) => setIngredient(e.value as string)}>
+            <RadioButton.Group
+                className="flex flex-wrap gap-4"
+                value={ingredient}
+                onValueChange={(e: RadioButtonGroupValueChangeEvent) => setIngredient(e.value as string)}
+            >
                 <div className="flex items-center gap-2">
                     <RadioButton inputId="ingredient1" name="pizza" value="cheese" />
                     <label htmlFor="ingredient1">Cheese</label>

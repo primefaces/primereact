@@ -68,7 +68,7 @@
         "react-scan": "0.3.3",
         "rimraf": "^6.0.1",
         "tsup": "^8.3.6",
-        "typescript": "^5.8.2",
+        "typescript": "^5.9.3",
         "typescript-eslint": "^8.24.0",
         "vitest": "^3.2.3"
     },
@@ -76,6 +76,11 @@
         "access": "public"
     },
     "packageManager": "pnpm@9.6.0",
+    "pnpm": {
+        "overrides": {
+            "typedoc>typescript": "^5.9.3"
+        }
+    },
     "lint-staged": {
         "**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}": ["eslint --fix", "prettier --write"],
         "**/*.{css,scss,md,mdx,json,yml}": "prettier --write"

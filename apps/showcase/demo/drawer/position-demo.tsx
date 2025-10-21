@@ -34,8 +34,8 @@ export default function PositionDemo() {
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
@@ -49,14 +49,19 @@ export default function PositionDemo() {
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
             </Drawer>
 
-            <Drawer position="top" open={visibleTop} onOpenChange={(e: DrawerChangeEvent) => setVisibleTop(e.value as boolean)} style={{ height: 'auto' }}>
+            <Drawer
+                position="top"
+                open={visibleTop}
+                onOpenChange={(e: DrawerChangeEvent) => setVisibleTop(e.value as boolean)}
+                style={{ height: 'auto' }}
+            >
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Top Drawer</Drawer.Title>
@@ -64,14 +69,19 @@ export default function PositionDemo() {
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
             </Drawer>
 
-            <Drawer position="bottom" open={visibleBottom} onOpenChange={(e: DrawerChangeEvent) => setVisibleBottom(e.value as boolean)} style={{ height: 'auto' }}>
+            <Drawer
+                position="bottom"
+                open={visibleBottom}
+                onOpenChange={(e: DrawerChangeEvent) => setVisibleBottom(e.value as boolean)}
+                style={{ height: 'auto' }}
+            >
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Bottom Drawer</Drawer.Title>
@@ -79,8 +89,8 @@ export default function PositionDemo() {
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>

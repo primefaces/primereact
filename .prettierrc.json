@@ -15,6 +15,13 @@
             }
         },
         {
+            "files": ["apps/showcase/demo/**/*.tsx"],
+            "options": {
+                "parser": "typescript",
+                "printWidth": 150
+            }
+        },
+        {
             "files": ["*.json"],
             "options": {
                 "parser": "json"

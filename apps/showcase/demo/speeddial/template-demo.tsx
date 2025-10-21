@@ -16,7 +16,13 @@ export default function TemplateDemo() {
     return (
         <div className="card">
             <div className="flex items-end justify-center" style={{ position: 'relative', height: '400px' }}>
-                <SpeedDial visible={visible} onVisibleChange={(e: SpeedDialChangeEvent) => setVisible(e.value as boolean)} direction="up" transitionDelay={80} style={{ position: 'absolute' }}>
+                <SpeedDial
+                    visible={visible}
+                    onVisibleChange={(e: SpeedDialChangeEvent) => setVisible(e.value as boolean)}
+                    direction="up"
+                    transitionDelay={80}
+                    style={{ position: 'absolute' }}
+                >
                     {(instance: SpeedDialInstance) => {
                         return (
                             <>
@@ -34,7 +40,11 @@ export default function TemplateDemo() {
                                 </Button>
                                 <SpeedDial.List>
                                     {items.map((action, index) => (
-                                        <SpeedDial.Item key={index} className="flex flex-col items-center justify-between gap-2 p-2 border rounded border-surface-200 dark:border-surface-700 w-20 cursor-pointer" onClick={instance?.onItemClick}>
+                                        <SpeedDial.Item
+                                            key={index}
+                                            className="flex flex-col items-center justify-between gap-2 p-2 border rounded border-surface-200 dark:border-surface-700 w-20 cursor-pointer"
+                                            onClick={instance?.onItemClick}
+                                        >
                                             <span className={action.icon}></span>
                                             <span>{action.label}</span>
                                         </SpeedDial.Item>

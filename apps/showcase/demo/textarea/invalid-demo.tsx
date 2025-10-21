@@ -6,7 +6,13 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-center">
-            <Textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} invalid={value === ''} rows={5} cols={30} />
+            <Textarea
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)}
+                invalid={value === ''}
+                rows={5}
+                cols={30}
+            />
         </div>
     );
 }

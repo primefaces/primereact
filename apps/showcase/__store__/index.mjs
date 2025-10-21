@@ -733,6 +733,52 @@ export const Store = {
             'filePath': 'demo/knob/template-demo.tsx',
         },
     },
+    'listbox': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/listbox/basic-demo.tsx')),
+            'filePath': 'demo/listbox/basic-demo.tsx',
+        },
+        'checkbox-selection-demo': {
+            'component': React.lazy(() => import('demo/listbox/checkbox-selection-demo.tsx')),
+            'filePath': 'demo/listbox/checkbox-selection-demo.tsx',
+        },
+        'checkmark-selection-demo': {
+            'component': React.lazy(() => import('demo/listbox/checkmark-selection-demo.tsx')),
+            'filePath': 'demo/listbox/checkmark-selection-demo.tsx',
+        },
+        'custom-selection-demo': {
+            'component': React.lazy(() => import('demo/listbox/custom-selection-demo.tsx')),
+            'filePath': 'demo/listbox/custom-selection-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/listbox/disabled-demo.tsx')),
+            'filePath': 'demo/listbox/disabled-demo.tsx',
+        },
+        'filter-demo': {
+            'component': React.lazy(() => import('demo/listbox/filter-demo.tsx')),
+            'filePath': 'demo/listbox/filter-demo.tsx',
+        },
+        'group-demo': {
+            'component': React.lazy(() => import('demo/listbox/group-demo.tsx')),
+            'filePath': 'demo/listbox/group-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/listbox/invalid-demo.tsx')),
+            'filePath': 'demo/listbox/invalid-demo.tsx',
+        },
+        'listbox-pt': {
+            'component': React.lazy(() => import('demo/listbox/listbox-pt.tsx')),
+            'filePath': 'demo/listbox/listbox-pt.tsx',
+        },
+        'multiple-selection-demo': {
+            'component': React.lazy(() => import('demo/listbox/multiple-selection-demo.tsx')),
+            'filePath': 'demo/listbox/multiple-selection-demo.tsx',
+        },
+        'option-demo': {
+            'component': React.lazy(() => import('demo/listbox/option-demo.tsx')),
+            'filePath': 'demo/listbox/option-demo.tsx',
+        },
+    },
     'message': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/message/basic-demo.tsx')),

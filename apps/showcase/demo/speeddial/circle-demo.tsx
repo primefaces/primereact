@@ -1,7 +1,13 @@
 import { SpeedDial } from 'primereact/speeddial';
 
 export default function CircleDemo() {
-    const items = [{ icon: 'pi pi-pencil' }, { icon: 'pi pi-refresh' }, { icon: 'pi pi-trash' }, { icon: 'pi pi-upload' }, { icon: 'pi pi-external-link' }];
+    const items = [
+        { icon: 'pi pi-pencil' },
+        { icon: 'pi pi-refresh' },
+        { icon: 'pi pi-trash' },
+        { icon: 'pi pi-upload' },
+        { icon: 'pi pi-external-link' }
+    ];
 
     return (
         <div className="card">

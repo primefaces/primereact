@@ -20,7 +20,13 @@ export default function RegexWordDemo() {
                 <Label htmlFor="numkeys" className="font-bold block mb-2">
                     Block Numeric (allow &quot;+&quot; only once at start)
                 </Label>
-                <InputText id="numkeys" value={text} onChange={(e: React.ChangeEvent<HTMLInputElement>) => validateInput(e)} onKeyPress={onKeyPress} fluid />
+                <InputText
+                    id="numkeys"
+                    value={text}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => validateInput(e)}
+                    onKeyPress={onKeyPress}
+                    fluid
+                />
             </div>
         </div>
     );

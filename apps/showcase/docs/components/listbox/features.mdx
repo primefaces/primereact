@@ -1,0 +1,125 @@
+---
+title: Listbox
+description: ListBox is used to select one or more values from a list of items.
+component: listbox
+---
+
+## Usage
+
+```tsx
+import { Listbox } from 'primereact/listbox';
+```
+
+```tsx
+<Listbox>
+    <Listbox.Options />
+</Listbox>
+```
+
+## Examples
+
+### Basic
+
+Listbox is used as a controlled component with `value` and `onValueChange` properties along with an `options` collection. Label and value of an option are defined with the `optionLabel` and `optionValue` properties respectively.
+Note that, when options are simple primitive values such as a string array, no `optionLabel` and `optionValue` would be necessary.
+
+<DocDemoViewer name="listbox:basic-demo" />
+
+### Option
+
+Options can be defined manually using `Listbox.Option` component for custom rendering. Each option requires a `uKey` or `index` prop for identification. The `optionKey` property on the Listbox specifies which field from the data corresponds to the option keys.
+
+<DocDemoViewer name="listbox:option-demo" />
+
+### Selection
+
+Listbox provides various selection modes. By default, only single item can be selected.
+
+#### Checkmark
+
+A checkmark icon is displayed next to the selected option when `checkmark` property is enabled.
+
+<DocDemoViewer name="listbox:checkmark-selection-demo" />
+
+#### Multiple
+
+Multiple items can be selected by setting `multiple` property. In this mode, the value binding should be an array.
+
+<DocDemoViewer name="listbox:multiple-selection-demo" />
+
+#### Checkbox
+
+Checkboxes can be displayed alongside each option by enabling the `checkbox` property. This works with `multiple` selection mode to provide a familiar multi-select UI. You can also add a `Listbox.Header` to display a title or additional controls.
+
+<DocDemoViewer name="listbox:checkbox-selection-demo" />
+
+#### Custom
+
+For full control over the option rendering and selection display, a custom render function can be used inside `Listbox.Options`. The function receives the listbox instance and options data, allowing completely custom option layouts with dynamic selection indicators.
+
+<DocDemoViewer name="listbox:custom-selection-demo" />
+
+### Group
+
+Options can be organized into groups with headers. Use `optionGroupLabel` to specify the label field for groups and `optionGroupChildren` to define the field that contains the items in each group.
+
+<DocDemoViewer name="listbox:group-demo" />
+
+### Filter
+
+Filtering enables searching through the options. Place a `Listbox.Filter` component inside `Listbox.Header` to add a search input. Any input component can be used with the `as` prop and the filtering logic can be controlled with the `onChange` event.
+
+<DocDemoViewer name="listbox:filter-demo" />
+
+### Invalid
+
+When the `invalid` property is set to true, a visual hint is applied to indicate that the Listbox is in an invalid state. This is commonly used for form validation feedback.
+
+<DocDemoViewer name="listbox:invalid-demo" />
+
+### Disabled
+
+When the `disabled` property is set to true, the Listbox becomes non-interactive and a visual hint is applied to indicate that it cannot be used.
+
+<DocDemoViewer name="listbox:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Value to describe the component can be provided `aria-labelledby` or `aria-label` props. The list element has a listbox role with the aria-multiselectable attribute that sets to true when multiple selection is enabled. Each list item has an option role with `aria-selected` and `aria-disabled` as their attributes.
+
+### Keyboard Support
+
+| Key                       | Function                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------ |
+| `tab`                     | Moves focus to the first selected option, if there is none then first option receives the focus. |
+| `up arrow`                | Moves focus to the previous option.                                                              |
+| `down arrow`              | Moves focus to the next option.                                                                  |
+| `enter`                   | Toggles the selected state of the focused option.                                                |
+| `space`                   | Toggles the selected state of the focused option.                                                |
+| `home`                    | Moves focus to the first option.                                                                 |
+| `end`                     | Moves focus to the last option.                                                                  |
+| `shift + down arrow`      | Moves focus to the next option and toggles the selection state.                                  |
+| `shift + up arrow`        | Moves focus to the previous option and toggles the selection state.                              |
+| `shift + space`           | Selects the items between the most recently selected option and the focused option.              |
+| `control + shift + home`  | Selects the focused option and all the options up to the first one.                              |
+| `control + shift + end`   | Selects the focused option and all the options down to the last one.                             |
+| `control + a`             | Selects all options.                                                                             |
+| `page up`                 | Jumps visual focus to the first option.                                                          |
+| `page down`               | Jumps visual focus to the last option.                                                           |
+| `any printable character` | Moves focus to the option whose label starts with the characters being typed.                    |
+
+### Filter Input Keyboard Support
+
+| Key           | Function                                                                                                           |
+| ------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `down arrow`  | Moves focus to the next option, if there is none then visual focus does not change.                                |
+| `up arrow`    | Moves focus to the previous option, if there is none then visual focus does not change.                            |
+| `left arrow`  | Removes the visual focus from the current option and moves input cursor to one character left.                     |
+| `right arrow` | Removes the visual focus from the current option and moves input cursor to one character right.                    |
+| `home`        | Moves input cursor at the end, if not then moves focus to the first option.                                        |
+| `end`         | Moves input cursor at the beginning, if not then moves focus to the last option.                                   |
+| `enter`       | Closes the popup and moves focus to the multiselect element.                                                       |
+| `escape`      | Closes the popup and moves focus to the multiselect element.                                                       |
+| `tab`         | Moves focus to the next focusable element in the component. If there is none, moves focus to next element in page. |

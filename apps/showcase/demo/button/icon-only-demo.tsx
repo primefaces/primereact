@@ -12,7 +12,9 @@ export default function IconOnlyDemo() {
 
     return (
         <div className="card">
-            <div className="flex justify-center mb-8">{/*<SelectButton v-model="size" :options="sizeOptions" optionLabel="label" optionValue="value" dataKey="label" />*/}</div>
+            <div className="flex justify-center mb-8">
+                {/*<SelectButton v-model="size" :options="sizeOptions" optionLabel="label" optionValue="value" dataKey="label" />*/}
+            </div>
 
             <div className="flex flex-wrap justify-center gap-4 mb-6">
                 <Button aria-label="Filter" size={size} iconOnly>

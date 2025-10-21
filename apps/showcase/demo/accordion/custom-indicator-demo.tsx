@@ -15,18 +15,23 @@ export default function CustomIndicatorDemo() {
                     </Accordion.Header>
                     <Accordion.Content>
                         <p>
-                            This service helps you manage your projects more efficiently by offering real-time collaboration, task tracking, and powerful analytics. Whether you&apos;re working solo or in a team, it&apos;s built to scale with your
-                            needs.
+                            This service helps you manage your projects more efficiently by offering real-time collaboration, task tracking, and
+                            powerful analytics. Whether you&apos;re working solo or in a team, it&apos;s built to scale with your needs.
                         </p>
                     </Accordion.Content>
                 </Accordion.Panel>
                 <Accordion.Panel value="2">
                     <Accordion.Header>
                         Is my data secure?
-                        <Accordion.HeaderIndicator>{({ accordionpanel }: AccordionHeaderIndicatorInstance) => (accordionpanel?.active ? <MinusIcon /> : <PlusIcon />)}</Accordion.HeaderIndicator>
+                        <Accordion.HeaderIndicator>
+                            {({ accordionpanel }: AccordionHeaderIndicatorInstance) => (accordionpanel?.active ? <MinusIcon /> : <PlusIcon />)}
+                        </Accordion.HeaderIndicator>
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>Yes. We use end-to-end encryption and follow industry best practices to ensure your data is protected. Your information is stored on secure servers and regularly backed up.</p>
+                        <p>
+                            Yes. We use end-to-end encryption and follow industry best practices to ensure your data is protected. Your information is
+                            stored on secure servers and regularly backed up.
+                        </p>
                     </Accordion.Content>
                 </Accordion.Panel>
                 <Accordion.Panel value="3">
@@ -35,7 +40,10 @@ export default function CustomIndicatorDemo() {
                         Can I upgrade or downgrade my plan later?
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>Absolutely. You can change your subscription plan at any time from your account settings. Changes take effect immediately, and any billing adjustments are handled automatically.</p>
+                        <p>
+                            Absolutely. You can change your subscription plan at any time from your account settings. Changes take effect immediately,
+                            and any billing adjustments are handled automatically.
+                        </p>
                     </Accordion.Content>
                 </Accordion.Panel>
             </Accordion>

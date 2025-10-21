@@ -12,7 +12,13 @@ function CustomizationDemo() {
                     </Paginator.Prev>
                     <Paginator.Pages>
                         {({ paginator }: PaginatorPagesInstance) =>
-                            paginator?.pages.map((page, index) => (page.type === 'page' ? <Paginator.Page key={index} value={page.value} className="rounded-md border border-surface" /> : <Paginator.Ellipsis key={index} />))
+                            paginator?.pages.map((page, index) =>
+                                page.type === 'page' ? (
+                                    <Paginator.Page key={index} value={page.value} className="rounded-md border border-surface" />
+                                ) : (
+                                    <Paginator.Ellipsis key={index} />
+                                )
+                            )
                         }
                     </Paginator.Pages>
                     <Paginator.Next className="rounded-md border border-surface">

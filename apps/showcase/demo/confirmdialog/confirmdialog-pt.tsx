@@ -7,16 +7,44 @@ export default function ConfirmDialogPT() {
             <div
                 className="p-dialog-mask p-dialog-open !relative"
                 data-pc-section="mask"
-                style={{ position: 'fixed', height: '100%', width: '100%', left: '0px', top: '0px', display: 'flex', justifyContent: 'center', alignItems: 'center', pointerEvents: 'auto' }}
+                style={{
+                    position: 'fixed',
+                    height: '100%',
+                    width: '100%',
+                    left: '0px',
+                    top: '0px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    pointerEvents: 'auto'
+                }}
             >
-                <div className="p-dialog p-component p-confirmdialog" data-p-focus-trap="true" style={{ display: 'flex', flexDirection: 'column', pointerEvents: 'auto' }}>
-                    <span className="p-hidden-accessible p-hidden-focusable" tabIndex={0} role="presentation" aria-hidden="true" data-p-hidden-accessible="true" data-p-hidden-focusable="true"></span>
+                <div
+                    className="p-dialog p-component p-confirmdialog"
+                    data-p-focus-trap="true"
+                    style={{ display: 'flex', flexDirection: 'column', pointerEvents: 'auto' }}
+                >
+                    <span
+                        className="p-hidden-accessible p-hidden-focusable"
+                        tabIndex={0}
+                        role="presentation"
+                        aria-hidden="true"
+                        data-p-hidden-accessible="true"
+                        data-p-hidden-focusable="true"
+                    ></span>
                     <div id="pr_id_r4m_header" className="p-dialog-header" data-pc-section="root" data-pc-name="header" data-pc-extend="dialogheader">
                         <div className="p-dialog-title" data-pc-section="root" data-pc-name="title" data-pc-extend="dialogtitle">
                             Edit Profile
                         </div>
                         <div className="p-dialog-header-actions" data-pc-section="root" data-pc-name="dialogheaderactions">
-                            <button id="pr_id_r84" className="p-button p-component p-button-text p-dialog-close-button" type="button" data-pc-section="root" data-pc-name="close" data-pc-extend="button">
+                            <button
+                                id="pr_id_r84"
+                                className="p-button p-component p-button-text p-dialog-close-button"
+                                type="button"
+                                data-pc-section="root"
+                                data-pc-name="close"
+                                data-pc-extend="button"
+                            >
                                 <svg
                                     width="14"
                                     height="14"
@@ -39,20 +67,45 @@ export default function ConfirmDialogPT() {
                         </div>
                     </div>
                     <div className="p-dialog-content" data-pc-section="root" data-pc-name="content" data-pc-extend="dialogcontent">
-                        <span className="p-confirmdialog-icon pi pi-exclamation-triangle" data-pc-section="root" data-pc-name="confirmdialogicon"></span>
+                        <span
+                            className="p-confirmdialog-icon pi pi-exclamation-triangle"
+                            data-pc-section="root"
+                            data-pc-name="confirmdialogicon"
+                        ></span>
                         <span className="p-confirmdialog-message" data-pc-section="root" data-pc-name="confirmdialogmessage">
                             Are you sure you want to proceed?
                         </span>
                     </div>
                     <div className="p-dialog-footer" data-pc-section="root" data-pc-name="footer" data-pc-extend="dialogfooter">
-                        <button id="pr_id_r8q" className="p-button p-component p-button-text p-confirmdialog-reject-button" type="button" data-pc-name="cancel" data-pc-section="root" data-pc-extend="button">
+                        <button
+                            id="pr_id_r8q"
+                            className="p-button p-component p-button-text p-confirmdialog-reject-button"
+                            type="button"
+                            data-pc-name="cancel"
+                            data-pc-section="root"
+                            data-pc-extend="button"
+                        >
                             Cancel
                         </button>
-                        <button id="pr_id_r90" className="p-button p-component p-confirmdialog-accept-button" type="button" data-pc-section="root" data-pc-name="action" data-pc-extend="button">
+                        <button
+                            id="pr_id_r90"
+                            className="p-button p-component p-confirmdialog-accept-button"
+                            type="button"
+                            data-pc-section="root"
+                            data-pc-name="action"
+                            data-pc-extend="button"
+                        >
                             Save
                         </button>
                     </div>
-                    <span className="p-hidden-accessible p-hidden-focusable" tabIndex={0} role="presentation" aria-hidden="true" data-p-hidden-accessible="true" data-p-hidden-focusable="true"></span>
+                    <span
+                        className="p-hidden-accessible p-hidden-focusable"
+                        tabIndex={0}
+                        role="presentation"
+                        aria-hidden="true"
+                        data-p-hidden-accessible="true"
+                        data-p-hidden-focusable="true"
+                    ></span>
                 </div>
             </div>
         </>

@@ -58,7 +58,11 @@ export default function SortDemo() {
         <div className="card">
             <DataView>
                 <div className="flex justify-center border-b border-surface-200 dark:border-surface-700 pb-4">
-                    <ToggleButton.Group value={value} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => onSortChange(e.value as string)} allowEmpty={false}>
+                    <ToggleButton.Group
+                        value={value}
+                        onValueChange={(e: ToggleButtonGroupValueChangeEvent) => onSortChange(e.value as string)}
+                        allowEmpty={false}
+                    >
                         <ToggleButton value="hightolow">
                             <ToggleButton.Indicator>Price High to Low</ToggleButton.Indicator>
                         </ToggleButton>
@@ -69,9 +73,18 @@ export default function SortDemo() {
                 </div>
                 <div className="flex flex-col">
                     {products.map((product, index) => (
-                        <div key={index} className={`flex flex-col sm:flex-row sm:items-center p-6 gap-4 ${index !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}>
+                        <div
+                            key={index}
+                            className={`flex flex-col sm:flex-row sm:items-center p-6 gap-4 ${index !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}
+                        >
                             <div className="md:w-40 relative">
-                                <Image className="mx-auto rounded w-full" src={`https://primefaces.org/cdn/primevue/images/product/${product.image}`} alt={product.name} width={160} height={160} />
+                                <Image
+                                    className="mx-auto rounded w-full"
+                                    src={`https://primefaces.org/cdn/primevue/images/product/${product.image}`}
+                                    alt={product.name}
+                                    width={160}
+                                    height={160}
+                                />
                                 <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
                                     <Tag severity={getSeverity(product)}>
                                         <Tag.Label>{product.inventoryStatus}</Tag.Label>
@@ -103,7 +116,10 @@ export default function SortDemo() {
                                         <Button variant="outlined">
                                             <i className="pi pi-heart"></i>
                                         </Button>
-                                        <Button disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto md:flex-initial whitespace-nowrap">
+                                        <Button
+                                            disabled={product.inventoryStatus === 'OUTOFSTOCK'}
+                                            className="flex-auto md:flex-initial whitespace-nowrap"
+                                        >
                                             <i className="pi pi-shopping-cart"></i>
                                             Buy Now
                                         </Button>

@@ -5,7 +5,14 @@ import { Message } from 'primereact/message';
 
 export default function FileUploadPTDemo() {
     return (
-        <FileUpload name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000} className="border border-surface-200 dark:border-surface-700 rounded-md">
+        <FileUpload
+            name="demo[]"
+            url="/api/upload"
+            multiple
+            accept="image/*"
+            maxFileSize={1000000}
+            className="border border-surface-200 dark:border-surface-700 rounded-md"
+        >
             {(instance: FileUploadInstance) => {
                 return (
                     <>

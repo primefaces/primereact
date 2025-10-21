@@ -7,7 +7,11 @@ export default function InvalidGroupDemo() {
 
     return (
         <div className="card flex items-center justify-center">
-            <ToggleButton.Group value={value} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string[])} invalid={value === null}>
+            <ToggleButton.Group
+                value={value}
+                onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string[])}
+                invalid={value === null}
+            >
                 <ToggleButton value="monthly">
                     <ToggleButton.Indicator>Monthly</ToggleButton.Indicator>
                 </ToggleButton>

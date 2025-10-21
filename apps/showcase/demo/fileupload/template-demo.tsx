@@ -40,7 +40,16 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000} className="border border-surface-200 dark:border-surface-700 rounded-md" onSelect={onSelect}>
+            <FileUpload
+                ref={fileUploadRef}
+                name="demo[]"
+                url="/api/upload"
+                multiple
+                accept="image/*"
+                maxFileSize={1000000}
+                className="border border-surface-200 dark:border-surface-700 rounded-md"
+                onSelect={onSelect}
+            >
                 {(instance: FileUploadInstance) => {
                     return (
                         <>
@@ -50,10 +59,24 @@ export default function TemplateDemo() {
                                         <Button onClick={instance.choose} iconOnly rounded variant="outlined" severity="secondary">
                                             <i className="pi pi-images" />
                                         </Button>
-                                        <Button onClick={instance.upload} iconOnly rounded variant="outlined" severity="success" disabled={!instance.hasFiles}>
+                                        <Button
+                                            onClick={instance.upload}
+                                            iconOnly
+                                            rounded
+                                            variant="outlined"
+                                            severity="success"
+                                            disabled={!instance.hasFiles}
+                                        >
                                             <i className="pi pi-cloud-upload" />
                                         </Button>
-                                        <Button onClick={instance.clear} iconOnly rounded variant="outlined" severity="danger" disabled={!instance.hasFiles}>
+                                        <Button
+                                            onClick={instance.clear}
+                                            iconOnly
+                                            rounded
+                                            variant="outlined"
+                                            severity="danger"
+                                            disabled={!instance.hasFiles}
+                                        >
                                             <i className="pi pi-times" />
                                         </Button>
                                     </div>
@@ -83,14 +106,31 @@ export default function TemplateDemo() {
                                             <h5 className="font-semibold">Pending</h5>
                                             <div className="flex flex-wrap gap-4">
                                                 {instance.state.files.map((file, index) => (
-                                                    <div key={file.name + file.type + file.size} className="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
+                                                    <div
+                                                        key={file.name + file.type + file.size}
+                                                        className="p-8 rounded-border flex flex-col border border-surface items-center gap-4"
+                                                    >
                                                         <div>
-                                                            <img role="presentation" alt={file.name} src={URL.createObjectURL(file)} width="100" height="50" />
+                                                            <img
+                                                                role="presentation"
+                                                                alt={file.name}
+                                                                src={URL.createObjectURL(file)}
+                                                                width="100"
+                                                                height="50"
+                                                            />
                                                         </div>
-                                                        <span className="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{file.name}</span>
+                                                        <span className="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">
+                                                            {file.name}
+                                                        </span>
                                                         <div>{instance?.formatSize(file.size)}</div>
                                                         <Badge severity="warn">Pending</Badge>
-                                                        <Button variant="text" rounded iconOnly severity="danger" onClick={() => onRemoveFileCallback(instance?.remove, file, index)}>
+                                                        <Button
+                                                            variant="text"
+                                                            rounded
+                                                            iconOnly
+                                                            severity="danger"
+                                                            onClick={() => onRemoveFileCallback(instance?.remove, file, index)}
+                                                        >
                                                             <i className="pi pi-times" />
                                                         </Button>
                                                     </div>
@@ -104,16 +144,33 @@ export default function TemplateDemo() {
                                             <h5 className="font-semibold">Completed</h5>
                                             <div className="flex flex-wrap gap-4">
                                                 {instance.state.uploadedFiles.map((file, index) => (
-                                                    <div key={file.name + file.type + file.size} className="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
+                                                    <div
+                                                        key={file.name + file.type + file.size}
+                                                        className="p-8 rounded-border flex flex-col border border-surface items-center gap-4"
+                                                    >
                                                         <div>
-                                                            <img role="presentation" alt={file.name} src={URL.createObjectURL(file)} width="100" height="50" />
+                                                            <img
+                                                                role="presentation"
+                                                                alt={file.name}
+                                                                src={URL.createObjectURL(file)}
+                                                                width="100"
+                                                                height="50"
+                                                            />
                                                         </div>
-                                                        <span className="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{file.name}</span>
+                                                        <span className="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">
+                                                            {file.name}
+                                                        </span>
                                                         <div>{instance.formatSize(file.size)}</div>
                                                         <Badge severity="success" className="mt-4">
                                                             Completed
                                                         </Badge>
-                                                        <Button variant="text" rounded iconOnly severity="danger" onClick={() => instance?.removeUploadedFile(index)}>
+                                                        <Button
+                                                            variant="text"
+                                                            rounded
+                                                            iconOnly
+                                                            severity="danger"
+                                                            onClick={() => instance?.removeUploadedFile(index)}
+                                                        >
                                                             <i className="pi pi-times" />
                                                         </Button>
                                                     </div>

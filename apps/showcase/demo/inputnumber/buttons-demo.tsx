@@ -45,12 +45,30 @@ export default function ButtonsDemo() {
                     Stacked
                 </Label>
                 <InputGroup>
-                    <InputNumber ref={inputRef1} value={value1} inputId="stacked-buttons" mode="currency" currency="USD" fluid onValueChange={inputNumber1?.onValueChange} />
+                    <InputNumber
+                        ref={inputRef1}
+                        value={value1}
+                        inputId="stacked-buttons"
+                        mode="currency"
+                        currency="USD"
+                        fluid
+                        onValueChange={inputNumber1?.onValueChange}
+                    />
                     <InputGroup.Addon className="flex-col">
-                        <Button severity="secondary" onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.increment(e, 1)} onPointerUp={inputRef1.current?.stopSpin} className="py-0 text-[.5rem]">
+                        <Button
+                            severity="secondary"
+                            onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.increment(e, 1)}
+                            onPointerUp={inputRef1.current?.stopSpin}
+                            className="py-0 text-[.5rem]"
+                        >
                             <i className="pi pi-angle-up" />
                         </Button>
-                        <Button severity="secondary" onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.decrement(e, -1)} onPointerUp={inputRef1.current?.stopSpin} className="py-0 text-[.5rem]">
+                        <Button
+                            severity="secondary"
+                            onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.decrement(e, -1)}
+                            onPointerUp={inputRef1.current?.stopSpin}
+                            className="py-0 text-[.5rem]"
+                        >
                             <i className="pi pi-angle-down" />
                         </Button>
                     </InputGroup.Addon>
@@ -62,11 +80,33 @@ export default function ButtonsDemo() {
                     Min-Max
                 </Label>
                 <InputGroup>
-                    <InputGroup.Addon as={Button} severity="secondary" iconOnly disabled={value2 === 100} onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef2.current?.increment(e, 1)} onPointerUp={inputRef2.current?.stopSpin}>
+                    <InputGroup.Addon
+                        as={Button}
+                        severity="secondary"
+                        iconOnly
+                        disabled={value2 === 100}
+                        onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef2.current?.increment(e, 1)}
+                        onPointerUp={inputRef2.current?.stopSpin}
+                    >
                         <i className="pi pi-plus"></i>
                     </InputGroup.Addon>
-                    <InputNumber ref={inputRef2} value={value2} inputId="minmax-buttons" fluid min={0} max={100} onValueChange={inputNumber2?.onValueChange} />
-                    <InputGroup.Addon as={Button} severity="secondary" iconOnly disabled={value2 === 0} onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef2.current?.decrement(e, -1)} onPointerUp={inputRef2.current?.stopSpin}>
+                    <InputNumber
+                        ref={inputRef2}
+                        value={value2}
+                        inputId="minmax-buttons"
+                        fluid
+                        min={0}
+                        max={100}
+                        onValueChange={inputNumber2?.onValueChange}
+                    />
+                    <InputGroup.Addon
+                        as={Button}
+                        severity="secondary"
+                        iconOnly
+                        disabled={value2 === 0}
+                        onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef2.current?.decrement(e, -1)}
+                        onPointerUp={inputRef2.current?.stopSpin}
+                    >
                         <i className="pi pi-minus"></i>
                     </InputGroup.Addon>
                 </InputGroup>
@@ -77,11 +117,25 @@ export default function ButtonsDemo() {
                     Horizontal with Step
                 </Label>
                 <IconField>
-                    <IconField.Icon onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.increment(e, 0.25)} onPointerUp={inputRef3.current?.stopSpin}>
+                    <IconField.Icon
+                        onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.increment(e, 0.25)}
+                        onPointerUp={inputRef3.current?.stopSpin}
+                    >
                         <i className="pi pi-plus"></i>
                     </IconField.Icon>
-                    <InputNumber ref={inputRef3} value={value3} inputId="horizontal-buttons" fluid mode="currency" currency="EUR" onValueChange={inputNumber3?.onValueChange} />
-                    <IconField.Icon onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.decrement(e, -0.25)} onPointerUp={inputRef3.current?.stopSpin}>
+                    <InputNumber
+                        ref={inputRef3}
+                        value={value3}
+                        inputId="horizontal-buttons"
+                        fluid
+                        mode="currency"
+                        currency="EUR"
+                        onValueChange={inputNumber3?.onValueChange}
+                    />
+                    <IconField.Icon
+                        onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.decrement(e, -0.25)}
+                        onPointerUp={inputRef3.current?.stopSpin}
+                    >
                         <i className="pi pi-minus"></i>
                     </IconField.Icon>
                 </IconField>

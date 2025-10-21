@@ -7,7 +7,10 @@ export default function CustomizationDemo() {
 
     return (
         <div className="card flex justify-center items-center gap-2">
-            <label htmlFor="custom" className="flex items-center gap-2 bg-surface-50 hover:bg-surface-100 dark:bg-slate-700 hover:dark:bg-slate-800 p-4 rounded-md">
+            <label
+                htmlFor="custom"
+                className="flex items-center gap-2 bg-surface-50 hover:bg-surface-100 dark:bg-slate-700 hover:dark:bg-slate-800 p-4 rounded-md"
+            >
                 <div className="flex flex-col gap-1">
                     <p className="m-0 text-medium">Try Beta Features</p>
                     <p className="m-0 text-sm text-slate-400">Experience upcoming features before they&apos;re officially released.</p>

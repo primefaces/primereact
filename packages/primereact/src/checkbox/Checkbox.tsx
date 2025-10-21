@@ -72,7 +72,7 @@ export const Checkbox = withComponent({
                     'aria-checked': state.indeterminate ? 'mixed' : undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
-                    onChange
+                    onChange: !props.readOnly ? onChange : undefined
                 },
                 ptm('input')
             );

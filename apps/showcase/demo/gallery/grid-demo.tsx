@@ -39,8 +39,15 @@ function BasicDemo() {
             </div>
             <Portal>
                 {present && (
-                    <div ref={ref as React.RefObject<HTMLDivElement>} className={`w-full h-[100dvh] top-0 left-0 !fixed z-[100000] ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}>
-                        <Gallery className="w-full h-full" activeIndex={activeIndex} onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}>
+                    <div
+                        ref={ref as React.RefObject<HTMLDivElement>}
+                        className={`w-full h-[100dvh] top-0 left-0 !fixed z-[100000] ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
+                    >
+                        <Gallery
+                            className="w-full h-full"
+                            activeIndex={activeIndex}
+                            onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}
+                        >
                             <Gallery.Backdrop />
                             <Gallery.Prev>
                                 <i className="pi pi-arrow-left"></i>
@@ -74,7 +81,11 @@ function BasicDemo() {
                             <Gallery.Content>
                                 {images.map((image) => (
                                     <Gallery.Item key={image}>
-                                        <img src={image} alt="image" className={`${isVisible ? 'scale-100 blur-none' : 'scale-[0.9] blur-2xl'}  transition-[scale,filter] duration-300`} />
+                                        <img
+                                            src={image}
+                                            alt="image"
+                                            className={`${isVisible ? 'scale-100 blur-none' : 'scale-[0.9] blur-2xl'}  transition-[scale,filter] duration-300`}
+                                        />
                                     </Gallery.Item>
                                 ))}
                             </Gallery.Content>
@@ -89,8 +100,14 @@ function BasicDemo() {
                                                 setActiveIndex(index);
                                             }}
                                         >
-                                            <div className={`h-full w-full border-2 rounded-md overflow-hidden ${activeIndex === index ? 'border-orange-500' : 'border-transparent'}`}>
-                                                <img draggable={false} src={image} className="h-full w-full object-cover hover:opacity-75 transition-opacity"></img>
+                                            <div
+                                                className={`h-full w-full border-2 rounded-md overflow-hidden ${activeIndex === index ? 'border-orange-500' : 'border-transparent'}`}
+                                            >
+                                                <img
+                                                    draggable={false}
+                                                    src={image}
+                                                    className="h-full w-full object-cover hover:opacity-75 transition-opacity"
+                                                ></img>
                                             </div>
                                         </Gallery.ThumbnailItem>
                                     ))}

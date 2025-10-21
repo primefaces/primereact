@@ -9,9 +9,9 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import { Carousel } from 'primereact/carousel';
+import type { CarouselInstance } from '@primereact/types/shared/carousel';
 
-/**s
+/**
  * Event fired when the gallery's active index changes.
  */
 export interface useGalleryChangeEvent<E = React.SyntheticEvent> {
@@ -135,7 +135,7 @@ export interface useGalleryExposes {
     /**
      * Ref to the thumbnail element.
      */
-    thumbnailRef: React.RefObject<React.RefObject<typeof Carousel> | null>;
+    thumbnailRef: React.RefObject<CarouselInstance | null>;
     /**
      * Ref to the previous button element.
      */

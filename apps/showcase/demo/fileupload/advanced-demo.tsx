@@ -17,7 +17,15 @@ export default function AdvancedDemo() {
 
     return (
         <div className="card">
-            <FileUpload name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000} className="border border-surface-200 dark:border-surface-700 rounded-md" onUpload={onUpload}>
+            <FileUpload
+                name="demo[]"
+                url="/api/upload"
+                multiple
+                accept="image/*"
+                maxFileSize={1000000}
+                className="border border-surface-200 dark:border-surface-700 rounded-md"
+                onUpload={onUpload}
+            >
                 {(instance: FileUploadInstance) => {
                     return (
                         <>
@@ -82,7 +90,14 @@ export default function AdvancedDemo() {
                                             <Toast.Description />
                                         </div>
                                     </div>
-                                    <Toast.Close as={Button} iconOnly severity={'secondary'} variant="text" size="small" className={'absolute top-2 right-2'}>
+                                    <Toast.Close
+                                        as={Button}
+                                        iconOnly
+                                        severity={'secondary'}
+                                        variant="text"
+                                        size="small"
+                                        className={'absolute top-2 right-2'}
+                                    >
                                         <i className="pi pi-times"></i>
                                     </Toast.Close>
                                 </Toast.Item>

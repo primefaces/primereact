@@ -48,9 +48,18 @@ export default function LayoutDemo() {
         return (
             <div className="flex flex-col">
                 {products.map((product, index) => (
-                    <div key={index} className={`flex flex-col sm:flex-row sm:items-center p-6 gap-4 ${index !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}>
+                    <div
+                        key={index}
+                        className={`flex flex-col sm:flex-row sm:items-center p-6 gap-4 ${index !== 0 ? 'border-t border-surface-200 dark:border-surface-700' : ''}`}
+                    >
                         <div className="md:w-40 relative">
-                            <Image className="mx-auto rounded w-full" src={`https://primefaces.org/cdn/primevue/images/product/${product.image}`} alt={product.name} width={160} height={160} />
+                            <Image
+                                className="mx-auto rounded w-full"
+                                src={`https://primefaces.org/cdn/primevue/images/product/${product.image}`}
+                                alt={product.name}
+                                width={160}
+                                height={160}
+                            />
                             <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
                                 <Tag severity={getSeverity(product)}>
                                     <Tag.Label>{product.inventoryStatus}</Tag.Label>
@@ -82,7 +91,10 @@ export default function LayoutDemo() {
                                     <Button variant="outlined">
                                         <i className="pi pi-heart"></i>
                                     </Button>
-                                    <Button disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto md:flex-initial whitespace-nowrap">
+                                    <Button
+                                        disabled={product.inventoryStatus === 'OUTOFSTOCK'}
+                                        className="flex-auto md:flex-initial whitespace-nowrap"
+                                    >
                                         <i className="pi pi-shopping-cart"></i>
                                         Buy Now
                                     </Button>
@@ -104,7 +116,13 @@ export default function LayoutDemo() {
                             <div className="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col">
                                 <div className="bg-surface-50 flex justify-center rounded p-4">
                                     <div className="relative mx-auto">
-                                        <Image src={`https://primefaces.org/cdn/primevue/images/product/${product.image}`} alt={product.name} width={300} height={200} className="rounded" />
+                                        <Image
+                                            src={`https://primefaces.org/cdn/primevue/images/product/${product.image}`}
+                                            alt={product.name}
+                                            width={300}
+                                            height={200}
+                                            className="rounded"
+                                        />
                                         <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
                                             <Tag severity={getSeverity(product)}>
                                                 <Tag.Label>{product.inventoryStatus}</Tag.Label>
@@ -159,7 +177,11 @@ export default function LayoutDemo() {
         <div className="card">
             <DataView>
                 <div className="flex justify-end border-b border-surface-200 dark:border-surface-700 pb-4">
-                    <ToggleButton.Group value={value} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)} allowEmpty={false}>
+                    <ToggleButton.Group
+                        value={value}
+                        onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)}
+                        allowEmpty={false}
+                    >
                         <ToggleButton value="list">
                             <ToggleButton.Indicator>
                                 <i className="pi pi-bars"></i>

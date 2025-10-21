@@ -97,6 +97,10 @@
                             "to": "/docs/components/knob"
                         },
                         {
+                            "name": "Listbox",
+                            "to": "/docs/components/listbox"
+                        },
+                        {
                             "name": "RadioButton",
                             "to": "/docs/components/radiobutton"
                         },

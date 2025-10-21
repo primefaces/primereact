@@ -76,7 +76,10 @@ export default function BasicDemo() {
                                                         <a className="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800">
                                                             <i className="pi pi-comments mr-2"></i>
                                                             <span className="font-medium">Messages</span>
-                                                            <span className="inline-flex items-center justify-center ml-auto bg-primary text-primary-contrast rounded-full" style={{ minWidth: ' 1.5rem', height: '1.5rem' }}>
+                                                            <span
+                                                                className="inline-flex items-center justify-center ml-auto bg-primary text-primary-contrast rounded-full"
+                                                                style={{ minWidth: ' 1.5rem', height: '1.5rem' }}
+                                                            >
                                                                 3
                                                             </span>
                                                         </a>

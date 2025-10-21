@@ -17,13 +17,25 @@ export default function RegexDemo() {
                     <Label for="spacekey" className="font-bold block mb-2">
                         Block Space
                     </Label>
-                    <InputText id="spacekey" value={spacekey} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpacekey(e.target.value)} onKeyPress={onSpaceKeyPress} fluid />
+                    <InputText
+                        id="spacekey"
+                        value={spacekey}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpacekey(e.target.value)}
+                        onKeyPress={onSpaceKeyPress}
+                        fluid
+                    />
                 </div>
                 <div className="flex-auto">
                     <Label htmlFor="chars" className="font-bold block mb-2">
                         Block &lt; &gt; * !
                     </Label>
-                    <InputText id="chars" value={chars} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChars(e.target.value)} onKeyPress={onCharsKeyPress} fluid />
+                    <InputText
+                        id="chars"
+                        value={chars}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChars(e.target.value)}
+                        onKeyPress={onCharsKeyPress}
+                        fluid
+                    />
                 </div>
             </div>
         </div>

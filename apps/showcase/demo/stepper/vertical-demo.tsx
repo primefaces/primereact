@@ -21,7 +21,9 @@ export default function VerticalDemo() {
                                         <Stepper.Separator />
                                         <Stepper.Content>
                                             <div className="flex flex-col h-48">
-                                                <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content I</div>
+                                                <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                                    Content I
+                                                </div>
                                             </div>
                                         </Stepper.Content>
                                     </Stepper.Panel>
@@ -45,7 +47,9 @@ export default function VerticalDemo() {
                                         <Stepper.Separator />
                                         <Stepper.Content>
                                             <div className="flex flex-col h-48">
-                                                <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content II</div>
+                                                <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                                    Content II
+                                                </div>
                                             </div>
                                         </Stepper.Content>
                                     </Stepper.Panel>
@@ -68,7 +72,9 @@ export default function VerticalDemo() {
                                     <Stepper.Panel>
                                         <Stepper.Content>
                                             <div className="flex flex-col h-48">
-                                                <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content III</div>
+                                                <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                                    Content III
+                                                </div>
                                             </div>
                                         </Stepper.Content>
                                     </Stepper.Panel>

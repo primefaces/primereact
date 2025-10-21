@@ -7,12 +7,26 @@ const icons = [
         icon1: () => (
             <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_1399_2309" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="74" height="73">
-                    <path d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z" fill="black" />
+                    <path
+                        d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z"
+                        fill="black"
+                    />
                 </mask>
                 <g mask="url(#mask0_1399_2309)">
-                    <path d="M37 0.5C56.8823 0.5 73 16.6177 73 36.5C73 56.3823 56.8823 72.5 37 72.5C17.1177 72.5 1 56.3823 1 36.5C1 16.6177 17.1177 0.5 37 0.5Z" stroke="#334155" />
-                    <path d="M28.2969 22.4004L60.4482 63.8155C59.471 64.6552 58.4488 65.4436 57.3848 66.1758L27.709 27.833L26.8135 26.6768V50.5879H22.9004V22.4004H28.2969Z" fill="url(#paint0_linear_1399_2309)" stroke="#334155" />
-                    <path d="M51.5059 22.4004L51.5 52.043L48.8994 48.7002L47.5 46.834L47.6357 22.4004H51.5059Z" fill="url(#paint1_linear_1399_2309)" stroke="#334155" />
+                    <path
+                        d="M37 0.5C56.8823 0.5 73 16.6177 73 36.5C73 56.3823 56.8823 72.5 37 72.5C17.1177 72.5 1 56.3823 1 36.5C1 16.6177 17.1177 0.5 37 0.5Z"
+                        stroke="#334155"
+                    />
+                    <path
+                        d="M28.2969 22.4004L60.4482 63.8155C59.471 64.6552 58.4488 65.4436 57.3848 66.1758L27.709 27.833L26.8135 26.6768V50.5879H22.9004V22.4004H28.2969Z"
+                        fill="url(#paint0_linear_1399_2309)"
+                        stroke="#334155"
+                    />
+                    <path
+                        d="M51.5059 22.4004L51.5 52.043L48.8994 48.7002L47.5 46.834L47.6357 22.4004H51.5059Z"
+                        fill="url(#paint1_linear_1399_2309)"
+                        stroke="#334155"
+                    />
                 </g>
                 <defs>
                     <linearGradient id="paint0_linear_1399_2309" x1="44.706" y1="47.2476" x2="59.1032" y2="65.0921" gradientUnits="userSpaceOnUse">
@@ -30,11 +44,20 @@ const icons = [
             <svg width="74" height="73" viewBox="0 0 74 73" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1399_2310)">
                     <mask id="mask0_1399_2310" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="74" height="73">
-                        <path d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z" fill="black" />
+                        <path
+                            d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z"
+                            fill="black"
+                        />
                     </mask>
                     <g mask="url(#mask0_1399_2310)">
-                        <path d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z" fill="black" />
-                        <path d="M61.1332 63.8835L28.5403 21.9004H22.3994V51.0883H27.3121V28.1393L57.2768 66.8542C58.6289 65.9494 59.9169 64.9562 61.1332 63.8835Z" fill="url(#paint0_linear_1399_2310)" />
+                        <path
+                            d="M37 73C57.1584 73 73.5 56.6584 73.5 36.5C73.5 16.3416 57.1584 0 37 0C16.8416 0 0.5 16.3416 0.5 36.5C0.5 56.6584 16.8416 73 37 73Z"
+                            fill="black"
+                        />
+                        <path
+                            d="M61.1332 63.8835L28.5403 21.9004H22.3994V51.0883H27.3121V28.1393L57.2768 66.8542C58.6289 65.9494 59.9169 64.9562 61.1332 63.8835Z"
+                            fill="url(#paint0_linear_1399_2310)"
+                        />
                         <path d="M52.0053 21.9004H47.1387V51.1004H52.0053V21.9004Z" fill="url(#paint1_linear_1399_2310)" />
                     </g>
                 </g>
@@ -97,11 +120,27 @@ const icons = [
                     ></path>
                 </g>
                 <defs data-v-051284a2="">
-                    <linearGradient data-v-051284a2="" id="paint0_linear_1_67" x1="1.30015" y1="5.5644" x2="36.5943" y2="52.7953" gradientUnits="userSpaceOnUse">
+                    <linearGradient
+                        data-v-051284a2=""
+                        id="paint0_linear_1_67"
+                        x1="1.30015"
+                        y1="5.5644"
+                        x2="36.5943"
+                        y2="52.7953"
+                        gradientUnits="userSpaceOnUse"
+                    >
                         <stop data-v-051284a2="" stopColor="#41D1FF"></stop>
                         <stop data-v-051284a2="" offset="1" stopColor="#BD34FE"></stop>
                     </linearGradient>
-                    <linearGradient data-v-051284a2="" id="paint1_linear_1_67" x1="29.8279" y1="1.85329" x2="36.2756" y2="45.4365" gradientUnits="userSpaceOnUse">
+                    <linearGradient
+                        data-v-051284a2=""
+                        id="paint1_linear_1_67"
+                        x1="29.8279"
+                        y1="1.85329"
+                        x2="36.2756"
+                        y2="45.4365"
+                        gradientUnits="userSpaceOnUse"
+                    >
                         <stop data-v-051284a2="" stopColor="#FFEA83"></stop>
                         <stop data-v-051284a2="" offset="0.0833333" stopColor="#FFDD35"></stop>
                         <stop data-v-051284a2="" offset="1" stopColor="#FFA800"></stop>
@@ -158,7 +197,9 @@ function SetupDemo() {
                 <Link key={icon.name} href={icon.to} className="relative flex-1  card flex flex-col items-center gap-2 group">
                     <div className="flex flex-col items-center justify-center gap-4 w-full h-full">
                         <div className="relative ">
-                            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:opacity-0 transition-opacity duration-150">{icon.icon1()}</span>
+                            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:opacity-0 transition-opacity duration-150">
+                                {icon.icon1()}
+                            </span>
                             <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">{icon.icon2()}</span>
                         </div>
                         <span className="text-base text-center text-(--text-secondary-color) font-medium uppercase">{icon.name}</span>

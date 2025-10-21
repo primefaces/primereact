@@ -8,7 +8,12 @@ export default function GroupDemo() {
 
     return (
         <div className="card flex items-center justify-center">
-            <Checkbox.Group defaultValue={['Cheese']} value={value} onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])} className="gap-4 flex-wrap">
+            <Checkbox.Group
+                defaultValue={['Cheese']}
+                value={value}
+                onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])}
+                className="gap-4 flex-wrap"
+            >
                 <div className="flex items-center gap-2">
                     <Checkbox inputId="cheese" value="Cheese" />
                     <label htmlFor="cheese">Cheese</label>
