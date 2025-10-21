@@ -1,6 +1,8 @@
 import { ListboxChangeEvent } from '@primereact/types/listbox';
+import { IconField } from 'primereact/iconfield';
+import { InputText } from 'primereact/inputtext';
 import { Listbox } from 'primereact/listbox';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -12,21 +14,34 @@ const cities = [
 
 export default function FilterDemo() {
     const [selectedCity, setSelectedCity] = useState<string | null>(null);
+    const [filterValue, setFilterValue] = useState<string>('');
+    const filteredCities = useMemo(() => cities.filter((city) => city.name.toLowerCase().startsWith(filterValue.toLowerCase())), [filterValue]);
 
     return (
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCity}
                 onValueChange={(e: ListboxChangeEvent) => setSelectedCity(e.value)}
-                options={cities}
+                options={filteredCities}
                 optionLabel="name"
                 optionValue="code"
                 className="w-full md:w-56"
             >
                 <Listbox.Header>
-                    <Listbox.Filter placeholder="Search city" />
+                    <IconField>
+                        <Listbox.Filter
+                            as={InputText}
+                            placeholder="Search city"
+                            value={filterValue}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
+                        />
+                        <IconField.Icon>
+                            <i className="pi pi-search" />
+                        </IconField.Icon>
+                    </IconField>
                 </Listbox.Header>
                 <Listbox.Options />
+                <Listbox.Empty>No options found</Listbox.Empty>
             </Listbox>
         </div>
     );

@@ -2,7 +2,6 @@
 import { Component } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { useListboxContext } from '../Listbox.context';
 import { defaultFilterProps } from './ListboxFilter.props';
@@ -36,6 +35,6 @@ export const ListboxFilter = withComponent({
             ptmi('root')
         );
 
-        return <Component as={InputText} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

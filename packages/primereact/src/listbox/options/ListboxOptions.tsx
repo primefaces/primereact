@@ -21,14 +21,26 @@ export const ListboxOptions = withComponent({
 
         const createOptions = () => {
             return options?.map((option: any, index: number) => {
-                const label = listbox.getOptionLabel(option);
+                const group = listbox.isOptionGroup(option);
 
-                return (
-                    <ListboxOption key={index} index={index}>
-                        <ListboxSelection pIf={listbox.props.checkmark || listbox.props.checkbox} />
-                        {label}
-                    </ListboxOption>
-                );
+                if (group) {
+                    const label = listbox.getOptionGroupLabel(option.optionGroup);
+
+                    return (
+                        <ListboxOption key={index} index={index} group>
+                            {label}
+                        </ListboxOption>
+                    );
+                } else {
+                    const label = listbox.getOptionLabel(option);
+
+                    return (
+                        <ListboxOption key={index} index={index}>
+                            <ListboxSelection pIf={listbox.props.checkmark || listbox.props.checkbox} />
+                            {label}
+                        </ListboxOption>
+                    );
+                }
             });
         };
 

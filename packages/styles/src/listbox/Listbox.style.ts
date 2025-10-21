@@ -7,8 +7,20 @@ const _style = /*css*/ `
 
     /* For PrimeReact */
     .p-listbox-selection {
-        margin-inline-start: dt('listbox.checkmark.gutter.start');
+        /* margin-inline-start: dt('listbox.checkmark.gutter.start'); */
         margin-inline-end: dt('listbox.checkmark.gutter.end');
+    }
+
+    .p-listbox-list {
+        overflow: auto;
+    }
+
+    .p-listbox-option {
+        flex-shrink: 0;
+    }
+
+    .p-listbox-empty-message {
+        display: flex;
     }
 `;
 

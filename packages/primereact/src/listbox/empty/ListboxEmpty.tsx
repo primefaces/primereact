@@ -25,6 +25,6 @@ export const ListboxEmpty = withComponent({
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component pIf={listbox?.getOptions().length === 0} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

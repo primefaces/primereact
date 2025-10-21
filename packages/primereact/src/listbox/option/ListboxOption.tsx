@@ -16,27 +16,41 @@ export const ListboxOption = withComponent({
         const index = instance.props?.index ?? options.findIndex((option: any) => option[listbox.props.optionKey] === instance.props.uKey);
         const option = options[index];
         const selected = listbox.isSelected(option);
+        const group = instance.props?.group ?? listbox.isOptionGroup(option);
 
-        return { listbox, option, index, selected };
+        return { listbox, option, index, group, selected };
     },
     render(instance) {
-        const { props, ptmi, listbox, option, index, selected } = instance;
+        const { props, ptmi, listbox, option, index, selected, group } = instance;
+
+        const computedProps = group
+            ? mergeProps(
+                  {
+                      className: listbox?.cx('optionGroup', { index })
+                  },
+                  listbox?.ptm('optionGroup')
+              )
+            : mergeProps(
+                  {
+                      className: listbox?.cx('option', { index, selected, disabled: listbox.isOptionDisabled(option) }),
+                      'aria-selected': selected,
+                      'aria-disabled': listbox.isOptionDisabled(option),
+                      'aria-setsize': listbox.getAriaSetSize(),
+                      'aria-posinset': listbox.getAriaPosInset(index),
+                      onClick: (event: React.MouseEvent) => listbox.onOptionSelect(event, option, index),
+                      onMouseDown: (event: React.MouseEvent) => listbox.onOptionMouseDown(event, index),
+                      onMouseMove: (event: React.MouseEvent) => listbox.onOptionMouseMove(event, index),
+                      onTouchEnd: listbox.onOptionTouchEnd
+                  },
+                  listbox?.ptm('option')
+              );
 
         const rootProps = mergeProps(
             {
                 id: listbox.getOptionId(index),
-                className: listbox?.cx('option', { index, selected, disabled: listbox.isOptionDisabled(option) }),
-                role: 'option',
-                'aria-selected': selected,
-                'aria-disabled': listbox.isOptionDisabled(option),
-                'aria-setsize': listbox.getAriaSetSize(),
-                'aria-posinset': listbox.getAriaPosInset(index),
-                onClick: (event: React.MouseEvent) => listbox.onOptionSelect(event, option, index),
-                onMouseDown: (event: React.MouseEvent) => listbox.onOptionMouseDown(event, index),
-                onMouseMove: (event: React.MouseEvent) => listbox.onOptionMouseMove(event, index),
-                onTouchEnd: listbox.onOptionTouchEnd
+                role: 'option'
             },
-            listbox?.ptm('option'),
+            computedProps,
             ptmi('root')
         );
 

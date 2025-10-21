@@ -1,4 +1,6 @@
 import { ListboxChangeEvent } from '@primereact/types/listbox';
+import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import { Checkbox } from 'primereact/checkbox';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
 
@@ -13,6 +15,9 @@ const cities = [
 export default function CheckboxDemo() {
     const [selectedCity, setSelectedCity] = useState<string[] | null>(null);
 
+    const isAllSelected = cities.every((city) => selectedCity?.includes(city.code));
+    const indeterminate = cities.some((city) => selectedCity?.includes(city.code)) && !isAllSelected;
+
     return (
         <div className="card flex justify-center">
             <Listbox
@@ -25,7 +30,13 @@ export default function CheckboxDemo() {
                 checkbox
                 className="w-full md:w-56"
             >
-                <Listbox.Header>Select Cities</Listbox.Header>
+                <Listbox.Header>
+                    <Checkbox
+                        indeterminate={indeterminate}
+                        checked={isAllSelected}
+                        onCheckedChange={(e: CheckboxChangeEvent) => setSelectedCity(e.checked ? cities.map((city) => city.code) : [])}
+                    />
+                </Listbox.Header>
                 <Listbox.Options />
             </Listbox>
         </div>

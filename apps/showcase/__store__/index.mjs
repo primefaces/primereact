@@ -734,10 +734,6 @@ export const Store = {
         },
     },
     'listbox': {
-        '_demos': {
-            'component': React.lazy(() => import('demo/listbox/_demos.tsx')),
-            'filePath': 'demo/listbox/_demos.tsx',
-        },
         'basic-demo': {
             'component': React.lazy(() => import('demo/listbox/basic-demo.tsx')),
             'filePath': 'demo/listbox/basic-demo.tsx',

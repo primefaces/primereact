@@ -63,7 +63,7 @@ export const Listbox = withComponent({
             {
                 id,
                 className: cx('root'),
-                onBlur: onFocusOut // @todo - should be onBlur?
+                onBlur: onFocusOut
             },
             ptmi('root')
         );
