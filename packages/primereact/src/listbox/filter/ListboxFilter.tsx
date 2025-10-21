@@ -20,7 +20,6 @@ export const ListboxFilter = withComponent({
         const rootProps = mergeProps(
             {
                 className: listbox?.cx('pcFilter'),
-                value: listbox?.state.filterValue,
                 role: 'searchbox',
                 autoComplete: 'off',
                 disabled: listbox.props.disabled,

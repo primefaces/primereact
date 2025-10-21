@@ -21,7 +21,6 @@ export const useListbox = withHeadless({
     setup({ id, props, elementRef }) {
         const [focusedState, setFocusedState] = React.useState<boolean>(false);
         const [focusedOptionIndexState, setFocusedOptionIndexState] = React.useState<number>(-1);
-        const [filterValueState, setFilterValueState] = React.useState<string>('');
         const [valueState, setValueState] = useControlledState({
             value: props.value,
             defaultValue: props.defaultValue ?? null,
@@ -31,8 +30,7 @@ export const useListbox = withHeadless({
         const state = {
             value: valueState,
             focused: focusedState,
-            focusedOptionIndex: focusedOptionIndexState,
-            filterValue: filterValueState
+            focusedOptionIndex: focusedOptionIndexState
         };
 
         // element refs
@@ -316,7 +314,6 @@ export const useListbox = withHeadless({
         };
 
         const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-            setFilterValueState(event.target.value);
             setFocusedOptionIndexState(-1);
             startRangeIndex.current = -1;
         };
@@ -696,27 +693,21 @@ export const useListbox = withHeadless({
         }, []);
 
         // computed
-        const optionsListFlat = React.useMemo(() => {
-            //return this.filterValue ? FilterService.filter(this.options, this.searchFields, this.filterValue, this.filterMatchMode, this.filterLocale) : this.options;
-            return props.options;
-        }, [props.options]);
-
         const optionsListGroup = React.useMemo(() => {
-            const filteredOptions = [];
+            const flattenOptions = [];
 
             (props.options || []).forEach((optionGroup) => {
                 const optionGroupChildren = getOptionGroupChildren(optionGroup) || [];
-                const filteredChildren = optionGroupChildren; //this.filterValue ? FilterService.filter(optionGroupChildren, this.searchFields, this.filterValue, this.filterMatchMode, this.filterLocale) : optionGroupChildren;
 
-                if (filteredChildren?.length) {
-                    filteredOptions.push({ optionGroup, group: true }, ...filteredChildren);
+                if (optionGroupChildren?.length) {
+                    flattenOptions.push({ optionGroup, group: true }, ...optionGroupChildren);
                 }
             });
 
-            return filteredOptions;
+            return flattenOptions;
         }, [props.options]);
 
-        const visibleOptions = props.optionGroupLabel ? optionsListGroup : optionsListFlat;
+        const visibleOptions = props.optionGroupLabel ? optionsListGroup : props.options;
         const equalityKey = props.optionValue ? undefined : props.optionKey;
 
         return {
