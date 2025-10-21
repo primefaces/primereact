@@ -4,14 +4,14 @@ export const defaultProps: useListboxProps = {
     value: undefined,
     defaultValue: undefined,
     options: [],
-    optionKey: undefined, // instead of dataKey
+    optionKey: undefined,
     optionLabel: undefined,
     optionValue: undefined,
     optionDisabled: undefined,
     optionGroupLabel: undefined,
     optionGroupChildren: undefined,
     disabled: false,
-    locale: undefined, // instead of filterLocale
+    locale: undefined,
     multiple: false,
     metaKeySelection: false,
     autoOptionFocus: true,

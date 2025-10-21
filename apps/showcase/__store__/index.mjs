@@ -766,6 +766,10 @@ export const Store = {
             'component': React.lazy(() => import('demo/listbox/invalid-demo.tsx')),
             'filePath': 'demo/listbox/invalid-demo.tsx',
         },
+        'listbox-pt': {
+            'component': React.lazy(() => import('demo/listbox/listbox-pt.tsx')),
+            'filePath': 'demo/listbox/listbox-pt.tsx',
+        },
         'multiple-selection-demo': {
             'component': React.lazy(() => import('demo/listbox/multiple-selection-demo.tsx')),
             'filePath': 'demo/listbox/multiple-selection-demo.tsx',

@@ -40,7 +40,6 @@ export const styles = createStyles<ListboxInstance>({
         header: 'p-listbox-header',
         footer: 'p-listbox-footer',
         pcFilter: 'p-listbox-filter',
-        listContainer: 'p-listbox-list-container',
         list: 'p-listbox-list',
         optionGroup: 'p-listbox-option-group',
         option: ({ props, state, context }) => {

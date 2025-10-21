@@ -21,7 +21,7 @@ export const ListboxSelection = withComponent({
     },
     render(instance) {
         const { props, ptmi, listbox, selected } = instance;
-        const { checkmark, checkbox } = listbox.props;
+        const { checkmark, checkbox } = listbox?.props || {};
 
         const rootProps = mergeProps(
             {

@@ -1,4 +1,4 @@
-import { ListboxChangeEvent } from '@primereact/types/listbox';
+import type { ListboxValueChangeEvent } from '@primereact/types/listbox';
 import { cn } from '@primeuix/utils';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ export default function CustomSelectionDemo() {
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCities}
-                onValueChange={(e: ListboxChangeEvent) => setSelectedCities(e.value)}
+                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCities(e.value)}
                 options={cities}
                 multiple
                 className="w-full md:w-56"

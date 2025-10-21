@@ -14,17 +14,17 @@ export const ListboxOptions = withComponent({
     setup() {
         const listbox = useListboxContext();
 
-        return { listbox, options: listbox.getOptions() };
+        return { listbox, options: listbox?.getOptions() };
     },
     render(instance) {
         const { id, props, ptmi, listbox, options } = instance;
 
         const createOptions = () => {
             return options?.map((option: any, index: number) => {
-                const group = listbox.isOptionGroup(option);
+                const group = listbox?.isOptionGroup(option);
 
                 if (group) {
-                    const label = listbox.getOptionGroupLabel(option.optionGroup);
+                    const label = listbox?.getOptionGroupLabel(option.optionGroup);
 
                     return (
                         <ListboxOption key={index} index={index} group>
@@ -32,11 +32,11 @@ export const ListboxOptions = withComponent({
                         </ListboxOption>
                     );
                 } else {
-                    const label = listbox.getOptionLabel(option);
+                    const label = listbox?.getOptionLabel(option);
 
                     return (
                         <ListboxOption key={index} index={index}>
-                            <ListboxSelection pIf={listbox.props.checkmark || listbox.props.checkbox} />
+                            <ListboxSelection pIf={listbox?.props.checkmark || listbox?.props.checkbox} />
                             {label}
                         </ListboxOption>
                     );

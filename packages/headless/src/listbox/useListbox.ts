@@ -465,7 +465,10 @@ export const useListbox = withHeadless({
         };
 
         const isOptionMatched = (option: unknown) => {
-            return isValidOption(option) && getOptionLabel(option)?.toLocaleLowerCase().startsWith(searchValue.current?.toLocaleLowerCase());
+            return (
+                isValidOption(option) &&
+                getOptionLabel(option)?.toLocaleLowerCase(props.locale).startsWith(searchValue.current?.toLocaleLowerCase(props.locale))
+            );
         };
 
         const isValidOption = (option: unknown) => {

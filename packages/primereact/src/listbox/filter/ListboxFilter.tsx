@@ -22,13 +22,13 @@ export const ListboxFilter = withComponent({
                 className: listbox?.cx('pcFilter'),
                 role: 'searchbox',
                 autoComplete: 'off',
-                disabled: listbox.props.disabled,
-                'aria-owns': listbox.props.id + '_list',
-                'aria-activedescendant': listbox.getFocusedOptionId(),
-                tabIndex: !listbox.props.disabled && !listbox.state.focused ? listbox.props.tabIndex : -1,
-                onBlur: listbox.onFilterBlur,
-                onChange: listbox.onFilterChange,
-                onKeyDown: listbox.onFilterKeyDown
+                disabled: listbox?.props.disabled,
+                'aria-owns': listbox?.props.id + '_list',
+                'aria-activedescendant': listbox?.getFocusedOptionId(),
+                tabIndex: !listbox?.props.disabled && !listbox?.state.focused ? listbox?.props.tabIndex : -1,
+                onBlur: listbox?.onFilterBlur,
+                onChange: listbox?.onFilterChange,
+                onKeyDown: listbox?.onFilterKeyDown
             },
             listbox?.ptm('pcFilter'),
             ptmi('root')
