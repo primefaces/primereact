@@ -1,5 +1,5 @@
-import type { ListboxValueChangeEvent } from '@primereact/types/listbox';
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { Checkbox } from 'primereact/checkbox';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ export default function CheckboxDemo() {
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCity}
-                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value)}
+                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string[])}
                 options={cities}
                 optionLabel="name"
                 optionValue="code"

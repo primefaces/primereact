@@ -1,4 +1,4 @@
-import type { ListboxValueChangeEvent } from '@primereact/types/listbox';
+import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { IconField } from 'primereact/iconfield';
 import { InputText } from 'primereact/inputtext';
 import { Listbox } from 'primereact/listbox';
@@ -21,7 +21,7 @@ export default function FilterDemo() {
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCity}
-                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value)}
+                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}
                 options={filteredCities}
                 optionLabel="name"
                 optionValue="code"

@@ -1,4 +1,4 @@
-import type { ListboxValueChangeEvent } from '@primereact/types/listbox';
+import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
 
@@ -42,7 +42,7 @@ export default function GroupDemo() {
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCity}
-                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value)}
+                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}
                 options={groupedCities}
                 optionLabel="label"
                 optionGroupLabel="label"

@@ -20,11 +20,11 @@ export const ListboxOptions = withComponent({
         const { id, props, ptmi, listbox, options } = instance;
 
         const createOptions = () => {
-            return options?.map((option: any, index: number) => {
+            return options?.map((option: unknown, index: number) => {
                 const group = listbox?.isOptionGroup(option);
 
                 if (group) {
-                    const label = listbox?.getOptionGroupLabel(option.optionGroup);
+                    const label = listbox?.getOptionGroupLabel((option as Record<string, unknown>).optionGroup);
 
                     return (
                         <ListboxOption key={index} index={index} group>
@@ -51,9 +51,9 @@ export const ListboxOptions = withComponent({
                 tabIndex: -1,
                 role: 'listbox',
                 'aria-activedescendant': listbox?.state.focused ? listbox.getFocusedOptionId() : undefined,
-                onFocus: (event: React.FocusEvent) => listbox?.onListFocus(event),
-                onBlur: (event: React.FocusEvent) => listbox?.onListBlur(event),
-                onKeyDown: (event: React.KeyboardEvent) => listbox?.onListKeyDown(event)
+                onFocus: listbox?.onListFocus,
+                onBlur: listbox?.onListBlur,
+                onKeyDown: listbox?.onListKeyDown
             },
             listbox?.ptm('list'),
             ptmi('root')

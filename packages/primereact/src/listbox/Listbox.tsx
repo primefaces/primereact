@@ -40,7 +40,7 @@ export const Listbox = withComponent({
             onFocusOut
         } = instance;
 
-        const createHiddenFocusableElement = (key: string, ref: React.Ref<HTMLSpanElement>, onFocus?: (event: FocusEvent) => void) => {
+        const createHiddenFocusableElement = (key: string, ref: React.Ref<HTMLSpanElement>, onFocus?: (event: React.FocusEvent) => void) => {
             const hiddenProps = mergeProps(
                 {
                     className: 'p-hidden-accessible p-hidden-focusable',
@@ -68,11 +68,14 @@ export const Listbox = withComponent({
             ptmi('root')
         );
 
+        // @ts-expect-error: Update resolve to handle attrs correctly
+        const content = resolve(props.children, instance, rootProps);
+
         return (
             <ListboxProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {firstHiddenFocusable}
-                    {resolve(props.children, instance, rootProps)}
+                    {content}
                     {lastHiddenFocusable}
                 </Component>
             </ListboxProvider>

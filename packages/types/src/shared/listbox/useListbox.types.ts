@@ -133,17 +133,17 @@ export interface useListboxExposes {
      */
     state: useListboxState;
     /**
-     * Reference to the content element of the listbox.
+     * Reference to the list element of the listbox.
      */
-    contentRef: React.RefObject<HTMLDivElement | null>;
+    listRef: React.RefObject<HTMLElement | null>;
     /**
      * Reference to the first hidden focusable element for accessibility.
      */
-    firstHiddenFocusableRef: React.RefObject<HTMLDivElement | null>;
+    firstHiddenFocusableRef: React.RefObject<HTMLElement | null>;
     /**
      * Reference to the last hidden focusable element for accessibility.
      */
-    lastHiddenFocusableRef: React.RefObject<HTMLDivElement | null>;
+    lastHiddenFocusableRef: React.RefObject<HTMLElement | null>;
     /**
      * Gets the list of options for the listbox.
      * @returns {unknown[]} The list of options.
@@ -230,7 +230,7 @@ export interface useListboxExposes {
      * Callback when the list loses focus.
      * @param {React.FocusEvent} event - The focus event.
      */
-    onListBlur: (event: React.FocusEvent) => void;
+    onListBlur: () => void;
     /**
      * Callback for keyboard events on the list.
      * @param {React.KeyboardEvent} event - The keyboard event.
@@ -328,7 +328,7 @@ export interface useListboxExposes {
      * Property name used for equality comparison.
      * @returns {string | undefined} The equality key.
      */
-    equalityKey: () => string | undefined;
+    equalityKey: string | undefined;
     /**
      * Checks if the listbox has a value.
      * @returns {boolean} True if there is a value.

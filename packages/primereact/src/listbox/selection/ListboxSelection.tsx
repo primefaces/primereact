@@ -2,6 +2,7 @@
 import { Component } from '@primereact/core/component';
 import { BlankIcon } from '@primereact/icons/blank';
 import { CheckIcon } from '@primereact/icons/check';
+import type { ListboxOptionInstance } from '@primereact/types/shared/listbox';
 import { mergeProps, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { Checkbox } from 'primereact/checkbox';
@@ -15,9 +16,9 @@ export const ListboxSelection = withComponent({
     defaultProps: defaultSelectionProps,
     setup() {
         const listbox = useListboxContext();
-        const { option, index, selected } = useListboxOptionContext();
+        const option = useListboxOptionContext() || ({} as ListboxOptionInstance);
 
-        return { listbox, option, index, selected };
+        return { ...option, listbox };
     },
     render(instance) {
         const { props, ptmi, listbox, selected } = instance;

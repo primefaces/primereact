@@ -54,7 +54,7 @@ export const useListbox = withHeadless({
         };
 
         const isOptionGroup = (option: unknown) => {
-            return props.optionGroupLabel && (option as any)?.optionGroup && (option as any)?.group;
+            return !!(props.optionGroupLabel && (option as Record<string, unknown>)?.optionGroup && (option as Record<string, unknown>)?.group);
         };
 
         const getOptionGroupLabel = (optionGroup: unknown) => {
@@ -70,7 +70,7 @@ export const useListbox = withHeadless({
         };
 
         const getAriaSetSize = () => {
-            return getOptions().filter((option: any) => !isOptionGroup(option)).length;
+            return getOptions().filter((option: unknown) => !isOptionGroup(option)).length;
         };
 
         const getAriaPosInset = (index: number) => {
@@ -79,7 +79,7 @@ export const useListbox = withHeadless({
                     ? index -
                       (getOptions()
                           .slice(0, index)
-                          .filter((option: any) => isOptionGroup(option)).length || 0)
+                          .filter((option: unknown) => isOptionGroup(option)).length || 0)
                     : index) + 1
             );
         };
@@ -89,28 +89,43 @@ export const useListbox = withHeadless({
 
             const firstFocusableEl = getFirstFocusableElement(elementRef.current!, ':not([data-p-hidden-focusable="true"])');
 
-            (lastHiddenFocusableRef.current! as any).tabIndex = isElement(firstFocusableEl) ? undefined : -1;
-            (firstHiddenFocusableRef.current! as any).tabIndex = -1;
+            if (lastHiddenFocusableRef.current) {
+                lastHiddenFocusableRef.current.tabIndex = isElement(firstFocusableEl) ? 0 : -1;
+            }
+
+            if (firstHiddenFocusableRef.current) {
+                firstHiddenFocusableRef.current.tabIndex = -1;
+            }
         };
 
-        const onLastHiddenFocus = (event: FocusEvent) => {
+        const onLastHiddenFocus = (event: React.FocusEvent) => {
             const relatedTarget = event.relatedTarget;
 
             if (relatedTarget === listRef.current) {
                 const firstFocusableEl = getFirstFocusableElement(elementRef.current!, ':not([data-p-hidden-focusable="true"])');
 
-                focus(firstFocusableEl as any);
-                (firstHiddenFocusableRef.current! as any).tabIndex = undefined;
+                if (firstFocusableEl instanceof HTMLElement) {
+                    focus(firstFocusableEl);
+                }
+
+                if (firstHiddenFocusableRef.current) {
+                    firstHiddenFocusableRef.current.tabIndex = 0;
+                }
             } else {
-                focus(firstHiddenFocusableRef.current! as any);
+                focus(firstHiddenFocusableRef.current!);
             }
 
-            (lastHiddenFocusableRef.current! as any).tabIndex = -1;
+            if (lastHiddenFocusableRef.current) {
+                lastHiddenFocusableRef.current.tabIndex = -1;
+            }
         };
 
-        const onFocusOut = (event: FocusEvent) => {
-            if (!(elementRef.current! as any).contains(event.relatedTarget) && lastHiddenFocusableRef.current && firstHiddenFocusableRef.current) {
-                (lastHiddenFocusableRef.current! as any).tabIndex = (firstHiddenFocusableRef.current! as any).tabIndex = undefined;
+        const onFocusOut = (event: React.FocusEvent) => {
+            const elementContains = elementRef.current instanceof HTMLElement && elementRef.current.contains(event.relatedTarget as Node);
+
+            if (!elementContains && lastHiddenFocusableRef.current && firstHiddenFocusableRef.current) {
+                lastHiddenFocusableRef.current.tabIndex = 0;
+                firstHiddenFocusableRef.current.tabIndex = 0;
             }
         };
 
@@ -124,7 +139,7 @@ export const useListbox = withHeadless({
             scrollInView(focusedOptionIndex);
         };
 
-        const onListBlur = (event: FocusEvent) => {
+        const onListBlur = () => {
             setFocusedState(false);
             setFocusedOptionIndexState(-1);
 
@@ -132,7 +147,7 @@ export const useListbox = withHeadless({
             searchValue.current = '';
         };
 
-        const onListKeyDown = (event: KeyboardEvent) => {
+        const onListKeyDown = (event: React.KeyboardEvent) => {
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
@@ -178,8 +193,8 @@ export const useListbox = withHeadless({
                 default:
                     if (props.multiple && event.code === 'KeyA' && metaKey) {
                         const value = getOptions()
-                            .filter((option: any) => isValidOption(option))
-                            .map((option: any) => getOptionValue(option));
+                            .filter((option: unknown) => isValidOption(option))
+                            .map((option: unknown) => getOptionValue(option));
 
                         updateModel(event, value);
 
@@ -196,7 +211,7 @@ export const useListbox = withHeadless({
             }
         };
 
-        const onOptionSelect = (event: MouseEvent | KeyboardEvent, option: unknown, index = -1) => {
+        const onOptionSelect = (event: React.MouseEvent | React.KeyboardEvent, option: unknown, index = -1) => {
             if (props.disabled || isOptionDisabled(option)) {
                 return;
             }
@@ -214,11 +229,11 @@ export const useListbox = withHeadless({
             }
         };
 
-        const onOptionMouseDown = (event: MouseEvent, index: number) => {
+        const onOptionMouseDown = (event: React.MouseEvent, index: number) => {
             changeFocusedOptionIndex(event, index);
         };
 
-        const onOptionMouseMove = (event: MouseEvent, index: number) => {
+        const onOptionMouseMove = (event: React.MouseEvent, index: number) => {
             if (props.focusOnHover && focusedState) {
                 changeFocusedOptionIndex(event, index);
             }
@@ -232,7 +247,7 @@ export const useListbox = withHeadless({
             optionTouched.current = true;
         };
 
-        const onOptionSelectSingle = (event: MouseEvent | KeyboardEvent, option: unknown) => {
+        const onOptionSelectSingle = (event: React.MouseEvent | React.KeyboardEvent, option: unknown) => {
             const selected = isSelected(option);
             const metaSelection = optionTouched.current ? false : props.metaKeySelection;
             let valueChanged = false;
@@ -260,7 +275,7 @@ export const useListbox = withHeadless({
             }
         };
 
-        const onOptionSelectMultiple = (event: MouseEvent | KeyboardEvent, option: unknown) => {
+        const onOptionSelectMultiple = (event: React.MouseEvent | React.KeyboardEvent, option: unknown) => {
             const selected = isSelected(option);
             const metaSelection = optionTouched.current ? false : props.metaKeySelection;
             let value = null;
@@ -271,17 +286,17 @@ export const useListbox = withHeadless({
                 if (selected) {
                     value = metaKey ? removeOption(option) : [getOptionValue(option)];
                 } else {
-                    value = metaKey ? valueState || [] : [];
-                    value = [...(value as unknown[]), getOptionValue(option)];
+                    value = metaKey ? (Array.isArray(valueState) ? valueState : []) : [];
+                    value = [...value, getOptionValue(option)];
                 }
             } else {
-                value = selected ? removeOption(option) : [...(valueState || []), getOptionValue(option)];
+                value = selected ? removeOption(option) : [...(Array.isArray(valueState) ? valueState : []), getOptionValue(option)];
             }
 
             updateModel(event, value);
         };
 
-        const onOptionSelectRange = (event: MouseEvent | KeyboardEvent, start = -1, end = -1) => {
+        const onOptionSelectRange = (event: React.MouseEvent | React.KeyboardEvent, start = -1, end = -1) => {
             start = start === -1 ? findNearestSelectedOptionIndex(end, true) : start;
             end = end === -1 ? findNearestSelectedOptionIndex(start) : end;
 
@@ -290,14 +305,14 @@ export const useListbox = withHeadless({
                 const rangeEnd = Math.max(start, end);
                 const value = getOptions()
                     .slice(rangeStart, rangeEnd + 1)
-                    .filter((option: any) => isValidOption(option))
-                    .map((option: any) => getOptionValue(option));
+                    .filter((option: unknown) => isValidOption(option))
+                    .map((option: unknown) => getOptionValue(option));
 
                 updateModel(event, value);
             }
         };
 
-        const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const onFilterChange = () => {
             setFocusedOptionIndexState(-1);
             startRangeIndex.current = -1;
         };
@@ -307,7 +322,7 @@ export const useListbox = withHeadless({
             startRangeIndex.current = -1;
         };
 
-        const onFilterKeyDown = (event: KeyboardEvent) => {
+        const onFilterKeyDown = (event: React.KeyboardEvent) => {
             switch (event.code) {
                 case 'ArrowDown':
                     onArrowDownKey(event);
@@ -345,7 +360,7 @@ export const useListbox = withHeadless({
             }
         };
 
-        const onArrowDownKey = (event: KeyboardEvent) => {
+        const onArrowDownKey = (event: React.KeyboardEvent) => {
             const optionIndex = focusedOptionIndexState !== -1 ? findNextOptionIndex(focusedOptionIndexState) : findFirstFocusedOptionIndex();
 
             if (props.multiple && event.shiftKey) {
@@ -356,7 +371,7 @@ export const useListbox = withHeadless({
             event.preventDefault();
         };
 
-        const onArrowUpKey = (event: KeyboardEvent) => {
+        const onArrowUpKey = (event: React.KeyboardEvent) => {
             const optionIndex = focusedOptionIndexState !== -1 ? findPrevOptionIndex(focusedOptionIndexState) : findLastFocusedOptionIndex();
 
             if (props.multiple && event.shiftKey) {
@@ -367,13 +382,13 @@ export const useListbox = withHeadless({
             event.preventDefault();
         };
 
-        const onArrowLeftKey = (event: KeyboardEvent, pressedInInputText = false) => {
+        const onArrowLeftKey = (event: React.KeyboardEvent, pressedInInputText = false) => {
             if (pressedInInputText) {
                 setFocusedOptionIndexState(-1);
             }
         };
 
-        const onHomeKey = (event: KeyboardEvent, pressedInInputText = false) => {
+        const onHomeKey = (event: React.KeyboardEvent, pressedInInputText = false) => {
             if (pressedInInputText) {
                 const target = event.currentTarget as HTMLInputElement;
 
@@ -397,7 +412,7 @@ export const useListbox = withHeadless({
             event.preventDefault();
         };
 
-        const onEndKey = (event: KeyboardEvent, pressedInInputText = false) => {
+        const onEndKey = (event: React.KeyboardEvent, pressedInInputText = false) => {
             if (pressedInInputText) {
                 const target = event.currentTarget as HTMLInputElement;
                 const length = target.value.length;
@@ -422,24 +437,24 @@ export const useListbox = withHeadless({
             event.preventDefault();
         };
 
-        const onPageUpKey = (event: KeyboardEvent) => {
+        const onPageUpKey = (event: React.KeyboardEvent) => {
             scrollInView(0);
             event.preventDefault();
         };
 
-        const onPageDownKey = (event: KeyboardEvent) => {
+        const onPageDownKey = (event: React.KeyboardEvent) => {
             scrollInView(getOptions().length - 1);
             event.preventDefault();
         };
 
-        const onEnterKey = (event: KeyboardEvent) => {
+        const onEnterKey = (event: React.KeyboardEvent) => {
             if (focusedOptionIndexState !== -1) {
                 if (props.multiple && event.shiftKey) onOptionSelectRange(event, focusedOptionIndexState);
                 else onOptionSelect(event, getOptions()[focusedOptionIndexState!]);
             }
         };
 
-        const onSpaceKey = (event: KeyboardEvent) => {
+        const onSpaceKey = (event: React.KeyboardEvent) => {
             event.preventDefault();
             onEnterKey(event);
         };
@@ -467,16 +482,19 @@ export const useListbox = withHeadless({
         const isSelected = (option: unknown) => {
             const optionValue = getOptionValue(option);
 
-            if (props.multiple) return (valueState || []).some((value: unknown) => isEquals(value, optionValue));
-            else return isEquals(valueState, optionValue);
+            if (props.multiple) {
+                return Array.isArray(valueState) && valueState.some((value: unknown) => isEquals(value, optionValue));
+            } else {
+                return isEquals(valueState, optionValue);
+            }
         };
 
         const findFirstOptionIndex = () => {
-            return getOptions().findIndex((option: any) => isValidOption(option));
+            return getOptions().findIndex((option: unknown) => isValidOption(option));
         };
 
         const findLastOptionIndex = () => {
-            return findLastIndex(getOptions(), (option: any) => isValidOption(option));
+            return findLastIndex(getOptions(), (option: unknown) => isValidOption(option));
         };
 
         const findNextOptionIndex = (index: number) => {
@@ -484,7 +502,7 @@ export const useListbox = withHeadless({
                 index < getOptions().length - 1
                     ? getOptions()
                           .slice(index + 1)
-                          .findIndex((option: any) => isValidOption(option))
+                          .findIndex((option: unknown) => isValidOption(option))
                     : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : index;
@@ -498,15 +516,15 @@ export const useListbox = withHeadless({
 
         const findSelectedOptionIndex = () => {
             if (hasValue()) {
-                if (props.multiple) {
-                    for (let index = (valueState as unknown[]).length - 1; index >= 0; index--) {
-                        const value = (valueState as unknown[])[index];
-                        const matchedOptionIndex = getOptions().findIndex((option: any) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
+                if (props.multiple && Array.isArray(valueState)) {
+                    for (let index = valueState.length - 1; index >= 0; index--) {
+                        const value = valueState[index];
+                        const matchedOptionIndex = getOptions().findIndex((option: unknown) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
 
                         if (matchedOptionIndex > -1) return matchedOptionIndex;
                     }
                 } else {
-                    return getOptions().findIndex((option: any) => isValidSelectedOption(option));
+                    return getOptions().findIndex((option: unknown) => isValidSelectedOption(option));
                 }
             }
 
@@ -566,7 +584,7 @@ export const useListbox = withHeadless({
             return selectedIndex < 0 ? findLastOptionIndex() : selectedIndex;
         };
 
-        const searchOptions = (event: KeyboardEvent, char: string) => {
+        const searchOptions = (event: React.KeyboardEvent, char: string) => {
             searchValue.current = (searchValue.current || '') + char;
 
             let optionIndex = -1;
@@ -575,15 +593,15 @@ export const useListbox = withHeadless({
                 if (focusedOptionIndexState !== -1) {
                     optionIndex = getOptions()
                         .slice(focusedOptionIndexState)
-                        .findIndex((option: any) => isOptionMatched(option));
+                        .findIndex((option: unknown) => isOptionMatched(option));
                     optionIndex =
                         optionIndex === -1
                             ? getOptions()
                                   .slice(0, focusedOptionIndexState)
-                                  .findIndex((option: any) => isOptionMatched(option))
+                                  .findIndex((option: unknown) => isOptionMatched(option))
                             : optionIndex + focusedOptionIndexState;
                 } else {
-                    optionIndex = getOptions().findIndex((option: any) => isOptionMatched(option));
+                    optionIndex = getOptions().findIndex((option: unknown) => isOptionMatched(option));
                 }
 
                 if (optionIndex === -1 && focusedOptionIndexState === -1) {
@@ -605,11 +623,11 @@ export const useListbox = withHeadless({
             }, 500);
         };
 
-        const removeOption = (option: any) => {
-            return (valueState as unknown[]).filter((val: unknown) => !isEquals(val, getOptionValue(option)));
+        const removeOption = (option: unknown) => {
+            return Array.isArray(valueState) ? valueState.filter((val: unknown) => !isEquals(val, getOptionValue(option))) : [];
         };
 
-        const changeFocusedOptionIndex = (event: MouseEvent | KeyboardEvent, index: number = -1) => {
+        const changeFocusedOptionIndex = (event: React.MouseEvent | React.KeyboardEvent, index: number = -1) => {
             if (focusedOptionIndexState !== index) {
                 setFocusedOptionIndexState(index);
 
@@ -643,11 +661,11 @@ export const useListbox = withHeadless({
                 const focusedOptionIndex = findFirstFocusedOptionIndex();
 
                 setFocusedOptionIndexState(focusedOptionIndex);
-                onOptionSelect(null as any, getOptions()[focusedOptionIndex!]);
+                onOptionSelect(null as unknown as React.MouseEvent, getOptions()[focusedOptionIndex!]);
             }
         };
 
-        const updateModel = (event: Event, value: any) => {
+        const updateModel = (event: React.SyntheticEvent, value: unknown) => {
             setValueState([
                 value,
                 {
@@ -675,7 +693,7 @@ export const useListbox = withHeadless({
 
         // computed
         const optionsListGroup = React.useMemo(() => {
-            const flattenOptions = [];
+            const flattenOptions: unknown[] = [];
 
             (props.options || []).forEach((optionGroup) => {
                 const optionGroupChildren = getOptionGroupChildren(optionGroup) || [];

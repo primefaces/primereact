@@ -1,4 +1,4 @@
-import type { ListboxValueChangeEvent } from '@primereact/types/listbox';
+import type { ListboxOptionsInstance, ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { cn } from '@primeuix/utils';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
@@ -18,17 +18,17 @@ export default function CustomSelectionDemo() {
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCities}
-                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCities(e.value)}
+                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCities(e.value as string[] | null)}
                 options={cities}
                 multiple
                 className="w-full md:w-56"
             >
                 <Listbox.Options>
-                    {(instance) => {
+                    {(instance: ListboxOptionsInstance) => {
                         const { listbox, options } = instance;
 
-                        return options.map((option, index) => {
-                            const isSelected = listbox.isSelected(option);
+                        return (options as typeof cities).map((option, index) => {
+                            const isSelected = listbox?.isSelected(option);
 
                             return (
                                 <Listbox.Option key={option.code} index={index} className="group">

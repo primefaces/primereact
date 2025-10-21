@@ -13,7 +13,16 @@ export const ListboxOption = withComponent({
     setup(instance) {
         const listbox = useListboxContext();
         const options = listbox?.getOptions();
-        const index = instance.props?.index ?? options?.findIndex((option: any) => option[listbox.props.optionKey] === instance.props.uKey);
+        const index =
+            instance.props?.index ??
+            options?.findIndex((option: unknown) => {
+                if (option && typeof option === 'object' && listbox?.props.optionKey) {
+                    return (option as Record<string, unknown>)[listbox.props.optionKey] === instance.props.uKey;
+                }
+
+                return false;
+            }) ??
+            -1;
         const option = options?.[index];
         const selected = listbox?.isSelected(option);
         const group = instance.props?.group ?? listbox?.isOptionGroup(option);
@@ -55,7 +64,7 @@ export const ListboxOption = withComponent({
         );
 
         return (
-            <ListboxOptionProvider value={{ option, index, selected }}>
+            <ListboxOptionProvider value={instance}>
                 <Component instance={instance} attrs={rootProps} children={props.children} />
             </ListboxOptionProvider>
         );

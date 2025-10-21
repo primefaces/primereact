@@ -45,6 +45,10 @@ export interface ListboxOptionsExposes {
      * The ListboxOptions component instance.
      */
     listbox: ListboxInstance | undefined | null;
+    /**
+     * The options available in the Listbox.
+     */
+    options: unknown[] | undefined | null;
 }
 
 /**

@@ -1,4 +1,4 @@
-import type { ListboxValueChangeEvent } from '@primereact/types/listbox';
+import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
 
@@ -17,7 +17,7 @@ export default function MultipleSelectionDemo() {
         <div className="card flex justify-center">
             <Listbox
                 value={selectedCity}
-                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value)}
+                onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string[] | null)}
                 options={cities}
                 optionLabel="name"
                 optionValue="code"
