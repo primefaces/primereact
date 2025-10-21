@@ -7,9 +7,25 @@ import { Tabs } from 'primereact/tabs';
 import { useState } from 'react';
 
 const tabs = [
-    { id: 'tab1', title: 'Account Info', icon: 'pi pi-user', content: 'Update your personal information such as name, email address, and profile picture.' },
-    { id: 'tab2', title: 'Payment', icon: 'pi pi-credit-card', badge: 'New', content: 'Manage your subscription plan, view invoices, and update your payment method.' },
-    { id: 'tab3', title: 'Preferences', icon: 'pi pi-cog', content: 'Customize how the application looks and behaves to match your personal preferences.' }
+    {
+        id: 'tab1',
+        title: 'Account Info',
+        icon: 'pi pi-user',
+        content: 'Update your personal information such as name, email address, and profile picture.'
+    },
+    {
+        id: 'tab2',
+        title: 'Payment',
+        icon: 'pi pi-credit-card',
+        badge: 'New',
+        content: 'Manage your subscription plan, view invoices, and update your payment method.'
+    },
+    {
+        id: 'tab3',
+        title: 'Preferences',
+        icon: 'pi pi-cog',
+        content: 'Customize how the application looks and behaves to match your personal preferences.'
+    }
 ];
 
 export default function TemplateDemo() {
@@ -35,7 +51,9 @@ export default function TemplateDemo() {
                 <Tabs.Panels>
                     <Tabs.Panel value="tab1">
                         <div>
-                            <p className="mt-2 mb-8 text-surface-500">Update your personal information such as name, email address, and profile picture.</p>
+                            <p className="mt-2 mb-8 text-surface-500">
+                                Update your personal information such as name, email address, and profile picture.
+                            </p>
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1">
@@ -53,7 +71,9 @@ export default function TemplateDemo() {
                     </Tabs.Panel>
                     <Tabs.Panel value="tab2">
                         <div>
-                            <p className="mt-2 mb-8 text-surface-500">Manage your subscription plan, view invoices, and update your payment method.</p>
+                            <p className="mt-2 mb-8 text-surface-500">
+                                Manage your subscription plan, view invoices, and update your payment method.
+                            </p>
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1">
@@ -75,7 +95,9 @@ export default function TemplateDemo() {
                     </Tabs.Panel>
                     <Tabs.Panel value="tab3">
                         <div>
-                            <p className="mt-2 mb-8 text-surface-500">Customize how the application looks and behaves to match your personal preferences.</p>
+                            <p className="mt-2 mb-8 text-surface-500">
+                                Customize how the application looks and behaves to match your personal preferences.
+                            </p>
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">

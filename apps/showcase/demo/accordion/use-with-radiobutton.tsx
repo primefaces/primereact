@@ -32,7 +32,11 @@ export default function UseWithRadioButton() {
     return (
         <div className="card">
             <div className="max-w-md mx-auto w-full">
-                <RadioButton.Group className="w-full" value={selected} onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelected(e.value as string)}>
+                <RadioButton.Group
+                    className="w-full"
+                    value={selected}
+                    onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelected(e.value as string)}
+                >
                     <Accordion
                         value={selected}
                         onChange={(e: useAccordionChangeEvent) => setSelected(e.value as string)}
@@ -40,7 +44,10 @@ export default function UseWithRadioButton() {
                     >
                         {items.map((item) => (
                             <Accordion.Panel key={item.value} value={item.value} className="last:border-none transition-all ease-out">
-                                <Accordion.Header onClick={() => setSelected(item.value)} className="flex items-center justify-between bg-transparent py-3.5">
+                                <Accordion.Header
+                                    onClick={() => setSelected(item.value)}
+                                    className="flex items-center justify-between bg-transparent py-3.5"
+                                >
                                     <span className="flex items-center gap-4">
                                         <RadioButton inputId={`radio-${item.value}`} name="price" value={item.value} />
                                         <span className="font-semibold text-xl">{item.label}</span>

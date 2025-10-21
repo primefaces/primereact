@@ -59,7 +59,14 @@ export default function BasicDemo() {
                                             <Toast.Description />
                                         </div>
                                     </div>
-                                    <Toast.Close as={Button} iconOnly severity={'secondary'} variant="text" size="small" className={'absolute top-2 right-2'}>
+                                    <Toast.Close
+                                        as={Button}
+                                        iconOnly
+                                        severity={'secondary'}
+                                        variant="text"
+                                        size="small"
+                                        className={'absolute top-2 right-2'}
+                                    >
                                         <i className="pi pi-times"></i>
                                     </Toast.Close>
                                 </Toast.Item>

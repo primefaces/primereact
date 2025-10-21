@@ -77,21 +77,57 @@ export default function FormatPatternsDemo() {
                 <Label htmlFor="ssn" className="font-bold block mb-2">
                     SSN
                 </Label>
-                <InputText ref={input1} value={value1} id="ssn" placeholder="999-99-9999" fluid onInput={onMaskInput1} onKeyDown={onMaskKeyDown1} onKeyPress={onMaskKeyPress1} onFocus={onMaskFocus1} onBlur={onMaskBlur1} onPaste={onMaskPaste1} />
+                <InputText
+                    ref={input1}
+                    value={value1}
+                    id="ssn"
+                    placeholder="999-99-9999"
+                    fluid
+                    onInput={onMaskInput1}
+                    onKeyDown={onMaskKeyDown1}
+                    onKeyPress={onMaskKeyPress1}
+                    onFocus={onMaskFocus1}
+                    onBlur={onMaskBlur1}
+                    onPaste={onMaskPaste1}
+                />
             </div>
 
             <div className="flex-auto">
                 <Label htmlFor="phone" className="font-bold block mb-2">
                     Phone
                 </Label>
-                <InputText ref={input2} value={value2} id="phone" placeholder="(999) 999-9999" fluid onInput={onMaskInput2} onKeyDown={onMaskKeyDown2} onKeyPress={onMaskKeyPress2} onFocus={onMaskFocus2} onBlur={onMaskBlur2} onPaste={onMaskPaste2} />
+                <InputText
+                    ref={input2}
+                    value={value2}
+                    id="phone"
+                    placeholder="(999) 999-9999"
+                    fluid
+                    onInput={onMaskInput2}
+                    onKeyDown={onMaskKeyDown2}
+                    onKeyPress={onMaskKeyPress2}
+                    onFocus={onMaskFocus2}
+                    onBlur={onMaskBlur2}
+                    onPaste={onMaskPaste2}
+                />
             </div>
 
             <div className="flex-auto">
                 <Label htmlFor="serial" className="font-bold block mb-2">
                     Serial
                 </Label>
-                <InputText ref={input3} value={value3} id="serial" placeholder="a*-999-a999" fluid onInput={onMaskInput3} onKeyDown={onMaskKeyDown3} onKeyPress={onMaskKeyPress3} onFocus={onMaskFocus3} onBlur={onMaskBlur3} onPaste={onMaskPaste3} />
+                <InputText
+                    ref={input3}
+                    value={value3}
+                    id="serial"
+                    placeholder="a*-999-a999"
+                    fluid
+                    onInput={onMaskInput3}
+                    onKeyDown={onMaskKeyDown3}
+                    onKeyPress={onMaskKeyPress3}
+                    onFocus={onMaskFocus3}
+                    onBlur={onMaskBlur3}
+                    onPaste={onMaskPaste3}
+                />
             </div>
         </div>
     );

@@ -26,7 +26,13 @@ export default function HorizontalDemo() {
                             {images &&
                                 images.map((image, index) => (
                                     <figure key={index} className="shrink-0">
-                                        <Image width={150} height={100} src={image.itemImageSrc} alt={image.title} className="w-full object-cover rounded-md" />
+                                        <Image
+                                            width={150}
+                                            height={100}
+                                            src={image.itemImageSrc}
+                                            alt={image.title}
+                                            className="w-full object-cover rounded-md"
+                                        />
                                         <figcaption className="pt-2 text-xs">
                                             Photo by <span className="font-semibold">{image.title}</span>
                                         </figcaption>

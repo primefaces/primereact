@@ -19,10 +19,19 @@ export default function IndeterminateDemo() {
         <div className="card flex items-center justify-center">
             <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
-                    <Checkbox inputId="indeterminate-checkbox" indeterminate={indeterminate} checked={isAllSelected} onCheckedChange={(e: CheckboxChangeEvent) => setValue(e.checked ? categories.map((category) => category.key) : [])} />
+                    <Checkbox
+                        inputId="indeterminate-checkbox"
+                        indeterminate={indeterminate}
+                        checked={isAllSelected}
+                        onCheckedChange={(e: CheckboxChangeEvent) => setValue(e.checked ? categories.map((category) => category.key) : [])}
+                    />
                     <label htmlFor="indeterminate-checkbox">Email Notifications</label>
                 </div>
-                <Checkbox.Group value={value} onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])} className="flex-col gap-4 pl-7">
+                <Checkbox.Group
+                    value={value}
+                    onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])}
+                    className="flex-col gap-4 pl-7"
+                >
                     {categories.map((item) => (
                         <div key={item.key} className="flex items-center gap-2">
                             <Checkbox inputId={item.key} value={item.key} />

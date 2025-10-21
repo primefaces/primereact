@@ -5,7 +5,11 @@ export default function TemplateDemo() {
         <div className="card">
             <ImageCompare className="max-w-lg w-full h-60 mx-auto aspect-auto">
                 <ImageCompare.Left as="div" className="bg-transparent absolute w-full h-full"></ImageCompare.Left>
-                <ImageCompare.Right as={'div'} className="absolute w-full h-full" style={{ clipPath: `polygon(0 0,var(--p-imagecompare-scope-x,50%) 0,var(--p-imagecompare-scope-x,50%) 100%,0 100%)` }}>
+                <ImageCompare.Right
+                    as={'div'}
+                    className="absolute w-full h-full"
+                    style={{ clipPath: `polygon(0 0,var(--p-imagecompare-scope-x,50%) 0,var(--p-imagecompare-scope-x,50%) 100%,0 100%)` }}
+                >
                     <svg className="absolute w-full h-full" viewBox="0 0 644 189" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1381_2302)">
                             <path

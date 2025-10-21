@@ -20,7 +20,15 @@ export default function CurrencyDemo() {
                 <Label htmlFor="currency-india" className="font-bold block mb-2">
                     India
                 </Label>
-                <InputNumber defaultValue={4250} inputId="currency-india" mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" fluid />
+                <InputNumber
+                    defaultValue={4250}
+                    inputId="currency-india"
+                    mode="currency"
+                    currency="INR"
+                    currencyDisplay="code"
+                    locale="en-IN"
+                    fluid
+                />
             </div>
             <div className="flex-auto">
                 <Label htmlFor="currency-japan" className="font-bold block mb-2">

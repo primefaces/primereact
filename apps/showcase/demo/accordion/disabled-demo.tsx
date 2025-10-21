@@ -10,7 +10,10 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>You can reset your password by clicking the “Forgot password?” link on the login page. We’ll send a password reset link to your registered email address.</p>
+                        <p>
+                            You can reset your password by clicking the “Forgot password?” link on the login page. We’ll send a password reset link to
+                            your registered email address.
+                        </p>
                     </Accordion.Content>
                 </Accordion.Panel>
                 <Accordion.Panel value="2">
@@ -19,7 +22,10 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>Yes. Our Team and Business plans are designed for collaboration. You can invite team members, assign roles, and manage permissions easily from your dashboard.</p>
+                        <p>
+                            Yes. Our Team and Business plans are designed for collaboration. You can invite team members, assign roles, and manage
+                            permissions easily from your dashboard.
+                        </p>
                     </Accordion.Content>
                 </Accordion.Panel>
             </Accordion>
@@ -30,7 +36,10 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>If you go over your plan limits (e.g., storage or API requests), you’ll receive a notification. You can either upgrade your plan or wait until the next billing cycle resets.</p>
+                        <p>
+                            If you go over your plan limits (e.g., storage or API requests), you’ll receive a notification. You can either upgrade
+                            your plan or wait until the next billing cycle resets.
+                        </p>
                     </Accordion.Content>
                 </Accordion.Panel>
                 <Accordion.Panel value="2" disabled>

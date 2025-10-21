@@ -18,7 +18,11 @@ function BasicDemo() {
 
     return (
         <div className="mb-12">
-            <Gallery className="w-full h-[600px] relative overflow-hidden" activeIndex={activeIndex} onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}>
+            <Gallery
+                className="w-full h-[600px] relative overflow-hidden"
+                activeIndex={activeIndex}
+                onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}
+            >
                 <Gallery.Backdrop />
                 <Gallery.Prev>
                     <i className="pi pi-arrow-left"></i>
@@ -45,7 +49,9 @@ function BasicDemo() {
                     <Gallery.ToolbarItem action="download">
                         <i className="pi pi-download"></i>
                     </Gallery.ToolbarItem>
-                    <Gallery.ToolbarItem action="toggleFullScreen">{() => <i className="pi pi-arrow-up-right-and-arrow-down-left-from-center"></i>}</Gallery.ToolbarItem>
+                    <Gallery.ToolbarItem action="toggleFullScreen">
+                        {() => <i className="pi pi-arrow-up-right-and-arrow-down-left-from-center"></i>}
+                    </Gallery.ToolbarItem>
                 </Gallery.Toolbar>
                 <Gallery.Content>
                     {images.map((image) => (
@@ -65,8 +71,14 @@ function BasicDemo() {
                                     setActiveIndex(index);
                                 }}
                             >
-                                <div className={`h-full w-full border-2 rounded-md overflow-hidden ${activeIndex === index ? 'border-orange-500' : 'border-transparent'}`}>
-                                    <img draggable={false} src={image} className="h-full w-full object-cover hover:opacity-75 transition-opacity"></img>
+                                <div
+                                    className={`h-full w-full border-2 rounded-md overflow-hidden ${activeIndex === index ? 'border-orange-500' : 'border-transparent'}`}
+                                >
+                                    <img
+                                        draggable={false}
+                                        src={image}
+                                        className="h-full w-full object-cover hover:opacity-75 transition-opacity"
+                                    ></img>
                                 </div>
                             </Gallery.ThumbnailItem>
                         ))}

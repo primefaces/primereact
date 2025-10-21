@@ -19,7 +19,11 @@ function TemplateDemo() {
             </Paginator>
 
             <div className="p-4 text-center">
-                <img src={`https://primefaces.org/cdn/primevue/images/nature/nature${page}.jpg`} alt={page.toString()} className="rounded-lg w-full sm:w-[30rem]" />
+                <img
+                    src={`https://primefaces.org/cdn/primevue/images/nature/nature${page}.jpg`}
+                    alt={page.toString()}
+                    className="rounded-lg w-full sm:w-[30rem]"
+                />
             </div>
         </div>
     );

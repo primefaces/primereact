@@ -10,15 +10,39 @@ export default function FloatLabelDemo() {
     return (
         <div className="card  flex flex-wrap justify-center items-stretch gap-4">
             <Label.Float>
-                <Textarea value={value1} onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue1(e.currentTarget.value)} id="over_label" rows={5} cols={30} style={{ resize: 'none' }} className="h-full" />
+                <Textarea
+                    value={value1}
+                    onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue1(e.currentTarget.value)}
+                    id="over_label"
+                    rows={5}
+                    cols={30}
+                    style={{ resize: 'none' }}
+                    className="h-full"
+                />
                 <Label htmlFor="over_label">Over Label</Label>
             </Label.Float>
             <Label.Float variant="in">
-                <Textarea value={value2} onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue2(e.currentTarget.value)} id="in_label" rows={5} cols={30} style={{ resize: 'none' }} className="h-full" />
+                <Textarea
+                    value={value2}
+                    onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue2(e.currentTarget.value)}
+                    id="in_label"
+                    rows={5}
+                    cols={30}
+                    style={{ resize: 'none' }}
+                    className="h-full"
+                />
                 <Label htmlFor="in_label">In Label</Label>
             </Label.Float>
             <Label.Float variant="on">
-                <Textarea value={value3} onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue3(e.currentTarget.value)} id="on_label" rows={5} cols={30} style={{ resize: 'none' }} className="h-full" />
+                <Textarea
+                    value={value3}
+                    onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue3(e.currentTarget.value)}
+                    id="on_label"
+                    rows={5}
+                    cols={30}
+                    style={{ resize: 'none' }}
+                    className="h-full"
+                />
                 <Label htmlFor="on_label">On Label</Label>
             </Label.Float>
         </div>

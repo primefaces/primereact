@@ -2,7 +2,11 @@ import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
 import { toast, Toast } from 'primereact/toast';
 
-function PositionToast({ position = 'bottom-right' }: { position: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center' }) {
+function PositionToast({
+    position = 'bottom-right'
+}: {
+    position: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
+}) {
     return (
         <Toast position={position} group={position}>
             <Toast.Portal>
@@ -18,7 +22,14 @@ function PositionToast({ position = 'bottom-right' }: { position: 'top-left' | '
                                         <Toast.Action as={Button} size="small" className="mt-4" />
                                     </div>
                                 </div>
-                                <Toast.Close as={Button} iconOnly severity={'secondary'} variant="text" size="small" className={'absolute top-2 right-2'}>
+                                <Toast.Close
+                                    as={Button}
+                                    iconOnly
+                                    severity={'secondary'}
+                                    variant="text"
+                                    size="small"
+                                    className={'absolute top-2 right-2'}
+                                >
                                     <i className="pi pi-times"></i>
                                 </Toast.Close>
                             </Toast.Item>

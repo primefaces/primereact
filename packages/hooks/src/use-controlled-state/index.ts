@@ -48,11 +48,7 @@ export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue
  * };
  * ```
  */
-export function useControlledState<T = unknown, E = T>({
-    value,
-    defaultValue,
-    onChange
-}: UseControlledStateOptions<T, E>): UseControlledStateReturnType<T | undefined> {
+export function useControlledState<T = unknown, E = T>({ value, defaultValue, onChange }: UseControlledStateOptions<T, E>): UseControlledStateReturnType<T | undefined> {
     const [valueState, setValueState] = React.useState<T | undefined>(defaultValue ?? value);
 
     const isControlled = value !== undefined;

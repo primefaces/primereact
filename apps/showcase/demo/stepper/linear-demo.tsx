@@ -36,7 +36,9 @@ export default function HorizontalDemo() {
                             return (
                                 <>
                                     <div className="flex flex-col h-48">
-                                        <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content I</div>
+                                        <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                            Content I
+                                        </div>
                                     </div>
                                     <div className="flex pt-6 justify-end">
                                         <Button onClick={() => stepper?.setActiveStep('2')}>
@@ -55,7 +57,9 @@ export default function HorizontalDemo() {
                             return (
                                 <>
                                     <div className="flex flex-col h-48">
-                                        <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content II</div>
+                                        <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                            Content II
+                                        </div>
                                     </div>
                                     <div className="flex pt-6 justify-between">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep('1')}>
@@ -78,7 +82,9 @@ export default function HorizontalDemo() {
                             return (
                                 <>
                                     <div className="flex flex-col h-48">
-                                        <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content III</div>
+                                        <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                            Content III
+                                        </div>
                                     </div>
                                     <div className="pt-6 ">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep('2')}>

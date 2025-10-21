@@ -17,10 +17,15 @@ export default function TemplateDemo() {
 
                             return (
                                 <div className="flex flex-row flex-auto gap-2">
-                                    <button className="bg-transparent border-0 inline-flex flex-col gap-2 cursor-pointer" onClick={() => stepper?.setActiveStep(props.value)}>
+                                    <button
+                                        className="bg-transparent border-0 inline-flex flex-col gap-2 cursor-pointer"
+                                        onClick={() => stepper?.setActiveStep(props.value)}
+                                    >
                                         <span
                                             className={`rounded-full border-2 w-12 h-12 inline-flex items-center justify-center ${
-                                                (instance?.props?.value as number) <= (stepper?.state.value as number) ? 'bg-primary text-primary-contrast border-primary' : 'border-surface-200 dark:border-surface-700'
+                                                (instance?.props?.value as number) <= (stepper?.state.value as number)
+                                                    ? 'bg-primary text-primary-contrast border-primary'
+                                                    : 'border-surface-200 dark:border-surface-700'
                                             }`}
                                         >
                                             <i className="pi pi-user" />
@@ -37,10 +42,15 @@ export default function TemplateDemo() {
 
                             return (
                                 <div className="flex flex-row flex-auto gap-2">
-                                    <button className="bg-transparent border-0 inline-flex flex-col gap-2 cursor-pointer" onClick={() => stepper?.setActiveStep(props.value)}>
+                                    <button
+                                        className="bg-transparent border-0 inline-flex flex-col gap-2 cursor-pointer"
+                                        onClick={() => stepper?.setActiveStep(props.value)}
+                                    >
                                         <span
                                             className={`rounded-full border-2 w-12 h-12 inline-flex items-center justify-center ${
-                                                (props?.value as number) <= (stepper?.state.value as number) ? 'bg-primary text-primary-contrast border-primary' : 'border-surface-200 dark:border-surface-700'
+                                                (props?.value as number) <= (stepper?.state.value as number)
+                                                    ? 'bg-primary text-primary-contrast border-primary'
+                                                    : 'border-surface-200 dark:border-surface-700'
                                             }`}
                                         >
                                             <i className="pi pi-star" />
@@ -57,10 +67,15 @@ export default function TemplateDemo() {
 
                             return (
                                 <div className="flex flex-row gap-2">
-                                    <button className="bg-transparent border-0 inline-flex flex-col gap-2 cursor-pointer" onClick={() => stepper?.setActiveStep(props.value)}>
+                                    <button
+                                        className="bg-transparent border-0 inline-flex flex-col gap-2 cursor-pointer"
+                                        onClick={() => stepper?.setActiveStep(props.value)}
+                                    >
                                         <span
                                             className={`rounded-full border-2 w-12 h-12 inline-flex items-center justify-center ${
-                                                (props?.value as number) <= (stepper?.state.value as number) ? 'bg-primary text-primary-contrast border-primary' : 'border-surface-200 dark:border-surface-700'
+                                                (props?.value as number) <= (stepper?.state.value as number)
+                                                    ? 'bg-primary text-primary-contrast border-primary'
+                                                    : 'border-surface-200 dark:border-surface-700'
                                             }`}
                                         >
                                             <i className="pi pi-id-card" />
@@ -164,7 +179,12 @@ export default function TemplateDemo() {
                                     <div className="flex flex-col gap-2 mx-auto" style={{ minHeight: '16rem', maxWidth: '24rem' }}>
                                         <div className="text-center mt-4 mb-4 text-xl font-semibold">Account created successfully</div>
                                         <div className="flex justify-center">
-                                            <Image alt="logo" width={240} height={160} src="https://primefaces.org/cdn/primevue/images/stepper/content.svg" />
+                                            <Image
+                                                alt="logo"
+                                                width={240}
+                                                height={160}
+                                                src="https://primefaces.org/cdn/primevue/images/stepper/content.svg"
+                                            />
                                         </div>
                                     </div>
                                     <div className="flex pt-6 justify-start">

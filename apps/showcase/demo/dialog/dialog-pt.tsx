@@ -4,15 +4,47 @@ export default function DialogPT() {
     return (
         <>
             <Dialog />
-            <div className="p-dialog-mask !relative" data-pc-section="mask" style={{ position: 'fixed', height: '100%', width: '100%', left: '0px', top: '0px', display: 'flex', justifyContent: 'center', alignItems: 'center', pointerEvents: 'auto' }}>
-                <div className="p-dialog p-component" data-p-focus-trap="true" style={{ display: 'flex', flexDirection: 'column', pointerEvents: 'auto', width: '25rem' }}>
-                    <span className="p-hidden-accessible p-hidden-focusable" tabIndex={0} role="presentation" aria-hidden="true" data-p-hidden-accessible="true" data-p-hidden-focusable="true"></span>
+            <div
+                className="p-dialog-mask !relative"
+                data-pc-section="mask"
+                style={{
+                    position: 'fixed',
+                    height: '100%',
+                    width: '100%',
+                    left: '0px',
+                    top: '0px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    pointerEvents: 'auto'
+                }}
+            >
+                <div
+                    className="p-dialog p-component"
+                    data-p-focus-trap="true"
+                    style={{ display: 'flex', flexDirection: 'column', pointerEvents: 'auto', width: '25rem' }}
+                >
+                    <span
+                        className="p-hidden-accessible p-hidden-focusable"
+                        tabIndex={0}
+                        role="presentation"
+                        aria-hidden="true"
+                        data-p-hidden-accessible="true"
+                        data-p-hidden-focusable="true"
+                    ></span>
                     <div id="pr_id_r0_header" className="p-dialog-header" data-pc-section="root" data-pc-name="dialogheader">
                         <div className="p-dialog-title" data-pc-section="root" data-pc-name="dialogtitle">
                             Header
                         </div>
                         <div className="p-dialog-header-actions" data-pc-section="root" data-pc-name="dialogheaderactions">
-                            <button id="pr_id_r3a" className="p-button p-component p-button-icon-only p-button-secondary p-button-rounded p-button-text" type="button" data-pc-name="maximizable" data-pc-section="root" data-pc-extend="button">
+                            <button
+                                id="pr_id_r3a"
+                                className="p-button p-component p-button-icon-only p-button-secondary p-button-rounded p-button-text"
+                                type="button"
+                                data-pc-name="maximizable"
+                                data-pc-section="root"
+                                data-pc-extend="button"
+                            >
                                 <svg
                                     width="14"
                                     height="14"
@@ -69,7 +101,14 @@ export default function DialogPT() {
                     <div className="p-dialog-footer" data-pc-section="root" data-pc-name="dialogfooter">
                         Footer
                     </div>
-                    <span className="p-hidden-accessible p-hidden-focusable" tabIndex={0} role="presentation" aria-hidden="true" data-p-hidden-accessible="true" data-p-hidden-focusable="true"></span>
+                    <span
+                        className="p-hidden-accessible p-hidden-focusable"
+                        tabIndex={0}
+                        role="presentation"
+                        aria-hidden="true"
+                        data-p-hidden-accessible="true"
+                        data-p-hidden-focusable="true"
+                    ></span>
                 </div>
             </div>
         </>

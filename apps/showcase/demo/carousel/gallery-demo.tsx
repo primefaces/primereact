@@ -24,7 +24,12 @@ function GalleryDemo() {
                         {images.map((_, i) => (
                             <Carousel.Item key={i}>
                                 <div className="p-1 h-full">
-                                    <img src={images[i]} alt={`Image ${i + 1}`} draggable={false} className="h-full w-full object-cover  select-none" />
+                                    <img
+                                        src={images[i]}
+                                        alt={`Image ${i + 1}`}
+                                        draggable={false}
+                                        className="h-full w-full object-cover  select-none"
+                                    />
                                 </div>
                             </Carousel.Item>
                         ))}
@@ -33,9 +38,19 @@ function GalleryDemo() {
                     <Carousel className="mt-4" spacing={4} align="center" slide={selectedImage}>
                         <Carousel.Content className="h-[90px]">
                             {images.map((_, i) => (
-                                <Carousel.Item key={i} size={20} onClick={() => setSelectedImage(i)} className={`cursor-pointer transition-opacity ${selectedImage === i ? '' : 'opacity-60 hover:opacity-40'}`}>
+                                <Carousel.Item
+                                    key={i}
+                                    size={20}
+                                    onClick={() => setSelectedImage(i)}
+                                    className={`cursor-pointer transition-opacity ${selectedImage === i ? '' : 'opacity-60 hover:opacity-40'}`}
+                                >
                                     <div className="p-1 h-full">
-                                        <img src={images[i]} alt={`Image ${i + 1}`} draggable={false} className="h-full w-full object-cover  select-none" />
+                                        <img
+                                            src={images[i]}
+                                            alt={`Image ${i + 1}`}
+                                            draggable={false}
+                                            className="h-full w-full object-cover  select-none"
+                                        />
                                     </div>
                                 </Carousel.Item>
                             ))}

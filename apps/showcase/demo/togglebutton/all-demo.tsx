@@ -1,4 +1,8 @@
-import type { ToggleButtonChangeEvent, ToggleButtonGroupValueChangeEvent, ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
+import type {
+    ToggleButtonChangeEvent,
+    ToggleButtonGroupValueChangeEvent,
+    ToggleButtonIndicatorInstance
+} from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
@@ -16,7 +20,9 @@ export default function BasicDemo() {
 
             <h2>States</h2>
             <ToggleButton>
-                <ToggleButton.Indicator>{({ togglebutton }: ToggleButtonIndicatorInstance) => (togglebutton?.state.pressed ? 'On' : 'Off')}</ToggleButton.Indicator>
+                <ToggleButton.Indicator>
+                    {({ togglebutton }: ToggleButtonIndicatorInstance) => (togglebutton?.state.pressed ? 'On' : 'Off')}
+                </ToggleButton.Indicator>
             </ToggleButton>
 
             <h2>Controlled</h2>
@@ -81,7 +87,12 @@ export default function BasicDemo() {
             </ToggleButton.Group>
 
             <h2>Multiple</h2>
-            <ToggleButton.Group allowEmpty={false} multiple value={multipleState} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setMultipleState(e.value as string[])}>
+            <ToggleButton.Group
+                allowEmpty={false}
+                multiple
+                value={multipleState}
+                onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setMultipleState(e.value as string[])}
+            >
                 <ToggleButton value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
                 </ToggleButton>

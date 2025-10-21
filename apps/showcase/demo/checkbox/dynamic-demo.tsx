@@ -14,7 +14,11 @@ export default function DynamicDemo() {
 
     return (
         <div className="card flex items-center justify-center">
-            <Checkbox.Group value={value} onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])} className="flex-col gap-4">
+            <Checkbox.Group
+                value={value}
+                onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])}
+                className="flex-col gap-4"
+            >
                 {categories.map((category) => (
                     <div key={category.key} className="flex items-center gap-2">
                         <Checkbox inputId={category.key} value={category.key} />

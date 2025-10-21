@@ -18,7 +18,14 @@ function VariantsToast() {
                                         <Toast.Action as={Button} size="small" className="mt-4" />
                                     </div>
                                 </div>
-                                <Toast.Close as={Button} iconOnly severity={'secondary'} variant="text" size="small" className={'absolute top-2 right-2'}>
+                                <Toast.Close
+                                    as={Button}
+                                    iconOnly
+                                    severity={'secondary'}
+                                    variant="text"
+                                    size="small"
+                                    className={'absolute top-2 right-2'}
+                                >
                                     <i className="pi pi-times"></i>
                                 </Toast.Close>
                             </Toast.Item>
@@ -87,7 +94,10 @@ function VariantsDemo() {
                     </p>
                 </div>
                 <div className="flex items-center">
-                    <button onClick={() => toast.remove(id)} className="font-medium px-3 py-1.5 rounded-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/75 dark:hover:bg-indigo-950 text-indigo-500 dark:text-indigo-400">
+                    <button
+                        onClick={() => toast.remove(id)}
+                        className="font-medium px-3 py-1.5 rounded-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/75 dark:hover:bg-indigo-950 text-indigo-500 dark:text-indigo-400"
+                    >
                         Action
                     </button>
                 </div>
@@ -155,10 +165,18 @@ function VariantsDemo() {
             >
                 Success
             </Button>
-            <Button onClick={() => toast.danger({ title: 'Danger', description: 'This is a danger toast', group: 'variants' })} variant="outlined" severity="danger">
+            <Button
+                onClick={() => toast.danger({ title: 'Danger', description: 'This is a danger toast', group: 'variants' })}
+                variant="outlined"
+                severity="danger"
+            >
                 Danger
             </Button>
-            <Button onClick={() => toast.warn({ title: 'Warn', description: 'This is a warning toast', group: 'variants' })} variant="outlined" severity="warn">
+            <Button
+                onClick={() => toast.warn({ title: 'Warn', description: 'This is a warning toast', group: 'variants' })}
+                variant="outlined"
+                severity="warn"
+            >
                 Warn
             </Button>
             <Button onClick={handleLoadingToast} variant="outlined">

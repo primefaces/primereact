@@ -25,7 +25,12 @@ function WithInputDemo() {
                     <Paginator.First />
                     <Paginator.Prev />
                     <div className="flex items-center gap-2">
-                        <InputText className="max-w-14 px-2 py-1" type="number" value={page} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPage(Number(e.target.value))} />
+                        <InputText
+                            className="max-w-14 px-2 py-1"
+                            type="number"
+                            value={page}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPage(Number(e.target.value))}
+                        />
                         <span>of {maxPage}</span>
                     </div>
                     <Paginator.Next />

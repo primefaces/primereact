@@ -31,7 +31,10 @@ function SelectDataDemo() {
                                                 setOpen(false);
                                             }}
                                         >
-                                            <img src={`https://primefaces.org/cdn/primevue/images/avatar/${member.image}`} style={{ width: '32px' }} />
+                                            <img
+                                                src={`https://primefaces.org/cdn/primevue/images/avatar/${member.image}`}
+                                                style={{ width: '32px' }}
+                                            />
                                             <div>
                                                 <span className="font-medium">{member.name}</span>
                                                 <div className="text-sm text-surface-500 dark:text-surface-400">{member.email}</div>

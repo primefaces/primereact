@@ -25,15 +25,11 @@ export const Checkbox = withComponent({
                   ...inProps,
                   checked: group.props.value?.includes(props.value),
                   defaultChecked: group.props.defaultValue?.includes(props.value),
-                  onCheckedChange: group.updateChange
-                      ? (event: CheckboxChangeEvent) => group.updateChange!({ ...event, value: props.value })
-                      : undefined
+                  onCheckedChange: group.updateChange ? (event: CheckboxChangeEvent) => group.updateChange!({ ...event, value: props.value }) : undefined
               }
             : {
                   ...inProps,
-                  onCheckedChange: props.onCheckedChange
-                      ? (event: CheckboxChangeEvent) => props.onCheckedChange!({ ...event, value: props.value })
-                      : undefined
+                  onCheckedChange: props.onCheckedChange ? (event: CheckboxChangeEvent) => props.onCheckedChange!({ ...event, value: props.value }) : undefined
               };
 
         const checkbox = useCheckbox(useCheckboxProps);

@@ -17,7 +17,12 @@ export default function CustomDemo() {
                     <Timeline.Event key={index} className={index % 2 === 1 ? 'max-[960px]:flex-row' : undefined}>
                         <Timeline.Opposite />
                         <Timeline.Separator>
-                            <span className={['flex w-8 h-8 items-center justify-center rounded-full z-10 shadow-sm', index !== events.length - 1 ? 'text-white bg-primary' : ''].join(' ')}>
+                            <span
+                                className={[
+                                    'flex w-8 h-8 items-center justify-center rounded-full z-10 shadow-sm',
+                                    index !== events.length - 1 ? 'text-white bg-primary' : ''
+                                ].join(' ')}
+                            >
                                 <i className={event.icon}></i>
                             </span>
                             {index !== events.length - 1 && <Timeline.Connector />}
@@ -30,10 +35,18 @@ export default function CustomDemo() {
                                         <Card.Subtitle>{event.date}</Card.Subtitle>
                                     </Card.Caption>
                                     <Card.Content>
-                                        {event.image && <img src={`https://primefaces.org/cdn/primevue/images/product/${event.image}`} alt={event.status} width="200" className="shadow-sm" />}
+                                        {event.image && (
+                                            <img
+                                                src={`https://primefaces.org/cdn/primevue/images/product/${event.image}`}
+                                                alt={event.status}
+                                                width="200"
+                                                className="shadow-sm"
+                                            />
+                                        )}
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis
-                                            esse, cupiditate neque quas!
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+                                            numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
+                                            cupiditate neque quas!
                                         </p>
                                         <Button variant="text">Read more</Button>
                                     </Card.Content>

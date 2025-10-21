@@ -29,17 +29,23 @@ export default function HorizontalDemo() {
                 <Stepper.Panels>
                     <Stepper.Panel value="1">
                         <div className="flex flex-col h-48">
-                            <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content I</div>
+                            <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                Content I
+                            </div>
                         </div>
                     </Stepper.Panel>
                     <Stepper.Panel value="2">
                         <div className="flex flex-col h-48">
-                            <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content II</div>
+                            <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                Content II
+                            </div>
                         </div>
                     </Stepper.Panel>
                     <Stepper.Panel value="3">
                         <div className="flex flex-col h-48">
-                            <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">Content III</div>
+                            <div className="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                                Content III
+                            </div>
                         </div>
                     </Stepper.Panel>
                 </Stepper.Panels>

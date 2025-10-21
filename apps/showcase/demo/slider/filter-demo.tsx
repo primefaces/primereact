@@ -17,7 +17,14 @@ export default function FilterDemo() {
 
     return (
         <div className="card flex flex-col items-center justify-center">
-            <Image alt="user header" className="w-80 rounded mb-6" src="https://primefaces.org/cdn/primevue/images/card-vue.jpg" style={filterStyle} width={320} height={240} />
+            <Image
+                alt="user header"
+                className="w-80 rounded mb-6"
+                src="https://primefaces.org/cdn/primevue/images/card-vue.jpg"
+                style={filterStyle}
+                width={320}
+                height={240}
+            />
             <ToggleButton.Group value={filter} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setFilter(e.value as number)}>
                 <ToggleButton value={0}>
                     <ToggleButton.Indicator>Contrast</ToggleButton.Indicator>

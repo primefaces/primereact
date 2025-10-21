@@ -1,17 +1,6 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import {
-    equals,
-    findLastIndex,
-    findSingle,
-    focus,
-    getFirstFocusableElement,
-    isElement,
-    isNotEmpty,
-    isPrintableCharacter,
-    isString,
-    resolveFieldData
-} from '@primeuix/utils';
+import { equals, findLastIndex, findSingle, focus, getFirstFocusableElement, isElement, isNotEmpty, isPrintableCharacter, isString, resolveFieldData } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useListbox.props';
 
@@ -126,12 +115,7 @@ export const useListbox = withHeadless({
         };
 
         const onListFocus = () => {
-            const focusedOptionIndex =
-                focusedOptionIndexState !== -1
-                    ? focusedOptionIndexState
-                    : props.autoOptionFocus
-                      ? findFirstFocusedOptionIndex()
-                      : findSelectedOptionIndex();
+            const focusedOptionIndex = focusedOptionIndexState !== -1 ? focusedOptionIndexState : props.autoOptionFocus ? findFirstFocusedOptionIndex() : findSelectedOptionIndex();
 
             setFocusedState(true);
             setFocusedOptionIndexState(focusedOptionIndex);
@@ -465,10 +449,7 @@ export const useListbox = withHeadless({
         };
 
         const isOptionMatched = (option: unknown) => {
-            return (
-                isValidOption(option) &&
-                getOptionLabel(option)?.toLocaleLowerCase(props.locale).startsWith(searchValue.current?.toLocaleLowerCase(props.locale))
-            );
+            return isValidOption(option) && getOptionLabel(option)?.toLocaleLowerCase(props.locale).startsWith(searchValue.current?.toLocaleLowerCase(props.locale));
         };
 
         const isValidOption = (option: unknown) => {
@@ -520,9 +501,7 @@ export const useListbox = withHeadless({
                 if (props.multiple) {
                     for (let index = (valueState as unknown[]).length - 1; index >= 0; index--) {
                         const value = (valueState as unknown[])[index];
-                        const matchedOptionIndex = getOptions().findIndex(
-                            (option: any) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option))
-                        );
+                        const matchedOptionIndex = getOptions().findIndex((option: any) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
 
                         if (matchedOptionIndex > -1) return matchedOptionIndex;
                     }
@@ -554,8 +533,7 @@ export const useListbox = withHeadless({
         };
 
         const findPrevSelectedOptionIndex = (index: number) => {
-            const matchedOptionIndex =
-                hasValue() && index > 0 ? findLastIndex(getOptions().slice(0, index), (option) => isValidSelectedOption(option)) : -1;
+            const matchedOptionIndex = hasValue() && index > 0 ? findLastIndex(getOptions().slice(0, index), (option) => isValidSelectedOption(option)) : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex : -1;
         };

@@ -52,7 +52,9 @@ export default function StepsDemo() {
 
                         return (
                             <ProgressBar.Track className={cn(colors?.track, 'transition-all duration-300 ease-linear')}>
-                                <ProgressBar.Indicator className={cn(colors?.indicator, 'transition-[width,_background-color] duration-300 ease-linear')}>
+                                <ProgressBar.Indicator
+                                    className={cn(colors?.indicator, 'transition-[width,_background-color] duration-300 ease-linear')}
+                                >
                                     <ProgressBar.Label>
                                         <ProgressBar.Value />
                                     </ProgressBar.Label>
