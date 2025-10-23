@@ -217,7 +217,10 @@ export const MultiSelectPanel = React.memo(
                                     style: options.style,
                                     className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
                                     role: 'listbox',
-                                    'aria-multiselectable': true
+                                    'aria-multiselectable': true,
+                                    // Make list focusable and capture keyboard events for navigation/select
+                                    tabIndex: 0,
+                                    onKeyDown: props.onKeyDown
                                 },
                                 getPTOptions('list')
                             );
@@ -235,7 +238,10 @@ export const MultiSelectPanel = React.memo(
             const wrapperProps = mergeProps(
                 {
                     className: cx('wrapper'),
-                    style: { maxHeight: props.scrollHeight }
+                    style: { maxHeight: props.scrollHeight },
+                    // Ensure wrapper can receive focus and keyboard events
+                    tabIndex: 0,
+                    onKeyDown: props.onKeyDown
                 },
                 getPTOptions('wrapper')
             );
