@@ -217,19 +217,15 @@ export const DataView = React.memo(
         };
 
         const createEmptyMessage = () => {
-            if (!props.loading) {
-                const content = props.emptyMessage || localeOption('emptyMessage');
-                const emptyMessageProps = mergeProps(
-                    {
-                        className: cx('emptyMessage')
-                    },
-                    ptm('emptyMessage')
-                );
+            const content = props.emptyMessage || localeOption('emptyMessage');
+            const emptyMessageProps = mergeProps(
+                {
+                    className: cx('emptyMessage')
+                },
+                ptm('emptyMessage')
+            );
 
-                return <div {...emptyMessageProps}>{content}</div>;
-            }
-
-            return null;
+            return <div {...emptyMessageProps}>{content}</div>;
         };
 
         const createHeader = () => {
