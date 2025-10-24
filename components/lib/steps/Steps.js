@@ -307,14 +307,14 @@ export const Steps = React.memo(
         }));
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            StepsBase.getOtherProps(props),
-            ptm('root')
+            StepsBase.getOtherProps(props)
         );
 
         const items = createItems();

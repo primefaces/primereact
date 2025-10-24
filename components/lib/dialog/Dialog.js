@@ -659,6 +659,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         );
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: dialogRef,
                 id: idState,
@@ -671,8 +672,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 'aria-modal': props.modal,
                 onPointerDown: onDialogPointerDown
             },
-            DialogBase.getOtherProps(props),
-            ptm('root')
+            DialogBase.getOtherProps(props)
         );
 
         const transitionProps = mergeProps(

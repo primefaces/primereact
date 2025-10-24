@@ -4445,13 +4445,13 @@ export const Calendar = React.memo(
         const yearPicker = createYearPicker();
         const isFilled = DomHandler.hasClass(inputRef.current, 'p-filled') && inputRef.current.value !== '';
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 className: classNames(props.className, cx('root', { focusedState, isFilled, panelVisible: visible })),
                 style: props.style
             },
-            CalendarBase.getOtherProps(props),
-            ptm('root')
+            CalendarBase.getOtherProps(props)
         );
 
         return (

@@ -675,14 +675,14 @@ export const Menubar = React.memo(
             />
         );
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 className: classNames(props.className, cx('root', { mobileActiveState })),
                 style: props.style
             },
-            MenubarBase.getOtherProps(props),
-            ptm('root')
+            MenubarBase.getOtherProps(props)
         );
 
         return (

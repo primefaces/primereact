@@ -32,13 +32,13 @@ export const Tag = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             ref: elementRef,
             className: classNames(props.className, cx('root')),
             style: props.style
         },
-        TagBase.getOtherProps(props),
-        ptm('root')
+        TagBase.getOtherProps(props)
     );
 
     const valueProps = mergeProps(

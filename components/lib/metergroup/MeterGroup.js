@@ -36,11 +36,11 @@ export const MeterGroup = (inProps) => {
     };
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             className: classNames(props.className, cx('root', { orientation }))
         },
-        MeterGroupBase.getOtherProps(props),
-        ptm('root')
+        MeterGroupBase.getOtherProps(props)
     );
 
     const createMeters = () => {
