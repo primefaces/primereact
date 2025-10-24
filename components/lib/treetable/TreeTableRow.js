@@ -527,7 +527,7 @@ export const TreeTableRow = React.memo((props) => {
                 },
                 getColumnPTOptions(column, 'rowCheckbox.icon')
             );
-            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxPartialIcon || <MinusIcon {...checkboxIconProps} /> : null;
             const checkIcon = IconUtils.getJSXIcon(icon, {}, { props, checked, partialChecked });
             const rowCheckboxProps = mergeProps(
                 {
@@ -596,6 +596,7 @@ export const TreeTableRow = React.memo((props) => {
                         node={childNode}
                         originalOptions={props.originalOptions}
                         checkboxIcon={props.checkboxIcon}
+                        checkboxPartialIcon={props.checkboxPartialIcon}
                         columns={props.columns}
                         expandedKeys={props.expandedKeys}
                         selectOnEdit={props.selectOnEdit}
