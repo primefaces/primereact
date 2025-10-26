@@ -72,6 +72,10 @@ const styles = `
         pointer-events: auto;
     }
 
+    .p-speeddial:not(.p-speeddial-opened) .p-speeddial-list {
+        display: none;
+    }
+
     .p-speeddial-opened .p-speeddial-item {
         transform: scale(1);
         opacity: 1;
