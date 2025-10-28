@@ -60,14 +60,14 @@ export const styles = createStyles<DatePickerInstance>({
     name: 'datepicker',
     style: theme,
     classes: {
-        root: ({ instance }) => [
+        root: ({ props, instance }) => [
             'p-datepicker p-component p-inputwrapper',
             {
-                'p-invalid': instance.$invalid,
-                'p-inputwrapper-filled': instance.$filled,
+                'p-invalid': props.invalid,
+                'p-inputwrapper-filled': props.value != null || props.defaultValue != null,
                 'p-inputwrapper-focus': instance.state.focused || instance.state.overlayVisible,
                 'p-focus': instance.state.focused || instance.state.overlayVisible,
-                'p-datepicker-fluid': instance.$fluid
+                'p-datepicker-fluid': props.fluid
             }
         ],
         input: 'p-datepicker-input',
@@ -83,7 +83,7 @@ export const styles = createStyles<DatePickerInstance>({
                 'p-datepicker-timeonly': props.timeOnly
             }
         ],
-        calendarContainer: 'p-datepicker-calendar-container',
+        container: 'p-datepicker-calendar-container',
         calendar: 'p-datepicker-calendar',
         header: 'p-datepicker-header',
         prev: 'p-datepicker-prev-button',
@@ -101,23 +101,23 @@ export const styles = createStyles<DatePickerInstance>({
         dayCell: ({ context }) => [
             'p-datepicker-day-cell',
             {
-                'p-datepicker-other-month': (context.date as useDatePickerDateMeta)?.otherMonth,
-                'p-datepicker-today': (context.date as useDatePickerDateMeta)?.today
+                'p-datepicker-other-month': (context.date as useDatePickerDateMeta).otherMonth,
+                'p-datepicker-today': (context.date as useDatePickerDateMeta).today
             }
         ],
         day: ({ instance, props, context }) => {
             let selectedDayClass = '';
 
             if (context.date && instance.state.rawValue !== null && instance.state.rawValue !== undefined) {
-                if (instance?.isRangeSelection?.() && instance?.isSelected?.(context.date as useDatePickerDateMeta) && (context.date as useDatePickerDateMeta).selectable) {
+                if (instance.isRangeSelection() && instance.isSelected(context.date as useDatePickerDateMeta) && (context.date as useDatePickerDateMeta).selectable) {
                     const rawValue = instance.state.rawValue;
 
                     if (Array.isArray(rawValue)) {
-                        let start: Date | null | undefined;
-                        let end: Date | null | undefined;
+                        let start: Date | string | null | undefined;
+                        let end: Date | string | null | undefined;
 
                         if (typeof rawValue[0] === 'string') {
-                            const parsed = instance?.parseValue?.(rawValue[0]);
+                            const parsed = instance.parseValue(rawValue[0]);
 
                             start = Array.isArray(parsed) ? parsed[0] : parsed;
                         } else {
@@ -125,15 +125,14 @@ export const styles = createStyles<DatePickerInstance>({
                         }
 
                         if (typeof rawValue[1] === 'string') {
-                            const parsed = instance?.parseValue?.(rawValue[1]);
+                            const parsed = instance.parseValue(rawValue[1]);
 
                             end = Array.isArray(parsed) ? parsed[0] : parsed;
                         } else {
                             end = rawValue[1];
                         }
 
-                        selectedDayClass =
-                            instance?.isDateEquals?.(start, context.date as useDatePickerDateMeta) || instance?.isDateEquals?.(end, context.date as useDatePickerDateMeta) ? 'p-datepicker-day-selected' : 'p-datepicker-day-selected-range';
+                        selectedDayClass = instance.isDateEquals(start, context.date as useDatePickerDateMeta) || instance.isDateEquals(end, context.date as useDatePickerDateMeta) ? 'p-datepicker-day-selected' : 'p-datepicker-day-selected-range';
                     }
                 }
             }
@@ -141,8 +140,8 @@ export const styles = createStyles<DatePickerInstance>({
             return [
                 'p-datepicker-day',
                 {
-                    'p-datepicker-day-selected': context.date && !instance?.isRangeSelection?.() && instance?.isSelected?.(context.date as useDatePickerDateMeta) && (context?.date as useDatePickerDateMeta).selectable,
-                    'p-disabled': props.disabled || (context.date && !(context?.date as useDatePickerDateMeta).selectable)
+                    'p-datepicker-day-selected': context.date && !instance.isRangeSelection() && instance.isSelected(context.date as useDatePickerDateMeta) && (context.date as useDatePickerDateMeta).selectable,
+                    'p-disabled': props.disabled || (context.date && !(context.date as useDatePickerDateMeta).selectable)
                 },
                 selectedDayClass
             ];
@@ -153,7 +152,7 @@ export const styles = createStyles<DatePickerInstance>({
             'p-datepicker-month',
 
             {
-                'p-datepicker-month-selected': context.index && instance?.isMonthSelected?.(context.index as number),
+                'p-datepicker-month-selected': context.index && instance.isMonthSelected(context.index as number),
                 'p-disabled': props.disabled || (context.month && !(context.month as useDatePickerMonthOptions).selectable)
             }
         ],
@@ -162,7 +161,7 @@ export const styles = createStyles<DatePickerInstance>({
         year: ({ instance, props, context }) => [
             'p-datepicker-year',
             {
-                'p-datepicker-year-selected': context.year && instance?.isYearSelected?.((context.year as useDatePickerYearOptions).value),
+                'p-datepicker-year-selected': context.year && instance.isYearSelected((context.year as useDatePickerYearOptions).value),
                 'p-disabled': props.disabled || (context.year && !(context.year as useDatePickerYearOptions).selectable)
             }
         ],

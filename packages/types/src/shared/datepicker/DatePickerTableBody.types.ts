@@ -24,14 +24,23 @@ export interface DatePickerTableBodyPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: DatePickerTableBodyPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    root?: DatePickerTableBodyPassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
 }
 
 /**
  * Defines valid properties in DatePickerTableBody component.
  */
 export interface DatePickerTableBodyProps extends BaseComponentProps<DatePickerTableBodyInstance, unknown, DatePickerTableBodyPassThrough> {
+    /**
+     * Current view of the date picker.
+     * @default date
+     */
     view?: 'date' | 'month' | 'year' | undefined;
+    /**
+     * Index of the table body.
+     * @default 0
+     */
+    index?: number | undefined;
 }
 
 /**

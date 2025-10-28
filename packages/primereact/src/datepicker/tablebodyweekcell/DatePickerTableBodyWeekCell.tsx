@@ -17,7 +17,7 @@ export const DatePickerTableBodyWeekCell = withComponent({
     render(instance) {
         const { props, ptmi, ptm, datepicker } = instance;
 
-        if (datepicker?.state.current.view !== 'date') {
+        if (datepicker?.state.currentView !== 'date') {
             return null;
         }
 

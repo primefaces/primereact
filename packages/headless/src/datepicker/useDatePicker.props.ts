@@ -31,6 +31,14 @@ export const defaultProps: useDatePickerProps = {
     manualInput: true,
     showSeconds: false,
     appendTo: 'body',
-    showWeek: false,
-    onValueChange: undefined
+    onValueChange: undefined,
+    onDateSelect: undefined,
+    onMonthChange: undefined,
+    onYearChange: undefined,
+    onTodayButtonClick: undefined,
+    onClearButtonClick: undefined,
+    onInput: undefined,
+    onKeyDown: undefined,
+    onFocus: undefined,
+    onBlur: undefined
 };

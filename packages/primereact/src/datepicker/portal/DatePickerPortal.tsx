@@ -1,8 +1,9 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { mergeProps } from '@primeuix/utils';
+import type { useOverlayOpenChangeEvent } from '@primereact/types/shared/overlay';
+import { mergeProps, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
-// import { Popover } from 'primereact/popover';
+import { Overlay } from 'primereact/overlay';
 import * as React from 'react';
 import { useDatePickerContext } from '../DatePicker.context';
 import { defaultPortalProps } from './DatePickerPortal.props';
@@ -25,8 +26,22 @@ export const DatePickerPortal = withComponent({
             ptmi('root')
         );
 
-        // @ts-expect-error: Popover.Portal expects a type prop, but we are using it as a portal.
-        // return <Component as={Popover.Portal} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('portal')} children={props.children} />;
-        return <Component instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('portal')} children={props.children} />;
+        return (
+            <Component instance={instance} attrs={rootProps}>
+                {datepicker?.props.inline ? (
+                    resolve(props.children, instance)
+                ) : (
+                    <Overlay
+                        appendTo={datepicker?.props.appendTo}
+                        target={datepicker?.inputRef?.current?.elementRef?.current}
+                        open={datepicker?.state.overlayVisible}
+                        onOpenChange={({ value }: useOverlayOpenChangeEvent) => datepicker?.setOverlayVisibleState(value)}
+                        onAfterEnter={() => datepicker?.updateFocus()}
+                    >
+                        {resolve(props.children, instance)}
+                    </Overlay>
+                )}
+            </Component>
+        );
     }
 });

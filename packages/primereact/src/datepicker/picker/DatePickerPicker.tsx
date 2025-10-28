@@ -17,13 +17,19 @@ export const DatePickerPicker = withComponent({
     },
     render(instance) {
         const { props, ptmi, datepicker } = instance;
+        const typeMap: Record<string, string> = {
+            hour: 'hourPicker',
+            minute: 'minutePicker',
+            second: 'secondPicker',
+            ampm: 'ampmPicker'
+        };
+        const pickerName = (props.type && typeMap[props.type]) || 'hourPicker';
 
         const rootProps = mergeProps(
             {
-                className: props.type === 'minute' ? datepicker?.cx('minutePicker') : datepicker?.cx('hourPicker')
+                className: datepicker?.cx(pickerName)
             },
-            props.type === 'hour' && datepicker?.ptm('hourPicker'),
-            props.type === 'minute' && datepicker?.ptm('minutePicker'),
+            datepicker?.ptm(pickerName),
             ptmi('root')
         );
 

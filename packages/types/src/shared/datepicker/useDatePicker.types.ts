@@ -91,6 +91,82 @@ export interface useDatePickerMonthData {
 }
 
 /**
+ * Event fired when the datepicker's value changes.
+ */
+export interface useDatePickerValueChangeEvent {
+    /**
+     * The value of the datepicker.
+     */
+    value: useDatePickerProps['value'];
+}
+
+/**
+ * Event fired when a date is selected.
+ */
+export interface useDatePickerDateSelectEvent {
+    /**
+     * The selected date value.
+     */
+    value: Date | useDatePickerProps['value'];
+}
+
+/**
+ * Event fired when the month changes.
+ */
+export interface useDatePickerMonthChangeEvent {
+    /**
+     * The month number (1-12).
+     */
+    month: number;
+    /**
+     * The year.
+     */
+    year: number;
+}
+
+/**
+ * Event fired when the year changes.
+ */
+export interface useDatePickerYearChangeEvent {
+    /**
+     * The month number (0-11).
+     */
+    month: number;
+    /**
+     * The year.
+     */
+    year: number;
+}
+
+/**
+ * Event fired when the today button is clicked.
+ */
+export interface useDatePickerTodayButtonClickEvent {
+    /**
+     * Original browser event.
+     */
+    originalEvent: React.MouseEvent<HTMLButtonElement>;
+    /**
+     * The current date.
+     */
+    date: Date;
+}
+
+/**
+ * Event fired when input blur occurs.
+ */
+export interface useDatePickerBlurEvent {
+    /**
+     * Original browser event.
+     */
+    originalEvent: React.FocusEvent<HTMLInputElement>;
+    /**
+     * The input value.
+     */
+    value: string;
+}
+
+/**
  * Defines valid properties in useDatePicker.
  */
 export interface useDatePickerProps {
@@ -278,11 +354,6 @@ export interface useDatePickerProps {
      */
     timeSeparator?: string | undefined;
     /**
-     * When enabled, datepicker will show week numbers.
-     * @default false
-     */
-    showWeek?: boolean | undefined;
-    /**
      * Whether to allow entering the date manually via typing.
      * @default true
      */
@@ -320,7 +391,7 @@ export interface useDatePickerProps {
      * Placeholder text for the input.
      */
     placeholder?: string | undefined;
-    /*
+    /**
      * When present, it specifies that the component is a required field.
      */
     required?: boolean | undefined;
@@ -344,9 +415,65 @@ export interface useDatePickerProps {
     ariaLabel?: string | undefined;
     /**
      * Callback to invoke when the value changes.
-     * @param {object} event - Custom value change event
+     * @param event The event that triggered the change.
+     * @param event.value The value of the datepicker.
+     * @returns void
      */
-    onValueChange?: ({ value }: { value: Date | string | Date[] | string[] | (Date | null)[] | (string | null)[] | null | undefined }) => void;
+    onValueChange?: (event: useDatePickerValueChangeEvent) => void;
+    /**
+     * Callback to invoke when a date is selected.
+     * @param {useDatePickerDateSelectEvent} event - Custom date select event.
+     * @returns void
+     */
+    onDateSelect?: (event: useDatePickerDateSelectEvent) => void;
+    /**
+     * Callback to invoke when the month changes.
+     * @param {useDatePickerMonthChangeEvent} event - Custom month change event.
+     * @returns void
+     */
+    onMonthChange?: (event: useDatePickerMonthChangeEvent) => void;
+    /**
+     * Callback to invoke when the year changes.
+     * @param {useDatePickerYearChangeEvent} event - Custom year change event.
+     * @returns void
+     */
+    onYearChange?: (event: useDatePickerYearChangeEvent) => void;
+    /**
+     * Callback to invoke when the today button is clicked.
+     * @param {useDatePickerTodayButtonClickEvent} event - Custom today button click event.
+     * @returns void
+     */
+    onTodayButtonClick?: (event: useDatePickerTodayButtonClickEvent) => void;
+    /**
+     * Callback to invoke when the clear button is clicked.
+     * @param {React.MouseEvent<HTMLButtonElement>} event - Browser event.
+     * @returns void
+     */
+    onClearButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    /**
+     * Callback to invoke on input event.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - Browser event.
+     * @returns void
+     */
+    onInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    /**
+     * Callback to invoke on keydown event.
+     * @param {React.KeyboardEvent<HTMLInputElement | HTMLButtonElement>} event - Browser event.
+     * @returns void
+     */
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => void;
+    /**
+     * Callback to invoke on focus event.
+     * @param {React.FocusEvent<HTMLInputElement>} event - Browser event.
+     * @returns void
+     */
+    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Callback to invoke on blur event.
+     * @param {useDatePickerBlurEvent} event - Custom blur event.
+     * @returns void
+     */
+    onBlur?: (event: useDatePickerBlurEvent) => void;
 }
 
 /**
@@ -356,16 +483,19 @@ export interface useDatePickerState {
     /**
      * The current raw value of the datepicker (unformatted).
      */
-    rawValue: Date | string | Date[] | string[] | (Date | null)[] | (string | null)[] | null | undefined;
+    rawValue: useDatePickerProps['value'];
+    /**
+     * Whether the overlay is visible.
+     */
+    overlayVisible: boolean;
     /**
      * Current view state information.
      */
-    current: {
-        /**
-         * The current view mode of the datepicker.
-         */
-        view: 'date' | 'month' | 'year' | undefined;
-    };
+    currentView: 'date' | 'month' | 'year' | undefined;
+    /**
+     * Whether to show the clear icon.
+     */
+    showClearIcon: boolean;
 }
 
 /**
@@ -375,220 +505,297 @@ export interface useDatePickerExposes {
     /**
      * State object containing the current raw value and view information.
      */
-    state?: useDatePickerState;
+    state: useDatePickerState;
     /**
      * Reference to the input element.
      */
-    inputRef?: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
+    inputRef: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
+    /**
+     * Reference to the next navigation button element.
+     */
+    nextButtonRef: React.RefObject<{ elementRef: React.RefObject<HTMLButtonElement> } | null>;
+    /**
+     * Reference to the previous navigation button element.
+     */
+    prevButtonRef: React.RefObject<{ elementRef: React.RefObject<HTMLButtonElement> } | null>;
     /**
      * Reference to the overlay element.
      */
-    overlayRef?: React.RefObject<HTMLDivElement | null>;
+    overlayRef: React.RefObject<HTMLDivElement | null>;
     /**
      * Formatted value string for the input field.
      */
-    inputFieldValue?: string;
+    inputFieldValue: string;
     /**
      * Label text for the week header.
      */
-    weekHeaderLabel?: string | undefined;
+    weekHeaderLabel: string | undefined;
     /**
      * Label text for today button.
      */
-    todayLabel?: string | undefined;
+    todayLabel: string | undefined;
     /**
      * Label text for clear button.
      */
-    clearLabel?: string | undefined;
+    clearLabel: string | undefined;
     /**
      * Array of localized day names for the week.
      */
-    weekDays?: string[];
+    weekDays: string[];
     /**
      * Array of month data objects containing dates and week numbers.
      */
-    months?: useDatePickerMonthData[];
-    /**
-     * Returns a specific month by index.
-     * @param index - The index of the month to retrieve.
-     */
-    getIndexedMonth?: (index?: number) => useDatePickerMonthData;
-    /**
-     * Returns the current year.
-     */
-    getYear?: () => number;
-    /**
-     * Returns the name of the current month.
-     */
-    getMonthName?: (index?: number) => string;
-    /**
-     * Handles click on previous button.
-     * @param event - The mouse event.
-     */
-    onPrevButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    /**
-     * Handles click on next button.
-     * @param event - The mouse event.
-     */
-    onNextButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    months: useDatePickerMonthData[];
     /**
      * Array of month picker values.
      */
-    monthPickerValues?: Array<{ value: string; selectable: boolean }>;
+    monthPickerValues: Array<{ value: string; selectable: boolean }>;
     /**
      * Array of year picker values.
      */
-    yearPickerValues?: Array<{ value: number; selectable: boolean }>;
-    /**
-     * Switches the view to month view.
-     * @param event - The mouse event.
-     */
-    switchToMonthView?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    /**
-     * Switches the view to year view.
-     * @param event - The mouse event.
-     */
-    switchToYearView?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    yearPickerValues: Array<{ value: number; selectable: boolean }>;
     /**
      * Whether the switch view button is disabled.
      */
-    switchViewButtonDisabled?: boolean;
+    switchViewButtonDisabled: boolean;
     /**
      * Formatted current hour value for display.
      */
-    formattedCurrentHour?: number | string;
+    formattedCurrentHour: number | string;
     /**
      * Formatted current minute value for display.
      */
-    formattedCurrentMinute?: number | string;
+    formattedCurrentMinute: number | string;
     /**
      * Formatted current second value for display.
      */
-    formattedCurrentSecond?: number | string;
+    formattedCurrentSecond: number | string;
     /**
      * AM/PM label for 12-hour format.
      */
-    ampmLabel?: string | undefined;
+    ampmLabel: string | undefined;
+    /**
+     * Sets the visibility state of the overlay.
+     * @param visible - Whether the overlay should be visible.
+     * @returns void
+     */
+    setOverlayVisibleState: (visible: boolean) => void;
+    /**
+     * Returns a specific month by index.
+     * @param index - The index of the month to retrieve.
+     * @returns useDatePickerMonthData
+     */
+    getIndexedMonth: (index?: number) => useDatePickerMonthData;
+    /**
+     * Returns the current year.
+     * @returns number
+     */
+    getYear: () => number;
+    /**
+     * Returns the name of the current month.
+     * @param index - The index of the month to retrieve.
+     * @returns string
+     */
+    getMonthName: (index?: number) => string;
     /**
      * Returns whether the selection mode is range.
+     * @returns boolean
      */
-    isRangeSelection?: () => boolean;
+    isRangeSelection: () => boolean;
     /**
      * Checks if a date is selected.
      * @param dateMeta - The date metadata to check.
+     * @returns boolean
      */
-    isSelected?: (dateMeta: useDatePickerDateMeta) => boolean;
+    isSelected: (dateMeta: useDatePickerDateMeta) => boolean;
     /**
      * Parses a text value into a Date or array of Dates.
      * @param text - The text value to parse.
+     * @returns useDatePickerProps['value']
      */
-    parseValue?: (text: string) => Date | Date[] | (Date | null)[] | null | undefined;
+    parseValue: (text: string) => useDatePickerProps['value'];
     /**
      * Checks if two dates are equal.
      * @param value - The date value to compare.
      * @param dateMeta - The date metadata to compare against.
+     * @returns boolean
      */
-    isDateEquals?: (value: Date | null | undefined, dateMeta: useDatePickerDateMeta) => boolean;
+    isDateEquals: (value: Date | string | null | undefined, dateMeta: useDatePickerDateMeta) => boolean;
     /**
      * Checks if a month is selected.
      * @param month - The month index to check (0-11).
+     * @returns boolean
      */
-    isMonthSelected?: (month: number) => boolean;
+    isMonthSelected: (month: number) => boolean;
     /**
      * Checks if a year is selected.
      * @param year - The year to check.
+     * @returns boolean
      */
-    isYearSelected?: (year: number) => boolean;
+    isYearSelected: (year: number) => boolean;
+    /**
+     * Updates focus on the calendar cells.
+     * @returns void
+     */
+    updateFocus: () => void;
+    /**
+     * Handles click on previous button.
+     * @param event - The mouse event.
+     * @returns void
+     */
+    onPrevButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    /**
+     * Handles click on next button.
+     * @param event - The mouse event.
+     * @returns void
+     */
+    onNextButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    /**
+     * Switches the view to month view.
+     * @param event - The mouse event.
+     * @returns void
+     */
+    switchToMonthView: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    /**
+     * Switches the view to year view.
+     * @param event - The mouse event.
+     * @returns void
+     */
+    switchToYearView: (event: React.MouseEvent<HTMLButtonElement>) => void;
     /**
      * Handles mouse down on time picker elements.
      * @param event - The mouse event.
      * @param type - The time picker type (0: hour, 1: minute, 2: second).
      * @param direction - The direction (1: increment, -1: decrement).
+     * @returns void
      */
-    onTimePickerElementMouseDown?: (event: React.MouseEvent<HTMLButtonElement>, type: number, direction: number) => void;
+    onTimePickerElementMouseDown: (event: React.MouseEvent<HTMLButtonElement>, type: number, direction: number) => void;
     /**
      * Handles mouse up on time picker elements.
      * @param event - The mouse or keyboard event.
+     * @returns void
      */
-    onTimePickerElementMouseUp?: (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => void;
+    onTimePickerElementMouseUp: (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => void;
     /**
      * Handles mouse leave on time picker elements.
+     * @returns void
      */
-    onTimePickerElementMouseLeave?: () => void;
+    onTimePickerElementMouseLeave: () => void;
     /**
      * Handles key down on container button.
      * @param event - The keyboard event.
+     * @returns void
      */
-    onContainerButtonKeydown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+    onContainerButtonKeydown: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
     /**
      * Handles key down on time picker elements.
      * @param event - The keyboard event.
      * @param type - The time picker type (0: hour, 1: minute, 2: second).
      * @param direction - The direction (1: increment, -1: decrement).
+     * @returns void
      */
-    onTimePickerElementKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>, type: number, direction: number) => void;
+    onTimePickerElementKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>, type: number, direction: number) => void;
     /**
      * Handles key up on time picker elements.
      * @param event - The keyboard event.
+     * @returns void
      */
-    onTimePickerElementKeyUp?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+    onTimePickerElementKeyUp: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
     /**
      * Toggles AM/PM in 12-hour format.
      * @param event - The mouse event.
+     * @returns void
      */
-    toggleAMPM?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    toggleAMPM: (event: React.MouseEvent<HTMLButtonElement>) => void;
     /**
      * Handles click on today button.
      * @param event - The mouse event.
+     * @returns void
      */
-    onTodayButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onTodayButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     /**
      * Handles click on clear button.
      * @param event - The mouse event.
+     * @returns void
      */
-    onClearButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onClearButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    /**
+     * Handles clear icon click event.
+     * @returns void
+     */
+    onClearClick: () => void;
     /**
      * Handles input change event for manual date entry.
      * @param event - The input change event.
+     * @returns void
      */
-    onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    /**
+     * Handles input click event.
+     * @returns void
+     */
+    onInputClick: () => void;
+    /**
+     * Handles input keydown event.
+     * @param event - The keyboard event.
+     * @returns void
+     */
+    onInputKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    /**
+     * Handles input focus event.
+     * @param event - The focus event.
+     * @returns void
+     */
+    onInputFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Handles input blur event.
+     * @param event - The blur event.
+     * @returns void
+     */
+    onInputBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
     /**
      * Handles date selection.
      * @param event - The event object.
      * @param dateMeta - The date metadata.
+     * @returns void
      */
-    onDateSelect?: (event: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement>, dateMeta: useDatePickerDateMeta) => void;
+    onDateSelect: (event: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement> | null, dateMeta: useDatePickerDateMeta) => void;
     /**
      * Handles month selection.
      * @param event - The event object.
      * @param month - The month index (0-11).
+     * @returns void
      */
-    onMonthSelect?: (event: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement>, month: number) => void;
+    onMonthSelect: (event: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement>, month: number) => void;
     /**
      * Handles year selection.
      * @param event - The event object.
      * @param year - The year object with value property.
+     * @returns void
      */
-    onYearSelect?: (event: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement>, year: { value: number }) => void;
+    onYearSelect: (event: React.MouseEvent<HTMLSpanElement> | React.KeyboardEvent<HTMLSpanElement>, year: { value: number }) => void;
     /**
      * Handles keyboard navigation on date cells.
      * @param event - The keyboard event.
      * @param date - The date metadata.
      * @param groupIndex - The group index.
+     * @returns void
      */
-    onDateCellKeydown?: (event: React.KeyboardEvent<HTMLSpanElement>, date: useDatePickerDateMeta, groupIndex: number) => void;
+    onDateCellKeydown: (event: React.KeyboardEvent<HTMLSpanElement>, date: useDatePickerDateMeta, groupIndex: number) => void;
     /**
      * Handles keyboard navigation on month cells.
      * @param event - The keyboard event.
      * @param index - The month index (0-11).
+     * @returns void
      */
-    onMonthCellKeydown?: (event: React.KeyboardEvent<HTMLSpanElement>, index: number) => void;
+    onMonthCellKeydown: (event: React.KeyboardEvent<HTMLSpanElement>, index: number) => void;
     /**
      * Handles keyboard navigation on year cells.
      * @param event - The keyboard event.
      * @param year - The year object with value property.
+     * @returns void
      */
-    onYearCellKeydown?: (event: React.KeyboardEvent<HTMLSpanElement>, year: { value: number }) => void;
+    onYearCellKeydown: (event: React.KeyboardEvent<HTMLSpanElement>, year: { value: number }) => void;
 }
 
 /**

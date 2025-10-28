@@ -12,5 +12,7 @@ export const defaultProps: DatePickerProps = {
     required: undefined,
     disabled: undefined,
     readOnly: undefined,
-    size: undefined
+    size: undefined,
+    inputId: undefined,
+    inputClass: undefined
 };

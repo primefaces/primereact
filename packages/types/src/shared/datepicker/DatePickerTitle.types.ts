@@ -24,7 +24,7 @@ export interface DatePickerTitlePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: DatePickerTitlePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    root?: DatePickerTitlePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

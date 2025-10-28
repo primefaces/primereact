@@ -1,22 +1,152 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useMountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useMountEffect } from '@primereact/hooks';
 import { useDatePickerDateMeta, useDatePickerProps } from '@primereact/types/shared/datepicker';
-import { find, findSingle, getAttribute, getFocusableElements, getIndex, isDate, isNotEmpty } from '@primeuix/utils';
+import { find, findSingle, getAttribute, getFocusableElements, getIndex, isDate, isEmpty, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useDatePicker.props';
 
 const TICKS_TO_1970 = ((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) + Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000;
 
+const primereact = {
+    config: {
+        locale: {
+            startsWith: 'Starts with',
+            contains: 'Contains',
+            notContains: 'Not contains',
+            endsWith: 'Ends with',
+            equals: 'Equals',
+            notEquals: 'Not equals',
+            noFilter: 'No Filter',
+            lt: 'Less than',
+            lte: 'Less than or equal to',
+            gt: 'Greater than',
+            gte: 'Greater than or equal to',
+            dateIs: 'Date is',
+            dateIsNot: 'Date is not',
+            dateBefore: 'Date is before',
+            dateAfter: 'Date is after',
+            clear: 'Clear',
+            apply: 'Apply',
+            matchAll: 'Match All',
+            matchAny: 'Match Any',
+            addRule: 'Add Rule',
+            removeRule: 'Remove Rule',
+            accept: 'Yes',
+            reject: 'No',
+            choose: 'Choose',
+            upload: 'Upload',
+            cancel: 'Cancel',
+            completed: 'Completed',
+            pending: 'Pending',
+            fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+            dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            chooseYear: 'Choose Year',
+            chooseMonth: 'Choose Month',
+            chooseDate: 'Choose Date',
+            prevDecade: 'Previous Decade',
+            nextDecade: 'Next Decade',
+            prevYear: 'Previous Year',
+            nextYear: 'Next Year',
+            prevMonth: 'Previous Month',
+            nextMonth: 'Next Month',
+            prevHour: 'Previous Hour',
+            nextHour: 'Next Hour',
+            prevMinute: 'Previous Minute',
+            nextMinute: 'Next Minute',
+            prevSecond: 'Previous Second',
+            nextSecond: 'Next Second',
+            am: 'am',
+            pm: 'pm',
+            today: 'Today',
+            weekHeader: 'Wk',
+            firstDayOfWeek: 0,
+            showMonthAfterYear: false,
+            dateFormat: 'mm/dd/yy',
+            weak: 'Weak',
+            medium: 'Medium',
+            strong: 'Strong',
+            passwordPrompt: 'Enter a password',
+            emptyFilterMessage: 'No results found',
+            searchMessage: '{0} results are available',
+            selectionMessage: '{0} items selected',
+            emptySelectionMessage: 'No selected item',
+            emptySearchMessage: 'No results found',
+            fileChosenMessage: '{0} files',
+            noFileChosenMessage: 'No file chosen',
+            emptyMessage: 'No available options',
+            aria: {
+                trueLabel: 'True',
+                falseLabel: 'False',
+                nullLabel: 'Not Selected',
+                star: '1 star',
+                stars: '{star} stars',
+                selectAll: 'All items selected',
+                unselectAll: 'All items unselected',
+                close: 'Close',
+                previous: 'Previous',
+                next: 'Next',
+                navigation: 'Navigation',
+                scrollTop: 'Scroll Top',
+                moveTop: 'Move Top',
+                moveUp: 'Move Up',
+                moveDown: 'Move Down',
+                moveBottom: 'Move Bottom',
+                moveToTarget: 'Move to Target',
+                moveToSource: 'Move to Source',
+                moveAllToTarget: 'Move All to Target',
+                moveAllToSource: 'Move All to Source',
+                pageLabel: 'Page {page}',
+                firstPageLabel: 'First Page',
+                lastPageLabel: 'Last Page',
+                nextPageLabel: 'Next Page',
+                prevPageLabel: 'Previous Page',
+                rowsPerPageLabel: 'Rows per page',
+                jumpToPageDropdownLabel: 'Jump to Page Dropdown',
+                jumpToPageInputLabel: 'Jump to Page Input',
+                selectRow: 'Row Selected',
+                unselectRow: 'Row Unselected',
+                expandRow: 'Row Expanded',
+                collapseRow: 'Row Collapsed',
+                showFilterMenu: 'Show Filter Menu',
+                hideFilterMenu: 'Hide Filter Menu',
+                filterOperator: 'Filter Operator',
+                filterConstraint: 'Filter Constraint',
+                editRow: 'Row Edit',
+                saveEdit: 'Save Edit',
+                cancelEdit: 'Cancel Edit',
+                listView: 'List View',
+                gridView: 'Grid View',
+                slide: 'Slide',
+                slideNumber: '{slideNumber}',
+                zoomImage: 'Zoom Image',
+                zoomIn: 'Zoom In',
+                zoomOut: 'Zoom Out',
+                rotateRight: 'Rotate Right',
+                rotateLeft: 'Rotate Left',
+                listLabel: 'Option List'
+            }
+        }
+    }
+};
+
 export const useDatePicker = withHeadless({
     name: 'useDatePicker',
     defaultProps,
-    setup: ({ props, $primereact }) => {
+    setup: ({ props }) => {
         const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
         const nextButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
         const prevButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
         const overlayRef = React.useRef<HTMLDivElement | null>(null);
         const timePickerTimer = React.useRef<NodeJS.Timeout | null>(null);
-        // const [rawValueState, setRawValueState] = React.useState<useDatePickerProps['value']>(props.defaultValue ?? props.value);
+        const typeUpdate = React.useRef(false);
+        const selectionStart = React.useRef<number | null>(null);
+        const selectionEnd = React.useRef<number | null>(null);
+        const [showClearIcon, setShowClearIcon] = React.useState(true);
+        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
         const [currentView, setCurrentView] = React.useState(props.view);
         const [currentMonth, setCurrentMonth] = React.useState<number>(0);
         const [currentYear, setCurrentYear] = React.useState<number>(0);
@@ -24,19 +154,16 @@ export const useDatePicker = withHeadless({
         const [currentMinute, setCurrentMinute] = React.useState<number>(0);
         const [currentSecond, setCurrentSecond] = React.useState<number>(0);
         const [pm, setPM] = React.useState<boolean>(false);
-        const [typeUpdate, setTypeUpdate] = React.useState(false);
         const [focusedDateIndex, setFocusedDateIndex] = React.useState(0);
         const [navigationState, setNavigationState] = React.useState<{ backward?: boolean; button?: boolean } | null>(null);
-        // const [preventFocus, setPreventFocus] = React.useState(false);
-        // const [focused, setFocused] = React.useState(false);
 
-        const getInitialValue = () => {
+        const getInitialValue = (): useDatePickerProps['value'] => {
             if (props.value !== undefined) {
-                return typeof props.value === 'string' ? parseValue(props.value) : props.value;
+                return typeof props.value === 'string' ? (parseValue(props.value) as useDatePickerProps['value']) : props.value;
             }
 
             if (props.defaultValue !== undefined) {
-                return typeof props.defaultValue === 'string' ? parseValue(props.defaultValue) : props.defaultValue;
+                return typeof props.defaultValue === 'string' ? (parseValue(props.defaultValue) as useDatePickerProps['value']) : props.defaultValue;
             }
 
             return null;
@@ -46,9 +173,9 @@ export const useDatePicker = withHeadless({
 
         const state = {
             rawValue: rawValueState,
-            current: {
-                view: currentView
-            }
+            overlayVisible: overlayVisibleState,
+            currentView,
+            showClearIcon
         };
 
         const isSelected = (dateMeta: useDatePickerDateMeta) => {
@@ -150,9 +277,16 @@ export const useDatePicker = withHeadless({
             return false;
         };
 
-        const isDateEquals = (value: Date | null | undefined, dateMeta: useDatePickerDateMeta) => {
-            if (value) return value.getDate() === dateMeta.day && value.getMonth() === dateMeta.month && value.getFullYear() === dateMeta.year;
-            else return false;
+        const isDateEquals = (value: Date | string | null | undefined, dateMeta: useDatePickerDateMeta) => {
+            if (value) {
+                const dateValue = typeof value === 'string' ? (parseValue(value) as Date | string) : value;
+
+                if (dateValue && dateValue instanceof Date) {
+                    return dateValue.getDate() === dateMeta.day && dateValue.getMonth() === dateMeta.month && dateValue.getFullYear() === dateMeta.year;
+                }
+            }
+
+            return false;
         };
 
         const isDateBetween = (start: Date, end: Date, dateMeta: useDatePickerDateMeta) => {
@@ -170,8 +304,7 @@ export const useDatePicker = withHeadless({
         };
 
         const sundayIndex = React.useMemo(() => {
-            // @ts-expect-error TODO:
-            return $primereact?.config?.locale?.firstDayOfWeek > 0 ? 7 - $primereact?.config?.locale?.firstDayOfWeek : 0;
+            return primereact?.config?.locale?.firstDayOfWeek > 0 ? 7 - primereact?.config?.locale?.firstDayOfWeek : 0;
         }, []);
 
         const getFirstDayOfMonthIndex = (month: number, year: number) => {
@@ -306,7 +439,10 @@ export const useDatePicker = withHeadless({
 
             if (currentView === 'month') {
                 decrementYear();
-                // this.$emit('year-change', { month: this.currentMonth, year: this.currentYear });
+
+                if (props.onYearChange) {
+                    props.onYearChange({ month: currentMonth, year: currentYear });
+                }
             } else if (currentView === 'year') {
                 decrementDecade();
             } else {
@@ -320,7 +456,9 @@ export const useDatePicker = withHeadless({
                         setCurrentMonth((currentMonth as number) - 1);
                     }
 
-                    // this.$emit('month-change', { month: this.currentMonth + 1, year: this.currentYear });
+                    if (props.onMonthChange) {
+                        props.onMonthChange({ month: currentMonth + 1, year: currentYear });
+                    }
                 }
             }
         };
@@ -334,7 +472,10 @@ export const useDatePicker = withHeadless({
 
             if (currentView === 'month') {
                 incrementYear();
-                // this.$emit('year-change', { month: this.currentMonth, year: this.currentYear });
+
+                if (props.onYearChange) {
+                    props.onYearChange({ month: currentMonth, year: currentYear });
+                }
             } else if (currentView === 'year') {
                 incrementDecade();
             } else {
@@ -348,7 +489,9 @@ export const useDatePicker = withHeadless({
                         setCurrentMonth((currentMonth as number) + 1);
                     }
 
-                    // this.$emit('month-change', { month: this.currentMonth + 1, year: this.currentYear });
+                    if (props.onMonthChange) {
+                        props.onMonthChange({ month: currentMonth + 1, year: currentYear });
+                    }
                 }
             }
         };
@@ -395,6 +538,17 @@ export const useDatePicker = withHeadless({
             setCurrentHour(Math.floor(currentHour / (props.stepHour ?? 1)) * (props.stepHour ?? 1));
             setCurrentMinute(Math.floor(date.getMinutes() / (props.stepMinute ?? 1)) * (props.stepMinute ?? 1));
             setCurrentSecond(Math.floor(date.getSeconds() / (props.stepSecond ?? 1)) * (props.stepSecond ?? 1));
+        };
+
+        const onButtonClick = () => {
+            if (isEnabled()) {
+                if (!overlayVisibleState) {
+                    inputRef.current?.elementRef.current?.focus();
+                    setOverlayVisibleState(true);
+                } else {
+                    setOverlayVisibleState(false);
+                }
+            }
         };
 
         const isDateDisabled = (day: number, month: number, year: number) => {
@@ -451,16 +605,15 @@ export const useDatePicker = withHeadless({
                 }
             }
 
-            //TODO:
-            // if (isSingleSelection() && (!props.showTime || props.hideOnDateTimeSelect)) {
-            //     if (this.input) {
-            //         this.input.focus();
-            //     }
+            if (isSingleSelection() && (!props.showTime || props.hideOnDateTimeSelect)) {
+                if (inputRef.current) {
+                    inputRef.current?.elementRef.current.focus();
+                }
 
-            //     setTimeout(() => {
-            //         overlayRef.currentVisible = false;
-            //     }, 150);
-            // }
+                setTimeout(() => {
+                    setOverlayVisibleState(false);
+                }, 150);
+            }
         };
 
         const selectDate = (dateMeta: useDatePickerDateMeta) => {
@@ -524,13 +677,11 @@ export const useDatePicker = withHeadless({
                 updateModel(modelVal as Date);
             }
 
-            if (isRangeSelection() && props.hideOnRangeSelection && Array.isArray(modelVal) && modelVal[1] !== null) {
-                // setTimeout(() => {
-                //     overlayRef.currentVisible = false;
-                // }, 150);
+            if (props.onDateSelect) {
+                props.onDateSelect({
+                    value: date
+                });
             }
-
-            // this.$emit('date-select', date);
         };
 
         const updateModel = (value: useDatePickerProps['value']) => {
@@ -594,6 +745,8 @@ export const useDatePicker = withHeadless({
         };
 
         const writeValue = (newValue: useDatePickerProps['value']) => {
+            setShowClearIcon(!isEmpty(newValue));
+
             if (props.onValueChange) {
                 props.onValueChange({
                     value: newValue
@@ -733,8 +886,7 @@ export const useDatePicker = withHeadless({
                                 output += formatNumber('d', date.getDate(), 2);
                                 break;
                             case 'D':
-                                // @ts-expect-error TODO:
-                                output += formatName('D', date.getDay(), $primereact?.config?.locale?.dayNamesShort, $primereact?.config?.locale?.dayNames);
+                                output += formatName('D', date.getDay(), primereact?.config?.locale?.dayNamesShort, primereact?.config?.locale?.dayNames);
                                 break;
                             case 'o':
                                 output += formatNumber('o', Math.round((new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
@@ -743,8 +895,7 @@ export const useDatePicker = withHeadless({
                                 output += formatNumber('m', date.getMonth() + 1, 2);
                                 break;
                             case 'M':
-                                // @ts-expect-error TODO:
-                                output += formatName('M', date.getMonth(), $primereact?.config?.locale?.monthNamesShort, $primereact?.config?.locale?.monthNames);
+                                output += formatName('M', date.getMonth(), primereact?.config?.locale?.monthNamesShort, primereact?.config?.locale?.monthNames);
                                 break;
                             case 'y':
                                 output += lookAhead('y') ? date.getFullYear() : (date.getFullYear() % 100 < 10 ? '0' : '') + (date.getFullYear() % 100);
@@ -802,8 +953,7 @@ export const useDatePicker = withHeadless({
             }
 
             if (props.hourFormat === '12') {
-                // @ts-expect-error TODO:
-                output += date.getHours() > 11 ? ` ${$primereact?.config?.locale?.pm}` : ` ${$primereact?.config?.locale?.am}`;
+                output += date.getHours() > 11 ? ` ${primereact?.config?.locale?.pm}` : ` ${primereact?.config?.locale?.am}`;
             }
 
             return output;
@@ -828,14 +978,26 @@ export const useDatePicker = withHeadless({
 
             setCurrentView('date');
             onDateSelect(null, dateMeta);
-            // this.$emit('today-click', date);
+
+            if (props.onTodayButtonClick) {
+                props.onTodayButtonClick({
+                    originalEvent: event,
+                    date
+                });
+            }
+
             event.preventDefault();
         };
 
         const onClearButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
             updateModel(null);
-            // this.overlayVisible = false;
-            // this.$emit('clear-click', event);
+            setOverlayVisibleState(false);
+            setShowClearIcon(false);
+
+            if (props.onClearButtonClick) {
+                props.onClearButtonClick(event);
+            }
+
             event.preventDefault();
         };
 
@@ -865,7 +1027,7 @@ export const useDatePicker = withHeadless({
                     break;
 
                 case 'Escape':
-                    // this.overlayVisible = false;
+                    setOverlayVisibleState(false);
                     event.preventDefault();
                     break;
 
@@ -874,7 +1036,9 @@ export const useDatePicker = withHeadless({
                     break;
             }
 
-            // this.$emit('keydown', event);
+            if (props.onKeyDown) {
+                props.onKeyDown(event);
+            }
         };
 
         const onTimePickerElementKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, type: number, direction: number) => {
@@ -1097,7 +1261,6 @@ export const useDatePicker = withHeadless({
         };
 
         const updateModelTime = () => {
-            // this.timePickerChange = true;
             let valueDate: Date | string | null = viewDate;
 
             if (isRangeSelection()) {
@@ -1145,8 +1308,12 @@ export const useDatePicker = withHeadless({
             }
 
             updateModel(value);
-            // this.$emit('date-select', value);
-            // setTimeout(() => (this.timePickerChange = false), 0);
+
+            if (props.onDateSelect) {
+                props.onDateSelect({
+                    value
+                });
+            }
         };
 
         const toggleAMPM = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -1155,7 +1322,7 @@ export const useDatePicker = withHeadless({
             if (!validHour && (props.maxDate || props.minDate)) return;
 
             setPM(!pm);
-            updateModelTime();
+
             event.preventDefault();
         };
 
@@ -1173,7 +1340,9 @@ export const useDatePicker = withHeadless({
                 setCurrentMonth(index);
                 setCurrentView('date');
 
-                // this.$emit('month-change', { month: this.currentMonth + 1, year: this.currentYear });
+                if (props.onMonthChange) {
+                    props.onMonthChange({ month: currentMonth + 1, year: currentYear });
+                }
             }
 
             setTimeout(updateFocus, 0);
@@ -1192,7 +1361,10 @@ export const useDatePicker = withHeadless({
             } else {
                 setCurrentYear(year.value);
                 setCurrentView('month');
-                // this.$emit('year-change', { month: this.currentMonth + 1, year: this.currentYear });
+
+                if (props.onYearChange) {
+                    props.onYearChange({ month: currentMonth + 1, year: currentYear });
+                }
             }
 
             setTimeout(updateFocus, 0);
@@ -1223,31 +1395,53 @@ export const useDatePicker = withHeadless({
             }
         };
 
-        const parseValue = (text: string) => {
+        const isValidSelection = (value: Date | Date[]) => {
+            if (value == null) {
+                return true;
+            }
+
+            let isValid = true;
+
+            if (isSingleSelection() && value instanceof Date) {
+                if (!isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false)) {
+                    isValid = false;
+                }
+            } else if (Array.isArray(value) && value.every((v) => isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false))) {
+                if (isRangeSelection()) {
+                    isValid = value.length > 1 && value[1] >= value[0];
+                }
+            }
+
+            return isValid;
+        };
+
+        const parseValue = (text: string): useDatePickerProps['value'] => {
             if (!text || text.trim().length === 0) {
                 return null;
             }
 
-            let value;
+            let value: useDatePickerProps['value'];
 
             if (isSingleSelection()) {
-                value = parseDateTime(text);
+                value = parseDateTime(text) ?? null;
             } else if (isMultipleSelection()) {
                 const tokens = text.split(',');
-
-                value = [];
+                const dateArray: (Date | null)[] = [];
 
                 for (const token of tokens) {
-                    value.push(parseDateTime(token.trim()));
+                    dateArray.push(parseDateTime(token.trim()) ?? null);
                 }
+
+                value = dateArray;
             } else if (isRangeSelection()) {
                 const tokens = text.split(' - ');
-
-                value = [];
+                const dateArray: (Date | null)[] = [];
 
                 for (let i = 0; i < tokens.length; i++) {
-                    value[i] = parseDateTime(tokens[i].trim());
+                    dateArray[i] = parseDateTime(tokens[i].trim()) ?? null;
                 }
+
+                value = dateArray;
             }
 
             return value;
@@ -1283,19 +1477,20 @@ export const useDatePicker = withHeadless({
             let date;
             const parts = text.match(/(?:(.+?) )?(\d{2}:\d{2}(?::\d{2})?)(?: (am|pm))?/);
 
-            if (!parts) {
-                throw new Error('Invalid date/time format');
-            }
-
             if (props.timeOnly) {
                 date = new Date();
-                populateTime(date, parts[2], parts[3] === 'pm');
+
+                if (parts) {
+                    populateTime(date, parts[2], parts[3]);
+                }
             } else {
                 const dateFormat = datePattern;
 
                 if (props.showTime) {
-                    date = parseDate(parts[1], dateFormat) as Date;
-                    populateTime(date, parts[2], parts[3] === 'pm');
+                    if (parts) {
+                        date = parseDate(parts[1], dateFormat) as Date;
+                        populateTime(date, parts[2], parts[3]);
+                    }
                 } else {
                     date = parseDate(text, dateFormat);
                 }
@@ -1304,13 +1499,12 @@ export const useDatePicker = withHeadless({
             return date;
         };
 
-        const populateTime = (value: Date, timeString: string, ampm: boolean) => {
+        const populateTime = (value: Date, timeString: string, ampm: string) => {
             if (props.hourFormat == '12' && !ampm) {
                 throw new Error('Invalid Time');
             }
 
-            // @ts-expect-error TODO:
-            setPM(ampm === $primereact?.config?.locale?.pm || ampm === $primereact?.config?.locale?.pm.toLowerCase());
+            setPM(ampm === primereact?.config?.locale?.pm || ampm === primereact?.config?.locale?.pm.toLowerCase());
             const time = parseTime(timeString);
 
             value.setHours(time.hour);
@@ -1457,8 +1651,7 @@ export const useDatePicker = withHeadless({
                             day = getNumber('d');
                             break;
                         case 'D':
-                            // @ts-expect-error TODO:
-                            getName('D', $primereact?.config?.locale?.dayNamesShort, $primereact?.config?.locale?.dayNames);
+                            getName('D', primereact?.config?.locale?.dayNamesShort, primereact?.config?.locale?.dayNames);
                             break;
                         case 'o':
                             doy = getNumber('o');
@@ -1467,8 +1660,7 @@ export const useDatePicker = withHeadless({
                             month = getNumber('m');
                             break;
                         case 'M':
-                            // @ts-expect-error TODO:
-                            month = getName('M', $primereact?.config?.locale?.monthNamesShort, $primereact?.config?.locale?.monthNames);
+                            month = getName('M', primereact?.config?.locale?.monthNamesShort, primereact?.config?.locale?.monthNames);
                             break;
                         case 'y':
                             year = getNumber('y');
@@ -1597,8 +1789,7 @@ export const useDatePicker = withHeadless({
                     cellContent.tabIndex = -1;
 
                     if (event.altKey) {
-                        // this.overlayVisible = false;
-                        // setFocused(true);
+                        setOverlayVisibleState(true);
                     } else {
                         const prevRow = cell.parentElement?.previousElementSibling;
 
@@ -1701,16 +1892,13 @@ export const useDatePicker = withHeadless({
                 }
 
                 case 'Escape': {
-                    // this.overlayVisible = false;
+                    setOverlayVisibleState(false);
                     event.preventDefault();
                     break;
                 }
 
                 case 'Tab': {
-                    //TODO:
-                    // if (!this.inline) {
                     trapFocus(event);
-                    // }
 
                     break;
                 }
@@ -1781,7 +1969,7 @@ export const useDatePicker = withHeadless({
             }
         };
 
-        const navigateToMonth = (event: React.KeyboardEvent<HTMLSpanElement>, prev: boolean, groupIndex: number) => {
+        const navigateToMonth = (event: React.KeyboardEvent<HTMLSpanElement>, prev: boolean, groupIndex: number = 0) => {
             if (prev) {
                 if (props.numberOfMonths === 1 || groupIndex === 0) {
                     setNavigationState({ backward: true });
@@ -1892,7 +2080,7 @@ export const useDatePicker = withHeadless({
                 }
 
                 case 'Escape': {
-                    // this.overlayVisible = false;
+                    setOverlayVisibleState(false);
                     event.preventDefault();
                     break;
                 }
@@ -1988,10 +2176,11 @@ export const useDatePicker = withHeadless({
                 case 'Space': {
                     onYearSelect(event, year);
                     event.preventDefault();
+                    break;
                 }
 
                 case 'Escape': {
-                    // this.overlayVisible = false; //TODO:
+                    setOverlayVisibleState(false);
                     event.preventDefault();
                     break;
                 }
@@ -2096,7 +2285,6 @@ export const useDatePicker = withHeadless({
 
             if (cell) {
                 (cell as HTMLElement).tabIndex = 0;
-                // setPreventFocus(false);
             }
         };
 
@@ -2121,7 +2309,6 @@ export const useDatePicker = withHeadless({
                     } else {
                         if (focusedIndex === -1) {
                             if (props.timeOnly) {
-                                //TODO:
                                 focusableElements[0].focus();
                             } else {
                                 let elementIndex = focusableElements.findIndex((el) => el.tagName === 'SPAN');
@@ -2147,8 +2334,7 @@ export const useDatePicker = withHeadless({
         };
 
         const getMonthName = (index?: number) => {
-            // @ts-expect-error TODO:
-            return $primereact?.config?.locale?.monthNames[index ?? currentMonth];
+            return primereact?.config?.locale?.monthNames[index ?? currentMonth];
         };
 
         const getYear = () => {
@@ -2157,7 +2343,101 @@ export const useDatePicker = withHeadless({
 
         const onClearClick = () => {
             updateModel(null);
-            // this.overlayVisible = false;
+            setShowClearIcon(false);
+            setOverlayVisibleState(false);
+        };
+
+        const onInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+            try {
+                selectionStart.current = event.target.selectionStart;
+                selectionEnd.current = event.target.selectionEnd;
+
+                setShowClearIcon(!isEmpty(event.target.value));
+                const value = parseValue(event.target.value) as Date;
+
+                if (isValidSelection(value)) {
+                    typeUpdate.current = true;
+                    updateModel(props.updateModelType === 'string' ? formatValue(value) : value);
+                    updateCurrentMetaData();
+                }
+            } catch {
+                /* NoOp */
+            }
+
+            if (props.onInput) {
+                props.onInput(event);
+            }
+        };
+
+        const onInputClick = () => {
+            if (props.showOnFocus && isEnabled() && !overlayVisibleState) {
+                setOverlayVisibleState(true);
+            }
+        };
+
+        const onInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (event.code === 'ArrowDown' && overlayVisibleState) {
+                trapFocus(event);
+            } else if (event.code === 'ArrowDown' && !overlayVisibleState) {
+                setOverlayVisibleState(true);
+            } else if (event.code === 'Escape') {
+                if (overlayVisibleState) {
+                    setOverlayVisibleState(false);
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            } else if (event.code === 'Tab') {
+                if (overlayVisibleState && overlayRef.current) {
+                    (getFocusableElements(overlayRef.current) as HTMLElement[]).forEach((el) => (el.tabIndex = -1));
+                }
+
+                if (overlayVisibleState) {
+                    setOverlayVisibleState(false);
+                }
+            } else if (event.code === 'Enter') {
+                if (props.manualInput && (event.target as HTMLInputElement).value !== null && (event.target as HTMLInputElement).value?.trim() !== '') {
+                    try {
+                        const value = parseValue((event.target as HTMLInputElement).value) as Date | Date[];
+
+                        if (isValidSelection(value)) {
+                            setOverlayVisibleState(false);
+                        }
+                    } catch {
+                        /* NoOp */
+                    }
+                }
+
+                if (props.onKeyDown) {
+                    props.onKeyDown(event);
+                }
+            }
+        };
+
+        const onInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+            if (props.showonInputFocus && isEnabled()) {
+                setOverlayVisibleState(true);
+            }
+
+            if (props.onFocus) {
+                props.onFocus(event);
+            }
+        };
+
+        const onInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+            if (props.onBlur) {
+                props.onBlur({
+                    originalEvent: event,
+                    value: event.target.value
+                });
+            }
+
+            if (props.onValueChange) {
+                event.target.value = formatValue(rawValueState);
+            }
+
+            if (showClearIcon) {
+                setShowClearIcon(!isEmpty(event.target.value));
+            }
         };
 
         const viewDate = React.useMemo<Date>(() => {
@@ -2171,14 +2451,13 @@ export const useDatePicker = withHeadless({
                         propValue = propValue[0];
                     } else {
                         const start = parseValueForComparison(propValue[0]) as Date;
+                        const end = parseValueForComparison(propValue[1]) as Date | null;
                         const lastVisibleMonth = new Date(start.getFullYear(), start.getMonth() + (props.numberOfMonths ?? 1), 1);
 
-                        const endCandidate = parseValueForComparison(propValue[1]) as Date | null;
-
-                        if (!endCandidate || endCandidate < lastVisibleMonth) {
+                        if (!end || end < lastVisibleMonth) {
                             propValue = propValue[0];
                         } else {
-                            propValue = new Date(endCandidate.getFullYear(), endCandidate.getMonth() - (props.numberOfMonths ?? 1) + 1, 1);
+                            propValue = new Date(end.getFullYear(), end.getMonth() - (props.numberOfMonths ?? 1) + 1, 1);
                         }
                     }
                 } else if (isMultipleSelection()) {
@@ -2336,8 +2615,7 @@ export const useDatePicker = withHeadless({
 
             for (let i = 0; i <= 11; i++) {
                 monthPickerValuesArray.push({
-                    // @ts-expect-error TODO:
-                    value: $primereact?.config?.locale?.monthNamesShort[i],
+                    value: primereact?.config?.locale?.monthNamesShort[i],
                     selectable: isSelectableMonth(i)
                 });
             }
@@ -2370,12 +2648,11 @@ export const useDatePicker = withHeadless({
 
         const weekDays = React.useMemo(() => {
             const weekDays = [];
-            // @ts-expect-error TODO:
-            let dayIndex = $primereact?.config?.locale?.firstDayOfWeek;
+
+            let dayIndex = primereact?.config?.locale?.firstDayOfWeek;
 
             for (let i = 0; i < 7; i++) {
-                // @ts-expect-error TODO:
-                weekDays.push($primereact?.config?.locale?.dayNamesMin[dayIndex]);
+                weekDays.push(primereact?.config?.locale?.dayNamesMin[dayIndex]);
                 dayIndex = dayIndex == 6 ? 0 : ++dayIndex;
             }
 
@@ -2383,10 +2660,8 @@ export const useDatePicker = withHeadless({
         }, []);
 
         const datePattern = React.useMemo(() => {
-            // @ts-expect-error TODO:
-            return props.dateFormat || $primereact?.config?.locale?.dateFormat;
-            // @ts-expect-error TODO:
-        }, [props.dateFormat, $primereact?.config?.locale]);
+            return props.dateFormat || primereact?.config?.locale?.dateFormat;
+        }, [props.dateFormat, primereact?.config?.locale]);
 
         const formattedCurrentHour = React.useMemo(() => {
             if (currentHour == 0 && props.hourFormat == '12') {
@@ -2405,93 +2680,92 @@ export const useDatePicker = withHeadless({
         }, [currentSecond]);
 
         const todayLabel = React.useMemo(() => {
-            // @ts-expect-error TODO:
-            return $primereact?.config?.locale?.today;
-            // @ts-expect-error TODO:
-        }, [$primereact?.config?.locale]);
+            return primereact?.config?.locale?.today;
+        }, [primereact?.config?.locale]);
 
         const clearLabel = React.useMemo(() => {
-            // @ts-expect-error TODO:
-            return $primereact?.config?.locale?.clear;
-            // @ts-expect-error TODO:
-        }, [$primereact?.config?.locale]);
+            return primereact?.config?.locale?.clear;
+        }, [primereact?.config?.locale]);
 
         const weekHeaderLabel = React.useMemo(() => {
-            // @ts-expect-error TODO:
-            return $primereact?.config?.locale?.weekHeader;
-            // @ts-expect-error TODO:
-        }, [$primereact?.config?.locale]);
+            return primereact?.config?.locale?.weekHeader;
+        }, [primereact?.config?.locale]);
 
         const switchViewButtonDisabled = React.useMemo(() => {
-            return (props.numberOfMonths as number) > 1 || props.disabled;
+            return (props.numberOfMonths as number) > 1 || !!props.disabled;
         }, [props.numberOfMonths, props.disabled]);
 
         const ampmLabel = React.useMemo(() => {
             if (pm) {
-                // @ts-expect-error TODO:
-                return $primereact?.config?.locale?.pm;
+                return primereact?.config?.locale?.pm;
             }
 
-            // @ts-expect-error TODO:
-            return $primereact?.config?.locale?.am;
-            // @ts-expect-error TODO:
-        }, [pm, $primereact?.config?.locale]);
+            return primereact?.config?.locale?.am;
+        }, [pm, primereact?.config?.locale]);
 
         // effects
         useMountEffect(() => {
             setTimeout(() => {
-                if (!props.disabled) {
-                    // setPreventFocus(true);
+                if (!props.disabled && props.inline) {
                     initFocusableCell();
                 }
             }, 300);
         });
 
-        useUpdateEffect(() => {
-            if (overlayRef.current) {
-                updateFocus();
+        React.useEffect(() => {
+            if (inputRef.current?.elementRef.current && selectionStart.current != null && selectionEnd.current != null) {
+                inputRef.current.elementRef.current.selectionStart = selectionStart.current;
+                inputRef.current.elementRef.current.selectionEnd = selectionEnd.current;
+                selectionStart.current = null;
+                selectionEnd.current = null;
             }
-        });
+        }, [inputFieldValue]);
 
         React.useEffect(() => {
             updateFocus();
-        }, [currentView]);
+        }, [currentView, months]);
 
         React.useEffect(() => {
             if (props.value === undefined) return;
 
             updateCurrentMetaData();
-            const initialValue = typeof props.value === 'string' ? parseValue(props.value) : props.value;
+            const initialValue = (typeof props.value === 'string' ? parseValue(props.value) : props.value) as useDatePickerProps['value'];
 
             setRawValueState(initialValue);
 
-            if (!typeUpdate && inputRef.current && inputRef.current.elementRef.current) {
+            if (!typeUpdate.current && inputRef.current && inputRef.current.elementRef.current) {
                 inputRef.current.elementRef.current.value = formatValue(initialValue);
             }
 
-            setTypeUpdate(false);
-            // if (this.$refs.clearIcon?.$el?.style) {
-            //     this.$refs.clearIcon.$el.style.display = isEmpty(newValue) ? 'none' : 'block';
-            // }
+            typeUpdate.current = false;
         }, [props.value]);
 
         React.useEffect(() => {
             if (props.value !== undefined) return;
 
             updateCurrentMetaData();
-            const initialValue = typeof props.defaultValue === 'string' ? parseValue(props.defaultValue) : props.defaultValue;
+            const initialValue = (typeof props.defaultValue === 'string' ? parseValue(props.defaultValue) : props.defaultValue) as useDatePickerProps['value'];
 
             setRawValueState(initialValue);
 
-            if (!typeUpdate && inputRef.current && inputRef.current.elementRef.current) {
+            if (!typeUpdate.current && inputRef.current && inputRef.current.elementRef.current) {
                 inputRef.current.elementRef.current.value = formatValue(initialValue);
             }
 
-            setTypeUpdate(false);
-            // if (this.$refs.clearIcon?.$el?.style) {
-            //     this.$refs.clearIcon.$el.style.display = isEmpty(newValue) ? 'none' : 'block';
-            // }
+            typeUpdate.current = false;
         }, [props.defaultValue]);
+
+        React.useEffect(() => {
+            if (props.inline || isEmpty(rawValueState)) {
+                setShowClearIcon(false);
+            }
+        }, [rawValueState, props.inline]);
+
+        React.useEffect(() => {
+            if (props.showTime && overlayVisibleState) {
+                updateModelTime();
+            }
+        }, [pm]);
 
         return {
             state,
@@ -2499,9 +2773,10 @@ export const useDatePicker = withHeadless({
             nextButtonRef,
             prevButtonRef,
             overlayRef,
+            setOverlayVisibleState,
             //methods
             inputFieldValue,
-            weekHeaderLabel, //TODO:
+            weekHeaderLabel,
             todayLabel,
             clearLabel,
             weekDays,
@@ -2521,6 +2796,7 @@ export const useDatePicker = withHeadless({
             onDateCellKeydown,
             onMonthCellKeydown,
             onYearCellKeydown,
+            onButtonClick,
             switchViewButtonDisabled,
             formattedCurrentHour,
             formattedCurrentMinute,
@@ -2536,6 +2812,12 @@ export const useDatePicker = withHeadless({
             onTodayButtonClick,
             onClearButtonClick,
             onClearClick,
+            onInput,
+            onInputClick,
+            onInputKeyDown,
+            onInputFocus,
+            onInputBlur,
+            updateFocus,
             // for styling
             isRangeSelection,
             isSelected,

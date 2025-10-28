@@ -25,6 +25,10 @@ export interface DatePickerTableHeadCellPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: DatePickerTableHeadCellPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Used to pass attributes to the week day label's DOM element.
+     */
+    weekDay?: DatePickerTableHeadCellPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

@@ -1,10 +1,8 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { mergeProps } from '@primeuix/utils';
+import { cn, mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { InputText } from 'primereact/inputtext';
-import { usePopoverContext } from 'primereact/popover';
-// import { Popover } from 'primereact/popover';
 import * as React from 'react';
 import { useDatePickerContext } from '../DatePicker.context';
 import { defaultInputProps } from './DatePickerInput.props';
@@ -14,17 +12,21 @@ export const DatePickerInput = withComponent({
     defaultProps: defaultInputProps,
     setup() {
         const datepicker = useDatePickerContext();
-        const popover = usePopoverContext();
 
-        return { datepicker, popover };
+        return { datepicker };
     },
     render(instance) {
-        const { props, ptmi, datepicker, popover } = instance;
+        const { props, ptmi, datepicker } = instance;
+
+        if (datepicker?.props.inline) {
+            return null;
+        }
 
         const rootProps = mergeProps(
             {
                 defaultValue: datepicker?.inputFieldValue,
-                className: datepicker?.cx('input'),
+                id: datepicker?.props.inputId,
+                className: cn(datepicker?.cx('input'), datepicker?.props.inputClass),
                 role: 'combobox',
                 placeholder: datepicker?.props.placeholder,
                 name: datepicker?.props.name,
@@ -41,28 +43,23 @@ export const DatePickerInput = withComponent({
                 'aria-autocomplete': 'none',
                 'aria-haspopup': 'dialog',
                 'aria-expanded': datepicker?.state.overlayVisible,
-                'aria-controls': datepicker?.state.overlayVisible ? datepicker?.panelId : undefined, //TODO:
+                'aria-controls': datepicker?.state.overlayVisible ? datepicker?.id + '_panel' : undefined,
                 'aria-labelledby': datepicker?.props.ariaLabelledby,
                 'aria-label': datepicker?.props.ariaLabel,
-                onClick: () => {
-                    //TODO:
-                    if (!datepicker?.props.disabled) {
-                        // datepicker?.showOverlay();
-                        popover?.show?.();
-                    }
-                    // props.onClick?.(e);
-                }
+                onChange: (event: React.ChangeEvent<HTMLInputElement>) => datepicker?.onInput(event),
+                onClick: datepicker?.onInputClick,
+                onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => datepicker?.onInputKeyDown(event),
+                onInputFocus: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputFocus(event),
+                onInputBlur: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputBlur(event)
             },
             ptmi('root')
         );
 
-        // if (datepicker?.props.inline) {
-        //     return null;
-        // }
+        if (datepicker?.props.inline) {
+            return null;
+        }
 
         // @ts-expect-error: InputText expects a type prop, but we are using it as a input.
         return <Component ref={datepicker?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('input')} children={props.children} />;
-
-        // return <Popover.Trigger ref={datepicker?.inputRef} as={InputText} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('input')} />;
     }
 });

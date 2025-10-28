@@ -25,6 +25,10 @@ export interface DatePickerIncrementPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: DatePickerIncrementPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the increment icon's DOM element.
+     */
+    incrementIcon?: DatePickerIncrementPassThroughType<React.HTMLAttributes<SVGElement>>;
 }
 
 /**

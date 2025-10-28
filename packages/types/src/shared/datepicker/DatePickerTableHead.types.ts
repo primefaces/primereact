@@ -24,7 +24,7 @@ export interface DatePickerTableHeadPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: DatePickerTableHeadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: DatePickerTableHeadPassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
 }
 
 /**

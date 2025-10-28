@@ -1,46 +1,6 @@
-// 'use client';
-// import { Component } from '@primereact/core/component';
-// import { mergeProps } from '@primeuix/utils';
-// import { withComponent } from 'primereact/base';
-// import * as React from 'react';
-// import { useDatePickerContext } from '../DatePicker.context';
-// import { defaultTableBodyCellProps } from './DatePickerTableBodyCell.props';
-
-// export const DatePickerTableBodyCell = withComponent({
-//     name: 'DatePickerTableBodyCell',
-//     defaultProps: defaultTableBodyCellProps,
-//     setup() {
-//         const datepicker = useDatePickerContext();
-
-//         return { datepicker };
-//     },
-//     render(instance) {
-//         const { props, ptmi, ptm, datepicker } = instance;
-
-//         const rootProps = mergeProps(
-//             {
-//                 className: datepicker?.cx('dayCell', { date: props.date })
-//             },
-//             datepicker?.ptm('dayCell'),
-//             ptmi('root')
-//         );
-
-//         const createLabel = () => {
-//             return (
-//                 <span className={datepicker?.cx('day', { date: props.date })} {...ptm('day')}>
-//                     {props.children}
-//                 </span>
-//             );
-//         };
-
-//         const label = createLabel();
-
-//         return <Component instance={instance} attrs={rootProps} children={label} />;
-//     }
-// });
-
 'use client';
 import { Component } from '@primereact/core/component';
+import type { useDatePickerDateMeta, useDatePickerYearOptions } from '@primereact/types/shared/datepicker';
 import { mergeProps, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -59,17 +19,25 @@ export const DatePickerTableBodyCell = withComponent({
     },
     render(instance) {
         const { props, ptmi, ptm, datepicker, datepickertablebody } = instance;
+        const { view } = datepickertablebody?.props ?? { view: 'date' };
 
-        const context = datepickertablebody?.props.view === 'year' ? { year: props.year } : datepickertablebody?.props.view === 'month' ? { month: props.month, index: props.index } : { date: props.date };
+        const viewMap: Record<string, { cellName: string; context: Record<string, unknown> }> = {
+            year: { cellName: 'yearCell', context: { year: props.year } },
+            month: { cellName: 'monthCell', context: { month: props.month, index: props.index } },
+            date: { cellName: 'dayCell', context: { date: props.date } }
+        };
+
+        const viewConfig = (view && viewMap[view]) || viewMap['date'];
+        const context = viewConfig.context;
 
         const rootProps = mergeProps(
             {
-                className: datepickertablebody?.props.view === 'year' ? datepicker?.cx('yearCell', context) : datepickertablebody?.props.view === 'month' ? datepicker?.cx('monthCell', context) : datepicker?.cx('dayCell', context),
-                'aria-label': datepickertablebody?.props.view === 'date' && props.date.day,
-                'data-p-today': datepickertablebody?.props.view === 'date' && props.date.today,
-                'data-p-other-month': datepickertablebody?.props.view === 'date' && props.date.otherMonth
+                className: datepicker?.cx(viewConfig.cellName, context),
+                'aria-label': props?.date && props?.date.day,
+                'data-p-today': props?.date && props?.date.today,
+                'data-p-other-month': props?.date && props?.date.otherMonth
             },
-            datepickertablebody?.props.view === 'year' ? ptm('yearCell') : datepickertablebody?.props.view === 'month' ? ptm('monthCell') : ptm('dayCell'),
+            ptm(viewConfig.cellName),
             ptmi('root')
         );
 
@@ -78,12 +46,12 @@ export const DatePickerTableBodyCell = withComponent({
                 {
                     className: datepicker?.cx('day', context),
                     draggable: false,
-                    'aria-selected': datepicker?.isSelected?.(props.date),
-                    'aria-disabled': !props.date.selectable,
-                    'data-p-selected': datepicker?.isSelected?.(props.date),
-                    'data-p-disabled': !props.date.selectable,
-                    onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onDateSelect?.(event, props.date),
-                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onDateCellKeydown?.(event, props.date, props.index)
+                    'aria-selected': props?.date && datepicker?.isSelected(props.date),
+                    'aria-disabled': props?.date && !props.date.selectable,
+                    'data-p-selected': props?.date && datepicker?.isSelected(props.date),
+                    'data-p-disabled': props?.date && !props.date.selectable,
+                    onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onDateSelect(event, props.date as useDatePickerDateMeta),
+                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onDateCellKeydown(event, props.date as useDatePickerDateMeta, props.index as number)
                 },
                 ptm('day')
             );
@@ -96,10 +64,10 @@ export const DatePickerTableBodyCell = withComponent({
                 {
                     className: datepicker?.cx('month', context),
                     draggable: false,
-                    'data-p-disabled': !props.month.selectable,
-                    'data-p-selected': datepicker?.isMonthSelected?.(props.index),
-                    onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onMonthSelect?.(event, props.index),
-                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onMonthCellKeydown?.(event, props.index)
+                    'data-p-disabled': props.month && !props.month.selectable,
+                    'data-p-selected': datepicker?.isMonthSelected(props.index as number),
+                    onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onMonthSelect?.(event, props.index as number),
+                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onMonthCellKeydown?.(event, props.index as number)
                 },
                 ptm('month')
             );
@@ -112,10 +80,10 @@ export const DatePickerTableBodyCell = withComponent({
                 {
                     className: datepicker?.cx('year', context),
                     draggable: false,
-                    'data-p-disabled': !props.year.selectable,
-                    'data-p-selected': datepicker?.isYearSelected?.(props.year.value),
-                    onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onYearSelect?.(event, props.year),
-                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onYearCellKeydown?.(event, props.year)
+                    'data-p-disabled': props.year && !props.year.selectable,
+                    'data-p-selected': datepicker?.isYearSelected((props.year as useDatePickerYearOptions).value),
+                    onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onYearSelect?.(event, props.year as useDatePickerYearOptions),
+                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onYearCellKeydown?.(event, props.year as useDatePickerYearOptions)
                 },
                 ptm('year')
             );

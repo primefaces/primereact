@@ -17,7 +17,7 @@ export const DatePickerDecade = withComponent({
     render(instance) {
         const { props, ptmi, datepicker } = instance;
 
-        if (datepicker?.state.current.view !== 'year') {
+        if (datepicker?.state.currentView !== 'year') {
             return null;
         }
 

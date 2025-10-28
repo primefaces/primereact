@@ -19,7 +19,7 @@ export const DatePickerContainer = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: datepicker?.cx('calendarContainer')
+                className: datepicker?.cx('container')
             },
             datepicker?.ptm('container'),
             ptmi('root')

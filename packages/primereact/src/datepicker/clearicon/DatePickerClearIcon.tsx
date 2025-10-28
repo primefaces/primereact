@@ -17,6 +17,10 @@ export const DatePickerClearIcon = withComponent({
     render(instance) {
         const { ptmi, datepicker } = instance;
 
+        if (!datepicker?.state.showClearIcon) {
+            return null;
+        }
+
         const rootProps = mergeProps(
             {
                 className: datepicker?.cx('clearIcon'),

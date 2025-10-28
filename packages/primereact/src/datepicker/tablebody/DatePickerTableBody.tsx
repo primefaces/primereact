@@ -18,7 +18,7 @@ export const DatePickerTableBody = withComponent({
     render(instance) {
         const { props, ptmi, datepicker } = instance;
 
-        if (datepicker?.state.current.view !== props.view) {
+        if (datepicker?.state.currentView !== props.view) {
             return null;
         }
 

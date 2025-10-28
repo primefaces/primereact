@@ -25,6 +25,10 @@ export interface DatePickerPrevPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: DatePickerPrevPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the prev icon's DOM element.
+     */
+    prevIcon?: DatePickerPrevPassThroughType<React.HTMLAttributes<SVGElement>>;
 }
 
 /**

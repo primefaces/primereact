@@ -25,6 +25,10 @@ export interface DatePickerDecrementPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: DatePickerDecrementPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the decrement icon's DOM element.
+     */
+    decrementIcon?: DatePickerDecrementPassThroughType<React.HTMLAttributes<SVGElement>>;
 }
 
 /**

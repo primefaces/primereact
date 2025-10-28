@@ -26,10 +26,10 @@ export const DatePickerIncrement = withComponent({
         const eventHandlers =
             picker?.props.type !== 'ampm'
                 ? {
-                      onMouseDown: (event: React.MouseEvent<HTMLButtonElement>) => datepicker?.onTimePickerElementMouseDown?.(event, direction, 1),
+                      onMouseDown: (event: React.MouseEvent<HTMLButtonElement>) => datepicker?.onTimePickerElementMouseDown(event, direction, 1),
                       onMouseUp: datepicker?.onTimePickerElementMouseUp,
                       onMouseLeave: datepicker?.onTimePickerElementMouseLeave,
-                      onKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => datepicker?.onTimePickerElementKeyDown?.(event, direction, 1),
+                      onKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => datepicker?.onTimePickerElementKeyDown(event, direction, 1),
                       onKeyUp: datepicker?.onTimePickerElementKeyUp
                   }
                 : {

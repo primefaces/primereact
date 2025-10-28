@@ -15,22 +15,22 @@ export const DatePickerSelectYear = withComponent({
         return { datepicker };
     },
     render(instance) {
-        const { props, ptmi, datepicker, $primereact } = instance;
+        const { props, ptmi, datepicker } = instance;
 
-        if (datepicker?.state.current.view === 'year') {
+        if (datepicker?.state.currentView === 'year') {
             return null;
         }
 
         const rootProps = mergeProps(
             {
-                className: datepicker?.cx('selectyear'),
+                className: datepicker?.cx('selectYear'),
                 type: 'button',
                 onClick: datepicker?.switchToYearView,
                 onKeyDown: datepicker?.onContainerButtonKeydown,
                 disabled: datepicker?.switchViewButtonDisabled,
-                'aria-label': $primereact?.config?.locale?.chooseYear
+                'aria-label': 'Choose Year' //TODO:
             },
-            datepicker?.ptm('selectyear'),
+            datepicker?.ptm('selectYear'),
             ptmi('root')
         );
 

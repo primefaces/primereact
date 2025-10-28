@@ -1,39 +1,3 @@
-// 'use client';
-// import { Component } from '@primereact/core/component';
-// import { mergeProps } from '@primeuix/utils';
-// import { withComponent } from 'primereact/base';
-// import * as React from 'react';
-// import { useDatePickerContext } from '../DatePicker.context';
-// import { defaultTableProps } from './DatePickerTable.props';
-
-// export const DatePickerTable = withComponent({
-//     name: 'DatePickerTable',
-//     defaultProps: defaultTableProps,
-//     setup() {
-//         const datepicker = useDatePickerContext();
-
-//         return { datepicker };
-//     },
-//     render(instance) {
-//         const { props, ptmi, datepicker } = instance;
-
-//         if (datepicker?.state.current.view !== 'date') {
-//             return null;
-//         }
-
-//         const tableProps = mergeProps(
-//             {
-//                 className: datepicker?.cx('dayView'),
-//                 role: 'grid'
-//             },
-//             datepicker?.ptm('dayView'),
-//             ptmi('root')
-//         );
-
-//         return <Component instance={instance} attrs={tableProps} children={props.children} />;
-//     }
-// });
-
 'use client';
 import { Component } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
@@ -52,13 +16,20 @@ export const DatePickerTable = withComponent({
     },
     render(instance) {
         const { props, ptmi, datepicker } = instance;
+        const currentView = datepicker?.state.currentView;
+        const viewMap: Record<string, string> = {
+            year: 'yearView',
+            month: 'monthView',
+            day: 'dayView'
+        };
+        const viewName = (currentView && viewMap[currentView]) || 'dayView';
 
         const rootProps = mergeProps(
             {
-                className: datepicker?.state.current.view === 'year' ? datepicker?.cx('yearView') : datepicker?.state.current.view === 'month' ? datepicker?.cx('monthView') : datepicker?.cx('dayView'),
+                className: datepicker?.cx(viewName),
                 role: 'grid'
             },
-            datepicker?.state.current.view === 'year' ? datepicker?.ptm('yearView') : datepicker?.state.current.view === 'month' ? datepicker?.ptm('monthView') : datepicker?.ptm('dayView'),
+            datepicker?.ptm(viewName),
             ptmi('root')
         );
 

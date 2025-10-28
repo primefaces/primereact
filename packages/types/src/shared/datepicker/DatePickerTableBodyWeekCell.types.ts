@@ -25,6 +25,10 @@ export interface DatePickerTableBodyWeekCellPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: DatePickerTableBodyWeekCellPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Used to pass attributes to the week label container's DOM element.
+     */
+    weekLabelContainer?: DatePickerTableBodyWeekCellPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

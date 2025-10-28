@@ -30,7 +30,12 @@ export interface DatePickerPickerPassThrough {
 /**
  * Defines valid properties in DatePickerPicker component.
  */
-export interface DatePickerPickerProps extends BaseComponentProps<DatePickerPickerInstance, unknown, DatePickerPickerPassThrough> {}
+export interface DatePickerPickerProps extends BaseComponentProps<DatePickerPickerInstance, unknown, DatePickerPickerPassThrough> {
+    /**
+     * Type of the picker.
+     */
+    type?: 'hour' | 'minute' | 'second' | 'ampm' | undefined;
+}
 
 /**
  * Defines valid state in DatePickerPicker component.

@@ -15,22 +15,22 @@ export const DatePickerSelectMonth = withComponent({
         return { datepicker };
     },
     render(instance) {
-        const { props, ptmi, datepicker, $primereact } = instance;
+        const { props, ptmi, datepicker } = instance;
 
-        if (datepicker?.state.current.view !== 'date') {
+        if (datepicker?.state.currentView !== 'date') {
             return null;
         }
 
         const rootProps = mergeProps(
             {
-                className: datepicker?.cx('selectmonth'),
+                className: datepicker?.cx('selectMonth'),
                 type: 'button',
                 onClick: datepicker?.switchToMonthView,
                 onKeyDown: datepicker?.onContainerButtonKeydown,
                 disabled: datepicker?.switchViewButtonDisabled,
-                'aria-label': $primereact?.config?.locale?.chooseMonth
+                'aria-label': 'Choose Month' //TODO:
             },
-            datepicker?.ptm('selectmonth'),
+            datepicker?.ptm('selectMonth'),
             ptmi('root')
         );
 
