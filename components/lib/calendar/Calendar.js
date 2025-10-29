@@ -99,6 +99,12 @@ export const Calendar = React.memo(
             return props.dateFormat || localeOption('dateFormat', props.locale);
         };
 
+        const onInputClick = () => {
+            if (!visible && props.showOnFocus) {
+                show();
+            }
+        };
+
         const onInputFocus = (event) => {
             if (ignoreFocusFunctionality.current) {
                 setFocusedState(true);
@@ -4206,6 +4212,7 @@ export const Calendar = React.memo(
                         autoComplete="off"
                         placeholder={props.placeholder}
                         tabIndex={props.tabIndex}
+                        onClick={onInputClick}
                         onInput={onUserInput}
                         onFocus={onInputFocus}
                         onBlur={onInputBlur}
