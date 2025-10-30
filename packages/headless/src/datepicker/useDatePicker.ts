@@ -1,7 +1,7 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useMountEffect } from '@primereact/hooks';
 import { useDatePickerDateMeta, useDatePickerProps } from '@primereact/types/shared/datepicker';
-import { find, findSingle, getAttribute, getFocusableElements, getIndex, isDate, isEmpty, isNotEmpty } from '@primeuix/utils';
+import { find, findSingle, getAttribute, getFocusableElements, getIndex, getOuterWidth, isDate, isEmpty, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useDatePicker.props';
 
@@ -136,10 +136,11 @@ const primereact = {
 export const useDatePicker = withHeadless({
     name: 'useDatePicker',
     defaultProps,
-    setup: ({ props }) => {
+    setup: ({ props, elementRef }) => {
         const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
         const nextButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
         const prevButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
+        const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
         const overlayRef = React.useRef<HTMLDivElement | null>(null);
         const timePickerTimer = React.useRef<NodeJS.Timeout | null>(null);
         const typeUpdate = React.useRef(false);
@@ -2052,6 +2053,10 @@ export const useDatePicker = withHeadless({
                     break;
                 }
 
+                case 'Home':
+                case 'End':
+                    break;
+
                 case 'PageUp': {
                     if (event.shiftKey) return;
 
@@ -2151,6 +2156,10 @@ export const useDatePicker = withHeadless({
                     event.preventDefault();
                     break;
                 }
+
+                case 'Home':
+                case 'End':
+                    break;
 
                 case 'PageUp': {
                     if (event.shiftKey) return;
@@ -2440,6 +2449,19 @@ export const useDatePicker = withHeadless({
             }
         };
 
+        const onOverlayEnter = () => {
+            updateFocus();
+
+            if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
+                const element = portalRef.current.containerRef.current.elementRef.current;
+
+                if (elementRef?.current) {
+                    element.style.width = getOuterWidth(element) + 'px';
+                    element.style.minWidth = getOuterWidth(elementRef.current) + 'px';
+                }
+            }
+        };
+
         const viewDate = React.useMemo<Date>(() => {
             let propValue = rawValueState;
 
@@ -2579,7 +2601,7 @@ export const useDatePicker = withHeadless({
             }
 
             return monthsArray;
-        }, [currentMonth, currentYear, props.numberOfMonths, props.minDate, props.maxDate, props.disabledDates, props.disabledDays, props.selectOtherMonths, props.showOtherMonths]);
+        }, [currentMonth, currentYear, props.numberOfMonths, props.minDate, props.maxDate, props.disabledDates, props.disabledDays, props.selectOtherMonths]);
 
         const getIndexedMonth = React.useCallback(
             (index: number = 0) => {
@@ -2772,6 +2794,7 @@ export const useDatePicker = withHeadless({
             inputRef,
             nextButtonRef,
             prevButtonRef,
+            portalRef,
             overlayRef,
             setOverlayVisibleState,
             //methods
@@ -2817,7 +2840,7 @@ export const useDatePicker = withHeadless({
             onInputKeyDown,
             onInputFocus,
             onInputBlur,
-            updateFocus,
+            onOverlayEnter,
             // for styling
             isRangeSelection,
             isSelected,

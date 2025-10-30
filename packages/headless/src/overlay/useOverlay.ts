@@ -2,7 +2,7 @@ import { withHeadless } from '@primereact/core/headless';
 import { ConnectedOverlayScrollHandler } from '@primereact/core/utils';
 import { useEventListener, useUnmountEffect } from '@primereact/hooks';
 import { $dt } from '@primeuix/styled';
-import { absolutePosition, addClass, addStyle, getOffset, getOuterWidth, isTouchDevice, relativePosition } from '@primeuix/utils/dom';
+import { absolutePosition, addClass, addStyle, getOffset, isTouchDevice, relativePosition } from '@primeuix/utils/dom';
 import { ZIndex } from '@primeuix/utils/zindex';
 import { OverlayEventBus } from 'primereact/overlayeventbus';
 import * as React from 'react';
@@ -101,7 +101,6 @@ export const useOverlay = withHeadless({
             }
 
             containerElement.style.setProperty($dt('overlay.arrow.left').name, `${arrowLeft}px`);
-            containerElement.style.width = getOuterWidth(containerElement) + 'px'; //TODO:
 
             if (containerOffset.top < targetOffset.top) {
                 addClass(containerElement, 'p-overlay-flipped');

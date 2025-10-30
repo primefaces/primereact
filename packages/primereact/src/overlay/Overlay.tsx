@@ -37,7 +37,7 @@ export const Overlay = withComponent({
 
         return (
             <OverlayProvider value={instance}>
-                <Portal>
+                <Portal appendTo={props.appendTo}>
                     <Motion {...containerProps} ref={containerRef}>
                         {resolve(props.children, instance)}
                     </Motion>

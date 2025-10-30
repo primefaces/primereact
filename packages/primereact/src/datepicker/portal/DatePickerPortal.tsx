@@ -32,11 +32,12 @@ export const DatePickerPortal = withComponent({
                     resolve(props.children, instance)
                 ) : (
                     <Overlay
+                        ref={datepicker?.portalRef}
                         appendTo={datepicker?.props.appendTo}
                         target={datepicker?.inputRef?.current?.elementRef?.current}
                         open={datepicker?.state.overlayVisible}
                         onOpenChange={({ value }: useOverlayOpenChangeEvent) => datepicker?.setOverlayVisibleState(value)}
-                        onAfterEnter={() => datepicker?.updateFocus()}
+                        onEnter={datepicker?.onOverlayEnter}
                     >
                         {resolve(props.children, instance)}
                     </Overlay>
