@@ -24,7 +24,7 @@ export interface ChipRemoveIconPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ChipRemoveIconPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ChipRemoveIconPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

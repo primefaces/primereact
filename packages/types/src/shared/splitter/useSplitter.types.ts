@@ -96,6 +96,7 @@ export interface useSplitterExposes {
      * @param event - Mouse, touch or keyboard event
      * @param index - Index of the gutter
      * @param isKeyDown - Whether it's triggered by keyboard
+     * @returns void
      */
     onResizeStart: (event: React.MouseEvent | React.TouchEvent | KeyboardEvent, index: number, isKeyDown: boolean) => void;
     /**
