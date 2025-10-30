@@ -604,7 +604,22 @@ export const MultiSelect = React.memo(
         };
 
         const findOptionIndexInList = (value, list) => {
-            return list.findIndex((item) => value.some((val) => ObjectUtils.equals(val, getOptionValue(item), equalityKey)));
+            if (!value || value.length === 0) {
+                return -1;
+            }
+
+            if (value.length <= 10) {
+                return list.findIndex((item) => value.some((val) => ObjectUtils.equals(val, getOptionValue(item), equalityKey)));
+            }
+
+            const valueSet = new Set(value.map((val) => (typeof val === 'object' ? JSON.stringify(val) : val)));
+
+            return list.findIndex((item) => {
+                const itemValue = getOptionValue(item);
+                const lookupValue = typeof itemValue === 'object' ? JSON.stringify(itemValue) : itemValue;
+
+                return valueSet.has(lookupValue) || value.some((val) => ObjectUtils.equals(val, itemValue, equalityKey));
+            });
         };
 
         const isEquals = (value1, value2) => {
@@ -753,6 +768,9 @@ export const MultiSelect = React.memo(
 
         const findSelectedOptionIndex = () => {
             if (hasSelectedOption()) {
+                if (props.value.length > 10) {
+                    return visibleOptions.findIndex((option) => isValidSelectedOption(option));
+                }
                 for (let index = props.value.length - 1; index >= 0; index--) {
                     const value = props.value[index];
                     const matchedOptionIndex = visibleOptions.findIndex((option) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
