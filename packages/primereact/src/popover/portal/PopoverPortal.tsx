@@ -36,7 +36,7 @@ export const PopoverPortal = withComponent({
         );
 
         return (
-            <Portal>
+            <Portal appendTo={props.appendTo}>
                 <Motion {...containerProps} ref={popover?.containerRef} children={props.children} />
             </Portal>
         );
