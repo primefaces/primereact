@@ -269,23 +269,21 @@ export default function IconDemo() {
                     </DatePicker.InputIconContainer>
                     <DatePicker.Portal>
                         <DatePicker.Panel>
-                            <DatePicker.Container>
-                                <DatePicker.Time>
-                                    <DatePicker.Picker type="hour">
-                                        <DatePicker.Increment />
-                                        <DatePicker.Hour />
-                                        <DatePicker.Decrement />
-                                    </DatePicker.Picker>
-                                    <DatePicker.SeparatorContainer>
-                                        <DatePicker.Separator />
-                                    </DatePicker.SeparatorContainer>
-                                    <DatePicker.Picker type="minute">
-                                        <DatePicker.Increment />
-                                        <DatePicker.Minute />
-                                        <DatePicker.Decrement />
-                                    </DatePicker.Picker>
-                                </DatePicker.Time>
-                            </DatePicker.Container>
+                            <DatePicker.Time>
+                                <DatePicker.Picker type="hour">
+                                    <DatePicker.Increment />
+                                    <DatePicker.Hour />
+                                    <DatePicker.Decrement />
+                                </DatePicker.Picker>
+                                <DatePicker.SeparatorContainer>
+                                    <DatePicker.Separator />
+                                </DatePicker.SeparatorContainer>
+                                <DatePicker.Picker type="minute">
+                                    <DatePicker.Increment />
+                                    <DatePicker.Minute />
+                                    <DatePicker.Decrement />
+                                </DatePicker.Picker>
+                            </DatePicker.Time>
                         </DatePicker.Panel>
                     </DatePicker.Portal>
                 </DatePicker>
