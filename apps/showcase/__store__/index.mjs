@@ -323,6 +323,104 @@ export const Store = {
             'filePath': 'demo/dataview/sort-demo.tsx',
         },
     },
+    'datepicker': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/datepicker/basic-demo.tsx')),
+            'filePath': 'demo/datepicker/basic-demo.tsx',
+        },
+        'buttonbar-demo': {
+            'component': React.lazy(() => import('demo/datepicker/buttonbar-demo.tsx')),
+            'filePath': 'demo/datepicker/buttonbar-demo.tsx',
+        },
+        'clear-icon-demo': {
+            'component': React.lazy(() => import('demo/datepicker/clear-icon-demo.tsx')),
+            'filePath': 'demo/datepicker/clear-icon-demo.tsx',
+        },
+        'date-template-demo': {
+            'component': React.lazy(() => import('demo/datepicker/date-template-demo.tsx')),
+            'filePath': 'demo/datepicker/date-template-demo.tsx',
+        },
+        'datepicker-pt': {
+            'component': React.lazy(() => import('demo/datepicker/datepicker-pt.tsx')),
+            'filePath': 'demo/datepicker/datepicker-pt.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/datepicker/disabled-demo.tsx')),
+            'filePath': 'demo/datepicker/disabled-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/datepicker/filled-demo.tsx')),
+            'filePath': 'demo/datepicker/filled-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/datepicker/float-label-demo.tsx')),
+            'filePath': 'demo/datepicker/float-label-demo.tsx',
+        },
+        'fluid-demo': {
+            'component': React.lazy(() => import('demo/datepicker/fluid-demo.tsx')),
+            'filePath': 'demo/datepicker/fluid-demo.tsx',
+        },
+        'format-demo': {
+            'component': React.lazy(() => import('demo/datepicker/format-demo.tsx')),
+            'filePath': 'demo/datepicker/format-demo.tsx',
+        },
+        'icon-demo': {
+            'component': React.lazy(() => import('demo/datepicker/icon-demo.tsx')),
+            'filePath': 'demo/datepicker/icon-demo.tsx',
+        },
+        'ifta-label-demo': {
+            'component': React.lazy(() => import('demo/datepicker/ifta-label-demo.tsx')),
+            'filePath': 'demo/datepicker/ifta-label-demo.tsx',
+        },
+        'inline-demo': {
+            'component': React.lazy(() => import('demo/datepicker/inline-demo.tsx')),
+            'filePath': 'demo/datepicker/inline-demo.tsx',
+        },
+        'inline-template-demo': {
+            'component': React.lazy(() => import('demo/datepicker/inline-template-demo.tsx')),
+            'filePath': 'demo/datepicker/inline-template-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/datepicker/invalid-demo.tsx')),
+            'filePath': 'demo/datepicker/invalid-demo.tsx',
+        },
+        'min-max-demo': {
+            'component': React.lazy(() => import('demo/datepicker/min-max-demo.tsx')),
+            'filePath': 'demo/datepicker/min-max-demo.tsx',
+        },
+        'model-type-demo': {
+            'component': React.lazy(() => import('demo/datepicker/model-type-demo.tsx')),
+            'filePath': 'demo/datepicker/model-type-demo.tsx',
+        },
+        'month-picker-demo': {
+            'component': React.lazy(() => import('demo/datepicker/month-picker-demo.tsx')),
+            'filePath': 'demo/datepicker/month-picker-demo.tsx',
+        },
+        'multiple-demo': {
+            'component': React.lazy(() => import('demo/datepicker/multiple-demo.tsx')),
+            'filePath': 'demo/datepicker/multiple-demo.tsx',
+        },
+        'multiple-months-demo': {
+            'component': React.lazy(() => import('demo/datepicker/multiple-months-demo.tsx')),
+            'filePath': 'demo/datepicker/multiple-months-demo.tsx',
+        },
+        'range-demo': {
+            'component': React.lazy(() => import('demo/datepicker/range-demo.tsx')),
+            'filePath': 'demo/datepicker/range-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/datepicker/sizes-demo.tsx')),
+            'filePath': 'demo/datepicker/sizes-demo.tsx',
+        },
+        'time-demo': {
+            'component': React.lazy(() => import('demo/datepicker/time-demo.tsx')),
+            'filePath': 'demo/datepicker/time-demo.tsx',
+        },
+        'year-picker-demo': {
+            'component': React.lazy(() => import('demo/datepicker/year-picker-demo.tsx')),
+            'filePath': 'demo/datepicker/year-picker-demo.tsx',
+        },
+    },
     'dialog': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/dialog/basic-demo.tsx')),
