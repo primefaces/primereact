@@ -481,6 +481,10 @@ export interface useDatePickerState {
      * Whether to show the clear icon.
      */
     showClearIcon: boolean;
+    /**
+     * The date currently being hovered in range selection mode.
+     */
+    hoveredDate: useDatePickerDateMeta | null;
 }
 
 /**
@@ -790,6 +794,18 @@ export interface useDatePickerExposes {
      * @returns boolean
      */
     isYearSelected: (year: number) => boolean;
+    /**
+     * Checks if a date is in the hover range during range selection.
+     * @param dateMeta - The date metadata to check.
+     * @returns boolean
+     */
+    isInHoverRange: (dateMeta: useDatePickerDateMeta) => boolean;
+    /**
+     * Handles date cell mouse enter event.
+     * @param dateMeta - The date metadata.
+     * @returns void
+     */
+    onDateCellMouseEnter: (dateMeta: useDatePickerDateMeta) => void;
 }
 
 /**

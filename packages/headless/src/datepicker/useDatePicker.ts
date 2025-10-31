@@ -157,6 +157,7 @@ export const useDatePicker = withHeadless({
         const [pm, setPM] = React.useState<boolean>(false);
         const [focusedDateIndex, setFocusedDateIndex] = React.useState(0);
         const [navigationState, setNavigationState] = React.useState<{ backward?: boolean; button?: boolean } | null>(null);
+        const [hoveredDateState, setHoveredDateState] = React.useState<useDatePickerDateMeta | null>(null);
 
         const getInitialValue = (): useDatePickerProps['value'] => {
             if (props.value !== undefined) {
@@ -176,7 +177,8 @@ export const useDatePicker = withHeadless({
             rawValue: rawValueState,
             overlayVisible: overlayVisibleState,
             currentView,
-            showClearIcon
+            showClearIcon,
+            hoveredDate: hoveredDateState
         };
 
         const isSelected = (dateMeta: useDatePickerDateMeta) => {
@@ -219,6 +221,36 @@ export const useDatePicker = withHeadless({
             }
 
             return false;
+        };
+
+        const isInHoverRange = (dateMeta: useDatePickerDateMeta) => {
+            if (!isRangeSelection() || !hoveredDateState || !rawValueState || !Array.isArray(rawValueState)) {
+                return false;
+            }
+
+            if (rawValueState.length === 0 || rawValueState[1] !== null) {
+                return false;
+            }
+
+            const start = parseValueForComparison(rawValueState[0]);
+
+            if (!start) {
+                return false;
+            }
+
+            const hoverDateObj = new Date(hoveredDateState.year, hoveredDateState.month, hoveredDateState.day);
+            const currentDateObj = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
+            const rangeStart = start.getTime() < hoverDateObj.getTime() ? start : hoverDateObj;
+            const rangeEnd = start.getTime() < hoverDateObj.getTime() ? hoverDateObj : start;
+            const currentTime = currentDateObj.getTime();
+
+            return currentTime >= rangeStart.getTime() && currentTime <= rangeEnd.getTime();
+        };
+
+        const onDateCellMouseEnter = (dateMeta: useDatePickerDateMeta) => {
+            if (isRangeSelection() && dateMeta.selectable) {
+                setHoveredDateState(dateMeta);
+            }
         };
 
         const isMonthSelected = (month: number) => {
@@ -661,10 +693,12 @@ export const useDatePicker = withHeadless({
                     if (!endDate && date.getTime() >= startDate.getTime()) {
                         endDate = date;
                         setFocusedDateIndex(1);
+                        setHoveredDateState(null);
                     } else {
                         startDate = date;
                         endDate = null;
                         setFocusedDateIndex(0);
+                        setHoveredDateState(null);
                     }
 
                     modelVal = [startDate, endDate];
@@ -2789,6 +2823,12 @@ export const useDatePicker = withHeadless({
             }
         }, [pm]);
 
+        React.useEffect(() => {
+            if (!overlayVisibleState && hoveredDateState) {
+                setHoveredDateState(null);
+            }
+        }, [overlayVisibleState]);
+
         return {
             state,
             inputRef,
@@ -2847,7 +2887,9 @@ export const useDatePicker = withHeadless({
             parseValue,
             isDateEquals,
             isMonthSelected,
-            isYearSelected
+            isYearSelected,
+            isInHoverRange,
+            onDateCellMouseEnter
         };
     }
 });

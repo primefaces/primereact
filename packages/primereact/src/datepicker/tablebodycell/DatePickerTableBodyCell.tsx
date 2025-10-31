@@ -51,7 +51,8 @@ export const DatePickerTableBodyCell = withComponent({
                     'data-p-selected': props?.date && datepicker?.isSelected(props.date),
                     'data-p-disabled': props?.date && !props.date.selectable,
                     onClick: (event: React.MouseEvent<HTMLSpanElement>) => datepicker?.onDateSelect(event, props.date as useDatePickerDateMeta),
-                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onDateCellKeydown(event, props.date as useDatePickerDateMeta, props.index as number)
+                    onKeyDown: (event: React.KeyboardEvent<HTMLSpanElement>) => datepicker?.onDateCellKeydown(event, props.date as useDatePickerDateMeta, props.index as number),
+                    onMouseEnter: () => datepicker?.onDateCellMouseEnter(props.date as useDatePickerDateMeta)
                 },
                 ptm('day')
             );

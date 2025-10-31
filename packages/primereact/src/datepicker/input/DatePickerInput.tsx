@@ -49,8 +49,8 @@ export const DatePickerInput = withComponent({
                 onChange: (event: React.ChangeEvent<HTMLInputElement>) => datepicker?.onInput(event),
                 onClick: datepicker?.onInputClick,
                 onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => datepicker?.onInputKeyDown(event),
-                onInputFocus: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputFocus(event),
-                onInputBlur: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputBlur(event)
+                onFocus: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputFocus(event),
+                onBlur: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputBlur(event)
             },
             ptmi('root')
         );

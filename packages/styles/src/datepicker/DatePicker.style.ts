@@ -13,7 +13,7 @@ ${style}
     width: 100%;
     border-collapse: collapse;
     font-size: 1rem;
-    margin: var(--p-datepicker-day-view-margin);
+    margin: dt('datepicker.day.view.margin');
 }
 
 .p-datepicker-month {
@@ -25,18 +25,18 @@ ${style}
     overflow: hidden;
     position: relative;
     width: 100%;
-    height: var(--p-datepicker-date-height);
+    height: dt('datepicker.date.height');
 }
 
 .p-datepicker-month-cell {
-    padding: var(--p-datepicker-date-padding);
+    padding: dt('datepicker.date.padding');
 }
 
 .p-datepicker-year-view {
     width: 100%;
     border-collapse: collapse;
     font-size: 1rem;
-    margin: var(--p-datepicker-day-view-margin);
+    margin: dt('datepicker.day.view.margin');
 }
 
 .p-datepicker-year {
@@ -48,11 +48,16 @@ ${style}
     overflow: hidden;
     position: relative;
     width: 100%;
-    height: var(--p-datepicker-date-height);
+    height: dt('datepicker.date.height');
 }
 
 .p-datepicker-year-cell {
-    padding: var(--p-datepicker-date-padding);
+    padding: dt('datepicker.date.padding');
+}
+
+.p-datepicker-day-hover-range:not(.p-datepicker-day-selected) {
+    background: dt('datepicker.date.hover.background');
+    color: dt('datepicker.date.hover.color');
 }
 `;
 
@@ -107,6 +112,7 @@ export const styles = createStyles<DatePickerInstance>({
         ],
         day: ({ instance, props, context }) => {
             let selectedDayClass = '';
+            let hoverRangeClass = '';
 
             if (context.date && instance.state.rawValue !== null && instance.state.rawValue !== undefined) {
                 if (instance.isRangeSelection() && instance.isSelected(context.date as useDatePickerDateMeta) && (context.date as useDatePickerDateMeta).selectable) {
@@ -135,6 +141,10 @@ export const styles = createStyles<DatePickerInstance>({
                         selectedDayClass = instance.isDateEquals(start, context.date as useDatePickerDateMeta) || instance.isDateEquals(end, context.date as useDatePickerDateMeta) ? 'p-datepicker-day-selected' : 'p-datepicker-day-selected-range';
                     }
                 }
+
+                if (instance.isRangeSelection() && instance.isInHoverRange(context.date as useDatePickerDateMeta) && (context.date as useDatePickerDateMeta).selectable) {
+                    hoverRangeClass = 'p-datepicker-day-hover-range';
+                }
             }
 
             return [
@@ -143,7 +153,8 @@ export const styles = createStyles<DatePickerInstance>({
                     'p-datepicker-day-selected': context.date && !instance.isRangeSelection() && instance.isSelected(context.date as useDatePickerDateMeta) && (context.date as useDatePickerDateMeta).selectable,
                     'p-disabled': props.disabled || (context.date && !(context.date as useDatePickerDateMeta).selectable)
                 },
-                selectedDayClass
+                selectedDayClass,
+                hoverRangeClass
             ];
         },
         monthView: 'p-datepicker-month-view',
