@@ -6,7 +6,6 @@ export const defaultProps: useDatePickerProps = {
     updateModelType: 'date',
     selectionMode: 'single',
     dateFormat: undefined,
-    inline: false,
     selectOtherMonths: false,
     numberOfMonths: 1,
     view: 'date',

@@ -20,8 +20,7 @@ export const DatePickerTableHeadCell = withComponent({
         const rootProps = mergeProps(
             {
                 className: datepicker?.cx('weekDayCell'),
-                scope: 'col',
-                abbr: resolve(props.children, instance) //TODO: verify abbr usage
+                scope: 'col'
             },
             datepicker?.ptm('weekDayCell'),
             ptmi('root')

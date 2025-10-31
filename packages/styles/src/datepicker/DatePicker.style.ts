@@ -176,8 +176,5 @@ export const styles = createStyles<DatePickerInstance>({
         buttonbar: 'p-datepicker-buttonbar',
         today: 'p-datepicker-today-button',
         clear: 'p-datepicker-clear-button'
-    },
-    inlineStyles: {
-        root: ({ props }) => ({ position: props.appendTo === 'self' ? 'relative' : undefined })
     }
 });

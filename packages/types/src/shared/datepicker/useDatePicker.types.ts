@@ -199,11 +199,6 @@ export interface useDatePickerProps {
      */
     updateModelType?: 'date' | 'string' | undefined;
     /**
-     * When enabled, displays the datepicker as inline instead of an overlay.
-     * @default false
-     */
-    inline?: boolean | undefined;
-    /**
      * Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
      * @default false
      */
