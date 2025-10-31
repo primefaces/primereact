@@ -68,6 +68,10 @@
                             "to": "/docs/components/inputtext"
                         },
                         {
+                            "name": "DatePicker",
+                            "to": "/docs/components/datepicker"
+                        },
+                        {
                             "name": "FloatLabel",
                             "to": "/docs/components/floatlabel"
                         },
