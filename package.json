@@ -30,7 +30,7 @@
         "@docsearch/react": "3.9.0",
         "chart.js": "4.5.0",
         "file-saver": "2.0.5",
-        "fs-extra": "^11.3.0",
+        "fs-extra": "^11.3.2",
         "jspdf": "3.0.2",
         "jspdf-autotable": "5.0.2",
         "next": "12.3.7",
