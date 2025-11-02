@@ -30,11 +30,16 @@ export function ExportDoc(props) {
     };
 
     const exportPdf = () => {
-        import('jspdf').then((jsPDF) => {
-            import('jspdf-autotable').then(() => {
-                const doc = new jsPDF.default(0, 0);
+        import('jspdf').then((jsPDFModule) => {
+            import('jspdf-autotable').then((autoTableModule) => {
+                const jsPDF = jsPDFModule.default;
+                const autoTable = autoTableModule.default;
+                const doc = new jsPDF(0, 0);
 
-                doc.autoTable(exportColumns, products);
+                autoTable(doc, {
+                    head: [exportColumns.map((col) => col.title)],
+                    body: products.map((product) => exportColumns.map((col) => product[col.dataKey]))
+                });
                 doc.save('products.pdf');
             });
         });
