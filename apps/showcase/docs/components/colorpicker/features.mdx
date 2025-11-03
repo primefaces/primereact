@@ -1,0 +1,110 @@
+---
+title: ColorPicker
+description: ColorPicker is a component that allows the user to select a color.
+component: colorpicker
+---
+
+## Usage
+
+```tsx
+import { ColorPicker } from 'primereact/colorpicker';
+```
+
+```tsx
+<ColorPicker>
+    <ColorPicker.Area />
+    <ColorPicker.Slider channel="hue" />
+    <ColorPicker.Input channel="hex" />
+    <ColorPicker.Swatch />
+    <ColorPicker.EyeDropper />
+
+    {/* depending on the style, add following components */}
+    <ColorPicker.AreaBackground />
+    <ColorPicker.AreaThumb />
+    <ColorPicker.SliderTrack />
+    <ColorPicker.SliderThumb />
+    <ColorPicker.SwatchBackground />
+    <ColorPicker.TransparencyGrid />
+</ColorPicker>
+```
+
+## Examples
+
+### Basic
+
+Use the `format` prop to change the color space. The `channel` prop of `ColorPicker.Slider` and `ColorPicker.Input` can be used to select the channel to control.
+
+<DocDemoViewer name="colorpicker:basic-demo" />
+
+### With Popover
+
+Use the `ColorPicker` inside a `Popover` to put the `ColorPicker` to the top of the component.
+
+<DocDemoViewer name="colorpicker:popover-demo" />
+
+### Vertical Slider
+
+Use the `orientation` prop to change the orientation of the slider.
+
+<DocDemoViewer name="colorpicker:vertical-slider-demo" />
+
+### Controlled
+
+Use the `value` and `onColorChange` props to control the color.
+
+<DocDemoViewer name="colorpicker:controlled-demo" />
+
+### Advanced
+
+<DocDemoViewer name="colorpicker:advanced-demo" />
+
+## colorManager
+
+### Color class
+
+The `Color` class is the base class for all color classes. It provides the basic functionality for all color classes.
+
+- `clone()`: Clones the color.
+- `toString(format)`: Converts the color to a string.
+- `toFormat(format)`: Converts the color to a specific format.
+- `toJSON()`: Converts the color to a JSON object.
+- `getChannelRange(channel)`: Returns the range of the channel.
+- `getFormat()`: Returns the format of the color.
+- `getChannels()`: Returns the channels of the color.
+- `getChannelValue(channel)`: Returns the value of the channel.
+- `getColorAxes(xyChannels)`: Returns the axes of the color.
+- `incChannelValue(channel, step)`: Increments the value of the channel by the step.
+- `decChannelValue(channel, step)`: Decrements the value of the channel by the step.
+- `withChannelValue(channel, value)`: Returns a new color with the value of the channel changed.
+
+## Accessibility
+
+### ColorPickerArea
+
+#### Screen Reader Support
+
+`aria-label` is used to describe the component. `aria-roledescription` is used to describe the role of the component. `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext` are used to describe the value of the component.
+
+#### Keyboard Support
+
+| Key           | Function                           |
+| ------------- | ---------------------------------- |
+| `tab`         | Moves focus to the area thumb.     |
+| `right arrow` | Moves the area thumb to the right. |
+| `left arrow`  | Moves the area thumb to the left.  |
+| `up arrow`    | Moves the area thumb to the up.    |
+| `down arrow`  | Moves the area thumb to the down.  |
+
+### ColorPickerSlider
+
+#### Screen Reader Support
+
+`aria-label` is used to describe the component. `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext` are used to describe the value of the component.
+
+#### Keyboard Support
+
+| Key                             | Function                         |
+| ------------------------------- | -------------------------------- |
+| `tab`                           | Moves focus to the slider thumb. |
+| `up arrow` \|\| `left arrow`    | Decrements the slider thumb.     |
+| `down arrow` \|\| `right arrow` | Increments the slider thumb.     |
