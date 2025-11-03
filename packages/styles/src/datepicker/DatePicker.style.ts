@@ -83,7 +83,6 @@ export const styles = createStyles<DatePickerInstance>({
         panel: ({ props }) => [
             'p-datepicker-panel p-component',
             {
-                'p-datepicker-panel-inline': props.inline,
                 'p-disabled': props.disabled,
                 'p-datepicker-timeonly': props.timeOnly
             }

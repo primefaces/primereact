@@ -17,10 +17,6 @@ export const DatePickerDropdown = withComponent({
     render(instance) {
         const { props, ptmi, datepicker } = instance;
 
-        if (datepicker?.props.inline) {
-            return null;
-        }
-
         const rootProps = mergeProps(
             {
                 className: datepicker?.cx('dropdown'),

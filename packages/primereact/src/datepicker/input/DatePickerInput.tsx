@@ -18,10 +18,6 @@ export const DatePickerInput = withComponent({
     render(instance) {
         const { props, ptmi, datepicker } = instance;
 
-        if (datepicker?.props.inline) {
-            return null;
-        }
-
         const rootProps = mergeProps(
             {
                 defaultValue: datepicker?.inputFieldValue,
@@ -54,10 +50,6 @@ export const DatePickerInput = withComponent({
             },
             ptmi('root')
         );
-
-        if (datepicker?.props.inline) {
-            return null;
-        }
 
         // @ts-expect-error: InputText expects a type prop, but we are using it as a input.
         return <Component ref={datepicker?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('input')} children={props.children} />;

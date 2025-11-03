@@ -2496,6 +2496,10 @@ export const useDatePicker = withHeadless({
             }
         };
 
+        const changeVisibleState = (isVisible: boolean) => {
+            setOverlayVisibleState(isVisible);
+        };
+
         const viewDate = React.useMemo<Date>(() => {
             let propValue = rawValueState;
 
@@ -2762,7 +2766,7 @@ export const useDatePicker = withHeadless({
         // effects
         useMountEffect(() => {
             setTimeout(() => {
-                if (!props.disabled && props.inline) {
+                if (!props.disabled) {
                     initFocusableCell();
                 }
             }, 300);
@@ -2812,10 +2816,10 @@ export const useDatePicker = withHeadless({
         }, [props.defaultValue]);
 
         React.useEffect(() => {
-            if (props.inline || isEmpty(rawValueState)) {
+            if (isEmpty(rawValueState)) {
                 setShowClearIcon(false);
             }
-        }, [rawValueState, props.inline]);
+        }, [rawValueState]);
 
         React.useEffect(() => {
             if (props.showTime && overlayVisibleState) {
@@ -2836,7 +2840,6 @@ export const useDatePicker = withHeadless({
             prevButtonRef,
             portalRef,
             overlayRef,
-            setOverlayVisibleState,
             //methods
             inputFieldValue,
             weekHeaderLabel,
@@ -2881,6 +2884,7 @@ export const useDatePicker = withHeadless({
             onInputFocus,
             onInputBlur,
             onOverlayEnter,
+            changeVisibleState,
             // for styling
             isRangeSelection,
             isSelected,

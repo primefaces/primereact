@@ -572,7 +572,7 @@ export interface useDatePickerExposes {
      * @param visible - Whether the overlay should be visible.
      * @returns void
      */
-    setOverlayVisibleState: (visible: boolean) => void;
+    changeVisibleState: (visible: boolean) => void;
     /**
      * Returns a specific month by index.
      * @param index - The index of the month to retrieve.
