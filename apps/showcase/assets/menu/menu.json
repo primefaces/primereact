@@ -64,6 +64,10 @@
                             "to": "/docs/components/checkbox"
                         },
                         {
+                            "name": "Color Picker",
+                            "to": "/docs/components/colorpicker"
+                        },
+                        {
                             "name": "InputText",
                             "to": "/docs/components/inputtext"
                         },
