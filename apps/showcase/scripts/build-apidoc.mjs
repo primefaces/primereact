@@ -49,6 +49,24 @@ const getTypeDoc = async (typeDocOptions) => {
                         description
                     };
 
+                    // Ensure base buckets exist even if specific groups are missing
+                    if (!doc[name]['interfaces']) {
+                        doc[name]['interfaces'] = {
+                            description: staticMessages['interfaces'],
+                            typeDescription: staticMessages['types'],
+                            values: {}
+                        };
+                    }
+
+                    if (!doc[name]['types']) {
+                        doc[name]['types'] = {
+                            description: staticMessages['exposes'],
+                            stateDescription: staticMessages['state'],
+                            typeDescription: staticMessages['types'],
+                            values: {}
+                        };
+                    }
+
                     const module_interfaces_group = module.groups?.find((g) => g.title === 'Interfaces');
 
                     if (module_interfaces_group) {
@@ -57,23 +75,6 @@ const getTypeDoc = async (typeDocOptions) => {
                             const component_prop = '';
                             const event_extendedBy = event.extendedBy && event.extendedBy.toString();
                             const event_extendedTypes = event.extendedTypes && event.extendedTypes.toString();
-
-                            if (!doc[name]['interfaces']) {
-                                doc[name]['interfaces'] = {
-                                    description: staticMessages['interfaces'],
-                                    typeDescription: staticMessages['types'],
-                                    values: {}
-                                };
-                            }
-
-                            if (!doc[name]['types']) {
-                                doc[name]['types'] = {
-                                    description: staticMessages['exposes'],
-                                    stateDescription: staticMessages['state'],
-                                    typeDescription: staticMessages['types'],
-                                    values: {}
-                                };
-                            }
 
                             const props = [];
                             const methods = [];
@@ -87,7 +88,7 @@ const getTypeDoc = async (typeDocOptions) => {
                                             name: prop.name,
                                             optional: prop.flags.isOptional,
                                             readonly: prop.flags.isReadonly,
-                                            type: prop.type.toString(),
+                                            type: (prop.type && prop.type.toString()) || '',
                                             default: prop.comment && prop.comment.getTag('@default') ? prop.comment.getTag('@default').content[0]?.text.replaceAll('```ts', '').replace('```', '').trim() || '' : '',
                                             description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' '),
                                             deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0]?.text) : undefined
@@ -98,16 +99,16 @@ const getTypeDoc = async (typeDocOptions) => {
 
                             const signature = event.getAllSignatures();
 
-                            if (signature && signature.length > 0) {
+                            if (signature && signature.length > 0 && signature[0].parameters && signature[0].parameters.length > 0) {
                                 const parameter = signature[0].parameters[0];
 
                                 props.push({
-                                    name: `[${parameter.name}: ${parameter.type.toString()}]`,
+                                    name: `[${parameter.name}: ${(parameter.type && parameter.type.toString()) || ''}]`,
                                     optional: parameter.flags.isOptional,
                                     readonly: parameter.flags.isReadonly,
-                                    type: signature[0].type.toString(),
+                                    type: (signature[0].type && signature[0].type.toString()) || '',
                                     //default: prop.comment && prop.comment.getTag('@default') ? prop.comment.getTag('@default').content[0].text : '',
-                                    description: signature[0].comment && signature[0].comment.summary.map((s) => s.text || '').join(' ')
+                                    description: (signature[0].comment && signature[0].comment.summary.map((s) => s.text || '').join(' ')) || ''
                                 });
                             }
 
@@ -127,7 +128,7 @@ const getTypeDoc = async (typeDocOptions) => {
                     if (module_types_group) {
                         module_types_group.children.forEach((event) => {
                             const event_props_description = event.comment && event.comment.summary.map((s) => s.text || '').join(' ');
-                            const values = event.type.toString();
+                            const values = (event.type && event.type.toString()) || '';
 
                             doc[name]['types'].values[event.name] = {
                                 values,
@@ -151,11 +152,11 @@ const getTypeDoc = async (typeDocOptions) => {
 
                             const variables = [];
 
-                            if (variable.type.declaration && variable.type.declaration.children) {
+                            if (variable.type && variable.type.declaration && variable.type.declaration.children) {
                                 variable.type.declaration.children.forEach((variableChild) => {
                                     variables.push({
                                         name: variableChild.name,
-                                        value: variableChild.type.value,
+                                        value: (variableChild.type && variableChild.type.value) || '',
                                         optional: variableChild.flags.isOptional,
                                         readonly: variableChild.flags.isReadonly,
                                         description: variableChild.comment && variableChild.comment.summary.map((s) => s.text || '').join(' ')
