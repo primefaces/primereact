@@ -959,9 +959,7 @@ export const MultiSelect = React.memo(
                     return props.value.map((val, index) => {
                         const item = ObjectUtils.getJSXElement(props.selectedItemTemplate, val);
 
-                        return (
-                            <React.Fragment key={index}>{item}</React.Fragment>
-                        );
+                        return <React.Fragment key={index}>{item}</React.Fragment>;
                     });
                 }
 
