@@ -16,11 +16,14 @@ export const useColorPickerSlider = withHeadless({
             isSliderDragging
         };
 
-        const workingValue = colorpicker?.state.value?.getChannels().includes(channel)
-            ? colorpicker?.state.value
-            : colorpicker?.areaValue.getChannels().includes(channel)
-              ? colorpicker?.areaValue
-              : colorpicker?.state.value?.toFormat(colorpicker?.props.format || 'hsba');
+        const workingValue =
+            channel === 'alpha'
+                ? colorpicker?.areaValue
+                : colorpicker?.state.value?.getChannels().includes(channel)
+                  ? colorpicker?.state.value
+                  : colorpicker?.areaValue.getChannels().includes(channel)
+                    ? colorpicker?.areaValue
+                    : colorpicker?.state.value?.toFormat(colorpicker?.props.format || 'hsba');
 
         const moveSlider = (x: number, y: number, element: HTMLElement) => {
             if (!element || disabled || colorpicker?.props.disabled) return;

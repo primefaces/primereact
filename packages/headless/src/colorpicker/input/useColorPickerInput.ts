@@ -47,7 +47,11 @@ export const useColorPickerInput = withHeadless({
                     newColor = colorValue;
                 }
             } else {
-                const current = colorValue.toFormat(colorFormat);
+                let current = colorValue;
+
+                if (channel !== 'alpha') {
+                    current = current.toFormat(colorFormat);
+                }
 
                 const parsed = Number.parseFloat(String(value));
                 const valueAsNumber = Number.isNaN(parsed) ? current.getChannelValue(channel) : parsed;
