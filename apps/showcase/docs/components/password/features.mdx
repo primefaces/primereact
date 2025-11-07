@@ -1,0 +1,115 @@
+---
+title: Password
+description: Password displays strength indicator for password fields.
+component: password
+---
+
+## Usage
+
+```tsx
+import { Password } from 'primereact/password';
+```
+
+```tsx
+<Password>
+    <Password.Input />
+    <Password.Strength />
+    <Password.Portal />
+</Password>
+```
+
+## Examples
+
+### Basic
+
+A simple password input component that can be used standalone with just the Password.Input sub-component. The Password component provides the foundation for all password functionality.
+
+<DocDemoViewer name="password:basic-demo" />
+
+### Strength
+
+`Password.Strength` displays a visual indicator that shows the strength level of the entered password. The strength is automatically calculated based on character diversity (lowercase, uppercase, numbers, symbols) and password length according to the defined strength options.
+
+<DocDemoViewer name="password:strength-demo" />
+
+### Requirements
+
+<DocDemoViewer name="password:requirements-demo" />
+
+### Portal
+
+`Password.Portal` renders the overlay content (strength indicator and requirements) in a portal container, allowing it to be positioned outside the normal DOM hierarchy.
+
+<DocDemoViewer name="password:portal-demo" />
+
+### Toggle Visibility
+
+Adding a toggle icon to show or hide the password, allowing users to verify their input.
+
+<DocDemoViewer name="password:toggle-mask-demo" />
+
+### Template
+
+Customize the appearance and layout of strength indicators and requirements using render functions. You have full control over the template structure, allowing you to add custom styling, icons, and components like tags or badges.
+
+<DocDemoViewer name="password:template-demo" />
+
+### Float Label
+
+FloatLabel visually integrates a label with its form element. Visit [FloatLabel](/docs/components/floatlabel) documentation for more information.
+
+<DocDemoViewer name="password:float-label-demo" />
+
+### Ifta Label
+
+IftaLabel is used to create infield top aligned labels. Visit [IftaLabel](/docs/components/iftalabel) documentation for more information.
+
+<DocDemoViewer name="password:ifta-label-demo" />
+
+### Clear Icon
+
+When `Password.ClearIcon` component is used, a clear icon is added to reset the Password input.
+
+<DocDemoViewer name="password:clear-icon-demo" />
+
+### Sizes
+
+Password provides `small` and `large` sizes as alternatives to the base.
+
+<DocDemoViewer name="password:sizes-demo" />
+
+### Fluid
+
+The fluid prop makes the component take up the full width of its container when set to true.
+
+<DocDemoViewer name="password:fluid-demo" />
+
+### Filled
+
+Specify the `filled` property to display the component with a higher visual emphasis than the default outlined style.
+
+<DocDemoViewer name="password:filled-demo" />
+
+### Disabled
+
+Use the `disabled` property to disable a password input.
+
+<DocDemoViewer name="password:disabled-demo" />
+
+### Invalid
+
+Specify the `invalid` property to display the component with a red border.
+
+<DocDemoViewer name="password:invalid-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Value to describe the component can either be provided via `label` tag combined with `id` prop or using `aria-labelledby`, `aria-label` props. Screen reader is notified about the changes to the strength of the password using a section that has `aria-live` while typing.
+
+### Keyboard Support
+
+| Key   | Function                  |
+| ----- | ------------------------- |
+| `tab` | Moves focus to the input. |
