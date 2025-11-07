@@ -11,7 +11,26 @@ import { DatePicker } from 'primereact/datepicker';
 ```
 
 ```tsx
-<DatePicker></DatePicker>
+<DatePicker>
+    <DatePicker.Input />
+    <DatePicker.Portal>
+        <DatePicker.Container>
+            <DatePicker.Calendar>
+                <DatePicker.Header />
+                <DatePicker.Table>
+                    <DatePicker.TableHead />
+                    <DatePicker.TableBody>
+                        <DatePicker.TableBodyRow>
+                            <DatePicker.TableBodyCell />
+                        </DatePicker.TableBodyRow>
+                    </DatePicker.TableBody>
+                </DatePicker.Table>
+                <DatePicker.Buttonbar />
+            </DatePicker.Calendar>
+        </DatePicker.Container>
+        <DatePicker.Time />
+    </DatePicker.Portal>
+</DatePicker>
 ```
 
 ## Examples
