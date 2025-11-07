@@ -163,10 +163,10 @@ export const styles = createStyles<ColorPickerInstance>({
     style: theme,
     classes: {
         area: 'p-color-picker-area',
-        areaThumb: 'p-color-picker-area-thumb',
+        areaThumb: ({ context }) => ['p-color-picker-area-thumb', { 'p-disabled': context.disabled }],
         areaBackground: 'p-color-picker-area-background',
         slider: ({ context }) => ['p-color-picker-slider', `p-color-picker-slider-${context.orientation}`],
-        sliderThumb: 'p-color-picker-slider-thumb',
+        sliderThumb: ({ context }) => ['p-color-picker-slider-thumb', { 'p-disabled': context.disabled }],
         sliderTrack: 'p-color-picker-slider-track',
         transparencyGrid: 'p-color-picker-transparency-grid',
         swatch: 'p-color-picker-swatch',

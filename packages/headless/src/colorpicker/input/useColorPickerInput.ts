@@ -30,23 +30,17 @@ export const useColorPickerInput = withHeadless({
         const colorFormat = colorpicker?.props.format || 'hsba';
 
         const channelRange = getInputChannelRange(colorValue, channel);
-        const channelValue = getInputChannelValue(colorValue, channel);
+        const channelValue = getInputChannelValue(colorValue, channel, colorFormat);
         const state = {};
 
         const isCssChannel = channel === 'hex' || channel === 'css';
 
         const changeValue = (value: string | number) => {
-            const currentAlpha = colorValue.getChannelValue('alpha');
+            if (colorpicker?.props.disabled) return;
 
             let newColor: ColorInstance;
 
-            if (channel === 'alpha') {
-                let valueAsNumber = Number.parseFloat(String(value));
-
-                valueAsNumber = Number.isNaN(valueAsNumber) ? currentAlpha : valueAsNumber;
-
-                newColor = colorValue.withChannelValue('alpha', valueAsNumber);
-            } else if (isCssChannel) {
+            if (isCssChannel) {
                 try {
                     newColor = parseColor(channel === 'hex' ? prefixHex(String(value)) : String(value));
                 } catch {

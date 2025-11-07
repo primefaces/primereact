@@ -23,7 +23,8 @@ export const ColorPickerEyeDropper = withComponent({
             {
                 type: 'button',
                 className: colorpicker?.cx('eyeDropper'),
-                onClick: colorpicker?.openEyeDropper
+                onClick: colorpicker?.openEyeDropper,
+                disabled: props.disabled || colorpicker?.props.disabled
             },
             colorpicker?.ptm('eyeDropper'),
             ptmi('root')

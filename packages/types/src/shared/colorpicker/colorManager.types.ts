@@ -15,12 +15,17 @@ export type ColorHexFormat = 'hex' | 'hexa';
 /**
  * The space of the color.
  */
-export type ColorSpace = 'rgba' | 'hsla' | 'hsba';
+export type ColorSpace = 'rgba' | 'hsla' | 'hsba' | 'oklcha';
 
 /**
  * The channel of the color.
  */
-export type ColorChannel = 'hue' | 'saturation' | 'brightness' | 'lightness' | 'red' | 'green' | 'blue' | 'alpha';
+export type ColorChannel = 'hue' | 'saturation' | 'brightness' | 'lightness' | 'L' | 'C' | 'H' | 'red' | 'green' | 'blue' | 'alpha';
+
+/**
+ * The channel of the color for the slider.
+ */
+export type ColorSliderChannel = Exclude<ColorChannel, 'L' | 'C' | 'H'>;
 
 /**
  * The input channel of the color.
@@ -30,7 +35,7 @@ export type ColorInputChannel = ColorChannel | 'hex' | 'css';
 /**
  * The output channel of the color.
  */
-export type ColorOutput = ColorHexFormat | ColorSpace | 'rgb' | 'hsl' | 'hsb' | 'css';
+export type ColorOutput = ColorHexFormat | ColorSpace | 'oklch' | 'rgb' | 'hsl' | 'hsb' | 'css';
 
 /**
  * The 2D axes of the color.
@@ -95,7 +100,7 @@ export interface ColorInstance {
     /**
      * Gets the color axes of the color instance.
      */
-    getColorAxes(xyChannels: Color2DAxes): Color3DAxes;
+    getSpaceAxes(xyChannels: Color2DAxes): Color3DAxes;
     /**
      * Increments the value of the color channel.
      */

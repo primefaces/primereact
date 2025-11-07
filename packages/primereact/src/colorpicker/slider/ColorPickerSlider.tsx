@@ -16,7 +16,7 @@ export const ColorPickerSlider = withComponent({
     defaultProps: defaultSliderProps,
     setup(instance) {
         const colorpicker = useColorPickerContext();
-        const colorpickerslider = useColorPickerSlider(instance.inProps);
+        const colorpickerslider = useColorPickerSlider({ ...instance.inProps, context: colorpicker });
 
         return { ...colorpickerslider, colorpicker };
     },

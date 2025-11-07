@@ -134,7 +134,7 @@ export const useColorPicker = withHeadless({
 
         const openEyeDropper = () => {
             // @ts-expect-error - EyeDropper is not supported by some browsers
-            if (typeof window !== 'undefined' && !window.EyeDropper) return;
+            if ((typeof window !== 'undefined' && !window.EyeDropper) || disabled) return;
 
             const eyeDropper = new (window as Window & typeof globalThis & { EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> } }).EyeDropper();
 
@@ -194,7 +194,7 @@ export const useColorPicker = withHeadless({
                     const channel = input.getAttribute('data-channel');
 
                     if (channel) {
-                        const channelValue = getInputChannelValue(base, channel as ColorInputChannel);
+                        const channelValue = getInputChannelValue(base, channel as ColorInputChannel, format);
 
                         input.value = String(channelValue);
                     }

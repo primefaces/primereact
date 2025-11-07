@@ -17,12 +17,15 @@ export const ColorPickerAreaThumb = withComponent({
     render(instance) {
         const { props, ptmi, colorpicker } = instance;
 
+        const disabled = colorpicker?.props.disabled;
+
         const rootProps = mergeProps(
             {
-                className: colorpicker?.cx('areaThumb'),
+                className: colorpicker?.cx('areaThumb', { disabled }),
                 onKeyDown: colorpicker?.handleAreaKeyDown,
                 role: 'slider',
-                tabIndex: 0,
+                tabIndex: disabled ? -1 : 0,
+                'aria-disabled': disabled,
                 'aria-valuemin': 0,
                 'aria-valuemax': 100,
                 'aria-valuenow': colorpicker?.areaValue?.getChannelValue(colorpicker?.areaChannels.xChannel) ?? 0,

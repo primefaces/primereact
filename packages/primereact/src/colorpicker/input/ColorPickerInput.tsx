@@ -35,7 +35,8 @@ export const ColorPickerInput = withComponent({
                 onBlur: handleBlur,
                 onKeyDown: handleKeyDown,
                 'data-channel': props.channel,
-                'aria-label': props.channel
+                'aria-label': props.channel,
+                disabled: props.disabled || colorpicker?.props.disabled
             },
             colorpicker?.ptm('input'),
             ptmi('root')

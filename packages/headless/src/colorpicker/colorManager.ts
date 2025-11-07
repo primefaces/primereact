@@ -1,10 +1,11 @@
-import type { Color2DAxes, Color3DAxes, ColorChannel, ColorChannelRange, ColorInputChannel, ColorInstance, ColorOutput, ColorSpace } from '@primereact/types/shared/colorpicker';
+import type { Color2DAxes, Color3DAxes, ColorChannel, ColorChannelRange, ColorInputChannel, ColorInstance, ColorOutput, ColorSliderChannel, ColorSpace } from '@primereact/types/shared/colorpicker';
 
 // CONSTANTS
 const HSB_REGEX = /hsb\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%)\)|hsba\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d(.\d+)?)\)/;
 const HSL_REGEX = /hsl\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%)\)|hsla\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d(.\d+)?)\)/;
 const HEX_REGEX = /^#?([a-fA-F0-9]{3,8})$/;
 const RGB_REGEX = /^rgba?\(\s*([^)]+)\s*\)$/;
+const OKLCH_REGEX = /oklch\(\s*([\d.]+)%?\s+([\d.]+)\s+([\d.]+)(deg)?(?:\s*\/\s*([\d.]+))?\)/i;
 
 // UTILS
 function clamp(value: number, min: number, max: number) {
@@ -12,6 +13,10 @@ function clamp(value: number, min: number, max: number) {
 }
 
 export const isEqual = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
+
+const multiplyMatrices = (A: number[], B: number[]) => {
+    return [A[0] * B[0] + A[1] * B[1] + A[2] * B[2], A[3] * B[0] + A[4] * B[1] + A[5] * B[2], A[6] * B[0] + A[7] * B[1] + A[8] * B[2]];
+};
 
 /**
  * Snaps a value to the nearest step increment within min/max bounds
@@ -52,18 +57,18 @@ abstract class Color {
         const { min, max } = this.getChannelRange(channel);
 
         if (channel in this) {
-            const clone = this.clone();
+            const cloned = this.clone();
 
-            // @ts-expect-error - channel is a valid key of this
-            clone[channel] = clamp(value, min, max);
+            // @ts-expect-error - channel
+            cloned[channel] = clamp(value, min, max);
 
-            return clone;
+            return cloned;
         }
 
         throw new Error(`Channel ${channel} not found`);
     }
 
-    getColorAxes(xyChannels: Color2DAxes): Color3DAxes {
+    getSpaceAxes(xyChannels: Color2DAxes): Color3DAxes {
         const { xChannel, yChannel } = xyChannels;
 
         if (xChannel === yChannel) {
@@ -156,6 +161,8 @@ export class HSBColor extends Color {
                 return this.toRGB();
             case 'hsla':
                 return this.toHSL();
+            case 'oklcha':
+                return this.toRGB().toFormat('oklcha');
             default:
                 throw new Error(`Invalid format: ${format}`);
         }
@@ -177,6 +184,8 @@ export class HSBColor extends Color {
                 return this.toHSL().toString('hsl');
             case 'rgb':
                 return this.toRGB().toString('rgb');
+            case 'oklch':
+                return this.toRGB().toFormat('oklcha').toString('oklch');
             default:
                 return this.toFormat(format).toString(format);
         }
@@ -283,6 +292,8 @@ export class HSLColor extends Color {
                 return this.toRGB();
             case 'hsba':
                 return this.toHSB();
+            case 'oklcha':
+                return this.toRGB().toFormat('oklcha');
             default:
                 throw new Error(`Invalid format: ${format}`);
         }
@@ -303,6 +314,8 @@ export class HSLColor extends Color {
                 return this.toRGB().toString('rgb');
             case 'hsb':
                 return this.toHSB().toString('hsb');
+            case 'oklch':
+                return this.toRGB().toFormat('oklcha').toString('oklch');
             default:
                 return this.toFormat(format).toString(format);
         }
@@ -487,6 +500,31 @@ export class RGBColor extends Color {
         return new HSLColor(Number(hue.toFixed(2)), Number((saturation * 100).toFixed(2)), Number((lightness * 100).toFixed(2)), Number(this.alpha.toFixed(2)));
     }
 
+    private toOKLCH(): OKLCHColor {
+        const rgb = [this.red / 255, this.green / 255, this.blue / 255];
+
+        const rgbLinear = rgb.map((c) => (Math.abs(c) <= 0.04045 ? c / 12.92 : (c < 0 ? -1 : 1) * ((Math.abs(c) + 0.055) / 1.055) ** 2.4));
+
+        const xyz = multiplyMatrices([0.41239079926595934, 0.357584339383878, 0.1804807884018343, 0.21263900587151027, 0.715168678767756, 0.07219231536073371, 0.01933081871559182, 0.11919477979462598, 0.9505321522496607], rgbLinear);
+
+        const LMS = multiplyMatrices([0.819022437996703, 0.3619062600528904, -0.1288737815209879, 0.0329836539323885, 0.9292868615863434, 0.0361446663506424, 0.0481771893596242, 0.2642395317527308, 0.6335478284694309], xyz);
+
+        const LMSg = LMS.map((val) => Math.cbrt(val));
+
+        const [L, a, b] = multiplyMatrices([0.210454268309314, 0.7936177747023054, -0.0040720430116193, 1.9779985324311684, -2.4285922420485799, 0.450593709617411, 0.0259040424655478, 0.7827717124575296, -0.8086757549230774], LMSg);
+
+        const C = Math.sqrt(a ** 2 + b ** 2);
+        const H = Math.abs(a) < 0.0002 && Math.abs(b) < 0.0002 ? NaN : ((((Math.atan2(b, a) * 180) / Math.PI) % 360) + 360) % 360;
+
+        const outL = Number(Math.min(1, Math.max(0, L)).toFixed(4));
+
+        const outC = Number(C.toFixed(4));
+
+        const outH = Number.isNaN(H) ? NaN : Number(H.toFixed(2));
+
+        return new OKLCHColor(outL, outC, outH, Number(this.alpha.toFixed(2)));
+    }
+
     toHexInt(): number {
         return (this.red << 16) | (this.green << 8) | this.blue;
     }
@@ -499,6 +537,8 @@ export class RGBColor extends Color {
                 return this.toHSL();
             case 'hsba':
                 return this.toHSB();
+            case 'oklcha':
+                return this.toOKLCH();
             default:
                 throw new Error(`Invalid format: ${format}`);
         }
@@ -521,6 +561,8 @@ export class RGBColor extends Color {
                 return this.toHSL().toString('hsl');
             case 'hsb':
                 return this.toHSB().toString('hsb');
+            case 'oklch':
+                return this.toOKLCH().toString('oklch');
             default:
                 return this.toFormat(format).toString(format);
         }
@@ -561,6 +603,142 @@ export class RGBColor extends Color {
     }
 }
 
+export class OKLCHColor extends Color {
+    private L: number; // 0–1
+    private C: number; // ~0–0.4 typical usable range
+    private H: number; // 0–360
+    private alpha: number; // 0–1
+
+    constructor(L: number, C: number, H: number, alpha: number) {
+        super();
+        this.L = L;
+        this.C = C;
+        this.H = H;
+        this.alpha = alpha;
+    }
+
+    static parse(value: string): OKLCHColor | undefined {
+        if (!value) return undefined;
+
+        const m = value.trim().match(OKLCH_REGEX);
+
+        if (!m) return;
+
+        const l = Number(m[1]) / 100;
+        const c = Number(m[2]);
+        const h = Number(m[3]);
+        const alpha = m[5] !== undefined ? Number(m[5]) : 1;
+
+        return new OKLCHColor(l, c, h, alpha);
+    }
+
+    private toRGB(): RGBColor {
+        const L = this.L;
+        const a = Number.isNaN(this.H) ? 0 : this.C * Math.cos((this.H * Math.PI) / 180);
+        const b = Number.isNaN(this.H) ? 0 : this.C * Math.sin((this.H * Math.PI) / 180);
+
+        const LMSg = multiplyMatrices([1, 0.3963377774, 0.2158037573, 1, -0.1055613458, -0.0638541728, 1, -0.0894841775, -1.291485548], [L, a, b]);
+
+        const LMS = LMSg.map((v) => v ** 3);
+
+        const xyz = multiplyMatrices([1.2268798758, -0.5578149945, 0.2813910457, -0.0405757452, 1.1122868033, -0.0717110581, -0.0763729367, -0.4214933324, 1.5869240198], LMS);
+
+        let [r, g, b2] = multiplyMatrices([3.240969942, -1.537383178, -0.49861076, -0.969243636, 1.875967502, 0.041555057, 0.05563008, -0.203976959, 1.056971514], xyz);
+
+        [r, g, b2] = [r, g, b2].map((c) => (Math.abs(c) > 0.0031308 ? (c < 0 ? -1 : 1) * (1.055 * Math.abs(c) ** (1 / 2.4) - 0.055) : 12.92 * c));
+
+        return new RGBColor(Math.round(clamp(r, 0, 1) * 255), Math.round(clamp(g, 0, 1) * 255), Math.round(clamp(b2, 0, 1) * 255), Number(this.alpha.toFixed(2)));
+    }
+
+    toJSON(): Record<string, number> {
+        return {
+            L: this.L,
+            C: this.C,
+            H: this.H,
+            alpha: this.alpha
+        };
+    }
+
+    clone(): ColorInstance {
+        return new OKLCHColor(this.L, this.C, this.H, this.alpha);
+    }
+
+    toFormat(format: ColorSpace): ColorInstance {
+        switch (format) {
+            case 'oklcha':
+                return this;
+            case 'rgba':
+                return this.toRGB();
+            case 'hsla':
+                return this.toRGB().toFormat('hsla');
+            case 'hsba':
+                return this.toRGB().toFormat('hsba');
+            default:
+                throw new Error(`Invalid format: ${format}`);
+        }
+    }
+
+    toString(format: ColorOutput): string {
+        switch (format) {
+            case 'hex':
+                return this.toRGB().toString('hex');
+            case 'hexa':
+                return this.toRGB().toString('hexa');
+
+            case 'oklch': {
+                const l = Number.isNaN(this.L) ? 0 : Number((this.L * 100).toFixed(2));
+                const c = Number.isNaN(this.C) ? 0 : Number(this.C.toFixed(4));
+                const h = Number.isNaN(this.H) ? 0 : Number(this.H.toFixed(2));
+
+                return `oklch(${l}% ${c} ${h})`;
+            }
+
+            case 'oklcha':
+
+            case 'css': {
+                const l = Number.isNaN(this.L) ? 0 : Number((this.L * 100).toFixed(2));
+                const c = Number.isNaN(this.C) ? 0 : Number(this.C.toFixed(4));
+                const h = Number.isNaN(this.H) ? 0 : Number(this.H.toFixed(2));
+                const a = Number.isNaN(this.alpha) ? 1 : Number(this.alpha.toFixed(2));
+
+                return `oklch(${l}% ${c} ${h} / ${a})`;
+            }
+
+            case 'hsl':
+                return this.toRGB().toString('hsl');
+            case 'hsb':
+                return this.toRGB().toString('hsb');
+            case 'rgb':
+                return this.toRGB().toString('rgb');
+            default:
+                return this.toFormat(format).toString(format);
+        }
+    }
+
+    getChannelRange(channel: ColorChannel): ColorChannelRange {
+        switch (channel) {
+            case 'L':
+                return { min: 0, max: 1, step: 0.01 };
+            case 'C':
+                return { min: 0, max: 0.4, step: 0.01 };
+            case 'H':
+                return { min: 0, max: 360, step: 1 };
+            case 'alpha':
+                return { min: 0, max: 1, step: 0.01 };
+            default:
+                throw new Error('Unknown color channel: ' + channel);
+        }
+    }
+
+    getFormat(): ColorSpace {
+        return 'oklcha';
+    }
+
+    getChannels(): [ColorChannel, ColorChannel, ColorChannel] {
+        return ['L', 'C', 'H'];
+    }
+}
+
 export const parseColor = (color: string): ColorInstance => {
     const parsedColor = RGBColor.parse(color) ?? HSLColor.parse(color) ?? HSBColor.parse(color) ?? undefined;
 
@@ -571,7 +749,7 @@ export const parseColor = (color: string): ColorInstance => {
     return parsedColor;
 };
 
-export function getChannelGradient(channel: ColorChannel, value: ColorInstance, orientation: 'horizontal' | 'vertical') {
+export function getChannelGradient(channel: ColorSliderChannel, value: ColorInstance, orientation: 'horizontal' | 'vertical') {
     const { min, max } = value.getChannelRange(channel);
 
     const direction = orientation === 'horizontal' ? 'right' : 'bottom';
@@ -588,11 +766,11 @@ export function getChannelGradient(channel: ColorChannel, value: ColorInstance, 
             return `linear-gradient(to ${direction}, ${start}, ${middle}, ${end})`;
         }
 
-        case 'saturation':
-        case 'brightness':
         case 'red':
         case 'green':
         case 'blue':
+        case 'saturation':
+        case 'brightness':
 
         case 'alpha': {
             const start = value.withChannelValue(channel, min).toString('css');
@@ -610,12 +788,13 @@ export function getChannelColor(color: ColorInstance, channel: ColorChannel) {
     switch (channel) {
         case 'hue':
             return parseColor(`hsl(${color.getChannelValue('hue')}, 100%, 50%)`);
-        case 'lightness':
-        case 'brightness':
-        case 'saturation':
+
         case 'red':
         case 'green':
         case 'blue':
+        case 'lightness':
+        case 'brightness':
+        case 'saturation':
             return color.withChannelValue('alpha', 1);
 
         case 'alpha': {
@@ -627,87 +806,43 @@ export function getChannelColor(color: ColorInstance, channel: ColorChannel) {
     }
 }
 
-const hue = (color: ColorInstance) => [0, 60, 120, 180, 240, 300, 360].map((hue) => color.withChannelValue('hue', hue).toString('css')).join(', ');
-const saturation = (color: ColorInstance) => `${color.withChannelValue('saturation', 0).toString('css')}, transparent`;
+const channelGenerators = {
+    hue: (color: ColorInstance) => [0, 60, 120, 180, 240, 300, 360].map((h) => color.withChannelValue('hue', h).toString('css')).join(', '),
 
-const hslChannels = {
-    hue,
-    saturation,
-    lightness: () => 'black, transparent, white'
-};
+    saturation: (color: ColorInstance) => `${color.withChannelValue('saturation', 0).toString('css')}, transparent`,
 
-const hsbChannels = {
-    hue,
-    saturation,
+    lightness: () => 'black, transparent, white',
     brightness: () => 'black, transparent'
 };
 
-export function getAreaGradient(color: ColorInstance, channels: Color2DAxes, dir: 'rtl' | 'ltr' = 'ltr') {
-    const { xChannel, yChannel, zChannel } = color.getColorAxes(channels);
+export function getAreaGradient(color: ColorInstance, axes: Color2DAxes) {
+    const { xChannel, zChannel } = color.getSpaceAxes(axes);
     const zValue = color.getChannelValue(zChannel);
+    const baseFormat = color.getFormat();
 
-    const isRTL = dir === 'rtl';
-    let areaStyles: Record<string, string> = {};
-    const format = color.getFormat();
+    const format = baseFormat === 'rgba' || baseFormat === 'oklcha' ? 'hsba' : baseFormat;
 
-    switch (format) {
-        case 'rgba': {
-            const rgb = parseColor('rgb(0, 0, 0)') as RGBColor;
+    const base = (format === 'hsla' ? parseColor('hsl(0, 100%, 50%)') : parseColor('hsb(0, 100%, 100%)')).withChannelValue(zChannel, zValue);
 
-            areaStyles = {
-                '--area-gradient': [
-                    `linear-gradient(to ${isRTL ? 'left' : 'right'}, ${rgb.withChannelValue(xChannel, 0)}, ${rgb.withChannelValue(xChannel, 255)})`,
-                    `linear-gradient(to top, ${rgb.withChannelValue(yChannel, 0)}, ${rgb.withChannelValue(yChannel, 255)})`,
-                    rgb.withChannelValue(zChannel, zValue)
-                ].join(','),
-                '--area-gradient-blend-mode': 'screen'
-            };
-            break;
-        }
+    const channels = color.getChannels();
 
-        case 'hsla': {
-            const channels = color.getChannels();
-            const value = (parseColor('hsl(0, 100%, 50%)') as HSLColor).withChannelValue(zChannel, zValue);
+    const direction = (c: string) => (c === xChannel ? 'right' : 'top');
 
-            const bg = channels
-                .filter((c) => c !== zChannel)
-                .map((c) => `linear-gradient(to ${c === xChannel ? (isRTL ? 'left' : 'right') : 'top'}, ${hslChannels[c as keyof typeof hslChannels](value)})`)
-                .reverse();
+    const layers = channels
+        .filter((c) => c !== zChannel)
+        .map((c) => `linear-gradient(to ${direction(c)}, ${channelGenerators[c as keyof typeof channelGenerators](base)})`)
+        .reverse();
 
-            if (zChannel === 'hue') {
-                bg.push(value.toString('css'));
-            }
-
-            areaStyles = {
-                '--area-gradient': bg.join(', ')
-            };
-            break;
-        }
-
-        case 'hsba': {
-            const channels = color.getChannels();
-            const value = (parseColor('hsb(0, 100%, 100%)') as HSBColor).withChannelValue(zChannel, zValue);
-
-            const bg = channels
-                .filter((c) => c !== zChannel)
-                .map((c) => `linear-gradient(to ${c === xChannel ? (isRTL ? 'left' : 'right') : 'top'}, ${hsbChannels[c as keyof typeof hsbChannels](value)})`)
-                .reverse();
-
-            if (zChannel === 'hue') {
-                bg.push(value.toString('css'));
-            }
-
-            areaStyles = {
-                '--area-gradient': bg.join(', ')
-            };
-            break;
-        }
+    if (zChannel === 'hue') {
+        layers.push(base.toString('css'));
     }
 
-    return areaStyles;
+    return {
+        '--area-gradient': layers.join(', ')
+    };
 }
 
-export function getInputChannelValue(color: ColorInstance, channel: ColorInputChannel) {
+export function getInputChannelValue(color: ColorInstance, channel: ColorInputChannel, format: ColorSpace = 'hsba') {
     const isHSL = color.getFormat() === 'hsla';
 
     switch (channel) {
@@ -720,25 +855,37 @@ export function getInputChannelValue(color: ColorInstance, channel: ColorInputCh
         }
 
         case 'css':
-            return color.toString('css');
+            return color.toFormat(format).toString('css');
+
+        case 'red':
+        case 'green':
+        case 'blue':
+            return color.toFormat('rgba').getChannelValue(channel).toString();
+
         case 'hue':
             return color
                 .toFormat(isHSL ? 'hsla' : 'hsba')
                 .getChannelValue('hue')
                 .toString();
+
         case 'saturation':
             return color
                 .toFormat(isHSL ? 'hsla' : 'hsba')
                 .getChannelValue('saturation')
                 .toString();
+
         case 'lightness':
             return color.toFormat('hsla').getChannelValue('lightness').toString();
+
         case 'brightness':
             return color.toFormat('hsba').getChannelValue('brightness').toString();
-        case 'red':
-        case 'green':
-        case 'blue':
-            return color.toFormat('rgba').getChannelValue(channel).toString();
+
+        case 'C':
+            return color.toFormat('oklcha').getChannelValue('C').toString();
+        case 'H':
+            return color.toFormat('oklcha').getChannelValue('H').toString();
+        case 'L':
+            return color.toFormat('oklcha').getChannelValue('L').toString();
         default:
             return color.getChannelValue(channel).toString();
     }
@@ -757,18 +904,23 @@ export function getInputChannelRange(color: ColorInstance, channel: ColorInputCh
         case 'css':
             return undefined;
 
+        case 'red':
+        case 'green':
+        case 'blue':
+            return color.toFormat('rgba').getChannelRange(channel);
+
         case 'hue':
-        case 'saturation':
         case 'lightness':
+        case 'saturation':
             return color.toFormat('hsla').getChannelRange(channel);
 
         case 'brightness':
             return color.toFormat('hsba').getChannelRange(channel);
 
-        case 'red':
-        case 'green':
-        case 'blue':
-            return color.toFormat('rgba').getChannelRange(channel);
+        case 'L':
+        case 'C':
+        case 'H':
+            return color.toFormat('oklcha').getChannelRange(channel);
 
         default:
             return color.getChannelRange(channel);

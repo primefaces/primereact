@@ -9,7 +9,7 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import type { ColorChannel, ColorChannelRange } from '@primereact/types/shared/colorpicker';
+import type { ColorChannelRange, ColorSliderChannel } from '@primereact/types/shared/colorpicker';
 import * as React from 'react';
 
 /**
@@ -19,7 +19,7 @@ export interface useColorPickerSliderProps {
     /**
      * The channel of the slider.
      */
-    channel?: ColorChannel;
+    channel?: ColorSliderChannel;
     /**
      * The orientation of the slider.
      */

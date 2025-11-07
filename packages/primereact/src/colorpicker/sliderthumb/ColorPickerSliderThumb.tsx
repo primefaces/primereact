@@ -19,16 +19,18 @@ export const ColorPickerSliderThumb = withComponent({
     render(instance) {
         const { props, ptmi, colorpicker, colorpickerslider } = instance;
 
+        const disabled = !!(colorpickerslider?.props.disabled || colorpicker?.props.disabled);
+
         const rootProps = mergeProps(
             {
-                className: colorpicker?.cx('slider-thumb'),
+                className: colorpicker?.cx('slider-thumb', { disabled: colorpickerslider?.props.disabled || colorpicker?.props.disabled }),
                 role: 'slider',
-                tabIndex: 0,
+                tabIndex: disabled ? -1 : 0,
                 onKeyDown: colorpickerslider?.handleSliderKeyDown,
                 'data-orientation': colorpickerslider?.props.orientation,
                 'data-channel': colorpickerslider?.props.channel,
                 'aria-orientation': colorpickerslider?.props.orientation,
-                'aria-disabled': !!(colorpickerslider?.props.disabled || colorpicker?.props.disabled),
+                'aria-disabled': disabled,
                 'aria-label': `${colorpickerslider?.props.channel} slider`,
                 'aria-valuemin': colorpickerslider?.channelRange?.min ?? 0,
                 'aria-valuemax': colorpickerslider?.channelRange?.max ?? 100,
