@@ -202,6 +202,10 @@ export const useColorPicker = withHeadless({
             });
         };
 
+        React.useEffect(() => {
+            syncChannelInputs();
+        }, [format]);
+
         return {
             state,
             value,
