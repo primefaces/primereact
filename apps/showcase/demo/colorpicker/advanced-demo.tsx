@@ -47,28 +47,25 @@ export default function AdvancedDemo() {
                             <ColorPicker.Input fluid channel="hex" />
                         </div>
                     </div>
-                    <div className="flex flex-1 gap-2 items-center">
+                    <div className="grid grid-cols-5 gap-2 items-center">
                         <span>RGBA</span>
                         <ColorPicker.Input fluid channel="red" />
                         <ColorPicker.Input fluid channel="green" />
                         <ColorPicker.Input fluid channel="blue" />
                         <ColorPicker.Input fluid channel="alpha" />
-                    </div>
-                    <div className="flex flex-1 gap-2 items-center">
+
                         <span>HSBA</span>
                         <ColorPicker.Input fluid channel="hue" />
                         <ColorPicker.Input fluid channel="saturation" />
                         <ColorPicker.Input fluid channel="brightness" />
                         <ColorPicker.Input fluid channel="alpha" />
-                    </div>
-                    <div className="flex flex-1 gap-2 items-center">
+
                         <span>HSLA</span>
                         <ColorPicker.Input fluid channel="hue" />
                         <ColorPicker.Input fluid channel="saturation" />
                         <ColorPicker.Input fluid channel="lightness" />
                         <ColorPicker.Input fluid channel="alpha" />
-                    </div>
-                    <div className="flex flex-1 gap-2 items-center">
+
                         <span>OKLCHA</span>
                         <ColorPicker.Input fluid channel="L" />
                         <ColorPicker.Input fluid channel="C" />
