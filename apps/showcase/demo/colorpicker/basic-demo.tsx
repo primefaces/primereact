@@ -13,7 +13,7 @@ export default function BasicDemo() {
                     <ColorPicker.Area />
                     <div className="flex items-center gap-4">
                         <div className="flex-1 space-y-1">
-                            <ColorPicker.Slider disabled />
+                            <ColorPicker.Slider />
                             <ColorPicker.Slider channel="alpha" />
                         </div>
                         <div className="flex items-center gap-2">
@@ -27,9 +27,11 @@ export default function BasicDemo() {
                             <option value="rgba">RGBA</option>
                             <option value="hsba">HSBA</option>
                             <option value="hsla">HSLA</option>
+                            <option value="oklcha">OKLCHA</option>
                         </select>
                         <div className="flex gap-2 flex-1">
                             {format === 'hex' && <ColorPicker.Input fluid channel="hex" />}
+                            {format === 'oklcha' && <ColorPicker.Input fluid channel="css" />}
                             {format === 'rgba' && (
                                 <>
                                     <ColorPicker.Input fluid channel="red" />
@@ -51,7 +53,7 @@ export default function BasicDemo() {
                                     <ColorPicker.Input fluid channel="lightness" />
                                 </>
                             )}
-                            <ColorPicker.Input fluid channel="alpha" />
+                            <ColorPicker.Input fluid channel="alpha" className="max-w-20" />
                         </div>
                     </div>
                 </ColorPicker>
