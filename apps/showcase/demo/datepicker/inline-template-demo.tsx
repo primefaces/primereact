@@ -36,9 +36,7 @@ export default function InlineTemplateDemo() {
 
                             return (
                                 <>
-                                    {months?.map((_, groupIndex) => {
-                                        const month = datepicker?.getIndexedMonth?.(groupIndex) as useDatePickerMonthData;
-
+                                    {months?.map((month, groupIndex) => {
                                         return (
                                             <DatePicker.Calendar key={groupIndex}>
                                                 {groupIndex === 0 && (

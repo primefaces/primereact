@@ -26,6 +26,21 @@ export const DatePickerPortal = withComponent({
             ptmi('root')
         );
 
+        const createPanel = () => {
+            const panelProps = mergeProps(
+                {
+                    className: datepicker?.cx('panel')
+                },
+                ptmi('panel')
+            );
+
+            return (
+                <div ref={datepicker?.overlayRef} {...panelProps}>
+                    {resolve(props.children, instance)}
+                </div>
+            );
+        };
+
         return (
             <Component instance={instance} attrs={rootProps}>
                 <Overlay
@@ -36,7 +51,7 @@ export const DatePickerPortal = withComponent({
                     onOpenChange={({ value }: useOverlayOpenChangeEvent) => datepicker?.changeVisibleState(value)}
                     onEnter={datepicker?.onOverlayEnter}
                 >
-                    {resolve(props.children, instance)}
+                    {createPanel()}
                 </Overlay>
             </Component>
         );

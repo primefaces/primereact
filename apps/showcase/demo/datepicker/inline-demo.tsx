@@ -16,7 +16,7 @@ export default function InlineDemo() {
 
     return (
         <div className="card flex justify-center">
-            <DatePicker value={date} className="w-full sm:w-[30rem]" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker value={date} className="w-full sm:w-120" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Panel>
                     <DatePicker.Container>
                         <DatePicker.Calendar>

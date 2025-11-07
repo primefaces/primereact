@@ -10,7 +10,6 @@ import {
 } from '@primereact/types/shared/datepicker';
 import { Button } from 'primereact/button';
 import { DatePicker } from 'primereact/datepicker';
-
 import * as React from 'react';
 
 export default function ButtonbarDemo() {
@@ -22,115 +21,113 @@ export default function ButtonbarDemo() {
             <DatePicker value={date} placeholder="Basic" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
-                    <DatePicker.Panel>
-                        <DatePicker.Container>
-                            <DatePicker.Calendar>
-                                <DatePicker.Header>
-                                    <DatePicker.Prev />
-                                    <DatePicker.Title>
-                                        <DatePicker.SelectMonth />
-                                        <DatePicker.SelectYear />
-                                        <DatePicker.Decade />
-                                    </DatePicker.Title>
-                                    <DatePicker.Next />
-                                </DatePicker.Header>
-                                <DatePicker.Table>
-                                    <DatePicker.TableHead>
-                                        <DatePicker.TableHeadRow>
-                                            {(instance: DatePickerTableHeadRowInstance) => {
-                                                const { datepicker } = instance;
-                                                const weekDays = datepicker?.weekDays as string[];
-
-                                                return (
-                                                    <>
-                                                        {weekDays.map((day, index) => (
-                                                            <DatePicker.TableHeadCell key={index} abbr={day}>
-                                                                {day}
-                                                            </DatePicker.TableHeadCell>
-                                                        ))}
-                                                    </>
-                                                );
-                                            }}
-                                        </DatePicker.TableHeadRow>
-                                    </DatePicker.TableHead>
-                                    <DatePicker.TableBody>
-                                        {(instance: DatePickerTableBodyInstance) => {
+                    <DatePicker.Container>
+                        <DatePicker.Calendar>
+                            <DatePicker.Header>
+                                <DatePicker.Prev />
+                                <DatePicker.Title>
+                                    <DatePicker.SelectMonth />
+                                    <DatePicker.SelectYear />
+                                    <DatePicker.Decade />
+                                </DatePicker.Title>
+                                <DatePicker.Next />
+                            </DatePicker.Header>
+                            <DatePicker.Table>
+                                <DatePicker.TableHead>
+                                    <DatePicker.TableHeadRow>
+                                        {(instance: DatePickerTableHeadRowInstance) => {
                                             const { datepicker } = instance;
-                                            const month = datepicker?.getIndexedMonth?.() as useDatePickerMonthData;
+                                            const weekDays = datepicker?.weekDays as string[];
 
                                             return (
                                                 <>
-                                                    {month.dates?.map((week) => (
-                                                        <DatePicker.TableBodyRow key={week[0].day + '' + week[0].month}>
-                                                            <>
-                                                                {week.map((date) => (
-                                                                    <DatePicker.TableBodyCell key={date.day + '' + date.month} date={date}>
-                                                                        {date.day}
-                                                                    </DatePicker.TableBodyCell>
-                                                                ))}
-                                                            </>
-                                                        </DatePicker.TableBodyRow>
+                                                    {weekDays.map((day, index) => (
+                                                        <DatePicker.TableHeadCell key={index} abbr={day}>
+                                                            {day}
+                                                        </DatePicker.TableHeadCell>
                                                     ))}
                                                 </>
                                             );
                                         }}
-                                    </DatePicker.TableBody>
-                                    <DatePicker.TableBody view="month">
-                                        {(instance: DatePickerTableBodyInstance) => {
-                                            const { datepicker } = instance;
-                                            const months = datepicker?.monthPickerValues as useDatePickerMonthOptions[];
+                                    </DatePicker.TableHeadRow>
+                                </DatePicker.TableHead>
+                                <DatePicker.TableBody>
+                                    {(instance: DatePickerTableBodyInstance) => {
+                                        const { datepicker } = instance;
+                                        const month = datepicker?.getIndexedMonth?.() as useDatePickerMonthData;
 
-                                            return (
-                                                <>
-                                                    {Array.from({ length: 4 }).map((_, rowIndex) => (
-                                                        <DatePicker.TableBodyRow key={`month-row-${rowIndex}`}>
-                                                            {months.slice(rowIndex * 3, (rowIndex + 1) * 3).map((month, colIndex) => {
-                                                                const monthIndex = rowIndex * 3 + colIndex;
+                                        return (
+                                            <>
+                                                {month.dates?.map((week) => (
+                                                    <DatePicker.TableBodyRow key={week[0].day + '' + week[0].month}>
+                                                        <>
+                                                            {week.map((date) => (
+                                                                <DatePicker.TableBodyCell key={date.day + '' + date.month} date={date}>
+                                                                    {date.day}
+                                                                </DatePicker.TableBodyCell>
+                                                            ))}
+                                                        </>
+                                                    </DatePicker.TableBodyRow>
+                                                ))}
+                                            </>
+                                        );
+                                    }}
+                                </DatePicker.TableBody>
+                                <DatePicker.TableBody view="month">
+                                    {(instance: DatePickerTableBodyInstance) => {
+                                        const { datepicker } = instance;
+                                        const months = datepicker?.monthPickerValues as useDatePickerMonthOptions[];
 
-                                                                return (
-                                                                    <DatePicker.TableBodyCell key={monthIndex} month={month} index={monthIndex}>
-                                                                        {month.value}
-                                                                    </DatePicker.TableBodyCell>
-                                                                );
-                                                            })}
-                                                        </DatePicker.TableBodyRow>
-                                                    ))}
-                                                </>
-                                            );
-                                        }}
-                                    </DatePicker.TableBody>
-                                    <DatePicker.TableBody view="year">
-                                        {(instance: DatePickerTableBodyInstance) => {
-                                            const { datepicker } = instance;
-                                            const years = datepicker?.yearPickerValues as useDatePickerYearOptions[];
+                                        return (
+                                            <>
+                                                {Array.from({ length: 4 }).map((_, rowIndex) => (
+                                                    <DatePicker.TableBodyRow key={`month-row-${rowIndex}`}>
+                                                        {months.slice(rowIndex * 3, (rowIndex + 1) * 3).map((month, colIndex) => {
+                                                            const monthIndex = rowIndex * 3 + colIndex;
 
-                                            return (
-                                                <>
-                                                    {Array.from({ length: 5 }).map((_, rowIndex) => (
-                                                        <DatePicker.TableBodyRow key={`year-row-${rowIndex}`}>
-                                                            {years.slice(rowIndex * 2, (rowIndex + 1) * 2).map((year, colIndex) => {
-                                                                const yearIndex = rowIndex * 2 + colIndex;
+                                                            return (
+                                                                <DatePicker.TableBodyCell key={monthIndex} month={month} index={monthIndex}>
+                                                                    {month.value}
+                                                                </DatePicker.TableBodyCell>
+                                                            );
+                                                        })}
+                                                    </DatePicker.TableBodyRow>
+                                                ))}
+                                            </>
+                                        );
+                                    }}
+                                </DatePicker.TableBody>
+                                <DatePicker.TableBody view="year">
+                                    {(instance: DatePickerTableBodyInstance) => {
+                                        const { datepicker } = instance;
+                                        const years = datepicker?.yearPickerValues as useDatePickerYearOptions[];
 
-                                                                return (
-                                                                    <DatePicker.TableBodyCell key={yearIndex} year={year}>
-                                                                        {year.value}
-                                                                    </DatePicker.TableBodyCell>
-                                                                );
-                                                            })}
-                                                        </DatePicker.TableBodyRow>
-                                                    ))}
-                                                </>
-                                            );
-                                        }}
-                                    </DatePicker.TableBody>
-                                </DatePicker.Table>
-                            </DatePicker.Calendar>
-                        </DatePicker.Container>
-                        <DatePicker.Buttonbar>
-                            <DatePicker.Today />
-                            <DatePicker.Clear />
-                        </DatePicker.Buttonbar>
-                    </DatePicker.Panel>
+                                        return (
+                                            <>
+                                                {Array.from({ length: 5 }).map((_, rowIndex) => (
+                                                    <DatePicker.TableBodyRow key={`year-row-${rowIndex}`}>
+                                                        {years.slice(rowIndex * 2, (rowIndex + 1) * 2).map((year, colIndex) => {
+                                                            const yearIndex = rowIndex * 2 + colIndex;
+
+                                                            return (
+                                                                <DatePicker.TableBodyCell key={yearIndex} year={year}>
+                                                                    {year.value}
+                                                                </DatePicker.TableBodyCell>
+                                                            );
+                                                        })}
+                                                    </DatePicker.TableBodyRow>
+                                                ))}
+                                            </>
+                                        );
+                                    }}
+                                </DatePicker.TableBody>
+                            </DatePicker.Table>
+                        </DatePicker.Calendar>
+                    </DatePicker.Container>
+                    <DatePicker.Buttonbar>
+                        <DatePicker.Today />
+                        <DatePicker.Clear />
+                    </DatePicker.Buttonbar>
                 </DatePicker.Portal>
             </DatePicker>
             <DatePicker
@@ -142,137 +139,135 @@ export default function ButtonbarDemo() {
             >
                 <DatePicker.Input />
                 <DatePicker.Portal>
-                    <DatePicker.Panel>
-                        <DatePicker.Container>
-                            <DatePicker.Calendar>
-                                <DatePicker.Header>
-                                    <DatePicker.Prev />
-                                    <DatePicker.Title>
-                                        <DatePicker.SelectMonth />
-                                        <DatePicker.SelectYear />
-                                        <DatePicker.Decade />
-                                    </DatePicker.Title>
-                                    <DatePicker.Next />
-                                </DatePicker.Header>
-                                <DatePicker.Table>
-                                    <DatePicker.TableHead>
-                                        <DatePicker.TableHeadRow>
-                                            {(instance: DatePickerTableHeadRowInstance) => {
-                                                const { datepicker } = instance;
-                                                const weekDays = datepicker?.weekDays as string[];
-
-                                                return (
-                                                    <>
-                                                        {weekDays.map((day, index) => (
-                                                            <DatePicker.TableHeadCell key={index} abbr={day}>
-                                                                {day}
-                                                            </DatePicker.TableHeadCell>
-                                                        ))}
-                                                    </>
-                                                );
-                                            }}
-                                        </DatePicker.TableHeadRow>
-                                    </DatePicker.TableHead>
-                                    <DatePicker.TableBody>
-                                        {(instance: DatePickerTableBodyInstance) => {
+                    <DatePicker.Container>
+                        <DatePicker.Calendar>
+                            <DatePicker.Header>
+                                <DatePicker.Prev />
+                                <DatePicker.Title>
+                                    <DatePicker.SelectMonth />
+                                    <DatePicker.SelectYear />
+                                    <DatePicker.Decade />
+                                </DatePicker.Title>
+                                <DatePicker.Next />
+                            </DatePicker.Header>
+                            <DatePicker.Table>
+                                <DatePicker.TableHead>
+                                    <DatePicker.TableHeadRow>
+                                        {(instance: DatePickerTableHeadRowInstance) => {
                                             const { datepicker } = instance;
-                                            const month = datepicker?.getIndexedMonth?.() as useDatePickerMonthData;
+                                            const weekDays = datepicker?.weekDays as string[];
 
                                             return (
                                                 <>
-                                                    {month.dates?.map((week) => (
-                                                        <DatePicker.TableBodyRow key={week[0].day + '' + week[0].month}>
-                                                            <>
-                                                                {week.map((date) => (
-                                                                    <DatePicker.TableBodyCell key={date.day + '' + date.month} date={date}>
-                                                                        {date.day}
-                                                                    </DatePicker.TableBodyCell>
-                                                                ))}
-                                                            </>
-                                                        </DatePicker.TableBodyRow>
+                                                    {weekDays.map((day, index) => (
+                                                        <DatePicker.TableHeadCell key={index} abbr={day}>
+                                                            {day}
+                                                        </DatePicker.TableHeadCell>
                                                     ))}
                                                 </>
                                             );
                                         }}
-                                    </DatePicker.TableBody>
-                                    <DatePicker.TableBody view="month">
-                                        {(instance: DatePickerTableBodyInstance) => {
-                                            const { datepicker } = instance;
-                                            const months = datepicker?.monthPickerValues as useDatePickerMonthOptions[];
+                                    </DatePicker.TableHeadRow>
+                                </DatePicker.TableHead>
+                                <DatePicker.TableBody>
+                                    {(instance: DatePickerTableBodyInstance) => {
+                                        const { datepicker } = instance;
+                                        const month = datepicker?.getIndexedMonth?.() as useDatePickerMonthData;
 
-                                            return (
-                                                <>
-                                                    {Array.from({ length: 4 }).map((_, rowIndex) => (
-                                                        <DatePicker.TableBodyRow key={`month-row-${rowIndex}`}>
-                                                            {months.slice(rowIndex * 3, (rowIndex + 1) * 3).map((month, colIndex) => {
-                                                                const monthIndex = rowIndex * 3 + colIndex;
+                                        return (
+                                            <>
+                                                {month.dates?.map((week) => (
+                                                    <DatePicker.TableBodyRow key={week[0].day + '' + week[0].month}>
+                                                        <>
+                                                            {week.map((date) => (
+                                                                <DatePicker.TableBodyCell key={date.day + '' + date.month} date={date}>
+                                                                    {date.day}
+                                                                </DatePicker.TableBodyCell>
+                                                            ))}
+                                                        </>
+                                                    </DatePicker.TableBodyRow>
+                                                ))}
+                                            </>
+                                        );
+                                    }}
+                                </DatePicker.TableBody>
+                                <DatePicker.TableBody view="month">
+                                    {(instance: DatePickerTableBodyInstance) => {
+                                        const { datepicker } = instance;
+                                        const months = datepicker?.monthPickerValues as useDatePickerMonthOptions[];
 
-                                                                return (
-                                                                    <DatePicker.TableBodyCell key={monthIndex} month={month} index={monthIndex}>
-                                                                        {month.value}
-                                                                    </DatePicker.TableBodyCell>
-                                                                );
-                                                            })}
-                                                        </DatePicker.TableBodyRow>
-                                                    ))}
-                                                </>
-                                            );
-                                        }}
-                                    </DatePicker.TableBody>
-                                    <DatePicker.TableBody view="year">
-                                        {(instance: DatePickerTableBodyInstance) => {
-                                            const { datepicker } = instance;
-                                            const years = datepicker?.yearPickerValues as useDatePickerYearOptions[];
+                                        return (
+                                            <>
+                                                {Array.from({ length: 4 }).map((_, rowIndex) => (
+                                                    <DatePicker.TableBodyRow key={`month-row-${rowIndex}`}>
+                                                        {months.slice(rowIndex * 3, (rowIndex + 1) * 3).map((month, colIndex) => {
+                                                            const monthIndex = rowIndex * 3 + colIndex;
 
-                                            return (
-                                                <>
-                                                    {Array.from({ length: 5 }).map((_, rowIndex) => (
-                                                        <DatePicker.TableBodyRow key={`year-row-${rowIndex}`}>
-                                                            {years.slice(rowIndex * 2, (rowIndex + 1) * 2).map((year, colIndex) => {
-                                                                const yearIndex = rowIndex * 2 + colIndex;
+                                                            return (
+                                                                <DatePicker.TableBodyCell key={monthIndex} month={month} index={monthIndex}>
+                                                                    {month.value}
+                                                                </DatePicker.TableBodyCell>
+                                                            );
+                                                        })}
+                                                    </DatePicker.TableBodyRow>
+                                                ))}
+                                            </>
+                                        );
+                                    }}
+                                </DatePicker.TableBody>
+                                <DatePicker.TableBody view="year">
+                                    {(instance: DatePickerTableBodyInstance) => {
+                                        const { datepicker } = instance;
+                                        const years = datepicker?.yearPickerValues as useDatePickerYearOptions[];
 
-                                                                return (
-                                                                    <DatePicker.TableBodyCell key={yearIndex} year={year}>
-                                                                        {year.value}
-                                                                    </DatePicker.TableBodyCell>
-                                                                );
-                                                            })}
-                                                        </DatePicker.TableBodyRow>
-                                                    ))}
-                                                </>
-                                            );
-                                        }}
-                                    </DatePicker.TableBody>
-                                </DatePicker.Table>
-                            </DatePicker.Calendar>
-                        </DatePicker.Container>
-                        <DatePicker.Buttonbar>
-                            {(instance: DatePickerButtonbarInstance) => {
-                                const { datepicker } = instance;
+                                        return (
+                                            <>
+                                                {Array.from({ length: 5 }).map((_, rowIndex) => (
+                                                    <DatePicker.TableBodyRow key={`year-row-${rowIndex}`}>
+                                                        {years.slice(rowIndex * 2, (rowIndex + 1) * 2).map((year, colIndex) => {
+                                                            const yearIndex = rowIndex * 2 + colIndex;
 
-                                return (
-                                    <div className="flex justify-between w-full">
-                                        <div className="flex gap-2">
-                                            <Button size="small" severity="secondary">
-                                                Exact
-                                            </Button>
-                                            <Button size="small" severity="secondary">
-                                                Flexible
-                                            </Button>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <Button size="small" label="Today" onClick={datepicker?.onTodayButtonClick} variant="outlined">
-                                                Today
-                                            </Button>
-                                            <Button size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
-                                                <i className="pi pi-times" />
-                                            </Button>
-                                        </div>
+                                                            return (
+                                                                <DatePicker.TableBodyCell key={yearIndex} year={year}>
+                                                                    {year.value}
+                                                                </DatePicker.TableBodyCell>
+                                                            );
+                                                        })}
+                                                    </DatePicker.TableBodyRow>
+                                                ))}
+                                            </>
+                                        );
+                                    }}
+                                </DatePicker.TableBody>
+                            </DatePicker.Table>
+                        </DatePicker.Calendar>
+                    </DatePicker.Container>
+                    <DatePicker.Buttonbar>
+                        {(instance: DatePickerButtonbarInstance) => {
+                            const { datepicker } = instance;
+
+                            return (
+                                <div className="flex justify-between w-full">
+                                    <div className="flex gap-2">
+                                        <Button size="small" severity="secondary">
+                                            Exact
+                                        </Button>
+                                        <Button size="small" severity="secondary">
+                                            Flexible
+                                        </Button>
                                     </div>
-                                );
-                            }}
-                        </DatePicker.Buttonbar>
-                    </DatePicker.Panel>
+                                    <div className="flex gap-2">
+                                        <Button size="small" label="Today" onClick={datepicker?.onTodayButtonClick} variant="outlined">
+                                            Today
+                                        </Button>
+                                        <Button size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
+                                            <i className="pi pi-times" />
+                                        </Button>
+                                    </div>
+                                </div>
+                            );
+                        }}
+                    </DatePicker.Buttonbar>
                 </DatePicker.Portal>
             </DatePicker>
         </div>
