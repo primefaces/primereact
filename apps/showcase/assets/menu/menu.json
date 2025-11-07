@@ -105,6 +105,10 @@
                             "to": "/docs/components/listbox"
                         },
                         {
+                            "name": "Password",
+                            "to": "/docs/components/password"
+                        },
+                        {
                             "name": "RadioButton",
                             "to": "/docs/components/radiobutton"
                         },

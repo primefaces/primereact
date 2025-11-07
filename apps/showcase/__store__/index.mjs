@@ -1011,6 +1011,68 @@ export const Store = {
             'filePath': 'demo/passthrough/basic-demo.tsx',
         },
     },
+    'password': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/password/basic-demo.tsx')),
+            'filePath': 'demo/password/basic-demo.tsx',
+        },
+        'clear-icon-demo': {
+            'component': React.lazy(() => import('demo/password/clear-icon-demo.tsx')),
+            'filePath': 'demo/password/clear-icon-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/password/disabled-demo.tsx')),
+            'filePath': 'demo/password/disabled-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/password/filled-demo.tsx')),
+            'filePath': 'demo/password/filled-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/password/float-label-demo.tsx')),
+            'filePath': 'demo/password/float-label-demo.tsx',
+        },
+        'fluid-demo': {
+            'component': React.lazy(() => import('demo/password/fluid-demo.tsx')),
+            'filePath': 'demo/password/fluid-demo.tsx',
+        },
+        'ifta-label-demo': {
+            'component': React.lazy(() => import('demo/password/ifta-label-demo.tsx')),
+            'filePath': 'demo/password/ifta-label-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/password/invalid-demo.tsx')),
+            'filePath': 'demo/password/invalid-demo.tsx',
+        },
+        'password-pt': {
+            'component': React.lazy(() => import('demo/password/password-pt.tsx')),
+            'filePath': 'demo/password/password-pt.tsx',
+        },
+        'portal-demo': {
+            'component': React.lazy(() => import('demo/password/portal-demo.tsx')),
+            'filePath': 'demo/password/portal-demo.tsx',
+        },
+        'requirements-demo': {
+            'component': React.lazy(() => import('demo/password/requirements-demo.tsx')),
+            'filePath': 'demo/password/requirements-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/password/sizes-demo.tsx')),
+            'filePath': 'demo/password/sizes-demo.tsx',
+        },
+        'strength-demo': {
+            'component': React.lazy(() => import('demo/password/strength-demo.tsx')),
+            'filePath': 'demo/password/strength-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/password/template-demo.tsx')),
+            'filePath': 'demo/password/template-demo.tsx',
+        },
+        'toggle-mask-demo': {
+            'component': React.lazy(() => import('demo/password/toggle-mask-demo.tsx')),
+            'filePath': 'demo/password/toggle-mask-demo.tsx',
+        },
+    },
     'popover': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/popover/basic-demo.tsx')),
