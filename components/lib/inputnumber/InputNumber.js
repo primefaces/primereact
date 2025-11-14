@@ -213,8 +213,55 @@ export const InputNumber = React.memo(
             return null;
         };
 
-        const addWithPrecision = (base, increment, precision = 10) => {
-            return Math.round((base + increment) * precision) / precision;
+        function countDecimals(value) {
+            if (!isFinite(value)) return 0;
+
+            const s = String(value);
+
+            // handle exponential notation: e.g. "1e-7"
+            if (s.toLowerCase().includes('e')) {
+                const [mantissa, expStr] = s.split('e');
+                const exp = parseInt(expStr, 10);
+                const decimalPart = (mantissa.split('.')[1] || '').length;
+
+                // If exponent is negative, decimals increase
+                if (exp < 0) return decimalPart + Math.abs(exp);
+
+                // If exponent is positive, decimals shrink
+                return Math.max(0, decimalPart - exp);
+            }
+
+            // normal decimal
+            return (s.split('.')[1] || '').length;
+        }
+
+        const addWithPrecision = (base, increment) => {
+            base = Number(base);
+            increment = Number(increment);
+
+            // invalid inputs → return NaN cleanly
+            if (!isFinite(base) || !isFinite(increment)) return NaN;
+
+            const baseDec = countDecimals(base);
+            const incDec = countDecimals(increment);
+
+            // Choose required decimal precision but cap so factor remains safe
+            const decimals = Math.min(Math.max(baseDec, incDec), 15);
+            const factor = Math.pow(10, decimals);
+
+            const maxSafe = Number.MAX_SAFE_INTEGER;
+
+            // avoid unsafe multiplication
+            if (Math.abs(base) * factor > maxSafe || Math.abs(increment) * factor > maxSafe) {
+                const sum = base + increment;
+                // fallback to a safe rounding
+                const fallbackFactor = Math.pow(10, 15);
+
+                return Math.round(sum * fallbackFactor) / fallbackFactor;
+            }
+
+            // Correct integer math → avoids floating point errors
+            return Math.round(base * factor + increment * factor) / factor;
         };
 
         const repeat = (event, interval, dir) => {
