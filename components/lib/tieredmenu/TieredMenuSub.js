@@ -259,7 +259,7 @@ export const TieredMenuSub = React.memo(
                     'data-p-visited': focused,
                     className: cx('menuitem', { itemClassName, active, focused, disabled }),
                     style: style,
-                    onMouseEnter: (event) => onItemMouseEnter(event, item),
+                    onMouseEnter: (event) => onItemMouseEnter(event, processedItem),
                     role: 'menuitem'
                 },
                 getPTOptions(processedItem, 'menuitem')
