@@ -274,7 +274,7 @@ export const TieredMenuSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
-            if (processedItem.visible === false) {
+            if (isItemVisible(processedItem) === false) {
                 return null;
             }
 
