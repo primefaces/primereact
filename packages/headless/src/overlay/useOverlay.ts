@@ -54,8 +54,8 @@ export const useOverlay = withHeadless({
 
             addStyle(containerElement, { position: 'absolute', top: '0' });
 
-            if (props.autoZIndex) {
-                ZIndex.set('overlay', containerElement, props.baseZIndex ?? 0 + ($primereact.config?.zIndex?.modal ?? 1100));
+            if (props.autoZIndex && props.type) {
+                ZIndex.set(props.type, containerElement, (props.baseZIndex ?? 0) + ($primereact.config?.zIndex?.[props.type] ?? 1000));
             }
 
             alignOverlay();

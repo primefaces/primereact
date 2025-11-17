@@ -29,6 +29,19 @@ export interface useOverlayProps {
      */
     target?: HTMLElement | undefined;
     /**
+     * Default open state for uncontrolled mode.
+     */
+    defaultOpen?: boolean | undefined;
+    /**
+     * Whether the overlay is visible (controlled mode).
+     */
+    open?: boolean | undefined;
+    /**
+     * Type of the overlay.
+     * @default 'overlay'
+     */
+    type?: 'overlay' | 'menu' | undefined;
+    /**
      * Where to append the overlay.
      * @default 'body'
      */
@@ -48,14 +61,6 @@ export interface useOverlayProps {
      * @default true
      */
     closeOnEscape?: boolean | undefined;
-    /**
-     * Default open state for uncontrolled mode.
-     */
-    defaultOpen?: boolean | undefined;
-    /**
-     * Whether the overlay is visible (controlled mode).
-     */
-    open?: boolean | undefined;
     /**
      * Callback function that is called when the overlay's open state changes.
      */
