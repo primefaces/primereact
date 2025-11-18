@@ -91,7 +91,7 @@ export interface useSliderExposes {
     /**
      * Counter for tracking number of thumbs.
      */
-    thumbCounter: React.MutableRefObject<number>;
+    thumbCounter: React.RefObject<number>;
     /**
      * Determines if the slider is in range mode.
      */

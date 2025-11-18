@@ -24,7 +24,7 @@ export interface MeterGroupLabelPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: MeterGroupLabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: MeterGroupLabelPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
 }
 
 /**

@@ -73,7 +73,6 @@ export interface useSplitterExposes {
     /**
      * Counter tracking the number of panels.
      */
-    // panelCounter: number;
     panelCounter: React.RefObject<number | null>;
     /**
      * Array storing the size of each panel.
