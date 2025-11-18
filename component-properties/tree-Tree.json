@@ -1,0 +1,714 @@
+{
+  "name": "Tree",
+  "description": "Tree is used to display hierarchical data.",
+  "properties": [
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines a string value that labels an interactive element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ariaLabelledby",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Identifier of the underlying menu element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "checkboxIcon",
+      "type": "IconType<TreeProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon to display in the checkbox.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "collapseIcon",
+      "type": "IconType<TreeProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of an expanded tab.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "contentClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the tree content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "contentStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the tree content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "contextMenuSelectionKey",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "A single key to control the selection with the context menu.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should be disabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "dragdropScope",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Unique key to enable dragdrop functionality.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "emptyMessage",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "No results found",
+      "description": "Template to display when filtering does not return any results.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "expandedKeys",
+      "type": "TreeExpandedKeysType",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of keys to represent the state of the tree expansion state in controlled mode.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "expandIcon",
+      "type": "IconType<TreeProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of an collapsed tab.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filter",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When specified, displays an input field to filter the items.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterBy",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "label",
+      "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterDelay",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "300",
+      "description": "Delay in milliseconds before filtering the data.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "filterIcon",
+      "type": "IconType<TreeProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the filter.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterLocale",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "undefined",
+      "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterMode",
+      "type": "\"strict\" | \"lenient\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "lenient",
+      "description": "Mode for filtering valid values are \"lenient\" and \"strict\". Default is lenient.",
+      "deprecated": null,
+      "acceptedValues": [
+        "strict",
+        "lenient"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterPlaceholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Placeholder text to show when filter input is empty.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of filter element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "filterValue",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "footer",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "header",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Unique identifier of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether to display loading indicator.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "loadingIcon",
+      "type": "IconType<TreeProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon to display when tree is loading.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "metaKeySelection",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "nodeTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Template of node element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "propagateSelectionDown",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether checkbox selections propagate to descendant nodes.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "propagateSelectionUp",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether checkbox selections propagate to ancestor nodes.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "pt",
+      "type": "TreePassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "selectionKeys",
+      "type": "null | string | TreeMultipleSelectionKeys | TreeCheckboxSelectionKeys",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "A single or an array of keys to control the selection state.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "selectionMode",
+      "type": "\"multiple\" | \"checkbox\" | \"single\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines the selection mode, valid values \"single\", \"multiple\", and \"checkbox\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "multiple",
+        "checkbox",
+        "single"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showHeader",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to show the header or not.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "togglerTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of toggler element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "value",
+      "type": "TreeNode[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of treenodes.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onCollapse",
+      "description": "Callback to invoke when a node is collapsed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeEventNodeEvent",
+          "description": "Custom node event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContextMenu",
+      "description": "Callback to invoke when a node is selected with a context menu.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeEventNodeEvent",
+          "description": "Custom node event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContextMenuSelectionChange",
+      "description": "Callback to invoke when selection changes with a context menu.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectionEvent",
+          "description": "Custom select event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onDragDrop",
+      "description": "Callback to invoke when a node is selected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeDragDropEvent",
+          "description": "Custom dragdrop event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onExpand",
+      "description": "Callback to invoke when a node is expanded.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeEventNodeEvent",
+          "description": "Custom node event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFilterValueChange",
+      "description": "Callback to invoke when filter value changes.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeFilterValueChangeEvent",
+          "description": "Custom filter value change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeClick",
+      "description": "Callback to invoke when the node is clicked.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeNodeClickEvent",
+          "description": "Custom click event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeDoubleClick",
+      "description": "Callback to invoke when the node is double-clicked.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeNodeDoubleClickEvent",
+          "description": "Custom doubleclick event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onSelect",
+      "description": "Callback to invoke when a node is selected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeEventNodeEvent",
+          "description": "Custom node event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onSelectionChange",
+      "description": "Callback to invoke when selection changes.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectionEvent",
+          "description": "Custom select event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onToggle",
+      "description": "Callback to invoke when a node is toggled.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeExpandedEvent",
+          "description": "Custom expand event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onUnselect",
+      "description": "Callback to invoke when a node is unselected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeEventNodeEvent",
+          "description": "Custom node event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "filter",
+      "description": "Filters the data.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "T",
+          "description": "The filter value"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 41,
+    "requiredProperties": 0,
+    "optionalProperties": 41,
+    "callbacksCount": 12,
+    "methodsCount": 2
+  }
+}

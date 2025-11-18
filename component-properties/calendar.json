@@ -1,0 +1,1371 @@
+{
+  "moduleName": "calendar",
+  "description": "Calendar also known as DatePicker, is a form component to work with dates.\n\n[Live Demo](https://www.primereact.org/calendar/)",
+  "components": {
+    "Calendar": {
+      "name": "Calendar",
+      "description": "Calendar also known as DatePicker, is a form component to work with dates.",
+      "properties": [
+        {
+          "name": "appendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ARIA label for screenreader support.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "autoFocus",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should automatically get focus on load.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "autoZIndex",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to automatically manage layering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "baseZIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Base zIndex value to use in layering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "clearButtonClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "p-secondary-button",
+          "description": "Style class of the clear button.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "dateFormat",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "mm/dd/yy",
+          "description": "Format of the date.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "decrementIcon",
+          "type": "IconType<CalendarProps<\"single\", Date>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to show in each of the decrement buttons.",
+          "deprecated": null,
+          "acceptedValues": [
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified, disables the component.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "disabledDates",
+          "type": "Date[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Array with dates to disable.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "disabledDays",
+          "type": "number[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Array with disabled weekday numbers.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "enabledDates",
+          "type": "Date[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Array with dates to enable (all other dates will be disabled).",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "hideOnDateTimeSelect",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to hide the overlay on date selection when showTime is enabled.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "hideOnRangeSelection",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Whether to hide the overlay on date selection is completed when selectionMode is range.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "hourFormat",
+          "type": "\"12\" | \"24\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "24",
+          "description": "Specifies 12 or 24 hour format.",
+          "deprecated": null,
+          "acceptedValues": [
+            "12",
+            "24"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "icon",
+          "type": "IconType<CalendarProps<\"single\", Date>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the calendar button.",
+          "deprecated": null,
+          "acceptedValues": [
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "iconPos",
+          "type": "\"left\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "right",
+          "description": "Icon position of the calendar button.",
+          "deprecated": null,
+          "acceptedValues": [
+            "left",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "incrementIcon",
+          "type": "IconType<CalendarProps<\"single\", Date>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to show in each of the increment buttons.",
+          "deprecated": null,
+          "acceptedValues": [
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "inline",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, displays the calendar as inline instead of an overlay.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "inputClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputId",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Identifier of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputRef",
+          "type": "Ref<HTMLInputElement>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Reference of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the input field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should have invalid state style.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "keepInvalid",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Keep invalid value when input blur.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "en",
+          "description": "Used to display the values ​​of the locale object defined in the Locale API.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "mask",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Mask pattern for input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "maskSlotChar",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "_",
+          "description": "Placeholder character in mask.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "maxDate",
+          "type": "Date",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The maximum selectable date.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "maxDateCount",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Maximum number of selectable dates in multiple mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "minDate",
+          "type": "Date",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The minimum selectable date.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "monthNavigator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the month should be rendered as a dropdown instead of text.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "nextIcon",
+          "type": "IconType<CalendarProps<\"single\", Date>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to show in the next button.",
+          "deprecated": null,
+          "acceptedValues": [
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "numberOfMonths",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Number of months to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "panelClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the datetimepicker panel.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "panelStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the datetimepicker panel.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Placeholder text for the input.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "prevIcon",
+          "type": "IconType<CalendarProps<\"single\", Date>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to show in the previous button.",
+          "deprecated": null,
+          "acceptedValues": [
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "CalendarPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "readOnlyInput",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified, prevents entering the date manually with keyboard.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that an input field must be filled out before submitting the form.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "selectionMode",
+          "type": "TMode",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "single",
+          "description": "Specifies the selection mode either \"single\", \"range\", or \"multiple\";",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "selectOtherMonths",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "shortYearCutoff",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "+10",
+          "description": "The cutoff year for determining the century for a date.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "showButtonBar",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to display today and clear buttons at the footer",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showIcon",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, displays a button with icon next to input.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showMillisec",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show the milliseconds in time picker.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showMinMaxRange",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showOnFocus",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "When disabled, datepicker will not be visible with input focus.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showOtherMonths",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to display dates in other months (non-selectable) at the start or end of the current month. To make these days selectable use the selectOtherMonths option.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showSeconds",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show the seconds in time picker.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showTime",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to display timepicker.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showWeek",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, calendar will show week numbers.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "stepHour",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Hours to change per step.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "stepMillisec",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Milliseconds to change per step.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "stepMinute",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Minutes to change per step.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "stepSecond",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Seconds to change per step.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "timeOnly",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to display timepicker only.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "todayButtonClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "p-secondary-button",
+          "description": "Style class of the today button.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tooltip",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content of the tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tooltipOptions",
+          "type": "TooltipOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "touchUI",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, calendar overlay is displayed as optimized for touch devices.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "Nullable<TValue>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "null",
+          "description": "Value of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "variant",
+          "type": "\"filled\" | \"outlined\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "outlined",
+          "description": "Specifies the input variant of the component.",
+          "deprecated": null,
+          "acceptedValues": [
+            "filled",
+            "outlined"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "view",
+          "type": "\"month\" | \"year\" | \"date\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "date",
+          "description": "Type of view to display.",
+          "deprecated": null,
+          "acceptedValues": [
+            "month",
+            "year",
+            "date"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "viewDate",
+          "type": "Nullable<Date>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Date instance whose month and year are used to display the calendar.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "visible",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Specifies the visibility of the overlay.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "yearNavigator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the year should be rendered as a dropdown instead of text.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "yearRange",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The range of years displayed in the year drop-down in (nnnn:nnnn) format such as (2000:2020).",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "dateTemplate",
+          "description": "Function that gets a date information and returns the cell content in datepicker.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarDateTemplateEvent",
+              "description": "Custom date template event"
+            }
+          ],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "decadeTemplate",
+          "description": "Function that gets a navigator information and returns the decade selections in the panel.",
+          "parameters": [
+            {
+              "name": "yearValues",
+              "optional": false,
+              "type": "number[]",
+              "description": "The values of years"
+            }
+          ],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "footerTemplate",
+          "description": "Custom footer template of overlay.",
+          "parameters": [],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "formatDateTime",
+          "description": "Function for overriding default behavior that formats a Date to the string representation.",
+          "parameters": [
+            {
+              "name": "date",
+              "optional": false,
+              "type": "Date",
+              "description": "Formating date"
+            }
+          ],
+          "returnType": "string"
+        },
+        {
+          "name": "headerTemplate",
+          "description": "Custom header template of overlay.",
+          "parameters": [],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "monthNavigatorTemplate",
+          "description": "Function that gets a navigator information and returns the navigator element in header.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarMonthNavigatorTemplateEvent",
+              "description": "Custom month navigator template event."
+            }
+          ],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "onBlur",
+          "description": "Callback to invoke on blur event of input field.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FocusEvent<HTMLInputElement, Element>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onChange",
+          "description": "Callback to invoke when value changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FormEvent<TValue, SyntheticEvent<Element, Event>>",
+              "description": "Custom change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onClearButtonClick",
+          "description": "Callback to invoke when clear button is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLButtonElement, MouseEvent>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFocus",
+          "description": "Callback to invoke on focus event of input field.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FocusEvent<HTMLInputElement, Element>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onHide",
+          "description": "Callback to invoke when overlay panel or modal becomes hidden.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onInput",
+          "description": "Callback to invoke on input event of input field.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FormEvent<HTMLInputElement>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onMonthChange",
+          "description": "Callback to invoke when month changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarMonthChangeEvent",
+              "description": "Custom month change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSelect",
+          "description": "Callback to invoke when a date is selected.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarSelectEvent",
+              "description": "Custom select event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Callback to invoke when overlay panel or modal becomes visible.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onTodayButtonClick",
+          "description": "Callback to invoke when today button is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLButtonElement, MouseEvent>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onViewDateChange",
+          "description": "Callback to invoke when the displayed month/year is changed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarViewChangeEvent",
+              "description": "Custom view change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onVisibleChange",
+          "description": "Callback to invoke when visible is changed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarVisibleChangeEvent",
+              "description": "Custom visible change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "parseDateTime",
+          "description": "Function for overriding default behavior that parses text into the Date.",
+          "parameters": [
+            {
+              "name": "text",
+              "optional": false,
+              "type": "string",
+              "description": "Parsing date"
+            }
+          ],
+          "returnType": "Date"
+        },
+        {
+          "name": "yearNavigatorTemplate",
+          "description": "Function that gets a navigator information and returns the navigator in header.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CalendarYearNavigatorTemplateEvent",
+              "description": "Custom year navigator template event"
+            }
+          ],
+          "returnType": "ReactNode"
+        }
+      ],
+      "methods": [
+        {
+          "name": "focus",
+          "description": "Used to focus the component.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "getCurrentDateTime",
+          "description": "Used to get the current date.",
+          "parameters": [],
+          "returnType": "TValue"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLSpanElement"
+        },
+        {
+          "name": "getInput",
+          "description": "Used to get input element.",
+          "parameters": [],
+          "returnType": "null | HTMLInputElement"
+        },
+        {
+          "name": "getOverlay",
+          "description": "Used to get overlay element.",
+          "parameters": [],
+          "returnType": "null | HTMLElement"
+        },
+        {
+          "name": "getViewDate",
+          "description": "Used to get the view date.",
+          "parameters": [],
+          "returnType": "TValue"
+        },
+        {
+          "name": "hide",
+          "description": "Used to hide the overlay.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "show",
+          "description": "Used to show the overlay.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "updateViewDate",
+          "description": "Used to update the current view date.",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "null | SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            },
+            {
+              "name": "value",
+              "type": "Nullable<TValue>",
+              "description": "New date."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 79,
+        "requiredProperties": 0,
+        "optionalProperties": 79,
+        "callbacksCount": 20,
+        "methodsCount": 9
+      }
+    }
+  }
+}

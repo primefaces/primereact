@@ -1,0 +1,5 @@
+{
+  "moduleName": "treenode",
+  "description": "This module contains the data interface for nodes in tree components.",
+  "components": {}
+}

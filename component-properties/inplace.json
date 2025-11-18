@@ -1,0 +1,242 @@
+{
+  "moduleName": "inplace",
+  "description": "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.\n\n[Live Demo](https://www.primereact.org/inplace)\n\nHelper Components:\n\n-  InplaceDisplay \n\n-  InplaceContent",
+  "components": {
+    "Inplace": {
+      "name": "Inplace",
+      "description": "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.",
+      "properties": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the content is displayed or not. To use in controlled mode you must implement  `onToggle`  callback at a minimum.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to define a string that labels the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "closable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Displays a button to switch back to display mode.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "closeIcon",
+          "type": "IconType<InplaceProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the close button.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the element should be disabled.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "InplacePassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onClose",
+          "description": "Callback to invoke when inplace is closed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLElement, MouseEvent>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onOpen",
+          "description": "Callback to invoke when inplace is opened.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLElement, MouseEvent>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onToggle",
+          "description": "Callback to invoke when inplace is opened or closed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "InplaceToggleEvent",
+              "description": "Custom toggle event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 9,
+        "requiredProperties": 0,
+        "optionalProperties": 9,
+        "callbacksCount": 3,
+        "methodsCount": 1
+      }
+    },
+    "InplaceDisplay": {
+      "name": "InplaceDisplay",
+      "description": "InplaceDisplay is a helper component for Inplace.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        }
+      ],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 1,
+        "requiredProperties": 0,
+        "optionalProperties": 1,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    },
+    "InplaceContent": {
+      "name": "InplaceContent",
+      "description": "InplaceContent is a helper component for Inplace.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        }
+      ],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 1,
+        "requiredProperties": 0,
+        "optionalProperties": 1,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    }
+  }
+}

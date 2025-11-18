@@ -1,0 +1,267 @@
+{
+  "name": "TabPanel",
+  "description": "TabPanel is a helper component for TabView.",
+  "properties": [
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the tab header and content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "closable",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Defines if tab can be removed.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "closeIcon",
+      "type": "IconType<TabPanel>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Close button of the tab header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "contentClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the tab content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "contentStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the tab content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether the tab is disabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "header",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Orientation of tab headers.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "headerClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the tab header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "headerStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the tab header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "headerTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Header template of the tab to customize more.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "leftIcon",
+      "type": "IconType<TabPanel>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icons can be placed at left of a header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "nextButton",
+      "type": "IconType<TabPanel>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Next button of the tab header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "prevButton",
+      "type": "IconType<TabPanel>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Previous button of the tab header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "TabPanelPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "rightIcon",
+      "type": "IconType<TabPanel>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icons can be placed at right of a header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the tab header and content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "When set as false, hides the tab panel.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [],
+  "methods": [],
+  "stats": {
+    "totalProperties": 20,
+    "requiredProperties": 0,
+    "optionalProperties": 20,
+    "callbacksCount": 0,
+    "methodsCount": 0
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "name": "Toast",
+  "description": "Toast is used to display messages in an overlay.",
+  "properties": [
+    {
+      "name": "appendTo",
+      "type": "null | HTMLElement | \"self\" | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "self",
+      "description": "DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+      "deprecated": null,
+      "acceptedValues": [
+        "self"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "baseZIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "0",
+      "description": "Base zIndex value to add to initial layering of PrimeReact components which start from 1000.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "content",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "position",
+      "type": "\"center\" | \"bottom-right\" | \"bottom-left\" | \"top-right\" | \"top-left\" | \"top-center\" | \"bottom-center\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "top-right",
+      "description": "Position of the toast in viewport, valid values are 'center', 'top-center', 'top-left', 'top-right', 'bottom-center', 'bottom-left', 'bottom-right'.",
+      "deprecated": null,
+      "acceptedValues": [
+        "center",
+        "bottom-right",
+        "bottom-left",
+        "top-right",
+        "top-left",
+        "top-center",
+        "bottom-center"
+      ],
+      "formControl": "select"
+    },
+    {
+      "name": "pt",
+      "type": "ToastPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onClick",
+      "description": "Callback to invoke when an active tab is collapsed by clicking on the header.",
+      "parameters": [
+        {
+          "name": "message",
+          "optional": false,
+          "type": "ToastMessage",
+          "description": "Clicked message"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onHide",
+      "description": "Callback to invoke when message becomes hidden.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onRemove",
+      "description": "Callback to invoke when a message is removed.",
+      "parameters": [
+        {
+          "name": "message",
+          "optional": false,
+          "type": "ToastMessage",
+          "description": "Removed message"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onShow",
+      "description": "Callback to invoke when message becomes visible.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear",
+      "description": "Clears the all messages from Toast.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "remove",
+      "description": "Used to remove messages.",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "ToastMessage | ToastMessage[]",
+          "description": "Message to remove"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "replace",
+      "description": "Used to add new messages after removing all old messages.",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "ToastMessage | ToastMessage[]",
+          "description": "Message to replace"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "show",
+      "description": "Used to show the message.",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "ToastMessage | ToastMessage[]",
+          "description": "Message to show"
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 8,
+    "requiredProperties": 0,
+    "optionalProperties": 8,
+    "callbacksCount": 4,
+    "methodsCount": 5
+  }
+}

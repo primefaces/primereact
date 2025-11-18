@@ -1,0 +1,186 @@
+{
+  "moduleName": "metergroup",
+  "description": "MeterGroup displays scalar measurements within a known range.\n\n[Live Demo](https://www.primereact.org/metergroup/)",
+  "components": {
+    "MeterGroup": {
+      "name": "MeterGroup",
+      "description": "MeterGroup is an extension to standard input element with theming and keyfiltering.",
+      "properties": [
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Additional CSS classes to apply to the MeterGroup.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "end",
+          "type": "Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "labelList",
+          "type": "Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "labelOrientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "'horizontal'",
+          "description": "The orientation of the label. Can be either 'horizontal' or 'vertical'.",
+          "deprecated": null,
+          "acceptedValues": [
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "labelPosition",
+          "type": "\"end\" | \"start\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "'end'",
+          "description": "The position of the label. Can be either 'start' or 'end'.",
+          "deprecated": null,
+          "acceptedValues": [
+            "end",
+            "start"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "100",
+          "description": "The maximum value for the MeterGroup.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "meter",
+          "type": "Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "The minimum value for the MeterGroup.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "'horizontal'",
+          "description": "The orientation of the MeterGroup. Can be either 'horizontal' or 'vertical'.",
+          "deprecated": null,
+          "acceptedValues": [
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "MeterGroupPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "start",
+          "type": "Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "values",
+          "type": "MeterGroupValue[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of values to be represented by the MeterGroup.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        }
+      ],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 13,
+        "requiredProperties": 0,
+        "optionalProperties": 13,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    }
+  }
+}

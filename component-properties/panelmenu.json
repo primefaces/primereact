@@ -1,0 +1,194 @@
+{
+  "moduleName": "panelmenu",
+  "description": "PanelMenu is a hybrid of accordion-tree components.\n\n[Live Demo](https://www.primereact.org/panelmenu/)",
+  "components": {
+    "PanelMenu": {
+      "name": "PanelMenu",
+      "description": "PanelMenu is a hybrid of accordion-tree components.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "collapseIcon",
+          "type": "IconType<PanelMenuProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon used when a submenu is expanded.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "expandedKeys",
+          "type": "PanelMenuExpandedKeys",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A map of keys to represent the expansion state in controlled mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "expandIcon",
+          "type": "IconType<PanelMenuProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon used when a submenu is collapsed.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "model",
+          "type": "MenuItem[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of menuitems.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether multiple tabs can be activated at the same time or not.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "PanelMenuPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onClose",
+          "description": "Callback to invoke when a panel gets collapsed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "PanelMenuHeaderItemClickEvent",
+              "description": "custom event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onExpandedKeysChange",
+          "description": "Callback to when the expandedKeys changes.",
+          "parameters": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "any",
+              "description": "New value."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onOpen",
+          "description": "Callback to invoke when a panel gets expanded.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "PanelMenuHeaderItemClickEvent",
+              "description": "custom event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 10,
+        "requiredProperties": 0,
+        "optionalProperties": 10,
+        "callbacksCount": 3,
+        "methodsCount": 1
+      }
+    }
+  }
+}

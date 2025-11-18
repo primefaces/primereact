@@ -1,0 +1,288 @@
+{
+  "name": "MultiStateCheckbox",
+  "description": "MultiStateCheckbox is used to select a state from given multiple states.",
+  "properties": [
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should automatically get focus on load.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "dataKey",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "A property to uniquely identify an option.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the element value cannot be altered.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "empty",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "If false, the empty state is skipped in the chekbox.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "iconTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of icon for the selected option.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component has invalid state style.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "optionIcon",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name to use as the icon of an option, defaults to the icon property.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name to refer to the option label, used by screen readers only. Defaults to optionValue.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "options",
+      "type": "any[] | MultiStateCheckboxOption[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array to display as the available options.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "optionValue",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name to use as the value of an option, defaults to the option itself when not defined.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "MultiStateCheckboxPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the value cannot be changed.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Content of the tooltip.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "tooltipOptions",
+      "type": "TooltipOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "value",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Value of the MultiStateCheckbox.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "null",
+      "description": "Specifies the input variant of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onChange",
+      "description": "Callback to invoke on value change",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MultiStateCheckboxChangeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "description": "Used to focus the component.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 19,
+    "requiredProperties": 0,
+    "optionalProperties": 19,
+    "callbacksCount": 1,
+    "methodsCount": 2
+  }
+}

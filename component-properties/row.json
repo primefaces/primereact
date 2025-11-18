@@ -1,0 +1,96 @@
+{
+  "moduleName": "row",
+  "description": "Row component is a helper component used to create grouping structures in DataTable.\n\n[Live Demo](https://www.primereact.org/datatable/)",
+  "components": {
+    "Row": {
+      "name": "Row",
+      "description": "Row component is a helper component used to create grouping structures in DataTable.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the row.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "RowPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 6,
+        "requiredProperties": 0,
+        "optionalProperties": 6,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    }
+  }
+}

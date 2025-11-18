@@ -1,0 +1,5 @@
+{
+  "moduleName": "keyfilter",
+  "description": "This module contains common options and types of components that use KeyFilter.",
+  "components": {}
+}

@@ -1,0 +1,172 @@
+{
+  "moduleName": "timeline",
+  "description": "Timeline visualizes a series of chained events.\n\n[Live Demo](https://www.primereact.org/timeline/)",
+  "components": {
+    "Timeline": {
+      "name": "Timeline",
+      "description": "Timeline visualizes a series of chained events.",
+      "properties": [
+        {
+          "name": "align",
+          "type": "\"alternate\" | \"left\" | \"top\" | \"bottom\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "left",
+          "description": "Position of the timeline bar relative to the content. Valid values are \"left\", \"right for vertical layout and \"top\", \"bottom\" for horizontal layout.",
+          "deprecated": null,
+          "acceptedValues": [
+            "alternate",
+            "left",
+            "top",
+            "bottom",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "content",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of the content.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "dataKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "layout",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "vertical",
+          "description": "Orientation of the timeline, valid values are \"vertical\" and \"horizontal\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "marker",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template content allows placing a custom event marker instead of the default one.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "opposite",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template content to be placed at the other side of the bar.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "pt",
+          "type": "TimelinePassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "any[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of events to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        }
+      ],
+      "callbacks": [],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 11,
+        "requiredProperties": 0,
+        "optionalProperties": 11,
+        "callbacksCount": 0,
+        "methodsCount": 1
+      }
+    }
+  }
+}

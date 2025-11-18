@@ -1,0 +1,558 @@
+{
+  "moduleName": "cascadeselect",
+  "description": "CascadeSelect is a form component to select a value from a nested structure of options.\n\n[Live Demo](https://www.primereact.org/cascadeselect/)",
+  "components": {
+    "CascadeSelect": {
+      "name": "CascadeSelect",
+      "description": "CascadeSelect is a form component to select a value from a nested structure of options.",
+      "properties": [
+        {
+          "name": "appendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "autoFocus",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should automatically get focus on load.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "breakpoint",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "dataKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A property to uniquely identify an option.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should be disabled.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "dropdownIcon",
+          "type": "IconType<CascadeSelectProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the dropdown icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputId",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Identifier of the underlying input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputRef",
+          "type": "Ref<HTMLInputElement>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Reference of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should have invalid state style.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "itemTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of items.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Display loading icon.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loadingIcon",
+          "type": "IconType<CascadeSelectProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the loading icon or JSX.Element for loading icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "optionGroupChildren",
+          "type": "string[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property name or getter function to retrieve the items of a group.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "optionGroupIcon",
+          "type": "IconType<CascadeSelectProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the option group.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "optionGroupLabel",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property name or getter function to use as the label of an option group.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "optionLabel",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property name or getter function to use as the label of an option.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "options",
+          "type": "SelectItemOptionsType",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of selectitems to display as the available options.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "optionValue",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property name or getter function to use as the value of an option, defaults to the option itself when not defined.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "panelClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the cascadeselect panel.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "panelStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the cascadeselect panel.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Default text to display when no option is selected.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "CascadeSelectPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "scrollHeight",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "400px",
+          "description": "Maximum height of the options panel on responsive mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "showClear",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, a clear icon is displayed to clear the value.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Value of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "variant",
+          "type": "\"filled\" | \"outlined\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "outlined",
+          "description": "Specifies the input variant of the component.",
+          "deprecated": null,
+          "acceptedValues": [
+            "filled",
+            "outlined"
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onBeforeHide",
+          "description": "Callback to invoke before the overlay is hidden.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onBeforeShow",
+          "description": "Callback to invoke before the overlay is shown.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onChange",
+          "description": "Callback to invoke on value change",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CascadeSelectChangeEvent",
+              "description": "Custom change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onGroupChange",
+          "description": "Callback to invoke when a group changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CascadeSelectGroupChangeEvent",
+              "description": "Custom group change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onHide",
+          "description": "Callback to invoke when the overlay is hidden.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Callback to invoke when the overlay is shown.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "focus",
+          "description": "Used to focus the component.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getInput",
+          "description": "Used to get input element.",
+          "parameters": [],
+          "returnType": "null | HTMLInputElement"
+        },
+        {
+          "name": "getLabel",
+          "description": "Used to get label element.",
+          "parameters": [],
+          "returnType": "null | HTMLSpanElement"
+        },
+        {
+          "name": "getOverlay",
+          "description": "Used to get overlay element.",
+          "parameters": [],
+          "returnType": "null | HTMLElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 36,
+        "requiredProperties": 0,
+        "optionalProperties": 36,
+        "callbacksCount": 6,
+        "methodsCount": 5
+      }
+    }
+  }
+}

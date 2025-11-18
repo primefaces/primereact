@@ -1,0 +1,197 @@
+{
+  "moduleName": "blockui",
+  "description": "BlockUI represents people using icons, labels and images.\n\n[Live Demo](https://www.primereact.org/blockui)",
+  "components": {
+    "BlockUI": {
+      "name": "BlockUI",
+      "description": "BlockUI represents people using icons, labels and images.",
+      "properties": [
+        {
+          "name": "autoZIndex",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to automatically manage layering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "baseZIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Base zIndex value to use in layering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "blocked",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Controls the blocked state.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "containerClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the container element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "containerStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the container element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "fullScreen",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, the whole document gets blocked.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "BlockUIPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "template",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of mask.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onBlocked",
+          "description": "Fired when the element gets blocked.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onUnblocked",
+          "description": "Fired when the element gets unblocked.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "block",
+          "description": "",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "unblock",
+          "description": "",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 11,
+        "requiredProperties": 0,
+        "optionalProperties": 11,
+        "callbacksCount": 2,
+        "methodsCount": 3
+      }
+    }
+  }
+}

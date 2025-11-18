@@ -1,0 +1,245 @@
+{
+  "moduleName": "editor",
+  "description": "Editor is rich text editor component based on Quill.\n\n[Live Demo](https://www.primereact.org/editor/)",
+  "components": {
+    "Editor": {
+      "name": "Editor",
+      "description": "Editor is rich text editor component based on Quill.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "formats",
+          "type": "string[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Whitelist of formats to display, see [here](https://quilljs.com/docs/formats/) for available options.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "headerTemplate",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style and modules of the toolbar.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "modules",
+          "type": "any",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Modules configuration, see [here](https://quilljs.com/docs/modules/) for available options.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Placeholder text to show when editor is empty.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "EditorPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to instantiate the editor to read-only mode.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showHeader",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to show the header of editor.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "theme",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The theme of editor",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Value of the content.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onLoad",
+          "description": "Callback to invoke when the quill modules are loaded.",
+          "parameters": [
+            {
+              "name": "quill",
+              "optional": false,
+              "type": "any",
+              "description": "Quill instance"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSelectionChange",
+          "description": "Callback to invoke when selected text of editor changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "EditorSelectionChangeEvent",
+              "description": "Custom selection change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onTextChange",
+          "description": "Callback to invoke when text of editor changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "EditorTextChangeEvent",
+              "description": "Custom text change event"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "focus",
+          "description": "Used to focus the component.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "getContent",
+          "description": "Used to get content element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getQuill",
+          "description": "Used to get quill instance.",
+          "parameters": [],
+          "returnType": "any"
+        },
+        {
+          "name": "getToolbar",
+          "description": "Used to get toolbar element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 12,
+        "requiredProperties": 0,
+        "optionalProperties": 12,
+        "callbacksCount": 3,
+        "methodsCount": 5
+      }
+    }
+  }
+}

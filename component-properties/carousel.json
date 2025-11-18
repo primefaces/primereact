@@ -1,0 +1,346 @@
+{
+  "moduleName": "carousel",
+  "description": "Carousel is a content slider featuring various customization options.\n\n[Live Demo](https://www.primereact.org/carousel)",
+  "components": {
+    "Carousel": {
+      "name": "Carousel",
+      "description": "Carousel is a content slider featuring various customization options.",
+      "properties": [
+        {
+          "name": "autoplayInterval",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Time in milliseconds to scroll items automatically.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "circular",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if scrolling would be infinite.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "containerClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the viewport container.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "contentClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of main content.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Label of footer.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "header",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Label of header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "indicatorsContentClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the paginator items.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "nextIcon",
+          "type": "IconType<CarouselProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon for the next button by orientation.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "numScroll",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Number of items to scroll.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "numVisible",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Number of items per page.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "horizontal",
+          "description": "Specifies the layout of the component, valid values are \"horizontal\" and \"vertical\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "page",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the first item.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "prevIcon",
+          "type": "IconType<CarouselProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon for the previous button by orientation.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "CarouselPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "responsiveOptions",
+          "type": "CarouselResponsiveOption[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of options for responsive design.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "showIndicators",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to display indicator container.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showNavigators",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to display navigation buttons in container.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "any[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of objects to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "verticalViewPortHeight",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "300px",
+          "description": "Height of the viewport in vertical layout.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "itemTemplate",
+          "description": "Function that gets an item in the value and returns the content for it.",
+          "parameters": [
+            {
+              "name": "item",
+              "optional": false,
+              "type": "any",
+              "description": "Current item"
+            }
+          ],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "onPageChange",
+          "description": "Callback to invoke after scroll.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "CarouselPageChangeEvent",
+              "description": "Custom change event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "startAutoplay",
+          "description": "Used to start the autoplay if it is currently stopped.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "stopAutoplay",
+          "description": "Used to stop the autoplay if it is currently started.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 22,
+        "requiredProperties": 0,
+        "optionalProperties": 22,
+        "callbacksCount": 2,
+        "methodsCount": 3
+      }
+    }
+  }
+}

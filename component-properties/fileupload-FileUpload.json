@@ -1,0 +1,703 @@
+{
+  "name": "FileUpload",
+  "description": "FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.",
+  "properties": [
+    {
+      "name": "accept",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Pattern to restrict the allowed file types such as \"image/*\".",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "auto",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, upload begins automatically after selection is completed.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "cancelLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Label of the cancel button. Defaults to global value in Locale configuration.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "cancelOptions",
+      "type": "FileUploadOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Options used to customize the cancel button. These options have \"label\", \"icon\", \"className\" and \"style\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "chooseLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Label of the choose button. Defaults to global value in Locale configuration.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "chooseOptions",
+      "type": "FileUploadOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Options used to customize the choose button. These options have \"label\", \"icon\", \"className\" and \"style\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "contentClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "contentStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "customUpload",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether to use the default upload or a manual implementation defined in uploadHandler callback.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Disables the upload functionality.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "emptyTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Custom template of empty content in the container.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "headerClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Custom template of the header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "headerStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "headerTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Custom template of the header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Unique identifier of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "invalidFileSizeMessageDetail",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "\"Maximum upload size is.\"",
+      "description": "Detail message of the invalid fize size.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "invalidFileSizeMessageSummary",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "Invalid file size",
+      "description": "Summary message of the invalid fize size.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "itemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Custom template of each item content in the container.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "maxFileSize",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Maximum file size allowed in bytes.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "mode",
+      "type": "\"basic\" | \"advanced\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "advanced",
+      "description": "Defines the UI of the component, possible values are \"advanced\" and \"basic\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "basic",
+        "advanced"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Used to select multiple files at once from file dialog.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the request parameter to identify the files at backend.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "previewWidth",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "50",
+      "description": "Width of the image thumbnail in pixels.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "progressBarTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Custom template of progressBar content in the container.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "pt",
+      "type": "FileUploadPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "removeIcon",
+      "type": "IconType<FileUploadProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the remove element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "selectedFileLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Label of the choose button after a file is selected.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "uploadLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Label of the upload button. Defaults to global value in Locale configuration.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "uploadOptions",
+      "type": "FileUploadOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Options used to customize the upload button. These options have \"label\", \"icon\", \"className\" and \"style\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Remote url to upload the files.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "withCredentials",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onBeforeDrop",
+      "description": "Callback to invoke before files dropped. Return false from callback to prevent drop.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "DragEvent",
+          "description": "DragEvent instance."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onBeforeSelect",
+      "description": "Callback to invoke before files are selected. Return false from callback to prevent selection.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadSelectEvent",
+          "description": "Custom select event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onBeforeSend",
+      "description": "Callback to invoke before file send begins to customize the request such as adding headers.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadBeforeSendEvent",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onBeforeUpload",
+      "description": "Callback to invoke before file upload begins to customize the request such as post parameters before the files.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadBeforeUploadEvent",
+          "description": "Custom beforeUpload."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onClear",
+      "description": "Callback to invoke when files in queue are removed without uploading.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onError",
+      "description": "Callback to invoke if file upload fails.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadErrorEvent",
+          "description": "Custom error event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onProgress",
+      "description": "Callback to invoke when files are being uploaded.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadProgressEvent",
+          "description": "Custom progress event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onRemove",
+      "description": "Callback to invoke when a file is removed without uploading using clear button of a file.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadRemoveEvent",
+          "description": "Custom remove event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onSelect",
+      "description": "Callback to invoke when files are selected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadSelectEvent",
+          "description": "Custom select event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onUpload",
+      "description": "Callback to invoke when file upload is complete.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadUploadEvent",
+          "description": "Custom upload event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onValidationFail",
+      "description": "Callback to invoke when a validation file fails.",
+      "parameters": [
+        {
+          "name": "file",
+          "optional": false,
+          "type": "File",
+          "description": "Invalid file."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "uploadHandler",
+      "description": "Callback to invoke in custom upload mode to upload the files manually.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FileUploadHandlerEvent",
+          "description": "Custom uploadHandler event"
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear",
+      "description": "Clears the files list.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "formatSize",
+      "description": "Formats the number of bytes.",
+      "parameters": [
+        {
+          "name": "bytes",
+          "type": "number",
+          "description": "Custom size event."
+        }
+      ],
+      "returnType": "number"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLElement"
+    },
+    {
+      "name": "getFiles",
+      "description": "Gets the current files list.",
+      "parameters": [],
+      "returnType": "FileUploadFile[]"
+    },
+    {
+      "name": "getInput",
+      "description": "Used to get input element.",
+      "parameters": [],
+      "returnType": "null | HTMLInputElement"
+    },
+    {
+      "name": "getUploadedFiles",
+      "description": "Gets the current uploaded files list.",
+      "parameters": [],
+      "returnType": "FileUploadFile[]"
+    },
+    {
+      "name": "onFileSelect",
+      "description": "Handles file selection event and updates.",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "FileUploadSelectEvent",
+          "description": "Custom select event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setFiles",
+      "description": "Sets the current files list.",
+      "parameters": [
+        {
+          "name": "files",
+          "type": "FileUploadFile[]",
+          "description": "Current files."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "setUploadedFiles",
+      "description": "Sets the current uploaded files list.",
+      "parameters": [
+        {
+          "name": "files",
+          "type": "FileUploadFile[]",
+          "description": "Current uploaded files."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "upload",
+      "description": "Uploads the selected files.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 36,
+    "requiredProperties": 0,
+    "optionalProperties": 36,
+    "callbacksCount": 12,
+    "methodsCount": 10
+  }
+}

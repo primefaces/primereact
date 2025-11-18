@@ -1,0 +1,342 @@
+{
+  "name": "Sidebar",
+  "description": "Sidebar is a panel component displayed as an overlay.",
+  "properties": [
+    {
+      "name": "appendTo",
+      "type": "null | HTMLElement | \"self\" | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "document.body",
+      "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and self. The self value is used to render a component where it is located.",
+      "deprecated": null,
+      "acceptedValues": [
+        "self"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "ariaCloseLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "close",
+      "description": "Aria label of the close icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "baseZIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "0",
+      "description": "Base zIndex value to use in layering.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "blockScroll",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether to block scrolling of the document when sidebar is active.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "closeIcon",
+      "type": "IconType<SidebarProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the close button.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "closeOnEscape",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Specifies if pressing escape key should hide the sidebar.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "content",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Specifies a custom content for the sidebar. For more complex markup, use the \"content\" slot instead.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "dismissable",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to dismiss sidebar on click of the mask.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "fullScreen",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Adds a close icon to the header to hide the dialog.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "header",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Custom template for the header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "icons",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Custom icons template for the header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "maskClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the mask.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "maskStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the mask.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "modal",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to a modal layer behind the sidebar.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "position",
+      "type": "\"left\" | \"top\" | \"bottom\" | \"right\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "left",
+      "description": "Specifies the position of the sidebar, valid values are \"left\" and \"right\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "left",
+        "top",
+        "bottom",
+        "right"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "pt",
+      "type": "SidebarPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "showCloseIcon",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to display a close icon inside the panel.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Specifies the visibility of the dialog.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onHide",
+      "description": "Callback to invoke when the actions used to close the sidebar are triggered. Exp; close icon, mask and esc key.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onShow",
+      "description": "Callback to invoke when sidebar gets shown.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getCloseIcon",
+      "description": "Used to get close icon element.",
+      "parameters": [],
+      "returnType": "null | HTMLButtonElement"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "getMask",
+      "description": "Used to get mask element.",
+      "parameters": [],
+      "returnType": "null | HTMLElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 22,
+    "requiredProperties": 0,
+    "optionalProperties": 22,
+    "callbacksCount": 2,
+    "methodsCount": 3
+  }
+}

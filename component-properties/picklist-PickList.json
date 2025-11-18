@@ -1,0 +1,775 @@
+{
+  "name": "PickList",
+  "description": "PickList is used to reorder items between different lists.",
+  "properties": [
+    {
+      "name": "autoOptionFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to focus on the first visible or selected element.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "breakpoint",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "'960px'.",
+      "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "dataKey",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": false,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the field that uniquely identifies the a record in the data.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filter",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When specified, displays an input field to filter the items on keyup.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterBy",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterLocale",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "undefined",
+      "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterMatchMode",
+      "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "contains",
+      "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "endsWith",
+        "startsWith",
+        "contains",
+        "equals",
+        "notEquals"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "focusOnHover",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "When enabled, the focus is placed on the hovered option.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Unique identifier of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "itemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template that gets the options for both source and target items and returns the content for it. Useful if you want the same template for both lists else use the custom sourceItemTemplate or targetItemTemplate properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "metaKeySelection",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "moveAllToSourceIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon for moving all items to the source list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveAllToTargetIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon for moving all items to the target list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveBottomIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the move bottom icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveDownIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the move down icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveTopIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the move top icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveToSourceIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon for moving an item to the source list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveToTargetIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon for moving an item to the target list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "moveUpIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the move up icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "PickListPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "showSourceControls",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to show buttons of source list.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showSourceFilter",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to show filter input for source list when filterBy is enabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showTargetControls",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to show buttons of target list.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showTargetFilter",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to show filter input for target list when filterBy is enabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "source",
+      "type": "any[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of objects for the source list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "sourceFilterIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the source list filter.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "sourceFilterPlaceholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Placeholder text on source filter input.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "sourceFilterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template for the source filter content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "sourceFilterValue",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Filter value in the target list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "sourceHeader",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template for the source list caption.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "sourceItemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template that gets the options for the source items and returns the content for it.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "sourceSelection",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Selected item in the source list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "sourceStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the source list element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Index of the element in tabbing order.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "target",
+      "type": "any[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of objects for the target list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "targetFilterIcon",
+      "type": "IconType<PickListProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the target list filter.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "targetFilterPlaceholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Placeholder text on target filter input.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "targetFilterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Placeholder text on target filter input.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "targetFilterValue",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Filter value in the source list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "targetHeader",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template for the target list caption.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "targetItemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template that gets the options for the target items and returns the content for it.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "targetSelection",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Selected items in the target list.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "targetStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the target list element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onBlur",
+      "description": "Callback to invoke when menu loses focus.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onChange",
+      "description": "Callback to invoke when items are moved from source to target.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListChangeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFocus",
+      "description": "Callback to invoke when menu receives focus.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMoveAllToSource",
+      "description": "Callback to invoke when all items are moved from target to source.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMoveAllToTarget",
+      "description": "Callback to invoke when all items are moved from source to target.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMoveToSource",
+      "description": "Callback to invoke when items are moved from target to source.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMoveToTarget",
+      "description": "Callback to invoke when items are moved from source to target.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onSourceFilterChange",
+      "description": "Callback to invoke when items are filtered within source list.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onSourceSelectionChange",
+      "description": "Callback to invoke when items are selected within source list.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTargetFilterChange",
+      "description": "Callback to invoke when items are filtered within target list.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTargetSelectionChange",
+      "description": "Callback to invoke when items are selected within target list.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "PickListEvent",
+          "description": "Custom picklist event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 48,
+    "requiredProperties": 1,
+    "optionalProperties": 47,
+    "callbacksCount": 11,
+    "methodsCount": 1
+  }
+}

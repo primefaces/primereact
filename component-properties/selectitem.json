@@ -1,0 +1,5 @@
+{
+  "moduleName": "selectitem",
+  "description": "This module contains the interface and types for options in a select component.",
+  "components": {}
+}

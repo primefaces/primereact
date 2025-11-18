@@ -1,0 +1,516 @@
+{
+  "moduleName": "tooltip",
+  "description": "Tooltip functionality is integrated within various PrimeReact components.\n\n[Live Demo](https://www.primereact.org/tooltip/)",
+  "components": {
+    "Tooltip": {
+      "name": "Tooltip",
+      "description": "Tooltip functionality is integrated within various PrimeReact components.",
+      "properties": [
+        {
+          "name": "appendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "at",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines which position on the target element to align the positioned tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "autoHide",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to hide tooltip when hovering over tooltip content.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "autoZIndex",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to automatically manage layering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "baseZIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Base zIndex value to use in layering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Specifies if pressing escape key should hide the tooltip.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content to be displayed in tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the tooltip should be hidden.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "event",
+          "type": "\"both\" | \"focus\" | \"hover\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "hover",
+          "description": "Event to show the tooltip.",
+          "deprecated": null,
+          "acceptedValues": [
+            "both",
+            "focus",
+            "hover"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "hideDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Delay to hide the tooltip in milliseconds.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "hideEvent",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "mouseleave",
+          "description": "Event to hide the tooltip if the event property is empty.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "mouseTrack",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the tooltip will follow the mouse.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "mouseTrackLeft",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "5",
+          "description": "Defines left position of the tooltip in relation to the mouse when the mouseTrack is enabled.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "mouseTrackTop",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "5",
+          "description": "Defines top position of the tooltip in relation to the mouse when the mouseTrack is enabled.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "my",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines which position on the tooltip being positioned to align with the target element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "position",
+          "type": "\"left\" | \"top\" | \"bottom\" | \"right\" | \"mouse\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "right",
+          "description": "Position of the tooltip.",
+          "deprecated": null,
+          "acceptedValues": [
+            "left",
+            "top",
+            "bottom",
+            "right",
+            "mouse"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "TooltipPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "showDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Delay to show the tooltip in milliseconds.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "showEvent",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "mouseenter",
+          "description": "Event to show the tooltip if the event property is empty.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "showOnDisabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show tooltip for disabled elements.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style of the tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "target",
+          "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Target element on global tooltip option.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "updateDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Delay to update the tooltip in milliseconds.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onBeforeHide",
+          "description": "Callback to invoke before the tooltip is hidden.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TooltipEvent",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onBeforeShow",
+          "description": "Callback to invoke before the tooltip is shown.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TooltipEvent",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onHide",
+          "description": "Callback to invoke when the tooltip is hidden.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TooltipEvent",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Callback to invoke when the tooltip is shown.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TooltipEvent",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLElement"
+        },
+        {
+          "name": "getTarget",
+          "description": "Used to get target element.",
+          "parameters": [],
+          "returnType": "null | HTMLElement"
+        },
+        {
+          "name": "hide",
+          "description": "Used to hide the tooltip.",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "TooltipEvent",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "null"
+        },
+        {
+          "name": "loadTargetEvents",
+          "description": "Used to load target events.",
+          "parameters": [
+            {
+              "name": "target",
+              "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
+              "description": "Target element or if undefined will use current target."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "show",
+          "description": "Used to show the tooltip.",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "TooltipEvent",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "null"
+        },
+        {
+          "name": "unloadTargetEvents",
+          "description": "Used to unload target events.",
+          "parameters": [
+            {
+              "name": "target",
+              "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
+              "description": "Target element or if undefined will use current target."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "updateTargetEvents",
+          "description": "Used to reload target events. In some cases, the target element can be hidden initially. Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.",
+          "parameters": [
+            {
+              "name": "target",
+              "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
+              "description": "Target element or if undefined will use current target."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 28,
+        "requiredProperties": 0,
+        "optionalProperties": 28,
+        "callbacksCount": 4,
+        "methodsCount": 7
+      }
+    }
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "name": "Checkbox",
+  "description": "Checkbox is an extension to standard checkbox element with skinning capabilities.",
+  "properties": [
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should automatically get focus on load.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": false,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Specifies whether a checkbox should be checked or not.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the element value cannot be altered.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "falseValue",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Value in unchecked state.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "icon",
+      "type": "IconType<CheckboxProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon to display in checkbox.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Unique identifier of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Identifier of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputRef",
+      "type": "Ref<HTMLInputElement>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Reference of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should have invalid state style.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the checkbox element .",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "CheckboxPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the value cannot be changed.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that an input field must be filled out before submitting the form.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Index of the element in tabbing order.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Content of the tooltip.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "tooltipOptions",
+      "type": "TooltipOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "trueValue",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Value in checked state.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "value",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Value of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "variant",
+      "type": "\"filled\" | \"outlined\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "outlined",
+      "description": "Specifies the input variant of the component.",
+      "deprecated": null,
+      "acceptedValues": [
+        "filled",
+        "outlined"
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onChange",
+      "description": "Callback to invoke on value change",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "CheckboxChangeEvent",
+          "description": "Custom change event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onClick",
+      "description": "Callback to invoke on click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLInputElement, MouseEvent> & Object",
+          "description": "click event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContextMenu",
+      "description": "Callback to invoke on right-click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMouseDown",
+      "description": "Callback to invoke to when a mouse button is pressed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "description": "Used to focus the component.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "getInput",
+      "description": "Used to get input element.",
+      "parameters": [],
+      "returnType": "null | HTMLInputElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 24,
+    "requiredProperties": 1,
+    "optionalProperties": 23,
+    "callbacksCount": 4,
+    "methodsCount": 3
+  }
+}

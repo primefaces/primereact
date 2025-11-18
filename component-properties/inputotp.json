@@ -1,0 +1,251 @@
+{
+  "moduleName": "inputotp",
+  "description": "InputOtp is an extension to standard input element with theming and keyfiltering.\n\n[Live Demo](https://www.primereact.org/inputotp/)",
+  "components": {
+    "InputOtp": {
+      "name": "InputOtp",
+      "description": "",
+      "properties": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should be disabled.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "inputTemplate",
+          "type": "TemplateType<InputOtpProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of an item.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "integerOnly",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that an input field is integer-only.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should have invalid state style.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "length",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "4",
+          "description": "Number of characters to initiate.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "mask",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Mask pattern.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "InputOtpPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "readonly",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that an input field is read-only.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "tabindex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "null | string | number",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "null",
+          "description": "Specifies the value of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "variant",
+          "type": "\"filled\" | \"outlined\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "outlined",
+          "description": "Specifies the input variant of the component.",
+          "deprecated": null,
+          "acceptedValues": [
+            "filled",
+            "outlined"
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onBlur",
+          "description": "Callback to invoke when autocomplete loses focus.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FocusEvent<HTMLInputElement, Element>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onChange",
+          "description": "Callback to invoke on value change.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "InputOtpChangeEvent",
+              "description": "Custom change event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFocus",
+          "description": "Callback to invoke when autocomplete gets focus.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FocusEvent<HTMLInputElement, Element>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onInput",
+          "description": "Callback to invoke while typing value on input",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FormEvent<HTMLInputElement>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [],
+      "stats": {
+        "totalProperties": 13,
+        "requiredProperties": 0,
+        "optionalProperties": 13,
+        "callbacksCount": 4,
+        "methodsCount": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "moduleName": "icons/eye",
+  "description": "",
+  "components": {
+    "EyeIcon": {
+      "name": "EyeIcon",
+      "description": "**PrimeReact - EyeIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+      "properties": [
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "spin",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 3,
+        "requiredProperties": 0,
+        "optionalProperties": 3,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    }
+  }
+}

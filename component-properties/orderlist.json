@@ -1,0 +1,402 @@
+{
+  "moduleName": "orderlist",
+  "description": "OrderList is used to sort a collection.\n\n[Live Demo](https://www.primereact.org/orderlist/)",
+  "components": {
+    "OrderList": {
+      "name": "OrderList",
+      "description": "OrderList is used to sort a collection.",
+      "properties": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to define a string that labels the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "autoOptionFocus",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to focus on the first visible or selected element.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "breakpoint",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "'960px'.",
+          "description": "The breakpoint to define the maximum width boundary when responsiveness is enabled.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "dataKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": false,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the field that uniquely identifies the a record in the data.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "dragdrop",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to enable dragdrop based reordering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "filter",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "label",
+          "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "filterBy",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "label",
+          "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterIcon",
+          "type": "IconType<OrderListProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the filter.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterLocale",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "undefined",
+          "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterMatchMode",
+          "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "contains",
+          "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "endsWith",
+            "startsWith",
+            "contains",
+            "equals",
+            "notEquals"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "filterPlaceholder",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Placeholder text to show when filter input is empty.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Custom template of filter element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "focusOnHover",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "When enabled, the focus is placed on the hovered option.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "header",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Text for the caption.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "listStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the list element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "moveBottomIcon",
+          "type": "IconType<OrderListProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the move bottom icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "moveDownIcon",
+          "type": "IconType<OrderListProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the move down icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "moveTopIcon",
+          "type": "IconType<OrderListProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the move top icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "moveUpIcon",
+          "type": "IconType<OrderListProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the move up icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "OrderListPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "any[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of objects to reorder.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "itemTemplate",
+          "description": "The template of each item",
+          "parameters": [
+            {
+              "name": "item",
+              "optional": false,
+              "type": "any",
+              "description": "Current item"
+            }
+          ],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "onBlur",
+          "description": "Callback to invoke when menu loses focus.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onChange",
+          "description": "Callback to invoke to when a mouse button is pressed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "OrderListChangeEvent",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFocus",
+          "description": "Callback to invoke when menu receives focus.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 25,
+        "requiredProperties": 1,
+        "optionalProperties": 24,
+        "callbacksCount": 4,
+        "methodsCount": 1
+      }
+    }
+  }
+}

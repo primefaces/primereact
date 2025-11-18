@@ -1,0 +1,327 @@
+{
+  "moduleName": "colorpicker",
+  "description": "ColorPicker is an input component to select a color.\n\n[Live Demo](https://www.primereact.org/colorpicker/)",
+  "components": {
+    "ColorPicker": {
+      "name": "ColorPicker",
+      "description": "ColorPicker is an input component to select a color.",
+      "properties": [
+        {
+          "name": "appendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "autoFocus",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When present, it specifies that the component should automatically get focus on load.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "defaultColor",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "ff0000",
+          "description": "Default color to display when value is null.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "format",
+          "type": "\"rgb\" | \"hex\" | \"hsb\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "hex",
+          "description": "Format to use in value binding.",
+          "deprecated": null,
+          "acceptedValues": [
+            "rgb",
+            "hex",
+            "hsb"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "inline",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to display as an overlay or not.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "inputClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the input field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputId",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Identifier of the focus input to match a label defined for the dropdown.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputRef",
+          "type": "Ref<HTMLInputElement>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Reference of the input element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inputStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the input field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "panelClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the overlay panel.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "panelStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the overlay panel.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "pt",
+          "type": "ColorPickerPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tooltip",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content of the tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tooltipOptions",
+          "type": "TooltipOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "string | ColorPickerRGBType | ColorPickerHSBType",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Value of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onChange",
+          "description": "Callback to invoke when a color is selected.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColorPickerChangeEvent",
+              "description": "Custom change event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onHide",
+          "description": "Callback to invoke when overlay panel becomes hidden.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Callback to invoke when overlay panel becomes visible.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "focus",
+          "description": "Used to focus the component.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getInput",
+          "description": "Used to get input element.",
+          "parameters": [],
+          "returnType": "null | HTMLInputElement"
+        },
+        {
+          "name": "getOverlay",
+          "description": "Used to get overlay element.",
+          "parameters": [],
+          "returnType": "null | HTMLElement"
+        },
+        {
+          "name": "hide",
+          "description": "Used to hide the overlay.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "show",
+          "description": "Used to show the overlay.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 19,
+        "requiredProperties": 0,
+        "optionalProperties": 19,
+        "callbacksCount": 3,
+        "methodsCount": 6
+      }
+    }
+  }
+}

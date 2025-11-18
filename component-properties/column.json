@@ -1,0 +1,1102 @@
+{
+  "moduleName": "column",
+  "description": "Column component defines various options to specify corresponding features.\nIt is a helper component for DataTable and TreeTable.\n\n[Live Demo](https://www.primereact.org/datatable/)",
+  "components": {
+    "Column": {
+      "name": "Column",
+      "description": "Column is a helper component for DataTable and TreeTable.",
+      "properties": [
+        {
+          "name": "align",
+          "type": "null | \"center\" | \"left\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Aligns the content of the column, valid values are left, right and center.",
+          "deprecated": null,
+          "acceptedValues": [
+            "center",
+            "left",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "alignFrozen",
+          "type": "\"left\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Position of a frozen column, valid values are left and right.",
+          "deprecated": null,
+          "acceptedValues": [
+            "left",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "alignHeader",
+          "type": "null | \"center\" | \"left\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Aligns the header of the column, valid values are left, right and center.",
+          "deprecated": null,
+          "acceptedValues": [
+            "center",
+            "left",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "body",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Body content of the column.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "bodyClassName",
+          "type": "string | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the body. If using a function must return a string.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "bodyStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the body.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "cellEditValidateOnClose",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled and cellEditorValidator is set, force to call cellEditorValidator\nbefore cell editor is closed. If cellEditorValidator returns false, editor stays open.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "cellEditValidatorEvent",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "click",
+          "description": "Event to trigger the validation, possible values are \"click\" and \"blur\".",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "colSpan",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Number of columns to span for grouping.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "columnKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Identifier of a column if field property is not defined. Only utilized by reorderableColumns feature at the moment.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "dataType",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Depending on the dataType of the column, suitable match modes are displayed.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "editor",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Function to provide the cell editor input.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "excludeGlobalFilter",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to exclude from global filtering or not.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "expander",
+          "type": "boolean | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Displays an icon to toggle row expansion.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "exportable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Defines whether the column is exported or not.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "exportField",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property of a row data used for exporting, defaults to field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "exportHeader",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Custom export header of the column to be exported.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property of a row data.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filter",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if a column can be filtered.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "filterApply",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of apply element in menu.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "filterClear",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of clear element in menu.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "filterElement",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Element for custom filtering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "filterField",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property of a row data used for filtering, defaults to field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterFooter",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of footer element in menu.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "filterHeader",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of header element in menu.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "filterHeaderClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the filter header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterHeaderStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the filter header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "filterMatchMode",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\".",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterMatchModeOptions",
+          "type": "ColumnFilterMatchModeOptions[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of label-value pairs to override the global match mode options.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "filterMaxLength",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Specifies the maximum number of characters allowed in the filter element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "filterMenuClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the column filter overlay.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterMenuStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the column filter overlay.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "filterPlaceholder",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines placeholder of the input fields.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterType",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "text",
+          "description": "Type of the filter input field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Footer content of the table.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "footerClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the footer.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "footerStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the footer.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "frozen",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the column is fixed in horizontal scrolling or not.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "header",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Header content of the table.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "headerClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "headerStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "headerTooltip",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content of the header tooltip.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "headerTooltipOptions",
+          "type": "TooltipOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Configuration of the header tooltip, refer to the tooltip documentation for more information.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "hidden",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the column is rendered.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "maxConstraints",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "2",
+          "description": "Maximum number of constraints for a column filter.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "pt",
+          "type": "ColumnPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "reorderable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to defined reorderableColumns per column when reorderableColumns of table is enabled, defaults to value of reorderableColumns.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "resizeable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to defined resizeableColumns per column when resizeableColumns of table is enabled, defaults to value of resizeableColumns.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "rowEditor",
+          "type": "boolean | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Displays icons to edit row.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "rowReorder",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether this column displays an icon to reorder the rows.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "rowReorderIcon",
+          "type": "IconType<ColumnProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the drag handle to reorder rows.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowSpan",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Number of rows to span for grouping.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "selectionMode",
+          "type": "\"multiple\" | \"single\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Specifies the selection mode, valid values are \"single\", \"multiple\", \"radiobutton\" and \"checkbox\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "multiple",
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showAddButton",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "When enabled, a button is displayed to add more rules.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showApplyButton",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Displays a button to apply the column filtering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showClearButton",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Displays a button to clear the column filtering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showFilterMatchModes",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to show the match modes selector.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showFilterMenu",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to display the filter overlay.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showFilterMenuOptions",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to show the match modes selector and match operator selector.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showFilterOperator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "When enabled, match all and match any operator selector is displayed.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if a column is sortable.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortableDisabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, the data of columns with this property cannot be sorted or changed by the user.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortField",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the field to sort data by default.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "cellEditValidator",
+          "description": "Validator function to validate the cell input value.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnEvent",
+              "description": "Custom event."
+            }
+          ],
+          "returnType": "boolean"
+        },
+        {
+          "name": "filterFunction",
+          "description": "Custom filter function.",
+          "parameters": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "any",
+              "description": "Value of the filter event."
+            },
+            {
+              "name": "filter",
+              "optional": false,
+              "type": "any",
+              "description": "Filter of the filter event."
+            },
+            {
+              "name": "filterLocale",
+              "optional": false,
+              "type": "string",
+              "description": "Filter locale of the event."
+            },
+            {
+              "name": "params",
+              "optional": false,
+              "type": "ColumnFilterEvent",
+              "description": "Params of the filter event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onBeforeCellEditHide",
+          "description": "Callback to invoke before the cell editor is hidden.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnEvent",
+              "description": "Custom event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onBeforeCellEditShow",
+          "description": "Callback to invoke before the cell editor is shown. To prevent editor from showing return false or originalEvent.preventDefault().",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnEvent",
+              "description": "Custom event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCellEditCancel",
+          "description": "Callback to execute when editor is cancelled.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnEvent",
+              "description": "Custom event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCellEditComplete",
+          "description": "Callback to execute when editor is submitted.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnEvent",
+              "description": "Custom event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCellEditInit",
+          "description": "Callback to invoke when cell edit is initiated. To prevent editor from showing return false or originalEvent.preventDefault().",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnEvent",
+              "description": "Custom event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilterApplyClick",
+          "description": "Callback to invoke when the apply button is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnFilterApplyClickEvent",
+              "description": "Custom filter event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilterClear",
+          "description": "Callback to invoke when the filter meta is cleared.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilterConstraintAdd",
+          "description": "Callback to invoke when a new constraint is added.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnFilterConstraintAddEvent",
+              "description": "Custom filter event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilterConstraintRemove",
+          "description": "Callback to invoke when a constraint is removed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnFilterConstraintRemoveEvent",
+              "description": "Custom filter event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilterMatchModeChange",
+          "description": "Callback to invoke when the match mode option is changed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnFilterMatchModeChangeEvent",
+              "description": "Custom filter event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilterOperatorChange",
+          "description": "Callback to invoke when the filter operator option is changed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnFilterOperatorChangeEvent",
+              "description": "Custom filter event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "sortFunction",
+          "description": "Sort function for custom sorting.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "ColumnSortEvent",
+              "description": "Custom sort event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [],
+      "stats": {
+        "totalProperties": 68,
+        "requiredProperties": 0,
+        "optionalProperties": 68,
+        "callbacksCount": 14,
+        "methodsCount": 0
+      }
+    }
+  }
+}

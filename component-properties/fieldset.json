@@ -1,0 +1,216 @@
+{
+  "moduleName": "fieldset",
+  "description": "Fieldset is an input component that provides real-time suggestions when being typed.\n\n[Live Demo](https://www.primereact.org/fieldset/)",
+  "components": {
+    "Fieldset": {
+      "name": "Fieldset",
+      "description": "Fieldset is an input component that provides real-time suggestions when being typed.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "collapsed",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines the default visibility state of the content.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "collapseIcon",
+          "type": "IconType<FieldsetProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of an expanded tab.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "expandIcon",
+          "type": "IconType<FieldsetProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of an collapsed tab.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "legend",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Header text of the fieldset.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "pt",
+          "type": "FieldsetPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "toggleable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified, content can toggled by clicking the legend.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onClick",
+          "description": "Callback to invoke when fieldset is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLElement, MouseEvent>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCollapse",
+          "description": "Callback to invoke when an active tab is collapsed by clicking on the header.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLElement, MouseEvent>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onExpand",
+          "description": "Callback to invoke when a tab gets expanded.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLElement, MouseEvent>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onToggle",
+          "description": "Callback to invoke when a tab gets expanded.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "FieldsetToggleEvent",
+              "description": "Custom toggle event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getContent",
+          "description": "Used to get the content element of the fieldset.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLFieldSetElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 10,
+        "requiredProperties": 0,
+        "optionalProperties": 10,
+        "callbacksCount": 4,
+        "methodsCount": 2
+      }
+    }
+  }
+}

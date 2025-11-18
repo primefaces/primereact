@@ -1,0 +1,363 @@
+{
+  "moduleName": "speeddial",
+  "description": "When pressed, a floating action button can display multiple primary actions that can be performed on a page.\n\n[Live Demo](https://www.primereact.org/speeddial/)",
+  "components": {
+    "SpeedDial": {
+      "name": "SpeedDial",
+      "description": "When pressed, a floating action button can display multiple primary actions that can be performed on a page.",
+      "properties": [
+        {
+          "name": "buttonClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the button element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "buttonStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the button element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "buttonTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of button element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "direction",
+          "type": "\"left\" | \"right\" | \"up\" | \"down\" | \"up-left\" | \"up-right\" | \"down-left\" | \"down-right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "up",
+          "description": "Specifies the opening direction of actions. Valid values are 'up', 'down', 'left', 'right', 'up-left', 'up-right', 'down-left' and 'down-right'",
+          "deprecated": null,
+          "acceptedValues": [
+            "left",
+            "right",
+            "up",
+            "down",
+            "up-left",
+            "up-right",
+            "down-left",
+            "down-right"
+          ],
+          "formControl": "select"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the component is disabled.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "hideIcon",
+          "type": "IconType<SpeedDialProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Hide icon of the button element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "hideOnClickOutside",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether the actions close when clicked outside.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "mask",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show a mask element behind the speeddial.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "maskClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the mask element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "maskStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the mask element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "model",
+          "type": "MenuItem[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "MenuModel instance to define the action items.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "pt",
+          "type": "SpeedDialPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Radius for *circle types.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "rotateAnimation",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Defined to rotate showIcon when hideIcon is not present.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showIcon",
+          "type": "IconType<SpeedDialProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Show icon of the button element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "transitionDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "30",
+          "description": "Transition delay step for each action item.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "type",
+          "type": "\"linear\" | \"circle\" | \"semi-circle\" | \"quarter-circle\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "linear",
+          "description": "Specifies the opening type of actions.",
+          "deprecated": null,
+          "acceptedValues": [
+            "linear",
+            "circle",
+            "semi-circle",
+            "quarter-circle"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "visible",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Specifies the visibility of the overlay.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onClick",
+          "description": "Fired when the button element clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "MouseEvent<HTMLElement, MouseEvent>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onHide",
+          "description": "Fired when the actions are hidden.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Fired when the actions are visible.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onVisibleChange",
+          "description": "Fired when the visibility of element changed.",
+          "parameters": [
+            {
+              "name": "visible",
+              "optional": false,
+              "type": "boolean",
+              "description": "Custom visible change event"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "hide",
+          "description": "Used to hide the popup.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "show",
+          "description": "Used to show the popup.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 21,
+        "requiredProperties": 0,
+        "optionalProperties": 21,
+        "callbacksCount": 4,
+        "methodsCount": 3
+      }
+    }
+  }
+}

@@ -1,0 +1,1057 @@
+{
+  "name": "Dropdown",
+  "description": "Dropdown also known as Select, is used to choose an item from a collection of options.",
+  "properties": [
+    {
+      "name": "appendTo",
+      "type": "null | HTMLElement | \"self\" | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "document.body",
+      "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located.",
+      "deprecated": null,
+      "acceptedValues": [
+        "self"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to define a string that labels the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should automatically get focus on load.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "autoOptionFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether to focus on the first visible or selected element.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "checkmark",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether the selected option will be shown with a check mark.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "clearIcon",
+      "type": "IconType<DropdownProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the dropdown.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "collapseIcon",
+      "type": "IconType<DropdownProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of collapse action.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "dataKey",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "A property to uniquely match the value in options for better performance.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should be disabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "dropdownIcon",
+      "type": "IconType<DropdownProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the dropdown.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "editable",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, custom value instead of predefined options can be entered using the editable input field.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "emptyFilterMessage",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "No results found",
+      "description": "Template to display when filtering does not return any results.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "emptyMessage",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "No available options",
+      "description": "Text to display when there are no options available.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "filter",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When specified, displays an input field to filter the items on keyup.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterBy",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "label",
+      "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterClearIcon",
+      "type": "IconType<DropdownProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the filter to clear.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterDelay",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "300",
+      "description": "Delay in milliseconds before filtering the data.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "filterIcon",
+      "type": "IconType<DropdownProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the filter to search.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterInputAutoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When the panel is opened, it specifies that the filter input should focus automatically.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterLocale",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterMatchMode",
+      "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "contains",
+      "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "endsWith",
+        "startsWith",
+        "contains",
+        "equals",
+        "notEquals"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterPlaceholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Placeholder text to show when filter input is empty.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of filter element.",
+      "deprecated": "Since v9.3.0",
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "focusInputRef",
+      "type": "Ref<HTMLInputElement>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Reference of the focusable input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "focusOnHover",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "When enabled, the focus is placed on the hovered option.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "highlightOnSelect",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether the selected option will be add highlight class.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Unique identifier of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Identifier of the focusable input.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputRef",
+      "type": "Ref<HTMLSelectElement>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Reference of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should have invalid state style.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "itemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of items.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Displays a loader to indicate data load is in progress.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "loadingIcon",
+      "type": "IconType<DropdownProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The icon to show while indicating data load is in progress.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Maximum number of characters to be typed on an editable input.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionDisabled",
+      "type": "string | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "optionGroupChildren",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "items",
+      "description": "Property name or getter function that refers to the children options of option group.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionGroupLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name or getter function to use as the label of an option group.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionGroupTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of an option group item.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "optionLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the label field of an option when arbitrary objects are used as options instead of SelectItems.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "options",
+      "type": "SelectItemOptionsType",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of selectitems to display as the available options.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionValue",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "panelClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the overlay panel element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "panelFooterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of the panel footer.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "panelStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the overlay panel element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Default text to display when no option is selected.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "DropdownPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that an input field must be filled out before submitting the form.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "resetFilterOnHide",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Clears the filter value when hiding the dropdown.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "scrollHeight",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "200px",
+      "description": "Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "selectOnFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, the focused tab is activated.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showClear",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, a clear icon is displayed to clear the value.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showFilterClear",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, a clear icon is displayed to clear the filtered value.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showOnFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, overlay panel will be visible with input focus.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Index of the element in tabbing order.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Content of the tooltip.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "tooltipOptions",
+      "type": "TooltipOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "useOptionAsValue",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Whether the option should be used as the value for the select element.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "value",
+      "type": "any",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Value of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "valueTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of selected item.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "variant",
+      "type": "\"filled\" | \"outlined\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "outlined",
+      "description": "Specifies the input variant of the component.",
+      "deprecated": null,
+      "acceptedValues": [
+        "filled",
+        "outlined"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "virtualScrollerOptions",
+      "type": "VirtualScrollerProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onBlur",
+      "description": "Callback to invoke when the element loses focus.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FocusEvent<HTMLInputElement, Element>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onChange",
+      "description": "Callback to invoke on value change",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "DropdownChangeEvent",
+          "description": "Custom change event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContextMenu",
+      "description": "Callback to invoke on right-click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFilter",
+      "description": "Callback to invoke when the value is filtered.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "DropdownFilterEvent",
+          "description": "Custom filter event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFocus",
+      "description": "Callback to invoke when the element receives focus.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FocusEvent<HTMLInputElement, Element>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onHide",
+      "description": "Callback to invoke when the overlay is hidden.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onMouseDown",
+      "description": "Callback to invoke to when a mouse button is pressed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onShow",
+      "description": "Callback to invoke when the overlay is shown.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear",
+      "description": "Clear the currently selected value.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "description": "Used to focus the component.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "getFocusInput",
+      "description": "Used to get focusable input element.",
+      "parameters": [],
+      "returnType": "null | HTMLInputElement"
+    },
+    {
+      "name": "getInput",
+      "description": "Used to get input element.",
+      "parameters": [],
+      "returnType": "null | HTMLInputElement"
+    },
+    {
+      "name": "getOverlay",
+      "description": "Used to get overlay element.",
+      "parameters": [],
+      "returnType": "null | HTMLElement"
+    },
+    {
+      "name": "getVirtualScroller",
+      "description": "Used to get the options of inline virtualScroller component.",
+      "parameters": [],
+      "returnType": "null | VirtualScroller"
+    },
+    {
+      "name": "hide",
+      "description": "Hide the dropdown overlay panel.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "show",
+      "description": "Show the dropdown overlay panel.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 69,
+    "requiredProperties": 0,
+    "optionalProperties": 69,
+    "callbacksCount": 8,
+    "methodsCount": 9
+  }
+}

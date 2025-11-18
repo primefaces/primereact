@@ -1,0 +1,5 @@
+{
+  "moduleName": "overlayservice",
+  "description": "OverlayService allows all overlay components to communicate with each other.\n\n[Live Demo](https://www.primereact.org/dropdown/)",
+  "components": {}
+}

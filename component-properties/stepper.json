@@ -1,0 +1,217 @@
+{
+  "moduleName": "stepper",
+  "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.\n\n[Live Demo](https://www.primereact.org/stepper/)",
+  "components": {
+    "Stepper": {
+      "name": "Stepper",
+      "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.",
+      "properties": [
+        {
+          "name": "activeStep",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Active step index of stepper.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "end",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of end section.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "headerPosition",
+          "type": "\"left\" | \"top\" | \"bottom\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Position of the stepper panel header relative to the step number.",
+          "deprecated": null,
+          "acceptedValues": [
+            "left",
+            "top",
+            "bottom",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "linear",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the steps are clickable or not.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "horizontal",
+          "description": "Orientation of the stepper.",
+          "deprecated": null,
+          "acceptedValues": [
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "StepperPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "start",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of start section.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onChangeStep",
+          "description": "Callback to invoke when an active panel is changed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "StepperChangeEvent"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getActiveStep",
+          "description": "Used to get the current active step index.",
+          "parameters": [],
+          "returnType": "undefined | number"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "nextCallback",
+          "description": "Used to navigate to the next step.",
+          "parameters": [
+            {
+              "name": "e",
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "prevCallback",
+          "description": "Used to navigate to the previous step.",
+          "parameters": [
+            {
+              "name": "e",
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "setActiveStep",
+          "description": "Used to set the active step index.",
+          "parameters": [
+            {
+              "name": "step",
+              "type": "number",
+              "description": "Index of step to set as active"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 10,
+        "requiredProperties": 0,
+        "optionalProperties": 10,
+        "callbacksCount": 1,
+        "methodsCount": 5
+      }
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "moduleName": "scrolltop",
+  "description": "ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.\n\n[Live Demo](https://www.primereact.org/scrolltop/)",
+  "components": {
+    "ScrollTop": {
+      "name": "ScrollTop",
+      "description": "ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.",
+      "properties": [
+        {
+          "name": "behavior",
+          "type": "\"auto\" | \"smooth\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "smooth",
+          "description": "Defines the scrolling behavior, \"smooth\" adds an animation and \"auto\" scrolls with a jump.",
+          "deprecated": null,
+          "acceptedValues": [
+            "auto",
+            "smooth"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "icon",
+          "type": "IconType<ScrollTopProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the icon or JSX.Element for icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "ScrollTopPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "target",
+          "type": "\"window\" | \"parent\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "window",
+          "description": "Target of the ScrollTop, valid values are \"window\" and \"parent\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "window",
+            "parent"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "threshold",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "400",
+          "description": "Defines the threshold value of the vertical scroll position of the target to toggle the visibility.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onHide",
+          "description": "Callback to invoke when overlay becomes hidden.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Callback to invoke when overlay panel becomes visible.",
+          "parameters": [],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLButtonElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 11,
+        "requiredProperties": 0,
+        "optionalProperties": 11,
+        "callbacksCount": 2,
+        "methodsCount": 1
+      }
+    }
+  }
+}

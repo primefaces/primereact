@@ -1,0 +1,296 @@
+{
+  "moduleName": "menu",
+  "description": "Menu is a navigation/command component that supports dynamic and static positioning.\n\n[Live Demo](https://www.primereact.org/menu/)",
+  "components": {
+    "Menu": {
+      "name": "Menu",
+      "description": "Menu is a navigation/command component that supports dynamic and static positioning.",
+      "properties": [
+        {
+          "name": "appendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "autoZIndex",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to automatically manage layering.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "baseZIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Base zIndex value to use in layering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Specifies if pressing escape key should hide the Menu Popup.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "model",
+          "type": "MenuItem[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of menuitems.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "popup",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if menu would displayed as a popup.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "popupAlignment",
+          "type": "\"left\" | \"right\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "left",
+          "description": "In popup mode determines how the overlay is aligned with its target. Values either 'left' or 'right'.",
+          "deprecated": null,
+          "acceptedValues": [
+            "left",
+            "right"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "MenuPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "transitionOptions",
+          "type": "CSSTransitionProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onBlur",
+          "description": "Callback to invoke when menu loses focus.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFocus",
+          "description": "Callback to invoke when menu receives focus.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onHide",
+          "description": "Callback to invoke when a popup menu is hidden.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onShow",
+          "description": "Callback to invoke when a popup menu is shown.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getTarget",
+          "description": "Used to get target element.",
+          "parameters": [],
+          "returnType": "null | EventTarget"
+        },
+        {
+          "name": "hide",
+          "description": "Hides the popup menu.",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "show",
+          "description": "Displays the popup menu.",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "toggle",
+          "description": "Toggles the visibility of the popup menu.",
+          "parameters": [
+            {
+              "name": "event",
+              "type": "SyntheticEvent<Element, Event>",
+              "description": "Browser event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 13,
+        "requiredProperties": 0,
+        "optionalProperties": 13,
+        "callbacksCount": 4,
+        "methodsCount": 5
+      }
+    }
+  }
+}

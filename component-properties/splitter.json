@@ -1,0 +1,294 @@
+{
+  "moduleName": "splitter",
+  "description": "Splitter is utilized to separate and resize panels.\n\n[Live Demo](https://www.primereact.org/splitter/)\n\nHelper Components:\n\n-  SplitterPanel",
+  "components": {
+    "SplitterPanel": {
+      "name": "SplitterPanel",
+      "description": "SplitterPanel is a helper component for Splitter.",
+      "properties": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Splitter handle ARIA label for screenreader support.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Establishes relationships between the splitter and panel label element IDs.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ClassName of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Returns the value of element's id content attribute. Can be set to change it.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "minSize",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Minimum size of the element relative to 100%.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "pt",
+          "type": "SplitterPanelPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Size of the element relative to 100%.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        }
+      ],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 10,
+        "requiredProperties": 0,
+        "optionalProperties": 10,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    },
+    "Splitter": {
+      "name": "Splitter",
+      "description": "Splitter is utilized to separate and resize panels.",
+      "properties": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "gutterSize",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "4",
+          "description": "Size of the divider in pixels.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "layout",
+          "type": "\"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "horizontal",
+          "description": "Orientation of the panels, valid values are \"horizontal\" and \"vertical\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "SplitterPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "stateKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Storage identifier of a stateful Splitter.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "stateStorage",
+          "type": "\"local\" | \"session\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "session",
+          "description": "Defines where a stateful splitter keeps its state, valid values are \"session\" for sessionStorage and \"local\" for localStorage.",
+          "deprecated": null,
+          "acceptedValues": [
+            "local",
+            "session"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "5",
+          "description": "Step factor to increment/decrement the size of the panels while pressing the arrow keys.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onResizeEnd",
+          "description": "Callback to invoke when resize ends.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "SplitterResizeEndEvent",
+              "description": "Custom resize end event."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 9,
+        "requiredProperties": 0,
+        "optionalProperties": 9,
+        "callbacksCount": 1,
+        "methodsCount": 1
+      }
+    }
+  }
+}

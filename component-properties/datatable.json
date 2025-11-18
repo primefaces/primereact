@@ -1,0 +1,2171 @@
+{
+  "moduleName": "datatable",
+  "description": "DataTable displays data in tabular format.\n\n[Live Demo](https://www.primereact.org/datatable/)",
+  "components": {
+    "DataTable": {
+      "name": "DataTable",
+      "description": "DataTable displays data in tabular format.",
+      "properties": [
+        {
+          "name": "alwaysShowPaginator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to show it even there is only one page.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "breakpoint",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "960px",
+          "description": "The breakpoint to define the maximum width boundary when using stack responsive layout.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "cellMemo",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to enable cell memoization.\n\nWhen the memoization is enabled, be sure to:\n     1- Update the value prop (i.e., row data) to trigger a re-render of the cells of a given row.\n     2- Where necessary, use the spread operator (...) when updating the value prop objs which creates new fresh\n     objects and avoids mutating the same objects.\n\nWhen the memoization is disabled, a re-render of the datatable will trigger a re-render of all cells, which can\nlead to performance issues with large datasets and is therefore not recommended.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "cellMemoProps",
+          "type": "string[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "['rowData', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex',\n'editing', 'expanded', 'editingMeta', 'frozenCol', 'alignFrozenCol']",
+          "description": "The cell props to be checked at memoization.\n\nPossible cell props are:\n    'hostName', 'allowCellSelection', 'cellMemo', 'cellMemoProps', 'cellMemoPropsDepth', 'cellClassName', 'checkIcon', 'collapsedRowIcon',\n    'field', 'resolveFieldData', 'column', 'cProps', 'dataKey', 'editMode', 'editing', 'editingMeta', 'onEditingMetaChange', 'editingKey',\n    'getEditingRowData', 'expanded', 'expandedRowIcon', 'frozenRow', 'frozenCol', 'alignFrozenCol', 'index', 'isSelectable', 'onCheckboxChange',\n    'onClick', 'onMouseDown', 'onMouseUp', 'onRadioChange', 'onRowEditCancel', 'onRowEditInit', 'onRowEditSave', 'onRowToggle', 'responsiveLayout',\n    'rowData', 'rowEditorCancelIcon', 'rowEditorInitIcon', 'rowEditorSaveIcon', 'rowIndex', 'rowSpan', 'selectOnEdit', 'isRowSelected', 'isCellSelected',\n    'selectionAriaLabel', 'showRowReorderElement', 'showSelectionElement', 'tabIndex', 'getTabIndex', 'tableProps', 'tableSelector', 'value',\n    'getVirtualScrollerOption', 'ptCallbacks', 'metaData', 'unstyled', 'findNextSelectableCell', 'findPrevSelectableCell', 'findDownSelectableCell',\n    'findUpSelectableCell', 'focusOnElement', 'focusOnInit', 'updateStickyPosition'\n\nIMPORTANT: Including a function to be checked will in general disable the memoization in practice, since functions are\ncompared by reference.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "cellMemoPropsDepth",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "The comparison depth when checking cell props (e.g., rowData) at memoization.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "cellSelection",
+          "type": "true",
+          "typeCategory": "mixed",
+          "optional": false,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to cell selection is enabled or not.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "checkIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display in the checkbox.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "collapsedRowIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the row toggler to display the row as collapsed.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "columnResizeMode",
+          "type": "\"expand\" | \"fit\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "fit",
+          "description": "Used to define the resize mode of the columns, valid values are \"fit\" and \"expand\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "expand",
+            "fit"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "compareSelectionBy",
+          "type": "\"equals\" | \"deepEquals\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "deepEquals",
+          "description": "Algorithm to define if a row is selected, valid values are \"equals\" that compares by reference and \"deepEquals\" that compares all fields.",
+          "deprecated": null,
+          "acceptedValues": [
+            "equals",
+            "deepEquals"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "contextMenuSelection",
+          "type": "object",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Selected row in single mode or an array of values in multiple mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "csvSeparator",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": ",",
+          "description": "Character to use as the csv separator.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "currentPageReportTemplate",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "({currentPage} of {totalPages})",
+          "description": "Template of the current page report element. Available placeholders are {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "dataKey",
+          "type": "string | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "({currentPage} of {totalPages})",
+          "description": "Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "defaultSortOrder",
+          "type": "null | 0 | 1 | -1",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "({currentPage} of {totalPages})",
+          "description": "Default sort order of an unsorted column.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "dragSelection",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, a rectangle that can be dragged can be used to make a range selection.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "editingRows",
+          "type": "DataTableValueArray | DataTableEditingRows",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A collection of rows to represent the current editing data in row edit mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "editMode",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "null",
+          "description": "Defines editing mode, options are \"cell\" and \"row\".",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "emptyMessage",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "No results found",
+          "description": "Text to display when there is no data.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "expandableRowGroups",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Makes row groups toggleable, default is false.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "expandedRowIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the row toggler to display the row as expanded.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "expandedRows",
+          "type": "DataTableValueArray | DataTableExpandedRows",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A collection of rows or a map object row data keys that are expanded.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "exportFilename",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "download",
+          "description": "Name of the exported file.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterClearIcon",
+          "type": "IconType<DataTable<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display when the filter can be cleared.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "300",
+          "description": "Delay in milliseconds before filtering the data.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "filterDisplay",
+          "type": "\"menu\" | \"row\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "menu",
+          "description": "Layout of the filter elements, valid values are \"row\" and \"menu\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "menu",
+            "row"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "filterIcon",
+          "type": "IconType<DataTable<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display the current filtering status.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterLocale",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "undefined",
+          "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filters",
+          "type": "DataTableFilterMeta",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of FilterMetadata objects to provide external filters.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "first",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Index of the first row to be displayed.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "footer",
+          "type": "DataTableFooterTemplateType<TValue>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Custom footer content of the table.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "footerColumnGroup",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ColumnGroup component for footer.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "frozenRow",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": "false",
+          "description": "Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "frozenValue",
+          "type": "DataTableRowDataArray<TValue>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Items of the frozen part in scrollable DataTable.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "frozenWidth",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Width of the frozen part in scrollable DataTable.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "globalFilter",
+          "type": "null | string",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Value of the global filter to use in filtering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "globalFilterFields",
+          "type": "string[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Define fields to be filtered globally.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "globalFilterMatchMode",
+          "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notIn\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "contains",
+          "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "endsWith",
+            "startsWith",
+            "custom",
+            "contains",
+            "in",
+            "equals",
+            "notEquals",
+            "notIn",
+            "lt",
+            "lte",
+            "gt",
+            "gte"
+          ],
+          "formControl": "select"
+        },
+        {
+          "name": "groupRowsBy",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used for either be grouped by a separate grouping row or using rowspan.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "header",
+          "type": "DataTableHeaderTemplateType<TValue>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Custom header content of the table.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "headerColumnGroup",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ColumnGroup component for header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "lazy",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if data is loaded and interacted with in lazy manner.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Displays a loader to indicate data load is in progress.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loadingIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The icon to show while indicating data load is in progress.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "metaKeySelection",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "multiSortMeta",
+          "type": "null | DataTableSortMeta[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of SortMeta objects to sort the data by default in multiple sort mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "pageLinkSize",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "5",
+          "description": "Number of page links to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "paginator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified as true, enables the pagination.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "paginatorClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the paginator element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "paginatorDropdownAppendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "paginatorLeft",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content for the left side of the paginator.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "paginatorPosition",
+          "type": "\"both\" | \"top\" | \"bottom\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "bottom",
+          "description": "Position of the paginator, options are \"top\",\"bottom\" or \"both\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "both",
+            "top",
+            "bottom"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "paginatorRight",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content for the right side of the paginator.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "paginatorTemplate",
+          "type": "PaginatorTemplate",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown",
+          "description": "Template of the paginator. For details, refer to the template section of the paginator documentation for further options.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "pt",
+          "type": "DataTablePassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "removableSort",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, columns can have an un-sorted state.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "reorderableColumns",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, columns can be reordered using drag and drop.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "reorderableRows",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, rows can be reordered using drag and drop.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "reorderIndicatorDownIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines the reorder indicator down icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "reorderIndicatorUpIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines the reorder indicator up icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "resizableColumns",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, columns can be resized using drag and drop.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "responsiveLayout",
+          "type": "\"scroll\" | \"stack\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "scroll",
+          "description": "Defines the responsive mode, valid options are \"stack\" and \"scroll\".",
+          "deprecated": "since version 9.2.0",
+          "acceptedValues": [
+            "scroll",
+            "stack"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "rowEditorCancelIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display in the row editor cancel button.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowEditorInitIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display in the row editor init button.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowEditorSaveIcon",
+          "type": "IconType<DataTableProps<TValue>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display in the row editor save button.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowGroupFooterTemplate",
+          "type": "DataTableRowGroupFooterTemplateType<TValue>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Function to provide the content of row group footer.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowGroupHeaderTemplate",
+          "type": "DataTableRowGroupHeaderTemplateType<TValue>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Function to provide the content of row group header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowGroupMode",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines the row grouping mode, valid values are \"subheader\" and \"rowgroup\".",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "rowHover",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "When enabled, background of the rows change on hover.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Number of rows to display per page.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "rowsPerPageOptions",
+          "type": "number[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Array of integer values to display inside rows per page dropdown.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "scrollable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified, enables horizontal and/or vertical scrolling.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "scrollHeight",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Height of the scroll viewport.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "selectAll",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified, selects all rows on page.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "selection",
+          "type": "null | DataTableCellSelection<TValue>[]",
+          "typeCategory": "array",
+          "optional": false,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Selected cells.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "selectionAriaLabel",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A field property from the row to add Select {field} and Unselect {field} ARIA labels to checkbox/radio buttons.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "selectionAutoFocus",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "selectionMode",
+          "type": "\"multiple\"",
+          "typeCategory": "mixed",
+          "optional": false,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Specifies the selection mode, valid values are \"single\", \"multiple\", \"radiobutton\" and \"checkbox\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "multiple"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "selectionPageOnly",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "selectOnEdit",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showGridlines",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show grid lines between cells.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showHeaders",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to show headers.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showSelectAll",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Whether to show the select all checkbox inside the datatable's header.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"normal\" | \"large\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "normal",
+          "description": "Define to set alternative sizes. Valid values: \"small\", \"normal\" and \"large\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "small",
+            "normal",
+            "large"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortField",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Property of a row data used for sorting, defaults to field.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "sortIcon",
+          "type": "IconType<DataTable<TValue>, Object>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display the current sorting status.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "sortMode",
+          "type": "\"multiple\" | \"single\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "single",
+          "description": "Defines whether sorting works on single column or on multiple columns.",
+          "deprecated": null,
+          "acceptedValues": [
+            "multiple",
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortOrder",
+          "type": "SortOrder",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Order to sort the data by default.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "stateKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of a stateful table to use in state storage.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "stateStorage",
+          "type": "\"custom\" | \"local\" | \"session\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "session",
+          "description": "Defines where a stateful table keeps its state, valid values are \"session\" for sessionStorage, \"local\" for localStorage and \"custom\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "custom",
+            "local",
+            "session"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "stripedRows",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to displays rows with alternating colors.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "tableClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the table element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tableStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the table element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "totalRecords",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Number of total records, defaults to length of value when not defined.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "TValue",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of objects to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "virtualScrollerOptions",
+          "type": "VirtualScrollerProps",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.\n\nNote: Currently only vertical orientation mode is supported.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "cellClassName",
+          "description": "Function that takes the cell data and returns an object in {'styleclass' : condition} format to define a classname for a particular now.",
+          "parameters": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "any",
+              "description": "Value of the cell."
+            },
+            {
+              "name": "options",
+              "optional": false,
+              "type": "DataTableCellClassNameOptions<TValue>",
+              "description": "ClassName options."
+            }
+          ],
+          "returnType": "undefined | string | object"
+        },
+        {
+          "name": "customRestoreState",
+          "description": "A function to implement custom restoreState with stateStorage=\"custom\". Need to return state object.",
+          "parameters": [],
+          "returnType": "undefined | object"
+        },
+        {
+          "name": "customSaveState",
+          "description": "A function to implement custom saveState with stateStorage=\"custom\".",
+          "parameters": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "object",
+              "description": "The object to be stored."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "exportFunction",
+          "description": "A function to implement custom export. Need to return string value.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableExportFunctionEvent<TValue>",
+              "description": "Custom export function event."
+            }
+          ],
+          "returnType": "any"
+        },
+        {
+          "name": "isDataSelectable",
+          "description": "Function that returns a boolean to decide whether the data should be selectable.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableDataSelectableEvent",
+              "description": "Custom data selectable event."
+            }
+          ],
+          "returnType": "null | boolean"
+        },
+        {
+          "name": "onAllRowsSelect",
+          "description": "Callback to invoke when all rows are selected using the header checkbox.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableSelectEvent",
+              "description": "Custom select event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onAllRowsUnselect",
+          "description": "Callback to invoke when all rows are unselected using the header checkbox.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableUnselectEvent",
+              "description": "Custom unselect event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCellClick",
+          "description": "Callback to invoke on cell click.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableCellClickEvent<TValue>",
+              "description": "Custom cell click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCellSelect",
+          "description": "Callback to invoke on cell select.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableCellClickEvent<TValue>",
+              "description": "Custom select event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCellUnselect",
+          "description": "Callback to invoke on cell unselect.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableCellClickEvent<TValue>",
+              "description": "Custom unselect event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onColReorder",
+          "description": "Callback to invoke when a column is reordered.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableColReorderEvent",
+              "description": "Custom column reorder event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onColumnResizeEnd",
+          "description": "Callback to invoke when a column is resized.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableColumnResizeEndEvent",
+              "description": "Custom column resize end event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onColumnResizerClick",
+          "description": "Callback to invoke when a resizer element is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableColumnResizerClickEvent",
+              "description": "Custom column resizer click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onColumnResizerDoubleClick",
+          "description": "Callback to invoke when a resizer element is double clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableColumnResizerClickEvent",
+              "description": "Custom column resizer double click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onContextMenu",
+          "description": "Callback to invoke when a context menu is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEvent",
+              "description": "Custom row event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onContextMenuSelectionChange",
+          "description": "Callback to invoke when a row selected with right click.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableContextMenuMultipleSelectionChangeEvent<TValue>",
+              "description": "Custom row event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilter",
+          "description": "Callback to invoke on filtering.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableStateEvent",
+              "description": "Custom state event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onPage",
+          "description": "Callback to invoke on pagination.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableStateEvent",
+              "description": "Custom state event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowClick",
+          "description": "Callback to invoke when a row is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowClickEvent",
+              "description": "Custom row click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowCollapse",
+          "description": "Callback to invoke when a row is collapsed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEvent",
+              "description": "Custom row event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowDoubleClick",
+          "description": "Callback to invoke when a row is double clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowClickEvent",
+              "description": "Custom click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowEditCancel",
+          "description": "Callback to invoke when the cancel icon is clicked on row editing mode.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEditEvent",
+              "description": "Custom row edit event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowEditChange",
+          "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEditEvent",
+              "description": "Custom row edit event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowEditComplete",
+          "description": "Callback to invoke when row edit is completed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEditCompleteEvent",
+              "description": "Custom row edit complete event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowEditInit",
+          "description": "Callback to invoke when the editing icon is clicked on row editing mode.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEditEvent",
+              "description": "Custom row edit event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowEditSave",
+          "description": "Callback to invoke when the save icon is clicked on row editing mode.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEditSaveEvent<TValue>",
+              "description": "Custom row edit save event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowExpand",
+          "description": "Callback to invoke when a row is expanded.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowEvent",
+              "description": "Custom row event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowMouseEnter",
+          "description": "Callback to invoke when a row is hovered with mouse.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowMouseEvent",
+              "description": "Custom row mouse event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowMouseLeave",
+          "description": "Callback to invoke when a row is navigated away from with mouse.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowMouseEvent",
+              "description": "Custom row mouse event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowPointerDown",
+          "description": "Callback to invoke when a row pointerDown event occurs.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowPointerEvent",
+              "description": "Custom click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowPointerUp",
+          "description": "Callback to invoke when a row pointerUp event occurs.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowPointerEvent",
+              "description": "Custom click event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowReorder",
+          "description": "Callback to update the new order.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowReorderEvent<TValue>",
+              "description": "Custom row reorder event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowSelect",
+          "description": "Callback to invoke when a row is selected.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableSelectEvent",
+              "description": "Custom select event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowToggle",
+          "description": "Callback to invoke when a row is toggled or collapsed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableRowToggleEvent",
+              "description": "Custom row toggle event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowUnselect",
+          "description": "Callback to invoke when a row is unselected.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableUnselectEvent",
+              "description": "Custom unselect event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSelectAllChange",
+          "description": "Callback to invoke when select all value changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableSelectAllChangeEvent",
+              "description": "Custom select all change event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSelectionChange",
+          "description": "Callback to invoke when selection changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableSelectionCellMultipleChangeEvent<TValue>",
+              "description": "Custom selection change event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSort",
+          "description": "Callback to invoke on sort.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "DataTableStateEvent",
+              "description": "Custom state event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onStateRestore",
+          "description": "Callback to invoke table state is restored.",
+          "parameters": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "object",
+              "description": "Table state."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onStateSave",
+          "description": "Callback to invoke table state is saved.",
+          "parameters": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "object",
+              "description": "Table state."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onValueChange",
+          "description": "Callback to invoke after filtering and sorting to pass the rendered value.",
+          "parameters": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "DataTableRowDataArray<TValue>",
+              "description": "Value displayed by the table."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "rowClassName",
+          "description": "Function that takes the row data and returns an object in {'styleclass' : condition} format to define a classname for a particular now.",
+          "parameters": [
+            {
+              "name": "data",
+              "optional": false,
+              "type": "DataTableRowData<TValue>",
+              "description": "Value displayed by the table."
+            },
+            {
+              "name": "options",
+              "optional": false,
+              "type": "DataTableRowClassNameOptions<TValue>"
+            }
+          ],
+          "returnType": "undefined | string | object"
+        },
+        {
+          "name": "rowEditValidator",
+          "description": "Callback to invoke to validate the editing row when the save icon is clicked on row editing mode.",
+          "parameters": [
+            {
+              "name": "data",
+              "optional": false,
+              "type": "DataTableRowData<TValue>",
+              "description": "Editing row data."
+            },
+            {
+              "name": "options",
+              "optional": false,
+              "type": "DataTableRowEditValidatorOptions<TValue>"
+            }
+          ],
+          "returnType": "boolean"
+        },
+        {
+          "name": "rowExpansionTemplate",
+          "description": "Function that receives the row data as the parameter and returns the expanded row content. You can override the rendering of the content by setting options.customRendering = true.",
+          "parameters": [
+            {
+              "name": "data",
+              "optional": false,
+              "type": "DataTableRowData<TValue>",
+              "description": "Editing row data."
+            },
+            {
+              "name": "options",
+              "optional": false,
+              "type": "DataTableRowExpansionTemplate",
+              "description": "Options for the row expansion template."
+            }
+          ],
+          "returnType": "ReactNode"
+        },
+        {
+          "name": "showRowReorderElement",
+          "description": "Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row.",
+          "parameters": [
+            {
+              "name": "data",
+              "optional": false,
+              "type": "DataTableRowData<TValue>",
+              "description": "Editing row data."
+            },
+            {
+              "name": "options",
+              "optional": false,
+              "type": "DataTableShowRowReorderElementOptions<TValue>",
+              "description": "Options for the row reorder element."
+            }
+          ],
+          "returnType": "null | boolean"
+        },
+        {
+          "name": "showSelectionElement",
+          "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row.",
+          "parameters": [
+            {
+              "name": "data",
+              "optional": false,
+              "type": "DataTableRowData<TValue>",
+              "description": "Editing row data."
+            },
+            {
+              "name": "options",
+              "optional": false,
+              "type": "DataTableShowSelectionElementOptions<TValue>",
+              "description": "Options for the row reorder element."
+            }
+          ],
+          "returnType": "null | boolean"
+        }
+      ],
+      "methods": [
+        {
+          "name": "clearState",
+          "description": "Clears the table state.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "closeEditingCell",
+          "description": "Closes the current editing cell when incell editing is enabled.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "closeEditingRows",
+          "description": "Closes the current editing rows when row editing is enabled.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "exportCSV",
+          "description": "Exports the data to CSV format.",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "Object",
+              "description": "Options to export"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "filter",
+          "description": "Filters the data.",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "T",
+              "description": "The filter value"
+            },
+            {
+              "name": "field",
+              "type": "string",
+              "description": "The filter field"
+            },
+            {
+              "name": "mode",
+              "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"notIn\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+              "description": "Filter match mode"
+            },
+            {
+              "name": "index",
+              "type": "number",
+              "description": "Index of the filter"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        },
+        {
+          "name": "getFilterMeta",
+          "description": "Retrieves the currently applied filters for the data table.",
+          "parameters": [],
+          "returnType": "undefined | DataTableFilterMeta"
+        },
+        {
+          "name": "getProcessedData",
+          "description": "Used to get the processed data.",
+          "parameters": [],
+          "returnType": "TValue"
+        },
+        {
+          "name": "getSortMeta",
+          "description": "Retrieves the currently applied multiple sort metadata for the data table.",
+          "parameters": [],
+          "returnType": "undefined | DataTableSortMeta[]"
+        },
+        {
+          "name": "getTable",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLTableElement"
+        },
+        {
+          "name": "getVirtualScroller",
+          "description": "Used to get the virtual scroller.",
+          "parameters": [],
+          "returnType": "null | VirtualScroller"
+        },
+        {
+          "name": "reset",
+          "description": "Resets sort, filter, paginator and columnorder state.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "resetColumnOrder",
+          "description": "Resets column order when reorderableColumns is enabled.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "resetResizeColumnsWidth",
+          "description": "Resets resize columns width.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "resetScroll",
+          "description": "Resets scroll position.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "restoreColumnWidths",
+          "description": "Restores the column widths.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "restoreState",
+          "description": "Restores the table state.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "restoreTableState",
+          "description": "Stored states can be loaded at any time using this method if there is a stateStorage property.",
+          "parameters": [
+            {
+              "name": "state",
+              "type": "any",
+              "description": "The state to restore"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "saveState",
+          "description": "Saves the state.",
+          "parameters": [],
+          "returnType": "void"
+        },
+        {
+          "name": "setFilterMeta",
+          "description": "Sets the filters for the data table.",
+          "parameters": [
+            {
+              "name": "filters",
+              "type": "DataTableFilterMeta",
+              "description": "The filters to be applied to the data table."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "setSortMeta",
+          "description": "Sets the multiple sort metadata for the data table.",
+          "parameters": [
+            {
+              "name": "sorts",
+              "type": "DataTableSortMeta[]",
+              "description": "The sorts to be applied to the data table."
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 103,
+        "requiredProperties": 3,
+        "optionalProperties": 100,
+        "callbacksCount": 46,
+        "methodsCount": 21
+      }
+    }
+  }
+}

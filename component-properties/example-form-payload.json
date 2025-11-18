@@ -1,0 +1,333 @@
+{
+  "formMetadata": {
+    "id": "user-profile-form",
+    "title": "Formulaire de Profil Utilisateur",
+    "version": "1.0.0",
+    "createdAt": "2025-11-18T20:17:04.205Z",
+    "description": "Exemple de payload pour la génération de formulaire basé sur les composants PrimeReact"
+  },
+  "layout": {
+    "type": "grid",
+    "columns": 12,
+    "gap": "1rem",
+    "responsive": true
+  },
+  "components": [
+    {
+      "id": "comp-1",
+      "componentType": "InputText",
+      "module": "inputtext",
+      "label": "Nom complet",
+      "props": {
+        "placeholder": "Entrez votre nom",
+        "required": true,
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 6,
+        "order": 1
+      },
+      "validation": {
+        "required": true,
+        "minLength": 3,
+        "maxLength": 50
+      }
+    },
+    {
+      "id": "comp-2",
+      "componentType": "InputText",
+      "module": "inputtext",
+      "label": "Email",
+      "props": {
+        "type": "email",
+        "placeholder": "exemple@email.com",
+        "required": true,
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 6,
+        "order": 2
+      },
+      "validation": {
+        "required": true,
+        "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+      }
+    },
+    {
+      "id": "comp-3",
+      "componentType": "InputNumber",
+      "module": "inputnumber",
+      "label": "Âge",
+      "props": {
+        "min": 18,
+        "max": 100,
+        "showButtons": true,
+        "required": true,
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 4,
+        "order": 3
+      },
+      "validation": {
+        "required": true,
+        "min": 18,
+        "max": 100
+      }
+    },
+    {
+      "id": "comp-4",
+      "componentType": "Dropdown",
+      "module": "dropdown",
+      "label": "Pays",
+      "props": {
+        "options": [
+          { "label": "France", "value": "FR" },
+          { "label": "Belgique", "value": "BE" },
+          { "label": "Suisse", "value": "CH" },
+          { "label": "Canada", "value": "CA" }
+        ],
+        "placeholder": "Sélectionnez un pays",
+        "filter": true,
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 4,
+        "order": 4
+      },
+      "validation": {
+        "required": true
+      }
+    },
+    {
+      "id": "comp-5",
+      "componentType": "Calendar",
+      "module": "calendar",
+      "label": "Date de naissance",
+      "props": {
+        "dateFormat": "dd/mm/yy",
+        "showIcon": true,
+        "maxDate": "today",
+        "yearNavigator": true,
+        "monthNavigator": true,
+        "yearRange": "1924:2007",
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 4,
+        "order": 5
+      },
+      "validation": {
+        "required": true
+      }
+    },
+    {
+      "id": "comp-6",
+      "componentType": "MultiSelect",
+      "module": "multiselect",
+      "label": "Langues parlées",
+      "props": {
+        "options": [
+          { "label": "Français", "value": "fr" },
+          { "label": "Anglais", "value": "en" },
+          { "label": "Espagnol", "value": "es" },
+          { "label": "Allemand", "value": "de" },
+          { "label": "Italien", "value": "it" }
+        ],
+        "placeholder": "Sélectionnez vos langues",
+        "display": "chip",
+        "filter": true,
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 6,
+        "order": 6
+      }
+    },
+    {
+      "id": "comp-7",
+      "componentType": "AutoComplete",
+      "module": "autocomplete",
+      "label": "Ville",
+      "props": {
+        "suggestions": [],
+        "placeholder": "Recherchez votre ville",
+        "dropdown": true,
+        "forceSelection": true,
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 6,
+        "order": 7
+      },
+      "dataSource": {
+        "type": "api",
+        "endpoint": "/api/cities",
+        "method": "GET",
+        "searchParam": "query"
+      }
+    },
+    {
+      "id": "comp-8",
+      "componentType": "InputTextarea",
+      "module": "inputtextarea",
+      "label": "Biographie",
+      "props": {
+        "rows": 5,
+        "cols": 30,
+        "autoResize": true,
+        "placeholder": "Parlez-nous de vous...",
+        "className": "w-full"
+      },
+      "layout": {
+        "col": 12,
+        "order": 8
+      },
+      "validation": {
+        "maxLength": 500
+      }
+    },
+    {
+      "id": "comp-9",
+      "componentType": "Checkbox",
+      "module": "checkbox",
+      "label": "J'accepte les conditions d'utilisation",
+      "props": {
+        "binary": true,
+        "required": true
+      },
+      "layout": {
+        "col": 12,
+        "order": 9
+      },
+      "validation": {
+        "required": true,
+        "mustBeTrue": true
+      }
+    },
+    {
+      "id": "comp-10",
+      "componentType": "Rating",
+      "module": "rating",
+      "label": "Évaluez notre service",
+      "props": {
+        "stars": 5,
+        "cancel": false
+      },
+      "layout": {
+        "col": 6,
+        "order": 10
+      }
+    },
+    {
+      "id": "comp-11",
+      "componentType": "Slider",
+      "module": "slider",
+      "label": "Niveau d'expérience",
+      "props": {
+        "min": 0,
+        "max": 10,
+        "step": 1
+      },
+      "layout": {
+        "col": 6,
+        "order": 11
+      }
+    },
+    {
+      "id": "comp-12",
+      "componentType": "FileUpload",
+      "module": "fileupload",
+      "label": "Photo de profil",
+      "props": {
+        "mode": "basic",
+        "accept": "image/*",
+        "maxFileSize": 1000000,
+        "auto": true,
+        "chooseLabel": "Choisir une photo"
+      },
+      "layout": {
+        "col": 12,
+        "order": 12
+      }
+    },
+    {
+      "id": "comp-13",
+      "componentType": "Button",
+      "module": "button",
+      "props": {
+        "label": "Enregistrer",
+        "icon": "pi pi-check",
+        "iconPos": "right",
+        "severity": "success",
+        "type": "submit",
+        "raised": true,
+        "className": "w-full md:w-auto"
+      },
+      "layout": {
+        "col": 6,
+        "order": 13
+      }
+    },
+    {
+      "id": "comp-14",
+      "componentType": "Button",
+      "module": "button",
+      "props": {
+        "label": "Annuler",
+        "icon": "pi pi-times",
+        "severity": "secondary",
+        "outlined": true,
+        "className": "w-full md:w-auto"
+      },
+      "layout": {
+        "col": 6,
+        "order": 14
+      },
+      "actions": {
+        "onClick": "resetForm"
+      }
+    }
+  ],
+  "validationRules": {
+    "global": {
+      "validateOnBlur": true,
+      "validateOnChange": false
+    }
+  },
+  "submitConfig": {
+    "method": "POST",
+    "endpoint": "/api/user/profile",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "successMessage": "Profil enregistré avec succès !",
+    "errorMessage": "Erreur lors de l'enregistrement du profil",
+    "redirectOnSuccess": "/dashboard"
+  },
+  "styling": {
+    "theme": "lara-light-blue",
+    "customCSS": {
+      "form": "p-fluid",
+      "fieldWrapper": "field mb-4"
+    }
+  },
+  "metadata": {
+    "generatedFrom": "PrimeReact Component Properties v10",
+    "extractedProperties": {
+      "Button": 23,
+      "InputText": 12,
+      "InputNumber": 47,
+      "Dropdown": 69,
+      "Calendar": 79,
+      "MultiSelect": 74,
+      "AutoComplete": 55,
+      "InputTextarea": 11,
+      "Checkbox": 24,
+      "Rating": 17,
+      "Slider": 12,
+      "FileUpload": 36
+    },
+    "totalComponentsUsed": 12
+  }
+}

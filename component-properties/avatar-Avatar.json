@@ -1,0 +1,203 @@
+{
+  "name": "Avatar",
+  "description": "Avatar represents people using icons, labels and images.",
+  "properties": [
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "icon",
+      "type": "IconType<AvatarProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines the icon to display.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "image",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines the image to display.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "imageAlt",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "avatar",
+      "description": "It specifies an alternate text for an image, if the image cannot be displayed.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "imageFallback",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "default",
+      "description": "Defines a fallback image or URL if the main image fails to load. If \"default\" will fallback to label then icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines the text to display.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "AvatarPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "shape",
+      "type": "\"square\" | \"circle\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "square",
+      "description": "Shape of the element.",
+      "deprecated": null,
+      "acceptedValues": [
+        "square",
+        "circle"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "size",
+      "type": "\"normal\" | \"large\" | \"xlarge\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "normal",
+      "description": "Size of the element.",
+      "deprecated": null,
+      "acceptedValues": [
+        "normal",
+        "large",
+        "xlarge"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "template",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of the content.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onClick",
+      "description": "Callback to invoke on click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onImageError",
+      "description": "This event is triggered if an error occurs while loading an image file.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 12,
+    "requiredProperties": 0,
+    "optionalProperties": 12,
+    "callbacksCount": 2,
+    "methodsCount": 1
+  }
+}

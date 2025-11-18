@@ -1,0 +1,198 @@
+{
+  "name": "TabView",
+  "description": "TabView is a container component to group content with tabs.",
+  "properties": [
+    {
+      "name": "activeIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "0",
+      "description": "Active index of the TabView.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "panelContainerClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the panels container of the tabview.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "panelContainerStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the panels container of the tabview.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "pt",
+      "type": "TabViewPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "renderActiveOnly",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to render the contents of the selected tab or all tabs.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "scrollable",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled displays buttons at each side of the tab headers to scroll the tab list.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onBeforeTabChange",
+      "description": "Callback to invoke before an active tab is changed. Return false to prevent tab from changing.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TabViewTabChangeEvent",
+          "description": "Custom tab change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onBeforeTabClose",
+      "description": "Callback to invoke before an active tab is close. Return false to prevent tab from closing.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TabViewTabCloseEvent",
+          "description": "Custom tab close event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTabChange",
+      "description": "Callback to invoke when an active tab is changed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TabViewTabChangeEvent",
+          "description": "Custom tab change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTabClose",
+      "description": "Callback to invoke when an active tab is closed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TabViewTabCloseEvent",
+          "description": "Custom tab close event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "reset",
+      "description": "Resets all states.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 9,
+    "requiredProperties": 0,
+    "optionalProperties": 9,
+    "callbacksCount": 4,
+    "methodsCount": 2
+  }
+}

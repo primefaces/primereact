@@ -1,0 +1,161 @@
+{
+  "name": "Accordion",
+  "description": "Accordion groups a collection of contents in tabs.",
+  "properties": [
+    {
+      "name": "activeIndex",
+      "type": "null | number | number[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Active index or indexes of the element. Use an array of numbers for multiple indexes.\nThe  multiple  prop must be set to true in order to specify multiple indexes.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "collapseIcon",
+      "type": "IconType<AccordionProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of an expanded tab.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "expandIcon",
+      "type": "IconType<AccordionProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of a collapsed tab.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "multiple",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, multiple tabs can be activated at the same time.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "pt",
+      "type": "AccordionPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onTabChange",
+      "description": "Callback to invoke when state of the accordion changes.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AccordionTabChangeEvent",
+          "description": "Custom tab close event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTabClose",
+      "description": "Callback to invoke when an active tab is collapsed by clicking on the header.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AccordionTabCloseEvent",
+          "description": "Custom tab close event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onTabOpen",
+      "description": "Callback to invoke when a tab gets expanded.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AccordionTabOpenEvent",
+          "description": "Custom tab open event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 8,
+    "requiredProperties": 0,
+    "optionalProperties": 8,
+    "callbacksCount": 3,
+    "methodsCount": 1
+  }
+}

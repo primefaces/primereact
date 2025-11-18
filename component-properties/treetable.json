@@ -1,0 +1,1272 @@
+{
+  "moduleName": "treetable",
+  "description": "TreeTable is used to display hierarchical data in tabular format.\n\n[Live Demo](https://www.primereact.org/treetable/)",
+  "components": {
+    "TreeTable": {
+      "name": "TreeTable",
+      "description": "TreeTable is used to display hierarchical data in tabular format.",
+      "properties": [
+        {
+          "name": "alwaysShowPaginator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether to show it even there is only one page.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "checkboxIcon",
+          "type": "IconType<TreeTableProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon of the checkbox when checked.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the node.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "columnResizeMode",
+          "type": "\"expand\" | \"fit\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "fit",
+          "description": "Defines whether the overall table width should change on column resize, valid values are \"fit\" and \"expand\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "expand",
+            "fit"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "contextMenuSelectionKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A single key to control the selection with the context menu.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "currentPageReportTemplate",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "({currentPage} of {totalPages})",
+          "description": "Template of the current page report element. Available placeholders are {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "defaultSortOrder",
+          "type": "null | 0 | 1 | -1",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "1",
+          "description": "Default sort order of an unsorted column.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "emptyMessage",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "No results found",
+          "description": "Text to display when there is no data.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "expandedKeys",
+          "type": "TreeTableExpandedKeysType",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of keys to represent the state of the tree expansion state in controlled mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "300",
+          "description": "Delay in milliseconds before filtering the data.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "filterLocale",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "undefined",
+          "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "filterMode",
+          "type": "\"strict\" | \"lenient\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "lenient",
+          "description": "Mode for filtering valid values are lenient and strict. Default is lenient.",
+          "deprecated": null,
+          "acceptedValues": [
+            "strict",
+            "lenient"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "filters",
+          "type": "TreeTableFilterMeta",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of FilterMetadata objects to provide external filters.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "first",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Index of the first row to be displayed.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Footer content of the table.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "footerColumnGroup",
+          "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ColumnCroup component for footer.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "frozenFooterColumnGroup",
+          "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ColumnCroup component for footer of frozen columns.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "frozenHeaderColumnGroup",
+          "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ColumnCroup component for header of frozen columns.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "frozenWidth",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Width of the frozen part in scrollable DataTable.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "globalFilter",
+          "type": "null | string",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Value of the global filter to use in filtering.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "globalFilterMatchMode",
+          "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"notIn\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "contains",
+          "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "endsWith",
+            "startsWith",
+            "custom",
+            "contains",
+            "in",
+            "equals",
+            "notEquals",
+            "notContains",
+            "notIn",
+            "lt",
+            "lte",
+            "gt",
+            "gte",
+            "between",
+            "dateIs",
+            "dateIsNot",
+            "dateBefore",
+            "dateAfter"
+          ],
+          "formControl": "select"
+        },
+        {
+          "name": "header",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Header content of the table.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "headerColumnGroup",
+          "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "ColumnCroup component for header.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "lazy",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if data is loaded and interacted with in lazy manner.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Displays a loader to indicate data load is in progress.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loadingIcon",
+          "type": "IconType<TreeTableProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The icon to show while indicating data load is in progress.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "metaKeySelection",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "multiSortMeta",
+          "type": "null | TreeTableSortMeta[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of SortMeta objects to sort the data by default in multiple sort mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "pageLinkSize",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "5",
+          "description": "Number of page links to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "paginator",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified as true, enables the pagination.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "paginatorClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the paginator element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "paginatorDropdownAppendTo",
+          "type": "null | HTMLElement | \"self\" | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "document.body",
+          "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+          "deprecated": null,
+          "acceptedValues": [
+            "self"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "paginatorLeft",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content for the left side of the paginator.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "paginatorPosition",
+          "type": "\"both\" | \"top\" | \"bottom\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "bottom",
+          "description": "Position of the paginator, options are \"top\",\"bottom\" or \"both\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "both",
+            "top",
+            "bottom"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "paginatorRight",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Content for the right side of the paginator.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "paginatorTemplate",
+          "type": "PaginatorTemplate",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown",
+          "description": "Template of the paginator. For details, refer to the template section of the paginator documentation for further options.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "propagateSelectionDown",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether checkbox selections propagate to descendant nodes.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "propagateSelectionUp",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Whether checkbox selections propagate to ancestor nodes.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "TreeTablePassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "removableSort",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, columns can have an un-sorted state.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "reorderableColumns",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, columns can be reordered using drag and drop.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "reorderIndicatorDownIcon",
+          "type": "IconType<TreeTableProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines the reorder indicator down icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "reorderIndicatorUpIcon",
+          "type": "IconType<TreeTableProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines the reorder indicator up icon.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "resizableColumns",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, columns can be resized using drag and drop.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "rowHover",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, background of the rows change on hover.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Number of rows to display per page.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "rowsPerPageOptions",
+          "type": "number[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Array of integer values to display inside rows per page dropdown.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "scrollable",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When specified, enables horizontal and/or vertical scrolling.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "scrollHeight",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Height of the scroll viewport.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "selectionKeys",
+          "type": "null | string | TreeTableSelectionKeysType | TreeTableSelectionKeysType[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "A single or an array of keys to control the selection state.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "selectionMode",
+          "type": "\"multiple\" | \"checkbox\" | \"single\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Defines the selection mode, valid values \"single\", \"multiple\", and \"checkbox\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "multiple",
+            "checkbox",
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "selectOnEdit",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showGridlines",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show grid lines between cells.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortField",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Name of the field to sort data by default.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "sortIcon",
+          "type": "IconType<TreeTableProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Icon to display the current sorting status.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "sortMode",
+          "type": "\"multiple\" | \"single\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "single",
+          "description": "Defines whether sorting works on single column or on multiple columns.",
+          "deprecated": null,
+          "acceptedValues": [
+            "multiple",
+            "single"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "sortOrder",
+          "type": "null | 0 | 1 | -1",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Order to sort the data by default.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "stateKey",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of a stateful table to use in state storage.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "stateStorage",
+          "type": "\"custom\" | \"local\" | \"session\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "session",
+          "description": "Defines where a stateful table keeps its state, valid values are \"session\" for sessionStorage, \"local\" for localStorage and \"custom\".",
+          "deprecated": null,
+          "acceptedValues": [
+            "custom",
+            "local",
+            "session"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "stripedRows",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to displays rows with alternating colors.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "tableClassName",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the table element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "tableStyle",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the table element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "togglerTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Template of toggler element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "totalRecords",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Number of total records, defaults to length of value when not defined.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "unstyled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, it removes component related styles in the core.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "value",
+          "type": "TreeNode[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of treenodes to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "customRestoreState",
+          "description": "A function to implement custom restoreState with stateStorage=\"custom\". Need to return state object.",
+          "parameters": [],
+          "returnType": "undefined | object"
+        },
+        {
+          "name": "customSaveState",
+          "description": "A function to implement custom saveState with stateStorage=\"custom\".",
+          "parameters": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "object",
+              "description": "The object to be stored."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onCollapse",
+          "description": "Callback to invoke when a node is collapsed.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableEvent",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onColReorder",
+          "description": "Callback to invoke when a column is reordered.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableColReorderEvent",
+              "description": "Custom column reorder event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onColumnResizeEnd",
+          "description": "Callback to invoke when a column is resized.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableColumnResizeEndEvent",
+              "description": "Custom resize event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onContextMenu",
+          "description": "Callback to invoke when a context menu is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableEvent",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onContextMenuSelectionChange",
+          "description": "Callback to invoke when selection changes with a context menu.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableSelectionEvent",
+              "description": "Custom selection event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onExpand",
+          "description": "Callback to invoke when a node is expanded.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableEvent",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onFilter",
+          "description": "Callback to invoke on filtering.",
+          "parameters": [
+            {
+              "name": "filters",
+              "optional": false,
+              "type": "TreeTableFilterMeta",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onPage",
+          "description": "Callback to invoke on pagination.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTablePageEvent",
+              "description": "Custom page event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowClick",
+          "description": "Callback to invoke when a row is clicked.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableEvent",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowMouseEnter",
+          "description": "Callback to invoke when a row is hovered with mouse.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableRowMouseEvent",
+              "description": "Custom row mouse event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onRowMouseLeave",
+          "description": "Callback to invoke when a row is navigated away from with mouse.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableRowMouseEvent",
+              "description": "Custom row mouse event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSelect",
+          "description": "Callback to invoke when a node is selected.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableEvent",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSelectionChange",
+          "description": "Callback to invoke when selection changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableSelectionEvent",
+              "description": "Custom selection event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onSort",
+          "description": "Callback to invoke on sort.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableSortEvent",
+              "description": "Custom sort event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onStateRestore",
+          "description": "Callback to invoke table state is restored.",
+          "parameters": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "object",
+              "description": "Table state."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onStateSave",
+          "description": "Callback to invoke table state is saved.",
+          "parameters": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "object",
+              "description": "Table state."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onToggle",
+          "description": "Callback to invoke when a node is toggled.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableToggleEvent",
+              "description": "Custom toggle event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onUnselect",
+          "description": "Callback to invoke when a node is unselected.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "TreeTableEvent",
+              "description": "Custom treetable event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onValueChange",
+          "description": "Callback to invoke after filtering and sorting to pass the rendered value.",
+          "parameters": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "undefined | TreeNode[]",
+              "description": "Value displayed by the table."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "rowClassName",
+          "description": "Function that takes the row data and returns an object in {'styleclass' : condition} format to define a classname for a particular now.",
+          "parameters": [
+            {
+              "name": "data",
+              "optional": false,
+              "type": "TreeNode",
+              "description": "Value displayed by the treetable."
+            }
+          ],
+          "returnType": "object"
+        }
+      ],
+      "methods": [
+        {
+          "name": "filter",
+          "description": "Filters the data.",
+          "parameters": [
+            {
+              "name": "value",
+              "type": "T",
+              "description": "The filter value"
+            },
+            {
+              "name": "field",
+              "type": "string",
+              "description": "The filter field"
+            },
+            {
+              "name": "mode",
+              "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notIn\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
+              "description": "Filter match mode."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "getElement",
+          "description": "Used to get container element.",
+          "parameters": [],
+          "returnType": "null | HTMLDivElement"
+        }
+      ],
+      "stats": {
+        "totalProperties": 71,
+        "requiredProperties": 0,
+        "optionalProperties": 71,
+        "callbacksCount": 22,
+        "methodsCount": 2
+      }
+    }
+  }
+}

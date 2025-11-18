@@ -1,0 +1,187 @@
+{
+  "name": "StyleClass",
+  "description": "StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.",
+  "properties": [
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "enterActiveClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add during enter animation.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "enterClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add when item begins to get displayed.",
+      "deprecated": "since 10.5.2 Use 'enterFromClassName' option instead.",
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "enterFromClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add when item begins to get displayed.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "enterToClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add when item begins to get displayed.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "hideOnOutsideClick",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether to trigger leave animation when outside of the element is clicked.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "leaveActiveClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add during leave animation.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "leaveClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add when item begins to get hidden.",
+      "deprecated": "since 10.5.2 Use 'leaveFromClassName' option instead.",
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "leaveFromClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add when item begins to get hidden.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "leaveToClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class to add when leave animation is completed.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "nodeRef",
+      "type": "MutableRefObject<ReactNode>",
+      "typeCategory": "component",
+      "optional": false,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "A React reference to DOM element that need to specify. Required.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "selector",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Selector to define the target element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "toggleClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Adds or removes a class when no enter-leave animation is required.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    }
+  ],
+  "callbacks": [],
+  "methods": [
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLElement"
+    },
+    {
+      "name": "getTarget",
+      "description": "Used to get target element.",
+      "parameters": [],
+      "returnType": "null | HTMLElement"
+    }
+  ],
+  "stats": {
+    "totalProperties": 13,
+    "requiredProperties": 1,
+    "optionalProperties": 12,
+    "callbacksCount": 0,
+    "methodsCount": 2
+  }
+}

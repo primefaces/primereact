@@ -1,0 +1,794 @@
+{
+  "name": "TreeSelect",
+  "description": "TreeSelect is a form component to choose from hierarchical data.",
+  "properties": [
+    {
+      "name": "appendTo",
+      "type": "null | HTMLElement | \"self\" | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "document.body",
+      "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+      "deprecated": null,
+      "acceptedValues": [
+        "self"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to define a string that labels the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should automatically get focus on load.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "clearIcon",
+      "type": "IconType<TreeSelectProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the dropdown.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "closeIcon",
+      "type": "IconType<TreeSelectProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the close button.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should be disabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "display",
+      "type": "\"comma\" | \"chip\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "comma",
+      "description": "Defines how the selected items are displayed, valid values are \"comma\" and \"chip\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "comma",
+        "chip"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "dropdownIcon",
+      "type": "IconType<TreeSelectProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the dropdown.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "emptyMessage",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "No available options",
+      "description": "Text to display when there is no data.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "expandedKeys",
+      "type": "TreeSelectExpandedKeysType",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of keys to represent the state of the treeselect expansion state in controlled mode.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filter",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When specified, displays an input field to filter the items.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterBy",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "label",
+      "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterDelay",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "300",
+      "description": "Delay in milliseconds before filtering the data.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "filterIcon",
+      "type": "IconType<TreeSelectProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the filter.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterInputAutoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "When the panel is opened, it specifies that the filter input should focus automatically.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterLocale",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "undefined",
+      "description": "Locale to use in filtering. The default locale is the host environment's current locale.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterMode",
+      "type": "\"strict\" | \"lenient\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "lenient",
+      "description": "Mode for filtering valid values are \"lenient\" and \"strict\". Default is lenient.",
+      "deprecated": null,
+      "acceptedValues": [
+        "strict",
+        "lenient"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "filterPlaceholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Placeholder text to show when filter input is empty.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "filterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Custom template for the filter element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "filterValue",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Identifier of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputRef",
+      "type": "Ref<HTMLInputElement>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Reference of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should have invalid state style.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "metaKeySelection",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "nodeTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Template of internally used tree component node element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "options",
+      "type": "TreeNode[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of options to display.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "panelClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the overlay panel element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "panelFooterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of footer.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "panelHeaderTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of header.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "panelStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the overlay panel element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Hint text for the input field.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "TreeSelectPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "resetFilterOnHide",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Resets the filter when the overlay is hidden.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "scrollHeight",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "400px",
+      "description": "Maximum height of the options panel.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "selectionMode",
+      "type": "\"multiple\" | \"checkbox\" | \"single\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines the selection mode, valid values \"single\", \"multiple\", and \"checkbox\".",
+      "deprecated": null,
+      "acceptedValues": [
+        "multiple",
+        "checkbox",
+        "single"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "showClear",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, a clear icon is displayed to clear the value.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "togglerTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of toggler element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Content of the tooltip.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "tooltipOptions",
+      "type": "TooltipOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "value",
+      "type": "null | string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "A single or an object of keys to control the selection state.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "valueTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The template of selected values.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "variant",
+      "type": "\"filled\" | \"outlined\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "outlined",
+      "description": "Specifies the input variant of the component.",
+      "deprecated": null,
+      "acceptedValues": [
+        "filled",
+        "outlined"
+      ],
+      "formControl": "radio"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onChange",
+      "description": "Callback to invoke when selection changes.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectChangeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFilterValueChange",
+      "description": "Callback to invoke when filter value changes.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectFilterValueChangeEvent",
+          "description": "Custom filter change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onHide",
+      "description": "Used to hide the overlay.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeClick",
+      "description": "Callback to invoke when the node is clicked.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectNodeClickEvent",
+          "description": "Custom click event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeCollapse",
+      "description": "Callback to invoke when a node is collapsed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectEventNodeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeDoubleClick",
+      "description": "Callback to invoke when the node is double-clicked.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectNodeDoubleClickEvent",
+          "description": "Custom doubleclick event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeExpand",
+      "description": "Callback to invoke when a node is expanded.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectEventNodeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeSelect",
+      "description": "Callback to invoke when a node is selected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectEventNodeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNodeUnselect",
+      "description": "Callback to invoke when a node is unselected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectEventNodeEvent",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onShow",
+      "description": "Used to show the overlay.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onToggle",
+      "description": "Callback to invoke when a node is toggled.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "TreeSelectExpandedEvent",
+          "description": "Custom toggle event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "clear",
+      "description": "Clear the currently selected value.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "focus",
+      "description": "Used to focus the component.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "hide",
+      "description": "Hide the dropdown overlay panel.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "show",
+      "description": "Show the dropdown overlay panel.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 48,
+    "requiredProperties": 0,
+    "optionalProperties": 48,
+    "callbacksCount": 11,
+    "methodsCount": 5
+  }
+}

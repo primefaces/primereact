@@ -1,0 +1,27 @@
+{
+  "name": "InplaceDisplay",
+  "description": "InplaceDisplay is a helper component for Inplace.",
+  "properties": [
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    }
+  ],
+  "callbacks": [],
+  "methods": [],
+  "stats": {
+    "totalProperties": 1,
+    "requiredProperties": 0,
+    "optionalProperties": 1,
+    "callbacksCount": 0,
+    "methodsCount": 0
+  }
+}

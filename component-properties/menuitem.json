@@ -1,0 +1,5 @@
+{
+  "moduleName": "menuitem",
+  "description": "PrimeReact menus components share a common api to specify the menuitems and submenus.\n\n[Live Demo](https://www.primereact.org/menumodel/)",
+  "components": {}
+}

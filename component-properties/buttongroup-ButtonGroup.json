@@ -1,0 +1,14 @@
+{
+  "name": "ButtonGroup",
+  "description": "",
+  "properties": [],
+  "callbacks": [],
+  "methods": [],
+  "stats": {
+    "totalProperties": 0,
+    "requiredProperties": 0,
+    "optionalProperties": 0,
+    "callbacksCount": 0,
+    "methodsCount": 0
+  }
+}

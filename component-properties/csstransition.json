@@ -1,0 +1,20 @@
+{
+  "moduleName": "csstransition",
+  "description": "CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.\nIt allows us to easily manage animations. All PrimeReact components use this component.\n\n[Live Demo](https://www.primereact.org/dropdown/)",
+  "components": {
+    "CSSTransition": {
+      "name": "CSSTransition",
+      "description": "CSSTransition component wraps [ReactCSSTransition](https://reactcommunity.org/react-transition-group/css-transition) API.\nIt allows us to easily manage animations. All PrimeReact components use this component.",
+      "properties": [],
+      "callbacks": [],
+      "methods": [],
+      "stats": {
+        "totalProperties": 0,
+        "requiredProperties": 0,
+        "optionalProperties": 0,
+        "callbacksCount": 0,
+        "methodsCount": 0
+      }
+    }
+  }
+}

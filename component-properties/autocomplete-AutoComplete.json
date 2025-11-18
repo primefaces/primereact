@@ -1,0 +1,976 @@
+{
+  "name": "AutoComplete",
+  "description": "AutoComplete is an input component that provides real-time suggestions while being typed.",
+  "properties": [
+    {
+      "name": "appendTo",
+      "type": "null | HTMLElement | \"self\" | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "document.body",
+      "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located.",
+      "deprecated": null,
+      "acceptedValues": [
+        "self"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should automatically get focus on load.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "autoHighlight",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, highlights the first item in the list by default.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "delay",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "300",
+      "description": "Delay between keystrokes to wait before sending a query.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should be disabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "dropdown",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Displays a button next to the input field when enabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "dropdownAriaLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "Choose",
+      "description": "ARIA label for the dropdown button. Defaults to placeholder then Locale \"choose\" label.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "dropdownAutoFocus",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Focus the input field when the dropdown button is clicked if enabled.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "dropdownIcon",
+      "type": "IconType<AutoCompleteProps<T, false>>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the dropdown.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "dropdownMode",
+      "type": "\"blank\" | \"current\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "blank",
+      "description": "Specifies the behavior dropdown button. Default \"blank\" mode sends an empty string and \"current\" mode sends the input value.",
+      "deprecated": null,
+      "acceptedValues": [
+        "blank",
+        "current"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "emptyMessage",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "No results found.",
+      "description": "Text to display when there is no data. Defaults to global value in i18n translation configuration.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "field",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Field of a suggested object to resolve and display.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "forceSelection",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, autocomplete clears the manual input if it does not match of the suggestions to force only accepting values from the suggestions.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Unique identifier of the element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the input field.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputId",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Identifier of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputRef",
+      "type": "Ref<HTMLInputElement>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Reference of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "inputStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the input field.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "invalid",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the component should have invalid state style.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "itemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of a list item.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "loadingIcon",
+      "type": "IconType<AutoCompleteProps<any, false>>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the loader.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Maximum number of characters to initiate a search.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "minLength",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "1",
+      "description": "Minimum number of characters to initiate a search.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "multiple",
+      "type": "M",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Specifies if multiple values can be selected.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Name of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionGroupChildren",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name or getter function that refers to the children options of option group.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionGroupLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Property name or getter function to use as the label of an option group.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "optionGroupTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of an option group item.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "panelClassName",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Style class of the overlay panel element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "panelFooterTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of the panel footer.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "panelStyle",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the overlay panel element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Hint text for the input field.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "pt",
+      "type": "AutoCompletePassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that the input cannot be typed.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "removeTokenIcon",
+      "type": "IconType<AutoCompleteProps<any, false>>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the remove chip element in multiple mode.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When present, it specifies that an input field must be filled out before submitting the form.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "scrollHeight",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "200px",
+      "description": "Maximum height of the suggestions panel.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "selectedItemTemplate",
+      "type": "ReactNode | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "selectionLimit",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Number of maximum options that can be selected.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "showEmptyMessage",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Whether to show the empty message or not.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Size of the input field.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "typeCategory": "style",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Inline style of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "style-editor"
+    },
+    {
+      "name": "suggestions",
+      "type": "(T extends any[] ? T[number] : T)[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of suggestions to display.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Index of the element in tabbing order.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "tooltip",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Content of the tooltip.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "tooltipOptions",
+      "type": "TooltipOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Configuration of the tooltip, refer to the tooltip documentation for more information.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Type of the input element.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "value",
+      "type": "M extends true ? T[] : undefined | string | number | readonly string[] | T",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Value of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "variant",
+      "type": "\"filled\" | \"outlined\"",
+      "typeCategory": "enum",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "outlined",
+      "description": "Specifies the input variant of the component.",
+      "deprecated": null,
+      "acceptedValues": [
+        "filled",
+        "outlined"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "virtualScrollerOptions",
+      "type": "VirtualScrollerProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "completeMethod",
+      "description": "Callback to invoke to search for suggestions.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AutoCompleteCompleteEvent",
+          "description": "Custom complete method event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onBlur",
+      "description": "Callback to invoke when autocomplete loses focus.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FocusEvent<HTMLInputElement, Element>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onChange",
+      "description": "Callback to invoke when autocomplete value changes.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AutoCompleteChangeEvent<M extends true ? T[] : T>",
+          "description": "Custom change event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onClear",
+      "description": "Callback to invoke when input is cleared by the user.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onClick",
+      "description": "Callback to invoke on click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onContextMenu",
+      "description": "Callback to invoke on right-click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onDblClick",
+      "description": "Callback to invoke on double click.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onDropdownClick",
+      "description": "Callback to invoke to when dropdown button is clicked.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AutoCompleteDropdownClickEvent",
+          "description": "Custom click event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onFocus",
+      "description": "Callback to invoke when autocomplete gets focus.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "FocusEvent<HTMLInputElement, Element>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onHide",
+      "description": "Callback to invoke when overlay panel becomes hidden.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onKeyPress",
+      "description": "Callback to invoke to when a key is pressed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "KeyboardEvent<HTMLInputElement>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onKeyUp",
+      "description": "Callback to invoke to when a key is released.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "KeyboardEvent<HTMLInputElement>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onMouseDown",
+      "description": "Callback to invoke to when a mouse button is pressed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "MouseEvent<HTMLElement, MouseEvent>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onSelect",
+      "description": "Callback to invoke when a suggestion is selected.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AutoCompleteSelectEvent<T>",
+          "description": "Custom select event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onShow",
+      "description": "Callback to invoke when overlay panel becomes visible.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "onUnselect",
+      "description": "Callback to invoke when a selected value is removed.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "AutoCompleteUnselectEvent<T>",
+          "description": "Custom unselect event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "focus",
+      "description": "Used to focus the component.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLSpanElement"
+    },
+    {
+      "name": "getInput",
+      "description": "Used to get input element.",
+      "parameters": [],
+      "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>"
+    },
+    {
+      "name": "getOverlay",
+      "description": "Used to get overlay element.",
+      "parameters": [],
+      "returnType": "null | HTMLElement"
+    },
+    {
+      "name": "getVirtualScroller",
+      "description": "Used to get the options of inline virtualScroller component.",
+      "parameters": [],
+      "returnType": "null | VirtualScroller"
+    },
+    {
+      "name": "hide",
+      "description": "Used to hide the overlay.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "search",
+      "description": "Used to search new suggestions.",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        },
+        {
+          "name": "query",
+          "type": "string",
+          "description": "Value to search with."
+        },
+        {
+          "name": "source",
+          "type": "null | \"input\" | \"dropdown\"",
+          "description": "Source type, valid values are 'dropdown' and 'input'"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "show",
+      "description": "Used to show the overlay.",
+      "parameters": [],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 55,
+    "requiredProperties": 0,
+    "optionalProperties": 55,
+    "callbacksCount": 16,
+    "methodsCount": 8
+  }
+}

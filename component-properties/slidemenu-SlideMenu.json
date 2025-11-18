@@ -1,0 +1,352 @@
+{
+  "name": "SlideMenu",
+  "description": "SlideMenu displays submenus with a slide animation.",
+  "properties": [
+    {
+      "name": "appendTo",
+      "type": "null | HTMLElement | \"self\" | Function",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "document.body",
+      "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.",
+      "deprecated": null,
+      "acceptedValues": [
+        "self"
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "autoZIndex",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Whether to automatically manage layering.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "backIcon",
+      "type": "IconType<SlideMenuProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Defines the backward icon.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "backLabel",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "Back",
+      "description": "Label of element to navigate back.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "baseZIndex",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "0",
+      "description": "Base zIndex value to use in layering.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "typeCategory": "component",
+      "optional": true,
+      "readonly": true,
+      "defaultValue": null,
+      "description": "Used to get the child elements of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "template"
+    },
+    {
+      "name": "closeOnEscape",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "true",
+      "description": "Specifies if pressing escape key should hide the SlideMenu Popup.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "easing",
+      "type": "string",
+      "typeCategory": "string",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "ease-out",
+      "description": "Easing animation to use for sliding.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "effectDuration",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "250",
+      "description": "Duration of the sliding animation in milliseconds.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "menuWidth",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "190",
+      "description": "Width of the submenus.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    },
+    {
+      "name": "model",
+      "type": "MenuItem[]",
+      "typeCategory": "array",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "An array of menuitems.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "multiselect"
+    },
+    {
+      "name": "popup",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "Defines if menu would displayed as a popup.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "pt",
+      "type": "SlideMenuPassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Uses to pass attributes to DOM elements inside the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "ptOptions",
+      "type": "PassThroughOptions",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Used to configure passthrough(pt) options of the component.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "submenuIcon",
+      "type": "IconType<SlideMenuProps>",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "Icon of the submenu.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "transitionOptions",
+      "type": "CSSTransitionProps",
+      "typeCategory": "mixed",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": null,
+      "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "text"
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "typeCategory": "boolean",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "false",
+      "description": "When enabled, it removes component related styles in the core.",
+      "deprecated": null,
+      "acceptedValues": [
+        true,
+        false
+      ],
+      "formControl": "radio"
+    },
+    {
+      "name": "viewportHeight",
+      "type": "number",
+      "typeCategory": "number",
+      "optional": true,
+      "readonly": false,
+      "defaultValue": "175",
+      "description": "Height of the scrollable area, a scrollbar appears if a menu height is longer than this value.",
+      "deprecated": null,
+      "acceptedValues": null,
+      "formControl": "number"
+    }
+  ],
+  "callbacks": [
+    {
+      "name": "onHide",
+      "description": "Callback to invoke when a popup menu is hidden.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onNavigate",
+      "description": "Callback to invoke when a menu is navigated to.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SlideMenuNavigateEvent",
+          "description": "Navigate event."
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "onShow",
+      "description": "Callback to invoke when a popup menu is shown.",
+      "parameters": [
+        {
+          "name": "event",
+          "optional": false,
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event."
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "methods": [
+    {
+      "name": "getElement",
+      "description": "Used to get container element.",
+      "parameters": [],
+      "returnType": "null | HTMLDivElement"
+    },
+    {
+      "name": "hide",
+      "description": "Hides the popup menu.",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "navigateBack",
+      "description": "Navigates the slide menu backwards.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "navigateForward",
+      "description": "Navigates the slide menu forward.",
+      "parameters": [],
+      "returnType": "void"
+    },
+    {
+      "name": "setLevelState",
+      "description": "Navigates the slide menu to this specific level.",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "number",
+          "description": "Number of the menu to set"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "show",
+      "description": "Displays the popup menu.",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    },
+    {
+      "name": "toggle",
+      "description": "Toggles the visibility of the popup menu.",
+      "parameters": [
+        {
+          "name": "event",
+          "type": "SyntheticEvent<Element, Event>",
+          "description": "Browser event"
+        }
+      ],
+      "returnType": "void"
+    }
+  ],
+  "stats": {
+    "totalProperties": 18,
+    "requiredProperties": 0,
+    "optionalProperties": 18,
+    "callbacksCount": 3,
+    "methodsCount": 7
+  }
+}

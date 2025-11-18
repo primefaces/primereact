@@ -1,0 +1,5 @@
+{
+  "moduleName": "hooks",
+  "description": "The module includes custom hook methods to create shorthands for users.",
+  "components": {}
+}

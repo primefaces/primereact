@@ -1,0 +1,528 @@
+{
+  "moduleName": "virtualscroller",
+  "description": "VirtualScroller is a performant approach to handle huge data efficiently.\n\n[Live Demo](https://www.primereact.org/virtualscroller/)",
+  "components": {
+    "VirtualScroller": {
+      "name": "VirtualScroller",
+      "description": "VirtualScroller is a performant approach to handle huge data efficiently.",
+      "properties": [
+        {
+          "name": "appendOnly",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Used to append each loaded item to top without removing any items from the DOM. Using very large data may cause the browser to crash.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "autoSize",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to dynamically change the height or width of scrollable container.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": true,
+          "defaultValue": null,
+          "description": "Used to get the child elements of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Style class of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "columns",
+          "type": "any",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Columns of the virtual scroller for vertical option.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "contentTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of item's wrapper element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Delay in scroll before new data is loaded.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "If disabled, the VirtualScroller feature is eliminated and the content is displayed directly.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Unique identifier of the element.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "inline",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "When enabled, positions the content as inline.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "items",
+          "type": "null | any[] | any[][]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "An array of objects to display.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "itemSize",
+          "type": "number | number[]",
+          "typeCategory": "array",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The height/width of item according to orientation.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "multiselect"
+        },
+        {
+          "name": "itemTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of item.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "lazy",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Defines if data is loaded and interacted with in lazy manner.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loaderDisabled",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Used to implement a custom loader instead of using the loader feature in the VirtualScroller.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loaderIconTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of loader's icon.",
+          "deprecated": "Since v9.2.3, use ",
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether the data is loaded.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "loadingIcon",
+          "type": "IconType<VirtualScrollerProps>",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The icon to show while indicating data load is in progress.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "loadingTemplate",
+          "type": "ReactNode | Function",
+          "typeCategory": "component",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "The template of loader.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "template"
+        },
+        {
+          "name": "numToleratedItems",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Determines how many additional elements to add to the DOM outside of the view. According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number. Default value is half the number of items shown in the view.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "orientation",
+          "type": "\"both\" | \"horizontal\" | \"vertical\"",
+          "typeCategory": "enum",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "'vertical'",
+          "description": "The orientation of scrollbar, valid values are 'vertical', 'horizontal' and 'both'.",
+          "deprecated": null,
+          "acceptedValues": [
+            "both",
+            "horizontal",
+            "vertical"
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "pt",
+          "type": "VirtualScrollerPassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Uses to pass attributes to DOM elements inside the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "ptOptions",
+          "type": "PassThroughOptions",
+          "typeCategory": "mixed",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Used to configure passthrough(pt) options of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "resizeDelay",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "10",
+          "description": "Delay after window's resize finishes.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "scrollHeight",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Height of the scroll viewport.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "scrollWidth",
+          "type": "string",
+          "typeCategory": "string",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Width of the scroll viewport.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "text"
+        },
+        {
+          "name": "showLoader",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "false",
+          "description": "Whether to show loader.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "showSpacer",
+          "type": "boolean",
+          "typeCategory": "boolean",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "true",
+          "description": "Used to implement a custom spacer instead of using the spacer feature in the VirtualScroller.",
+          "deprecated": null,
+          "acceptedValues": [
+            true,
+            false
+          ],
+          "formControl": "radio"
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Used to specify how many items to load in each load method in lazy mode.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        },
+        {
+          "name": "style",
+          "type": "CSSProperties",
+          "typeCategory": "style",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": null,
+          "description": "Inline style of the component.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "style-editor"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "typeCategory": "number",
+          "optional": true,
+          "readonly": false,
+          "defaultValue": "0",
+          "description": "Index of the element in tabbing order.",
+          "deprecated": null,
+          "acceptedValues": null,
+          "formControl": "number"
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "onLazyLoad",
+          "description": "Callback to invoke in lazy mode to load new data.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "VirtualScrollerLazyEvent",
+              "description": "Custom lazy load event."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onScroll",
+          "description": "Callback to invoke when scroll position changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "UIEvent<HTMLElement, UIEvent>",
+              "description": "Browser event"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "onScrollIndexChange",
+          "description": "Callback to invoke when scroll position and item's range in view changes.",
+          "parameters": [
+            {
+              "name": "event",
+              "optional": false,
+              "type": "VirtualScrollerChangeEvent",
+              "description": "Custom change event"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getElementRef",
+          "description": "Returns the reference of virtualScroller's container.",
+          "parameters": [],
+          "returnType": "Ref<HTMLDivElement>"
+        },
+        {
+          "name": "getRenderedRange",
+          "description": "Returns the range of items added to the DOM.",
+          "parameters": [],
+          "returnType": "VirtualScrollerRenderedRange"
+        },
+        {
+          "name": "scrollInView",
+          "description": "It is used to move the specified index into the view. It is a method that will usually be needed when keyboard support is added to the virtualScroller component.",
+          "parameters": [
+            {
+              "name": "index",
+              "type": "number | number[]",
+              "description": "Index of item according to orientation mode."
+            },
+            {
+              "name": "to",
+              "type": "\"to-start\" | \"to-end\"",
+              "description": "Defines the location of the item in view, valid values are 'to-start' and 'to-end'."
+            },
+            {
+              "name": "behavior",
+              "type": "\"auto\" | \"smooth\"",
+              "description": "Behavior of scroll, valid values are 'auto' and 'smooth'"
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "scrollTo",
+          "description": "Scroll to move to a specific position.",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "VirtualScrollerOptionsType",
+              "description": "Custom virtual scroller options."
+            }
+          ],
+          "returnType": "void"
+        },
+        {
+          "name": "scrollToIndex",
+          "description": "Scroll to move to a specific item.",
+          "parameters": [
+            {
+              "name": "index",
+              "type": "number | number[]",
+              "description": "Index of item according to orientation mode."
+            },
+            {
+              "name": "behavior",
+              "type": "\"auto\" | \"smooth\"",
+              "description": "Behavior of scroll, valid values are 'auto' and 'smooth'"
+            }
+          ],
+          "returnType": "void"
+        }
+      ],
+      "stats": {
+        "totalProperties": 31,
+        "requiredProperties": 0,
+        "optionalProperties": 31,
+        "callbacksCount": 3,
+        "methodsCount": 5
+      }
+    }
+  }
+}
