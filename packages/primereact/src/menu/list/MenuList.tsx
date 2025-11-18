@@ -1,0 +1,92 @@
+'use client';
+import { Component } from '@primereact/core/component';
+import { mergeProps, resolve } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
+import * as React from 'react';
+import { useMenuContext } from '../Menu.context';
+import { MenuLevelProvider, useMenuLevelContext } from '../MenuLevel.context';
+import { useMenuSubContext } from '../sub/MenuSub.context';
+import { defaultListProps } from './MenuList.props';
+
+export const MenuList = withComponent({
+    name: 'MenuList',
+    defaultProps: defaultListProps,
+    setup() {
+        const menu = useMenuContext();
+        const submenu = useMenuSubContext();
+        const parentLevel = useMenuLevelContext();
+        const triggerIndexRef = React.useRef<number | null>(null);
+
+        if (submenu && triggerIndexRef.current === null && parentLevel) {
+            triggerIndexRef.current = parentLevel.itemCounter.current - 1;
+        }
+
+        // For root list: children are at level 0, path = []
+        // For submenu list: children are at parent's level + 1, path = [...parentPath, triggerIndex]
+        const newParentPath = submenu && parentLevel ? [...parentLevel.path, triggerIndexRef.current!] : (parentLevel?.path ?? []);
+        const listLevel = submenu && parentLevel ? parentLevel.level + 1 : 0;
+
+        const listId = React.useMemo(() => {
+            if (!menu) return undefined;
+
+            if (newParentPath.length === 0) {
+                // Root level
+                return `${menu.id}_list`;
+            } else {
+                // Nested level
+                return `${menu.id}_${newParentPath.join('_')}_list`;
+            }
+        }, [menu?.id, newParentPath.join('_')]);
+
+        return { menu, submenu, parentLevel, listLevel, listId, triggerIndex: triggerIndexRef.current };
+    },
+    render(instance) {
+        const { props, ptmi, menu, submenu, listId, parentLevel, triggerIndex } = instance;
+
+        const computedProps = submenu
+            ? mergeProps({
+                  style: !submenu.state.opened ? { display: 'none' } : undefined
+              })
+            : mergeProps({
+                  onFocus: menu?.onListFocus,
+                  onBlur: menu?.onListBlur
+              });
+
+        const rootProps = mergeProps(
+            {
+                id: listId,
+                className: menu?.cx('list'),
+                role: 'menu',
+                tabIndex: menu?.props.tabIndex,
+                'aria-activedescendant': menu?.state.focusedOptionId || undefined,
+                onKeyDown: menu?.onListKeyDown
+            },
+            computedProps,
+            menu?.ptm('list'),
+            ptmi('root')
+        );
+
+        const contentProps = mergeProps(
+            {
+                className: menu?.cx('content')
+            },
+            menu?.ptm('content')
+        );
+
+        const childrenWithLevel = submenu ? (
+            <MenuLevelProvider parentPath={parentLevel?.path as number[]} parentIndex={triggerIndex}>
+                {resolve(props.children, instance)}
+            </MenuLevelProvider>
+        ) : (
+            props.children
+        );
+
+        return submenu ? (
+            <Component ref={submenu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
+        ) : (
+            <div {...contentProps}>
+                <Component ref={menu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
+            </div>
+        );
+    }
+});
