@@ -42,6 +42,18 @@ export const MultiSelectItem = React.memo((props) => {
         event.stopPropagation();
     };
 
+    const onKeyDown = (event) => {
+        // Handle Enter key or Space key to toggle selection
+        if (event.code === 'Enter' || event.code === 'Space') {
+            if (props.onClick) {
+                props.onClick(event, props.option);
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    };
+
     const checkboxIconProps = mergeProps(
         {
             className: cx('checkboxIcon')
@@ -66,13 +78,16 @@ export const MultiSelectItem = React.memo((props) => {
             className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
             style: props.style,
             onClick: onClick,
+            onKeyDown: onKeyDown,
             onFocus: onFocus,
             onBlur: onBlur,
             onMouseMove: (e) => props?.onMouseMove(e, props.index),
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
-            'data-p-disabled': props.disabled
+            'data-p-disabled': props.disabled,
+            // expose index to aid scroll-into-view and focus management
+            'data-p-index': props.index
         },
         getPTOptions('item')
     );
