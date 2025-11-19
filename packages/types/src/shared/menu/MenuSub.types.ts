@@ -11,6 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import { MenuInstance } from './Menu.types';
+import type { MenuLevelContextValue } from './MenuLevel.types';
 import type { useMenuSubExposes, useMenuSubOpenChangeEvent, useMenuSubProps, useMenuSubState } from './useMenuSub.types';
 
 /**
@@ -39,6 +40,11 @@ export interface MenuSubOpenChangeEvent extends useMenuSubOpenChangeEvent {}
  */
 export interface MenuSubProps extends BaseComponentProps<MenuSubInstance, Omit<useMenuSubProps, 'onOpenChange'>, MenuSubPassThrough> {
     /**
+     * Whether the submenu is disabled.
+     * @default false
+     */
+    disabled?: boolean;
+    /**
      * Callback fired when the submenu's open state changes.
      * @param event.value The new value of the menu's open state.
      * @returns void
@@ -58,9 +64,13 @@ export interface MenuSubState extends useMenuSubState {}
  */
 export interface MenuSubExposes extends useMenuSubExposes {
     /**
-     * The Message component instance.
+     * The Menu component instance.
      */
     menu: MenuInstance | undefined | null;
+    /**
+     * Context value of the MenuLevel.
+     */
+    parentLevel: MenuLevelContextValue | undefined | null;
 }
 
 /**

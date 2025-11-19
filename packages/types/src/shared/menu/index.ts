@@ -1,5 +1,6 @@
 export * from './Menu.types';
 export * from './MenuItem.types';
+export * from './MenuLevel.types';
 export * from './MenuList.types';
 export * from './MenuPortal.types';
 export * from './MenuSeparator.types';

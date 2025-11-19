@@ -11,6 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
+import type { MenuLevelContextValue } from './MenuLevel.types';
 import type { MenuSubInstance } from './MenuSub.types';
 
 /**
@@ -26,6 +27,10 @@ export interface MenuListPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: MenuListPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Used to pass attributes to the content's DOM element.
+     */
+    content?: MenuListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,6 +55,22 @@ export interface MenuListExposes {
      * Instance of the MenuSub component.
      */
     submenu: MenuSubInstance | undefined | null;
+    /**
+     * Context value of the MenuLevel.
+     */
+    parentLevel: MenuLevelContextValue | undefined | null;
+    /**
+     * Level of the list.
+     */
+    listLevel: number;
+    /**
+     * ID of the list element.
+     */
+    listId: string | undefined;
+    /**
+     * Index of the trigger element.
+     */
+    triggerIndex: number | null;
 }
 
 /**

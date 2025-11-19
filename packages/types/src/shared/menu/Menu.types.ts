@@ -26,29 +26,37 @@ export interface MenuPassThrough {
      */
     root?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Used to pass attributes to the header's DOM element.
+     * Used to pass attributes to the list's DOM element.
      */
-    header?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    list?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
-     * Used to pass attributes to the header actions's DOM element.
+     * Used to pass attributes to the item's DOM element.
      */
-    headerActions?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    item?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
-     * Used to pass attributes to the title's DOM element.
+     * Used to pass attributes to the group label's DOM element.
      */
-    title?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    groupLabel?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
-     * Used to pass attributes to the content's DOM element.
+     * Used to pass attributes to the submenu's DOM element.
      */
-    content?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    submenu?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
-     * Used to pass attributes to the collapse's DOM element.
+     * Used to pass attributes to the trigger's DOM element.
      */
-    collapse?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    trigger?: MenuPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Used to pass attributes to the footer's DOM element.
+     * Used to pass attributes to the item icon's DOM element.
      */
-    footer?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    itemIcon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
+    /**
+     * Used to pass attributes to the separator's DOM element.
+     */
+    separator?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to pass attributes to the portal's DOM element.
+     */
+    portal?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -90,28 +98,37 @@ export const MenuClassNames = {
      */
     root: 'p-menu',
     /**
-     * Class name of the header element
+     * Class name of the list element
      */
-    header: 'p-menu-header',
+    list: 'p-menu-list',
     /**
-     * Class name of the title element
+     * Class name of the group label element
      */
-    title: 'p-menu-title',
+    groupLabel: 'p-menu-group-label',
     /**
-     * Class name of the header actions element
+     * Class name of the submenu element
      */
-    headerActions: 'p-menu-header-actions',
+    submenu: 'p-menu-submenu',
     /**
-     * Class name of the toggle button element
+     * Class name of the submenu label element
      */
-    collapse: 'p-menu-toggle-button',
+    submenuLabel: 'p-menu-submenu-label',
     /**
-     * Class name of the content element
+     * Class name of the separator element
      */
-    content: 'p-menu-content'
+    separator: 'p-menu-separator',
     /**
-     * Class name of the footer element
+     * Class name of the item element
      */
+    item: 'p-menu-item',
+    /**
+     * Class name of the trigger element
+     */
+    trigger: 'p-menu-trigger-button',
+    /**
+     * Class name of the item icon element
+     */
+    itemIcon: 'p-menu-item-icon'
 } as const;
 
 /**

@@ -58,11 +58,10 @@ export const MenuItem = withComponent({
         const ariaPosInSet = itemIndex !== undefined ? itemIndex + 1 : undefined;
         const ariaSetSize = level && level.totalItems > 0 ? level.totalItems : undefined;
 
-        return { menu, submenu, portal, itemRef, itemId, level, focused, ariaLevel, ariaPosInSet, ariaSetSize };
+        return { menu, submenu, portal, level, itemRef, itemId, focused, ariaLevel, ariaPosInSet, ariaSetSize };
     },
     render(instance) {
-        const { props, ptmi, menu, submenu, portal, itemRef, itemId, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
-        const isFocused = menu?.state.focusedOptionId === itemId;
+        const { props, ptmi, menu, submenu, portal, itemRef, itemId, focused, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
         const isInteractive = !props.disabled && !props.group;
 
         const onItemMouseDown = (event: React.MouseEvent) => {
@@ -93,15 +92,15 @@ export const MenuItem = withComponent({
             : mergeProps(
                   {
                       id: itemId,
-                      className: menu?.cx('item', { disabled: props.disabled, focused: isFocused }),
+                      className: menu?.cx('item', { disabled: props.disabled, focused }),
                       role: 'menuitem',
-                      tabIndex: props.disabled ? -1 : isFocused ? 0 : -1,
+                      tabIndex: props.disabled ? -1 : focused ? 0 : -1,
                       'aria-disabled': props.disabled,
                       'aria-level': ariaLevel,
                       'aria-posinset': ariaPosInSet,
                       'aria-setsize': ariaSetSize,
-                      'aria-expanded': submenu ? submenu.state.open : undefined,
-                      'data-p-focused': isFocused,
+                      'aria-expanded': submenu ? submenu.state.opened : undefined,
+                      'data-p-focused': focused,
                       'data-p-disabled': props.disabled,
                       onMouseDown: onItemMouseDown,
                       onMouseMove: onItemMouseMove

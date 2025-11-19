@@ -1,6 +1,7 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { mergeProps, resolve } from '@primeuix/utils';
+import { defaultProps } from '@primereact/headless/menu';
+import { mergeProps, omit, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useMenuContext } from '../Menu.context';
@@ -66,11 +67,14 @@ export const MenuList = withComponent({
             ptmi('root')
         );
 
-        const contentProps = mergeProps(
+        const menuProps = mergeProps(
             {
-                className: menu?.cx('content')
+                className: menu?.cx('root')
             },
-            menu?.ptm('content')
+            {
+                ...(omit(menu?.inProps, ...Object.keys(defaultProps)) as Record<PropertyKey, unknown>)
+            },
+            menu?.ptm('root')
         );
 
         const childrenWithLevel = submenu ? (
@@ -84,7 +88,7 @@ export const MenuList = withComponent({
         return submenu ? (
             <Component ref={submenu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
         ) : (
-            <div {...contentProps}>
+            <div {...menuProps}>
                 <Component ref={menu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
             </div>
         );

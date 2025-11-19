@@ -35,11 +35,6 @@ export interface useMenuSubProps {
      */
     defaultOpen?: boolean;
     /**
-     * Whether the submenu is disabled.
-     * @default false
-     */
-    disabled?: boolean;
-    /**
      * Callback to invoke when the open state changes.
      */
     onOpenChange?: (event: useMenuSubOpenChangeEvent) => void;

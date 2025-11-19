@@ -11,6 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
+import type { MenuLevelContextValue } from './MenuLevel.types';
 import type { MenuSubInstance } from './MenuSub.types';
 
 /**
@@ -26,6 +27,10 @@ export interface MenuTriggerPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: MenuTriggerPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the item icon's DOM element.
+     */
+    itemIcon?: MenuTriggerPassThroughType<React.HTMLAttributes<SVGElement>>;
 }
 
 /**
@@ -50,6 +55,34 @@ export interface MenuTriggerExposes {
      * Instance of the MenuPortal component.
      */
     submenu: MenuSubInstance | undefined | null;
+    /**
+     * Instance of the MenuLevel component.
+     */
+    level: MenuLevelContextValue | undefined | null;
+    /**
+     * Identifier of the menu item.
+     */
+    itemId: string | undefined;
+    /**
+     * Whether the menu item is focused.
+     */
+    focused: boolean | undefined;
+    /**
+     * Whether the menu item is disabled.
+     */
+    disabled: boolean | undefined;
+    /**
+     * Aria level of the menu item.
+     */
+    ariaLevel: number;
+    /**
+     * Aria position in set of the menu item.
+     */
+    ariaPosInSet: number | undefined;
+    /**
+     * Aria set size of the menu item.
+     */
+    ariaSetSize: number | undefined;
 }
 
 /**

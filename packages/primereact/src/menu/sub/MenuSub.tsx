@@ -12,37 +12,27 @@ import { defaultSubProps } from './MenuSub.props';
 export const MenuSub = withComponent({
     name: 'MenuSub',
     defaultProps: defaultSubProps,
-    setup({ props }) {
+    setup(instance) {
+        const submenu = useMenuSub(instance?.inProps);
         const menu = useMenuContext();
         const parentLevel = useMenuLevelContext();
 
-        //TODO:
-        // Extract useMenuSub props and internal component props
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { open, defaultOpen, onOpenChange, disabled, pIf: _pIf, as: _as, asChild: _asChild, ptOptions: _ptOptions, unstyled: _unstyled, pt: _pt, ...restProps } = props;
-        const menusub = useMenuSub({ open, defaultOpen, onOpenChange, disabled });
-
         return {
-            ...menusub,
+            ...submenu,
             menu,
-            restProps,
             parentLevel
         };
     },
     render(instance) {
-        const { props, ptmi, menu, restProps } = instance;
+        const { props, ptmi, menu } = instance;
 
         const rootProps = mergeProps(
             {
                 className: menu?.cx('submenu')
             },
-            restProps,
             ptmi('root')
         );
 
-        // DON'T wrap children with MenuLevelProvider here!
-        // The Trigger should remain in the parent level context.
-        // Only MenuList will create a new level for its children.
         return (
             <MenuSubProvider value={instance}>
                 <Component instance={instance} attrs={rootProps} children={props.children} />

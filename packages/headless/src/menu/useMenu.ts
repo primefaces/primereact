@@ -141,6 +141,12 @@ export const useMenu = withHeadless({
         const onArrowUp = (event: React.KeyboardEvent) => {
             event.preventDefault();
 
+            if (event.altKey && triggerRef.current) {
+                hide();
+
+                return;
+            }
+
             const focusableItems = getFocusableItems();
 
             if (focusableItems.length === 0) return;
@@ -195,6 +201,16 @@ export const useMenu = withHeadless({
             event.preventDefault();
         };
 
+        const onEscapeKey = () => {
+            setFocusedOptionId('');
+
+            setTimeout(() => {
+                if (triggerRef.current) {
+                    focus(triggerRef.current.elementRef.current!);
+                }
+            }, 10);
+        };
+
         const onListKeyDown = (event: React.KeyboardEvent) => {
             const metaKey = event.metaKey || event.ctrlKey;
 
@@ -232,6 +248,11 @@ export const useMenu = withHeadless({
                 case 'Backspace':
                 case 'ShiftLeft':
                 case 'ShiftRight':
+                    break;
+
+                case 'Escape':
+                    onEscapeKey();
+
                     break;
 
                 default:
@@ -278,6 +299,12 @@ export const useMenu = withHeadless({
             if (listRef.current) {
                 focus(listRef.current);
             }
+
+            if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
+                const element = portalRef.current.containerRef.current.elementRef.current;
+
+                element.style.overflowY = 'auto';
+            }
         };
 
         const onTriggerClick = () => {
@@ -285,7 +312,6 @@ export const useMenu = withHeadless({
             updateOpenState(true);
         };
 
-        //TODO:
         const onItemClick = (event: React.MouseEvent) => {
             event.preventDefault();
             hide();

@@ -11,6 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
+import type { MenuLevelContextValue } from './MenuLevel.types';
 import type { MenuPortalInstance } from './MenuPortal.types';
 import type { MenuSubInstance } from './MenuSub.types';
 
@@ -66,6 +67,34 @@ export interface MenuItemExposes {
      * Instance of the MenuPortal component.
      */
     portal: MenuPortalInstance | undefined | null;
+    /**
+     * Context value of the MenuLevel.
+     */
+    level: MenuLevelContextValue | undefined | null;
+    /**
+     * Reference to the item element.
+     */
+    itemRef: React.RefObject<HTMLElement | null> | null;
+    /**
+     * ID of the item element.
+     */
+    itemId: string | undefined;
+    /**
+     * Whether the item is focused or not.
+     */
+    focused: boolean;
+    /**
+     * Aria level of the item.
+     */
+    ariaLevel: number;
+    /**
+     * Aria position in set of the item.
+     */
+    ariaPosInSet: number | undefined;
+    /**
+     * Aria set size of the item.
+     */
+    ariaSetSize: number | undefined;
 }
 
 /**

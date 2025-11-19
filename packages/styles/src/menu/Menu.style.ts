@@ -1,19 +1,17 @@
 import { createStyles } from '@primereact/styles/utils';
 import type { MenuInstance } from '@primereact/types/shared/menu';
-import { style } from '@primeuix/styles/menu';
 
 const _style = /*css*/ `
-    /* ${style} */
-
     /* For PrimeReact */
-    .p-menu-content {
+    .p-menu {
         background: dt('menu.background');
         color: dt('menu.color');
         border: 1px solid dt('menu.border.color');
         border-radius: dt('menu.border.radius');
-        min-width: 12.5rem;
-        /* min-width: max-content; */
+        /* min-width: 12.5rem; */
+        min-width: max-content;
     }
+
 
     .p-menu-list {
         margin: 0;
@@ -52,15 +50,10 @@ const _style = /*css*/ `
         background: dt('menu.item.focus.background');
     }
 
-    .p-menu-submenu {
-        position: relative;
-    }
-
     .p-menu-submenu-label {
         cursor: pointer;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         text-decoration: none;
         padding: dt('menu.item.padding');
         gap: dt('menu.item.gap');
@@ -85,13 +78,14 @@ const _style = /*css*/ `
     }
 
     .p-menu-item-icon {
+        margin-left: auto;
         color: dt('menu.item.icon.color');
         transition: transform 0.2s;
     }
 
     .p-menu-submenu .p-menu-list {
-        padding-left: 1rem;
-        margin-top: 0.25rem;
+        padding-inline-start: 1rem;
+        padding-inline-end: 0;
     }
 
     .p-menu-group-label {

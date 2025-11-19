@@ -49,19 +49,19 @@ export const MenuTrigger = withComponent({
             };
         }, [itemId, menu?.registerItem, menu?.unregisterItem, submenu?.props.disabled]);
 
+        const focused = submenu && menu?.state.focusedOptionId === itemId;
+        const disabled = submenu ? submenu.inProps?.disabled : false;
         const ariaLevel = level ? level.level + 1 : 1;
         const ariaPosInSet = itemIndex !== undefined ? itemIndex + 1 : undefined;
         const ariaSetSize = level && level.totalItems > 0 ? level.totalItems : undefined;
 
-        return { menu, submenu, itemId, level, ariaLevel, ariaPosInSet, ariaSetSize };
+        return { menu, submenu, level, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize };
     },
     render(instance) {
-        const { props, ptmi, menu, submenu, itemId, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
-        const isFocused = submenu && menu?.state.focusedOptionId === itemId;
-        const isDisabled = submenu?.inProps?.disabled;
+        const { props, ptmi, menu, submenu, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
 
         const onItemMouseMove = () => {
-            if (!isDisabled && itemId !== undefined && menu?.state.focused) {
+            if (!disabled && itemId !== undefined && menu?.state.focused) {
                 menu?.changeFocusedOptionId(itemId);
             }
         };
@@ -69,7 +69,7 @@ export const MenuTrigger = withComponent({
         const onItemMouseDown = () => {
             submenu?.toggle();
 
-            if (!isDisabled && itemId !== undefined) {
+            if (!disabled && itemId !== undefined) {
                 menu?.changeFocusedOptionId(itemId);
             }
         };
@@ -77,16 +77,16 @@ export const MenuTrigger = withComponent({
         const computedProps = submenu
             ? mergeProps({
                   id: itemId,
-                  className: menu?.cx('submenuLabel', { disabled: isDisabled, focused: isFocused, active: submenu.state.opened }),
+                  className: menu?.cx('submenuLabel', { disabled, focused, active: submenu.state.opened }),
                   role: 'menuitem',
-                  tabIndex: isDisabled ? -1 : isFocused ? 0 : -1,
+                  tabIndex: disabled ? -1 : focused ? 0 : -1,
                   'aria-expanded': submenu.state.opened,
-                  'aria-disabled': isDisabled,
+                  'aria-disabled': disabled,
                   'aria-level': ariaLevel,
                   'aria-posinset': ariaPosInSet,
                   'aria-setsize': ariaSetSize,
-                  'data-p-focused': isFocused,
-                  'data-p-disabled': isDisabled,
+                  'data-p-focused': focused,
+                  'data-p-disabled': disabled,
                   onMouseDown: onItemMouseDown,
                   onMouseMove: onItemMouseMove
               })
