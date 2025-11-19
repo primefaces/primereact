@@ -1,6 +1,6 @@
 /**
  *
- * Menu is a grouping component providing with content toggle feature.
+ * Menu displays submenus in nested overlays.
  *
  * [Live Demo](https://www.primereact.org/menu/)
  *

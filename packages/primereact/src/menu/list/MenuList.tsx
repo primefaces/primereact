@@ -59,7 +59,6 @@ export const MenuList = withComponent({
                 className: menu?.cx('list'),
                 role: 'menu',
                 tabIndex: menu?.props.tabIndex,
-                'aria-activedescendant': menu?.state.focusedOptionId || undefined,
                 onKeyDown: menu?.onListKeyDown
             },
             computedProps,
@@ -69,7 +68,8 @@ export const MenuList = withComponent({
 
         const menuProps = mergeProps(
             {
-                className: menu?.cx('root')
+                className: menu?.cx('root'),
+                'aria-activedescendant': menu?.state.focusedOptionId || undefined
             },
             {
                 ...(omit(menu?.inProps, ...Object.keys(defaultProps)) as Record<PropertyKey, unknown>)
