@@ -6,6 +6,7 @@ import { withComponent } from 'primereact/base';
 import { Overlay } from 'primereact/overlay';
 import * as React from 'react';
 import { useMenuContext } from '../Menu.context';
+import { useMenuSubContext } from '../sub/MenuSub.context';
 import { MenuPortalProvider } from './MenuPortal.context';
 import { defaultPortalProps } from './MenuPortal.props';
 
@@ -14,11 +15,12 @@ export const MenuPortal = withComponent({
     defaultProps: defaultPortalProps,
     setup() {
         const menu = useMenuContext();
+        const submenu = useMenuSubContext();
 
-        return { menu };
+        return { menu, submenu };
     },
     render(instance) {
-        const { props, ptmi, menu } = instance;
+        const { props, ptmi, menu, submenu } = instance;
 
         const rootProps = mergeProps(
             {
@@ -30,17 +32,31 @@ export const MenuPortal = withComponent({
         return (
             <MenuPortalProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
-                    <Overlay
-                        ref={menu?.portalRef}
-                        appendTo={menu?.props.appendTo}
-                        target={menu?.triggerRef?.current?.elementRef?.current}
-                        type="menu"
-                        open={menu?.state.opened}
-                        onOpenChange={({ value }: useOverlayOpenChangeEvent) => menu?.changeVisibleState(value)}
-                        onEnter={menu?.onOverlayEnter}
-                    >
-                        {resolve(props.children, instance)}
-                    </Overlay>
+                    {submenu ? (
+                        <Overlay
+                            ref={submenu?.portalRef}
+                            appendTo={menu?.props.appendTo}
+                            target={submenu?.triggerRef?.current}
+                            type="menu"
+                            open={submenu?.state.opened}
+                            // onOpenChange={({ value }: useOverlayOpenChangeEvent) => menu?.changeVisibleState(value)}
+                            onEnter={menu?.onOverlayEnter} //TODO: should we have separate onEnter for submenu?
+                        >
+                            {resolve(props.children, instance)}
+                        </Overlay>
+                    ) : (
+                        <Overlay
+                            ref={menu?.portalRef}
+                            appendTo={menu?.props.appendTo}
+                            target={menu?.triggerRef?.current?.elementRef?.current}
+                            type="menu"
+                            open={menu?.state.opened}
+                            onOpenChange={({ value }: useOverlayOpenChangeEvent) => menu?.changeVisibleState(value)}
+                            onEnter={menu?.onOverlayEnter}
+                        >
+                            {resolve(props.children, instance)}
+                        </Overlay>
+                    )}
                 </Component>
             </MenuPortalProvider>
         );

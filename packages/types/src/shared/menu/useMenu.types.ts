@@ -35,6 +35,12 @@ export interface useMenuProps {
      */
     defaultOpen?: boolean;
     /**
+     * Whether the menu is in composite mode (menubar).
+     * In composite mode, submenus open on hover and focusedOptionId is an array tracking the focus path.
+     * @default false
+     */
+    composite?: boolean;
+    /**
      * The element to which the overlay is appended.
      * @default 'body'
      */
@@ -74,8 +80,10 @@ export interface useMenuState {
     focused: boolean;
     /**
      * The ID of the focused option (HTML id attribute).
+     * In composite mode, this is an array representing the focus path (e.g., ['menu_0', 'menu_0_1']).
+     * The last element is used for aria-activedescendant.
      */
-    focusedOptionId: string;
+    focusedOptionId: string | string[];
 }
 
 /**
@@ -132,8 +140,21 @@ export interface useMenuExposes {
     onListKeyDown: (event: React.KeyboardEvent) => void;
     /**
      * Change the focused option ID.
+     * In composite mode, can specify level to set focus at a specific depth.
      */
-    changeFocusedOptionId: (id: string) => void;
+    changeFocusedOptionId: (id: string, level?: number) => void;
+    /**
+     * Push a new focused option ID to the focus path (composite mode only).
+     */
+    pushFocusedOptionId?: (id: string) => void;
+    /**
+     * Pop the last focused option ID from the focus path (composite mode only).
+     */
+    popFocusedOptionId?: () => void;
+    /**
+     * Hide all submenus at or after a specific level (composite mode only).
+     */
+    hideSubmenusAfterLevel?: (targetItemId: string) => void;
     /**
      * Handle item click event.
      */

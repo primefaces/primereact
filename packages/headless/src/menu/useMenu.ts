@@ -9,7 +9,7 @@ export const useMenu = withHeadless({
     setup({ props }) {
         const [openState, setOpenState] = React.useState<boolean>(props.open !== undefined ? props.open : (props.defaultOpen ?? false));
         const [focusedState, setFocusedState] = React.useState<boolean>(false);
-        const [focusedOptionId, setFocusedOptionId] = React.useState<string>('');
+        const [focusedOptionId, setFocusedOptionId] = React.useState<string | string[]>(props.composite ? [] : '');
         const isMouseInteractionRef = React.useRef(false);
 
         const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
@@ -85,7 +85,66 @@ export const useMenu = withHeadless({
         const changeFocusedOptionId = (id: string) => {
             // Mark as mouse interaction to prevent auto-focus in onListFocus
             isMouseInteractionRef.current = true;
-            setFocusedOptionId(id);
+
+            if (props.composite) {
+                setFocusedOptionId((prev) => {
+                    const prevArray = Array.isArray(prev) ? prev : [];
+
+                    if (prevArray.length === 0) {
+                        return [id];
+                    } else {
+                        if (prevArray.includes(id)) {
+                            const len = id.length;
+
+                            const findIndex = prevArray.findIndex((val) => val.length === len);
+
+                            if (findIndex !== -1) {
+                                return [...prevArray.slice(0, findIndex), id];
+                            }
+
+                            return prevArray;
+                        } else if (prevArray[prevArray.length - 1].length === id.length) {
+                            return [...prevArray.slice(0, -1), id];
+                        }
+
+                        return [...prevArray, id];
+                    }
+                });
+            } else {
+                setFocusedOptionId(id);
+            }
+        };
+
+        const pushFocusedOptionId = (id: string) => {
+            if (props.composite) {
+                setFocusedOptionId((prev) => {
+                    const prevArray = Array.isArray(prev) ? prev : [];
+
+                    return [...prevArray, id];
+                });
+            }
+        };
+
+        const popFocusedOptionId = () => {
+            if (props.composite) {
+                setFocusedOptionId((prev) => {
+                    const prevArray = Array.isArray(prev) ? prev : [];
+
+                    if (prevArray.length > 0) {
+                        return prevArray.slice(0, -1);
+                    }
+
+                    return prevArray;
+                });
+            }
+        };
+
+        const getCurrentFocusedId = () => {
+            if (props.composite && Array.isArray(focusedOptionId)) {
+                return focusedOptionId[focusedOptionId.length - 1] || '';
+            }
+
+            return typeof focusedOptionId === 'string' ? focusedOptionId : '';
         };
 
         const searchItems = (char: string) => {
@@ -93,7 +152,8 @@ export const useMenu = withHeadless({
 
             if (focusableItems.length === 0) return;
 
-            const startIndex = focusedOptionId ? focusableItems.findIndex((item) => item.id === focusedOptionId) + 1 : 0;
+            const currentFocusedId = getCurrentFocusedId();
+            const startIndex = currentFocusedId ? focusableItems.findIndex((item) => item.id === currentFocusedId) + 1 : 0;
             const searchChar = char.toLowerCase();
 
             for (let i = startIndex; i < focusableItems.length; i++) {
@@ -101,7 +161,11 @@ export const useMenu = withHeadless({
                 const itemText = item.element.textContent?.trim().toLowerCase() || '';
 
                 if (itemText.startsWith(searchChar)) {
-                    setFocusedOptionId(item.id);
+                    if (props.composite) {
+                        changeFocusedOptionId(item.id);
+                    } else {
+                        setFocusedOptionId(item.id);
+                    }
 
                     return;
                 }
@@ -112,7 +176,11 @@ export const useMenu = withHeadless({
                 const itemText = item.element.textContent?.trim().toLowerCase() || '';
 
                 if (itemText.startsWith(searchChar)) {
-                    setFocusedOptionId(item.id);
+                    if (props.composite) {
+                        changeFocusedOptionId(item.id);
+                    } else {
+                        setFocusedOptionId(item.id);
+                    }
 
                     return;
                 }
@@ -126,16 +194,26 @@ export const useMenu = withHeadless({
 
             if (focusableItems.length === 0) return;
 
-            if (!focusedOptionId) {
-                setFocusedOptionId(focusableItems[0].id);
+            const currentFocusedId = getCurrentFocusedId();
+
+            if (!currentFocusedId) {
+                if (props.composite) {
+                    changeFocusedOptionId(focusableItems[0].id);
+                } else {
+                    setFocusedOptionId(focusableItems[0].id);
+                }
 
                 return;
             }
 
-            const currentIndex = focusableItems.findIndex((item) => item.id === focusedOptionId);
+            const currentIndex = focusableItems.findIndex((item) => item.id === currentFocusedId);
             const nextIndex = currentIndex < focusableItems.length - 1 ? currentIndex + 1 : 0;
 
-            setFocusedOptionId(focusableItems[nextIndex].id);
+            if (props.composite) {
+                changeFocusedOptionId(focusableItems[nextIndex].id);
+            } else {
+                setFocusedOptionId(focusableItems[nextIndex].id);
+            }
         };
 
         const onArrowUp = (event: React.KeyboardEvent) => {
@@ -151,16 +229,110 @@ export const useMenu = withHeadless({
 
             if (focusableItems.length === 0) return;
 
-            if (!focusedOptionId) {
-                setFocusedOptionId(focusableItems[focusableItems.length - 1].id);
+            const currentFocusedId = getCurrentFocusedId();
+
+            if (!currentFocusedId) {
+                if (props.composite) {
+                    changeFocusedOptionId(focusableItems[focusableItems.length - 1].id);
+                } else {
+                    setFocusedOptionId(focusableItems[focusableItems.length - 1].id);
+                }
 
                 return;
             }
 
-            const currentIndex = focusableItems.findIndex((item) => item.id === focusedOptionId);
+            const currentIndex = focusableItems.findIndex((item) => item.id === currentFocusedId);
             const prevIndex = currentIndex > 0 ? currentIndex - 1 : focusableItems.length - 1;
 
-            setFocusedOptionId(focusableItems[prevIndex].id);
+            if (props.composite) {
+                changeFocusedOptionId(focusableItems[prevIndex].id);
+            } else {
+                setFocusedOptionId(focusableItems[prevIndex].id);
+            }
+        };
+
+        const onArrowRight = (event: React.KeyboardEvent) => {
+            if (!props.composite) return;
+
+            event.preventDefault();
+
+            const currentFocusedId = getCurrentFocusedId();
+
+            if (!currentFocusedId) return;
+
+            // Find the focused element
+            const focusedElement = itemRefsById.current.get(currentFocusedId);
+
+            if (!focusedElement) return;
+
+            // Check if it has aria-expanded (it's a submenu trigger)
+            const ariaExpanded = focusedElement.getAttribute('aria-expanded');
+
+            if (ariaExpanded !== null) {
+                // It's a submenu trigger
+                if (ariaExpanded === 'false') {
+                    // Open the submenu by simulating mousedown
+                    const mouseDownEvent = new MouseEvent('mousedown', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+
+                    focusedElement.dispatchEvent(mouseDownEvent);
+                }
+
+                // After opening (or if already open), focus first item in submenu
+                setTimeout(() => {
+                    const focusableItems = getFocusableItems();
+
+                    // Find items that are children of the current trigger
+                    // They will have IDs starting with currentFocusedId + "_"
+                    const submenuItems = focusableItems.filter((item) => {
+                        return item.id.startsWith(currentFocusedId + '_') && item.id.split('_').length === currentFocusedId.split('_').length + 1;
+                    });
+
+                    // Focus the first item in the submenu
+                    if (submenuItems.length > 0) {
+                        // pushFocusedOptionId(submenuItems[0].id);
+                        setFocusedOptionId((prev) => {
+                            const prevArray = Array.isArray(prev) ? prev : [];
+
+                            return [...prevArray, submenuItems[0].id];
+                        });
+                    }
+                }, 10);
+            }
+        };
+
+        const onArrowLeft = (event: React.KeyboardEvent) => {
+            if (!props.composite) return;
+
+            event.preventDefault();
+
+            const currentFocusedId = getCurrentFocusedId();
+
+            if (!currentFocusedId || !Array.isArray(focusedOptionId)) return;
+
+            // If we're in a submenu (focusedOptionId array has more than 1 element)
+            if (focusedOptionId.length > 1) {
+                // Find the parent trigger ID (second to last element)
+                const parentTriggerId = focusedOptionId[focusedOptionId.length - 2];
+                const parentTrigger = itemRefsById.current.get(parentTriggerId);
+
+                if (parentTrigger && parentTrigger.getAttribute('aria-expanded') === 'true') {
+                    // Close the submenu
+                    const mouseDownEvent = new MouseEvent('mousedown', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+
+                    parentTrigger.dispatchEvent(mouseDownEvent);
+                }
+
+                // Pop the focus back to the trigger
+                // popFocusedOptionId();
+            }
         };
 
         const onHome = (event: React.KeyboardEvent) => {
@@ -170,7 +342,11 @@ export const useMenu = withHeadless({
 
             if (focusableItems.length === 0) return;
 
-            setFocusedOptionId(focusableItems[0].id);
+            if (props.composite) {
+                changeFocusedOptionId(focusableItems[0].id);
+            } else {
+                setFocusedOptionId(focusableItems[0].id);
+            }
         };
 
         const onEnd = (event: React.KeyboardEvent) => {
@@ -180,12 +356,21 @@ export const useMenu = withHeadless({
 
             if (focusableItems.length === 0) return;
 
-            setFocusedOptionId(focusableItems[focusableItems.length - 1].id);
+            if (props.composite) {
+                changeFocusedOptionId(focusableItems[focusableItems.length - 1].id);
+            } else {
+                setFocusedOptionId(focusableItems[focusableItems.length - 1].id);
+            }
         };
 
         const onEnterKey = (event: React.KeyboardEvent) => {
+            if (props.composite) {
+                onEscapeKey();
+            }
+
             if (listRef?.current) {
-                const element = findSingle(listRef?.current, `[id="${focusedOptionId}"]`) as HTMLElement;
+                const currentFocusedId = getCurrentFocusedId();
+                const element = findSingle(listRef?.current, `[id="${currentFocusedId}"]`) as HTMLElement;
 
                 if (element) {
                     const mouseDownEvent = new MouseEvent('mousedown', {
@@ -202,7 +387,7 @@ export const useMenu = withHeadless({
         };
 
         const onEscapeKey = () => {
-            setFocusedOptionId('');
+            hideAllSubmenus();
 
             setTimeout(() => {
                 if (triggerRef.current) {
@@ -225,6 +410,20 @@ export const useMenu = withHeadless({
 
                     break;
 
+                case 'ArrowRight':
+                    if (props.composite) {
+                        onArrowRight(event);
+                    }
+
+                    break;
+
+                case 'ArrowLeft':
+                    if (props.composite) {
+                        onArrowLeft(event);
+                    }
+
+                    break;
+
                 case 'Home':
                     onHome(event);
 
@@ -241,8 +440,6 @@ export const useMenu = withHeadless({
 
                     break;
 
-                case 'ArrowLeft':
-                case 'ArrowRight':
                 case 'PageDown':
                 case 'PageUp':
                 case 'Backspace':
@@ -267,11 +464,17 @@ export const useMenu = withHeadless({
         const onListFocus = () => {
             setFocusedState(true);
 
-            if (focusedOptionId === '' && !isMouseInteractionRef.current) {
+            const currentFocusedId = getCurrentFocusedId();
+
+            if (currentFocusedId === '' && !isMouseInteractionRef.current) {
                 const focusableItems = getFocusableItems();
 
                 if (focusableItems.length > 0) {
-                    setFocusedOptionId(focusableItems[0].id);
+                    if (props.composite) {
+                        changeFocusedOptionId(focusableItems[0].id);
+                    } else {
+                        setFocusedOptionId(focusableItems[0].id);
+                    }
                 }
             }
 
@@ -280,13 +483,74 @@ export const useMenu = withHeadless({
 
         const onListBlur = () => {
             setFocusedState(false);
-            setFocusedOptionId('');
+
+            if (props.composite) {
+                hideAllSubmenus();
+            }
+        };
+
+        const hideAllSubmenus = () => {
+            if (props.composite) {
+                itemRefsById.current.forEach((element) => {
+                    const ariaExpanded = element.getAttribute('aria-expanded');
+
+                    if (ariaExpanded === 'true') {
+                        const mouseDownEvent = new MouseEvent('mousedown', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+
+                        element.dispatchEvent(mouseDownEvent);
+                    }
+                });
+
+                setFocusedOptionId([]);
+            } else {
+                setFocusedOptionId('');
+            }
+        };
+
+        const hideSubmenusAfterLevel = (targetItemId: string) => {
+            if (!props.composite || !Array.isArray(focusedOptionId)) return;
+
+            const targetLevel = targetItemId.split('_').length - 1;
+
+            itemRefsById.current.forEach((element, elementId) => {
+                const elementLevel = elementId.split('_').length - 1;
+                const ariaExpanded = element.getAttribute('aria-expanded');
+
+                if (ariaExpanded === 'true' && elementLevel >= targetLevel) {
+                    const mouseDownEvent = new MouseEvent('mousedown', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+
+                    element.dispatchEvent(mouseDownEvent);
+                }
+            });
+
+            setFocusedOptionId((prev) => {
+                const prevArray = Array.isArray(prev) ? prev : [];
+
+                return prevArray.filter((id) => {
+                    const idLevel = id.split('_').length - 1;
+
+                    return idLevel < targetLevel;
+                });
+            });
         };
 
         const hide = () => {
             setOpenState(false);
             updateOpenState(false);
-            setFocusedOptionId('');
+
+            if (props.composite) {
+                setFocusedOptionId([]);
+            } else {
+                setFocusedOptionId('');
+            }
 
             setTimeout(() => {
                 if (triggerRef.current) {
@@ -300,11 +564,11 @@ export const useMenu = withHeadless({
                 focus(listRef.current);
             }
 
-            if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
-                const element = portalRef.current.containerRef.current.elementRef.current;
+            // if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
+            //     const element = portalRef.current.containerRef.current.elementRef.current;
 
-                element.style.overflowY = 'auto';
-            }
+            //     element.style.overflowY = 'auto';
+            // }
         };
 
         const onTriggerClick = () => {
@@ -328,6 +592,9 @@ export const useMenu = withHeadless({
             unregisterItem,
             changeVisibleState,
             changeFocusedOptionId,
+            pushFocusedOptionId,
+            popFocusedOptionId,
+            hideSubmenusAfterLevel,
             onListKeyDown,
             onListFocus,
             onListBlur,

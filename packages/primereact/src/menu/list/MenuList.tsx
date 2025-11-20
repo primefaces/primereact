@@ -59,12 +59,25 @@ export const MenuList = withComponent({
                   onBlur: menu?.onListBlur
               });
 
+        const getAriaActiveDescendant = () => {
+            const focusedOptionId = menu?.state.focusedOptionId;
+
+            if (!focusedOptionId) return undefined;
+
+            if (Array.isArray(focusedOptionId)) {
+                // For composite mode, use the last element of the array
+                return focusedOptionId[focusedOptionId.length - 1] || undefined;
+            }
+
+            return focusedOptionId || undefined;
+        };
+
         const rootProps = mergeProps(
             {
                 id: listId,
                 className: menu?.cx('list'),
                 role: 'menu',
-                'aria-activedescendant': menu?.state.focusedOptionId || undefined,
+                'aria-activedescendant': getAriaActiveDescendant(),
                 tabIndex: menu?.props.tabIndex,
                 onKeyDown: menu?.onListKeyDown
             },

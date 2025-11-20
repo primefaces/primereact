@@ -53,7 +53,21 @@ export const MenuItem = withComponent({
             };
         }, [itemId, menu?.registerItem, menu?.unregisterItem, props.disabled, props.group]);
 
-        const focused = menu?.state.focusedOptionId === itemId;
+        const focused = React.useMemo(() => {
+            const focusedOptionId = menu?.state.focusedOptionId;
+
+            if (!focusedOptionId || itemId === undefined) return false;
+
+            if (Array.isArray(focusedOptionId)) {
+                // For composite mode, check if itemId is the last element
+                // return focusedOptionId[focusedOptionId.length - 1] === itemId;
+
+                return focusedOptionId.includes(itemId);
+            }
+
+            return focusedOptionId === itemId;
+        }, [menu?.state.focusedOptionId, itemId]);
+
         const ariaLevel = level ? level.level + 1 : 1;
         const ariaPosInSet = itemIndex !== undefined ? itemIndex + 1 : undefined;
         const ariaSetSize = level && level.totalItems > 0 ? level.totalItems : undefined;
@@ -76,6 +90,13 @@ export const MenuItem = withComponent({
 
         const onItemMouseMove = () => {
             if (isInteractive && itemId !== undefined && menu?.state.focused) {
+                menu?.changeFocusedOptionId(itemId);
+            }
+        };
+
+        const onItemMouseEnter = () => {
+            if (menu?.props.composite && isInteractive && itemId !== undefined && menu?.state.focused) {
+                menu?.hideSubmenusAfterLevel?.(itemId);
                 menu?.changeFocusedOptionId(itemId);
             }
         };
@@ -103,7 +124,8 @@ export const MenuItem = withComponent({
                       'data-p-focused': focused,
                       'data-p-disabled': props.disabled,
                       onMouseDown: onItemMouseDown,
-                      onMouseMove: onItemMouseMove
+                      onMouseMove: onItemMouseMove,
+                      onMouseEnter: menu?.props.composite ? onItemMouseEnter : undefined
                   },
                   menu?.ptm('item'),
                   ptmi('root')

@@ -8,6 +8,7 @@ export const useMenuSub = withHeadless({
     setup({ props }) {
         const [openState, setOpenState] = React.useState<boolean>(props.open !== undefined ? props.open : (props.defaultOpen ?? false));
 
+        const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
         const triggerRef = React.useRef<HTMLDivElement | null>(null);
         const listRef = React.useRef<HTMLUListElement | null>(null);
 
@@ -40,13 +41,34 @@ export const useMenuSub = withHeadless({
             }
         };
 
+        const open = () => {
+            if (!props.disabled) {
+                const newState = true;
+
+                setOpenState(newState);
+                updateOpenState(newState);
+            }
+        };
+
+        const close = () => {
+            if (!props.disabled) {
+                const newState = false;
+
+                setOpenState(newState);
+                updateOpenState(newState);
+            }
+        };
+
         return {
             state,
             // refs
+            portalRef,
             triggerRef,
             listRef,
             // methods
             toggle,
+            open,
+            close,
             onTriggerClick
         };
     }

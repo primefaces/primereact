@@ -8,6 +8,7 @@ import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useMenuContext } from '../Menu.context';
 import { useMenuLevelContext } from '../MenuLevel.context';
+import { useMenuPortalContext } from '../portal/MenuPortal.context';
 import { useMenuSubContext } from '../sub/MenuSub.context';
 import { defaultTriggerProps } from './MenuTrigger.props';
 
@@ -17,6 +18,7 @@ export const MenuTrigger = withComponent({
     setup() {
         const menu = useMenuContext();
         const submenu = useMenuSubContext();
+        const portal = useMenuPortalContext();
         const level = useMenuLevelContext();
 
         const itemIndexRef = React.useRef<number | undefined>(undefined);
@@ -50,16 +52,31 @@ export const MenuTrigger = withComponent({
             };
         }, [itemId, menu?.registerItem, menu?.unregisterItem, submenu?.props.disabled]);
 
-        const focused = submenu && menu?.state.focusedOptionId === itemId;
+        const focused = React.useMemo(() => {
+            if (!submenu) return false;
+
+            const focusedOptionId = menu?.state.focusedOptionId;
+
+            if (!focusedOptionId || itemId === undefined) return false;
+
+            if (Array.isArray(focusedOptionId)) {
+                // For composite mode, check if itemId is the last element
+                // return focusedOptionId[focusedOptionId.length - 1] === itemId;
+                return focusedOptionId.includes(itemId);
+            }
+
+            return focusedOptionId === itemId;
+        }, [submenu, menu?.state.focusedOptionId, itemId]);
+
         const disabled = submenu ? submenu.inProps?.disabled : false;
         const ariaLevel = level ? level.level + 1 : 1;
         const ariaPosInSet = itemIndex !== undefined ? itemIndex + 1 : undefined;
         const ariaSetSize = level && level.totalItems > 0 ? level.totalItems : undefined;
 
-        return { menu, submenu, level, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize };
+        return { menu, submenu, portal, level, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize };
     },
     render(instance) {
-        const { props, ptmi, menu, submenu, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
+        const { props, ptmi, menu, submenu, portal, level, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
 
         const onItemMouseMove = () => {
             if (!disabled && itemId !== undefined && menu?.state.focused) {
@@ -67,11 +84,53 @@ export const MenuTrigger = withComponent({
             }
         };
 
-        const onItemMouseDown = () => {
-            submenu?.toggle();
-
+        const onItemMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
             if (!disabled && itemId !== undefined) {
                 menu?.changeFocusedOptionId(itemId);
+            }
+
+            //TODO:
+            if (menu?.props.composite && portal && submenu) {
+                submenu.toggle();
+            }
+
+            if (menu?.props.composite && !portal && level?.level === 0 && submenu) {
+                event?.preventDefault();
+
+                submenu.toggle();
+
+                if (!submenu.state.opened && menu?.listRef?.current) {
+                    menu?.listRef?.current.focus();
+                }
+            } else if (!menu?.props.composite && submenu) {
+                submenu.toggle();
+            }
+        };
+
+        const onItemMouseEnter = () => {
+            if (menu?.props.composite && !disabled && itemId !== undefined && menu?.state.focused) {
+                menu?.hideSubmenusAfterLevel?.(itemId);
+                menu?.changeFocusedOptionId(itemId);
+
+                if (level?.level === 0 && submenu && !submenu.state.opened) {
+                    submenu.open?.();
+                }
+            }
+        };
+
+        const onItemMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+            if (menu?.props.composite && submenu && submenu.state.opened && itemId !== undefined) {
+                const relatedTarget = event.relatedTarget as HTMLElement;
+
+                if (relatedTarget) {
+                    const submenuList = submenu.listRef.current;
+
+                    if (submenuList && submenuList.contains(relatedTarget)) {
+                        return;
+                    }
+                }
+
+                submenu.close?.();
             }
         };
 
@@ -89,7 +148,9 @@ export const MenuTrigger = withComponent({
                   'data-p-focused': focused,
                   'data-p-disabled': disabled,
                   onMouseDown: onItemMouseDown,
-                  onMouseMove: onItemMouseMove
+                  onMouseMove: onItemMouseMove,
+                  onMouseEnter: onItemMouseEnter,
+                  onMouseLeave: onItemMouseLeave
               })
             : mergeProps({
                   className: menu?.cx('trigger'),

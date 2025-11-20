@@ -71,6 +71,14 @@ export interface useMenuSubExposes {
      */
     toggle: () => void;
     /**
+     * Open the submenu (composite mode).
+     */
+    open?: () => void;
+    /**
+     * Close the submenu (composite mode).
+     */
+    close?: () => void;
+    /**
      * Handle trigger click event.
      */
     onTriggerClick: () => void;
