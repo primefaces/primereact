@@ -1,0 +1,19 @@
+import { ColorPicker } from 'primereact/colorpicker';
+
+function VerticalSliderDemo() {
+    return (
+        <div className="card">
+            <ColorPicker format="hsba">
+                <div className="flex gap-4">
+                    <ColorPicker.Area className="max-w-xs flex-1" />
+                    <ColorPicker.Slider orientation="vertical" className="h-auto" />
+                    <ColorPicker.Slider channel="saturation" orientation="vertical" />
+                    <ColorPicker.Slider channel="brightness" orientation="vertical" />
+                    <ColorPicker.Slider channel="alpha" orientation="vertical" />
+                </div>
+            </ColorPicker>
+        </div>
+    );
+}
+
+export default VerticalSliderDemo;

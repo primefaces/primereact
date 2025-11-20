@@ -66,6 +66,9 @@ export * from '@primereact/icons/exclamationtriangle';
 // EyeIcon
 export * from '@primereact/icons/eye';
 
+// EyeDropperIcon
+export * from '@primereact/icons/eyedropper';
+
 // EyeSlashIcon
 export * from '@primereact/icons/eyeslash';
 
