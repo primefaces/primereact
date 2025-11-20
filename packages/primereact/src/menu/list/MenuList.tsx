@@ -1,7 +1,7 @@
 'use client';
 import { Component } from '@primereact/core/component';
 import { defaultProps } from '@primereact/headless/menu';
-import { mergeProps, omit, resolve } from '@primeuix/utils';
+import { mergeProps, nestedPosition, omit, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useMenuContext } from '../Menu.context';
@@ -39,6 +39,12 @@ export const MenuList = withComponent({
             }
         }, [menu?.id, newParentPath.join('_')]);
 
+        React.useEffect(() => {
+            if (submenu?.listRef?.current && submenu?.state.opened) {
+                nestedPosition(submenu.listRef.current as HTMLUListElement, submenu?.parentLevel?.level as number);
+            }
+        }, [submenu?.state.opened, submenu?.listRef?.current]);
+
         return { menu, submenu, parentLevel, listLevel, listId, triggerIndex: triggerIndexRef.current };
     },
     render(instance) {
@@ -58,6 +64,7 @@ export const MenuList = withComponent({
                 id: listId,
                 className: menu?.cx('list'),
                 role: 'menu',
+                'aria-activedescendant': menu?.state.focusedOptionId || undefined,
                 tabIndex: menu?.props.tabIndex,
                 onKeyDown: menu?.onListKeyDown
             },
@@ -68,8 +75,7 @@ export const MenuList = withComponent({
 
         const menuProps = mergeProps(
             {
-                className: menu?.cx('root'),
-                'aria-activedescendant': menu?.state.focusedOptionId || undefined
+                className: menu?.cx('root')
             },
             {
                 ...(omit(menu?.inProps, ...Object.keys(defaultProps)) as Record<PropertyKey, unknown>)
@@ -85,9 +91,17 @@ export const MenuList = withComponent({
             props.children
         );
 
-        return submenu ? (
-            <Component ref={submenu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
-        ) : (
+        if (submenu) {
+            const submenuList = <Component ref={submenu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />;
+
+            if (menu?.props.composite) {
+                return submenu?.state.opened ? submenuList : null;
+            }
+
+            return submenuList;
+        }
+
+        return (
             <div {...menuProps}>
                 <Component ref={menu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
             </div>

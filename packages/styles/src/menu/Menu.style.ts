@@ -12,7 +12,6 @@ const _style = /*css*/ `
         min-width: max-content;
     }
 
-
     .p-menu-list {
         margin: 0;
         padding: dt('menu.list.padding');
@@ -21,6 +20,22 @@ const _style = /*css*/ `
         display: flex;
         flex-direction: column;
         gap: dt('menu.list.gap');
+    }
+
+    .p-menu:not(.p-menu-composite) .p-menu-submenu .p-menu-list {
+        padding-inline-start: 1rem;
+        padding-inline-end: 0;
+    }
+
+    .p-menu-composite .p-menu-submenu .p-menu-list {
+        position: absolute;
+        min-width: 100%;
+        z-index: 1;
+        background: dt('menu.background');
+        color: dt('menu.color');
+        border: 1px solid dt('menu.border.color');
+        border-radius: dt('menu.border.radius');
+        box-shadow: var(--p-menu-shadow);
     }
 
     .p-menu-item {
@@ -83,11 +98,6 @@ const _style = /*css*/ `
         transition: transform 0.2s;
     }
 
-    .p-menu-submenu .p-menu-list {
-        padding-inline-start: 1rem;
-        padding-inline-end: 0;
-    }
-
     .p-menu-group-label {
         background: dt('menu.submenu.label.background');
         padding: dt('menu.submenu.label.padding');
@@ -107,7 +117,7 @@ export const styles = createStyles<MenuInstance>({
         root: ({ props }) => [
             'p-menu p-component',
             {
-                'p-menu-overlay': props.popup
+                'p-menu-composite': props.composite
             }
         ],
         content: 'p-menu-content',
@@ -132,5 +142,10 @@ export const styles = createStyles<MenuInstance>({
         ],
         trigger: 'p-menu-trigger-button',
         itemIcon: 'p-menu-item-icon'
+    },
+    inlineStyles: {
+        submenu: ({ props }) => ({
+            position: props.composite ? 'relative' : undefined
+        })
     }
 });

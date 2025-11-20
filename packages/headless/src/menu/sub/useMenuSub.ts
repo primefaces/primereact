@@ -42,8 +42,10 @@ export const useMenuSub = withHeadless({
 
         return {
             state,
+            // refs
             triggerRef,
             listRef,
+            // methods
             toggle,
             onTriggerClick
         };

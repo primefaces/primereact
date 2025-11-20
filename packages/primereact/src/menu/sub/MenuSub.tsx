@@ -28,7 +28,8 @@ export const MenuSub = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: menu?.cx('submenu')
+                className: menu?.cx('submenu'),
+                style: menu?.sx('submenu')
             },
             ptmi('root')
         );

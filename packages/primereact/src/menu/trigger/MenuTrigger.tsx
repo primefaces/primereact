@@ -1,6 +1,7 @@
 'use client';
 import { Component } from '@primereact/core/component';
 import { AngleDownIcon } from '@primereact/icons/angledown';
+import { AngleRightIcon } from '@primereact/icons/angleright';
 import { mergeProps, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { Button } from 'primereact/button';
@@ -99,10 +100,17 @@ export const MenuTrigger = withComponent({
 
         const rootProps = mergeProps(computedProps, ptmi('root'));
 
+        const iconProps = mergeProps(
+            {
+                className: menu?.cx('itemIcon')
+            },
+            menu?.ptm('itemIcon')
+        );
+
         return submenu ? (
             <div ref={submenu?.triggerRef} {...rootProps}>
                 {resolve(props.children, instance)}
-                <AngleDownIcon className={menu?.cx('itemIcon')} rotate={submenu.state.opened ? 180 : 0} {...menu?.ptm('itemIcon')} />
+                {menu?.props.composite ? <AngleRightIcon {...iconProps} /> : <AngleDownIcon {...iconProps} rotate={submenu.state.opened ? 180 : 0} />}
             </div>
         ) : (
             // @ts-expect-error: Button expects a type prop, but we are using it as a trigger.
