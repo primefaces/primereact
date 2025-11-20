@@ -34,7 +34,7 @@ const data: TreeNode[] = [
             name: 'Amy Elsner',
             title: 'CEO'
         },
-        custom: (node: TreeNode) => <CustomNode node={node as CustomNodeProps} />,
+        render: (node: TreeNode) => <CustomNode node={node as CustomNodeProps} />,
         children: [
             {
                 key: '0_0',
@@ -49,7 +49,7 @@ const data: TreeNode[] = [
                     title: 'CMO'
                 },
 
-                custom: (node: TreeNode) => <CustomNode node={node as CustomNodeProps} />,
+                render: (node: TreeNode) => <CustomNode node={node as CustomNodeProps} />,
                 children: [
                     {
                         key: '0_0_0',
@@ -74,7 +74,7 @@ const data: TreeNode[] = [
                     title: 'CTO'
                 },
 
-                custom: (node: TreeNode) => <CustomNode node={node as CustomNodeProps} />,
+                render: (node: TreeNode) => <CustomNode node={node as CustomNodeProps} />,
                 children: [
                     {
                         key: '0_1_0',
