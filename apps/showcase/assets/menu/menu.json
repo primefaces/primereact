@@ -159,6 +159,10 @@
                             "to": "/docs/components/dataview"
                         },
                         {
+                            "name": "OrgChart",
+                            "to": "/docs/components/orgchart"
+                        },
+                        {
                             "name": "Paginator",
                             "to": "/docs/components/paginator"
                         },
