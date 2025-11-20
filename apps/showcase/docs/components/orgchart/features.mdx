@@ -1,0 +1,81 @@
+---
+title: OrgChart
+description: OrgChart visualizes hierarchical organization data.
+component: orgchart
+---
+
+## Usage
+
+```tsx
+import { OrgChart } from 'primereact/orgchart';
+```
+
+```tsx
+<OrgChart />
+```
+
+## Examples
+
+### Basic
+
+OrgChart requires a collection of TreeNode instances as a value.
+
+<DocDemoViewer name="orgchart:basic-demo" />
+
+### Collapsible
+
+Use the `collapsible` prop to make nodes collapsible.
+
+<DocDemoViewer name="orgchart:collapsible-demo" />
+
+### Selectable
+
+Use the `selectable` prop to make nodes selectable. Besides, use the `selectionMode` prop to specify the selection mode.
+
+<DocDemoViewer name="orgchart:selectable-demo" />
+
+### Partial Collapsible & Selectable
+
+Use the `collapsible` attribute on a node to make a node collapsible and the `selectable` attribute on a node to make a node selectable partially.
+
+<DocDemoViewer name="orgchart:partial-demo" />
+
+### Default Collapsed & Selected
+
+Use the `collapsedByDefault` attribute on a node to make a node collapsed by default and the `selectedByDefault` attribute on a node to make a node selected by default.
+
+<DocDemoViewer name="orgchart:default-demo" />
+
+### Custom
+
+Use the `custom` attribute on a node to render a custom node content.
+
+<DocDemoViewer name="orgchart:custom-demo" />
+
+### Template
+
+<DocDemoViewer name="orgchart:template-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+OrgChart uses ARIA roles and attributes for screen reader accessibility. The root element has `role="tree"` with `aria-multiselectable` for multiple selection support. Each tree item uses `role="treeitem"` with `aria-level` for hierarchy, `aria-expanded` for collapse state, and `aria-selected` for selection state. Child nodes are grouped with `role="group"`.
+
+### Keyboard Navigation
+
+_OrgChart.Node_
+
+| Key     | Function                                                  |
+| ------- | --------------------------------------------------------- |
+| `tab`   | Moves focus through the focusable nodes within the chart. |
+| `enter` | Toggles the selection state of a node.                    |
+| `space` | Toggles the selection state of a node.                    |
+
+_OrgChart.CollapseButton_
+
+| Key     | Function                                                     |
+| ------- | ------------------------------------------------------------ |
+| `tab`   | Moves focus through the focusable elements within the chart. |
+| `enter` | Toggles the expanded state of a node.                        |
+| `space` | Toggles the expanded state of a node.                        |
