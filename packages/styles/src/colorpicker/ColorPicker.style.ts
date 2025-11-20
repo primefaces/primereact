@@ -48,11 +48,7 @@ const theme = `
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-drag: none;
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
-    }
-
-    .p-dark .p-color-picker-area-background{
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+        box-shadow: inset 0 0 0 1px light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.15));
     }
 
     .p-color-picker-slider{
@@ -105,12 +101,8 @@ const theme = `
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-drag: none;
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+        box-shadow: inset 0 0 0 1px light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.15));
         background: var(--slider-background);
-    }
-
-    .p-dark .p-color-picker-slider-track{
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
     }
 
     .p-color-picker-transparency-grid{
@@ -140,7 +132,7 @@ const theme = `
 
     .p-color-picker-swatch-background{
         background: var(--swatch-background);
-        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+        box-shadow: inset 0 0 0 1px light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.15));
         position: absolute;
         inset: 0;
         z-index: 0;
@@ -151,10 +143,6 @@ const theme = `
         forced-color-adjust: none;
         -webkit-user-select: none;
         -webkit-touch-callout: none;
-    }
-
-    .p-dark .p-color-picker-swatch-background{
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
     }
 `;
 
