@@ -28,6 +28,6 @@ export const OrgChartNodeContent = withComponent({
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children ?? (typeof item?.custom === 'function' ? item.custom(item as TreeNode) : item?.custom) ?? item?.label} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children ?? (typeof item?.render === 'function' ? item.render(item as TreeNode) : item?.render) ?? item?.label} />;
     }
 });

@@ -25,7 +25,7 @@ export interface TreeNode {
     /**
      * Custom content of the node.
      */
-    custom?: React.ReactNode | ((node: TreeNode) => React.ReactNode);
+    render?: React.ReactNode | ((node: TreeNode) => React.ReactNode);
     /**
      * Children of the node.
      */
