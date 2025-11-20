@@ -269,6 +269,28 @@ export const Store = {
             'filePath': 'demo/chip/template-demo.tsx',
         },
     },
+    'colorpicker': {
+        'advanced-demo': {
+            'component': React.lazy(() => import('demo/colorpicker/advanced-demo.tsx')),
+            'filePath': 'demo/colorpicker/advanced-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/colorpicker/basic-demo.tsx')),
+            'filePath': 'demo/colorpicker/basic-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/colorpicker/controlled-demo.tsx')),
+            'filePath': 'demo/colorpicker/controlled-demo.tsx',
+        },
+        'popover-demo': {
+            'component': React.lazy(() => import('demo/colorpicker/popover-demo.tsx')),
+            'filePath': 'demo/colorpicker/popover-demo.tsx',
+        },
+        'vertical-slider-demo': {
+            'component': React.lazy(() => import('demo/colorpicker/vertical-slider-demo.tsx')),
+            'filePath': 'demo/colorpicker/vertical-slider-demo.tsx',
+        },
+    },
     'confirmdialog': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/confirmdialog/basic-demo.tsx')),
@@ -943,6 +965,36 @@ export const Store = {
         'vertical-demo': {
             'component': React.lazy(() => import('demo/metergroup/vertical-demo.tsx')),
             'filePath': 'demo/metergroup/vertical-demo.tsx',
+        },
+    },
+    'orgchart': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/orgchart/basic-demo.tsx')),
+            'filePath': 'demo/orgchart/basic-demo.tsx',
+        },
+        'collapsible-demo': {
+            'component': React.lazy(() => import('demo/orgchart/collapsible-demo.tsx')),
+            'filePath': 'demo/orgchart/collapsible-demo.tsx',
+        },
+        'custom-demo': {
+            'component': React.lazy(() => import('demo/orgchart/custom-demo.tsx')),
+            'filePath': 'demo/orgchart/custom-demo.tsx',
+        },
+        'default-demo': {
+            'component': React.lazy(() => import('demo/orgchart/default-demo.tsx')),
+            'filePath': 'demo/orgchart/default-demo.tsx',
+        },
+        'partial-demo': {
+            'component': React.lazy(() => import('demo/orgchart/partial-demo.tsx')),
+            'filePath': 'demo/orgchart/partial-demo.tsx',
+        },
+        'selectable-demo': {
+            'component': React.lazy(() => import('demo/orgchart/selectable-demo.tsx')),
+            'filePath': 'demo/orgchart/selectable-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/orgchart/template-demo.tsx')),
+            'filePath': 'demo/orgchart/template-demo.tsx',
         },
     },
     'paginator': {
