@@ -82,6 +82,52 @@ export const useMenu = withHeadless({
             return items;
         }, []);
 
+        const getFocusableItemsAtCurrentLevel = React.useCallback(() => {
+            const allFocusableItems = getFocusableItems();
+
+            if (allFocusableItems.length === 0) return [];
+
+            // Determine the root level depth by examining all items
+            // Find the minimum underscore count among all items to determine root level depth
+            const minDepth = Math.min(...allFocusableItems.map((item) => item.id.split('_').length));
+
+            if (focusedOptionId.length === 0) {
+                // No focus yet, return root level items
+                const rootItems = allFocusableItems.filter((item) => {
+                    return item.id.split('_').length === minDepth;
+                });
+
+                return rootItems;
+            }
+
+            // Get the current focused item ID
+            const currentFocusedId = focusedOptionId[focusedOptionId.length - 1];
+            const currentIdParts = currentFocusedId.split('_');
+            const currentDepth = currentIdParts.length;
+
+            // Filter items that are at the same level and belong to the same parent
+            const levelItems = allFocusableItems.filter((item) => {
+                const itemParts = item.id.split('_');
+
+                // Must have same depth
+                if (itemParts.length !== currentDepth) return false;
+
+                // For root level
+                if (currentDepth === minDepth) {
+                    return itemParts.length === minDepth;
+                }
+
+                // For nested levels, check if they share the same parent path
+                // Example: menu_0_1_2 and menu_0_1_3 share parent menu_0_1
+                const currentParentPath = currentIdParts.slice(0, -1).join('_');
+                const itemParentPath = itemParts.slice(0, -1).join('_');
+
+                return currentParentPath === itemParentPath;
+            });
+
+            return levelItems;
+        }, [props.composite, focusedOptionId, getFocusableItems]);
+
         const changeFocusedOptionId = (id: string) => {
             // Mark as mouse interaction to prevent auto-focus in onListFocus
             isMouseInteractionRef.current = true;
@@ -115,30 +161,6 @@ export const useMenu = withHeadless({
             }
         };
 
-        const pushFocusedOptionId = (id: string) => {
-            if (props.composite) {
-                setFocusedOptionId((prev) => {
-                    const prevArray = Array.isArray(prev) ? prev : [];
-
-                    return [...prevArray, id];
-                });
-            }
-        };
-
-        const popFocusedOptionId = () => {
-            if (props.composite) {
-                setFocusedOptionId((prev) => {
-                    const prevArray = Array.isArray(prev) ? prev : [];
-
-                    if (prevArray.length > 0) {
-                        return prevArray.slice(0, -1);
-                    }
-
-                    return prevArray;
-                });
-            }
-        };
-
         const getCurrentFocusedId = () => {
             if (props.composite && Array.isArray(focusedOptionId)) {
                 return focusedOptionId[focusedOptionId.length - 1] || '';
@@ -148,7 +170,7 @@ export const useMenu = withHeadless({
         };
 
         const searchItems = (char: string) => {
-            const focusableItems = getFocusableItems();
+            const focusableItems = props.composite ? getFocusableItemsAtCurrentLevel() : getFocusableItems();
 
             if (focusableItems.length === 0) return;
 
@@ -190,7 +212,7 @@ export const useMenu = withHeadless({
         const onArrowDown = (event: React.KeyboardEvent) => {
             event.preventDefault();
 
-            const focusableItems = getFocusableItems();
+            const focusableItems = props.composite ? getFocusableItemsAtCurrentLevel() : getFocusableItems();
 
             if (focusableItems.length === 0) return;
 
@@ -225,7 +247,7 @@ export const useMenu = withHeadless({
                 return;
             }
 
-            const focusableItems = getFocusableItems();
+            const focusableItems = props.composite ? getFocusableItemsAtCurrentLevel() : getFocusableItems();
 
             if (focusableItems.length === 0) return;
 
@@ -265,11 +287,9 @@ export const useMenu = withHeadless({
 
             if (!focusedElement) return;
 
-            // Check if it has aria-expanded (it's a submenu trigger)
             const ariaExpanded = focusedElement.getAttribute('aria-expanded');
 
             if (ariaExpanded !== null) {
-                // It's a submenu trigger
                 if (ariaExpanded === 'false') {
                     // Open the submenu by simulating mousedown
                     const mouseDownEvent = new MouseEvent('mousedown', {
@@ -281,19 +301,15 @@ export const useMenu = withHeadless({
                     focusedElement.dispatchEvent(mouseDownEvent);
                 }
 
-                // After opening (or if already open), focus first item in submenu
                 setTimeout(() => {
                     const focusableItems = getFocusableItems();
 
-                    // Find items that are children of the current trigger
-                    // They will have IDs starting with currentFocusedId + "_"
                     const submenuItems = focusableItems.filter((item) => {
                         return item.id.startsWith(currentFocusedId + '_') && item.id.split('_').length === currentFocusedId.split('_').length + 1;
                     });
 
                     // Focus the first item in the submenu
                     if (submenuItems.length > 0) {
-                        // pushFocusedOptionId(submenuItems[0].id);
                         setFocusedOptionId((prev) => {
                             const prevArray = Array.isArray(prev) ? prev : [];
 
@@ -313,14 +329,12 @@ export const useMenu = withHeadless({
 
             if (!currentFocusedId || !Array.isArray(focusedOptionId)) return;
 
-            // If we're in a submenu (focusedOptionId array has more than 1 element)
             if (focusedOptionId.length > 1) {
-                // Find the parent trigger ID (second to last element)
                 const parentTriggerId = focusedOptionId[focusedOptionId.length - 2];
                 const parentTrigger = itemRefsById.current.get(parentTriggerId);
 
                 if (parentTrigger && parentTrigger.getAttribute('aria-expanded') === 'true') {
-                    // Close the submenu
+                    // Close the submenu by simulating mousedown
                     const mouseDownEvent = new MouseEvent('mousedown', {
                         bubbles: true,
                         cancelable: true,
@@ -329,16 +343,13 @@ export const useMenu = withHeadless({
 
                     parentTrigger.dispatchEvent(mouseDownEvent);
                 }
-
-                // Pop the focus back to the trigger
-                // popFocusedOptionId();
             }
         };
 
         const onHome = (event: React.KeyboardEvent) => {
             event.preventDefault();
 
-            const focusableItems = getFocusableItems();
+            const focusableItems = props.composite ? getFocusableItemsAtCurrentLevel() : getFocusableItems();
 
             if (focusableItems.length === 0) return;
 
@@ -352,7 +363,7 @@ export const useMenu = withHeadless({
         const onEnd = (event: React.KeyboardEvent) => {
             event.preventDefault();
 
-            const focusableItems = getFocusableItems();
+            const focusableItems = props.composite ? getFocusableItemsAtCurrentLevel() : getFocusableItems();
 
             if (focusableItems.length === 0) return;
 
@@ -467,7 +478,7 @@ export const useMenu = withHeadless({
             const currentFocusedId = getCurrentFocusedId();
 
             if (currentFocusedId === '' && !isMouseInteractionRef.current) {
-                const focusableItems = getFocusableItems();
+                const focusableItems = props.composite ? getFocusableItemsAtCurrentLevel() : getFocusableItems();
 
                 if (focusableItems.length > 0) {
                     if (props.composite) {
@@ -486,6 +497,9 @@ export const useMenu = withHeadless({
 
             if (props.composite) {
                 hideAllSubmenus();
+            } else {
+                // For non-composite mode, reset focus on blur
+                setFocusedOptionId('');
             }
         };
 
@@ -592,8 +606,6 @@ export const useMenu = withHeadless({
             unregisterItem,
             changeVisibleState,
             changeFocusedOptionId,
-            pushFocusedOptionId,
-            popFocusedOptionId,
             hideSubmenusAfterLevel,
             onListKeyDown,
             onListFocus,

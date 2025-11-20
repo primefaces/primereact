@@ -59,6 +59,10 @@ export interface useMenuSubExposes {
      */
     state: useMenuSubState;
     /**
+     * Reference to the portal element.
+     */
+    portalRef: React.RefObject<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>;
+    /**
      * Reference to the trigger element.
      */
     triggerRef: React.RefObject<HTMLDivElement | null>;
@@ -73,11 +77,11 @@ export interface useMenuSubExposes {
     /**
      * Open the submenu (composite mode).
      */
-    open?: () => void;
+    open: () => void;
     /**
      * Close the submenu (composite mode).
      */
-    close?: () => void;
+    close: () => void;
     /**
      * Handle trigger click event.
      */

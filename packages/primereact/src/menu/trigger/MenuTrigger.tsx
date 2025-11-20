@@ -89,7 +89,6 @@ export const MenuTrigger = withComponent({
                 menu?.changeFocusedOptionId(itemId);
             }
 
-            //TODO:
             if (menu?.props.composite && portal && submenu) {
                 submenu.toggle();
             }
@@ -113,7 +112,7 @@ export const MenuTrigger = withComponent({
                 menu?.changeFocusedOptionId(itemId);
 
                 if (level?.level === 0 && submenu && !submenu.state.opened) {
-                    submenu.open?.();
+                    submenu.open();
                 }
             }
         };
@@ -130,7 +129,7 @@ export const MenuTrigger = withComponent({
                     }
                 }
 
-                submenu.close?.();
+                submenu.close();
             }
         };
 

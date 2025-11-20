@@ -144,14 +144,6 @@ export interface useMenuExposes {
      */
     changeFocusedOptionId: (id: string, level?: number) => void;
     /**
-     * Push a new focused option ID to the focus path (composite mode only).
-     */
-    pushFocusedOptionId?: (id: string) => void;
-    /**
-     * Pop the last focused option ID from the focus path (composite mode only).
-     */
-    popFocusedOptionId?: () => void;
-    /**
      * Hide all submenus at or after a specific level (composite mode only).
      */
     hideSubmenusAfterLevel?: (targetItemId: string) => void;

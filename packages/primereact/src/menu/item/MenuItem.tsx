@@ -83,7 +83,9 @@ export const MenuItem = withComponent({
                 menu?.changeFocusedOptionId(itemId);
             }
 
-            if (isInteractive && portal) {
+            if (isInteractive && portal && menu?.props.composite && event.detail > 0) {
+                menu?.onItemClick?.(event);
+            } else if (isInteractive && portal && !menu?.props.composite) {
                 menu?.onItemClick?.(event);
             }
         };
