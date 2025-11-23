@@ -9,6 +9,7 @@ export const useInputOtp = withHeadless({
     defaultProps,
     setup({ props }) {
         const [valueState, setValueState] = React.useState<useInputOtpProps['value']>(props.value ?? props.defaultValue ?? null);
+        const [valueEvent, setValueEvent] = React.useState<React.FormEvent<HTMLInputElement> | React.ClipboardEvent<HTMLInputElement>>();
         const [tokens, setTokens] = React.useState<string[]>(() => {
             const initialValue = props.value ?? props.defaultValue ?? '';
 
@@ -54,8 +55,9 @@ export const useInputOtp = withHeadless({
             const currentTokens = [...tokens];
 
             currentTokens[index] = target.value;
+
+            setValueEvent(event);
             setTokens(currentTokens);
-            updateValue(event);
 
             if (inputEvent.inputType === 'deleteContentBackward') {
                 moveToPrev(event);
@@ -157,13 +159,17 @@ export const useInputOtp = withHeadless({
                 if (!props.integerOnly || !isNaN(Number(pastedCode))) {
                     const newTokens = pastedCode.split('');
 
+                    setValueEvent(event);
                     setTokens(newTokens);
-                    updateValue(event);
                 }
             }
 
             event.preventDefault();
         };
+
+        React.useEffect(() => {
+            if (valueEvent) updateValue(valueEvent);
+        }, [tokens, valueEvent]);
 
         return {
             state,
