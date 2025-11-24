@@ -1,6 +1,6 @@
 ---
 title: Menu
-description: Menu displays submenus in nested overlays.
+description: Menu is a versatile component that provides various features such as inline and portal rendering, composite structures, app-style layouts, menubars, sidebars, and router integration.
 component: menu
 ---
 
@@ -17,7 +17,9 @@ import { Menu } from 'primereact/menu';
     </Menu.List>
     <Menu.Separator />
     <Menu.Sub>
-        <Menu.Trigger />
+        <Menu.Trigger>
+            <Menu.Icon />
+        </Menu.Trigger>
         <Menu.List>
             <Menu.Item />
             <Menu.Separator />
@@ -41,6 +43,12 @@ The main `Menu` component groups menu items with `Menu.List`, adds individual me
 
 <DocDemoViewer name="menu:portal-demo" />
 
+### Composite
+
+The `composite` prop allows combining multiple Menu components to create complex nested menus. Each Menu can have its own structure, and submenus can be nested within parent menus.
+
+<DocDemoViewer name="menu:composite-demo" />
+
 ### Apps
 
 The Menu component can be customized to create app launchers or grid-based menus. By applying custom classes to `Menu.List` and `Menu.Item`, the menu layout can be transformed into a grid structure with custom styling for icons and labels.
@@ -52,6 +60,16 @@ The Menu component can be customized to create app launchers or grid-based menus
 Multiple Menu components can be combined to create a horizontal menubar. By managing the open state and keyboard navigation between menus, a traditional desktop-style menubar can be implemented.
 
 <DocDemoViewer name="menu:menubar-demo" />
+
+### Sidebar
+
+<DocDemoViewer name="menu:sidebar-demo" />
+
+### Router
+
+The Menu component can be integrated with routing libraries. `MenuItem` supports the `as` prop to render as Next.js Link components, the `onClick` prop for programmatic navigation, or standard anchor tags for external links.
+
+<DocDemoViewer name="menu:router-demo" />
 
 ## Accessibility
 
