@@ -1,6 +1,6 @@
 /**
  *
- * Menu displays submenus in nested overlays.
+ * Menu Menu is a versatile component that provides various features such as inline and portal rendering, composite structures, app-style layouts, menubars, sidebars, and router integration.
  *
  * [Live Demo](https://www.primereact.org/menu/)
  *
@@ -37,10 +37,6 @@ export interface MenuPassThrough {
      * Used to pass attributes to the group label's DOM element.
      */
     groupLabel?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the submenu's DOM element.
-     */
-    submenu?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Used to pass attributes to the trigger's DOM element.
      */

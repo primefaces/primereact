@@ -60,8 +60,6 @@ export const MenuItem = withComponent({
 
             if (Array.isArray(focusedOptionId)) {
                 // For composite mode, check if itemId is the last element
-                // return focusedOptionId[focusedOptionId.length - 1] === itemId;
-
                 return focusedOptionId.includes(itemId);
             }
 
@@ -81,6 +79,11 @@ export const MenuItem = withComponent({
         const onItemMouseDown = (event: React.MouseEvent) => {
             if (isInteractive && itemId !== undefined) {
                 menu?.changeFocusedOptionId(itemId);
+            }
+
+            // For keyboard events (synthetic mousedown from useMenu), trigger click for router support
+            if (isInteractive && event.detail === 0 && itemRef.current) {
+                itemRef.current?.click();
             }
 
             if (isInteractive && portal && menu?.props.composite && event.detail > 0) {
