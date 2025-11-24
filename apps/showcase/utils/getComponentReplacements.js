@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Store } from '../__store__/index.mjs';
+import { Store } from '../__store__';
 import { getApiDocs, getPTOptions, getStyleOptions, getTokenOptions } from './getComponentOptions';
 
 export function replaceComponentViewer(content) {
