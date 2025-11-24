@@ -22,8 +22,6 @@ export const MenuList = withComponent({
             triggerIndexRef.current = parentLevel.itemCounter.current - 1;
         }
 
-        // For root list: children are at level 0, path = []
-        // For submenu list: children are at parent's level + 1, path = [...parentPath, triggerIndex]
         const newParentPath = submenu && parentLevel ? [...parentLevel.path, triggerIndexRef.current!] : (parentLevel?.path ?? []);
         const listLevel = submenu && parentLevel ? parentLevel.level + 1 : 0;
 
@@ -39,9 +37,11 @@ export const MenuList = withComponent({
             }
         }, [menu?.id, newParentPath.join('_')]);
 
-        React.useEffect(() => {
+        React.useLayoutEffect(() => {
             if (submenu?.listRef?.current && submenu?.state.opened) {
-                nestedPosition(submenu.listRef.current as HTMLUListElement, ((submenu?.parentLevel?.level ?? 0) + 1) as number);
+                const listElement = submenu.listRef.current as HTMLUListElement;
+
+                nestedPosition(listElement, listLevel as number);
             }
         }, [submenu?.state.opened, submenu?.listRef?.current]);
 
