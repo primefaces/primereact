@@ -1,3 +1,5 @@
+'use client';
+
 import type {
     ToggleButtonChangeEvent,
     ToggleButtonGroupValueChangeEvent,
@@ -12,7 +14,7 @@ export default function BasicDemo() {
     const [multipleState, setMultipleState] = React.useState<string[]>([]);
 
     return (
-        <div className="card flex justify-center items-center flex-col gap-3">
+        <div className="flex justify-center items-center flex-col gap-3">
             <h2>Single</h2>
             <ToggleButton>
                 <ToggleButton.Indicator>New</ToggleButton.Indicator>

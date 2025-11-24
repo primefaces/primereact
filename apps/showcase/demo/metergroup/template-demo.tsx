@@ -1,3 +1,5 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function TemplateDemo() {
@@ -15,7 +17,7 @@ export default function TemplateDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <MeterGroup max={200} aria-valuenow={totalPercent}>
                 <MeterGroup.Labels>
                     {values.map((value, index) => (

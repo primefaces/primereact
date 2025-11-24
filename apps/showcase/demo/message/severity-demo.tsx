@@ -1,8 +1,10 @@
+'use client';
+
 import { Message } from 'primereact/message';
 
 export default function SeverityDemo() {
     return (
-        <div className="card flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4">
             <Message severity="success">
                 <Message.Content>
                     <Message.Text>Success Message</Message.Text>

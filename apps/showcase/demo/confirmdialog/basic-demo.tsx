@@ -1,8 +1,10 @@
+'use client';
+
 import { ConfirmDialog } from 'primereact/confirmdialog';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-wrap gap-2 justify-center">
+        <div className="flex flex-wrap gap-2 justify-center">
             <ConfirmDialog>
                 <ConfirmDialog.Trigger variant="outlined">Save</ConfirmDialog.Trigger>
                 <ConfirmDialog.Portal>

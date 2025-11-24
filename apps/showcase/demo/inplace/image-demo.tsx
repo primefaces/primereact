@@ -1,8 +1,10 @@
+'use client';
+
 import { Inplace } from 'primereact/inplace';
 
 export default function ImageDemo() {
     return (
-        <div className="card">
+        <div>
             <Inplace>
                 <Inplace.Display>
                     <span className="pi pi-image mr-2"></span>

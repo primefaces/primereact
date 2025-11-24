@@ -1,8 +1,10 @@
+'use client';
+
 import { Stepper } from 'primereact/stepper';
 
 export default function HorizontalDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Stepper value="1" className="basis-[50rem]">
                 <Stepper.List>
                     <Stepper.Step value="1">

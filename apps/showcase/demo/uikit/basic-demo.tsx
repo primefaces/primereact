@@ -1,3 +1,5 @@
+'use client';
+
 import { useApp } from '@/hooks/useApp';
 import Image from 'next/image';
 import * as React from 'react';
@@ -17,7 +19,7 @@ export default function BasicDemo() {
                 <Image src={coverImage} alt="PrimeReact Figma UI Kit" width={2000} height={2000} className="w-full" />
             </div>
 
-            <div className="card !mb-8" style={{ borderRadius: '50px' }}>
+            <div className="!mb-8" style={{ borderRadius: '50px' }}>
                 <div className="flex flex-col md:flex-row items-center gap-6 md:gap-20 mb-20">
                     <div className="w-full md:w-6/12">
                         <Image
@@ -253,7 +255,7 @@ export default function BasicDemo() {
                 </a>
             </div>
 
-            <div className="card !mb-8" style={{ borderRadius: '50px' }}>
+            <div className="!mb-8" style={{ borderRadius: '50px' }}>
                 <div className="font-bold text-5xl mb-6 text-center">Pricing</div>
                 <div className="mb-2 text-center leading-normal text-lg">
                     Choose the right plan for your business. Whether you are an individual or a member of a team, UI Kit is available for affordable
@@ -409,7 +411,7 @@ export default function BasicDemo() {
                 </div>
             </div>
 
-            <div className="card" style={{ borderRadius: '50px' }}>
+            <div style={{ borderRadius: '50px' }}>
                 <span className="block font-bold text-5xl mb-8 text-center">Frequently Asked Questions</span>
                 <div className="grid grid-cols-12 gap-4 text-lg">
                     <div className="col-span-12 lg:col-span-4 px-2 lg:px-8">

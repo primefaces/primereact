@@ -1,3 +1,5 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function MinMaxDemo() {
@@ -13,7 +15,7 @@ export default function MinMaxDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <MeterGroup max={200}>
                 <MeterGroup.Meters>
                     {values.map((item, index) => (

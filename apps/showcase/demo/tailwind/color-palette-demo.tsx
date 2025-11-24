@@ -1,9 +1,11 @@
+'use client';
+
 export default function ColorPaletteDemo() {
     const colors = ['primary', 'surface'];
     const shades = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-col gap-12">
                 <ul className="p-0 m-0 list-none flex sm:flex-col gap-4 flex-wrap sm:flex-nowrap">
                     {colors.map((color, i) => (

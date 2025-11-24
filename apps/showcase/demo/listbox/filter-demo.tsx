@@ -1,3 +1,5 @@
+'use client';
+
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { IconField } from 'primereact/iconfield';
 import { InputText } from 'primereact/inputtext';
@@ -18,7 +20,7 @@ export default function FilterDemo() {
     const filteredCities = useMemo(() => cities.filter((city) => city.name.toLowerCase().startsWith(filterValue.toLowerCase())), [filterValue]);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Listbox
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}

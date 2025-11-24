@@ -1,4 +1,5 @@
 'use client';
+
 import type { ColorSpace } from '@primereact/types/shared/colorpicker';
 import { ColorPicker } from 'primereact/colorpicker';
 import * as React from 'react';
@@ -7,7 +8,7 @@ export default function AdvancedDemo() {
     const [format, setFormat] = React.useState<ColorSpace>('hsla');
 
     return (
-        <div className="card">
+        <div>
             <div className="max-w-md space-y-4">
                 <select value={format} onChange={(e) => setFormat(e.target.value as ColorSpace)}>
                     <option value="rgba">RGBA</option>

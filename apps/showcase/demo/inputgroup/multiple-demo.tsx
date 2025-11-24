@@ -1,9 +1,11 @@
+'use client';
+
 import { InputGroup } from 'primereact/inputgroup';
 import { InputText } from 'primereact/inputtext';
 
 export default function MultipleDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <InputGroup className="sm:!w-96">
                 <InputGroup.Addon>
                     <i className="pi pi-clock"></i>

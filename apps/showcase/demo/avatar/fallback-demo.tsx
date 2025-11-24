@@ -1,9 +1,11 @@
+'use client';
+
 import { CheckIcon } from '@primereact/icons';
 import { Avatar } from 'primereact/avatar';
 
 export default function LabelDemo() {
     return (
-        <div className="card flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4">
             <Avatar>
                 <Avatar.Fallback>J</Avatar.Fallback>
             </Avatar>

@@ -1,3 +1,5 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function VerticalDemo() {
@@ -9,7 +11,7 @@ export default function VerticalDemo() {
     ];
 
     return (
-        <div className="card flex justify-center" style={{ height: '360px' }}>
+        <div className="flex justify-center" style={{ height: '360px' }}>
             <MeterGroup orientation="vertical">
                 <MeterGroup.Meters>
                     {values.map((item, index) => (

@@ -1,3 +1,5 @@
+'use client';
+
 import { usePresence } from '@primereact/hooks';
 import { useGalleryChangeEvent } from '@primereact/types/shared/gallery';
 import { Gallery } from 'primereact/gallery';
@@ -29,7 +31,7 @@ function BasicDemo() {
     const isVisible = present && mounted && !exiting;
 
     return (
-        <div className="card">
+        <div>
             <div className="grid grid-cols-4 gap-4">
                 {images.map((image, index) => (
                     <div key={image} className="h-[300px] hover:opacity-75 transition-opacity" onClick={() => handleOpen(index)}>

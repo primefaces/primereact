@@ -1,10 +1,12 @@
+'use client';
+
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import { Popover } from 'primereact/popover';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <Popover>
                 <Popover.Trigger>Show Popover</Popover.Trigger>
                 <Popover.Portal>

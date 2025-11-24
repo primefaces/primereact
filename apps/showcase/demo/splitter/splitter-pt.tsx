@@ -1,3 +1,5 @@
+'use client';
+
 import { Splitter } from 'primereact/splitter';
 
 export default function SplitterPT() {

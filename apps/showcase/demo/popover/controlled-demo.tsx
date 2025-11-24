@@ -1,3 +1,5 @@
+'use client';
+
 import { usePopoverOpenChangeEvent } from '@primereact/types/shared/popover';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -9,7 +11,7 @@ function ControlledDemo() {
     const [open, setOpen] = React.useState(false);
 
     return (
-        <div className="card flex gap-4 justify-center items-center">
+        <div className="flex gap-4 justify-center items-center">
             <Button onClick={() => setOpen(!open)}>Show Popover</Button>
 
             <Popover open={open} onOpenChange={(e: usePopoverOpenChangeEvent) => setOpen(e.value)}>

@@ -1,3 +1,5 @@
+'use client';
+
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
@@ -6,7 +8,7 @@ export default function ControlledGroupDemo() {
     const [value, setValue] = React.useState<string[]>([]);
 
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <ToggleButton.Group
                 allowEmpty={false}
                 value={value}

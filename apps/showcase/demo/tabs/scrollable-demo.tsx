@@ -1,10 +1,12 @@
+'use client';
+
 import { Tabs } from 'primereact/tabs';
 
 const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i + 1}`, content: `Tab ${i + 1} Content`, value: `${i}` }));
 
 export default function ScrollableDemo() {
     return (
-        <div className="card">
+        <div>
             <Tabs value="0" scrollable>
                 <Tabs.List>
                     {scrollableTabs.map((tab) => (

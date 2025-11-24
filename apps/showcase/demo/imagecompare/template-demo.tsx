@@ -1,8 +1,10 @@
+'use client';
+
 import { ImageCompare } from 'primereact/imagecompare';
 
 export default function TemplateDemo() {
     return (
-        <div className="card">
+        <div>
             <ImageCompare className="max-w-lg w-full h-60 mx-auto aspect-auto">
                 <ImageCompare.Left as="div" className="bg-transparent absolute w-full h-full"></ImageCompare.Left>
                 <ImageCompare.Right
@@ -30,7 +32,7 @@ export default function TemplateDemo() {
                         </defs>
                     </svg>
                 </ImageCompare.Right>
-                <ImageCompare.Slider className="" />
+                <ImageCompare.Slider />
             </ImageCompare>
         </div>
     );

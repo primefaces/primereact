@@ -1,8 +1,10 @@
+'use client';
+
 import { Panel } from 'primereact/panel';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <Panel
                 pt={{
                     root: 'border border-primary rounded-xl p-4',

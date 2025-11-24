@@ -1,8 +1,10 @@
+'use client';
+
 import { ScrollArea } from 'primereact/scrollarea';
 
 export default function CustomDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <ScrollArea style={{ width: '600px', height: '200px' }}>
                 <ScrollArea.Viewport>
                     <ScrollArea.Content>

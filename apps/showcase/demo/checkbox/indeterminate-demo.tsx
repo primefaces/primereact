@@ -1,4 +1,5 @@
 'use client';
+
 import type { CheckboxChangeEvent, CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from 'primereact/checkbox';
 import React from 'react';
@@ -16,7 +17,7 @@ export default function IndeterminateDemo() {
     const indeterminate = categories.some((category) => value.includes(category.key)) && !isAllSelected;
 
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                     <Checkbox

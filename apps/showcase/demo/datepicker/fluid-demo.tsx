@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -14,7 +16,7 @@ export default function FluidDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card">
+        <div>
             <DatePicker value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>

@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -18,7 +20,7 @@ export default function TimeDemo() {
 
     return (
         <>
-            <div className="card flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4">
                 <div className="flex-auto">
                     <Label htmlFor="datepicker-12h" className="font-bold block mb-2">
                         12h Format

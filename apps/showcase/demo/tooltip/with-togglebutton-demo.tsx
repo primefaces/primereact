@@ -1,3 +1,5 @@
+'use client';
+
 import { ToggleButton } from 'primereact/togglebutton';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -26,7 +28,7 @@ const content = [
 
 export default function WithToggleButtonDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <Tooltip.Group>
                 <ToggleButton.Group allowEmpty={false}>
                     {content.map((item) => (

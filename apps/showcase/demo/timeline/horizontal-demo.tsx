@@ -1,10 +1,12 @@
+'use client';
+
 import { Timeline } from 'primereact/timeline';
 
 export default function HorizontalDemo() {
     const events = ['2020', '2021', '2022', '2023'];
 
     return (
-        <div className="card flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
             <Timeline orientation="horizontal" align="top">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>

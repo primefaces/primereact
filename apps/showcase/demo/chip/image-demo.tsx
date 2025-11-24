@@ -1,8 +1,10 @@
+'use client';
+
 import { Chip } from 'primereact/chip';
 
 export default function ImageDemo() {
     return (
-        <div className="card flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
             <Chip>
                 <Chip.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                 <Chip.Label>Amy Elsner</Chip.Label>

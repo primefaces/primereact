@@ -1,3 +1,5 @@
+'use client';
+
 import { DialogChangeEvent, DialogContentInstance, DialogProps } from '@primereact/types/shared/dialog';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -15,7 +17,7 @@ export default function PositionDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
                 <Button onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Left

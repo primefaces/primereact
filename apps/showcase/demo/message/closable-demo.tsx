@@ -1,8 +1,10 @@
+'use client';
+
 import { Message } from 'primereact/message';
 
 export default function ClosableDemo() {
     return (
-        <div className="card">
+        <div>
             <Message>
                 <Message.Content>
                     <Message.Text>This is a closable message.</Message.Text>

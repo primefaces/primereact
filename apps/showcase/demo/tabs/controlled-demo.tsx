@@ -1,3 +1,6 @@
+'use client';
+
+import { TabsProps, useTabsChangeEvent } from '@primereact/types/shared/tabs';
 import { Button } from 'primereact/button';
 import { Tabs } from 'primereact/tabs';
 import * as React from 'react';
@@ -9,12 +12,12 @@ const tabs = [
 ];
 
 export default function ControlledDemo() {
-    const [activeTab, setActiveTab] = React.useState('tab1');
+    const [activeTab, setActiveTab] = React.useState<TabsProps['value']>('tab1');
 
     return (
-        <div className="card space-y-4">
+        <div className="space-y-4">
             <Button onClick={() => setActiveTab('tab2')}>Go to Payment</Button>
-            <Tabs value={activeTab} onValueChange={(e: any) => setActiveTab(e.value)}>
+            <Tabs value={activeTab} onValueChange={(e: useTabsChangeEvent) => setActiveTab(e.value)}>
                 <Tabs.List>
                     {tabs.map((tab) => (
                         <Tabs.Tab key={tab.id} value={tab.id}>

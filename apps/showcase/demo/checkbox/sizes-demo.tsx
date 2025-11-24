@@ -1,8 +1,10 @@
+'use client';
+
 import { Checkbox } from 'primereact/checkbox';
 
 export default function SizesDemo() {
     return (
-        <div className="card flex flex-wrap items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="flex items-center gap-2">
                 <Checkbox inputId="small" size="small" />
                 <label htmlFor="small" className="text-sm">

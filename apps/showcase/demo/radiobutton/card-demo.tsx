@@ -1,4 +1,5 @@
 'use client';
+
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
 import { RadioButton } from 'primereact/radiobutton';
 import React from 'react';
@@ -13,7 +14,7 @@ const CardDemo = () => {
     ];
 
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <div>
                 <span className="font-semibold">Payment Method</span>
                 <RadioButton.Group

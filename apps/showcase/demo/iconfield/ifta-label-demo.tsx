@@ -1,10 +1,12 @@
+'use client';
+
 import { IconField } from 'primereact/iconfield';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 
 export default function IftaLabelDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Label.Ifta>
                 <IconField>
                     <IconField.Icon>

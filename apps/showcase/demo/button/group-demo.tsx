@@ -1,8 +1,10 @@
+'use client';
+
 import { Button } from 'primereact/button';
 
 export default function GroupDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Button.Group>
                 <Button>
                     <i className="pi pi-check" />

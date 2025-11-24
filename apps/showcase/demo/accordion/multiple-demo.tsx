@@ -1,8 +1,10 @@
+'use client';
+
 import { Accordion } from 'primereact/accordion';
 
 export default function MultipleDemo() {
     return (
-        <div className="card">
+        <div>
             <Accordion multiple className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>

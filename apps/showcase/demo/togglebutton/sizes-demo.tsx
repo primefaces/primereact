@@ -1,8 +1,10 @@
+'use client';
+
 import { ToggleButton } from 'primereact/togglebutton';
 
 export default function SizesDemo() {
     return (
-        <div className="card flex flex-col gap-2 items-center justify-center">
+        <div className="flex flex-col gap-2 items-center justify-center">
             <ToggleButton size="small" className="min-w-16">
                 <ToggleButton.Indicator>Small</ToggleButton.Indicator>
             </ToggleButton>

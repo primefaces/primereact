@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerInputIconContainerInstance,
     DatePickerTableBodyInstance,
@@ -18,7 +20,7 @@ export default function IconDemo() {
     const [date3, setDate3] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
                 <Label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Button

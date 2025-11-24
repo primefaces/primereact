@@ -1,4 +1,5 @@
 'use client';
+
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Paginator } from 'primereact/paginator';
 import React from 'react';
@@ -7,7 +8,7 @@ function TemplateDemo() {
     const [page, setPage] = React.useState(1);
 
     return (
-        <div className="card flex flex-col gap-6 items-center justify-center">
+        <div className="flex flex-col gap-6 items-center justify-center">
             <Paginator total={12} itemsPerPage={1} page={1} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
                 <Paginator.Content>
                     <Paginator.First />

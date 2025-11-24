@@ -1,8 +1,10 @@
+'use client';
+
 import { Button } from 'primereact/button';
 
 export default function OutlinedDemo() {
     return (
-        <div className="card flex justify-center flex-wrap gap-4">
+        <div className="flex justify-center flex-wrap gap-4">
             <Button variant="outlined">Primary</Button>
             <Button severity="secondary" variant="outlined">
                 Secondary

@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -17,7 +19,7 @@ export default function FloatLabelDemo() {
     const [date3, setDate3] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex flex-wrap justify-center items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
                 <DatePicker value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="over_label" />

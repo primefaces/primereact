@@ -1,3 +1,5 @@
+'use client';
+
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import * as React from 'react';
@@ -8,7 +10,7 @@ export default function InvalidDemo() {
     const [value3, setValue3] = React.useState('');
 
     return (
-        <div className="card flex flex-wrap justify-center items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
                 <InputText
                     id="value1"

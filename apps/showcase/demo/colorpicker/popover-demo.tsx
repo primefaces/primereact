@@ -1,9 +1,11 @@
+'use client';
+
 import { ColorPicker } from 'primereact/colorpicker';
 import { Popover } from 'primereact/popover';
 
 function PopoverDemo() {
     return (
-        <div className="card">
+        <div>
             <ColorPicker defaultColor="#0099ff">
                 <Popover>
                     <Popover.Trigger unstyled>

@@ -1,8 +1,10 @@
+'use client';
+
 import { Tag } from 'primereact/tag';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-wrap justify-center gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
             <Tag rounded>
                 <Tag.Label>Primary</Tag.Label>
             </Tag>

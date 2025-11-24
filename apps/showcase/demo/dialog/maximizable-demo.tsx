@@ -1,8 +1,10 @@
+'use client';
+
 import { Dialog } from 'primereact/dialog';
 
 export default function MaximizableDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Dialog modal>
                 <Dialog.Trigger>Show</Dialog.Trigger>
                 <Dialog.Portal style={{ width: '50rem' }}>

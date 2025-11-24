@@ -1,3 +1,5 @@
+'use client';
+
 import { SwitchChangeEvent } from '@primereact/types/shared/switch';
 import { Switch } from 'primereact/switch';
 import * as React from 'react';
@@ -6,7 +8,7 @@ export default function CustomizationDemo() {
     const [checked, setChecked] = React.useState(true);
 
     return (
-        <div className="card flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2">
             <label
                 htmlFor="custom"
                 className="flex items-center gap-2 bg-surface-50 hover:bg-surface-100 dark:bg-slate-700 hover:dark:bg-slate-800 p-4 rounded-md"

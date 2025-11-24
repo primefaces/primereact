@@ -1,3 +1,5 @@
+'use client';
+
 import type {
     DatePickerContainerInstance,
     DatePickerValueChangeEvent,
@@ -13,7 +15,7 @@ export default function MultipleMonthsDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <DatePicker value={date} numberOfMonths={2} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>

@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -29,7 +31,7 @@ export default function MinMaxDemo() {
     maxDate.setFullYear(nextYear);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <DatePicker
                 value={date}
                 minDate={minDate}

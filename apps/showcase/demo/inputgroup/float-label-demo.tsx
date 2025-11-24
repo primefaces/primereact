@@ -1,3 +1,5 @@
+'use client';
+
 import { InputGroup } from 'primereact/inputgroup';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
@@ -9,7 +11,7 @@ export default function FloatLabelDemo() {
     const [value3, setValue3] = React.useState('');
 
     return (
-        <div className="card flex flex-col md:items-end md:flex-row gap-4">
+        <div className="flex flex-col md:items-end md:flex-row gap-4">
             <InputGroup>
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>

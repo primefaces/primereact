@@ -1,3 +1,5 @@
+'use client';
+
 import { Motion } from '@primereact/core/motion';
 import { MinusIcon, PlusIcon } from '@primereact/icons';
 import { Avatar } from 'primereact/avatar';
@@ -9,7 +11,7 @@ export default function TemplateDemo() {
     const [show, setShow] = React.useState(true);
 
     return (
-        <div className="card">
+        <div>
             <Panel toggleable>
                 <Panel.Header>
                     <Panel.Title>

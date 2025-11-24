@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@primeuix/utils';
 import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
@@ -43,7 +45,7 @@ export default function StepsDemo() {
     const prevStep = () => setStep(Math.max(step - 1, 0));
 
     return (
-        <div className="card">
+        <div>
             <div className="max-w-sm mx-auto">
                 <div className="mb-3 font-medium">{orderProgress[step].status}</div>
                 <ProgressBar value={step} min={0} max={4}>

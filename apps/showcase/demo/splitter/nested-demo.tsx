@@ -1,8 +1,10 @@
+'use client';
+
 import { Splitter } from 'primereact/splitter';
 
 export default function NestedDemo() {
     return (
-        <div className="card ">
+        <div>
             <Splitter style={{ height: '300px' }}>
                 <Splitter.Panel className="flex items-center justify-center" size={20} minSize={10}>
                     Panel 1

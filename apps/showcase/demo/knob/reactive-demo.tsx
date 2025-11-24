@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Knob } from 'primereact/knob';
 import * as React from 'react';
@@ -6,7 +8,7 @@ export default function ReactiveDemo() {
     const [value, setValue] = React.useState(0);
 
     return (
-        <div className="card flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2">
             <Knob value={value} size={150} readOnly>
                 <Knob.Range />
                 <Knob.Value />

@@ -1,3 +1,5 @@
+'use client';
+
 import type { InputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
 import { InputNumber } from 'primereact/inputnumber';
 import { Label } from 'primereact/label';
@@ -9,7 +11,7 @@ export default function FloatLabelDemo() {
     const [value3, setValue3] = React.useState<number | null>(null);
 
     return (
-        <div className="card flex flex-wrap justify-center items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
                 <InputNumber
                     value={value1}

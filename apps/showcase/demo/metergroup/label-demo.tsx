@@ -1,3 +1,5 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function LabelDemo() {
@@ -9,7 +11,7 @@ export default function LabelDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <MeterGroup>
                 <MeterGroup.Labels orientation="vertical">
                     {values.map((item, index) => (

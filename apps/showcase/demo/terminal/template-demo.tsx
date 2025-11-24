@@ -1,3 +1,5 @@
+'use client';
+
 import { TerminalCommandItem, TerminalInstance } from '@primereact/types/shared/terminal';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
@@ -49,7 +51,7 @@ export default function BasicDemo() {
     }, []);
 
     return (
-        <div className="card">
+        <div>
             <p className="mb-4">
                 Enter &quot;<strong>date</strong>&quot; to display the current date, &quot;<strong>greet {0}</strong>&quot; for a message and &quot;
                 <strong>random</strong>&quot; to get a random number.

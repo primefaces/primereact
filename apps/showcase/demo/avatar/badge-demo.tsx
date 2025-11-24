@@ -1,9 +1,11 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
 const BadgeDemo = () => {
     return (
-        <div className="card flex items-center justify-center gap-8">
+        <div className="flex items-center justify-center gap-8">
             <Badge.Overlay>
                 <Avatar size="large" shape="circle">
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />

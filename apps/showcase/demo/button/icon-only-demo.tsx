@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { useState } from 'react';
 
@@ -11,7 +13,7 @@ export default function IconOnlyDemo() {
     const [size] = useState<'small' | 'normal' | 'large'>('normal');
 
     return (
-        <div className="card">
+        <div>
             <div className="flex justify-center mb-8">
                 {/*<SelectButton v-model="size" :options="sizeOptions" optionLabel="label" optionValue="value" dataKey="label" />*/}
             </div>

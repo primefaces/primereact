@@ -1,3 +1,5 @@
+'use client';
+
 import { ChevronDownIcon, ChevronUpIcon } from '@primereact/icons';
 import { PanelCollapseInstance } from '@primereact/types/shared/panel';
 import { Button } from 'primereact/button';
@@ -5,7 +7,7 @@ import { Panel } from 'primereact/panel';
 
 export default function ToggleableDemo() {
     return (
-        <div className="card">
+        <div>
             <Panel toggleable>
                 <Panel.Header>
                     <Panel.Title>Uncontrolled Panel</Panel.Title>

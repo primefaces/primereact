@@ -1,8 +1,10 @@
+'use client';
+
 import { Drawer } from 'primereact/drawer';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Drawer position="full">
                 <Drawer.Trigger>
                     <i className="pi pi-window-maximize" />

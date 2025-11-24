@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -17,7 +19,7 @@ export default function SizesDemo() {
     const [date3, setDate3] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
             <DatePicker value={date} size="small" placeholder="Small" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>

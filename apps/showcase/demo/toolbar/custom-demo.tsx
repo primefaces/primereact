@@ -1,10 +1,12 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
 
 export default function CustomDemo() {
     return (
-        <div className="card">
+        <div>
             <Toolbar style={{ borderRadius: '3rem', padding: '1rem 1rem 1rem 1.5rem' }}>
                 <Toolbar.Start>
                     <Button variant="text" plain>

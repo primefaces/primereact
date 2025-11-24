@@ -1,3 +1,5 @@
+'use client';
+
 import { Drawer } from 'primereact/drawer';
 
 export default function DialogPT() {
@@ -9,7 +11,7 @@ export default function DialogPT() {
                     id="pr_id_r5i"
                     data-pc-section="root"
                     data-pc-name="motion"
-                    className="p-drawer-mask p-overlay-mask p-overlay-mask-enter p-drawer-open p-drawer-left  !relative"
+                    className="p-drawer-mask p-overlay-mask p-overlay-mask-enter p-drawer-open p-drawer-left!relative"
                     style={{
                         position: 'fixed',
                         height: '100%',

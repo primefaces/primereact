@@ -1,8 +1,10 @@
+'use client';
+
 import { ColorPicker } from 'primereact/colorpicker';
 
 function VerticalSliderDemo() {
     return (
-        <div className="card">
+        <div>
             <ColorPicker format="hsba">
                 <div className="flex gap-4">
                     <ColorPicker.Area className="max-w-xs flex-1" />

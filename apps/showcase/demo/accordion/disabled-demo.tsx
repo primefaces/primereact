@@ -1,8 +1,10 @@
+'use client';
+
 import { Accordion } from 'primereact/accordion';
 
 export default function DisabledDemo() {
     return (
-        <div className="card space-y-8">
+        <div className="space-y-8">
             <Accordion disabled className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>

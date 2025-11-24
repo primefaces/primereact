@@ -1,8 +1,10 @@
+'use client';
+
 import { RadioButton } from 'primereact/radiobutton';
 
 export default function SizesDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
                     <RadioButton inputId="size_small" name="size" size="small" />

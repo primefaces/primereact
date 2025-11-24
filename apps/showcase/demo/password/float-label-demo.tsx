@@ -1,3 +1,5 @@
+'use client';
+
 import { PasswordChangeEvent, usePasswordProps } from '@primereact/types/shared/password';
 import { Label } from 'primereact/label';
 import { Password } from 'primereact/password';
@@ -9,7 +11,7 @@ export default function FloatLabelDemo() {
     const [value3, setValue3] = React.useState<usePasswordProps['value']>('');
 
     return (
-        <div className="card flex flex-wrap justify-center items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
                 <Password value={value} onValueChange={(e: PasswordChangeEvent) => setValue(e.value as string)}>
                     <Password.Input />

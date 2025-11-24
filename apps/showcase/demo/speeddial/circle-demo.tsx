@@ -1,3 +1,5 @@
+'use client';
+
 import { SpeedDial } from 'primereact/speeddial';
 
 export default function CircleDemo() {
@@ -10,7 +12,7 @@ export default function CircleDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <div className="flex items-center justify-center" style={{ position: 'relative', height: '500px' }}>
                 <SpeedDial type="circle" radius={80} style={{ position: 'absolute' }}>
                     <SpeedDial.Button severity="warn" />

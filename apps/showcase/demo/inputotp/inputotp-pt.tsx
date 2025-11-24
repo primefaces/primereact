@@ -1,3 +1,5 @@
+'use client';
+
 import { InputOtp } from 'primereact/inputotp';
 
 export default function InputOtpPTDemo() {

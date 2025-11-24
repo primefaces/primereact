@@ -1,3 +1,5 @@
+'use client';
+
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
 import { InputTextInstance } from '@primereact/types/shared/inputtext';
 import { InputText } from 'primereact/inputtext';
@@ -21,7 +23,7 @@ export default function BasicDemo() {
     });
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <InputText
                 ref={ref}
                 value={value}

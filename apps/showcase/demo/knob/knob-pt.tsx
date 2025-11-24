@@ -1,3 +1,5 @@
+'use client';
+
 import { Knob } from 'primereact/knob';
 
 export default function KnobPTDemo() {

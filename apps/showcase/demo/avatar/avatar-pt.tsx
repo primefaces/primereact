@@ -1,3 +1,5 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 
 export default function AvatarPT() {

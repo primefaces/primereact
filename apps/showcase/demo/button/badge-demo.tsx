@@ -1,9 +1,11 @@
+'use client';
+
 import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
 
 export default function BadgeDemo() {
     return (
-        <div className="card flex justify-center flex-wrap gap-4">
+        <div className="flex justify-center flex-wrap gap-4">
             <Button type="button">
                 Emails
                 <Badge severity="secondary" shape="circle">

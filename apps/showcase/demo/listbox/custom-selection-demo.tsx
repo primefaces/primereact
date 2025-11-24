@@ -1,3 +1,5 @@
+'use client';
+
 import type { ListboxOptionsInstance, ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { cn } from '@primeuix/utils';
 import { Listbox } from 'primereact/listbox';
@@ -15,7 +17,7 @@ export default function CustomSelectionDemo() {
     const [selectedCities, setSelectedCities] = useState<string[] | null>(null);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Listbox
                 value={selectedCities}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCities(e.value as string[] | null)}

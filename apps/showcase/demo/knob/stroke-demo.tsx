@@ -1,8 +1,10 @@
+'use client';
+
 import { Knob } from 'primereact/knob';
 
 export default function StrokeDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Knob defaultValue={40}>
                 <Knob.Range strokeWidth={5} />
                 <Knob.Value strokeWidth={5} />

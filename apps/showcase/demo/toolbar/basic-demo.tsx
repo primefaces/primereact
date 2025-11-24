@@ -1,10 +1,12 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Toolbar } from 'primereact/toolbar';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <Toolbar>
                 <Toolbar.Start>
                     <Button className="mr-2" severity="secondary" variant="text">

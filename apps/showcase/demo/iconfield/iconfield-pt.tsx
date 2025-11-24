@@ -1,3 +1,5 @@
+'use client';
+
 import { IconField } from 'primereact/iconfield';
 import { InputText } from 'primereact/inputtext';
 

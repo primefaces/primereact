@@ -1,8 +1,10 @@
+'use client';
+
 import { ToggleButton } from 'primereact/togglebutton';
 
 export default function MultipleDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <ToggleButton.Group multiple>
                 <ToggleButton value="bold">
                     <ToggleButton.Indicator>Bold</ToggleButton.Indicator>

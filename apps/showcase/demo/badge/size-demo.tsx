@@ -1,8 +1,10 @@
+'use client';
+
 import { Badge } from 'primereact/badge';
 
 export default function SizeDemo() {
     return (
-        <div className="card flex flex-wrap items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2">
             <Badge size="small">Small</Badge>
             <Badge>Default</Badge>
             <Badge size="large">Large</Badge>

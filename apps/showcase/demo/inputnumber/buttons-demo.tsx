@@ -1,3 +1,5 @@
+'use client';
+
 import { useInputNumber } from '@primereact/headless/inputnumber';
 import type { InputNumberInstance, useInputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
 import { Button } from 'primereact/button';
@@ -39,7 +41,7 @@ export default function ButtonsDemo() {
     });
 
     return (
-        <div className="card flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
                 <Label htmlFor="stacked-buttons" className="font-bold block mb-2">
                     Stacked

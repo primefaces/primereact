@@ -1,8 +1,10 @@
+'use client';
+
 import { Password } from 'primereact/password';
 
 export default function SizesDemo() {
     return (
-        <div className="card flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
             <Password size="small">
                 <Password.Input placeholder="Small" />
             </Password>

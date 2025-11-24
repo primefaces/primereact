@@ -1,9 +1,11 @@
+'use client';
+
 import { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 
 export default function StateDemo() {
     return (
-        <div className="card flex flex-wrap items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
             <ToggleButton>
                 <ToggleButton.Indicator>
                     {({ togglebutton }: ToggleButtonIndicatorInstance) => (togglebutton?.state.pressed ? 'On' : 'Off')}

@@ -1,9 +1,11 @@
+'use client';
+
 import { IconField } from 'primereact/iconfield';
 import { InputText } from 'primereact/inputtext';
 
 export default function SizesDemo() {
     return (
-        <div className="card flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
             <IconField>
                 <IconField.Icon>
                     <i className="pi pi-search" />

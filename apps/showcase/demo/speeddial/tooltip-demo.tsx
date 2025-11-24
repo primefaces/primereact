@@ -1,3 +1,5 @@
+'use client';
+
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -11,7 +13,7 @@ export default function TooltipDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <div style={{ position: 'relative', height: '350px' }}>
                 <SpeedDial direction="up" style={{ position: 'absolute', right: 0, bottom: 0 }}>
                     <SpeedDial.Button severity="help" />

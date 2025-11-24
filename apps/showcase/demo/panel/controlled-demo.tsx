@@ -1,3 +1,5 @@
+'use client';
+
 import { PanelInstance, PanelToggleEvent } from '@primereact/types/shared/panel';
 import { Panel } from 'primereact/panel';
 import * as React from 'react';
@@ -7,7 +9,7 @@ export default function ToggleableDemo() {
     const [collapsed, setCollapsed] = React.useState(false);
 
     return (
-        <div className="card">
+        <div>
             <Panel ref={panelRef} toggleable collapsed={collapsed} onToggle={(e: PanelToggleEvent) => setCollapsed(e.value)}>
                 <Panel.Header>
                     <Panel.Title>Controlled Panel</Panel.Title>

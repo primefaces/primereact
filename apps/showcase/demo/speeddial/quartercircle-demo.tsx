@@ -1,3 +1,5 @@
+'use client';
+
 import { SpeedDial } from 'primereact/speeddial';
 
 const directions = [
@@ -17,7 +19,7 @@ export default function QuarterCircleDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <div style={{ position: 'relative', height: '500px' }}>
                 {directions.map((item) => (
                     <SpeedDial key={item.direction} radius={120} type="quarter-circle" direction={item.direction} style={item.style}>

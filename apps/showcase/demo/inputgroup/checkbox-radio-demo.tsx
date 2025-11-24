@@ -1,3 +1,5 @@
+'use client';
+
 import { Checkbox } from 'primereact/checkbox';
 import { InputGroup } from 'primereact/inputgroup';
 import { InputText } from 'primereact/inputtext';
@@ -5,7 +7,7 @@ import { RadioButton } from 'primereact/radiobutton';
 
 export default function CheckboxRadioDemo() {
     return (
-        <div className="card flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
             <InputGroup>
                 <InputText placeholder="Price" />
                 <InputGroup.Addon>

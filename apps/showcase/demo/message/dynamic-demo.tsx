@@ -1,3 +1,5 @@
+'use client';
+
 import { MessageProps } from '@primereact/types/shared/message';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
@@ -19,7 +21,7 @@ export default function DynamicDemo() {
     };
 
     return (
-        <div className="card flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex gap-2">
                 <Button onClick={addMessages}>Add Messages</Button>
                 <Button severity="secondary" onClick={clearMessages}>

@@ -1,3 +1,5 @@
+'use client';
+
 import { FileUploadHandlerEvent, FileUploadInstance } from '@primereact/types/shared/fileupload';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
@@ -20,7 +22,7 @@ export default function CustomUploadDemo() {
     };
 
     return (
-        <div className="card flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6">
             <FileUpload url="/api/upload" auto customUpload uploadHandler={onFileSelect}>
                 {(instance: FileUploadInstance) => {
                     return (

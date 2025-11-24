@@ -1,8 +1,10 @@
+'use client';
+
 import { Skeleton } from 'primereact/skeleton';
 
 export default function ShapesDemo() {
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-col items-start gap-8 max-w-sm">
                 <div className="w-full">
                     <h5>Circle</h5>

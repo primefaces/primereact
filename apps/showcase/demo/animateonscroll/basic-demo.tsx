@@ -1,10 +1,12 @@
+'use client';
+
 import { AnimateOnScroll } from 'primereact/animateonscroll';
 import { Avatar } from 'primereact/avatar';
 import { Button } from 'primereact/button';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-col items-center overflow-hidden">
+        <div className="flex flex-col items-center overflow-hidden">
             <div className="flex flex-col items-center gap-2">
                 <span className="text-xl font-medium">Scroll Down</span>
                 <span className="animate-bounce h-8 w-8 bg-primary text-primary-contrast rounded-full inline-flex items-center justify-center">

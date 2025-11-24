@@ -1,4 +1,5 @@
 'use client';
+
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { InputText } from 'primereact/inputtext';
 import { Paginator } from 'primereact/paginator';
@@ -12,7 +13,7 @@ function WithInputDemo() {
     const maxPage = Math.ceil(total / itemsPerPage);
 
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <Paginator
                 total={total}
                 itemsPerPage={itemsPerPage}

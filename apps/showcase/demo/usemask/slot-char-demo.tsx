@@ -1,3 +1,5 @@
+'use client';
+
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
 import * as React from 'react';
 
@@ -20,7 +22,7 @@ export default function SlotCharDemo() {
     });
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <input
                 type="text"
                 ref={ref}

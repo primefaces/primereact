@@ -1,3 +1,5 @@
+'use client';
+
 import { Dialog } from 'primereact/dialog';
 
 export default function DialogPT() {

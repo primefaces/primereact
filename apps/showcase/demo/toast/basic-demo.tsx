@@ -1,3 +1,5 @@
+'use client';
+
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
 import { toast, Toast } from 'primereact/toast';
@@ -39,7 +41,7 @@ function BasicToast() {
 
 function BasicDemo() {
     return (
-        <div className="card flex flex-wrap items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
             <Button
                 onClick={() =>
                     toast({

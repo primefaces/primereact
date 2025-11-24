@@ -1,3 +1,5 @@
+'use client';
+
 import { TreeNode } from '@primereact/types/shared/orgchart';
 import { OrgChart } from 'primereact/orgchart';
 
@@ -92,7 +94,7 @@ const data: TreeNode[] = [
 
 function CustomDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <OrgChart value={data} collapsible />
         </div>
     );

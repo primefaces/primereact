@@ -1,3 +1,5 @@
+'use client';
+
 import { OrgChart } from 'primereact/orgchart';
 
 const data = [
@@ -41,7 +43,7 @@ const data = [
 
 function DefaultDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <OrgChart value={data} collapsible />
         </div>
     );

@@ -1,3 +1,5 @@
+'use client';
+
 import { SliderChangeEvent } from '@primereact/types/shared/slider';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import Image from 'next/image';
@@ -16,7 +18,7 @@ export default function FilterDemo() {
     }, [filterValues]);
 
     return (
-        <div className="card flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
             <Image
                 alt="user header"
                 className="w-80 rounded mb-6"

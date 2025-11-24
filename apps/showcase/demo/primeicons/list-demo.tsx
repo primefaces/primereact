@@ -1,3 +1,5 @@
+'use client';
+
 import { IconService } from '@/services/icon.service';
 import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
@@ -70,7 +72,7 @@ export default function ListDemo() {
         <div>
             <InputText onChange={onFilter} className="w-full p-4 mt-4 mb-6" placeholder="Search an icon" />
 
-            <div className="card">
+            <div>
                 <div className="grid grid-cols-12 gap-4 text-center">
                     {filteredIcons?.map((icon) => (
                         <div key={icon.properties.name} className="col-span-12 md:col-span-2 mb-8">

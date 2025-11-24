@@ -1,10 +1,12 @@
+'use client';
+
 import { Fluid } from 'primereact/fluid';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
             <div>
                 <Label htmlFor="non-fluid" className="font-bold mb-2 block">
                     Non-Fluid

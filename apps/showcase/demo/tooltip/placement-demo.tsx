@@ -1,9 +1,11 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 
 export default function PlacementDemo() {
     return (
-        <div className="card flex flex-col items-center justify-center gap-12">
+        <div className="flex flex-col items-center justify-center gap-12">
             <div className="flex items-center justify-center gap-6">
                 <Tooltip side="top">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">

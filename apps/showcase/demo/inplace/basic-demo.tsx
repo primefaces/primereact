@@ -1,8 +1,10 @@
+'use client';
+
 import { Inplace } from 'primereact/inplace';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <Inplace>
                 <Inplace.Display>View Content</Inplace.Display>
                 <Inplace.Content>

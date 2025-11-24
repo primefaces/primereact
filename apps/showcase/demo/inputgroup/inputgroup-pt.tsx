@@ -1,3 +1,5 @@
+'use client';
+
 import { InputGroup } from 'primereact/inputgroup';
 import { InputText } from 'primereact/inputtext';
 

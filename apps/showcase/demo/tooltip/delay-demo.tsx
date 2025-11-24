@@ -1,9 +1,11 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 
 export default function DelayDemo() {
     return (
-        <div className="card flex flex-col items-center justify-center gap-8">
+        <div className="flex flex-col items-center justify-center gap-8">
             <Tooltip showDelayDuration={1000} hideDelayDuration={1000}>
                 <Tooltip.Trigger as={Button} severity="secondary">
                     Show Tooltip

@@ -1,3 +1,5 @@
+'use client';
+
 import { ProductService } from '@/services/product.service';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';

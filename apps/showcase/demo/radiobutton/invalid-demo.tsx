@@ -1,8 +1,10 @@
+'use client';
+
 import { RadioButton } from 'primereact/radiobutton';
 
 export default function InvalidDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <RadioButton invalid />
         </div>
     );

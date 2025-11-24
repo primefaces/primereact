@@ -1,3 +1,5 @@
+'use client';
+
 import { StepperPanelInstance, StepperStepInstance } from '@primereact/types/shared/stepper';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
@@ -8,7 +10,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 
 export default function TemplateDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Stepper value={1} className="basis-[40rem]">
                 <Stepper.List>
                     <Stepper.Step asChild value={1}>

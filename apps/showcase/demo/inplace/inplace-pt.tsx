@@ -1,3 +1,5 @@
+'use client';
+
 import { Inplace } from 'primereact/inplace';
 
 export default function InplacePT() {

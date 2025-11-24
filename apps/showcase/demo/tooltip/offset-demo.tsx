@@ -1,9 +1,11 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 
 function OffsetDemo() {
     return (
-        <div className="card flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4">
             <Tooltip sideOffset={24}>
                 <Tooltip.Trigger as={Button} variant="outlined" severity="secondary">
                     Show Tooltip
