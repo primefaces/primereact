@@ -6,7 +6,7 @@ import * as React from 'react';
 import { useMenuContext } from '../Menu.context';
 import { useMenuLevelContext } from '../MenuLevel.context';
 import { useMenuPortalContext } from '../portal/MenuPortal.context';
-import { useMenuSubContext } from '../sub//MenuSub.context';
+import { useMenuSubContext } from '../sub/MenuSub.context';
 import { MenuItemProvider } from './MenuItem.context';
 import { defaultItemProps } from './MenuItem.props';
 

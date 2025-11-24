@@ -59,7 +59,6 @@ export const MenuTrigger = withComponent({
 
             if (Array.isArray(focusedOptionId)) {
                 // For composite mode, check if itemId is the last element
-                // return focusedOptionId[focusedOptionId.length - 1] === itemId;
                 return focusedOptionId.includes(itemId);
             }
 

@@ -22,6 +22,9 @@ export const MenuLevelProvider: React.FC<{
     const [totalItems, setTotalItems] = React.useState(0);
 
     const level = parentPath.length;
+
+    // For root list: children are at level 0, path = []
+    // For submenu list: children are at parent's level + 1, path = [...parentPath, triggerIndex]
     const path = parentIndex !== null ? [...parentPath, parentIndex] : parentPath;
 
     const getNextItemIndex = React.useCallback(() => {
