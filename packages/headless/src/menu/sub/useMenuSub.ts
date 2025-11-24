@@ -29,15 +29,11 @@ export const useMenuSub = withHeadless({
         }, [props.open]);
 
         const toggle = () => {
-            const newState = !openState;
-
-            setOpenState(newState);
-            updateOpenState(newState);
-        };
-
-        const onTriggerClick = () => {
             if (!props.disabled) {
-                toggle();
+                const newState = !openState;
+
+                setOpenState(newState);
+                updateOpenState(newState);
             }
         };
 
@@ -56,6 +52,12 @@ export const useMenuSub = withHeadless({
 
                 setOpenState(newState);
                 updateOpenState(newState);
+            }
+        };
+
+        const onTriggerClick = () => {
+            if (!props.disabled) {
+                toggle();
             }
         };
 

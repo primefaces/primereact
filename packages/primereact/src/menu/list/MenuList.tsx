@@ -41,7 +41,7 @@ export const MenuList = withComponent({
 
         React.useEffect(() => {
             if (submenu?.listRef?.current && submenu?.state.opened) {
-                nestedPosition(submenu.listRef.current as HTMLUListElement, submenu?.parentLevel?.level as number);
+                nestedPosition(submenu.listRef.current as HTMLUListElement, ((submenu?.parentLevel?.level ?? 0) + 1) as number);
             }
         }, [submenu?.state.opened, submenu?.listRef?.current]);
 
