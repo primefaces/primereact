@@ -23,6 +23,7 @@ export default function InlineDemo() {
                         <Menu.Trigger>
                             <i className="pi pi-folder" />
                             Projects
+                            <Menu.Icon />
                         </Menu.Trigger>
                         <Menu.List>
                             <Menu.Item>
@@ -38,6 +39,7 @@ export default function InlineDemo() {
                                 <Menu.Trigger>
                                     <i className="pi pi-star" />
                                     Favorites
+                                    <Menu.Icon />
                                 </Menu.Trigger>
                                 <Menu.List>
                                     <Menu.Item>
@@ -66,6 +68,7 @@ export default function InlineDemo() {
                         <Menu.Trigger>
                             <i className="pi pi-users" />
                             Team
+                            <Menu.Icon />
                         </Menu.Trigger>
                         <Menu.List>
                             <Menu.Item>
@@ -81,6 +84,7 @@ export default function InlineDemo() {
                                 <Menu.Trigger>
                                     <i className="pi pi-cog" />
                                     Settings
+                                    <Menu.Icon />
                                 </Menu.Trigger>
                                 <Menu.List>
                                     <Menu.Item>
