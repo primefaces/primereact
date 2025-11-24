@@ -49,24 +49,6 @@ const getTypeDoc = async (typeDocOptions) => {
                         description
                     };
 
-                    // Ensure base buckets exist even if specific groups are missing
-                    if (!doc[name]['interfaces']) {
-                        doc[name]['interfaces'] = {
-                            description: staticMessages['interfaces'],
-                            typeDescription: staticMessages['types'],
-                            values: {}
-                        };
-                    }
-
-                    if (!doc[name]['types']) {
-                        doc[name]['types'] = {
-                            description: staticMessages['exposes'],
-                            stateDescription: staticMessages['state'],
-                            typeDescription: staticMessages['types'],
-                            values: {}
-                        };
-                    }
-
                     const module_interfaces_group = module.groups?.find((g) => g.title === 'Interfaces');
 
                     if (module_interfaces_group) {
@@ -75,6 +57,23 @@ const getTypeDoc = async (typeDocOptions) => {
                             const component_prop = '';
                             const event_extendedBy = event.extendedBy && event.extendedBy.toString();
                             const event_extendedTypes = event.extendedTypes && event.extendedTypes.toString();
+
+                            if (!doc[name]['interfaces']) {
+                                doc[name]['interfaces'] = {
+                                    description: staticMessages['interfaces'],
+                                    typeDescription: staticMessages['types'],
+                                    values: {}
+                                };
+                            }
+
+                            if (!doc[name]['types']) {
+                                doc[name]['types'] = {
+                                    description: staticMessages['exposes'],
+                                    stateDescription: staticMessages['state'],
+                                    typeDescription: staticMessages['types'],
+                                    values: {}
+                                };
+                            }
 
                             const props = [];
                             const methods = [];
@@ -156,7 +155,7 @@ const getTypeDoc = async (typeDocOptions) => {
                                 variable.type.declaration.children.forEach((variableChild) => {
                                     variables.push({
                                         name: variableChild.name,
-                                        value: (variableChild.type && variableChild.type.value) || '',
+                                        value: variableChild.type.value,
                                         optional: variableChild.flags.isOptional,
                                         readonly: variableChild.flags.isReadonly,
                                         description: variableChild.comment && variableChild.comment.summary.map((s) => s.text || '').join(' ')
