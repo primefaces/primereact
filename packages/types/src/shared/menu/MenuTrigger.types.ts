@@ -28,10 +28,6 @@ export interface MenuTriggerPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: MenuTriggerPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the item icon's DOM element.
-     */
-    itemIcon?: MenuTriggerPassThroughType<React.HTMLAttributes<SVGElement>>;
 }
 
 /**

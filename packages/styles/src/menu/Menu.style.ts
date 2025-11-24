@@ -8,7 +8,6 @@ const _style = /*css*/ `
         color: dt('menu.color');
         border: 1px solid dt('menu.border.color');
         border-radius: dt('menu.border.radius');
-        /* min-width: 12.5rem; */
         min-width: max-content;
     }
 
@@ -141,7 +140,7 @@ export const styles = createStyles<MenuInstance>({
             }
         ],
         trigger: 'p-menu-trigger-button',
-        itemIcon: 'p-menu-item-icon'
+        icon: 'p-menu-item-icon'
     },
     inlineStyles: {
         submenu: ({ props }) => ({

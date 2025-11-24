@@ -48,7 +48,7 @@ export interface MenuPassThrough {
     /**
      * Used to pass attributes to the item icon's DOM element.
      */
-    itemIcon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
+    icon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
     /**
      * Used to pass attributes to the separator's DOM element.
      */
@@ -128,7 +128,7 @@ export const MenuClassNames = {
     /**
      * Class name of the item icon element
      */
-    itemIcon: 'p-menu-item-icon'
+    icon: 'p-menu-item-icon'
 } as const;
 
 /**
