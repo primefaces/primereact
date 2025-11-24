@@ -8,6 +8,7 @@ import * as React from 'react';
 import { MenuProvider } from './Menu.context';
 import { defaultProps } from './Menu.props';
 import { MenuLevelProvider } from './MenuLevel.context';
+import { MenuIcon } from './icon';
 import { MenuItem } from './item';
 import { MenuList } from './list';
 import { MenuPortal } from './portal';
@@ -49,6 +50,7 @@ export const Menu = withComponent({
         Trigger: MenuTrigger,
         Portal: MenuPortal,
         Sub: MenuSub,
-        Separator: MenuSeparator
+        Separator: MenuSeparator,
+        Icon: MenuIcon
     }
 });
