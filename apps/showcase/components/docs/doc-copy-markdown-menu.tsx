@@ -6,7 +6,15 @@ import { Button } from 'primereact/button';
 import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
 
-const DocCopyMarkdown: React.FC<React.HTMLAttributes<HTMLDivElement> & { llm: string; component?: string }> = ({ llm, component, className, ...props }) => {
+export default function DocCopyMarkdownMenu({
+    llm,
+    component,
+    className,
+    ...props
+}: React.ComponentProps<'div'> & {
+    llm: string;
+    component?: string;
+}) {
     const params = useParams();
     const [isCopied, setIsCopied] = React.useState(false);
     const [isMarkdownLinkCopied, setIsMarkdownLinkCopied] = React.useState(false);
@@ -168,6 +176,4 @@ const DocCopyMarkdown: React.FC<React.HTMLAttributes<HTMLDivElement> & { llm: st
             </div>
         </div>
     );
-};
-
-export default DocCopyMarkdown;
+}

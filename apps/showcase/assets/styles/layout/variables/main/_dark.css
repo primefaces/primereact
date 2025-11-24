@@ -29,4 +29,11 @@
     --designer-primary-emphasis-color: #f3f4f6;
     --designer-primary-contrast-color: #000000;
     --designer-focus-outline-color: #ffffff;
+
+    --code-figure-background: var(--p-surface-900);
+    --code-figure-color: var(--p-surface-0);
+    --code-figure-border: var(--p-surface-800);
+    --code-figure-number-color: var(--p-surface-500);
+    --code-figure-higlighted-background: color-mix(in srgb, var(--color-surface-500) 10%, var(--color-surface-900) 80%);
+    --code-figure-caption-background: color-mix(in srgb, var(--p-surface-900) 50%, transparent 50%);
 }

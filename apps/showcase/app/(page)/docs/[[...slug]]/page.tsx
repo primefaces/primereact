@@ -1,7 +1,7 @@
-import DocCopyMarkdown from '@/components/doc/DocCopyMarkdown';
-import { DocMdx } from '@/components/doc/DocMdx';
-import DocTabs from '@/components/doc/DocTabs';
-import DocToc from '@/components/doc/DocToc';
+import DocCopyMarkdownMenu from '@/components/docs/doc-copy-markdown-menu';
+import DocMdx from '@/components/docs/doc-mdx';
+import DocTabs from '@/components/docs/doc-tabs';
+import DocToc from '@/components/docs/doc-toc';
 import { allDocs } from 'contentlayer/generated';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -68,8 +68,8 @@ async function DocsPage({ params }: PageProps) {
                 <div className="flex-1 overflow-hidden pb-12">
                     <div className="grid grid-cols-[1fr_auto] gap-2 items-start">
                         <h1 className="text-4xl font-semibold leading-[1.2] text-(--high-contrast-text-color)">{doc.title}</h1>
-                        <DocCopyMarkdown className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />
-                        <p className="text-xl leading-[1.625] col-span-2">{doc.description}</p>
+                        <DocCopyMarkdownMenu className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />
+                        <p className="text-xl leading-6.5 col-span-2">{doc.description}</p>
                     </div>
 
                     <DocMdx code={doc.body.code} />

@@ -2,6 +2,7 @@
 import { cn } from '@primeuix/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import React from 'react';
 
 const tabs = [
     { key: 'features', label: 'FEATURES', href: (componentName: string) => `/docs/components/${componentName}` },
@@ -10,7 +11,7 @@ const tabs = [
     { key: 'pt', label: 'PASS THROUGH', href: (componentName: string) => `/docs/components/${componentName}/pt` }
 ];
 
-const DocTabs = ({ componentName }: { componentName: string }) => {
+const DocTabs = ({ componentName }: React.ComponentProps<'ul'> & { componentName: string }) => {
     const pathname = usePathname();
     const tab = pathname.split('/')?.[4] ?? 'features';
 

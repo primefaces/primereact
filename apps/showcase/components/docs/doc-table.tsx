@@ -1,3 +1,4 @@
+'use client';
 import { useApp } from '@/hooks/useApp';
 import { ApiChild, ApiData, ApiDataItem, NestedApiData } from '@/types/Doc.types';
 import { getApiDocs, getPTOptions, getStyleOptions, getTokenOptions } from '@/utils/getComponentOptions';
