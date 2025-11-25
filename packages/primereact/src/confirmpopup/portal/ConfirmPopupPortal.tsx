@@ -26,13 +26,16 @@ export const ConfirmPopupPortal = withComponent({
                 appear: true,
                 name: 'p-confirmpopup',
                 className: confirmpopup?.cx('root'),
-                style: { ...(confirmpopup?.sx('root') || {}), ...((inProps && inProps.style) || {}) },
+                style: confirmpopup?.sx('root'),
                 role: 'alertdialog',
                 'aria-modal': confirmpopup?.state.opened,
                 onEnter: confirmpopup?.onMotionEnter,
                 onAfterEnter: confirmpopup?.onMotionAfterEnter,
                 onLeave: confirmpopup?.onMotionLeave,
                 onAfterLeave: confirmpopup?.onMotionAfterLeave
+            },
+            {
+                style: inProps?.style
             },
             confirmpopup?.ptm('root')
         );

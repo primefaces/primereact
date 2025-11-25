@@ -36,7 +36,7 @@ export const DialogPortal = withComponent({
                 appear: true,
                 name: 'p-dialog',
                 className: dialog?.cx('root'),
-                style: { ...(dialog?.sx('root') || {}), ...((inProps && inProps.style) || {}) },
+                style: dialog?.sx('root'),
                 role: 'dialog',
                 'aria-labelledby': dialog?.inProps?.ariaLabelledby ?? dialog?.id + '_header',
                 'aria-modal': dialog?.props.modal,
@@ -45,6 +45,9 @@ export const DialogPortal = withComponent({
                 onBeforeLeave: dialog?.onMotionBeforeLeave,
                 onLeave: dialog?.onMotionLeave,
                 onAfterLeave: dialog?.onMotionAfterLeave
+            },
+            {
+                style: inProps?.style
             },
             dialog?.ptm('mask')
         );

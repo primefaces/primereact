@@ -35,13 +35,16 @@ export const DrawerPortal = withComponent({
                 appear: true,
                 name: 'p-drawer',
                 className: drawer?.cx('root'),
-                style: { ...(drawer?.sx('root') || {}), ...((inProps && inProps.style) || {}) },
+                style: drawer?.sx('root'),
                 role: 'complementary',
                 'aria-modal': drawer?.props.modal,
                 onEnter: drawer?.onMotionEnter,
                 onAfterEnter: drawer?.onMotionAfterEnter,
                 onBeforeLeave: drawer?.onMotionBeforeLeave,
                 onAfterLeave: drawer?.onMotionAfterLeave
+            },
+            {
+                style: inProps?.style
             },
             drawer?.ptmi('root')
         );
