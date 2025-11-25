@@ -35,11 +35,6 @@ export interface MenuItemPassThrough {
  */
 export interface MenuItemProps extends BaseComponentProps<MenuItemInstance, unknown, MenuItemPassThrough> {
     /**
-     * When enabled, renders the item as a group label.
-     * @defaultValue false
-     */
-    group?: boolean | undefined;
-    /**
      * When present, it specifies that the item should be disabled.
      * @default false
      */
