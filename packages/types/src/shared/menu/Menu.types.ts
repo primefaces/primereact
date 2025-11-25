@@ -34,9 +34,9 @@ export interface MenuPassThrough {
      */
     item?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
-     * Used to pass attributes to the group label's DOM element.
+     * Used to pass attributes to the label's DOM element.
      */
-    groupLabel?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    label?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Used to pass attributes to the trigger's DOM element.
      */
@@ -100,7 +100,7 @@ export const MenuClassNames = {
     /**
      * Class name of the group label element
      */
-    groupLabel: 'p-menu-group-label',
+    label: 'p-menu-label',
     /**
      * Class name of the submenu element
      */

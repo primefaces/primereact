@@ -10,6 +10,7 @@ import { defaultProps } from './Menu.props';
 import { MenuLevelProvider } from './MenuLevel.context';
 import { MenuIcon } from './icon';
 import { MenuItem } from './item';
+import { MenuLabel } from './label';
 import { MenuList } from './list';
 import { MenuPortal } from './portal';
 import { MenuSeparator } from './separator';
@@ -47,6 +48,7 @@ export const Menu = withComponent({
     components: {
         List: MenuList,
         Item: MenuItem,
+        Label: MenuLabel,
         Trigger: MenuTrigger,
         Portal: MenuPortal,
         Sub: MenuSub,

@@ -97,7 +97,7 @@ const _style = /*css*/ `
         transition: transform 0.2s;
     }
 
-    .p-menu-group-label {
+    .p-menu-label {
         background: dt('menu.submenu.label.background');
         padding: dt('menu.submenu.label.padding');
         color: dt('menu.submenu.label.color');
@@ -119,9 +119,8 @@ export const styles = createStyles<MenuInstance>({
                 'p-menu-composite': props.composite
             }
         ],
-        content: 'p-menu-content',
         list: 'p-menu-list',
-        groupLabel: 'p-menu-group-label',
+        label: 'p-menu-label',
         submenu: 'p-menu-submenu',
         submenuLabel: ({ context }) => [
             'p-menu-submenu-label',
