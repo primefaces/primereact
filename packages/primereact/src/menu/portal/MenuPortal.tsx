@@ -33,7 +33,7 @@ export const MenuPortal = withComponent({
                     <Overlay
                         ref={menu?.portalRef}
                         appendTo={menu?.props.appendTo}
-                        target={menu?.triggerRef?.current?.elementRef?.current}
+                        target={menu?.state.contextMenuTarget || menu?.triggerRef?.current?.elementRef?.current}
                         type="menu"
                         open={menu?.state.opened}
                         onOpenChange={({ value }: useOverlayOpenChangeEvent) => menu?.changeVisibleState(value)}

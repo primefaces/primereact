@@ -10,6 +10,7 @@ export const useMenu = withHeadless({
         const [openState, setOpenState] = React.useState<boolean>(props.open !== undefined ? props.open : (props.defaultOpen ?? false));
         const [focusedState, setFocusedState] = React.useState<boolean>(false);
         const [focusedOptionId, setFocusedOptionId] = React.useState<string | string[]>(props.composite ? [] : '');
+        const [contextMenuTarget, setContextMenuTarget] = React.useState<{ pageX: number; pageY: number } | null>(null);
         const isMouseInteractionRef = React.useRef(false);
 
         const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
@@ -20,7 +21,8 @@ export const useMenu = withHeadless({
         const state = {
             opened: openState,
             focused: focusedState,
-            focusedOptionId
+            focusedOptionId,
+            contextMenuTarget
         };
 
         const registerItem = React.useCallback((id: string, ref: HTMLElement) => {
@@ -577,17 +579,36 @@ export const useMenu = withHeadless({
             if (listRef.current) {
                 focus(listRef.current);
             }
-
-            // if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
-            //     const element = portalRef.current.containerRef.current.elementRef.current;
-
-            //     element.style.overflowY = 'auto';
-            // }
         };
 
-        const onTriggerClick = () => {
-            setOpenState(true);
-            updateOpenState(true);
+        const onTriggerClick = (event?: React.MouseEvent) => {
+            if (event && event.type === 'contextmenu') {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const newTarget = { pageX: event.pageX, pageY: event.pageY };
+
+                if (openState) {
+                    updateOpenState(false);
+                    setOpenState(false);
+
+                    setTimeout(() => {
+                        setContextMenuTarget(newTarget);
+                        updateOpenState(true);
+                        setOpenState(true);
+                    }, 0);
+                } else {
+                    setContextMenuTarget(newTarget);
+
+                    setOpenState(true);
+                    updateOpenState(true);
+                }
+            } else {
+                setContextMenuTarget(null);
+
+                setOpenState(true);
+                updateOpenState(true);
+            }
         };
 
         const onItemClick = (event: React.MouseEvent) => {

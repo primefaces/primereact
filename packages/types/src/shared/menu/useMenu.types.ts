@@ -84,6 +84,10 @@ export interface useMenuState {
      * The last element is used for aria-activedescendant.
      */
     focusedOptionId: string | string[];
+    /**
+     * The target position for context menu (used when triggered by right-click).
+     */
+    contextMenuTarget: { pageX: number; pageY: number } | null;
 }
 
 /**
@@ -117,7 +121,7 @@ export interface useMenuExposes {
     /**
      * Handle trigger click event.
      */
-    onTriggerClick: () => void;
+    onTriggerClick: (event?: React.MouseEvent) => void;
     /**
      * Handle overlay enter event.
      */

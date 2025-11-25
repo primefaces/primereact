@@ -91,7 +91,7 @@ export const MenuList = withComponent({
                 className: menu?.cx('root')
             },
             {
-                ...(omit(menu?.inProps, ...Object.keys(defaultProps)) as Record<PropertyKey, unknown>)
+                ...(omit(menu?.inProps, ...Object.keys(defaultProps), 'pIf', 'asChild', 'ptOptions') as Record<PropertyKey, unknown>)
             },
             menu?.ptm('root')
         );
