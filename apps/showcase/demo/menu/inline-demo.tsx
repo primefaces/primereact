@@ -12,7 +12,7 @@ export default function InlineDemo() {
 
                     <Menu.Separator />
 
-                    <Menu.Item group>Workspace</Menu.Item>
+                    <Menu.Label>Workspace</Menu.Label>
 
                     <Menu.Item>
                         <i className="pi pi-chart-line" />

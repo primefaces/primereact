@@ -6,7 +6,7 @@ export default function MenuPTDemo() {
             <Menu.List>
                 <Menu.Item>Dashboard</Menu.Item>
                 <Menu.Separator />
-                <Menu.Item group>Workspace</Menu.Item>
+                <Menu.Label>Workspace</Menu.Label>
                 <Menu.Item>Analytics</Menu.Item>
                 <Menu.Sub defaultOpen={true}>
                     <Menu.Trigger>

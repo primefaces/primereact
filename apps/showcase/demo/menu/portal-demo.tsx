@@ -18,10 +18,10 @@ export default function PortalDemo() {
 
                 <Menu.Portal>
                     <Menu.List>
-                        <Menu.Item group className="flex-col items-start gap-2">
+                        <Menu.Label className="flex-col items-start gap-2">
                             <p className="font-bold text-sm">Active Account</p>
                             <p className="font-bold text-sm">sarah.anderson@company.com</p>
-                        </Menu.Item>
+                        </Menu.Label>
 
                         <Menu.Separator />
 

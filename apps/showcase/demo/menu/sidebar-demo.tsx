@@ -162,9 +162,9 @@ export default function SidebarDemo() {
 
                             <Menu.Separator />
 
-                            <Menu.Item group>
+                            <Menu.Label>
                                 <span className="text-xs font-bold text-surface-500">FAVORITES</span>
-                            </Menu.Item>
+                            </Menu.Label>
 
                             <Menu.Item>
                                 <i className="pi pi-star-fill text-yellow-500" />
