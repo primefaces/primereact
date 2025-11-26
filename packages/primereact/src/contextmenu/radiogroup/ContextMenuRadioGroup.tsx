@@ -5,11 +5,11 @@ import { withComponent } from 'primereact/base';
 import { Menu, useMenuContext } from 'primereact/menu';
 import * as React from 'react';
 import { useContextMenuContext } from '../ContextMenu.context';
-import { defaultItemProps } from './ContextMenuItem.props';
+import { defaultRadioGroupProps } from './ContextMenuRadioGroup.props';
 
-export const ContextMenuItem = withComponent({
-    name: 'ContextMenuItem',
-    defaultProps: defaultItemProps,
+export const ContextMenuRadioGroup = withComponent({
+    name: 'ContextMenuRadioGroup',
+    defaultProps: defaultRadioGroupProps,
     setup() {
         const contextmenu = useContextMenuContext();
         const menu = useMenuContext();
@@ -21,12 +21,12 @@ export const ContextMenuItem = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: contextmenu?.cx('item')
+                className: contextmenu?.cx('radiogroup')
             },
             ptmi('root')
         );
 
-        // @ts-expect-error: Menu.Item expects a type prop, but we are using it as a item.
-        return <Component as={Menu.Item} instance={instance} attrs={rootProps} pt={contextmenu?.ptm('item')} children={props.children} />;
+        // @ts-expect-error: Menu.RadioGroup expects a type prop, but we are using it as a radio group.
+        return <Component as={Menu.RadioGroup} instance={instance} attrs={rootProps} pt={contextmenu?.ptm('radioGroup')} children={props.children} />;
     }
 });
