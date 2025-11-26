@@ -1,10 +1,10 @@
 /**
  *
- * MenuItem is a component that displays a item.
+ * MenuRadioItem is a component that displays a radio item.
  *
  * [Live Demo](https://www.primereact.org/menu/)
  *
- * @module menuitem
+ * @module menuradioitem
  * @group components
  *
  */
@@ -13,27 +13,32 @@ import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
 import type { MenuLevelContextInterface } from './MenuLevel.types';
 import type { MenuPortalInstance } from './MenuPortal.types';
+import type { MenuRadioGroupContextInterface } from './MenuRadioGroup.types';
 import type { MenuSubInstance } from './MenuSub.types';
 
 /**
- * Defines passthrough(pt) options type in MenuItem component.
+ * Defines passthrough(pt) options type in MenuRadioItem component.
  */
-export type MenuItemPassThroughType<E> = PassThroughType<MenuItemInstance, E>;
+export type MenuRadioItemPassThroughType<E> = PassThroughType<MenuRadioItemInstance, E>;
 
 /**
- * Defines passthrough(pt) options of MenuItem component.
+ * Defines passthrough(pt) options of MenuRadioItem component.
  */
-export interface MenuItemPassThrough {
+export interface MenuRadioItemPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: MenuItemPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    root?: MenuRadioItemPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
 }
 
 /**
- * Defines valid properties in MenuItem component.
+ * Defines valid properties in MenuRadioItem component.
  */
-export interface MenuItemProps extends BaseComponentProps<MenuItemInstance, unknown, MenuItemPassThrough> {
+export interface MenuRadioItemProps extends BaseComponentProps<MenuRadioItemInstance, unknown, MenuRadioItemPassThrough> {
+    /**
+     * Value of the radio item.
+     */
+    value?: unknown;
     /**
      * When present, it specifies that the item should be disabled.
      * @default false
@@ -42,14 +47,14 @@ export interface MenuItemProps extends BaseComponentProps<MenuItemInstance, unkn
 }
 
 /**
- * Defines valid state in MenuItem component.
+ * Defines valid state in MenuRadioItem component.
  */
-export interface MenuItemState {}
+export interface MenuRadioItemState {}
 
 /**
- * Defines the methods and properties exposed by MenuItem component.
+ * Defines the methods and properties exposed by MenuRadioItem component.
  */
-export interface MenuItemExposes {
+export interface MenuRadioItemExposes {
     /**
      * Instance of the Menu component.
      */
@@ -90,9 +95,21 @@ export interface MenuItemExposes {
      * Aria set size of the item.
      */
     ariaSetSize: number | undefined;
+    /**
+     * Context value of the MenuRadioGroup.
+     */
+    radioGroup: MenuRadioGroupContextInterface | null;
+    /**
+     * Whether the radio item is checked or not.
+     */
+    checked: boolean;
+    /**
+     * Handler to select this radio item.
+     */
+    handleValueChange: () => void;
 }
 
 /**
- * Instance of MenuItem component.
+ * Instance of MenuRadioItem component.
  */
-export type MenuItemInstance = ComponentInstance<MenuItemProps, MenuItemState, MenuItemExposes>;
+export type MenuRadioItemInstance = ComponentInstance<MenuRadioItemProps, MenuRadioItemState, MenuRadioItemExposes>;

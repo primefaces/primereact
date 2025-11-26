@@ -24,7 +24,7 @@ export interface MenuIconPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: MenuIconPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: MenuIconPassThroughType<React.SVGAttributes<SVGElement>>;
 }
 
 /**

@@ -11,7 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
-import type { MenuLevelContextValue } from './MenuLevel.types';
+import type { MenuLevelContextInterface } from './MenuLevel.types';
 import type { MenuPortalInstance } from './MenuPortal.types';
 import type { MenuSubInstance } from './MenuSub.types';
 
@@ -59,7 +59,7 @@ export interface MenuTriggerExposes {
     /**
      * Instance of the MenuLevel component.
      */
-    level: MenuLevelContextValue | undefined | null;
+    level: MenuLevelContextInterface | undefined | null;
     /**
      * Identifier of the menu item.
      */

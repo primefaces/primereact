@@ -83,7 +83,9 @@ export const MenuTrigger = withComponent({
 
         const onItemMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
             if (!disabled && itemId !== undefined) {
-                menu?.changeFocusedOptionId(itemId);
+                setTimeout(() => {
+                    menu?.changeFocusedOptionId(itemId);
+                }, 0);
             }
 
             if (menu?.props.composite && portal && submenu) {

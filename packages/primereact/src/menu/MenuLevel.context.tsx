@@ -1,15 +1,8 @@
 'use client';
+import { MenuLevelContextInterface } from '@primereact/types/shared/menu/';
 import * as React from 'react';
 
-export interface MenuLevelContextValue {
-    level: number; // Current nesting level (0 for root)
-    path: number[]; // Array representing the path [parentIndex, ...]
-    itemCounter: React.RefObject<number>; // Counter for items at this level
-    getNextItemIndex(): number; // Get next item index at this level
-    totalItems: number; // Total number of items at this level (stable value)
-}
-
-export const MenuLevelContext = React.createContext<MenuLevelContextValue | null>(null);
+export const MenuLevelContext = React.createContext<MenuLevelContextInterface | null>(null);
 
 export const useMenuLevelContext = () => React.useContext(MenuLevelContext);
 
@@ -37,7 +30,7 @@ export const MenuLevelProvider: React.FC<{
         setTotalItems(itemCounter.current);
     }, []);
 
-    const value = React.useMemo(
+    const context = React.useMemo(
         () => ({
             level,
             path,
@@ -48,5 +41,5 @@ export const MenuLevelProvider: React.FC<{
         [level, path, getNextItemIndex, totalItems]
     );
 
-    return <MenuLevelContext.Provider value={value}>{children}</MenuLevelContext.Provider>;
+    return <MenuLevelContext.Provider value={context}>{children}</MenuLevelContext.Provider>;
 };

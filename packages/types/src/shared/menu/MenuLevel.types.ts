@@ -13,7 +13,7 @@ import type { ComponentInstance } from '@primereact/types/core';
 /**
  * Defines the value structure for MenuLevel context.
  */
-export interface MenuLevelContextValue {
+export interface MenuLevelContextInterface {
     /**
      * Current nesting level (0 for root).
      */
@@ -66,7 +66,7 @@ export interface MenuLevelExposes {
     /**
      * The context value for this menu level.
      */
-    levelContextValue: MenuLevelContextValue | undefined;
+    levelContext: MenuLevelContextInterface | undefined;
 }
 
 /**

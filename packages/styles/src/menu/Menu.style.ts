@@ -37,7 +37,9 @@ const _style = /*css*/ `
         box-shadow: var(--p-menu-shadow);
     }
 
-    .p-menu-item {
+    .p-menu-item,
+    .p-menu-item-checkbox,
+    .p-menu-item-radio {
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -54,12 +56,23 @@ const _style = /*css*/ `
         overflow: hidden;
     }
 
-    .p-menu-item:not(.p-disabled):hover {
+    .p-menu:has([role="menuitemcheckbox"]) .p-menu-item,
+    .p-menu:has([role="menuitemradio"]) .p-menu-item,
+    .p-menu:has([role="menuitemcheckbox"]) .p-menu-label,
+    .p-menu:has([role="menuitemradio"]) .p-menu-label {
+        padding-inline-start: 2.25rem;
+    }
+
+    .p-menu-item:not(.p-disabled):hover,
+    .p-menu-item-checkbox:not(.p-disabled):hover,
+    .p-menu-item-radio:not(.p-disabled):hover {
         color: dt('menu.item.focus.color');
         background: dt('menu.item.focus.background');
     }
 
-    .p-menu-item.p-focus {
+    .p-menu-item.p-focus,
+    .p-menu-item-checkbox.p-focus,
+    .p-menu-item-radio.p-focus {
         color: dt('menu.item.focus.color');
         background: dt('menu.item.focus.background');
     }
@@ -138,8 +151,24 @@ export const styles = createStyles<MenuInstance>({
                 'p-disabled': context.disabled
             }
         ],
+        checkboxItem: ({ context }) => [
+            'p-menu-item-checkbox',
+            {
+                'p-focus': context.focused,
+                'p-disabled': context.disabled
+            }
+        ],
+        radioItem: ({ context }) => [
+            'p-menu-item-radio',
+            {
+                'p-focus': context.focused,
+                'p-disabled': context.disabled
+            }
+        ],
         trigger: 'p-menu-trigger-button',
-        icon: 'p-menu-item-icon'
+        icon: 'p-menu-item-icon',
+        checkboxIcon: 'p-menu-checkbox-icon',
+        radioIcon: 'p-menu-radio-icon'
     },
     inlineStyles: {
         submenu: ({ props }) => ({

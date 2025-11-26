@@ -34,6 +34,14 @@ export interface MenuPassThrough {
      */
     item?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
+     * Used to pass attributes to the checkbox item's DOM element.
+     */
+    checkboxItem?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to pass attributes to the radio item's DOM element.
+     */
+    radioItem?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
      * Used to pass attributes to the label's DOM element.
      */
     label?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
@@ -45,6 +53,14 @@ export interface MenuPassThrough {
      * Used to pass attributes to the item icon's DOM element.
      */
     icon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
+    /**
+     * Used to pass attributes to the checkbox item icon's DOM element.
+     */
+    checkboxIcon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
+    /**
+     * Used to pass attributes to the radio item icon's DOM element.
+     */
+    radioIcon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
     /**
      * Used to pass attributes to the separator's DOM element.
      */
@@ -118,13 +134,29 @@ export const MenuClassNames = {
      */
     item: 'p-menu-item',
     /**
+     * Class name of the checkbox item element
+     */
+    checkboxItem: 'p-menu-item-checkbox',
+    /**
+     * Class name of the radio item element
+     */
+    radioItem: 'p-menu-item-radio',
+    /**
      * Class name of the trigger element
      */
     trigger: 'p-menu-trigger-button',
     /**
      * Class name of the item icon element
      */
-    icon: 'p-menu-item-icon'
+    icon: 'p-menu-item-icon',
+    /**
+     * Class name of the checkbox icon element
+     */
+    checkboxIcon: 'p-menu-checkbox-icon',
+    /**
+     * Class name of the radio icon element
+     */
+    radioIcon: 'p-menu-radio-icon'
 } as const;
 
 /**

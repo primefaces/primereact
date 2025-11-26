@@ -11,7 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
-import type { MenuLevelContextValue } from './MenuLevel.types';
+import type { MenuLevelContextInterface } from './MenuLevel.types';
 import type { MenuSubInstance } from './MenuSub.types';
 
 /**
@@ -58,7 +58,7 @@ export interface MenuListExposes {
     /**
      * Context value of the MenuLevel.
      */
-    parentLevel: MenuLevelContextValue | undefined | null;
+    parentLevel: MenuLevelContextInterface | undefined | null;
     /**
      * Level of the list.
      */

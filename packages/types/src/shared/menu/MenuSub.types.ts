@@ -11,7 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import { MenuInstance } from './Menu.types';
-import type { MenuLevelContextValue } from './MenuLevel.types';
+import type { MenuLevelContextInterface } from './MenuLevel.types';
 import type { useMenuSubExposes, useMenuSubOpenChangeEvent, useMenuSubProps, useMenuSubState } from './useMenuSub.types';
 
 /**
@@ -70,7 +70,7 @@ export interface MenuSubExposes extends useMenuSubExposes {
     /**
      * Context value of the MenuLevel.
      */
-    parentLevel: MenuLevelContextValue | undefined | null;
+    parentLevel: MenuLevelContextInterface | undefined | null;
 }
 
 /**
