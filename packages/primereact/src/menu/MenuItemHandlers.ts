@@ -16,10 +16,10 @@ export const MenuItemHandlers = (params: { isDisabled: boolean; itemId: string |
                 itemRef.current?.click();
             }
 
-            if (isDisabled && portal && menu?.props.composite && event.detail > 0) {
-                menu?.onItemClick?.(event);
-            } else if (isDisabled && portal && !menu?.props.composite) {
-                menu?.onItemClick?.(event);
+            if (isDisabled && portal) {
+                if ((menu?.props.composite && event.detail > 0) || !menu?.props.composite) {
+                    menu?.onItemClick?.(event);
+                }
             }
         },
         [isDisabled, itemId, itemRef, menu, portal]
