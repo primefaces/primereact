@@ -1,6 +1,6 @@
 /**
  *
- * ContextMenu uses a Menu UI with <ContextMenu> tag.
+ * ContextMenu ContextMenu uses Menu component and displays an overlay menu to display actions related to a trigger.
  *
  * [Live Demo](https://www.primereact.org/contextmenu/)
  *
@@ -9,6 +9,7 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { MenuPassThrough } from '@primereact/types/shared/menu';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { useContextMenuExposes, useContextMenuOpenChangeEvent, useContextMenuProps, useContextMenuState } from './useContextMenu.types';
 
@@ -19,8 +20,9 @@ export type ContextMenuPassThroughType<E> = PassThroughType<ContextMenuInstance,
 
 /**
  * Defines passthrough(pt) options of ContextMenu component.
+ * @extends MenuPassThrough
  */
-export interface ContextMenuPassThrough {}
+export interface ContextMenuPassThrough extends MenuPassThrough {}
 
 /**
  * Event fired when the contextmenu's open state changes.
@@ -61,7 +63,47 @@ export const ContextMenuClassNames = {
     /**
      * Class name of the root element
      */
-    root: 'p-contextmenu'
+    root: 'p-contextmenu',
+    /**
+     * Class name of the list element
+     */
+    list: 'p-contextmenu-list',
+    /**
+     * Class name of the submenu element
+     */
+    submenu: 'p-contextmenu-submenu',
+    /**
+     * Class name of the separator element
+     */
+    separator: 'p-contextmenu-separator',
+    /**
+     * Class name of the item element
+     */
+    item: 'p-contextmenu-item',
+    /**
+     * Class name of the checkbox item element
+     */
+    checkboxItem: 'p-contextmenu-item-checkbox',
+    /**
+     * Class name of the radio item element
+     */
+    radioItem: 'p-contextmenu-item-radio',
+    /**
+     * Class name of the trigger element
+     */
+    trigger: 'p-contextmenu-trigger',
+    /**
+     * Class name of the icon element
+     */
+    icon: 'p-contextmenu-item-icon',
+    /**
+     * Class name of the checkbox icon element
+     */
+    checkboxIcon: 'p-contextmenu-checkbox-icon',
+    /**
+     * Class name of the radio icon element
+     */
+    radioIcon: 'p-contextmenu-radio-icon'
 } as const;
 
 /**

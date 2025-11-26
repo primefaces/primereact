@@ -36,7 +36,6 @@ export interface MenuItemPassThrough {
 export interface MenuItemProps extends BaseComponentProps<MenuItemInstance, unknown, MenuItemPassThrough> {
     /**
      * When present, it specifies that the item should be disabled.
-     * @default false
      */
     disabled?: boolean | undefined;
 }

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { MenuCheckboxIconInstance, MenuCheckboxIconPassThrough, MenuCheckboxIconState, MenuInstance } from '../menu';
+import { MenuCheckboxIconPassThrough, MenuInstance } from '../menu';
 import type { ContextMenuInstance } from './ContextMenu.types';
 
 /**
@@ -20,33 +20,19 @@ export type ContextMenuCheckboxIconPassThroughType<E> = PassThroughType<ContextM
 
 /**
  * Defines passthrough(pt) options of ContextMenuCheckboxIcon component.
+ * @extends MenuCheckboxIconPassThrough
  */
 export interface ContextMenuCheckboxIconPassThrough extends MenuCheckboxIconPassThrough {}
 
 /**
- * Event object for the onCheckedChange callback.
- */
-export interface ContextMenuCheckboxIconCheckedChangeEvent {
-    /**
-     * The new checked state value.
-     */
-    value: boolean;
-}
-
-/**
  * Defines valid properties in ContextMenuCheckboxIcon component.
  */
-export interface ContextMenuCheckboxIconProps extends BaseComponentProps<ContextMenuCheckboxIconInstance, Omit<MenuCheckboxIconInstance, 'onCheckedChange'>, ContextMenuCheckboxIconPassThrough> {
-    /**
-     * Callback to invoke when checked state changes.
-     */
-    onCheckedChange?: (event: ContextMenuCheckboxIconCheckedChangeEvent) => void;
-}
+export interface ContextMenuCheckboxIconProps extends BaseComponentProps<ContextMenuCheckboxIconInstance, unknown, ContextMenuCheckboxIconPassThrough> {}
 
 /**
  * Defines valid state in ContextMenuCheckboxIcon component.
  */
-export interface ContextMenuCheckboxIconState extends MenuCheckboxIconState {}
+export interface ContextMenuCheckboxIconState {}
 
 /**
  * Defines the methods and properties exposed by ContextMenuCheckboxIcon component.

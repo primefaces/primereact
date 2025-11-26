@@ -20,6 +20,7 @@ export type ContextMenuCheckboxItemPassThroughType<E> = PassThroughType<ContextM
 
 /**
  * Defines passthrough(pt) options of ContextMenuCheckboxItem component.
+ * @extends MenuCheckboxItemPassThrough
  */
 export interface ContextMenuCheckboxItemPassThrough extends MenuCheckboxItemPassThrough {}
 
@@ -37,6 +38,10 @@ export interface ContextMenuCheckboxItemCheckedChangeEvent {
  * Defines valid properties in ContextMenuCheckboxItem component.
  */
 export interface ContextMenuCheckboxItemProps extends BaseComponentProps<ContextMenuCheckboxItemInstance, Omit<MenuCheckboxItemInstance, 'onCheckedChange'>, ContextMenuCheckboxItemPassThrough> {
+    /**
+     * When present, it specifies that the item should be disabled.
+     */
+    disabled?: boolean | undefined;
     /**
      * Callback to invoke when checked state changes.
      */

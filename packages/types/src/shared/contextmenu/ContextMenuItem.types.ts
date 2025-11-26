@@ -9,6 +9,7 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { MenuItemPassThrough } from '@primereact/types/shared/menu';
 import type { BaseComponentProps, PassThroughType } from '..';
 import { MenuInstance } from '../menu';
 import type { ContextMenuInstance } from './ContextMenu.types';
@@ -20,18 +21,19 @@ export type ContextMenuItemPassThroughType<E> = PassThroughType<ContextMenuItemI
 
 /**
  * Defines passthrough(pt) options of ContextMenuItem component.
+ * @extends MenuItemPassThrough
  */
-export interface ContextMenuItemPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: ContextMenuItemPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
+export interface ContextMenuItemPassThrough extends MenuItemPassThrough {}
 
 /**
  * Defines valid properties in ContextMenuItem component.
  */
-export interface ContextMenuItemProps extends BaseComponentProps<ContextMenuItemInstance, unknown, ContextMenuItemPassThrough> {}
+export interface ContextMenuItemProps extends BaseComponentProps<ContextMenuItemInstance, unknown, ContextMenuItemPassThrough> {
+    /**
+     * When present, it specifies that the item should be disabled.
+     */
+    disabled?: boolean | undefined;
+}
 
 /**
  * Defines valid state in ContextMenuItem component.

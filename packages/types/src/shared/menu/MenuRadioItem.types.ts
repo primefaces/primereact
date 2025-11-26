@@ -41,7 +41,6 @@ export interface MenuRadioItemProps extends BaseComponentProps<MenuRadioItemInst
     value?: unknown;
     /**
      * When present, it specifies that the item should be disabled.
-     * @default false
      */
     disabled?: boolean | undefined;
 }

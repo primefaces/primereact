@@ -9,6 +9,7 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { MenuIconPassThrough } from '@primereact/types/shared/menu';
 import type { BaseComponentProps, PassThroughType } from '..';
 import { MenuInstance } from '../menu';
 import type { ContextMenuInstance } from './ContextMenu.types';
@@ -20,13 +21,9 @@ export type ContextMenuIconPassThroughType<E> = PassThroughType<ContextMenuIconI
 
 /**
  * Defines passthrough(pt) options of ContextMenuIcon component.
+ * @extends MenuIconPassThrough
  */
-export interface ContextMenuIconPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: ContextMenuIconPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
+export interface ContextMenuIconPassThrough extends MenuIconPassThrough {}
 
 /**
  * Defines valid properties in ContextMenuIcon component.

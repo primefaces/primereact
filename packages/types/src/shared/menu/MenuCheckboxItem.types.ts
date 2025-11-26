@@ -54,7 +54,6 @@ export interface MenuCheckboxItemProps extends BaseComponentProps<MenuCheckboxIt
     defaultChecked?: boolean | undefined;
     /**
      * When present, it specifies that the item should be disabled.
-     * @default false
      */
     disabled?: boolean | undefined;
     /**

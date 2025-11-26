@@ -9,6 +9,7 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { MenuRadioGroupPassThrough } from '@primereact/types/shared/menu';
 import type { BaseComponentProps, PassThroughType } from '..';
 import { MenuInstance, MenuRadioGroupInstance } from '../menu';
 import type { ContextMenuInstance } from './ContextMenu.types';
@@ -20,13 +21,9 @@ export type ContextMenuRadioGroupPassThroughType<E> = PassThroughType<ContextMen
 
 /**
  * Defines passthrough(pt) options of ContextMenuRadioGroup component.
+ * @extends MenuRadioGroupPassThrough
  */
-export interface ContextMenuRadioGroupPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: ContextMenuRadioGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
+export interface ContextMenuRadioGroupPassThrough extends MenuRadioGroupPassThrough {}
 
 /**
  * Event object for the onValueChange callback.
