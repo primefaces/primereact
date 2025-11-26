@@ -15,6 +15,18 @@ import { Menu } from 'primereact/menu';
     <Menu.List>
         <Menu.Label />
         <Menu.Item />
+        <Menu.Separator />
+        <Menu.CheckboxItem>
+            <Menu.CheckboxIcon />
+        </Menu.CheckboxItem>
+        <Menu.RadioGroup>
+            <Menu.RadioItem>
+                <Menu.RadioIcon />
+            </Menu.RadioItem>
+            <Menu.RadioItem>
+                <Menu.RadioIcon />
+            </Menu.RadioItem>
+        </Menu.RadioGroup>
     </Menu.List>
     <Menu.Separator />
     <Menu.Sub>
@@ -67,6 +79,8 @@ Multiple Menu components can be combined to create a horizontal menubar. By mana
 <DocDemoViewer name="menu:sidebar-demo" />
 
 ### Radio and Checkbox
+
+The `Menu` component supports checkbox and radio items through `Menu.CheckboxItem`, `Menu.RadioGroup` and `Menu.RadioItem`. These items include their respective icons, `Menu.CheckboxIcon` and `Menu.RadioIcon`, to visually indicate their state.
 
 <DocDemoViewer name="menu:radio-checkbox-demo" />
 
