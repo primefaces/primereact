@@ -38,7 +38,7 @@ export const ConfirmDialogPortal = withComponent({
                 appear: true,
                 name: 'p-dialog',
                 className: cn(dialog?.cx('root'), confirmdialog?.cx('root')),
-                style: { ...(dialog?.sx('root') || {}), ...((inProps && inProps.style) || {}) },
+                style: dialog?.sx('root'),
                 role: 'dialog',
                 'aria-labelledby': dialog?.inProps?.ariaLabelledby ?? dialog?.id + '_header',
                 'aria-modal': dialog?.props.modal,
@@ -47,6 +47,9 @@ export const ConfirmDialogPortal = withComponent({
                 onBeforeLeave: dialog?.onMotionBeforeLeave,
                 onLeave: dialog?.onMotionLeave,
                 onAfterLeave: dialog?.onMotionAfterLeave
+            },
+            {
+                style: inProps?.style
             },
             confirmdialog?.ptm('mask')
         );
