@@ -1,5 +1,4 @@
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
-import fs from 'fs';
 import GithubSlugger from 'github-slugger';
 import { h } from 'hastscript';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -7,10 +6,9 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import { codeImport } from 'remark-code-import';
 import remarkGfm from 'remark-gfm';
-import { u } from 'unist-builder';
-import { visit } from 'unist-util-visit';
-import { Store } from './__store__/index.mjs';
 import { replaceApiTable, replaceComponentViewer } from './utils/getComponentReplacements';
+import { themes } from './utils/highlight-code';
+import { rehypeAttachMeta, rehypeNpmCommandMeta, rehypeReAttachMeta } from './utils/rehype-source-transform';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
@@ -82,157 +80,16 @@ export default makeSource({
         remarkPlugins: [remarkGfm, codeImport],
         rehypePlugins: [
             rehypeSlug,
-            () => (tree) => {
-                visit(tree, (node) => {
-                    if (node.name === 'DocDemoViewer') {
-                        const name = getNodeAttributeByName(node, 'name')?.value;
-                        const hideCode = getNodeAttributeByName(node, 'hideCode', 'boolean')?.value;
-                        const full = getNodeAttributeByName(node, 'full', 'boolean')?.value;
-
-                        if (!name) {
-                            return null;
-                        }
-
-                        let filePath;
-
-                        if (name.includes(':')) {
-                            const [component, demo] = name.split(':');
-
-                            if (!Store[component]?.[demo]) return null;
-
-                            filePath = Store[component][demo].filePath;
-                        } else {
-                            if (!Store[name]) return null;
-
-                            filePath = Store[name].filePath;
-                        }
-
-                        if (!filePath) return null;
-
-                        if (!hideCode) {
-                            try {
-                                const source = fs.readFileSync(filePath, 'utf8');
-
-                                node.children?.push(
-                                    u('element', {
-                                        tagName: 'pre',
-                                        properties: {
-                                            __src__: filePath,
-                                            __spec__: 'DocDemoViewer',
-                                            __full__: `${full}`
-                                        },
-                                        children: [
-                                            u('element', {
-                                                tagName: 'code',
-                                                properties: {
-                                                    className: ['language-tsx']
-                                                },
-                                                children: [
-                                                    {
-                                                        type: 'text',
-                                                        value: source
-                                                    }
-                                                ]
-                                            })
-                                        ]
-                                    })
-                                );
-                            } catch (error) {
-                                // eslint-disable-next-line no-console
-                                console.error(`Error reading file ${filePath}:`, error);
-                            }
-                        }
-                    }
-                });
-            },
-            () => (tree) => {
-                visit(tree, (node) => {
-                    if (node?.type === 'element' && node?.tagName === 'pre') {
-                        const [codeEl] = node.children;
-
-                        if (codeEl.tagName !== 'code') {
-                            return;
-                        }
-
-                        if (codeEl.data?.meta) {
-                            const regex = /event="([^"]*)"/;
-                            const match = codeEl.data?.meta.match(regex);
-
-                            if (match) {
-                                node.__event__ = match ? match[1] : null;
-                                codeEl.data.meta = codeEl.data.meta.replace(regex, '');
-                            }
-                        }
-
-                        node.__syntaxSource__ = codeEl.children?.[0].value;
-                        node.__src__ = node.properties?.__src__;
-                        node.__style__ = node.properties?.__style__;
-                        node.__spec__ = node.properties?.__spec__;
-                        node.__full__ = node.properties?.__full__;
-                    }
-                });
-            },
+            rehypeAttachMeta,
             [
                 rehypePrettyCode,
                 {
-                    theme: 'github-dark-default'
+                    theme: themes,
+                    keepBackground: false
                 }
             ],
-            () => (tree) => {
-                visit(tree, (node) => {
-                    if (node?.type === 'element' && node?.tagName === 'figure') {
-                        if (!('data-rehype-pretty-code-figure' in node.properties)) {
-                            return;
-                        }
-
-                        const preElement = node.children.at(-1);
-
-                        if (preElement.tagName !== 'pre') {
-                            return;
-                        }
-
-                        preElement.properties['__withMeta__'] = node.children.at(0).tagName === 'div';
-                        preElement.properties['__syntaxSource__'] = node.__syntaxSource__;
-                        preElement.properties['__spec__'] = node?.__spec__ ?? null;
-
-                        if (node.__src__) {
-                            preElement.properties['__src__'] = node.__src__;
-                        }
-
-                        if (node.__event__) {
-                            preElement.properties['__event__'] = node.__event__;
-                        }
-
-                        if (node.__style__) {
-                            preElement.properties['__style__'] = node.__style__;
-                        }
-
-                        const codeElement = preElement.children.at(-1);
-
-                        if (codeElement.tagName !== 'code') {
-                            return;
-                        }
-
-                        codeElement.properties['className'] = ['language-tsx'];
-
-                        if (codeElement.data?.meta?.includes('full') || node.__full__ === 'true') {
-                            preElement.properties['__full__'] = 'true';
-                        }
-                    }
-                });
-            },
-            () => (tree) => {
-                visit(tree, (node) => {
-                    if (node?.type === 'element' && node?.tagName === 'pre' && node.properties?.['__syntaxSource__']?.startsWith('npm install')) {
-                        const npmInstall = node.properties?.['__syntaxSource__'];
-
-                        node.properties['__npmInstall__'] = npmInstall;
-                        node.properties['__yarnInstall__'] = npmInstall.replace('npm install', 'yarn add');
-                        node.properties['__pnpmInstall__'] = npmInstall.replace('npm install', 'pnpm add');
-                        node.properties['__bunInstall__'] = npmInstall.replace('npm install', 'bun add');
-                    }
-                });
-            },
+            rehypeReAttachMeta,
+            rehypeNpmCommandMeta,
             [
                 rehypeAutolinkHeadings,
                 {
@@ -246,13 +103,3 @@ export default makeSource({
         ]
     }
 });
-
-function getNodeAttributeByName(node, name, type = 'string') {
-    const attribute = node.attributes?.find((attribute) => attribute.name === name);
-
-    if (type === 'boolean') {
-        return { value: attribute?.value?.value === 'true' || attribute?.value === null };
-    }
-
-    return attribute;
-}

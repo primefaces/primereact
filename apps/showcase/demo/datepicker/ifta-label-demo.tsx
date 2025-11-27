@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -15,7 +17,7 @@ export default function IftaLabelDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Label.Ifta>
                 <DatePicker value={date} variant="filled" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="date" />

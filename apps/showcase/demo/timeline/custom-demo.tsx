@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Timeline } from 'primereact/timeline';
@@ -11,7 +13,7 @@ export default function CustomDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <Timeline align="alternate">
                 {events.map((event, index) => (
                     <Timeline.Event key={index} className={index % 2 === 1 ? 'max-[960px]:flex-row' : undefined}>

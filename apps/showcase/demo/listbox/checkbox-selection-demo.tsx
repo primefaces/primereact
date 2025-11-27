@@ -1,3 +1,5 @@
+'use client';
+
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { Checkbox } from 'primereact/checkbox';
@@ -19,7 +21,7 @@ export default function CheckboxDemo() {
     const indeterminate = cities.some((city) => selectedCity?.includes(city.code)) && !isAllSelected;
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Listbox
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string[])}

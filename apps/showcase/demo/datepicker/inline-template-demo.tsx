@@ -1,3 +1,5 @@
+'use client';
+
 import type {
     DatePickerContainerInstance,
     DatePickerTableBodyInstance,
@@ -26,7 +28,7 @@ export default function InlineTemplateDemo() {
     }, []);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <DatePicker value={value} numberOfMonths={2} onValueChange={(event: DatePickerValueChangeEvent) => setValue(event.value as Date)}>
                 <DatePicker.Panel>
                     <DatePicker.Container>

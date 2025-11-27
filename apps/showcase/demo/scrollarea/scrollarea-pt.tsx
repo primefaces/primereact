@@ -1,3 +1,5 @@
+'use client';
+
 import { ScrollArea } from 'primereact/scrollarea';
 
 export default function SkeletonPT() {

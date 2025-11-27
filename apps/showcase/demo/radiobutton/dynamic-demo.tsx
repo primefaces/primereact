@@ -1,4 +1,5 @@
 'use client';
+
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
 import { RadioButton } from 'primereact/radiobutton';
 import { RadioButtonGroup } from 'primereact/radiobutton/group';
@@ -14,7 +15,7 @@ export default function DynamicDemo() {
     ];
 
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <RadioButtonGroup
                 className="flex flex-wrap gap-4"
                 value={ingredient}

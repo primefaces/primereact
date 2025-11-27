@@ -1,8 +1,10 @@
+'use client';
+
 import { Tag } from 'primereact/tag';
 
 export default function IconDemo() {
     return (
-        <div className="card flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
             <div className="flex flex-wrap justify-center gap-2">
                 <Tag>
                     <Tag.Icon>

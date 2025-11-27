@@ -1,8 +1,10 @@
+'use client';
+
 import { Tag } from 'primereact/tag';
 
 export default function TemplateDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Tag
                 className="flex items-center gap-2 px-3"
                 style={{ border: '2px solid var(--border-color)', background: 'transparent', color: 'var(--text-color)' }}

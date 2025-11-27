@@ -1,3 +1,5 @@
+'use client';
+
 import { DialogContentInstance } from '@primereact/types/shared/dialog';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -6,7 +8,7 @@ import { Label } from 'primereact/label';
 
 export default function WithoutModalDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Dialog>
                 <Dialog.Trigger>Show</Dialog.Trigger>
                 <Dialog.Portal style={{ width: '25rem' }}>

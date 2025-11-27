@@ -1,8 +1,10 @@
+'use client';
+
 import { Rating } from 'primereact/rating';
 
 function DisabledDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Rating value={3} disabled>
                 <Rating.Option />
             </Rating>

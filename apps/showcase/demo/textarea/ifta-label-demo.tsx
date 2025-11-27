@@ -1,3 +1,5 @@
+'use client';
+
 import { Label } from 'primereact/label';
 import { Textarea } from 'primereact/textarea';
 import * as React from 'react';
@@ -6,7 +8,7 @@ export default function IftaLabelDemo() {
     const [value, setValue] = React.useState('');
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Label.Ifta>
                 <Textarea
                     id="description"

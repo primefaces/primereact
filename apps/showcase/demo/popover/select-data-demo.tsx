@@ -1,3 +1,5 @@
+'use client';
+
 import { usePopoverOpenChangeEvent } from '@primereact/types/shared/popover';
 import { Popover } from 'primereact/popover';
 import React from 'react';
@@ -13,7 +15,7 @@ function SelectDataDemo() {
     const [open, setOpen] = React.useState(false);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Popover open={open} onOpenChange={(e: usePopoverOpenChangeEvent) => setOpen(e.value)}>
                 <Popover.Trigger className="min-w-48">{selectedMember?.name}</Popover.Trigger>
                 <Popover.Portal>

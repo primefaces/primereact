@@ -1,8 +1,10 @@
+'use client';
+
 import { Tabs } from 'primereact/tabs';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <Tabs value="tab1">
                 <Tabs.List>
                     <Tabs.Tab value="tab1">Account Info</Tabs.Tab>

@@ -1,8 +1,10 @@
+'use client';
+
 import { Message } from 'primereact/message';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <Message>
                 <Message.Content>
                     <Message.Text>Message Content</Message.Text>

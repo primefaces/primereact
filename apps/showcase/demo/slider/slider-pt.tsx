@@ -1,3 +1,5 @@
+'use client';
+
 import { Slider } from 'primereact/slider';
 
 export default function SliderPTDemo() {

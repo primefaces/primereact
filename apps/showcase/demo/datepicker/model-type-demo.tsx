@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -16,7 +18,7 @@ export default function ModelTypeDemo() {
     const [date2, setDate2] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
                 <Label htmlFor="datetype" className="font-bold block mb-2">
                     Date Type Model

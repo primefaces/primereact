@@ -1,7 +1,7 @@
 import { cn } from '@primeuix/utils';
 import React from 'react';
 
-const DocLinkCard: React.FC<React.AnchorHTMLAttributes<HTMLAnchorElement>> = ({ children, className, target = '_blank', rel = 'noopener noreferrer', ...props }) => {
+export default function DocLinkCard({ children, className, target = '_blank', rel = 'noopener noreferrer', ...props }: React.ComponentProps<'a'>) {
     return (
         <a
             className={cn(
@@ -15,6 +15,4 @@ const DocLinkCard: React.FC<React.AnchorHTMLAttributes<HTMLAnchorElement>> = ({ 
             {children}
         </a>
     );
-};
-
-export default DocLinkCard;
+}

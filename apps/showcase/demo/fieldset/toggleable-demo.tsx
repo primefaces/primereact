@@ -1,3 +1,5 @@
+'use client';
+
 import { Motion } from '@primereact/core/motion';
 import { MinusIcon, PlusIcon } from '@primereact/icons';
 import { Button } from 'primereact/button';
@@ -8,7 +10,7 @@ export default function ToggleableDemo() {
     const [show, setShow] = React.useState(true);
 
     return (
-        <div className="card">
+        <div>
             <Fieldset>
                 <Fieldset.Legend>
                     <Button onClick={() => setShow((prev) => !prev)} variant="text">

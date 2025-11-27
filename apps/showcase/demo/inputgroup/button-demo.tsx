@@ -1,10 +1,12 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { InputGroup } from 'primereact/inputgroup';
 import { InputText } from 'primereact/inputtext';
 
 export default function ButtonDemo() {
     return (
-        <div className="card flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
             <InputGroup>
                 <Button>Search</Button>
                 <InputText placeholder="Keyword" />

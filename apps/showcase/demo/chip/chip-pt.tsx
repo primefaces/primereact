@@ -1,3 +1,5 @@
+'use client';
+
 import { Chip } from 'primereact/chip';
 
 export default function ChipPT() {

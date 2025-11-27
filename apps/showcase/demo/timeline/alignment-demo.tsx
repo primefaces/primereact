@@ -1,10 +1,12 @@
+'use client';
+
 import { Timeline } from 'primereact/timeline';
 
 export default function AlignmentDemo() {
     const events = [{ status: 'Ordered' }, { status: 'Processing' }, { status: 'Shipped' }, { status: 'Delivered' }];
 
     return (
-        <div className="card flex flex-wrap gap-12">
+        <div className="flex flex-wrap gap-12">
             <Timeline className="w-full md:w-80">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>

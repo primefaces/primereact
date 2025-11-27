@@ -1,3 +1,5 @@
+'use client';
+
 import { ProgressBar } from 'primereact/progressbar';
 import * as React from 'react';
 
@@ -29,7 +31,7 @@ export default function DynamicDemo() {
     }, []);
 
     return (
-        <div className="card">
+        <div>
             <ProgressBar value={value}>
                 <ProgressBar.Track>
                     <ProgressBar.Indicator>

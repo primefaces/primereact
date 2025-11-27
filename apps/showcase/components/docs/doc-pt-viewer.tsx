@@ -1,33 +1,26 @@
 'use client';
+import { Store } from '@/__store__';
 import { getPTOptions } from '@/utils/getComponentOptions';
+import { cn } from '@primeuix/utils';
 import { addClass, find, removeClass } from '@primeuix/utils/dom';
 import * as React from 'react';
-import { useEffect, useMemo, useState } from 'react';
-import { Store } from '../../__store__/index.mjs';
+import { useEffect, useState } from 'react';
 
 type PTNameType = {
     name: string;
     item: string;
 };
 
-type DocPTViewerProps = {
-    name: string;
-    components?: string[];
-};
-
 interface PTOption {
     data: Array<{ label: string }>;
 }
 
-const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerProps> = ({ name, components, ...props }) => {
+export default function DocPtViewer({ components, className, name, ...props }: React.ComponentProps<'div'> & { components?: string[]; name: string }) {
     const container = React.useRef<HTMLDivElement | null>(null);
     const [PTNames, setPTNames] = useState<Array<PTNameType>>([]);
     const [hoveredElements, setHoveredElements] = useState<HTMLElement[]>([]);
-    const Component = useMemo(() => {
-        const componentName = name.split('-')[0];
 
-        return (Store as Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element> }>>)[componentName]?.[name]?.component ?? null;
-    }, [name]);
+    const Demo = Store[name.split('-')[0]]?.[name]?.component;
 
     useEffect(() => {
         const newPTNames: Array<PTNameType> = [];
@@ -85,31 +78,35 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
         setHoveredElements([]);
     };
 
+    if (!Demo) {
+        return (
+            <div className="card">
+                <p className="text-center">
+                    The component&apos;s PT demo referenced as <code className="bg-surface-100 dark:bg-surface-800 p-1 rounded-md ">{name}</code> is unavailable or does not exist.
+                </p>
+            </div>
+        );
+    }
+
     return (
-        <div ref={container} className="doc-ptviewerwrapper card" {...props}>
+        <div ref={container} className={cn('doc-ptviewerwrapper card', className)} {...props}>
             <React.Suspense fallback={<div className="py-24 w-full h-full flex items-center justify-center text-surface-500">Loading...</div>}>
                 <div id="doc-ptviewer" className="doc-ptviewer">
-                    {Component && <Component />}
+                    <Demo />
                 </div>
                 {PTNames.length > 0 && (
                     <div className="doc-ptoptions">
                         {PTNames.map((item) => (
-                            <>
-                                {item.item === 'root' && (
-                                    <div className="doc-ptheader" key={item.name}>
-                                        {item.name}
-                                    </div>
-                                )}
-                                <div className="doc-ptoption" key={`${item.name}_${item.item}`} onMouseEnter={() => enterSection(item)} onMouseLeave={leaveSection}>
+                            <React.Fragment key={`${item.name}_${item.item}`}>
+                                {item.item === 'root' && <div className="doc-ptheader">{item.name}</div>}
+                                <div className="doc-ptoption" onMouseEnter={() => enterSection(item)} onMouseLeave={leaveSection}>
                                     <span className="doc-ptoption-text">{item.item}</span>
                                 </div>
-                            </>
+                            </React.Fragment>
                         ))}
                     </div>
                 )}
             </React.Suspense>
         </div>
     );
-};
-
-export default DocPTViewer;
+}

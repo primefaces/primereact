@@ -1,3 +1,5 @@
+'use client';
+
 import { Listbox } from 'primereact/listbox';
 
 const cities = [
@@ -10,7 +12,7 @@ const cities = [
 
 export default function DisabledDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Listbox options={cities} optionLabel="name" optionValue="code" disabled className="w-full md:w-56">
                 <Listbox.Options />
             </Listbox>

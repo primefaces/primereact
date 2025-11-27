@@ -1,3 +1,5 @@
+'use client';
+
 import { ProgressBar } from 'primereact/progressbar';
 import * as React from 'react';
 
@@ -24,7 +26,7 @@ export default function TemplateDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <div className="max-w-sm mx-auto space-y-8">
                 {/* Basic percentage formatter */}
                 <ProgressBar value={uploadedFileSize} max={maxFileSize} formatter={(value: number) => `${value.toFixed(1)}%`}>

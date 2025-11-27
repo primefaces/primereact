@@ -1,3 +1,5 @@
+'use client';
+
 import { useScrollTop } from '@primereact/hooks';
 import { Button } from 'primereact/button';
 
@@ -5,7 +7,7 @@ export default function BasicDemo() {
     const { scrollToTop, visible } = useScrollTop();
 
     return (
-        <div className="card flex flex-col items-center">
+        <div className="flex flex-col items-center">
             <p>Scroll down the page to display the ScrollTop component.</p>
             <i className="pi pi-angle-down animate-fadeout animate-duration-1000 animate-infinite text-[2rem] mb-[30rem]"></i>
             {visible && (

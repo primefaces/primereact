@@ -1,8 +1,10 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function ColorDemo() {
     return (
-        <div className="card">
+        <div>
             <MeterGroup>
                 <MeterGroup.Meters>
                     <MeterGroup.Meter value={12} color="violet" />

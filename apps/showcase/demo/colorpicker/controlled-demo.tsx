@@ -1,4 +1,5 @@
 'use client';
+
 import { parseColor } from '@primereact/headless/colorpicker';
 import type { ColorInstance, ColorSpace } from '@primereact/types/shared/colorpicker';
 import { useColorPickerChangeEvent } from '@primereact/types/shared/colorpicker';
@@ -10,7 +11,7 @@ export default function ControlledDemo() {
     const [value, setValue] = React.useState<ColorInstance>(parseColor('#000000').toFormat(format === 'hex' ? 'rgba' : format));
 
     return (
-        <div className="card">
+        <div>
             <div className="max-w-sm space-y-4">
                 <ColorPicker
                     format={format === 'hex' ? 'rgba' : format}

@@ -1,3 +1,5 @@
+'use client';
+
 import { PasswordInstance } from '@primereact/types/shared/password';
 import { Password } from 'primereact/password';
 import { Tag } from 'primereact/tag';
@@ -32,7 +34,7 @@ const requirements = [
 
 export default function TemplateDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Password
                 strengthOptions={[
                     { id: 0, value: 'Weak', minDiversity: 0, minLength: 0 },

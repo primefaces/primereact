@@ -1,3 +1,5 @@
+'use client';
+
 import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 
@@ -6,7 +8,7 @@ export default function InvalidDemo() {
     const [value2, setValue2] = React.useState('');
 
     return (
-        <div className="card flex flex-wrap gap-4 items-center justify-center">
+        <div className="flex flex-wrap gap-4 items-center justify-center">
             <InputText
                 value={value1}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue1(e.target.value)}

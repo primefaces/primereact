@@ -1,3 +1,5 @@
+'use client';
+
 import { ProductService } from '@/services/product.service';
 import { useDataView } from '@primereact/headless/dataview';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
@@ -55,7 +57,7 @@ export default function SortDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <DataView>
                 <div className="flex justify-center border-b border-surface-200 dark:border-surface-700 pb-4">
                     <ToggleButton.Group

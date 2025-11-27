@@ -1,3 +1,5 @@
+'use client';
+
 import { Switch } from 'primereact/switch';
 
 export default function ScopedTokensDemo() {
@@ -32,7 +34,7 @@ export default function ScopedTokensDemo() {
     };
 
     return (
-        <div className="card flex justify-center gap-4">
+        <div className="flex justify-center gap-4">
             <Switch defaultChecked>
                 <Switch.Control>
                     <Switch.Thumb />

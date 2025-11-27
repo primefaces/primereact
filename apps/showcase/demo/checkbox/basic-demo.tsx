@@ -1,8 +1,10 @@
+'use client';
+
 import { Checkbox } from 'primereact/checkbox';
 
 const BasicDemo = () => {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <div className="flex items-center gap-2">
                 <Checkbox inputId="basic-checkbox" />
                 <label htmlFor="basic-checkbox">

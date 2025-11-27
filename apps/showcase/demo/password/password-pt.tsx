@@ -1,3 +1,5 @@
+'use client';
+
 import { Password } from 'primereact/password';
 
 export default function PasswordPTDemo() {

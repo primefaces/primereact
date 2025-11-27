@@ -1,8 +1,10 @@
+'use client';
+
 import { Splitter } from 'primereact/splitter';
 
 export default function HorizontalDemo() {
     return (
-        <div className="card ">
+        <div>
             <Splitter style={{ height: '300px' }}>
                 <Splitter.Panel className="flex items-center justify-center"> Panel 1 </Splitter.Panel>
                 <Splitter.Gutter>

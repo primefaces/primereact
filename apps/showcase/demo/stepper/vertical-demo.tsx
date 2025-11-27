@@ -1,10 +1,12 @@
+'use client';
+
 import { Motion } from '@primereact/core/motion';
 import { StepperItemInstance } from '@primereact/types/shared/stepper';
 import { Stepper } from 'primereact/stepper';
 
 export default function VerticalDemo() {
     return (
-        <div className="card ">
+        <div>
             <Stepper value="1">
                 <Stepper.Item value="1">
                     {(instance: StepperItemInstance) => {

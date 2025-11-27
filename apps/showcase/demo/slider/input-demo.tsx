@@ -1,3 +1,5 @@
+'use client';
+
 import { SliderChangeEvent } from '@primereact/types/shared/slider';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
@@ -7,7 +9,7 @@ export default function InputDemo() {
     const [value, setValue] = React.useState(50);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <div className="w-56">
                 <InputText
                     value={value}

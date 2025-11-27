@@ -1,4 +1,5 @@
 'use client';
+
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Paginator } from 'primereact/paginator';
 import React from 'react';
@@ -10,7 +11,7 @@ function CustomTextDemo() {
     const itemsPerPage = 5;
 
     return (
-        <div className="card flex items-center justify-end">
+        <div className="flex items-center justify-end">
             <Paginator total={total} itemsPerPage={itemsPerPage} page={page} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
                 <Paginator.Content>
                     Showing {itemsPerPage * (page - 1) + 1} – {Math.min(total, itemsPerPage * page)} of {total}

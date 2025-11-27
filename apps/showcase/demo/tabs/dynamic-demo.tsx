@@ -1,3 +1,5 @@
+'use client';
+
 import { Tabs } from 'primereact/tabs';
 
 const tabs = [
@@ -8,7 +10,7 @@ const tabs = [
 
 export default function DynamicDemo() {
     return (
-        <div className="card">
+        <div>
             <Tabs value="tab1">
                 <Tabs.List>
                     {tabs.map((tab) => (

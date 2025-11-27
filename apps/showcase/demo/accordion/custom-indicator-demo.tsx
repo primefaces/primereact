@@ -1,10 +1,12 @@
+'use client';
+
 import { MinusIcon, PlusIcon } from '@primereact/icons';
 import type { AccordionHeaderIndicatorInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from 'primereact/accordion';
 
 export default function CustomIndicatorDemo() {
     return (
-        <div className="card">
+        <div>
             <Accordion className="max-w-md mx-auto" multiple>
                 <Accordion.Panel value="1">
                     <Accordion.Header>

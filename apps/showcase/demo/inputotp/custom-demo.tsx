@@ -1,8 +1,10 @@
+'use client';
+
 import { InputOtp } from 'primereact/inputotp';
 
 export default function CustomDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <InputOtp>
                 {Array.from({ length: 4 }, (_, index) => {
                     return (

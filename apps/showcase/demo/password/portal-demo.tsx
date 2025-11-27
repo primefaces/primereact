@@ -1,3 +1,5 @@
+'use client';
+
 import { PasswordPortalInstance, PasswordStrengthResult } from '@primereact/types/shared/password';
 import { Password } from 'primereact/password';
 
@@ -31,7 +33,7 @@ const requirements = [
 
 export default function RequirementsDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Password>
                 <Password.Input />
                 <Password.Portal>

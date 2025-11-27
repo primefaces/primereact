@@ -1,10 +1,12 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Inplace } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
 export default function InputDemo() {
     return (
-        <div className="card">
+        <div>
             <Inplace>
                 <Inplace.Display>Click to Edit</Inplace.Display>
                 <Inplace.Content>

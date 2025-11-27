@@ -1,76 +1,97 @@
-code[data-line-numbers] {
-    counter-reset: line;
+[data-rehype-pretty-code-figure] {
+    background-color: var(--code-figure-background);
+    color: var(--code-figure-color);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--code-figure-border);
+    margin-top: calc(var(--spacing) * 4);
+    overflow: hidden;
+    outline: none;
+    position: relative;
+}
+[data-rehype-pretty-code-figure="in-wrapper"] {
+    margin-top: 0;
+    border-radius: 0;
+    border: none;
 }
 
-code[data-line-numbers] > [data-line]::before {
+[data-rehype-pretty-code-figure] [data-rehype-pretty-code-pre] {
+    min-width: 0;
+    overflow-x: auto;
+    padding: calc(var(--spacing) * 3.5) calc(var(--spacing) * 4);
+    outline: none;
+    background: transparent !important;
+}
+
+[data-rehype-pretty-code-figure] [data-rehype-pretty-code-pre]:has([data-highlighted-line]),
+[data-rehype-pretty-code-figure] [data-rehype-pretty-code-pre]:has([data-line-numbers]) {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+[data-rehype-pretty-code-figure] [data-line-numbers] {
+    display: grid;
+    min-width: 100%;
+    white-space: pre;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    counter-reset: line;
+    box-decoration-break: clone;
+}
+
+[data-rehype-pretty-code-figure] [data-line-numbers] [data-line]::before {
     counter-increment: line;
     content: counter(line);
-
-    /* Other styling */
     display: inline-block;
-    width: 0.75rem;
-    margin-left: -0.15rem;
-    margin-right: 1.15rem;
+    width: calc(var(--spacing) * 15);
+    padding-right: calc(var(--spacing) * 5);
     text-align: right;
-    color: var(--color-surface-500);
-    opacity: 0.75;
-    z-index: 1;
+    color: var(--code-figure-number-color);
+    background-color: var(--code-figure-background);
+    position: sticky;
+    left: 0;
 }
 
-code[data-line-numbers-max-digits="2"] > [data-line]::before {
-    width: 1.25rem;
+[data-rehype-pretty-code-figure] [data-line-numbers] [data-highlighted-line][data-line]::before {
+    background-color: var(--code-figure-higlighted-background);
 }
 
-code[data-line-numbers-max-digits="3"] > [data-line]::before {
-    width: 1.75rem;
+[data-rehype-pretty-code-figure] [data-line] {
+    padding-top: calc(var(--spacing) * 0.75);
+    padding-bottom: calc(var(--spacing) * 0.75);
+    min-height: calc(var(--spacing) * 0.75);
+    width: 100%;
+    display: inline-block;
 }
 
-code[data-line-numbers-max-digits="4"] > [data-line]::before {
-    width: 2.25rem;
+[data-rehype-pretty-code-figure] [data-line] span {
+    color: var(--shiki-light);
+
+    @variant dark {
+        color: var(--shiki-dark) !important;
+    }
 }
 
-code > span[data-highlighted-line] {
+[data-rehype-pretty-code-figure] [data-highlighted-line],
+[data-rehype-pretty-code-figure] [data-highlighted-chars] {
     position: relative;
+    background-color: var(--code-figure-higlighted-background);
 }
 
-code > span[data-highlighted-line] > span {
-    position: relative;
-    z-index: 1;
-}
-
-code > span[data-highlighted-line]::after {
-    content: "";
+[data-rehype-pretty-code-figure] [data-highlighted-line]::after {
     position: absolute;
     top: 0;
-    left: -1rem;
-    right: -1rem;
-    height: 100%;
-    background-color: color-mix(in srgb, var(--color-surface-500) 20%, transparent);
-    border-left: 2px solid color-mix(in srgb, var(--color-surface-0) 40%, transparent);
-    pointer-events: none;
-    z-index: 0;
-}
-
-code > span > mark[data-highlighted-chars] {
-    position: relative;
-    z-index: 1;
-    background-color: transparent;
-    padding: 0rem 0.25rem;
-}
-
-code > span > mark[data-highlighted-chars]::after {
-    content: "";
-    position: absolute;
-    top: -0.125rem;
-    bottom: -0.125rem;
     left: 0;
-    right: 0;
-    background-color: color-mix(in srgb, var(--color-surface-500) 30%, transparent);
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 0.25rem;
+    width: 2px;
+    height: 100%;
+    content: "";
+    background-color: var(--code-figure-higlighted-border);
 }
 
-code > span {
-    padding: 0.15rem 0;
+[data-rehype-pretty-code-figure] [data-highlighted-chars] {
+    border-radius: var(--radius-sm);
+    padding-inline: 0.3rem;
+    padding-block: 0.1rem;
+    font-size: 0.96rem;
+    border: 1px solid var(--code-figure-border);
 }

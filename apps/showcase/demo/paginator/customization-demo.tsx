@@ -1,9 +1,11 @@
+'use client';
+
 import { PaginatorPagesInstance } from '@primereact/types/shared/paginator';
 import { Paginator } from 'primereact/paginator';
 
 function CustomizationDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <Paginator total={100} itemsPerPage={5}>
                 <Paginator.Content>
                     <Paginator.First className="min-w-auto px-3 py-2 rounded-md">First</Paginator.First>

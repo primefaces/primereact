@@ -1,3 +1,5 @@
+'use client';
+
 import { ConfirmDialogChangeEvent, ConfirmDialogProps } from '@primereact/types/shared/confirmdialog';
 import { Button } from 'primereact/button';
 import { ConfirmDialog } from 'primereact/confirmdialog';
@@ -13,7 +15,7 @@ export default function PositionDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
                 <Button onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Left

@@ -1,3 +1,5 @@
+'use client';
+
 import { Fluid } from 'primereact/fluid';
 import { InputText } from 'primereact/inputtext';
 

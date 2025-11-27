@@ -1,3 +1,5 @@
+'use client';
+
 export default function ColorsListDemo() {
     const colors = [
         'emerald',
@@ -26,7 +28,7 @@ export default function ColorsListDemo() {
     const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
     return (
-        <div className="card">
+        <div>
             <ul className="p-0 m-0 list-none flex sm:flex-col gap-4 flex-wrap sm:flex-nowrap">
                 {colors.map((color, i) => (
                     <li key={i} className="flex-auto" style={{ minWidth: '6rem' }}>

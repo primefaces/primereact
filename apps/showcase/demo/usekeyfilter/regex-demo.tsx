@@ -1,3 +1,5 @@
+'use client';
+
 import { useKeyFilter } from '@primereact/hooks';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
@@ -11,7 +13,7 @@ export default function RegexDemo() {
     const [chars, setChars] = React.useState('');
 
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-wrap gap-3">
                 <div className="flex-auto">
                     <Label for="spacekey" className="font-bold block mb-2">

@@ -1,8 +1,10 @@
+'use client';
+
 import { Rating } from 'primereact/rating';
 
 function TemplateDemo() {
     return (
-        <div className="card flex flex-col gap-6 justify-center">
+        <div className="flex flex-col gap-6 justify-center">
             <Rating value={3}>
                 <Rating.Option
                     onIcon={<span className="text-surface-950 dark:text-surface-0 text-2xl select-none">A</span>}

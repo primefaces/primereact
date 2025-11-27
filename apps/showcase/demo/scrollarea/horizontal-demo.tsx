@@ -1,3 +1,5 @@
+'use client';
+
 import { PhotoService } from '@/services/photo.service';
 import Image from 'next/image';
 import { ScrollArea } from 'primereact/scrollarea';
@@ -18,7 +20,7 @@ export default function HorizontalDemo() {
     }, []);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <ScrollArea className="border border-surface-200 dark:border-surface-700 rounded-md" style={{ width: '632px', height: '200px' }}>
                 <ScrollArea.Viewport className="p-4">
                     <ScrollArea.Content>

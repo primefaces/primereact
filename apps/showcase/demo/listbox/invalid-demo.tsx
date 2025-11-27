@@ -1,3 +1,5 @@
+'use client';
+
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
@@ -14,7 +16,7 @@ export default function InvalidDemo() {
     const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Listbox
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}

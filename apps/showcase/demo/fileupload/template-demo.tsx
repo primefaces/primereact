@@ -1,3 +1,5 @@
+'use client';
+
 import { FileUploadInstance, FileUploadSelectEvent } from '@primereact/types/shared/fileupload';
 import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
@@ -39,7 +41,7 @@ export default function TemplateDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <FileUpload
                 ref={fileUploadRef}
                 name="demo[]"

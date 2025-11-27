@@ -1,9 +1,11 @@
+'use client';
+
 import { InputNumber } from 'primereact/inputnumber';
 import { Label } from 'primereact/label';
 
 export default function CurrencyDemo() {
     return (
-        <div className="card flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
                 <Label htmlFor="currency-us" className="font-bold block mb-2">
                     United States

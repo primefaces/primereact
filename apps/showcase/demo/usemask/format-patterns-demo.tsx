@@ -1,3 +1,5 @@
+'use client';
+
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
 import { InputTextInstance } from '@primereact/types/shared/inputtext';
 import { InputText } from 'primereact/inputtext';
@@ -72,7 +74,7 @@ export default function FormatPatternsDemo() {
     });
 
     return (
-        <div className="card flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
                 <Label htmlFor="ssn" className="font-bold block mb-2">
                     SSN

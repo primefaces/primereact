@@ -1,4 +1,5 @@
 'use client';
+
 import type { CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from 'primereact/checkbox';
 import React from 'react';
@@ -7,7 +8,7 @@ export default function GroupDemo() {
     const [value, setValue] = React.useState<string[]>();
 
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <Checkbox.Group
                 defaultValue={['Cheese']}
                 value={value}

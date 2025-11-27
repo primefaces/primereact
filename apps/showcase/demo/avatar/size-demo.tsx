@@ -1,8 +1,10 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 
 const SizeDemo = () => {
     return (
-        <div className="card flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4">
             <Avatar shape="circle" size="normal">
                 <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                 <Avatar.Fallback>CC</Avatar.Fallback>

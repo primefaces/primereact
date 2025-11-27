@@ -1,3 +1,5 @@
+'use client';
+
 import { useGalleryChangeEvent } from '@primereact/types/shared/gallery';
 import { Gallery } from 'primereact/gallery';
 import * as React from 'react';

@@ -1,3 +1,5 @@
+'use client';
+
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import * as React from 'react';
@@ -6,7 +8,7 @@ export default function InvalidDemo() {
     const [value, setValue] = React.useState('');
 
     return (
-        <div className="card flex flex-wrap justify-center ">
+        <div className="flex flex-wrap justify-center">
             <Label.Ifta>
                 <InputText
                     id="invalid"

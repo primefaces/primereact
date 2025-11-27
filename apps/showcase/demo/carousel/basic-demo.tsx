@@ -1,3 +1,5 @@
+'use client';
+
 import { Carousel } from 'primereact/carousel';
 
 function BasicDemo() {

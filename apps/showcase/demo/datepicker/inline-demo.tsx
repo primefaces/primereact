@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -15,7 +17,7 @@ export default function InlineDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <DatePicker value={date} className="w-full sm:w-120" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Panel>
                     <DatePicker.Container>

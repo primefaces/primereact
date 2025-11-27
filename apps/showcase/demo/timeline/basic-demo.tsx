@@ -1,10 +1,12 @@
+'use client';
+
 import { Timeline } from 'primereact/timeline';
 
 export default function BasicDemo() {
     const events = [{ status: 'Ordered' }, { status: 'Processing' }, { status: 'Shipped' }, { status: 'Delivered' }];
 
     return (
-        <div className="card">
+        <div>
             <Timeline>
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>

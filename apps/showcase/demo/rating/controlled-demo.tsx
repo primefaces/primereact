@@ -1,3 +1,5 @@
+'use client';
+
 import { useRatingChangeEvent } from '@primereact/types/shared/rating';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
@@ -7,7 +9,7 @@ function ControlledDemo() {
     const [value, setValue] = React.useState<number | undefined>(4);
 
     return (
-        <div className="card flex flex-col justify-center gap-4">
+        <div className="flex flex-col justify-center gap-4">
             <div className="flex items-center gap-2">
                 <Button onClick={() => setValue(2.5)} severity="secondary" variant="outlined">
                     2.5 Star

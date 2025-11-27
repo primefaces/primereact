@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function DocNotification({ children }: { children: React.ReactNode }) {
+export default function DocNotification({ children }: React.ComponentProps<'div'>) {
     return <div className="doc-notification">{children}</div>;
 }

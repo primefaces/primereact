@@ -1,3 +1,5 @@
+'use client';
+
 import { DrawerChangeEvent } from '@primereact/types/shared/drawer';
 import { Button } from 'primereact/button';
 import { Drawer } from 'primereact/drawer';
@@ -10,7 +12,7 @@ export default function PositionDemo() {
     const [visibleBottom, setVisibleBottom] = React.useState<boolean>(false);
 
     return (
-        <div className="card">
+        <div>
             <div className="flex gap-2 justify-center">
                 <Button onClick={() => setVisibleLeft(true)}>
                     <i className="pi pi-arrow-right" />

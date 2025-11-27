@@ -1,10 +1,12 @@
+'use client';
+
 import { StepperPanelInstance } from '@primereact/types/shared/stepper';
 import { Button } from 'primereact/button';
 import { Stepper } from 'primereact/stepper';
 
 export default function HorizontalDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Stepper defaultValue="1" linear className="basis-[50rem]">
                 <Stepper.List>
                     <Stepper.Step value="1">
@@ -43,7 +45,7 @@ export default function HorizontalDemo() {
                                     <div className="flex pt-6 justify-end">
                                         <Button onClick={() => stepper?.setActiveStep('2')}>
                                             Next
-                                            <i className="pi pi-arrow-right " />
+                                            <i className="pi pi-arrow-right" />
                                         </Button>
                                     </div>
                                 </>
@@ -86,9 +88,9 @@ export default function HorizontalDemo() {
                                             Content III
                                         </div>
                                     </div>
-                                    <div className="pt-6 ">
+                                    <div className="pt-6">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep('2')}>
-                                            <i className="pi pi-arrow-left " />
+                                            <i className="pi pi-arrow-left" />
                                             Back
                                         </Button>
                                     </div>

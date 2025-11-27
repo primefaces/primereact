@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -16,7 +18,7 @@ export default function InvalidDemo() {
     const [date2, setDate2] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
             <DatePicker value={date} invalid={!date} placeholder="Date" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>

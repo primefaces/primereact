@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -5,7 +7,7 @@ import { Label } from 'primereact/label';
 
 export default function LoginDemo() {
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-5/12 flex flex-col items-center justify-center gap-3 py-5">
                     <div className="flex flex-col gap-2">

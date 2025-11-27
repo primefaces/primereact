@@ -1,10 +1,11 @@
+'use client';
+
 import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import { Switch } from 'primereact/switch';
 import { Tabs } from 'primereact/tabs';
-import { useState } from 'react';
 
 const tabs = [
     {
@@ -29,14 +30,8 @@ const tabs = [
 ];
 
 export default function TemplateDemo() {
-    const [preferences, setPreferences] = useState({
-        darkMode: false,
-        emailNotifications: false,
-        desktopNotifications: false
-    });
-
     return (
-        <div className="card">
+        <div>
             <Tabs value="tab1" className="max-w-md mx-auto">
                 <Tabs.List>
                     {tabs.map((tab) => (

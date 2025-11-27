@@ -1,3 +1,5 @@
+'use client';
+
 import { Carousel } from 'primereact/carousel';
 import * as React from 'react';
 
@@ -24,12 +26,7 @@ function GalleryDemo() {
                         {images.map((_, i) => (
                             <Carousel.Item key={i}>
                                 <div className="p-1 h-full">
-                                    <img
-                                        src={images[i]}
-                                        alt={`Image ${i + 1}`}
-                                        draggable={false}
-                                        className="h-full w-full object-cover  select-none"
-                                    />
+                                    <img src={images[i]} alt={`Image ${i + 1}`} draggable={false} className="h-full w-full object-coverselect-none" />
                                 </div>
                             </Carousel.Item>
                         ))}
@@ -49,7 +46,7 @@ function GalleryDemo() {
                                             src={images[i]}
                                             alt={`Image ${i + 1}`}
                                             draggable={false}
-                                            className="h-full w-full object-cover  select-none"
+                                            className="h-full w-full object-coverselect-none"
                                         />
                                     </div>
                                 </Carousel.Item>

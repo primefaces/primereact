@@ -1,3 +1,5 @@
+'use client';
+
 import { useKeyFilter } from '@primereact/hooks';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
@@ -19,7 +21,7 @@ export default function PatternDemo() {
     const [alphanumeric, setAlphanumeric] = React.useState('');
 
     return (
-        <div className="card">
+        <div>
             <div className="flex flex-wrap gap-3 mb-4">
                 <div className="flex-auto">
                     <Label htmlFor="integer" className="font-bold block mb-2">

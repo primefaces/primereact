@@ -1,3 +1,5 @@
+'use client';
+
 import { useKeyFilter } from '@primereact/hooks';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
@@ -15,7 +17,7 @@ export default function RegexWordDemo() {
     };
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <div>
                 <Label htmlFor="numkeys" className="font-bold block mb-2">
                     Block Numeric (allow &quot;+&quot; only once at start)

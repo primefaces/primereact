@@ -1,3 +1,5 @@
+'use client';
+
 import { MinusIcon } from '@primereact/icons';
 import { Button } from 'primereact/button';
 import { InputOtp } from 'primereact/inputotp';
@@ -5,7 +7,7 @@ import * as React from 'react';
 
 export default function SampleDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <div className="flex flex-col items-center">
                 <div className="font-bold text-xl mb-2">Authenticate Your Account</div>
                 <p className="text-surface-500 dark:text-surface-400 block mb-8">Please enter the code sent to your phone.</p>

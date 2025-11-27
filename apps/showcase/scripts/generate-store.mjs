@@ -15,7 +15,7 @@ let storeContent = `/***********************************************************
 
 import * as React from 'react';
 
-export const Store = {
+export const Store: Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element>; filePath: string }>> = {
 `;
 
 function createNestedObject(obj, path, value) {
@@ -71,7 +71,7 @@ const storeObject = {};
 
 for (const { filePath, relativePath } of demoFiles) {
     const value = {
-        component: `React.lazy(() => import('${filePath}'))`,
+        component: `React.lazy(() => import('${filePath.replace('.tsx', '')}'))`,
         filePath: `'${filePath}'`
     };
 
@@ -104,4 +104,5 @@ if (!fs.existsSync(storeDir)) {
     fs.mkdirSync(storeDir, { recursive: true });
 }
 
-fs.writeFileSync(path.join(storeDir, 'index.mjs'), storeContent);
+// Write .tsx file (TypeScript + JSX)
+fs.writeFileSync(path.join(storeDir, 'index.tsx'), storeContent);

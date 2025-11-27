@@ -1,3 +1,5 @@
+'use client';
+
 import { EyeIcon } from '@primereact/icons/eye';
 import { EyeSlashIcon } from '@primereact/icons/eyeslash';
 import { PasswordInstance } from '@primereact/types/shared/password';
@@ -15,7 +17,7 @@ export default function ToggleMaskDemo() {
     };
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <IconField>
                 <Password ref={passwordRef}>
                     <Password.Input />

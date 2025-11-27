@@ -3,7 +3,7 @@
 import { cn } from '@primeuix/utils';
 import React from 'react';
 
-export const DocStep: React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>> = ({ children, className, ...props }) => {
+export function DocStep({ children, className, ...props }: React.ComponentProps<'div'>) {
     return (
         <div className={cn('flex gap-3 sm:gap-5 last:[&_[data-content=true]]:pb-0 [counter-increment:step]', className)} {...props}>
             <div className="flex flex-col items-center">
@@ -15,14 +15,12 @@ export const DocStep: React.FC<React.PropsWithChildren<React.HTMLAttributes<HTML
             </div>
         </div>
     );
-};
+}
 
-const DocStepper: React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>> = ({ children, className, ...props }) => {
+export default function DocStepper({ children, className, ...props }: React.ComponentProps<'div'>) {
     return (
         <div className={cn('mt-8 mb-4 [counter-reset:step]', className)} {...props}>
             {children}
         </div>
     );
-};
-
-export default DocStepper;
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import { Drawer } from 'primereact/drawer';
 
 export default function DialogPT() {

@@ -1,8 +1,10 @@
+'use client';
+
 import { ConfirmPopup } from 'primereact/confirmpopup';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-wrap gap-2 justify-center">
+        <div className="flex flex-wrap gap-2 justify-center">
             <ConfirmPopup>
                 <ConfirmPopup.Trigger variant="outlined">Save</ConfirmPopup.Trigger>
                 <ConfirmPopup.Portal>

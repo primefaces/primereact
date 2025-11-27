@@ -1,8 +1,10 @@
+'use client';
+
 import { ProgressBar } from 'primereact/progressbar';
 
 export default function IndeterminateDemo() {
     return (
-        <div className="card">
+        <div>
             <ProgressBar mode="indeterminate">
                 <ProgressBar.Track className="h-1.5">
                     <ProgressBar.Indicator />

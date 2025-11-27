@@ -1,3 +1,5 @@
+'use client';
+
 import { OrgChartSubtreeInstance, TreeNode } from '@primereact/types/shared/orgchart';
 import { OrgChart } from 'primereact/orgchart';
 
@@ -99,7 +101,7 @@ const RecursiveTree = ({ items, root }: { items: NodeType[]; root?: boolean }) =
 
 function TemplateDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <OrgChart collapsible value={data}>
                 <RecursiveTree items={data} root={true} />
             </OrgChart>

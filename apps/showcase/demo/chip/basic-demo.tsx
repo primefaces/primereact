@@ -1,8 +1,10 @@
+'use client';
+
 import { Chip } from 'primereact/chip';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
             <Chip>
                 <Chip.Label>Action</Chip.Label>
             </Chip>

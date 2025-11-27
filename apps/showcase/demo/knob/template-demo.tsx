@@ -1,9 +1,11 @@
+'use client';
+
 import { KnobTextInstance } from '@primereact/types/shared/knob';
 import { Knob } from 'primereact/knob';
 
 export default function TemplateDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Knob defaultValue={50}>
                 <Knob.Range />
                 <Knob.Value />

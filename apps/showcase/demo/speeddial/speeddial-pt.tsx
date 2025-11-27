@@ -1,3 +1,5 @@
+'use client';
+
 import { SpeedDial } from 'primereact/speeddial';
 
 export default function SpeedDialPTDemo() {

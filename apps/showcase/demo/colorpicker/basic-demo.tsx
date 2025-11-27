@@ -1,4 +1,5 @@
 'use client';
+
 import type { ColorSpace } from '@primereact/types/shared/colorpicker';
 import { ColorPicker } from 'primereact/colorpicker';
 import * as React from 'react';
@@ -7,7 +8,7 @@ export default function BasicDemo() {
     const [format, setFormat] = React.useState<ColorSpace | 'hex'>('hex');
 
     return (
-        <div className="card">
+        <div>
             <div className="max-w-sm space-y-4">
                 <ColorPicker format={format === 'hex' ? 'rgba' : format}>
                     <ColorPicker.Area />

@@ -1,3 +1,5 @@
+'use client';
+
 import { Stepper } from 'primereact/stepper';
 
 export default function StepperPTDemo() {

@@ -1,4 +1,5 @@
 'use client';
+
 import type { CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from 'primereact/checkbox';
 import React from 'react';
@@ -25,9 +26,9 @@ export default function CardDemo() {
     const [value, setValue] = React.useState<string[]>([]);
 
     return (
-        <div className="card flex items-center justify-center">
-            <div className="max-w-3xl ">
-                <div className=" font-semibold leading-none">Select your interests</div>
+        <div className="flex items-center justify-center">
+            <div className="max-w-3xl">
+                <div className="font-semibold leading-none">Select your interests</div>
                 <Checkbox.Group
                     value={value}
                     onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])}

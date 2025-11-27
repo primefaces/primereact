@@ -1,3 +1,5 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';

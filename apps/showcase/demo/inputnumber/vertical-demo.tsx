@@ -1,3 +1,5 @@
+'use client';
+
 import { useInputNumber } from '@primereact/headless/inputnumber';
 import type { InputNumberInstance, useInputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
 import { Button } from 'primereact/button';
@@ -17,7 +19,7 @@ export default function VerticalDemo() {
     });
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <InputGroup className="flex-col w-[3rem]">
                 <InputGroup.Addon
                     as={Button}

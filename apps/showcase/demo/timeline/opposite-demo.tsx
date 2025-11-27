@@ -1,3 +1,5 @@
+'use client';
+
 import { Timeline } from 'primereact/timeline';
 
 export default function OppositeDemo() {
@@ -9,7 +11,7 @@ export default function OppositeDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <Timeline>
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>

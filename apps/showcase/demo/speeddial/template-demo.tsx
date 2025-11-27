@@ -1,3 +1,5 @@
+'use client';
+
 import { SpeedDialChangeEvent, SpeedDialInstance } from '@primereact/types/shared/speeddial';
 import { Button } from 'primereact/button';
 import { SpeedDial } from 'primereact/speeddial';
@@ -14,7 +16,7 @@ export default function TemplateDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <div className="flex items-end justify-center" style={{ position: 'relative', height: '400px' }}>
                 <SpeedDial
                     visible={visible}

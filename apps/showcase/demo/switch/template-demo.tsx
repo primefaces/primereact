@@ -1,10 +1,12 @@
+'use client';
+
 import { CheckIcon, TimesIcon } from '@primereact/icons';
 import type { SwitchThumbInstance } from '@primereact/types/shared/switch';
 import { Switch } from 'primereact/switch';
 
 export default function TemplateDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Switch>
                 <Switch.Control>
                     <Switch.Thumb>

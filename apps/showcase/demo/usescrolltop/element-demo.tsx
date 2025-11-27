@@ -1,3 +1,5 @@
+'use client';
+
 import { useScrollTop } from '@primereact/hooks';
 import { Button } from 'primereact/button';
 import * as React from 'react';
@@ -11,7 +13,7 @@ export default function ElementDemo() {
     });
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <div ref={setTarget} className="overflow-y-scroll" style={{ width: '250px', height: '200px', scrollbarWidth: 'thin' }}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae

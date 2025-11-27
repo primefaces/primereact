@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -14,7 +16,7 @@ export default function MonthPickerDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <DatePicker value={date} view="month" dateFormat="mm/yy" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>

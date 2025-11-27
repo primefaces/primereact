@@ -1,3 +1,5 @@
+'use client';
+
 import { FileUploadInstance } from '@primereact/types/shared/fileupload';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
@@ -16,7 +18,7 @@ export default function AdvancedDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <FileUpload
                 name="demo[]"
                 url="/api/upload"

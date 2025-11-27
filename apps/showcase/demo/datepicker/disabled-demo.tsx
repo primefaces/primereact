@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
@@ -9,7 +11,7 @@ import { DatePicker } from 'primereact/datepicker';
 
 export default function DisabledDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <DatePicker disabled>
                 <DatePicker.Input />
                 <DatePicker.Portal>

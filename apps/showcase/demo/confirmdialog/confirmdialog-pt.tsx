@@ -1,3 +1,5 @@
+'use client';
+
 import { ConfirmDialog } from 'primereact/confirmdialog';
 
 export default function ConfirmDialogPT() {

@@ -1,3 +1,5 @@
+'use client';
+
 import {
     DatePickerButtonbarInstance,
     DatePickerTableBodyInstance,
@@ -17,7 +19,7 @@ export default function ButtonbarDemo() {
     const [date2, setDate2] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <div className="card flex justify-center gap-4 flex-wrap">
+        <div className="flex justify-center gap-4 flex-wrap">
             <DatePicker value={date} placeholder="Basic" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>

@@ -1,3 +1,5 @@
+'use client';
+
 import { ProgressBar } from 'primereact/progressbar';
 
 export default function ProgressBarPT() {

@@ -1,8 +1,10 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 
 export default function GroupDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Avatar.Group>
                 <Avatar shape="circle">
                     <Avatar.Image className="w-2" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
@@ -25,7 +27,7 @@ export default function GroupDemo() {
                     <Avatar.Fallback>X</Avatar.Fallback>
                 </Avatar>
                 <Avatar shape="circle">
-                    <Avatar.Fallback className="">+2</Avatar.Fallback>
+                    <Avatar.Fallback>+2</Avatar.Fallback>
                 </Avatar>
             </Avatar.Group>
         </div>

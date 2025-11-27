@@ -1,3 +1,5 @@
+'use client';
+
 import { ProductService } from '@/services/product.service';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
@@ -42,7 +44,7 @@ export default function BasicDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <DataView>
                 <div className="flex flex-col">
                     {products.map((product, index) => (

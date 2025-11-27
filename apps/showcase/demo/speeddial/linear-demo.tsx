@@ -1,3 +1,5 @@
+'use client';
+
 import { SpeedDialProps } from '@primereact/types/shared/speeddial';
 import { SpeedDial } from 'primereact/speeddial';
 
@@ -18,7 +20,7 @@ export default function LinearDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <div style={{ position: 'relative', height: '500px' }}>
                 {directions.map((item, index) => (
                     <SpeedDial key={index} direction={item.direction as SpeedDialProps['direction']} style={item.style as React.CSSProperties}>

@@ -1,8 +1,10 @@
+'use client';
+
 import { Divider } from 'primereact/divider';
 
 export default function DividerPT() {
     return (
-        <div className="card">
+        <div>
             <p className="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
 
             <Divider align="left" type="solid">

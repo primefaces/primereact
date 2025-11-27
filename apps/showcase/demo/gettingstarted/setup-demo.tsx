@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const icons = [
@@ -194,9 +196,9 @@ function SetupDemo() {
     return (
         <div className="flex gap-4">
             {icons.map((icon) => (
-                <Link key={icon.name} href={icon.to} className="relative flex-1  card flex flex-col items-center gap-2 group">
+                <Link key={icon.name} href={icon.to} className="relative flex-1flex flex-col items-center gap-2 group">
                     <div className="flex flex-col items-center justify-center gap-4 w-full h-full">
-                        <div className="relative ">
+                        <div className="relative">
                             <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:opacity-0 transition-opacity duration-150">
                                 {icon.icon1()}
                             </span>

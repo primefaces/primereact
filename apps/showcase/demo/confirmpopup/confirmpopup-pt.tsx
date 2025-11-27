@@ -1,3 +1,5 @@
+'use client';
+
 import { ConfirmPopup } from 'primereact/confirmpopup';
 
 export default function ConfirmPopupPT() {

@@ -1,3 +1,5 @@
+'use client';
+
 import { ProductService } from '@/services/product.service';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import Image from 'next/image';
@@ -46,7 +48,7 @@ export default function PaginationDemo() {
     };
 
     return (
-        <div className="card">
+        <div>
             <DataView>
                 <div className="flex flex-col">
                     {products.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((product, index) => (

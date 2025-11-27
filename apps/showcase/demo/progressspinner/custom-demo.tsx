@@ -1,8 +1,10 @@
+'use client';
+
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 export default function CustomDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <ProgressSpinner
                 strokeWidth="8"
                 fill="transparent"

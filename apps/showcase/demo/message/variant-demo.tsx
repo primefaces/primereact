@@ -1,8 +1,10 @@
+'use client';
+
 import { Message } from 'primereact/message';
 
 export default function VariantDemo() {
     return (
-        <div className="card space-y-8">
+        <div className="space-y-8">
             <div className="space-y-4">
                 <h3 className="text-lg font-semibold mb-2">Outlined</h3>
                 <div className="flex items-center gap-4">

@@ -1,8 +1,10 @@
+'use client';
+
 import { Badge } from 'primereact/badge';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
             <Badge.Overlay>
                 <i className="pi pi-bell" style={{ fontSize: '2rem' }} />
                 <Badge shape="circle">2</Badge>

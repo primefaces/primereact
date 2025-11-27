@@ -1,3 +1,5 @@
+'use client';
+
 import { PasswordChangeEvent, usePasswordProps } from '@primereact/types/shared/password';
 import { Label } from 'primereact/label';
 import { Password } from 'primereact/password';
@@ -8,7 +10,7 @@ export default function IftaLabelDemo() {
     const [value, setValue] = React.useState<usePasswordProps['value']>('');
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Label.Ifta>
                 <Password
                     value={value}

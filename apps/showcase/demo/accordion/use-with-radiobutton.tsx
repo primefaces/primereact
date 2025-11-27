@@ -1,3 +1,5 @@
+'use client';
+
 import type { useAccordionChangeEvent } from '@primereact/types/shared/accordion';
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
 import { Accordion } from 'primereact/accordion';
@@ -30,7 +32,7 @@ export default function UseWithRadioButton() {
     const [selected, setSelected] = React.useState<string>('1');
 
     return (
-        <div className="card">
+        <div>
             <div className="max-w-md mx-auto w-full">
                 <RadioButton.Group
                     className="w-full"

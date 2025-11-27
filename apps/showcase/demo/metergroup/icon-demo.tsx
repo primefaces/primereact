@@ -1,3 +1,5 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function IconDemo() {
@@ -9,7 +11,7 @@ export default function IconDemo() {
     ];
 
     return (
-        <div className="card">
+        <div>
             <MeterGroup>
                 <MeterGroup.Meters>
                     {values.map(({ value }, index) => (

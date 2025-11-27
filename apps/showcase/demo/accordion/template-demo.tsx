@@ -1,3 +1,5 @@
+'use client';
+
 import { Icon } from '@primereact/core/icon';
 import type { AccordionHeaderInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from 'primereact/accordion';
@@ -28,7 +30,7 @@ const items = [
 
 export default function TemplateDemo() {
     return (
-        <div className="card">
+        <div>
             <Accordion className="max-w-md mx-auto border border-surface-200 dark:border-surface-700 rounded-md divide-y divide-surface-200 dark:divide-surface-700">
                 {items.map((item) => (
                     <Accordion.Panel key={item.value} value={item.value} className="last:border-none transition-all ease-out">

@@ -1,3 +1,5 @@
+'use client';
+
 import { InputNumber } from 'primereact/inputnumber';
 
 export default function InputNumberPTDemo() {

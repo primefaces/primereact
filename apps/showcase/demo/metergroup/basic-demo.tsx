@@ -1,10 +1,12 @@
+'use client';
+
 import { MeterGroup } from 'primereact/metergroup';
 
 export default function BasicDemo() {
     const value = { label: 'Space used', value: 15, color: 'var(--p-primary-color)' };
 
     return (
-        <div className="card">
+        <div>
             <MeterGroup>
                 <MeterGroup.Meters>
                     <MeterGroup.Meter value={value.value} color={value.color} />

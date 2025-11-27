@@ -1,10 +1,12 @@
+'use client';
+
 // import { Skeleton } from 'primereact/skeleton';
 
 export default function DataTableDemo() {
     //   const items = Array.from({ length: 4 }, (v, i) => i);
 
     return (
-        <div className="card">
+        <div>
             {/* <DataTable :value="products">
             <Column field="code" header="Code">
                 <template #body>

@@ -1,3 +1,5 @@
+'use client';
+
 import type { InputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
 import { InputNumber } from 'primereact/inputnumber';
 import * as React from 'react';
@@ -7,7 +9,7 @@ export default function InvalidDemo() {
     const [value2, setValue2] = React.useState<number | null>(null);
 
     return (
-        <div className="card flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
             <InputNumber
                 value={value1}
                 onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)}

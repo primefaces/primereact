@@ -1,8 +1,10 @@
+'use client';
+
 import { Fieldset } from 'primereact/fieldset';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <Fieldset>
                 <Fieldset.Legend>Legend</Fieldset.Legend>
                 <Fieldset.Content>

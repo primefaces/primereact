@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
 import { FocusTrap } from 'primereact/focustrap';
@@ -5,7 +7,7 @@ import { InputText } from 'primereact/inputtext';
 
 export default function BasicDemo() {
     return (
-        <div className="card">
+        <div>
             <FocusTrap className="max-w-80 mx-auto flex flex-col gap-6">
                 <InputText id="input" type="text" placeholder="Name" fluid />
 

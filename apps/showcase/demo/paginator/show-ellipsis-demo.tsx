@@ -1,8 +1,10 @@
+'use client';
+
 import { Paginator } from 'primereact/paginator';
 
 function ShowEllipsisDemo() {
     return (
-        <div className="card flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <Paginator total={100} itemsPerPage={5} showEllipsis={false} siblings={3}>
                 <Paginator.Content>
                     <Paginator.First />

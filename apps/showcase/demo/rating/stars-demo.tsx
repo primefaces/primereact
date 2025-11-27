@@ -1,8 +1,10 @@
+'use client';
+
 import { Rating } from 'primereact/rating';
 
 function StarsDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Rating stars={10}>
                 <Rating.Option />
             </Rating>

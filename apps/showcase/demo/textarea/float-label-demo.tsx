@@ -1,3 +1,5 @@
+'use client';
+
 import { Label } from 'primereact/label';
 import { Textarea } from 'primereact/textarea';
 import * as React from 'react';
@@ -8,7 +10,7 @@ export default function FloatLabelDemo() {
     const [value3, setValue3] = React.useState('');
 
     return (
-        <div className="card  flex flex-wrap justify-center items-stretch gap-4">
+        <div className="flex flex-wrap justify-center items-stretch gap-4">
             <Label.Float>
                 <Textarea
                     value={value1}

@@ -1,9 +1,11 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 import { Message } from 'primereact/message';
 
 export default function IconDemo() {
     return (
-        <div className="card flex justify-center gap-4">
+        <div className="flex justify-center gap-4">
             <Message severity="info">
                 <Message.Content>
                     <Message.Icon className="pi pi-info-circle" />

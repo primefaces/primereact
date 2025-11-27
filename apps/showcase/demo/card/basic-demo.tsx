@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';

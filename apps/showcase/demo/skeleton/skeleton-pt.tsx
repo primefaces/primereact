@@ -1,3 +1,5 @@
+'use client';
+
 import { Skeleton } from 'primereact/skeleton';
 
 export default function SkeletonPT() {

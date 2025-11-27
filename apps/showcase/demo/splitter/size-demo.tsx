@@ -1,8 +1,10 @@
+'use client';
+
 import { Splitter } from 'primereact/splitter';
 
 export default function SizeDemo() {
     return (
-        <div className="card ">
+        <div>
             <Splitter style={{ height: '300px' }}>
                 <Splitter.Panel className="flex items-center justify-center" size={25} minSize={10}>
                     Panel 1

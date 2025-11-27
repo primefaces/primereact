@@ -1,3 +1,5 @@
+'use client';
+
 import { DrawerContentInstance } from '@primereact/types/shared/drawer';
 import { Avatar } from 'primereact/avatar';
 import { Button } from 'primereact/button';
@@ -5,7 +7,7 @@ import { Drawer } from 'primereact/drawer';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Drawer>
                 <Drawer.Trigger>
                     <i className="pi pi-arrow-right" />

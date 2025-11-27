@@ -1,9 +1,11 @@
+'use client';
+
 import { InputNumber } from 'primereact/inputnumber';
 import { Label } from 'primereact/label';
 
 export default function NumeralsDemo() {
     return (
-        <div className="card flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
                 <Label htmlFor="integeronly" className="font-bold block mb-2">
                     Integer Only

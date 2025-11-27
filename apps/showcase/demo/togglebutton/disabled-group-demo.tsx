@@ -1,8 +1,10 @@
+'use client';
+
 import { ToggleButton } from 'primereact/togglebutton';
 
 export default function DisabledGroupDemo() {
     return (
-        <div className="card flex items-center gap-4 justify-center">
+        <div className="flex items-center gap-4 justify-center">
             <ToggleButton.Group disabled>
                 <ToggleButton value="off">
                     <ToggleButton.Indicator>Off</ToggleButton.Indicator>

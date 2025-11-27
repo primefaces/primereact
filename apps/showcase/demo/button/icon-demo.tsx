@@ -1,8 +1,10 @@
+'use client';
+
 import { Button } from 'primereact/button';
 
 export default function IconDemo() {
     return (
-        <div className="card flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
             <div className="flex flex-wrap gap-4 justify-center">
                 <Button aria-label="Save">
                     <i className="pi pi-home" />

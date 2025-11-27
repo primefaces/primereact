@@ -1,3 +1,5 @@
+'use client';
+
 import { Switch } from 'primereact/switch';
 
 export default function SwitchPT() {

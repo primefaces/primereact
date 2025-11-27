@@ -1,3 +1,5 @@
+'use client';
+
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import * as React from 'react';
