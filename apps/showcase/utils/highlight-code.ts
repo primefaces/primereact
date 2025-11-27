@@ -2,8 +2,12 @@ import { codeToHtml } from 'shiki';
 
 export const themes = {
     dark: 'github-dark',
-    light: 'catppuccin-latte'
+    light: 'github-light'
 };
+
+// alt
+// light -> catppuccin-latte
+// dark -> catppuccin-macchiato
 
 export async function highlightCode(code: string, lang: string = 'tsx') {
     const html = await codeToHtml(code, {
