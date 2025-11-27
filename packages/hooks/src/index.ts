@@ -13,3 +13,4 @@ export * from './use-scrolltop';
 export * from './use-unmount-effect';
 export * from './use-update-effect';
 export * from './use-view-transition';
+export * from './use-visibility-change';
