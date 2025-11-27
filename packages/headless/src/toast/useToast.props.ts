@@ -1,9 +1,9 @@
 import type { useToastProps } from '@primereact/types/shared/toast';
 
 export const defaultProps: useToastProps = {
-    timeout: 5000,
-    gap: 12,
+    timeout: 6000,
+    gap: 14,
     position: 'bottom-right',
-    icons: undefined,
-    group: undefined
+    group: undefined,
+    limit: 3
 };

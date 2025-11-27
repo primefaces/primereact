@@ -19,16 +19,18 @@ export const ToastClose = withComponent({
         return { toast, toastItem };
     },
     render(instance) {
-        const { id, props, ptmi, toastItem } = instance;
+        const { id, props, ptmi, toastItem, toast } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
-                onClick: toastItem?.handleCloseOnClick
+                onClick: toastItem?.handleCloseOnClick,
+                className: toast?.cx('close')
             },
+            toast?.ptm('close'),
             ptmi('root')
         );
 
-        return <Component pIf={toastItem?.props.data.variant !== 'loading' && toastItem?.props.data.dismissible !== false} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component pIf={toastItem?.props.toast.variant !== 'loading' && toastItem?.props.toast.dismissible !== false} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

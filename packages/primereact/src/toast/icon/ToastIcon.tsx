@@ -2,7 +2,7 @@
 import { Component } from '@primereact/core/component';
 import { Icon } from '@primereact/core/icon';
 import { CheckIcon, ExclamationTriangleIcon, InfoCircleIcon, SpinnerIcon, TimesCircleIcon } from '@primereact/icons';
-import { ToastVariant, useToastProps } from '@primereact/types/shared/toast';
+import { ToastIconProps, ToastVariant } from '@primereact/types/shared/toast';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -10,7 +10,7 @@ import { useToastItemContext } from '../item/ToastItem.context';
 import { useToastContext } from '../Toast.context';
 import { defaultIconProps } from './ToastIcon.props';
 
-const defaultIcons: useToastProps['icons'] = {
+const defaultIcons: ToastIconProps['icons'] = {
     danger: <TimesCircleIcon />,
     warn: <ExclamationTriangleIcon />,
     info: <InfoCircleIcon />,
@@ -34,19 +34,21 @@ export const ToastIcon = withComponent({
         const rootProps = mergeProps(
             {
                 className: toast?.cx('icon'),
-                ...(toastItem?.props.data.variant === 'loading' && { spin: true })
+                ...(toastItem?.props.toast.variant === 'loading' && { spin: true })
             },
             toast?.ptm('icon'),
             ptmi('root')
         );
 
+        const icons = { ...defaultIcons, ...props.icons };
+
         return (
             <Component
-                pIf={!!toastItem?.props.data.icon || !!defaultIcons[toastItem?.props.data.variant as ToastVariant]}
+                pIf={!!toastItem?.props.toast.icon || !!icons[toastItem?.props.toast.variant as ToastVariant]}
                 as={Icon}
                 instance={instance}
                 attrs={rootProps}
-                children={toastItem?.props.data.icon ?? defaultIcons[toastItem?.props.data.variant as ToastVariant] ?? props.children}
+                children={toastItem?.props.toast.icon ?? icons[toastItem?.props.toast.variant as ToastVariant] ?? props.children}
             />
         );
     }

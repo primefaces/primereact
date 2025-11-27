@@ -1,17 +1,18 @@
 import { withHeadless } from '@primereact/core/headless';
-import type { ToastEvent, ToastType } from '@primereact/types/shared/toast';
-import { ToastManagerInstance } from 'primereact/toast';
+import type { ToastId, ToastType } from '@primereact/types/shared/toast';
 import * as React from 'react';
+import { ToastStore } from './toastStore';
 import { defaultProps } from './useToast.props';
 
 export const useToast = withHeadless({
     name: 'useToast',
     defaultProps,
     setup: ({ props }) => {
-        const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
-        const [isInteracting, setIsInteracting] = React.useState<boolean>(false);
-        const [toasts, setToasts] = React.useState<ToastType[]>([]);
-        const previousFocusedElement = React.useRef<HTMLElement | null>(null);
+        const toasts = React.useSyncExternalStore(
+            (listener) => ToastStore.subscribe(listener),
+            () => ToastStore.snapshot(),
+            () => ToastStore.snapshot()
+        );
 
         const filteredToasts: ToastType[] = React.useMemo(() => {
             if (props.group) {
@@ -21,40 +22,16 @@ export const useToast = withHeadless({
             return toasts.filter((toast) => !toast.group);
         }, [toasts, props.group]);
 
+        const [heights, setHeights] = React.useState<{ height: number; toastId: ToastId }[]>([]);
+        const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
+        const [isInteracting, setIsInteracting] = React.useState<boolean>(false);
+
+        const focusWithinRef = React.useRef<boolean>(false);
+
         const state = {
             isExpanded,
-            isInteracting
-        };
-
-        const handleToastFocus = () => {
-            const activeElement = document.activeElement;
-
-            if (activeElement instanceof HTMLElement && !activeElement.closest('[role="dialog"][aria-live="assertive"]')) {
-                previousFocusedElement.current = activeElement;
-            }
-        };
-
-        const handleFocusElement = (toastElement: HTMLElement | null) => {
-            const activeElement = document.activeElement;
-
-            if (!toastElement || !(activeElement instanceof HTMLElement) || !toastElement.contains(activeElement)) {
-                return;
-            }
-
-            let nextFocusableToast: HTMLElement | null = null;
-
-            nextFocusableToast = toastElement.nextElementSibling as HTMLElement;
-
-            if (!nextFocusableToast) {
-                nextFocusableToast = toastElement.previousElementSibling as HTMLElement;
-            }
-
-            if (nextFocusableToast && nextFocusableToast.tabIndex >= 0) {
-                nextFocusableToast.focus();
-            } else if (previousFocusedElement.current && document.contains(previousFocusedElement.current)) {
-                previousFocusedElement.current.focus();
-                previousFocusedElement.current = null;
-            }
+            isInteracting,
+            heights
         };
 
         const onRegionMouseEnter = () => {
@@ -66,7 +43,9 @@ export const useToast = withHeadless({
         };
 
         const onRegionMouseLeave = () => {
-            if (!isInteracting) {
+            if (!isInteracting && !focusWithinRef.current) {
+                if (toasts.some((t) => t.removed === true)) return;
+
                 setIsExpanded(false);
             }
         };
@@ -76,9 +55,7 @@ export const useToast = withHeadless({
         };
 
         const onRegionPointerDown = (event: React.PointerEvent) => {
-            const isNotDismissible = event.target instanceof HTMLElement && event.target.dataset.dismissible === 'false';
-
-            if (isNotDismissible) return;
+            if (event.target instanceof HTMLElement && event.target.dataset.dismissible === 'false') return;
 
             setIsInteracting(true);
         };
@@ -87,82 +64,70 @@ export const useToast = withHeadless({
             setIsInteracting(false);
         };
 
+        const onRegionFocus = (event: React.FocusEvent<HTMLElement>) => {
+            const region = event.currentTarget;
+            const activeEl = document.activeElement as HTMLElement;
+
+            if (activeEl && activeEl.matches(':focus-visible') && region.contains(activeEl)) {
+                focusWithinRef.current = true;
+                setIsExpanded(true);
+            }
+        };
+
+        const onRegionBlur = (event: React.FocusEvent<HTMLElement>) => {
+            const region = event.currentTarget;
+            const related = event.relatedTarget as HTMLElement | null;
+
+            if (related && region.contains(related)) {
+                return;
+            }
+
+            focusWithinRef.current = false;
+
+            if (isInteracting) return;
+
+            if (toasts.some((t) => t.removed === true)) return;
+
+            setIsExpanded(false);
+        };
+
+        const handleFocusManagement = (toastEl: HTMLElement | null) => {
+            if (!toastEl) return;
+
+            const activeEl = document.activeElement as HTMLElement;
+
+            if (!toastEl.contains(activeEl)) {
+                return;
+            }
+
+            const nextToastEl = toastEl.nextElementSibling as HTMLElement | null;
+            const prevToastEl = toastEl.previousElementSibling as HTMLElement | null;
+
+            requestAnimationFrame(() => {
+                if (nextToastEl) nextToastEl.focus({ preventScroll: true });
+                else if (prevToastEl) prevToastEl.focus({ preventScroll: true });
+            });
+        };
+
         React.useEffect(() => {
             if (filteredToasts.length <= 1) {
                 setIsExpanded(false);
             }
         }, [filteredToasts]);
 
-        React.useEffect(() => {
-            const unsubscribe = ToastManagerInstance.subscribe((event: ToastEvent) => {
-                switch (event.type) {
-                    case 'add':
-                        if (event.toast) {
-                            setToasts((prev) => [event.toast!, ...prev]);
-                        }
-
-                        break;
-                    case 'remove':
-                        if (event.toastId) {
-                            setToasts((prev) => {
-                                let changed = false;
-                                const next = prev.map((t) => {
-                                    if (t.id !== event.toastId) return t;
-
-                                    if (t.removed && t.height === 0) return t;
-
-                                    changed = true;
-
-                                    return { ...t, removed: true, height: 0 };
-                                });
-
-                                return changed ? next : prev;
-                            });
-                        }
-
-                        break;
-
-                    case 'delete':
-                        if (event.toastId) {
-                            setToasts((prev) => {
-                                const idx = prev.findIndex((t) => t.id === event.toastId);
-
-                                if (idx === -1) return prev;
-
-                                return [...prev.slice(0, idx), ...prev.slice(idx + 1)];
-                            });
-                        }
-
-                        break;
-                    case 'update':
-                        if (event.toast) {
-                            setToasts((prev) => prev.map((toast) => (toast.id === event.toast!.id ? event.toast! : toast)));
-                        }
-
-                        break;
-                    case 'clear':
-                        setToasts([]);
-                        break;
-                    default:
-                        break;
-                }
-            });
-
-            return unsubscribe;
-        }, []);
-
         return {
             state,
             toasts: filteredToasts,
+            setHeights,
             onRegionMouseEnter,
             onRegionMouseMove,
             onRegionMouseLeave,
             onRegionDragEnd,
             onRegionPointerDown,
             onRegionPointerUp,
-            setToasts,
-            handleFocusElement,
-            handleToastFocus
+            onRegionFocus,
+            onRegionBlur,
+            handleFocusManagement
         };
     }
 });

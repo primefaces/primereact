@@ -28,7 +28,7 @@ export interface useToastItemProps {
     /**
      * Toast data containing all toast information
      */
-    data: ToastType;
+    toast: ToastType;
 }
 
 /**
@@ -36,29 +36,41 @@ export interface useToastItemProps {
  */
 export interface useToastItemState {
     /**
-     * Whether the toast item is mounted in the DOM
+     * Indicates whether the toast item is mounted
      */
-    isMounted: boolean;
+    mounted: boolean;
     /**
-     * Whether the toast item is being swiped
+     * Indicates whether the user is swiping the toast
      */
-    isSwiping: boolean;
+    swiping: boolean;
     /**
-     * Whether the toast item is swiped out (dismissed)
+     * Indicates whether the toast has been swiped out (dismissed)
      */
-    isSwipeOut: boolean;
+    swipeOut: boolean;
     /**
      * Direction of swipe out animation
      */
     swipeOutDirection: ToastItemSwipeDirection | null;
     /**
-     * Direction of swipe
+     * Direction of swipe interaction
      */
     swipeDirection: ToastItemSwipeAxis | null;
     /**
-     * Real height of the toast item
+     * Measured height of the toast content
      */
-    realHeight: number;
+    initialHeight: number;
+    /**
+     * Whether the toast has been removed from the stack
+     */
+    removed: boolean;
+    /**
+     * Whether the toast has been swiped (even if not dismissed)
+     */
+    isSwiped: boolean;
+    /**
+     * Offset that should be preserved while the toast exits
+     */
+    offsetBeforeRemove: number;
 }
 
 /**
@@ -66,21 +78,29 @@ export interface useToastItemState {
  */
 export interface useToastItemExposes {
     /**
-     * Current state of the toast item
-     */
-    state: useToastItemState;
-    /**
      * Vertical offset for stacking toasts
      */
     offset: number;
+    /**
+     * Offset snapshot used during removal transitions
+     */
+    offsetBeforeRemove: number;
     /**
      * Index of the toast in the stack
      */
     index: number;
     /**
-     * Function to delete/remove the toast
+     * Index among currently visible toasts
      */
-    deleteToast: () => void;
+    visibleIndex: number;
+    /**
+     * Whether the toast is currently visible considering the limit
+     */
+    isVisible: boolean;
+    /**
+     * Whether the toast is in the front-most position
+     */
+    isFront: boolean;
     /**
      * Handler for pointer down events (swipe start)
      */

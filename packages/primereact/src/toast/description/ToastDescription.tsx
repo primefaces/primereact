@@ -19,12 +19,16 @@ export const ToastDescription = withComponent({
         return { toast, toastItem };
     },
     render(instance) {
-        const { props, toastItem } = instance;
+        const { props, toastItem, toast, ptmi } = instance;
 
-        const rootProps = mergeProps({
-            className: 'p-toast-description'
-        });
+        const rootProps = mergeProps(
+            {
+                className: toast?.cx('description')
+            },
+            toast?.ptm('description'),
+            ptmi('root')
+        );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children ?? toastItem?.props.data.description} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children ?? toastItem?.props.toast.description} />;
     }
 });

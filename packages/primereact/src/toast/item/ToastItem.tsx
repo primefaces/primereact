@@ -2,7 +2,7 @@
 import { Component } from '@primereact/core/component';
 import { useToastItem } from '@primereact/headless/toast/item';
 import { styles } from '@primereact/styles/toast';
-import { cn, mergeProps } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useToastContext } from '../Toast.context';
@@ -21,42 +21,54 @@ export const ToastItem = withComponent({
         return { ...toastItem, toast };
     },
     render(instance) {
-        const { id, props, ptmi, toast, state, offset, onPointerDown, onPointerMove, onPointerUp, onDragEnd, index, onKeyDown } = instance;
+        const { id, props, ptmi, state, toast: toastContext, offset, onPointerDown, onPointerMove, onPointerUp, onDragEnd, index, visibleIndex, isVisible, isFront } = instance;
 
-        const { data } = props;
+        const { toast } = props;
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cn('p-toast'),
-                tabIndex: 0,
+                className: toastContext?.cx('item'),
+                tabIndex: isVisible ? 0 : -1,
                 role: 'alert',
+                inert: !isVisible,
                 'aria-live': 'assertive',
                 'aria-atomic': 'true',
-                style: { '--p-toast-index': index, '--p-toast-offset': offset + 'px', '--p-swipe-amount-x': '0px', '--p-swipe-amount-y': '0px', '--p-real-height': state.realHeight + 'px' } as React.CSSProperties,
-                'data-overflow': index > 2,
-                'data-removed': data.removed,
-                'data-expanded': toast?.state.isExpanded,
-                'data-mounted': state?.isMounted,
-                'data-front': index === 0,
-                'data-swiping': state?.isSwiping,
-                'data-swipe-out': state?.isSwipeOut,
-                'data-swipe-out-direction': state?.swipeOutDirection,
-                'data-variant': data.variant,
-                'data-id': data.id,
-                'data-rich-colors': toast?.props.richColors,
+                'aria-hidden': !isVisible,
+                style: {
+                    '--initial-height': state?.initialHeight ? `${state?.initialHeight}px` : undefined,
+                    '--toast-index': state.removed ? index : visibleIndex,
+                    '--toast-z-index': (toastContext?.toasts?.length || 0) - index,
+                    '--toast-offset': (state.removed ? state.offsetBeforeRemove : offset) + 'px',
+                    '--swipe-amount-x': '0px',
+                    '--swipe-amount-y': '0px'
+                } as React.CSSProperties,
+                'data-id': toast?.id,
+                'data-variant': toast?.variant,
+                'data-rich-colors': toastContext?.props.richColors,
+                'data-mounted': state?.mounted,
+                'data-swiped': state.isSwiped,
+                'data-removed': state.removed,
+                'data-visible': isVisible,
+                'data-index': index,
+                'data-front': isFront,
+                'data-swiping': state.swiping,
+                'data-dismissible': toast.dismissible,
+                'data-swipe-out': state.swipeOut,
+                'data-swipe-direction': state.swipeOutDirection,
+                'data-expanded': toastContext?.state.isExpanded,
                 onPointerDown: onPointerDown,
                 onPointerMove: onPointerMove,
                 onPointerUp: onPointerUp,
-                onDragEnd: onDragEnd,
-                onKeyDown: onKeyDown
+                onDragEnd: onDragEnd
             },
+            toastContext?.ptm('item'),
             ptmi('root')
         );
 
         return (
             <ToastItemProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={data.jsx ?? props.children}></Component>
+                <Component instance={instance} attrs={rootProps} children={toast?.jsx ?? props.children}></Component>
             </ToastItemProvider>
         );
     }

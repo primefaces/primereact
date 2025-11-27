@@ -19,18 +19,20 @@ export const ToastAction = withComponent({
         return { toast, toastItem };
     },
     render(instance) {
-        const { id, props, ptmi, toastItem } = instance;
+        const { id, props, ptmi, toastItem, toast } = instance;
 
-        const actionProps = toastItem?.props.data.action ?? {};
+        const actionProps = toastItem?.props.toast.action ?? {};
 
         const rootProps = mergeProps(
             {
                 id,
-                ...actionProps
+                ...actionProps,
+                className: toast?.cx('action')
             },
+            toast?.ptm('action'),
             ptmi('root')
         );
 
-        return <Component pIf={!!toastItem?.props.data.action} instance={instance} attrs={rootProps} children={actionProps?.children ?? props.children} />;
+        return <Component pIf={!!toastItem?.props.toast.action} instance={instance} attrs={rootProps} children={actionProps?.children ?? props.children} />;
     }
 });

@@ -9,7 +9,6 @@ export * from './ToastDescription.types';
 export * from './ToastIcon.types';
 export * from './ToastItem.types';
 export * from './ToastManager.types';
-export * from './ToastProgress.types';
 export * from './ToastRegion.types';
 export * from './ToastTitle.types';
 export * from './useToastItem.types';

@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import { ToastInstance } from './Toast.types';
 import { ToastItemInstance } from './ToastItem.types';
 
 /**
@@ -41,6 +42,10 @@ export interface ToastTitleState {}
  * Defines the methods and properties exposed by ToastTitle component.
  */
 export interface ToastTitleExposes {
+    /**
+     * The Toast component instance.
+     */
+    toast: ToastInstance | undefined | null;
     /**
      * The ToastItem component instance.
      */

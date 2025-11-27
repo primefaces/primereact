@@ -10,7 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { ToastPassThroughType } from './Toast.types';
+import { ToastInstance } from './Toast.types';
+import { ToastItemInstance } from './ToastItem.types';
 
 /**
  * Defines passthrough(pt) options type in ToastClose component.
@@ -24,7 +25,7 @@ export interface ToastClosePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ToastPassThroughType<React.ButtonHTMLAttributes<HTMLButtonElement>>;
+    root?: ToastClosePassThroughType<React.ButtonHTMLAttributes<HTMLButtonElement>>;
 }
 
 /**
@@ -40,7 +41,16 @@ export interface ToastCloseState {}
 /**
  * Defines the methods and properties exposed by ToastClose component.
  */
-export interface ToastCloseExposes {}
+export interface ToastCloseExposes {
+    /**
+     * The Toast component instance.
+     */
+    toast: ToastInstance | undefined | null;
+    /**
+     * The ToastItem component instance.
+     */
+    toastItem: ToastItemInstance | undefined | null;
+}
 
 /**
  * Instance of ToastClose component.

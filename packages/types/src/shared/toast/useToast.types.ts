@@ -9,7 +9,7 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import type { ToastType, ToastVariant } from './ToastManager.types';
+import type { ToastId, ToastType } from './ToastManager.types';
 
 /**
  * Toast position type
@@ -31,15 +31,10 @@ export interface useToastProps {
      */
     position?: ToastPosition;
     /**
-     * Whether to expand the toast on hover
-     * @default false
+     * Maximum number of toasts to be visible
+     * @default 3
      */
-    expand?: boolean;
-    /**
-     * Duration in milliseconds for toast auto-dismiss
-     * @default 6000
-     */
-    duration?: number;
+    limit?: number;
     /**
      * Gap between toasts in pixels
      * @default 14
@@ -51,23 +46,9 @@ export interface useToastProps {
      */
     timeout?: number;
     /**
-     * Allowed swipe directions for dismissing toasts
-     * @default ['right']
-     */
-    swipeDirection?: ToastSwipeDirection[];
-    /**
-     * Custom icons for each toast variant
-     */
-    icons?: Partial<Record<ToastVariant, React.ReactNode>>;
-    /**
      * Group identifier for toast grouping
      */
     group?: string;
-    /**
-     * Whether to show rich colors
-     * @default false
-     */
-    richColors?: boolean;
 }
 
 /**
@@ -82,6 +63,10 @@ export interface useToastState {
      * Whether user is currently interacting with toasts
      */
     isInteracting: boolean;
+    /**
+     * Cached heights of rendered toasts for stacking calculations
+     */
+    heights: Array<{ toastId: ToastId; height: number }>;
 }
 
 /**
@@ -97,13 +82,13 @@ export interface useToastExposes {
      */
     onRegionMouseEnter: () => void;
     /**
-     * Handler for mouse leave on the toast region
-     */
-    onRegionMouseLeave: () => void;
-    /**
      * Handler for mouse move on the toast region
      */
     onRegionMouseMove: () => void;
+    /**
+     * Handler for mouse leave on the toast region
+     */
+    onRegionMouseLeave: () => void;
     /**
      * Handler for drag end on the toast region
      */
@@ -117,17 +102,21 @@ export interface useToastExposes {
      */
     onRegionPointerUp: () => void;
     /**
-     * Function to update the toasts state
+     * Handler for focus events within the toast region
      */
-    setToasts: React.Dispatch<React.SetStateAction<ToastType[]>>;
+    onRegionFocus: (event: React.FocusEvent<HTMLElement>) => void;
+    /**
+     * Handler for blur events leaving the toast region
+     */
+    onRegionBlur: (event: React.FocusEvent<HTMLElement>) => void;
+    /**
+     * Function to update the heights state
+     */
+    setHeights: React.Dispatch<React.SetStateAction<Array<{ height: number; toastId: ToastId }>>>;
     /**
      * Handler for managing focus when a toast is dismissed
      */
-    handleFocusElement: (toastElement: HTMLElement | null) => void;
-    /**
-     * Handler for storing focus when a toast receives focus
-     */
-    handleToastFocus: () => void;
+    handleFocusManagement: (toastElement: HTMLElement | null) => void;
 }
 
 /**

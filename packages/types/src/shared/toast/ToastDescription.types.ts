@@ -10,7 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { ToastPassThroughType } from './Toast.types';
+import { ToastInstance } from './Toast.types';
+import { ToastItemInstance } from './ToastItem.types';
 
 /**
  * Defines passthrough(pt) options type in ToastDescription component.
@@ -24,7 +25,7 @@ export interface ToastDescriptionPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ToastDescriptionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -40,7 +41,16 @@ export interface ToastDescriptionState {}
 /**
  * Defines the methods and properties exposed by ToastItem component.
  */
-export interface ToastDescriptionExposes {}
+export interface ToastDescriptionExposes {
+    /**
+     * The Toast component instance.
+     */
+    toast: ToastInstance | undefined | null;
+    /**
+     * The ToastItem component instance.
+     */
+    toastItem: ToastItemInstance | undefined | null;
+}
 
 /**
  * Instance of ToastItem component.

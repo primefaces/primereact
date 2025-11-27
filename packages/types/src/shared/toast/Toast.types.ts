@@ -31,6 +31,10 @@ export interface ToastPassThrough {
  * Defines valid properties in Toast component.
  */
 export interface ToastProps extends BaseComponentProps<ToastInstance, useToastProps, ToastPassThrough> {
+    /**
+     * Whether to show rich colors
+     * @default false
+     */
     richColors?: boolean;
 }
 
@@ -49,7 +53,16 @@ export interface ToastExposes extends useToastExposes {}
 /**
  * Defines the CSS class names used in the Toast component.
  */
-export const ToastClassNames = {} as const;
+export const ToastClassNames = {
+    region: 'p-toast-region',
+    item: 'p-toast',
+    icon: 'p-toast-icon',
+    title: 'p-toast-title',
+    description: 'p-toast-description',
+    action: 'p-toast-action',
+    close: 'p-toast-close',
+    progress: 'p-toast-progress'
+} as const;
 
 /**
  * Type representing the CSS class names used in the Toast component.

@@ -17,26 +17,31 @@ export const ToastRegion = withComponent({
         return { toast };
     },
     render(instance) {
-        const { props, toast } = instance;
+        const { props, toast, ptmi } = instance;
 
-        const rootProps = mergeProps({
-            role: 'region',
-            className: 'p-toast-region',
-            tabIndex: -1,
-            onMouseEnter: toast?.onRegionMouseEnter,
-            onMouseLeave: toast?.onRegionMouseLeave,
-            onMouseMove: toast?.onRegionMouseMove,
-            onDragEnd: toast?.onRegionDragEnd,
-            onPointerDown: toast?.onRegionPointerDown,
-            onPointerUp: toast?.onRegionPointerUp,
-            'data-position': toast?.props.position,
-            'data-expanded': toast?.state.isExpanded,
-            style: {
-                '--gap': `${toast?.props.gap}px`,
-                '--raise-factor': toast?.props.position?.includes('top') ? 1 : -1,
-                '--front-toast-height': `${toast?.toasts[0]?.height || 0}px`
-            } as React.CSSProperties
-        });
+        const rootProps = mergeProps(
+            {
+                role: 'region',
+                className: toast?.cx('region'),
+                tabIndex: 0,
+                onMouseEnter: toast?.onRegionMouseEnter,
+                onMouseLeave: toast?.onRegionMouseLeave,
+                onMouseMove: toast?.onRegionMouseMove,
+                onDragEnd: toast?.onRegionDragEnd,
+                onPointerDown: toast?.onRegionPointerDown,
+                onPointerUp: toast?.onRegionPointerUp,
+                onFocus: toast?.onRegionFocus,
+                onBlur: toast?.onRegionBlur,
+                'data-position': toast?.props.position,
+                'data-expanded': toast?.state.isExpanded,
+                style: {
+                    '--gap': `${toast?.props.gap}px`,
+                    '--front-toast-height': `${toast?.state.heights?.[0]?.height || 0}px`
+                } as React.CSSProperties
+            },
+            toast?.ptm('region'),
+            ptmi('root')
+        );
 
         return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }

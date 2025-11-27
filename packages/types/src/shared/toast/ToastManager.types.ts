@@ -1,50 +1,61 @@
-type ToastVariant = 'success' | 'danger' | 'warn' | 'info' | 'loading' | 'custom';
+import type * as React from 'react';
 
-type ToastId = string | number;
+export type ToastVariant = 'success' | 'danger' | 'warn' | 'info' | 'loading' | 'custom';
 
-type ToastType = {
+export type ToastId = string | number;
+
+export type ToastCustomRenderer = React.ReactElement | ((id: ToastId) => React.ReactElement);
+
+export type ToastType = {
     id?: ToastId;
-    title?: string;
-    description?: string;
-    action?: React.HTMLAttributes<HTMLButtonElement>;
+    title?: React.ReactNode | string;
+    description?: React.ReactNode | string;
+    action?: React.ButtonHTMLAttributes<HTMLButtonElement>;
     dismissible?: boolean;
     variant?: ToastVariant;
     removed?: boolean;
-    height?: number;
     icon?: React.ReactNode;
     jsx?: React.ReactElement;
     duration?: number;
     group?: string;
-    onDismiss?: () => void;
-    onTimeout?: () => void;
+    promise?: unknown;
+    onDismiss?: (toast: ToastType) => void;
+    onTimeout?: (toast: ToastType) => void;
 };
 
-type ToastEventType = 'add' | 'remove' | 'update' | 'clear' | 'delete' | 'promise' | 'custom';
-
-type ToastEvent =
-    | {
-          type: 'add' | 'remove' | 'update' | 'clear' | 'delete';
-          toast?: ToastType;
-          toastId?: ToastId;
-      }
-    | ToastPromiseEvent
-    | {
-          type: 'custom';
-          toast: ToastType;
-      };
-
-type ToastPromiseType<T = unknown> = {
+export type ToastPromiseType<T = unknown> = {
     loading: ToastType;
-    success?: ToastType | ((data: T) => ToastType);
-    error?: ToastType | ((error: unknown) => ToastType);
+    success?: ToastType | ((data: T) => ToastType | void);
+    error?: ToastType | ((error: unknown) => ToastType | void);
 };
 
-type ToastPromiseEvent<T = unknown> = {
-    type: 'promise';
-    promise: Promise<T>;
-    options: ToastPromiseType<T>;
+export interface ToastManager {
+    snapshot(): ToastType[];
+    subscribe(listener: () => void): () => void;
+    add(toast: ToastType): ToastId;
+    create(toast: ToastType): ToastId;
+    update(id: ToastId, updates: Partial<ToastType>): void;
+    dismiss(id?: ToastId): ToastId | undefined;
+    remove(id: ToastId): ToastId | undefined;
+    clear(): void;
+    get(id: ToastId): ToastType | undefined;
+    success(toast: ToastType): ToastId;
+    danger(toast: ToastType): ToastId;
+    warn(toast: ToastType): ToastId;
+    info(toast: ToastType): ToastId;
+    loading(toast: ToastType): ToastId;
+    custom(jsx: ToastCustomRenderer, options?: Partial<ToastType>): ToastId;
+    promise<T>(promise: Promise<T>, options: ToastPromiseType<T>): Promise<T>;
+}
+
+export type ToastFunction = ((toast: ToastType) => ToastId) & {
+    success(toast: ToastType): ToastId;
+    danger(toast: ToastType): ToastId;
+    warn(toast: ToastType): ToastId;
+    info(toast: ToastType): ToastId;
+    loading(toast: ToastType): ToastId;
+    dismiss(id?: ToastId): ToastId | undefined;
+    remove(id: ToastId): ToastId | undefined;
+    custom(jsx: ToastCustomRenderer, options?: Partial<ToastType>): ToastId;
+    promise<T>(promise: Promise<T>, options: ToastPromiseType<T>): Promise<T>;
 };
-
-type ToastListener = (event: ToastEvent) => void;
-
-export type { ToastEvent, ToastEventType, ToastId, ToastListener, ToastPromiseEvent, ToastPromiseType, ToastType, ToastVariant };
