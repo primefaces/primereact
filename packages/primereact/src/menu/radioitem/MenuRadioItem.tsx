@@ -22,7 +22,7 @@ export const MenuRadioItem = withComponent({
         }
 
         const radioGroup = radioGroupInstance?.context ?? null;
-        const checked = radioGroup?.value === props.value;
+        const checked = React.useMemo(() => radioGroup?.value === props.value, [radioGroup?.value, props.value]);
 
         const handleValueChange = () => {
             if (props.value !== undefined && radioGroup) {
