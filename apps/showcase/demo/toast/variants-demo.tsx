@@ -1,8 +1,9 @@
 'use client';
 
+import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
-import { toast, Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
 
 function VariantsToast() {
     return (
@@ -11,7 +12,7 @@ function VariantsToast() {
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
                         toast?.toasts.map((toast: ToastType) => (
-                            <Toast.Item key={toast.id} data={toast}>
+                            <Toast.Item key={toast.id} toast={toast}>
                                 <div className="flex items-start gap-2">
                                     <Toast.Icon />
                                     <div className="flex-1">
@@ -97,7 +98,7 @@ function VariantsDemo() {
                 </div>
                 <div className="flex items-center">
                     <button
-                        onClick={() => toast.remove(id)}
+                        onClick={() => toast.dismiss(id)}
                         className="font-medium px-3 py-1.5 rounded-sm bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/75 dark:hover:bg-indigo-950 text-indigo-500 dark:text-indigo-400"
                     >
                         Action

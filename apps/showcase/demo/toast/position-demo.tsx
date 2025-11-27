@@ -1,8 +1,9 @@
 'use client';
 
+import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
-import { toast, Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
 
 function PositionToast({
     position = 'bottom-right'
@@ -15,7 +16,7 @@ function PositionToast({
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
                         toast?.toasts.map((toast: ToastType) => (
-                            <Toast.Item key={toast.id} data={toast}>
+                            <Toast.Item key={toast.id} toast={toast}>
                                 <div className="flex items-start gap-2">
                                     <Toast.Icon />
                                     <div className="flex-1">

@@ -1,11 +1,12 @@
 'use client';
 
+import { toast } from '@primereact/headless/toast';
 import { FileUploadInstance } from '@primereact/types/shared/fileupload';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Message } from 'primereact/message';
-import { Toast, toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
 
 const onUpload = () => {
     toast({

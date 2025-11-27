@@ -1,8 +1,9 @@
 'use client';
 
+import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
-import { toast, Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
 
 function RichColorsToast() {
     return (
@@ -11,7 +12,7 @@ function RichColorsToast() {
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
                         toast?.toasts.map((toastItem: ToastType) => (
-                            <Toast.Item key={toastItem.id} data={toastItem}>
+                            <Toast.Item key={toastItem.id} toast={toastItem}>
                                 <div className="flex items-start gap-2">
                                     <Toast.Icon />
                                     <div className="flex-1">

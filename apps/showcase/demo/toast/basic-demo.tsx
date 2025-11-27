@@ -1,8 +1,9 @@
 'use client';
 
+import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from 'primereact/button';
-import { toast, Toast } from 'primereact/toast';
+import { Toast } from 'primereact/toast';
 
 function BasicToast() {
     return (
@@ -11,7 +12,7 @@ function BasicToast() {
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
                         toast?.toasts.map((toast: ToastType) => (
-                            <Toast.Item key={toast.id} data={toast}>
+                            <Toast.Item key={toast.id} toast={toast}>
                                 <div className="flex items-start gap-2">
                                     <Toast.Icon />
                                     <div className="flex-1">
@@ -43,12 +44,12 @@ function BasicDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
             <Button
-                onClick={() =>
+                onClick={() => {
                     toast({
                         title: 'Changes saved',
                         description: 'Are you sure you would like to remove this user? This action cannot be undone.'
-                    })
-                }
+                    });
+                }}
                 variant="outlined"
             >
                 Create toast
