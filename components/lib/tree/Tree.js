@@ -343,13 +343,13 @@ export const Tree = React.memo(
                         filteredNodes.current.push(copyNode);
                     }
                 }
+                
+                onToggle({
+                    originalEvent: null,
+                    value: currentFilterExpandedKeys.current,
+                    navigateFocusToChild: false
+                });
             }
-
-            onToggle({
-                originalEvent: null,
-                value: currentFilterExpandedKeys.current,
-                navigateFocusToChild: false
-            });
 
             currentFilterExpandedKeys.current = {};
             forceRender((x) => !x);
