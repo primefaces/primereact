@@ -20,8 +20,14 @@
             }
         ],
         "paths": {
-            "@/*": ["./*"],
-            "contentlayer/generated": ["./.contentlayer/generated"]
+            "@primeuix/styled/*": ["../../../../packages/styled/dist/*"],
+            "@primeuix/styles/*": ["../../../../packages/styles/dist/*"],
+            "@primeuix/themes/*": ["../../../../packages/themes/dist/*"],
+            "@primeuix/utils/*": ["../../../../packages/utils/dist/*"],
+            "@primeuix/motion/*": ["../../../../packages/motion/dist/*"],
+            "contentlayer/generated": ["./.contentlayer/generated"],
+
+            "@/*": ["./*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".contentlayer/generated", "contentlayer.config.js", "utils/rehype-source-transform.js"],
