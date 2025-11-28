@@ -1,7 +1,6 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { nextFrame } from '@primeuix/motion';
-import { mergeProps } from '@primeuix/utils';
+import { mergeProps, nextFrame } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { MotionProvider } from './Motion.context';
