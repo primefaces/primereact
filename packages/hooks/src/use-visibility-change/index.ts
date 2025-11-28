@@ -14,12 +14,14 @@ import * as React from 'react';
  * };
  */
 export function useVisibilityChange() {
-    const [isVisible, setIsVisible] = React.useState(!document.hidden);
+    const [isVisible, setIsVisible] = React.useState(true);
 
     React.useEffect(() => {
         const handleVisibilityChange = () => {
             setIsVisible(!document.hidden);
         };
+
+        handleVisibilityChange();
 
         document.addEventListener('visibilitychange', handleVisibilityChange);
 
