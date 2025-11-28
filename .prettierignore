@@ -17,3 +17,4 @@ yarn.lock
 .npmrc
 .editorconfig
 .gitattributes
+apps/showcase/assets/apidoc/index.json

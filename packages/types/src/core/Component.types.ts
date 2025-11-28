@@ -93,8 +93,10 @@ export type GlobalComponentPTProps<PassThrough = Record<string, unknown>> = {
         : never;
 };
 
-export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown>
-    extends Omit<GlobalComponentProps<I, unknown, T, R, D>, 'pt' | 'ptOptions' | 'dt' | 'styles'> {
+export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> extends Omit<
+    GlobalComponentProps<I, unknown, T, R, D>,
+    'pt' | 'ptOptions' | 'dt' | 'styles'
+> {
     /**
      * The instance of the component.
      * This is a reference to the component instance.
