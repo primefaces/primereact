@@ -67,7 +67,7 @@ export const useColorPicker = withHeadless({
         const handleAreaPointerDown = (event: PointerEvent) => {
             const element = event.currentTarget as HTMLElement;
 
-            if (!element) return;
+            if (!element || event.button !== 0) return;
 
             element.setPointerCapture(event.pointerId);
             setIsAreaDragging(true);

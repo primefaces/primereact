@@ -8,6 +8,8 @@ const theme = `
         aspect-ratio: 4 / 3;
         border-radius: 0.5rem;
         background: var(--area-background);
+        touch-action: none;
+        forced-color-adjust: none;
     }
 
     .p-color-picker-area-thumb{
@@ -16,11 +18,8 @@ const theme = `
         position: absolute;
         z-index: 1;
         border-radius: 999px;
-        pointer-events: none;
-        user-select: none;
         touch-action: none;
         forced-color-adjust: none;
-        -webkit-user-select: none;
         border: 3px solid rgb(255,255,255);
         cursor: pointer;
         transform: translate(-50%, -50%);
@@ -40,20 +39,14 @@ const theme = `
         user-select: none;
         touch-action: none;
         forced-color-adjust: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-drag: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-drag: none;
         box-shadow: inset 0 0 0 1px light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.15));
     }
 
     .p-color-picker-slider{
         position:relative;
         border-radius: 0.25rem;
+        forced-color-adjust: none;
+        touch-action: none;
     }
 
     .p-color-picker-slider-horizontal{
@@ -75,8 +68,6 @@ const theme = `
         position: absolute;
         z-index: 1;
         border-radius: 999px;
-        pointer-events: none;
-        user-select: none;
         touch-action: none;
         transform: translate(-50%, -50%);
         top: var(--thumb-position-top);
@@ -95,12 +86,6 @@ const theme = `
         pointer-events: none;
         user-select: none;
         touch-action: none;
-        forced-color-adjust: none;
-        -webkit-user-select: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-drag: none;
         box-shadow: inset 0 0 0 1px light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.15));
         background: var(--slider-background);
     }
@@ -116,11 +101,6 @@ const theme = `
         pointer-events: none;
         user-select: none;
         touch-action: none;
-        forced-color-adjust: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-drag: none;
     }
 
     .p-color-picker-swatch{
@@ -141,8 +121,6 @@ const theme = `
         user-select: none;
         touch-action: none;
         forced-color-adjust: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
     }
 `;
 
