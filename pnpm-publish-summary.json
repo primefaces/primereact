@@ -2,31 +2,31 @@
     "publishedPackages": [
         {
             "name": "@primereact/hooks",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         },
         {
             "name": "@primereact/styles",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         },
         {
             "name": "@primereact/types",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         },
         {
             "name": "@primereact/core",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         },
         {
             "name": "@primereact/headless",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         },
         {
             "name": "@primereact/icons",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         },
         {
             "name": "primereact",
-            "version": "11.0.0-alpha.7"
+            "version": "11.0.0-alpha.8"
         }
     ]
 }
