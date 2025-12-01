@@ -2,7 +2,7 @@
 import { useContextMenu } from '@primereact/headless/contextmenu';
 import { styles } from '@primereact/styles/contextmenu';
 import { ContextMenuInstance, ContextMenuProps } from '@primereact/types/shared/contextmenu';
-import { mergeProps, omit } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { Menu, useMenuContext } from 'primereact/menu';
 import * as React from 'react';
@@ -41,7 +41,7 @@ export const ContextMenu = withComponent({
                 className: cx('root')
             },
             {
-                ...(omit(inProps, ...Object.keys(defaultProps)) as Record<PropertyKey, unknown>)
+                ...inProps
             },
             ptmi('root')
         );
