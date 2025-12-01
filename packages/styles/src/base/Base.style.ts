@@ -20,6 +20,27 @@ const css = /*css*/ `
     overflow: hidden;
     padding-right: dt('scrollbar.width');
 }
+
+/* For PrimeReact Motion */
+.p-toggleable-content-enter-from,
+.p-toggleable-content-leave-to {
+    max-height: 0;
+}
+
+.p-toggleable-content-enter-to,
+.p-toggleable-content-leave-from {
+    max-height: var(--pui-motion-height, 1000px);
+}
+
+.p-toggleable-content-leave-active {
+    overflow: hidden;
+    transition: max-height 200ms ease-out;
+}
+
+.p-toggleable-content-enter-active {
+    overflow: hidden;
+    transition: max-height 200ms ease-out;
+}
 `;
 
 export const styles = {

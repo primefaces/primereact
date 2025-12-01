@@ -65,7 +65,8 @@
                         },
                         {
                             "name": "ColorPicker",
-                            "to": "/docs/components/colorpicker"
+                            "to": "/docs/components/colorpicker",
+                            "badge": "New"
                         },
                         {
                             "name": "InputText",
@@ -160,7 +161,8 @@
                         },
                         {
                             "name": "OrgChart",
-                            "to": "/docs/components/orgchart"
+                            "to": "/docs/components/orgchart",
+                            "badge": "New"
                         },
                         {
                             "name": "Paginator",
@@ -278,13 +280,11 @@
                         },
                         {
                             "name": "Carousel",
-                            "to": "/docs/components/carousel",
-                            "badge": "New"
+                            "to": "/docs/components/carousel"
                         },
                         {
                             "name": "Gallery",
-                            "to": "/docs/components/gallery",
-                            "badge": "New"
+                            "to": "/docs/components/gallery"
                         }
                     ]
                 },

@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/tooltip/)
  *
- * @module tooltip
+ * @module tooltipgroup
  * @group components
  *
  */
