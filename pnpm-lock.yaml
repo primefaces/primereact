@@ -349,6 +349,9 @@ importers:
 
   packages/types:
     dependencies:
+      '@primeuix/motion':
+        specifier: 'catalog:'
+        version: 0.0.10
       '@primeuix/styled':
         specifier: 'catalog:'
         version: 0.7.4

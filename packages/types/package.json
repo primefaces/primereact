@@ -1,6 +1,6 @@
 {
     "name": "@primereact/types",
-    "version": "11.0.0-alpha.7",
+    "version": "11.0.0-alpha.8",
     "author": "PrimeTek Informatics",
     "description": "",
     "homepage": "https://primereact.org/",
@@ -44,7 +44,8 @@
         "type:check": "tsc --noEmit",
         "dev:link": "pnpm link --global && npm link"
     },
-    "dependencies": {
-        "@primeuix/styled": "catalog:"
+    "peerDependencies": {
+        "@primeuix/styled": "catalog:",
+        "@primeuix/motion": "catalog:"
     }
 }

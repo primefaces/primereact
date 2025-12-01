@@ -1,5 +1,17 @@
 # Changelog
 
+## [11.0.0-alpha.8](https://github.com/primefaces/primereact/tree/11.0.0-alpha.8) (2025-12-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.7...11.0.0-alpha.8)
+
+**Implemented New Features and Enhancements:**
+
+- New Component: Listbox [\#8347](https://github.com/primefaces/primereact/issues/8347)
+- New Component: DatePicker [\#8363](https://github.com/primefaces/primereact/issues/8363)
+- New Component: Password [\#8380](https://github.com/primefaces/primereact/issues/8380)
+- New Component: ColorPicker [\#8373](https://github.com/primefaces/primereact/issues/8373)
+- New Component: OrgChart [\#8400](https://github.com/primefaces/primereact/issues/8400)
+
 ## [11.0.0-alpha.7](https://github.com/primefaces/primereact/tree/11.0.0-alpha.7) (2025-10-16)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.6...11.0.0-alpha.7)

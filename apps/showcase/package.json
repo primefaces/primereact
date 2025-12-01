@@ -1,6 +1,6 @@
 {
     "name": "showcase",
-    "version": "11.0.0-alpha.7",
+    "version": "11.0.0-alpha.8",
     "scripts": {
         "dev": "npm run dev:init && next dev --turbopack",
         "dev2": "npm run dev:init && cross-env DEV_ENV=hot next dev --port 3001",
