@@ -104,14 +104,6 @@ export function DocSectionNav({ docs = [] }) {
             <ul ref={navRef} className="doc-section-nav">
                 {docs.map((item) => createItem(item))}
             </ul>
-
-            <div className="mt-5 p-3 border-round-lg border-1 surface-border bg-surface-0 w-full">
-                <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/store.images/discount/nov25/showcase/primestore-novembersale-2025-sm.jpg" className="w-full border-round-md" alt="November Sale 2025" />
-                <div className="text-center text-sm mt-3 line-height-3">Limited coupons for PrimeStore's biggest sale. Claim yours before they're gone!</div>
-                <span className="flex justify-content-center">
-                    <a className="p-button p-button-rounded p-button-sm mt-3 inline-flex" href="https://primeui.store" target="_blank" rel="noopener"> Claim Coupon </a>
-                </span>
-            </div>
         </div>
     );
 }
