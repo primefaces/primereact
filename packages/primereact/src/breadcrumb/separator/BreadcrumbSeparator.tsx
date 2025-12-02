@@ -26,8 +26,15 @@ export const BreadcrumbSeparator = withComponent({
             ptmi('root')
         );
 
+        const iconProps = mergeProps(
+            {
+                className: breadcrumb?.cx('icon')
+            },
+            breadcrumb?.ptm('icon')
+        );
+
         const createIconElement = () => {
-            return <ChevronRightIcon pt={breadcrumb?.ptm('icon')} />;
+            return <ChevronRightIcon {...iconProps} />;
         };
 
         return (
