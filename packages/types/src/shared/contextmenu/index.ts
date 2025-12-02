@@ -1,4 +1,5 @@
 export * from './ContextMenu.types';
+export * from './ContextMenuCheckboxGroup.types';
 export * from './ContextMenuCheckboxIcon.types';
 export * from './ContextMenuCheckboxItem.types';
 export * from './ContextMenuIcon.types';

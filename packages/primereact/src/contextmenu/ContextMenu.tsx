@@ -6,6 +6,7 @@ import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { Menu, useMenuContext } from 'primereact/menu';
 import * as React from 'react';
+import { ContextMenuCheckboxGroup } from './checkboxgroup';
 import { ContextMenuCheckboxIcon } from './checkboxicon';
 import { ContextMenuCheckboxItem } from './checkboxitem';
 import { ContextMenuProvider } from './ContextMenu.context';
@@ -57,15 +58,16 @@ export const ContextMenu = withComponent({
     components: {
         List: ContextMenuList,
         Item: ContextMenuItem,
-        CheckboxItem: ContextMenuCheckboxItem,
-        RadioItem: ContextMenuRadioItem,
-        RadioGroup: ContextMenuRadioGroup,
         Label: ContextMenuLabel,
         Trigger: ContextMenuTrigger,
         Portal: ContextMenuPortal,
         Sub: ContextMenuSub,
         Separator: ContextMenuSeparator,
         Icon: ContextMenuIcon,
+        CheckboxGroup: ContextMenuCheckboxGroup,
+        CheckboxItem: ContextMenuCheckboxItem,
+        RadioGroup: ContextMenuRadioGroup,
+        RadioItem: ContextMenuRadioItem,
         RadioIcon: ContextMenuRadioIcon,
         CheckboxIcon: ContextMenuCheckboxIcon
     }
