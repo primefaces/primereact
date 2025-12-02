@@ -32,7 +32,7 @@ export const BreadcrumbSeparator = withComponent({
 
         return (
             <Component instance={instance} attrs={rootProps}>
-                {props.children ? resolve(props.children) : createIconElement()}
+                {props.children ? resolve(props.children, instance) : createIconElement()}
             </Component>
         );
     }
