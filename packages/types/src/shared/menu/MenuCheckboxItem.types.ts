@@ -11,6 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { MenuInstance } from './Menu.types';
+import type { MenuCheckboxGroupContextInterface } from './MenuCheckboxGroup.types';
 import type { MenuLevelContextInterface } from './MenuLevel.types';
 import type { MenuPortalInstance } from './MenuPortal.types';
 import type { MenuSubInstance } from './MenuSub.types';
@@ -83,6 +84,10 @@ export interface MenuCheckboxItemExposes {
      * Instance of the MenuPortal component.
      */
     portal: MenuPortalInstance | undefined | null;
+    /**
+     * Context value of the MenuCheckboxGroup.
+     */
+    checkboxGroup: MenuCheckboxGroupContextInterface | null;
     /**
      * Context value of the MenuLevel.
      */

@@ -3,6 +3,7 @@ import { Component } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
+import { useMenuCheckboxGroupContext } from '../checkboxgroup/MenuCheckboxGroup.context';
 import { MenuItemHandlers } from '../MenuItemHandlers';
 import { MenuItemSetup } from '../MenuItemSetup';
 import { MenuCheckboxItemProvider } from './MenuCheckboxItem.context';
@@ -11,23 +12,38 @@ import { defaultCheckboxItemProps } from './MenuCheckboxItem.props';
 export const MenuCheckboxItem = withComponent({
     name: 'MenuCheckboxItem',
     defaultProps: defaultCheckboxItemProps,
-    setup({ props }) {
-        const itemSetup = MenuItemSetup(props);
+    setup(instance) {
+        const { props, inProps } = instance;
+        const checkboxGroupInstance = useMenuCheckboxGroupContext();
 
-        const [checkedState, setCheckedState] = React.useState(props.checked !== undefined ? props.checked : (props.defaultChecked ?? false));
+        const checkboxGroup = checkboxGroupInstance?.context ?? null;
+
+        const isCheckedInGroup = checkboxGroup ? checkboxGroup.value?.includes(props.value) : false;
+        const [checkedState, setCheckedState] = React.useState(checkboxGroup ? isCheckedInGroup : props.checked !== undefined ? props.checked : (props.defaultChecked ?? false));
+
+        const itemSetup = MenuItemSetup(inProps ?? {});
 
         React.useEffect(() => {
-            if (props.checked !== undefined) {
+            if (checkboxGroup) {
+                setCheckedState(checkboxGroup.value?.includes(props.value) ?? false);
+            } else if (props.checked !== undefined) {
                 setCheckedState(props.checked);
             }
-        }, [props.checked]);
+        }, [props.checked, checkboxGroup?.value, props.value, checkboxGroup]);
 
         const handleCheckedChange = (checked: boolean) => {
-            setCheckedState(checked);
-            props.onCheckedChange?.({ value: checked });
+            if (checkboxGroup) {
+                const currentValue = checkboxGroup.value ?? [];
+                const newValue = checked ? [...currentValue, props.value] : currentValue.filter((v) => v !== props.value);
+
+                checkboxGroup.onValueChange?.(newValue);
+            } else {
+                setCheckedState(checked);
+                props.onCheckedChange?.({ value: checked });
+            }
         };
 
-        return { ...itemSetup, checked: checkedState, handleCheckedChange };
+        return { ...itemSetup, checkboxGroup, checked: checkedState ?? false, handleCheckedChange };
     },
     render(instance) {
         const { props, ptmi, menu, submenu, portal, itemRef, itemId, focused, ariaLevel, ariaPosInSet, ariaSetSize, checked, handleCheckedChange } = instance;

@@ -1,4 +1,5 @@
 export * from './Menu.types';
+export * from './MenuCheckboxGroup.types';
 export * from './MenuCheckboxIcon.types';
 export * from './MenuCheckboxItem.types';
 export * from './MenuIcon.types';

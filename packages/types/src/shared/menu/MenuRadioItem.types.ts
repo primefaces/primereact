@@ -71,6 +71,10 @@ export interface MenuRadioItemExposes {
      */
     level: MenuLevelContextInterface | undefined | null;
     /**
+     * Context value of the MenuRadioGroup.
+     */
+    radioGroup: MenuRadioGroupContextInterface | null;
+    /**
      * Reference to the item element.
      */
     itemRef: React.RefObject<HTMLElement | null> | null;
@@ -94,10 +98,6 @@ export interface MenuRadioItemExposes {
      * Aria set size of the item.
      */
     ariaSetSize: number | undefined;
-    /**
-     * Context value of the MenuRadioGroup.
-     */
-    radioGroup: MenuRadioGroupContextInterface | null;
     /**
      * Whether the radio item is checked or not.
      */
