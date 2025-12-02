@@ -6,7 +6,7 @@ import { Breadcrumb } from 'primereact/breadcrumb';
 
 export default function RouteDemo() {
     return (
-        <div className="card">
+        <div className="card flex justify-center">
             <Breadcrumb>
                 <Breadcrumb.List>
                     <Breadcrumb.Item>

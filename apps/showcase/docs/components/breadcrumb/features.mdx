@@ -11,7 +11,12 @@ import { Breadcrumb } from 'primereact/breadcrumb';
 ```
 
 ```tsx
-<Breadcrumb>Breadcrumb</Breadcrumb>
+<Breadcrumb>
+    <Breadcrumb.List>
+        <Breadcrumb.Item />
+        <Breadcrumb.Separator />
+    </Breadcrumb.List>
+</Breadcrumb>
 ```
 
 ## Examples
@@ -31,3 +36,15 @@ A breadcrumb can be used with routing libraries to navigate between pages.
 A breadcrumb can be controlled by managing the current page state.
 
 <DocDemoViewer name="breadcrumb:controlled-demo" />
+
+### Custom Separator
+
+A breadcrumb allows customization of the separator between items.
+
+<DocDemoViewer name="breadcrumb:custom-separator-demo" />
+
+### Custom Item
+
+A breadcrumb allows customization of the items.
+
+<DocDemoViewer name="breadcrumb:custom-item-demo" />
