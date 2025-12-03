@@ -50,15 +50,6 @@ export const MenuList = withComponent({
     render(instance) {
         const { props, ptmi, menu, submenu, listId, parentLevel, triggerIndex } = instance;
 
-        const computedProps = submenu
-            ? mergeProps({
-                  style: !submenu.state.opened ? { display: 'none' } : undefined
-              })
-            : mergeProps({
-                  onFocus: menu?.onListFocus,
-                  onBlur: menu?.onListBlur
-              });
-
         const getAriaActiveDescendant = () => {
             const focusedOptionId = menu?.state.focusedOptionId;
 
@@ -71,6 +62,15 @@ export const MenuList = withComponent({
 
             return focusedOptionId || undefined;
         };
+
+        const computedProps = submenu
+            ? mergeProps({
+                  style: !submenu.state.opened ? { display: 'none' } : undefined
+              })
+            : mergeProps({
+                  onFocus: menu?.onListFocus,
+                  onBlur: menu?.onListBlur
+              });
 
         const rootProps = mergeProps(
             {
@@ -96,15 +96,13 @@ export const MenuList = withComponent({
             menu?.ptm('root')
         );
 
-        const childrenWithLevel = submenu ? (
-            <MenuLevelProvider parentPath={parentLevel?.path as number[]} parentIndex={triggerIndex}>
-                {resolve(props.children, instance)}
-            </MenuLevelProvider>
-        ) : (
-            props.children
-        );
-
         if (submenu) {
+            const childrenWithLevel = (
+                <MenuLevelProvider parentPath={parentLevel?.path as number[]} parentIndex={triggerIndex}>
+                    {resolve(props.children, instance)}
+                </MenuLevelProvider>
+            );
+
             const submenuList = <Component ref={submenu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />;
 
             if (menu?.props.composite) {
@@ -116,7 +114,7 @@ export const MenuList = withComponent({
 
         return (
             <div {...menuProps}>
-                <Component ref={menu?.listRef} instance={instance} attrs={rootProps} children={childrenWithLevel} />
+                <Component ref={menu?.listRef} instance={instance} attrs={rootProps} children={props.children} />
             </div>
         );
     }
