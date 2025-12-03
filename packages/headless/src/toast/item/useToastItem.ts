@@ -282,6 +282,14 @@ export const useToastItem = withHeadless({
             toast.onDismiss?.(toast);
         };
 
+        React.useEffect(() => {
+            return () => {
+                if (!mounted || !toast.id) return;
+
+                ToastStore.remove(toast.id);
+            };
+        }, [mounted, toast.id]);
+
         const state = {
             mounted,
             swiping,
