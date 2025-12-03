@@ -52,7 +52,7 @@
 }
 
 .p-toast {
-    --offset-y: calc(var(--swipe-amount-y) + (var(--toast-offset)+var(--toast-index) * var(--gap)) * var(--raise-factor));
+    --offset-y: calc(var(--swipe-amount-y) + (var(--toast-offset) + var(--toast-index) * var(--gap)) * var(--raise-factor));
     --offset-x: var(--swipe-amount-x);
     width: 100%;
     padding: 1.125rem;
