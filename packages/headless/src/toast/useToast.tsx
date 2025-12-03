@@ -9,7 +9,7 @@ export const useToast = withHeadless({
     defaultProps,
     setup: ({ props }) => {
         const toasts = React.useSyncExternalStore(
-            (listener) => ToastStore.subscribe(listener),
+            ToastStore.subscribe,
             () => ToastStore.snapshot(),
             () => ToastStore.snapshot()
         );
@@ -114,6 +114,12 @@ export const useToast = withHeadless({
                 setIsExpanded(false);
             }
         }, [filteredToasts]);
+
+        React.useEffect(() => {
+            return () => {
+                ToastStore.clear(props.group);
+            };
+        }, []);
 
         return {
             state,

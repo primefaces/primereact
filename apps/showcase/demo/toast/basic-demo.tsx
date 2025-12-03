@@ -7,7 +7,7 @@ import { Toast } from 'primereact/toast';
 
 function BasicToast() {
     return (
-        <Toast>
+        <Toast group="basic">
             <Toast.Portal>
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
@@ -47,7 +47,8 @@ function BasicDemo() {
                 onClick={() => {
                     toast({
                         title: 'Changes saved',
-                        description: 'Are you sure you would like to remove this user? This action cannot be undone.'
+                        description: 'Are you sure you would like to remove this user? This action cannot be undone.',
+                        group: 'basic'
                     });
                 }}
                 variant="outlined"

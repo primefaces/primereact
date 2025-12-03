@@ -8,11 +8,10 @@ const generateId = (): string => `toast-${++toastCounter}-${Date.now()}`;
 
 class ToastManager {
     private toasts: ToastType[];
-    private listeners: Set<() => void>;
+    private listeners: Set<() => void> = new Set();
 
     constructor() {
         this.toasts = [];
-        this.listeners = new Set();
     }
 
     private emit() {
@@ -21,11 +20,13 @@ class ToastManager {
 
     snapshot = (): ToastType[] => this.toasts;
 
-    subscribe(listener: () => void): () => void {
+    subscribe = (listener: () => void): (() => void) => {
         this.listeners.add(listener);
 
-        return () => this.listeners.delete(listener);
-    }
+        return () => {
+            this.listeners.delete(listener);
+        };
+    };
 
     private commit(action: ToastStateAction) {
         const nextState = typeof action === 'function' ? (action as (prev: ToastType[]) => ToastType[])(this.snapshot()) : [...action];
@@ -101,8 +102,14 @@ class ToastManager {
         return id;
     };
 
-    clear = () => {
+    clear = (group?: string) => {
         if (!this.toasts.length) {
+            return;
+        }
+
+        if (group) {
+            this.commit((prev) => prev.filter((toast) => toast.group !== group));
+
             return;
         }
 
@@ -202,5 +209,6 @@ export const toast = Object.assign(baseToast, {
     dismiss: ToastStore.dismiss,
     custom: ToastStore.custom,
     remove: ToastStore.remove,
+    clear: ToastStore.clear,
     promise: ToastStore.promise
 });
