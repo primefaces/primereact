@@ -82,7 +82,7 @@ export const Calendar = React.memo(
                         if (!isOverlayClicked.current && !isNavIconClicked(event.target)) {
                             hide('outside');
                         }
-                    } else if (context.hideOverlaysOnDocumentScrolling) {
+                    } else if ((context && context.hideOverlaysOnDocumentScrolling) || PrimeReact.hideOverlaysOnDocumentScrolling) {
                         hide();
                     } else if (!DomHandler.isDocument(event.target)) {
                         alignOverlay();
