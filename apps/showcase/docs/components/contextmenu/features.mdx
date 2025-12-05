@@ -1,0 +1,82 @@
+---
+title: ContextMenu
+description: ContextMenu uses Menu component and displays an overlay menu to display actions related to a trigger.
+component: contextmenu
+---
+
+## Usage
+
+```tsx
+import { ContextMenu } from 'primereact/contextmenu';
+```
+
+```tsx
+<ContextMenu>
+    <ContextMenu.Trigger />
+    <ContextMenu.Portal>
+        <ContextMenu.List>
+            <ContextMenu.Label />
+            <ContextMenu.Item />
+            <ContextMenu.Separator />
+            <ContextMenu.CheckboxItem>
+                <ContextMenu.CheckboxIcon />
+            </ContextMenu.CheckboxItem>
+            <ContextMenu.RadioGroup>
+                <ContextMenu.RadioItem>
+                    <ContextMenu.RadioIcon />
+                </ContextMenu.RadioItem>
+                <ContextMenu.RadioItem>
+                    <ContextMenu.RadioIcon />
+                </ContextMenu.RadioItem>
+            </ContextMenu.RadioGroup>
+        </ContextMenu.List>
+        <ContextMenu.Separator />
+        <ContextMenu.Sub>
+            <ContextMenu.Trigger>
+                <ContextMenu.Icon />
+            </ContextMenu.Trigger>
+            <ContextMenu.List>
+                <ContextMenu.Item />
+                <ContextMenu.Separator />
+                <ContextMenu.Item />
+            </ContextMenu.List>
+        </ContextMenu.Sub>
+    </ContextMenu.Portal>
+</ContextMenu>
+```
+
+## Examples
+
+### Basic
+
+The main `ContextMenu` component groups menu items with `ContextMenu.List`, adds individual menu elements with `ContextMenu.Item`, uses separators with `ContextMenu.Separator`, and creates submenus with `ContextMenu.Sub`. Submenus are triggered by `ContextMenu.Trigger` and can have their own `ContextMenu.List` structure.
+
+<DocDemoViewer name="contextmenu:basic-demo" />
+
+### Radio and Checkbox
+
+The `ContextMenu` component supports checkbox and radio items through `ContextMenu.CheckboxItem`, `ContextMenu.RadioGroup` and `ContextMenu.RadioItem`. These items include their respective icons, `ContextMenu.CheckboxIcon` and `ContextMenu.RadioIcon`, to visually indicate their state.
+
+<DocDemoViewer name="contextmenu:radio-checkbox-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+ContextMenu component uses the `menu` role and the value to describe the menu can either be provided with `aria-labelledby` or `aria-label` props. Each list item has a `menuitem` role with `aria-label` referring to the
+label of the item and `aria-disabled` defined if the item is disabled. The component implicitly manages the `aria-expanded`, `aria-haspopup` and `aria-controls` attributes of the target element to define the relation between the target and the popup.
+
+### Keyboard Support
+
+| Key              | Function                                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tab`            | Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.     |
+| `shift + tab`    | Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence. |
+| `enter`          | Activates the focused menuitem. If menu is in overlay mode, popup gets closes and focus moves to target.                                                                 |
+| `space`          | Activates the focused menuitem. If menu is in overlay mode, popup gets closes and focus moves to target.                                                                 |
+| `escape`         | If menu is in overlay mode, popup gets closes and focus moves to target.                                                                                                 |
+| `down arrow`     | Moves focus to the next menuitem.                                                                                                                                        |
+| `up arrow`       | Moves focus to the previous menuitem.                                                                                                                                    |
+| `alt + up arrow` | If menu is in overlay mode, popup gets closes and focus moves to the target.                                                                                             |
+| `home`           | Moves focus to the first menuitem.                                                                                                                                       |
+| `end`            | Moves focus to the last menuitem.                                                                                                                                        |

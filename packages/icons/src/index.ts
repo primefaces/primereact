@@ -60,6 +60,9 @@ export * from '@primereact/icons/chevronright';
 // ChevronUpIcon
 export * from '@primereact/icons/chevronup';
 
+// DotIcon
+export * from '@primereact/icons/dot';
+
 // ExclamationTriangleIcon
 export * from '@primereact/icons/exclamationtriangle';
 

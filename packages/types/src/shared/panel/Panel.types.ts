@@ -115,9 +115,6 @@ export const PanelClassNames = {
      * Class name of the content element
      */
     content: 'p-panel-content'
-    /**
-     * Class name of the footer element
-     */
 } as const;
 
 /**

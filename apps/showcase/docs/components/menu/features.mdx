@@ -1,0 +1,115 @@
+---
+title: Menu
+description: Menu is a versatile component that provides various features such as inline and portal rendering, composite structures, app-style layouts, menubars, sidebars, and router integration.
+component: menu
+---
+
+## Usage
+
+```tsx
+import { Menu } from 'primereact/menu';
+```
+
+```tsx
+<Menu>
+    <Menu.List>
+        <Menu.Label />
+        <Menu.Item />
+        <Menu.Separator />
+        <Menu.CheckboxItem>
+            <Menu.CheckboxIcon />
+        </Menu.CheckboxItem>
+        <Menu.RadioGroup>
+            <Menu.RadioItem>
+                <Menu.RadioIcon />
+            </Menu.RadioItem>
+            <Menu.RadioItem>
+                <Menu.RadioIcon />
+            </Menu.RadioItem>
+        </Menu.RadioGroup>
+    </Menu.List>
+    <Menu.Separator />
+    <Menu.Sub>
+        <Menu.Trigger>
+            <Menu.Icon />
+        </Menu.Trigger>
+        <Menu.List>
+            <Menu.Item />
+            <Menu.Separator />
+            <Menu.Item />
+        </Menu.List>
+    </Menu.Sub>
+</Menu>
+```
+
+## Examples
+
+### Inline
+
+The main `Menu` component groups menu items with `Menu.List`, adds individual menu elements with `Menu.Item`, uses separators with `Menu.Separator`, and creates submenus with `Menu.Sub`. Submenus are triggered by `Menu.Trigger` and can have their own `Menu.List` structure.
+
+<DocDemoViewer name="menu:inline-demo" />
+
+### Composite
+
+The `composite` prop allows combining multiple Menu components to create complex nested menus. Each Menu can have its own structure, and submenus can be nested within parent menus.
+
+<DocDemoViewer name="menu:composite-demo" />
+
+### Portal
+
+`Menu.Portal` renders the menu content in a portal, positioning it outside the DOM hierarchy. This is useful for dropdown menus triggered by buttons or avatars, ensuring proper z-index stacking and avoiding overflow issues.
+
+<DocDemoViewer name="menu:portal-demo" />
+
+### Apps
+
+The Menu component can be customized to create app launchers or grid-based menus. By applying custom classes to `Menu.List` and `Menu.Item`, the menu layout can be transformed into a grid structure with custom styling for icons and labels.
+
+<DocDemoViewer name="menu:apps-demo" />
+
+### Menubar
+
+Multiple Menu components can be combined to create a horizontal menubar. By managing the open state and keyboard navigation between menus, a traditional desktop-style menubar can be implemented.
+
+<DocDemoViewer name="menu:menubar-demo" />
+
+### Sidebar
+
+<DocDemoViewer name="menu:sidebar-demo" />
+
+### Radio and Checkbox
+
+The `Menu` component supports checkbox and radio items through `Menu.CheckboxItem`, `Menu.RadioGroup` and `Menu.RadioItem`. These items include their respective icons, `Menu.CheckboxIcon` and `Menu.RadioIcon`, to visually indicate their state.
+
+<DocDemoViewer name="menu:radio-checkbox-demo" />
+
+### Router
+
+The Menu component can be integrated with routing libraries. `MenuItem` supports the `as` prop to render as Next.js Link components, the `onClick` prop for programmatic navigation, or standard anchor tags for external links.
+
+<DocDemoViewer name="menu:router-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Menu component uses the `menu` role and the value to describe the menu can either be provided with `aria-labelledby` or `aria-label` props. Each list item has a `menuitem` role with `aria-label` referring to the
+label of the item and `aria-disabled` defined if the item is disabled.
+
+In popup mode, the component implicitly manages the `aria-expanded`, `aria-haspopup` and `aria-controls` attributes of the target element to define the relation between the target and the popup.
+
+### Keyboard Support
+
+| Key              | Function                                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tab`            | Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.     |
+| `shift + tab`    | Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence. |
+| `enter`          | Activates the focused menuitem. If menu is in overlay mode, popup gets closes and focus moves to target.                                                                 |
+| `space`          | Activates the focused menuitem. If menu is in overlay mode, popup gets closes and focus moves to target.                                                                 |
+| `escape`         | If menu is in overlay mode, popup gets closes and focus moves to target.                                                                                                 |
+| `down arrow`     | Moves focus to the next menuitem.                                                                                                                                        |
+| `up arrow`       | Moves focus to the previous menuitem.                                                                                                                                    |
+| `alt + up arrow` | If menu is in overlay mode, popup gets closes and focus moves to the target.                                                                                             |
+| `home`           | Moves focus to the first menuitem.                                                                                                                                       |
+| `end`            | Moves focus to the last menuitem.                                                                                                                                        |
