@@ -781,6 +781,40 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
             'filePath': 'demo/inputotp/sizes-demo.tsx',
         },
     },
+    'inputtags': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/inputtags/basic-demo')),
+            'filePath': 'demo/inputtags/basic-demo.tsx',
+        },
+        'delimiter-demo': {
+            'component': React.lazy(() => import('demo/inputtags/delimiter-demo')),
+            'filePath': 'demo/inputtags/delimiter-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/inputtags/disabled-demo')),
+            'filePath': 'demo/inputtags/disabled-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/inputtags/filled-demo')),
+            'filePath': 'demo/inputtags/filled-demo.tsx',
+        },
+        'float-label-demo': {
+            'component': React.lazy(() => import('demo/inputtags/float-label-demo')),
+            'filePath': 'demo/inputtags/float-label-demo.tsx',
+        },
+        'inputtags-pt': {
+            'component': React.lazy(() => import('demo/inputtags/inputtags-pt')),
+            'filePath': 'demo/inputtags/inputtags-pt.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/inputtags/invalid-demo')),
+            'filePath': 'demo/inputtags/invalid-demo.tsx',
+        },
+        'item-demo': {
+            'component': React.lazy(() => import('demo/inputtags/item-demo')),
+            'filePath': 'demo/inputtags/item-demo.tsx',
+        },
+    },
     'inputtext': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/inputtext/basic-demo')),

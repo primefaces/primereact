@@ -24,7 +24,7 @@ export interface PasswordInputPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PasswordInputPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: PasswordInputPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
 }
 
 /**
