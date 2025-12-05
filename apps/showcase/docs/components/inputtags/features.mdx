@@ -1,0 +1,63 @@
+---
+title: InputTags
+description: InputTags groups a collection of contents in items.
+component: inputtags
+---
+
+## Usage
+
+```tsx
+import { InputTags } from 'primereact/inputtags';
+```
+
+```tsx
+<InputTags>
+    <InputTags.Control>
+        <InputTags.Item />
+        <InputTags.Input />
+    </InputTags.Control>
+    <InputTags.HiddenInput />
+</InputTags>
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="inputtags:basic-demo" />
+
+### Delimiter
+
+A new chip is added when `enter` key is pressed, `delimiter` property allows definining an additional key. Currently only valid value is `,` to create a new item when comma key is pressed.
+
+<DocDemoViewer name="inputtags:delimiter-demo" />
+
+### Item
+
+The `InputTags.Control` component accepts a render function that provides access to the component instance, allowing full customization of tags, input field, and additional UI elements. You can add custom icons, implement remove actions with `onItemRemoveClick` and `onRemoveAllItems`, or wrap components with additional functionality.
+
+<DocDemoViewer name="inputtags:item-demo" />
+
+### Filled
+
+Specify the `variant` property as `filled` to display the component with a higher visual emphasis than the default `outlined` style.
+
+<DocDemoViewer name="inputtags:filled-demo" />
+
+### Float Label
+
+A floating label is displayed when the input is focused or filled.
+
+<DocDemoViewer name="inputtags:float-label-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocDemoViewer name="inputtags:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused.
+
+<DocDemoViewer name="inputtags:disabled-demo" />
