@@ -1,0 +1,36 @@
+'use client';
+import { Component } from '@primereact/core/component';
+import { styles } from '@primereact/styles/commandmenu';
+import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
+import * as React from 'react';
+import { useCommandMenuContext } from '../CommandMenu.context';
+import { defaultListProps } from './CommandMenuList.props';
+
+export const CommandMenuList = withComponent({
+    name: 'CommandMenuList',
+    defaultProps: defaultListProps,
+    styles,
+    setup() {
+        const commandmenu = useCommandMenuContext();
+
+        return {
+            commandmenu
+        };
+    },
+    render(instance) {
+        const { props, ptmi, commandmenu } = instance;
+
+        const rootProps = mergeProps(
+            {
+                role: 'listbox',
+                tabIndex: -1,
+                className: commandmenu?.cx('list')
+            },
+            commandmenu?.ptm('list'),
+            ptmi('root')
+        );
+
+        return <Component instance={instance} attrs={rootProps} children={props.children} ref={commandmenu?.listRef} />;
+    }
+});
