@@ -7,7 +7,6 @@ import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { InputTagsProvider } from './InputTags.context';
 import { defaultProps } from './InputTags.props';
-import { InputTagsControl } from './control/InputTagsControl';
 import { InputTagsHiddenInput } from './hiddeninput/InputTagsHiddenInput';
 import { InputTagsInput } from './input/InputTagsInput';
 import { InputTagsItem } from './item/InputTagsItem';
@@ -40,7 +39,6 @@ export const InputTags = withComponent({
         );
     },
     components: {
-        Control: InputTagsControl,
         Item: InputTagsItem,
         Input: InputTagsInput,
         HiddenInput: InputTagsHiddenInput

@@ -192,6 +192,8 @@ export const useInputTags = withHeadless({
         };
 
         const onClick = () => {
+            setFocusedItemIndexState(-1);
+
             if (inputRef.current && !props.disabled) {
                 focus(inputRef.current?.elementRef.current);
             }
@@ -223,6 +225,10 @@ export const useInputTags = withHeadless({
         const onBlur = () => {
             if (props.addOnBlur && inputValueState.trim()) {
                 addItem(inputValueState);
+            }
+
+            if (focusedItemIndexState !== -1) {
+                setFocusedItemIndexState(-1);
             }
         };
 

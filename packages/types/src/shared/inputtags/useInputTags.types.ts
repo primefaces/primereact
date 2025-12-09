@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/inputitems/)
  *
- * @module useInputTags
+ * @module useinputtags
  * @group headless
  *
  */

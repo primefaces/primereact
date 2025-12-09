@@ -26,10 +26,6 @@ export interface InputTagsPassThrough {
      */
     root?: InputTagsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Used to pass attributes to the control's DOM element.
-     */
-    control?: InputTagsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Used to pass attributes to the item's DOM element.
      */
     item?: InputTagsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -37,6 +33,10 @@ export interface InputTagsPassThrough {
      * Used to pass attributes to the input's DOM element.
      */
     input?: InputTagsPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the hidden input's DOM element.
+     */
+    hiddenInput?: InputTagsPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
 }
 
 /**
@@ -102,7 +102,15 @@ export const InputTagsClassNames = {
     /**
      * Class name of the root element
      */
-    root: 'p-inputtags'
+    root: 'p-inputtags',
+    /**
+     * Class name of the item element
+     */
+    item: 'p-inputtags-item',
+    /**
+     * Class name of the input element
+     */
+    input: 'p-inputtags-input'
 } as const;
 
 /**

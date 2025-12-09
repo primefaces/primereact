@@ -4,16 +4,14 @@ import { isNotEmpty } from '@primeuix/utils';
 
 const style = /*css*/ `
     .p-inputtags {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         position: relative;
-    }
-
-    .p-inputtags-control {
-        font-family: inherit;
-        font-feature-settings: inherit;
-        font-size: 1rem;
+        padding: calc(dt('inputtext.padding.y') /2) dt('inputtext.padding.y');
+        gap: calc(dt('inputtext.padding.y') /2);
         color: dt('inputtext.color');
         background: dt('inputtext.background');
-        padding: 0.25rem 0.5rem;
         border: 1px solid dt('inputtext.border.color');
         transition:
             background dt('inputtext.transition.duration'),
@@ -25,53 +23,49 @@ const style = /*css*/ `
         border-radius: dt('inputtext.border.radius');
         outline-color: transparent;
         box-shadow: dt('inputtext.shadow');
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.25rem;
     }
 
-    .p-inputtags .p-chip {
-        padding-inline: 0.5rem;
-        padding-block: 0.25rem;
+    .p-inputtags .p-inputtags-item {
+        padding-inline: dt('inputtext.padding.y');
+        padding-block: calc(dt('inputtext.padding.y') /2);
         border-radius: dt('border.radius.sm');
     }
 
-    .p-inputtags .p-chip .p-chip-label {
+    .p-inputtags .p-inputtags-item .p-chip-label {
         line-height: 1;
     }
 
-    .p-inputtags .p-chip.p-focused .p-chip-remove-icon {
+    .p-inputtags .p-inputtags-item.p-focused {
+        background-color: light-dark(var(--p-surface-200), var(--p-surface-700));
+    }
+
+    .p-inputtags .p-inputtags-item.p-focused .p-chip-remove-icon {
         box-shadow: dt('chip.remove.icon.focus.ring.shadow');
         outline: dt('chip.remove.icon.focus.ring.width') dt('chip.remove.icon.focus.ring.style') dt('chip.remove.icon.focus.ring.color');
         outline-offset: dt('chip.remove.icon.focus.ring.offset');
-    }
-
-    .p-inputtags .p-chip.p-focused {
-        background-color: dt('form.field.filled.focus.background');
     }
 
     .p-inputtags .p-inputtags-input {
         border: 0 none;
         outline: 0 none;
         background-color: transparent;
-        margin-left: 0.25rem;
-        padding: 0.25rem;
+        margin-left: calc(dt('inputtext.padding.y') /2);
+        padding: calc(dt('inputtext.padding.y') /2);
         box-shadow: none;
         border-radius: 0;
     }
 
-    .p-inputtags.p-invalid .p-inputtags-control {
+    .p-inputtags.p-invalid {
         border-color: dt('inputtext.invalid.border.color');
     }
 
-    .p-inputtags.p-disabled .p-inputtags-control {
+    .p-inputtags.p-disabled {
         opacity: 1;
         background: dt('inputtext.disabled.background');
         color: dt('inputtext.disabled.color');
     }
 
-    .p-inputtags.p-variant-filled .p-inputtags-control {
+    .p-inputtags.p-variant-filled {
         background: dt('inputtext.filled.background');
     }
 `;
@@ -90,7 +84,6 @@ export const styles = createStyles<InputTagsInstance>({
                 'p-disabled': props.disabled
             }
         ],
-        control: 'p-inputtags-control',
         item: ({ context }) => [
             'p-inputtags-item',
             {
