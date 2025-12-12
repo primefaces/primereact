@@ -21,13 +21,22 @@ export interface useOverlayOpenChangeEvent {
 }
 
 /**
+ * Virtual target for context menus and similar use cases.
+ */
+export interface VirtualTarget {
+    pageX: number;
+    pageY: number;
+}
+
+/**
  * Defines valid properties in useOverlay.
  */
 export interface useOverlayProps {
     /**
      * The target element to attach the overlay to.
+     * Can be an HTMLElement or a virtual target with coordinates.
      */
-    target?: HTMLElement | undefined;
+    target?: HTMLElement | VirtualTarget | undefined;
     /**
      * Default open state for uncontrolled mode.
      */

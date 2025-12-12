@@ -2,7 +2,7 @@ import { withHeadless } from '@primereact/core/headless';
 import { ConnectedOverlayScrollHandler } from '@primereact/core/utils';
 import { useEventListener, useUnmountEffect } from '@primereact/hooks';
 import { $dt } from '@primeuix/styled';
-import { absolutePosition, addClass, addStyle, getOffset, isTouchDevice, relativePosition } from '@primeuix/utils/dom';
+import { absolutePosition, addClass, addStyle, getHiddenElementOuterHeight, getHiddenElementOuterWidth, getOffset, getViewport, isTouchDevice, relativePosition } from '@primeuix/utils/dom';
 import { ZIndex } from '@primeuix/utils/zindex';
 import { OverlayEventBus } from 'primereact/overlayeventbus';
 import * as React from 'react';
@@ -65,12 +65,20 @@ export const useOverlay = withHeadless({
             bindOutsideClickListener();
             bindScrollListener();
             bindResizeListener();
+
+            if (props.type === 'menu') {
+                bindOutsideContextMenuListener();
+            }
         };
 
         const onLeave = () => {
             unbindOutsideClickListener();
             unbindScrollListener();
             unbindResizeListener();
+
+            if (props.type === 'menu') {
+                unbindOutsideContextMenuListener();
+            }
         };
 
         const onAfterLeave = () => {
@@ -86,30 +94,72 @@ export const useOverlay = withHeadless({
 
             if (!containerElement) return;
 
-            if (props.appendTo === 'self') {
-                relativePosition(containerElement, props.target as HTMLElement);
-            } else {
-                absolutePosition(containerElement, props.target as HTMLElement);
-            }
+            const isVirtualTarget = props.target && typeof props.target === 'object' && 'pageX' in props.target && 'pageY' in props.target;
 
-            const containerOffset = getOffset(containerElement);
-            const targetOffset = getOffset(props.target);
-            let arrowLeft = 0;
+            if (isVirtualTarget) {
+                const virtualTarget = props.target as { pageX: number; pageY: number };
 
-            if (Number(containerOffset.left) < Number(targetOffset.left)) {
-                arrowLeft = Number(targetOffset.left) - Number(containerOffset.left);
-            }
+                let left = virtualTarget.pageX + 1;
+                let top = virtualTarget.pageY + 1;
+                const width = containerElement.offsetParent ? containerElement.offsetWidth : getHiddenElementOuterWidth(containerElement);
+                const height = containerElement.offsetParent ? containerElement.offsetHeight : getHiddenElementOuterHeight(containerElement);
+                const viewport = getViewport();
+                const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                const scrollLeft = window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
 
-            containerElement.style.setProperty($dt('overlay.arrow.left').name, `${arrowLeft}px`);
+                //flip
+                if (left + width - scrollLeft > viewport.width) {
+                    left -= width;
+                }
 
-            if (containerOffset.top < targetOffset.top) {
-                addClass(containerElement, 'p-overlay-flipped');
-                containerElement.setAttribute('data-p-overlay-flipped', 'true');
+                //flip
+                if (top + height - scrollTop > viewport.height) {
+                    top -= height;
+                }
+
+                //fit
+                if (left < scrollLeft) {
+                    left = scrollLeft;
+                }
+
+                //fit
+                if (top < scrollTop) {
+                    top = scrollTop;
+                }
+
+                containerElement.style.left = left + 'px';
+                containerElement.style.top = top + 'px';
+            } else if (props.target) {
+                if (props.appendTo === 'self') {
+                    relativePosition(containerElement, props.target as HTMLElement);
+                } else {
+                    absolutePosition(containerElement, props.target as HTMLElement);
+                }
+
+                const containerOffset = getOffset(containerElement);
+                const targetOffset = getOffset(props.target as HTMLElement);
+                let arrowLeft = 0;
+
+                if (Number(containerOffset.left) < Number(targetOffset.left)) {
+                    arrowLeft = Number(targetOffset.left) - Number(containerOffset.left);
+                }
+
+                containerElement.style.setProperty($dt('overlay.arrow.left').name, `${arrowLeft}px`);
+
+                if (containerOffset.top < targetOffset.top) {
+                    addClass(containerElement, 'p-overlay-flipped');
+                    containerElement.setAttribute('data-p-overlay-flipped', 'true');
+                }
             }
         };
 
         const [bindOutsideClickListener, unbindOutsideClickListener] = useEventListener({
             type: 'click',
+            listener: (event) => onOutsideClick(event as unknown as React.MouseEvent)
+        });
+
+        const [bindOutsideContextMenuListener, unbindOutsideContextMenuListener] = useEventListener({
+            type: 'contextmenu',
             listener: (event) => onOutsideClick(event as unknown as React.MouseEvent)
         });
 
@@ -199,6 +249,10 @@ export const useOverlay = withHeadless({
             unbindOutsideClickListener();
             unbindScrollListener();
             unbindResizeListener();
+
+            if (props.type === 'menu') {
+                unbindOutsideContextMenuListener();
+            }
 
             if (scrollHandler.current) {
                 scrollHandler.current.destroy();
