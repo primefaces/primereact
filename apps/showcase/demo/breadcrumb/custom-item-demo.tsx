@@ -13,7 +13,7 @@ export default function CustomItemDemo() {
     const brands = [{ label: 'Apple' }, { label: 'Dell' }, { label: 'HP' }, { label: 'Lenovo' }, { label: 'Asus' }];
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Breadcrumb>
                 <Breadcrumb.List>
                     <Breadcrumb.Item>

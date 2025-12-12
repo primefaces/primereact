@@ -1,9 +1,11 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 import { Menu } from 'primereact/menu';
 
 export default function PortalDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Menu className="w-64">
                 <Menu.Trigger className="flex items-center gap-3">
                     <Avatar shape="circle">

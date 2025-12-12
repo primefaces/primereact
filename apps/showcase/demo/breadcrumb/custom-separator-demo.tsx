@@ -6,7 +6,7 @@ import { Breadcrumb } from 'primereact/breadcrumb';
 
 export default function CustomSeparatorDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Breadcrumb>
                 <Breadcrumb.List>
                     <Breadcrumb.Item>

@@ -1,3 +1,5 @@
+'use client';
+
 import { Menu } from 'primereact/menu';
 
 const apps = [
@@ -14,7 +16,7 @@ const apps = [
 
 export default function AppsDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Menu className="w-116">
                 <Menu.Trigger rounded iconOnly>
                     <i className="pi pi-bars" />

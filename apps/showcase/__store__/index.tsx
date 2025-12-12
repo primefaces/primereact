@@ -99,6 +99,32 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
             'filePath': 'demo/badge/size-demo.tsx',
         },
     },
+    'breadcrumb': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/breadcrumb/basic-demo')),
+            'filePath': 'demo/breadcrumb/basic-demo.tsx',
+        },
+        'breadcrumb-pt': {
+            'component': React.lazy(() => import('demo/breadcrumb/breadcrumb-pt')),
+            'filePath': 'demo/breadcrumb/breadcrumb-pt.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/breadcrumb/controlled-demo')),
+            'filePath': 'demo/breadcrumb/controlled-demo.tsx',
+        },
+        'custom-item-demo': {
+            'component': React.lazy(() => import('demo/breadcrumb/custom-item-demo')),
+            'filePath': 'demo/breadcrumb/custom-item-demo.tsx',
+        },
+        'custom-separator-demo': {
+            'component': React.lazy(() => import('demo/breadcrumb/custom-separator-demo')),
+            'filePath': 'demo/breadcrumb/custom-separator-demo.tsx',
+        },
+        'route-demo': {
+            'component': React.lazy(() => import('demo/breadcrumb/route-demo')),
+            'filePath': 'demo/breadcrumb/route-demo.tsx',
+        },
+    },
     'button': {
         'badge-demo': {
             'component': React.lazy(() => import('demo/button/badge-demo')),
@@ -317,6 +343,20 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         'template-demo': {
             'component': React.lazy(() => import('demo/confirmpopup/template-demo')),
             'filePath': 'demo/confirmpopup/template-demo.tsx',
+        },
+    },
+    'contextmenu': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/contextmenu/basic-demo')),
+            'filePath': 'demo/contextmenu/basic-demo.tsx',
+        },
+        'contextmenu-pt': {
+            'component': React.lazy(() => import('demo/contextmenu/contextmenu-pt')),
+            'filePath': 'demo/contextmenu/contextmenu-pt.tsx',
+        },
+        'radio-checkbox-demo': {
+            'component': React.lazy(() => import('demo/contextmenu/radio-checkbox-demo')),
+            'filePath': 'demo/contextmenu/radio-checkbox-demo.tsx',
         },
     },
     'dataview': {
@@ -897,6 +937,44 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         'option-demo': {
             'component': React.lazy(() => import('demo/listbox/option-demo')),
             'filePath': 'demo/listbox/option-demo.tsx',
+        },
+    },
+    'menu': {
+        'apps-demo': {
+            'component': React.lazy(() => import('demo/menu/apps-demo')),
+            'filePath': 'demo/menu/apps-demo.tsx',
+        },
+        'composite-demo': {
+            'component': React.lazy(() => import('demo/menu/composite-demo')),
+            'filePath': 'demo/menu/composite-demo.tsx',
+        },
+        'inline-demo': {
+            'component': React.lazy(() => import('demo/menu/inline-demo')),
+            'filePath': 'demo/menu/inline-demo.tsx',
+        },
+        'menu-pt': {
+            'component': React.lazy(() => import('demo/menu/menu-pt')),
+            'filePath': 'demo/menu/menu-pt.tsx',
+        },
+        'menubar-demo': {
+            'component': React.lazy(() => import('demo/menu/menubar-demo')),
+            'filePath': 'demo/menu/menubar-demo.tsx',
+        },
+        'portal-demo': {
+            'component': React.lazy(() => import('demo/menu/portal-demo')),
+            'filePath': 'demo/menu/portal-demo.tsx',
+        },
+        'radio-checkbox-demo': {
+            'component': React.lazy(() => import('demo/menu/radio-checkbox-demo')),
+            'filePath': 'demo/menu/radio-checkbox-demo.tsx',
+        },
+        'router-demo': {
+            'component': React.lazy(() => import('demo/menu/router-demo')),
+            'filePath': 'demo/menu/router-demo.tsx',
+        },
+        'sidebar-demo': {
+            'component': React.lazy(() => import('demo/menu/sidebar-demo')),
+            'filePath': 'demo/menu/sidebar-demo.tsx',
         },
     },
     'message': {

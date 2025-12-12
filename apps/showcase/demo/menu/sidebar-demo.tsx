@@ -1,3 +1,5 @@
+'use client';
+
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 import { Menu } from 'primereact/menu';
@@ -8,7 +10,7 @@ export default function SidebarDemo() {
     const menuRef = React.useRef(null);
 
     return (
-        <div className="card flex gap-6">
+        <div className="flex gap-6">
             <div className="w-64 h-240 bg-surface-0 dark:bg-surface-900 border-r border-surface-200 dark:border-surface-700 flex flex-col">
                 <div className="p-4 border-b border-surface-200 dark:border-surface-700">
                     <div className="text-xl font-bold text-primary">Prime App</div>

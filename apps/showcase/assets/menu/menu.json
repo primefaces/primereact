@@ -258,6 +258,23 @@
                     ]
                 },
                 {
+                    "name": "Menu",
+                    "children": [
+                        {
+                            "name": "Breadcrumb",
+                            "to": "/docs/components/breadcrumb"
+                        },
+                        {
+                            "name": "ContextMenu",
+                            "to": "/docs/components/contextmenu"
+                        },
+                        {
+                            "name": "Menu",
+                            "to": "/docs/components/menu"
+                        }
+                    ]
+                },
+                {
                     "name": "Messages",
                     "children": [
                         {

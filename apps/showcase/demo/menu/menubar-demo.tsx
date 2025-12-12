@@ -1,3 +1,5 @@
+'use client';
+
 import { MenuInstance } from '@primereact/types/shared/menu';
 import { Menu } from 'primereact/menu';
 import * as React from 'react';
@@ -54,7 +56,7 @@ export default function MenubarDemo() {
     }, []);
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <div
                 className="flex gap-1 bg-surface-100 dark:bg-surface-800 rounded-md p-1 w-fit"
                 role="menubar"

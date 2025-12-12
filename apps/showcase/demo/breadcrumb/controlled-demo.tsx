@@ -8,7 +8,7 @@ export default function ControlledDemo() {
     const [currentPage, setCurrentPage] = React.useState('reports');
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Breadcrumb onAction={(key: string) => setCurrentPage(key)}>
                 <Breadcrumb.List>
                     <Breadcrumb.Item uKey="home" isCurrent={currentPage === 'home'}>

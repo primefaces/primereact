@@ -1,3 +1,5 @@
+'use client';
+
 import { MenuCheckboxItemCheckedChangeEvent, MenuRadioGroupValueChangeEvent } from '@primereact/types/shared/menu';
 import { Menu } from 'primereact/menu';
 import * as React from 'react';
@@ -8,7 +10,7 @@ export default function RadioCheckboxDemo() {
     const [theme, setTheme] = React.useState('light');
 
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Menu className="w-64">
                 <Menu.List>
                     <Menu.Item>Overview</Menu.Item>

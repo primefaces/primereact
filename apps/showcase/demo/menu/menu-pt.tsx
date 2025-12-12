@@ -1,3 +1,5 @@
+'use client';
+
 import { Menu } from 'primereact/menu';
 
 export default function MenuPTDemo() {

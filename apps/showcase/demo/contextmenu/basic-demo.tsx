@@ -1,8 +1,10 @@
+'use client';
+
 import { ContextMenu } from 'primereact/contextmenu';
 
 export default function BasicDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <ContextMenu className="w-64">
                 <ContextMenu.Trigger className="flex justify-center items-center border-2 border-dashed border-surface-200 dark:border-surface-700 w-120 h-64">
                     Right Click Here
