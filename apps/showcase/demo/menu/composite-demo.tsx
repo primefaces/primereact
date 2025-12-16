@@ -1,8 +1,10 @@
+'use client';
+
 import { Menu } from 'primereact/menu';
 
 export default function CompositeDemo() {
     return (
-        <div className="card flex justify-center">
+        <div className="flex justify-center">
             <Menu className="w-56" composite>
                 <Menu.List>
                     <Menu.Item>
