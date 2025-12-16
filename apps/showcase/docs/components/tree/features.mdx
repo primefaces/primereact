@@ -1,0 +1,79 @@
+---
+title: Tree
+description: Tree is used to display hierarchical data.
+component: tree
+---
+
+## Usage
+
+```tsx
+import { Tree } from 'primereact/tree';
+```
+
+```tsx
+<Tree>
+    <Tree.List>
+        <Tree.Node>
+            <Tree.Content>
+                <Tree.Toggle />
+            </Tree.Content>
+        </Tree.Node>
+    </Tree.List>
+</Tree>
+```
+
+## Examples
+
+### Basic
+
+The basic example demonstrates a simple Tree implementation where nodes are expanded and collapsed on click.
+
+<DocDemoViewer name="tree:basic-demo" />
+
+### Node
+
+Tree nodes can be customized with templates using the `Tree.Node` components.
+
+<DocDemoViewer name="tree:node-demo" />
+
+### Controlled
+
+Tree state can be controlled programmatically with the `expandedKeys` property that defines the keys that are expanded. This property is a Map instance whose key is the key of a node and value is a boolean.
+
+<DocDemoViewer name="tree:controlled-demo" />
+
+### Selection
+
+#### Single
+
+Single node selection is configured by setting `selectionMode` as `single` along with `selectionKeys` property to manage the selection value binding.
+
+<DocDemoViewer name="tree:single-selection-demo" />
+
+#### Multiple
+
+More than one node is selectable by setting `selectionMode` to` multiple`. By default in multiple selection mode, metaKey press (e.g. `⌘`) is not necessary to add to existing selections. When the optional `metaKeySelection` is present, behavior is changed in a way that selecting a new node requires meta key to be present. Note that in touch enabled devices, Tree always ignores metaKey.
+
+In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.
+
+<DocDemoViewer name="tree:multiple-selection-demo" />
+
+#### Checkbox
+
+Selection of multiple nodes via checkboxes is enabled by configuring `selectionMode` as `checkbox`.
+
+In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has `checked` and `partialChecked` properties to represent the checked state of a node object to indicate selection.
+
+<DocDemoViewer name="tree:checkbox-selection-demo" />
+
+### Lazy Loading
+
+Lazy loading is demonstrated in this example where nodes are loaded on demand when a node is expanded.
+
+<DocDemoViewer name="tree:lazy-demo" />
+
+### Filter
+
+Filtering enables searching through the nodes. Place a `Tree.Filter` component inside `Tree.Header` to add a search input. Any input component can be used with the `as` prop and the filtering logic can be controlled with the `onChange` event.
+
+<DocDemoViewer name="tree:filter-demo" />
