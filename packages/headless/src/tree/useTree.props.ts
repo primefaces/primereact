@@ -1,0 +1,26 @@
+import type { useTreeProps } from '@primereact/types/shared/tree';
+
+export const defaultProps: useTreeProps = {
+    value: [],
+    expandedKeys: undefined,
+    defaultExpandedKeys: undefined,
+    selectionKeys: undefined,
+    defaultSelectionKeys: undefined,
+    selectionMode: undefined,
+    metaKeySelection: false,
+    highlightOnSelect: false,
+    scrollHeight: undefined,
+    // draggableNodes: undefined,
+    // droppableNodes: undefined,
+    // draggableScope: undefined,
+    // droppableScope: undefined,
+    // validateDrop: false,
+    onExpandedChange: undefined,
+    onSelectionChange: undefined,
+    onToggle: undefined,
+    onExpand: undefined,
+    onCollapse: undefined,
+    onClick: undefined,
+    onSelect: undefined,
+    onUnselect: undefined
+};
