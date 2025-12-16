@@ -3,23 +3,23 @@
         "source.fixAll.eslint": "explicit",
         "source.organizeImports": "explicit"
     },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "prettier.prettier-vscode",
     "javascript.referencesCodeLens.enabled": true,
     "eslint.useFlatConfig": true,
     "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "prettier.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "prettier.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "prettier.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "prettier.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[css]": {
@@ -31,7 +31,7 @@
         "editor.formatOnSave": true
     },
     "[mdx]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "prettier.prettier-vscode",
         "editor.formatOnSave": true
     }
 }

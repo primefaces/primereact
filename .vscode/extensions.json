@@ -1,7 +1,7 @@
 {
     "recommendations": [
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
+        "prettier.prettier-vscode",
         "sibiraj-s.vscode-scss-formatter",
         "unifiedjs.vscode-mdx",
         "pushqrdx.inline-html"
