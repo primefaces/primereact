@@ -226,9 +226,9 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
             'component': React.lazy(() => import('demo/carousel/orientation-demo')),
             'filePath': 'demo/carousel/orientation-demo.tsx',
         },
-        'size-demo': {
-            'component': React.lazy(() => import('demo/carousel/size-demo')),
-            'filePath': 'demo/carousel/size-demo.tsx',
+        'variable-size-demo': {
+            'component': React.lazy(() => import('demo/carousel/variable-size-demo')),
+            'filePath': 'demo/carousel/variable-size-demo.tsx',
         },
     },
     'checkbox': {
