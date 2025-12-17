@@ -78,10 +78,6 @@ export const useCarousel = withHeadless({
         }
 
         function setPage(page: number) {
-            if (page === pageState) return;
-
-            setPageState(page);
-
             if (!props.loop) {
                 const size = snapPointsRef.current.size || snapPoints.size;
                 let isNextDisabled = false;
@@ -98,6 +94,8 @@ export const useCarousel = withHeadless({
                 setIsNextDisabled(isNextDisabled);
                 setIsPrevDisabled(isPrevDisabled);
             }
+
+            setPageState(page);
 
             props.onPageChange?.({ value: page });
             props.onSlideChange?.({ value: page });
