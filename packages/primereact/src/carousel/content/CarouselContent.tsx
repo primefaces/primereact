@@ -19,35 +19,17 @@ export const CarouselContent = withComponent({
 
         const contentProps = mergeProps(
             {
-                className: carousel?.cx('content', { orientation: carousel?.props.orientation }),
-                style: {
-                    ...({
-                        '--p-swipe-amount-x': `0px`,
-                        '--p-swipe-amount-y': `0px`,
-                        '--p-spacing': `${carousel?.props.spacing}px`
-                    } as React.CSSProperties)
-                },
-                onPointerDown: carousel?.handlePointerDown,
-                onPointerMove: carousel?.handlePointerMove,
-                onPointerUp: carousel?.handlePointerUp,
-                onClick: carousel?.handleClick,
-                onClickCapture: carousel?.handleClick
+                className: carousel?.cx('content'),
+                style: { ...carousel?.contentStyles, ...carousel?.sx('content') },
+                onPointerDown: carousel?.onContentPointerDown,
+                onPointerMove: carousel?.onContentPointerMove,
+                onPointerUp: carousel?.onContentPointerUp,
+                onWheel: carousel?.onContentWheel
             },
             carousel?.ptm('content'),
             ptmi('root')
         );
 
-        const viewportProps = mergeProps(
-            {
-                className: carousel?.cx('viewport')
-            },
-            carousel?.ptm('viewport')
-        );
-
-        return (
-            <div {...viewportProps}>
-                <Component instance={instance} attrs={contentProps} children={props.children} ref={carousel?.carouselRef} />
-            </div>
-        );
+        return <Component instance={instance} attrs={contentProps} children={props.children} ref={carousel?.contentRef} />;
     }
 });
