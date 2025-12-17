@@ -4,6 +4,7 @@ export * from './TreeEmpty.types';
 export * from './TreeFilter.types';
 export * from './TreeFooter.types';
 export * from './TreeHeader.types';
+export * from './TreeIcon.types';
 export * from './TreeLabel.types';
 export * from './TreeList.types';
 export * from './TreeNode.types';

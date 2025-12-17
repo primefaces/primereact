@@ -10,11 +10,11 @@ export const defaultProps: useTreeProps = {
     metaKeySelection: false,
     highlightOnSelect: false,
     scrollHeight: undefined,
-    // draggableNodes: undefined,
-    // droppableNodes: undefined,
-    // draggableScope: undefined,
-    // droppableScope: undefined,
-    // validateDrop: false,
+    draggableNodes: undefined,
+    droppableNodes: undefined,
+    draggableScope: undefined,
+    droppableScope: undefined,
+    validateDrop: false,
     onExpandedChange: undefined,
     onSelectionChange: undefined,
     onToggle: undefined,
@@ -22,5 +22,9 @@ export const defaultProps: useTreeProps = {
     onCollapse: undefined,
     onClick: undefined,
     onSelect: undefined,
-    onUnselect: undefined
+    onUnselect: undefined,
+    onNodeDrop: undefined,
+    onDragEnter: undefined,
+    onDragLeave: undefined,
+    onValueChange: undefined
 };

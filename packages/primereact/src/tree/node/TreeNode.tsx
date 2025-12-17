@@ -18,7 +18,7 @@ export const TreeNode = withComponent({
         const nodeKey = props?.node?.key;
         const expanded = nodeKey ? tree?.state?.expandedKey?.[nodeKey] === true : false;
         const selected = props.node ? (tree?.isNodeSelected(props.node) ?? false) : false;
-        const leaf = props?.node ? (props.node.leaf ?? !props.node.children) : true;
+        const leaf = props?.node ? (props.node.leaf ?? (!props.node.children || props.node.children.length === 0)) : true;
 
         let checked = false;
         let partialChecked = false;
@@ -56,7 +56,18 @@ export const TreeNode = withComponent({
             setSize = info.setSize;
         }
 
-        return { tree, parentNode, expanded, checked, partialChecked, selected, leaf, setSize, posInSet, level };
+        return {
+            tree,
+            parentNode,
+            expanded,
+            checked,
+            partialChecked,
+            selected,
+            leaf,
+            setSize,
+            posInSet,
+            level
+        };
     },
     render(instance) {
         const { props, ptmi, tree, expanded, checked, selected, leaf, setSize, posInSet, level } = instance;
@@ -83,7 +94,6 @@ export const TreeNode = withComponent({
             <TreeNodeProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {resolve(props.children, instance) ?? props.node?.label}
-                    {/* {props.children && expanded && props.node?.children && <TreeList />} */}
                 </Component>
             </TreeNodeProvider>
         );

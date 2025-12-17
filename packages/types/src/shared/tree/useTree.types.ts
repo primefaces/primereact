@@ -24,6 +24,10 @@ export interface TreeNode {
      */
     label?: React.ReactNode;
     /**
+     * Icon of the node.
+     */
+    icon?: string;
+    /**
      * Children nodes.
      */
     children?: TreeNode[];
@@ -35,6 +39,14 @@ export interface TreeNode {
      * Specifies the node loading.
      */
     loading?: boolean;
+    /**
+     * Whether the node is draggable.
+     */
+    draggable?: boolean;
+    /**
+     * Whether the node is droppable.
+     */
+    droppable?: boolean;
     /**
      * Optional properties
      */
@@ -64,7 +76,7 @@ export type TreeCheckboxSelectionKeys = Record<string, { checked: boolean; parti
  */
 export interface useTreeExpandedChangeEvent<E = React.SyntheticEvent> {
     /**
-     * The original event that triggered the change.
+     * The original event that triggered the expansion change.
      */
     originalEvent: E;
     /**
@@ -78,7 +90,7 @@ export interface useTreeExpandedChangeEvent<E = React.SyntheticEvent> {
  */
 export interface useTreeSelectionChangeEvent<E = React.SyntheticEvent> {
     /**
-     * The original event that triggered the change.
+     * The original event that triggered the selection change.
      */
     originalEvent: E;
     /**
@@ -172,6 +184,90 @@ export interface useTreeUnselectEvent {
 }
 
 /**
+ * Event fired when a node is dropped.
+ */
+export interface useTreeNodeDropEvent {
+    /**
+     * The original event that triggered the drop.
+     */
+    originalEvent: React.DragEvent;
+    /**
+     * The value of the tree.
+     */
+    value: TreeNode[];
+    /**
+     * The dragged node.
+     */
+    dragNode: TreeNode;
+    /**
+     * The drop target node.
+     */
+    dropNode: TreeNode | null;
+    /**
+     * The index of the dragged node.
+     */
+    index: number;
+    /**
+     * Accept callback for validateDrop mode.
+     */
+    accept?: () => void;
+}
+
+/**
+ * Event fired when drag enters the tree.
+ */
+export interface useTreeDragEnterEvent {
+    /**
+     * The original event that triggered the drag enter.
+     */
+    originalEvent: React.DragEvent;
+    /**
+     * The value of the tree.
+     */
+    value: TreeNode[];
+    /**
+     * The dragged node.
+     */
+    dragNode: TreeNode | null;
+    /**
+     * The drag node scope.
+     */
+    dragNodeScope: string | string[] | null;
+}
+
+/**
+ * Event fired when drag leaves the tree.
+ */
+export interface useTreeDragLeaveEvent {
+    /**
+     * The original event that triggered the drag leave.
+     */
+    originalEvent: React.DragEvent;
+    /**
+     * The value of the tree.
+     */
+    value: TreeNode[];
+    /**
+     * The dragged node.
+     */
+    dragNode: TreeNode | null;
+    /**
+     * The drag node scope.
+     */
+    dragNodeScope: string | string[] | null;
+}
+
+/**
+ * Event fired when the tree value changes (for drag-drop).
+ */
+export interface useTreeValueChangeEvent {
+    /**
+     * The new value.
+     */
+    value: TreeNode[];
+}
+
+/**
  * Defines valid properties in useTree.
  */
 export interface useTreeProps {
@@ -215,6 +311,27 @@ export interface useTreeProps {
      *  @default false
      */
     highlightOnSelect?: boolean | undefined;
+    /**
+     * Whether the tree nodes can be dragged.
+     */
+    draggableNodes?: boolean | undefined;
+    /**
+     * Whether the tree can accept dropped nodes.
+     */
+    droppableNodes?: boolean | undefined;
+    /**
+     * A unique identifier for the draggable scope.
+     */
+    draggableScope?: string | string[] | undefined;
+    /**
+     * A unique identifier for the droppable scope.
+     */
+    droppableScope?: string | string[] | undefined;
+    /**
+     * Whether to validate drops before processing.
+     * @default false
+     */
+    validateDrop?: boolean;
     /**
      * Callback fired when the tree's expanded keys change.
      * @param event The event that triggered the change.
@@ -273,6 +390,30 @@ export interface useTreeProps {
      * @returns void
      */
     onUnselect?: (event: useTreeUnselectEvent) => void;
+    /**
+     * Callback fired when a node is dropped.
+     * @param event The node drop event.
+     * @returns void
+     */
+    onNodeDrop?: (event: useTreeNodeDropEvent) => void;
+    /**
+     * Callback fired when drag enters the tree.
+     * @param event The drag enter event.
+     * @returns void
+     */
+    onDragEnter?: (event: useTreeDragEnterEvent) => void;
+    /**
+     * Callback fired when drag leaves the tree.
+     * @param event The drag leave event.
+     * @returns void
+     */
+    onDragLeave?: (event: useTreeDragLeaveEvent) => void;
+    /**
+     * Callback fired when the tree value changes (for drag-drop).
+     * @param event The value change event.
+     * @returns void
+     */
+    onValueChange?: (event: useTreeValueChangeEvent) => void;
 }
 
 /**
@@ -287,6 +428,10 @@ export interface useTreeState {
      * The current selected keys of the tree.
      */
     selectedKey: TreeSelectionKeys | TreeCheckboxSelectionKeys | undefined;
+    /**
+     * Whether the tree is in drag hover state.
+     */
+    dragHover: boolean;
 }
 
 /**
@@ -349,6 +494,12 @@ export interface useTreeExposes {
      * @returns {{ level: number; posInSet: number; setSize: number }} Node information.
      */
     findNodeInfo: (nodeKey: string) => { level: number; posInSet: number; setSize: number };
+    /**
+     * Checks if a node can be dropped based on drag-drop rules.
+     * @param {TreeNode} node - The node to check.
+     * @returns {boolean} True if the node can accept drops.
+     */
+    allowDrop: (node: TreeNode) => boolean;
 }
 
 /**

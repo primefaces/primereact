@@ -3,6 +3,7 @@ import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import type { TreeCheckboxSelectionKeys, TreeExpandedKeys, TreeNode, TreeSelectionKeys } from '@primereact/types/shared/tree';
 import { find, findSingle, focus, getAttribute, isPrintableCharacter } from '@primeuix/utils';
 import * as React from 'react';
+import { TreeDragDropService } from './TreeDragDropService';
 import { defaultProps } from './useTree.props';
 
 export const useTree = withHeadless({
@@ -26,9 +27,24 @@ export const useTree = withHeadless({
         const searchTimeout = React.useRef<NodeJS.Timeout | null>(null);
         const searchValue = React.useRef<string>('');
 
+        const [dragHoverState, setDragHoverState] = React.useState(false);
+
+        React.useEffect(() => {
+            if (props.droppableNodes) {
+                const dragStopCleanup = TreeDragDropService.onDragStop(() => {
+                    setDragHoverState(false);
+                });
+
+                return () => {
+                    dragStopCleanup();
+                };
+            }
+        }, [props.droppableNodes]);
+
         const state = {
             expandedKey: expandedKeyState,
-            selectedKey: selectedKeyState
+            selectedKey: selectedKeyState,
+            dragHover: dragHoverState
         };
 
         const getNodes = () => {
@@ -636,6 +652,183 @@ export const useTree = withHeadless({
             }
         };
 
+        const onDragOver = (event: React.DragEvent) => {
+            if (props.droppableNodes && allowDrop()) {
+                event.dataTransfer.dropEffect = 'copy';
+            } else {
+                event.dataTransfer.dropEffect = 'none';
+            }
+
+            event.preventDefault();
+        };
+
+        const onDragEnter = (event: React.DragEvent) => {
+            const { dragNode, dragScope } = TreeDragDropService.getDragState();
+
+            if (props.droppableNodes && allowDrop()) {
+                setDragHoverState(true);
+
+                if (props.onDragEnter) {
+                    props.onDragEnter({
+                        originalEvent: event,
+                        value: props.value || [],
+                        dragNode,
+                        dragNodeScope: dragScope
+                    });
+                }
+            }
+        };
+
+        const onDragLeave = (event: React.DragEvent) => {
+            if (props.droppableNodes) {
+                const rect = event.currentTarget.getBoundingClientRect();
+
+                if (event.clientX >= rect.right || event.clientX <= rect.left || event.clientY >= rect.bottom || event.clientY <= rect.top) {
+                    setDragHoverState(false);
+
+                    if (props.onDragLeave) {
+                        const { dragNode, dragScope } = TreeDragDropService.getDragState();
+
+                        props.onDragLeave({
+                            originalEvent: event,
+                            value: props.value || [],
+                            dragNode,
+                            dragNodeScope: dragScope
+                        });
+                    }
+                }
+            }
+        };
+
+        const processTreeDrop = (dragNode: TreeNode, dragNodeIndex: number) => {
+            const { dragNodeSubNodes } = TreeDragDropService.getDragState();
+
+            if (dragNodeSubNodes) {
+                dragNodeSubNodes.splice(dragNodeIndex, 1);
+            }
+
+            const newValue = [...(props.value || []), dragNode];
+
+            if (props.onValueChange) {
+                props.onValueChange({
+                    value: newValue
+                });
+            }
+
+            TreeDragDropService.stopDrag({
+                node: dragNode
+            });
+        };
+
+        const onDrop = (event: React.DragEvent) => {
+            if (props.droppableNodes) {
+                event.preventDefault();
+                const { dragNode, dragScope, dragNodeIndex } = TreeDragDropService.getDragState();
+
+                if (dragNode && allowDrop()) {
+                    if (isSameTreeScope(dragScope as string | string[])) {
+                        TreeDragDropService.stopDrag({
+                            node: dragNode
+                        });
+                        setDragHoverState(false);
+
+                        return;
+                    }
+
+                    if (dragNodeIndex !== null) {
+                        if (props.validateDrop) {
+                            if (props.onNodeDrop) {
+                                props.onNodeDrop({
+                                    originalEvent: event,
+                                    value: props.value || [],
+                                    dragNode: dragNode,
+                                    dropNode: null,
+                                    index: dragNodeIndex,
+                                    accept: () => {
+                                        processTreeDrop(dragNode, dragNodeIndex);
+                                    }
+                                });
+                            }
+                        } else {
+                            if (props.onNodeDrop) {
+                                props.onNodeDrop({
+                                    originalEvent: event,
+                                    value: props.value || [],
+                                    dragNode: dragNode,
+                                    dropNode: null,
+                                    index: dragNodeIndex
+                                });
+                            }
+
+                            processTreeDrop(dragNode, dragNodeIndex);
+                        }
+                    }
+                }
+            }
+
+            setDragHoverState(false);
+        };
+
+        const allowDrop = (dropNode?: TreeNode) => {
+            const { dragNode, dragScope } = TreeDragDropService.getDragState();
+
+            if (!dragNode) {
+                return false;
+            } else if (isValidDragScope(dragScope as string | string[])) {
+                let allow = true;
+
+                if (dropNode && dragNode === dropNode) {
+                    allow = false;
+                }
+
+                return allow;
+            } else {
+                return false;
+            }
+        };
+
+        const hasCommonScope = (dragScope: string | string[] | undefined, dropScope: string | string[] | undefined) => {
+            if (dragScope === undefined && dropScope === undefined) {
+                return true;
+            } else if (dragScope === undefined || dropScope === undefined) {
+                return false;
+            }
+
+            if (typeof dropScope === 'string') {
+                if (typeof dragScope === 'string') {
+                    return dragScope === dropScope;
+                } else if (Array.isArray(dragScope)) {
+                    return dragScope.indexOf(dropScope) !== -1;
+                }
+            } else if (Array.isArray(dropScope)) {
+                if (typeof dragScope === 'string') {
+                    return dropScope.indexOf(dragScope) !== -1;
+                } else if (Array.isArray(dragScope)) {
+                    for (const ds of dragScope) {
+                        if (dropScope.indexOf(ds) !== -1) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            }
+
+            return false;
+        };
+
+        const isValidDragScope = (dragScope: string | string[] | undefined) => {
+            if (props.droppableScope === undefined) {
+                return true;
+            }
+
+            return hasCommonScope(dragScope, props.droppableScope);
+        };
+
+        const isSameTreeScope = (dragScope: string | string[] | undefined) => {
+            return hasCommonScope(dragScope, props.draggableScope);
+        };
+
         const findNodeInfo = (nodeKey: string) => {
             let level = 1;
             let posInSet = 0;
@@ -681,6 +874,11 @@ export const useTree = withHeadless({
             onCheckboxChange,
             isNodeSelected,
             onFilterKeyUp,
+            onDragOver,
+            onDragEnter,
+            onDragLeave,
+            onDrop,
+            allowDrop,
             findNodeInfo
         };
     }

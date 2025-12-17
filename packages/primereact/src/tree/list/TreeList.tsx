@@ -1,12 +1,13 @@
 'use client';
 import { Component } from '@primereact/core/component';
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
-import type { TreeNode as TreeNodeType } from '@primereact/types/shared/tree';
+import type { TreeNode as TreeNodeType, TreeNodeValueChangeEvent } from '@primereact/types/shared/tree';
 import { mergeProps, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import { Checkbox } from 'primereact/checkbox';
 import * as React from 'react';
 import { TreeContent } from '../content/TreeContent';
+import { TreeIcon } from '../icon/TreeIcon';
 import { TreeLabel } from '../label/TreeLabel';
 import { TreeNode } from '../node/TreeNode';
 import { useTreeNodeContext } from '../node/TreeNode.context';
@@ -60,17 +61,18 @@ export const TreeList = withComponent({
                 }
 
                 return (
-                    <TreeNode key={index} node={node} index={index}>
+                    <TreeNode key={index} node={node} index={index} onValueChange={(e: TreeNodeValueChangeEvent) => tree?.props.onValueChange?.({ value: e.nodes })} onNodeDrop={tree?.props.onNodeDrop}>
                         <TreeContent>
                             <TreeToggle />
+                            {node.icon && <TreeIcon className={node.icon} />}
                             {tree?.props.selectionMode === 'checkbox' && (
                                 <Checkbox
-                                    className={tree?.cx('checkbox')}
+                                    className={tree?.cx('pcCheckbox')}
                                     checked={isChecked}
                                     indeterminate={isPartialChecked}
                                     onCheckedChange={(event: CheckboxChangeEvent) => tree?.onCheckboxChange(event.originalEvent as React.ChangeEvent<HTMLInputElement>, node)}
                                     tabIndex={-1}
-                                    pt={tree?.ptm('checkbox')}
+                                    pt={tree?.ptm('pcCheckbox')}
                                 />
                             )}
                             <TreeLabel>{resolve(node.label, instance)}</TreeLabel>

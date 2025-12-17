@@ -6,17 +6,14 @@ export const styles = createStyles<TreeInstance>({
     name: 'tree',
     style,
     classes: {
-        root: ({ props }) => [
+        root: ({ props, state }) => [
             'p-tree p-component',
             {
-                //     'p-tree-selectable': props.selectionMode != null,
-                //     'p-tree-loading': props.loading,
-                'p-tree-flex-scrollable': props.scrollHeight === 'flex'
-                //     'p-tree-node-dragover': state.dragHover
+                'p-tree-selectable': props.selectionMode != null,
+                'p-tree-flex-scrollable': props.scrollHeight === 'flex',
+                'p-tree-node-dragover': state.dragHover
             }
         ],
-        // mask: 'p-tree-mask p-overlay-mask',
-        // loadingIcon: 'p-tree-loading-icon',
         pcFilter: 'p-tree-filter-input',
         wrapper: 'p-tree-root',
         header: 'p-tree-header',
@@ -25,20 +22,19 @@ export const styles = createStyles<TreeInstance>({
         node: ({ context }) => ['p-tree-node', { 'p-tree-node-leaf': context.leaf }],
         content: ({ props, context }) => [
             'p-tree-node-content',
-            // instance.node.styleClass,
             {
                 'p-tree-node-selectable': context.selectable,
-                'p-tree-node-selected': props.selectionMode === 'checkbox' ? props.highlightOnSelect && context.checked : context.selected
-                // 'p-tree-node-dragover': instance.isNodeDropActive
+                'p-tree-node-selected': props.selectionMode === 'checkbox' ? props.highlightOnSelect && context.checked : context.selected,
+                'p-tree-node-dragover': context.isNodeDropActive
             }
         ],
         toggle: 'p-tree-node-toggle-button',
         toggleIcon: 'p-tree-node-toggle-icon',
-        // nodeCheckbox: 'p-tree-node-checkbox',
-        // nodeIcon: 'p-tree-node-icon',
+        icon: 'p-tree-node-icon',
+        pcCheckbox: 'p-tree-node-checkbox',
         label: 'p-tree-node-label',
         nodeChildren: 'p-tree-node-children',
-        empty: 'p-tree-empty-message'
-        // dropPoint: 'p-tree-node-drop-point'
+        empty: 'p-tree-empty-message',
+        dropPoint: 'p-tree-node-drop-point'
     }
 });

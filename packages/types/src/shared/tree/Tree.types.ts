@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useTreeExposes, useTreeProps, useTreeState } from './useTree.types';
+import type { TreeCheckboxSelectionKeys, TreeExpandedKeys, TreeNode, TreeSelectionKeys, useTreeExpandedChangeEvent, useTreeExposes, useTreeProps, useTreeSelectionChangeEvent, useTreeState, useTreeValueChangeEvent } from './useTree.types';
 
 /**
  * Defines passthrough(pt) options type in Tree component.
@@ -42,6 +42,10 @@ export interface TreePassThrough {
      */
     content?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Used to pass attributes to the label's DOM element.
+     */
+    label?: TreePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Used to pass attributes to the toggle button's DOM element.
      */
     toggle?: TreePassThroughType<React.ButtonHTMLAttributes<HTMLButtonElement>>;
@@ -50,15 +54,92 @@ export interface TreePassThrough {
      */
     toggleIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement>>;
     /**
-     * Used to pass attributes to the label's DOM element.
+     * Used to pass attributes to the checkbox's DOM element.
      */
-    label?: TreePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    pcCheckbox?: TreePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the filter's DOM element.
+     */
+    pcFilter?: TreePassThroughType<React.HTMLAttributes<HTMLElement>>;
+    /**
+     * Used to pass attributes to the header's DOM element.
+     */
+    header?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the footer's DOM element.
+     */
+    footer?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the empty message's DOM element.
+     */
+    empty?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the drop point's DOM element.
+     */
+    dropPoint?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Event fired when the tree's expanded keys state changes.
+ * @extends useTreeExpandedChangeEvent
+ */
+export interface TreeExpandedChangeEvent extends useTreeExpandedChangeEvent {
+    /**
+     * The new expanded keys.
+     */
+    value: TreeExpandedKeys;
+}
+
+/**
+ * Event fired when the tree's selection keys state changes.
+ * @extends useTreeSelectionChangeEvent
+ */
+export interface TreeSelectionChangeEvent extends useTreeSelectionChangeEvent {
+    /**
+     * The new selection keys.
+     */
+    value: TreeSelectionKeys | TreeCheckboxSelectionKeys;
+}
+
+/**
+ * Event fired when the tree's value state changes.
+ * @extends useTreeValueChangeEvent
+ */
+export interface TreeValueChangeEvent extends useTreeValueChangeEvent {
+    /**
+     * The new value.
+     */
+    value: TreeNode[];
 }
 
 /**
  * Defines valid properties in Tree component.
  */
-export interface TreeProps extends BaseComponentProps<TreeInstance, useTreeProps, TreePassThrough> {}
+export interface TreeProps extends BaseComponentProps<TreeInstance, Omit<useTreeProps, 'onExpandedChange' | 'onSelectionChange' | 'onValueChange'>, TreePassThrough> {
+    /**
+     * Callback fired when the tree's expanded keys state changes.
+     * @param event The event that expanded keys the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The expanded keys of the tree.
+     * @returns void
+     */
+    onExpandedChange?: (event: TreeExpandedChangeEvent) => void;
+    /**
+     * Callback fired when the tree's selection keys state changes.
+     * @param event The event that selection keys the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The selection keys of the tree.
+     * @returns void
+     */
+    onSelectionChange?: (event: TreeSelectionChangeEvent) => void;
+    /**
+     * Callback fired when the tree's value state changes.
+     * @param event The event that value the change.
+     * @param event.value The value of the tree.
+     * @returns void
+     */
+    onValueChange?: (event: TreeValueChangeEvent) => void;
+}
 
 /**
  * Defines valid state in Tree component.

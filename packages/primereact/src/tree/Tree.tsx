@@ -12,6 +12,7 @@ import { TreeEmpty } from './empty/TreeEmpty';
 import { TreeFilter } from './filter/TreeFilter';
 import { TreeFooter } from './footer/TreeFooter';
 import { TreeHeader } from './header/TreeHeader';
+import { TreeIcon } from './icon/TreeIcon';
 import { TreeLabel } from './label/TreeLabel';
 import { TreeList } from './list/TreeList';
 import { TreeNode } from './node/TreeNode';
@@ -27,14 +28,18 @@ export const Tree = withComponent({
         return tree;
     },
     render(instance) {
-        const { id, props, ptmi, ptm, cx } = instance;
+        const { id, props, state, ptmi, ptm, cx, onDragOver, onDragEnter, onDragLeave, onDrop } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root', { isDragHover: state.isDragHover }),
+                onDragOver,
+                onDragEnter,
+                onDragLeave,
+                onDrop
             },
-            ptmi('root')
+            ptmi('root', { isDragHover: state.isDragHover })
         );
 
         const createWrapper = () => {
@@ -46,11 +51,7 @@ export const Tree = withComponent({
                 ptm('wrapper')
             );
 
-            return (
-                <div className={cx('wrapper')} {...wrapperProps}>
-                    {resolve(props.children, instance)}
-                </div>
-            );
+            return <div {...wrapperProps}>{resolve(props.children, instance)}</div>;
         };
 
         return (
@@ -66,6 +67,7 @@ export const Tree = withComponent({
         Node: TreeNode,
         Content: TreeContent,
         Label: TreeLabel,
+        Icon: TreeIcon,
         Toggle: TreeToggle,
         Filter: TreeFilter,
         Header: TreeHeader,

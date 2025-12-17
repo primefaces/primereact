@@ -45,7 +45,13 @@ export const TreeToggle = withComponent({
                 tree?.ptm('toggleIcon')
             );
 
-            return treenode?.props?.node?.loading ? <SpinnerIcon spin {...iconProps} /> : treenode?.expanded ? <ChevronDownIcon {...iconProps} /> : <ChevronRightIcon {...iconProps} />;
+            if (treenode?.props?.node?.loading) {
+                return <SpinnerIcon spin {...iconProps} />;
+            } else if (treenode?.expanded) {
+                return <ChevronDownIcon {...iconProps} />;
+            }
+
+            return <ChevronRightIcon {...iconProps} />;
         };
 
         return <Component instance={instance} attrs={rootProps} children={props.children ?? createIconElement()} />;
