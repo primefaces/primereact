@@ -1,6 +1,7 @@
 export * from './use-attr-selector';
 export * from './use-controlled-state';
 export * from './use-event-listener';
+export * from './use-hot-key';
 export * from './use-id';
 export * from './use-key-filter';
 export * from './use-mask';
@@ -9,6 +10,7 @@ export * from './use-mount-effect';
 export * from './use-presence';
 export * from './use-previous';
 export * from './use-props';
+export * from './use-queue-task';
 export * from './use-scrolltop';
 export * from './use-unmount-effect';
 export * from './use-update-effect';

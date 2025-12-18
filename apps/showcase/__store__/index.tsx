@@ -317,6 +317,24 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
             'filePath': 'demo/colorpicker/vertical-slider-demo.tsx',
         },
     },
+    'commandmenu': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/commandmenu/basic-demo')),
+            'filePath': 'demo/commandmenu/basic-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/commandmenu/controlled-demo')),
+            'filePath': 'demo/commandmenu/controlled-demo.tsx',
+        },
+        'filter-demo': {
+            'component': React.lazy(() => import('demo/commandmenu/filter-demo')),
+            'filePath': 'demo/commandmenu/filter-demo.tsx',
+        },
+        'with-dialog-demo': {
+            'component': React.lazy(() => import('demo/commandmenu/with-dialog-demo')),
+            'filePath': 'demo/commandmenu/with-dialog-demo.tsx',
+        },
+    },
     'confirmdialog': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/confirmdialog/basic-demo')),

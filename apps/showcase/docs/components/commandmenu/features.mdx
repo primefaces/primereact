@@ -1,0 +1,62 @@
+---
+title: CommandMenu
+description: CommandMenu represents a command menu component.
+component: commandmenu
+---
+
+## Usage
+
+```tsx
+import { CommandMenu } from 'primereact/commandmenu';
+```
+
+```tsx
+<CommandMenu>
+    <CommandMenu.Input />
+    <CommandMenu.Empty> </CommandMenu.Empty>
+    <CommandMenu.List>
+        <CommandMenu.Group>
+            <CommandMenu.GroupHeading></CommandMenu.GroupHeading>
+            <CommandMenu.Item></CommandMenu.Item>
+        </CommandMenu.Group>
+    </CommandMenu.List>
+</CommandMenu>
+```
+
+## Examples
+
+### Basic
+
+<DocDemoViewer name="commandmenu:basic-demo" />
+
+### Filter
+
+Use the `filter` prop to customize the filtering of the items.
+
+<DocDemoViewer name="commandmenu:filter-demo" />
+
+### With Dialog
+
+Use the `CommandPalette` component inside a `Dialog` component to create a command palette that is displayed in a dialog. `useHotKey` hook is used to open the dialog with the `meta+k` shortcut.
+
+<DocDemoViewer name="commandmenu:with-dialog-demo" />
+
+### Controlled
+
+<DocDemoViewer name="commandmenu:controlled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+CommandMenu renders a combobox with an input (`role="combobox"`) that controls a list of options (`role="listbox"`). Items use `aria-selected` to reflect the current selection and `aria-disabled="true"` when an item cannot be chosen. You can override the accessible name with `aria-label` or `aria-labelledby` on the root component.
+
+### Keyboard Support
+
+| Key / Combo             | Function                                         |
+| ----------------------- | ------------------------------------------------ |
+| `ArrowDown` / `ArrowUp` | Move to next / previous item                     |
+| `Alt + ArrowDown/Up`    | Jump by the configured `jump` amount (default 5) |
+| `Meta + ArrowDown/Up`   | Jump to the next / previous group                |
+| `Home` / `End`          | Move to first / last item                        |
+| `Enter`                 | Selects the active item (ignored when disabled)  |
