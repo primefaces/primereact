@@ -138,11 +138,11 @@ function CustomTreeNode({ node, index }: { node: TreeNodeType; index: number }) 
                             />
 
                             {leaf ? (
-                                <Icon className="pi pi-file" />
+                                <Tree.Icon className="pi pi-file" />
                             ) : expanded ? (
-                                <Icon className="pi pi-folder-open" />
+                                <Tree.Icon className="pi pi-folder-open" />
                             ) : (
-                                <Icon className="pi pi-folder" />
+                                <Tree.Icon className="pi pi-folder" />
                             )}
 
                             <Tree.Label>{node.label}</Tree.Label>
