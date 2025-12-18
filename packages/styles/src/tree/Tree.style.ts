@@ -19,7 +19,12 @@ export const styles = createStyles<TreeInstance>({
         header: 'p-tree-header',
         footer: 'p-tree-footer',
         rootChildren: 'p-tree-root-children',
-        node: ({ context }) => ['p-tree-node', { 'p-tree-node-leaf': context.leaf }],
+        node: ({ context }) => [
+            'p-tree-node',
+            {
+                'p-tree-node-leaf': context.leaf
+            }
+        ],
         content: ({ props, context }) => [
             'p-tree-node-content',
             {

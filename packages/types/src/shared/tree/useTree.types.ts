@@ -40,6 +40,10 @@ export interface TreeNode {
      */
     loading?: boolean;
     /**
+     * Whether the node is selectable.
+     */
+    selectable?: boolean;
+    /**
      * Whether the node is draggable.
      */
     draggable?: boolean;
@@ -47,6 +51,10 @@ export interface TreeNode {
      * Whether the node is droppable.
      */
     droppable?: boolean;
+    /**
+     * Used to pass all properties of the HTMLDivElement.
+     */
+    nodeProps?: React.HTMLAttributes<HTMLDivElement>;
     /**
      * Optional properties
      */

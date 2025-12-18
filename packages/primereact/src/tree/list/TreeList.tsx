@@ -64,7 +64,6 @@ export const TreeList = withComponent({
                     <TreeNode key={index} node={node} index={index} onValueChange={(e: TreeNodeValueChangeEvent) => tree?.props.onValueChange?.({ value: e.nodes })} onNodeDrop={tree?.props.onNodeDrop}>
                         <TreeContent>
                             <TreeToggle />
-                            {node.icon && <TreeIcon className={node.icon} />}
                             {tree?.props.selectionMode === 'checkbox' && (
                                 <Checkbox
                                     className={tree?.cx('pcCheckbox')}
@@ -75,6 +74,7 @@ export const TreeList = withComponent({
                                     pt={tree?.ptm('pcCheckbox')}
                                 />
                             )}
+                            {node.icon && <TreeIcon className={node.icon} />}
                             <TreeLabel>{resolve(node.label, instance)}</TreeLabel>
                         </TreeContent>
                         {isExpanded && <TreeList />}

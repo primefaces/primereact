@@ -25,7 +25,7 @@ export interface TreeLabelPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TreeLabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: TreeLabelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

@@ -86,6 +86,7 @@ export const TreeNode = withComponent({
                 'data-node-key': props.node?.key,
                 onKeyDown: (event: React.KeyboardEvent) => tree?.onKeyDown(event, props.node as TreeNodeType, level, expanded, leaf)
             },
+            props.node?.nodeProps,
             tree?.ptm('node'),
             ptmi('root')
         );

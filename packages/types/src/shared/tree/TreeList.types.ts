@@ -25,7 +25,7 @@ export interface TreeListPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TreeListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: TreeListPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
 }
 
 /**

@@ -25,7 +25,67 @@ export interface TreeNodePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TreeNodePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: TreeNodePassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Event fired when a node is dropped on this node.
+ */
+export interface TreeNodeDropEvent {
+    /**
+     * The original drag event.
+     */
+    originalEvent: React.DragEvent;
+    /**
+     * The value of the tree.
+     */
+    value: TreeNode[];
+    /**
+     * The dragged node.
+     */
+    dragNode: TreeNode;
+    /**
+     * The drop target node.
+     */
+    dropNode: TreeNode;
+    /**
+     * The index of the dropped node.
+     */
+    index: number;
+    /**
+     * Accept callback for validateDrop mode.
+     */
+    accept?: () => void;
+}
+
+/**
+ * Event fired when drag enters a node.
+ */
+export interface TreeNodeDragEnterEvent {
+    /**
+     * The node being entered.
+     */
+    node: TreeNode;
+}
+
+/**
+ * Event fired when drag leaves a node.
+ */
+export interface TreeNodeDragLeaveEvent {
+    /**
+     * The node being left.
+     */
+    node: TreeNode;
+}
+
+/**
+ * Event fired when the tree value changes due to drag-drop.
+ */
+export interface TreeNodeValueChangeEvent {
+    /**
+     * The updated tree nodes.
+     */
+    nodes: TreeNode[];
 }
 
 /**
@@ -40,6 +100,43 @@ export interface TreeNodeProps extends BaseComponentProps<TreeNodeInstance, unkn
      * Index of the node in the list of siblings.
      */
     index?: number | undefined;
+    /**
+     * Whether nodes can be dragged.
+     */
+    draggableNodes?: boolean | undefined;
+    /**
+     * Whether nodes can accept drops.
+     */
+    droppableNodes?: boolean | undefined;
+    /**
+     * Draggable scope identifier.
+     */
+    draggableScope?: string | string[] | undefined;
+    /**
+     * Droppable scope identifier.
+     */
+    droppableScope?: string | string[] | undefined;
+    /**
+     * Whether to validate drops before processing.
+     * @default false
+     */
+    validateDrop?: boolean;
+    /**
+     * Callback fired when a node is dropped on this node.
+     */
+    onNodeDrop?: (event: TreeNodeDropEvent) => void;
+    /**
+     * Callback fired when drag enters this node.
+     */
+    onNodeDragEnter?: (event: TreeNodeDragEnterEvent) => void;
+    /**
+     * Callback fired when drag leaves this node.
+     */
+    onNodeDragLeave?: (event: TreeNodeDragLeaveEvent) => void;
+    /**
+     * Callback fired when the tree value changes.
+     */
+    onValueChange?: (event: TreeNodeValueChangeEvent) => void;
 }
 
 /**

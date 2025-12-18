@@ -305,7 +305,7 @@ export const TreeContent = withComponent({
                 onDragEnd: onNodeDragEnd,
                 onDrop: onNodeDrop,
                 onClick: (event: React.MouseEvent) => {
-                    if (tree) {
+                    if (tree && treenode?.props.node?.selectable !== false) {
                         tree.onClick(event, treenode?.props.node as TreeNodeType, nodeTouched);
 
                         if (nodeTouched) {

@@ -25,7 +25,11 @@ export interface TreeTogglePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TreeTogglePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: TreeTogglePassThroughType<React.ButtonHTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the toggle icon's DOM element.
+     */
+    toggleIcon?: TreeTogglePassThroughType<React.SVGProps<SVGSVGElement>>;
 }
 
 /**
