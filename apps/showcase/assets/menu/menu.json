@@ -102,6 +102,10 @@
                             "to": "/docs/components/inputotp"
                         },
                         {
+                            "name": "InputTags",
+                            "to": "/docs/components/inputtags"
+                        },
+                        {
                             "name": "Knob",
                             "to": "/docs/components/knob"
                         },
@@ -171,6 +175,10 @@
                         {
                             "name": "Timeline",
                             "to": "/docs/components/timeline"
+                        },
+                        {
+                            "name": "Tree",
+                            "to": "/docs/components/tree"
                         }
                     ]
                 },
