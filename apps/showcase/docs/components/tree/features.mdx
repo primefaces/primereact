@@ -1,0 +1,121 @@
+---
+title: Tree
+description: Tree is used to display hierarchical data.
+component: tree
+---
+
+## Usage
+
+```tsx
+import { Tree } from 'primereact/tree';
+```
+
+```tsx
+<Tree>
+    <Tree.Header />
+    <Tree.List>
+        <Tree.Node>
+            <Tree.Content>
+                <Tree.Toggle />
+            </Tree.Content>
+        </Tree.Node>
+    </Tree.List>
+    <Tree.Footer />
+    <Tree.Empty />
+</Tree>
+```
+
+## Examples
+
+### Basic
+
+The basic example demonstrates a simple Tree implementation where nodes are expanded and collapsed on click.
+
+<DocDemoViewer name="tree:basic-demo" />
+
+### Node
+
+Tree nodes can be customized with templates using the `Tree.Node` components.
+
+<DocDemoViewer name="tree:node-demo" />
+
+### Controlled
+
+Tree state can be controlled programmatically with the `expandedKeys` property that defines the keys that are expanded. This property is a Map instance whose key is the key of a node and value is a boolean.
+
+<DocDemoViewer name="tree:controlled-demo" />
+
+### Selection
+
+#### Single
+
+Single node selection is configured by setting `selectionMode` as `single` along with `selectionKeys` property to manage the selection value binding.
+
+<DocDemoViewer name="tree:single-selection-demo" />
+
+#### Multiple
+
+More than one node is selectable by setting `selectionMode` to` multiple`. By default in multiple selection mode, metaKey press (e.g. `⌘`) is not necessary to add to existing selections. When the optional `metaKeySelection` is present, behavior is changed in a way that selecting a new node requires meta key to be present. Note that in touch enabled devices, Tree always ignores metaKey.
+
+In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.
+
+<DocDemoViewer name="tree:multiple-selection-demo" />
+
+#### Checkbox
+
+Selection of multiple nodes via checkboxes is enabled by configuring `selectionMode` as `checkbox`.
+
+In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has `checked` and `partialChecked` properties to represent the checked state of a node object to indicate selection.
+
+<DocDemoViewer name="tree:checkbox-selection-demo" />
+
+### Lazy Loading
+
+Lazy loading is demonstrated in this example where nodes are loaded on demand when a node is expanded.
+
+<DocDemoViewer name="tree:lazy-demo" />
+
+### Filter
+
+Filtering enables searching through the nodes. Place a `Tree.Filter` component inside `Tree.Header` to add a search input. Any input component can be used with the `as` prop and the filtering logic can be controlled with the `onChange` event.
+
+<DocDemoViewer name="tree:filter-demo" />
+
+### DragDrop
+
+#### Single
+
+Drag&Drop based reordering is enabled by adding the `draggableNodes` and `droppableNodes` properties..
+
+<DocDemoViewer name="tree:drag-drop-single-demo" />
+
+#### Multiple
+
+Nodes can be transferred between multiple trees as well. The `draggableScope` and `droppableScope` properties defines keys to restrict the actions between trees. In this example, nodes can only be transferred from start to the end.
+
+<DocDemoViewer name="tree:drag-drop-multiple-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Value to describe the component can either be provided with `aria-labelledby` or `aria-label` props. The root list element has a `tree` role whereas each list item has a `treeitem` role along with `aria-label`,
+
+`aria-selected` and `aria-expanded` attributes. In checkbox selection, `aria-checked` is used instead of `aria-selected`. The container element of a treenode has the `group` role. Checkbox and toggle icons are
+
+hidden from screen readers as their parent element with `treeitem` role and attributes are used instead for readers and keyboard support. The `aria-setsize`, `aria-posinset` and `aria-level` attributes are calculated
+
+implicitly and added to each treeitem.
+
+### Keyboard Support
+
+| Key             | Function                                                                                                                                                                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tab`           | Moves focus to the first selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the next focusable element in the page tab sequence.    |
+| `shift` + `tab` | Moves focus to the last selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the previous focusable element in the page tab sequence. |
+| `enter`         | Selects the focused treenode.                                                                                                                                                                                                                    |
+| `space`         | Selects the focused treenode.                                                                                                                                                                                                                    |
+| `down arrow`    | Moves focus to the next treenode.                                                                                                                                                                                                                |
+| `up arrow`      | Moves focus to the previous treenode.                                                                                                                                                                                                            |
+| `right arrow`   | If node is closed, opens the node otherwise moves focus to the first child node.                                                                                                                                                                 |
+| `left arrow`    | If node is open, closes the node otherwise moves focus to the parent node.                                                                                                                                                                       |
