@@ -1787,6 +1787,52 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
             'filePath': 'demo/tooltip/with-togglebutton-demo.tsx',
         },
     },
+    'tree': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/tree/basic-demo')),
+            'filePath': 'demo/tree/basic-demo.tsx',
+        },
+        'checkbox-selection-demo': {
+            'component': React.lazy(() => import('demo/tree/checkbox-selection-demo')),
+            'filePath': 'demo/tree/checkbox-selection-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/tree/controlled-demo')),
+            'filePath': 'demo/tree/controlled-demo.tsx',
+        },
+        'drag-drop-multiple-demo': {
+            'component': React.lazy(() => import('demo/tree/drag-drop-multiple-demo')),
+            'filePath': 'demo/tree/drag-drop-multiple-demo.tsx',
+        },
+        'drag-drop-single-demo': {
+            'component': React.lazy(() => import('demo/tree/drag-drop-single-demo')),
+            'filePath': 'demo/tree/drag-drop-single-demo.tsx',
+        },
+        'filter-demo': {
+            'component': React.lazy(() => import('demo/tree/filter-demo')),
+            'filePath': 'demo/tree/filter-demo.tsx',
+        },
+        'lazy-demo': {
+            'component': React.lazy(() => import('demo/tree/lazy-demo')),
+            'filePath': 'demo/tree/lazy-demo.tsx',
+        },
+        'multiple-selection-demo': {
+            'component': React.lazy(() => import('demo/tree/multiple-selection-demo')),
+            'filePath': 'demo/tree/multiple-selection-demo.tsx',
+        },
+        'node-demo': {
+            'component': React.lazy(() => import('demo/tree/node-demo')),
+            'filePath': 'demo/tree/node-demo.tsx',
+        },
+        'single-selection-demo': {
+            'component': React.lazy(() => import('demo/tree/single-selection-demo')),
+            'filePath': 'demo/tree/single-selection-demo.tsx',
+        },
+        'tree-pt': {
+            'component': React.lazy(() => import('demo/tree/tree-pt')),
+            'filePath': 'demo/tree/tree-pt.tsx',
+        },
+    },
     'uikit': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/uikit/basic-demo')),
