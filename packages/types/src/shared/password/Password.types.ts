@@ -28,7 +28,7 @@ export interface PasswordPassThrough {
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    input?: PasswordPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
+    pcInputText?: PasswordPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
     /**
      * Used to pass attributes to the portal's DOM element.
      */

@@ -44,6 +44,6 @@ export const InputOtpText = withComponent({
         );
 
         // @ts-expect-error: InputText expects a type prop, but we are using it as a text.
-        return <Component as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={inputotp?.ptm('text')} children={props.children} />;
+        return <Component as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={inputotp?.ptm('pcInputText')} children={props.children} />;
     }
 });

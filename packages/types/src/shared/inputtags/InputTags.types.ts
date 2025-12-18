@@ -32,7 +32,7 @@ export interface InputTagsPassThrough {
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    input?: InputTagsPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
+    pcInputText?: InputTagsPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
     /**
      * Used to pass attributes to the hidden input's DOM element.
      */

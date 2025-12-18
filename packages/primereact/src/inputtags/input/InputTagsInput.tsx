@@ -36,6 +36,6 @@ export const InputTagsInput = withComponent({
         );
 
         // @ts-expect-error: InputText expects a type prop, but we are using it as a inputtags input.
-        return <Component ref={inputtags?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={inputtags?.ptm('input')} children={props.children} />;
+        return <Component ref={inputtags?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={inputtags?.ptm('pcInputText')} children={props.children} />;
     }
 });

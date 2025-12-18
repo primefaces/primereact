@@ -28,7 +28,7 @@ export interface InputNumberPassThrough {
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    input?: InputNumberPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
+    pcInputText?: InputNumberPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
 }
 
 /**

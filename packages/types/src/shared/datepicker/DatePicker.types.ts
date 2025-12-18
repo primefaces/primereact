@@ -28,7 +28,7 @@ export interface DatePickerPassThrough {
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    input?: DatePickerPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    pcInputText?: DatePickerPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Used to pass attributes to the portal's DOM element.
      */

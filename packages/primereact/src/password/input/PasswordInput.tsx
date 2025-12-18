@@ -43,6 +43,6 @@ export const PasswordInput = withComponent({
         );
 
         // @ts-expect-error: InputText expects a type prop, but we are using it as a password input.
-        return <Component ref={password?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={password?.ptm('input')} children={props.children} />;
+        return <Component ref={password?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={password?.ptm('pcInputText')} children={props.children} />;
     }
 });

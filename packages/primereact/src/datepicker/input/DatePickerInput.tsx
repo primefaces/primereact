@@ -52,6 +52,6 @@ export const DatePickerInput = withComponent({
         );
 
         // @ts-expect-error: InputText expects a type prop, but we are using it as a input.
-        return <Component ref={datepicker?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('input')} children={props.children} />;
+        return <Component ref={datepicker?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('pcInputText')} children={props.children} />;
     }
 });

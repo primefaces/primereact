@@ -30,39 +30,36 @@ export const InputNumber = withComponent({
         );
 
         const createText = () => {
-            const textProps = mergeProps(
-                {
-                    defaultValue: state.value,
-                    id: props.inputId,
-                    className: cx('text'),
-                    role: 'spinbutton',
-                    'aria-valuemin': props.min,
-                    'aria-valuemax': props.max,
-                    'aria-valuenow': state.value,
-                    'aria-labelledby': props['aria-labelledby'],
-                    'aria-label': props['aria-label'],
-                    inputMode: props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal',
-                    name: props.name,
-                    disabled: props.disabled,
-                    readOnly: props.readonly,
-                    placeholder: props.placeholder,
-                    required: props.required,
-                    size: props.size,
-                    invalid: props.invalid,
-                    variant: props.variant,
-                    fluid: props.fluid,
-                    onInput: onInput,
-                    onKeyDown: onInputKeyDown,
-                    onKeyPress: onInputKeyPress,
-                    onClick: onInputClick,
-                    onPaste,
-                    onFocus: onInputFocus,
-                    onBlur: onInputBlur
-                },
-                ptm('text')
-            );
+            const textProps = mergeProps({
+                defaultValue: state.value,
+                id: props.inputId,
+                className: cx('text'),
+                role: 'spinbutton',
+                'aria-valuemin': props.min,
+                'aria-valuemax': props.max,
+                'aria-valuenow': state.value,
+                'aria-labelledby': props['aria-labelledby'],
+                'aria-label': props['aria-label'],
+                inputMode: props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal',
+                name: props.name,
+                disabled: props.disabled,
+                readOnly: props.readonly,
+                placeholder: props.placeholder,
+                required: props.required,
+                size: props.size,
+                invalid: props.invalid,
+                variant: props.variant,
+                fluid: props.fluid,
+                onInput: onInput,
+                onKeyDown: onInputKeyDown,
+                onKeyPress: onInputKeyPress,
+                onClick: onInputClick,
+                onPaste,
+                onFocus: onInputFocus,
+                onBlur: onInputBlur
+            });
 
-            return <InputText ref={inputRef} {...textProps} />;
+            return <InputText ref={inputRef} {...textProps} pt={ptm('pcInputText')} />;
         };
 
         const text = createText();

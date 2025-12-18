@@ -28,7 +28,7 @@ export interface InputOtpPassThrough {
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    text?: InputOtpPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
+    pcInputText?: InputOtpPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
 }
 
 /**
