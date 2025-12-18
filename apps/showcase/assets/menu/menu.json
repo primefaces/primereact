@@ -277,6 +277,10 @@
                             "to": "/docs/components/contextmenu"
                         },
                         {
+                            "name": "CommandMenu",
+                            "to": "/docs/components/commandmenu"
+                        },
+                        {
                             "name": "Menu",
                             "to": "/docs/components/menu"
                         }
