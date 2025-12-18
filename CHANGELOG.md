@@ -1,5 +1,19 @@
 # Changelog
 
+## [11.0.0-alpha.9](https://github.com/primefaces/primereact/tree/11.0.0-alpha.9) (2025-12-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.8...11.0.0-alpha.9)
+
+**Implemented New Features and Enhancements:**
+
+- New Component: Tree [\#8441](https://github.com/primefaces/primereact/issues/8441)
+- Refactor Component: Carousel [\#8438](https://github.com/primefaces/primereact/issues/8438)
+- New Component: CommandMenu [\#8436](https://github.com/primefaces/primereact/issues/8436)
+- New Component: InputTags [\#8425](https://github.com/primefaces/primereact/issues/8425)
+- Add Component Breadcrumb [\#8424](https://github.com/primefaces/primereact/issues/8424)
+- Add Component ContextMenu [\#8423](https://github.com/primefaces/primereact/issues/8423)
+- Add Component Menu [\#8411](https://github.com/primefaces/primereact/issues/8411)
+
 ## [11.0.0-alpha.8](https://github.com/primefaces/primereact/tree/11.0.0-alpha.8) (2025-12-01)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.7...11.0.0-alpha.8)
