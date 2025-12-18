@@ -30,9 +30,7 @@ export interface CarouselItemPassThrough {
 /**
  * Defines valid properties in CarouselItem component.
  */
-export interface CarouselItemProps extends BaseComponentProps<CarouselItemInstance, unknown, CarouselItemPassThrough> {
-    size?: number;
-}
+export interface CarouselItemProps extends BaseComponentProps<CarouselItemInstance, unknown, CarouselItemPassThrough> {}
 
 /**
  * Defines valid state in CarouselItem component.

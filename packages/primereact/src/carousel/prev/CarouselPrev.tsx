@@ -17,11 +17,11 @@ export const CarouselPrev = withComponent({
     render(instance) {
         const { props, ptmi, carousel } = instance;
 
-        const disabled = carousel?.state.prevDisabled;
+        const disabled = carousel?.state.isPrevDisabled || props.disabled;
         const rootProps = mergeProps(
             {
                 className: carousel?.cx('prev', { disabled }),
-                onClick: carousel?.handlePrev,
+                onClick: carousel?.prev,
                 disabled
             },
             carousel?.ptm('prev'),

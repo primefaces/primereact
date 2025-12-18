@@ -24,12 +24,13 @@ export const Carousel = withComponent({
         return carousel;
     },
     render(instance) {
-        const { id, props, ptmi, cx } = instance;
+        const { id, props, state, ptmi, cx } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                'data-swiping': state.swiping
             },
             ptmi('root')
         );

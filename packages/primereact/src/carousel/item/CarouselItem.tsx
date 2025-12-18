@@ -15,19 +15,24 @@ export const CarouselItem = withComponent({
         return { carousel };
     },
     render(instance) {
-        const { props, ptmi, carousel } = instance;
+        const { id, props, ptmi, carousel } = instance;
 
         const rootProps = mergeProps(
             {
+                id,
                 className: carousel?.cx('item'),
                 style: {
-                    '--p-slide-size': `${props.size}%`
-                }
+                    ...(carousel?.itemStyles || {}),
+                    ...(carousel?.sx('item') || {})
+                },
+                'data-value': props.value,
+                'data-item': '',
+                'data-inview': 'false'
             },
             carousel?.ptm('item'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children} ref={carousel?.addSlideRef} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

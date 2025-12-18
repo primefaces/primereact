@@ -33,8 +33,8 @@ export const CarouselIndicators = withComponent({
                 children={
                     props.children ?? (
                         <>
-                            {carousel?.state?.snapPoints.map((snap, i) => (
-                                <CarouselIndicator key={i} snap={snap} index={i} />
+                            {Array.from(carousel?.state.snapPoints ?? []).map((_, i) => (
+                                <CarouselIndicator key={i} page={i} />
                             ))}
                         </>
                     )

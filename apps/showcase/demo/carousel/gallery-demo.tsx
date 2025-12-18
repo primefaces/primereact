@@ -1,5 +1,6 @@
 'use client';
 
+import type { useCarouselChangeEvent } from '@primereact/types/shared/carousel';
 import { Carousel } from 'primereact/carousel';
 import * as React from 'react';
 
@@ -21,38 +22,27 @@ function GalleryDemo() {
     return (
         <div className="mt-8 mb-16">
             <div className="max-w-3xl mx-auto">
-                <Carousel slide={selectedImage} onSlideChange={(e) => setSelectedImage(e.value)}>
+                <Carousel slide={selectedImage} onSlideChange={(e: useCarouselChangeEvent) => setSelectedImage(Number(e.value ?? 0))} align="center">
                     <Carousel.Content className="h-[400px]">
                         {images.map((_, i) => (
-                            <Carousel.Item key={i}>
-                                <div className="p-1 h-full">
-                                    <img src={images[i]} alt={`Image ${i + 1}`} draggable={false} className="h-full w-full object-coverselect-none" />
-                                </div>
+                            <Carousel.Item key={i} className="basis-full! ">
+                                <img draggable={false} src={images[i]} alt={`Image ${i + 1}`} className="h-full w-full object-cover select-none" />
                             </Carousel.Item>
                         ))}
                     </Carousel.Content>
-
-                    <Carousel className="mt-4" spacing={4} align="center" slide={selectedImage}>
-                        <Carousel.Content className="h-[90px]">
-                            {images.map((_, i) => (
-                                <Carousel.Item
-                                    key={i}
-                                    size={20}
-                                    onClick={() => setSelectedImage(i)}
-                                    className={`cursor-pointer transition-opacity ${selectedImage === i ? '' : 'opacity-60 hover:opacity-40'}`}
-                                >
-                                    <div className="p-1 h-full">
-                                        <img
-                                            src={images[i]}
-                                            alt={`Image ${i + 1}`}
-                                            draggable={false}
-                                            className="h-full w-full object-coverselect-none"
-                                        />
-                                    </div>
-                                </Carousel.Item>
-                            ))}
-                        </Carousel.Content>
-                    </Carousel>
+                </Carousel>
+                <Carousel className="mt-3" spacing={8} align="center" slide={selectedImage}>
+                    <Carousel.Content className="h-[90px]">
+                        {images.map((_, i) => (
+                            <Carousel.Item
+                                key={i}
+                                onClick={() => setSelectedImage(i)}
+                                className={`cursor-pointer basis-1/4! transition-opacity ${selectedImage === i ? '' : 'opacity-60 hover:opacity-40'}`}
+                            >
+                                <img draggable={false} src={images[i]} alt={`Image ${i + 1}`} className="h-full w-full object-cover select-none" />
+                            </Carousel.Item>
+                        ))}
+                    </Carousel.Content>
                 </Carousel>
             </div>
         </div>

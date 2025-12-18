@@ -2,680 +2,438 @@ import { withHeadless } from '@primereact/core/headless';
 import * as React from 'react';
 import { defaultProps } from './useCarousel.props';
 
-type CarouselAnimation = {
-    start: () => void;
-    stop: () => void;
-    reset: () => void;
-};
+const ITEM_SELECTOR = '[data-item]';
 
-function useCarouselAnimation(update: () => void, render: (alpha: number) => void): CarouselAnimation {
-    const frameId = React.useRef(0);
-    const lastTimeStamp = React.useRef<number | null>(null);
-    const accTime = React.useRef(0);
-    const fixedStep = 1000 / 60;
+function areSetsEqual<T>(a: Set<T>, b: Set<T>) {
+    if (a.size !== b.size) return false;
 
-    const animate = (timeStamp: number) => {
-        if (!frameId.current) return;
-
-        if (!lastTimeStamp.current) {
-            lastTimeStamp.current = timeStamp;
-            update();
-            update();
-        }
-
-        const timeElapsed = timeStamp - lastTimeStamp.current;
-
-        lastTimeStamp.current = timeStamp;
-        accTime.current += timeElapsed;
-
-        while (accTime.current >= fixedStep) {
-            update();
-            accTime.current -= fixedStep;
-        }
-
-        const alpha = accTime.current / fixedStep;
-
-        render(alpha);
-
-        if (frameId.current) frameId.current = requestAnimationFrame(animate);
-    };
-
-    const start = () => {
-        if (!frameId.current) frameId.current = requestAnimationFrame(animate);
-    };
-
-    const stop = () => {
-        cancelAnimationFrame(frameId.current);
-        frameId.current = 0;
-        lastTimeStamp.current = null;
-        accTime.current = 0;
-    };
-
-    function reset(): void {
-        lastTimeStamp.current = null;
-        accTime.current = 0;
+    for (const value of a) {
+        if (!b.has(value)) return false;
     }
 
-    React.useEffect(() => {
-        const handleVisibilityChange = () => {
-            if (document.hidden) {
-                reset();
-            }
-        };
-
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-
-        return () => {
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-        };
-    }, []);
-
-    React.useEffect(() => {
-        return () => stop();
-    }, []);
-
-    return { start, stop, reset };
+    return true;
 }
-
-const DAMPENING_FACTOR = 0.5;
-
-const applyDampening = (delta: number) => {
-    const distance = Math.abs(delta);
-
-    const threshold = 20;
-
-    if (distance <= threshold) {
-        return delta;
-    }
-
-    const overflow = distance - threshold;
-
-    const maxStretch = 80 / DAMPENING_FACTOR;
-
-    const dampened = threshold + (maxStretch * overflow) / (overflow + maxStretch);
-
-    return Math.sign(delta) * dampened;
-};
-
-type SwipeDirection = 1 | -1 | 0;
-type LoopPoint = { index: number; loopPoint: number; target: () => number };
 
 export const useCarousel = withHeadless({
     name: 'useCarousel',
     defaultProps,
     setup({ props }) {
-        const { loop, orientation, align, slide, onSlideChange } = props;
-        const [isSwiping, setIsSwiping] = React.useState(false);
-        const [activeIndex, setActiveIndex] = React.useState(slide || 0);
-        const [slideSizes, setSlideSizes] = React.useState<number[]>([]);
-        const [canLoop, setCanLoop] = React.useState<boolean>(loop || false);
-        const [snaps, setSnaps] = React.useState<number[]>([]);
-        const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
-        const [snapPoints, setSnapPoints] = React.useState<number[]>([]);
-        const [slidesLength, setSlidesLength] = React.useState<number>(0);
-        const [viewSize, setViewSize] = React.useState<number>(0);
-        const [prevDisabled, setPrevDisabled] = React.useState<boolean>(false);
-        const [nextDisabled, setNextDisabled] = React.useState<boolean>(false);
+        const [swiping, setSwiping] = React.useState(false);
+        const [isNextDisabled, setIsNextDisabled] = React.useState(false);
+        const [isPrevDisabled, setIsPrevDisabled] = React.useState(false);
+        const [snapPoints, setSnapPoints] = React.useState<Set<number>>(new Set());
+        const [pageState, setPageState] = React.useState(props.page ?? props.defaultPage ?? 0);
 
-        const loopPointsRef = React.useRef<LoopPoint[]>([]);
-        const swipeDirectionRef = React.useRef<SwipeDirection>(0);
-        const prevDeltaRef = React.useRef<number>(0);
-        const carouselRef = React.useRef<HTMLDivElement>(null);
-        const slideRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-        const swipeStartTimeRef = React.useRef<number | null>(null);
-        const swipeStartPointerRef = React.useRef<{ x: number; y: number } | null>(null);
-        const prevSwipeAmountRef = React.useRef<number>(0);
-        const recentSwipeRef = React.useRef<{ time: number; startX: number; startY: number; moved: boolean } | null>(null);
+        const contentRef = React.useRef<HTMLDivElement>(null);
+        const snapPointsRef = React.useRef<Set<number>>(new Set());
+        const scrollSnapsRef = React.useRef<number[]>([]);
+        const initialPageAppliedRef = React.useRef(false);
 
-        const previousPosition = React.useRef(0);
-        const position = React.useRef(0);
-        const target = React.useRef(0);
+        const mutationObserverRef = React.useRef<MutationObserver>(null);
+        const intersectionObserverRef = React.useRef<IntersectionObserver>(null);
+        const resizeObserverRef = React.useRef<ResizeObserver>(null);
+        const scrollTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+        const wheelTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
-        const velocity = 0.09;
+        const swipeStartPointRef = React.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+        const isRealSwipeRef = React.useRef(false);
 
-        const update = () => {
-            previousPosition.current = position.current;
+        function computeSnapPoints() {
+            const content = contentRef.current;
 
-            const delta = target.current - position.current;
+            if (!content) return [];
 
-            if (Math.abs(delta) < 0.5) {
-                position.current = target.current;
-                animate.stop();
+            const isHorizontal = props.orientation !== 'vertical';
+            const trackSize = isHorizontal ? content.clientWidth : content.clientHeight;
+            const maxOffset = Math.max(0, isHorizontal ? content.scrollWidth - trackSize : content.scrollHeight - trackSize);
+            const snaps: number[] = [];
 
-                return;
-            }
+            scrollSnapsRef.current = [];
 
-            position.current += delta * velocity;
-        };
+            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => {
+                const offset = isHorizontal ? item.offsetLeft : item.offsetTop;
+                const size = isHorizontal ? item.clientWidth : item.clientHeight;
 
-        const render = (alpha: number) => {
-            const value = position.current * alpha + previousPosition.current * (1 - alpha);
+                let snapPoint = offset;
 
-            if (canLoop) {
-                normalizeSwipeAmount(value);
-            } else {
-                setSwipeAmount(value);
-            }
-        };
+                if (props.align === 'center') {
+                    snapPoint = offset - (trackSize - size) / 2;
+                } else if (props.align === 'end') {
+                    snapPoint = offset - (trackSize - size);
+                }
 
-        const animate = useCarouselAnimation(update, render);
+                const clamped = Math.max(0, Math.min(snapPoint, maxOffset));
 
-        const isVertical = React.useMemo(() => orientation === 'vertical', [orientation]);
-        const contentSize = React.useMemo(() => -snaps[snaps.length - 1] + slideSizes[slidesLength - 1], [snaps, slideSizes, slidesLength]);
-        const { minOffset, maxOffset } = React.useMemo(() => {
-            if (!canLoop) {
-                return {
-                    minOffset: snaps[snaps.length - 1] + viewSize - slideSizes[slideSizes.length - 1],
-                    maxOffset: snaps[0]
-                };
-            } else {
-                return { minOffset: scrollSnaps[scrollSnaps.length - 1] - slideSizes[slideSizes.length - 1], maxOffset: scrollSnaps[0] };
-            }
-        }, [scrollSnaps, snaps, slideSizes, canLoop, viewSize]);
+                scrollSnapsRef.current.push(clamped);
 
-        const calculateSnaps = React.useCallback(() => {
-            if (!slideRefs.current || viewSize === 0 || !carouselRef.current || viewSize === 0 || contentSize === 0) return;
-
-            const container = carouselRef.current;
-            const containerRect = container.getBoundingClientRect();
-            const containerSize = container[isVertical ? 'offsetHeight' : 'offsetWidth'] || 0;
-
-            const snaps = slideRefs.current.map((slide) => {
-                return Math.abs((isVertical ? containerRect.top : containerRect.left) - (slide?.getBoundingClientRect()[isVertical ? 'top' : 'left'] || 0)) * -1;
+                snaps.push(clamped);
             });
 
-            const scrollSnaps: number[] = [];
+            const newSnapPoints = new Set(snaps.map(Number));
 
-            for (let i = 0; i < slideRefs.current.length; i++) {
-                const slide = slideRefs.current[i];
+            if (areSetsEqual(snapPoints, newSnapPoints)) return;
 
-                if (!slide) continue;
+            snapPointsRef.current = newSnapPoints;
+            setSnapPoints(newSnapPoints);
+        }
 
-                const slideRect = slide.getBoundingClientRect();
-                const slideSize = isVertical ? slideRect.height : slideRect.width;
-                const startOffset = isVertical ? slideRect.top - containerRect.top : slideRect.left - containerRect.left;
+        function setPage(page: number) {
+            if (!props.loop) {
+                const size = snapPointsRef.current.size || snapPoints.size;
+                let isNextDisabled = false;
+                let isPrevDisabled = false;
 
-                let offset = 0;
-
-                if (align === 'start') {
-                    offset = -startOffset;
-                } else if (align === 'center') {
-                    offset = -startOffset + (containerSize - slideSize) / 2;
-                } else if (align === 'end') {
-                    offset = -startOffset + (containerSize - slideSize);
+                if (page === 0) {
+                    isPrevDisabled = true;
                 }
 
-                if (canLoop) {
-                    scrollSnaps.push(offset);
-                } else {
-                    const minClamp = Math.min(0, viewSize - contentSize);
-                    const clamped = Math.max(minClamp, Math.min(0, offset));
-
-                    scrollSnaps.push(clamped);
+                if (page === size - 1) {
+                    isNextDisabled = true;
                 }
+
+                setIsNextDisabled(isNextDisabled);
+                setIsPrevDisabled(isPrevDisabled);
             }
 
-            let lastSnap: number | undefined;
+            setPageState(page);
 
-            const snapPoints: number[] = [];
+            props.onPageChange?.({ value: page });
+            props.onSlideChange?.({ value: page });
+        }
 
-            scrollSnaps.forEach((snap, index) => {
-                if (snap !== lastSnap) {
-                    snapPoints.push(snap);
-                }
+        function setToClosest() {
+            const content = contentRef.current;
 
-                lastSnap = scrollSnaps[index];
+            const points = snapPointsRef.current;
+
+            if (!content || points.size === 0) return;
+
+            const scrollPos = props.orientation === 'horizontal' ? content.scrollLeft : content.scrollTop;
+
+            const closestSnapPoint = Array.from(points).reduce((closest, point) => {
+                return Math.abs(point - scrollPos) < Math.abs(closest - scrollPos) ? point : closest;
+            }, Infinity);
+
+            const index = Array.from(points).indexOf(closestSnapPoint);
+
+            setPage(index);
+
+            return index;
+        }
+
+        function scrollToPage(page?: number, instant = false) {
+            const points = snapPointsRef.current;
+
+            if (points.size === 0) return;
+
+            const target = page ?? pageState;
+            const clampedPage = props.loop ? (target + points.size) % points.size : Math.max(0, Math.min(target, points.size - 1));
+
+            setPage(clampedPage);
+            scrollTo(Array.from(points)[clampedPage], instant);
+        }
+
+        function next() {
+            scrollToPage(pageState + 1);
+        }
+
+        function prev() {
+            scrollToPage(pageState - 1);
+        }
+
+        function scrollTo(snapPoint: number, instant = false) {
+            const content = contentRef.current;
+
+            if (!content) return;
+
+            content.scrollTo({
+                [props.orientation === 'horizontal' ? 'left' : 'top']: snapPoint,
+                behavior: instant ? 'instant' : 'smooth'
+            });
+        }
+
+        function scrollToSlide(slide: number) {
+            const points = snapPointsRef.current;
+            const snaps = scrollSnapsRef.current;
+
+            if (points.size === 0 || snaps.length === 0) return;
+
+            const clampedSlide = Math.max(0, Math.min(slide, snaps.length - 1));
+
+            const snap = snaps[clampedSlide];
+
+            scrollTo(snap);
+
+            const page = Array.from(points).indexOf(snap);
+
+            setPage(page);
+        }
+
+        React.useLayoutEffect(() => {
+            const content = contentRef.current;
+
+            if (!content) return;
+
+            resizeObserverRef.current = new ResizeObserver(() => {
+                computeSnapPoints();
+                const closest = setToClosest();
+
+                scrollToPage(closest ?? pageState, true);
             });
 
-            setSnaps(snaps);
-            setScrollSnaps(scrollSnaps);
-            setSnapPoints(snapPoints);
-        }, [isVertical, align, viewSize, canLoop, contentSize]);
+            resizeObserverRef.current.observe(content);
+            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => resizeObserverRef.current?.observe(item));
 
-        const getSwipeAmount = (): number => {
-            if (!carouselRef.current) return 0;
-
-            const value = getComputedStyle(carouselRef.current).getPropertyValue(isVertical ? '--p-swipe-amount-y' : '--p-swipe-amount-x') || '0';
-
-            return parseFloat(value || '0') || 0;
-        };
-
-        const setSwipeAmount = (amount: number) => {
-            if (!carouselRef.current) return;
-
-            if (amount === undefined) return;
-
-            if (isVertical) {
-                carouselRef.current.style.setProperty('--p-swipe-amount-y', `${amount ?? 0}px`);
-                carouselRef.current.style.setProperty('--p-swipe-amount-x', `0px`);
-            } else {
-                carouselRef.current.style.setProperty('--p-swipe-amount-x', `${amount ?? 0}px`);
-                carouselRef.current.style.setProperty('--p-swipe-amount-y', `0px`);
-            }
-        };
-
-        const normalizeSwipeAmount = React.useCallback(
-            (amount: number) => {
-                if (contentSize === 0 || slidesLength === 0 || !carouselRef.current) return;
-
-                let computedAmount = amount;
-
-                if (!canLoop) {
-                    if (computedAmount < minOffset) {
-                        computedAmount = minOffset + applyDampening(computedAmount - minOffset);
-                    } else if (computedAmount > maxOffset) {
-                        computedAmount = maxOffset + applyDampening(computedAmount - maxOffset);
-                    }
-                } else {
-                    while (computedAmount <= minOffset) computedAmount += contentSize;
-                    while (computedAmount > maxOffset) computedAmount -= contentSize;
-
-                    if (computedAmount < minOffset) {
-                        computedAmount = minOffset + applyDampening(computedAmount - minOffset);
-                    } else if (computedAmount > maxOffset) {
-                        computedAmount = maxOffset + applyDampening(computedAmount - maxOffset);
-                    }
-                }
-
-                if (Object.is(computedAmount, -0)) computedAmount = 0;
-
-                setSwipeAmount(computedAmount);
-                updateLoopPoints();
-            },
-            [isVertical, canLoop, contentSize, slidesLength, minOffset, maxOffset]
-        );
-
-        const findClosestSnapIndex = (currentOffset: number, snaps: number[], contentSize: number, isLoop: boolean) => {
-            let closestIndex = 0;
-            let minDistance = Infinity;
-
-            snaps.forEach((snap, index) => {
-                if (isLoop) {
-                    const distances = [Math.abs(currentOffset - snap), Math.abs(currentOffset - (snap + contentSize)), Math.abs(currentOffset - (snap - contentSize))];
-                    const distance = Math.min(...distances);
-
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestIndex = index;
-                    }
-                } else {
-                    const distance = Math.abs(currentOffset - snap);
-
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestIndex = index;
-                    }
-                }
-            });
-
-            return closestIndex;
-        };
-
-        const slideTo = (index?: number, offset?: number) => {
-            let newIndex: number | undefined = index;
-
-            if (viewSize === 0) return;
-
-            if (!(index === undefined || index < 0 || index >= slidesLength)) {
-                newIndex = Math.min(index, scrollSnaps.length - 1);
-            } else if (offset !== undefined) {
-                newIndex = findClosestSnapIndex(offset, scrollSnaps, contentSize, canLoop);
-            } else {
-                return;
-            }
-
-            const currentOffset = getSwipeAmount();
-            let targetOffset = newIndex !== undefined ? scrollSnaps[newIndex] : offset || 0;
-
-            if (canLoop) {
-                const loopPoints = loopPointsRef.current;
-                const relevantLoopPoint = loopPoints.find((point) => point.index === newIndex);
-
-                if (relevantLoopPoint) {
-                    targetOffset -= relevantLoopPoint.target();
-                }
-            }
-
-            let delta = 0;
-
-            if (canLoop && targetOffset <= maxOffset && targetOffset >= 0 && scrollSnaps[scrollSnaps.length - 1] >= currentOffset) {
-                delta = -contentSize - currentOffset + targetOffset;
-            } else {
-                delta = targetOffset - currentOffset;
-            }
-
-            position.current = currentOffset;
-            target.current = currentOffset + delta;
-            animate.start();
-
-            setActiveIndex(newIndex);
-
-            if (onSlideChange && newIndex !== activeIndex) {
-                onSlideChange({ value: newIndex });
-            }
-        };
-
-        const updateLoopPoints = React.useCallback(() => {
-            if (!loop || !slideRefs.current || snaps.length === 0 || slideSizes.length === 0 || scrollSnaps.length === 0 || viewSize === 0 || slidesLength === 0) return;
-
-            const ascItems = Array.from({ length: slidesLength }, (_, index) => index);
-            const descItems = Array.from({ length: slidesLength }, (_, index) => slidesLength - 1 - index);
-            const tolerance = 0.5;
-
-            function removeSlideSizes(indexes: number[], from: number): number {
-                return indexes.reduce((a: number, i) => {
-                    return a - slideSizes[i];
-                }, from);
-            }
-
-            const slidesInGap = (indexes: number[], gap: number) => {
-                return indexes.reduce((a: number[], i) => {
-                    const remainingGap = removeSlideSizes(a, gap);
-
-                    return remainingGap > 0 ? a.concat([i]) : a;
-                }, []);
-            };
-
-            function findSlideBounds(offset: number) {
-                return snaps.map((snap, index) => ({
-                    start: snap - slideSizes[index] + tolerance + offset,
-                    end: snap + viewSize - tolerance + offset
-                }));
-            }
-
-            function findLoopPoints(indexes: number[], offset: number, isEndEdge: boolean) {
-                const slideBounds = findSlideBounds(offset);
-
-                return indexes.map((index) => {
-                    const initial = isEndEdge ? 0 : -contentSize;
-                    const altered = isEndEdge ? contentSize : 0;
-                    const boundEdge = isEndEdge ? 'end' : 'start';
-                    const loopPoint = slideBounds[index][boundEdge];
-
-                    return {
-                        index,
-                        loopPoint,
-                        target: () => (getSwipeAmount() > loopPoint ? initial : altered)
-                    };
-                });
-            }
-
-            const startPoints = () => {
-                const gap = viewSize;
-                const indexes = slidesInGap(descItems, gap);
-
-                return findLoopPoints(indexes, contentSize, false);
-            };
-
-            const endPoints = () => {
-                const gap = viewSize - scrollSnaps[0] - 1;
-                const indexes = slidesInGap(ascItems, gap);
-
-                return findLoopPoints(indexes, -contentSize, true);
-            };
-
-            const loopPoints: LoopPoint[] = startPoints().concat(endPoints());
-
-            loopPointsRef.current = loopPoints;
-
-            const canLoop = loopPoints.every(({ index }) => {
-                const otherIndexes = ascItems.filter((i) => i !== index);
-
-                return removeSlideSizes(otherIndexes, viewSize) <= 0.1;
-            });
-
-            setCanLoop(canLoop);
-
-            if (!canLoop) return;
-
-            loopPoints.forEach((loopPoint) => {
-                const { target } = loopPoint;
-                const shiftLocation = target();
-
-                // if (shiftLocation === swipeAmount[swipeAxis]) return;
-
-                const slide = slideRefs.current[loopPoint.index];
-
-                if (slide) {
-                    const transformValue = `translate3d(${isVertical ? '0px' : `${shiftLocation}px`}, ${isVertical ? `${shiftLocation}px` : '0px'}, 0px)`;
-
-                    slide.style.transform = transformValue;
-                }
-            });
-        }, [loop, orientation, snaps, slideSizes, scrollSnaps, slidesLength, viewSize, contentSize, isVertical]);
-
-        const addSlideRef = (el: HTMLDivElement | null) => {
-            if (el && !slideRefs.current.includes(el)) {
-                slideRefs.current.push(el);
-            }
-        };
-
-        const handlePrev = () => {
-            if (!canLoop && getSwipeAmount() >= maxOffset) return;
-
-            animate.stop();
-            const prevIndex = canLoop ? (activeIndex - 1 + scrollSnaps.length) % scrollSnaps.length : Math.max(0, activeIndex - 1);
-
-            slideTo(prevIndex);
-        };
-
-        const handleNext = () => {
-            if (!canLoop && getSwipeAmount() <= minOffset) return;
-
-            animate.stop();
-            const nextIndex = canLoop ? (activeIndex + 1) % scrollSnaps.length : Math.min(scrollSnaps.length - 1, activeIndex + 1);
-
-            slideTo(nextIndex);
-        };
-
-        const handlePointerDown = (event: PointerEvent) => {
-            if (event.button === 2) return;
-
-            animate.stop();
-            (event.target as HTMLElement).setPointerCapture(event.pointerId);
-
-            setIsSwiping(true);
-
-            const time = new Date().getTime();
-
-            swipeStartTimeRef.current = time;
-            swipeStartPointerRef.current = { x: event.clientX, y: event.clientY };
-            prevSwipeAmountRef.current = getSwipeAmount();
-
-            recentSwipeRef.current = {
-                time,
-                startX: event.clientX,
-                startY: event.clientY,
-                moved: false
-            };
-        };
-
-        const handlePointerMove = (event: PointerEvent) => {
-            if (!isSwiping || !swipeStartPointerRef.current || !swipeStartTimeRef.current || !carouselRef.current) return;
-
-            if (recentSwipeRef.current) {
-                recentSwipeRef.current.moved = true;
-            }
-
-            const delta = isVertical ? event.clientY - swipeStartPointerRef.current.y : event.clientX - swipeStartPointerRef.current.x;
-
-            const prevDelta = prevDeltaRef.current;
-
-            if (delta > prevDelta) {
-                swipeDirectionRef.current = 1;
-            } else if (delta < prevDelta) {
-                swipeDirectionRef.current = -1;
-            }
-
-            prevDeltaRef.current = delta;
-
-            const prevSwipeAmount = prevSwipeAmountRef.current;
-
-            const totalOffset = prevSwipeAmount + delta;
-
-            carouselRef.current.style.userSelect = 'none';
-            normalizeSwipeAmount(totalOffset);
-        };
-
-        const handlePointerUp = (event: PointerEvent) => {
-            if (event.target instanceof HTMLElement) {
-                event.target.releasePointerCapture(event.pointerId);
-            }
-
-            if (!swipeStartPointerRef.current || !swipeStartTimeRef.current || !carouselRef.current) {
-                setIsSwiping(false);
-
-                return;
-            }
-
-            const elapsed = Date.now() - swipeStartTimeRef.current;
-            const distance = getSwipeAmount() - prevSwipeAmountRef.current;
-            const velocity = Math.abs(distance / elapsed);
-
-            if (velocity > 0.3 && Math.abs(distance) < 25) {
-                slideTo((activeIndex + swipeDirectionRef.current + slidesLength) % slidesLength);
-            } else {
-                const currentOffset = getSwipeAmount();
-                const closestIndex = findClosestSnapIndex(currentOffset, scrollSnaps, contentSize, canLoop);
-
-                slideTo(closestIndex);
-            }
-
-            carouselRef.current.style.userSelect = '';
-            setIsSwiping(false);
-            swipeStartPointerRef.current = null;
-            swipeStartTimeRef.current = null;
-
-            setTimeout(() => {
-                recentSwipeRef.current = null;
-            }, 100);
-        };
-
-        const handleClick = (event: MouseEvent) => {
-            if (isSwiping) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                return;
-            }
-
-            if (recentSwipeRef.current) {
-                const elapsed = Date.now() - recentSwipeRef.current.time;
-                const deltaX = Math.abs(event.clientX - recentSwipeRef.current.startX);
-                const deltaY = Math.abs(event.clientY - recentSwipeRef.current.startY);
-                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-                const significantMovement = recentSwipeRef.current.moved && elapsed > 150;
-                const tooLong = elapsed > 500;
-                const tooFar = distance > 25;
-
-                if (significantMovement || tooLong || tooFar) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    return;
-                }
-            }
-        };
-
-        React.useEffect(() => {
-            calculateSnaps();
-        }, [calculateSnaps]);
-
-        React.useEffect(() => {
-            if (scrollSnaps.length === 0 || snapPoints.length === 0 || contentSize === 0) return;
-
-            slideTo(props.slide !== undefined ? props.slide : 0);
-        }, [props.slide, scrollSnaps, snapPoints, canLoop, contentSize]);
-
-        React.useEffect(() => {
-            if (canLoop) return;
-
-            setPrevDisabled(activeIndex === 0 && !canLoop);
-            setNextDisabled(activeIndex === snapPoints.length - 1 && !canLoop);
-        }, [activeIndex, canLoop, snapPoints]);
-
-        React.useEffect(() => {
-            setSlidesLength(slideRefs.current.length);
-        }, []);
-
-        React.useEffect(() => {
-            setViewSize(carouselRef.current?.[isVertical ? 'offsetHeight' : 'offsetWidth'] || 0);
-
-            const observer = new ResizeObserver(() => {
-                setViewSize(carouselRef.current?.[isVertical ? 'offsetHeight' : 'offsetWidth'] || 0);
-            });
-
-            if (carouselRef.current) {
-                observer.observe(carouselRef.current);
-            }
+            computeSnapPoints();
 
             return () => {
-                observer.disconnect();
+                resizeObserverRef.current?.disconnect();
+                resizeObserverRef.current = null;
             };
-        }, [carouselRef]);
-
-        React.useEffect(() => {
-            slideRefs.current = [];
         }, []);
 
+        React.useLayoutEffect(() => {
+            if (initialPageAppliedRef.current) return;
+
+            const size = snapPointsRef.current.size || snapPoints.size;
+
+            if (size === 0) return;
+
+            initialPageAppliedRef.current = true;
+            scrollToPage(props.defaultPage ?? 0, true);
+        }, [snapPoints, props.page, props.defaultPage]);
+
         React.useEffect(() => {
-            if (!slideRefs.current) return;
+            if (props.page === undefined || props.page === null || props.slide !== undefined || props.slide !== null) return;
 
-            const observer = new ResizeObserver((entries) => {
-                entries.forEach((entry) => {
-                    const index = slideRefs.current.findIndex((slide) => slide === entry.target);
+            if (snapPointsRef.current.size === 0 && snapPoints.size === 0) return;
 
-                    if (index === -1) return;
+            scrollToPage(props.page);
+        }, [props.page, snapPoints]);
 
-                    setSlideSizes((prev) => {
-                        const newSizes = [...prev];
+        React.useEffect(() => {
+            if (props.slide === undefined || props.slide === null) return;
 
-                        newSizes[index] = entry.contentRect[isVertical ? 'height' : 'width'];
+            if (snapPointsRef.current.size === 0 && snapPoints.size === 0) return;
 
-                        return newSizes;
+            scrollToSlide(props.slide);
+        }, [props.slide]);
+
+        React.useEffect(() => {
+            const content = contentRef.current;
+
+            if (!content) return;
+
+            mutationObserverRef.current = new MutationObserver((mutations) => {
+                mutations.forEach(() => {
+                    computeSnapPoints();
+                    requestAnimationFrame(() => {
+                        const closest = setToClosest();
+
+                        scrollToPage(closest ?? pageState, true);
                     });
                 });
             });
 
-            slideRefs.current.forEach((slideEl) => {
-                if (slideEl) observer.observe(slideEl);
-            });
+            mutationObserverRef.current.observe(content, { childList: true, subtree: true });
 
             return () => {
-                observer.disconnect();
+                mutationObserverRef.current?.disconnect();
+                mutationObserverRef.current = null;
             };
-        }, [isVertical]);
+        }, []);
 
-        React.useLayoutEffect(() => {
-            if (!slideRefs.current?.length) return;
+        React.useEffect(() => {
+            const content = contentRef.current;
 
-            setSlideSizes(slideRefs.current.map((el) => (el ? (isVertical ? el.getBoundingClientRect().height : el.getBoundingClientRect().width) : 0)));
-        }, [isVertical]);
+            if (!content) return;
+
+            intersectionObserverRef.current = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) entry.target.setAttribute('data-inview', 'true');
+                        else entry.target.setAttribute('data-inview', 'false');
+                    });
+                },
+                {
+                    root: contentRef.current,
+                    threshold: 0.6
+                }
+            );
+
+            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => intersectionObserverRef.current?.observe(item));
+
+            return () => {
+                intersectionObserverRef.current?.disconnect();
+                intersectionObserverRef.current = null;
+            };
+        }, []);
+
+        React.useEffect(() => {
+            const content = contentRef.current;
+
+            if (!content) return;
+
+            const onScroll = () => {
+                if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+
+                scrollTimeoutRef.current = setTimeout(() => {
+                    setToClosest();
+                }, 80);
+            };
+
+            onScroll();
+
+            content.addEventListener('scroll', onScroll, { passive: true });
+
+            return () => {
+                if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+
+                scrollTimeoutRef.current = null;
+
+                content.removeEventListener('scroll', onScroll);
+            };
+        }, []);
+
+        function onContentPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+            if (e.button !== 0) return;
+
+            if (e.pointerType === 'touch') return;
+
+            setSwiping(true);
+            swipeStartPointRef.current = { x: e.clientX, y: e.clientY };
+            isRealSwipeRef.current = false;
+        }
+
+        function onContentPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+            const content = contentRef.current;
+
+            if (!swiping || !content || e.pointerType === 'touch') return;
+
+            const deltaX = e.clientX - swipeStartPointRef.current.x;
+            const deltaY = e.clientY - swipeStartPointRef.current.y;
+            const distance = Math.abs(deltaX) + Math.abs(deltaY);
+
+            if (distance < 6) return;
+
+            if ((window.getSelection()?.toString().length ?? 0) > 0) return;
+
+            e.currentTarget.setPointerCapture(e.pointerId);
+
+            content.style.userSelect = 'none';
+            isRealSwipeRef.current = true;
+            content.style.scrollSnapType = 'none';
+            content.scrollBy({
+                left: -e.movementX,
+                top: -e.movementY,
+                behavior: 'instant'
+            });
+
+            e.preventDefault();
+        }
+
+        function onContentPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+            setSwiping(false);
+            e.currentTarget.releasePointerCapture(e.pointerId);
+
+            if (!isRealSwipeRef.current) return;
+
+            const content = contentRef.current;
+
+            if (!content) return;
+
+            content.style.userSelect = '';
+
+            const scrollPos = props.orientation === 'horizontal' ? content.scrollLeft : content.scrollTop;
+            const snapPoints = snapPointsRef.current;
+
+            const closestSnapPoint = Array.from(snapPoints).reduce((closest, point) => {
+                return Math.abs(point - scrollPos) < Math.abs(closest - scrollPos) ? point : closest;
+            }, Infinity);
+
+            const index = Array.from(snapPoints).indexOf(closestSnapPoint);
+
+            requestAnimationFrame(() => {
+                if (closestSnapPoint !== undefined) scrollToPage(index);
+
+                requestAnimationFrame(() => {
+                    content.style.scrollSnapType = resolveSnapType();
+                });
+            });
+        }
+
+        function onContentWheel(e: React.WheelEvent<HTMLDivElement>) {
+            if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
+
+            wheelTimeoutRef.current = setTimeout(() => {
+                const primaryDelta = props.orientation === 'horizontal' ? e.deltaX || e.deltaY : e.deltaY || e.deltaX;
+
+                if (primaryDelta > 0 && isNextDisabled) {
+                    return;
+                }
+
+                if (primaryDelta < 0 && isPrevDisabled) {
+                    return;
+                }
+
+                setToClosest();
+            }, 80);
+        }
+
+        const resolveSnapType = () => {
+            const axis = props.orientation === 'vertical' ? 'y' : 'x';
+
+            return `${axis} ${props.snapType ?? 'mandatory'}`;
+        };
+
+        const contentStyles = {
+            position: 'relative',
+            scrollSnapType: resolveSnapType(),
+            overflowX: props.orientation === 'vertical' ? '' : 'scroll',
+            overflowY: props.orientation === 'horizontal' ? '' : 'scroll',
+            scrollbarWidth: 'none',
+            overscrollBehaviorX: props.orientation === 'vertical' ? '' : 'contain',
+            overscrollBehaviorY: props.orientation === 'horizontal' ? '' : 'contain',
+            display: 'flex',
+            flexDirection: props.orientation === 'horizontal' ? '' : 'column',
+            '--spacing': props.spacing + 'px',
+            gap: 'var(--spacing)'
+        } as React.CSSProperties;
+
+        const slidesPerPage = props.slidesPerPage && props.slidesPerPage > 0 ? props.slidesPerPage : 1;
+        const basis = props.autoSize ? 'auto' : `calc(100% /${slidesPerPage} - var(--spacing) * (${slidesPerPage} - 1) / ${slidesPerPage})`;
+
+        const itemStyles = {
+            scrollSnapAlign: props.align,
+            flexGrow: 0,
+            flexShrink: 0,
+            minWidth: 0,
+            flexBasis: basis
+        } as React.CSSProperties;
 
         const state = {
-            isSwiping,
-            slideSizes,
-            canLoop,
-            snaps,
-            scrollSnaps,
-            activeIndex,
-            prevDisabled,
-            nextDisabled,
-            snapPoints
+            swiping,
+            isNextDisabled,
+            isPrevDisabled,
+            snapPoints,
+            page: pageState
         };
 
         return {
             state,
-            handlePrev,
-            handleNext,
-            handlePointerDown,
-            handlePointerMove,
-            handlePointerUp,
-            addSlideRef,
-            slideTo,
-            handleClick,
-            carouselRef
+            contentStyles,
+            itemStyles,
+            contentRef,
+            onContentPointerDown,
+            onContentPointerMove,
+            onContentPointerUp,
+            onContentWheel,
+            next,
+            prev,
+            scrollToPage,
+            scrollTo,
+            scrollToSlide,
+            setToClosest
         };
     }
 });

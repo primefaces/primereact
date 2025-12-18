@@ -17,10 +17,13 @@ export const CarouselIndicator = withComponent({
     render(instance) {
         const { props, ptmi, carousel } = instance;
 
+        const isActive = carousel?.state.page === props.page;
+
         const contentProps = mergeProps(
             {
-                className: carousel?.cx('indicator', { active: props.index === carousel?.state?.activeIndex }),
-                onClick: () => carousel?.slideTo(undefined, props.snap)
+                className: carousel?.cx('indicator', { active: isActive }),
+                onClick: () => carousel?.scrollToPage(props.page),
+                'data-active': isActive
             },
             carousel?.ptm('indicator'),
             ptmi('root')

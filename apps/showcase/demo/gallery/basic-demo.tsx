@@ -62,26 +62,15 @@ function BasicDemo() {
                         </Gallery.Item>
                     ))}
                 </Gallery.Content>
-                <Gallery.Thumbnail align="center" slide={activeIndex} spacing={2} loop>
-                    <Gallery.ThumbnailContent className="h-16">
+                <Gallery.Thumbnail align="center" slide={activeIndex} spacing={2} loop slidesPerPage={4}>
+                    <Gallery.ThumbnailContent className="h-24">
                         {images.map((image, index) => (
                             <Gallery.ThumbnailItem
                                 key={index}
-                                size={20}
-                                onClick={(e: React.MouseEvent) => {
-                                    e.preventDefault();
-                                    setActiveIndex(index);
-                                }}
+                                onClick={() => setActiveIndex(index)}
+                                className={`border-2 rounded-md overflow-hidden ${activeIndex === index ? 'border-orange-500' : 'border-transparent'}`}
                             >
-                                <div
-                                    className={`h-full w-full border-2 rounded-md overflow-hidden ${activeIndex === index ? 'border-orange-500' : 'border-transparent'}`}
-                                >
-                                    <img
-                                        draggable={false}
-                                        src={image}
-                                        className="h-full w-full object-cover hover:opacity-75 transition-opacity"
-                                    ></img>
-                                </div>
+                                <img draggable={false} src={image} className="h-full w-full object-cover hover:opacity-75 transition-opacity" />
                             </Gallery.ThumbnailItem>
                         ))}
                     </Gallery.ThumbnailContent>

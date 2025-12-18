@@ -2,42 +2,6 @@ import { createStyles } from '@primereact/styles/utils';
 import type { CarouselInstance } from '@primereact/types/shared/carousel';
 
 const theme = `
-.p-carousel{
-position:relative;
-}
-
-.p-carousel-viewport{
-    overflow: hidden;
-}
-
-.p-carousel-content{
-    display: flex;
-    transform: translate3d(var(--p-swipe-amount-x), var(--p-swipe-amount-y), 0);
-    touch-action: pan-y pinch-zoom;
-}
-
-.p-carousel-content-horizontal{
-    flex-direction: row;
-    margin-left: calc(var(--p-spacing) * -1);
-}
-
-.p-carousel-content-vertical{
-    flex-direction: column;
-    margin-top: calc(var(--p-spacing) * -1);
-}
-    
-.p-carousel-item{
-    flex: 0 0 var(--p-slide-size);
-    min-width: 0;
-}
-
-.p-carousel-content-horizontal .p-carousel-item{
-padding-left: var(--p-spacing);
-}
-
-.p-carousel-content-vertical .p-carousel-item{
-padding-top: var(--p-spacing);
-}
 
 .p-carousel-indicator-list {
     display: flex;

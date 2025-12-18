@@ -17,7 +17,7 @@ export interface useCarouselChangeEvent {
     /**
      * The value of the accordion.
      */
-    value: null | undefined | number;
+    value?: string | number;
 }
 
 /**
@@ -25,13 +25,18 @@ export interface useCarouselChangeEvent {
  */
 export interface useCarouselProps {
     /**
+     * Whether the carousel should auto size.
+     * @default false
+     */
+    autoSize?: boolean;
+    /**
      *Orientation of the carousel.
      * @default 'horizontal'
      */
     orientation?: 'horizontal' | 'vertical';
     /**
      *Alignment of the carousel items.
-     * @default 'start'
+     * @default 'center'
      */
     align?: 'start' | 'center' | 'end';
     /**
@@ -40,19 +45,45 @@ export interface useCarouselProps {
      */
     loop?: boolean;
     /**
+     * Scroll snap type applied to the track.
+     * @default 'mandatory'
+     */
+    snapType?: 'mandatory' | 'proximity';
+    /**
      * Spacing between carousel items.
      * @default 16
      */
     spacing?: number;
     /**
+     * How many slides are visible per page. Supports fractions (e.g. 1.5).
+     * @default 1
+     */
+    slidesPerPage?: number;
+    /**
      * Index of the active slide.
-     * @default 0
+     * @default undefined
+     */
+    page?: number;
+    /**
+     * Index of the active slide.
+     * @default undefined
      */
     slide?: number;
     /**
-     * Callback fired when the carousel's slide changes.
+     * Default index of the active slide.
+     * @default 0
+     */
+    defaultPage?: number;
+    /**
+     * Callback fired when the carousel's page changes.
      * @param event The event that triggered the change.
-     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The value of the active page.
+     * @returns void
+     */
+    onPageChange?: (event: useCarouselChangeEvent) => void;
+    /**
+     * Callback fired when the active slide (by value) changes.
+     * @param event The event that triggered the change.
      * @param event.value The value of the active slide.
      * @returns void
      */
@@ -64,41 +95,25 @@ export interface useCarouselProps {
  */
 export interface useCarouselState {
     /**
-     * Array of calculated scroll positions (snap points) for each slide.
-     */
-    scrollSnaps: number[];
-    /**
-     * Array of calculated scroll positions (snap points) for each slide.
-     */
-    snapPoints: number[];
-    /**
-     * Indicates whether the user is currently swiping/dragging the carousel.
-     */
-    isSwiping: boolean;
-    /**
-     * Array of sizes (width or height depending on orientation) of each slide.
-     */
-    slideSizes: number[];
-    /**
-     * Indicates if looping (circular scroll) is enabled or possible.
-     */
-    canLoop: boolean;
-    /**
-     * Array of raw snap offsets without adjustments for looping or alignment.
-     */
-    snaps: number[];
-    /**
-     * The index of the currently active slide.
-     */
-    activeIndex: number;
-    /**
      * Whether the "previous" navigation button should be disabled.
      */
-    prevDisabled: boolean;
+    isPrevDisabled: boolean;
     /**
      * Whether the "next" navigation button should be disabled.
      */
-    nextDisabled: boolean;
+    isNextDisabled: boolean;
+    /**
+     * The snap points of the carousel.
+     */
+    snapPoints: Set<number>;
+    /**
+     * The current page of the carousel.
+     */
+    page: number;
+    /**
+     * Whether the user is currently swiping the carousel by touch.
+     */
+    swiping: boolean;
 }
 
 /**
@@ -110,52 +125,76 @@ export interface useCarouselExposes {
      */
     state: useCarouselState;
     /**
-     * Ref to the main carousel container DOM element.
+     * Styles applied to the content element.
      */
-    carouselRef: React.RefObject<HTMLDivElement | null>;
+    contentStyles: React.CSSProperties;
     /**
-     * Adds a reference to a slide element.
-     * @param el The slide element to add.
+     * Styles applied to the item elements.
+     */
+    itemStyles: React.CSSProperties;
+    /**
+     * Ref to the content element.
+     * @returns React.RefObject<HTMLDivElement | null>
+     */
+    contentRef: React.RefObject<HTMLDivElement | null>;
+    /**
+     * Navigates to the previous slide.
      * @returns void
      */
-    addSlideRef: (el: HTMLDivElement | null) => void;
+    prev: () => void;
     /**
-     * Scrolls the carousel to a specific slide index.
-     * @param index The index of the slide to scroll to.
-     * @param offset Optional offset to apply when scrolling.
+     * Navigates to the next slide.
      * @returns void
      */
-    slideTo: (index?: number, offset?: number) => void;
+    next: () => void;
     /**
-     * Handles pointer release events.
+     * Scrolls to the specified value.
+     * @param value The index of the slide to scroll to.
      * @returns void
      */
-    handlePointerUp: (event: PointerEvent) => void;
+    scrollTo: (value: number) => void;
     /**
-     * Handles pointer down events.
+     * Scrolls to the specified page.
+     * @param value The index of the page to scroll to.
      * @returns void
      */
-    handlePointerDown: (event: PointerEvent) => void;
+    scrollToPage: (page: number) => void;
     /**
-     * Handles pointer move events.
+     * Scrolls to the specified slide value.
+     * @param page The page index to scroll to.
      * @returns void
      */
-    handlePointerMove: (event: PointerEvent) => void;
+    scrollToSlide: (slide: number) => void;
     /**
-     * Handles previous button click events.
+     * Scrolls to the closest snap point.
+     * @param page The slide index to scroll to.
      * @returns void
      */
-    handlePrev: () => void;
+    setToClosest: () => void;
     /**
-     * Handles next button click events.
+     * Event handler for content pointer down.
+     * @param event The event that triggered the pointer down.
      * @returns void
      */
-    handleNext: () => void;
+    onContentPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
-     * Handles carousel container click events.
+     * Event handler for content pointer move.
+     * @param event The event that triggered the pointer move.
      * @returns void
      */
-    handleClick: (event: MouseEvent) => void;
+    onContentPointerMove: (event: React.PointerEvent<HTMLDivElement>) => void;
+    /**
+     * Event handler for content pointer up.
+     * @param event The event that triggered the pointer up.
+     * @returns void
+     */
+    onContentPointerUp: (event: React.PointerEvent<HTMLDivElement>) => void;
+    /**
+     * Event handler for content wheel.
+     * @param event The event that triggered the wheel.
+     * @returns void
+     */
+    onContentWheel: (event: React.WheelEvent<HTMLDivElement>) => void;
 }
 
 /**
