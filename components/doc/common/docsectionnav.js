@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import AppContentContext from '@/components/layout/appcontentcontext';
 import { useContext } from 'react';
+import { Button } from '@/components/lib/button/Button';
 
 export function DocSectionNav({ docs = [] }) {
     const { darkMode } = useContext(AppContentContext);
@@ -104,6 +105,47 @@ export function DocSectionNav({ docs = [] }) {
             <ul ref={navRef} className="doc-section-nav">
                 {docs.map((item) => createItem(item))}
             </ul>
+
+            <div
+                style={{
+                    marginTop: '2rem',
+                    border: '1px solid light-dark(var(--surface-200),var(--surface-800))',
+                    padding: '1rem',
+                    background: 'light-dark(var(--surface-0),var(--surface-900))',
+                    width: '100%',
+                    borderRadius: '0.5rem'
+                }}
+            >
+                <img
+                    style={{
+                        width: '100%',
+                        borderRadius: '0.5rem'
+                    }}
+                    src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/store.images/discount/dec25/showcase/primestore-endofyear-2025-sm.jpg"
+                    alt="November Sale 2025"
+                />
+                <div
+                    style={{
+                        textAlign: 'center',
+                        fontSize: '0.875rem',
+                        marginTop: '1rem',
+                        lineHeight: '1.25rem'
+                    }}
+                >
+                    Apply coupon code <b>ENDOFYEAR25</b> at checkout to enjoy 25% off your order.
+                </div>
+                <span
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop:'1rem'
+                    }}
+                >
+                    <a href="https://primeui.store" target="_blank" rel="noopener" className='p-button p-component p-button-rounded p-button-sm'>
+                        <span className='p-button-label p-c'>Buy Now</span>
+                    </a>
+                </span>
+            </div>
         </div>
     );
 }
