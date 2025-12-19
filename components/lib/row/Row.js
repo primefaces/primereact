@@ -13,12 +13,12 @@ export const Row = (inProps) => {
     });
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             className: props.className,
             style: props.style
         },
-        RowBase.getOtherProps(props),
-        ptm('root')
+        RowBase.getOtherProps(props)
     );
 
     return <tr {...rootProps}>{props.children}</tr>;

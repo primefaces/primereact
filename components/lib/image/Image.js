@@ -382,12 +382,12 @@ export const Image = React.memo(
         const image = props.src && <img {...imageProp} alt={alt} />;
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root'))
             },
-            ImageBase.getOtherProps(props),
-            ptm('root')
+            ImageBase.getOtherProps(props)
         );
 
         return (

@@ -1386,13 +1386,13 @@ export const InputNumber = React.memo(
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
                 style: props.style
             },
-            otherProps,
-            ptm('root')
+            otherProps
         );
 
         return (

@@ -592,13 +592,13 @@ export const SpeedDial = React.memo(
         const list = createList();
         const mask = createMask();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(props.className, cx('root', { visible })),
                 style: { ...props.style, ...sx('root') },
                 id: idState
             },
-            SpeedDialBase.getOtherProps(props),
-            ptm('root')
+            SpeedDialBase.getOtherProps(props)
         );
 
         return (
