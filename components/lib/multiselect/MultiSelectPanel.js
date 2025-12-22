@@ -28,8 +28,13 @@ export const MultiSelectPanel = React.memo(
                 if (virtualScrollerRef.current) {
                     const selectedIndex = props.getSelectedOptionIndex();
 
-                    if (selectedIndex !== -1) {
-                        setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+                    if (selectedIndex !== -1 && typeof selectedIndex === 'number') {
+                        const maxSelectedForScroll = 100;
+                        const selectedCount = props.value ? (Array.isArray(props.value) ? props.value.length : 1) : 0;
+
+                        if (selectedCount <= maxSelectedForScroll) {
+                            setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+                        }
                     }
                 }
             });
