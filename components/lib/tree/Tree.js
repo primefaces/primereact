@@ -318,8 +318,6 @@ export const Tree = React.memo(
             setFilterValueState(ObjectUtils.isNotEmpty(value) ? value : '');
         };
 
-        const childNodeFocus = (node) => {};
-
         const _filter = () => {
             if (!filterChanged.current) return;
 
