@@ -1284,7 +1284,36 @@ export const Calendar = React.memo(
                             navigateToMonth(true, groupIndex, event);
                         }
                     } else {
-                        navigateToMonth(true, groupIndex, event);
+                        let prevRow = cell.parentElement.previousElementSibling;
+
+                        if (prevRow) {
+                            const lastCellIndex = prevRow.children.length - 1;
+                            const lastCell = prevRow.children[lastCellIndex];
+                            let focusCell = lastCell.children[0];
+
+                            if (!DomHandler.getAttribute(focusCell, 'data-p-disabled')) {
+                                focusCell.tabIndex = '0';
+                                focusCell.focus();
+                            } else {
+                                const prevRowCells = Array.from(prevRow.children).reverse();
+                                let hasPrevFocusableDate = prevRowCells.find((el) => {
+                                    let focusCell = el.children[0];
+
+                                    return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
+                                });
+
+                                if (hasPrevFocusableDate) {
+                                    let focusCell = hasPrevFocusableDate.children[0];
+
+                                    focusCell.tabIndex = '0';
+                                    focusCell.focus();
+                                } else {
+                                    navigateToMonth(true, groupIndex, event);
+                                }
+                            }
+                        } else {
+                            navigateToMonth(true, groupIndex, event);
+                        }
                     }
 
                     event.preventDefault();
@@ -1298,6 +1327,7 @@ export const Calendar = React.memo(
                     if (nextCell) {
                         const cells = Array.from(cell.parentElement.children);
                         const nextCells = cells.slice(cellIndex + 1);
+
                         let hasNextFocusableDate = nextCells.find((el) => {
                             let focusCell = el.children[0];
 
@@ -1313,7 +1343,35 @@ export const Calendar = React.memo(
                             navigateToMonth(false, groupIndex, event);
                         }
                     } else {
-                        navigateToMonth(false, groupIndex, event);
+                        let nextRow = cell.parentElement.nextElementSibling;
+
+                        if (nextRow) {
+                            const firstCell = nextRow.children[0];
+                            let focusCell = firstCell.children[0];
+
+                            if (!DomHandler.getAttribute(focusCell, 'data-p-disabled')) {
+                                focusCell.tabIndex = '0';
+                                focusCell.focus();
+                            } else {
+                                const nextRowCells = Array.from(nextRow.children);
+                                let hasNextFocusableDate = nextRowCells.find((el) => {
+                                    let focusCell = el.children[0];
+
+                                    return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
+                                });
+
+                                if (hasNextFocusableDate) {
+                                    let focusCell = hasNextFocusableDate.children[0];
+
+                                    focusCell.tabIndex = '0';
+                                    focusCell.focus();
+                                } else {
+                                    navigateToMonth(false, groupIndex, event);
+                                }
+                            }
+                        } else {
+                            navigateToMonth(false, groupIndex, event);
+                        }
                     }
 
                     event.preventDefault();
