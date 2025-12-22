@@ -35,14 +35,14 @@ const styles = `
     .p-skeleton-none::after {
         animation: none;
     }
-}
 
-@keyframes p-skeleton-animation {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(100%);
+    @keyframes p-skeleton-animation {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(100%);
+        }
     }
 }
 `;
