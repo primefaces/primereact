@@ -57,7 +57,7 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     /**
      * Severity level of the message.
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast' | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | 'contrast' | undefined;
     /**
      * Custom template of the message.
      */
