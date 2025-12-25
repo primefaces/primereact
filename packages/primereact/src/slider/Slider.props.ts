@@ -1,9 +1,3 @@
-import * as HeadlessSlider from '@primereact/headless/slider';
-import type { SliderProps } from '@primereact/types/shared/slider';
-
-export const defaultProps: SliderProps = {
-    ...HeadlessSlider.defaultProps,
-    as: 'div',
-    disabled: undefined,
-    tabIndex: 0
-};
+export { defaultContentProps as Range } from './range';
+export { defaultRootProps as Root } from './root';
+export { defaultThumbProps as Thumb } from './thumb';

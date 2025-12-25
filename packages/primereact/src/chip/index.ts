@@ -1,10 +1,10 @@
-'use client';
-export * from './Chip';
 export * from './Chip.context';
-export * from './Chip.props';
+export * as Chip from './Chip.parts';
+export * as ChipProps from './Chip.props';
 
-// helpers
-export * from './icon';
-export * from './image';
-export * from './label';
-export * from './removeicon';
+// Named runtime exports to maximize tree-shaking
+export { ChipIcon, defaultIconProps } from './icon';
+export { ChipImage, defaultImageProps } from './image';
+export { ChipLabel, defaultLabelProps } from './label';
+export { ChipRemoveIcon, defaultRemoveIconProps } from './removeicon';
+export { ChipRoot, defaultRootProps } from './root';

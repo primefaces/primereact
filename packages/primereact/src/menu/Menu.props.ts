@@ -1,6 +1,14 @@
-import * as HeadlessMenu from '@primereact/headless/menu';
-import type { MenuProps } from '@primereact/types/shared/menu';
-
-export const defaultProps: MenuProps = {
-    ...HeadlessMenu.defaultProps
-};
+export { defaultCheckboxIconProps as CheckboxIconDefaults } from './checkboxicon';
+export { defaultCheckboxItemProps as CheckboxItemDefaults } from './checkboxitem';
+export { defaultIconProps as IconDefaults } from './icon';
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultLabelProps as LabelDefaults } from './label';
+export { defaultListProps as ListDefaults } from './list';
+export { defaultPortalProps as PortalDefaults } from './portal';
+export { defaultRadioGroupProps as RadioGroupDefaults } from './radiogroup';
+export { defaultRadioIconProps as RadioIconDefaults } from './radioicon';
+export { defaultRadioItemProps as RadioItemDefaults } from './radioitem';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultSeparatorProps as SeparatorDefaults } from './separator';
+export { defaultSubProps as SubDefaults } from './sub';
+export { defaultTriggerProps as TriggerDefaults } from './trigger';

@@ -12,6 +12,7 @@ export const globalProps: GlobalComponentProps = {
     ptOptions: undefined,
     unstyled: undefined,
     dt: undefined,
+    styles: undefined,
     children: undefined
 };
 

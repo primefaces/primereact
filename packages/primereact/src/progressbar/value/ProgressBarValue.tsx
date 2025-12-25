@@ -1,13 +1,12 @@
 'use client';
-import { Component } from '@primereact/core/component';
-import { withComponent } from 'primereact/base';
+import { Component, withComponent } from '@primereact/core/component';
 import * as React from 'react';
 import { useProgressBarContext } from '../ProgressBar.context';
-import { defaultLabelProps } from './ProgressBarValue.props';
+import { defaultValueProps } from './ProgressBarValue.props';
 
 export const ProgressBarValue = withComponent({
     name: 'ProgressBarValue',
-    defaultProps: defaultLabelProps,
+    defaultProps: defaultValueProps,
     setup() {
         const progressbar = useProgressBarContext();
 

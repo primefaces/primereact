@@ -1,5 +1,5 @@
-import type { MessageTextProps } from '@primereact/types/shared/message';
+import type { MessageContentProps } from '@primereact/types/shared/message';
 
-export const defaultProps: MessageTextProps = {
+export const defaultContentProps: MessageContentProps = {
     as: 'div'
 };

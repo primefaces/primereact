@@ -1,5 +1,5 @@
 import type { ImageCompareLeftProps } from '@primereact/types/shared/imagecompare';
 
-export const defaultProps: ImageCompareLeftProps = {
+export const defaultLeftProps: ImageCompareLeftProps = {
     as: 'img'
 };

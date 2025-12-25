@@ -1,0 +1,9 @@
+export { PaginatorContent as Content } from './content';
+export { PaginatorEllipsis as Ellipsis } from './ellipsis';
+export { PaginatorFirst as First } from './first';
+export { PaginatorLast as Last } from './last';
+export { PaginatorNext as Next } from './next';
+export { PaginatorPage as Page } from './page';
+export { PaginatorPages as Pages } from './pages';
+export { PaginatorPrev as Prev } from './prev';
+export { PaginatorRoot as Root } from './root';

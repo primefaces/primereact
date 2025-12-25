@@ -1,8 +1,8 @@
 import { DrawerCloseProps } from '@primereact/types/shared/drawer';
-import * as Button from 'primereact/button';
+import { ButtonProps } from 'primereact/button';
 
 export const defaultCloseProps: DrawerCloseProps = {
-    ...(Button.defaultProps as DrawerCloseProps),
+    ...(ButtonProps.RootDefaults as DrawerCloseProps),
     iconOnly: true,
     variant: 'text',
     rounded: true,

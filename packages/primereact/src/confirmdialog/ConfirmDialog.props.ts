@@ -1,7 +1,13 @@
-import * as HeadlessConfirmDialog from '@primereact/headless/confirmdialog';
-import type { ConfirmDialogProps } from '@primereact/types/shared/confirmdialog';
-
-export const defaultProps: ConfirmDialogProps = {
-    ...HeadlessConfirmDialog.defaultProps,
-    position: 'center'
-};
+export { defaultActionProps as ActionDefaults } from './action';
+export { defaultCancelProps as CancelDefaults } from './cancel';
+export { defaultCloseProps as CloseDefaults } from './close';
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultFooterProps as FooterDefaults } from './footer';
+export { defaultHeaderProps as HeaderDefaults } from './header';
+export { defaultHeaderActionsProps as HeaderActionsDefaults } from './headeractions';
+export { defaultIconProps as IconDefaults } from './icon';
+export { defaultMessageProps as MessageDefaults } from './message';
+export { defaultPortalProps as PortalDefaults } from './portal';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultTitleProps as TitleDefaults } from './title';
+export { defaultTriggerProps as TriggerDefaults } from './trigger';

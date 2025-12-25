@@ -1,6 +1,12 @@
-import * as HeadlessColorPicker from '@primereact/headless/colorpicker';
-import type { ColorPickerProps } from '@primereact/types/shared/colorpicker';
-
-export const defaultProps: ColorPickerProps = {
-    ...HeadlessColorPicker.defaultProps
-};
+export { defaultAreaProps as AreaDefaults } from './area';
+export { defaultAreaBackgroundProps as AreaBackgroundDefaults } from './areabackground';
+export { defaultAreaThumbProps as AreaThumbDefaults } from './areathumb';
+export { defaultEyeDropperProps as EyeDropperDefaults } from './eyedropper';
+export { defaultInputProps as InputDefaults } from './input';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultSliderProps as SliderDefaults } from './slider';
+export { defaultSliderThumbProps as SliderThumbDefaults } from './sliderthumb';
+export { defaultSliderTrackProps as SliderTrackDefaults } from './slidertrack';
+export { defaultSwatchProps as SwatchDefaults } from './swatch';
+export { defaultSwatchBackgroundProps as SwatchBackgroundDefaults } from './swatchbackground';
+export { defaultTransparencyGridProps as TransparencyGridDefaults } from './transparencygrid';

@@ -1,4 +1,3 @@
-'use client';
 export * from './Motion';
 export * from './Motion.context';
 export * from './Motion.props';

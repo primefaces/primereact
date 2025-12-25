@@ -1,7 +1,3 @@
-import * as HeadlessTerminal from '@primereact/headless/terminal';
-import type { TerminalProps } from '@primereact/types/shared/terminal';
-
-export const defaultProps: TerminalProps = {
-    ...HeadlessTerminal.defaultProps,
-    as: 'div'
-};
+export { defaultCommandListProps as CommandListDefaults } from './commandlist';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultWelcomeProps as WelcomeDefaults } from './welcome';

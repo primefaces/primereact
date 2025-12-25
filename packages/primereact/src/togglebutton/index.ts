@@ -1,7 +1,8 @@
-'use client';
-export * from './ToggleButton';
 export * from './ToggleButton.context';
-export * from './ToggleButton.props';
+export * as ToggleButton from './ToggleButton.parts';
+export * as ToggleButtonProps from './ToggleButton.props';
 
-// helpers
-export * from './group';
+// Named runtime exports to maximize tree-shaking
+export { defaultGroupProps, ToggleButtonGroup } from './group';
+export { defaultIndicatorProps, ToggleButtonIndicator } from './indicator';
+export { defaultRootProps, ToggleButtonRoot } from './root';

@@ -1,0 +1,10 @@
+export { DialogClose as Close } from './close';
+export { DialogContent as Content } from './content';
+export { DialogFooter as Footer } from './footer';
+export { DialogHeader as Header } from './header';
+export { DialogHeaderActions as HeaderActions } from './headeractions';
+export { DialogMaximizable as Maximizable } from './maximizable';
+export { DialogPortal as Portal } from './portal';
+export { DialogRoot as Root } from './root';
+export { DialogTitle as Title } from './title';
+export { DialogTrigger as Trigger } from './trigger';

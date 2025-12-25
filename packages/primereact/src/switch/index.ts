@@ -1,8 +1,8 @@
-'use client';
-export * from './Switch';
 export * from './Switch.context';
-export * from './Switch.props';
+export * as Switch from './Switch.parts';
+export * as SwitchProps from './Switch.props';
 
-// helpers
-export * from './control';
-export * from './thumb';
+// Named runtime exports to maximize tree-shaking
+export { defaultControlProps, SwitchControl } from './control';
+export { defaultRootProps, SwitchRoot } from './root';
+export { defaultThumbProps, SwitchThumb } from './thumb';

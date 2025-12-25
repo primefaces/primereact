@@ -1,14 +1,13 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useMessageContext } from '../Message.context';
-import { defaultProps } from './MessageContent.props';
+import { defaultContentProps } from './MessageContent.props';
 
 export const MessageContent = withComponent({
     name: 'MessageContent',
-    defaultProps,
+    defaultProps: defaultContentProps,
     setup() {
         const message = useMessageContext();
 

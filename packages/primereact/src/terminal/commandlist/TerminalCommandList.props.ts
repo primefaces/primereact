@@ -1,5 +1,5 @@
 import type { TerminalCommandListProps } from '@primereact/types/shared/terminal';
 
-export const defaultCenterProps: TerminalCommandListProps = {
+export const defaultCommandListProps: TerminalCommandListProps = {
     as: 'div'
 };

@@ -1,8 +1,7 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { overlayStyles } from '@primereact/styles/badge';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { OverlayBadgeProvider } from './OverlayBadge.context';
 import { defaultOverlayProps } from './OverlayBadge.props';

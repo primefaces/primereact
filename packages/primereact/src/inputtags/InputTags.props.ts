@@ -1,11 +1,4 @@
-import * as HeadlessInputTags from '@primereact/headless/inputtags';
-import type { InputTagsProps } from '@primereact/types/shared/inputtags';
-
-export const defaultProps: InputTagsProps = {
-    ...HeadlessInputTags.defaultProps,
-    as: 'div',
-    variant: undefined,
-    fluid: undefined,
-    invalid: undefined,
-    disabled: undefined
-};
+export { defaultHiddenInputProps as HiddenInputDefaults } from './hiddeninput';
+export { defaultInputProps as InputDefaults } from './input';
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultRootProps as RootDefaults } from './root';

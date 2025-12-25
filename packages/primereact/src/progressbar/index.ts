@@ -1,7 +1,10 @@
-'use client';
-export * from './ProgressBar';
 export * from './ProgressBar.context';
-export * from './ProgressBar.props';
+export * as ProgressBar from './ProgressBar.parts';
+export * as ProgressBarProps from './ProgressBar.props';
 
-// helpers
-export * from './label';
+// Named runtime exports to maximize tree-shaking
+export { defaultIndicatorProps, ProgressBarIndicator } from './indicator';
+export { defaultLabelProps, ProgressBarLabel } from './label';
+export { defaultRootProps, ProgressBarRoot } from './root';
+export { defaultTrackProps, ProgressBarTrack } from './track';
+export { defaultValueProps, ProgressBarValue } from './value';

@@ -1,5 +1,5 @@
 import { GalleryBackdropProps } from '@primereact/types/shared/gallery';
 
-export const defaultCloseProps: GalleryBackdropProps = {
+export const defaultBackdropProps: GalleryBackdropProps = {
     as: 'div'
 };

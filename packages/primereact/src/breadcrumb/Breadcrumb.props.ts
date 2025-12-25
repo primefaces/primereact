@@ -1,7 +1,4 @@
-import * as HeadlessBreadcrumb from '@primereact/headless/breadcrumb';
-import type { BreadcrumbProps } from '@primereact/types/shared/breadcrumb';
-
-export const defaultProps: BreadcrumbProps = {
-    ...HeadlessBreadcrumb.defaultProps,
-    as: 'nav'
-};
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultListProps as ListDefaults } from './list';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultSeparatorProps as SeparatorDefaults } from './separator';

@@ -1,18 +1,40 @@
-import * as HeadlessDatePicker from '@primereact/headless/datepicker';
-import type { DatePickerProps } from '@primereact/types/shared/datepicker';
-
-export const defaultProps: DatePickerProps = {
-    ...HeadlessDatePicker.defaultProps,
-    as: 'span',
-    name: undefined,
-    placeholder: undefined,
-    invalid: undefined,
-    variant: undefined,
-    fluid: undefined,
-    required: undefined,
-    disabled: undefined,
-    readOnly: undefined,
-    size: undefined,
-    inputId: undefined,
-    inputClass: undefined
-};
+export { defaultAmPmProps as AmPmDefaults } from './ampm';
+export { defaultButtonbarProps as ButtonbarDefaults } from './buttonbar';
+export { defaultCalendarProps as CalendarDefaults } from './calendar';
+export { defaultClearProps as ClearDefaults } from './clear';
+export { defaultClearIconProps as ClearIconDefaults } from './clearicon';
+export { defaultContainerProps as ContainerDefaults } from './container';
+export { defaultDecadeProps as DecadeDefaults } from './decade';
+export { defaultDecrementProps as DecrementDefaults } from './decrement';
+export { defaultDropdownProps as DropdownDefaults } from './dropdown';
+export { defaultDropdownIconProps as DropdownIconDefaults } from './dropdownicon';
+export { defaultFooterProps as FooterDefaults } from './footer';
+export { defaultHeaderProps as HeaderDefaults } from './header';
+export { defaultHourProps as HourDefaults } from './hour';
+export { defaultIncrementProps as IncrementDefaults } from './increment';
+export { defaultInputProps as InputDefaults } from './input';
+export { defaultInputIconContainerProps as InputIconContainerDefaults } from './inputiconcontainer';
+export { defaultMinuteProps as MinuteDefaults } from './minute';
+export { defaultNextProps as NextDefaults } from './next';
+export { defaultPanelProps as PanelDefaults } from './panel';
+export { defaultPickerProps as PickerDefaults } from './picker';
+export { defaultPortalProps as PortalDefaults } from './portal';
+export { defaultPrevProps as PrevDefaults } from './prev';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultSecondProps as SecondDefaults } from './second';
+export { defaultSelectMonthProps as SelectMonthDefaults } from './selectmonth';
+export { defaultSelectYearProps as SelectYearDefaults } from './selectyear';
+export { defaultSeparatorProps as SeparatorDefaults } from './separator';
+export { defaultSeparatorContainerProps as SeparatorContainerDefaults } from './separatorcontainer';
+export { defaultTableProps as TableDefaults } from './table';
+export { defaultTableBodyProps as TableBodyDefaults } from './tablebody';
+export { defaultTableBodyCellProps as TableBodyCellDefaults } from './tablebodycell';
+export { defaultTableBodyRowProps as TableBodyRowDefaults } from './tablebodyrow';
+export { defaultTableBodyWeekCellProps as TableBodyWeekCellDefaults } from './tablebodyweekcell';
+export { defaultTableHeadProps as TableHeadDefaults } from './tablehead';
+export { defaultTableHeadCellProps as TableHeadCellDefaults } from './tableheadcell';
+export { defaultTableHeadRowProps as TableHeadRowDefaults } from './tableheadrow';
+export { defaultTableHeadWeekCellProps as TableHeadWeekCellDefaults } from './tableheadweekcell';
+export { defaultTimeProps as TimeDefaults } from './time';
+export { defaultTitleProps as TitleDefaults } from './title';
+export { defaultTodayProps as TodayDefaults } from './today';

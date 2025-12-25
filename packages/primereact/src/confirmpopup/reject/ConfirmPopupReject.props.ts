@@ -1,8 +1,8 @@
 import { ConfirmPopupRejectProps } from '@primereact/types/shared/confirmpopup';
-import * as Button from 'primereact/button';
+import { ButtonProps } from 'primereact/button';
 
 export const defaultRejectProps: ConfirmPopupRejectProps = {
-    ...(Button.defaultProps as ConfirmPopupRejectProps),
+    ...(ButtonProps.RootDefaults as ConfirmPopupRejectProps),
     size: 'small',
     variant: 'text'
 };

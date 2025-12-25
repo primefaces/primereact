@@ -7,7 +7,7 @@ import { defaultProps } from './useImageCompare.props';
 export const useImageCompare = withHeadless({
     name: 'useImageCompare',
     defaultProps,
-    setup: () => {
+    setup() {
         const [slideValueState, setSlideValueState] = React.useState<string | undefined>('50');
         const rightImageRef = React.useRef<HTMLImageElement>(null);
 

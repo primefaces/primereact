@@ -1,14 +1,13 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useSliderContext } from '../Slider.context';
-import { defaultContentProps } from './SliderThumb.props';
+import { defaultThumbProps } from './SliderThumb.props';
 
 export const SliderThumb = withComponent({
     name: 'SliderThumb',
-    defaultProps: defaultContentProps,
+    defaultProps: defaultThumbProps,
     setup() {
         const slider = useSliderContext();
 

@@ -1,5 +1,2 @@
-import type { InputGroupProps } from '@primereact/types/shared/inputgroup';
-
-export const defaultProps: InputGroupProps = {
-    as: 'div'
-};
+export { defaultAddonProps as Addon } from './addon';
+export { defaultRootProps as Root } from './root';

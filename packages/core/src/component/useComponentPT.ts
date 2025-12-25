@@ -54,7 +54,7 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
                     ...(key === 'root' && {
                         [`${datasetPrefix}name`]: toFlatCase((isExtended ? props.pt?.['data-pc-section'] : name) as string),
                         ...(isExtended && { [`${datasetPrefix}extend`]: toFlatCase(name!) }),
-                        [`${$attrSelector}`]: ''
+                        [`${datasetPrefix}id`]: $attrSelector
                     }),
                     [`${datasetPrefix}section`]: toFlatCase(key)
                 }

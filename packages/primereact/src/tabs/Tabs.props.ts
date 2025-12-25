@@ -1,11 +1,6 @@
-import * as HeadlessTabs from '@primereact/headless/tabs';
-import type { TabsProps } from '@primereact/types/shared/tabs';
-
-export const defaultProps: TabsProps = {
-    ...HeadlessTabs.defaultProps,
-    as: 'div',
-    lazy: false,
-    scrollable: false,
-    showNavigators: true,
-    tabIndex: 0
-};
+export { defaultIndicatorProps as IndicatorDefaults } from './indicator';
+export { defaultListProps as ListDefaults } from './list';
+export { defaultPanelProps as PanelDefaults } from './panel';
+export { defaultPanelsProps as PanelsDefaults } from './panels';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultTabProps as TabDefaults } from './tab';

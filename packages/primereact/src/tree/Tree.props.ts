@@ -1,7 +1,11 @@
-import * as HeadlessTree from '@primereact/headless/tree';
-import type { TreeProps } from '@primereact/types/shared/tree';
-
-export const defaultProps: TreeProps = {
-    ...HeadlessTree.defaultProps,
-    as: 'div'
-};
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultEmptyProps as EmptyDefaults } from './empty';
+export { defaultFilterProps as FilterDefaults } from './filter';
+export { defaultFooterProps as FooterDefaults } from './footer';
+export { defaultHeaderProps as HeaderDefaults } from './header';
+export { defaultIconProps as IconDefaults } from './icon';
+export { defaultLabelProps as LabelDefaults } from './label';
+export { defaultListProps as ListDefaults } from './list';
+export { defaultNodeProps as NodeDefaults } from './node';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultToggleProps as ToggleDefaults } from './toggle';

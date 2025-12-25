@@ -1,5 +1,5 @@
 import type { TerminalWelcomeProps } from '@primereact/types/shared/terminal';
 
-export const defaultCenterProps: TerminalWelcomeProps = {
+export const defaultWelcomeProps: TerminalWelcomeProps = {
     as: 'div'
 };

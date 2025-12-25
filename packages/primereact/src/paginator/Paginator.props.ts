@@ -1,7 +1,9 @@
-import * as HeadlessPaginator from '@primereact/headless/paginator';
-import type { PaginatorProps } from '@primereact/types/shared/paginator';
-
-export const defaultProps: PaginatorProps = {
-    ...HeadlessPaginator.defaultProps,
-    as: 'nav'
-};
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultEllipsisProps as EllipsisDefaults } from './ellipsis';
+export { defaultFirstProps as FirstDefaults } from './first';
+export { defaultLastProps as LastDefaults } from './last';
+export { defaultNextProps as NextDefaults } from './next';
+export { defaultPageProps as PageDefaults } from './page';
+export { defaultPagesProps as PagesDefaults } from './pages';
+export { defaultPrevProps as PrevDefaults } from './prev';
+export { defaultRootProps as RootDefaults } from './root';

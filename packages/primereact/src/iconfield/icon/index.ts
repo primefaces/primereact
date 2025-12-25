@@ -1,3 +1,2 @@
-'use client';
-export * from './InputIcon';
-export * from './InputIcon.props';
+export * from './IconFieldInputIcon';
+export * from './IconFieldInputIcon.props';

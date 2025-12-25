@@ -1,8 +1,6 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useAccordionContext } from '../Accordion.context';
 import { useAccordionPanelContext } from '../panel/AccordionPanel.context';

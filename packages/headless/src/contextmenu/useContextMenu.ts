@@ -7,7 +7,7 @@ import { defaultProps } from './useContextMenu.props';
 export const useContextMenu = withHeadless({
     name: 'useContextMenu',
     defaultProps
-    // setup: (instance) => {
+    // setup(instance) {
     //     const { props } = instance;
 
     //     // Use the menu hook with composite set to false for ContextMenu

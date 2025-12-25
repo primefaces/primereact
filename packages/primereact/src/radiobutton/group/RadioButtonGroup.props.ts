@@ -1,6 +1,6 @@
 import type { RadioButtonGroupProps } from '@primereact/types/shared/radiobutton';
 
-export const defaultProps: RadioButtonGroupProps = {
+export const defaultGroupProps: RadioButtonGroupProps = {
     as: 'div',
     value: undefined,
     defaultValue: undefined,

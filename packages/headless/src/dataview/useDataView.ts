@@ -5,7 +5,7 @@ import { defaultProps } from './useDataView.props';
 export const useDataView = withHeadless({
     name: 'useDataView',
     defaultProps,
-    setup: () => {
+    setup() {
         const sort = (value: unknown[] | null, sortField: string, sortOrder: number) => {
             if (value) {
                 const _value = [...value];

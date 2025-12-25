@@ -1,7 +1,7 @@
 import type { ComponentInstance, InComponentInstance, useComponentOptions, withComponentOptions } from '@primereact/types/core';
 import type { BaseComponentProps } from '@primereact/types/shared';
 import type { StylesOptions } from '@primereact/types/styles';
-import { isObject } from '@primeuix/utils';
+import { isObject, shallowEqualProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useComponent } from './useComponent';
 
@@ -48,8 +48,9 @@ export function withComponent<IProps, DProps, Exposes extends Record<PropertyKey
             return false;
         }
 
-        // Compare shallow equality for all defaultProps keys
-        return prevProps === nextProps && Object.keys(defaultProps || {}).every((key) => (prevProps as Record<string, unknown>)[key] === (nextProps as Record<string, unknown>)[key]);
+        // Compare shallow equality
+        return shallowEqualProps(prevProps, nextProps);
+        //return prevProps === nextProps && Object.keys(defaultProps || {}).every((key) => (prevProps as Record<string, unknown>)[key] === (nextProps as Record<string, unknown>)[key]);
     }) as unknown as typeof BaseComponent & CData & React.FC;
 
     Component.displayName = `PrimeReact.${name}`;

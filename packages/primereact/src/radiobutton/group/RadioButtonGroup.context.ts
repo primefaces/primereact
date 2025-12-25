@@ -1,3 +1,4 @@
+'use client';
 import { createOptionalContext } from '@primereact/core/utils';
 import type { RadioButtonGroupInstance } from '@primereact/types/shared/radiobutton';
 

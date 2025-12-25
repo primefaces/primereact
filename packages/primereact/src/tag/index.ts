@@ -1,8 +1,8 @@
-'use client';
-export * from './Tag';
 export * from './Tag.context';
-export * from './Tag.props';
+export * as Tag from './Tag.parts';
+export * as TagProps from './Tag.props';
 
-// helpers
-export * from './icon';
-export * from './label';
+// Named runtime exports to maximize tree-shaking
+export { defaultIconProps, TagIcon } from './icon';
+export { defaultLabelProps, TagLabel } from './label';
+export { defaultRootProps, TagRoot } from './root';

@@ -1,9 +1,7 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useFluid } from '@primereact/headless/fluid';
-import { styles } from '@primereact/styles/fluid';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { FluidProvider } from './Fluid.context';
 import { defaultProps } from './Fluid.props';
@@ -11,7 +9,6 @@ import { defaultProps } from './Fluid.props';
 export const Fluid = withComponent({
     name: 'Fluid',
     defaultProps,
-    styles,
     setup(instance) {
         const fluid = useFluid(instance.inProps);
 

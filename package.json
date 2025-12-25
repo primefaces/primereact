@@ -31,6 +31,7 @@
         "build:lib": "pnpm --filter primereact build",
         "build:styles": "pnpm --filter styles build",
         "build:types": "pnpm --filter types build",
+        "build:ui": "pnpm --filter ui build",
         "build:showcase": "pnpm --filter showcase build",
         "build:apidoc": "pnpm --filter showcase build:apidoc",
         "dev": "pnpm --filter showcase dev",

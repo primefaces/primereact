@@ -1,10 +1,5 @@
-import * as HeadlessMessage from '@primereact/headless/message';
-import type { MessageProps } from '@primereact/types/shared/message';
-
-export const defaultProps: MessageProps = {
-    ...HeadlessMessage.defaultProps,
-    as: 'div',
-    severity: 'info',
-    variant: null,
-    size: undefined
-};
+export { defaultCloseProps as Close } from './close';
+export { defaultContentProps as Content } from './content';
+export { defaultIconProps as Icon } from './icon';
+export { defaultRootProps as Root } from './root';
+export { defaultTextProps as Text } from './text';

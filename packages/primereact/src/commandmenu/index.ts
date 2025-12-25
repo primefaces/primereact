@@ -1,6 +1,12 @@
-'use client';
-export * from './CommandMenu';
 export * from './CommandMenu.context';
-export * from './CommandMenu.props';
+export * as CommandMenu from './CommandMenu.parts';
+export * as CommandMenuProps from './CommandMenu.props';
 
-// helpers
+// Named runtime exports to maximize tree-shaking
+export { CommandMenuEmpty, defaultEmptyProps } from './empty';
+export { CommandMenuGroup, defaultGroupProps } from './group';
+export { CommandMenuGroupHeading, defaultGroupHeadingProps } from './groupheading';
+export { CommandMenuInput, defaultInputProps } from './input';
+export { CommandMenuItem, defaultItemProps } from './item';
+export { CommandMenuList, defaultListProps } from './list';
+export { CommandMenuRoot, defaultRootProps } from './root';

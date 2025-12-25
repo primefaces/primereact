@@ -1,7 +1,11 @@
-import * as HeadlessGallery from '@primereact/headless/gallery';
-import type { GalleryProps } from '@primereact/types/shared/gallery';
-
-export const defaultProps: GalleryProps = {
-    ...HeadlessGallery.defaultProps,
-    as: 'div'
-};
+export { defaultBackdropProps as BackdropDefaults } from './backdrop';
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultNextProps as NextDefaults } from './next';
+export { defaultPrevProps as PrevDefaults } from './prev';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultThumbnailProps as ThumbnailDefaults } from './thumbnail';
+export { defaultThumbnailContentProps as ThumbnailContentDefaults } from './thumbnailcontent';
+export { defaultThumbnailItemProps as ThumbnailItemDefaults } from './thumbnailitem';
+export { defaultToolbarProps as ToolbarDefaults } from './toolbar';
+export { defaultToolbarItemProps as ToolbarItemDefaults } from './toolbaritem';

@@ -1,9 +1,9 @@
-'use client';
-export * from './Avatar';
 export * from './Avatar.context';
-export * from './Avatar.props';
+export * as Avatar from './Avatar.parts';
+export * as AvatarProps from './Avatar.props';
 
-// helpers
-export * from './fallback';
-export * from './group';
-export * from './image';
+// Named runtime exports to maximize tree-shaking
+export { AvatarFallback, defaultFallbackProps } from './fallback';
+export { AvatarGroup, defaultGroupProps } from './group';
+export { AvatarImage, defaultImageProps } from './image';
+export { AvatarRoot, defaultRootProps } from './root';

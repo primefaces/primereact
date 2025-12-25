@@ -1,7 +1,9 @@
-import * as HeadlessToast from '@primereact/headless/toast';
-import type { ToastProps } from '@primereact/types/shared/toast';
-
-export const defaultProps: ToastProps = {
-    ...HeadlessToast.defaultProps,
-    richColors: false
-};
+export { defaultActionProps as Action } from './action';
+export { defaultCloseProps as Close } from './close';
+export { defaultDescriptionProps as Description } from './description';
+export { defaultIconProps as Icon } from './icon';
+export { defaultItemProps as Item } from './item';
+//export { defaultPortalProps as Portal } from './portal';
+export { defaultRegionProps as Region } from './region';
+export { defaultRootProps as Root } from './root';
+export { defaultTitleProps as Title } from './title';

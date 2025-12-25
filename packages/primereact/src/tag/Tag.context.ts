@@ -1,3 +1,4 @@
+'use client';
 import { createOptionalContext } from '@primereact/core/utils';
 import type { TagInstance } from '@primereact/types/shared/tag';
 

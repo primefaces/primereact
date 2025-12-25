@@ -1,4 +1,7 @@
-'use client';
-export * from './Divider';
 export * from './Divider.context';
-export * from './Divider.props';
+export * as Divider from './Divider.parts';
+export * as DividerProps from './Divider.props';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultContentProps, DividerContent } from './content';
+export { defaultRootProps, DividerRoot } from './root';

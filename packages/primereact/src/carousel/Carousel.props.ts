@@ -1,7 +1,7 @@
-import * as HeadlessCarousel from '@primereact/headless/carousel';
-import type { CarouselProps } from '@primereact/types/shared/carousel';
-
-export const defaultProps: CarouselProps = {
-    ...HeadlessCarousel.defaultProps,
-    as: 'div'
-};
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultIndicatorProps as IndicatorDefaults } from './indicator';
+export { defaultIndicatorsProps as IndicatorsDefaults } from './indicators';
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultNextProps as NextDefaults } from './next';
+export { defaultPrevProps as PrevDefaults } from './prev';
+export { defaultRootProps as RootDefaults } from './root';

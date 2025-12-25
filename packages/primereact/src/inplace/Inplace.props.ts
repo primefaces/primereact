@@ -1,6 +1,4 @@
-import type { InplaceProps } from '@primereact/types/shared/inplace';
-
-export const defaultProps: InplaceProps = {
-    as: 'div',
-    disabled: false
-};
+export { defaultCloseProps as CloseDefaults } from './close';
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultDisplayProps as DisplayDefaults } from './display';
+export { defaultRootProps as RootDefaults } from './root';

@@ -1,8 +1,8 @@
 import { DatePickerDecrementProps } from '@primereact/types/shared/datepicker';
-import * as Button from 'primereact/button';
+import { ButtonProps } from 'primereact/button';
 
 export const defaultDecrementProps: DatePickerDecrementProps = {
-    ...(Button.defaultProps as DatePickerDecrementProps),
+    ...(ButtonProps.RootDefaults as DatePickerDecrementProps),
     iconOnly: true,
     variant: 'text',
     rounded: true,

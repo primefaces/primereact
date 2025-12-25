@@ -1,16 +1,15 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { TerminalCommandItem } from '@primereact/types/shared/terminal';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useTerminalContext } from '../Terminal.context';
 import { TerminalCommandListProvider } from './TerminalCommandList.context';
-import { defaultCenterProps } from './TerminalCommandList.props';
+import { defaultCommandListProps } from './TerminalCommandList.props';
 
 export const TerminalCommandList = withComponent({
     name: 'TerminalCommandList',
-    defaultProps: defaultCenterProps,
+    defaultProps: defaultCommandListProps,
     setup() {
         const terminal = useTerminalContext();
 

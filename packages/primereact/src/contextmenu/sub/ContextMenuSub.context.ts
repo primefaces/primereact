@@ -1,3 +1,4 @@
+'use client';
 import { createOptionalContext } from '@primereact/core/utils';
 import type { ContextMenuSubInstance } from '@primereact/types/shared/contextmenu';
 

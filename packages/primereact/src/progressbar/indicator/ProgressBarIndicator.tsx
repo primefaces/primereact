@@ -1,14 +1,13 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useProgressBarContext } from '../ProgressBar.context';
-import { defaultLabelProps } from './ProgressBarIndicator.props';
+import { defaultIndicatorProps } from './ProgressBarIndicator.props';
 
 export const ProgressBarIndicator = withComponent({
     name: 'ProgressBarIndicator',
-    defaultProps: defaultLabelProps,
+    defaultProps: defaultIndicatorProps,
     setup() {
         const progressbar = useProgressBarContext();
 

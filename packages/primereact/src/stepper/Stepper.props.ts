@@ -1,7 +1,11 @@
-import * as HeadlessStepper from '@primereact/headless/stepper';
-import type { StepperProps } from '@primereact/types/shared/stepper';
-
-export const defaultProps: StepperProps = {
-    ...HeadlessStepper.defaultProps,
-    as: 'div'
-};
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultHeaderProps as HeaderDefaults } from './header';
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultListProps as ListDefaults } from './list';
+export { defaultNumberProps as NumberDefaults } from './number';
+export { defaultPanelProps as PanelDefaults } from './panel';
+export { defaultPanelsProps as PanelsDefaults } from './panels';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultSeparatorProps as SeparatorDefaults } from './separator';
+export { defaultStepProps as StepDefaults } from './step';
+export { defaultTitleProps as TitleDefaults } from './title';

@@ -1,9 +1,7 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useFocusTrap } from '@primereact/headless/focustrap';
-import { styles } from '@primereact/styles/focustrap';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { FocusTrapProvider } from './FocusTrap.context';
 import { defaultProps } from './FocusTrap.props';
@@ -11,7 +9,6 @@ import { defaultProps } from './FocusTrap.props';
 export const FocusTrap = withComponent({
     name: 'FocusTrap',
     defaultProps,
-    styles,
     setup(instance) {
         const focustrap = useFocusTrap(instance.inProps);
 

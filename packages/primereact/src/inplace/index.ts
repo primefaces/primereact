@@ -1,9 +1,9 @@
-'use client';
-export * from './Inplace';
 export * from './Inplace.context';
-export * from './Inplace.props';
+export * as Inplace from './Inplace.parts';
+export * as InplaceProps from './Inplace.props';
 
-// helpers
-export * from './close';
-export * from './content';
-export * from './display';
+// Named runtime exports to maximize tree-shaking
+export { defaultCloseProps, InplaceClose } from './close';
+export { defaultContentProps, InplaceContent } from './content';
+export { defaultDisplayProps, InplaceDisplay } from './display';
+export { defaultRootProps, InplaceRoot } from './root';

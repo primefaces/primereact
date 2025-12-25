@@ -1,9 +1,5 @@
-import * as HeadlessSpeedDial from '@primereact/headless/speeddial';
-import type { SpeedDialProps } from '@primereact/types/shared/speeddial';
-
-export const defaultProps: SpeedDialProps = {
-    ...HeadlessSpeedDial.defaultProps,
-    as: 'div',
-    disabled: false,
-    rotateAnimation: true
-};
+export { defaultActionProps as ActionDefaults } from './action';
+export { defaultButtonProps as ButtonDefaults } from './button';
+export { defaultItemProps as ItemDefaults } from './item';
+export { defaultListProps as ListDefaults } from './list';
+export { defaultRootProps as RootDefaults } from './root';

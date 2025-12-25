@@ -1,9 +1,2 @@
-import * as HeadlessRating from '@primereact/headless/rating';
-import { RatingProps } from '@primereact/types/shared/rating';
-
-export const defaultProps: RatingProps = {
-    ...HeadlessRating.defaultProps,
-    as: 'div',
-    name: undefined,
-    invalid: false
-};
+export { defaultOptionProps as OptionDefaults } from './option';
+export { defaultRootProps as RootDefaults } from './root';

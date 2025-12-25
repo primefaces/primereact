@@ -1,15 +1,14 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useTerminalContext } from '../Terminal.context';
 import { TerminalWelcomeProvider } from './TerminalWelcome.context';
-import { defaultCenterProps } from './TerminalWelcome.props';
+import { defaultWelcomeProps } from './TerminalWelcome.props';
 
 export const TerminalWelcome = withComponent({
     name: 'TerminalWelcome',
-    defaultProps: defaultCenterProps,
+    defaultProps: defaultWelcomeProps,
     setup() {
         const terminal = useTerminalContext();
 

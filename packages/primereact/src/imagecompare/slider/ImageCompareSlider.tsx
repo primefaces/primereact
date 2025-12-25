@@ -1,14 +1,13 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useImageCompareContext } from '../ImageCompare.context';
-import { defaultProps } from './ImageCompareSlider.props';
+import { defaultSliderProps } from './ImageCompareSlider.props';
 
 export const ImageCompareSlider = withComponent({
     name: 'ImageCompareSlider',
-    defaultProps,
+    defaultProps: defaultSliderProps,
     setup() {
         const imagecompare = useImageCompareContext();
 

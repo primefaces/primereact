@@ -1,3 +1,4 @@
+'use client';
 import { createOptionalContext } from '@primereact/core/utils';
 import type { AnimateOnScrollInstance } from '@primereact/types/shared/animateonscroll';
 

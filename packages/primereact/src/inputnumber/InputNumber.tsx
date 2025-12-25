@@ -1,9 +1,7 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useInputNumber } from '@primereact/headless/inputnumber';
-import { styles } from '@primereact/styles/inputnumber';
 import { mergeProps, resolve } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { InputNumberProvider } from './InputNumber.context';
@@ -12,7 +10,6 @@ import { defaultProps } from './InputNumber.props';
 export const InputNumber = withComponent({
     name: 'InputNumber',
     defaultProps,
-    styles,
     setup(instance) {
         const inputnumber = useInputNumber(instance?.inProps);
 

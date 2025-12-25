@@ -1,7 +1,4 @@
-import * as HeadlessToolbar from '@primereact/headless/toolbar';
-import type { ToolbarProps } from '@primereact/types/shared/toolbar';
-
-export const defaultProps: ToolbarProps = {
-    ...HeadlessToolbar.defaultProps,
-    as: 'div'
-};
+export { defaultCenterProps as CenterDefaults } from './center';
+export { defaultEndProps as EndDefaults } from './end';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultStartProps as StartDefaults } from './start';

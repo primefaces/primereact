@@ -1,7 +1,6 @@
 'use client';
-import { Component } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { usePanelContext } from '../Panel.context';
 import { defaultContentProps } from './PanelContent.props';
@@ -14,7 +13,7 @@ export const PanelContent = withComponent({
 
         return { panel };
     },
-    render: (instance) => {
+    render(instance) {
         const { props, ptmi, panel } = instance;
 
         const rootProps = mergeProps(

@@ -1,7 +1,5 @@
-import * as HeadlessScrollArea from '@primereact/headless/scrollarea';
-import type { ScrollAreaProps } from '@primereact/types/shared/scrollarea';
-
-export const defaultProps: ScrollAreaProps = {
-    ...HeadlessScrollArea.defaultProps,
-    as: 'div'
-};
+export { defaultContentProps as ContentDefaults } from './content';
+export { defaultRootProps as RootDefaults } from './root';
+export { defaultThumbXProps as ThumbXDefaults } from './thumbx';
+export { defaultThumbYProps as ThumbYDefaults } from './thumby';
+export { defaultViewportProps as ViewportDefaults } from './viewport';

@@ -1,7 +1,7 @@
-'use client';
-export * from './Checkbox';
 export * from './Checkbox.context';
-export * from './Checkbox.props';
+export * as Checkbox from './Checkbox.parts';
+export * as CheckboxProps from './Checkbox.props';
 
-// helpers
-export * from './group';
+// Named runtime exports to maximize tree-shaking
+export { CheckboxGroup, defaultGroupProps } from './group';
+export { CheckboxRoot, defaultRootProps } from './root';
