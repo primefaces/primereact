@@ -12,6 +12,7 @@ export {
     defaultHeaderIndicatorProps,
     defaultHeaderProps,
     defaultPanelProps,
+    defaultRootProps,
     useAccordionContext
 } from 'primereact/accordion';
-export { UIAccordionRoot } from './root';
+export { UIAccordionRoot as AccordionRoot } from './root';

@@ -1,12 +1,24 @@
-export * from './MeterGroup';
-export * from './MeterGroup.context';
-export * from './MeterGroup.props';
+export * as MeterGroup from './UIMeterGroup.parts';
 
-// helpers
-export * from './icon';
-export * from './label';
-export * from './labels';
-export * from './marker';
-export * from './meter';
-export * from './meters';
-export * from './text';
+// Named runtime exports to maximize tree-shaking
+export {
+    defaultIconProps,
+    defaultLabelProps,
+    defaultLabelsProps,
+    defaultMarkerProps,
+    defaultMeterProps,
+    defaultMetersProps,
+    defaultRootProps,
+    defaultTextProps,
+    MeterGroupIcon,
+    MeterGroupLabel,
+    MeterGroupLabels,
+    MeterGroupMarker,
+    MeterGroupMeter,
+    MeterGroupMeters,
+    MeterGroupProps,
+    MeterGroupProvider,
+    MeterGroupText,
+    useMeterGroupContext
+} from 'primereact/metergroup';
+export { UIMeterGroupRoot as MeterGroupRoot } from './root';

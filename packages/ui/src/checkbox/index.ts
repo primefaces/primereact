@@ -1,6 +1,5 @@
-export * from './Checkbox';
-export * from './Checkbox.context';
-export * from './Checkbox.props';
+export * as Checkbox from './UICheckbox.parts';
 
-// helpers
-export * from './group';
+// Named runtime exports to maximize tree-shaking
+export { CheckboxGroup, CheckboxProps, CheckboxProvider, defaultGroupProps, defaultRootProps, useCheckboxContext } from 'primereact/checkbox';
+export { UICheckboxRoot as CheckboxRoot } from './root';

@@ -1,6 +1,5 @@
-export * from './ToggleButton';
-export * from './ToggleButton.context';
-export * from './ToggleButton.props';
+export * as ToggleButton from './UIToggleButton.parts';
 
-// helpers
-export * from './group';
+// Named runtime exports to maximize tree-shaking
+export { defaultGroupProps, defaultIndicatorProps, defaultRootProps, ToggleButtonGroup, ToggleButtonIndicator, ToggleButtonProps, ToggleButtonProvider, useToggleButtonContext } from 'primereact/togglebutton';
+export { UIToggleButtonRoot as ToggleButtonRoot } from './root';

@@ -1,7 +1,5 @@
-export * from './Switch';
-export * from './Switch.context';
-export * from './Switch.props';
+export * as Switch from './UISwitch.parts';
 
-// helpers
-export * from './control';
-export * from './thumb';
+// Named runtime exports to maximize tree-shaking
+export { defaultControlProps, defaultRootProps, defaultThumbProps, SwitchControl, SwitchProps, SwitchProvider, SwitchThumb, useSwitchContext } from 'primereact/switch';
+export { UISwitchRoot as SwitchRoot } from './root';

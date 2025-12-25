@@ -1,9 +1,5 @@
-export * from './Tabs';
-export * from './Tabs.context';
-export * from './Tabs.props';
+export * as Tabs from './UITabs.parts';
 
-// helpers;
-export * from './list';
-export * from './panel';
-export * from './panels';
-export * from './tab';
+// Named runtime exports to maximize tree-shaking
+export { defaultIndicatorProps, defaultListProps, defaultPanelProps, defaultPanelsProps, defaultRootProps, defaultTabProps, TabsIndicator, TabsList, TabsPanel, TabsPanels, TabsProps, TabsProvider, TabsTab, useTabsContext } from 'primereact/tabs';
+export { UITabsRoot as TabsRoot } from './root';

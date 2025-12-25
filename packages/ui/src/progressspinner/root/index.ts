@@ -1,1 +1,1 @@
-export * from './UIPanelRoot';
+export * from './UIProgressspinnerRoot';

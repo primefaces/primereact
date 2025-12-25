@@ -1,6 +1,18 @@
-export * from './ProgressBar';
-export * from './ProgressBar.context';
-export * from './ProgressBar.props';
+export * as ProgressBar from './UIProgressBar.parts';
 
-// helpers
-export * from './label';
+// Named runtime exports to maximize tree-shaking
+export {
+    defaultIndicatorProps,
+    defaultLabelProps,
+    defaultRootProps,
+    defaultTrackProps,
+    defaultValueProps,
+    ProgressBarIndicator,
+    ProgressBarLabel,
+    ProgressBarProps,
+    ProgressBarProvider,
+    ProgressBarTrack,
+    ProgressBarValue,
+    useProgressBarContext
+} from 'primereact/progressbar';
+export { UIProgressBarRoot as ProgressBarRoot } from './root';

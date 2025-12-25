@@ -1,5 +1,22 @@
-export * from './CommandMenu';
-export * from './CommandMenu.context';
-export * from './CommandMenu.props';
+export * as CommandMenu from './UICommandMenu.parts';
 
-// helpers
+// Named runtime exports to maximize tree-shaking
+export {
+    CommandMenuEmpty,
+    CommandMenuGroup,
+    CommandMenuGroupHeading,
+    CommandMenuInput,
+    CommandMenuItem,
+    CommandMenuList,
+    CommandMenuProps,
+    CommandMenuProvider,
+    defaultEmptyProps,
+    defaultGroupHeadingProps,
+    defaultGroupProps,
+    defaultInputProps,
+    defaultItemProps,
+    defaultListProps,
+    defaultRootProps,
+    useCommandMenuContext
+} from 'primereact/commandmenu';
+export { UICommandMenuRoot as CommandMenuRoot } from './root';

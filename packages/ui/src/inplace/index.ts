@@ -1,8 +1,5 @@
-export * from './Inplace';
-export * from './Inplace.context';
-export * from './Inplace.props';
+export * as Inplace from './UIInplace.parts';
 
-// helpers
-export * from './close';
-export * from './content';
-export * from './display';
+// Named runtime exports to maximize tree-shaking
+export { defaultCloseProps, defaultContentProps, defaultDisplayProps, defaultRootProps, InplaceClose, InplaceContent, InplaceDisplay, InplaceProps, InplaceProvider, useInplaceContext } from 'primereact/inplace';
+export { UIInplaceRoot as InplaceRoot } from './root';

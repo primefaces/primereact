@@ -1,3 +1,5 @@
-export * from './Terminal';
-export * from './Terminal.context';
-export * from './Terminal.props';
+export * as Terminal from './UITerminal.parts';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultCommandListProps, defaultRootProps, defaultWelcomeProps, TerminalCommandList, TerminalProps, TerminalProvider, TerminalWelcome, useTerminalContext } from 'primereact/terminal';
+export { UITerminalRoot as TerminalRoot } from './root';
