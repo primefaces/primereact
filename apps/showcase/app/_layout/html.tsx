@@ -1,5 +1,12 @@
 import '@/assets/styles/global.css';
+import { Geist_Mono } from 'next/font/google';
 import Body from './body';
+
+const geistMono = Geist_Mono({
+    subsets: ['latin'],
+    variable: '--font-mono',
+    weight: ['400']
+});
 
 export default function Html({
     children
@@ -7,7 +14,7 @@ export default function Html({
     children?: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" className={geistMono.variable} suppressHydrationWarning>
             <head>
                 <link rel="preconnect" href="https://rsms.me/" />
                 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />

@@ -75,13 +75,22 @@ export const rehypeReAttachMeta = () => (tree) => {
 
 export const rehypeNpmCommandMeta = () => (tree) => {
     visit(tree, (node) => {
-        if (node?.type === 'element' && node?.tagName === 'pre' && node.properties?.['__syntaxSource__']?.startsWith('npm install')) {
+        if (node?.type === 'element' && node?.tagName === 'pre' && node.properties?.['__syntaxSource__']) {
             const npmInstall = node.properties?.['__syntaxSource__'];
 
-            node.properties['__npmInstall__'] = npmInstall;
-            node.properties['__yarnInstall__'] = npmInstall.replace('npm install', 'yarn add');
-            node.properties['__pnpmInstall__'] = npmInstall.replace('npm install', 'pnpm add');
-            node.properties['__bunInstall__'] = npmInstall.replace('npm install', 'bun add');
+            if (npmInstall.startsWith('npm install')) {
+                node.properties['__npmInstall__'] = npmInstall;
+                node.properties['__yarnInstall__'] = npmInstall.replace('yarn install', 'yarn add');
+                node.properties['__pnpmInstall__'] = npmInstall.replace('pnpm install', 'pnpm add');
+                node.properties['__bunInstall__'] = npmInstall.replace('bun install', 'bun add');
+            }
+
+            if (npmInstall.startsWith('npx')) {
+                node.properties['__npmInstall__'] = npmInstall;
+                node.properties['__yarnInstall__'] = npmInstall.replace('npx', 'yarn');
+                node.properties['__pnpmInstall__'] = npmInstall.replace('npx', 'pnpm dlx');
+                node.properties['__bunInstall__'] = npmInstall.replace('npx', 'bunx --bun');
+            }
         }
     });
 };

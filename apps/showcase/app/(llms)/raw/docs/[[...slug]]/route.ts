@@ -31,7 +31,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
         const componentName = cleanSlug[1];
 
         if (cleanSlug[2]) {
-            const componentSlug = `components/${componentName}/${cleanSlug[2]}`;
+            const componentSlug = cleanSlug.join('/');
             const doc = allDocs.find((d) => d.componentSlug === componentSlug);
 
             if (doc && doc.llm) {

@@ -60,7 +60,7 @@ const TypescriptLogo = ({ ...props }: React.ComponentProps<'svg'>) => {
     );
 };
 
-const CaptionButton = ({ className, ...props }: React.ComponentProps<'button'>) => {
+export const CaptionButton = ({ className, ...props }: React.ComponentProps<'button'>) => {
     return (
         <button
             className={cn(

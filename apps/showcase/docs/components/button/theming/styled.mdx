@@ -6,10 +6,11 @@ component: button
 
 <DocTabs value="styled" size="xl">
 <DocTabsList className="mt-4">
-    <DocTabsTab value="styled">Styled</DocTabsTab>
-    <DocTabsTab value="tailwind">Tailwind</DocTabsTab>
+    <DocTabsTab value="styled" as="Link" href="/docs/components/button/theming/styled">Styled</DocTabsTab>
+    <DocTabsTab value="tailwind" as="Link" href="/docs/components/button/theming/tailwind">Tailwind</DocTabsTab>
 </DocTabsList>
-<DocTabsPanel value="styled">
+</DocTabs>
+
 ### Button CSS Classes
 
 List of class names used in the styled mode.
@@ -27,10 +28,3 @@ List of class names used in the styled mode.
 List of design tokens.
 
 <DocTable name="Button" category="token" />
-
-</DocTabsPanel>
-<DocTabsPanel value="tailwind">
-### Button CSS Classes
-
-</DocTabsPanel>
-</DocTabs>

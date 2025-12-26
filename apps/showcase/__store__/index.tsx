@@ -138,6 +138,10 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
             'component': React.lazy(() => import('demo/button/button-pt')),
             'filePath': 'demo/button/button-pt.tsx',
         },
+        'button': {
+            'component': React.lazy(() => import('demo/button/button')),
+            'filePath': 'demo/button/button.tsx',
+        },
         'disabled-demo': {
             'component': React.lazy(() => import('demo/button/disabled-demo')),
             'filePath': 'demo/button/disabled-demo.tsx',
@@ -185,6 +189,10 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         'size-demo': {
             'component': React.lazy(() => import('demo/button/size-demo')),
             'filePath': 'demo/button/size-demo.tsx',
+        },
+        'tailwind-demo': {
+            'component': React.lazy(() => import('demo/button/tailwind-demo')),
+            'filePath': 'demo/button/tailwind-demo.tsx',
         },
         'text-demo': {
             'component': React.lazy(() => import('demo/button/text-demo')),
