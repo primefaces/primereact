@@ -1,6 +1,5 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/commandmenu';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useCommandMenuContext } from '../CommandMenu.context';
@@ -9,7 +8,6 @@ import { defaultInputProps } from './CommandMenuInput.props';
 export const CommandMenuInput = withComponent({
     name: 'CommandMenuInput',
     defaultProps: defaultInputProps,
-    styles,
     setup() {
         const commandmenu = useCommandMenuContext();
 

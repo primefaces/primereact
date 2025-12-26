@@ -1,6 +1,5 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/commandmenu';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useCommandMenuContext } from '../CommandMenu.context';
@@ -10,7 +9,6 @@ import { defaultGroupProps } from './CommandMenuGroup.props';
 export const CommandMenuGroup = withComponent({
     name: 'CommandMenuGroup',
     defaultProps: defaultGroupProps,
-    styles,
     setup(instance) {
         const { props, id } = instance;
         const commandmenu = useCommandMenuContext();

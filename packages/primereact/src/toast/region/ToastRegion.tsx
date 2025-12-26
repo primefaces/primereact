@@ -1,6 +1,5 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/toast';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useToastContext } from '../Toast.context';
@@ -9,7 +8,6 @@ import { defaultRegionProps } from './ToastRegion.props';
 export const ToastRegion = withComponent({
     name: 'ToastRegion',
     defaultProps: defaultRegionProps,
-    styles,
     setup() {
         const toast = useToastContext();
 

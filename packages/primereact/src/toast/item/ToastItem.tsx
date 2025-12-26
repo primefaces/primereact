@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useToastItem } from '@primereact/headless/toast/item';
-import { styles } from '@primereact/styles/toast';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useToastContext } from '../Toast.context';
@@ -11,7 +10,6 @@ import { defaultItemProps } from './ToastItem.props';
 export const ToastItem = withComponent({
     name: 'ToastItem',
     defaultProps: defaultItemProps,
-    styles,
     setup(instance) {
         const toastItem = useToastItem(instance.inProps);
 
