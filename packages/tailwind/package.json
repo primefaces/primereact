@@ -2,7 +2,7 @@
     "name": "@/ui",
     "private": true,
     "author": "PrimeTek Informatics",
-    "description": "",
+    "description": "A Tailwind CSS based UI component library for React.",
     "homepage": "https://primereact.org/",
     "license": "MIT",
     "repository": {
@@ -13,11 +13,7 @@
     "bugs": {
         "url": "https://github.com/primefaces/primereact/issues"
     },
-    "main": "./src/index.ts",
-    "module": "./src/index.ts",
-    "types": "./src/index.ts",
     "exports": {
-        ".": "./src/index.ts",
         "./*": "./src/*/index.tsx"
     },
     "dependencies": {
