@@ -1,4 +1,28 @@
 {
     "name": "@/ui",
-    "private": true
+    "private": true,
+    "author": "PrimeTek Informatics",
+    "description": "",
+    "homepage": "https://primereact.org/",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/primefaces/primereact.git",
+        "directory": "packages/tailwind"
+    },
+    "bugs": {
+        "url": "https://github.com/primefaces/primereact/issues"
+    },
+    "main": "./src/index.ts",
+    "module": "./src/index.ts",
+    "types": "./src/index.ts",
+    "exports": {
+        ".": "./src/index.ts",
+        "./*": "./src/*/index.tsx"
+    },
+    "dependencies": {
+        "class-variance-authority": "^0.7.1",
+        "primereact": "workspace:*",
+        "tailwindcss-primeui": "catalog:"
+    }
 }

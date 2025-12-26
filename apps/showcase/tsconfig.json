@@ -27,6 +27,7 @@
             "@primeuix/motion/*": ["../../../../packages/motion/dist/*"],
             "contentlayer/generated": ["./.contentlayer/generated"],
 
+            "@/ui/*": ["../../packages/tailwind/src/*"],
             "@/*": ["./*"]
         }
     },
