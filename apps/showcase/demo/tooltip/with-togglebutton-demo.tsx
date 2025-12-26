@@ -32,7 +32,7 @@ export default function WithToggleButtonDemo() {
             <Tooltip.Group>
                 <ToggleButton.Group allowEmpty={false}>
                     {content.map((item) => (
-                        <Tooltip key={item.value}>
+                        <Tooltip.Root key={item.value}>
                             <Tooltip.Trigger as={ToggleButton} value={item.value}>
                                 <ToggleButton.Indicator>
                                     <i className={item.icon}></i>
@@ -44,7 +44,7 @@ export default function WithToggleButtonDemo() {
                                     <Tooltip.Arrow />
                                 </Tooltip.Content>
                             </Tooltip.Portal>
-                        </Tooltip>
+                        </Tooltip.Root>
                     ))}
                 </ToggleButton.Group>
             </Tooltip.Group>

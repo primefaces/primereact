@@ -20,7 +20,7 @@ export default function ButtonbarDemo() {
 
     return (
         <div className="flex justify-center gap-4 flex-wrap">
-            <DatePicker value={date} placeholder="Basic" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} placeholder="Basic" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -131,8 +131,8 @@ export default function ButtonbarDemo() {
                         <DatePicker.Clear />
                     </DatePicker.Buttonbar>
                 </DatePicker.Portal>
-            </DatePicker>
-            <DatePicker
+            </DatePicker.Root>
+            <DatePicker.Root
                 value={date2}
                 placeholder="Customized"
                 selectionMode="range"
@@ -251,27 +251,27 @@ export default function ButtonbarDemo() {
                             return (
                                 <div className="flex justify-between w-full">
                                     <div className="flex gap-2">
-                                        <Button size="small" severity="secondary">
+                                        <Button.Root size="small" severity="secondary">
                                             Exact
-                                        </Button>
-                                        <Button size="small" severity="secondary">
+                                        </Button.Root>
+                                        <Button.Root size="small" severity="secondary">
                                             Flexible
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                     <div className="flex gap-2">
-                                        <Button size="small" label="Today" onClick={datepicker?.onTodayButtonClick} variant="outlined">
+                                        <Button.Root size="small" label="Today" onClick={datepicker?.onTodayButtonClick} variant="outlined">
                                             Today
-                                        </Button>
-                                        <Button size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
+                                        </Button.Root>
+                                        <Button.Root size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
                                             <i className="pi pi-times" />
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </div>
                             );
                         }}
                     </DatePicker.Buttonbar>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

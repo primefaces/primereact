@@ -17,10 +17,10 @@ export default function InputDemo() {
                     fluid
                     className="mb-4"
                 />
-                <Slider value={value} onValueChange={(e: SliderChangeEvent) => setValue(e.value as number)} className="w-full">
+                <Slider.Root value={value} onValueChange={(e: SliderChangeEvent) => setValue(e.value as number)} className="w-full">
                     <Slider.Range />
                     <Slider.Thumb />
-                </Slider>
+                </Slider.Root>
             </div>
         </div>
     );

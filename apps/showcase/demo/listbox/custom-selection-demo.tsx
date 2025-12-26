@@ -18,7 +18,7 @@ export default function CustomSelectionDemo() {
 
     return (
         <div className="flex justify-center">
-            <Listbox
+            <Listbox.Root
                 value={selectedCities}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCities(e.value as string[] | null)}
                 options={cities}
@@ -48,7 +48,7 @@ export default function CustomSelectionDemo() {
                         });
                     }}
                 </Listbox.Options>
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

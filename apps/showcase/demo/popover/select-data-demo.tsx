@@ -16,7 +16,7 @@ function SelectDataDemo() {
 
     return (
         <div className="flex justify-center">
-            <Popover open={open} onOpenChange={(e: usePopoverOpenChangeEvent) => setOpen(e.value)}>
+            <Popover.Root open={open} onOpenChange={(e: usePopoverOpenChangeEvent) => setOpen(e.value)}>
                 <Popover.Trigger className="min-w-48">{selectedMember?.name}</Popover.Trigger>
                 <Popover.Portal>
                     <Popover.Content>
@@ -48,7 +48,7 @@ function SelectDataDemo() {
                         </div>
                     </Popover.Content>
                 </Popover.Portal>
-            </Popover>
+            </Popover.Root>
         </div>
     );
 }

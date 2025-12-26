@@ -102,9 +102,9 @@ const RecursiveTree = ({ items, root }: { items: NodeType[]; root?: boolean }) =
 function TemplateDemo() {
     return (
         <div className="flex items-center justify-center">
-            <OrgChart collapsible value={data}>
+            <OrgChart.Root collapsible value={data}>
                 <RecursiveTree items={data} root={true} />
-            </OrgChart>
+            </OrgChart.Root>
         </div>
     );
 }

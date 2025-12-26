@@ -7,7 +7,7 @@ export default function PlacementDemo() {
     return (
         <div className="flex flex-col items-center justify-center gap-12">
             <div className="flex items-center justify-center gap-6">
-                <Tooltip side="top">
+                <Tooltip.Root side="top">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         Top
                     </Tooltip.Trigger>
@@ -17,8 +17,8 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
-                <Tooltip side="bottom">
+                </Tooltip.Root>
+                <Tooltip.Root side="bottom">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         Bottom
                     </Tooltip.Trigger>
@@ -28,8 +28,8 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
-                <Tooltip side="right">
+                </Tooltip.Root>
+                <Tooltip.Root side="right">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         Right
                     </Tooltip.Trigger>
@@ -39,8 +39,8 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
-                <Tooltip side="left">
+                </Tooltip.Root>
+                <Tooltip.Root side="left">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         Left
                     </Tooltip.Trigger>
@@ -50,10 +50,10 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
+                </Tooltip.Root>
             </div>
             <div className="flex items-center justify-center gap-6">
-                <Tooltip align="start">
+                <Tooltip.Root align="start">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         Start
                     </Tooltip.Trigger>
@@ -63,8 +63,8 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
-                <Tooltip align="center">
+                </Tooltip.Root>
+                <Tooltip.Root align="center">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         Center
                     </Tooltip.Trigger>
@@ -74,8 +74,8 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
-                <Tooltip align="end">
+                </Tooltip.Root>
+                <Tooltip.Root align="end">
                     <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                         End
                     </Tooltip.Trigger>
@@ -85,7 +85,7 @@ export default function PlacementDemo() {
                             <Tooltip.Arrow />
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
+                </Tooltip.Root>
             </div>
         </div>
     );

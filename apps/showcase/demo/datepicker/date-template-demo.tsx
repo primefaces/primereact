@@ -17,7 +17,7 @@ export default function DateTemplateDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -128,7 +128,7 @@ export default function DateTemplateDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

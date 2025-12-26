@@ -1,3 +1,4 @@
+'use client';
 import { LocaleProvider } from '@primereact/core/locale';
 import { PassThroughProvider } from '@primereact/core/passthrough';
 import { ThemeProvider } from '@primereact/core/theme';

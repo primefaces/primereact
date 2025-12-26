@@ -21,7 +21,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
-                <DatePicker value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="over_label" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -131,12 +131,12 @@ export default function FloatLabelDemo() {
                             </DatePicker.Calendar>
                         </DatePicker.Container>
                     </DatePicker.Portal>
-                </DatePicker>
-                <Label htmlFor="over_label">Over Label</Label>
+                </DatePicker.Root>
+                <Label.Root htmlFor="over_label">Over Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="in">
-                <DatePicker value={date2} onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
+                <DatePicker.Root value={date2} onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
                     <DatePicker.Input id="in_label" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -246,12 +246,12 @@ export default function FloatLabelDemo() {
                             </DatePicker.Calendar>
                         </DatePicker.Container>
                     </DatePicker.Portal>
-                </DatePicker>
-                <Label htmlFor="in_label">In Label</Label>
+                </DatePicker.Root>
+                <Label.Root htmlFor="in_label">In Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="on">
-                <DatePicker value={date3} onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
+                <DatePicker.Root value={date3} onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
                     <DatePicker.Input id="on_label" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -361,8 +361,8 @@ export default function FloatLabelDemo() {
                             </DatePicker.Calendar>
                         </DatePicker.Container>
                     </DatePicker.Portal>
-                </DatePicker>
-                <Label htmlFor="on_label">On Label</Label>
+                </DatePicker.Root>
+                <Label.Root htmlFor="on_label">On Label</Label.Root>
             </Label.Float>
         </div>
     );

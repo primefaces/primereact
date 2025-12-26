@@ -18,7 +18,7 @@ export default function InlineDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker value={date} className="w-full sm:w-120" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} className="w-full sm:w-120" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Panel>
                     <DatePicker.Container>
                         <DatePicker.Calendar>
@@ -128,7 +128,7 @@ export default function InlineDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Panel>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

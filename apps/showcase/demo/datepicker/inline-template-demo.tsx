@@ -29,7 +29,7 @@ export default function InlineTemplateDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker value={value} numberOfMonths={2} onValueChange={(event: DatePickerValueChangeEvent) => setValue(event.value as Date)}>
+            <DatePicker.Root value={value} numberOfMonths={2} onValueChange={(event: DatePickerValueChangeEvent) => setValue(event.value as Date)}>
                 <DatePicker.Panel>
                     <DatePicker.Container>
                         {(instance: DatePickerContainerInstance) => {
@@ -159,7 +159,7 @@ export default function InlineTemplateDemo() {
                         }}
                     </DatePicker.Container>
                 </DatePicker.Panel>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

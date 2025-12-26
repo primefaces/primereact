@@ -5,7 +5,7 @@ import { ScrollArea } from 'primereact/scrollarea';
 export default function CustomDemo() {
     return (
         <div className="flex justify-center">
-            <ScrollArea style={{ width: '600px', height: '200px' }}>
+            <ScrollArea.Root style={{ width: '600px', height: '200px' }}>
                 <ScrollArea.Viewport>
                     <ScrollArea.Content>
                         <p>
@@ -35,7 +35,7 @@ export default function CustomDemo() {
                     </ScrollArea.Content>
                 </ScrollArea.Viewport>
                 <ScrollArea.ThumbY className="bg-primary" />
-            </ScrollArea>
+            </ScrollArea.Root>
         </div>
     );
 }

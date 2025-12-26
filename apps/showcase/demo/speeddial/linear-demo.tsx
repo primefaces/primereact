@@ -23,7 +23,7 @@ export default function LinearDemo() {
         <div>
             <div style={{ position: 'relative', height: '500px' }}>
                 {directions.map((item, index) => (
-                    <SpeedDial key={index} direction={item.direction as SpeedDialProps['direction']} style={item.style as React.CSSProperties}>
+                    <SpeedDial.Root key={index} direction={item.direction as SpeedDialProps['direction']} style={item.style as React.CSSProperties}>
                         <SpeedDial.Button />
                         <SpeedDial.List>
                             {items.map((action) => (
@@ -34,7 +34,7 @@ export default function LinearDemo() {
                                 </SpeedDial.Item>
                             ))}
                         </SpeedDial.List>
-                    </SpeedDial>
+                    </SpeedDial.Root>
                 ))}
             </div>
         </div>

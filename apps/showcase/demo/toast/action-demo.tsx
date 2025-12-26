@@ -7,7 +7,7 @@ import { Toast } from 'primereact/toast';
 
 function ActionToast() {
     return (
-        <Toast group="action">
+        <Toast.Root group="action">
             <Toast.Portal>
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
@@ -36,7 +36,7 @@ function ActionToast() {
                     }
                 </Toast.Region>
             </Toast.Portal>
-        </Toast>
+        </Toast.Root>
     );
 }
 
@@ -62,9 +62,9 @@ function ActionDemo() {
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button onClick={handleCreateToast} variant="outlined">
+            <Button.Root onClick={handleCreateToast} variant="outlined">
                 Create toast with action
-            </Button>
+            </Button.Root>
             <ActionToast />
         </div>
     );

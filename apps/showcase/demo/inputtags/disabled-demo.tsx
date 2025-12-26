@@ -5,7 +5,7 @@ import { InputTags } from 'primereact/inputtags';
 
 export default function DisabledDemo() {
     return (
-        <InputTags disabled>
+        <InputTags.Root disabled>
             {(instance: InputTagsInstance) => {
                 return (
                     <>
@@ -16,6 +16,6 @@ export default function DisabledDemo() {
                     </>
                 );
             }}
-        </InputTags>
+        </InputTags.Root>
     );
 }

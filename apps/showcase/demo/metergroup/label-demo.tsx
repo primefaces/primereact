@@ -12,7 +12,7 @@ export default function LabelDemo() {
 
     return (
         <div>
-            <MeterGroup>
+            <MeterGroup.Root>
                 <MeterGroup.Labels orientation="vertical">
                     {values.map((item, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
@@ -28,7 +28,7 @@ export default function LabelDemo() {
                         <MeterGroup.Meter key={`meter_${index}`} value={item.value} index={index} />
                     ))}
                 </MeterGroup.Meters>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

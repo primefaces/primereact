@@ -1,9 +1,9 @@
-import { Button } from './button';
+/*import { Button } from './button';
 
 export default function TailwindDemo() {
     return (
         <div className="flex justify-center">
-            <Button>Button</Button>
+            <Button.Root>Button</Button.Root>
         </div>
     );
-}
+}*/

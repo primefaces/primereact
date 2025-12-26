@@ -5,7 +5,7 @@ import { InputTags } from 'primereact/inputtags';
 
 export default function BasicDemo() {
     return (
-        <InputTags delimiter=",">
+        <InputTags.Root delimiter=",">
             {(instance: InputTagsInstance) => {
                 return (
                     <>
@@ -16,6 +16,6 @@ export default function BasicDemo() {
                     </>
                 );
             }}
-        </InputTags>
+        </InputTags.Root>
     );
 }

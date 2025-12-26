@@ -5,7 +5,7 @@ import { Menu } from 'primereact/menu';
 export default function InlineDemo() {
     return (
         <div className="flex justify-center">
-            <Menu className="w-64">
+            <Menu.Root className="w-64">
                 <Menu.List>
                     <Menu.Item>
                         <i className="pi pi-home" />
@@ -113,7 +113,7 @@ export default function InlineDemo() {
                         Help & Support
                     </Menu.Item>
                 </Menu.List>
-            </Menu>
+            </Menu.Root>
         </div>
     );
 }

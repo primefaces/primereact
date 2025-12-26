@@ -75,7 +75,7 @@ export default function LazyDemo() {
     }, []);
 
     return (
-        <Tree onExpand={onNodeExpand} className="w-full md:w-120">
+        <Tree.Root onExpand={onNodeExpand} className="w-full md:w-120">
             <Tree.List>
                 {nodes.map((node, index) => (
                     <Tree.Node key={node.key} node={node} index={index}>
@@ -113,6 +113,6 @@ export default function LazyDemo() {
                     </Tree.Node>
                 ))}
             </Tree.List>
-        </Tree>
+        </Tree.Root>
     );
 }

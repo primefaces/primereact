@@ -1,4 +1,4 @@
-'use client';
+/*'use client';
 import { ButtonProps as PrimeButtonProps } from '@primereact/types/shared/button';
 import { cn } from '@primeuix/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -38,3 +38,4 @@ const buttonVariants = cva(
 export function Button({ className, variant, size, ...props }: PrimeButtonProps & VariantProps<typeof buttonVariants>) {
     return <PrimeButton className={cn(buttonVariants({ variant, size, className }))} {...props} unstyled />;
 }
+*/

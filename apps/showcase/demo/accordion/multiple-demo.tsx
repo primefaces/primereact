@@ -5,7 +5,7 @@ import { Accordion } from 'primereact/accordion';
 export default function MultipleDemo() {
     return (
         <div>
-            <Accordion multiple className="max-w-md mx-auto">
+            <Accordion.Root multiple className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         What is this service about?
@@ -42,7 +42,7 @@ export default function MultipleDemo() {
                         </p>
                     </Accordion.Content>
                 </Accordion.Panel>
-            </Accordion>
+            </Accordion.Root>
         </div>
     );
 }

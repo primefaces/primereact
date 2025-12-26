@@ -6,21 +6,21 @@ import { InputText } from 'primereact/inputtext';
 export default function SizesDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
-            <IconField>
+            <IconField.Root>
                 <IconField.Icon>
                     <i className="pi pi-search" />
                 </IconField.Icon>
                 <InputText placeholder="Small" size="small" />
-            </IconField>
+            </IconField.Root>
 
-            <IconField>
+            <IconField.Root>
                 <InputText placeholder="Normal" />
                 <IconField.Icon>
                     <i className="pi pi-user" />
                 </IconField.Icon>
-            </IconField>
+            </IconField.Root>
 
-            <IconField>
+            <IconField.Root>
                 <IconField.Icon>
                     <i className="pi pi-lock" />
                 </IconField.Icon>
@@ -28,7 +28,7 @@ export default function SizesDemo() {
                 <IconField.Icon>
                     <i className="pi pi-spin pi-spinner" />
                 </IconField.Icon>
-            </IconField>
+            </IconField.Root>
         </div>
     );
 }

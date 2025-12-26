@@ -9,7 +9,7 @@ export default function ControlledDemo() {
 
     return (
         <div className="flex justify-center">
-            <Breadcrumb onAction={(key: string) => setCurrentPage(key)}>
+            <Breadcrumb.Root onAction={(key: string) => setCurrentPage(key)}>
                 <Breadcrumb.List>
                     <Breadcrumb.Item uKey="home" isCurrent={currentPage === 'home'}>
                         <Link href="#controlled">Home</Link>
@@ -31,7 +31,7 @@ export default function ControlledDemo() {
                         <Link href="#controlled">Reports</Link>
                     </Breadcrumb.Item>
                 </Breadcrumb.List>
-            </Breadcrumb>
+            </Breadcrumb.Root>
         </div>
     );
 }

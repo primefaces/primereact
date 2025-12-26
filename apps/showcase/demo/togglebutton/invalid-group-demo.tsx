@@ -14,12 +14,12 @@ export default function InvalidGroupDemo() {
                 onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string[])}
                 invalid={value === null}
             >
-                <ToggleButton value="monthly">
+                <ToggleButton.Root value="monthly">
                     <ToggleButton.Indicator>Monthly</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="yearly">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="yearly">
                     <ToggleButton.Indicator>Yearly</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
         </div>
     );

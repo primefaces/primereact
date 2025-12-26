@@ -1,3 +1,4 @@
+'use client';
 import { useProps } from '@primereact/hooks';
 import type { ThemeProps } from '@primereact/types/core';
 import { Theme } from '@primeuix/styled';

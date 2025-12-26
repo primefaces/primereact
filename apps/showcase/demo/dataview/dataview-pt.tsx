@@ -55,16 +55,16 @@ export default function DataViewPTDemo() {
                             <div className="flex flex-col md:items-end gap-8">
                                 <span className="text-xl font-semibold">${product.price}</span>
                                 <div className="flex flex-row-reverse md:flex-row gap-2">
-                                    <Button variant="outlined">
+                                    <Button.Root variant="outlined">
                                         <i className="pi pi-heart"></i>
-                                    </Button>
-                                    <Button
+                                    </Button.Root>
+                                    <Button.Root
                                         disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                         className="flex-auto md:flex-initial whitespace-nowrap"
                                     >
                                         <i className="pi pi-shopping-cart"></i>
                                         Buy Now
-                                    </Button>
+                                    </Button.Root>
                                 </div>
                             </div>
                         </div>

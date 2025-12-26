@@ -14,21 +14,21 @@ export default function PositionDemo() {
     return (
         <div>
             <div className="flex gap-2 justify-center">
-                <Button onClick={() => setVisibleLeft(true)}>
+                <Button.Root onClick={() => setVisibleLeft(true)}>
                     <i className="pi pi-arrow-right" />
-                </Button>
-                <Button onClick={() => setVisibleRight(true)}>
+                </Button.Root>
+                <Button.Root onClick={() => setVisibleRight(true)}>
                     <i className="pi pi-arrow-left" />
-                </Button>
-                <Button onClick={() => setVisibleTop(true)}>
+                </Button.Root>
+                <Button.Root onClick={() => setVisibleTop(true)}>
                     <i className="pi pi-arrow-down" />
-                </Button>
-                <Button onClick={() => setVisibleBottom(true)}>
+                </Button.Root>
+                <Button.Root onClick={() => setVisibleBottom(true)}>
                     <i className="pi pi-arrow-up" />
-                </Button>
+                </Button.Root>
             </div>
 
-            <Drawer open={visibleLeft} onOpenChange={(e: DrawerChangeEvent) => setVisibleLeft(e.value as boolean)}>
+            <Drawer.Root open={visibleLeft} onOpenChange={(e: DrawerChangeEvent) => setVisibleLeft(e.value as boolean)}>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Left Drawer</Drawer.Title>
@@ -41,9 +41,9 @@ export default function PositionDemo() {
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
-            </Drawer>
+            </Drawer.Root>
 
-            <Drawer position="right" open={visibleRight} onOpenChange={(e: DrawerChangeEvent) => setVisibleRight(e.value as boolean)}>
+            <Drawer.Root position="right" open={visibleRight} onOpenChange={(e: DrawerChangeEvent) => setVisibleRight(e.value as boolean)}>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Right Drawer</Drawer.Title>
@@ -56,9 +56,9 @@ export default function PositionDemo() {
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
-            </Drawer>
+            </Drawer.Root>
 
-            <Drawer
+            <Drawer.Root
                 position="top"
                 open={visibleTop}
                 onOpenChange={(e: DrawerChangeEvent) => setVisibleTop(e.value as boolean)}
@@ -76,9 +76,9 @@ export default function PositionDemo() {
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
-            </Drawer>
+            </Drawer.Root>
 
-            <Drawer
+            <Drawer.Root
                 position="bottom"
                 open={visibleBottom}
                 onOpenChange={(e: DrawerChangeEvent) => setVisibleBottom(e.value as boolean)}
@@ -96,7 +96,7 @@ export default function PositionDemo() {
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
-            </Drawer>
+            </Drawer.Root>
         </div>
     );
 }

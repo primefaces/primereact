@@ -7,7 +7,7 @@ export default function HorizontalDemo() {
 
     return (
         <div className="flex flex-col gap-4">
-            <Timeline orientation="horizontal" align="top">
+            <Timeline.Root orientation="horizontal" align="top">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite />
@@ -18,8 +18,8 @@ export default function HorizontalDemo() {
                         <Timeline.Content>{event}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
-            <Timeline orientation="horizontal" align="bottom">
+            </Timeline.Root>
+            <Timeline.Root orientation="horizontal" align="bottom">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite />
@@ -30,8 +30,8 @@ export default function HorizontalDemo() {
                         <Timeline.Content>{event}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
-            <Timeline orientation="horizontal" align="alternate">
+            </Timeline.Root>
+            <Timeline.Root orientation="horizontal" align="alternate">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite>&nbsp;</Timeline.Opposite>
@@ -42,7 +42,7 @@ export default function HorizontalDemo() {
                         <Timeline.Content>{event}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
+            </Timeline.Root>
         </div>
     );
 }

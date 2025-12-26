@@ -4,7 +4,7 @@ import { ScrollArea } from 'primereact/scrollarea';
 
 export default function SkeletonPT() {
     return (
-        <ScrollArea style={{ width: '600px', height: '200px' }}>
+        <ScrollArea.Root style={{ width: '600px', height: '200px' }}>
             <ScrollArea.Viewport>
                 <ScrollArea.Content>
                     <p>
@@ -34,6 +34,6 @@ export default function SkeletonPT() {
                 </ScrollArea.Content>
             </ScrollArea.Viewport>
             <ScrollArea.ThumbY />
-        </ScrollArea>
+        </ScrollArea.Root>
     );
 }

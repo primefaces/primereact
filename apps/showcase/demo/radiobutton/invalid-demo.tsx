@@ -5,7 +5,7 @@ import { RadioButton } from 'primereact/radiobutton';
 export default function InvalidDemo() {
     return (
         <div className="flex justify-center">
-            <RadioButton invalid />
+            <RadioButton.Root invalid />
         </div>
     );
 }

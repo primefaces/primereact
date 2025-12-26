@@ -12,13 +12,13 @@ function CustomTextDemo() {
 
     return (
         <div className="flex items-center justify-end">
-            <Paginator total={total} itemsPerPage={itemsPerPage} page={page} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
+            <Paginator.Root total={total} itemsPerPage={itemsPerPage} page={page} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
                 <Paginator.Content>
                     Showing {itemsPerPage * (page - 1) + 1} – {Math.min(total, itemsPerPage * page)} of {total}
                     <Paginator.Prev />
                     <Paginator.Next />
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
         </div>
     );
 }

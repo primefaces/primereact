@@ -11,12 +11,12 @@ export default function ToggleableDemo() {
 
     return (
         <div>
-            <Fieldset>
+            <Fieldset.Root>
                 <Fieldset.Legend>
-                    <Button onClick={() => setShow((prev) => !prev)} variant="text">
+                    <Button.Root onClick={() => setShow((prev) => !prev)} variant="text">
                         {show ? <MinusIcon /> : <PlusIcon />}
                         Legend
-                    </Button>
+                    </Button.Root>
                 </Fieldset.Legend>
                 <Motion in={show} name="p-toggleable-content">
                     <Fieldset.Content>
@@ -28,7 +28,7 @@ export default function ToggleableDemo() {
                         </p>
                     </Fieldset.Content>
                 </Motion>
-            </Fieldset>
+            </Fieldset.Root>
         </div>
     );
 }

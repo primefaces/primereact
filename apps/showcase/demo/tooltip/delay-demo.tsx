@@ -6,7 +6,7 @@ import { Tooltip } from 'primereact/tooltip';
 export default function DelayDemo() {
     return (
         <div className="flex flex-col items-center justify-center gap-8">
-            <Tooltip showDelayDuration={1000} hideDelayDuration={1000}>
+            <Tooltip.Root showDelayDuration={1000} hideDelayDuration={1000}>
                 <Tooltip.Trigger as={Button} severity="secondary">
                     Show Tooltip
                 </Tooltip.Trigger>
@@ -15,9 +15,9 @@ export default function DelayDemo() {
                         <p>This is a tooltip</p>
                     </Tooltip.Content>
                 </Tooltip.Portal>
-            </Tooltip>
+            </Tooltip.Root>
             <Tooltip.Group as="div" className="flex items-center gap-2" timeout={1000} skipTimeout={300}>
-                <Tooltip>
+                <Tooltip.Root>
                     <Tooltip.Trigger as={Button} severity="secondary">
                         Item 1
                     </Tooltip.Trigger>
@@ -26,8 +26,8 @@ export default function DelayDemo() {
                             <p>This is a tooltip</p>
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
-                <Tooltip>
+                </Tooltip.Root>
+                <Tooltip.Root>
                     <Tooltip.Trigger as={Button} severity="secondary">
                         Item 2
                     </Tooltip.Trigger>
@@ -36,7 +36,7 @@ export default function DelayDemo() {
                             <p>This is a tooltip</p>
                         </Tooltip.Content>
                     </Tooltip.Portal>
-                </Tooltip>
+                </Tooltip.Root>
             </Tooltip.Group>
         </div>
     );

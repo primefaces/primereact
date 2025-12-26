@@ -10,7 +10,7 @@ export default function BasicDemo() {
     return (
         <div>
             <div className="max-w-sm space-y-4">
-                <ColorPicker format={format === 'hex' ? 'rgba' : format}>
+                <ColorPicker.Root format={format === 'hex' ? 'rgba' : format}>
                     <ColorPicker.Area />
                     <div className="flex items-center gap-4">
                         <div className="flex-1 space-y-1">
@@ -57,7 +57,7 @@ export default function BasicDemo() {
                             <ColorPicker.Input fluid channel="alpha" className="max-w-20" />
                         </div>
                     </div>
-                </ColorPicker>
+                </ColorPicker.Root>
             </div>
         </div>
     );

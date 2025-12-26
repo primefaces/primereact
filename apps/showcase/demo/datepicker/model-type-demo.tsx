@@ -20,10 +20,10 @@ export default function ModelTypeDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label htmlFor="datetype" className="font-bold block mb-2">
+                <Label.Root htmlFor="datetype" className="font-bold block mb-2">
                     Date Type Model
-                </Label>
-                <DatePicker value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                </Label.Root>
+                <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="datetype" />
                     <DatePicker.Portal>
                         <DatePicker.Container>
@@ -130,13 +130,18 @@ export default function ModelTypeDemo() {
                             </DatePicker.Calendar>
                         </DatePicker.Container>
                     </DatePicker.Portal>
-                </DatePicker>
+                </DatePicker.Root>
             </div>
             <div className="flex-auto">
-                <Label htmlFor="stringtype" className="font-bold block mb-2">
+                <Label.Root htmlFor="stringtype" className="font-bold block mb-2">
                     String Type Model
-                </Label>
-                <DatePicker value={date2} updateModelType="string" fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
+                </Label.Root>
+                <DatePicker.Root
+                    value={date2}
+                    updateModelType="string"
+                    fluid
+                    onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}
+                >
                     <DatePicker.Input id="stringtype" />
                     <DatePicker.Portal>
                         <DatePicker.Container>
@@ -243,7 +248,7 @@ export default function ModelTypeDemo() {
                             </DatePicker.Calendar>
                         </DatePicker.Container>
                     </DatePicker.Portal>
-                </DatePicker>
+                </DatePicker.Root>
             </div>
         </div>
     );

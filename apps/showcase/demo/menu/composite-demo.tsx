@@ -5,7 +5,7 @@ import { Menu } from 'primereact/menu';
 export default function CompositeDemo() {
     return (
         <div className="flex justify-center">
-            <Menu className="w-56" composite>
+            <Menu.Root className="w-56" composite>
                 <Menu.List>
                     <Menu.Item>
                         <i className="pi pi-file" />
@@ -84,7 +84,7 @@ export default function CompositeDemo() {
                         Exit
                     </Menu.Item>
                 </Menu.List>
-            </Menu>
+            </Menu.Root>
         </div>
     );
 }

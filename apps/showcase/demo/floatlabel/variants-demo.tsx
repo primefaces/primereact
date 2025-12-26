@@ -17,7 +17,7 @@ export default function VariantsDemo() {
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)}
                     autoComplete="off"
                 />
-                <Label htmlFor="in_label">In Label</Label>
+                <Label.Root htmlFor="in_label">In Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="on">
@@ -27,7 +27,7 @@ export default function VariantsDemo() {
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)}
                     autoComplete="off"
                 />
-                <Label htmlFor="on_label">On Label</Label>
+                <Label.Root htmlFor="on_label">On Label</Label.Root>
             </Label.Float>
         </div>
     );

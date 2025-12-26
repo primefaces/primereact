@@ -21,7 +21,7 @@ export default function FloatLabelDemo() {
                     style={{ resize: 'none' }}
                     className="h-full"
                 />
-                <Label htmlFor="over_label">Over Label</Label>
+                <Label.Root htmlFor="over_label">Over Label</Label.Root>
             </Label.Float>
             <Label.Float variant="in">
                 <Textarea
@@ -33,7 +33,7 @@ export default function FloatLabelDemo() {
                     style={{ resize: 'none' }}
                     className="h-full"
                 />
-                <Label htmlFor="in_label">In Label</Label>
+                <Label.Root htmlFor="in_label">In Label</Label.Root>
             </Label.Float>
             <Label.Float variant="on">
                 <Textarea
@@ -45,7 +45,7 @@ export default function FloatLabelDemo() {
                     style={{ resize: 'none' }}
                     className="h-full"
                 />
-                <Label htmlFor="on_label">On Label</Label>
+                <Label.Root htmlFor="on_label">On Label</Label.Root>
             </Label.Float>
         </div>
     );

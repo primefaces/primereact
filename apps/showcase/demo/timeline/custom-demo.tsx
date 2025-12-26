@@ -14,7 +14,7 @@ export default function CustomDemo() {
 
     return (
         <div>
-            <Timeline align="alternate">
+            <Timeline.Root align="alternate">
                 {events.map((event, index) => (
                     <Timeline.Event key={index} className={index % 2 === 1 ? 'max-[960px]:flex-row' : undefined}>
                         <Timeline.Opposite />
@@ -30,7 +30,7 @@ export default function CustomDemo() {
                             {index !== events.length - 1 && <Timeline.Connector />}
                         </Timeline.Separator>
                         <Timeline.Content className={index % 2 === 1 ? 'max-[960px]:!text-left' : undefined}>
-                            <Card className="mt-4">
+                            <Card.Root className="mt-4">
                                 <Card.Body>
                                     <Card.Caption>
                                         <Card.Title>{event.status}</Card.Title>
@@ -50,14 +50,14 @@ export default function CustomDemo() {
                                             numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
                                             cupiditate neque quas!
                                         </p>
-                                        <Button variant="text">Read more</Button>
+                                        <Button.Root variant="text">Read more</Button.Root>
                                     </Card.Content>
                                 </Card.Body>
-                            </Card>
+                            </Card.Root>
                         </Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
+            </Timeline.Root>
         </div>
     );
 }

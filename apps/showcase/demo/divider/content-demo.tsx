@@ -12,11 +12,11 @@ export default function ContentDemo() {
                 culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
-            <Divider align="left" type="solid">
+            <Divider.Root align="left" type="solid">
                 <Divider.Content>
                     <b>Left</b>
                 </Divider.Content>
-            </Divider>
+            </Divider.Root>
 
             <p className="m-0">
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
@@ -25,11 +25,11 @@ export default function ContentDemo() {
                 velit, sed quia non numquam eius modi.
             </p>
 
-            <Divider align="center" type="dotted">
+            <Divider.Root align="center" type="dotted">
                 <Divider.Content>
                     <b>Center</b>
                 </Divider.Content>
-            </Divider>
+            </Divider.Root>
 
             <p className="m-0">
                 At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
@@ -38,11 +38,11 @@ export default function ContentDemo() {
                 eligendi optio cumque nihil impedit quo minus.
             </p>
 
-            <Divider align="right" type="dashed">
+            <Divider.Root align="right" type="dashed">
                 <Divider.Content>
                     <b>Right</b>
                 </Divider.Content>
-            </Divider>
+            </Divider.Root>
 
             <p className="m-0">
                 Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et

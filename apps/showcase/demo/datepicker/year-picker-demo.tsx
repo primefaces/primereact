@@ -16,7 +16,7 @@ export default function YearPickerDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker value={date} view="year" dateFormat="yy" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} view="year" dateFormat="yy" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -77,7 +77,7 @@ export default function YearPickerDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

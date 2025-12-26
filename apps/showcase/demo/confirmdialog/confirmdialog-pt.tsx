@@ -5,7 +5,7 @@ import { ConfirmDialog } from 'primereact/confirmdialog';
 export default function ConfirmDialogPT() {
     return (
         <>
-            <ConfirmDialog />
+            <ConfirmDialog.Root />
             <div
                 className="p-dialog-mask p-dialog-open !relative"
                 data-pc-section="mask"

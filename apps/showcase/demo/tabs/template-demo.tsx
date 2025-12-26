@@ -32,13 +32,13 @@ const tabs = [
 export default function TemplateDemo() {
     return (
         <div>
-            <Tabs value="tab1" className="max-w-md mx-auto">
+            <Tabs.Root value="tab1" className="max-w-md mx-auto">
                 <Tabs.List>
                     {tabs.map((tab) => (
                         <Tabs.Tab key={tab.id} value={tab.id} className="flex items-center gap-2">
                             <i className={tab.icon}></i>
                             {tab.title}
-                            {tab.badge && <Badge size="small">{tab.badge}</Badge>}
+                            {tab.badge && <Badge.Root size="small">{tab.badge}</Badge.Root>}
                         </Tabs.Tab>
                     ))}
                     <Tabs.Indicator />
@@ -52,15 +52,15 @@ export default function TemplateDemo() {
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1">
-                                        <Label htmlFor="username">Username</Label>
+                                        <Label.Root htmlFor="username">Username</Label.Root>
                                         <InputText id="username" placeholder="john.doe" />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <Label htmlFor="email">Email</Label>
+                                        <Label.Root htmlFor="email">Email</Label.Root>
                                         <InputText id="email" placeholder="john.doe@example.com" />
                                     </div>
                                 </div>
-                                <Button className="mt-8 w-fit">Save Changes</Button>
+                                <Button.Root className="mt-8 w-fit">Save Changes</Button.Root>
                             </form>
                         </div>
                     </Tabs.Panel>
@@ -72,19 +72,19 @@ export default function TemplateDemo() {
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1">
-                                        <Label htmlFor="cardName">Cardholder Name</Label>
+                                        <Label.Root htmlFor="cardName">Cardholder Name</Label.Root>
                                         <InputText id="cardName" placeholder="John Doe" />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <Label htmlFor="cardNumber">Card Number</Label>
+                                        <Label.Root htmlFor="cardNumber">Card Number</Label.Root>
                                         <InputText id="cardNumber" placeholder="0000 0000 0000 0000" />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <Label htmlFor="expiryDate">Expiry Date</Label>
+                                        <Label.Root htmlFor="expiryDate">Expiry Date</Label.Root>
                                         <InputText id="expiryDate" placeholder="MM/YY" />
                                     </div>
                                 </div>
-                                <Button className="mt-8 w-fit">Update Payment</Button>
+                                <Button.Root className="mt-8 w-fit">Update Payment</Button.Root>
                             </form>
                         </div>
                     </Tabs.Panel>
@@ -96,36 +96,36 @@ export default function TemplateDemo() {
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <Label htmlFor="darkMode">Dark Mode</Label>
-                                        <Switch inputId="darkMode">
+                                        <Label.Root htmlFor="darkMode">Dark Mode</Label.Root>
+                                        <Switch.Root inputId="darkMode">
                                             <Switch.Control>
                                                 <Switch.Thumb />
                                             </Switch.Control>
-                                        </Switch>
+                                        </Switch.Root>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <Label htmlFor="emailNotifications">Email Notifications</Label>
-                                        <Switch inputId="emailNotifications" defaultChecked>
+                                        <Label.Root htmlFor="emailNotifications">Email Notifications</Label.Root>
+                                        <Switch.Root inputId="emailNotifications" defaultChecked>
                                             <Switch.Control>
                                                 <Switch.Thumb />
                                             </Switch.Control>
-                                        </Switch>
+                                        </Switch.Root>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <Label htmlFor="desktopNotifications">Desktop Notifications</Label>
-                                        <Switch inputId="desktopNotifications">
+                                        <Label.Root htmlFor="desktopNotifications">Desktop Notifications</Label.Root>
+                                        <Switch.Root inputId="desktopNotifications">
                                             <Switch.Control>
                                                 <Switch.Thumb />
                                             </Switch.Control>
-                                        </Switch>
+                                        </Switch.Root>
                                     </div>
                                 </div>
-                                <Button className="w-fit mt-8 ml-auto mr-0">Save Preferences</Button>
+                                <Button.Root className="w-fit mt-8 ml-auto mr-0">Save Preferences</Button.Root>
                             </form>
                         </div>
                     </Tabs.Panel>
                 </Tabs.Panels>
-            </Tabs>
+            </Tabs.Root>
         </div>
     );
 }

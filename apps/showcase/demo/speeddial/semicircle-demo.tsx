@@ -22,7 +22,7 @@ export default function SemiCircleDemo() {
         <div>
             <div style={{ position: 'relative', height: '500px' }}>
                 {directions.map((item) => (
-                    <SpeedDial key={item.direction} radius={80} type="semi-circle" direction={item.direction} style={item.style}>
+                    <SpeedDial.Root key={item.direction} radius={80} type="semi-circle" direction={item.direction} style={item.style}>
                         <SpeedDial.Button />
                         <SpeedDial.List>
                             {items.map((action) => (
@@ -33,7 +33,7 @@ export default function SemiCircleDemo() {
                                 </SpeedDial.Item>
                             ))}
                         </SpeedDial.List>
-                    </SpeedDial>
+                    </SpeedDial.Root>
                 ))}
             </div>
         </div>

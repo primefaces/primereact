@@ -11,13 +11,13 @@ export default function ToggleableDemo() {
 
     return (
         <div>
-            <Panel>
+            <Panel.Root>
                 <Panel.Header>
                     <Panel.Title>Header</Panel.Title>
                     <Panel.HeaderActions>
-                        <Button onClick={() => setShow((prev) => !prev)} rounded variant="text" iconOnly>
+                        <Button.Root onClick={() => setShow((prev) => !prev)} rounded variant="text" iconOnly>
                             {show ? <MinusIcon /> : <PlusIcon />}
-                        </Button>
+                        </Button.Root>
                     </Panel.HeaderActions>
                 </Panel.Header>
                 <Motion in={show} name="p-toggleable-content">
@@ -34,7 +34,7 @@ export default function ToggleableDemo() {
                         <p className="m-0">Footer</p>
                     </Panel.Footer>
                 </Motion>
-            </Panel>
+            </Panel.Root>
         </div>
     );
 }

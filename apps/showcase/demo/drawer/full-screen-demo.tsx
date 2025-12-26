@@ -5,7 +5,7 @@ import { Drawer } from 'primereact/drawer';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <Drawer position="full">
+            <Drawer.Root position="full">
                 <Drawer.Trigger>
                     <i className="pi pi-window-maximize" />
                 </Drawer.Trigger>
@@ -21,7 +21,7 @@ export default function BasicDemo() {
                         </p>
                     </Drawer.Content>
                 </Drawer.Portal>
-            </Drawer>
+            </Drawer.Root>
         </div>
     );
 }

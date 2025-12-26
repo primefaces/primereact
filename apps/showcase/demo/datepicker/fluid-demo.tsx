@@ -17,7 +17,7 @@ export default function FluidDemo() {
 
     return (
         <div>
-            <DatePicker value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -124,7 +124,7 @@ export default function FluidDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

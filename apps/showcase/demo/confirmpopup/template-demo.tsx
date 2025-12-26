@@ -5,7 +5,7 @@ import { ConfirmPopup } from 'primereact/confirmpopup';
 export default function TemplateDemo() {
     return (
         <div className="flex justify-center">
-            <ConfirmPopup>
+            <ConfirmPopup.Root>
                 <ConfirmPopup.Trigger>Save</ConfirmPopup.Trigger>
                 <ConfirmPopup.Portal>
                     <ConfirmPopup.Content>
@@ -25,7 +25,7 @@ export default function TemplateDemo() {
                         </ConfirmPopup.Accept>
                     </ConfirmPopup.Footer>
                 </ConfirmPopup.Portal>
-            </ConfirmPopup>
+            </ConfirmPopup.Root>
         </div>
     );
 }

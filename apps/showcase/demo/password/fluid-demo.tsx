@@ -5,9 +5,9 @@ import { Password } from 'primereact/password';
 export default function FluidDemo() {
     return (
         <div>
-            <Password fluid>
+            <Password.Root fluid>
                 <Password.Input />
-            </Password>
+            </Password.Root>
         </div>
     );
 }

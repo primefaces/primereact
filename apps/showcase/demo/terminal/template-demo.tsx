@@ -56,7 +56,7 @@ export default function BasicDemo() {
                 Enter &quot;<strong>date</strong>&quot; to display the current date, &quot;<strong>greet {0}</strong>&quot; for a message and &quot;
                 <strong>random</strong>&quot; to get a random number.
             </p>
-            <Terminal
+            <Terminal.Root
                 prompt="primereact $"
                 pt={{
                     promptLabel: 'font-medium'
@@ -80,7 +80,7 @@ export default function BasicDemo() {
                         </>
                     );
                 }}
-            </Terminal>
+            </Terminal.Root>
         </div>
     );
 }

@@ -12,7 +12,7 @@ export default function ContextMenuPTDemo() {
     const [theme, setTheme] = React.useState('light');
 
     return (
-        <ContextMenu className="w-64">
+        <ContextMenu.Root className="w-64">
             <ContextMenu.List>
                 <ContextMenu.Item>Overview</ContextMenu.Item>
 
@@ -59,6 +59,6 @@ export default function ContextMenuPTDemo() {
 
                 <ContextMenu.Item>Settings</ContextMenu.Item>
             </ContextMenu.List>
-        </ContextMenu>
+        </ContextMenu.Root>
     );
 }

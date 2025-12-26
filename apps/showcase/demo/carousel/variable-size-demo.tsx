@@ -7,7 +7,7 @@ const items = ['120px', '80px', '200px', '160px', '220px', '180px', '280px', '10
 function VariableSizeDemo() {
     return (
         <div className="mt-8 mb-16">
-            <Carousel className="max-w-xl mx-auto" align="center" autoSize>
+            <Carousel.Root className="max-w-xl mx-auto" align="center" autoSize>
                 <Carousel.Content className="h-[140px]">
                     {items.map((width, i) => (
                         <Carousel.Item key={i} style={{ width }}>
@@ -28,7 +28,7 @@ function VariableSizeDemo() {
                         </Carousel.Next>
                     </div>
                 </div>
-            </Carousel>
+            </Carousel.Root>
         </div>
     );
 }

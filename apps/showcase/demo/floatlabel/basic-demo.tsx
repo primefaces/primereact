@@ -11,7 +11,7 @@ export default function BasicDemo() {
         <div className="flex flex-wrap justify-center">
             <Label.Float>
                 <InputText value={value} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} id="username" />
-                <Label htmlFor="username">InputText</Label>
+                <Label.Root htmlFor="username">InputText</Label.Root>
             </Label.Float>
         </div>
     );

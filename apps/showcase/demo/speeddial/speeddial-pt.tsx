@@ -13,7 +13,7 @@ export default function SpeedDialPTDemo() {
 
     return (
         <div style={{ position: 'relative', height: '300px' }}>
-            <SpeedDial direction="down" style={{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }}>
+            <SpeedDial.Root direction="down" style={{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }}>
                 <SpeedDial.Button />
                 <SpeedDial.List>
                     {items.map((action) => (
@@ -24,7 +24,7 @@ export default function SpeedDialPTDemo() {
                         </SpeedDial.Item>
                     ))}
                 </SpeedDial.List>
-            </SpeedDial>
+            </SpeedDial.Root>
         </div>
     );
 }

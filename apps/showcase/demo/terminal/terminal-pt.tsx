@@ -55,10 +55,10 @@ export default function TerminalPTDemo() {
                 Enter &quot;<strong>date</strong>&quot; to display the current date, &quot;<strong>greet {0}</strong>&quot; for a message and &quot;
                 <strong>random</strong>&quot; to get a random number.
             </p>
-            <Terminal prompt="primereact $">
+            <Terminal.Root prompt="primereact $">
                 <Terminal.Welcome>Welcome to PrimeReact</Terminal.Welcome>
                 <Terminal.CommandList />
-            </Terminal>
+            </Terminal.Root>
         </div>
     );
 }

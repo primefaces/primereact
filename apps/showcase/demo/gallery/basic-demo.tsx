@@ -20,7 +20,7 @@ function BasicDemo() {
 
     return (
         <div className="mb-12">
-            <Gallery
+            <Gallery.Root
                 className="w-full h-[600px] relative overflow-hidden"
                 activeIndex={activeIndex}
                 onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}
@@ -75,7 +75,7 @@ function BasicDemo() {
                         ))}
                     </Gallery.ThumbnailContent>
                 </Gallery.Thumbnail>
-            </Gallery>
+            </Gallery.Root>
         </div>
     );
 }

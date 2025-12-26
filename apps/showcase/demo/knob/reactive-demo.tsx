@@ -9,18 +9,18 @@ export default function ReactiveDemo() {
 
     return (
         <div className="flex flex-col items-center gap-2">
-            <Knob value={value} size={150} readOnly>
+            <Knob.Root value={value} size={150} readOnly>
                 <Knob.Range />
                 <Knob.Value />
                 <Knob.Text />
-            </Knob>
+            </Knob.Root>
             <div className="flex gap-2">
-                <Button onClick={() => setValue(value + 1)} disabled={value === 100}>
+                <Button.Root onClick={() => setValue(value + 1)} disabled={value === 100}>
                     <i className="pi pi-plus" />
-                </Button>
-                <Button onClick={() => setValue(value - 1)} disabled={value <= 0}>
+                </Button.Root>
+                <Button.Root onClick={() => setValue(value - 1)} disabled={value <= 0}>
                     <i className="pi pi-minus" />
-                </Button>
+                </Button.Root>
             </div>
         </div>
     );

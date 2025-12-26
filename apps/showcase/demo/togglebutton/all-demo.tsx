@@ -16,24 +16,24 @@ export default function BasicDemo() {
     return (
         <div className="flex justify-center items-center flex-col gap-3">
             <h2>Single</h2>
-            <ToggleButton>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator>New</ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
 
             <h2>States</h2>
-            <ToggleButton>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator>
                     {({ togglebutton }: ToggleButtonIndicatorInstance) => (togglebutton?.state.pressed ? 'On' : 'Off')}
                 </ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
 
             <h2>Controlled</h2>
-            <ToggleButton pressed={pressedState} onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}>
+            <ToggleButton.Root pressed={pressedState} onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}>
                 <ToggleButton.Indicator>New</ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
 
             <h2>Icon</h2>
-            <ToggleButton>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator>
                     {({ togglebutton }: ToggleButtonIndicatorInstance) =>
                         togglebutton?.state.pressed ? (
@@ -47,45 +47,45 @@ export default function BasicDemo() {
                         )
                     }
                 </ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
 
             <h2>Group</h2>
             <ToggleButton.Group allowEmpty={false}>
-                <ToggleButton value="1">
+                <ToggleButton.Root value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="2">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="2">
                     <ToggleButton.Indicator>Option 2</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="3">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="3">
                     <ToggleButton.Indicator>Option 3</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
 
             <h2>Group with unControlled</h2>
             <ToggleButton.Group defaultValue={'2'}>
-                <ToggleButton value="1">
+                <ToggleButton.Root value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="2">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="2">
                     <ToggleButton.Indicator>Option 2</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="3">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="3">
                     <ToggleButton.Indicator>Option 3</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
 
             <h2>Group with Controlled</h2>
             <ToggleButton.Group value={singleState} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setSingleState(e.value as string)}>
-                <ToggleButton value="1">
+                <ToggleButton.Root value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="2">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="2">
                     <ToggleButton.Indicator>Option 2</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="3">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="3">
                     <ToggleButton.Indicator>Option 3</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
 
             <h2>Multiple</h2>
@@ -95,15 +95,15 @@ export default function BasicDemo() {
                 value={multipleState}
                 onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setMultipleState(e.value as string[])}
             >
-                <ToggleButton value="1">
+                <ToggleButton.Root value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="2">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="2">
                     <ToggleButton.Indicator>Option 2</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="3">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="3">
                     <ToggleButton.Indicator>Option 3</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
         </div>
     );

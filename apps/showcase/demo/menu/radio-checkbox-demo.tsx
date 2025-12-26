@@ -11,7 +11,7 @@ export default function RadioCheckboxDemo() {
 
     return (
         <div className="flex justify-center">
-            <Menu className="w-64">
+            <Menu.Root className="w-64">
                 <Menu.List>
                     <Menu.Item>Overview</Menu.Item>
 
@@ -55,7 +55,7 @@ export default function RadioCheckboxDemo() {
 
                     <Menu.Item>Settings</Menu.Item>
                 </Menu.List>
-            </Menu>
+            </Menu.Root>
         </div>
     );
 }

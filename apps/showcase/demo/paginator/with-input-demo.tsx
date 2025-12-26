@@ -14,7 +14,7 @@ function WithInputDemo() {
 
     return (
         <div className="flex items-center justify-center">
-            <Paginator
+            <Paginator.Root
                 total={total}
                 itemsPerPage={itemsPerPage}
                 page={page}
@@ -37,7 +37,7 @@ function WithInputDemo() {
                     <Paginator.Next />
                     <Paginator.Last />
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
         </div>
     );
 }

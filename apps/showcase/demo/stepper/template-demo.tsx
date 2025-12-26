@@ -11,7 +11,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 export default function TemplateDemo() {
     return (
         <div className="flex justify-center">
-            <Stepper value={1} className="basis-[40rem]">
+            <Stepper.Root value={1} className="basis-[40rem]">
                 <Stepper.List>
                     <Stepper.Step asChild value={1}>
                         {(instance: StepperStepInstance) => {
@@ -33,7 +33,7 @@ export default function TemplateDemo() {
                                             <i className="pi pi-user" />
                                         </span>
                                     </button>
-                                    <Divider />
+                                    <Divider.Root />
                                 </div>
                             );
                         }}
@@ -58,7 +58,7 @@ export default function TemplateDemo() {
                                             <i className="pi pi-star" />
                                         </span>
                                     </button>
-                                    <Divider />
+                                    <Divider.Root />
                                 </div>
                             );
                         }}
@@ -108,10 +108,10 @@ export default function TemplateDemo() {
                                         </div>
                                     </div>
                                     <div className="flex pt-6 justify-end">
-                                        <Button onClick={() => stepper?.setActiveStep(2)}>
+                                        <Button.Root onClick={() => stepper?.setActiveStep(2)}>
                                             Next
                                             <i className="pi pi-arrow-right" />
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </>
                             );
@@ -126,47 +126,47 @@ export default function TemplateDemo() {
                                     <div className="flex flex-col gap-2 mx-auto" style={{ minHeight: '16rem', maxWidth: '24rem' }}>
                                         <div className="text-center mt-4 mb-4 text-xl font-semibold">Choose your interests</div>
                                         <div className="flex flex-wrap justify-center gap-4">
-                                            <ToggleButton>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Nature</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Art</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Music</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Design</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Photography</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Movies</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Sports</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Gaming</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Traveling</ToggleButton.Indicator>
-                                            </ToggleButton>
-                                            <ToggleButton>
+                                            </ToggleButton.Root>
+                                            <ToggleButton.Root>
                                                 <ToggleButton.Indicator>Dancing</ToggleButton.Indicator>
-                                            </ToggleButton>
+                                            </ToggleButton.Root>
                                         </div>
                                     </div>
                                     <div className="flex pt-6 justify-between">
-                                        <Button severity="secondary" onClick={() => stepper?.setActiveStep(1)}>
+                                        <Button.Root severity="secondary" onClick={() => stepper?.setActiveStep(1)}>
                                             <i className="pi pi-arrow-left" />
                                             Back
-                                        </Button>
-                                        <Button onClick={() => stepper?.setActiveStep(3)}>
+                                        </Button.Root>
+                                        <Button.Root onClick={() => stepper?.setActiveStep(3)}>
                                             Next
                                             <i className="pi pi-arrow-right" />
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </>
                             );
@@ -190,17 +190,17 @@ export default function TemplateDemo() {
                                         </div>
                                     </div>
                                     <div className="flex pt-6 justify-start">
-                                        <Button severity="secondary" onClick={() => stepper?.setActiveStep(2)}>
+                                        <Button.Root severity="secondary" onClick={() => stepper?.setActiveStep(2)}>
                                             <i className="pi pi-arrow-left" />
                                             Back
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </>
                             );
                         }}
                     </Stepper.Panel>
                 </Stepper.Panels>
-            </Stepper>
+            </Stepper.Root>
         </div>
     );
 }

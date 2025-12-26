@@ -17,44 +17,44 @@ export default function PositionDemo() {
     return (
         <div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
-                <Button onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
+                <Button.Root onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Left
                     <i className="pi pi-arrow-right" />
-                </Button>
-                <Button onClick={() => openPosition('right')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button.Root>
+                <Button.Root onClick={() => openPosition('right')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Right
                     <i className="pi pi-arrow-left" />
-                </Button>
+                </Button.Root>
             </div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
-                <Button onClick={() => openPosition('topleft')} severity="secondary" style={{ minWidth: '10rem' }}>
+                <Button.Root onClick={() => openPosition('topleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopLeft
                     <i className="pi pi-arrow-down-right" />
-                </Button>
-                <Button onClick={() => openPosition('top')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button.Root>
+                <Button.Root onClick={() => openPosition('top')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Top
                     <i className="pi pi-arrow-down" />
-                </Button>
-                <Button onClick={() => openPosition('topright')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button.Root>
+                <Button.Root onClick={() => openPosition('topright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopRight
                     <i className="pi pi-arrow-down-left" />
-                </Button>
+                </Button.Root>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-                <Button onClick={() => openPosition('bottomleft')} severity="secondary" style={{ minWidth: '10rem' }}>
+                <Button.Root onClick={() => openPosition('bottomleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomLeft
                     <i className="pi pi-arrow-up-right" />
-                </Button>
-                <Button onClick={() => openPosition('bottom')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button.Root>
+                <Button.Root onClick={() => openPosition('bottom')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Bottom
                     <i className="pi pi-arrow-up" />
-                </Button>
-                <Button onClick={() => openPosition('bottomright')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button.Root>
+                <Button.Root onClick={() => openPosition('bottomright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomRight
                     <i className="pi pi-arrow-up-left" />
-                </Button>
+                </Button.Root>
             </div>
-            <ConfirmDialog open={open} onOpenChange={(e: ConfirmDialogChangeEvent) => setOpen(e.value as boolean)} position={position}>
+            <ConfirmDialog.Root open={open} onOpenChange={(e: ConfirmDialogChangeEvent) => setOpen(e.value as boolean)} position={position}>
                 <ConfirmDialog.Portal>
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Edit Profile</ConfirmDialog.Title>
@@ -69,7 +69,7 @@ export default function PositionDemo() {
                         <ConfirmDialog.Action>Save</ConfirmDialog.Action>
                     </ConfirmDialog.Footer>
                 </ConfirmDialog.Portal>
-            </ConfirmDialog>
+            </ConfirmDialog.Root>
         </div>
     );
 }

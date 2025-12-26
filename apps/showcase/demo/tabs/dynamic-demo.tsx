@@ -11,7 +11,7 @@ const tabs = [
 export default function DynamicDemo() {
     return (
         <div>
-            <Tabs value="tab1">
+            <Tabs.Root value="tab1">
                 <Tabs.List>
                     {tabs.map((tab) => (
                         <Tabs.Tab key={tab.id} value={tab.id}>
@@ -27,7 +27,7 @@ export default function DynamicDemo() {
                         </Tabs.Panel>
                     ))}
                 </Tabs.Panels>
-            </Tabs>
+            </Tabs.Root>
         </div>
     );
 }

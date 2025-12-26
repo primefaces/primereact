@@ -7,7 +7,7 @@ export default function AlignmentDemo() {
 
     return (
         <div className="flex flex-wrap gap-12">
-            <Timeline className="w-full md:w-80">
+            <Timeline.Root className="w-full md:w-80">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite />
@@ -18,8 +18,8 @@ export default function AlignmentDemo() {
                         <Timeline.Content>{event.status}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
-            <Timeline align="right" className="w-full md:w-80">
+            </Timeline.Root>
+            <Timeline.Root align="right" className="w-full md:w-80">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite />
@@ -30,8 +30,8 @@ export default function AlignmentDemo() {
                         <Timeline.Content>{event.status}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
-            <Timeline align="alternate" className="w-full md:w-80">
+            </Timeline.Root>
+            <Timeline.Root align="alternate" className="w-full md:w-80">
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite />
@@ -42,7 +42,7 @@ export default function AlignmentDemo() {
                         <Timeline.Content>{event.status}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
+            </Timeline.Root>
         </div>
     );
 }

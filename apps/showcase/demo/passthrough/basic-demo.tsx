@@ -5,7 +5,7 @@ import { Panel } from 'primereact/panel';
 export default function BasicDemo() {
     return (
         <div>
-            <Panel
+            <Panel.Root
                 pt={{
                     root: 'border border-primary rounded-xl p-4',
                     header: {
@@ -30,7 +30,7 @@ export default function BasicDemo() {
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </Panel.Content>
-            </Panel>
+            </Panel.Root>
         </div>
     );
 }

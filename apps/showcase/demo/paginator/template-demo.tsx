@@ -9,7 +9,7 @@ function TemplateDemo() {
 
     return (
         <div className="flex flex-col gap-6 items-center justify-center">
-            <Paginator total={12} itemsPerPage={1} page={1} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
+            <Paginator.Root total={12} itemsPerPage={1} page={1} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
                 <Paginator.Content>
                     <Paginator.First />
                     <Paginator.Prev />
@@ -17,7 +17,7 @@ function TemplateDemo() {
                     <Paginator.Next />
                     <Paginator.Last />
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
 
             <div className="p-4 text-center">
                 <img

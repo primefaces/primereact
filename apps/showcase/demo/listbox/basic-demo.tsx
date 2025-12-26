@@ -17,7 +17,7 @@ export default function BasicDemo() {
 
     return (
         <div className="flex justify-center">
-            <Listbox
+            <Listbox.Root
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}
                 options={cities}
@@ -26,7 +26,7 @@ export default function BasicDemo() {
                 className="w-full md:w-56"
             >
                 <Listbox.Options />
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

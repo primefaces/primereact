@@ -18,7 +18,7 @@ export default function RangeDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker
+            <DatePicker.Root
                 value={date}
                 selectionMode="range"
                 manualInput={false}
@@ -130,7 +130,7 @@ export default function RangeDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

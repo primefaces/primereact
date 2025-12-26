@@ -77,16 +77,16 @@ export default function LayoutDemo() {
                         onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)}
                         allowEmpty={false}
                     >
-                        <ToggleButton value="list">
+                        <ToggleButton.Root value="list">
                             <ToggleButton.Indicator>
                                 <i className="pi pi-bars"></i>
                             </ToggleButton.Indicator>
-                        </ToggleButton>
-                        <ToggleButton value="grid">
+                        </ToggleButton.Root>
+                        <ToggleButton.Root value="grid">
                             <ToggleButton.Indicator>
                                 <i className="pi pi-table"></i>
                             </ToggleButton.Indicator>
-                        </ToggleButton>
+                        </ToggleButton.Root>
                     </ToggleButton.Group>
                 </div>
                 {value === 'list' ? list : grid}

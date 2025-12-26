@@ -29,7 +29,7 @@ export default function TemplateDemo() {
         <div>
             <div className="max-w-sm mx-auto space-y-8">
                 {/* Basic percentage formatter */}
-                <ProgressBar value={uploadedFileSize} max={maxFileSize} formatter={(value: number) => `${value.toFixed(1)}%`}>
+                <ProgressBar.Root value={uploadedFileSize} max={maxFileSize} formatter={(value: number) => `${value.toFixed(1)}%`}>
                     <div className="flex items-center justify-between mb-3">
                         <span className="font-medium">Basic Percentage</span>
                         <ProgressBar.Value />
@@ -37,10 +37,10 @@ export default function TemplateDemo() {
                     <ProgressBar.Track className="rounded-full h-1.5">
                         <ProgressBar.Indicator className="bg-blue-600 rounded-full" />
                     </ProgressBar.Track>
-                </ProgressBar>
+                </ProgressBar.Root>
 
                 {/* File size formatter */}
-                <ProgressBar
+                <ProgressBar.Root
                     value={uploadedFileSize}
                     max={maxFileSize}
                     formatter={(value: number) => {
@@ -56,10 +56,10 @@ export default function TemplateDemo() {
                     <ProgressBar.Track className="rounded-full h-1.5">
                         <ProgressBar.Indicator className="bg-emerald-600 rounded-full" />
                     </ProgressBar.Track>
-                </ProgressBar>
+                </ProgressBar.Root>
 
                 {/* Time remaining formatter */}
-                <ProgressBar
+                <ProgressBar.Root
                     value={uploadedFileSize}
                     max={maxFileSize}
                     formatter={(value: number) => {
@@ -75,10 +75,10 @@ export default function TemplateDemo() {
                     <ProgressBar.Track className="rounded-full h-1.5">
                         <ProgressBar.Indicator className="bg-purple-600 rounded-full" />
                     </ProgressBar.Track>
-                </ProgressBar>
+                </ProgressBar.Root>
 
                 {/* Status Steps formatter */}
-                <ProgressBar
+                <ProgressBar.Root
                     value={uploadedFileSize}
                     max={maxFileSize}
                     formatter={(value: number) => {
@@ -95,7 +95,7 @@ export default function TemplateDemo() {
                     <ProgressBar.Track className="rounded-full h-1.5">
                         <ProgressBar.Indicator className="bg-orange-600 rounded-full" />
                     </ProgressBar.Track>
-                </ProgressBar>
+                </ProgressBar.Root>
             </div>
         </div>
     );

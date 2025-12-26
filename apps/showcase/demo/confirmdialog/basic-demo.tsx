@@ -5,7 +5,7 @@ import { ConfirmDialog } from 'primereact/confirmdialog';
 export default function BasicDemo() {
     return (
         <div className="flex flex-wrap gap-2 justify-center">
-            <ConfirmDialog>
+            <ConfirmDialog.Root>
                 <ConfirmDialog.Trigger variant="outlined">Save</ConfirmDialog.Trigger>
                 <ConfirmDialog.Portal>
                     <ConfirmDialog.Header>
@@ -21,8 +21,8 @@ export default function BasicDemo() {
                         <ConfirmDialog.Action>Save</ConfirmDialog.Action>
                     </ConfirmDialog.Footer>
                 </ConfirmDialog.Portal>
-            </ConfirmDialog>
-            <ConfirmDialog>
+            </ConfirmDialog.Root>
+            <ConfirmDialog.Root>
                 <ConfirmDialog.Trigger severity="danger" variant="outlined">
                     Delete
                 </ConfirmDialog.Trigger>
@@ -40,7 +40,7 @@ export default function BasicDemo() {
                         <ConfirmDialog.Action severity="danger">Delete</ConfirmDialog.Action>
                     </ConfirmDialog.Footer>
                 </ConfirmDialog.Portal>
-            </ConfirmDialog>
+            </ConfirmDialog.Root>
         </div>
     );
 }

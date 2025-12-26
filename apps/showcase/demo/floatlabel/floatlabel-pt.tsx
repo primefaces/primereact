@@ -10,7 +10,7 @@ export default function FloatLabelDemo() {
     return (
         <Label.Float>
             <InputText value={value} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} id="username" />
-            <Label htmlFor="username">InputText</Label>
+            <Label.Root htmlFor="username">InputText</Label.Root>
         </Label.Float>
     );
 }

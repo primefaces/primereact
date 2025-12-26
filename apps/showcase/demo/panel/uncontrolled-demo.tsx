@@ -8,7 +8,7 @@ import { Panel } from 'primereact/panel';
 export default function ToggleableDemo() {
     return (
         <div>
-            <Panel toggleable>
+            <Panel.Root toggleable>
                 <Panel.Header>
                     <Panel.Title>Uncontrolled Panel</Panel.Title>
                     <Panel.HeaderActions>
@@ -17,9 +17,9 @@ export default function ToggleableDemo() {
                                 const { panel } = instance;
 
                                 return (
-                                    <Button type="button" variant="text" onClick={panel?.onButtonClick}>
+                                    <Button.Root type="button" variant="text" onClick={panel?.onButtonClick}>
                                         {panel?.state.collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
-                                    </Button>
+                                    </Button.Root>
                                 );
                             }}
                         </Panel.Collapse>
@@ -33,7 +33,7 @@ export default function ToggleableDemo() {
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </Panel.Content>
-            </Panel>
+            </Panel.Root>
         </div>
     );
 }

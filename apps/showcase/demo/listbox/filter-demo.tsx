@@ -21,7 +21,7 @@ export default function FilterDemo() {
 
     return (
         <div className="flex justify-center">
-            <Listbox
+            <Listbox.Root
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}
                 options={filteredCities}
@@ -30,7 +30,7 @@ export default function FilterDemo() {
                 className="w-full md:w-56"
             >
                 <Listbox.Header>
-                    <IconField>
+                    <IconField.Root>
                         <Listbox.Filter
                             as={InputText}
                             placeholder="Search city"
@@ -40,11 +40,11 @@ export default function FilterDemo() {
                         <IconField.Icon>
                             <i className="pi pi-search" />
                         </IconField.Icon>
-                    </IconField>
+                    </IconField.Root>
                 </Listbox.Header>
                 <Listbox.Options />
                 <Listbox.Empty>No options found</Listbox.Empty>
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

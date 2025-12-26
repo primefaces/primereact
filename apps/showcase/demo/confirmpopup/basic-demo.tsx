@@ -5,7 +5,7 @@ import { ConfirmPopup } from 'primereact/confirmpopup';
 export default function BasicDemo() {
     return (
         <div className="flex flex-wrap gap-2 justify-center">
-            <ConfirmPopup>
+            <ConfirmPopup.Root>
                 <ConfirmPopup.Trigger variant="outlined">Save</ConfirmPopup.Trigger>
                 <ConfirmPopup.Portal>
                     <ConfirmPopup.Content>
@@ -19,8 +19,8 @@ export default function BasicDemo() {
                         <ConfirmPopup.Accept>Save</ConfirmPopup.Accept>
                     </ConfirmPopup.Footer>
                 </ConfirmPopup.Portal>
-            </ConfirmPopup>
-            <ConfirmPopup>
+            </ConfirmPopup.Root>
+            <ConfirmPopup.Root>
                 <ConfirmPopup.Trigger severity="danger" variant="outlined">
                     Delete
                 </ConfirmPopup.Trigger>
@@ -36,7 +36,7 @@ export default function BasicDemo() {
                         <ConfirmPopup.Accept severity="danger">Delete</ConfirmPopup.Accept>
                     </ConfirmPopup.Footer>
                 </ConfirmPopup.Portal>
-            </ConfirmPopup>
+            </ConfirmPopup.Root>
         </div>
     );
 }

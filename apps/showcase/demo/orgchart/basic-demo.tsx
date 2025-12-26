@@ -42,7 +42,7 @@ const data = [
 export default function BasicDemo() {
     return (
         <div className="flex items-center justify-center">
-            <OrgChart value={data} />
+            <OrgChart.Root value={data} />
         </div>
     );
 }

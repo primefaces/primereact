@@ -9,9 +9,13 @@ export default function InvalidDemo() {
 
     return (
         <div className="flex items-center justify-center">
-            <ToggleButton pressed={pressedState} onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)} invalid={!pressedState}>
+            <ToggleButton.Root
+                pressed={pressedState}
+                onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}
+                invalid={!pressedState}
+            >
                 <ToggleButton.Indicator>Invalid</ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
         </div>
     );
 }

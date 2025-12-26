@@ -5,7 +5,7 @@ import { Accordion } from 'primereact/accordion';
 export default function DisabledDemo() {
     return (
         <div className="space-y-8">
-            <Accordion disabled className="max-w-md mx-auto">
+            <Accordion.Root disabled className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         How do I reset my password?
@@ -30,8 +30,8 @@ export default function DisabledDemo() {
                         </p>
                     </Accordion.Content>
                 </Accordion.Panel>
-            </Accordion>
-            <Accordion className="max-w-md mx-auto">
+            </Accordion.Root>
+            <Accordion.Root className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         What happens if I exceed my usage limit?
@@ -53,7 +53,7 @@ export default function DisabledDemo() {
                         <p>Yes, we offer both iOS and Android apps so you can manage your account and stay connected on the go.</p>
                     </Accordion.Content>
                 </Accordion.Panel>
-            </Accordion>
+            </Accordion.Root>
         </div>
     );
 }

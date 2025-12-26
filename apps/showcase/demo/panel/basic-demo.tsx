@@ -5,7 +5,7 @@ import { Panel } from 'primereact/panel';
 export default function BasicDemo() {
     return (
         <div>
-            <Panel>
+            <Panel.Root>
                 <Panel.Header>Header</Panel.Header>
                 <Panel.Content>
                     <p className="m-0">
@@ -15,7 +15,7 @@ export default function BasicDemo() {
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </Panel.Content>
-            </Panel>
+            </Panel.Root>
         </div>
     );
 }

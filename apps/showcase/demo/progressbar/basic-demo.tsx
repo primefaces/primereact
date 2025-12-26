@@ -7,7 +7,7 @@ export default function BasicDemo() {
 
     return (
         <div>
-            <ProgressBar value={value}>
+            <ProgressBar.Root value={value}>
                 <ProgressBar.Track>
                     <ProgressBar.Indicator>
                         <ProgressBar.Label>
@@ -15,7 +15,7 @@ export default function BasicDemo() {
                         </ProgressBar.Label>
                     </ProgressBar.Indicator>
                 </ProgressBar.Track>
-            </ProgressBar>
+            </ProgressBar.Root>
         </div>
     );
 }

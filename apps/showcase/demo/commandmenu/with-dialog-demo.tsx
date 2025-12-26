@@ -73,14 +73,14 @@ export default function BasicDemo() {
                     CTRL/⌘ + K
                 </kbd>
             </div>
-            <Dialog open={open} onOpenChange={(e: DialogChangeEvent) => setOpen(e.value as boolean)} modal dismissableMask>
+            <Dialog.Root open={open} onOpenChange={(e: DialogChangeEvent) => setOpen(e.value as boolean)} modal dismissableMask>
                 <Dialog.Portal>
                     <Dialog.Content unstyled className="bg-none p-0 border-none sm:min-w-[520px] w-full">
                         {(instance: DialogContentInstance) => {
                             const { dialog } = instance;
 
                             return (
-                                <CommandMenu className=" border-none">
+                                <CommandMenu.Root className=" border-none">
                                     <div className="border-b border-surface-200 dark:border-surface-700/50 px-4 py-2 flex items-center gap-2">
                                         <CommandMenu.Input
                                             className="flex-1"
@@ -116,12 +116,12 @@ export default function BasicDemo() {
                                             </CommandMenu.Group>
                                         ))}
                                     </CommandMenu.List>
-                                </CommandMenu>
+                                </CommandMenu.Root>
                             );
                         }}
                     </Dialog.Content>
                 </Dialog.Portal>
-            </Dialog>
+            </Dialog.Root>
         </div>
     );
 }

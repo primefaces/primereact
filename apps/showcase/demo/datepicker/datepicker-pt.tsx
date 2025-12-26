@@ -16,7 +16,7 @@ export default function DatePickerPTDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <DatePicker value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+        <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
             <DatePicker.Container>
                 <DatePicker.Calendar>
                     <DatePicker.Header>
@@ -120,6 +120,6 @@ export default function DatePickerPTDemo() {
                     </DatePicker.Table>
                 </DatePicker.Calendar>
             </DatePicker.Container>
-        </DatePicker>
+        </DatePicker.Root>
     );
 }

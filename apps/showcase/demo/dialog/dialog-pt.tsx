@@ -5,7 +5,7 @@ import { Dialog } from 'primereact/dialog';
 export default function DialogPT() {
     return (
         <>
-            <Dialog />
+            <Dialog.Root />
             <div
                 className="p-dialog-mask !relative"
                 data-pc-section="mask"

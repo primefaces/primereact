@@ -5,7 +5,7 @@ import { Stepper } from 'primereact/stepper';
 export default function StepsOnlyDemo() {
     return (
         <div className="flex justify-center">
-            <Stepper value="1" className="basis-[50rem]">
+            <Stepper.Root value="1" className="basis-[50rem]">
                 <Stepper.List>
                     <Stepper.Step value="1">
                         <Stepper.Header>
@@ -29,7 +29,7 @@ export default function StepsOnlyDemo() {
                         <Stepper.Separator />
                     </Stepper.Step>
                 </Stepper.List>
-            </Stepper>
+            </Stepper.Root>
         </div>
     );
 }

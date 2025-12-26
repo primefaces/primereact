@@ -28,17 +28,17 @@ export default function FilterDemo() {
                 height={240}
             />
             <ToggleButton.Group value={filter} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setFilter(e.value as number)}>
-                <ToggleButton value={0}>
+                <ToggleButton.Root value={0}>
                     <ToggleButton.Indicator>Contrast</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value={1}>
+                </ToggleButton.Root>
+                <ToggleButton.Root value={1}>
                     <ToggleButton.Indicator>Brightness</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value={2}>
+                </ToggleButton.Root>
+                <ToggleButton.Root value={2}>
                     <ToggleButton.Indicator>Sepia</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
-            <Slider
+            <Slider.Root
                 value={filterValues[filter]}
                 onValueChange={(e: SliderChangeEvent) =>
                     setFilterValues((prev) => {
@@ -55,7 +55,7 @@ export default function FilterDemo() {
             >
                 <Slider.Range />
                 <Slider.Thumb />
-            </Slider>
+            </Slider.Root>
         </div>
     );
 }

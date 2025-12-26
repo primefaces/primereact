@@ -8,29 +8,29 @@ import { RadioButton } from 'primereact/radiobutton';
 export default function CheckboxRadioDemo() {
     return (
         <div className="flex flex-col md:flex-row gap-4">
-            <InputGroup>
+            <InputGroup.Root>
                 <InputText placeholder="Price" />
                 <InputGroup.Addon>
-                    <RadioButton name="rb1" value="rb1" />
+                    <RadioButton.Root name="rb1" value="rb1" />
                 </InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
 
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Checkbox />
+                    <Checkbox.Root />
                 </InputGroup.Addon>
                 <InputText placeholder="Username" />
-            </InputGroup>
+            </InputGroup.Root>
 
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Checkbox />
+                    <Checkbox.Root />
                 </InputGroup.Addon>
                 <InputText placeholder="Website" />
                 <InputGroup.Addon>
-                    <RadioButton name="rb2" value="rb2" />
+                    <RadioButton.Root name="rb2" value="rb2" />
                 </InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
         </div>
     );
 }

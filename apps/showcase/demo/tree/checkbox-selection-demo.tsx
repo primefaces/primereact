@@ -13,8 +13,8 @@ export default function CheckboxSelectionDemo() {
     }, []);
 
     return (
-        <Tree value={nodes} selectionMode="checkbox" className="w-full md:w-120">
+        <Tree.Root value={nodes} selectionMode="checkbox" className="w-full md:w-120">
             <Tree.List />
-        </Tree>
+        </Tree.Root>
     );
 }

@@ -7,7 +7,7 @@ import { Breadcrumb } from 'primereact/breadcrumb';
 export default function RouteDemo() {
     return (
         <div className="flex justify-center">
-            <Breadcrumb>
+            <Breadcrumb.Root>
                 <Breadcrumb.List>
                     <Breadcrumb.Item>
                         <Link href="/">
@@ -27,7 +27,7 @@ export default function RouteDemo() {
                         <Link href="/inputtext">InputText</Link>
                     </Breadcrumb.Item>
                 </Breadcrumb.List>
-            </Breadcrumb>
+            </Breadcrumb.Root>
         </div>
     );
 }

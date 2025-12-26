@@ -5,9 +5,9 @@ import { Password } from 'primereact/password';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <Password>
+            <Password.Root>
                 <Password.Input placeholder="Enter password" />
-            </Password>
+            </Password.Root>
         </div>
     );
 }

@@ -6,15 +6,15 @@ export default function MultipleDemo() {
     return (
         <div className="flex items-center justify-center">
             <ToggleButton.Group multiple>
-                <ToggleButton value="bold">
+                <ToggleButton.Root value="bold">
                     <ToggleButton.Indicator>Bold</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="italic">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="italic">
                     <ToggleButton.Indicator>Italic</ToggleButton.Indicator>
-                </ToggleButton>
-                <ToggleButton value="underline">
+                </ToggleButton.Root>
+                <ToggleButton.Root value="underline">
                     <ToggleButton.Indicator>Underline</ToggleButton.Indicator>
-                </ToggleButton>
+                </ToggleButton.Root>
             </ToggleButton.Group>
         </div>
     );

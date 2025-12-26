@@ -17,7 +17,7 @@ export default function MonthPickerDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker value={date} view="month" dateFormat="mm/yy" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} view="month" dateFormat="mm/yy" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -102,7 +102,7 @@ export default function MonthPickerDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

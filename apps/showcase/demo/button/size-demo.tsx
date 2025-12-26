@@ -5,18 +5,18 @@ import { Button } from 'primereact/button';
 export default function SizeDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="small">
+            <Button.Root size="small">
                 <i className="pi pi-check" />
                 Small
-            </Button>
-            <Button>
+            </Button.Root>
+            <Button.Root>
                 <i className="pi pi-check" />
                 Normal
-            </Button>
-            <Button size="large">
+            </Button.Root>
+            <Button.Root size="large">
                 <i className="pi pi-check" />
                 Large
-            </Button>
+            </Button.Root>
         </div>
     );
 }

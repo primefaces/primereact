@@ -13,8 +13,8 @@ export default function SingleSelectionDemo() {
     }, []);
 
     return (
-        <Tree value={nodes} selectionMode="single" className="w-full md:w-120">
+        <Tree.Root value={nodes} selectionMode="single" className="w-full md:w-120">
             <Tree.List />
-        </Tree>
+        </Tree.Root>
     );
 }

@@ -17,7 +17,7 @@ export default function ClearIconDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)} inputClass="w-56">
+            <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)} inputClass="w-56">
                 <DatePicker.Input />
                 <DatePicker.ClearIcon />
                 <DatePicker.Portal>
@@ -125,7 +125,7 @@ export default function ClearIconDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

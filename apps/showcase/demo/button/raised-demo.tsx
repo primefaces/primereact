@@ -5,28 +5,28 @@ import { Button } from 'primereact/button';
 export default function RaisedDemo() {
     return (
         <div className="flex justify-center flex-wrap gap-4">
-            <Button raised>Primary</Button>
-            <Button severity="secondary" raised>
+            <Button.Root raised>Primary</Button.Root>
+            <Button.Root severity="secondary" raised>
                 Secondary
-            </Button>
-            <Button severity="success" raised>
+            </Button.Root>
+            <Button.Root severity="success" raised>
                 Success
-            </Button>
-            <Button severity="info" raised>
+            </Button.Root>
+            <Button.Root severity="info" raised>
                 Info
-            </Button>
-            <Button severity="warn" raised>
+            </Button.Root>
+            <Button.Root severity="warn" raised>
                 Warn
-            </Button>
-            <Button severity="help" raised>
+            </Button.Root>
+            <Button.Root severity="help" raised>
                 Help
-            </Button>
-            <Button severity="danger" raised>
+            </Button.Root>
+            <Button.Root severity="danger" raised>
                 Danger
-            </Button>
-            <Button severity="contrast" raised>
+            </Button.Root>
+            <Button.Root severity="contrast" raised>
                 Contrast
-            </Button>
+            </Button.Root>
         </div>
     );
 }

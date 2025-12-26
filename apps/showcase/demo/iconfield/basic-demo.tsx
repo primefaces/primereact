@@ -6,18 +6,18 @@ import { InputText } from 'primereact/inputtext';
 export default function BasicDemo() {
     return (
         <div className="flex flex-wrap justify-center gap-4">
-            <IconField>
-                <IconField.Icon>
+            <IconField.Root>
+                <IconField.InputIcon>
                     <i className="pi pi-search" />
-                </IconField.Icon>
+                </IconField.InputIcon>
                 <InputText placeholder="Search" />
-            </IconField>
-            <IconField>
+            </IconField.Root>
+            <IconField.Root>
                 <InputText variant="filled" />
-                <IconField.Icon>
+                <IconField.InputIcon>
                     <i className="pi pi-spin pi-spinner" />
-                </IconField.Icon>
-            </IconField>
+                </IconField.InputIcon>
+            </IconField.Root>
         </div>
     );
 }

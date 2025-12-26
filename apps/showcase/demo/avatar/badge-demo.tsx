@@ -7,20 +7,20 @@ const BadgeDemo = () => {
     return (
         <div className="flex items-center justify-center gap-8">
             <Badge.Overlay>
-                <Avatar size="large" shape="circle">
+                <Avatar.Root size="large" shape="circle">
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
                     <Avatar.Fallback>O</Avatar.Fallback>
-                </Avatar>
-                <Badge size="small" shape="circle" severity="success">
+                </Avatar.Root>
+                <Badge.Root size="small" shape="circle" severity="success">
                     2
-                </Badge>
+                </Badge.Root>
             </Badge.Overlay>
             <Badge.Overlay>
-                <Avatar size="large">
+                <Avatar.Root size="large">
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/organization/walter.jpg" />
                     <Avatar.Fallback>W</Avatar.Fallback>
-                </Avatar>
-                <Badge shape="circle" severity="danger"></Badge>
+                </Avatar.Root>
+                <Badge.Root shape="circle" severity="danger"></Badge.Root>
             </Badge.Overlay>
         </div>
     );

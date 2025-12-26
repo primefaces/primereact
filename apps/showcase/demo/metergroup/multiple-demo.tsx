@@ -15,7 +15,7 @@ export default function MultipleDemo() {
 
     return (
         <div>
-            <MeterGroup>
+            <MeterGroup.Root>
                 <MeterGroup.Meters>
                     {values.map((item, index) => (
                         <MeterGroup.Meter key={`meter_${index}`} index={index} value={item.value} />
@@ -31,7 +31,7 @@ export default function MultipleDemo() {
                         </MeterGroup.Label>
                     ))}
                 </MeterGroup.Labels>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

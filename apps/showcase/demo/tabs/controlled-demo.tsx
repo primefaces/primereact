@@ -16,8 +16,8 @@ export default function ControlledDemo() {
 
     return (
         <div className="space-y-4">
-            <Button onClick={() => setActiveTab('tab2')}>Go to Payment</Button>
-            <Tabs value={activeTab} onValueChange={(e: useTabsChangeEvent) => setActiveTab(e.value)}>
+            <Button.Root onClick={() => setActiveTab('tab2')}>Go to Payment</Button.Root>
+            <Tabs.Root value={activeTab} onValueChange={(e: useTabsChangeEvent) => setActiveTab(e.value)}>
                 <Tabs.List>
                     {tabs.map((tab) => (
                         <Tabs.Tab key={tab.id} value={tab.id}>
@@ -33,7 +33,7 @@ export default function ControlledDemo() {
                         </Tabs.Panel>
                     ))}
                 </Tabs.Panels>
-            </Tabs>
+            </Tabs.Root>
         </div>
     );
 }

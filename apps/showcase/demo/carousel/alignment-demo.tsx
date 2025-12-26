@@ -5,7 +5,7 @@ import { Carousel } from 'primereact/carousel';
 function AlignmentDemo() {
     return (
         <div className="mt-8 mb-16">
-            <Carousel className="max-w-2xl mx-auto" align="start" slidesPerPage={1.5}>
+            <Carousel.Root className="max-w-2xl mx-auto" align="start" slidesPerPage={1.5}>
                 <Carousel.Content className="h-[240px]">
                     {Array.from({ length: 5 }).map((_, i) => (
                         <Carousel.Item key={i}>
@@ -26,7 +26,7 @@ function AlignmentDemo() {
                         </Carousel.Next>
                     </div>
                 </div>
-            </Carousel>
+            </Carousel.Root>
         </div>
     );
 }

@@ -23,18 +23,18 @@ export default function CustomUploadDemo() {
 
     return (
         <div className="flex flex-col items-center gap-6">
-            <FileUpload url="/api/upload" auto customUpload uploadHandler={onFileSelect}>
+            <FileUpload.Root url="/api/upload" auto customUpload uploadHandler={onFileSelect}>
                 {(instance: FileUploadInstance) => {
                     return (
                         <div className="flex flex-wrap items-center gap-3">
-                            <Button onClick={instance.choose} severity="secondary" variant="outlined">
+                            <Button.Root onClick={instance.choose} severity="secondary" variant="outlined">
                                 <i className="pi pi-plus" />
                                 Browse
-                            </Button>
+                            </Button.Root>
                         </div>
                     );
                 }}
-            </FileUpload>
+            </FileUpload.Root>
             {src && <img src={src} alt="Image" className="shadow-md rounded-xl w-full sm:w-64" style={{ filter: 'grayscale(100%)' }} />}
         </div>
     );

@@ -19,16 +19,16 @@ export default function SingleSelectionDemo() {
     return (
         <>
             <div className="flex items-center mb-4 gap-2">
-                <Switch checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)} inputId="input-metakey">
+                <Switch.Root checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)} inputId="input-metakey">
                     <Switch.Control>
                         <Switch.Thumb />
                     </Switch.Control>
-                </Switch>
-                <Label htmlFor="input-metakey">MetaKey</Label>
+                </Switch.Root>
+                <Label.Root htmlFor="input-metakey">MetaKey</Label.Root>
             </div>
-            <Tree value={nodes} selectionMode="multiple" metaKeySelection={checked} className="w-full md:w-120">
+            <Tree.Root value={nodes} selectionMode="multiple" metaKeySelection={checked} className="w-full md:w-120">
                 <Tree.List />
-            </Tree>
+            </Tree.Root>
         </>
     );
 }

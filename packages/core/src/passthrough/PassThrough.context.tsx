@@ -1,3 +1,4 @@
+'use client';
 import { useProps } from '@primereact/hooks';
 import type { PassThroughProps } from '@primereact/types/core';
 import { resolve } from '@primeuix/utils';

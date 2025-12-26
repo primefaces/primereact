@@ -63,9 +63,9 @@ export default function LayoutDemo() {
                                 height={160}
                             />
                             <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
-                                <Tag severity={getSeverity(product)}>
+                                <Tag.Root severity={getSeverity(product)}>
                                     <Tag.Label>{product.inventoryStatus}</Tag.Label>
-                                </Tag>
+                                </Tag.Root>
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
@@ -90,16 +90,16 @@ export default function LayoutDemo() {
                             <div className="flex flex-col md:items-end gap-8">
                                 <span className="text-xl font-semibold">${product.price}</span>
                                 <div className="flex flex-row-reverse md:flex-row gap-2">
-                                    <Button variant="outlined">
+                                    <Button.Root variant="outlined">
                                         <i className="pi pi-heart"></i>
-                                    </Button>
-                                    <Button
+                                    </Button.Root>
+                                    <Button.Root
                                         disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                         className="flex-auto md:flex-initial whitespace-nowrap"
                                     >
                                         <i className="pi pi-shopping-cart"></i>
                                         Buy Now
-                                    </Button>
+                                    </Button.Root>
                                 </div>
                             </div>
                         </div>
@@ -126,9 +126,9 @@ export default function LayoutDemo() {
                                             className="rounded"
                                         />
                                         <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
-                                            <Tag severity={getSeverity(product)}>
+                                            <Tag.Root severity={getSeverity(product)}>
                                                 <Tag.Label>{product.inventoryStatus}</Tag.Label>
-                                            </Tag>
+                                            </Tag.Root>
                                         </div>
                                     </div>
                                 </div>
@@ -154,13 +154,13 @@ export default function LayoutDemo() {
                                     <div className="flex flex-col gap-6 mt-6">
                                         <span className="text-2xl font-semibold">${product.price}</span>
                                         <div className="flex gap-2">
-                                            <Button disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto whitespace-nowrap">
+                                            <Button.Root disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto whitespace-nowrap">
                                                 <i className="pi pi-shopping-cart"></i>
                                                 Buy Now
-                                            </Button>
-                                            <Button variant="outlined">
+                                            </Button.Root>
+                                            <Button.Root variant="outlined">
                                                 <i className="pi pi-heart"></i>
-                                            </Button>
+                                            </Button.Root>
                                         </div>
                                     </div>
                                 </div>
@@ -184,16 +184,16 @@ export default function LayoutDemo() {
                         onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)}
                         allowEmpty={false}
                     >
-                        <ToggleButton value="list">
+                        <ToggleButton.Root value="list">
                             <ToggleButton.Indicator>
                                 <i className="pi pi-bars"></i>
                             </ToggleButton.Indicator>
-                        </ToggleButton>
-                        <ToggleButton value="grid">
+                        </ToggleButton.Root>
+                        <ToggleButton.Root value="grid">
                             <ToggleButton.Indicator>
                                 <i className="pi pi-table"></i>
                             </ToggleButton.Indicator>
-                        </ToggleButton>
+                        </ToggleButton.Root>
                     </ToggleButton.Group>
                 </div>
                 {value === 'list' ? list : grid}

@@ -125,7 +125,7 @@ function CustomTreeNode({ node, index }: { node: TreeNodeType; index: number }) 
                         <>
                             <Tree.Toggle>{expanded ? <Icon className="pi pi-arrow-up" /> : <Icon className="pi pi-arrow-down" />}</Tree.Toggle>
 
-                            <Checkbox
+                            <Checkbox.Root
                                 checked={checked}
                                 indeterminate={partialChecked}
                                 onCheckedChange={(event: CheckboxChangeEvent) => {
@@ -164,12 +164,12 @@ function CustomTreeNode({ node, index }: { node: TreeNodeType; index: number }) 
 
 export default function NodeDemo() {
     return (
-        <Tree className="w-full md:w-120" value={nodes} selectionMode="checkbox">
+        <Tree.Root className="w-full md:w-120" value={nodes} selectionMode="checkbox">
             <Tree.List>
                 {nodes.map((node, index) => (
                     <CustomTreeNode key={node.key} node={node} index={index} />
                 ))}
             </Tree.List>
-        </Tree>
+        </Tree.Root>
     );
 }

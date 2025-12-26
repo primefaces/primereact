@@ -5,14 +5,14 @@ import { Button } from 'primereact/button';
 export default function SeverityDemo() {
     return (
         <div className="flex justify-center flex-wrap gap-4">
-            <Button>Primary</Button>
-            <Button severity="secondary">Secondary</Button>
-            <Button severity="success">Success</Button>
-            <Button severity="info">Info</Button>
-            <Button severity="warn">Warn</Button>
-            <Button severity="help">Help</Button>
-            <Button severity="danger">Danger</Button>
-            <Button severity="contrast">Contrast</Button>
+            <Button.Root>Primary</Button.Root>
+            <Button.Root severity="secondary">Secondary</Button.Root>
+            <Button.Root severity="success">Success</Button.Root>
+            <Button.Root severity="info">Info</Button.Root>
+            <Button.Root severity="warn">Warn</Button.Root>
+            <Button.Root severity="help">Help</Button.Root>
+            <Button.Root severity="danger">Danger</Button.Root>
+            <Button.Root severity="contrast">Contrast</Button.Root>
         </div>
     );
 }

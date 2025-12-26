@@ -28,7 +28,7 @@ const CardDemo = () => {
                             htmlFor={card.id}
                             className={`flex-1 flex items-start gap-2 p-4 rounded-md border border-surface-200 dark:border-surface-800 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${selectedCard === card.id ? '!border-primary' : ''}`}
                         >
-                            <RadioButton inputId={card.id} name="card" value={card.id} />
+                            <RadioButton.Root inputId={card.id} name="card" value={card.id} />
                             <div className="flex-1 flex flex-col gap-2">
                                 <div className="text-lg font-bold leading-none">{card.name}</div>
                                 <div className="text-sm text-surface-500">{card.description}</div>

@@ -6,7 +6,7 @@ export default function TimelinePTDemo() {
     const events = [{ status: 'Ordered' }, { status: 'Processing' }, { status: 'Shipped' }, { status: 'Delivered' }];
 
     return (
-        <Timeline>
+        <Timeline.Root>
             {events.map((event, index) => (
                 <Timeline.Event key={index}>
                     <Timeline.Opposite />
@@ -17,6 +17,6 @@ export default function TimelinePTDemo() {
                     <Timeline.Content>{event.status}</Timeline.Content>
                 </Timeline.Event>
             ))}
-        </Timeline>
+        </Timeline.Root>
     );
 }

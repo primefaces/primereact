@@ -8,7 +8,7 @@ import { Drawer } from 'primereact/drawer';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <Drawer>
+            <Drawer.Root>
                 <Drawer.Trigger>
                     <i className="pi pi-arrow-right" />
                 </Drawer.Trigger>
@@ -38,9 +38,9 @@ export default function BasicDemo() {
                                             <span className="font-semibold text-2xl text-primary">Your Logo</span>
                                         </span>
                                         <span>
-                                            <Button type="button" rounded variant="outlined" iconOnly onClick={drawer?.close}>
+                                            <Button.Root type="button" rounded variant="outlined" iconOnly onClick={drawer?.close}>
                                                 <i className="pi pi-times"></i>
-                                            </Button>
+                                            </Button.Root>
                                         </span>
                                     </div>
                                     <div className="overflow-y-auto">
@@ -132,10 +132,10 @@ export default function BasicDemo() {
                                     <div className="mt-auto">
                                         <hr className="mb-4 mx-4 border-t border-0 border-surface-200 dark:border-surface-700" />
                                         <a className="m-4 flex items-center cursor-pointer p-4 gap-2 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800">
-                                            <Avatar shape="circle">
+                                            <Avatar.Root shape="circle">
                                                 <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                                                 <Avatar.Fallback>A</Avatar.Fallback>
-                                            </Avatar>
+                                            </Avatar.Root>
                                             <span className="font-bold">Amy Elsner</span>
                                         </a>
                                     </div>
@@ -144,7 +144,7 @@ export default function BasicDemo() {
                         }}
                     </Drawer.Content>
                 </Drawer.Portal>
-            </Drawer>
+            </Drawer.Root>
         </div>
     );
 }

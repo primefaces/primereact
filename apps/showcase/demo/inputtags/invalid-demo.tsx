@@ -8,7 +8,7 @@ export default function InvalidDemo() {
     const [tags, setTags] = React.useState<string[]>([]);
 
     return (
-        <InputTags value={tags} invalid={tags.length === 0} onValueChange={(e: useInputTagsValueChangeEvent) => setTags(e.value as string[])}>
+        <InputTags.Root value={tags} invalid={tags.length === 0} onValueChange={(e: useInputTagsValueChangeEvent) => setTags(e.value as string[])}>
             {(instance: InputTagsInstance) => {
                 return (
                     <>
@@ -19,6 +19,6 @@ export default function InvalidDemo() {
                     </>
                 );
             }}
-        </InputTags>
+        </InputTags.Root>
     );
 }

@@ -16,7 +16,7 @@ export default function MinMaxDemo() {
 
     return (
         <div>
-            <MeterGroup max={200}>
+            <MeterGroup.Root max={200}>
                 <MeterGroup.Meters>
                     {values.map((item, index) => (
                         <MeterGroup.Meter key={`meter_${index}`} value={item.value} index={index} />
@@ -32,7 +32,7 @@ export default function MinMaxDemo() {
                         </MeterGroup.Label>
                     ))}
                 </MeterGroup.Labels>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

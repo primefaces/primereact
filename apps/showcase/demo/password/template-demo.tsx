@@ -35,7 +35,7 @@ const requirements = [
 export default function TemplateDemo() {
     return (
         <div className="flex justify-center">
-            <Password
+            <Password.Root
                 strengthOptions={[
                     { id: 0, value: 'Weak', minDiversity: 0, minLength: 0 },
                     { id: 1, value: 'Medium', minDiversity: 2, minLength: 6 },
@@ -58,13 +58,13 @@ export default function TemplateDemo() {
                                     </div>
 
                                     {strength?.value !== '' && (
-                                        <Tag
+                                        <Tag.Root
                                             style={{
                                                 backgroundColor: colors[currentLevel]
                                             }}
                                         >
                                             <Tag.Label className="text-white">{strength?.value === '' ? 'Weak' : strength?.value}</Tag.Label>
-                                        </Tag>
+                                        </Tag.Root>
                                     )}
                                 </>
                             </Password.Strength>
@@ -83,7 +83,7 @@ export default function TemplateDemo() {
                         </>
                     );
                 }}
-            </Password>
+            </Password.Root>
         </div>
     );
 }

@@ -8,7 +8,7 @@ import { Label } from 'primereact/label';
 
 export default function BasicDemo() {
     return (
-        <Card className="mb-4 max-w-sm mx-auto p-1.5">
+        <Card.Root className="mb-4 max-w-sm mx-auto p-1.5">
             <Card.Body className="space-y-4">
                 <Card.Caption>
                     <Card.Title>Welcome back</Card.Title>
@@ -17,35 +17,35 @@ export default function BasicDemo() {
                 <Card.Content>
                     <form className="space-y-6">
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="email">Email</Label>
+                            <Label.Root htmlFor="email">Email</Label.Root>
                             <InputText id="email" type="email" />
                         </div>
                         <div className="flex flex-col gap-2">
                             <div className="flex items-center justify-between">
-                                <Label htmlFor="password" className="flex-1">
+                                <Label.Root htmlFor="password" className="flex-1">
                                     Password
-                                </Label>
-                                <Button as={Link} href="/forgot-password" variant="link" className="p-0">
+                                </Label.Root>
+                                <Button.Root as={Link} href="/forgot-password" variant="link" className="p-0">
                                     Forgot password?
-                                </Button>
+                                </Button.Root>
                             </div>
                             <InputText id="password" type="password" />
                         </div>
                     </form>
                 </Card.Content>
                 <Card.Footer className="flex flex-col gap-4">
-                    <Button>Login</Button>
-                    <Button severity="secondary" variant="outlined">
+                    <Button.Root>Login</Button.Root>
+                    <Button.Root severity="secondary" variant="outlined">
                         Login with Google
-                    </Button>
+                    </Button.Root>
                     <div className="mt-2 text-center text-surface-500">
                         Don’t have an account?{' '}
-                        <Button as={Link} href="/signup" variant="link" className="p-0">
+                        <Button.Root as={Link} href="/signup" variant="link" className="p-0">
                             Sign up
-                        </Button>
+                        </Button.Root>
                     </div>
                 </Card.Footer>
             </Card.Body>
-        </Card>
+        </Card.Root>
     );
 }

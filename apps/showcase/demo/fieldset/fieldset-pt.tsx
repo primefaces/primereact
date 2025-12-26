@@ -4,7 +4,7 @@ import { Fieldset } from 'primereact/fieldset';
 
 export default function FieldsetDemo() {
     return (
-        <Fieldset>
+        <Fieldset.Root>
             <Fieldset.Legend>Legend</Fieldset.Legend>
             <Fieldset.Content>
                 <p>
@@ -14,6 +14,6 @@ export default function FieldsetDemo() {
                     in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </Fieldset.Content>
-        </Fieldset>
+        </Fieldset.Root>
     );
 }

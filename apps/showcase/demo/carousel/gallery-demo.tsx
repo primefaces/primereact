@@ -22,7 +22,11 @@ function GalleryDemo() {
     return (
         <div className="mt-8 mb-16">
             <div className="max-w-3xl mx-auto">
-                <Carousel slide={selectedImage} onSlideChange={(e: useCarouselChangeEvent) => setSelectedImage(Number(e.value ?? 0))} align="center">
+                <Carousel.Root
+                    slide={selectedImage}
+                    onSlideChange={(e: useCarouselChangeEvent) => setSelectedImage(Number(e.value ?? 0))}
+                    align="center"
+                >
                     <Carousel.Content className="h-[400px]">
                         {images.map((_, i) => (
                             <Carousel.Item key={i} className="basis-full! ">
@@ -30,8 +34,8 @@ function GalleryDemo() {
                             </Carousel.Item>
                         ))}
                     </Carousel.Content>
-                </Carousel>
-                <Carousel className="mt-3" spacing={8} align="center" slide={selectedImage}>
+                </Carousel.Root>
+                <Carousel.Root className="mt-3" spacing={8} align="center" slide={selectedImage}>
                     <Carousel.Content className="h-[90px]">
                         {images.map((_, i) => (
                             <Carousel.Item
@@ -43,7 +47,7 @@ function GalleryDemo() {
                             </Carousel.Item>
                         ))}
                     </Carousel.Content>
-                </Carousel>
+                </Carousel.Root>
             </div>
         </div>
     );

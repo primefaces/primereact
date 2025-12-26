@@ -9,7 +9,7 @@ import { Label } from 'primereact/label';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <Dialog modal>
+            <Dialog.Root modal>
                 <Dialog.Trigger>Show</Dialog.Trigger>
                 <Dialog.Portal style={{ width: '25rem' }}>
                     <Dialog.Header>
@@ -24,29 +24,29 @@ export default function BasicDemo() {
                                 <>
                                     <span className="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
                                     <div className="flex items-center gap-4 mb-4">
-                                        <Label htmlFor="username" className="font-semibold w-24">
+                                        <Label.Root htmlFor="username" className="font-semibold w-24">
                                             Username
-                                        </Label>
+                                        </Label.Root>
                                         <InputText id="username" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex items-center gap-4 mb-8">
-                                        <Label htmlFor="email" className="font-semibold w-24">
+                                        <Label.Root htmlFor="email" className="font-semibold w-24">
                                             Email
-                                        </Label>
+                                        </Label.Root>
                                         <InputText id="email" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex justify-end gap-2">
-                                        <Button onClick={dialog?.close} severity="secondary">
+                                        <Button.Root onClick={dialog?.close} severity="secondary">
                                             Cancel
-                                        </Button>
-                                        <Button onClick={dialog?.close}>Sign-In</Button>
+                                        </Button.Root>
+                                        <Button.Root onClick={dialog?.close}>Sign-In</Button.Root>
                                     </div>
                                 </>
                             );
                         }}
                     </Dialog.Content>
                 </Dialog.Portal>
-            </Dialog>
+            </Dialog.Root>
         </div>
     );
 }

@@ -7,33 +7,33 @@ import { InputText } from 'primereact/inputtext';
 export default function ButtonDemo() {
     return (
         <div className="flex flex-col md:flex-row gap-4">
-            <InputGroup>
-                <Button>Search</Button>
+            <InputGroup.Root>
+                <Button.Root>Search</Button.Root>
                 <InputText placeholder="Keyword" />
-            </InputGroup>
+            </InputGroup.Root>
 
-            <InputGroup>
+            <InputGroup.Root>
                 <InputText placeholder="Keyword" />
                 <InputGroup.Addon>
-                    <Button severity="secondary" variant="text">
+                    <Button.Root severity="secondary" variant="text">
                         <i className="pi pi-search" />
-                    </Button>
+                    </Button.Root>
                 </InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
 
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Button severity="secondary">
+                    <Button.Root severity="secondary">
                         <i className="pi pi-check" />
-                    </Button>
+                    </Button.Root>
                 </InputGroup.Addon>
                 <InputText placeholder="Vote" />
                 <InputGroup.Addon>
-                    <Button severity="secondary">
+                    <Button.Root severity="secondary">
                         <i className="pi pi-times" />
-                    </Button>
+                    </Button.Root>
                 </InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
         </div>
     );
 }

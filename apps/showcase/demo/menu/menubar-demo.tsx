@@ -62,7 +62,7 @@ export default function MenubarDemo() {
                 role="menubar"
                 onMouseLeave={() => setOpenMenuIndex(null)}
             >
-                <Menu
+                <Menu.Root
                     className="w-64"
                     ref={(el) => {
                         menuRefs.current[0] = menuRefs.current[0] ?? (el as MenuInstance | null);
@@ -109,9 +109,9 @@ export default function MenubarDemo() {
                             </Menu.Item>
                         </Menu.List>
                     </Menu.Portal>
-                </Menu>
+                </Menu.Root>
 
-                <Menu
+                <Menu.Root
                     ref={(el) => {
                         menuRefs.current[1] = menuRefs.current[1] ?? (el as MenuInstance | null);
                     }}
@@ -157,9 +157,9 @@ export default function MenubarDemo() {
                             </Menu.Item>
                         </Menu.List>
                     </Menu.Portal>
-                </Menu>
+                </Menu.Root>
 
-                <Menu
+                <Menu.Root
                     ref={(el) => {
                         menuRefs.current[2] = menuRefs.current[2] ?? (el as MenuInstance | null);
                     }}
@@ -200,9 +200,9 @@ export default function MenubarDemo() {
                             </Menu.Item>
                         </Menu.List>
                     </Menu.Portal>
-                </Menu>
+                </Menu.Root>
 
-                <Menu
+                <Menu.Root
                     ref={(el) => {
                         menuRefs.current[3] = menuRefs.current[3] ?? (el as MenuInstance | null);
                     }}
@@ -239,7 +239,7 @@ export default function MenubarDemo() {
                             </Menu.Item>
                         </Menu.List>
                     </Menu.Portal>
-                </Menu>
+                </Menu.Root>
             </div>
         </div>
     );

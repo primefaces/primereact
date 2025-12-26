@@ -10,7 +10,7 @@ export default function FloatLabelDemo() {
 
     return (
         <Label.Float>
-            <InputTags value={tags} onValueChange={(e: InputTagsValueChangeEvent) => setTags(e.value as string[])}>
+            <InputTags.Root value={tags} onValueChange={(e: InputTagsValueChangeEvent) => setTags(e.value as string[])}>
                 {(instance: InputTagsInstance) => {
                     return (
                         <>
@@ -21,8 +21,8 @@ export default function FloatLabelDemo() {
                         </>
                     );
                 }}
-            </InputTags>
-            <Label htmlFor="over_label">Over Label</Label>
+            </InputTags.Root>
+            <Label.Root htmlFor="over_label">Over Label</Label.Root>
         </Label.Float>
     );
 }

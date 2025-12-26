@@ -17,7 +17,7 @@ export default function OptionDemo() {
 
     return (
         <div className="flex justify-center">
-            <Listbox
+            <Listbox.Root
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}
                 options={cities}
@@ -31,7 +31,7 @@ export default function OptionDemo() {
                     <Listbox.Option uKey="IST">Istanbul</Listbox.Option>
                     <Listbox.Option uKey="PRS">Paris</Listbox.Option>
                 </Listbox.Options>
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

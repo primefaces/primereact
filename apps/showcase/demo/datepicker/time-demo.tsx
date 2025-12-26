@@ -22,10 +22,10 @@ export default function TimeDemo() {
         <>
             <div className="flex flex-wrap gap-4">
                 <div className="flex-auto">
-                    <Label htmlFor="datepicker-12h" className="font-bold block mb-2">
+                    <Label.Root htmlFor="datepicker-12h" className="font-bold block mb-2">
                         12h Format
-                    </Label>
-                    <DatePicker
+                    </Label.Root>
+                    <DatePicker.Root
                         value={date1}
                         showTime
                         hourFormat="12"
@@ -161,13 +161,13 @@ export default function TimeDemo() {
                                 </DatePicker.Picker>
                             </DatePicker.Time>
                         </DatePicker.Portal>
-                    </DatePicker>
+                    </DatePicker.Root>
                 </div>
                 <div className="flex-auto">
-                    <Label htmlFor="datepicker-24h" className="font-bold block mb-2">
+                    <Label.Root htmlFor="datepicker-24h" className="font-bold block mb-2">
                         24h Format
-                    </Label>
-                    <DatePicker
+                    </Label.Root>
+                    <DatePicker.Root
                         value={date2}
                         showTime
                         hourFormat="24"
@@ -295,13 +295,13 @@ export default function TimeDemo() {
                                 </DatePicker.Picker>
                             </DatePicker.Time>
                         </DatePicker.Portal>
-                    </DatePicker>
+                    </DatePicker.Root>
                 </div>
                 <div className="flex-auto">
-                    <Label htmlFor="datepicker-timeonly" className="font-bold block mb-2">
+                    <Label.Root htmlFor="datepicker-timeonly" className="font-bold block mb-2">
                         Time Only
-                    </Label>
-                    <DatePicker value={date3} timeOnly fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
+                    </Label.Root>
+                    <DatePicker.Root value={date3} timeOnly fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
                         <DatePicker.Input id="datepicker-timeonly" />
                         <DatePicker.Portal>
                             <DatePicker.Time>
@@ -320,7 +320,7 @@ export default function TimeDemo() {
                                 </DatePicker.Picker>
                             </DatePicker.Time>
                         </DatePicker.Portal>
-                    </DatePicker>
+                    </DatePicker.Root>
                 </div>
             </div>
         </>

@@ -20,7 +20,12 @@ export default function SizesDemo() {
 
     return (
         <div className="flex flex-col items-center gap-4">
-            <DatePicker value={date} size="small" placeholder="Small" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root
+                value={date}
+                size="small"
+                placeholder="Small"
+                onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}
+            >
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>
                     <DatePicker.DropdownIcon />
@@ -130,8 +135,8 @@ export default function SizesDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
-            <DatePicker value={date2} placeholder="Normal" onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
+            </DatePicker.Root>
+            <DatePicker.Root value={date2} placeholder="Normal" onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>
                     <DatePicker.DropdownIcon />
@@ -241,8 +246,13 @@ export default function SizesDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
-            <DatePicker value={date3} size="large" placeholder="Large" onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
+            </DatePicker.Root>
+            <DatePicker.Root
+                value={date3}
+                size="large"
+                placeholder="Large"
+                onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}
+            >
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>
                     <DatePicker.DropdownIcon />
@@ -352,7 +362,7 @@ export default function SizesDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

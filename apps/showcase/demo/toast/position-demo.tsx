@@ -11,7 +11,7 @@ function PositionToast({
     position: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
 }) {
     return (
-        <Toast position={position} group={position}>
+        <Toast.Root position={position} group={position}>
             <Toast.Portal>
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
@@ -40,7 +40,7 @@ function PositionToast({
                     }
                 </Toast.Region>
             </Toast.Portal>
-        </Toast>
+        </Toast.Root>
     );
 }
 
@@ -55,24 +55,24 @@ function PositionDemo() {
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button onClick={() => createToast('top-left')} variant="outlined">
+            <Button.Root onClick={() => createToast('top-left')} variant="outlined">
                 Top Left
-            </Button>
-            <Button onClick={() => createToast('top-center')} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={() => createToast('top-center')} variant="outlined">
                 Top Center
-            </Button>
-            <Button onClick={() => createToast('top-right')} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={() => createToast('top-right')} variant="outlined">
                 Top Right
-            </Button>
-            <Button onClick={() => createToast('bottom-left')} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={() => createToast('bottom-left')} variant="outlined">
                 Bottom Left
-            </Button>
-            <Button onClick={() => createToast('bottom-center')} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={() => createToast('bottom-center')} variant="outlined">
                 Bottom Center
-            </Button>
-            <Button onClick={() => createToast('bottom-right')} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={() => createToast('bottom-right')} variant="outlined">
                 Bottom Right
-            </Button>
+            </Button.Root>
 
             <PositionToast position="top-left" />
             <PositionToast position="top-right" />

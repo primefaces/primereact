@@ -19,7 +19,12 @@ export default function InvalidDemo() {
 
     return (
         <div className="flex flex-wrap justify-center gap-4">
-            <DatePicker value={date} invalid={!date} placeholder="Date" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root
+                value={date}
+                invalid={!date}
+                placeholder="Date"
+                onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}
+            >
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -126,8 +131,8 @@ export default function InvalidDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
-            <DatePicker
+            </DatePicker.Root>
+            <DatePicker.Root
                 value={date2}
                 invalid={!date2}
                 variant="filled"
@@ -240,7 +245,7 @@ export default function InvalidDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

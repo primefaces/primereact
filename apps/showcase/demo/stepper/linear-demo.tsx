@@ -7,7 +7,7 @@ import { Stepper } from 'primereact/stepper';
 export default function HorizontalDemo() {
     return (
         <div className="flex justify-center">
-            <Stepper defaultValue="1" linear className="basis-[50rem]">
+            <Stepper.Root defaultValue="1" linear className="basis-[50rem]">
                 <Stepper.List>
                     <Stepper.Step value="1">
                         <Stepper.Header>
@@ -43,10 +43,10 @@ export default function HorizontalDemo() {
                                         </div>
                                     </div>
                                     <div className="flex pt-6 justify-end">
-                                        <Button onClick={() => stepper?.setActiveStep('2')}>
+                                        <Button.Root onClick={() => stepper?.setActiveStep('2')}>
                                             Next
                                             <i className="pi pi-arrow-right" />
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </>
                             );
@@ -64,14 +64,14 @@ export default function HorizontalDemo() {
                                         </div>
                                     </div>
                                     <div className="flex pt-6 justify-between">
-                                        <Button severity="secondary" onClick={() => stepper?.setActiveStep('1')}>
+                                        <Button.Root severity="secondary" onClick={() => stepper?.setActiveStep('1')}>
                                             <i className="pi pi-arrow-left" />
                                             Back
-                                        </Button>
-                                        <Button onClick={() => stepper?.setActiveStep('3')}>
+                                        </Button.Root>
+                                        <Button.Root onClick={() => stepper?.setActiveStep('3')}>
                                             Next
                                             <i className="pi pi-arrow-right" />
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </>
                             );
@@ -89,17 +89,17 @@ export default function HorizontalDemo() {
                                         </div>
                                     </div>
                                     <div className="pt-6">
-                                        <Button severity="secondary" onClick={() => stepper?.setActiveStep('2')}>
+                                        <Button.Root severity="secondary" onClick={() => stepper?.setActiveStep('2')}>
                                             <i className="pi pi-arrow-left" />
                                             Back
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </>
                             );
                         }}
                     </Stepper.Panel>
                 </Stepper.Panels>
-            </Stepper>
+            </Stepper.Root>
         </div>
     );
 }

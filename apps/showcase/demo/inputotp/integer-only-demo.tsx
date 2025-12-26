@@ -5,12 +5,12 @@ import { InputOtp } from 'primereact/inputotp';
 export default function IntegerOnlyDemo() {
     return (
         <div className="flex justify-center">
-            <InputOtp integerOnly>
+            <InputOtp.Root integerOnly>
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
-            </InputOtp>
+            </InputOtp.Root>
         </div>
     );
 }

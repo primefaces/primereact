@@ -13,8 +13,8 @@ export default function TreePTDemo() {
     }, []);
 
     return (
-        <Tree value={nodes} className="w-full md:w-120">
+        <Tree.Root value={nodes} className="w-full md:w-120">
             <Tree.List />
-        </Tree>
+        </Tree.Root>
     );
 }

@@ -6,7 +6,7 @@ import { Tooltip } from 'primereact/tooltip';
 export default function ArrowDemo() {
     return (
         <div className="flex items-center justify-center gap-6">
-            <Tooltip>
+            <Tooltip.Root>
                 <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                     Show Tooltip
                 </Tooltip.Trigger>
@@ -16,8 +16,8 @@ export default function ArrowDemo() {
                         <Tooltip.Arrow />
                     </Tooltip.Content>
                 </Tooltip.Portal>
-            </Tooltip>
-            <Tooltip>
+            </Tooltip.Root>
+            <Tooltip.Root>
                 <Tooltip.Trigger as={Button} severity="secondary" variant="outlined">
                     Show Tooltip
                 </Tooltip.Trigger>
@@ -26,7 +26,7 @@ export default function ArrowDemo() {
                         <p>Tooltip without arrow</p>
                     </Tooltip.Content>
                 </Tooltip.Portal>
-            </Tooltip>
+            </Tooltip.Root>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import { Dialog } from 'primereact/dialog';
 export default function MaximizableDemo() {
     return (
         <div className="flex justify-center">
-            <Dialog modal>
+            <Dialog.Root modal>
                 <Dialog.Trigger>Show</Dialog.Trigger>
                 <Dialog.Portal style={{ width: '50rem' }}>
                     <Dialog.Header>
@@ -24,7 +24,7 @@ export default function MaximizableDemo() {
                         </p>
                     </Dialog.Content>
                 </Dialog.Portal>
-            </Dialog>
+            </Dialog.Root>
         </div>
     );
 }

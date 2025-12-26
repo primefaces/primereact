@@ -7,7 +7,7 @@ export default function BasicDemo() {
     const [search, setSearch] = React.useState('');
 
     return (
-        <CommandMenu>
+        <CommandMenu.Root>
             <div className="border-b border-surface-200 dark:border-surface-700/50 px-4 py-2">
                 <CommandMenu.Input value={search} onValueChange={(val: string) => setSearch(val)} placeholder="Search for commands..." />
             </div>
@@ -31,7 +31,7 @@ export default function BasicDemo() {
                 ))}
                 <CommandMenu.Item value="test">Test</CommandMenu.Item>
             </CommandMenu.List>
-        </CommandMenu>
+        </CommandMenu.Root>
     );
 }
 

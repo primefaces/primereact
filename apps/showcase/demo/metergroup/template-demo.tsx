@@ -18,11 +18,11 @@ export default function TemplateDemo() {
 
     return (
         <div>
-            <MeterGroup max={200} aria-valuenow={totalPercent}>
+            <MeterGroup.Root max={200} aria-valuenow={totalPercent}>
                 <MeterGroup.Labels>
                     {values.map((value, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
-                            {/* <Card className="flex-1 border border-surface shadow-none">
+                            {/* <Card.Root className="flex-1 border border-surface shadow-none">
                                 <div className="flex justify-between gap-8">
                                     <div className="flex flex-col gap-1">
                                         <span className="text-surface-500 dark:text-surface-400 text-sm">{value.label}</span>
@@ -32,7 +32,7 @@ export default function TemplateDemo() {
                                         <i className={value.icon} />
                                     </span>
                                 </div>
-                            </Card> */}
+                            </Card.Root> */}
                         </MeterGroup.Label>
                     ))}
                 </MeterGroup.Labels>
@@ -57,10 +57,10 @@ export default function TemplateDemo() {
                     ))}
                 </MeterGroup.Meters>
                 {/* <div className="flex justify-between mt-4">
-                    <Button label="Manage Storage" outlined size="small" />
-                    <Button label="Update Plan" size="small" />
+                    <Button.Root label="Manage Storage" outlined size="small" />
+                    <Button.Root label="Update Plan" size="small" />
                     </div> */}
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

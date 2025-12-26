@@ -20,7 +20,7 @@ export default function VerticalDemo() {
 
     return (
         <div className="flex justify-center">
-            <InputGroup className="flex-col w-[3rem]">
+            <InputGroup.Root className="flex-col w-[3rem]">
                 <InputGroup.Addon
                     as={Button}
                     severity="secondary"
@@ -42,7 +42,7 @@ export default function VerticalDemo() {
                 >
                     <i className="pi pi-minus"></i>
                 </InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
         </div>
     );
 }

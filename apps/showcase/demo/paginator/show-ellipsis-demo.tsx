@@ -5,7 +5,7 @@ import { Paginator } from 'primereact/paginator';
 function ShowEllipsisDemo() {
     return (
         <div className="flex items-center justify-center">
-            <Paginator total={100} itemsPerPage={5} showEllipsis={false} siblings={3}>
+            <Paginator.Root total={100} itemsPerPage={5} showEllipsis={false} siblings={3}>
                 <Paginator.Content>
                     <Paginator.First />
                     <Paginator.Prev />
@@ -13,7 +13,7 @@ function ShowEllipsisDemo() {
                     <Paginator.Next />
                     <Paginator.Last />
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
         </div>
     );
 }

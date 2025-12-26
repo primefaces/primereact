@@ -57,7 +57,7 @@ const commands = [
 
 export default function FuzeDemo() {
     return (
-        <CommandMenu
+        <CommandMenu.Root
             filter={(value: string, search: string) => {
                 if (!search) return 1;
 
@@ -100,6 +100,6 @@ export default function FuzeDemo() {
                     </CommandMenu.Group>
                 ))}
             </CommandMenu.List>
-        </CommandMenu>
+        </CommandMenu.Root>
     );
 }

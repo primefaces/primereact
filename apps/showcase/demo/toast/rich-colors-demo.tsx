@@ -7,7 +7,7 @@ import { Toast } from 'primereact/toast';
 
 function RichColorsToast() {
     return (
-        <Toast richColors group="rich-colors">
+        <Toast.Root richColors group="rich-colors">
             <Toast.Portal>
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
@@ -36,21 +36,21 @@ function RichColorsToast() {
                     }
                 </Toast.Region>
             </Toast.Portal>
-        </Toast>
+        </Toast.Root>
     );
 }
 
 function RichColorsDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
+            <Button.Root
                 variant="outlined"
                 severity="info"
                 onClick={() => toast.info({ title: 'Info', description: 'This is an info toast', group: 'rich-colors' })}
             >
                 Info
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 variant="outlined"
                 severity="success"
                 onClick={() =>
@@ -62,21 +62,21 @@ function RichColorsDemo() {
                 }
             >
                 Success
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 variant="outlined"
                 severity="danger"
                 onClick={() => toast.danger({ title: 'Error', description: 'This is an error toast', group: 'rich-colors' })}
             >
                 Danger
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 variant="outlined"
                 severity="warn"
                 onClick={() => toast.warn({ title: 'Warning', description: 'This is a warning toast', group: 'rich-colors' })}
             >
                 Warn
-            </Button>
+            </Button.Root>
             <RichColorsToast />
         </div>
     );

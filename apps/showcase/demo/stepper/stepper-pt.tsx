@@ -4,7 +4,7 @@ import { Stepper } from 'primereact/stepper';
 
 export default function StepperPTDemo() {
     return (
-        <Stepper value="1" className="basis-[50rem]">
+        <Stepper.Root value="1" className="basis-[50rem]">
             <Stepper.List style={{ overflowX: 'unset' }}>
                 <Stepper.Step value="1">
                     <Stepper.Header>
@@ -50,6 +50,6 @@ export default function StepperPTDemo() {
                     </div>
                 </Stepper.Panel>
             </Stepper.Panels>
-        </Stepper>
+        </Stepper.Root>
     );
 }

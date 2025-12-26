@@ -6,26 +6,26 @@ import { Button } from 'primereact/button';
 export default function BadgeDemo() {
     return (
         <div className="flex justify-center flex-wrap gap-4">
-            <Button type="button">
+            <Button.Root type="button">
                 Emails
-                <Badge severity="secondary" shape="circle">
+                <Badge.Root severity="secondary" shape="circle">
                     2
-                </Badge>
-            </Button>
+                </Badge.Root>
+            </Button.Root>
 
-            <Button type="button" variant="outlined">
+            <Button.Root type="button" variant="outlined">
                 <i className="pi pi-users" />
                 Messages
-                <Badge severity="contrast" shape="circle">
+                <Badge.Root severity="contrast" shape="circle">
                     2
-                </Badge>
-            </Button>
+                </Badge.Root>
+            </Button.Root>
 
             <Badge.Overlay>
-                <Button type="button" variant="outlined">
+                <Button.Root type="button" variant="outlined">
                     <i className="pi pi-bell" />
-                </Button>
-                <Badge severity="info" className="animate-pulse" />
+                </Button.Root>
+                <Badge.Root severity="info" className="animate-pulse" />
             </Badge.Overlay>
         </div>
     );

@@ -6,18 +6,18 @@ export default function GroupDemo() {
     return (
         <div className="flex justify-center">
             <Button.Group>
-                <Button>
+                <Button.Root>
                     <i className="pi pi-check" />
                     Save
-                </Button>
-                <Button>
+                </Button.Root>
+                <Button.Root>
                     <i className="pi pi-trash" />
                     Delete
-                </Button>
-                <Button>
+                </Button.Root>
+                <Button.Root>
                     <i className="pi pi-times" />
                     Cancel
-                </Button>
+                </Button.Root>
             </Button.Group>
         </div>
     );

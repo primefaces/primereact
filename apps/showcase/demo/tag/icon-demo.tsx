@@ -6,92 +6,92 @@ export default function IconDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <div className="flex flex-wrap justify-center gap-2">
-                <Tag>
+                <Tag.Root>
                     <Tag.Icon>
                         <i className="pi pi-user"></i>
                     </Tag.Icon>
                     <Tag.Label>Primary</Tag.Label>
-                </Tag>
-                <Tag severity="secondary">
+                </Tag.Root>
+                <Tag.Root severity="secondary">
                     <Tag.Icon>
                         <i className="pi pi-user" />
                     </Tag.Icon>
                     <Tag.Label>Secondary</Tag.Label>
-                </Tag>
-                <Tag severity="success">
+                </Tag.Root>
+                <Tag.Root severity="success">
                     <Tag.Icon>
                         <i className="pi pi-check" />
                     </Tag.Icon>
                     <Tag.Label>Success</Tag.Label>
-                </Tag>
-                <Tag severity="info">
+                </Tag.Root>
+                <Tag.Root severity="info">
                     <Tag.Icon>
                         <i className="pi pi-search" />
                     </Tag.Icon>
                     <Tag.Label>Info</Tag.Label>
-                </Tag>
-                <Tag severity="warn">
+                </Tag.Root>
+                <Tag.Root severity="warn">
                     <Tag.Icon>
                         <i className="pi pi-exclamation-triangle" />
                     </Tag.Icon>
                     <Tag.Label>Warn</Tag.Label>
-                </Tag>
-                <Tag severity="danger">
+                </Tag.Root>
+                <Tag.Root severity="danger">
                     <Tag.Icon>
                         <i className="pi pi-times" />
                     </Tag.Icon>
                     <Tag.Label>Danger</Tag.Label>
-                </Tag>
-                <Tag severity="contrast">
+                </Tag.Root>
+                <Tag.Root severity="contrast">
                     <Tag.Icon>
                         <i className="pi pi-cog" />
                     </Tag.Icon>
                     <Tag.Label>Contrast</Tag.Label>
-                </Tag>
+                </Tag.Root>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-                <Tag>
+                <Tag.Root>
                     <Tag.Label>Primary</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-user"></i>
                     </Tag.Icon>
-                </Tag>
-                <Tag severity="secondary">
+                </Tag.Root>
+                <Tag.Root severity="secondary">
                     <Tag.Label>Secondary</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-user" />
                     </Tag.Icon>
-                </Tag>
-                <Tag severity="success">
+                </Tag.Root>
+                <Tag.Root severity="success">
                     <Tag.Label>Success</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-check" />
                     </Tag.Icon>
-                </Tag>
-                <Tag severity="info">
+                </Tag.Root>
+                <Tag.Root severity="info">
                     <Tag.Label>Info</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-search" />
                     </Tag.Icon>
-                </Tag>
-                <Tag severity="warn">
+                </Tag.Root>
+                <Tag.Root severity="warn">
                     <Tag.Label>Warn</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-exclamation-triangle" />
                     </Tag.Icon>
-                </Tag>
-                <Tag severity="danger">
+                </Tag.Root>
+                <Tag.Root severity="danger">
                     <Tag.Label>Danger</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-times" />
                     </Tag.Icon>
-                </Tag>
-                <Tag severity="contrast">
+                </Tag.Root>
+                <Tag.Root severity="contrast">
                     <Tag.Label>Contrast</Tag.Label>
                     <Tag.Icon>
                         <i className="pi pi-cog" />
                     </Tag.Icon>
-                </Tag>
+                </Tag.Root>
             </div>
         </div>
     );

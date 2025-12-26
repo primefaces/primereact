@@ -5,7 +5,7 @@ import { ConfirmPopup } from 'primereact/confirmpopup';
 export default function ConfirmPopupPT() {
     return (
         <>
-            <ConfirmPopup>
+            <ConfirmPopup.Root>
                 <ConfirmPopup.Trigger variant="outlined">Open Popup</ConfirmPopup.Trigger>
                 <ConfirmPopup.Portal>
                     <ConfirmPopup.Content>
@@ -19,7 +19,7 @@ export default function ConfirmPopupPT() {
                         <ConfirmPopup.Accept>Save</ConfirmPopup.Accept>
                     </ConfirmPopup.Footer>
                 </ConfirmPopup.Portal>
-            </ConfirmPopup>
+            </ConfirmPopup.Root>
         </>
     );
 }

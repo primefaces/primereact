@@ -7,7 +7,7 @@ import { InputText } from 'primereact/inputtext';
 export default function InputDemo() {
     return (
         <div>
-            <Inplace>
+            <Inplace.Root>
                 <Inplace.Display>Click to Edit</Inplace.Display>
                 <Inplace.Content>
                     <span className="inline-flex items-center gap-2">
@@ -17,7 +17,7 @@ export default function InputDemo() {
                         </Inplace.Close>
                     </span>
                 </Inplace.Content>
-            </Inplace>
+            </Inplace.Root>
         </div>
     );
 }

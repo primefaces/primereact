@@ -6,22 +6,22 @@ import { Message } from 'primereact/message';
 export default function IconDemo() {
     return (
         <div className="flex justify-center gap-4">
-            <Message severity="info">
+            <Message.Root severity="info">
                 <Message.Content>
                     <Message.Icon className="pi pi-info-circle" />
                     <Message.Text>Info Message</Message.Text>
                 </Message.Content>
-            </Message>
-            <Message severity="success">
+            </Message.Root>
+            <Message.Root severity="success">
                 <Message.Content>
                     <Message.Icon asChild>
-                        <Avatar shape="circle">
+                        <Avatar.Root shape="circle">
                             <Avatar.Image src="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" />
-                        </Avatar>
+                        </Avatar.Root>
                     </Message.Icon>
                     <Message.Text>How may I help you?</Message.Text>
                 </Message.Content>
-            </Message>
+            </Message.Root>
         </div>
     );
 }

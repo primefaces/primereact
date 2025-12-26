@@ -23,7 +23,7 @@ export default function DynamicDemo() {
             >
                 {categories.map((item) => (
                     <div key={item.key} className="flex items-center gap-2">
-                        <RadioButton inputId={item.key} name="category" value={item.key} />
+                        <RadioButton.Root inputId={item.key} name="category" value={item.key} />
                         <label htmlFor={item.key}>{item.name}</label>
                     </div>
                 ))}

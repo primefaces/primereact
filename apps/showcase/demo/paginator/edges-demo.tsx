@@ -5,7 +5,7 @@ import { Paginator } from 'primereact/paginator';
 function EdgesDemo() {
     return (
         <div className="flex items-center justify-center">
-            <Paginator total={100} itemsPerPage={5} page={6} edges={2}>
+            <Paginator.Root total={100} itemsPerPage={5} page={6} edges={2}>
                 <Paginator.Content>
                     <Paginator.First />
                     <Paginator.Prev />
@@ -13,7 +13,7 @@ function EdgesDemo() {
                     <Paginator.Next />
                     <Paginator.Last />
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
         </div>
     );
 }

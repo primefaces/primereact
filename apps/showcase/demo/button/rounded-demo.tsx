@@ -5,28 +5,28 @@ import { Button } from 'primereact/button';
 export default function RoundedDemo() {
     return (
         <div className="flex justify-center flex-wrap gap-4">
-            <Button rounded>Primary</Button>
-            <Button severity="secondary" rounded>
+            <Button.Root rounded>Primary</Button.Root>
+            <Button.Root severity="secondary" rounded>
                 Secondary
-            </Button>
-            <Button severity="success" rounded>
+            </Button.Root>
+            <Button.Root severity="success" rounded>
                 Success
-            </Button>
-            <Button severity="info" rounded>
+            </Button.Root>
+            <Button.Root severity="info" rounded>
                 Info
-            </Button>
-            <Button severity="warn" rounded>
+            </Button.Root>
+            <Button.Root severity="warn" rounded>
                 Warn
-            </Button>
-            <Button severity="help" rounded>
+            </Button.Root>
+            <Button.Root severity="help" rounded>
                 Help
-            </Button>
-            <Button severity="danger" rounded>
+            </Button.Root>
+            <Button.Root severity="danger" rounded>
                 Danger
-            </Button>
-            <Button severity="contrast" rounded>
+            </Button.Root>
+            <Button.Root severity="contrast" rounded>
                 Contrast
-            </Button>
+            </Button.Root>
         </div>
     );
 }

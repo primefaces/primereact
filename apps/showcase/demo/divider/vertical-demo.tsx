@@ -12,7 +12,7 @@ export default function VerticalDemo() {
                 culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
-            <Divider orientation="vertical" />
+            <Divider.Root orientation="vertical" />
 
             <p className="m-0">
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
@@ -21,7 +21,7 @@ export default function VerticalDemo() {
                 velit, sed quia non numquam eius modi.
             </p>
 
-            <Divider orientation="vertical" />
+            <Divider.Root orientation="vertical" />
 
             <p className="m-0">
                 At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores

@@ -7,21 +7,21 @@ export default function CurrencyDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label htmlFor="currency-us" className="font-bold block mb-2">
+                <Label.Root htmlFor="currency-us" className="font-bold block mb-2">
                     United States
-                </Label>
+                </Label.Root>
                 <InputNumber defaultValue={1500} inputId="currency-us" mode="currency" currency="USD" locale="en-US" fluid />
             </div>
             <div className="flex-auto">
-                <Label htmlFor="currency-germany" className="font-bold block mb-2">
+                <Label.Root htmlFor="currency-germany" className="font-bold block mb-2">
                     Germany
-                </Label>
+                </Label.Root>
                 <InputNumber defaultValue={2500} inputId="currency-germany" mode="currency" currency="EUR" locale="de-DE" fluid />
             </div>
             <div className="flex-auto">
-                <Label htmlFor="currency-india" className="font-bold block mb-2">
+                <Label.Root htmlFor="currency-india" className="font-bold block mb-2">
                     India
-                </Label>
+                </Label.Root>
                 <InputNumber
                     defaultValue={4250}
                     inputId="currency-india"
@@ -33,9 +33,9 @@ export default function CurrencyDemo() {
                 />
             </div>
             <div className="flex-auto">
-                <Label htmlFor="currency-japan" className="font-bold block mb-2">
+                <Label.Root htmlFor="currency-japan" className="font-bold block mb-2">
                     Japan
-                </Label>
+                </Label.Root>
                 <InputNumber defaultValue={5002} inputId="currency-japan" mode="currency" currency="JPY" locale="jp-JP" fluid />
             </div>
         </div>

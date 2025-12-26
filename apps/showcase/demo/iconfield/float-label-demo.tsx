@@ -13,7 +13,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
-                <IconField>
+                <IconField.Root>
                     <IconField.Icon>
                         <i className="pi pi-search" />
                     </IconField.Icon>
@@ -23,12 +23,12 @@ export default function FloatLabelDemo() {
                         id="over_label"
                         autoComplete="off"
                     />
-                </IconField>
-                <Label htmlFor="over_label">Over Label</Label>
+                </IconField.Root>
+                <Label.Root htmlFor="over_label">Over Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="in">
-                <IconField>
+                <IconField.Root>
                     <IconField.Icon>
                         <i className="pi pi-search" />
                     </IconField.Icon>
@@ -39,12 +39,12 @@ export default function FloatLabelDemo() {
                         autoComplete="off"
                         variant="filled"
                     />
-                </IconField>
-                <Label htmlFor="in_label">In Label</Label>
+                </IconField.Root>
+                <Label.Root htmlFor="in_label">In Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="on">
-                <IconField>
+                <IconField.Root>
                     <IconField.Icon>
                         <i className="pi pi-search" />
                     </IconField.Icon>
@@ -54,8 +54,8 @@ export default function FloatLabelDemo() {
                         id="on_label"
                         autoComplete="off"
                     />
-                </IconField>
-                <Label htmlFor="on_label">On Label</Label>
+                </IconField.Root>
+                <Label.Root htmlFor="on_label">On Label</Label.Root>
             </Label.Float>
         </div>
     );

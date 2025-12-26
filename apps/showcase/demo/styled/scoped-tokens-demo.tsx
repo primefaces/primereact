@@ -35,16 +35,16 @@ export default function ScopedTokensDemo() {
 
     return (
         <div className="flex justify-center gap-4">
-            <Switch defaultChecked>
+            <Switch.Root defaultChecked>
                 <Switch.Control>
                     <Switch.Thumb />
                 </Switch.Control>
-            </Switch>
-            <Switch defaultChecked dt={amberSwitch}>
+            </Switch.Root>
+            <Switch.Root defaultChecked dt={amberSwitch}>
                 <Switch.Control>
                     <Switch.Thumb />
                 </Switch.Control>
-            </Switch>
+            </Switch.Root>
         </div>
     );
 }

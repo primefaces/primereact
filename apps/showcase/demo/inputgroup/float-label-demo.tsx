@@ -12,32 +12,32 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-col md:items-end md:flex-row gap-4">
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>
                 </InputGroup.Addon>
                 <Label.Float>
                     <InputText id="over_label" value={value1} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)} />
-                    <Label htmlFor="over_label">Over Label</Label>
+                    <Label.Root htmlFor="over_label">Over Label</Label.Root>
                 </Label.Float>
-            </InputGroup>
+            </InputGroup.Root>
 
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>$</InputGroup.Addon>
                 <Label.Float variant="in">
                     <InputText id="in_label" value={value2} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)} />
-                    <Label htmlFor="in_label">In Label</Label>
+                    <Label.Root htmlFor="in_label">In Label</Label.Root>
                 </Label.Float>
                 <InputGroup.Addon>.00</InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
 
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>www</InputGroup.Addon>
                 <Label.Float variant="on">
                     <InputText id="on_label" value={value3} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue3(e.currentTarget.value)} />
-                    <Label htmlFor="on_label">On Label</Label>
+                    <Label.Root htmlFor="on_label">On Label</Label.Root>
                 </Label.Float>
-            </InputGroup>
+            </InputGroup.Root>
         </div>
     );
 }

@@ -10,7 +10,7 @@ export default function ToggleableDemo() {
 
     return (
         <div>
-            <Panel ref={panelRef} toggleable collapsed={collapsed} onToggle={(e: PanelToggleEvent) => setCollapsed(e.value)}>
+            <Panel.Root ref={panelRef} toggleable collapsed={collapsed} onToggle={(e: PanelToggleEvent) => setCollapsed(e.value)}>
                 <Panel.Header>
                     <Panel.Title>Controlled Panel</Panel.Title>
                     <Panel.HeaderActions>
@@ -25,7 +25,7 @@ export default function ToggleableDemo() {
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </Panel.Content>
-            </Panel>
+            </Panel.Root>
         </div>
     );
 }

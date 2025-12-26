@@ -7,7 +7,7 @@ const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i +
 export default function ScrollableDemo() {
     return (
         <div>
-            <Tabs value="0" scrollable>
+            <Tabs.Root value="0" scrollable>
                 <Tabs.List>
                     {scrollableTabs.map((tab) => (
                         <Tabs.Tab key={tab.value} value={tab.value}>
@@ -23,7 +23,7 @@ export default function ScrollableDemo() {
                         </Tabs.Panel>
                     ))}
                 </Tabs.Panels>
-            </Tabs>
+            </Tabs.Root>
         </div>
     );
 }

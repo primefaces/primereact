@@ -12,7 +12,7 @@ export default function BasicDemo() {
                 culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
-            <Divider />
+            <Divider.Root />
 
             <p className="m-0">
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
@@ -21,7 +21,7 @@ export default function BasicDemo() {
                 velit, sed quia non numquam eius modi.
             </p>
 
-            <Divider />
+            <Divider.Root />
 
             <p className="m-0">
                 At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
@@ -30,7 +30,7 @@ export default function BasicDemo() {
                 eligendi optio cumque nihil impedit quo minus.
             </p>
 
-            <Divider />
+            <Divider.Root />
 
             <p className="m-0">
                 Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et

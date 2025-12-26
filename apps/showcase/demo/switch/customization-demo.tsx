@@ -18,11 +18,11 @@ export default function CustomizationDemo() {
                     <p className="m-0 text-sm text-slate-400">Experience upcoming features before they&apos;re officially released.</p>
                 </div>
 
-                <Switch inputId="custom" checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)}>
+                <Switch.Root inputId="custom" checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)}>
                     <Switch.Control className={`${checked ? 'bg-blue-300' : 'bg-surface-300 dark:bg-surface-500'} rounded-md`}>
                         <Switch.Thumb className="bg-blue-900" />
                     </Switch.Control>
-                </Switch>
+                </Switch.Root>
             </label>
         </div>
     );

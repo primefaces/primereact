@@ -5,7 +5,7 @@ import { Drawer } from 'primereact/drawer';
 export default function DialogPT() {
     return (
         <>
-            <Drawer />
+            <Drawer.Root />
             <div className="justify-start">
                 <div
                     id="pr_id_r5i"

@@ -17,7 +17,7 @@ const apps = [
 export default function AppsDemo() {
     return (
         <div className="flex justify-center">
-            <Menu className="w-116">
+            <Menu.Root className="w-116">
                 <Menu.Trigger rounded iconOnly>
                     <i className="pi pi-bars" />
                 </Menu.Trigger>
@@ -36,7 +36,7 @@ export default function AppsDemo() {
                         ))}
                     </Menu.List>
                 </Menu.Portal>
-            </Menu>
+            </Menu.Root>
         </div>
     );
 }

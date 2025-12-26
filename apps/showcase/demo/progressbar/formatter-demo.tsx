@@ -5,7 +5,7 @@ import { ProgressBar } from 'primereact/progressbar';
 export default function FormatterDemo() {
     return (
         <div>
-            <ProgressBar value={50} formatter={(value: number) => `${value}/100`}>
+            <ProgressBar.Root value={50} formatter={(value: number) => `${value}/100`}>
                 <ProgressBar.Track>
                     <ProgressBar.Indicator>
                         <ProgressBar.Label>
@@ -13,7 +13,7 @@ export default function FormatterDemo() {
                         </ProgressBar.Label>
                     </ProgressBar.Indicator>
                 </ProgressBar.Track>
-            </ProgressBar>
+            </ProgressBar.Root>
         </div>
     );
 }

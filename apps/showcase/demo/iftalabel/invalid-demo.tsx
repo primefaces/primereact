@@ -16,7 +16,7 @@ export default function InvalidDemo() {
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
                     invalid={!value}
                 />
-                <Label htmlFor="invalid">Username</Label>
+                <Label.Root htmlFor="invalid">Username</Label.Root>
             </Label.Ifta>
         </div>
     );

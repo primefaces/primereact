@@ -18,7 +18,7 @@ export default function IftaLabelDemo() {
                     cols={30}
                     style={{ resize: 'none' }}
                 />
-                <Label htmlFor="description">Description</Label>
+                <Label.Root htmlFor="description">Description</Label.Root>
             </Label.Ifta>
         </div>
     );

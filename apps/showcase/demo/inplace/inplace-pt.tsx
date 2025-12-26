@@ -4,7 +4,7 @@ import { Inplace } from 'primereact/inplace';
 
 export default function InplacePT() {
     return (
-        <Inplace>
+        <Inplace.Root>
             <Inplace.Display>View Content</Inplace.Display>
             <Inplace.Content>
                 <p>
@@ -14,6 +14,6 @@ export default function InplacePT() {
                     in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </Inplace.Content>
-        </Inplace>
+        </Inplace.Root>
     );
 }

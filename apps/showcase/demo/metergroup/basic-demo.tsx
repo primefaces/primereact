@@ -7,7 +7,7 @@ export default function BasicDemo() {
 
     return (
         <div>
-            <MeterGroup>
+            <MeterGroup.Root>
                 <MeterGroup.Meters>
                     <MeterGroup.Meter value={value.value} color={value.color} />
                 </MeterGroup.Meters>
@@ -19,7 +19,7 @@ export default function BasicDemo() {
                         </MeterGroup.Text>
                     </MeterGroup.Label>
                 </MeterGroup.Labels>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

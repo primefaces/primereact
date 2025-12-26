@@ -10,12 +10,12 @@ export default function InvalidDemo() {
 
     return (
         <div className="flex flex-wrap justify-center gap-4">
-            <Password value={value1} invalid={!value1} onValueChange={(e: PasswordChangeEvent) => setValue1(e.value as string)}>
+            <Password.Root value={value1} invalid={!value1} onValueChange={(e: PasswordChangeEvent) => setValue1(e.value as string)}>
                 <Password.Input placeholder="Password" />
-            </Password>
-            <Password value={value2} invalid={!value2} variant="filled" onValueChange={(e: PasswordChangeEvent) => setValue2(e.value as string)}>
+            </Password.Root>
+            <Password.Root value={value2} invalid={!value2} variant="filled" onValueChange={(e: PasswordChangeEvent) => setValue2(e.value as string)}>
                 <Password.Input placeholder="Password" />
-            </Password>
+            </Password.Root>
         </div>
     );
 }

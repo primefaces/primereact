@@ -7,15 +7,15 @@ import { Label } from 'primereact/label';
 export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
-            <InputGroup>
+            <InputGroup.Root>
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>
                 </InputGroup.Addon>
                 <Label.Ifta>
                     <InputText id="name" defaultValue="Amy" />
-                    <Label htmlFor="name">Name</Label>
+                    <Label.Root htmlFor="name">Name</Label.Root>
                 </Label.Ifta>
-            </InputGroup>
+            </InputGroup.Root>
         </div>
     );
 }

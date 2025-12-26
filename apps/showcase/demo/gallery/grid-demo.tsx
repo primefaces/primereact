@@ -45,7 +45,7 @@ function BasicDemo() {
                         ref={ref as React.RefObject<HTMLDivElement>}
                         className={`w-full h-[100dvh] top-0 left-0 !fixed z-[100000] ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
                     >
-                        <Gallery
+                        <Gallery.Root
                             className="w-full h-full"
                             activeIndex={activeIndex}
                             onActiveIndexChange={(e: useGalleryChangeEvent) => setActiveIndex(e.value ?? 0)}
@@ -108,7 +108,7 @@ function BasicDemo() {
                                     ))}
                                 </Gallery.ThumbnailContent>
                             </Gallery.Thumbnail>
-                        </Gallery>
+                        </Gallery.Root>
                     </div>
                 )}
             </Portal>

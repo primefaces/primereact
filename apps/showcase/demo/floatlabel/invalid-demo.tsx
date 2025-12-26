@@ -18,7 +18,7 @@ export default function InvalidDemo() {
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)}
                     invalid={!value1}
                 />
-                <Label htmlFor="value1">Username</Label>
+                <Label.Root htmlFor="value1">Username</Label.Root>
             </Label.Float>
 
             <Label.Float variant="in">
@@ -29,7 +29,7 @@ export default function InvalidDemo() {
                     autoComplete="off"
                     invalid={!value2}
                 />
-                <Label htmlFor="value2">Username</Label>
+                <Label.Root htmlFor="value2">Username</Label.Root>
             </Label.Float>
 
             <Label.Float variant="on">
@@ -40,7 +40,7 @@ export default function InvalidDemo() {
                     autoComplete="off"
                     invalid={!value3}
                 />
-                <Label htmlFor="value3">Username</Label>
+                <Label.Root htmlFor="value3">Username</Label.Root>
             </Label.Float>
         </div>
     );

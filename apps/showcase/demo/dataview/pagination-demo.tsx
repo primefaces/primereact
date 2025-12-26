@@ -65,9 +65,9 @@ export default function PaginationDemo() {
                                     height={160}
                                 />
                                 <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
-                                    <Tag severity={getSeverity(product)}>
+                                    <Tag.Root severity={getSeverity(product)}>
                                         <Tag.Label>{product.inventoryStatus}</Tag.Label>
-                                    </Tag>
+                                    </Tag.Root>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
@@ -92,23 +92,23 @@ export default function PaginationDemo() {
                                 <div className="flex flex-col md:items-end gap-8">
                                     <span className="text-xl font-semibold">${product.price}</span>
                                     <div className="flex flex-row-reverse md:flex-row gap-2">
-                                        <Button variant="outlined">
+                                        <Button.Root variant="outlined">
                                             <i className="pi pi-heart"></i>
-                                        </Button>
-                                        <Button
+                                        </Button.Root>
+                                        <Button.Root
                                             disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                             className="flex-auto md:flex-initial whitespace-nowrap"
                                         >
                                             <i className="pi pi-shopping-cart"></i>
                                             Buy Now
-                                        </Button>
+                                        </Button.Root>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-                <Paginator
+                <Paginator.Root
                     total={products.length}
                     itemsPerPage={itemsPerPage}
                     onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}
@@ -121,7 +121,7 @@ export default function PaginationDemo() {
                         <Paginator.Next />
                         <Paginator.Last />
                     </Paginator.Content>
-                </Paginator>
+                </Paginator.Root>
             </DataView>
         </div>
     );

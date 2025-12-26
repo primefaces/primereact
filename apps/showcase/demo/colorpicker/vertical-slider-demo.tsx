@@ -5,7 +5,7 @@ import { ColorPicker } from 'primereact/colorpicker';
 function VerticalSliderDemo() {
     return (
         <div>
-            <ColorPicker format="hsba">
+            <ColorPicker.Root format="hsba">
                 <div className="flex gap-4">
                     <ColorPicker.Area className="max-w-xs flex-1" />
                     <ColorPicker.Slider orientation="vertical" className="h-auto" />
@@ -13,7 +13,7 @@ function VerticalSliderDemo() {
                     <ColorPicker.Slider channel="brightness" orientation="vertical" />
                     <ColorPicker.Slider channel="alpha" orientation="vertical" />
                 </div>
-            </ColorPicker>
+            </ColorPicker.Root>
         </div>
     );
 }

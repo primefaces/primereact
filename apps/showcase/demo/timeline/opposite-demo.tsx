@@ -12,7 +12,7 @@ export default function OppositeDemo() {
 
     return (
         <div>
-            <Timeline>
+            <Timeline.Root>
                 {events.map((event, index) => (
                     <Timeline.Event key={index}>
                         <Timeline.Opposite>
@@ -25,7 +25,7 @@ export default function OppositeDemo() {
                         <Timeline.Content>{event.status}</Timeline.Content>
                     </Timeline.Event>
                 ))}
-            </Timeline>
+            </Timeline.Root>
         </div>
     );
 }

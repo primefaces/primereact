@@ -4,8 +4,8 @@ import { ToggleButton } from 'primereact/togglebutton';
 
 export default function ToggleButtonPT() {
     return (
-        <ToggleButton>
+        <ToggleButton.Root>
             <ToggleButton.Indicator>Bold</ToggleButton.Indicator>
-        </ToggleButton>
+        </ToggleButton.Root>
     );
 }

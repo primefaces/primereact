@@ -39,7 +39,7 @@ export default function CardDemo() {
                             key={interest.id}
                             className={`flex-1 flex items-start gap-4 p-4 rounded-md border border-surface-200 dark:border-surface-800 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${value.includes(interest.id) ? '!border-primary' : ''}`}
                         >
-                            <Checkbox key={interest.id} value={interest.id} />
+                            <Checkbox.Root key={interest.id} value={interest.id} />
                             <div className="flex-1 flex flex-col gap-2">
                                 <div className="text-lg font-semibold leading-none">{interest.title}</div>
                                 <div className="text-sm text-surface-500">{interest.description}</div>

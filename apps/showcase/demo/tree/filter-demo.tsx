@@ -39,9 +39,9 @@ export default function FilterDemo() {
     }, []);
 
     return (
-        <Tree value={filteredNodes} className="w-full md:w-120">
+        <Tree.Root value={filteredNodes} className="w-full md:w-120">
             <Tree.Header>
-                <IconField as={Fluid}>
+                <IconField.Root as={Fluid}>
                     <Tree.Filter
                         as={InputText}
                         value={filterValue}
@@ -50,10 +50,10 @@ export default function FilterDemo() {
                     <IconField.Icon>
                         <i className="pi pi-search" />
                     </IconField.Icon>
-                </IconField>
+                </IconField.Root>
             </Tree.Header>
             <Tree.List />
             <Tree.Empty className="mt-2">No options found.</Tree.Empty>
-        </Tree>
+        </Tree.Root>
     );
 }

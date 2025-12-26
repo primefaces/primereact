@@ -12,7 +12,7 @@ export default function IconDemo() {
 
     return (
         <div>
-            <MeterGroup>
+            <MeterGroup.Root>
                 <MeterGroup.Meters>
                     {values.map(({ value }, index) => (
                         <MeterGroup.Meter key={`meter_${index}`} value={value} index={index} />
@@ -28,7 +28,7 @@ export default function IconDemo() {
                         </MeterGroup.Label>
                     ))}
                 </MeterGroup.Labels>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

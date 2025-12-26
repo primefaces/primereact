@@ -32,7 +32,7 @@ export default function MinMaxDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker
+            <DatePicker.Root
                 value={date}
                 minDate={minDate}
                 maxDate={maxDate}
@@ -145,7 +145,7 @@ export default function MinMaxDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

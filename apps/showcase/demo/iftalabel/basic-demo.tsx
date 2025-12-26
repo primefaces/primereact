@@ -8,7 +8,7 @@ export default function BasicDemo() {
         <div className="flex flex-wrap justify-center">
             <Label.Ifta>
                 <InputText id="username" />
-                <Label htmlFor="username">InputText</Label>
+                <Label.Root htmlFor="username">InputText</Label.Root>
             </Label.Ifta>
         </div>
     );

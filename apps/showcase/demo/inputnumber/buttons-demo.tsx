@@ -43,10 +43,10 @@ export default function ButtonsDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label htmlFor="stacked-buttons" className="font-bold block mb-2">
+                <Label.Root htmlFor="stacked-buttons" className="font-bold block mb-2">
                     Stacked
-                </Label>
-                <InputGroup>
+                </Label.Root>
+                <InputGroup.Root>
                     <InputNumber
                         ref={inputRef1}
                         value={value1}
@@ -57,31 +57,31 @@ export default function ButtonsDemo() {
                         onValueChange={inputNumber1?.onValueChange}
                     />
                     <InputGroup.Addon className="flex-col">
-                        <Button
+                        <Button.Root
                             severity="secondary"
                             onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.increment(e, 1)}
                             onPointerUp={inputRef1.current?.stopSpin}
                             className="py-0 text-[.5rem]"
                         >
                             <i className="pi pi-angle-up" />
-                        </Button>
-                        <Button
+                        </Button.Root>
+                        <Button.Root
                             severity="secondary"
                             onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.decrement(e, -1)}
                             onPointerUp={inputRef1.current?.stopSpin}
                             className="py-0 text-[.5rem]"
                         >
                             <i className="pi pi-angle-down" />
-                        </Button>
+                        </Button.Root>
                     </InputGroup.Addon>
-                </InputGroup>
+                </InputGroup.Root>
             </div>
 
             <div className="flex-auto">
-                <Label htmlFor="minmax-buttons" className="font-bold block mb-2">
+                <Label.Root htmlFor="minmax-buttons" className="font-bold block mb-2">
                     Min-Max
-                </Label>
-                <InputGroup>
+                </Label.Root>
+                <InputGroup.Root>
                     <InputGroup.Addon
                         as={Button}
                         severity="secondary"
@@ -111,14 +111,14 @@ export default function ButtonsDemo() {
                     >
                         <i className="pi pi-minus"></i>
                     </InputGroup.Addon>
-                </InputGroup>
+                </InputGroup.Root>
             </div>
 
             <div className="flex-auto">
-                <Label htmlFor="horizontal-buttons" className="font-bold block mb-2">
+                <Label.Root htmlFor="horizontal-buttons" className="font-bold block mb-2">
                     Horizontal with Step
-                </Label>
-                <IconField>
+                </Label.Root>
+                <IconField.Root>
                     <IconField.Icon
                         onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.increment(e, 0.25)}
                         onPointerUp={inputRef3.current?.stopSpin}
@@ -140,7 +140,7 @@ export default function ButtonsDemo() {
                     >
                         <i className="pi pi-minus"></i>
                     </IconField.Icon>
-                </IconField>
+                </IconField.Root>
             </div>
         </div>
     );

@@ -7,30 +7,30 @@ import { Tag } from 'primereact/tag';
 
 export default function AdvancedDemo() {
     return (
-        <Card className="max-w-sm mx-auto overflow-hidden mb-4">
+        <Card.Root className="max-w-sm mx-auto overflow-hidden mb-4">
             <Card.Header className="relative">
                 <img
                     className="w-full max-h-48 object-cover"
                     alt="user header"
                     src="https://images.unsplash.com/photo-1513649718256-1a7162666bad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 />
-                <Avatar shape="circle" className="w-28 h-28 border-3 border-surface-0 dark:border-surface-900 absolute -bottom-14 left-4 z-10">
+                <Avatar.Root shape="circle" className="w-28 h-28 border-3 border-surface-0 dark:border-surface-900 absolute -bottom-14 left-4 z-10">
                     <Avatar.Image
                         className="object-cover"
                         src="https://images.unsplash.com/photo-1722495178488-c8056c4ec2c0?q=80&w=2081&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     />
-                </Avatar>
+                </Avatar.Root>
             </Card.Header>
             <Card.Body className="pt-16">
                 <Card.Caption>
                     <Card.Title className="font-bold text-2xl">Sakura Fresh Market</Card.Title>
                     <div className="flex items-center gap-2">
-                        <Tag className="w-fit" severity="info">
+                        <Tag.Root className="w-fit" severity="info">
                             Daily
-                        </Tag>
-                        <Tag className="w-fit" severity="info">
+                        </Tag.Root>
+                        <Tag.Root className="w-fit" severity="info">
                             Premium
-                        </Tag>
+                        </Tag.Root>
                     </div>
                 </Card.Caption>
                 <Card.Content className="space-y-4">
@@ -47,16 +47,16 @@ export default function AdvancedDemo() {
                     </div>
                 </Card.Content>
                 <Card.Footer className="flex items-center gap-2 mt-4">
-                    <Button className="flex-1" severity="secondary" variant="outlined">
+                    <Button.Root className="flex-1" severity="secondary" variant="outlined">
                         <i className="pi pi-phone"></i>
                         Call Us
-                    </Button>
-                    <Button className="flex-1">
+                    </Button.Root>
+                    <Button.Root className="flex-1">
                         <i className="pi pi-globe"></i>
                         Visit Site
-                    </Button>
+                    </Button.Root>
                 </Card.Footer>
             </Card.Body>
-        </Card>
+        </Card.Root>
     );
 }

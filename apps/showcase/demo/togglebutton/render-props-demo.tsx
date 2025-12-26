@@ -6,12 +6,12 @@ import { ToggleButton } from 'primereact/togglebutton';
 export default function StateDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <ToggleButton>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator>
                     {({ togglebutton }: ToggleButtonIndicatorInstance) => (togglebutton?.state.pressed ? 'On' : 'Off')}
                 </ToggleButton.Indicator>
-            </ToggleButton>
-            <ToggleButton>
+            </ToggleButton.Root>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator>
                     {({ togglebutton }: ToggleButtonIndicatorInstance) =>
                         togglebutton?.state.pressed ? (
@@ -25,8 +25,8 @@ export default function StateDemo() {
                         )
                     }
                 </ToggleButton.Indicator>
-            </ToggleButton>
-            <ToggleButton>
+            </ToggleButton.Root>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator>
                     {({ togglebutton }: ToggleButtonIndicatorInstance) =>
                         togglebutton?.state.pressed ? (
@@ -40,14 +40,14 @@ export default function StateDemo() {
                         )
                     }
                 </ToggleButton.Indicator>
-            </ToggleButton>
-            <ToggleButton>
+            </ToggleButton.Root>
+            <ToggleButton.Root>
                 <ToggleButton.Indicator className="w-8 h-8">
                     {({ togglebutton }: ToggleButtonIndicatorInstance) =>
                         togglebutton?.state.pressed ? <i className="pi pi-heart-fill"></i> : <i className="pi pi-heart"></i>
                     }
                 </ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
         </div>
     );
 }

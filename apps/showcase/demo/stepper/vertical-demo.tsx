@@ -7,7 +7,7 @@ import { Stepper } from 'primereact/stepper';
 export default function VerticalDemo() {
     return (
         <div>
-            <Stepper value="1">
+            <Stepper.Root value="1">
                 <Stepper.Item value="1">
                     {(instance: StepperItemInstance) => {
                         return (
@@ -85,7 +85,7 @@ export default function VerticalDemo() {
                         );
                     }}
                 </Stepper.Item>
-            </Stepper>
+            </Stepper.Root>
         </div>
     );
 }

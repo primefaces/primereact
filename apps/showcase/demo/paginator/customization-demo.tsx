@@ -6,7 +6,7 @@ import { Paginator } from 'primereact/paginator';
 function CustomizationDemo() {
     return (
         <div className="flex items-center justify-center">
-            <Paginator total={100} itemsPerPage={5}>
+            <Paginator.Root total={100} itemsPerPage={5}>
                 <Paginator.Content>
                     <Paginator.First className="min-w-auto px-3 py-2 rounded-md">First</Paginator.First>
                     <Paginator.Prev className="rounded-md border border-surface">
@@ -28,7 +28,7 @@ function CustomizationDemo() {
                     </Paginator.Next>
                     <Paginator.Last className="min-w-auto px-3 py-2 rounded-md">Last</Paginator.Last>
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
         </div>
     );
 }

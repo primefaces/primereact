@@ -6,7 +6,7 @@ import { Breadcrumb } from 'primereact/breadcrumb';
 
 export default function BreadcrumbPTDemo() {
     return (
-        <Breadcrumb>
+        <Breadcrumb.Root>
             <Breadcrumb.List>
                 <Breadcrumb.Item>
                     <Link href="/">
@@ -30,6 +30,6 @@ export default function BreadcrumbPTDemo() {
                     <Link href="#">Dell XPS 15</Link>
                 </Breadcrumb.Item>
             </Breadcrumb.List>
-        </Breadcrumb>
+        </Breadcrumb.Root>
     );
 }

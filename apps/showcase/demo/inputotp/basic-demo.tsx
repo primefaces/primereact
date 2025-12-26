@@ -5,12 +5,12 @@ import { InputOtp } from 'primereact/inputotp';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <InputOtp>
+            <InputOtp.Root>
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
                 <InputOtp.Text />
-            </InputOtp>
+            </InputOtp.Root>
         </div>
     );
 }

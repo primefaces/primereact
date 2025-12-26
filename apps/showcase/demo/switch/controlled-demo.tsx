@@ -9,11 +9,11 @@ export default function ControlledDemo() {
 
     return (
         <div className="flex justify-center items-center gap-2">
-            <Switch inputId="mode" checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)}>
+            <Switch.Root inputId="mode" checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)}>
                 <Switch.Control>
                     <Switch.Thumb />
                 </Switch.Control>
-            </Switch>
+            </Switch.Root>
             <label htmlFor="mode">Airplane Mode</label>
         </div>
     );

@@ -14,7 +14,7 @@ export default function CircleDemo() {
     return (
         <div>
             <div className="flex items-center justify-center" style={{ position: 'relative', height: '500px' }}>
-                <SpeedDial type="circle" radius={80} style={{ position: 'absolute' }}>
+                <SpeedDial.Root type="circle" radius={80} style={{ position: 'absolute' }}>
                     <SpeedDial.Button severity="warn" />
                     <SpeedDial.List>
                         {items.map((action) => (
@@ -25,7 +25,7 @@ export default function CircleDemo() {
                             </SpeedDial.Item>
                         ))}
                     </SpeedDial.List>
-                </SpeedDial>
+                </SpeedDial.Root>
             </div>
         </div>
     );

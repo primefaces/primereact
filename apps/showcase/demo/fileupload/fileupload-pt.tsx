@@ -7,7 +7,7 @@ import { Message } from 'primereact/message';
 
 export default function FileUploadPTDemo() {
     return (
-        <FileUpload
+        <FileUpload.Root
             name="demo[]"
             url="/api/upload"
             multiple
@@ -19,18 +19,18 @@ export default function FileUploadPTDemo() {
                 return (
                     <>
                         <div className="flex items-center p-5 gap-2">
-                            <Button onClick={instance.choose}>
+                            <Button.Root onClick={instance.choose}>
                                 <i className="pi pi-plus" />
                                 Choose
-                            </Button>
-                            <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.upload}>
+                            </Button.Root>
+                            <Button.Root severity="secondary" disabled={!instance.hasFiles} onClick={instance.upload}>
                                 <i className="pi pi-upload" />
                                 Upload
-                            </Button>
-                            <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.clear}>
+                            </Button.Root>
+                            <Button.Root severity="secondary" disabled={!instance.hasFiles} onClick={instance.clear}>
                                 <i className="pi pi-times" />
                                 Cancel
-                            </Button>
+                            </Button.Root>
                         </div>
 
                         <FileUpload.Content>
@@ -39,11 +39,11 @@ export default function FileUploadPTDemo() {
                                     {instance.state.messages &&
                                         instance.state.messages.length > 0 &&
                                         instance.state.messages.map((msg, i) => (
-                                            <Message key={i} severity="error" className="mb-2">
+                                            <Message.Root key={i} severity="error" className="mb-2">
                                                 <Message.Content>
                                                     <Message.Text>{msg}</Message.Text>
                                                 </Message.Content>
-                                            </Message>
+                                            </Message.Root>
                                         ))}
                                 </div>
                             )}
@@ -55,6 +55,6 @@ export default function FileUploadPTDemo() {
                     </>
                 );
             }}
-        </FileUpload>
+        </FileUpload.Root>
     );
 }

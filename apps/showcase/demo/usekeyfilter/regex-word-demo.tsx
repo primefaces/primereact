@@ -19,9 +19,9 @@ export default function RegexWordDemo() {
     return (
         <div className="flex justify-center">
             <div>
-                <Label htmlFor="numkeys" className="font-bold block mb-2">
+                <Label.Root htmlFor="numkeys" className="font-bold block mb-2">
                     Block Numeric (allow &quot;+&quot; only once at start)
-                </Label>
+                </Label.Root>
                 <InputText
                     id="numkeys"
                     value={text}

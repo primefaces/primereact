@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 export default function DisabledDemo() {
     return (
         <div className="flex justify-center">
-            <Button disabled>Submit</Button>
+            <Button.Root disabled>Submit</Button.Root>
         </div>
     );
 }

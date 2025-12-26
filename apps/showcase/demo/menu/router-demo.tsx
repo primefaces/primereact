@@ -13,7 +13,7 @@ export default function RouterDemo() {
 
     return (
         <div className="flex justify-center">
-            <Menu className="w-56">
+            <Menu.Root className="w-56">
                 <Menu.List>
                     <Menu.Item as={Link} href="/docs/theming/unstyled">
                         <i className="pi pi-palette" />
@@ -28,7 +28,7 @@ export default function RouterDemo() {
                         External
                     </Menu.Item>
                 </Menu.List>
-            </Menu>
+            </Menu.Root>
         </div>
     );
 }

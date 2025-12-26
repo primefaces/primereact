@@ -42,7 +42,7 @@ const data = [
 function SelectableDemo() {
     return (
         <div className="flex items-center justify-center">
-            <OrgChart value={data} selectable selectionMode="multiple" />
+            <OrgChart.Root value={data} selectable selectionMode="multiple" />
         </div>
     );
 }

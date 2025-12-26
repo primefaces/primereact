@@ -20,7 +20,7 @@ export default function AdvancedDemo() {
 
     return (
         <div>
-            <FileUpload
+            <FileUpload.Root
                 name="demo[]"
                 url="/api/upload"
                 multiple
@@ -33,18 +33,18 @@ export default function AdvancedDemo() {
                     return (
                         <>
                             <div className="flex items-center p-5 gap-2">
-                                <Button onClick={instance.choose}>
+                                <Button.Root onClick={instance.choose}>
                                     <i className="pi pi-plus" />
                                     Choose
-                                </Button>
-                                <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.upload}>
+                                </Button.Root>
+                                <Button.Root severity="secondary" disabled={!instance.hasFiles} onClick={instance.upload}>
                                     <i className="pi pi-upload" />
                                     Upload
-                                </Button>
-                                <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.clear}>
+                                </Button.Root>
+                                <Button.Root severity="secondary" disabled={!instance.hasFiles} onClick={instance.clear}>
                                     <i className="pi pi-times" />
                                     Cancel
-                                </Button>
+                                </Button.Root>
                             </div>
 
                             <FileUpload.Content>
@@ -53,21 +53,21 @@ export default function AdvancedDemo() {
                                         {instance.state.messages &&
                                             instance.state.messages.length > 0 &&
                                             instance.state.messages.map((msg, i) => (
-                                                <Message key={i} severity="error" className="mb-2">
+                                                <Message.Root key={i} severity="error" className="mb-2">
                                                     <Message.Content>
                                                         <Message.Text>{msg}</Message.Text>
                                                     </Message.Content>
-                                                </Message>
+                                                </Message.Root>
                                             ))}
 
                                         {instance.hasFiles && (
-                                            <ProgressBar value={instance.state.progress}>
+                                            <ProgressBar.Root value={instance.state.progress}>
                                                 <ProgressBar.Track style={{ height: '0.25rem' }}>
                                                     <ProgressBar.Indicator>
                                                         <ProgressBar.Label />
                                                     </ProgressBar.Indicator>
                                                 </ProgressBar.Track>
-                                            </ProgressBar>
+                                            </ProgressBar.Root>
                                         )}
                                     </div>
                                 )}
@@ -79,9 +79,9 @@ export default function AdvancedDemo() {
                         </>
                     );
                 }}
-            </FileUpload>
+            </FileUpload.Root>
 
-            <Toast position="top-right" group="advanced-demo">
+            <Toast.Root position="top-right" group="advanced-demo">
                 <Toast.Portal>
                     <Toast.Region>
                         {({ toast }: ToastRegionInstance) =>
@@ -108,7 +108,7 @@ export default function AdvancedDemo() {
                         }
                     </Toast.Region>
                 </Toast.Portal>
-            </Toast>
+            </Toast.Root>
         </div>
     );
 }

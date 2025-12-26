@@ -7,9 +7,9 @@ export default function ProgressBarPT() {
 
     return (
         <div className="w-full">
-            <ProgressBar value={value}>
+            <ProgressBar.Root value={value}>
                 <ProgressBar.Label>{value}%</ProgressBar.Label>
-            </ProgressBar>
+            </ProgressBar.Root>
         </div>
     );
 }

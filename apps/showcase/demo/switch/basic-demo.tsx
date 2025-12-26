@@ -7,11 +7,11 @@ export default function BasicDemo() {
         <>
             <div className="flex justify-center items-center gap-2">
                 <label htmlFor="switch">Off</label>
-                <Switch inputId="switch">
+                <Switch.Root inputId="switch">
                     <Switch.Control>
                         <Switch.Thumb />
                     </Switch.Control>
-                </Switch>
+                </Switch.Root>
                 <label htmlFor="switch">On</label>
             </div>
         </>

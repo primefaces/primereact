@@ -7,7 +7,7 @@ import { Switch } from 'primereact/switch';
 export default function TemplateDemo() {
     return (
         <div className="flex justify-center">
-            <Switch>
+            <Switch.Root>
                 <Switch.Control>
                     <Switch.Thumb>
                         {(instance: SwitchThumbInstance) => {
@@ -17,7 +17,7 @@ export default function TemplateDemo() {
                         }}
                     </Switch.Thumb>
                 </Switch.Control>
-            </Switch>
+            </Switch.Root>
         </div>
     );
 }

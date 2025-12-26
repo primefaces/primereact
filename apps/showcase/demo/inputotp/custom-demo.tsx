@@ -5,7 +5,7 @@ import { InputOtp } from 'primereact/inputotp';
 export default function CustomDemo() {
     return (
         <div className="flex justify-center">
-            <InputOtp>
+            <InputOtp.Root>
                 {Array.from({ length: 4 }, (_, index) => {
                     return (
                         <InputOtp.Text
@@ -14,7 +14,7 @@ export default function CustomDemo() {
                         />
                     );
                 })}
-            </InputOtp>
+            </InputOtp.Root>
         </div>
     );
 }

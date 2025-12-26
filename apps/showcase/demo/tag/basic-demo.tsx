@@ -5,9 +5,9 @@ import { Tag } from 'primereact/tag';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <Tag>
+            <Tag.Root>
                 <Tag.Label>New</Tag.Label>
-            </Tag>
+            </Tag.Root>
         </div>
     );
 }

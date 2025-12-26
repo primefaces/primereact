@@ -4,7 +4,7 @@ import { Panel } from 'primereact/panel';
 
 export default function PanelPT() {
     return (
-        <Panel toggleable>
+        <Panel.Root toggleable>
             <Panel.Header>
                 <Panel.Title>Header</Panel.Title>
                 <Panel.HeaderActions>
@@ -20,6 +20,6 @@ export default function PanelPT() {
                 </p>
             </Panel.Content>
             <Panel.Footer>Footer</Panel.Footer>
-        </Panel>
+        </Panel.Root>
     );
 }

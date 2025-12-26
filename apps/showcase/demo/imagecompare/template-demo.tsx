@@ -5,7 +5,7 @@ import { ImageCompare } from 'primereact/imagecompare';
 export default function TemplateDemo() {
     return (
         <div>
-            <ImageCompare className="max-w-lg w-full h-60 mx-auto aspect-auto">
+            <ImageCompare.Root className="max-w-lg w-full h-60 mx-auto aspect-auto">
                 <ImageCompare.Left as="div" className="bg-transparent absolute w-full h-full"></ImageCompare.Left>
                 <ImageCompare.Right
                     as={'div'}
@@ -33,7 +33,7 @@ export default function TemplateDemo() {
                     </svg>
                 </ImageCompare.Right>
                 <ImageCompare.Slider />
-            </ImageCompare>
+            </ImageCompare.Root>
         </div>
     );
 }

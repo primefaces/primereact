@@ -42,7 +42,7 @@ export default function GroupDemo() {
 
     return (
         <div className="flex justify-center">
-            <Listbox
+            <Listbox.Root
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string | null)}
                 options={groupedCities}
@@ -52,7 +52,7 @@ export default function GroupDemo() {
                 className="w-full md:w-56"
             >
                 <Listbox.Options style={{ maxHeight: '250px' }} />
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

@@ -5,11 +5,11 @@ import { Message } from 'primereact/message';
 export default function BasicDemo() {
     return (
         <div>
-            <Message>
+            <Message.Root>
                 <Message.Content>
                     <Message.Text>Message Content</Message.Text>
                 </Message.Content>
-            </Message>
+            </Message.Root>
         </div>
     );
 }

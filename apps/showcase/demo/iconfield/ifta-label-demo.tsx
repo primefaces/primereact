@@ -8,13 +8,13 @@ export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
             <Label.Ifta>
-                <IconField>
+                <IconField.Root>
                     <IconField.Icon>
                         <i className="pi pi-user" />
                     </IconField.Icon>
                     <InputText id="username" autoComplete="off" variant="filled" />
-                </IconField>
-                <Label htmlFor="username">Username</Label>
+                </IconField.Root>
+                <Label.Root htmlFor="username">Username</Label.Root>
             </Label.Ifta>
         </div>
     );

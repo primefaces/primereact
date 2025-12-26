@@ -9,11 +9,11 @@ export default function InvalidDemo() {
 
     return (
         <div className="flex justify-center">
-            <Switch checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)} invalid={!checked}>
+            <Switch.Root checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)} invalid={!checked}>
                 <Switch.Control>
                     <Switch.Thumb />
                 </Switch.Control>
-            </Switch>
+            </Switch.Root>
         </div>
     );
 }

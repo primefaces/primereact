@@ -20,7 +20,7 @@ export default function IndeterminateDemo() {
         <div className="flex items-center justify-center">
             <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
-                    <Checkbox
+                    <Checkbox.Root
                         inputId="indeterminate-checkbox"
                         indeterminate={indeterminate}
                         checked={isAllSelected}
@@ -35,7 +35,7 @@ export default function IndeterminateDemo() {
                 >
                     {categories.map((item) => (
                         <div key={item.key} className="flex items-center gap-2">
-                            <Checkbox inputId={item.key} value={item.key} />
+                            <Checkbox.Root inputId={item.key} value={item.key} />
                             <label htmlFor={item.key}>{item.name}</label>
                         </div>
                     ))}

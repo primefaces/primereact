@@ -12,7 +12,7 @@ import { DatePicker } from 'primereact/datepicker';
 export default function DisabledDemo() {
     return (
         <div className="flex justify-center">
-            <DatePicker disabled>
+            <DatePicker.Root disabled>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -119,7 +119,7 @@ export default function DisabledDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

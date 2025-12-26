@@ -5,7 +5,7 @@ import { Tabs } from 'primereact/tabs';
 export default function DisabledDemo() {
     return (
         <div>
-            <Tabs value="tab1">
+            <Tabs.Root value="tab1">
                 <Tabs.List>
                     <Tabs.Tab value="tab1">Account Info</Tabs.Tab>
                     <Tabs.Tab value="tab2" disabled>
@@ -25,7 +25,7 @@ export default function DisabledDemo() {
                         <p>Customize how the application looks and behaves to match your personal preferences.</p>
                     </Tabs.Panel>
                 </Tabs.Panels>
-            </Tabs>
+            </Tabs.Root>
         </div>
     );
 }

@@ -14,13 +14,13 @@ export default function BasicDemo() {
                 <InputText id="email" type="email" placeholder="Email" fluid />
 
                 <div className="flex items-center gap-2">
-                    <Checkbox inputId="accept" name="accept" value="Accept" />
+                    <Checkbox.Root inputId="accept" name="accept" value="Accept" />
                     <label htmlFor="accept">I agree to the terms and conditions.</label>
                 </div>
 
-                <Button type="submit" className="mt-2">
+                <Button.Root type="submit" className="mt-2">
                     Submit
-                </Button>
+                </Button.Root>
             </FocusTrap>
         </div>
     );

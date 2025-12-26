@@ -15,12 +15,12 @@ export default function TooltipDemo() {
     return (
         <div>
             <div style={{ position: 'relative', height: '350px' }}>
-                <SpeedDial direction="up" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+                <SpeedDial.Root direction="up" style={{ position: 'absolute', right: 0, bottom: 0 }}>
                     <SpeedDial.Button severity="help" />
                     <SpeedDial.List>
                         <Tooltip.Group>
                             {items.map((action) => (
-                                <Tooltip key={action.icon} side="left">
+                                <Tooltip.Root key={action.icon} side="left">
                                     <Tooltip.Trigger as={SpeedDial.Item}>
                                         <SpeedDial.Action>
                                             <i className={action.icon}></i>
@@ -32,17 +32,17 @@ export default function TooltipDemo() {
                                             <Tooltip.Arrow />
                                         </Tooltip.Content>
                                     </Tooltip.Portal>
-                                </Tooltip>
+                                </Tooltip.Root>
                             ))}
                         </Tooltip.Group>
                     </SpeedDial.List>
-                </SpeedDial>
-                <SpeedDial direction="up" style={{ position: 'absolute', left: 0, bottom: 0 }}>
+                </SpeedDial.Root>
+                <SpeedDial.Root direction="up" style={{ position: 'absolute', left: 0, bottom: 0 }}>
                     <SpeedDial.Button severity="danger" />
                     <SpeedDial.List>
                         <Tooltip.Group>
                             {items.map((action) => (
-                                <Tooltip key={action.icon} side="right">
+                                <Tooltip.Root key={action.icon} side="right">
                                     <Tooltip.Trigger as={SpeedDial.Item}>
                                         <SpeedDial.Action>
                                             <i className={action.icon}></i>
@@ -54,11 +54,11 @@ export default function TooltipDemo() {
                                             <Tooltip.Arrow />
                                         </Tooltip.Content>
                                     </Tooltip.Portal>
-                                </Tooltip>
+                                </Tooltip.Root>
                             ))}
                         </Tooltip.Group>
                     </SpeedDial.List>
-                </SpeedDial>
+                </SpeedDial.Root>
             </div>
         </div>
     );

@@ -1,11 +1,9 @@
-'use client';
-
 import { Paginator } from 'primereact/paginator';
 
 function BasicDemo() {
     return (
         <div className="flex items-center justify-center">
-            <Paginator total={100} itemsPerPage={5} edges={0}>
+            <Paginator.Root total={100} itemsPerPage={5} edges={0}>
                 <Paginator.Content>
                     <Paginator.First />
                     <Paginator.Prev />
@@ -13,7 +11,7 @@ function BasicDemo() {
                     <Paginator.Next />
                     <Paginator.Last />
                 </Paginator.Content>
-            </Paginator>
+            </Paginator.Root>
         </div>
     );
 }

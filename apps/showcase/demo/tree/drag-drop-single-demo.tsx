@@ -109,7 +109,7 @@ export default function DragDropSingleDemo() {
     ]);
 
     return (
-        <Tree
+        <Tree.Root
             value={nodes}
             onValueChange={(e: useTreeValueChangeEvent) => setNodes(e.value)}
             draggableNodes
@@ -117,6 +117,6 @@ export default function DragDropSingleDemo() {
             className="w-full md:w-120"
         >
             <Tree.List />
-        </Tree>
+        </Tree.Root>
     );
 }

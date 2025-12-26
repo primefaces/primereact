@@ -6,8 +6,8 @@ import { Popover } from 'primereact/popover';
 function PopoverDemo() {
     return (
         <div>
-            <ColorPicker defaultColor="#0099ff">
-                <Popover>
+            <ColorPicker.Root defaultColor="#0099ff">
+                <Popover.Root>
                     <Popover.Trigger unstyled>
                         <ColorPicker.Swatch />
                     </Popover.Trigger>
@@ -26,8 +26,8 @@ function PopoverDemo() {
                             </div>
                         </Popover.Content>
                     </Popover.Portal>
-                </Popover>
-            </ColorPicker>
+                </Popover.Root>
+            </ColorPicker.Root>
         </div>
     );
 }

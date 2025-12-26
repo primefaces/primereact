@@ -22,7 +22,7 @@ export default function CheckboxDemo() {
 
     return (
         <div className="flex justify-center">
-            <Listbox
+            <Listbox.Root
                 value={selectedCity}
                 onValueChange={(e: ListboxValueChangeEvent) => setSelectedCity(e.value as string[])}
                 options={cities}
@@ -40,7 +40,7 @@ export default function CheckboxDemo() {
                     />
                 </Listbox.Header>
                 <Listbox.Options />
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

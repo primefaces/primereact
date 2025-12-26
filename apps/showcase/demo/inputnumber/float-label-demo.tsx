@@ -21,7 +21,7 @@ export default function FloatLabelDemo() {
                     currency="USD"
                     locale="en-US"
                 />
-                <Label htmlFor="over_label">Over Label</Label>
+                <Label.Root htmlFor="over_label">Over Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="in">
@@ -34,7 +34,7 @@ export default function FloatLabelDemo() {
                     locale="en-US"
                     variant="filled"
                 />
-                <Label htmlFor="in_label">In Label</Label>
+                <Label.Root htmlFor="in_label">In Label</Label.Root>
             </Label.Float>
 
             <Label.Float variant="on">
@@ -46,7 +46,7 @@ export default function FloatLabelDemo() {
                     currency="USD"
                     locale="en-US"
                 />
-                <Label htmlFor="on_label">On Label</Label>
+                <Label.Root htmlFor="on_label">On Label</Label.Root>
             </Label.Float>
         </div>
     );

@@ -7,25 +7,25 @@ import { Toolbar } from 'primereact/toolbar';
 export default function BasicDemo() {
     return (
         <div>
-            <Toolbar>
+            <Toolbar.Root>
                 <Toolbar.Start>
-                    <Button className="mr-2" severity="secondary" variant="text">
+                    <Button.Root className="mr-2" severity="secondary" variant="text">
                         <i className="pi pi-plus"></i>
-                    </Button>
-                    <Button className="mr-2" severity="secondary" variant="text">
+                    </Button.Root>
+                    <Button.Root className="mr-2" severity="secondary" variant="text">
                         <i className="pi pi-print"></i>
-                    </Button>
-                    <Button severity="secondary" variant="text">
+                    </Button.Root>
+                    <Button.Root severity="secondary" variant="text">
                         <i className="pi pi-upload"></i>
-                    </Button>
+                    </Button.Root>
                 </Toolbar.Start>
                 <Toolbar.Center>
                     <InputText placeholder="Search" />
                 </Toolbar.Center>
                 <Toolbar.End>
-                    <Button>Save</Button>
+                    <Button.Root>Save</Button.Root>
                 </Toolbar.End>
-            </Toolbar>
+            </Toolbar.Root>
         </div>
     );
 }

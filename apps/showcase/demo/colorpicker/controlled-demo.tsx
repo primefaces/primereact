@@ -13,7 +13,7 @@ export default function ControlledDemo() {
     return (
         <div>
             <div className="max-w-sm space-y-4">
-                <ColorPicker
+                <ColorPicker.Root
                     format={format === 'hex' ? 'rgba' : format}
                     onValueChange={(e: useColorPickerChangeEvent) => {
                         setValue(e.value);
@@ -64,7 +64,7 @@ export default function ControlledDemo() {
                             <ColorPicker.Input fluid channel="alpha" />
                         </div>
                     </div>
-                </ColorPicker>
+                </ColorPicker.Root>
             </div>
         </div>
     );

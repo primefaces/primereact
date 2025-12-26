@@ -18,7 +18,7 @@ export default function MultipleDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker
+            <DatePicker.Root
                 value={date}
                 selectionMode="multiple"
                 manualInput={false}
@@ -130,7 +130,7 @@ export default function MultipleDemo() {
                         </DatePicker.Calendar>
                     </DatePicker.Container>
                 </DatePicker.Portal>
-            </DatePicker>
+            </DatePicker.Root>
         </div>
     );
 }

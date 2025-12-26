@@ -16,7 +16,7 @@ export default function AdvancedDemo() {
                     <option value="hsla">HSLA</option>
                     <option value="oklcha">OKLCHA</option>
                 </select>
-                <ColorPicker format={format}>
+                <ColorPicker.Root format={format}>
                     <ColorPicker.Area />
                     <ColorPicker.Slider />
                     {format === 'rgba' && (
@@ -76,7 +76,7 @@ export default function AdvancedDemo() {
                     <div className="flex gap-2">
                         <ColorPicker.Input fluid channel="css" />
                     </div>
-                </ColorPicker>
+                </ColorPicker.Root>
             </div>
         </div>
     );

@@ -39,7 +39,7 @@ export default function UseWithRadioButton() {
                     value={selected}
                     onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelected(e.value as string)}
                 >
-                    <Accordion
+                    <Accordion.Root
                         value={selected}
                         onChange={(e: useAccordionChangeEvent) => setSelected(e.value as string)}
                         className="w-full border border-surface-200 dark:border-surface-700 rounded-md divide-y divide-surface-200 dark:divide-surface-700"
@@ -51,7 +51,7 @@ export default function UseWithRadioButton() {
                                     className="flex items-center justify-between bg-transparent py-3.5"
                                 >
                                     <span className="flex items-center gap-4">
-                                        <RadioButton inputId={`radio-${item.value}`} name="price" value={item.value} />
+                                        <RadioButton.Root inputId={`radio-${item.value}`} name="price" value={item.value} />
                                         <span className="font-semibold text-xl">{item.label}</span>
                                     </span>
                                     <span className="text-xl font-semibold">{item.price}</span>
@@ -61,11 +61,11 @@ export default function UseWithRadioButton() {
                                 </Accordion.Content>
                             </Accordion.Panel>
                         ))}
-                    </Accordion>
+                    </Accordion.Root>
                 </RadioButton.Group>
-                <Button className="w-full mt-4" size="large">
+                <Button.Root className="w-full mt-4" size="large">
                     Buy Now for {items.find((item) => item.value === selected)?.price}
-                </Button>
+                </Button.Root>
             </div>
         </div>
     );

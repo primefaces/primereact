@@ -48,7 +48,7 @@ export default function StepsDemo() {
         <div>
             <div className="max-w-sm mx-auto">
                 <div className="mb-3 font-medium">{orderProgress[step].status}</div>
-                <ProgressBar value={step} min={0} max={4}>
+                <ProgressBar.Root value={step} min={0} max={4}>
                     {() => {
                         const { colors } = orderProgress[step] ?? {};
 
@@ -64,15 +64,15 @@ export default function StepsDemo() {
                             </ProgressBar.Track>
                         );
                     }}
-                </ProgressBar>
+                </ProgressBar.Root>
 
                 <div className="flex items-center justify-between mt-6">
-                    <Button onClick={prevStep} disabled={step === 0} rounded variant="text" severity="contrast">
+                    <Button.Root onClick={prevStep} disabled={step === 0} rounded variant="text" severity="contrast">
                         Previous
-                    </Button>
-                    <Button onClick={nextStep} disabled={step === orderProgress.length - 1} rounded variant="text" severity="contrast">
+                    </Button.Root>
+                    <Button.Root onClick={nextStep} disabled={step === orderProgress.length - 1} rounded variant="text" severity="contrast">
                         Next
-                    </Button>
+                    </Button.Root>
                 </div>
             </div>
         </div>

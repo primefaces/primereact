@@ -120,7 +120,7 @@ export default function DragDropMultipleDemo() {
 
     return (
         <div className="flex flex-col md:flex-row gap-4">
-            <Tree
+            <Tree.Root
                 value={nodes}
                 onValueChange={(e: useTreeValueChangeEvent) => setNodes(e.value)}
                 draggableNodes
@@ -131,8 +131,8 @@ export default function DragDropMultipleDemo() {
             >
                 <Tree.List />
                 <Tree.Empty>No Items Left</Tree.Empty>
-            </Tree>
-            <Tree
+            </Tree.Root>
+            <Tree.Root
                 value={nodes2}
                 onValueChange={(e: useTreeValueChangeEvent) => setNodes2(e.value)}
                 draggableNodes
@@ -146,8 +146,8 @@ export default function DragDropMultipleDemo() {
             >
                 <Tree.List />
                 <Tree.Empty>Drag Nodes Here</Tree.Empty>
-            </Tree>
-            <Tree
+            </Tree.Root>
+            <Tree.Root
                 value={nodes3}
                 onValueChange={(e: useTreeValueChangeEvent) => setNodes3(e.value)}
                 draggableNodes
@@ -160,7 +160,7 @@ export default function DragDropMultipleDemo() {
             >
                 <Tree.List />
                 <Tree.Empty>Drag Nodes Here</Tree.Empty>
-            </Tree>
+            </Tree.Root>
         </div>
     );
 }

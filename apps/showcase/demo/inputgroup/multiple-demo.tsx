@@ -6,7 +6,7 @@ import { InputText } from 'primereact/inputtext';
 export default function MultipleDemo() {
     return (
         <div className="flex justify-center">
-            <InputGroup className="sm:!w-96">
+            <InputGroup.Root className="sm:!w-96">
                 <InputGroup.Addon>
                     <i className="pi pi-clock"></i>
                 </InputGroup.Addon>
@@ -16,7 +16,7 @@ export default function MultipleDemo() {
                 <InputText placeholder="Price" />
                 <InputGroup.Addon>$</InputGroup.Addon>
                 <InputGroup.Addon>.00</InputGroup.Addon>
-            </InputGroup>
+            </InputGroup.Root>
         </div>
     );
 }

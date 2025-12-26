@@ -8,7 +8,7 @@ export default function AccessibilityCheckboxDemo() {
             <label htmlFor="chkbox" className="mr-2">
                 Remember Me
             </label>
-            <Checkbox id="chkbox" />
+            <Checkbox.Root id="chkbox" />
         </div>
     );
 }

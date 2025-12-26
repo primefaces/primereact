@@ -7,7 +7,7 @@ import { Toast } from 'primereact/toast';
 
 function VariantsToast() {
     return (
-        <Toast group="variants">
+        <Toast.Root group="variants">
             <Toast.Portal>
                 <Toast.Region>
                     {({ toast }: ToastRegionInstance) =>
@@ -36,7 +36,7 @@ function VariantsToast() {
                     }
                 </Toast.Region>
             </Toast.Portal>
-        </Toast>
+        </Toast.Root>
     );
 }
 
@@ -130,7 +130,7 @@ function VariantsDemo() {
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
+            <Button.Root
                 onClick={() => {
                     toast({
                         title: 'Default',
@@ -141,8 +141,8 @@ function VariantsDemo() {
                 variant="outlined"
             >
                 Default
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 onClick={() => {
                     toast.info({
                         title: 'Info',
@@ -154,8 +154,8 @@ function VariantsDemo() {
                 severity="info"
             >
                 Info
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 onClick={() =>
                     toast.success({
                         title: 'Success',
@@ -167,30 +167,30 @@ function VariantsDemo() {
                 severity="success"
             >
                 Success
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 onClick={() => toast.danger({ title: 'Danger', description: 'This is a danger toast', group: 'variants' })}
                 variant="outlined"
                 severity="danger"
             >
                 Danger
-            </Button>
-            <Button
+            </Button.Root>
+            <Button.Root
                 onClick={() => toast.warn({ title: 'Warn', description: 'This is a warning toast', group: 'variants' })}
                 variant="outlined"
                 severity="warn"
             >
                 Warn
-            </Button>
-            <Button onClick={handleLoadingToast} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={handleLoadingToast} variant="outlined">
                 Loading
-            </Button>
-            <Button onClick={handleToastPromise} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={handleToastPromise} variant="outlined">
                 Promise
-            </Button>
-            <Button onClick={handleCustomToast} variant="outlined">
+            </Button.Root>
+            <Button.Root onClick={handleCustomToast} variant="outlined">
                 Custom
-            </Button>
+            </Button.Root>
             <VariantsToast />
         </div>
     );

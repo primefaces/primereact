@@ -4,9 +4,9 @@ import { Password } from 'primereact/password';
 
 export default function PasswordPTDemo() {
     return (
-        <Password>
+        <Password.Root>
             <Password.Input />
             <Password.Strength />
-        </Password>
+        </Password.Root>
     );
 }

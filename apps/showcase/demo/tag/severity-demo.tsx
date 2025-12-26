@@ -5,27 +5,27 @@ import { Tag } from 'primereact/tag';
 export default function SeverityDemo() {
     return (
         <div className="flex flex-wrap justify-center gap-2">
-            <Tag>
+            <Tag.Root>
                 <Tag.Label>Primary</Tag.Label>
-            </Tag>
-            <Tag severity="secondary">
+            </Tag.Root>
+            <Tag.Root severity="secondary">
                 <Tag.Label>Secondary</Tag.Label>
-            </Tag>
-            <Tag severity="success">
+            </Tag.Root>
+            <Tag.Root severity="success">
                 <Tag.Label>Success</Tag.Label>
-            </Tag>
-            <Tag severity="info">
+            </Tag.Root>
+            <Tag.Root severity="info">
                 <Tag.Label>Info</Tag.Label>
-            </Tag>
-            <Tag severity="warn">
+            </Tag.Root>
+            <Tag.Root severity="warn">
                 <Tag.Label>Warn</Tag.Label>
-            </Tag>
-            <Tag severity="danger">
+            </Tag.Root>
+            <Tag.Root severity="danger">
                 <Tag.Label>Danger</Tag.Label>
-            </Tag>
-            <Tag severity="contrast">
+            </Tag.Root>
+            <Tag.Root severity="contrast">
                 <Tag.Label>Contrast</Tag.Label>
-            </Tag>
+            </Tag.Root>
         </div>
     );
 }

@@ -6,12 +6,12 @@ import { Menu } from 'primereact/menu';
 export default function PortalDemo() {
     return (
         <div className="flex justify-center">
-            <Menu className="w-64">
+            <Menu.Root className="w-64">
                 <Menu.Trigger className="flex items-center gap-3">
-                    <Avatar shape="circle">
+                    <Avatar.Root shape="circle">
                         <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                         <Avatar.Fallback>A</Avatar.Fallback>
-                    </Avatar>
+                    </Avatar.Root>
                     <div className="flex flex-col items-start">
                         <span className="font-semibold text-sm">Sarah Anderson</span>
                         <span className="text-xs">Product Manager</span>
@@ -61,7 +61,7 @@ export default function PortalDemo() {
                         </Menu.Item>
                     </Menu.List>
                 </Menu.Portal>
-            </Menu>
+            </Menu.Root>
         </div>
     );
 }

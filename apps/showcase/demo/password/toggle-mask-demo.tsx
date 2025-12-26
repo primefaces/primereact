@@ -18,12 +18,12 @@ export default function ToggleMaskDemo() {
 
     return (
         <div className="flex justify-center">
-            <IconField>
-                <Password ref={passwordRef}>
+            <IconField.Root>
+                <Password.Root ref={passwordRef}>
                     <Password.Input />
-                </Password>
+                </Password.Root>
                 <IconField.Icon>{unmasked ? <EyeSlashIcon onClick={handleToggle} /> : <EyeIcon onClick={handleToggle} />}</IconField.Icon>
-            </IconField>
+            </IconField.Root>
         </div>
     );
 }

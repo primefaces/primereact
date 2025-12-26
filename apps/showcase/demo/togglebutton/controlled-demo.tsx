@@ -9,9 +9,9 @@ export default function ControlledDemo() {
 
     return (
         <div className="flex items-center justify-center">
-            <ToggleButton pressed={pressedState} onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}>
+            <ToggleButton.Root pressed={pressedState} onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}>
                 <ToggleButton.Indicator>{pressedState ? 'Pressed' : 'Not Pressed'}</ToggleButton.Indicator>
-            </ToggleButton>
+            </ToggleButton.Root>
         </div>
     );
 }

@@ -55,9 +55,9 @@ export default function BasicDemo() {
                     enterClassName="animate-enter fade-in-10 slide-in-from-t-20 animate-duration-1000"
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
-                    <Avatar shape="circle" size="xlarge">
+                    <Avatar.Root shape="circle" size="xlarge">
                         <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
-                    </Avatar>
+                    </Avatar.Root>
                     <span className="text-2xl font-medium">Jenna Thompson</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
                 </AnimateOnScroll>
@@ -66,9 +66,9 @@ export default function BasicDemo() {
                     enterClassName="animate-enter fade-in-10 slide-in-from-b-20 animate-duration-1000"
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
-                    <Avatar shape="circle" size="xlarge">
+                    <Avatar.Root shape="circle" size="xlarge">
                         <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png" />
-                    </Avatar>
+                    </Avatar.Root>
                     <span className="text-2xl font-medium">Isabel Garcia</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
                 </AnimateOnScroll>
@@ -77,9 +77,9 @@ export default function BasicDemo() {
                     enterClassName="animate-enter fade-in-10 slide-in-from-t-20 animate-duration-1000"
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
-                    <Avatar shape="circle" size="xlarge">
+                    <Avatar.Root shape="circle" size="xlarge">
                         <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
-                    </Avatar>
+                    </Avatar.Root>
                     <span className="text-2xl font-medium">Xavier Mason</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
                 </AnimateOnScroll>
@@ -174,12 +174,12 @@ export default function BasicDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
                     <div className="flex items-center justify-center gap-4">
-                        <Button size="large" rounded>
+                        <Button.Root size="large" rounded>
                             Join for free
-                        </Button>
-                        <Button size="large" variant="outlined" rounded severity="secondary">
+                        </Button.Root>
+                        <Button.Root size="large" variant="outlined" rounded severity="secondary">
                             See our plans
-                        </Button>
+                        </Button.Root>
                     </div>
                 </AnimateOnScroll>
             </div>

@@ -34,7 +34,7 @@ const requirements = [
 export default function RequirementsDemo() {
     return (
         <div className="flex justify-center">
-            <Password className="flex-col">
+            <Password.Root className="flex-col">
                 {(instance: PasswordInstance) => {
                     return (
                         <>
@@ -56,7 +56,7 @@ export default function RequirementsDemo() {
                         </>
                     );
                 }}
-            </Password>
+            </Password.Root>
         </div>
     );
 }

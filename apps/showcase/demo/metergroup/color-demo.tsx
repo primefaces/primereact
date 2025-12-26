@@ -5,7 +5,7 @@ import { MeterGroup } from 'primereact/metergroup';
 export default function ColorDemo() {
     return (
         <div>
-            <MeterGroup>
+            <MeterGroup.Root>
                 <MeterGroup.Meters>
                     <MeterGroup.Meter value={12} color="violet" />
                     <MeterGroup.Meter value={14} color="#10B981" />
@@ -35,7 +35,7 @@ export default function ColorDemo() {
                         <MeterGroup.Text>Yellow</MeterGroup.Text>
                     </MeterGroup.Label>
                 </MeterGroup.Labels>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

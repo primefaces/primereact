@@ -6,7 +6,7 @@ import { Tooltip } from 'primereact/tooltip';
 function OffsetDemo() {
     return (
         <div className="flex items-center justify-center gap-4">
-            <Tooltip sideOffset={24}>
+            <Tooltip.Root sideOffset={24}>
                 <Tooltip.Trigger as={Button} variant="outlined" severity="secondary">
                     Show Tooltip
                 </Tooltip.Trigger>
@@ -16,8 +16,8 @@ function OffsetDemo() {
                         <Tooltip.Arrow />
                     </Tooltip.Content>
                 </Tooltip.Portal>
-            </Tooltip>
-            <Tooltip alignOffset={24} align="end" side="bottom">
+            </Tooltip.Root>
+            <Tooltip.Root alignOffset={24} align="end" side="bottom">
                 <Tooltip.Trigger as={Button} variant="outlined" severity="secondary">
                     Show Tooltip
                 </Tooltip.Trigger>
@@ -27,7 +27,7 @@ function OffsetDemo() {
                         <Tooltip.Arrow />
                     </Tooltip.Content>
                 </Tooltip.Portal>
-            </Tooltip>
+            </Tooltip.Root>
         </div>
     );
 }

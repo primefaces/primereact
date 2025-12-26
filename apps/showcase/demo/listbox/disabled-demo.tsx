@@ -13,9 +13,9 @@ const cities = [
 export default function DisabledDemo() {
     return (
         <div className="flex justify-center">
-            <Listbox options={cities} optionLabel="name" optionValue="code" disabled className="w-full md:w-56">
+            <Listbox.Root options={cities} optionLabel="name" optionValue="code" disabled className="w-full md:w-56">
                 <Listbox.Options />
-            </Listbox>
+            </Listbox.Root>
         </div>
     );
 }

@@ -6,13 +6,13 @@ import { Button } from 'primereact/button';
 export default function LinkDemo() {
     return (
         <div className="flex justify-center gap-4">
-            <Button variant="link">Link</Button>
-            <Button as="a" href="https://reactjs.org/" target="_blank" rel="noopener">
+            <Button.Root variant="link">Link</Button.Root>
+            <Button.Root as="a" href="https://reactjs.org/" target="_blank" rel="noopener">
                 External
-            </Button>
-            <Button as={Link} href="/">
+            </Button.Root>
+            <Button.Root as={Link} href="/">
                 Router
-            </Button>
+            </Button.Root>
         </div>
     );
 }

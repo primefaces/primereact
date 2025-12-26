@@ -16,19 +16,19 @@ export default function GroupDemo() {
                 className="gap-4 flex-wrap"
             >
                 <div className="flex items-center gap-2">
-                    <Checkbox inputId="cheese" value="Cheese" />
+                    <Checkbox.Root inputId="cheese" value="Cheese" />
                     <label htmlFor="cheese">Cheese</label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Checkbox inputId="mushroom" value="Mushroom" />
+                    <Checkbox.Root inputId="mushroom" value="Mushroom" />
                     <label htmlFor="mushroom">Mushroom</label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Checkbox inputId="pepper" value="Pepper" />
+                    <Checkbox.Root inputId="pepper" value="Pepper" />
                     <label htmlFor="pepper">Pepper</label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Checkbox inputId="onion" value="Onion" />
+                    <Checkbox.Root inputId="onion" value="Onion" />
                     <label htmlFor="onion">Onion</label>
                 </div>
             </Checkbox.Group>

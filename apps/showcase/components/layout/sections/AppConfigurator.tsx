@@ -342,9 +342,9 @@ export default function AppConfigurator() {
                     <span className="config-panel-label">Theme</span>
                     <ToggleButton.Group value={app.preset} onValueChange={onPresetChange} allowEmpty={false} size="small">
                         {Object.keys(presets).map((label) => (
-                            <ToggleButton key={label} value={label}>
+                            <ToggleButton.Root key={label} value={label}>
                                 <ToggleButton.Indicator>{label}</ToggleButton.Indicator>
-                            </ToggleButton>
+                            </ToggleButton.Root>
                         ))}
                     </ToggleButton.Group>
                 </div>
@@ -352,7 +352,7 @@ export default function AppConfigurator() {
                     <div className="flex-1">
                         <div className="config-panel-settings items-end">
                             <span className="config-panel-label">RTL</span>
-                            <Switch
+                            <Switch.Root
                                 checked={app.isRTL}
                                 onCheckedChange={(e: SwitchChangeEvent) => {
                                     toggleRTL(e.checked);
@@ -361,7 +361,7 @@ export default function AppConfigurator() {
                                 <Switch.Control>
                                     <Switch.Thumb />
                                 </Switch.Control>
-                            </Switch>
+                            </Switch.Root>
                         </div>
                     </div>
                 </div>

@@ -5,10 +5,10 @@ import { Password } from 'primereact/password';
 export default function StrengthDemo() {
     return (
         <div className="flex justify-center">
-            <Password>
+            <Password.Root>
                 <Password.Input />
                 <Password.Strength />
-            </Password>
+            </Password.Root>
         </div>
     );
 }

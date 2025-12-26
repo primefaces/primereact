@@ -19,7 +19,7 @@ export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
             <Label.Ifta>
-                <DatePicker value={date} variant="filled" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                <DatePicker.Root value={date} variant="filled" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="date" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -129,10 +129,10 @@ export default function IftaLabelDemo() {
                             </DatePicker.Calendar>
                         </DatePicker.Container>
                     </DatePicker.Portal>
-                </DatePicker>
-                <Label htmlFor="date" className="mb-2">
+                </DatePicker.Root>
+                <Label.Root htmlFor="date" className="mb-2">
                     Date
-                </Label>
+                </Label.Root>
             </Label.Ifta>
         </div>
     );

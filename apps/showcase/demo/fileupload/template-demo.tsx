@@ -42,7 +42,7 @@ export default function TemplateDemo() {
 
     return (
         <div>
-            <FileUpload
+            <FileUpload.Root
                 ref={fileUploadRef}
                 name="demo[]"
                 url="/api/upload"
@@ -58,10 +58,10 @@ export default function TemplateDemo() {
                             <div className="flex items-center p-5 gap-2">
                                 <div className="flex flex-wrap justify-between items-center flex-1 gap-4">
                                     <div className="flex gap-2">
-                                        <Button onClick={instance.choose} iconOnly rounded variant="outlined" severity="secondary">
+                                        <Button.Root onClick={instance.choose} iconOnly rounded variant="outlined" severity="secondary">
                                             <i className="pi pi-images" />
-                                        </Button>
-                                        <Button
+                                        </Button.Root>
+                                        <Button.Root
                                             onClick={instance.upload}
                                             iconOnly
                                             rounded
@@ -70,8 +70,8 @@ export default function TemplateDemo() {
                                             disabled={!instance.hasFiles}
                                         >
                                             <i className="pi pi-cloud-upload" />
-                                        </Button>
-                                        <Button
+                                        </Button.Root>
+                                        <Button.Root
                                             onClick={instance.clear}
                                             iconOnly
                                             rounded
@@ -80,15 +80,15 @@ export default function TemplateDemo() {
                                             disabled={!instance.hasFiles}
                                         >
                                             <i className="pi pi-times" />
-                                        </Button>
+                                        </Button.Root>
                                     </div>
-                                    <ProgressBar value={totalSizePercent}>
+                                    <ProgressBar.Root value={totalSizePercent}>
                                         <ProgressBar.Track className="md:w-20rem w-full md:ml-auto">
                                             <ProgressBar.Indicator>
                                                 <ProgressBar.Label />
                                             </ProgressBar.Indicator>
                                         </ProgressBar.Track>
-                                    </ProgressBar>
+                                    </ProgressBar.Root>
                                 </div>
                             </div>
                             <FileUpload.Content>
@@ -96,11 +96,11 @@ export default function TemplateDemo() {
                                     {instance.state.messages &&
                                         instance.state.messages.length > 0 &&
                                         instance.state.messages.map((msg, i) => (
-                                            <Message key={i} severity="error" className="mb-2">
+                                            <Message.Root key={i} severity="error" className="mb-2">
                                                 <Message.Content>
                                                     <Message.Text>{msg}</Message.Text>
                                                 </Message.Content>
-                                            </Message>
+                                            </Message.Root>
                                         ))}
 
                                     {instance.hasFiles && (
@@ -125,8 +125,8 @@ export default function TemplateDemo() {
                                                             {file.name}
                                                         </span>
                                                         <div>{instance?.formatSize(file.size)}</div>
-                                                        <Badge severity="warn">Pending</Badge>
-                                                        <Button
+                                                        <Badge.Root severity="warn">Pending</Badge.Root>
+                                                        <Button.Root
                                                             variant="text"
                                                             rounded
                                                             iconOnly
@@ -134,7 +134,7 @@ export default function TemplateDemo() {
                                                             onClick={() => onRemoveFileCallback(instance?.remove, file, index)}
                                                         >
                                                             <i className="pi pi-times" />
-                                                        </Button>
+                                                        </Button.Root>
                                                     </div>
                                                 ))}
                                             </div>
@@ -163,10 +163,10 @@ export default function TemplateDemo() {
                                                             {file.name}
                                                         </span>
                                                         <div>{instance.formatSize(file.size)}</div>
-                                                        <Badge severity="success" className="mt-4">
+                                                        <Badge.Root severity="success" className="mt-4">
                                                             Completed
-                                                        </Badge>
-                                                        <Button
+                                                        </Badge.Root>
+                                                        <Button.Root
                                                             variant="text"
                                                             rounded
                                                             iconOnly
@@ -174,7 +174,7 @@ export default function TemplateDemo() {
                                                             onClick={() => instance?.removeUploadedFile(index)}
                                                         >
                                                             <i className="pi pi-times" />
-                                                        </Button>
+                                                        </Button.Root>
                                                     </div>
                                                 ))}
                                             </div>
@@ -194,7 +194,7 @@ export default function TemplateDemo() {
                         </>
                     );
                 }}
-            </FileUpload>
+            </FileUpload.Root>
         </div>
     );
 }

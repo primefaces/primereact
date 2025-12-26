@@ -18,14 +18,14 @@ export default function SidebarDemo() {
 
                 {/* Top Navigation Menu */}
                 <div className="flex-1 overflow-y-auto">
-                    <Menu className="border-none">
+                    <Menu.Root className="border-none">
                         <Menu.List>
                             <Menu.Item>
                                 <i className="pi pi-home" />
                                 Dashboard
-                                <Badge shape="circle" className="ml-auto">
+                                <Badge.Root shape="circle" className="ml-auto">
                                     8
-                                </Badge>
+                                </Badge.Root>
                             </Menu.Item>
 
                             <Menu.Sub defaultOpen={true}>
@@ -175,18 +175,18 @@ export default function SidebarDemo() {
                             <Menu.Item>
                                 <i className="pi pi-bookmark-fill text-blue-500" />
                                 Bookmarks
-                                <Badge shape="circle" severity="secondary" className="ml-auto">
+                                <Badge.Root shape="circle" severity="secondary" className="ml-auto">
                                     5
-                                </Badge>
+                                </Badge.Root>
                             </Menu.Item>
                         </Menu.List>
-                    </Menu>
+                    </Menu.Root>
                 </div>
 
                 {/* Bottom User Menu */}
                 <div className="p-4 border-t border-surface-200 dark:border-surface-700">
                     <div ref={menuRef} className="hidden overflow-hidden mb-2">
-                        <Menu className="border-none">
+                        <Menu.Root className="border-none">
                             <Menu.List className="w-56">
                                 <Menu.Item>
                                     <i className="pi pi-user" />
@@ -211,7 +211,7 @@ export default function SidebarDemo() {
                                     Sign Out
                                 </Menu.Item>
                             </Menu.List>
-                        </Menu>
+                        </Menu.Root>
                     </div>
 
                     <StyleClass
@@ -224,10 +224,10 @@ export default function SidebarDemo() {
                         leaveActiveClassName="animate-fadeout"
                         className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer"
                     >
-                        <Avatar shape="circle" size="normal">
+                        <Avatar.Root shape="circle" size="normal">
                             <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                             <Avatar.Fallback>SA</Avatar.Fallback>
-                        </Avatar>
+                        </Avatar.Root>
                         <div className="flex flex-col items-start flex-1">
                             <span className="font-semibold text-sm">Sarah Anderson</span>
                             <span className="text-xs text-surface-500">Online</span>

@@ -12,7 +12,7 @@ export default function VerticalDemo() {
 
     return (
         <div className="flex justify-center" style={{ height: '360px' }}>
-            <MeterGroup orientation="vertical">
+            <MeterGroup.Root orientation="vertical">
                 <MeterGroup.Meters>
                     {values.map((item, index) => (
                         <MeterGroup.Meter key={index} value={item.value} index={index} />
@@ -28,7 +28,7 @@ export default function VerticalDemo() {
                         </MeterGroup.Label>
                     ))}
                 </MeterGroup.Labels>
-            </MeterGroup>
+            </MeterGroup.Root>
         </div>
     );
 }

@@ -14,7 +14,7 @@ export default function CustomItemDemo() {
 
     return (
         <div className="flex justify-center">
-            <Breadcrumb>
+            <Breadcrumb.Root>
                 <Breadcrumb.List>
                     <Breadcrumb.Item>
                         <Link href="#" className="flex items-center gap-2">
@@ -44,12 +44,12 @@ export default function CustomItemDemo() {
                     <Breadcrumb.Item>
                         <Link href="#" className="flex items-center gap-2">
                             Laptops
-                            <Badge shape="circle">5</Badge>
+                            <Badge.Root shape="circle">5</Badge.Root>
                         </Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Separator />
                     <Breadcrumb.Item>
-                        <Menu>
+                        <Menu.Root>
                             <Menu.Trigger variant="text" className="flex items-center gap-2 px-0">
                                 {selectedBrand}
                                 <Icon className="pi pi-chevron-down text-xs" />
@@ -70,10 +70,10 @@ export default function CustomItemDemo() {
                                     ))}
                                 </Menu.List>
                             </Menu.Portal>
-                        </Menu>
+                        </Menu.Root>
                     </Breadcrumb.Item>
                 </Breadcrumb.List>
-            </Breadcrumb>
+            </Breadcrumb.Root>
         </div>
     );
 }

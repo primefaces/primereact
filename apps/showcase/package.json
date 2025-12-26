@@ -29,6 +29,7 @@
         "next-contentlayer2": "0.5.8",
         "primeicons": "catalog:",
         "primereact": "workspace:*",
+        "@/ui": "workspace:*",
         "react": "catalog:react19",
         "react-dom": "catalog:react19",
         "rehype-autolink-headings": "^7.1.0",

@@ -4,7 +4,7 @@ import { Menu } from 'primereact/menu';
 
 export default function MenuPTDemo() {
     return (
-        <Menu className="w-64">
+        <Menu.Root className="w-64">
             <Menu.List>
                 <Menu.Item>Dashboard</Menu.Item>
                 <Menu.Separator />
@@ -20,6 +20,6 @@ export default function MenuPTDemo() {
                     </Menu.List>
                 </Menu.Sub>
             </Menu.List>
-        </Menu>
+        </Menu.Root>
     );
 }
