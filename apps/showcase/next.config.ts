@@ -95,6 +95,7 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true
     },
     typescript: {
+        // @todo remove this once all TS errors are fixed
         ignoreBuildErrors: true
     }
 };
