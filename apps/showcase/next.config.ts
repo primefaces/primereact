@@ -59,6 +59,11 @@ const nextConfig: NextConfig = {
                         source: `/${folderName}`,
                         destination: `/docs/components/${folderName}`,
                         permanent: true
+                    },
+                    {
+                        source: `/docs/components/${folderName}/theming`,
+                        destination: `/docs/components/${folderName}/theming/styled`,
+                        permanent: true
                     }
                 ];
             })

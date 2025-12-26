@@ -1,6 +1,6 @@
 import DocCopyMarkdownMenu from '@/components/docs/doc-copy-markdown-menu';
 import DocMdx from '@/components/docs/doc-mdx';
-import DocTabs from '@/components/docs/doc-tabs';
+import DocTabMenu from '@/components/docs/doc-tab-menu';
 import DocToc from '@/components/docs/doc-toc';
 import { allDocs } from 'contentlayer/generated';
 import type { Metadata } from 'next';
@@ -63,7 +63,7 @@ async function DocsPage({ params }: PageProps) {
 
     return (
         <>
-            {doc.component && <DocTabs componentName={doc.component} />}
+            {doc.component && <DocTabMenu componentName={doc.component} />}
             <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
                 <div className="flex-1 overflow-hidden pb-12">
                     <div className="grid grid-cols-[1fr_auto] gap-2 items-start">

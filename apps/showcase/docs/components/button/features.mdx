@@ -4,11 +4,39 @@ description: Button is an extension to standard input element with icons and the
 component: button
 ---
 
+<DocComponentShowcase
+tailwind={{
+    demo: 'button:tailwind-demo',
+    names: ['button:tailwind-demo','button:button']
+}}
+styled={{
+    demo: 'button:basic-demo',
+    names: ['button:basic-demo']
+}}/>
+
 ## Usage
 
+<DocTabs value="styled">
+<DocTabsList>
+    <DocTabsTab value="styled">Styled</DocTabsTab>
+    <DocTabsTab value="tailwind">Tailwind</DocTabsTab>
+</DocTabsList>
+<DocTabsPanel value="styled">
 ```tsx
 import { Button } from 'primereact/button';
 ```
+</DocTabsPanel>
+<DocTabsPanel value="tailwind">
+```bash
+npx shadcn@latest add @primereact/ui/button
+```
+
+```tsx
+import { Button } from '@/components/ui';
+```
+
+</DocTabsPanel>
+</DocTabs>
 
 ```tsx
 <Button>Button</Button>

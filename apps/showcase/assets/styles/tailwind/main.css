@@ -2,3 +2,7 @@
 @import "tailwindcss-primeui";
 
 @custom-variant dark (&:where(.p-dark, .p-dark *));
+
+@theme inline {
+    --font-mono: var(--font-mono);
+}

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import DocButton from './doc-button';
+import DocComponentShowcase from './doc-component-showcase';
 import DocCopyButton from './doc-copy-button';
 import DocDemoViewer from './doc-demo-viewer';
 import DocLinkCard from './doc-link-card';
@@ -12,6 +13,7 @@ import DocNotification from './doc-notification';
 import DocNpmWrapper from './doc-npm-wrapper';
 import DocStepper, { DocStep } from './doc-stepper';
 import DocTable from './doc-table';
+import { DocTabs, DocTabsList, DocTabsPanel, DocTabsTab } from './doc-tabs';
 
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mb-2 scroll-m-32 text-4xl leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
@@ -56,6 +58,7 @@ const components = {
     Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => <Link className={cn('font-medium underline underline-offset-4', className)} {...props} />,
     em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <em className={cn('text-base relative rounded-md bg-(--mark-background) font-medium text-(--mark-text) not-italic py-0.5 px-1.25', className)} {...props} />,
     DocDemoViewer,
+    DocComponentShowcase,
     DocPTViewer,
     DocNotification,
     DocTable,
@@ -81,7 +84,7 @@ const components = {
         const isNpmCommand = __npmInstall__ || __yarnInstall__ || __pnpmInstall__ || __bunInstall__;
 
         if (isNpmCommand) {
-            return <DocNpmWrapper commands={{ yarn: __yarnInstall__, npm: __npmInstall__, pnpm: __pnpmInstall__, bun: __bunInstall__ }} />;
+            return <DocNpmWrapper commands={{ npm: __npmInstall__, pnpm: __pnpmInstall__, yarn: __yarnInstall__, bun: __bunInstall__ }} />;
         }
 
         return (
@@ -98,12 +101,16 @@ const components = {
     },
     code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
         if (typeof props.children === 'string') {
-            return <code className={cn('text-base bg-(--mark-background) text-surface-900 dark:text-surface-0 rounded-md px-1.25 py-0.5 tracking-tight', className)} {...props} />;
+            return <code className={cn('text-base bg-(--mark-background) text-surface-900 dark:text-surface-0 rounded-md px-1.25 py-0.5 tracking-tight font-mono', className)} {...props} />;
         }
 
-        return <code data-so={'asdas'} {...props} />;
+        return <code className={cn('font-mono', className)} {...props} />;
     },
-    Button: DocButton
+    Button: DocButton,
+    DocTabs,
+    DocTabsTab,
+    DocTabsList,
+    DocTabsPanel
 };
 
 function DocMdx({ code }: { code: string }) {
