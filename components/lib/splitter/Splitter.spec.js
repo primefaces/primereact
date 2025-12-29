@@ -73,7 +73,9 @@ describe('Splitter', () => {
     snapshot(
         <>
             <Splitter style={{ height: '300px' }} layout="vertical">
-                <SplitterPanel><div data-pc-section="root" /></SplitterPanel>
+                <SplitterPanel>
+                    <div data-pc-section="root" />
+                </SplitterPanel>
             </Splitter>
         </>,
         'Single Panel with some other nested prime component'
