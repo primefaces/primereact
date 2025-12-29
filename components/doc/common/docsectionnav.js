@@ -138,11 +138,11 @@ export function DocSectionNav({ docs = [] }) {
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        marginTop:'1rem'
+                        marginTop: '1rem'
                     }}
                 >
-                    <a href="https://primeui.store" target="_blank" rel="noopener" className='p-button p-component p-button-rounded p-button-sm'>
-                        <span className='p-button-label p-c'>Buy Now</span>
+                    <a href="https://primeui.store" target="_blank" rel="noopener" className="p-button p-component p-button-rounded p-button-sm">
+                        <span className="p-button-label p-c">Buy Now</span>
                     </a>
                 </span>
             </div>

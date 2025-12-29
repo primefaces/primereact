@@ -380,7 +380,7 @@ export const Splitter = React.memo(
                 prevSize.current = panelSize(panelSizes, 0);
                 _panelSizes[i] = panelSize(panelSizes, i);
 
-                if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-name='splitter']") && DomHandler.find(panelElement, "[data-pc-section='root']"))) {
+                if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-name='splitter']")) && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-section='root']"))) {
                     !isUnstyled() && DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
                     panelElement.setAttribute('data-p-splitter-panel-nested', true);
                     setNested(true);
