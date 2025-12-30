@@ -432,7 +432,7 @@ export const DataTableBase = ComponentBase.extend({
         breakpoint: '960px',
         cellClassName: null,
         cellMemo: true,
-        cellMemoProps: ['rowData', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'frozenCol', 'alignFrozenCol'],
+        cellMemoProps: ['rowData', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'rowIndex', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'frozenCol', 'alignFrozenCol'],
         cellMemoPropsDepth: 1,
         cellSelection: false,
         checkIcon: null,
