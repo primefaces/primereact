@@ -31,25 +31,27 @@ export default function MyApp({ Component }) {
                 </p>
 
                 <p>
-                    When <b>PrimeReactProvider</b> is used, it becomes the primary source of locale
-                    configuration for all PrimeReact components.
+                    When <b>PrimeReactProvider</b> is used, it becomes the primary source of locale configuration for all PrimeReact components.
                 </p>
 
                 <h5>Locale Precedence</h5>
-                <p>
-                    Locale resolution follows the order below:
-                </p>
+                <p>Locale resolution follows the order below:</p>
                 <ul>
-                    <li><code>locale</code> prop defined on a component</li>
-                    <li><code>PrimeReactProvider</code> (<code>context.locale</code>)</li>
-                    <li>Global <code>PrimeReact.locale</code> set via <code>locale()</code></li>
+                    <li>
+                        <code>locale</code> prop defined on a component
+                    </li>
+                    <li>
+                        <code>PrimeReactProvider</code> (<code>context.locale</code>)
+                    </li>
+                    <li>
+                        Global <code>PrimeReact.locale</code> set via <code>locale()</code>
+                    </li>
                     <li>Browser locale</li>
                 </ul>
 
                 <p>
                     This means that once <b>PrimeReactProvider</b> is present, calling
-                    <code> locale()</code> alone is not sufficient. The locale must be provided
-                    explicitly through the provider.
+                    <code> locale()</code> alone is not sufficient. The locale must be provided explicitly through the provider.
                 </p>
             </DocSectionText>
 
