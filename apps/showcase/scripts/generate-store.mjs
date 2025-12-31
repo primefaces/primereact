@@ -15,7 +15,7 @@ let storeContent = `/***********************************************************
 
 import * as React from 'react';
 
-export const Store: Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element>; filePath: string }>> = {
+export const Store: Record<string, Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element>; filePath: string }>>> = {
 `;
 
 function createNestedObject(obj, path, value) {

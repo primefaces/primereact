@@ -35,6 +35,8 @@ export const ColorPickerEyeDropper = withComponent({
 
         const icon = createIconElement();
 
+        return null;
+
         // @ts-expect-error: Button expects a type prop, but we are using it as a close button.
         return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={colorpicker?.ptm('eyeDropper')} children={props.children ?? icon} />;
     }

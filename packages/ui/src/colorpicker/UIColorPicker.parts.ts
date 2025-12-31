@@ -11,4 +11,4 @@ export {
     ColorPickerSwatchBackground as SwatchBackground,
     ColorPickerTransparencyGrid as TransparencyGrid
 } from 'primereact/colorpicker';
-export { UIColorPickerRoot as ColorPickerRoot } from './root';
+export { UIColorPickerRoot as Root } from './root';

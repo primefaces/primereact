@@ -1,3 +1,5 @@
-export * from './InputText';
-export * from './InputText.context';
-export * from './InputText.props';
+export * as InputText from './UIInputText.parts';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultProps, InputTextProvider, useInputTextContext } from 'primereact/inputtext';
+export { UIInputTextRoot as InputTextRoot } from './root';

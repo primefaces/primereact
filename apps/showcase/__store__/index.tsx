@@ -4,7 +4,7 @@
 
 import * as React from 'react';
 
-export const Store: Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element>; filePath: string }>> = {
+export const Store: Record<string, Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element>; filePath: string }>>> = {
     'accessibility': {
         'accessibility-checkbox-demo': {
             'component': React.lazy(() => import('demo/accessibility/accessibility-checkbox-demo')),
@@ -126,77 +126,149 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         },
     },
     'button': {
-        'badge-demo': {
-            'component': React.lazy(() => import('demo/button/badge-demo')),
-            'filePath': 'demo/button/badge-demo.tsx',
+        'styled': {
+            'badge-demo': {
+                'component': React.lazy(() => import('demo/button/styled/badge-demo')),
+                'filePath': 'demo/button/styled/badge-demo.tsx',
+            },
+            'button-pt': {
+                'component': React.lazy(() => import('demo/button/styled/button-pt')),
+                'filePath': 'demo/button/styled/button-pt.tsx',
+            },
+            'button': {
+                'component': React.lazy(() => import('demo/button/styled/button')),
+                'filePath': 'demo/button/styled/button.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/button/styled/disabled-demo')),
+                'filePath': 'demo/button/styled/disabled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/button/styled/example')),
+                'filePath': 'demo/button/styled/example.tsx',
+            },
+            'group-demo': {
+                'component': React.lazy(() => import('demo/button/styled/group-demo')),
+                'filePath': 'demo/button/styled/group-demo.tsx',
+            },
+            'icon-demo': {
+                'component': React.lazy(() => import('demo/button/styled/icon-demo')),
+                'filePath': 'demo/button/styled/icon-demo.tsx',
+            },
+            'icon-only-demo': {
+                'component': React.lazy(() => import('demo/button/styled/icon-only-demo')),
+                'filePath': 'demo/button/styled/icon-only-demo.tsx',
+            },
+            'link-demo': {
+                'component': React.lazy(() => import('demo/button/styled/link-demo')),
+                'filePath': 'demo/button/styled/link-demo.tsx',
+            },
+            'loading-demo': {
+                'component': React.lazy(() => import('demo/button/styled/loading-demo')),
+                'filePath': 'demo/button/styled/loading-demo.tsx',
+            },
+            'outlined-demo': {
+                'component': React.lazy(() => import('demo/button/styled/outlined-demo')),
+                'filePath': 'demo/button/styled/outlined-demo.tsx',
+            },
+            'raised-demo': {
+                'component': React.lazy(() => import('demo/button/styled/raised-demo')),
+                'filePath': 'demo/button/styled/raised-demo.tsx',
+            },
+            'raised-text-demo': {
+                'component': React.lazy(() => import('demo/button/styled/raised-text-demo')),
+                'filePath': 'demo/button/styled/raised-text-demo.tsx',
+            },
+            'rounded-demo': {
+                'component': React.lazy(() => import('demo/button/styled/rounded-demo')),
+                'filePath': 'demo/button/styled/rounded-demo.tsx',
+            },
+            'severity-demo': {
+                'component': React.lazy(() => import('demo/button/styled/severity-demo')),
+                'filePath': 'demo/button/styled/severity-demo.tsx',
+            },
+            'size-demo': {
+                'component': React.lazy(() => import('demo/button/styled/size-demo')),
+                'filePath': 'demo/button/styled/size-demo.tsx',
+            },
+            'text-demo': {
+                'component': React.lazy(() => import('demo/button/styled/text-demo')),
+                'filePath': 'demo/button/styled/text-demo.tsx',
+            },
+            'verify-demo': {
+                'component': React.lazy(() => import('demo/button/styled/verify-demo')),
+                'filePath': 'demo/button/styled/verify-demo.tsx',
+            },
         },
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/button/basic-demo')),
-            'filePath': 'demo/button/basic-demo.tsx',
-        },
-        'button-pt': {
-            'component': React.lazy(() => import('demo/button/button-pt')),
-            'filePath': 'demo/button/button-pt.tsx',
-        },
-        'disabled-demo': {
-            'component': React.lazy(() => import('demo/button/disabled-demo')),
-            'filePath': 'demo/button/disabled-demo.tsx',
-        },
-        'group-demo': {
-            'component': React.lazy(() => import('demo/button/group-demo')),
-            'filePath': 'demo/button/group-demo.tsx',
-        },
-        'icon-demo': {
-            'component': React.lazy(() => import('demo/button/icon-demo')),
-            'filePath': 'demo/button/icon-demo.tsx',
-        },
-        'icon-only-demo': {
-            'component': React.lazy(() => import('demo/button/icon-only-demo')),
-            'filePath': 'demo/button/icon-only-demo.tsx',
-        },
-        'link-demo': {
-            'component': React.lazy(() => import('demo/button/link-demo')),
-            'filePath': 'demo/button/link-demo.tsx',
-        },
-        'loading-demo': {
-            'component': React.lazy(() => import('demo/button/loading-demo')),
-            'filePath': 'demo/button/loading-demo.tsx',
-        },
-        'outlined-demo': {
-            'component': React.lazy(() => import('demo/button/outlined-demo')),
-            'filePath': 'demo/button/outlined-demo.tsx',
-        },
-        'raised-demo': {
-            'component': React.lazy(() => import('demo/button/raised-demo')),
-            'filePath': 'demo/button/raised-demo.tsx',
-        },
-        'raised-text-demo': {
-            'component': React.lazy(() => import('demo/button/raised-text-demo')),
-            'filePath': 'demo/button/raised-text-demo.tsx',
-        },
-        'rounded-demo': {
-            'component': React.lazy(() => import('demo/button/rounded-demo')),
-            'filePath': 'demo/button/rounded-demo.tsx',
-        },
-        'severity-demo': {
-            'component': React.lazy(() => import('demo/button/severity-demo')),
-            'filePath': 'demo/button/severity-demo.tsx',
-        },
-        'size-demo': {
-            'component': React.lazy(() => import('demo/button/size-demo')),
-            'filePath': 'demo/button/size-demo.tsx',
-        },
-        'tailwind-demo': {
-            'component': React.lazy(() => import('demo/button/tailwind-demo')),
-            'filePath': 'demo/button/tailwind-demo.tsx',
-        },
-        'text-demo': {
-            'component': React.lazy(() => import('demo/button/text-demo')),
-            'filePath': 'demo/button/text-demo.tsx',
-        },
-        'verify-demo': {
-            'component': React.lazy(() => import('demo/button/verify-demo')),
-            'filePath': 'demo/button/verify-demo.tsx',
+        'tailwind': {
+            'badge-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/badge-demo')),
+                'filePath': 'demo/button/tailwind/badge-demo.tsx',
+            },
+            'button-pt': {
+                'component': React.lazy(() => import('demo/button/tailwind/button-pt')),
+                'filePath': 'demo/button/tailwind/button-pt.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/disabled-demo')),
+                'filePath': 'demo/button/tailwind/disabled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/button/tailwind/example')),
+                'filePath': 'demo/button/tailwind/example.tsx',
+            },
+            'group-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/group-demo')),
+                'filePath': 'demo/button/tailwind/group-demo.tsx',
+            },
+            'icon-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/icon-demo')),
+                'filePath': 'demo/button/tailwind/icon-demo.tsx',
+            },
+            'icon-only-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/icon-only-demo')),
+                'filePath': 'demo/button/tailwind/icon-only-demo.tsx',
+            },
+            'link-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/link-demo')),
+                'filePath': 'demo/button/tailwind/link-demo.tsx',
+            },
+            'loading-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/loading-demo')),
+                'filePath': 'demo/button/tailwind/loading-demo.tsx',
+            },
+            'outlined-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/outlined-demo')),
+                'filePath': 'demo/button/tailwind/outlined-demo.tsx',
+            },
+            'raised-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/raised-demo')),
+                'filePath': 'demo/button/tailwind/raised-demo.tsx',
+            },
+            'raised-text-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/raised-text-demo')),
+                'filePath': 'demo/button/tailwind/raised-text-demo.tsx',
+            },
+            'rounded-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/rounded-demo')),
+                'filePath': 'demo/button/tailwind/rounded-demo.tsx',
+            },
+            'severity-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/severity-demo')),
+                'filePath': 'demo/button/tailwind/severity-demo.tsx',
+            },
+            'size-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/size-demo')),
+                'filePath': 'demo/button/tailwind/size-demo.tsx',
+            },
+            'text-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/text-demo')),
+                'filePath': 'demo/button/tailwind/text-demo.tsx',
+            },
+            'verify-demo': {
+                'component': React.lazy(() => import('demo/button/tailwind/verify-demo')),
+                'filePath': 'demo/button/tailwind/verify-demo.tsx',
+            },
         },
     },
     'card': {
@@ -300,25 +372,49 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         },
     },
     'colorpicker': {
-        'advanced-demo': {
-            'component': React.lazy(() => import('demo/colorpicker/advanced-demo')),
-            'filePath': 'demo/colorpicker/advanced-demo.tsx',
+        'styled': {
+            'advanced-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/styled/advanced-demo')),
+                'filePath': 'demo/colorpicker/styled/advanced-demo.tsx',
+            },
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/styled/controlled-demo')),
+                'filePath': 'demo/colorpicker/styled/controlled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/colorpicker/styled/example')),
+                'filePath': 'demo/colorpicker/styled/example.tsx',
+            },
+            'popover-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/styled/popover-demo')),
+                'filePath': 'demo/colorpicker/styled/popover-demo.tsx',
+            },
+            'vertical-slider-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/styled/vertical-slider-demo')),
+                'filePath': 'demo/colorpicker/styled/vertical-slider-demo.tsx',
+            },
         },
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/colorpicker/basic-demo')),
-            'filePath': 'demo/colorpicker/basic-demo.tsx',
-        },
-        'controlled-demo': {
-            'component': React.lazy(() => import('demo/colorpicker/controlled-demo')),
-            'filePath': 'demo/colorpicker/controlled-demo.tsx',
-        },
-        'popover-demo': {
-            'component': React.lazy(() => import('demo/colorpicker/popover-demo')),
-            'filePath': 'demo/colorpicker/popover-demo.tsx',
-        },
-        'vertical-slider-demo': {
-            'component': React.lazy(() => import('demo/colorpicker/vertical-slider-demo')),
-            'filePath': 'demo/colorpicker/vertical-slider-demo.tsx',
+        'tailwind': {
+            'advanced-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/tailwind/advanced-demo')),
+                'filePath': 'demo/colorpicker/tailwind/advanced-demo.tsx',
+            },
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/tailwind/controlled-demo')),
+                'filePath': 'demo/colorpicker/tailwind/controlled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/colorpicker/tailwind/example')),
+                'filePath': 'demo/colorpicker/tailwind/example.tsx',
+            },
+            'popover-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/tailwind/popover-demo')),
+                'filePath': 'demo/colorpicker/tailwind/popover-demo.tsx',
+            },
+            'vertical-slider-demo': {
+                'component': React.lazy(() => import('demo/colorpicker/tailwind/vertical-slider-demo')),
+                'filePath': 'demo/colorpicker/tailwind/vertical-slider-demo.tsx',
+            },
         },
     },
     'commandmenu': {
@@ -878,29 +974,57 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         },
     },
     'inputtext': {
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/inputtext/basic-demo')),
-            'filePath': 'demo/inputtext/basic-demo.tsx',
+        'styled': {
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/inputtext/styled/disabled-demo')),
+                'filePath': 'demo/inputtext/styled/disabled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/inputtext/styled/example')),
+                'filePath': 'demo/inputtext/styled/example.tsx',
+            },
+            'filled-demo': {
+                'component': React.lazy(() => import('demo/inputtext/styled/filled-demo')),
+                'filePath': 'demo/inputtext/styled/filled-demo.tsx',
+            },
+            'inputtext-pt': {
+                'component': React.lazy(() => import('demo/inputtext/styled/inputtext-pt')),
+                'filePath': 'demo/inputtext/styled/inputtext-pt.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/inputtext/styled/invalid-demo')),
+                'filePath': 'demo/inputtext/styled/invalid-demo.tsx',
+            },
+            'sizes-demo': {
+                'component': React.lazy(() => import('demo/inputtext/styled/sizes-demo')),
+                'filePath': 'demo/inputtext/styled/sizes-demo.tsx',
+            },
         },
-        'disabled-demo': {
-            'component': React.lazy(() => import('demo/inputtext/disabled-demo')),
-            'filePath': 'demo/inputtext/disabled-demo.tsx',
-        },
-        'filled-demo': {
-            'component': React.lazy(() => import('demo/inputtext/filled-demo')),
-            'filePath': 'demo/inputtext/filled-demo.tsx',
-        },
-        'inputtext-pt': {
-            'component': React.lazy(() => import('demo/inputtext/inputtext-pt')),
-            'filePath': 'demo/inputtext/inputtext-pt.tsx',
-        },
-        'invalid-demo': {
-            'component': React.lazy(() => import('demo/inputtext/invalid-demo')),
-            'filePath': 'demo/inputtext/invalid-demo.tsx',
-        },
-        'sizes-demo': {
-            'component': React.lazy(() => import('demo/inputtext/sizes-demo')),
-            'filePath': 'demo/inputtext/sizes-demo.tsx',
+        'tailwind': {
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/inputtext/tailwind/disabled-demo')),
+                'filePath': 'demo/inputtext/tailwind/disabled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/inputtext/tailwind/example')),
+                'filePath': 'demo/inputtext/tailwind/example.tsx',
+            },
+            'filled-demo': {
+                'component': React.lazy(() => import('demo/inputtext/tailwind/filled-demo')),
+                'filePath': 'demo/inputtext/tailwind/filled-demo.tsx',
+            },
+            'inputtext-pt': {
+                'component': React.lazy(() => import('demo/inputtext/tailwind/inputtext-pt')),
+                'filePath': 'demo/inputtext/tailwind/inputtext-pt.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/inputtext/tailwind/invalid-demo')),
+                'filePath': 'demo/inputtext/tailwind/invalid-demo.tsx',
+            },
+            'sizes-demo': {
+                'component': React.lazy(() => import('demo/inputtext/tailwind/sizes-demo')),
+                'filePath': 'demo/inputtext/tailwind/sizes-demo.tsx',
+            },
         },
     },
     'knob': {
@@ -1554,37 +1678,73 @@ export const Store: Record<string, Record<string, { component: React.LazyExoticC
         },
     },
     'switch': {
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/switch/basic-demo')),
-            'filePath': 'demo/switch/basic-demo.tsx',
+        'styled': {
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/switch/styled/controlled-demo')),
+                'filePath': 'demo/switch/styled/controlled-demo.tsx',
+            },
+            'customization-demo': {
+                'component': React.lazy(() => import('demo/switch/styled/customization-demo')),
+                'filePath': 'demo/switch/styled/customization-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/switch/styled/disabled-demo')),
+                'filePath': 'demo/switch/styled/disabled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/switch/styled/example')),
+                'filePath': 'demo/switch/styled/example.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/switch/styled/invalid-demo')),
+                'filePath': 'demo/switch/styled/invalid-demo.tsx',
+            },
+            'switch-pt': {
+                'component': React.lazy(() => import('demo/switch/styled/switch-pt')),
+                'filePath': 'demo/switch/styled/switch-pt.tsx',
+            },
+            'template-demo': {
+                'component': React.lazy(() => import('demo/switch/styled/template-demo')),
+                'filePath': 'demo/switch/styled/template-demo.tsx',
+            },
+            'uncontrolled-demo': {
+                'component': React.lazy(() => import('demo/switch/styled/uncontrolled-demo')),
+                'filePath': 'demo/switch/styled/uncontrolled-demo.tsx',
+            },
         },
-        'controlled-demo': {
-            'component': React.lazy(() => import('demo/switch/controlled-demo')),
-            'filePath': 'demo/switch/controlled-demo.tsx',
-        },
-        'customization-demo': {
-            'component': React.lazy(() => import('demo/switch/customization-demo')),
-            'filePath': 'demo/switch/customization-demo.tsx',
-        },
-        'disabled-demo': {
-            'component': React.lazy(() => import('demo/switch/disabled-demo')),
-            'filePath': 'demo/switch/disabled-demo.tsx',
-        },
-        'invalid-demo': {
-            'component': React.lazy(() => import('demo/switch/invalid-demo')),
-            'filePath': 'demo/switch/invalid-demo.tsx',
-        },
-        'switch-pt': {
-            'component': React.lazy(() => import('demo/switch/switch-pt')),
-            'filePath': 'demo/switch/switch-pt.tsx',
-        },
-        'template-demo': {
-            'component': React.lazy(() => import('demo/switch/template-demo')),
-            'filePath': 'demo/switch/template-demo.tsx',
-        },
-        'uncontrolled-demo': {
-            'component': React.lazy(() => import('demo/switch/uncontrolled-demo')),
-            'filePath': 'demo/switch/uncontrolled-demo.tsx',
+        'tailwind': {
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/switch/tailwind/controlled-demo')),
+                'filePath': 'demo/switch/tailwind/controlled-demo.tsx',
+            },
+            'customization-demo': {
+                'component': React.lazy(() => import('demo/switch/tailwind/customization-demo')),
+                'filePath': 'demo/switch/tailwind/customization-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/switch/tailwind/disabled-demo')),
+                'filePath': 'demo/switch/tailwind/disabled-demo.tsx',
+            },
+            'example': {
+                'component': React.lazy(() => import('demo/switch/tailwind/example')),
+                'filePath': 'demo/switch/tailwind/example.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/switch/tailwind/invalid-demo')),
+                'filePath': 'demo/switch/tailwind/invalid-demo.tsx',
+            },
+            'switch-pt': {
+                'component': React.lazy(() => import('demo/switch/tailwind/switch-pt')),
+                'filePath': 'demo/switch/tailwind/switch-pt.tsx',
+            },
+            'template-demo': {
+                'component': React.lazy(() => import('demo/switch/tailwind/template-demo')),
+                'filePath': 'demo/switch/tailwind/template-demo.tsx',
+            },
+            'uncontrolled-demo': {
+                'component': React.lazy(() => import('demo/switch/tailwind/uncontrolled-demo')),
+                'filePath': 'demo/switch/tailwind/uncontrolled-demo.tsx',
+            },
         },
     },
     'tabs': {

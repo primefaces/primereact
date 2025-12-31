@@ -15,16 +15,31 @@ export interface Component {
     highlightedCode: string;
 }
 
-async function getComponents(names: string[]): Promise<Map<string, Component>> {
+const cwd = process.cwd();
+const repoRoot = cwd.includes(`${path.sep}apps${path.sep}showcase`) ? path.resolve(cwd, '..', '..') : cwd;
+
+async function getComponents(names: string[], folder: 'styled' | 'tailwind', hideCode: boolean): Promise<Map<string, Component>> {
     const components: Map<string, Component> = new Map();
+
+    if (hideCode) {
+        return components;
+    }
 
     await Promise.all(
         names.map(async (name) => {
-            const [component, demo] = name.split(':');
-            const filePath = `demo/${component}/${demo}.tsx`;
-
             try {
-                const source = await fs.readFile(path.join(process.cwd(), filePath), 'utf8');
+                let filePath = '';
+                let source = '';
+
+                if (name.startsWith('ui/')) {
+                    filePath = path.join(repoRoot, 'packages', name.replace('ui/', 'tailwind/src/')) + '/index.tsx';
+                } else {
+                    const [component, demo] = name.split(':');
+
+                    filePath = path.join(repoRoot, 'apps', 'showcase', 'demo', component, folder, `${demo}.tsx`);
+                }
+
+                source = await fs.readFile(filePath, 'utf8');
 
                 components.set(name, {
                     source,
@@ -39,9 +54,9 @@ async function getComponents(names: string[]): Promise<Map<string, Component>> {
     return components;
 }
 
-const getDemo = (name: string) => {
+const getDemo = (name: string, folder: 'styled' | 'tailwind') => {
     const [component, demo] = name.split(':');
-    const Demo = Store[component]?.[demo]?.component;
+    const Demo = Store[component]?.[folder]?.[demo]?.component;
 
     if (!Demo) return;
 
@@ -51,6 +66,7 @@ const getDemo = (name: string) => {
 export default async function DocComponentShowcase({
     tailwind,
     styled,
+    hideCode = false,
     ...props
 }: React.ComponentProps<'div'> & {
     tailwind: {
@@ -61,17 +77,18 @@ export default async function DocComponentShowcase({
         demo: string;
         names: string[];
     };
+    hideCode?: boolean;
 }) {
     const showcase: Map<string, Showcase> = new Map();
 
     await Promise.all([
-        getComponents(styled.names).then((components) => {
-            showcase.set('styled', { demo: getDemo(styled.demo), components });
+        getComponents(styled.names, 'styled', hideCode).then((components) => {
+            showcase.set('styled', { demo: getDemo(styled.demo, 'styled'), components });
         }),
-        getComponents(tailwind.names).then((components) => {
-            showcase.set('tailwind', { demo: getDemo(tailwind.demo), components });
+        getComponents(tailwind.names, 'tailwind', hideCode).then((components) => {
+            showcase.set('tailwind', { demo: getDemo(tailwind.demo, 'tailwind'), components });
         })
     ]);
 
-    return <DocShowcaseWrapper showcase={showcase} {...props} />;
+    return <DocShowcaseWrapper showcase={showcase} hideCode={hideCode} {...props} />;
 }

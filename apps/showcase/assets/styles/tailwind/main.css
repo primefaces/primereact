@@ -6,3 +6,6 @@
 @theme inline {
     --font-mono: var(--font-mono);
 }
+
+@source "../../**/*.{ts,tsx,js,jsx,mdx}";
+@source "../../../../../packages/tailwind/src/**/*.{ts,tsx}";

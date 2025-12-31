@@ -4,6 +4,16 @@ description: ColorPicker is a component that allows the user to select a color.
 component: colorpicker
 ---
 
+<DocComponentShowcase
+tailwind={{
+    demo: 'colorpicker:example',
+    names: ['colorpicker:example','ui/colorpicker']
+}}
+styled={{
+    demo: 'colorpicker:example',
+    names: ['colorpicker:example']
+}}/>
+
 ## Usage
 
 ```tsx
@@ -35,7 +45,7 @@ import { ColorPicker } from 'primereact/colorpicker';
 Use the `format` prop to change the color space. The `channel` prop of `ColorPicker.Slider` and `ColorPicker.Input` can be used to select the channel to control.
 
 <DocDemoViewer name="colorpicker:basic-demo" />
-
+{/* 
 ### With Popover
 
 Use the `ColorPicker` inside a `Popover` to put the `ColorPicker` to the top of the component.
@@ -56,7 +66,7 @@ Use the `value` and `onColorChange` props to control the color.
 
 ### Advanced
 
-<DocDemoViewer name="colorpicker:advanced-demo" />
+<DocDemoViewer name="colorpicker:advanced-demo" /> \*/}
 
 ## colorManager
 

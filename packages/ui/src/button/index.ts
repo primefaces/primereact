@@ -1,7 +1,5 @@
-export * from './Button.context';
-export * as Button from './Button.parts';
-export * as ButtonProps from './Button.props';
+export * as Button from './UIButton.parts';
 
 // Named runtime exports to maximize tree-shaking
-export { ButtonGroup, defaultGroupProps } from './group';
-export { ButtonRoot, defaultRootProps } from './root';
+export { ButtonGroup, ButtonProps, ButtonProvider, defaultGroupProps, defaultRootProps, useButtonContext } from 'primereact/button';
+export { UIButtonRoot as ButtonRoot } from './root';

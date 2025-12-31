@@ -1,7 +1,7 @@
 import * as HeadlessButton from '@primereact/headless/button';
-import type { ButtonRootProps } from '@primereact/types/shared/button';
+import type { ButtonProps } from '@primereact/types/shared/button';
 
-export const defaultRootProps: ButtonRootProps = {
+export const defaultRootProps: ButtonProps = {
     ...HeadlessButton.defaultProps,
     as: 'button',
     size: undefined,

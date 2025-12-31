@@ -51,6 +51,12 @@ importers:
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^3.0.2
+        version: 3.4.0
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.7.1
@@ -362,6 +368,9 @@ importers:
       primereact:
         specifier: workspace:*
         version: link:../primereact
+      tailwindcss-primeui:
+        specifier: 'catalog:'
+        version: 0.5.1(tailwindcss@4.1.18)
 
   packages/types:
     dependencies:
