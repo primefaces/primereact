@@ -6,9 +6,11 @@ import { IconUtils, ObjectUtils } from '../utils/Utils';
 
 const chunkArray = (array, size) => {
     const result = [];
+
     for (let i = 0; i < array.length; i += size) {
         result.push(array.slice(i, i + size));
     }
+
     return result;
 };
 
@@ -158,6 +160,7 @@ export const OrganizationChartNode = React.memo((props) => {
             );
         });
     };
+
     const createLinesDown = (row) => {
         if (!node.children || node.expanded === false) {
             return null;
@@ -199,6 +202,7 @@ export const OrganizationChartNode = React.memo((props) => {
             );
         });
     };
+
     const createToggler = () => {
         if (!leaf) {
             const nodeTogglerIconProps = mergeProps(
