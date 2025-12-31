@@ -113,90 +113,92 @@ export const OrganizationChartNode = React.memo((props) => {
     };
 
     const createLinesMiddle = (row) => {
-    if (!node.children || node.expanded === false) {
-        return null;
-    }
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
 
-    const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
 
-    return rows.map((row, rowIndex) => {
-        const nodeChildLength = row.length;
+        return rows.map((row, rowIndex) => {
+            const nodeChildLength = row.length;
 
-        const linesProps = mergeProps(
-            {
-                className: cx('lines'),
-                style: { visibility }
-            },
-            _ptm('lines')
-        );
+            const linesProps = mergeProps(
+                {
+                    className: cx('lines'),
+                    style: { visibility }
+                },
+                _ptm('lines')
+            );
 
-        return (
-            <tr {...linesProps} key={rowIndex}>
-                {row.map((_, index) => {
-                    const lineLeftProps = mergeProps(
-                        {
-                            className: cx('lineLeft', { index })
-                        },
-                        getNodePTOptions(index !== 0, 'lineLeft')
-                    );
+            return (
+                <tr {...linesProps} key={rowIndex}>
+                    {row.map((_, index) => {
+                        const lineLeftProps = mergeProps(
+                            {
+                                className: cx('lineLeft', { index })
+                            },
+                            getNodePTOptions(index !== 0, 'lineLeft')
+                        );
 
-                    const lineRightProps = mergeProps(
-                        {
-                            className: cx('lineRight', { index, nodeChildLength })
-                        },
-                        getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
-                    );
+                        const lineRightProps = mergeProps(
+                            {
+                                className: cx('lineRight', { index, nodeChildLength })
+                            },
+                            getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
+                        );
 
-                    return [
-                        <td key={`${index}-l`} {...lineLeftProps}>&nbsp;</td>,
-                        <td key={`${index}-r`} {...lineRightProps}>&nbsp;</td>
-                    ];
-                })}
-            </tr>
-        );
-    });
-};
+                        return (
+                            <React.Fragment key={index}>
+                                <td {...lineLeftProps}>&nbsp;</td>
+                                <td {...lineRightProps}>&nbsp;</td>
+                            </React.Fragment>
+                        );
+                    })}
+                </tr>
+            );
+        });
+    };
     const createLinesDown = (row) => {
-    if (!node.children || node.expanded === false) {
-        return null;
-    }
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
 
-    const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
 
-    return rows.map((row, rowIndex) => {
-        const colspan = row.length * 2;
+        return rows.map((row, rowIndex) => {
+            const colspan = row.length * 2;
 
-        const linesProps = mergeProps(
-            {
-                className: cx('lines'),
-                style: { visibility }
-            },
-            _ptm('lines')
-        );
+            const linesProps = mergeProps(
+                {
+                    className: cx('lines'),
+                    style: { visibility }
+                },
+                _ptm('lines')
+            );
 
-        const lineCellProps = mergeProps(
-            {
-                colSpan: colspan
-            },
-            _ptm('lineCell')
-        );
+            const lineCellProps = mergeProps(
+                {
+                    colSpan: colspan
+                },
+                _ptm('lineCell')
+            );
 
-        const lineDownProps = mergeProps(
-            {
-                className: cx('lineDown')
-            },
-            _ptm('lineDown')
-        );
+            const lineDownProps = mergeProps(
+                {
+                    className: cx('lineDown')
+                },
+                _ptm('lineDown')
+            );
 
-        return (
-            <tr {...linesProps} key={rowIndex}>
-                <td {...lineCellProps}>
-                    <div {...lineDownProps} />
-                </td>
-            </tr>
-        );
-    });
-};
+            return (
+                <tr {...linesProps} key={rowIndex}>
+                    <td {...lineCellProps}>
+                        <div {...lineDownProps} />
+                    </td>
+                </tr>
+            );
+        });
+    };
     const createToggler = () => {
         if (!leaf) {
             const nodeTogglerIconProps = mergeProps(
@@ -251,9 +253,7 @@ export const OrganizationChartNode = React.memo((props) => {
 
         const cellProps = mergeProps(
             {
-                colSpan: node.children && node.children.length
-            ? Math.min(node.children.length, MAX_CHILDREN_PER_ROW) * 2
-            : 2
+                colSpan: node.children && node.children.length ? Math.min(node.children.length, MAX_CHILDREN_PER_ROW) * 2 : 2
             },
             _ptm('cell')
         );
@@ -284,20 +284,20 @@ export const OrganizationChartNode = React.memo((props) => {
     const nodeContent = createNodeContent();
 
     const createChildrenSection = () => {
-    if (!node.children || node.expanded === false) {
-        return null;
-    }
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
 
-    const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
 
-    return rows.map((row, rowIndex) => (
-        <React.Fragment key={rowIndex}>
-            {createLinesDown(row)}
-            {createLinesMiddle(row)}
-            {createChildNodes(row)}
-        </React.Fragment>
-    ));
-};
+        return rows.map((row, rowIndex) => (
+            <React.Fragment key={rowIndex}>
+                {createLinesDown(row)}
+                {createLinesMiddle(row)}
+                {createChildNodes(row)}
+            </React.Fragment>
+        ));
+    };
 
     const tableProps = mergeProps(
         {
