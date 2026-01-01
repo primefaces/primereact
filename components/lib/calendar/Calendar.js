@@ -69,6 +69,12 @@ export const Calendar = React.memo(
         const [yearOptions, setYearOptions] = React.useState([]);
 
         const previousValue = usePrevious(props.value);
+        React.useEffect(() => {
+            if (props.value !== previousValue) {
+                updateInputfield(props.value);
+            }
+        }, [props.value]);
+
         const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
         const attributeSelector = UniqueComponentId();
         const panelId = idState + '_panel';
@@ -1771,8 +1777,6 @@ export const Calendar = React.memo(
                     value: date
                 });
             }
-
-            updateInputfield(selectedValues);
         };
 
         const decrementDecade = () => {
