@@ -62,6 +62,7 @@ export const Calendar = React.memo(
         const viewChangedWithKeyDown = React.useRef(false);
         const onChangeRef = React.useRef(null);
         const isClearClicked = React.useRef(false);
+        const updateInputfieldRef = React.useRef(null);
 
         const [currentView, setCurrentView] = React.useState('date');
         const [currentMonth, setCurrentMonth] = React.useState(null);
@@ -72,9 +73,9 @@ export const Calendar = React.memo(
 
         React.useEffect(() => {
             if (props.value !== previousValue) {
-                updateInputfield(props.value);
+                updateInputfieldRef.current && updateInputfieldRef.current(props.value);
             }
-        }, [props.value, previousValue, updateInputfield]);
+        }, [props.value, previousValue]);
 
         const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
         const attributeSelector = UniqueComponentId();
@@ -2566,6 +2567,10 @@ export const Calendar = React.memo(
 
             inputRef.current.value = formattedValue;
         };
+
+        React.useEffect(() => {
+            updateInputfieldRef.current = updateInputfield;
+        }, [updateInputfield]);
 
         const formatDateTime = (date) => {
             if (props.formatDateTime) {
