@@ -4,12 +4,23 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { IconUtils, ObjectUtils } from '../utils/Utils';
 
+const chunkArray = (array, size) => {
+    const result = [];
+
+    for (let i = 0; i < array.length; i += size) {
+        result.push(array.slice(i, i + size));
+    }
+
+    return result;
+};
+
+const MAX_CHILDREN_PER_ROW = 10;
+
 export const OrganizationChartNode = React.memo((props) => {
     const mergeProps = useMergeProps();
     const node = props.node;
     const [expandedState, setExpandedState] = React.useState(node.expanded);
     const leaf = node.leaf === false ? false : !(node.children && node.children.length);
-    const colspan = node.children && node.children.length ? node.children.length * 2 : null;
     const selected = props.isSelected(node);
     const visibility = !leaf && expandedState ? 'inherit' : 'hidden';
     const { ptm, cx, sx } = props;
@@ -56,83 +67,81 @@ export const OrganizationChartNode = React.memo((props) => {
         }
     };
 
-    const createChildNodes = () => {
-        const nodesProps = mergeProps(
-            {
-                className: cx('nodes'),
-                style: { visibility }
-            },
-            _ptm('nodes')
-        );
-        const nodeCellProps = mergeProps(
-            {
-                colSpan: '2'
-            },
-            _ptm('nodeCell')
-        );
+    const createChildNodes = (row) => {
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
 
-        return (
-            <tr {...nodesProps}>
-                {node.children &&
-                    node.children.map((child, index) => {
-                        return (
-                            <td key={index} {...nodeCellProps}>
-                                <OrganizationChartNode
-                                    node={child}
-                                    nodeTemplate={props.nodeTemplate}
-                                    selectionMode={props.selectionMode}
-                                    onNodeClick={props.onNodeClick}
-                                    isSelected={props.isSelected}
-                                    togglerIcon={props.togglerIcon}
-                                    ptm={ptm}
-                                    cx={cx}
-                                    sx={sx}
-                                />
-                            </td>
-                        );
-                    })}
-            </tr>
-        );
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+
+        return rows.map((row, rowIndex) => {
+            const colspan = row.length * 2;
+
+            const nodesProps = mergeProps(
+                {
+                    className: cx('nodes'),
+                    style: { visibility }
+                },
+                _ptm('nodes')
+            );
+
+            const nodeCellProps = mergeProps(
+                {
+                    colSpan: '2'
+                },
+                _ptm('nodeCell')
+            );
+
+            return (
+                <tr {...nodesProps} key={rowIndex}>
+                    {row.map((child, index) => (
+                        <td key={index} {...nodeCellProps}>
+                            <OrganizationChartNode
+                                node={child}
+                                nodeTemplate={props.nodeTemplate}
+                                selectionMode={props.selectionMode}
+                                onNodeClick={props.onNodeClick}
+                                isSelected={props.isSelected}
+                                togglerIcon={props.togglerIcon}
+                                ptm={ptm}
+                                cx={cx}
+                                sx={sx}
+                            />
+                        </td>
+                    ))}
+                </tr>
+            );
+        });
     };
 
-    const createLinesMiddle = () => {
-        const nodeChildLength = node.children && node.children.length;
-        const linesProps = mergeProps(
-            {
-                className: cx('lines'),
-                style: { visibility }
-            },
-            _ptm('lines')
-        );
-        const lineCellProps = mergeProps(
-            {
-                colSpan: colspan
-            },
-            _ptm('lineCell')
-        );
-        const lineDownProps = mergeProps(
-            {
-                className: cx('lineDown')
-            },
-            _ptm('lineDown')
-        );
+    const createLinesMiddle = (row) => {
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
 
-        return (
-            <tr {...linesProps}>
-                {node.children && node.children.length === 1 && (
-                    <td {...lineCellProps}>
-                        <div {...lineDownProps} />
-                    </td>
-                )}
-                {node.children &&
-                    node.children.length > 1 &&
-                    node.children.map((_, index) => {
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+
+        return rows.map((row, rowIndex) => {
+            const nodeChildLength = row.length;
+
+            const linesProps = mergeProps(
+                {
+                    className: cx('lines'),
+                    style: { visibility }
+                },
+                _ptm('lines')
+            );
+
+            return (
+                <tr {...linesProps} key={rowIndex}>
+                    {row.map((_, index) => {
                         const lineLeftProps = mergeProps(
                             {
                                 className: cx('lineLeft', { index })
                             },
                             getNodePTOptions(index !== 0, 'lineLeft')
                         );
+
                         const lineRightProps = mergeProps(
                             {
                                 className: cx('lineRight', { index, nodeChildLength })
@@ -140,49 +149,58 @@ export const OrganizationChartNode = React.memo((props) => {
                             getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
                         );
 
-                        return [
-                            <td key={index + '_lineleft'} {...lineLeftProps}>
-                                &nbsp;
-                            </td>,
-                            <td key={index + '_lineright'} {...lineRightProps}>
-                                &nbsp;
-                            </td>
-                        ];
+                        return (
+                            <React.Fragment key={index}>
+                                <td {...lineLeftProps}>&nbsp;</td>
+                                <td {...lineRightProps}>&nbsp;</td>
+                            </React.Fragment>
+                        );
                     })}
-            </tr>
-        );
+                </tr>
+            );
+        });
     };
 
-    const createLinesDown = () => {
-        const linesProps = mergeProps(
-            {
-                className: cx('lines'),
-                style: { visibility }
-            },
-            _ptm('lines')
-        );
+    const createLinesDown = (row) => {
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
 
-        const lineCellProps = mergeProps(
-            {
-                colSpan: colspan
-            },
-            _ptm('lineCell')
-        );
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
 
-        const lineDownProps = mergeProps(
-            {
-                className: cx('lineDown')
-            },
-            _ptm('lineDown')
-        );
+        return rows.map((row, rowIndex) => {
+            const colspan = row.length * 2;
 
-        return (
-            <tr {...linesProps}>
-                <td {...lineCellProps}>
-                    <div {...lineDownProps} />
-                </td>
-            </tr>
-        );
+            const linesProps = mergeProps(
+                {
+                    className: cx('lines'),
+                    style: { visibility }
+                },
+                _ptm('lines')
+            );
+
+            const lineCellProps = mergeProps(
+                {
+                    colSpan: colspan
+                },
+                _ptm('lineCell')
+            );
+
+            const lineDownProps = mergeProps(
+                {
+                    className: cx('lineDown')
+                },
+                _ptm('lineDown')
+            );
+
+            return (
+                <tr {...linesProps} key={rowIndex}>
+                    <td {...lineCellProps}>
+                        <div {...lineDownProps} />
+                    </td>
+                </tr>
+            );
+        });
     };
 
     const createToggler = () => {
@@ -239,7 +257,7 @@ export const OrganizationChartNode = React.memo((props) => {
 
         const cellProps = mergeProps(
             {
-                colSpan: colspan
+                colSpan: node.children && node.children.length ? Math.min(node.children.length, MAX_CHILDREN_PER_ROW) * 2 : 2
             },
             _ptm('cell')
         );
@@ -268,9 +286,22 @@ export const OrganizationChartNode = React.memo((props) => {
     };
 
     const nodeContent = createNodeContent();
-    const linesDown = createLinesDown();
-    const linesMiddle = createLinesMiddle();
-    const childNodes = createChildNodes();
+
+    const createChildrenSection = () => {
+        if (!node.children || node.expanded === false) {
+            return null;
+        }
+
+        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+
+        return rows.map((row, rowIndex) => (
+            <React.Fragment key={rowIndex}>
+                {createLinesDown(row)}
+                {createLinesMiddle(row)}
+                {createChildNodes(row)}
+            </React.Fragment>
+        ));
+    };
 
     const tableProps = mergeProps(
         {
@@ -283,9 +314,7 @@ export const OrganizationChartNode = React.memo((props) => {
         <table {...tableProps}>
             <tbody>
                 {nodeContent}
-                {linesDown}
-                {linesMiddle}
-                {childNodes}
+                {createChildrenSection()}
             </tbody>
         </table>
     );
