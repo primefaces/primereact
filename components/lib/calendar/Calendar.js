@@ -170,7 +170,7 @@ export const Calendar = React.memo(
 
         const updateValueOnInput = (event, rawValue, invalidCallback) => {
             props.onInput && props.onInput(event);
-            
+
             try {
                 const value = parseValueFromString(props.timeOnly ? rawValue.replace('_', '') : rawValue);
 
