@@ -139,6 +139,7 @@ export const InputTextarea = React.memo(
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root', { context, isFilled })),
+                autoComplete: props.autoComplete,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyUp: onKeyUp,
