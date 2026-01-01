@@ -2568,9 +2568,7 @@ export const Calendar = React.memo(
             inputRef.current.value = formattedValue;
         };
 
-        React.useEffect(() => {
-            updateInputfieldRef.current = updateInputfield;
-        }, [updateInputfield]);
+        updateInputfieldRef.current = updateInputfield;
 
         const formatDateTime = (date) => {
             if (props.formatDateTime) {
