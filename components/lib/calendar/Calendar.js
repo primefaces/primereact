@@ -62,6 +62,7 @@ export const Calendar = React.memo(
         const viewChangedWithKeyDown = React.useRef(false);
         const onChangeRef = React.useRef(null);
         const isClearClicked = React.useRef(false);
+        const updateInputfieldRef = React.useRef(null);
 
         const [currentView, setCurrentView] = React.useState('date');
         const [currentMonth, setCurrentMonth] = React.useState(null);
@@ -1771,8 +1772,6 @@ export const Calendar = React.memo(
                     value: date
                 });
             }
-
-            updateInputfield(selectedValues);
         };
 
         const decrementDecade = () => {
@@ -2562,6 +2561,8 @@ export const Calendar = React.memo(
             inputRef.current.value = formattedValue;
         };
 
+        updateInputfieldRef.current = updateInputfield;
+
         const formatDateTime = (date) => {
             if (props.formatDateTime) {
                 return props.formatDateTime(date);
@@ -3036,6 +3037,12 @@ export const Calendar = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        React.useEffect(() => {
+            if (props.value !== previousValue) {
+                updateInputfieldRef.current && updateInputfieldRef.current(props.value);
+            }
+        }, [props.value, previousValue]);
 
         useMountEffect(() => {
             let viewDate = getViewDate(props.viewDate);
