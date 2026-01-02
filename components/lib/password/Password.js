@@ -461,6 +461,7 @@ export const Password = React.memo(
             {
                 ref: inputRef,
                 id: props.inputId,
+                autoComplete: props.autoComplete,
                 ...inputProps,
                 className: classNames(props.inputClassName, cx('input')),
                 onBlur: onBlur,

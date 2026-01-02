@@ -634,6 +634,7 @@ export const InputMask = React.memo(
             <InputText
                 ref={elementRef}
                 autoFocus={props.autoFocus}
+                autoComplete={props.autoComplete}
                 id={props.id}
                 type={props.type}
                 name={props.name}
