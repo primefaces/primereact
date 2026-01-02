@@ -137,6 +137,7 @@ export const SelectButton = React.memo(
         const items = createItems();
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
@@ -144,8 +145,7 @@ export const SelectButton = React.memo(
                 style: props.style,
                 role: 'group'
             },
-            SelectButtonBase.getOtherProps(props),
-            ptm('root')
+            SelectButtonBase.getOtherProps(props)
         );
 
         return (

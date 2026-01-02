@@ -83,6 +83,7 @@ export const Message = React.memo(
         const content = createContent();
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(props.className, cx('root')),
                 style: props.style,
@@ -90,8 +91,7 @@ export const Message = React.memo(
                 'aria-live': 'polite',
                 'aria-atomic': 'true'
             },
-            MessageBase.getOtherProps(props),
-            ptm('root')
+            MessageBase.getOtherProps(props)
         );
 
         return (

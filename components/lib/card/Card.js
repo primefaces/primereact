@@ -92,14 +92,14 @@ export const Card = React.forwardRef((inProps, ref) => {
     }, [elementRef, ref]);
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: props.id,
             ref: elementRef,
             style: props.style,
             className: classNames(props.className, cx('root'))
         },
-        CardBase.getOtherProps(props),
-        ptm('root')
+        CardBase.getOtherProps(props)
     );
 
     const header = createHeader();

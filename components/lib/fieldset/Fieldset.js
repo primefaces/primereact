@@ -195,6 +195,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: idState,
             ref: elementRef,
@@ -202,8 +203,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             className: classNames(props.className, cx('root')),
             onClick: props.onClick
         },
-        FieldsetBase.getOtherProps(props),
-        ptm('root')
+        FieldsetBase.getOtherProps(props)
     );
 
     const legend = createLegend();

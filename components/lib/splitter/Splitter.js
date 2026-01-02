@@ -468,14 +468,14 @@ export const Splitter = React.memo(
         };
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 style: props.style,
                 className: classNames(props.className, cx('root')),
                 'data-p-splitter-resizing': false
             },
-            SplitterBase.getOtherProps(props),
-            ptm('root')
+            SplitterBase.getOtherProps(props)
         );
 
         const panels = createPanels();

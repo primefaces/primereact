@@ -194,14 +194,14 @@ export const Rating = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 id: props.id,
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            RatingBase.getOtherProps(props),
-            ptm('root')
+            RatingBase.getOtherProps(props)
         );
 
         const cancelIcon = createCancelIcon();

@@ -80,14 +80,14 @@ export const OrganizationChart = React.memo(
         }));
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
                 className: classNames(props.className, cx('root'))
             },
-            OrganizationChartBase.getOtherProps(props),
-            ptm('root')
+            OrganizationChartBase.getOtherProps(props)
         );
 
         return (
