@@ -70,7 +70,6 @@ export const Calendar = React.memo(
         const [yearOptions, setYearOptions] = React.useState([]);
 
         const previousValue = usePrevious(props.value);
-
         const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
         const attributeSelector = UniqueComponentId();
         const panelId = idState + '_panel';
