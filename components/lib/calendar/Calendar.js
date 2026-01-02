@@ -71,12 +71,6 @@ export const Calendar = React.memo(
 
         const previousValue = usePrevious(props.value);
 
-        React.useEffect(() => {
-            if (props.value !== previousValue) {
-                updateInputfieldRef.current && updateInputfieldRef.current(props.value);
-            }
-        }, [props.value, previousValue]);
-
         const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
         const attributeSelector = UniqueComponentId();
         const panelId = idState + '_panel';
@@ -3046,6 +3040,12 @@ export const Calendar = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        React.useEffect(() => {
+            if (props.value !== previousValue) {
+                updateInputfieldRef.current && updateInputfieldRef.current(props.value);
+            }
+        }, [props.value, previousValue]);
 
         useMountEffect(() => {
             let viewDate = getViewDate(props.viewDate);
