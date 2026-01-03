@@ -163,8 +163,7 @@ export const TriStateCheckbox = React.memo(
                 'aria-invalid': props.invalid,
                 disabled: props.disabled,
                 readOnly: props.readOnly,
-                value: checkBoxValue,
-                checked: checkBoxValue,
+                checked: !!checkBoxValue,
                 onChange: onChange
             },
             ptm('input')
