@@ -12,6 +12,7 @@ import { PageLinks } from './PageLinks';
 import { PaginatorBase } from './PaginatorBase';
 import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
+import { CustomOption } from './CustomOption';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -251,7 +252,18 @@ export const Paginator = React.memo(
                     break;
 
                 default:
-                    element = null;
+                    element = (
+                        <CustomOption hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            first={props.first}
+                            template={template}
+                            onChange={changePage} 
+                            ptm={ptm} />
+                    );
                     break;
             }
 
