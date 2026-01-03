@@ -15,7 +15,8 @@ import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
 import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
 import { Slider } from '@/components/lib/slider/Slider';
 import { Tag } from '@/components/lib/tag/Tag';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDebounce } from '@/components/lib/hooks/useDebounce';
 import { CustomerService } from '../../../../service/CustomerService';
 
 export const CustomersDoc = (props) => {
@@ -32,6 +33,7 @@ export const CustomersDoc = (props) => {
         activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
     });
     const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const debouncedGlobalFilterValue = useDebounce(globalFilterValue, 300);
     const [representatives] = useState([
         { name: 'Amy Elsner', image: 'amyelsner.png' },
         { name: 'Anna Fali', image: 'annafali.png' },
@@ -45,6 +47,16 @@ export const CustomersDoc = (props) => {
         { name: 'XuXue Feng', image: 'xuxuefeng.png' }
     ]);
     const [statuses] = useState(['unqualified', 'qualified', 'new', 'negotiation', 'renewal']);
+
+    useEffect(() => {
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            global: {
+                ...prevFilters.global,
+                value: debouncedGlobalFilterValue
+            }
+        }));
+    }, [debouncedGlobalFilterValue]);
 
     const getSeverity = (status) => {
         switch (status) {
@@ -90,13 +102,7 @@ export const CustomersDoc = (props) => {
     };
 
     const onGlobalFilterChange = (e) => {
-        const value = e.target.value;
-        let _filters = { ...filters };
-
-        _filters.global.value = value;
-
-        setFilters(_filters);
-        setGlobalFilterValue(value);
+        setGlobalFilterValue(e.target.value);
     };
 
     const renderHeader = () => {
