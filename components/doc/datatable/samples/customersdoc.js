@@ -49,14 +49,14 @@ export const CustomersDoc = (props) => {
     const [statuses] = useState(['unqualified', 'qualified', 'new', 'negotiation', 'renewal']);
 
     useEffect(() => {
-    setFilters((prevFilters) => ({
-        ...prevFilters,
-        global: {
-            ...prevFilters.global,
-            value: debouncedGlobalFilterValue
-        }
-    }));
-}, [debouncedGlobalFilterValue]);
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            global: {
+                ...prevFilters.global,
+                value: debouncedGlobalFilterValue
+            }
+        }));
+    }, [debouncedGlobalFilterValue]);
 
     const getSeverity = (status) => {
         switch (status) {
@@ -102,7 +102,7 @@ export const CustomersDoc = (props) => {
     };
 
     const onGlobalFilterChange = (e) => {
-    setGlobalFilterValue(e.target.value);
+        setGlobalFilterValue(e.target.value);
     };
 
     const renderHeader = () => {
