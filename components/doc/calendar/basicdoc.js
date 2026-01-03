@@ -8,7 +8,11 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Calendar value={date} onChange={(e) => setDate(e.value)} />
+        <Calendar
+            value={date}
+            onChange={(e) => setDate(e.value)}
+            appendTo={typeof window !== 'undefined' ? document.body : null}
+        />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -19,7 +23,11 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} />
+        <Calendar
+            value={date}
+            onChange={(e) => setDate(e.value)}
+            appendTo={typeof window !== 'undefined' ? document.body : null}
+        />
         </div>
     )
 }
@@ -34,7 +42,11 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} />
+            <Calendar
+                value={date}
+                onChange={(e) => setDate(e.value)}
+                appendTo={typeof window !== 'undefined' ? document.body : null}
+            />
         </div>
     )
 }
@@ -49,7 +61,11 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar value={date} onChange={(e) => setDate(e.value)} />
+                <Calendar
+                    value={date}
+                    onChange={(e) => setDate(e.value)}
+                    appendTo={typeof window !== 'undefined' ? document.body : null}
+                />
             </div>
             <DocSectionCode code={code} />
         </>
