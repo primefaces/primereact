@@ -61,11 +61,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar
-                    value={date}
-                    onChange={(e) => setDate(e.value)}
-                    appendTo={typeof window !== 'undefined' ? document.body : null}
-                />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} appendTo={typeof window !== 'undefined' ? document.body : null} />
             </div>
             <DocSectionCode code={code} />
         </>
