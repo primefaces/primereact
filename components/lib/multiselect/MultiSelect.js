@@ -17,7 +17,8 @@ export const MultiSelect = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MultiSelectBase.getProps(inProps, context);
-        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
+        // -1 represents no logical option focus; avoids null-based arithmetic bugs
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const [clicked, setClicked] = React.useState(false);
         const [filterValue, filterState, setFilterState] = useDebounce('', props.filterDelay || 0);
         const [startRangeIndex, setStartRangeIndex] = React.useState(-1);
@@ -162,10 +163,18 @@ export const MultiSelect = React.memo(
 
         const onArrowDownKey = (event) => {
             if (!overlayVisibleState) {
+                // Open and move focus to the first option (per a11y expectations)
                 show();
-                props.editable && changeFocusedOptionIndex(event, findSelectedOptionIndex());
+                changeFocusedOptionIndex(event, findFirstOptionIndex());
             } else {
-                const optionIndex = focusedOptionIndex !== -1 ? findNextOptionIndex(focusedOptionIndex) : clicked ? findFirstOptionIndex() : findFirstFocusedOptionIndex();
+                let optionIndex;
+                if (focusedOptionIndex !== -1) {
+                    optionIndex = findNextOptionIndex(focusedOptionIndex);
+                } else {
+                    // If key pressed within overlay (wrapper/list), start from the first visible option
+                    const pressedInOverlay = event.currentTarget !== inputRef.current;
+                    optionIndex = pressedInOverlay ? findFirstOptionIndex() : findFirstFocusedOptionIndex();
+                }
 
                 if (event.shiftKey) {
                     onOptionSelectRange(event, startRangeIndex, optionIndex);
@@ -186,7 +195,13 @@ export const MultiSelect = React.memo(
                 overlayVisibleState && hide();
                 event.preventDefault();
             } else {
-                const optionIndex = focusedOptionIndex !== -1 ? findPrevOptionIndex(focusedOptionIndex) : clicked ? findLastOptionIndex() : findLastFocusedOptionIndex();
+                let optionIndex;
+                if (focusedOptionIndex !== -1) {
+                    optionIndex = findPrevOptionIndex(focusedOptionIndex);
+                } else {
+                    const pressedInOverlay = event.currentTarget !== inputRef.current;
+                    optionIndex = pressedInOverlay ? findLastOptionIndex() : findLastFocusedOptionIndex();
+                }
 
                 changeFocusedOptionIndex(event, optionIndex);
 
@@ -198,6 +213,7 @@ export const MultiSelect = React.memo(
         const onEnterKey = (event) => {
             if (!overlayVisibleState) {
                 setFocusedOptionIndex(-1);
+                // Open and set focus to the first option
                 onArrowDownKey(event);
             } else if (focusedOptionIndex !== -1) {
                 if (event.shiftKey) {
@@ -308,12 +324,31 @@ export const MultiSelect = React.memo(
                     break;
 
                 case 'Space':
+                    if (props.inline) {
+                        break;
+                    }
+                    // If wrapper/list is focused and no option is focused, scroll the wrapper (prevent page scroll)
+                    if (event.currentTarget !== inputRef.current && focusedOptionIndex === -1) {
+                        const panelEl = overlayRef.current;
+                        const wrapperEl = panelEl && panelEl.querySelector('.p-multiselect-items-wrapper');
+
+                        if (wrapperEl) {
+                            const pageAmount = Math.max(1, wrapperEl.clientHeight - 40);
+                            const delta = event.shiftKey ? -pageAmount : pageAmount;
+                            wrapperEl.scrollTop = Math.max(0, Math.min(wrapperEl.scrollTop + delta, wrapperEl.scrollHeight - wrapperEl.clientHeight));
+                        }
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                        break;
+                    }
+                    onEnterKey(event);
+                    break;
                 case 'NumpadEnter':
                 case 'Enter':
                     if (props.inline) {
                         break;
                     }
-
                     onEnterKey(event);
                     break;
 
@@ -349,6 +384,9 @@ export const MultiSelect = React.memo(
                     }
 
                     hide();
+                    // Return focus to the trigger
+                    DomHandler.focus(inputRef.current);
+                    event.preventDefault();
                     break;
 
                 case 'Tab':
@@ -507,22 +545,36 @@ export const MultiSelect = React.memo(
             props.onFilter && props.onFilter({ filter: '' });
         };
 
-        const scrollInView = (event) => {
-            if (!overlayVisibleState) {
+        const scrollInView = (index = focusedOptionIndex) => {
+            if (!overlayVisibleState || index === -1) {
                 return;
             }
 
-            let focusedItem;
+            // Defer to next tick so DOM reflects current focus/index
+            setTimeout(() => {
+                const panelEl = overlayRef.current;
+                if (!panelEl) return;
 
-            if (event) {
-                focusedItem = event.currentTarget;
-            } else {
-                focusedItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
-            }
+                const wrapperEl = panelEl.querySelector('.p-multiselect-items-wrapper');
+                const itemEl = panelEl.querySelector(`[data-p-index="${index}"]`);
 
-            if (focusedItem && focusedItem.scrollIntoView) {
-                focusedItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-            }
+                if (wrapperEl && itemEl) {
+                    const wrapperRect = wrapperEl.getBoundingClientRect();
+                    const itemRect = itemEl.getBoundingClientRect();
+
+                    const overScrollUp = wrapperRect.top - itemRect.top;
+                    const overScrollDown = itemRect.bottom - wrapperRect.bottom;
+
+                    if (overScrollUp > 0) {
+                        wrapperEl.scrollTop -= overScrollUp;
+                    } else if (overScrollDown > 0) {
+                        wrapperEl.scrollTop += overScrollDown;
+                    }
+                } else if (itemEl && itemEl.scrollIntoView) {
+                    // Fallback for environments without explicit wrapper
+                    itemEl.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                }
+            }, 0);
         };
 
         const show = () => {
@@ -561,7 +613,6 @@ export const MultiSelect = React.memo(
             }
 
             ZIndexUtils.clear(overlayRef.current);
-
             props.onHide && props.onHide();
         };
 
@@ -593,7 +644,6 @@ export const MultiSelect = React.memo(
                 if (props.optionGroupLabel) {
                     let groupIndex = 0;
                     const optionIndex = props.options.findIndex((optionGroup, i) => (groupIndex = i) && findOptionIndexInList(props.value, getOptionGroupChildren(optionGroup)) !== -1);
-
                     return optionIndex !== -1 ? { group: groupIndex, option: optionIndex } : -1;
                 }
 
@@ -615,7 +665,6 @@ export const MultiSelect = React.memo(
             if (props.value) {
                 const optionValue = getOptionValue(option);
                 const isUsed = isOptionValueUsed(option);
-
                 return props.value.some((val) => ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey));
             }
 
@@ -833,7 +882,7 @@ export const MultiSelect = React.memo(
         const changeFocusedOptionIndex = (event, index) => {
             if (focusedOptionIndex !== index) {
                 setFocusedOptionIndex(index);
-                scrollInView(event);
+                scrollInView(index);
 
                 if (props.selectOnFocus) {
                     onOptionSelect(event, visibleOptions[index], false);
@@ -849,10 +898,7 @@ export const MultiSelect = React.memo(
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
             if (props.onRemove) {
-                props.onRemove({
-                    originalEvent: event,
-                    value
-                });
+                props.onRemove({ originalEvent: event, value });
             }
 
             updateModel(event, value, item);
@@ -867,7 +913,6 @@ export const MultiSelect = React.memo(
             const target = element.closest('[data-pc-section="token"]');
             const parentStyles = window.getComputedStyle(parentElement);
             const targetStyles = window.getComputedStyle(target);
-
             const parentWidth = parentElement.clientWidth - parseFloat(parentStyles.paddingLeft) - parseFloat(parentStyles.paddingRight);
             const targetRight = target.getBoundingClientRect().right + parseFloat(targetStyles.marginRight) - parentElement.getBoundingClientRect().left;
 
@@ -925,12 +970,7 @@ export const MultiSelect = React.memo(
                 const value = props.value.slice(0, props.maxSelectedLabels || valueLength);
 
                 return value.map((val, i) => {
-                    const context = {
-                        context: {
-                            value: val,
-                            index: i
-                        }
-                    };
+                    const context = { context: { value: val, index: i } };
                     const label = getLabelByValue(val);
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
@@ -944,14 +984,12 @@ export const MultiSelect = React.memo(
                         ptm('removeTokenIcon', context)
                     );
                     const icon = !props.disabled && (props.removeIcon ? IconUtils.getJSXIcon(props.removeIcon, { ...iconProps }, { props }) : <TimesCircleIcon {...iconProps} />);
-
                     const tokenProps = mergeProps(
                         {
                             className: cx('token')
                         },
                         ptm('token', context)
                     );
-
                     const tokenLabelProps = mergeProps(
                         {
                             className: cx('tokenLabel')
@@ -1001,9 +1039,7 @@ export const MultiSelect = React.memo(
         const flatOptions = (options) => {
             return (options || []).reduce((result, option, index) => {
                 result.push({ ...option, group: true, index });
-
                 const optionGroupChildren = getOptionGroupChildren(option);
-
                 optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
 
                 return result;
@@ -1066,6 +1102,7 @@ export const MultiSelect = React.memo(
             } else if (props.overlayVisible === false) {
                 hide();
             }
+
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.overlayVisible]);
 
@@ -1074,6 +1111,13 @@ export const MultiSelect = React.memo(
                 alignOverlay();
             }
         }, [overlayVisibleState, filterState, hasFilter]);
+
+        // Scroll to focused item when focused index changes
+        useUpdateEffect(() => {
+            if (overlayVisibleState && focusedOptionIndex !== -1) {
+                scrollInView(focusedOptionIndex);
+            }
+        }, [focusedOptionIndex, overlayVisibleState]);
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
@@ -1090,7 +1134,6 @@ export const MultiSelect = React.memo(
                 },
                 ptm('clearIcon')
             );
-
             const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
             const clearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
 
@@ -1103,7 +1146,6 @@ export const MultiSelect = React.memo(
 
         const createLabel = () => {
             const content = getLabelContent();
-
             const labelContainerProps = mergeProps(
                 {
                     ref: labelContainerRef,
@@ -1111,7 +1153,6 @@ export const MultiSelect = React.memo(
                 },
                 ptm('labelContainer')
             );
-
             const labelProps = mergeProps(
                 {
                     ref: labelRef,
@@ -1128,32 +1169,26 @@ export const MultiSelect = React.memo(
         };
 
         const visibleOptions = getVisibleOptions();
-
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = MultiSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-
         const triggerIconProps = mergeProps(
             {
                 className: cx('triggerIcon')
             },
             ptm('triggerIcon')
         );
-
         const triggerProps = mergeProps(
             {
                 className: cx('trigger')
             },
             ptm('trigger')
         );
-
         const loadingIcon = props.loadingIcon ? IconUtils.getJSXIcon(props.loadingIcon, { ...triggerIconProps }, { props }) : <SpinnerIcon spin {...triggerIconProps} />;
         const dropdownIcon = props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { ...triggerIconProps }, { props }) : <ChevronDownIcon {...triggerIconProps} />;
         const triggerIcon = <div {...triggerProps}>{props.loading ? loadingIcon : dropdownIcon}</div>;
-
         const label = !props.inline && createLabel();
         const clearIcon = !props.inline && createClearIcon();
-
         const rootProps = mergeProps(
             {
                 ref: elementRef,
@@ -1166,7 +1201,6 @@ export const MultiSelect = React.memo(
             MultiSelectBase.getOtherProps(props),
             ptm('root')
         );
-
         const hiddenInputWrapperProps = mergeProps(
             {
                 className: 'p-hidden-accessible',
@@ -1174,7 +1208,6 @@ export const MultiSelect = React.memo(
             },
             ptm('hiddenInputWrapper')
         );
-
         const inputProps = mergeProps(
             {
                 ref: inputRef,
@@ -1207,7 +1240,6 @@ export const MultiSelect = React.memo(
                             {triggerIcon}
                         </>
                     )}
-
                     <MultiSelectPanel
                         hostName="MultiSelect"
                         ref={overlayRef}
@@ -1228,6 +1260,7 @@ export const MultiSelect = React.memo(
                         updateModel={updateModel}
                         onFilterInputChange={onFilterInputChange}
                         onFilterKeyDown={onFilterKeyDown}
+                        onKeyDown={onKeyDown}
                         resetFilter={resetFilter}
                         onCloseClick={onCloseClick}
                         onSelectAll={onSelectAll}
