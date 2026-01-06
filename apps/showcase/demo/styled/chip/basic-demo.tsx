@@ -1,6 +1,6 @@
 'use client';
 
-import { Chip } from 'primereact/chip';
+import { Chip } from '@primereact/ui/chip';
 
 export default function BasicDemo() {
     return (

@@ -1,7 +1,7 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
-import { Menu } from 'primereact/menu';
+import { Avatar } from '@primereact/ui/avatar';
+import { Menu } from '@primereact/ui/menu';
 
 export default function PortalDemo() {
     return (

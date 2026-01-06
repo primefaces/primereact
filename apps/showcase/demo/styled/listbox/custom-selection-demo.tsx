@@ -1,8 +1,8 @@
 'use client';
 
 import type { ListboxOptionsInstance, ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
+import { Listbox } from '@primereact/ui/listbox';
 import { cn } from '@primeuix/utils';
-import { Listbox } from 'primereact/listbox';
 import { useState } from 'react';
 
 const cities = [

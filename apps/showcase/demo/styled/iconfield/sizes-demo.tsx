@@ -1,33 +1,33 @@
 'use client';
 
-import { IconField } from 'primereact/iconfield';
-import { InputText } from 'primereact/inputtext';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function SizesDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <IconField.Root>
-                <IconField.Icon>
+                <IconField.InputIcon>
                     <i className="pi pi-search" />
-                </IconField.Icon>
+                </IconField.InputIcon>
                 <InputText placeholder="Small" size="small" />
             </IconField.Root>
 
             <IconField.Root>
                 <InputText placeholder="Normal" />
-                <IconField.Icon>
+                <IconField.InputIcon>
                     <i className="pi pi-user" />
-                </IconField.Icon>
+                </IconField.InputIcon>
             </IconField.Root>
 
             <IconField.Root>
-                <IconField.Icon>
+                <IconField.InputIcon>
                     <i className="pi pi-lock" />
-                </IconField.Icon>
+                </IconField.InputIcon>
                 <InputText placeholder="Large" size="large" />
-                <IconField.Icon>
+                <IconField.InputIcon>
                     <i className="pi pi-spin pi-spinner" />
-                </IconField.Icon>
+                </IconField.InputIcon>
             </IconField.Root>
         </div>
     );

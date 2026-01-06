@@ -1,7 +1,7 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
-import { Message } from 'primereact/message';
+import { Avatar } from '@primereact/ui/avatar';
+import { Message } from '@primereact/ui/message';
 
 export default function IconDemo() {
     return (

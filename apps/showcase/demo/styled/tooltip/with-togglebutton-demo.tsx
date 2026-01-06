@@ -1,7 +1,7 @@
 'use client';
 
-import { ToggleButton } from 'primereact/togglebutton';
-import { Tooltip } from 'primereact/tooltip';
+import { ToggleButton } from '@primereact/ui/togglebutton';
+import { Tooltip } from '@primereact/ui/tooltip';
 
 const content = [
     {

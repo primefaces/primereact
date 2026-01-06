@@ -2,8 +2,8 @@
 
 import { Motion } from '@primereact/core/motion';
 import { MinusIcon, PlusIcon } from '@primereact/icons';
-import { Button } from 'primereact/button';
-import { Panel } from 'primereact/panel';
+import { Button } from '@primereact/ui/button';
+import { Panel } from '@primereact/ui/panel';
 import * as React from 'react';
 
 export default function ToggleableDemo() {

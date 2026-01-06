@@ -1,7 +1,8 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "explicit"
+        "source.fixAll": "never",
+        "source.fixAll.eslint": "never",
+        "source.organizeImports": "never"
     },
     "editor.defaultFormatter": "prettier.prettier-vscode",
     "javascript.referencesCodeLens.enabled": true,

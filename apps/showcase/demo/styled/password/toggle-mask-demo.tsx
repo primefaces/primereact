@@ -3,8 +3,8 @@
 import { EyeIcon } from '@primereact/icons/eye';
 import { EyeSlashIcon } from '@primereact/icons/eyeslash';
 import { PasswordInstance } from '@primereact/types/shared/password';
-import { IconField } from 'primereact/iconfield';
-import { Password } from 'primereact/password';
+import { IconField } from '@primereact/ui/iconfield';
+import { Password } from '@primereact/ui/password';
 import * as React from 'react';
 
 export default function ToggleMaskDemo() {
@@ -22,7 +22,7 @@ export default function ToggleMaskDemo() {
                 <Password.Root ref={passwordRef}>
                     <Password.Input />
                 </Password.Root>
-                <IconField.Icon>{unmasked ? <EyeSlashIcon onClick={handleToggle} /> : <EyeIcon onClick={handleToggle} />}</IconField.Icon>
+                <IconField.InputIcon>{unmasked ? <EyeSlashIcon onClick={handleToggle} /> : <EyeIcon onClick={handleToggle} />}</IconField.InputIcon>
             </IconField.Root>
         </div>
     );

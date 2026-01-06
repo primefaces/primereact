@@ -1,8 +1,8 @@
 'use client';
 
+import { Button } from '@primereact/ui/button';
+import { ProgressBar } from '@primereact/ui/progressbar';
 import { cn } from '@primeuix/utils';
-import { Button } from 'primereact/button';
-import { ProgressBar } from 'primereact/progressbar';
 import * as React from 'react';
 
 const orderProgress = [

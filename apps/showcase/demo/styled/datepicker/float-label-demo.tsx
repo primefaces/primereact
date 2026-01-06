@@ -9,8 +9,8 @@ import {
     useDatePickerProps,
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
-import { DatePicker } from 'primereact/datepicker';
-import { Label } from 'primereact/label';
+import { DatePicker } from '@primereact/ui/datepicker';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function FloatLabelDemo() {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Accordion } from 'primereact/accordion';
+import { Accordion } from '@primereact/ui/accordion';
 
 export default function BasicDemo() {
     return (

@@ -1,7 +1,7 @@
 'use client';
 
 import { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
-import { ToggleButton } from 'primereact/togglebutton';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 
 export default function StateDemo() {
     return (

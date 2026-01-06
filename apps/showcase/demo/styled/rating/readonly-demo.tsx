@@ -1,6 +1,6 @@
 'use client';
 
-import { Rating } from 'primereact/rating';
+import { Rating } from '@primereact/ui/rating';
 
 function ReadOnlyDemo() {
     return (

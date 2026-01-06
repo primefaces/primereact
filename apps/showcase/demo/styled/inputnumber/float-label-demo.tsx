@@ -1,8 +1,8 @@
 'use client';
 
 import type { InputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
-import { InputNumber } from 'primereact/inputnumber';
-import { Label } from 'primereact/label';
+import { InputNumber } from '@primereact/ui/inputnumber';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function FloatLabelDemo() {

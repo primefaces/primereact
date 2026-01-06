@@ -1,8 +1,8 @@
 'use client';
 
 import { Icon } from '@primereact/core/icon';
+import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import Link from 'next/link';
-import { Breadcrumb } from 'primereact/breadcrumb';
 
 export default function CustomSeparatorDemo() {
     return (

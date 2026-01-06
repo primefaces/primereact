@@ -2,9 +2,9 @@
 
 import { useInputNumber } from '@primereact/headless/inputnumber';
 import type { InputNumberInstance, useInputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
-import { Button } from 'primereact/button';
-import { InputGroup } from 'primereact/inputgroup';
-import { InputNumber } from 'primereact/inputnumber';
+import { Button } from '@primereact/ui/button';
+import { InputGroup } from '@primereact/ui/inputgroup';
+import { InputNumber } from '@primereact/ui/inputnumber';
 import * as React from 'react';
 
 export default function VerticalDemo() {

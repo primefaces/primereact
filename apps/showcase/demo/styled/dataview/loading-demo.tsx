@@ -2,8 +2,8 @@
 
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { DataView } from 'primereact/dataview';
-import { Skeleton } from 'primereact/skeleton';
-import { ToggleButton } from 'primereact/togglebutton';
+import { Skeleton } from '@primereact/ui/skeleton';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 import * as React from 'react';
 
 export default function LayoutDemo() {

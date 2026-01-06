@@ -1,7 +1,7 @@
 'use client';
 
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
-import { RadioButton } from 'primereact/radiobutton';
+import { RadioButton } from '@primereact/ui/radiobutton';
 import * as React from 'react';
 
 export default function GroupDemo() {

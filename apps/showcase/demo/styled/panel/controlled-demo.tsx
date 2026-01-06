@@ -1,7 +1,7 @@
 'use client';
 
 import { PanelInstance, PanelToggleEvent } from '@primereact/types/shared/panel';
-import { Panel } from 'primereact/panel';
+import { Panel } from '@primereact/ui/panel';
 import * as React from 'react';
 
 export default function ToggleableDemo() {

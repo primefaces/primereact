@@ -2,7 +2,7 @@
 
 import { MinusIcon, PlusIcon } from '@primereact/icons';
 import type { AccordionHeaderIndicatorInstance } from '@primereact/types/shared/accordion';
-import { Accordion } from 'primereact/accordion';
+import { Accordion } from '@primereact/ui/accordion';
 
 export default function CustomIndicatorDemo() {
     return (

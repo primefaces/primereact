@@ -2,10 +2,10 @@
 
 import { NodeService } from '@/services/node.service';
 import type { TreeNode } from '@primereact/types/shared/tree';
-import { Fluid } from 'primereact/fluid';
-import { IconField } from 'primereact/iconfield';
-import { InputText } from 'primereact/inputtext';
-import { Tree } from 'primereact/tree';
+import { Fluid } from '@primereact/ui/fluid';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputText } from '@primereact/ui/inputtext';
+import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
 
 export default function FilterDemo() {
@@ -47,9 +47,9 @@ export default function FilterDemo() {
                         value={filterValue}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                     />
-                    <IconField.Icon>
+                    <IconField.InputIcon>
                         <i className="pi pi-search" />
-                    </IconField.Icon>
+                    </IconField.InputIcon>
                 </IconField.Root>
             </Tree.Header>
             <Tree.List />

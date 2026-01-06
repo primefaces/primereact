@@ -1,6 +1,6 @@
 'use client';
 
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 
 export default function ConfirmDialogPT() {
     return (

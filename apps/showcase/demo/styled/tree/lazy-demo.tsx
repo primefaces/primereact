@@ -2,7 +2,7 @@
 
 import { Icon } from '@primereact/core/icon';
 import type { TreeNode, TreeNodeInstance, useTreeExpandEvent } from '@primereact/types/shared/tree';
-import { Tree } from 'primereact/tree';
+import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
 
 export default function LazyDemo() {

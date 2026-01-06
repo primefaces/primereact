@@ -1,6 +1,6 @@
 'use client';
 
-import { ColorPicker } from 'primereact/colorpicker';
+import { ColorPicker } from '@primereact/ui/colorpicker';
 
 function VerticalSliderDemo() {
     return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { Carousel } from 'primereact/carousel';
+import { Carousel } from '@primereact/ui/carousel';
 
 function LoopDemo() {
     return (

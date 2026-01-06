@@ -1,6 +1,6 @@
 'use client';
 
-import { RadioButton } from 'primereact/radiobutton';
+import { RadioButton } from '@primereact/ui/radiobutton';
 
 export default function SizesDemo() {
     return (

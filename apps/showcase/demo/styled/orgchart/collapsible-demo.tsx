@@ -1,6 +1,6 @@
 'use client';
 
-import { OrgChart } from 'primereact/orgchart';
+import { OrgChart } from '@primereact/ui/orgchart';
 
 const data = [
     {

@@ -1,7 +1,7 @@
 'use client';
 
 import { usePopoverOpenChangeEvent } from '@primereact/types/shared/popover';
-import { Popover } from 'primereact/popover';
+import { Popover } from '@primereact/ui/popover';
 import React from 'react';
 
 const members = [

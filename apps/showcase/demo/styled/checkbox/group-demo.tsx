@@ -1,7 +1,7 @@
 'use client';
 
 import type { CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
-import { Checkbox } from 'primereact/checkbox';
+import { Checkbox } from '@primereact/ui/checkbox';
 import React from 'react';
 
 export default function GroupDemo() {

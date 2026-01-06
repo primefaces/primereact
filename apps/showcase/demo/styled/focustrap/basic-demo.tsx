@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import { Checkbox } from 'primereact/checkbox';
-import { FocusTrap } from 'primereact/focustrap';
-import { InputText } from 'primereact/inputtext';
+import { Button } from '@primereact/ui/button';
+import { Checkbox } from '@primereact/ui/checkbox';
+import { FocusTrap } from '@primereact/ui/focustrap';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function BasicDemo() {
     return (

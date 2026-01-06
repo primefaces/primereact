@@ -2,8 +2,8 @@
 
 import { ChevronDownIcon, ChevronUpIcon } from '@primereact/icons';
 import { PanelCollapseInstance } from '@primereact/types/shared/panel';
-import { Button } from 'primereact/button';
-import { Panel } from 'primereact/panel';
+import { Button } from '@primereact/ui/button';
+import { Panel } from '@primereact/ui/panel';
 
 export default function ToggleableDemo() {
     return (

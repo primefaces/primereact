@@ -1,9 +1,9 @@
 'use client';
 
 import { FileUploadInstance } from '@primereact/types/shared/fileupload';
-import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
-import { Message } from 'primereact/message';
+import { Button } from '@primereact/ui/button';
+import { FileUpload } from '@primereact/ui/fileupload';
+import { Message } from '@primereact/ui/message';
 
 export default function FileUploadPTDemo() {
     return (

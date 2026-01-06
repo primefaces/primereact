@@ -1,7 +1,7 @@
 'use client';
 
-import { IconField } from 'primereact/iconfield';
-import { InputText } from 'primereact/inputtext';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function BasicDemo() {
     return (

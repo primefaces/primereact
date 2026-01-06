@@ -1,8 +1,8 @@
 'use client';
 
 import { StepperPanelInstance } from '@primereact/types/shared/stepper';
-import { Button } from 'primereact/button';
-import { Stepper } from 'primereact/stepper';
+import { Button } from '@primereact/ui/button';
+import { Stepper } from '@primereact/ui/stepper';
 
 export default function HorizontalDemo() {
     return (

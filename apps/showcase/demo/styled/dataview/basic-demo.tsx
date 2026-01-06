@@ -1,10 +1,10 @@
 'use client';
 
 import { ProductService } from '@/services/product.service';
-import Image from 'next/image';
-import { Button } from 'primereact/button';
+import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';
-import { Tag } from 'primereact/tag';
+import { Tag } from '@primereact/ui/tag';
+import Image from 'next/image';
 import * as React from 'react';
 
 interface Product {

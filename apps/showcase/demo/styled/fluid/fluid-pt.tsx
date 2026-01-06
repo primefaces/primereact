@@ -1,7 +1,7 @@
 'use client';
 
-import { Fluid } from 'primereact/fluid';
-import { InputText } from 'primereact/inputtext';
+import { Fluid } from '@primereact/ui/fluid';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function FluidPTDemo() {
     return (

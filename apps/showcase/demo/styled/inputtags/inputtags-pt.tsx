@@ -1,7 +1,7 @@
 'use client';
 
 import { InputTagsInstance } from '@primereact/types/shared/inputtags';
-import { InputTags } from 'primereact/inputtags';
+import { InputTags } from '@primereact/ui/inputtags';
 
 export default function InputTagsPTDemo() {
     return (

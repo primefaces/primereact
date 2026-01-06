@@ -2,7 +2,7 @@
 
 import { usePresence } from '@primereact/hooks';
 import { useGalleryChangeEvent } from '@primereact/types/shared/gallery';
-import { Gallery } from 'primereact/gallery';
+import { Gallery } from '@primereact/ui/gallery';
 import { Portal } from 'primereact/portal';
 import * as React from 'react';
 

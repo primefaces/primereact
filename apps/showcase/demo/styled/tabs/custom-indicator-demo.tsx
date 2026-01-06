@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs } from 'primereact/tabs';
+import { Tabs } from '@primereact/ui/tabs';
 
 const tabs = [
     { id: 'tab1', title: 'Account Info', content: 'Update your personal information such as name, email address, and profile picture.' },

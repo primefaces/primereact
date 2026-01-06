@@ -1,7 +1,7 @@
 'use client';
 
 import type { ColorSpace } from '@primereact/types/shared/colorpicker';
-import { ColorPicker } from 'primereact/colorpicker';
+import { ColorPicker } from '@primereact/ui/colorpicker';
 import * as React from 'react';
 
 export default function Example() {

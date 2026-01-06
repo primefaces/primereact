@@ -1,7 +1,7 @@
 'use client';
 
-import { InputNumber } from 'primereact/inputnumber';
-import { Label } from 'primereact/label';
+import { InputNumber } from '@primereact/ui/inputnumber';
+import { Label } from '@primereact/ui/label';
 
 export default function IftaLabelDemo() {
     return (

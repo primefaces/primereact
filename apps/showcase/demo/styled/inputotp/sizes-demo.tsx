@@ -1,6 +1,6 @@
 'use client';
 
-import { InputOtp } from 'primereact/inputotp';
+import { InputOtp } from '@primereact/ui/inputotp';
 
 export default function SizesDemo() {
     return (

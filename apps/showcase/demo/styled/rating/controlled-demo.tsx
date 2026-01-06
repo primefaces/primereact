@@ -1,8 +1,8 @@
 'use client';
 
 import { useRatingChangeEvent } from '@primereact/types/shared/rating';
-import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
+import { Button } from '@primereact/ui/button';
+import { Rating } from '@primereact/ui/rating';
 import React from 'react';
 
 function ControlledDemo() {

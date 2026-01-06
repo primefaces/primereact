@@ -1,7 +1,7 @@
 'use client';
 
 import { MenuCheckboxItemCheckedChangeEvent, MenuRadioGroupValueChangeEvent } from '@primereact/types/shared/menu';
-import { Menu } from 'primereact/menu';
+import { Menu } from '@primereact/ui/menu';
 import * as React from 'react';
 
 export default function RadioCheckboxDemo() {

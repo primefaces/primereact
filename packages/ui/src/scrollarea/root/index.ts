@@ -1,1 +1,1 @@
-export * from './UIScrollareaRoot';
+export * from './UIScrollAreaRoot';

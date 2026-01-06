@@ -1,1 +1,1 @@
-export * from './UIInputtagsRoot';
+export * from './UIInputTagsRoot';

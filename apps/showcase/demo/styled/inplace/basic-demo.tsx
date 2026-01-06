@@ -1,6 +1,6 @@
 'use client';
 
-import { Inplace } from 'primereact/inplace';
+import { Inplace } from '@primereact/ui/inplace';
 
 export default function BasicDemo() {
     return (

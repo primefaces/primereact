@@ -1,6 +1,6 @@
 'use client';
 
-import { Terminal } from 'primereact/terminal';
+import { Terminal } from '@primereact/ui/terminal';
 import { TerminalService } from 'primereact/terminalservice';
 import * as React from 'react';
 

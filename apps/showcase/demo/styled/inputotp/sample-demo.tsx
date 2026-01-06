@@ -1,8 +1,8 @@
 'use client';
 
 import { MinusIcon } from '@primereact/icons';
-import { Button } from 'primereact/button';
-import { InputOtp } from 'primereact/inputotp';
+import { Button } from '@primereact/ui/button';
+import { InputOtp } from '@primereact/ui/inputotp';
 import * as React from 'react';
 
 export default function SampleDemo() {

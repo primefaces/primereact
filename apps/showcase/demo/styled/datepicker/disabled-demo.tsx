@@ -7,7 +7,7 @@ import {
     useDatePickerMonthOptions,
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
-import { DatePicker } from 'primereact/datepicker';
+import { DatePicker } from '@primereact/ui/datepicker';
 
 export default function DisabledDemo() {
     return (

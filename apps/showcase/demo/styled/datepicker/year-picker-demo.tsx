@@ -7,7 +7,7 @@ import {
     useDatePickerProps,
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
-import { DatePicker } from 'primereact/datepicker';
+import { DatePicker } from '@primereact/ui/datepicker';
 
 import * as React from 'react';
 

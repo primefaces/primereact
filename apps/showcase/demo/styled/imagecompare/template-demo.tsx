@@ -1,6 +1,6 @@
 'use client';
 
-import { ImageCompare } from 'primereact/imagecompare';
+import { ImageCompare } from '@primereact/ui/imagecompare';
 
 export default function TemplateDemo() {
     return (

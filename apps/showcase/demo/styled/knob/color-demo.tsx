@@ -1,6 +1,6 @@
 'use client';
 
-import { Knob } from 'primereact/knob';
+import { Knob } from '@primereact/ui/knob';
 
 export default function ColorDemo() {
     return (

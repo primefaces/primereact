@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu } from 'primereact/menu';
+import { Menu } from '@primereact/ui/menu';
 
 const apps = [
     { label: 'Search', icon: 'pi-search', gradient: 'from-sky-400 to-cyan-500' },

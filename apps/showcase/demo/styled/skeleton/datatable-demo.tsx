@@ -1,6 +1,6 @@
 'use client';
 
-// import { Skeleton } from 'primereact/skeleton';
+// import { Skeleton } from '@primereact/ui/skeleton';
 
 export default function DataTableDemo() {
     //   const items = Array.from({ length: 4 }, (v, i) => i);

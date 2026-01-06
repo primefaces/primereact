@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu } from 'primereact/menu';
+import { Menu } from '@primereact/ui/menu';
 
 export default function MenuPTDemo() {
     return (

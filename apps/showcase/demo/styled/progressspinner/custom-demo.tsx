@@ -1,6 +1,6 @@
 'use client';
 
-import { ProgressSpinner } from 'primereact/progressspinner';
+import { ProgressSpinner } from '@primereact/ui/progressspinner';
 
 export default function CustomDemo() {
     return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { Panel } from 'primereact/panel';
+import { Panel } from '@primereact/ui/panel';
 
 export default function BasicDemo() {
     return (

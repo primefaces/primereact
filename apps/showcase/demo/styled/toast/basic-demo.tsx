@@ -2,8 +2,8 @@
 
 import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
-import { Button } from 'primereact/button';
-import { Toast } from 'primereact/toast';
+import { Button } from '@primereact/ui/button';
+import { Toast } from '@primereact/ui/toast';
 
 function BasicToast() {
     return (

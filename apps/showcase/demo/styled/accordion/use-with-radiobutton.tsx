@@ -2,9 +2,9 @@
 
 import type { useAccordionChangeEvent } from '@primereact/types/shared/accordion';
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
-import { Accordion } from 'primereact/accordion';
-import { Button } from 'primereact/button';
-import { RadioButton } from 'primereact/radiobutton';
+import { Accordion } from '@primereact/ui/accordion';
+import { Button } from '@primereact/ui/button';
+import { RadioButton } from '@primereact/ui/radiobutton';
 import * as React from 'react';
 
 const items = [

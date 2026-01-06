@@ -1,6 +1,6 @@
 'use client';
 
-import { ProgressBar } from 'primereact/progressbar';
+import { ProgressBar } from '@primereact/ui/progressbar';
 
 export default function IndeterminateDemo() {
     return (

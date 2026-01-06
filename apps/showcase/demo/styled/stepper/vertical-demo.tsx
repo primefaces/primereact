@@ -2,7 +2,7 @@
 
 import { Motion } from '@primereact/core/motion';
 import { StepperItemInstance } from '@primereact/types/shared/stepper';
-import { Stepper } from 'primereact/stepper';
+import { Stepper } from '@primereact/ui/stepper';
 
 export default function VerticalDemo() {
     return (

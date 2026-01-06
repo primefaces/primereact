@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs } from 'primereact/tabs';
+import { Tabs } from '@primereact/ui/tabs';
 
 export default function DisabledDemo() {
     return (

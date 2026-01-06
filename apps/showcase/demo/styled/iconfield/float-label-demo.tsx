@@ -1,8 +1,8 @@
 'use client';
 
-import { IconField } from 'primereact/iconfield';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function FloatLabelDemo() {
@@ -14,9 +14,9 @@ export default function FloatLabelDemo() {
         <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
                 <IconField.Root>
-                    <IconField.Icon>
+                    <IconField.InputIcon>
                         <i className="pi pi-search" />
-                    </IconField.Icon>
+                    </IconField.InputIcon>
                     <InputText
                         value={value1}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)}
@@ -29,9 +29,9 @@ export default function FloatLabelDemo() {
 
             <Label.Float variant="in">
                 <IconField.Root>
-                    <IconField.Icon>
+                    <IconField.InputIcon>
                         <i className="pi pi-search" />
-                    </IconField.Icon>
+                    </IconField.InputIcon>
                     <InputText
                         value={value2}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)}
@@ -45,9 +45,9 @@ export default function FloatLabelDemo() {
 
             <Label.Float variant="on">
                 <IconField.Root>
-                    <IconField.Icon>
+                    <IconField.InputIcon>
                         <i className="pi pi-search" />
-                    </IconField.Icon>
+                    </IconField.InputIcon>
                     <InputText
                         value={value3}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => setValue3(e.currentTarget.value)}

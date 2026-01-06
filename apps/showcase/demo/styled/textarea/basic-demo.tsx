@@ -1,6 +1,6 @@
 'use client';
 
-import { Textarea } from 'primereact/textarea';
+import { Textarea } from '@primereact/ui/textarea';
 
 export default function BasicDemo() {
     return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { ContextMenu } from 'primereact/contextmenu';
+import { ContextMenu } from '@primereact/ui/contextmenu';
 
 export default function BasicDemo() {
     return (

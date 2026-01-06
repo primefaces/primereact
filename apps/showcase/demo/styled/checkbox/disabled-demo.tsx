@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox } from 'primereact/checkbox';
+import { Checkbox } from '@primereact/ui/checkbox';
 
 export default function DisabledDemo() {
     return (

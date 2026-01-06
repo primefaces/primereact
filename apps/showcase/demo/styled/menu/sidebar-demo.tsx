@@ -1,8 +1,8 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
-import { Menu } from 'primereact/menu';
+import { Avatar } from '@primereact/ui/avatar';
+import { Badge } from '@primereact/ui/badge';
+import { Menu } from '@primereact/ui/menu';
 import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
 

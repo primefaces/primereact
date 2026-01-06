@@ -1,6 +1,6 @@
 'use client';
 
-import { Drawer } from 'primereact/drawer';
+import { Drawer } from '@primereact/ui/drawer';
 
 export default function BasicDemo() {
     return (

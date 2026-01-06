@@ -1,8 +1,8 @@
 'use client';
 
 import { SpeedDialChangeEvent, SpeedDialInstance } from '@primereact/types/shared/speeddial';
-import { Button } from 'primereact/button';
-import { SpeedDial } from 'primereact/speeddial';
+import { Button } from '@primereact/ui/button';
+import { SpeedDial } from '@primereact/ui/speeddial';
 import * as React from 'react';
 
 export default function TemplateDemo() {

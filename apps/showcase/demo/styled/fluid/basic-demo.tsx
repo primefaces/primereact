@@ -1,8 +1,8 @@
 'use client';
 
-import { Fluid } from 'primereact/fluid';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
+import { Fluid } from '@primereact/ui/fluid';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 
 export default function BasicDemo() {
     return (

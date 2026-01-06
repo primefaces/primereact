@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Timeline } from 'primereact/timeline';
+import { Button } from '@primereact/ui/button';
+import { Card } from '@primereact/ui/card';
+import { Timeline } from '@primereact/ui/timeline';
 
 export default function CustomDemo() {
     const events = [

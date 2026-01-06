@@ -1,6 +1,6 @@
 'use client';
 
-import { SpeedDial } from 'primereact/speeddial';
+import { SpeedDial } from '@primereact/ui/speeddial';
 
 const directions = [
     { direction: 'up-left', style: { position: 'absolute', right: 0, bottom: 0 } },

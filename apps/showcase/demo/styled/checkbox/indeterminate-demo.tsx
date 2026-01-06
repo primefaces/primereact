@@ -1,7 +1,7 @@
 'use client';
 
 import type { CheckboxChangeEvent, CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
-import { Checkbox } from 'primereact/checkbox';
+import { Checkbox } from '@primereact/ui/checkbox';
 import React from 'react';
 
 const categories = [

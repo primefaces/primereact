@@ -1,7 +1,7 @@
 'use client';
 
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function InvalidDemo() {

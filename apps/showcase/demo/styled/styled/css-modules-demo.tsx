@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { InputText } from 'primereact/inputtext';
+import { InputText } from '@primereact/ui/inputtext';
 import styles from './css-modules-demo.module.css';
 
 export default function CSSModulesDemo() {

@@ -2,7 +2,7 @@
 
 import { NodeService } from '@/services/node.service';
 import type { TreeNode } from '@primereact/types/shared/tree';
-import { Tree } from 'primereact/tree';
+import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
 
 export default function SingleSelectionDemo() {

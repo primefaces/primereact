@@ -1,7 +1,7 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
+import { Avatar } from '@primereact/ui/avatar';
+import { Badge } from '@primereact/ui/badge';
 
 const BadgeDemo = () => {
     return (

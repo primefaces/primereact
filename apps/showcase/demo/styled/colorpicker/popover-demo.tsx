@@ -1,7 +1,7 @@
 'use client';
 
-import { ColorPicker } from 'primereact/colorpicker';
-import { Popover } from 'primereact/popover';
+import { ColorPicker } from '@primereact/ui/colorpicker';
+import { Popover } from '@primereact/ui/popover';
 
 function PopoverDemo() {
     return (

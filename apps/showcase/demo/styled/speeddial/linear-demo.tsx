@@ -1,7 +1,7 @@
 'use client';
 
 import { SpeedDialProps } from '@primereact/types/shared/speeddial';
-import { SpeedDial } from 'primereact/speeddial';
+import { SpeedDial } from '@primereact/ui/speeddial';
 
 const directions = [
     { direction: 'up', style: { position: 'absolute', left: 'calc(50% - 2rem)', bottom: 0 } },

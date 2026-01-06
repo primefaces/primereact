@@ -1,6 +1,6 @@
 'use client';
 
-import { ConfirmPopup } from 'primereact/confirmpopup';
+import { ConfirmPopup } from '@primereact/ui/confirmpopup';
 
 export default function BasicDemo() {
     return (

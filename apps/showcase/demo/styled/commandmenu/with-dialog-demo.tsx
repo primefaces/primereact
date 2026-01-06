@@ -1,8 +1,8 @@
 'use client';
 import { useHotKey } from '@primereact/hooks';
 import { DialogChangeEvent, DialogContentInstance } from '@primereact/types/shared/dialog';
-import { CommandMenu } from 'primereact/commandmenu';
-import { Dialog } from 'primereact/dialog';
+import { CommandMenu } from '@primereact/ui/commandmenu';
+import { Dialog } from '@primereact/ui/dialog';
 import * as React from 'react';
 import { cmds } from './cmds';
 

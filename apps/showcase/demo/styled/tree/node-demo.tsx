@@ -3,8 +3,8 @@
 import { Icon } from '@primereact/core/icon';
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import type { TreeContentInstance, TreeNode as TreeNodeType } from '@primereact/types/shared/tree';
-import { Checkbox } from 'primereact/checkbox';
-import { Tree } from 'primereact/tree';
+import { Checkbox } from '@primereact/ui/checkbox';
+import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
 
 const nodes = [

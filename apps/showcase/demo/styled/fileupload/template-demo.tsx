@@ -1,11 +1,11 @@
 'use client';
 
 import { FileUploadInstance, FileUploadSelectEvent } from '@primereact/types/shared/fileupload';
-import { Badge } from 'primereact/badge';
-import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
-import { Message } from 'primereact/message';
-import { ProgressBar } from 'primereact/progressbar';
+import { Badge } from '@primereact/ui/badge';
+import { Button } from '@primereact/ui/button';
+import { FileUpload } from '@primereact/ui/fileupload';
+import { Message } from '@primereact/ui/message';
+import { ProgressBar } from '@primereact/ui/progressbar';
 import * as React from 'react';
 
 export default function TemplateDemo() {

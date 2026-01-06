@@ -1,6 +1,6 @@
 'use client';
 
-import { Timeline } from 'primereact/timeline';
+import { Timeline } from '@primereact/ui/timeline';
 
 export default function OppositeDemo() {
     const events = [

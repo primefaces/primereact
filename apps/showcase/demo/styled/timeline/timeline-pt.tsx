@@ -1,6 +1,6 @@
 'use client';
 
-import { Timeline } from 'primereact/timeline';
+import { Timeline } from '@primereact/ui/timeline';
 
 export default function TimelinePTDemo() {
     const events = [{ status: 'Ordered' }, { status: 'Processing' }, { status: 'Shipped' }, { status: 'Delivered' }];

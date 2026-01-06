@@ -1,8 +1,8 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
-import { Button } from 'primereact/button';
-import { Toolbar } from 'primereact/toolbar';
+import { Avatar } from '@primereact/ui/avatar';
+import { Button } from '@primereact/ui/button';
+import { Toolbar } from '@primereact/ui/toolbar';
 
 export default function CustomDemo() {
     return (

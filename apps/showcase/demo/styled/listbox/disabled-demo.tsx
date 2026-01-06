@@ -1,6 +1,6 @@
 'use client';
 
-import { Listbox } from 'primereact/listbox';
+import { Listbox } from '@primereact/ui/listbox';
 
 const cities = [
     { name: 'New York', code: 'NY' },

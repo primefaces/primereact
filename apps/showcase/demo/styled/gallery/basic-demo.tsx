@@ -1,7 +1,7 @@
 'use client';
 
 import { useGalleryChangeEvent } from '@primereact/types/shared/gallery';
-import { Gallery } from 'primereact/gallery';
+import { Gallery } from '@primereact/ui/gallery';
 import * as React from 'react';
 
 const images = [

@@ -1,6 +1,6 @@
 'use client';
 
-import { Timeline } from 'primereact/timeline';
+import { Timeline } from '@primereact/ui/timeline';
 
 export default function HorizontalDemo() {
     const events = ['2020', '2021', '2022', '2023'];

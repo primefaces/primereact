@@ -1,10 +1,10 @@
 'use client';
 
 import { usePopoverOpenChangeEvent } from '@primereact/types/shared/popover';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
-import { Popover } from 'primereact/popover';
+import { Button } from '@primereact/ui/button';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
+import { Popover } from '@primereact/ui/popover';
 import React from 'react';
 
 function ControlledDemo() {

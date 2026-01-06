@@ -1,7 +1,7 @@
 'use client';
 
 import type { ToggleButtonChangeEvent } from '@primereact/types/shared/togglebutton';
-import { ToggleButton } from 'primereact/togglebutton';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 import * as React from 'react';
 
 export default function ControlledDemo() {

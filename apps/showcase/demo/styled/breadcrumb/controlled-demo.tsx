@@ -1,7 +1,7 @@
 'use client';
 
+import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import Link from 'next/link';
-import { Breadcrumb } from 'primereact/breadcrumb';
 import * as React from 'react';
 
 export default function ControlledDemo() {

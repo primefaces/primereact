@@ -2,8 +2,8 @@
 
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
-import { Checkbox } from 'primereact/checkbox';
-import { Listbox } from 'primereact/listbox';
+import { Checkbox } from '@primereact/ui/checkbox';
+import { Listbox } from '@primereact/ui/listbox';
 import { useState } from 'react';
 
 const cities = [

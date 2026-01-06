@@ -2,11 +2,11 @@
 
 import { ProductService } from '@/services/product.service';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
-import Image from 'next/image';
-import { Button } from 'primereact/button';
+import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';
-import { Tag } from 'primereact/tag';
-import { ToggleButton } from 'primereact/togglebutton';
+import { Tag } from '@primereact/ui/tag';
+import { ToggleButton } from '@primereact/ui/togglebutton';
+import Image from 'next/image';
 import * as React from 'react';
 
 interface Product {

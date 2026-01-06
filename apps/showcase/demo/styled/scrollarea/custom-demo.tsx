@@ -1,6 +1,6 @@
 'use client';
 
-import { ScrollArea } from 'primereact/scrollarea';
+import { ScrollArea } from '@primereact/ui/scrollarea';
 
 export default function CustomDemo() {
     return (

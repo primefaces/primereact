@@ -3,9 +3,9 @@
 import { NodeService } from '@/services/node.service';
 import { SwitchChangeEvent } from '@primereact/types/shared/switch';
 import type { TreeNode } from '@primereact/types/shared/tree';
-import { Label } from 'primereact/label';
-import { Switch } from 'primereact/switch';
-import { Tree } from 'primereact/tree';
+import { Label } from '@primereact/ui/label';
+import { Switch } from '@primereact/ui/switch';
+import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
 
 export default function SingleSelectionDemo() {

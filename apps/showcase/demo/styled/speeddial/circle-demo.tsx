@@ -1,6 +1,6 @@
 'use client';
 
-import { SpeedDial } from 'primereact/speeddial';
+import { SpeedDial } from '@primereact/ui/speeddial';
 
 export default function CircleDemo() {
     const items = [

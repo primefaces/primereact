@@ -1,8 +1,8 @@
 'use client';
 
 import { PasswordInstance } from '@primereact/types/shared/password';
-import { Password } from 'primereact/password';
-import { Tag } from 'primereact/tag';
+import { Password } from '@primereact/ui/password';
+import { Tag } from '@primereact/ui/tag';
 
 const requirements = [
     {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Tag } from 'primereact/tag';
+import { Tag } from '@primereact/ui/tag';
 
 export default function SeverityDemo() {
     return (

@@ -1,12 +1,12 @@
 'use client';
 
 import { StepperPanelInstance, StepperStepInstance } from '@primereact/types/shared/stepper';
+import { Button } from '@primereact/ui/button';
+import { Divider } from '@primereact/ui/divider';
+import { InputText } from '@primereact/ui/inputtext';
+import { Stepper } from '@primereact/ui/stepper';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 import Image from 'next/image';
-import { Button } from 'primereact/button';
-import { Divider } from 'primereact/divider';
-import { InputText } from 'primereact/inputtext';
-import { Stepper } from 'primereact/stepper';
-import { ToggleButton } from 'primereact/togglebutton';
 
 export default function TemplateDemo() {
     return (

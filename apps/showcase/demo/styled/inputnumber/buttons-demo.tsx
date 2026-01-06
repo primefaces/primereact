@@ -2,11 +2,11 @@
 
 import { useInputNumber } from '@primereact/headless/inputnumber';
 import type { InputNumberInstance, useInputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
-import { Button } from 'primereact/button';
-import { IconField } from 'primereact/iconfield';
-import { InputGroup } from 'primereact/inputgroup';
-import { InputNumber } from 'primereact/inputnumber';
-import { Label } from 'primereact/label';
+import { Button } from '@primereact/ui/button';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputGroup } from '@primereact/ui/inputgroup';
+import { InputNumber } from '@primereact/ui/inputnumber';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function ButtonsDemo() {
@@ -119,12 +119,12 @@ export default function ButtonsDemo() {
                     Horizontal with Step
                 </Label.Root>
                 <IconField.Root>
-                    <IconField.Icon
+                    <IconField.InputIcon
                         onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.increment(e, 0.25)}
                         onPointerUp={inputRef3.current?.stopSpin}
                     >
                         <i className="pi pi-plus"></i>
-                    </IconField.Icon>
+                    </IconField.InputIcon>
                     <InputNumber
                         ref={inputRef3}
                         value={value3}
@@ -134,12 +134,12 @@ export default function ButtonsDemo() {
                         currency="EUR"
                         onValueChange={inputNumber3?.onValueChange}
                     />
-                    <IconField.Icon
+                    <IconField.InputIcon
                         onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.decrement(e, -0.25)}
                         onPointerUp={inputRef3.current?.stopSpin}
                     >
                         <i className="pi pi-minus"></i>
-                    </IconField.Icon>
+                    </IconField.InputIcon>
                 </IconField.Root>
             </div>
         </div>

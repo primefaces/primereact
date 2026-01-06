@@ -1,6 +1,6 @@
 'use client';
 
-import { Splitter } from 'primereact/splitter';
+import { Splitter } from '@primereact/ui/splitter';
 
 export default function HorizontalDemo() {
     return (

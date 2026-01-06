@@ -1,6 +1,6 @@
 'use client';
 
-import { ToggleButton } from 'primereact/togglebutton';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 
 export default function ToggleButtonPT() {
     return (

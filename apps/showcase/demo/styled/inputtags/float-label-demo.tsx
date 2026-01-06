@@ -1,8 +1,8 @@
 'use client';
 
 import { InputTagsInstance, InputTagsValueChangeEvent } from '@primereact/types/shared/inputtags';
-import { InputTags } from 'primereact/inputtags';
-import { Label } from 'primereact/label';
+import { InputTags } from '@primereact/ui/inputtags';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function FloatLabelDemo() {

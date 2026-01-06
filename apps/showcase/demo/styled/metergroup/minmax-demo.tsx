@@ -1,6 +1,6 @@
 'use client';
 
-import { MeterGroup } from 'primereact/metergroup';
+import { MeterGroup } from '@primereact/ui/metergroup';
 
 export default function MinMaxDemo() {
     const values = [

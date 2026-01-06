@@ -1,6 +1,6 @@
 'use client';
 
-import { Slider } from 'primereact/slider';
+import { Slider } from '@primereact/ui/slider';
 
 export default function BasicDemo() {
     return (

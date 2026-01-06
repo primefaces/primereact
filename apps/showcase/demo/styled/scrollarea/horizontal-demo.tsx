@@ -1,8 +1,8 @@
 'use client';
 
 import { PhotoService } from '@/services/photo.service';
+import { ScrollArea } from '@primereact/ui/scrollarea';
 import Image from 'next/image';
-import { ScrollArea } from 'primereact/scrollarea';
 import * as React from 'react';
 
 interface ImageData {

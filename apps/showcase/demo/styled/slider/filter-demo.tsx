@@ -2,9 +2,9 @@
 
 import { SliderChangeEvent } from '@primereact/types/shared/slider';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
+import { Slider } from '@primereact/ui/slider';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 import Image from 'next/image';
-import { Slider } from 'primereact/slider';
-import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
 export default function FilterDemo() {

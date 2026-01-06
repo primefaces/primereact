@@ -1,6 +1,6 @@
 'use client';
 
-import { Stepper } from 'primereact/stepper';
+import { Stepper } from '@primereact/ui/stepper';
 
 export default function StepsOnlyDemo() {
     return (

@@ -1,14 +1,14 @@
 'use client';
 
-import { IconField } from 'primereact/iconfield';
-import { InputText } from 'primereact/inputtext';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function IconFieldPTDemo() {
     return (
         <IconField.Root>
-            <IconField.Icon>
+            <IconField.InputIcon>
                 <i className="pi pi-search" />
-            </IconField.Icon>
+            </IconField.InputIcon>
             <InputText placeholder="Search" />
         </IconField.Root>
     );

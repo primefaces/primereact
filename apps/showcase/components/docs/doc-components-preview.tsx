@@ -55,7 +55,7 @@ export default function DocComponentsPreview() {
     return (
         <div className="space-y-6 mt-6" suppressHydrationWarning>
             <div className="flex gap-4">
-                <InputText.Root value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} placeholder="Search components..." />
+                <InputText value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} placeholder="Search components..." />
                 <div className="flex items-center w-fit bg-surface-0 dark:bg-surface-900 border border-surface shadow-xs rounded-lg p-0.75">
                     {TYPES.map((item) => (
                         <button

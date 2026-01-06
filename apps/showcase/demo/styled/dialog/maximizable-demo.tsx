@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog } from 'primereact/dialog';
+import { Dialog } from '@primereact/ui/dialog';
 
 export default function MaximizableDemo() {
     return (

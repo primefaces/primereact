@@ -1,5 +1,5 @@
 'use client';
-import { CommandMenu } from 'primereact/commandmenu';
+import { CommandMenu } from '@primereact/ui/commandmenu';
 import * as React from 'react';
 import { cmds } from './cmds';
 

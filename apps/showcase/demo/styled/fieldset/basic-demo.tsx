@@ -1,6 +1,6 @@
 'use client';
 
-import { Fieldset } from 'primereact/fieldset';
+import { Fieldset } from '@primereact/ui/fieldset';
 
 export default function BasicDemo() {
     return (

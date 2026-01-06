@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from 'primereact/button';
+import { Button } from '@primereact/ui/button';
 
 export default function AlternativeButtonDemo() {
     return (

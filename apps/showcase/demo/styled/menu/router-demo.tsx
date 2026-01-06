@@ -1,8 +1,8 @@
 'use client';
 
+import { Menu } from '@primereact/ui/menu';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Menu } from 'primereact/menu';
 
 export default function RouterDemo() {
     const router = useRouter();

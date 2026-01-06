@@ -1,7 +1,7 @@
 'use client';
 
 import type { InputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber } from '@primereact/ui/inputnumber';
 import * as React from 'react';
 
 export default function InvalidDemo() {

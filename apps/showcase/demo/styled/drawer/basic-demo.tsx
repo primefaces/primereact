@@ -1,9 +1,9 @@
 'use client';
 
 import { DrawerContentInstance } from '@primereact/types/shared/drawer';
-import { Avatar } from 'primereact/avatar';
-import { Button } from 'primereact/button';
-import { Drawer } from 'primereact/drawer';
+import { Avatar } from '@primereact/ui/avatar';
+import { Button } from '@primereact/ui/button';
+import { Drawer } from '@primereact/ui/drawer';
 
 export default function BasicDemo() {
     return (

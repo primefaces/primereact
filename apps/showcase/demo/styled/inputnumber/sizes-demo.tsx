@@ -1,6 +1,6 @@
 'use client';
 
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber } from '@primereact/ui/inputnumber';
 
 export default function SizesDemo() {
     return (

@@ -2,11 +2,11 @@
 
 import { ProductService } from '@/services/product.service';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
-import Image from 'next/image';
-import { Button } from 'primereact/button';
+import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';
-import { Paginator } from 'primereact/paginator';
-import { Tag } from 'primereact/tag';
+import { Paginator } from '@primereact/ui/paginator';
+import { Tag } from '@primereact/ui/tag';
+import Image from 'next/image';
 import * as React from 'react';
 
 interface Product {

@@ -1,7 +1,7 @@
 'use client';
 
 import { KnobTextInstance } from '@primereact/types/shared/knob';
-import { Knob } from 'primereact/knob';
+import { Knob } from '@primereact/ui/knob';
 
 export default function TemplateDemo() {
     return (

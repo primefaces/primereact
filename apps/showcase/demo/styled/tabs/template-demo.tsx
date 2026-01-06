@@ -1,11 +1,11 @@
 'use client';
 
-import { Badge } from 'primereact/badge';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
-import { Switch } from 'primereact/switch';
-import { Tabs } from 'primereact/tabs';
+import { Badge } from '@primereact/ui/badge';
+import { Button } from '@primereact/ui/button';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
+import { Switch } from '@primereact/ui/switch';
+import { Tabs } from '@primereact/ui/tabs';
 
 const tabs = [
     {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge } from 'primereact/badge';
+import { Badge } from '@primereact/ui/badge';
 
 export default function BasicDemo() {
     return (

@@ -1,10 +1,10 @@
 'use client';
 
 import { Icon } from '@primereact/core/icon';
+import { Badge } from '@primereact/ui/badge';
+import { Breadcrumb } from '@primereact/ui/breadcrumb';
+import { Menu } from '@primereact/ui/menu';
 import Link from 'next/link';
-import { Badge } from 'primereact/badge';
-import { Breadcrumb } from 'primereact/breadcrumb';
-import { Menu } from 'primereact/menu';
 import * as React from 'react';
 
 export default function CustomItemDemo() {

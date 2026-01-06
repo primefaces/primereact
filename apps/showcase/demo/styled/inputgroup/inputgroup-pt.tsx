@@ -1,7 +1,7 @@
 'use client';
 
-import { InputGroup } from 'primereact/inputgroup';
-import { InputText } from 'primereact/inputtext';
+import { InputGroup } from '@primereact/ui/inputgroup';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function InputGroupPTDemo() {
     return (

@@ -1,8 +1,8 @@
 'use client';
 
-import { InputGroup } from 'primereact/inputgroup';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
+import { InputGroup } from '@primereact/ui/inputgroup';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 
 export default function IftaLabelDemo() {
     return (

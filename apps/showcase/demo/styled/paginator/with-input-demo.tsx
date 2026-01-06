@@ -26,7 +26,7 @@ function WithInputDemo() {
                     <Paginator.First />
                     <Paginator.Prev />
                     <div className="flex items-center gap-2">
-                        <InputText.Root
+                        <InputText
                             className="max-w-14 px-2 py-1"
                             type="number"
                             value={page}

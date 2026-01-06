@@ -3,7 +3,7 @@
 import { parseColor } from '@primereact/headless/colorpicker';
 import type { ColorInstance, ColorSpace } from '@primereact/types/shared/colorpicker';
 import { useColorPickerChangeEvent } from '@primereact/types/shared/colorpicker';
-import { ColorPicker } from 'primereact/colorpicker';
+import { ColorPicker } from '@primereact/ui/colorpicker';
 import * as React from 'react';
 
 export default function ControlledDemo() {

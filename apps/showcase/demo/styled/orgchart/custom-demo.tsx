@@ -1,7 +1,7 @@
 'use client';
 
 import { TreeNode } from '@primereact/types/shared/orgchart';
-import { OrgChart } from 'primereact/orgchart';
+import { OrgChart } from '@primereact/ui/orgchart';
 
 interface CustomNodeProps extends TreeNode {
     data: {

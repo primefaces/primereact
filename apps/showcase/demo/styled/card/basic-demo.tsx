@@ -1,10 +1,10 @@
 'use client';
 
+import { Button } from '@primereact/ui/button';
+import { Card } from '@primereact/ui/card';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 import Link from 'next/link';
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
 
 export default function BasicDemo() {
     return (

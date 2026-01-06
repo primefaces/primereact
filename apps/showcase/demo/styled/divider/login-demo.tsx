@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import { Divider } from 'primereact/divider';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
+import { Button } from '@primereact/ui/button';
+import { Divider } from '@primereact/ui/divider';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 
 export default function LoginDemo() {
     return (

@@ -1,9 +1,9 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Tag } from 'primereact/tag';
+import { Avatar } from '@primereact/ui/avatar';
+import { Button } from '@primereact/ui/button';
+import { Card } from '@primereact/ui/card';
+import { Tag } from '@primereact/ui/tag';
 
 export default function AdvancedDemo() {
     return (

@@ -2,7 +2,7 @@
 
 import { Icon } from '@primereact/core/icon';
 import type { AccordionHeaderInstance } from '@primereact/types/shared/accordion';
-import { Accordion } from 'primereact/accordion';
+import { Accordion } from '@primereact/ui/accordion';
 
 const items = [
     {

@@ -6,7 +6,7 @@ import type {
     DatePickerValueChangeEvent,
     useDatePickerMonthData
 } from '@primereact/types/shared/datepicker';
-import { DatePicker } from 'primereact/datepicker';
+import { DatePicker } from '@primereact/ui/datepicker';
 import * as React from 'react';
 
 const getRandomNumber = (min: number = 30, max: number = 100): number => {

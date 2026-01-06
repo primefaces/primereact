@@ -1,10 +1,10 @@
 'use client';
 
 import { DialogContentInstance } from '@primereact/types/shared/dialog';
-import { Button } from 'primereact/button';
-import { Dialog } from 'primereact/dialog';
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
+import { Button } from '@primereact/ui/button';
+import { Dialog } from '@primereact/ui/dialog';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 
 export default function BasicDemo() {
     return (

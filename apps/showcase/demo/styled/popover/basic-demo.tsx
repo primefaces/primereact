@@ -1,8 +1,8 @@
 'use client';
 
-import { InputText } from 'primereact/inputtext';
-import { Label } from 'primereact/label';
-import { Popover } from 'primereact/popover';
+import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
+import { Popover } from '@primereact/ui/popover';
 
 export default function BasicDemo() {
     return (

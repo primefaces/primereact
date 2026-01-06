@@ -1,9 +1,9 @@
 'use client';
 
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
-import { IconField } from 'primereact/iconfield';
-import { InputText } from 'primereact/inputtext';
-import { Listbox } from 'primereact/listbox';
+import { IconField } from '@primereact/ui/iconfield';
+import { InputText } from '@primereact/ui/inputtext';
+import { Listbox } from '@primereact/ui/listbox';
 import { useMemo, useState } from 'react';
 
 const cities = [
@@ -37,9 +37,9 @@ export default function FilterDemo() {
                             value={filterValue}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                         />
-                        <IconField.Icon>
+                        <IconField.InputIcon>
                             <i className="pi pi-search" />
-                        </IconField.Icon>
+                        </IconField.InputIcon>
                     </IconField.Root>
                 </Listbox.Header>
                 <Listbox.Options />

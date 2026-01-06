@@ -1,6 +1,6 @@
 'use client';
 
-import { Message } from 'primereact/message';
+import { Message } from '@primereact/ui/message';
 
 export default function ClosableDemo() {
     return (

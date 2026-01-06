@@ -1,8 +1,8 @@
 'use client';
 
 import { SliderChangeEvent } from '@primereact/types/shared/slider';
-import { InputText } from 'primereact/inputtext';
-import { Slider } from 'primereact/slider';
+import { InputText } from '@primereact/ui/inputtext';
+import { Slider } from '@primereact/ui/slider';
 import * as React from 'react';
 
 export default function InputDemo() {

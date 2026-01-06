@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import { Message } from 'primereact/message';
+import { Button } from '@primereact/ui/button';
+import { Message } from '@primereact/ui/message';
 import * as React from 'react';
 
 export default function LifeDemo() {

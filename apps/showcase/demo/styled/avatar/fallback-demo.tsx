@@ -1,7 +1,7 @@
 'use client';
 
 import { CheckIcon } from '@primereact/icons';
-import { Avatar } from 'primereact/avatar';
+import { Avatar } from '@primereact/ui/avatar';
 
 export default function LabelDemo() {
     return (

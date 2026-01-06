@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar } from 'primereact/avatar';
+import { Avatar } from '@primereact/ui/avatar';
 
 const ShapeDemo = () => {
     return (

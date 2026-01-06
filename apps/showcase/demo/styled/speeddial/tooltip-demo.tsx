@@ -1,7 +1,7 @@
 'use client';
 
-import { SpeedDial } from 'primereact/speeddial';
-import { Tooltip } from 'primereact/tooltip';
+import { SpeedDial } from '@primereact/ui/speeddial';
+import { Tooltip } from '@primereact/ui/tooltip';
 
 export default function TooltipDemo() {
     const items = [

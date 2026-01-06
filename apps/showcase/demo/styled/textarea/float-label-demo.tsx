@@ -1,7 +1,7 @@
 'use client';
 
-import { Label } from 'primereact/label';
-import { Textarea } from 'primereact/textarea';
+import { Label } from '@primereact/ui/label';
+import { Textarea } from '@primereact/ui/textarea';
 import * as React from 'react';
 
 export default function FloatLabelDemo() {

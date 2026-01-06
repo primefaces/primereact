@@ -1,6 +1,6 @@
 'use client';
 
-import { Divider } from 'primereact/divider';
+import { Divider } from '@primereact/ui/divider';
 
 export default function VerticalDemo() {
     return (

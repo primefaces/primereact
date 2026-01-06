@@ -1,5 +1,5 @@
 'use client';
-import { CommandMenu } from 'primereact/commandmenu';
+import { CommandMenu } from '@primereact/ui/commandmenu';
 import { cmds } from './cmds';
 
 const commands = [

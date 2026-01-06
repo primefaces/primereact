@@ -1,6 +1,6 @@
 'use client';
 
-import { ProgressBar } from 'primereact/progressbar';
+import { ProgressBar } from '@primereact/ui/progressbar';
 import * as React from 'react';
 
 export default function DynamicDemo() {

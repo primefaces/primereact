@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import { InputGroup } from 'primereact/inputgroup';
-import { InputText } from 'primereact/inputtext';
+import { Button } from '@primereact/ui/button';
+import { InputGroup } from '@primereact/ui/inputgroup';
+import { InputText } from '@primereact/ui/inputtext';
 
 export default function ButtonDemo() {
     return (

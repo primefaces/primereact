@@ -9,13 +9,13 @@ export default function InvalidDemo() {
 
     return (
         <div className="flex flex-wrap gap-4 items-center justify-center">
-            <InputText.Root
+            <InputText
                 value={value1}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue1(e.target.value)}
                 placeholder="Enter text"
                 invalid={value1 === ''}
             />
-            <InputText.Root
+            <InputText
                 value={value2}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue2(e.target.value)}
                 placeholder="Enter text"

@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { Toolbar } from 'primereact/toolbar';
+import { Button } from '@primereact/ui/button';
+import { InputText } from '@primereact/ui/inputtext';
+import { Toolbar } from '@primereact/ui/toolbar';
 
 export default function BasicDemo() {
     return (

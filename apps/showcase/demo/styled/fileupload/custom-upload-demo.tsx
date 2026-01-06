@@ -1,8 +1,8 @@
 'use client';
 
 import { FileUploadHandlerEvent, FileUploadInstance } from '@primereact/types/shared/fileupload';
-import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
+import { Button } from '@primereact/ui/button';
+import { FileUpload } from '@primereact/ui/fileupload';
 import * as React from 'react';
 
 export default function CustomUploadDemo() {

@@ -1,8 +1,8 @@
 'use client';
 
 import { DrawerChangeEvent } from '@primereact/types/shared/drawer';
-import { Button } from 'primereact/button';
-import { Drawer } from 'primereact/drawer';
+import { Button } from '@primereact/ui/button';
+import { Drawer } from '@primereact/ui/drawer';
 import * as React from 'react';
 
 export default function PositionDemo() {

@@ -10,8 +10,8 @@ import {
     useDatePickerProps,
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
-import { Button } from 'primereact/button';
-import { DatePicker } from 'primereact/datepicker';
+import { Button } from '@primereact/ui/button';
+import { DatePicker } from '@primereact/ui/datepicker';
 import * as React from 'react';
 
 export default function ButtonbarDemo() {

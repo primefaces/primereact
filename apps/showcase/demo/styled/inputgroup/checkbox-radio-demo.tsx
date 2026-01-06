@@ -1,9 +1,9 @@
 'use client';
 
-import { Checkbox } from 'primereact/checkbox';
-import { InputGroup } from 'primereact/inputgroup';
-import { InputText } from 'primereact/inputtext';
-import { RadioButton } from 'primereact/radiobutton';
+import { Checkbox } from '@primereact/ui/checkbox';
+import { InputGroup } from '@primereact/ui/inputgroup';
+import { InputText } from '@primereact/ui/inputtext';
+import { RadioButton } from '@primereact/ui/radiobutton';
 
 export default function CheckboxRadioDemo() {
     return (

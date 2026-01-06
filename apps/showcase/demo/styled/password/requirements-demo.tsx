@@ -1,7 +1,7 @@
 'use client';
 
 import { PasswordInstance, PasswordStrengthResult } from '@primereact/types/shared/password';
-import { Password } from 'primereact/password';
+import { Password } from '@primereact/ui/password';
 
 const requirements = [
     {

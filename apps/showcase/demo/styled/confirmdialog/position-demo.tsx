@@ -1,8 +1,8 @@
 'use client';
 
 import { ConfirmDialogChangeEvent, ConfirmDialogProps } from '@primereact/types/shared/confirmdialog';
-import { Button } from 'primereact/button';
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Button } from '@primereact/ui/button';
+import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 import * as React from 'react';
 
 export default function PositionDemo() {

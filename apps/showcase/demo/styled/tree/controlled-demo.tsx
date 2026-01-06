@@ -1,8 +1,8 @@
 'use client';
 
 import type { TreeExpandedKeys, TreeNode, useTreeExpandedChangeEvent } from '@primereact/types/shared/tree';
-import { Button } from 'primereact/button';
-import { Tree } from 'primereact/tree';
+import { Button } from '@primereact/ui/button';
+import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
 
 export default function ControlledDemo() {

@@ -1,8 +1,8 @@
 'use client';
 
-import { AnimateOnScroll } from 'primereact/animateonscroll';
-import { Avatar } from 'primereact/avatar';
-import { Button } from 'primereact/button';
+import { AnimateOnScroll } from '@primereact/ui/animateonscroll';
+import { Avatar } from '@primereact/ui/avatar';
+import { Button } from '@primereact/ui/button';
 
 export default function BasicDemo() {
     return (
