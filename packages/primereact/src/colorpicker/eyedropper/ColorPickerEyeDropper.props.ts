@@ -2,7 +2,7 @@ import type { ColorPickerEyeDropperProps } from '@primereact/types/shared/colorp
 import { ButtonProps } from 'primereact/button';
 
 export const defaultEyeDropperProps: ColorPickerEyeDropperProps = {
-    ...(ButtonProps.defaults as ColorPickerEyeDropperProps),
+    ...(ButtonProps.defaultProps as ColorPickerEyeDropperProps),
     iconOnly: true,
     variant: 'outlined',
     severity: 'secondary'

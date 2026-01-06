@@ -1,5 +1,5 @@
 'use client';
-import { MenuLevelContextInterface } from '@primereact/types/shared/menu/';
+import { MenuLevelContextInterface } from '@primereact/types/shared/menu';
 import * as React from 'react';
 
 export const MenuLevelContext = React.createContext<MenuLevelContextInterface | null>(null);

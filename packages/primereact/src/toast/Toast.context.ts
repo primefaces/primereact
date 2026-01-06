@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ToastInstance } from '@primereact/types/shared/toast';
+import type { ToastRootInstance } from '@primereact/types/shared/toast';
 
-export const [ToastProvider, useToastContext] = createOptionalContext<ToastInstance>();
+export const [ToastProvider, useToastContext] = createOptionalContext<ToastRootInstance>();

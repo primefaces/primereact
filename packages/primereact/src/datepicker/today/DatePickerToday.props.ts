@@ -2,7 +2,7 @@ import { DatePickerTodayProps } from '@primereact/types/shared/datepicker';
 import { ButtonProps } from 'primereact/button';
 
 export const defaultTodayProps: DatePickerTodayProps = {
-    ...(ButtonProps.defaults as DatePickerTodayProps),
+    ...(ButtonProps.defaultProps as DatePickerTodayProps),
     variant: 'text',
     severity: 'secondary',
     size: 'small'

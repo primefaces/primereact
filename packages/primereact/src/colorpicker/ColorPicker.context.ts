@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ColorPickerInstance } from '@primereact/types/shared/colorpicker';
+import type { ColorPickerRootInstance } from '@primereact/types/shared/colorpicker';
 
-export const [ColorPickerProvider, useColorPickerContext] = createOptionalContext<ColorPickerInstance>();
+export const [ColorPickerProvider, useColorPickerContext] = createOptionalContext<ColorPickerRootInstance>();

@@ -2,7 +2,7 @@ import { PopoverCloseProps } from '@primereact/types/shared/popover';
 import { ButtonProps } from 'primereact/button';
 
 export const defaultCloseProps: PopoverCloseProps = {
-    ...(ButtonProps.defaults as PopoverCloseProps),
+    ...(ButtonProps.defaultProps as PopoverCloseProps),
     iconOnly: true,
     variant: 'text',
     rounded: true,

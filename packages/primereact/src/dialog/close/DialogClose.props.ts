@@ -2,7 +2,7 @@ import { DialogCloseProps } from '@primereact/types/shared/dialog';
 import { ButtonProps } from 'primereact/button';
 
 export const defaultCloseProps: DialogCloseProps = {
-    ...(ButtonProps.defaults as DialogCloseProps),
+    ...(ButtonProps.defaultProps as DialogCloseProps),
     iconOnly: true,
     variant: 'text',
     rounded: true,

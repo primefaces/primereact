@@ -191,7 +191,7 @@ const main = async () => {
     try {
         const inlineDocs = await getTypeDoc({
             name: 'PrimeReact',
-            entryPoints: [path.resolve(rootDir, 'packages/types/src/shared')],
+            entryPoints: [path.resolve(rootDir, 'packages/@primereact/types/src/shared')],
             exclude: ['node_modules/**/*', '**/*.spec.ts', '**/*.test.ts']
         });
 

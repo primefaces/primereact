@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { GalleryInstance } from '@primereact/types/shared/gallery';
+import type { GalleryRootInstance } from '@primereact/types/shared/gallery';
 
-export const [GalleryProvider, useGalleryContext] = createOptionalContext<GalleryInstance>();
+export const [GalleryProvider, useGalleryContext] = createOptionalContext<GalleryRootInstance>();

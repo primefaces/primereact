@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { CarouselInstance } from '@primereact/types/shared/carousel';
+import type { CarouselRootInstance } from '@primereact/types/shared/carousel';
 
-export const [CarouselProvider, useCarouselContext] = createOptionalContext<CarouselInstance>();
+export const [CarouselProvider, useCarouselContext] = createOptionalContext<CarouselRootInstance>();

@@ -11,7 +11,7 @@ export default defineConfig({
             reporter: ['text', 'json', 'html']
         },
         alias: {
-            '^@primereact/(.*)/(.*)$': './packages/$1/src/$2'
+            '^@primereact/(.*)/(.*)$': './packages/@primereact/$1/src/$2'
         }
     }
 });

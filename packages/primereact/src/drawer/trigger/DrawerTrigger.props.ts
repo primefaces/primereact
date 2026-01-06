@@ -2,5 +2,5 @@ import { DrawerTriggerProps } from '@primereact/types/shared/drawer';
 import { ButtonProps } from 'primereact/button';
 
 export const defaultTriggerProps: DrawerTriggerProps = {
-    ...(ButtonProps.defaults as DrawerTriggerProps)
+    ...(ButtonProps.defaultProps as DrawerTriggerProps)
 };

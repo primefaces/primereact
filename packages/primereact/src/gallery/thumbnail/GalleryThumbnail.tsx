@@ -24,6 +24,6 @@ export const GalleryThumbnail = withComponent({
             ptmi('root')
         );
 
-        return <Component as={Carousel} instance={instance} attrs={rootProps} children={props.children} ref={gallery?.thumbnailRef} />;
+        return <Component as={Carousel.Root} instance={instance} attrs={rootProps} children={props.children} ref={gallery?.thumbnailRef} />;
     }
 });
