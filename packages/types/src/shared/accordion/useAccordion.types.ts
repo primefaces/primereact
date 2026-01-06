@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/accordion/)
  *
- * @module useaccordion
+ * @module useAccordion
  * @group headless
  *
  */
