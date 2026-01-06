@@ -4,7 +4,6 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--code-figure-border);
     margin-top: calc(var(--spacing) * 2);
-    margin-bottom: calc(var(--spacing) * 4);
     overflow: hidden;
     outline: none;
     position: relative;

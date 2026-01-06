@@ -15,12 +15,10 @@ interface PTOption {
     data: Array<{ label: string }>;
 }
 
-export default function DocPtViewer({ components, className, name, ...props }: React.ComponentProps<'div'> & { components?: string[]; name: string }) {
+export default function DocPtViewer({ components, className, name, __pathname__, ...props }: React.ComponentProps<'div'> & { components?: string[]; name: string; __pathname__: string }) {
     const container = React.useRef<HTMLDivElement | null>(null);
     const [PTNames, setPTNames] = useState<Array<PTNameType>>([]);
     const [hoveredElements, setHoveredElements] = useState<HTMLElement[]>([]);
-
-    const Demo = Store[name.split('-')[0]]?.[name]?.component;
 
     useEffect(() => {
         const newPTNames: Array<PTNameType> = [];
@@ -77,6 +75,15 @@ export default function DocPtViewer({ components, className, name, ...props }: R
 
         setHoveredElements([]);
     };
+
+    const match = __pathname__.match(/\/docs\/([^/]+)\/components\/([^/]+)/);
+
+    const type = match?.[1];
+    const componentName = match?.[2];
+
+    if (!type || !componentName) return;
+
+    const Demo = Store[type]?.[componentName]?.[name].component;
 
     if (!Demo) {
         return (

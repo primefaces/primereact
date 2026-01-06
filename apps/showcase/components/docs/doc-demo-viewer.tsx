@@ -1,18 +1,21 @@
+import { Store } from '@/__store__';
 import { highlightCode } from '@/utils/highlight-code';
-import dynamic from 'next/dynamic';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import React from 'react';
 import DocDemoWrapper from './doc-demo-wrapper';
 
-export default async function DocDemoViewer({ name, hideCode, __type__, ...props }: React.ComponentProps<'div'> & { name: string; hideCode?: boolean; __type__?: string }) {
+export default async function DocDemoViewer({ name, hideCode, __pathname__, ...props }: React.ComponentProps<'div'> & { name: string; hideCode?: boolean; __pathname__: string }) {
+    const match = __pathname__?.match(/\/docs\/([^/]+)\//);
+    const type = match?.[1];
+
+    if (!type) return null;
+
     const [component, demo] = name.split(':');
 
-    const Component = dynamic(() => {
-        return import(`@/demo/${__type__ ? __type__ + '/' : ''}${name.split(':').join('/')}.tsx`).then((mod) => mod.default);
-    });
+    const Demo = Store?.[type]?.[component]?.[demo].component;
 
-    if (!Component) {
+    if (!Demo) {
         return (
             <div className="card">
                 <p className="text-center">
@@ -27,7 +30,7 @@ export default async function DocDemoViewer({ name, hideCode, __type__, ...props
 
     if (!hideCode) {
         try {
-            const filePath = `demo/${__type__ ? __type__ + '/' : ''}${component}/${demo}.tsx`;
+            const filePath = `demo/${type ? type + '/' : ''}${component}/${demo}.tsx`;
 
             source = await fs.readFile(path.join(process.cwd(), filePath), 'utf8');
 
@@ -37,5 +40,5 @@ export default async function DocDemoViewer({ name, hideCode, __type__, ...props
         }
     }
 
-    return <DocDemoWrapper name={name} component={<Component />} source={source} highlightedCode={highlightedCode} {...props} />;
+    return <DocDemoWrapper name={name} component={<Demo />} source={source} highlightedCode={highlightedCode} {...props} />;
 }

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import DocButton from './doc-button';
-import DocComponentShowcase from './doc-component-showcase';
 import DocComponentsPreview from './doc-components-preview';
 import DocCopyButton from './doc-copy-button';
 import DocDemoViewer from './doc-demo-viewer';
@@ -60,7 +59,6 @@ const components = {
     Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => <Link className={cn('font-medium underline underline-offset-4', className)} {...props} />,
     em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <em className={cn('text-sm relative rounded-md bg-(--mark-background) font-medium text-(--mark-text) not-italic py-0.5 px-1.25', className)} {...props} />,
     DocDemoViewer,
-    DocComponentShowcase,
     DocPTViewer,
     DocNotification,
     DocTable,

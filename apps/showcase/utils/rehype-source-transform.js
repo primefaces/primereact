@@ -4,27 +4,17 @@ import { visit } from 'unist-util-visit';
 export const rehypeDemoViewer = () => (tree, file) => {
     const pathname = file.data?.pathname;
 
-    const match = pathname?.match(/\/docs\/([^/]+)\//);
-    const type = match?.[1];
-
     visit(tree, (node) => {
-        const isDocDemoViewer = (node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') && node.name === 'DocDemoViewer';
+        const isComponentWithNameProp = node.name === 'DocDemoViewer' || node.name === 'DocPTViewer' || node.name === 'DocSourceViewer';
 
-        if (!isDocDemoViewer) return;
+        if (!isComponentWithNameProp) return;
 
         node.attributes ||= [];
-
-        const existing = node.attributes.find((attr) => attr.type === 'mdxJsxAttribute' && attr.name === '__type__');
-
-        if (existing) {
-            existing.value = type;
-        } else {
-            node.attributes.push({
-                type: 'mdxJsxAttribute',
-                name: '__type__',
-                value: type
-            });
-        }
+        node.attributes.push({
+            type: 'mdxJsxAttribute',
+            name: '__pathname__',
+            value: pathname
+        });
     });
 };
 
