@@ -396,12 +396,12 @@ export const useCarousel = withHeadless({
             overscrollBehaviorY: props.orientation === 'horizontal' ? '' : 'contain',
             display: 'flex',
             flexDirection: props.orientation === 'horizontal' ? '' : 'column',
-            '--spacing': props.spacing + 'px',
-            gap: 'var(--spacing)'
+            '--spacing-items': props.spacing + 'px',
+            gap: props.spacing + 'px'
         } as React.CSSProperties;
 
         const slidesPerPage = props.slidesPerPage && props.slidesPerPage > 0 ? props.slidesPerPage : 1;
-        const basis = props.autoSize ? 'auto' : `calc(100% /${slidesPerPage} - var(--spacing) * (${slidesPerPage} - 1) / ${slidesPerPage})`;
+        const basis = props.autoSize ? 'auto' : `calc(100% /${slidesPerPage} - var(--spacing-items) * (${slidesPerPage} - 1) / ${slidesPerPage})`;
 
         const itemStyles = {
             scrollSnapAlign: props.align,
