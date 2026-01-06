@@ -5,10 +5,10 @@ import { Button } from 'primereact/button';
 export default function AlternativeButtonDemo() {
     return (
         <div className="flex justify-center">
-            <Button.Root unstyled>
+            <Button unstyled>
                 Check
                 <i className="pi pi-check" />
-            </Button.Root>
+            </Button>
         </div>
     );
 }

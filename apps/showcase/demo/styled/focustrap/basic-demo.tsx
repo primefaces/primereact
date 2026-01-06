@@ -18,9 +18,9 @@ export default function BasicDemo() {
                     <label htmlFor="accept">I agree to the terms and conditions.</label>
                 </div>
 
-                <Button.Root type="submit" className="mt-2">
+                <Button type="submit" className="mt-2">
                     Submit
-                </Button.Root>
+                </Button>
             </FocusTrap>
         </div>
     );

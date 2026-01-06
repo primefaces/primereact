@@ -47,14 +47,14 @@ export default function AdvancedDemo() {
                     </div>
                 </Card.Content>
                 <Card.Footer className="flex items-center gap-2 mt-4">
-                    <Button.Root className="flex-1" severity="secondary" variant="outlined">
+                    <Button className="flex-1" severity="secondary" variant="outlined">
                         <i className="pi pi-phone"></i>
                         Call Us
-                    </Button.Root>
-                    <Button.Root className="flex-1">
+                    </Button>
+                    <Button className="flex-1">
                         <i className="pi pi-globe"></i>
                         Visit Site
-                    </Button.Root>
+                    </Button>
                 </Card.Footer>
             </Card.Body>
         </Card.Root>

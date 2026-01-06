@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { IconFieldInstance } from './IconField.types';
+import { IconFieldRootInstance } from './IconFieldRoot.types';
 
 /**
  * Defines passthrough(pt) options type in InputIcon component.
@@ -44,7 +44,7 @@ export interface InputIconExposes {
     /**
      * Instance of the IconField component.
      */
-    iconfield: IconFieldInstance | undefined | null;
+    iconfield: IconFieldRootInstance | undefined | null;
 }
 
 /**

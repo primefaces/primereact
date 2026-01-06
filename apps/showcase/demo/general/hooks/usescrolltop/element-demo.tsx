@@ -27,14 +27,9 @@ export default function ElementDemo() {
                     nec.
                 </p>
                 {visible && (
-                    <Button.Root
-                        onClick={scrollToTop}
-                        iconOnly
-                        rounded
-                        className="sticky flex ms-auto [inset-block-end:20px] [inset-inline-end:20px]"
-                    >
+                    <Button onClick={scrollToTop} iconOnly rounded className="sticky flex ms-auto [inset-block-end:20px] [inset-inline-end:20px]">
                         <i className="pi pi-arrow-up" />
-                    </Button.Root>
+                    </Button>
                 )}
             </div>
         </div>

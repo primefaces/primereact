@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { DrawerInstance } from './Drawer.types';
+import type { DrawerRootInstance } from './DrawerRoot.types';
 
 /**
  * Defines passthrough(pt) options type in DrawerPortal component.
@@ -44,7 +44,7 @@ export interface DrawerPortalExposes {
     /**
      * Instance of the Drawer component.
      */
-    drawer: DrawerInstance | undefined | null;
+    drawer: DrawerRootInstance | undefined | null;
 }
 
 /**

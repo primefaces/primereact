@@ -1,3 +1,3 @@
-export * from './FocusTrap';
-export * from './FocusTrap.context';
-export * from './FocusTrap.props';
+// Named runtime exports to maximize tree-shaking
+export { defaultProps, FocusTrapProps, FocusTrapProvider, useFocusTrapContext } from 'primereact/focustrap';
+export { UIFocusTrap as FocusTrap } from './UIFocusTrap';

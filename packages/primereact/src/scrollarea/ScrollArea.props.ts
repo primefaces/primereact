@@ -1,5 +1,5 @@
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultThumbXProps as ThumbXDefaults } from './thumbx';
-export { defaultThumbYProps as ThumbYDefaults } from './thumby';
-export { defaultViewportProps as ViewportDefaults } from './viewport';
+export { defaultContentProps } from './content';
+export { defaultRootProps } from './root';
+export { defaultThumbXProps } from './thumbx';
+export { defaultThumbYProps } from './thumby';
+export { defaultViewportProps } from './viewport';

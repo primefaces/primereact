@@ -1,4 +1,4 @@
-export { defaultRangeProps as RangeDefaults } from './range';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultTextProps as TextDefaults } from './text';
-export { defaultValueProps as ValueDefaults } from './value';
+export { defaultRangeProps } from './range';
+export { defaultRootProps } from './root';
+export { defaultTextProps } from './text';
+export { defaultValueProps } from './value';

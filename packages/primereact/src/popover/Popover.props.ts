@@ -1,5 +1,5 @@
-export { defaultCloseProps as CloseDefaults } from './close';
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultPortalProps as PortalDefaults } from './portal';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultTriggerProps as TriggerDefaults } from './trigger';
+export { defaultCloseProps } from './close';
+export { defaultContentProps } from './content';
+export { defaultPortalProps } from './portal';
+export { defaultRootProps } from './root';
+export { defaultTriggerProps } from './trigger';

@@ -58,10 +58,10 @@ export default function TemplateDemo() {
                             <div className="flex items-center p-5 gap-2">
                                 <div className="flex flex-wrap justify-between items-center flex-1 gap-4">
                                     <div className="flex gap-2">
-                                        <Button.Root onClick={instance.choose} iconOnly rounded variant="outlined" severity="secondary">
+                                        <Button onClick={instance.choose} iconOnly rounded variant="outlined" severity="secondary">
                                             <i className="pi pi-images" />
-                                        </Button.Root>
-                                        <Button.Root
+                                        </Button>
+                                        <Button
                                             onClick={instance.upload}
                                             iconOnly
                                             rounded
@@ -70,8 +70,8 @@ export default function TemplateDemo() {
                                             disabled={!instance.hasFiles}
                                         >
                                             <i className="pi pi-cloud-upload" />
-                                        </Button.Root>
-                                        <Button.Root
+                                        </Button>
+                                        <Button
                                             onClick={instance.clear}
                                             iconOnly
                                             rounded
@@ -80,7 +80,7 @@ export default function TemplateDemo() {
                                             disabled={!instance.hasFiles}
                                         >
                                             <i className="pi pi-times" />
-                                        </Button.Root>
+                                        </Button>
                                     </div>
                                     <ProgressBar.Root value={totalSizePercent}>
                                         <ProgressBar.Track className="md:w-20rem w-full md:ml-auto">
@@ -126,7 +126,7 @@ export default function TemplateDemo() {
                                                         </span>
                                                         <div>{instance?.formatSize(file.size)}</div>
                                                         <Badge.Root severity="warn">Pending</Badge.Root>
-                                                        <Button.Root
+                                                        <Button
                                                             variant="text"
                                                             rounded
                                                             iconOnly
@@ -134,7 +134,7 @@ export default function TemplateDemo() {
                                                             onClick={() => onRemoveFileCallback(instance?.remove, file, index)}
                                                         >
                                                             <i className="pi pi-times" />
-                                                        </Button.Root>
+                                                        </Button>
                                                     </div>
                                                 ))}
                                             </div>
@@ -166,7 +166,7 @@ export default function TemplateDemo() {
                                                         <Badge.Root severity="success" className="mt-4">
                                                             Completed
                                                         </Badge.Root>
-                                                        <Button.Root
+                                                        <Button
                                                             variant="text"
                                                             rounded
                                                             iconOnly
@@ -174,7 +174,7 @@ export default function TemplateDemo() {
                                                             onClick={() => instance?.removeUploadedFile(index)}
                                                         >
                                                             <i className="pi pi-times" />
-                                                        </Button.Root>
+                                                        </Button>
                                                     </div>
                                                 ))}
                                             </div>

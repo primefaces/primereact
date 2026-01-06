@@ -1,9 +1,9 @@
-export { ConfirmPopupAccept as Accept } from './accept';
-export { ConfirmPopupContent as Content } from './content';
-export { ConfirmPopupFooter as Footer } from './footer';
-export { ConfirmPopupIcon as Icon } from './icon';
-export { ConfirmPopupMessage as Message } from './message';
-export { ConfirmPopupPortal as Portal } from './portal';
-export { ConfirmPopupReject as Reject } from './reject';
-export { ConfirmPopupRoot as Root } from './root';
-export { ConfirmPopupTrigger as Trigger } from './trigger';
+export { defaultAcceptProps } from './accept';
+export { defaultContentProps } from './content';
+export { defaultFooterProps } from './footer';
+export { defaultIconProps } from './icon';
+export { defaultMessageProps } from './message';
+export { defaultPortalProps } from './portal';
+export { defaultRejectProps } from './reject';
+export { defaultRootProps } from './root';
+export { defaultTriggerProps } from './trigger';

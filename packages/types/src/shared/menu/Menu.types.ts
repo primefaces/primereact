@@ -8,98 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useMenuExposes, useMenuOpenChangeEvent, useMenuProps, useMenuState } from './useMenu.types';
-
-/**
- * Defines passthrough(pt) options type in Menu component.
- */
-export type MenuPassThroughType<E> = PassThroughType<MenuInstance, E>;
-
-/**
- * Defines passthrough(pt) options of Menu component.
- */
-export interface MenuPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the list's DOM element.
-     */
-    list?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
-    /**
-     * Used to pass attributes to the item's DOM element.
-     */
-    item?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the checkbox item's DOM element.
-     */
-    checkboxItem?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the radio item's DOM element.
-     */
-    radioItem?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the label's DOM element.
-     */
-    label?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the trigger's DOM element.
-     */
-    trigger?: MenuPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the item icon's DOM element.
-     */
-    icon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
-    /**
-     * Used to pass attributes to the checkbox item icon's DOM element.
-     */
-    checkboxIcon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
-    /**
-     * Used to pass attributes to the radio item icon's DOM element.
-     */
-    radioIcon?: MenuPassThroughType<React.HTMLAttributes<SVGElement>>;
-    /**
-     * Used to pass attributes to the separator's DOM element.
-     */
-    separator?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the portal's DOM element.
-     */
-    portal?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Event fired when the menu's open state changes.
- * @extends useMenuOpenChangeEvent
- */
-export interface MenuOpenChangeEvent extends useMenuOpenChangeEvent {}
-
-/**
- * Defines valid properties in Menu component.
- */
-export interface MenuProps extends BaseComponentProps<MenuInstance, Omit<useMenuProps, 'onOpenChange'>, MenuPassThrough> {
-    /**
-     * Callback fired when the menu's open state changes.
-     * @param event.value The new value of the menu's open state.
-     * @returns void
-     */
-    onOpenChange?: (event: MenuOpenChangeEvent) => void;
-}
-
-/**
- * Defines valid state in Menu component.
- * @extends useMenuState
- */
-export interface MenuState extends useMenuState {}
-
-/**
- * Defines the methods and properties exposed by Menu component.
- * @extends useMenuExposes
- */
-export interface MenuExposes extends useMenuExposes {}
 
 /**
  * Defines the CSS class names used in the Menu component.
@@ -163,8 +71,3 @@ export const MenuClassNames = {
  * Type representing the CSS class names used in the Menu component.
  */
 export type MenuClassNamesType = (typeof MenuClassNames)[keyof typeof MenuClassNames];
-
-/**
- * Instance of Menu component.
- */
-export type MenuInstance = ComponentInstance<MenuProps, MenuState, MenuExposes>;

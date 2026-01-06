@@ -1,2 +1,2 @@
-export { defaultOverlayProps as OverlayDefaults } from './overlay';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultOverlayProps } from './overlay';
+export { defaultRootProps } from './root';

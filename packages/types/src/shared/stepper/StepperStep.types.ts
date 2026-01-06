@@ -10,8 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { StepperInstance } from './Stepper.types';
-import { StepperItemInstance } from './StepperItem.types';
+import type { StepperItemInstance } from './StepperItem.types';
+import type { StepperRootInstance } from './StepperRoot.types';
 
 /**
  * Defines passthrough(pt) options type in StepperStep component.
@@ -56,7 +56,7 @@ export interface StepperStepExposes {
     /**
      * The Stepper component instance.
      */
-    stepper: StepperInstance | undefined | null;
+    stepper: StepperRootInstance | undefined | null;
     /**
      * The StepperItem component instance.
      */

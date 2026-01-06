@@ -1,9 +1,12 @@
 export * from './Card.types';
+export * from './useCard.types';
+
+// parts
 export * from './CardBody.types';
 export * from './CardCaption.types';
 export * from './CardContent.types';
 export * from './CardFooter.types';
 export * from './CardHeader.types';
+export * from './CardRoot.types';
 export * from './CardSubtitle.types';
 export * from './CardTitle.types';
-export * from './useCard.types';

@@ -17,9 +17,9 @@ export default function ToggleableDemo() {
                                 const { panel } = instance;
 
                                 return (
-                                    <Button.Root type="button" variant="text" onClick={panel?.onButtonClick}>
+                                    <Button type="button" variant="text" onClick={panel?.onButtonClick}>
                                         {panel?.state.collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
-                                    </Button.Root>
+                                    </Button>
                                 );
                             }}
                         </Panel.Collapse>

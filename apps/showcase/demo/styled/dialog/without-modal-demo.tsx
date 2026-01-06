@@ -38,12 +38,12 @@ export default function WithoutModalDemo() {
                                         <InputText id="email" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex justify-end gap-2">
-                                        <Button.Root type="button" severity="secondary" onClick={dialog?.close}>
+                                        <Button type="button" severity="secondary" onClick={dialog?.close}>
                                             Cancel
-                                        </Button.Root>
-                                        <Button.Root type="button" onClick={dialog?.close}>
+                                        </Button>
+                                        <Button type="button" onClick={dialog?.close}>
                                             Save
-                                        </Button.Root>
+                                        </Button>
                                     </div>
                                 </>
                             );

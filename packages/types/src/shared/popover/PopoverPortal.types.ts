@@ -10,8 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { PortalProps } from '../portal';
-import type { PopoverInstance } from './Popover.types';
+import type { PortalProps } from '@primereact/types/shared/portal';
+import type { PopoverRootInstance } from './PopoverRoot.types';
 
 /**
  * Defines passthrough(pt) options type in PopoverPortal component.
@@ -45,7 +45,7 @@ export interface PopoverPortalExposes {
     /**
      * The Popover component instance.
      */
-    popover: PopoverInstance | undefined | null;
+    popover: PopoverRootInstance | undefined | null;
 }
 
 /**

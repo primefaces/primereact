@@ -55,24 +55,24 @@ function PositionDemo() {
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button.Root onClick={() => createToast('top-left')} variant="outlined">
+            <Button onClick={() => createToast('top-left')} variant="outlined">
                 Top Left
-            </Button.Root>
-            <Button.Root onClick={() => createToast('top-center')} variant="outlined">
+            </Button>
+            <Button onClick={() => createToast('top-center')} variant="outlined">
                 Top Center
-            </Button.Root>
-            <Button.Root onClick={() => createToast('top-right')} variant="outlined">
+            </Button>
+            <Button onClick={() => createToast('top-right')} variant="outlined">
                 Top Right
-            </Button.Root>
-            <Button.Root onClick={() => createToast('bottom-left')} variant="outlined">
+            </Button>
+            <Button onClick={() => createToast('bottom-left')} variant="outlined">
                 Bottom Left
-            </Button.Root>
-            <Button.Root onClick={() => createToast('bottom-center')} variant="outlined">
+            </Button>
+            <Button onClick={() => createToast('bottom-center')} variant="outlined">
                 Bottom Center
-            </Button.Root>
-            <Button.Root onClick={() => createToast('bottom-right')} variant="outlined">
+            </Button>
+            <Button onClick={() => createToast('bottom-right')} variant="outlined">
                 Bottom Right
-            </Button.Root>
+            </Button>
 
             <PositionToast position="top-left" />
             <PositionToast position="top-right" />

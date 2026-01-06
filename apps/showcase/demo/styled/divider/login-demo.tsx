@@ -19,10 +19,10 @@ export default function LoginDemo() {
                         <InputText id="password" type="password" />
                     </div>
                     <div className="flex">
-                        <Button.Root className="w-full max-w-[17.35rem] mx-auto">
+                        <Button className="w-full max-w-[17.35rem] mx-auto">
                             Login
                             <i className="pi pi-user" />
-                        </Button.Root>
+                        </Button>
                     </div>
                 </div>
                 <div className="w-full md:w-2/12">
@@ -34,10 +34,10 @@ export default function LoginDemo() {
                     </Divider.Root>
                 </div>
                 <div className="w-full md:w-5/12 flex items-center justify-center py-5">
-                    <Button.Root severity="success" className="w-full max-w-[17.35rem] mx-auto">
+                    <Button severity="success" className="w-full max-w-[17.35rem] mx-auto">
                         <i className="pi pi-user-plus" />
                         Sign Up
-                    </Button.Root>
+                    </Button>
                 </div>
             </div>
         </div>

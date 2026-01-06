@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { TooltipInstance } from './Tooltip.types';
+import type { TooltipRootInstance } from './TooltipRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TooltipArrow component.
@@ -44,7 +44,7 @@ export interface TooltipArrowExposes {
     /**
      * The Tooltip component instance.
      */
-    tooltip: TooltipInstance | undefined | null;
+    tooltip: TooltipRootInstance | undefined | null;
 }
 
 /**

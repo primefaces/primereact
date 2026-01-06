@@ -8,68 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { usePaginatorExposes, usePaginatorProps, usePaginatorState } from './usePaginator.types';
-
-/**
- * Defines passthrough(pt) options type in Paginator component.
- */
-export type PaginatorPassThroughType<E> = PassThroughType<PaginatorInstance, E>;
-
-/**
- * Defines passthrough(pt) options of Paginator component.
- */
-export interface PaginatorPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the content's DOM element.
-     */
-    content?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the first's DOM element.
-     */
-    first?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the prev's DOM element.
-     */
-    prev?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the next's DOM element.
-     */
-    next?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the last's DOM element.
-     */
-    last?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-}
-
-/**
- * Defines valid properties in Paginator component.
- */
-export interface PaginatorProps extends BaseComponentProps<PaginatorInstance, usePaginatorProps, PaginatorPassThrough> {}
-
-/**
- * Defines valid state in Paginator component.
- * @extends usePaginatorState
- */
-export interface PaginatorState extends usePaginatorState {}
-
-/**
- * Defines the methods and properties exposed by Paginator component.
- * @extends usePaginatorExposes
- */
-export interface PaginatorExposes extends usePaginatorExposes {
-    /**
-     * Get the aria label for the given label type.
-     * @param labelType - The type of label to get.
-     * @returns The aria label for the given label type.
-     */
-    getAriaLabel: (labelType: string) => string;
-}
 
 /**
  * Defines the CSS class names used in the Paginator component.
@@ -149,8 +87,3 @@ export const PaginatorClassNames = {
  * Type representing the CSS class names used in the Paginator component.
  */
 export type PaginatorClassNamesType = (typeof PaginatorClassNames)[keyof typeof PaginatorClassNames];
-
-/**
- * Instance of Paginator component.
- */
-export type PaginatorInstance = ComponentInstance<PaginatorProps, PaginatorState, PaginatorExposes>;

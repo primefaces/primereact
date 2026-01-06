@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { CommandMenuInstance } from './CommandMenu.types';
+import type { CommandMenuRootInstance } from './CommandMenuRoot.types';
 
 /**
  * Defines passthrough(pt) options type in CommandMenuGroupHeading component.
@@ -44,7 +44,7 @@ export interface CommandMenuGroupHeadingExposes {
     /**
      * The CommandMenu component instance.
      */
-    commandmenu: CommandMenuInstance | undefined | null;
+    commandmenu: CommandMenuRootInstance | undefined | null;
 }
 
 /**

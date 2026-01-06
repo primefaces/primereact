@@ -1,3 +1,3 @@
-export { defaultCommandListProps as CommandListDefaults } from './commandlist';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultWelcomeProps as WelcomeDefaults } from './welcome';
+export { defaultCommandListProps } from './commandlist';
+export { defaultRootProps } from './root';
+export { defaultWelcomeProps } from './welcome';

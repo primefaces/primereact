@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { useTooltipGroupExposes, useTooltipGroupProps, useTooltipGroupState } from './useTooltipGroup.types';
+import type { useTooltipGroupExposes, useTooltipGroupProps, useTooltipGroupState } from './useTooltipGroup.types';
 
 /**
  * Defines passthrough(pt) options type in  TooltipGroup component.

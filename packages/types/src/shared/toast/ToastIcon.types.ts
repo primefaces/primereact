@@ -10,9 +10,9 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { ToastInstance } from './Toast.types';
-import { ToastItemInstance } from './ToastItem.types';
-import { ToastVariant } from './ToastManager.types';
+import type { ToastItemInstance } from './ToastItem.types';
+import type { ToastVariant } from './ToastManager.types';
+import type { ToastRootInstance } from './ToastRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ToastIcon component.
@@ -51,7 +51,7 @@ export interface ToastIconExposes {
     /**
      * The Toast component instance.
      */
-    toast: ToastInstance | undefined | null;
+    toast: ToastRootInstance | undefined | null;
     /**
      * The ToastItem component instance.
      */

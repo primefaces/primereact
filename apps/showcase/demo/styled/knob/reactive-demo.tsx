@@ -15,12 +15,12 @@ export default function ReactiveDemo() {
                 <Knob.Text />
             </Knob.Root>
             <div className="flex gap-2">
-                <Button.Root onClick={() => setValue(value + 1)} disabled={value === 100}>
+                <Button onClick={() => setValue(value + 1)} disabled={value === 100}>
                     <i className="pi pi-plus" />
-                </Button.Root>
-                <Button.Root onClick={() => setValue(value - 1)} disabled={value <= 0}>
+                </Button>
+                <Button onClick={() => setValue(value - 1)} disabled={value <= 0}>
                     <i className="pi pi-minus" />
-                </Button.Root>
+                </Button>
             </div>
         </div>
     );

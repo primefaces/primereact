@@ -8,57 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useScrollAreaExposes, useScrollAreaProps, useScrollAreaState } from './useScrollArea.types';
-
-/**
- * Defines passthrough(pt) options type in ScrollArea component.
- */
-export type ScrollAreaPassThroughType<E> = PassThroughType<ScrollAreaInstance, E>;
-
-/**
- * Defines passthrough(pt) options of ScrollArea component.
- */
-export interface ScrollAreaPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: ScrollAreaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the viewport's DOM element.
-     */
-    viewport?: ScrollAreaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the content's DOM element.
-     */
-    content?: ScrollAreaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the thumbY's DOM element.
-     */
-    thumbY?: ScrollAreaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the thumbX's DOM element.
-     */
-    thumbX?: ScrollAreaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in ScrollArea component.
- */
-export interface ScrollAreaProps extends BaseComponentProps<ScrollAreaInstance, useScrollAreaProps, ScrollAreaPassThrough> {}
-
-/**
- * Defines valid state in ScrollArea component.
- * @extends useScrollAreaState
- */
-export interface ScrollAreaState extends useScrollAreaState {}
-
-/**
- * Defines the methods and properties exposed by ScrollArea component.
- * @extends useScrollAreaExposes
- */
-export interface ScrollAreaExposes extends useScrollAreaExposes {}
 
 /**
  * Defines the CSS class names used in the ScrollArea component.
@@ -90,8 +39,3 @@ export const ScrollAreaClassNames = {
  * Type representing the CSS class names used in the ScrollArea component.
  */
 export type ScrollAreaClassNamesType = (typeof ScrollAreaClassNames)[keyof typeof ScrollAreaClassNames];
-
-/**
- * Instance of ScrollArea component.
- */
-export type ScrollAreaInstance = ComponentInstance<ScrollAreaProps, ScrollAreaState, ScrollAreaExposes>;

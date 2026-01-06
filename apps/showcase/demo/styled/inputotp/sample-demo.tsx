@@ -37,10 +37,10 @@ export default function SampleDemo() {
                     })}
                 </InputOtp.Root>
                 <div className="flex justify-between mt-8 self-stretch">
-                    <Button.Root variant="link" className="p-0">
+                    <Button variant="link" className="p-0">
                         Resend Code
-                    </Button.Root>
-                    <Button.Root>Submit Code</Button.Root>
+                    </Button>
+                    <Button>Submit Code</Button>
                 </div>
             </div>
         </div>

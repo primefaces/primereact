@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { PasswordInstance } from './Password.types';
+import type { PasswordRootInstance } from './PasswordRoot.types';
 
 /**
  * Defines passthrough(pt) options type in PasswordMeter component.
@@ -54,7 +54,7 @@ export interface PasswordMeterExposes {
     /**
      * Instance of the Password component.
      */
-    password: PasswordInstance | undefined | null;
+    password: PasswordRootInstance | undefined | null;
 }
 
 /**

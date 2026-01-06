@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { SwitchInstance } from './Switch.types';
+import type { SwitchRootInstance } from './SwitchRoot.types';
 
 /**
  * Defines passthrough(pt) options type in SwitchControl component.
@@ -44,7 +44,7 @@ export interface SwitchControlExposes {
     /**
      * The Switch component instance.
      */
-    switch: SwitchInstance | undefined | null;
+    switch: SwitchRootInstance | undefined | null;
 }
 
 /**

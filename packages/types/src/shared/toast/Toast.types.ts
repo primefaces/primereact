@@ -8,59 +8,46 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useToastExposes, useToastProps, useToastState } from './useToast.types';
-
-/**
- * Defines passthrough(pt) options type in Toast component.
- */
-export type ToastPassThroughType<E> = PassThroughType<ToastInstance, E>;
-
-/**
- * Defines passthrough(pt) options of Toast component.
- */
-export interface ToastPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in Toast component.
- */
-export interface ToastProps extends BaseComponentProps<ToastInstance, useToastProps, ToastPassThrough> {
-    /**
-     * Whether to show rich colors
-     * @default false
-     */
-    richColors?: boolean;
-}
-
-/**
- * Defines valid state in Toast component.
- * @extends useToastState
- */
-export interface ToastState extends useToastState {}
-
-/**
- * Defines the methods and properties exposed by Toast component.
- * @extends useToastExposes
- */
-export interface ToastExposes extends useToastExposes {}
 
 /**
  * Defines the CSS class names used in the Toast component.
  */
 export const ToastClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-toast p-component',
+    /**
+     * Class name of the region element
+     */
     region: 'p-toast-region',
+    /**
+     * Class name of the toast item element
+     */
     item: 'p-toast',
+    /**
+     * Class name of the icon element
+     */
     icon: 'p-toast-icon',
+    /**
+     * Class name of the title element
+     */
     title: 'p-toast-title',
+    /**
+     * Class name of the description element
+     */
     description: 'p-toast-description',
+    /**
+     * Class name of the action element
+     */
     action: 'p-toast-action',
+    /**
+     * Class name of the close element
+     */
     close: 'p-toast-close',
+    /**
+     * Class name of the progress element
+     */
     progress: 'p-toast-progress'
 } as const;
 
@@ -68,8 +55,3 @@ export const ToastClassNames = {
  * Type representing the CSS class names used in the Toast component.
  */
 export type ToastClassNamesType = (typeof ToastClassNames)[keyof typeof ToastClassNames];
-
-/**
- * Instance of Toast component.
- */
-export type ToastInstance = ComponentInstance<ToastProps, ToastState, ToastExposes>;

@@ -1,3 +1,3 @@
-export { defaultAnchorProps as Anchor } from './anchor';
-export { defaultArrowProps as Arrow } from './arrow';
-export { defaultRootProps as Root } from './root';
+export { defaultAnchorProps } from './anchor';
+export { defaultArrowProps } from './arrow';
+export { defaultRootProps } from './root';

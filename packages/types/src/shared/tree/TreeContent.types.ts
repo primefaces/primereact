@@ -10,8 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { TreeInstance } from './Tree.types';
 import type { TreeNodeInstance } from './TreeNode.types';
+import type { TreeRootInstance } from './TreeRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TreeContent component.
@@ -45,7 +45,7 @@ export interface TreeContentExposes {
     /**
      * The Tree component instance.
      */
-    tree: TreeInstance | undefined | null;
+    tree: TreeRootInstance | undefined | null;
     /**
      * The TreeNode component instance.
      */

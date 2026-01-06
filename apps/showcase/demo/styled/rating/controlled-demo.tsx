@@ -11,15 +11,15 @@ function ControlledDemo() {
     return (
         <div className="flex flex-col justify-center gap-4">
             <div className="flex items-center gap-2">
-                <Button.Root onClick={() => setValue(2.5)} severity="secondary" variant="outlined">
+                <Button onClick={() => setValue(2.5)} severity="secondary" variant="outlined">
                     2.5 Star
-                </Button.Root>
-                <Button.Root onClick={() => setValue(3)} severity="secondary" variant="outlined">
+                </Button>
+                <Button onClick={() => setValue(3)} severity="secondary" variant="outlined">
                     3 Star
-                </Button.Root>
-                <Button.Root onClick={() => setValue(3.5)} severity="secondary" variant="outlined">
+                </Button>
+                <Button onClick={() => setValue(3.5)} severity="secondary" variant="outlined">
                     3.5 Star
-                </Button.Root>
+                </Button>
             </div>
             <Rating.Root value={value} onValueChange={(e: useRatingChangeEvent) => setValue(e.value)}>
                 <Rating.Option />

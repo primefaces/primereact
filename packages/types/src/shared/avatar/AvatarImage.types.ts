@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { AvatarInstance } from './Avatar.types';
+import type { AvatarRootInstance } from './AvatarRoot.types';
 
 /**
  * Defines passthrough(pt) options type in AvatarImage component.
@@ -50,7 +50,7 @@ export interface AvatarImageExposes {
     /**
      * The Avatar component instance.
      */
-    avatar: AvatarInstance | undefined | null;
+    avatar: AvatarRootInstance | undefined | null;
 }
 
 /**

@@ -4,11 +4,11 @@ import { useDataView } from '@primereact/headless/dataview';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { DataViewProvider } from './DataView.context';
-import { defaultProps } from './DataView.props';
+import { defaultRootProps } from './DataView.props';
 
 export const DataView = withComponent({
     name: 'DataView',
-    defaultProps,
+    defaultProps: defaultRootProps,
     setup(instance) {
         const dataview = useDataView(instance.inProps);
 

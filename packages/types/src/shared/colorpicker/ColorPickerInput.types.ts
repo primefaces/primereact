@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ColorPickerInstance } from './ColorPicker.types';
+import type { ColorPickerRootInstance } from './ColorPickerRoot.types';
 import type { useColorPickerInputExposes, useColorPickerInputProps, useColorPickerInputState } from './useColorPickerInput.types';
 
 /**
@@ -45,7 +45,7 @@ export interface ColorPickerInputExposes extends useColorPickerInputExposes {
     /**
      * The ColorPicker component instance.
      */
-    colorpicker: ColorPickerInstance | undefined | null;
+    colorpicker: ColorPickerRootInstance | undefined | null;
 }
 
 /**

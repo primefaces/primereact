@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { DividerInstance } from './Divider.types';
+import type { DividerRootInstance } from './DividerRoot.types';
 
 /**
  * Defines passthrough(pt) options type in DividerContent component.
@@ -44,7 +44,7 @@ export interface DividerContentExposes {
     /**
      * Instance of the Divider component.
      */
-    divider: DividerInstance | undefined | null;
+    divider: DividerRootInstance | undefined | null;
 }
 
 /**

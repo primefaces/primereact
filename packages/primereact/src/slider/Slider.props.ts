@@ -1,3 +1,3 @@
-export { defaultContentProps as Range } from './range';
-export { defaultRootProps as Root } from './root';
-export { defaultThumbProps as Thumb } from './thumb';
+export { defaultContentProps } from './range';
+export { defaultRootProps } from './root';
+export { defaultThumbProps } from './thumb';

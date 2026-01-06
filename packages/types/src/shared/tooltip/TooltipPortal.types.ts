@@ -9,14 +9,14 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { PortalProps } from '@primereact/types/shared/portal';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { PortalProps } from '../portal';
-import type { TooltipInstance } from './Tooltip.types';
+import type { TooltipRootInstance } from './TooltipRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TooltipPortal component.
  */
-export type TooltipPortalPassThroughType<E> = PassThroughType<TooltipInstance, E>;
+export type TooltipPortalPassThroughType<E> = PassThroughType<TooltipPortalInstance, E>;
 
 /**
  * Defines passthrough(pt) options of TooltipPortal component.
@@ -45,7 +45,7 @@ export interface TooltipPortalExposes {
     /**
      * The Tooltip component instance.
      */
-    tooltip: TooltipInstance | undefined | null;
+    tooltip: TooltipRootInstance | undefined | null;
 }
 
 /**

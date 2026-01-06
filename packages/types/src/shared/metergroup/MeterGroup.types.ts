@@ -8,79 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useMeterGroupExposes, useMeterGroupProps, useMeterGroupState } from './useMeterGroup.types';
-
-/**
- * Defines passthrough(pt) options type in MeterGroup component.
- */
-export type MeterGroupPassThroughType<E> = PassThroughType<MeterGroupInstance, E>;
-
-/**
- * Defines passthrough(pt) options of MeterGroup component.
- */
-export interface MeterGroupPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the meters' DOM element.
-     */
-    meters?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the meter's DOM element.
-     */
-    meter?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the labels' DOM element.
-     */
-    labels?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLOListElement>>;
-    /**
-     * Used to pass attributes to the label's DOM element.
-     */
-    label?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the label icon's DOM element.
-     */
-    icon?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLElement>>;
-    /**
-     * Used to pass attributes to the label marker's DOM element.
-     */
-    marker?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    text?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-}
-
-/**
- * Defines valid properties in MeterGroup component.
- */
-export interface MeterGroupProps extends BaseComponentProps<MeterGroupInstance, useMeterGroupProps, MeterGroupPassThrough> {
-    /**
-     * Specifies the layout of the component.
-     * @default horizontal
-     */
-    orientation?: 'horizontal' | 'vertical' | undefined;
-}
-
-/**
- * Defines valid state in MeterGroup component.
- * @extends useMeterGroupState
- */
-export interface MeterGroupState extends useMeterGroupState {}
-
-/**
- * Defines the methods and properties exposed by MeterGroup component.
- * @extends useMeterGroupExposes
- */
-export interface MeterGroupExposes extends useMeterGroupExposes {
-    colors: Record<METERGROUP_DEFAULT_COLORS_TYPE, string>;
-    getNextColorIndex: () => number;
-    getNextLabelIndex: () => number;
-}
 
 /**
  * Defines the CSS class names used in the MeterGroup component.
@@ -120,14 +47,7 @@ export const MeterGroupClassNames = {
     labelText: 'p-metergroup-label-text'
 } as const;
 
-export type METERGROUP_DEFAULT_COLORS_TYPE = 'blue' | 'emerald' | 'violet' | 'amber' | 'gray' | 'cyan' | 'pink' | 'lime' | 'fuchsia';
-
 /**
  * Type representing the CSS class names used in the MeterGroup component.
  */
 export type MeterGroupClassNamesType = (typeof MeterGroupClassNames)[keyof typeof MeterGroupClassNames];
-
-/**
- * Instance of MeterGroup component.
- */
-export type MeterGroupInstance = ComponentInstance<MeterGroupProps, MeterGroupState, MeterGroupExposes>;

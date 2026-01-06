@@ -16,7 +16,7 @@ export default function ControlledDemo() {
 
     return (
         <div className="space-y-4">
-            <Button.Root onClick={() => setActiveTab('tab2')}>Go to Payment</Button.Root>
+            <Button onClick={() => setActiveTab('tab2')}>Go to Payment</Button>
             <Tabs.Root value={activeTab} onValueChange={(e: useTabsChangeEvent) => setActiveTab(e.value)}>
                 <Tabs.List>
                     {tabs.map((tab) => (

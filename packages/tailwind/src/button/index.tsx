@@ -1,7 +1,7 @@
 import type { ButtonProps } from '@primereact/types/shared/button';
 import { cn } from '@primeuix/utils';
 import { cva, VariantProps } from 'class-variance-authority';
-import { ButtonRoot } from 'primereact/button';
+import { Button as PRButton } from 'primereact/button';
 import * as React from 'react';
 
 const buttonVariants = cva(
@@ -187,7 +187,7 @@ const buttonVariants = cva(
 );
 
 function Button({ className, variant, size, severity, raised, rounded, iconOnly, ...props }: ButtonProps & VariantProps<typeof buttonVariants>) {
-    return <ButtonRoot className={cn(buttonVariants({ variant, size, severity, raised, rounded, iconOnly, className }))} {...props} />;
+    return <PRButton className={cn(buttonVariants({ variant, size, severity, raised, rounded, iconOnly, className }))} {...props} />;
 }
 
 export { Button, buttonVariants };

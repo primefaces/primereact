@@ -1,8 +1,8 @@
-export { defaultCloseProps as CloseDefaults } from './close';
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultFooterProps as FooterDefaults } from './footer';
-export { defaultHeaderProps as HeaderDefaults } from './header';
-export { defaultPortalProps as PortalDefaults } from './portal';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultTitleProps as TitleDefaults } from './title';
-export { defaultTriggerProps as TriggerDefaults } from './trigger';
+export { defaultCloseProps } from './close';
+export { defaultContentProps } from './content';
+export { defaultFooterProps } from './footer';
+export { defaultHeaderProps } from './header';
+export { defaultPortalProps } from './portal';
+export { defaultRootProps } from './root';
+export { defaultTitleProps } from './title';
+export { defaultTriggerProps } from './trigger';

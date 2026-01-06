@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { InputOtpInstance } from './InputOtp.types';
+import type { InputOtpRootInstance } from './InputOtpRoot.types';
 
 /**
  * Defines passthrough(pt) options type in InputOtpText component.
@@ -44,7 +44,7 @@ export interface InputOtpTextExposes {
     /**
      * Instance of the InputOtp component.
      */
-    inputotp: InputOtpInstance | undefined | null;
+    inputotp: InputOtpRootInstance | undefined | null;
 }
 
 /**

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { InputGroupInstance } from './InputGroup.types';
+import type { InputGroupRootInstance } from './InputGroupRoot.types';
 
 /**
  * Defines passthrough(pt) options type in InputGroupAddon component.
@@ -44,7 +44,7 @@ export interface InputGroupAddonExposes {
     /**
      * Instance of the InputGroup component.
      */
-    inputgroup: InputGroupInstance | undefined | null;
+    inputgroup: InputGroupRootInstance | undefined | null;
 }
 
 /**

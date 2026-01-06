@@ -8,41 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useColorPickerExposes, useColorPickerProps, useColorPickerState } from './useColorPicker.types';
-
-/**
- * Defines passthrough(pt) options type in ColorPicker component.
- */
-export type ColorPickerPassThroughType<E> = PassThroughType<ColorPickerInstance, E>;
-
-/**
- * Defines passthrough(pt) options of ColorPicker component.
- */
-export interface ColorPickerPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in ColorPicker component.
- */
-export interface ColorPickerProps extends BaseComponentProps<ColorPickerInstance, useColorPickerProps, ColorPickerPassThrough> {}
-
-/**
- * Defines valid state in ColorPicker component.
- * @extends useColorPickerState
- */
-export interface ColorPickerState extends useColorPickerState {}
-
-/**
- * Defines the methods and properties exposed by ColorPicker component.
- * @extends useColorPickerExposes
- */
-export interface ColorPickerExposes extends useColorPickerExposes {}
 
 /**
  * Defines the CSS class names used in the ColorPicker component.
@@ -98,8 +63,3 @@ export const ColorPickerClassNames = {
  * Type representing the CSS class names used in the ColorPicker component.
  */
 export type ColorPickerClassNamesType = (typeof ColorPickerClassNames)[keyof typeof ColorPickerClassNames];
-
-/**
- * Instance of ColorPicker component.
- */
-export type ColorPickerInstance = ComponentInstance<ColorPickerProps, ColorPickerState, ColorPickerExposes>;

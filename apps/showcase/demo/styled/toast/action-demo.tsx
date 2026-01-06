@@ -62,9 +62,9 @@ function ActionDemo() {
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button.Root onClick={handleCreateToast} variant="outlined">
+            <Button onClick={handleCreateToast} variant="outlined">
                 Create toast with action
-            </Button.Root>
+            </Button>
             <ActionToast />
         </div>
     );

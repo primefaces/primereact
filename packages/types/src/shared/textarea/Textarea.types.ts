@@ -9,8 +9,8 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import { FluidInstance } from '@primereact/types/shared/fluid';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { FluidInstance } from '../fluid/Fluid.types';
 import type { useTextareaExposes, useTextareaProps, useTextareaState } from './useTextarea.types';
 
 /**

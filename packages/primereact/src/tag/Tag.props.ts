@@ -1,3 +1,3 @@
-export { defaultIconProps as IconDefaults } from './icon';
-export { defaultLabelProps as LabelDefaults } from './label';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultIconProps } from './icon';
+export { defaultLabelProps } from './label';
+export { defaultRootProps } from './root';

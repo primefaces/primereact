@@ -1,3 +1,6 @@
 export * from './Fluid';
 export * from './Fluid.context';
-export * from './Fluid.props';
+export * as FluidProps from './Fluid.props';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultProps } from './Fluid.props';

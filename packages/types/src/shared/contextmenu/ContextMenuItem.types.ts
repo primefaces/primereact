@@ -9,10 +9,9 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { MenuItemPassThrough } from '@primereact/types/shared/menu';
+import type { MenuItemPassThrough, MenuRootInstance } from '@primereact/types/shared/menu';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { MenuInstance } from '../menu';
-import type { ContextMenuInstance } from './ContextMenu.types';
+import type { ContextMenuRootInstance } from './ContextMenuRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ContextMenuItem component.
@@ -47,11 +46,11 @@ export interface ContextMenuItemExposes {
     /**
      * The ContextMenu component instance.
      */
-    contextmenu: ContextMenuInstance | undefined | null;
+    contextmenu: ContextMenuRootInstance | undefined | null;
     /**
      * Instance of the Menu component.
      */
-    menu: MenuInstance | undefined | null;
+    menu: MenuRootInstance | undefined | null;
 }
 
 /**

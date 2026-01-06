@@ -1,3 +1,3 @@
-export { defaultControlProps as ControlDefaults } from './control';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultThumbProps as ThumbDefaults } from './thumb';
+export { defaultControlProps } from './control';
+export { defaultRootProps } from './root';
+export { defaultThumbProps } from './thumb';

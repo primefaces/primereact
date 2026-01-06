@@ -115,16 +115,16 @@ export default function SortDemo() {
                                 <div className="flex flex-col md:items-end gap-8">
                                     <span className="text-xl font-semibold">${product.price}</span>
                                     <div className="flex flex-row-reverse md:flex-row gap-2">
-                                        <Button.Root variant="outlined">
+                                        <Button variant="outlined">
                                             <i className="pi pi-heart"></i>
-                                        </Button.Root>
-                                        <Button.Root
+                                        </Button>
+                                        <Button
                                             disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                             className="flex-auto md:flex-initial whitespace-nowrap"
                                         >
                                             <i className="pi pi-shopping-cart"></i>
                                             Buy Now
-                                        </Button.Root>
+                                        </Button>
                                     </div>
                                 </div>
                             </div>

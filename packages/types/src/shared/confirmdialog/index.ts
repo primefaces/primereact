@@ -1,4 +1,7 @@
 export * from './ConfirmDialog.types';
+export * from './useConfirmDialog.types';
+
+// parts
 export * from './ConfirmDialogAction.types';
 export * from './ConfirmDialogCancel.types';
 export * from './ConfirmDialogClose.types';
@@ -9,6 +12,6 @@ export * from './ConfirmDialogHeaderActions.types';
 export * from './ConfirmDialogIcon.types';
 export * from './ConfirmDialogMessage.types';
 export * from './ConfirmDialogPortal.types';
+export * from './ConfirmDialogRoot.types';
 export * from './ConfirmDialogTitle.types';
 export * from './ConfirmDialogTrigger.types';
-export * from './useConfirmDialog.types';

@@ -138,14 +138,14 @@ export default function ControlledDemo() {
     return (
         <>
             <div className="flex flex-wrap gap-2 mb-6">
-                <Button.Root type="button" onClick={expandAll}>
+                <Button type="button" onClick={expandAll}>
                     <i className="pi pi-plus" />
                     Expand All
-                </Button.Root>
-                <Button.Root type="button" onClick={collapseAll}>
+                </Button>
+                <Button type="button" onClick={collapseAll}>
                     <i className="pi pi-minus" />
                     Collapse All
-                </Button.Root>
+                </Button>
             </div>
             <Tree.Root
                 value={nodes}

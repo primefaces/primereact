@@ -1,3 +1,6 @@
 export * from './IconField.types';
-export * from './InputIcon.types';
 export * from './useIconField.types';
+
+// parts
+export * from './IconFieldRoot.types';
+export * from './InputIcon.types';

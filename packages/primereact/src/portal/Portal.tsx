@@ -4,11 +4,11 @@ import { usePortal } from '@primereact/headless/portal';
 import { PortalProps } from '@primereact/types/shared/portal';
 import { resolve } from '@primeuix/utils';
 import { createPortal } from 'react-dom';
-import { defaultProps } from './Portal.props';
+import { defaultRootProps } from './Portal.props';
 
 export const Portal = withComponent({
     name: 'Portal',
-    defaultProps,
+    defaultProps: defaultRootProps,
     setup(instance) {
         const portal = usePortal(instance.inProps);
 

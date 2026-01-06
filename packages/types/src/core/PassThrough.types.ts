@@ -1,18 +1,18 @@
-import type { AvatarPassThrough } from '../shared/avatar';
-import type { BadgePassThrough } from '../shared/badge';
-import type { ButtonPassThrough } from '../shared/button';
-import type { CheckboxPassThrough } from '../shared/checkbox';
-import type { ChipPassThrough } from '../shared/chip';
-import type { InplacePassThrough } from '../shared/inplace';
-import type { InputTextPassThrough } from '../shared/inputtext';
-import type { MeterGroupPassThrough } from '../shared/metergroup';
-import type { PanelPassThrough } from '../shared/panel';
-import type { ProgressBarPassThrough } from '../shared/progressbar';
-import type { ProgressSpinnerPassThrough } from '../shared/progressspinner';
-import type { RadioButtonPassThrough } from '../shared/radiobutton';
-import type { SkeletonPassThrough } from '../shared/skeleton';
-import type { StyleClassPassThrough } from '../shared/styleclass';
-import type { TagPassThrough } from '../shared/tag';
+import type { AvatarRootPassThrough } from '@primereact/types/shared/avatar';
+import type { BadgeRootPassThrough } from '@primereact/types/shared/badge';
+import type { ButtonPassThrough } from '@primereact/types/shared/button';
+import type { CheckboxRootPassThrough } from '@primereact/types/shared/checkbox';
+import type { ChipRootPassThrough } from '@primereact/types/shared/chip';
+import type { InplaceRootPassThrough } from '@primereact/types/shared/inplace';
+import type { InputTextPassThrough } from '@primereact/types/shared/inputtext';
+import type { MeterGroupRootPassThrough } from '@primereact/types/shared/metergroup';
+import type { PanelRootPassThrough } from '@primereact/types/shared/panel';
+import type { ProgressBarRootPassThrough } from '@primereact/types/shared/progressbar';
+import type { ProgressSpinnerPassThrough } from '@primereact/types/shared/progressspinner';
+import type { RadioButtonRootPassThrough } from '@primereact/types/shared/radiobutton';
+import type { SkeletonPassThrough } from '@primereact/types/shared/skeleton';
+import type { StyleClassPassThrough } from '@primereact/types/shared/styleclass';
+import type { TagRootPassThrough } from '@primereact/types/shared/tag';
 
 /**
  * Defines the pass-through options.
@@ -50,20 +50,20 @@ export interface PassThroughProps extends PassThroughOptions {
      * @todo Define the type.
      */
     value?: {
-        avatar?: AvatarPassThrough;
-        badge?: BadgePassThrough;
+        avatar?: AvatarRootPassThrough;
+        badge?: BadgeRootPassThrough;
         button?: ButtonPassThrough;
-        checkbox?: CheckboxPassThrough;
-        chip?: ChipPassThrough;
-        inplace?: InplacePassThrough;
+        checkbox?: CheckboxRootPassThrough;
+        chip?: ChipRootPassThrough;
+        inplace?: InplaceRootPassThrough;
         inputtext?: InputTextPassThrough;
-        metergroup?: MeterGroupPassThrough;
-        panel?: PanelPassThrough;
-        progressbar?: ProgressBarPassThrough;
+        metergroup?: MeterGroupRootPassThrough;
+        panel?: PanelRootPassThrough;
+        progressbar?: ProgressBarRootPassThrough;
         progressspinner?: ProgressSpinnerPassThrough;
-        radiobutton?: RadioButtonPassThrough;
+        radiobutton?: RadioButtonRootPassThrough;
         skeleton?: SkeletonPassThrough;
         styleclass?: StyleClassPassThrough;
-        tag?: TagPassThrough;
+        tag?: TagRootPassThrough;
     };
 }

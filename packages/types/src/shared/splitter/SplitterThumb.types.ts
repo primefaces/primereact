@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { SplitterInstance } from './Splitter.types';
+import type { SplitterRootInstance } from './SplitterRoot.types';
 
 /**
  * Defines passthrough(pt) options type in SplitterThumb component.
@@ -44,7 +44,7 @@ export interface SplitterThumbExposes {
     /**
      * The Splitter component instance.
      */
-    splitter: SplitterInstance | undefined | null;
+    splitter: SplitterRootInstance | undefined | null;
 }
 
 /**

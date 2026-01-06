@@ -23,10 +23,10 @@ export default function DynamicDemo() {
     return (
         <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex gap-2">
-                <Button.Root onClick={addMessages}>Add Messages</Button.Root>
-                <Button.Root severity="secondary" onClick={clearMessages}>
+                <Button onClick={addMessages}>Add Messages</Button>
+                <Button severity="secondary" onClick={clearMessages}>
                     Clear Messages
-                </Button.Root>
+                </Button>
             </div>
             {messages.map((item, index) => (
                 <Message.Root key={index} severity={item.severity}>

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { FieldsetInstance } from './Fieldset.types';
+import type { FieldsetRootInstance } from './FieldsetRoot.types';
 
 /**
  * Defines passthrough(pt) options type in FieldsetLegend component.
@@ -44,7 +44,7 @@ export interface FieldsetLegendExposes {
     /**
      * The Fieldset component instance.
      */
-    fieldset: FieldsetInstance | undefined | null;
+    fieldset: FieldsetRootInstance | undefined | null;
 }
 
 /**

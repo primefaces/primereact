@@ -1,4 +1,4 @@
-export { defaultItemProps as ItemDefaults } from './item';
-export { defaultListProps as ListDefaults } from './list';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultSeparatorProps as SeparatorDefaults } from './separator';
+export { defaultItemProps } from './item';
+export { defaultListProps } from './list';
+export { defaultRootProps } from './root';
+export { defaultSeparatorProps } from './separator';

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { FileUploadInstance } from './FileUpload.types';
+import type { FileUploadRootInstance } from './FileUploadRoot.types';
 
 /**
  * Defines passthrough(pt) options type in FileUploadList component.
@@ -72,7 +72,7 @@ export interface FileUploadListExposes {
     /**
      * Instance of the FileUpload component.
      */
-    fileupload: FileUploadInstance | undefined | null;
+    fileupload: FileUploadRootInstance | undefined | null;
 }
 
 /**

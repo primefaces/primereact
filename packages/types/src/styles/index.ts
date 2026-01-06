@@ -1,6 +1,6 @@
+import type { ComponentInstance } from '@primereact/types/core';
 import type { StyleType } from '@primeuix/styled';
 import type { CSSProperties } from 'react';
-import { ComponentInstance } from '../core';
 
 export type * from '@primeuix/styled';
 

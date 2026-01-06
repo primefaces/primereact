@@ -9,9 +9,9 @@ export default function LifeDemo() {
 
     return (
         <div className="flex flex-col items-center justify-center gap-4">
-            <Button.Root disabled={visible} onClick={() => setVisible(true)}>
+            <Button disabled={visible} onClick={() => setVisible(true)}>
                 Show Message
-            </Button.Root>
+            </Button>
             {visible && (
                 <Message.Root life={3000} severity="success" onClose={() => setVisible(false)}>
                     <Message.Content>

@@ -43,14 +43,14 @@ function RichColorsToast() {
 function RichColorsDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button.Root
+            <Button
                 variant="outlined"
                 severity="info"
                 onClick={() => toast.info({ title: 'Info', description: 'This is an info toast', group: 'rich-colors' })}
             >
                 Info
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 variant="outlined"
                 severity="success"
                 onClick={() =>
@@ -62,21 +62,21 @@ function RichColorsDemo() {
                 }
             >
                 Success
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 variant="outlined"
                 severity="danger"
                 onClick={() => toast.danger({ title: 'Error', description: 'This is an error toast', group: 'rich-colors' })}
             >
                 Danger
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 variant="outlined"
                 severity="warn"
                 onClick={() => toast.warn({ title: 'Warning', description: 'This is a warning toast', group: 'rich-colors' })}
             >
                 Warn
-            </Button.Root>
+            </Button>
             <RichColorsToast />
         </div>
     );

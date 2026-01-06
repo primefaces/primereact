@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { InplaceInstance } from './Inplace.types';
+import type { InplaceRootInstance } from './InplaceRoot.types';
 
 /**
  * Defines passthrough(pt) options type in InplaceContent component.
@@ -44,7 +44,7 @@ export interface InplaceContentExposes {
     /**
      * The Inplace component instance.
      */
-    inplace: InplaceInstance | undefined | null;
+    inplace: InplaceRootInstance | undefined | null;
 }
 
 /**

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { PaginatorInstance, PaginatorPassThroughType } from './Paginator.types';
+import type { PaginatorRootInstance } from './PaginatorRoot.types';
 
 /**
  * Defines passthrough(pt) options type in PaginatorEllipsis component.
@@ -24,7 +24,7 @@ export interface PaginatorEllipsisPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    root?: PaginatorEllipsisPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
 }
 
 /**
@@ -41,7 +41,7 @@ export interface PaginatorEllipsisState {}
  * Defines the methods and properties exposed by PaginatorEllipsis component.
  */
 export interface PaginatorEllipsisExposes {
-    paginator: PaginatorInstance | undefined | null;
+    paginator: PaginatorRootInstance | undefined | null;
 }
 
 /**

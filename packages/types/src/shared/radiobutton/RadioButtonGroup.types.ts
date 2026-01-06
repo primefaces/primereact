@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { RadioButtonChangeEvent } from './RadioButton.types';
+import type { RadioButtonRootChangeEvent } from './RadioButtonRoot.types';
 
 /**
  * Defines passthrough(pt) options type in RadioButtonGroup component.
@@ -39,9 +39,9 @@ export interface RadioButtonGroupValueChangeEvent {
 
 /**
  * Used to update the radio button group value.
- * @extends RadioButtonChangeEvent
+ * @extends RadioButtonRootChangeEvent
  */
-export interface RadioButtonGroupUpdateChangeEvent extends RadioButtonChangeEvent {}
+export interface RadioButtonGroupUpdateChangeEvent extends RadioButtonRootChangeEvent {}
 
 /**
  * Defines valid properties in RadioButtonGroup component.

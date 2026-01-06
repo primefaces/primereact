@@ -1,0 +1,129 @@
+/**
+ *
+ * Switch component is used to select a boolean value.
+ *
+ * [Live Demo](https://www.primereact.org/switch/)
+ *
+ * @module switch
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { useSwitchChangeEvent, useSwitchExposes, useSwitchProps, useSwitchState } from './useSwitch.types';
+
+/**
+ * Defines passthrough(pt) options type in Switch component.
+ */
+export type SwitchRootPassThroughType<E> = PassThroughType<SwitchRootInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of Switch component.
+ */
+export interface SwitchRootPassThrough {
+    /**
+     * Used to pass attributes to the root's DOM element.
+     */
+    root?: SwitchRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the input's DOM element.
+     */
+    input?: SwitchRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    /**
+     * Used to pass attributes to the control's DOM element.
+     */
+    control?: SwitchRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the thumb's DOM element.
+     */
+    thumb?: SwitchRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Event fired when the switch's checked state changes.
+ * @extends useSwitchChangeEvent
+ */
+export interface SwitchRootChangeEvent extends useSwitchChangeEvent<React.ChangeEvent<HTMLInputElement>> {
+    /**
+     * Value of the switch.
+     */
+    value?: unknown | undefined;
+}
+
+/**
+ * Defines valid properties in Switch component.
+ */
+export interface SwitchRootProps extends BaseComponentProps<SwitchRootInstance, Omit<useSwitchProps, 'onCheckedChange'>, SwitchRootPassThrough> {
+    /**
+     * Value of the switch.
+     */
+    value?: unknown | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that the element is required.
+     * @default false
+     */
+    required?: boolean | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @default false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * Identifier of the underlying input element.
+     */
+    inputId?: string | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Style class of the input field.
+     */
+    inputClassName?: string | undefined;
+    /**
+     * Establishes a string value that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledby?: string | undefined;
+    /**
+     * Callback function that is called when the switch is focused.
+     */
+    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Callback function that is called when the switch loses focus.
+     */
+    onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Callback fired when the switch's checked state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.checked The checked state of the switch.
+     * @returns void
+     */
+    onCheckedChange?: (event: SwitchRootChangeEvent) => void;
+}
+
+/**
+ * Defines valid state in Switch component.
+ * @extends useSwitchState
+ */
+export interface SwitchRootState extends useSwitchState {}
+
+/**
+ * Defines the methods and properties exposed by Switch component.
+ * @extends useSwitchExposes
+ */
+export interface SwitchRootExposes extends useSwitchExposes {}
+
+/**
+ * Instance of Switch component.
+ */
+export type SwitchRootInstance = ComponentInstance<SwitchRootProps, SwitchRootState, SwitchRootExposes>;

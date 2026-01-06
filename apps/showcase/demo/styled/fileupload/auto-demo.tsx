@@ -34,10 +34,10 @@ export default function AutoDemo() {
                                 ))}
 
                             <div className="flex flex-wrap items-center gap-3">
-                                <Button.Root onClick={instance.choose}>
+                                <Button onClick={instance.choose}>
                                     <i className="pi pi-plus" />
                                     Browse
-                                </Button.Root>
+                                </Button>
                             </div>
                         </>
                     );

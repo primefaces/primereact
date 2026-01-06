@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { TimelineInstance } from './Timeline.types';
+import type { TimelineRootInstance } from './TimelineRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TimelineEvent component.
@@ -44,7 +44,7 @@ export interface TimelineEventExposes {
     /**
      * The Timeline component instance.
      */
-    timeline: TimelineInstance | undefined | null;
+    timeline: TimelineRootInstance | undefined | null;
 }
 
 /**

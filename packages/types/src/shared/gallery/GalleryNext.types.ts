@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { GalleryInstance } from './Gallery.types';
+import type { GalleryRootInstance } from './GalleryRoot.types';
 
 /**
  * Defines passthrough(pt) options type in GalleryNext component.
@@ -44,7 +44,7 @@ export interface GalleryNextExposes {
     /**
      * The Gallery component instance.
      */
-    gallery: GalleryInstance | undefined | null;
+    gallery: GalleryRootInstance | undefined | null;
 }
 
 /**

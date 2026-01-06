@@ -50,7 +50,7 @@ export default function CustomDemo() {
                                             numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
                                             cupiditate neque quas!
                                         </p>
-                                        <Button.Root variant="text">Read more</Button.Root>
+                                        <Button variant="text">Read more</Button>
                                     </Card.Content>
                                 </Card.Body>
                             </Card.Root>

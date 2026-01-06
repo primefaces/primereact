@@ -12,7 +12,7 @@ function ControlledDemo() {
 
     return (
         <div className="flex gap-4 justify-center items-center">
-            <Button.Root onClick={() => setOpen(!open)}>Show Popover</Button.Root>
+            <Button onClick={() => setOpen(!open)}>Show Popover</Button>
 
             <Popover.Root open={open} onOpenChange={(e: usePopoverOpenChangeEvent) => setOpen(e.value)}>
                 <Popover.Trigger>Popover Trigger</Popover.Trigger>

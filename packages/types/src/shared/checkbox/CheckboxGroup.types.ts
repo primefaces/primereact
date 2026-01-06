@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { CheckboxChangeEvent } from './Checkbox.types';
+import type { CheckboxRootChangeEvent } from './CheckboxRoot.types';
 
 /**
  * Defines passthrough(pt) options type in Checkbox component.
@@ -39,9 +39,9 @@ export interface CheckboxGroupValueChangeEvent {
 
 /**
  * Used to update the checkbox group value.
- * @extends CheckboxChangeEvent
+ * @extends CheckboxRootChangeEvent
  */
-export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {}
+export interface CheckboxGroupUpdateChangeEvent extends CheckboxRootChangeEvent {}
 
 /**
  * Defines valid properties in CheckboxGroup component.

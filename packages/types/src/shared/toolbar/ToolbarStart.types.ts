@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ToolbarInstance } from './Toolbar.types';
+import type { ToolbarRootInstance } from './ToolbarRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ToolbarStart component.
@@ -44,7 +44,7 @@ export interface ToolbarStartExposes {
     /**
      * The Toolbar component instance.
      */
-    toolbar: ToolbarInstance | undefined | null;
+    toolbar: ToolbarRootInstance | undefined | null;
 }
 
 /**

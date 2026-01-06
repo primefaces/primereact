@@ -1,3 +1,3 @@
-export { defaultGroupProps as GroupDefaults } from './group';
-export { defaultIndicatorProps as IndicatorDefaults } from './indicator';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultGroupProps } from './group';
+export { defaultIndicatorProps } from './indicator';
+export { defaultRootProps } from './root';

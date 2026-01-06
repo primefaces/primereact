@@ -24,12 +24,12 @@ export default function TemplateDemo() {
                         </div>
                     </Panel.Title>
                     <Panel.HeaderActions>
-                        <Button.Root severity="secondary" rounded variant="text" iconOnly>
+                        <Button severity="secondary" rounded variant="text" iconOnly>
                             <i className="pi pi-cog" />
-                        </Button.Root>
-                        <Button.Root onClick={() => setShow((prev) => !prev)} rounded variant="text" iconOnly>
+                        </Button>
+                        <Button onClick={() => setShow((prev) => !prev)} rounded variant="text" iconOnly>
                             {show ? <MinusIcon /> : <PlusIcon />}
-                        </Button.Root>
+                        </Button>
                     </Panel.HeaderActions>
                 </Panel.Header>
                 <Motion in={show} name="p-toggleable-content">
@@ -42,12 +42,12 @@ export default function TemplateDemo() {
                         </p>
                         <div className="flex flex-wrap items-center justify-between gap-4">
                             <div className="flex items-center gap-2">
-                                <Button.Root iconOnly rounded variant="text">
+                                <Button iconOnly rounded variant="text">
                                     <i className="pi pi-user" />
-                                </Button.Root>
-                                <Button.Root severity="secondary" iconOnly rounded variant="text">
+                                </Button>
+                                <Button severity="secondary" iconOnly rounded variant="text">
                                     <i className="pi pi-bookmark" />
-                                </Button.Root>
+                                </Button>
                             </div>
                             <span className="text-surface-500 dark:text-surface-400">Updated 2 hours ago</span>
                         </div>

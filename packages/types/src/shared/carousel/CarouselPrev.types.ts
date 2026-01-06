@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { CarouselInstance } from './Carousel.types';
+import type { CarouselRootInstance } from './CarouselRoot.types';
 
 /**
  * Defines passthrough(pt) options type in CarouselPrev component.
@@ -44,7 +44,7 @@ export interface CarouselPrevExposes {
     /**
      * The Carousel component instance.
      */
-    carousel: CarouselInstance | undefined | null;
+    carousel: CarouselRootInstance | undefined | null;
 }
 
 /**

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { DatePickerInstance } from './DatePicker.types';
+import type { DatePickerRootInstance } from './DatePickerRoot.types';
 
 /**
  * Defines passthrough(pt) options type in DatePickerClearIcon component.
@@ -44,7 +44,7 @@ export interface DatePickerClearIconExposes {
     /**
      * The DatePicker component instance.
      */
-    datepicker: DatePickerInstance | undefined | null;
+    datepicker: DatePickerRootInstance | undefined | null;
 }
 
 /**

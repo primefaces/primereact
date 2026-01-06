@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ScrollAreaInstance } from './ScrollArea.types';
+import type { ScrollAreaRootInstance } from './ScrollAreaRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ScrollAreaContent component.
@@ -44,7 +44,7 @@ export interface ScrollAreaContentExposes {
     /**
      * Instance of the ScrollArea component.
      */
-    scrollarea: ScrollAreaInstance | undefined | null;
+    scrollarea: ScrollAreaRootInstance | undefined | null;
 }
 
 /**

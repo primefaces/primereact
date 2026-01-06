@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/focus-trap/)
  *
- * @module tag
+ * @module focustrap
  * @group components
  *
  */

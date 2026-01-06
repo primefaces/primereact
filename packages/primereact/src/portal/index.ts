@@ -1,3 +1,6 @@
 export * from './Portal';
 export * from './Portal.context';
-export * from './Portal.props';
+export * as PortalProps from './Portal.props';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultRootProps } from './Portal.props';

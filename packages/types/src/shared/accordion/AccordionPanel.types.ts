@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { AccordionInstance } from './Accordion.types';
+import type { AccordionRootInstance } from './AccordionRoot.types';
 
 /**
  * Defines passthrough(pt) options type in AccordionPanel component.
@@ -55,7 +55,7 @@ export interface AccordionPanelExposes {
     /**
      * The Accordion component instance.
      */
-    accordion: AccordionInstance | undefined | null;
+    accordion: AccordionRootInstance | undefined | null;
     /**
      * Whether the item is active.
      */

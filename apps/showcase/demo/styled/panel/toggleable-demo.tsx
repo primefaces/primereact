@@ -15,9 +15,9 @@ export default function ToggleableDemo() {
                 <Panel.Header>
                     <Panel.Title>Header</Panel.Title>
                     <Panel.HeaderActions>
-                        <Button.Root onClick={() => setShow((prev) => !prev)} rounded variant="text" iconOnly>
+                        <Button onClick={() => setShow((prev) => !prev)} rounded variant="text" iconOnly>
                             {show ? <MinusIcon /> : <PlusIcon />}
-                        </Button.Root>
+                        </Button>
                     </Panel.HeaderActions>
                 </Panel.Header>
                 <Motion in={show} name="p-toggleable-content">

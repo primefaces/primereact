@@ -1,2 +1,2 @@
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultTextProps as TextDefaults } from './text';
+export { defaultRootProps } from './root';
+export { defaultTextProps } from './text';

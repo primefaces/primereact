@@ -10,9 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-
-import type { OrgChartInstance } from './OrgChart.types';
-import { TreeNode } from './useOrgChart.types';
+import type { OrgChartRootInstance } from './OrgChartRoot.types';
+import type { TreeNode } from './useOrgChart.types';
 
 /**
  * Defines passthrough(pt) options type in OrgChartTree component.
@@ -51,7 +50,7 @@ export interface OrgChartTreeExposes {
     /**
      * The parent OrgChart instance.
      */
-    orgchart: OrgChartInstance | undefined | null;
+    orgchart: OrgChartRootInstance | undefined | null;
     /**
      * The level of the org chart tree.
      */

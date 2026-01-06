@@ -1,8 +1,8 @@
-export { defaultEmptyProps as EmptyDefaults } from './empty';
-export { defaultFilterProps as FilterDefaults } from './filter';
-export { defaultFooterProps as FooterDefaults } from './footer';
-export { defaultHeaderProps as HeaderDefaults } from './header';
-export { defaultOptionProps as OptionDefaults } from './option';
-export { defaultOptionsProps as OptionsDefaults } from './options';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultSelectionProps as SelectionDefaults } from './selection';
+export { defaultEmptyProps } from './empty';
+export { defaultFilterProps } from './filter';
+export { defaultFooterProps } from './footer';
+export { defaultHeaderProps } from './header';
+export { defaultOptionProps } from './option';
+export { defaultOptionsProps } from './options';
+export { defaultRootProps } from './root';
+export { defaultSelectionProps } from './selection';

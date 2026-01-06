@@ -1,7 +1,7 @@
 import * as HeadlessDataView from '@primereact/headless/dataview';
-import type { DataViewProps } from '@primereact/types/shared/dataview';
+import type { DataViewRootProps } from '@primereact/types/shared/dataview';
 
-export const defaultProps: DataViewProps = {
+export const defaultRootProps: DataViewRootProps = {
     ...HeadlessDataView.defaultProps,
     as: 'div'
 };

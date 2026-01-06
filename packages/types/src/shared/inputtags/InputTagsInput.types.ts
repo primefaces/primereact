@@ -10,15 +10,15 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { InputTagsInstance } from './InputTags.types';
+import type { InputTagsRootInstance } from './InputTagsRoot.types';
 
 /**
- * Defines passthrough(pt) options type in InputTagsInputcomponent.
+ * Defines passthrough(pt) options type in InputTagsInput component.
  */
 export type InputTagsInputPassThroughType<E> = PassThroughType<InputTagsInputInstance, E>;
 
 /**
- * Defines passthrough(pt) options of InputTagsInputcomponent.
+ * Defines passthrough(pt) options of InputTagsInput component.
  */
 export interface InputTagsInputPassThrough {
     /**
@@ -28,7 +28,7 @@ export interface InputTagsInputPassThrough {
 }
 
 /**
- * Defines valid properties in InputTagsInputcomponent.
+ * Defines valid properties in InputTagsInput component.
  */
 export interface InputTagsInputProps extends BaseComponentProps<InputTagsInputInstance, unknown, InputTagsInputPassThrough> {}
 
@@ -38,16 +38,16 @@ export interface InputTagsInputProps extends BaseComponentProps<InputTagsInputIn
 export interface InputTagsInputState {}
 
 /**
- * Defines the methods and properties exposed by InputTagsInputcomponent.
+ * Defines the methods and properties exposed by InputTagsInput component.
  */
 export interface InputTagsInputExposes {
     /**
      * Instance of the InputTags component.
      */
-    inputtags: InputTagsInstance | undefined | null;
+    inputtags: InputTagsRootInstance | undefined | null;
 }
 
 /**
- * Instance of InputTagsInputcomponent.
+ * Instance of InputTagsInput component.
  */
 export type InputTagsInputInstance = ComponentInstance<InputTagsInputProps, InputTagsInputState, InputTagsInputExposes>;

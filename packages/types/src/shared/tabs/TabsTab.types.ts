@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { TabsInstance } from './Tabs.types';
+import type { TabsRootInstance } from './TabsRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TabsTab component.
@@ -54,7 +54,7 @@ export interface TabsTabExposes {
     /**
      * The Tabs component instance.
      */
-    tabs: TabsInstance | undefined | null;
+    tabs: TabsRootInstance | undefined | null;
     /**
      * Whether the tab is active.
      */

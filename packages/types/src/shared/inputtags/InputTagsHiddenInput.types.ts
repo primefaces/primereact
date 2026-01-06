@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { InputTagsInstance } from './InputTags.types';
+import type { InputTagsRootInstance } from './InputTagsRoot.types';
 
 /**
  * Defines passthrough(pt) options type in InputTagsHiddenInputcomponent.
@@ -49,7 +49,7 @@ export interface InputTagsHiddenInputExposes {
     /**
      * Instance of the InputTags component.
      */
-    inputtags: InputTagsInstance | undefined | null;
+    inputtags: InputTagsRootInstance | undefined | null;
 }
 
 /**

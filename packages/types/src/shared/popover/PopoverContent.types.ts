@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { PopoverInstance } from './Popover.types';
+import type { PopoverRootInstance } from './PopoverRoot.types';
 
 /**
  * Defines passthrough(pt) options type in PopoverContent component.
@@ -50,7 +50,7 @@ export interface PopoverContentExposes {
     /**
      * The Popover component instance.
      */
-    popover: PopoverInstance | undefined | null;
+    popover: PopoverRootInstance | undefined | null;
 }
 
 /**

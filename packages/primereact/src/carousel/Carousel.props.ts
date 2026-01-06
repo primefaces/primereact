@@ -1,7 +1,7 @@
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultIndicatorProps as IndicatorDefaults } from './indicator';
-export { defaultIndicatorsProps as IndicatorsDefaults } from './indicators';
-export { defaultItemProps as ItemDefaults } from './item';
-export { defaultNextProps as NextDefaults } from './next';
-export { defaultPrevProps as PrevDefaults } from './prev';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultContentProps } from './content';
+export { defaultIndicatorProps } from './indicator';
+export { defaultIndicatorsProps } from './indicators';
+export { defaultItemProps } from './item';
+export { defaultNextProps } from './next';
+export { defaultPrevProps } from './prev';
+export { defaultRootProps } from './root';

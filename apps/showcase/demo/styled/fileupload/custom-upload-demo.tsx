@@ -27,10 +27,10 @@ export default function CustomUploadDemo() {
                 {(instance: FileUploadInstance) => {
                     return (
                         <div className="flex flex-wrap items-center gap-3">
-                            <Button.Root onClick={instance.choose} severity="secondary" variant="outlined">
+                            <Button onClick={instance.choose} severity="secondary" variant="outlined">
                                 <i className="pi pi-plus" />
                                 Browse
-                            </Button.Root>
+                            </Button>
                         </div>
                     );
                 }}

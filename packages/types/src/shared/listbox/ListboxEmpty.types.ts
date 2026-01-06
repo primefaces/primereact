@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ListboxInstance } from './Listbox.types';
+import type { ListboxRootInstance } from './ListboxRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ListboxEmpty component.
@@ -44,7 +44,7 @@ export interface ListboxEmptyExposes {
     /**
      * The ListboxEmpty component instance.
      */
-    listbox: ListboxInstance | undefined | null;
+    listbox: ListboxRootInstance | undefined | null;
 }
 
 /**

@@ -43,7 +43,7 @@ function BasicToast() {
 function BasicDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button.Root
+            <Button
                 onClick={() => {
                     toast({
                         title: 'Changes saved',
@@ -54,7 +54,7 @@ function BasicDemo() {
                 variant="outlined"
             >
                 Create toast
-            </Button.Root>
+            </Button>
             <BasicToast />
         </div>
     );

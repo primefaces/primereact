@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { PaginatorInstance, PaginatorPassThroughType } from './Paginator.types';
+import type { PaginatorRootInstance } from './PaginatorRoot.types';
 
 /**
  * Defines passthrough(pt) options type in PaginatorPages component.
@@ -24,7 +24,7 @@ export interface PaginatorPagesPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: PaginatorPagesPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -41,7 +41,7 @@ export interface PaginatorPagesState {}
  * Defines the methods and properties exposed by PaginatorPages component.
  */
 export interface PaginatorPagesExposes {
-    paginator: PaginatorInstance | undefined | null;
+    paginator: PaginatorRootInstance | undefined | null;
 }
 
 /**

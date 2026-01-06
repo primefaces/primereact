@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { KnobInstance } from './Knob.types';
+import type { KnobRootInstance } from './KnobRoot.types';
 
 /**
  * Defines passthrough(pt) options type in KnobRange component.
@@ -55,7 +55,7 @@ export interface KnobRangeExposes {
     /**
      * The Knob component instance.
      */
-    knob: KnobInstance | undefined | null;
+    knob: KnobRootInstance | undefined | null;
 }
 
 /**

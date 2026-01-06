@@ -1,4 +1,7 @@
 export * from './DatePicker.types';
+export * from './useDatePicker.types';
+
+// parts
 export * from './DatePickerAmPm.types';
 export * from './DatePickerButtonbar.types';
 export * from './DatePickerCalendar.types';
@@ -21,6 +24,7 @@ export * from './DatePickerPanel.types';
 export * from './DatePickerPicker.types';
 export * from './DatePickerPortal.types';
 export * from './DatePickerPrev.types';
+export * from './DatePickerRoot.types';
 export * from './DatePickerSecond.types';
 export * from './DatePickerSelectMonth.types';
 export * from './DatePickerSelectYear.types';
@@ -38,4 +42,3 @@ export * from './DatePickerTableHeadWeekCell.types';
 export * from './DatePickerTime.types';
 export * from './DatePickerTitle.types';
 export * from './DatePickerToday.types';
-export * from './useDatePicker.types';

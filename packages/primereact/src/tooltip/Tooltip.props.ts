@@ -1,6 +1,6 @@
-export { defaultArrowProps as ArrowDefaults } from './arrow';
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultGroupProps as GroupDefaults } from './group';
-export { defaultPortalProps as PortalDefaults } from './portal';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultTriggerProps as TriggerDefaults } from './trigger';
+export { defaultArrowProps } from './arrow';
+export { defaultContentProps } from './content';
+export { defaultGroupProps } from './group';
+export { defaultPortalProps } from './portal';
+export { defaultRootProps } from './root';
+export { defaultTriggerProps } from './trigger';

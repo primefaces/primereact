@@ -8,41 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useGalleryExposes, useGalleryProps, useGalleryState } from './useGallery.types';
-
-/**
- * Defines passthrough(pt) options type in Gallery component.
- */
-export type GalleryPassThroughType<E> = PassThroughType<GalleryInstance, E>;
-
-/**
- * Defines passthrough(pt) options of Gallery component.
- */
-export interface GalleryPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: GalleryPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in Gallery component.
- */
-export interface GalleryProps extends BaseComponentProps<GalleryInstance, useGalleryProps, GalleryPassThrough> {}
-
-/**
- * Defines valid state in Gallery component.
- * @extends useAvatarState
- */
-export interface GalleryState extends useGalleryState {}
-
-/**
- * Defines the methods and properties exposed by Gallery component.
- * @extends useAvatarExposes
- */
-export interface GalleryExposes extends useGalleryExposes {}
 
 /**
  * Defines the CSS class names used in the Gallery component.
@@ -98,8 +63,3 @@ export const GalleryClassNames = {
  * Type representing the CSS class names used in the Gallery component.
  */
 export type GalleryClassNamesType = (typeof GalleryClassNames)[keyof typeof GalleryClassNames];
-
-/**
- * Instance of Gallery component.
- */
-export type GalleryInstance = ComponentInstance<GalleryProps, GalleryState, GalleryExposes>;

@@ -10,8 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { MenuInstance } from '../menu';
-import type { ContextMenuInstance } from './ContextMenu.types';
+import type { MenuRootInstance } from '@primereact/types/shared/menu';
+import type { ContextMenuRootInstance } from './ContextMenuRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ContextMenuTrigger component.
@@ -45,11 +45,11 @@ export interface ContextMenuTriggerExposes {
     /**
      * The ContextMenu component instance.
      */
-    contextmenu: ContextMenuInstance | undefined | null;
+    contextmenu: ContextMenuRootInstance | undefined | null;
     /**
      * Instance of the Menu component.
      */
-    menu: MenuInstance | undefined | null;
+    menu: MenuRootInstance | undefined | null;
 }
 
 /**

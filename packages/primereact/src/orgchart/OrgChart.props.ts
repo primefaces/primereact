@@ -1,6 +1,6 @@
-export { defaultCollapseButtonProps as CollapseButtonDefaults } from './collapsebutton';
-export { defaultNodeProps as NodeDefaults } from './node';
-export { defaultNodeContentProps as NodeContentDefaults } from './nodecontent';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultSubtreeProps as SubtreeDefaults } from './subtree';
-export { defaultTreeProps as TreeDefaults } from './tree';
+export { defaultCollapseButtonProps } from './collapsebutton';
+export { defaultNodeProps } from './node';
+export { defaultNodeContentProps } from './nodecontent';
+export { defaultRootProps } from './root';
+export { defaultSubtreeProps } from './subtree';
+export { defaultTreeProps } from './tree';

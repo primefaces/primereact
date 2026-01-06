@@ -8,56 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useMessageExposes, useMessageProps, useMessageState } from './useMessage.types';
-
-/**
- * Defines passthrough(pt) options type in Message component.
- */
-export type MessagePassThroughType<E> = PassThroughType<MessageInstance, E>;
-
-/**
- * Defines passthrough(pt) options of Message component.
- */
-export interface MessagePassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: MessagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in Message component.
- */
-export interface MessageProps extends BaseComponentProps<MessageInstance, useMessageProps, MessagePassThrough> {
-    /**
-     * Severity level of the message.
-     * @default info
-     */
-    severity?: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast' | null;
-    /**
-     * Specifies the variant of the component.
-     * @default undefined
-     */
-    variant?: 'outlined' | 'simple' | null;
-    /**
-     * Defines the size of the component.
-     */
-    size?: 'small' | 'large' | undefined;
-}
-
-/**
- * Defines valid state in Message component.
- * @extends useMessageState
- */
-export interface MessageState extends useMessageState {}
-
-/**
- * Defines the methods and properties exposed by Message component.
- * @extends useMessageExposes
- */
-export interface MessageExposes extends useMessageExposes {}
 
 /**
  * Defines the CSS class names used in the Message component.
@@ -93,8 +43,3 @@ export const MessageClassNames = {
  * Type representing the CSS class names used in the Message component.
  */
 export type MessageClassNamesType = (typeof MessageClassNames)[keyof typeof MessageClassNames];
-
-/**
- * Instance of Message component.
- */
-export type MessageInstance = ComponentInstance<MessageProps, MessageState, MessageExposes>;

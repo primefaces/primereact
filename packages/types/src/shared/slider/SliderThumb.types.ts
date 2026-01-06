@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { SliderInstance } from './Slider.types';
+import type { SliderRootInstance } from './SliderRoot.types';
 
 /**
  * Defines passthrough(pt) options type in SliderThumb component.
@@ -58,7 +58,7 @@ export interface SliderThumbExposes {
     /**
      * The Slider component instance.
      */
-    slider: SliderInstance | undefined | null;
+    slider: SliderRootInstance | undefined | null;
 }
 
 /**

@@ -5,6 +5,9 @@
     },
     "editor.defaultFormatter": "prettier.prettier-vscode",
     "javascript.referencesCodeLens.enabled": true,
+    "typescript.tsserver.useSyntaxServer": "auto",
+    "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+    "typescript.tsserver.maxTsServerMemory": 4096,
     "eslint.useFlatConfig": true,
     "[javascript]": {
         "editor.defaultFormatter": "prettier.prettier-vscode",

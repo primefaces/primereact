@@ -1,4 +1,4 @@
-export { defaultHiddenInputProps as HiddenInputDefaults } from './hiddeninput';
-export { defaultInputProps as InputDefaults } from './input';
-export { defaultItemProps as ItemDefaults } from './item';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultHiddenInputProps } from './hiddeninput';
+export { defaultInputProps } from './input';
+export { defaultItemProps } from './item';
+export { defaultRootProps } from './root';

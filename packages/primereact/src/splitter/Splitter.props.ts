@@ -1,4 +1,4 @@
-export { defaultGutterProps as GutterDefaults } from './gutter';
-export { defaultPanelProps as PanelDefaults } from './panel';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultThumbProps as ThumbDefaults } from './thumb';
+export { defaultGutterProps } from './gutter';
+export { defaultPanelProps } from './panel';
+export { defaultRootProps } from './root';
+export { defaultThumbProps } from './thumb';

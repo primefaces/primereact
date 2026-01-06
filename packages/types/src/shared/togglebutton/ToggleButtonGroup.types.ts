@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ToggleButtonChangeEvent } from './ToggleButton.types';
+import type { ToggleButtonRootChangeEvent } from './ToggleButtonRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ToggleButton component.
@@ -39,9 +39,9 @@ export interface ToggleButtonGroupValueChangeEvent {
 
 /**
  * Used to update the ToggleButton group value.
- * @extends ToggleButtonChangeEvent
+ * @extends ToggleButtonRootChangeEvent
  */
-export interface ToggleButtonGroupUpdateChangeEvent extends ToggleButtonChangeEvent {}
+export interface ToggleButtonGroupUpdateChangeEvent extends ToggleButtonRootChangeEvent {}
 
 /**
  * Defines valid properties in ToggleButtonGroup component.

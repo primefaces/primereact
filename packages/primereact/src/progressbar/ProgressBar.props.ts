@@ -1,5 +1,5 @@
-export { defaultIndicatorProps as IndicatorDefaults } from './indicator';
-export { defaultLabelProps as LabelDefaults } from './label';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultTrackProps as TrackDefaults } from './track';
-export { defaultValueProps as ValueDefaults } from './value';
+export { defaultIndicatorProps } from './indicator';
+export { defaultLabelProps } from './label';
+export { defaultRootProps } from './root';
+export { defaultTrackProps } from './track';
+export { defaultValueProps } from './value';

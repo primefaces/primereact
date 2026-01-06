@@ -60,7 +60,7 @@ export default function TemplateDemo() {
                                         <InputText id="email" placeholder="john.doe@example.com" />
                                     </div>
                                 </div>
-                                <Button.Root className="mt-8 w-fit">Save Changes</Button.Root>
+                                <Button className="mt-8 w-fit">Save Changes</Button>
                             </form>
                         </div>
                     </Tabs.Panel>
@@ -84,7 +84,7 @@ export default function TemplateDemo() {
                                         <InputText id="expiryDate" placeholder="MM/YY" />
                                     </div>
                                 </div>
-                                <Button.Root className="mt-8 w-fit">Update Payment</Button.Root>
+                                <Button className="mt-8 w-fit">Update Payment</Button>
                             </form>
                         </div>
                     </Tabs.Panel>
@@ -120,7 +120,7 @@ export default function TemplateDemo() {
                                         </Switch.Root>
                                     </div>
                                 </div>
-                                <Button.Root className="w-fit mt-8 ml-auto mr-0">Save Preferences</Button.Root>
+                                <Button className="w-fit mt-8 ml-auto mr-0">Save Preferences</Button>
                             </form>
                         </div>
                     </Tabs.Panel>

@@ -1,5 +1,5 @@
-export { defaultIconProps as IconDefaults } from './icon';
-export { defaultImageProps as ImageDefaults } from './image';
-export { defaultLabelProps as LabelDefaults } from './label';
-export { defaultRemoveIconProps as RemoveIconDefaults } from './removeicon';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultIconProps } from './icon';
+export { defaultImageProps } from './image';
+export { defaultLabelProps } from './label';
+export { defaultRemoveIconProps } from './removeicon';
+export { defaultRootProps } from './root';

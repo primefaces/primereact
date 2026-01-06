@@ -8,30 +8,30 @@ export default function ButtonDemo() {
     return (
         <div className="flex flex-col md:flex-row gap-4">
             <InputGroup.Root>
-                <Button.Root>Search</Button.Root>
+                <Button>Search</Button>
                 <InputText placeholder="Keyword" />
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputText placeholder="Keyword" />
                 <InputGroup.Addon>
-                    <Button.Root severity="secondary" variant="text">
+                    <Button severity="secondary" variant="text">
                         <i className="pi pi-search" />
-                    </Button.Root>
+                    </Button>
                 </InputGroup.Addon>
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Button.Root severity="secondary">
+                    <Button severity="secondary">
                         <i className="pi pi-check" />
-                    </Button.Root>
+                    </Button>
                 </InputGroup.Addon>
                 <InputText placeholder="Vote" />
                 <InputGroup.Addon>
-                    <Button.Root severity="secondary">
+                    <Button severity="secondary">
                         <i className="pi pi-times" />
-                    </Button.Root>
+                    </Button>
                 </InputGroup.Addon>
             </InputGroup.Root>
         </div>

@@ -9,9 +9,9 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { DialogRootInstance } from '@primereact/types/shared/dialog';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { DialogInstance } from '../dialog';
-import type { ConfirmDialogInstance } from './ConfirmDialog.types';
+import type { ConfirmDialogRootInstance } from './ConfirmDialogRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ConfirmDialogCancel component.
@@ -45,11 +45,11 @@ export interface ConfirmDialogCancelExposes {
     /**
      * Instance of the ConfirmDialog component.
      */
-    confirmdialog: ConfirmDialogInstance | undefined | null;
+    confirmdialog: ConfirmDialogRootInstance | undefined | null;
     /**
      * Instance of the Dialog component.
      */
-    dialog: DialogInstance | undefined | null;
+    dialog: DialogRootInstance | undefined | null;
 }
 
 /**

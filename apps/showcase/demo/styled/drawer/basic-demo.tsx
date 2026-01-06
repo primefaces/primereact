@@ -38,9 +38,9 @@ export default function BasicDemo() {
                                             <span className="font-semibold text-2xl text-primary">Your Logo</span>
                                         </span>
                                         <span>
-                                            <Button.Root type="button" rounded variant="outlined" iconOnly onClick={drawer?.close}>
+                                            <Button type="button" rounded variant="outlined" iconOnly onClick={drawer?.close}>
                                                 <i className="pi pi-times"></i>
-                                            </Button.Root>
+                                            </Button>
                                         </span>
                                     </div>
                                     <div className="overflow-y-auto">

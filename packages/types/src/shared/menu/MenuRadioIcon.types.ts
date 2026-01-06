@@ -10,8 +10,8 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { MenuInstance } from './Menu.types';
 import type { MenuRadioItemInstance } from './MenuRadioItem.types';
+import type { MenuRootInstance } from './MenuRoot.types';
 
 /**
  * Defines passthrough(pt) options type in MenuRadioIcon component.
@@ -45,7 +45,7 @@ export interface MenuRadioIconExposes {
     /**
      * The Menu component instance.
      */
-    menu: MenuInstance | undefined | null;
+    menu: MenuRootInstance | undefined | null;
     /**
      * Instance of the MenuRadioItem component.
      */

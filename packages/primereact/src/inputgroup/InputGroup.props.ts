@@ -1,2 +1,2 @@
-export { defaultAddonProps as Addon } from './addon';
-export { defaultRootProps as Root } from './root';
+export { defaultAddonProps } from './addon';
+export { defaultRootProps } from './root';

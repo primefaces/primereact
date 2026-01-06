@@ -1,3 +1,6 @@
 export * from './InputNumber';
 export * from './InputNumber.context';
-export * from './InputNumber.props';
+export * as InputNumberProps from './InputNumber.props';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultProps } from './InputNumber.props';

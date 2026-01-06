@@ -1,7 +1,7 @@
 import type { InputTextProps } from '@primereact/types/shared/inputtext';
 import { cn } from '@primeuix/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { InputText as InputTextPrime } from 'primereact/inputtext';
+import { InputText as PRInputText } from 'primereact/inputtext';
 import * as React from 'react';
 
 const inputTextVariants = cva(
@@ -26,7 +26,7 @@ const inputTextVariants = cva(
 );
 
 function InputText({ className, size, variant, invalid, ...props }: InputTextProps & VariantProps<typeof inputTextVariants>) {
-    return <InputTextPrime className={cn(inputTextVariants({ size, variant, className }))} {...props} aria-invalid={invalid} />;
+    return <PRInputText className={cn(inputTextVariants({ size, variant, className }))} {...props} aria-invalid={invalid} />;
 }
 
 export { InputText, inputTextVariants };

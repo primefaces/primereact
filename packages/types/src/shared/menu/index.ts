@@ -1,4 +1,8 @@
 export * from './Menu.types';
+export * from './useMenu.types';
+export * from './useMenuSub.types';
+
+// parts
 export * from './MenuCheckboxGroup.types';
 export * from './MenuCheckboxIcon.types';
 export * from './MenuCheckboxItem.types';
@@ -11,8 +15,7 @@ export * from './MenuPortal.types';
 export * from './MenuRadioGroup.types';
 export * from './MenuRadioIcon.types';
 export * from './MenuRadioItem.types';
+export * from './MenuRoot.types';
 export * from './MenuSeparator.types';
 export * from './MenuSub.types';
 export * from './MenuTrigger.types';
-export * from './useMenu.types';
-export * from './useMenuSub.types';

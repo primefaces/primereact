@@ -36,10 +36,10 @@ export default function BasicDemo() {
                                         <InputText id="email" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex justify-end gap-2">
-                                        <Button.Root onClick={dialog?.close} severity="secondary">
+                                        <Button onClick={dialog?.close} severity="secondary">
                                             Cancel
-                                        </Button.Root>
-                                        <Button.Root onClick={dialog?.close}>Sign-In</Button.Root>
+                                        </Button>
+                                        <Button onClick={dialog?.close}>Sign-In</Button>
                                     </div>
                                 </>
                             );

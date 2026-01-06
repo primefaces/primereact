@@ -1,2 +1,2 @@
-export { defaultContentProps as ContentDefault } from './content';
-export { defaultRootProps as RootDefault } from './root';
+export { defaultContentProps } from './content';
+export { defaultRootProps } from './root';

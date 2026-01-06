@@ -9,9 +9,9 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
+import type { ButtonProps } from '@primereact/types/shared/button';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ButtonProps } from '../button';
-import type { TooltipInstance } from './Tooltip.types';
+import type { TooltipRootInstance } from './TooltipRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TooltipTrigger component.
@@ -45,7 +45,7 @@ export interface TooltipTriggerExposes {
     /**
      * The Tooltip component instance.
      */
-    tooltip: TooltipInstance | undefined | null;
+    tooltip: TooltipRootInstance | undefined | null;
 }
 
 /**

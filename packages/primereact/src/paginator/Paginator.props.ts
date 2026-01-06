@@ -1,9 +1,9 @@
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultEllipsisProps as EllipsisDefaults } from './ellipsis';
-export { defaultFirstProps as FirstDefaults } from './first';
-export { defaultLastProps as LastDefaults } from './last';
-export { defaultNextProps as NextDefaults } from './next';
-export { defaultPageProps as PageDefaults } from './page';
-export { defaultPagesProps as PagesDefaults } from './pages';
-export { defaultPrevProps as PrevDefaults } from './prev';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultContentProps } from './content';
+export { defaultEllipsisProps } from './ellipsis';
+export { defaultFirstProps } from './first';
+export { defaultLastProps } from './last';
+export { defaultNextProps } from './next';
+export { defaultPageProps } from './page';
+export { defaultPagesProps } from './pages';
+export { defaultPrevProps } from './prev';
+export { defaultRootProps } from './root';

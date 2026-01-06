@@ -9,21 +9,21 @@ export default function CustomDemo() {
         <div>
             <Toolbar.Root style={{ borderRadius: '3rem', padding: '1rem 1rem 1rem 1.5rem' }}>
                 <Toolbar.Start>
-                    <Button.Root variant="text" plain>
+                    <Button variant="text" plain>
                         Files
-                    </Button.Root>
-                    <Button.Root variant="text" plain>
+                    </Button>
+                    <Button variant="text" plain>
                         Edit
-                    </Button.Root>
-                    <Button.Root variant="text" plain>
+                    </Button>
+                    <Button variant="text" plain>
                         View
-                    </Button.Root>
+                    </Button>
                 </Toolbar.Start>
                 <Toolbar.End>
                     <div className="flex items-center gap-2">
-                        <Button.Root severity="contrast" size="small">
+                        <Button severity="contrast" size="small">
                             Share
-                        </Button.Root>
+                        </Button>
                         <Avatar.Root shape="circle">
                             <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                             <Avatar.Fallback>A</Avatar.Fallback>

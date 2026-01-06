@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ColorPickerInstance } from './ColorPicker.types';
+import type { ColorPickerRootInstance } from './ColorPickerRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ColorPickerSwatchBackground component.
@@ -44,7 +44,7 @@ export interface ColorPickerSwatchBackgroundExposes {
     /**
      * The ColorPicker component instance.
      */
-    colorpicker: ColorPickerInstance | undefined | null;
+    colorpicker: ColorPickerRootInstance | undefined | null;
 }
 
 /**

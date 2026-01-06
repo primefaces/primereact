@@ -1,13 +1,16 @@
 export * from './Gallery.types';
+export * from './useGallery.types';
+export * from './useGalleryItem.types';
+
+// parts
 export * from './GalleryBackdrop.types';
 export * from './GalleryContent.types';
 export * from './GalleryItem.types';
 export * from './GalleryNext.types';
 export * from './GalleryPrev.types';
+export * from './GalleryRoot.types';
 export * from './GalleryThumbnail.types';
 export * from './GalleryThumbnailContent.types';
 export * from './GalleryThumbnailItem.types';
 export * from './GalleryToolbar.types';
 export * from './GalleryToolbarItem.types';
-export * from './useGallery.types';
-export * from './useGalleryItem.types';

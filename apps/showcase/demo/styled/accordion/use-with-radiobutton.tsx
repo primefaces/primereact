@@ -63,9 +63,9 @@ export default function UseWithRadioButton() {
                         ))}
                     </Accordion.Root>
                 </RadioButton.Group>
-                <Button.Root className="w-full mt-4" size="large">
+                <Button className="w-full mt-4" size="large">
                     Buy Now for {items.find((item) => item.value === selected)?.price}
-                </Button.Root>
+                </Button>
             </div>
         </div>
     );

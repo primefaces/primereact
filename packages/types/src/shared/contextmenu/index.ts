@@ -1,4 +1,7 @@
 export * from './ContextMenu.types';
+export * from './useContextMenu.types';
+
+// parts
 export * from './ContextMenuCheckboxGroup.types';
 export * from './ContextMenuCheckboxIcon.types';
 export * from './ContextMenuCheckboxItem.types';
@@ -10,7 +13,7 @@ export * from './ContextMenuPortal.types';
 export * from './ContextMenuRadioGroup.types';
 export * from './ContextMenuRadioIcon.types';
 export * from './ContextMenuRadioItem.types';
+export * from './ContextMenuRoot.types';
 export * from './ContextMenuSeparator.types';
 export * from './ContextMenuSub.types';
 export * from './ContextMenuTrigger.types';
-export * from './useContextMenu.types';

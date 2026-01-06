@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { RatingInstance } from './Rating.types';
+import type { RatingRootInstance } from './RatingRoot.types';
 
 /**
  * Defines passthrough(pt) options type in RatingOption component.
@@ -53,7 +53,7 @@ export interface RatingOptionExposes {
     /**
      * The Rating component instance.
      */
-    rating: RatingInstance | undefined | null;
+    rating: RatingRootInstance | undefined | null;
 }
 
 /**

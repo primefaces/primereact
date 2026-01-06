@@ -35,15 +35,15 @@ export default function BasicDemo() {
 
                             <div className="flex justify-between">
                                 <div className="flex flex-wrap items-center gap-3">
-                                    <Button.Root onClick={instance.choose}>
+                                    <Button onClick={instance.choose}>
                                         <i className="pi pi-plus" />
                                         Choose
-                                    </Button.Root>
+                                    </Button>
                                     <span>{instance.hasFiles ? instance.state.files.map((file) => file.name).join(', ') : 'No file chosen'}</span>
                                 </div>
-                                <Button.Root severity="secondary" onClick={instance.upload}>
+                                <Button severity="secondary" onClick={instance.upload}>
                                     Upload
-                                </Button.Root>
+                                </Button>
                             </div>
                         </>
                     );

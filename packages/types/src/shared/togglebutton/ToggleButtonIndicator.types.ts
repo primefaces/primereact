@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ToggleButtonInstance } from './ToggleButton.types';
+import type { ToggleButtonRootInstance } from './ToggleButtonRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ToggleButtonIndicator component.
@@ -44,7 +44,7 @@ export interface ToggleButtonIndicatorExposes {
     /**
      * The ToggleButton component instance.
      */
-    togglebutton: ToggleButtonInstance | undefined | null;
+    togglebutton: ToggleButtonRootInstance | undefined | null;
 }
 
 /**

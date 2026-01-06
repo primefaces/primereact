@@ -2,7 +2,7 @@
 import { Button } from '@primereact/ui/button';
 
 function DocButton({ ...props }: React.ComponentProps<typeof Button.Root>) {
-    return <Button.Root {...props} />;
+    return <Button {...props} />;
 }
 
 export default DocButton;

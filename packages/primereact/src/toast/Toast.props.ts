@@ -1,9 +1,9 @@
-export { defaultActionProps as Action } from './action';
-export { defaultCloseProps as Close } from './close';
-export { defaultDescriptionProps as Description } from './description';
-export { defaultIconProps as Icon } from './icon';
-export { defaultItemProps as Item } from './item';
-//export { defaultPortalProps as Portal } from './portal';
-export { defaultRegionProps as Region } from './region';
-export { defaultRootProps as Root } from './root';
-export { defaultTitleProps as Title } from './title';
+export { defaultActionProps } from './action';
+export { defaultCloseProps } from './close';
+export { defaultDescriptionProps } from './description';
+export { defaultIconProps } from './icon';
+export { defaultItemProps } from './item';
+//export { defaultPortalProps } from './portal';
+export { defaultRegionProps } from './region';
+export { defaultRootProps } from './root';
+export { defaultTitleProps } from './title';

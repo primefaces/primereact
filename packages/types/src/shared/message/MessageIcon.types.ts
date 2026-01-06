@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { MessageInstance } from './Message.types';
+import type { MessageRootInstance } from './MessageRoot.types';
 
 /**
  * Defines passthrough(pt) options type in MessageIcon component.
@@ -44,7 +44,7 @@ export interface MessageIconExposes {
     /**
      * The Message component instance.
      */
-    message: MessageInstance | undefined | null;
+    message: MessageRootInstance | undefined | null;
 }
 
 /**

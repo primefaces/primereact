@@ -130,7 +130,7 @@ function VariantsDemo() {
 
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button.Root
+            <Button
                 onClick={() => {
                     toast({
                         title: 'Default',
@@ -141,8 +141,8 @@ function VariantsDemo() {
                 variant="outlined"
             >
                 Default
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 onClick={() => {
                     toast.info({
                         title: 'Info',
@@ -154,8 +154,8 @@ function VariantsDemo() {
                 severity="info"
             >
                 Info
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 onClick={() =>
                     toast.success({
                         title: 'Success',
@@ -167,30 +167,30 @@ function VariantsDemo() {
                 severity="success"
             >
                 Success
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 onClick={() => toast.danger({ title: 'Danger', description: 'This is a danger toast', group: 'variants' })}
                 variant="outlined"
                 severity="danger"
             >
                 Danger
-            </Button.Root>
-            <Button.Root
+            </Button>
+            <Button
                 onClick={() => toast.warn({ title: 'Warn', description: 'This is a warning toast', group: 'variants' })}
                 variant="outlined"
                 severity="warn"
             >
                 Warn
-            </Button.Root>
-            <Button.Root onClick={handleLoadingToast} variant="outlined">
+            </Button>
+            <Button onClick={handleLoadingToast} variant="outlined">
                 Loading
-            </Button.Root>
-            <Button.Root onClick={handleToastPromise} variant="outlined">
+            </Button>
+            <Button onClick={handleToastPromise} variant="outlined">
                 Promise
-            </Button.Root>
-            <Button.Root onClick={handleCustomToast} variant="outlined">
+            </Button>
+            <Button onClick={handleCustomToast} variant="outlined">
                 Custom
-            </Button.Root>
+            </Button>
             <VariantsToast />
         </div>
     );

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { TagInstance } from './Tag.types';
+import type { TagRootInstance } from './TagRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TagLabel component.
@@ -44,7 +44,7 @@ export interface TagLabelExposes {
     /**
      * The Tag component instance.
      */
-    tag: TagInstance | undefined | null;
+    tag: TagRootInstance | undefined | null;
 }
 
 /**

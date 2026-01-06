@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { BreadcrumbInstance } from './Breadcrumb.types';
+import type { BreadcrumbRootInstance } from './BreadcrumbRoot.types';
 
 /**
  * Defines passthrough(pt) options type in BreadcrumbItem component.
@@ -57,7 +57,7 @@ export interface BreadcrumbItemExposes {
     /**
      * Instance of the Breadcrumb component.
      */
-    breadcrumb: BreadcrumbInstance | undefined | null;
+    breadcrumb: BreadcrumbRootInstance | undefined | null;
 }
 
 /**

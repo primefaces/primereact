@@ -57,8 +57,8 @@ export default function TemplateDemo() {
                     ))}
                 </MeterGroup.Meters>
                 {/* <div className="flex justify-between mt-4">
-                    <Button.Root label="Manage Storage" outlined size="small" />
-                    <Button.Root label="Update Plan" size="small" />
+                    <Button label="Manage Storage" outlined size="small" />
+                    <Button label="Update Plan" size="small" />
                     </div> */}
             </MeterGroup.Root>
         </div>

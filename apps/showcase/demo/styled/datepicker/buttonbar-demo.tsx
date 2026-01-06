@@ -251,20 +251,20 @@ export default function ButtonbarDemo() {
                             return (
                                 <div className="flex justify-between w-full">
                                     <div className="flex gap-2">
-                                        <Button.Root size="small" severity="secondary">
+                                        <Button size="small" severity="secondary">
                                             Exact
-                                        </Button.Root>
-                                        <Button.Root size="small" severity="secondary">
+                                        </Button>
+                                        <Button size="small" severity="secondary">
                                             Flexible
-                                        </Button.Root>
+                                        </Button>
                                     </div>
                                     <div className="flex gap-2">
-                                        <Button.Root size="small" label="Today" onClick={datepicker?.onTodayButtonClick} variant="outlined">
+                                        <Button size="small" label="Today" onClick={datepicker?.onTodayButtonClick} variant="outlined">
                                             Today
-                                        </Button.Root>
-                                        <Button.Root size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
+                                        </Button>
+                                        <Button size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
                                             <i className="pi pi-times" />
-                                        </Button.Root>
+                                        </Button>
                                     </div>
                                 </div>
                             );

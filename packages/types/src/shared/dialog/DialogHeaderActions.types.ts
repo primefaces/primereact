@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { DialogInstance } from './Dialog.types';
+import type { DialogRootInstance } from './DialogRoot.types';
 
 /**
  * Defines passthrough(pt) options type in DialogHeaderActions component.
@@ -44,7 +44,7 @@ export interface DialogHeaderActionsExposes {
     /**
      * The dialog instance that the header actions belong to.
      */
-    dialog?: DialogInstance | undefined;
+    dialog?: DialogRootInstance | undefined;
 }
 
 /**

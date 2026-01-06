@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { METERGROUP_DEFAULT_COLORS_TYPE, MeterGroupInstance } from './MeterGroup.types';
+import type { METERGROUP_DEFAULT_COLORS_TYPE, MeterGroupRootInstance } from './MeterGroupRoot.types';
 
 /**
  * Defines passthrough(pt) options type in MeterGroupMeter component.
@@ -57,7 +57,7 @@ export interface MeterGroupMeterExposes {
     /**
      * The MeterGroup component instance.
      */
-    metergroup: MeterGroupInstance | undefined | null;
+    metergroup: MeterGroupRootInstance | undefined | null;
 }
 
 /**

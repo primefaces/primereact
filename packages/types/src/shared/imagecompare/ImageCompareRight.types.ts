@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ImageCompareInstance } from './ImageCompare.types';
+import type { ImageCompareRootInstance } from './ImageCompareRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ImageCompareRight component.
@@ -44,7 +44,7 @@ export interface ImageCompareRightExposes {
     /**
      * The ImageCompare component instance.
      */
-    imagecompare: ImageCompareInstance | undefined | null;
+    imagecompare: ImageCompareRootInstance | undefined | null;
 }
 
 /**

@@ -10,8 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-
-import type { OrgChartInstance } from './OrgChart.types';
+import type { OrgChartRootInstance } from './OrgChartRoot.types';
 
 /**
  * Defines passthrough(pt) options type in OrgChartCollapseButton component.
@@ -45,7 +44,7 @@ export interface OrgChartCollapseButtonExposes {
     /**
      * The parent OrgChart instance.
      */
-    orgchart: OrgChartInstance | undefined | null;
+    orgchart: OrgChartRootInstance | undefined | null;
 }
 
 /**

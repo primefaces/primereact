@@ -9,10 +9,9 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { MenuRadioItemPassThrough } from '@primereact/types/shared/menu';
+import type { MenuRadioItemPassThrough, MenuRootInstance } from '@primereact/types/shared/menu';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { MenuInstance } from '../menu';
-import type { ContextMenuInstance } from './ContextMenu.types';
+import type { ContextMenuRootInstance } from './ContextMenuRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ContextMenuRadioItem component.
@@ -47,11 +46,11 @@ export interface ContextMenuRadioItemExposes {
     /**
      * The ContextMenu component instance.
      */
-    contextmenu: ContextMenuInstance | undefined | null;
+    contextmenu: ContextMenuRootInstance | undefined | null;
     /**
      * Instance of the Menu component.
      */
-    menu: MenuInstance | undefined | null;
+    menu: MenuRootInstance | undefined | null;
 }
 
 /**

@@ -19,42 +19,42 @@ export default function PositionDemo() {
     return (
         <div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
-                <Button.Root onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
+                <Button onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Left
                     <i className="pi pi-arrow-right" />
-                </Button.Root>
-                <Button.Root onClick={() => openPosition('right')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button>
+                <Button onClick={() => openPosition('right')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Right
                     <i className="pi pi-arrow-left" />
-                </Button.Root>
+                </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
-                <Button.Root onClick={() => openPosition('topleft')} severity="secondary" style={{ minWidth: '10rem' }}>
+                <Button onClick={() => openPosition('topleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopLeft
                     <i className="pi pi-arrow-down-right" />
-                </Button.Root>
-                <Button.Root onClick={() => openPosition('top')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button>
+                <Button onClick={() => openPosition('top')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Top
                     <i className="pi pi-arrow-down" />
-                </Button.Root>
-                <Button.Root onClick={() => openPosition('topright')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button>
+                <Button onClick={() => openPosition('topright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopRight
                     <i className="pi pi-arrow-down-left" />
-                </Button.Root>
+                </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-                <Button.Root onClick={() => openPosition('bottomleft')} severity="secondary" style={{ minWidth: '10rem' }}>
+                <Button onClick={() => openPosition('bottomleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomLeft
                     <i className="pi pi-arrow-up-right" />
-                </Button.Root>
-                <Button.Root onClick={() => openPosition('bottom')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button>
+                <Button onClick={() => openPosition('bottom')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Bottom
                     <i className="pi pi-arrow-up" />
-                </Button.Root>
-                <Button.Root onClick={() => openPosition('bottomright')} severity="secondary" style={{ minWidth: '10rem' }}>
+                </Button>
+                <Button onClick={() => openPosition('bottomright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomRight
                     <i className="pi pi-arrow-up-left" />
-                </Button.Root>
+                </Button>
             </div>
             <Dialog.Root open={open} onOpenChange={(e: DialogChangeEvent) => setOpen(e.value as boolean)} modal position={position} draggable={false}>
                 <Dialog.Portal style={{ width: '25rem' }}>
@@ -84,12 +84,12 @@ export default function PositionDemo() {
                                         <InputText id="email" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex justify-end gap-2">
-                                        <Button.Root type="button" severity="secondary" onClick={dialog?.close}>
+                                        <Button type="button" severity="secondary" onClick={dialog?.close}>
                                             Cancel
-                                        </Button.Root>
-                                        <Button.Root type="button" onClick={dialog?.close}>
+                                        </Button>
+                                        <Button type="button" onClick={dialog?.close}>
                                             Save
-                                        </Button.Root>
+                                        </Button>
                                     </div>
                                 </>
                             );

@@ -1,4 +1,7 @@
 export * from './Paginator.types';
+export * from './usePaginator.types';
+
+// parts
 export * from './PaginatorContent.types';
 export * from './PaginatorEllipsis.types';
 export * from './PaginatorFirst.types';
@@ -7,4 +10,4 @@ export * from './PaginatorNext.types';
 export * from './PaginatorPage.types';
 export * from './PaginatorPages.types';
 export * from './PaginatorPrev.types';
-export * from './usePaginator.types';
+export * from './PaginatorRoot.types';

@@ -6,13 +6,13 @@ import Link from 'next/link';
 export default function LinkDemo() {
     return (
         <div className="flex justify-center gap-4">
-            <Button.Root variant="link">Link</Button.Root>
-            <Button.Root as="a" href="https://reactjs.org/" target="_blank" rel="noopener">
+            <Button variant="link">Link</Button>
+            <Button as="a" href="https://reactjs.org/" target="_blank" rel="noopener">
                 External
-            </Button.Root>
-            <Button.Root as={Link} href="/">
+            </Button>
+            <Button as={Link} href="/">
                 Router
-            </Button.Root>
+            </Button>
         </div>
     );
 }

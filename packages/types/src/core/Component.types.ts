@@ -1,6 +1,6 @@
+import type { StylesOptions } from '@primereact/types/styles';
 import type { Instance, useBaseOptions } from '.';
 import type { SafeRecord } from '..';
-import type { StylesOptions } from '../styles';
 import type { PassThroughOptions } from './PassThrough.types';
 
 /**

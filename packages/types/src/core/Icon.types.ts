@@ -9,7 +9,7 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '../shared';
+import type { BaseComponentProps, PassThroughType } from '@primereact/types/shared';
 
 /**
  * Defines passthrough(pt) options type in Icon component.

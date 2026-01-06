@@ -10,9 +10,9 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { DatePickerInstance } from './DatePicker.types';
+import type { DatePickerRootInstance } from './DatePickerRoot.types';
 import type { DatePickerTableBodyInstance } from './DatePickerTableBody.types';
-import { useDatePickerDateMeta, useDatePickerMonthOptions, useDatePickerYearOptions } from './useDatePicker.types';
+import type { useDatePickerDateMeta, useDatePickerMonthOptions, useDatePickerYearOptions } from './useDatePicker.types';
 
 /**
  * Defines passthrough(pt) options type in DatePickerTableBodyCell component.
@@ -63,7 +63,7 @@ export interface DatePickerTableBodyCellExposes {
     /**
      * Instance of the DatePicker component.
      */
-    datepicker: DatePickerInstance | undefined | null;
+    datepicker: DatePickerRootInstance | undefined | null;
     /**
      * Instance of the DatePickerTableBody component.
      */

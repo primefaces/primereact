@@ -1,3 +1,3 @@
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultLegendProps as LegendDefaults } from './legend';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultContentProps } from './content';
+export { defaultLegendProps } from './legend';
+export { defaultRootProps } from './root';

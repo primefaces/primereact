@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { SpeedDialInstance } from './SpeedDial.types';
+import type { SpeedDialRootInstance } from './SpeedDialRoot.types';
 
 /**
  * Defines passthrough(pt) options type in SpeedDialList component.
@@ -44,7 +44,7 @@ export interface SpeedDialListExposes {
     /**
      * Instance of the SpeedDial component.
      */
-    speeddial: SpeedDialInstance | undefined | null;
+    speeddial: SpeedDialRootInstance | undefined | null;
 }
 
 /**

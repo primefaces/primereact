@@ -3,11 +3,11 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useStyleClass } from '@primereact/headless/styleclass';
 import * as React from 'react';
 import { StyleClassProvider } from './StyleClass.context';
-import { defaultProps } from './StyleClass.props';
+import { defaultRootProps } from './StyleClass.props';
 
 export const StyleClass = withComponent({
     name: 'StyleClass',
-    defaultProps,
+    defaultProps: defaultRootProps,
     setup(instance) {
         const styleclass = useStyleClass(instance?.inProps);
 

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { MenuInstance } from '../menu';
+import type { MenuRootInstance } from './MenuRoot.types';
 
 /**
  * Defines passthrough(pt) options type in MenuLabel component.
@@ -44,7 +44,7 @@ export interface MenuLabelExposes {
     /**
      * Instance of the Menu component.
      */
-    menu: MenuInstance | undefined | null;
+    menu: MenuRootInstance | undefined | null;
 }
 
 /**

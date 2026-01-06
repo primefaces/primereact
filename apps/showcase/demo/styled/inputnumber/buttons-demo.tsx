@@ -57,22 +57,22 @@ export default function ButtonsDemo() {
                         onValueChange={inputNumber1?.onValueChange}
                     />
                     <InputGroup.Addon className="flex-col">
-                        <Button.Root
+                        <Button
                             severity="secondary"
                             onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.increment(e, 1)}
                             onPointerUp={inputRef1.current?.stopSpin}
                             className="py-0 text-[.5rem]"
                         >
                             <i className="pi pi-angle-up" />
-                        </Button.Root>
-                        <Button.Root
+                        </Button>
+                        <Button
                             severity="secondary"
                             onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef1.current?.decrement(e, -1)}
                             onPointerUp={inputRef1.current?.stopSpin}
                             className="py-0 text-[.5rem]"
                         >
                             <i className="pi pi-angle-down" />
-                        </Button.Root>
+                        </Button>
                     </InputGroup.Addon>
                 </InputGroup.Root>
             </div>

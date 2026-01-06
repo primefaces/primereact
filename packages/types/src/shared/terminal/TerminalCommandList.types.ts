@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { TerminalInstance } from './Terminal.types';
+import type { TerminalRootInstance } from './TerminalRoot.types';
 
 /**
  * Defines passthrough(pt) options type in TerminalCommandList component.
@@ -44,7 +44,7 @@ export interface TerminalCommandListExposes {
     /**
      * The Terminal component instance.
      */
-    terminal: TerminalInstance | undefined | null;
+    terminal: TerminalRootInstance | undefined | null;
 }
 
 /**

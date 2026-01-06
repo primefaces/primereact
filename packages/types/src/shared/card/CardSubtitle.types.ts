@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { CardInstance } from './Card.types';
+import type { CardRootInstance } from './CardRoot.types';
 
 /**
  * Defines passthrough(pt) options type in CardSubtitle component.
@@ -44,7 +44,7 @@ export interface CardSubtitleExposes {
     /**
      * The Card component instance.
      */
-    card: CardInstance | undefined | null;
+    card: CardRootInstance | undefined | null;
 }
 
 /**

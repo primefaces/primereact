@@ -8,59 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useInputOtpExposes, useInputOtpProps, useInputOtpState } from './useInputOtp.types';
-
-/**
- * Defines passthrough(pt) options type in InputOtp component.
- */
-export type InputOtpPassThroughType<E> = PassThroughType<InputOtpInstance, E>;
-
-/**
- * Defines passthrough(pt) options of InputOtp component.
- */
-export interface InputOtpPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: InputOtpPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
-    /**
-     * Used to pass attributes to the input's DOM element.
-     */
-    pcInputText?: InputOtpPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
-}
-
-/**
- * Defines valid properties in InputOtp component.
- */
-export interface InputOtpProps extends BaseComponentProps<InputOtpInstance, useInputOtpProps, InputOtpPassThrough> {
-    /**
-     * Defines the size of the InputText.
-     */
-    size?: 'small' | 'large' | undefined;
-    /**
-     * Specifies the input variant of the component.
-     */
-    variant?: 'outlined' | 'filled' | undefined;
-    /**
-     * When present, it specifies that the element should be disabled.
-     * @default false
-     */
-    disabled?: boolean | undefined;
-}
-
-/**
- * Defines valid state in InputOtp component.
- * @extends useInputOtpState
- */
-export interface InputOtpState extends useInputOtpState {}
-
-/**
- * Defines the methods and properties exposed by InputOtp component.
- * @extends useInputOtpExposes
- */
-export interface InputOtpExposes extends useInputOtpExposes {}
 
 /**
  * Defines the CSS class names used in the InputOtp component.
@@ -80,8 +27,3 @@ export const InputOtpClassNames = {
  * Type representing the CSS class names used in the InputOtp component.
  */
 export type InputOtpClassNamesType = (typeof InputOtpClassNames)[keyof typeof InputOtpClassNames];
-
-/**
- * Instance of InputOtp component.
- */
-export type InputOtpInstance = ComponentInstance<InputOtpProps, InputOtpState, InputOtpExposes>;

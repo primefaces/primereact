@@ -1,2 +1,2 @@
-export { defaultOptionProps as OptionDefaults } from './option';
-export { defaultRootProps as RootDefaults } from './root';
+export { defaultOptionProps } from './option';
+export { defaultRootProps } from './root';

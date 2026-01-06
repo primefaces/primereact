@@ -8,41 +8,6 @@
  * @group components
  *
  */
-import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughType } from '..';
-import type { useCardExposes, useCardProps, useCardState } from './useCard.types';
-
-/**
- * Defines passthrough(pt) options type in Card component.
- */
-export type CardPassThroughType<E> = PassThroughType<CardInstance, E>;
-
-/**
- * Defines passthrough(pt) options of Card component.
- */
-export interface CardPassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in Card component.
- */
-export interface CardProps extends BaseComponentProps<CardInstance, useCardProps, CardPassThrough> {}
-
-/**
- * Defines valid state in Card component.
- * @extends useCardState
- */
-export interface CardState extends useCardState {}
-
-/**
- * Defines the methods and properties exposed by Card component.
- * @extends useCardExposes
- */
-export interface CardExposes extends useCardExposes {}
 
 /**
  * Defines the CSS class names used in the Card component.
@@ -86,8 +51,3 @@ export const CardClassNames = {
  * Type representing the CSS class names used in the Card component.
  */
 export type CardClassNamesType = (typeof CardClassNames)[keyof typeof CardClassNames];
-
-/**
- * Instance of Card component.
- */
-export type CardInstance = ComponentInstance<CardProps, CardState, CardExposes>;

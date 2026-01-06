@@ -1,8 +1,8 @@
-import { ConfirmDialogCloseProps } from '@primereact/types/shared/confirmdialog';
+import type { ConfirmDialogCloseProps } from '@primereact/types/shared/confirmdialog';
 import { ButtonProps } from 'primereact/button';
 
 export const defaultCloseProps: ConfirmDialogCloseProps = {
-    ...(ButtonProps.RootDefaults as ConfirmDialogCloseProps),
+    ...(ButtonProps.defaults as ConfirmDialogCloseProps),
     iconOnly: true,
     variant: 'text',
     rounded: true,

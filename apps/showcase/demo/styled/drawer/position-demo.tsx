@@ -14,18 +14,18 @@ export default function PositionDemo() {
     return (
         <div>
             <div className="flex gap-2 justify-center">
-                <Button.Root onClick={() => setVisibleLeft(true)}>
+                <Button onClick={() => setVisibleLeft(true)}>
                     <i className="pi pi-arrow-right" />
-                </Button.Root>
-                <Button.Root onClick={() => setVisibleRight(true)}>
+                </Button>
+                <Button onClick={() => setVisibleRight(true)}>
                     <i className="pi pi-arrow-left" />
-                </Button.Root>
-                <Button.Root onClick={() => setVisibleTop(true)}>
+                </Button>
+                <Button onClick={() => setVisibleTop(true)}>
                     <i className="pi pi-arrow-down" />
-                </Button.Root>
-                <Button.Root onClick={() => setVisibleBottom(true)}>
+                </Button>
+                <Button onClick={() => setVisibleBottom(true)}>
                     <i className="pi pi-arrow-up" />
-                </Button.Root>
+                </Button>
             </div>
 
             <Drawer.Root open={visibleLeft} onOpenChange={(e: DrawerChangeEvent) => setVisibleLeft(e.value as boolean)}>

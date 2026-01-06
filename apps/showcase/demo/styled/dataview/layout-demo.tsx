@@ -90,16 +90,16 @@ export default function LayoutDemo() {
                             <div className="flex flex-col md:items-end gap-8">
                                 <span className="text-xl font-semibold">${product.price}</span>
                                 <div className="flex flex-row-reverse md:flex-row gap-2">
-                                    <Button.Root variant="outlined">
+                                    <Button variant="outlined">
                                         <i className="pi pi-heart"></i>
-                                    </Button.Root>
-                                    <Button.Root
+                                    </Button>
+                                    <Button
                                         disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                         className="flex-auto md:flex-initial whitespace-nowrap"
                                     >
                                         <i className="pi pi-shopping-cart"></i>
                                         Buy Now
-                                    </Button.Root>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -154,13 +154,13 @@ export default function LayoutDemo() {
                                     <div className="flex flex-col gap-6 mt-6">
                                         <span className="text-2xl font-semibold">${product.price}</span>
                                         <div className="flex gap-2">
-                                            <Button.Root disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto whitespace-nowrap">
+                                            <Button disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto whitespace-nowrap">
                                                 <i className="pi pi-shopping-cart"></i>
                                                 Buy Now
-                                            </Button.Root>
-                                            <Button.Root variant="outlined">
+                                            </Button>
+                                            <Button variant="outlined">
                                                 <i className="pi pi-heart"></i>
-                                            </Button.Root>
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>

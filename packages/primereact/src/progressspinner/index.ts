@@ -1,3 +1,6 @@
 export * from './ProgressSpinner';
 export * from './ProgressSpinner.context';
-export * from './ProgressSpinner.props';
+export * as ProgressSpinnerProps from './ProgressSpinner.props';
+
+// Named runtime exports to maximize tree-shaking
+export { defaultProps } from './ProgressSpinner.props';

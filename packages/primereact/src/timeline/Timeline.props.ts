@@ -1,7 +1,7 @@
-export { defaultConnectorProps as ConnectorDefaults } from './connector';
-export { defaultContentProps as ContentDefaults } from './content';
-export { defaultEventProps as EventDefaults } from './event';
-export { defaultMarkerProps as MarkerDefaults } from './marker';
-export { defaultOppositeProps as OppositeDefaults } from './opposite';
-export { defaultRootProps as RootDefaults } from './root';
-export { defaultSeparatorProps as SeparatorDefaults } from './separator';
+export { defaultConnectorProps } from './connector';
+export { defaultContentProps } from './content';
+export { defaultEventProps } from './event';
+export { defaultMarkerProps } from './marker';
+export { defaultOppositeProps } from './opposite';
+export { defaultRootProps } from './root';
+export { defaultSeparatorProps } from './separator';

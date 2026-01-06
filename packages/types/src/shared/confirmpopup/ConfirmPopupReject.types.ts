@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ConfirmPopupInstance } from './ConfirmPopup.types';
+import type { ConfirmPopupRootInstance } from './ConfirmPopupRoot.types';
 
 /**
  * Defines passthrough(pt) options type in ConfirmPopupReject component.
@@ -55,7 +55,7 @@ export interface ConfirmPopupRejectExposes {
     /**
      * Instance of the ConfirmPopup component.
      */
-    confirmpopup: ConfirmPopupInstance | undefined | null;
+    confirmpopup: ConfirmPopupRootInstance | undefined | null;
 }
 
 /**

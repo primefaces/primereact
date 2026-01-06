@@ -174,12 +174,12 @@ export default function BasicDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
                     <div className="flex items-center justify-center gap-4">
-                        <Button.Root size="large" rounded>
+                        <Button size="large" rounded>
                             Join for free
-                        </Button.Root>
-                        <Button.Root size="large" variant="outlined" rounded severity="secondary">
+                        </Button>
+                        <Button size="large" variant="outlined" rounded severity="secondary">
                             See our plans
-                        </Button.Root>
+                        </Button>
                     </div>
                 </AnimateOnScroll>
             </div>

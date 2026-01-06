@@ -1,6 +1,6 @@
-export { defaultClearIconProps as ClearIcon } from './clearicon';
-export { defaultInputProps as Input } from './input';
-export { defaultMeterProps as Meter } from './meter';
-export { defaultPortalProps as Portal } from './portal';
-export { defaultRootProps as Root } from './root';
-export { defaultStrengthProps as Strength } from './strength';
+export { defaultClearIconProps } from './clearicon';
+export { defaultInputProps } from './input';
+export { defaultMeterProps } from './meter';
+export { defaultPortalProps } from './portal';
+export { defaultRootProps } from './root';
+export { defaultStrengthProps } from './strength';

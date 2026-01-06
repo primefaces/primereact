@@ -67,12 +67,12 @@ export default function StepsDemo() {
                 </ProgressBar.Root>
 
                 <div className="flex items-center justify-between mt-6">
-                    <Button.Root onClick={prevStep} disabled={step === 0} rounded variant="text" severity="contrast">
+                    <Button onClick={prevStep} disabled={step === 0} rounded variant="text" severity="contrast">
                         Previous
-                    </Button.Root>
-                    <Button.Root onClick={nextStep} disabled={step === orderProgress.length - 1} rounded variant="text" severity="contrast">
+                    </Button>
+                    <Button onClick={nextStep} disabled={step === orderProgress.length - 1} rounded variant="text" severity="contrast">
                         Next
-                    </Button.Root>
+                    </Button>
                 </div>
             </div>
         </div>
