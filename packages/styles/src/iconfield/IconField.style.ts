@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { IconFieldInstance } from '@primereact/types/shared/iconfield';
+import type { IconFieldRootInstance } from '@primereact/types/shared/iconfield';
 import { style } from '@primeuix/styles/iconfield';
 
-export const styles = createStyles<IconFieldInstance>({
+export const styles = createStyles<IconFieldRootInstance>({
     name: 'iconfield',
     style,
     classes: {

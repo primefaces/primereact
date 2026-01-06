@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { PasswordInstance } from '@primereact/types/shared/password';
+import type { PasswordRootInstance } from '@primereact/types/shared/password';
 import { style } from '@primeuix/styles/password';
 import { isNotEmpty } from '@primeuix/utils';
 
@@ -34,7 +34,7 @@ ${style}
 }
 `;
 
-export const styles = createStyles<PasswordInstance>({
+export const styles = createStyles<PasswordRootInstance>({
     name: 'password',
     style: theme,
     classes: {

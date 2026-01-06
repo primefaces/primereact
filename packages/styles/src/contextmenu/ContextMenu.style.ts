@@ -1,7 +1,7 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ContextMenuInstance } from '@primereact/types/shared/contextmenu';
+import type { ContextMenuRootInstance } from '@primereact/types/shared/contextmenu';
 
-export const styles = createStyles<ContextMenuInstance>({
+export const styles = createStyles<ContextMenuRootInstance>({
     name: 'contextmenu',
     classes: {
         root: 'p-contextmenu',

@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { KnobInstance } from '@primereact/types/shared/knob';
+import type { KnobRootInstance } from '@primereact/types/shared/knob';
 import { style } from '@primeuix/styles/knob';
 
-export const styles = createStyles<KnobInstance>({
+export const styles = createStyles<KnobRootInstance>({
     name: 'knob',
     style,
     classes: {

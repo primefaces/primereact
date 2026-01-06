@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { InputOtpInstance } from '@primereact/types/shared/inputotp';
+import type { InputOtpRootInstance } from '@primereact/types/shared/inputotp';
 import { style } from '@primeuix/styles/inputotp';
 
-export const styles = createStyles<InputOtpInstance>({
+export const styles = createStyles<InputOtpRootInstance>({
     name: 'inputotp',
     style,
     classes: {

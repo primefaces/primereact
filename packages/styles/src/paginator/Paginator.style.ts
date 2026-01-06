@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { PaginatorInstance } from '@primereact/types/shared/paginator';
+import type { PaginatorRootInstance } from '@primereact/types/shared/paginator';
 import { style } from '@primeuix/styles/paginator';
 
 const theme = `
@@ -28,7 +28,7 @@ ${style}
 }
 `;
 
-export const styles = createStyles<PaginatorInstance>({
+export const styles = createStyles<PaginatorRootInstance>({
     name: 'paginator',
     style: theme,
     classes: {

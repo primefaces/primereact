@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ConfirmPopupInstance } from '@primereact/types/shared/confirmpopup';
+import type { ConfirmPopupRootInstance } from '@primereact/types/shared/confirmpopup';
 import { style } from '@primeuix/styles/confirmpopup';
 
-export const styles = createStyles<ConfirmPopupInstance>({
+export const styles = createStyles<ConfirmPopupRootInstance>({
     name: 'confirmpopup',
     style,
     classes: {

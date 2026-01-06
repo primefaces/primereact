@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ScrollAreaInstance } from '@primereact/types/shared/scrollarea';
+import type { ScrollAreaRootInstance } from '@primereact/types/shared/scrollarea';
 import { style } from '@primeuix/styles/scrollpanel';
 
-export const styles = createStyles<ScrollAreaInstance>({
+export const styles = createStyles<ScrollAreaRootInstance>({
     name: 'scrollpanel',
     style,
     classes: {

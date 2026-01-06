@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { GalleryInstance } from '@primereact/types/shared/gallery';
+import type { GalleryRootInstance } from '@primereact/types/shared/gallery';
 
 const theme = `
     .p-gallery {
@@ -137,7 +137,7 @@ const theme = `
     }
 `;
 
-export const styles = createStyles<GalleryInstance>({
+export const styles = createStyles<GalleryRootInstance>({
     name: 'gallery',
     style: theme,
     classes: {

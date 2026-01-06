@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { DividerInstance } from '@primereact/types/shared/divider';
+import type { DividerRootInstance } from '@primereact/types/shared/divider';
 import { style } from '@primeuix/styles/divider';
 
-export const styles = createStyles<DividerInstance>({
+export const styles = createStyles<DividerRootInstance>({
     name: 'divider',
     style,
     classes: {

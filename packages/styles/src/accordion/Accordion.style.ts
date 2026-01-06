@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { AccordionInstance } from '@primereact/types/shared/accordion';
+import type { AccordionRootInstance } from '@primereact/types/shared/accordion';
 import { style } from '@primeuix/styles/accordion';
 
-export const styles = createStyles<AccordionInstance>({
+export const styles = createStyles<AccordionRootInstance>({
     name: 'accordion',
     style,
     classes: {

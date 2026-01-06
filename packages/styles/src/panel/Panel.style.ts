@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { PanelInstance } from '@primereact/types/shared/panel';
+import type { PanelRootInstance } from '@primereact/types/shared/panel';
 import { style } from '@primeuix/styles/panel';
 
-export const styles = createStyles<PanelInstance>({
+export const styles = createStyles<PanelRootInstance>({
     name: 'panel',
     style,
     classes: {

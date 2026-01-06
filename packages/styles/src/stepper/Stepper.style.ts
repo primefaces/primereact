@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { StepperInstance } from '@primereact/types/shared/stepper';
+import type { StepperRootInstance } from '@primereact/types/shared/stepper';
 import { style } from '@primeuix/styles/stepper';
 
-export const styles = createStyles<StepperInstance>({
+export const styles = createStyles<StepperRootInstance>({
     name: 'stepper',
     style,
     classes: {

@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { InputTagsInstance } from '@primereact/types/shared/inputtags';
+import type { InputTagsRootInstance } from '@primereact/types/shared/inputtags';
 import { isNotEmpty } from '@primeuix/utils';
 
 const style = /*css*/ `
@@ -70,7 +70,7 @@ const style = /*css*/ `
     }
 `;
 
-export const styles = createStyles<InputTagsInstance>({
+export const styles = createStyles<InputTagsRootInstance>({
     name: 'inputtags',
     style,
     classes: {

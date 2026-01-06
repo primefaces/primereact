@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { TooltipInstance } from '@primereact/types/shared/tooltip';
+import type { TooltipRootInstance } from '@primereact/types/shared/tooltip';
 
 const style = `
     .p-tooltip2 {
@@ -65,7 +65,7 @@ const style = `
 
 `;
 
-export const styles = createStyles<TooltipInstance>({
+export const styles = createStyles<TooltipRootInstance>({
     name: 'tooltip',
     style,
     classes: {

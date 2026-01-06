@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { RatingInstance } from '@primereact/types/shared/rating';
+import type { RatingRootInstance } from '@primereact/types/shared/rating';
 import { style } from '@primeuix/styles/rating';
 
 const theme = `
@@ -69,7 +69,7 @@ const theme = `
         }
 `;
 
-export const styles = createStyles<RatingInstance>({
+export const styles = createStyles<RatingRootInstance>({
     name: 'rating',
     style: theme,
     classes: {

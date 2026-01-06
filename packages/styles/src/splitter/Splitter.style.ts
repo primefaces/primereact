@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { SplitterInstance } from '@primereact/types/shared/splitter';
+import type { SplitterRootInstance } from '@primereact/types/shared/splitter';
 import { style } from '@primeuix/styles/splitter';
 
-export const styles = createStyles<SplitterInstance>({
+export const styles = createStyles<SplitterRootInstance>({
     name: 'splitter',
     style,
     classes: {

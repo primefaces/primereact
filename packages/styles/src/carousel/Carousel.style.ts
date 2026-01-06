@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { CarouselInstance } from '@primereact/types/shared/carousel';
+import type { CarouselRootInstance } from '@primereact/types/shared/carousel';
 
 const theme = `
 
@@ -50,7 +50,7 @@ const theme = `
 }
 `;
 
-export const styles = createStyles<CarouselInstance>({
+export const styles = createStyles<CarouselRootInstance>({
     name: 'carousel',
     style: theme,
     classes: {

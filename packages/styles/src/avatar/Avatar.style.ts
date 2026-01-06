@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { AvatarInstance } from '@primereact/types/shared/avatar';
+import type { AvatarRootInstance } from '@primereact/types/shared/avatar';
 import { style } from '@primeuix/styles/avatar';
 
-export const styles = createStyles<AvatarInstance>({
+export const styles = createStyles<AvatarRootInstance>({
     name: 'avatar',
     style,
     classes: {

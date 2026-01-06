@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { MessageInstance } from '@primereact/types/shared/message';
+import type { MessageRootInstance } from '@primereact/types/shared/message';
 import { style } from '@primeuix/styles/message';
 
-export const styles = createStyles<MessageInstance>({
+export const styles = createStyles<MessageRootInstance>({
     name: 'message',
     style,
     classes: {

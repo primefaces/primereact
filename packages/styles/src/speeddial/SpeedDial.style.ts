@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { SpeedDialInstance } from '@primereact/types/shared/speeddial';
+import type { SpeedDialRootInstance } from '@primereact/types/shared/speeddial';
 import { style } from '@primeuix/styles/speeddial';
 
-export const styles = createStyles<SpeedDialInstance>({
+export const styles = createStyles<SpeedDialRootInstance>({
     name: 'speeddial',
     style,
     classes: {

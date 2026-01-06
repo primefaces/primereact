@@ -1,6 +1,6 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { LabelInstance } from '@primereact/types/shared/label';
+import type { LabelRootInstance } from '@primereact/types/shared/label';
 
-export const styles = createStyles<LabelInstance>({
+export const styles = createStyles<LabelRootInstance>({
     name: 'label'
 });

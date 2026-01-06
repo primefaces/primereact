@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { SliderInstance } from '@primereact/types/shared/slider';
+import type { SliderRootInstance } from '@primereact/types/shared/slider';
 import { style } from '@primeuix/styles/slider';
 
-export const styles = createStyles<SliderInstance>({
+export const styles = createStyles<SliderRootInstance>({
     name: 'slider',
     style,
     classes: {

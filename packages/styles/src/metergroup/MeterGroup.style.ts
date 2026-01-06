@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { MeterGroupInstance } from '@primereact/types/shared/metergroup';
+import type { MeterGroupRootInstance } from '@primereact/types/shared/metergroup';
 import { style } from '@primeuix/styles/metergroup';
 
-export const styles = createStyles<MeterGroupInstance>({
+export const styles = createStyles<MeterGroupRootInstance>({
     name: 'metergroup',
     style,
     classes: {

@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { CardInstance } from '@primereact/types/shared/card';
+import type { CardRootInstance } from '@primereact/types/shared/card';
 import { style } from '@primeuix/styles/card';
 
-export const styles = createStyles<CardInstance>({
+export const styles = createStyles<CardRootInstance>({
     name: 'card',
     style,
     classes: {

@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ImageCompareInstance } from '@primereact/types/shared/imagecompare';
+import type { ImageCompareRootInstance } from '@primereact/types/shared/imagecompare';
 import { style } from '@primeuix/styles/imagecompare';
 
-export const styles = createStyles<ImageCompareInstance>({
+export const styles = createStyles<ImageCompareRootInstance>({
     name: 'imagecompare',
     style,
     classes: {

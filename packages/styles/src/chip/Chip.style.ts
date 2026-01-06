@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ChipInstance } from '@primereact/types/shared/chip';
+import type { ChipRootInstance } from '@primereact/types/shared/chip';
 import { style } from '@primeuix/styles/chip';
 
-export const styles = createStyles<ChipInstance>({
+export const styles = createStyles<ChipRootInstance>({
     name: 'chip',
     style,
     classes: {

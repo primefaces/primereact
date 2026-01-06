@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { TreeInstance } from '@primereact/types/shared/tree';
+import type { TreeRootInstance } from '@primereact/types/shared/tree';
 import { style } from '@primeuix/styles/tree';
 
-export const styles = createStyles<TreeInstance>({
+export const styles = createStyles<TreeRootInstance>({
     name: 'tree',
     style,
     classes: {

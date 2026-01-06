@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { FieldsetInstance } from '@primereact/types/shared/fieldset';
+import type { FieldsetRootInstance } from '@primereact/types/shared/fieldset';
 import { style } from '@primeuix/styles/fieldset';
 
-export const styles = createStyles<FieldsetInstance>({
+export const styles = createStyles<FieldsetRootInstance>({
     name: 'fieldset',
     style,
     classes: {

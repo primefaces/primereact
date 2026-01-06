@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { FileUploadInstance } from '@primereact/types/shared/fileupload';
+import type { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { style } from '@primeuix/styles/fileupload';
 
-export const styles = createStyles<FileUploadInstance>({
+export const styles = createStyles<FileUploadRootInstance>({
     name: 'fileupload',
     style,
     classes: {

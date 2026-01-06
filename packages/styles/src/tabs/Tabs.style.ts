@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { TabsInstance } from '@primereact/types/shared/tabs';
+import type { TabsRootInstance } from '@primereact/types/shared/tabs';
 import { style } from '@primeuix/styles/tabs';
 
-export const styles = createStyles<TabsInstance>({
+export const styles = createStyles<TabsRootInstance>({
     name: 'tabs',
     style,
     classes: {

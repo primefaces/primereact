@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { MenuInstance } from '@primereact/types/shared/menu';
+import type { MenuRootInstance } from '@primereact/types/shared/menu';
 
 const _style = /*css*/ `
     /* For PrimeReact */
@@ -122,7 +122,7 @@ const _style = /*css*/ `
     }
 `;
 
-export const styles = createStyles<MenuInstance>({
+export const styles = createStyles<MenuRootInstance>({
     name: 'menu',
     style: _style,
     classes: {

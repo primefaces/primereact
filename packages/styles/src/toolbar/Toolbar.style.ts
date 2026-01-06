@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ToolbarInstance } from '@primereact/types/shared/toolbar';
+import type { ToolbarRootInstance } from '@primereact/types/shared/toolbar';
 import { style } from '@primeuix/styles/toolbar';
 
-export const styles = createStyles<ToolbarInstance>({
+export const styles = createStyles<ToolbarRootInstance>({
     name: 'toolbar',
     style,
     classes: {

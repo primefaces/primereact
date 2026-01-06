@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { TagInstance } from '@primereact/types/shared/tag';
+import type { TagRootInstance } from '@primereact/types/shared/tag';
 import { style } from '@primeuix/styles/tag';
 
-export const styles = createStyles<TagInstance>({
+export const styles = createStyles<TagRootInstance>({
     name: 'tag',
     style,
     classes: {

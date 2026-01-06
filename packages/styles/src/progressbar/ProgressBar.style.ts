@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ProgressBarInstance } from '@primereact/types/shared/progressbar';
+import type { ProgressBarRootInstance } from '@primereact/types/shared/progressbar';
 import { style } from '@primeuix/styles/progressbar';
 
-export const styles = createStyles<ProgressBarInstance>({
+export const styles = createStyles<ProgressBarRootInstance>({
     name: 'progressbar',
     style,
     classes: {

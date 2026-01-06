@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { DatePickerInstance, useDatePickerDateMeta, useDatePickerMonthOptions, useDatePickerYearOptions } from '@primereact/types/shared/datepicker';
+import type { DatePickerRootInstance, useDatePickerDateMeta, useDatePickerMonthOptions, useDatePickerYearOptions } from '@primereact/types/shared/datepicker';
 import { style } from '@primeuix/styles/datepicker';
 
 const theme = `
@@ -61,7 +61,7 @@ ${style}
 }
 `;
 
-export const styles = createStyles<DatePickerInstance>({
+export const styles = createStyles<DatePickerRootInstance>({
     name: 'datepicker',
     style: theme,
     classes: {

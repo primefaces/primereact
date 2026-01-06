@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { PopoverInstance } from '@primereact/types/shared/popover';
+import type { PopoverRootInstance } from '@primereact/types/shared/popover';
 import { style } from '@primeuix/styles/popover';
 
-export const styles = createStyles<PopoverInstance>({
+export const styles = createStyles<PopoverRootInstance>({
     name: 'popover',
     style,
     classes: {

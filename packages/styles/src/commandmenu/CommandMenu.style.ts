@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { CommandMenuInstance } from '@primereact/types/shared/commandmenu';
+import type { CommandMenuRootInstance } from '@primereact/types/shared/commandmenu';
 
 const theme = `
     .p-commandmenu {
@@ -72,7 +72,7 @@ const theme = `
     }
 `;
 
-export const styles = createStyles<CommandMenuInstance>({
+export const styles = createStyles<CommandMenuRootInstance>({
     name: 'commandmenu',
     style: theme,
     classes: {

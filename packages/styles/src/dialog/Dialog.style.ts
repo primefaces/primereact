@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { DialogInstance } from '@primereact/types/shared/dialog';
+import type { DialogRootInstance } from '@primereact/types/shared/dialog';
 import { style } from '@primeuix/styles/dialog';
 
-export const styles = createStyles<DialogInstance>({
+export const styles = createStyles<DialogRootInstance>({
     name: 'dialog',
     style,
     classes: {

@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ConfirmDialogInstance } from '@primereact/types/shared/confirmdialog';
+import type { ConfirmDialogRootInstance } from '@primereact/types/shared/confirmdialog';
 import { style } from '@primeuix/styles/confirmdialog';
 
-export const styles = createStyles<ConfirmDialogInstance>({
+export const styles = createStyles<ConfirmDialogRootInstance>({
     name: 'confirmdialog',
     style,
     classes: {

@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { OrgChartInstance } from '@primereact/types/shared/orgchart';
+import type { OrgChartRootInstance } from '@primereact/types/shared/orgchart';
 import { style } from '@primeuix/styles/organizationchart';
 
 const theme = `
@@ -187,7 +187,7 @@ ${style}
 
 `;
 
-export const styles = createStyles<OrgChartInstance>({
+export const styles = createStyles<OrgChartRootInstance>({
     name: 'organizationchart',
     style: theme,
     classes: {

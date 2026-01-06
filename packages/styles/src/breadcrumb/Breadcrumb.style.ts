@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { BreadcrumbInstance } from '@primereact/types/shared/breadcrumb';
+import type { BreadcrumbRootInstance } from '@primereact/types/shared/breadcrumb';
 import { style } from '@primeuix/styles/breadcrumb';
 
 const _style = /*css*/ `
@@ -31,7 +31,7 @@ const _style = /*css*/ `
     }
 `;
 
-export const styles = createStyles<BreadcrumbInstance>({
+export const styles = createStyles<BreadcrumbRootInstance>({
     name: 'breadcrumb',
     style: _style,
     classes: {

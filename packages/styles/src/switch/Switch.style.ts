@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { SwitchInstance } from '@primereact/types/shared/switch';
+import type { SwitchRootInstance } from '@primereact/types/shared/switch';
 import { style } from '@primeuix/styles/toggleswitch';
 
-export const styles = createStyles<SwitchInstance>({
+export const styles = createStyles<SwitchRootInstance>({
     name: 'toggleswitch',
     style,
     classes: {

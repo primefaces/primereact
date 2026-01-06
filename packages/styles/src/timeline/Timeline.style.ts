@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { TimelineInstance } from '@primereact/types/shared/timeline';
+import type { TimelineRootInstance } from '@primereact/types/shared/timeline';
 import { style } from '@primeuix/styles/timeline';
 
-export const styles = createStyles<TimelineInstance>({
+export const styles = createStyles<TimelineRootInstance>({
     name: 'timeline',
     style,
     classes: {

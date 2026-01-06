@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { TerminalInstance } from '@primereact/types/shared/terminal';
+import type { TerminalRootInstance } from '@primereact/types/shared/terminal';
 import { style } from '@primeuix/styles/terminal';
 
-export const styles = createStyles<TerminalInstance>({
+export const styles = createStyles<TerminalRootInstance>({
     name: 'terminal',
     style,
     classes: {

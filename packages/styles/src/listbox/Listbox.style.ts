@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ListboxInstance } from '@primereact/types/shared/listbox';
+import type { ListboxRootInstance } from '@primereact/types/shared/listbox';
 import { style } from '@primeuix/styles/listbox';
 
 const _style = /*css*/ `
@@ -24,7 +24,7 @@ const _style = /*css*/ `
     }
 `;
 
-export const styles = createStyles<ListboxInstance>({
+export const styles = createStyles<ListboxRootInstance>({
     name: 'listbox',
     style: _style,
     classes: {

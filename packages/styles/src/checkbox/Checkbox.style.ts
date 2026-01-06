@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { CheckboxInstance } from '@primereact/types/shared/checkbox';
+import type { CheckboxRootInstance } from '@primereact/types/shared/checkbox';
 import { style } from '@primeuix/styles/checkbox';
 
-export const styles = createStyles<CheckboxInstance>({
+export const styles = createStyles<CheckboxRootInstance>({
     name: 'checkbox',
     style,
     classes: {

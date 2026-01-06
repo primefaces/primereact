@@ -1,11 +1,11 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ToastInstance } from '@primereact/types/shared/toast';
+import type { ToastRootInstance } from '@primereact/types/shared/toast';
 
 const style = `
     
 `;
 
-export const styles = createStyles<ToastInstance>({
+export const styles = createStyles<ToastRootInstance>({
     name: 'toast',
     style,
     classes: {

@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { DrawerInstance } from '@primereact/types/shared/drawer';
+import type { DrawerRootInstance } from '@primereact/types/shared/drawer';
 import { style } from '@primeuix/styles/drawer';
 
-export const styles = createStyles<DrawerInstance>({
+export const styles = createStyles<DrawerRootInstance>({
     name: 'drawer',
     style,
     classes: {

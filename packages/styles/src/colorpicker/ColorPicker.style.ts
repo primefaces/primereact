@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ColorPickerInstance } from '@primereact/types/shared/colorpicker';
+import type { ColorPickerRootInstance } from '@primereact/types/shared/colorpicker';
 // import { style } from '@primeuix/styles/colorpicker';
 
 const theme = `
@@ -124,7 +124,7 @@ const theme = `
     }
 `;
 
-export const styles = createStyles<ColorPickerInstance>({
+export const styles = createStyles<ColorPickerRootInstance>({
     name: 'colorpicker',
     style: theme,
     classes: {

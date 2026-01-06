@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ToggleButtonInstance } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonRootInstance } from '@primereact/types/shared/togglebutton';
 import { style } from '@primeuix/styles/togglebutton';
 
-export const styles = createStyles<ToggleButtonInstance>({
+export const styles = createStyles<ToggleButtonRootInstance>({
     name: 'togglebutton',
     style,
     classes: {
