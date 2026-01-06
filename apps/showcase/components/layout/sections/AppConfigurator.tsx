@@ -1,6 +1,6 @@
 import { useApp } from '@/hooks/useApp';
 import { useViewTransition } from '@primereact/hooks';
-import { SwitchChangeEvent } from '@primereact/types/shared/switch';
+import { SwitchRootChangeEvent } from '@primereact/types/shared/switch';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
@@ -8,8 +8,8 @@ import Lara from '@primeuix/themes/lara';
 import Material from '@primeuix/themes/material';
 import Nora from '@primeuix/themes/nora';
 import { cn } from '@primeuix/utils';
-import { Switch } from 'primereact/switch';
-import { ToggleButton } from 'primereact/togglebutton';
+import { Switch } from '@primereact/ui/switch';
+import { ToggleButton } from '@primereact/ui/togglebutton';
 import * as React from 'react';
 
 interface PaletteType {
@@ -354,7 +354,7 @@ export default function AppConfigurator() {
                             <span className="config-panel-label">RTL</span>
                             <Switch.Root
                                 checked={app.isRTL}
-                                onCheckedChange={(e: SwitchChangeEvent) => {
+                                onCheckedChange={(e: SwitchRootChangeEvent) => {
                                     toggleRTL(e.checked);
                                 }}
                             >
