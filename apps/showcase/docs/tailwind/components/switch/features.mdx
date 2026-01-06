@@ -1,0 +1,101 @@
+---
+title: Switch
+description: Switch is used to select a boolean value.
+component: switch
+---
+
+<DocDemoViewer name="switch:example" hideCode/>
+
+## Installation
+
+<DocTabs value="CLI">
+<DocTabsList>
+    <DocTabsTab value="CLI">CLI</DocTabsTab>
+    <DocTabsTab value="Manual">Manual</DocTabsTab>
+</DocTabsList>
+<DocTabsPanel value="CLI">
+```bash
+npx shadcn@latest add @primereact/ui/switch
+```
+</DocTabsPanel>
+<DocTabsPanel value="Manual">
+▸  Copy and paste the following code into your project
+<DocSourceViewer name="ui/switch" />
+▸  Update the import paths to match your project setup.
+</DocTabsPanel>
+</DocTabs>
+
+## Usage
+
+```tsx
+import { Switch } from 'primereact/switch';
+```
+
+```tsx
+<Switch>
+    <Switch.Control>
+        <Switch.Thumb />
+    </Switch.Control>
+</Switch>
+```
+
+## Examples
+
+### Controlled
+
+A controlled Switch requires managing the checked state with a state variable and handling the change event manually. This allows for complete control over the Switch's behavior.
+
+<DocDemoViewer name="switch:controlled-demo" />
+
+### Uncontrolled
+
+For an uncontrolled Switch component, `defaultChecked` is used to set the initial state, and the component manages its own state internally.
+
+<DocDemoViewer name="switch:uncontrolled-demo" />
+
+### Template
+
+`Switch.Thumb` also allows displaying custom content inside itself.
+
+<DocDemoViewer name="switch:template-demo" />
+
+### Customization
+
+`Switch` component supports customization through CSS classes. The appearance, including colors and other visual properties, can be modified by applying custom classes to the component.
+
+<DocDemoViewer name="switch:customization-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocDemoViewer name="switch:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused.
+
+<DocDemoViewer name="switch:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Switch component uses a hidden native checkbox element with switch role internally that is only visible to screen readers. Value to describe the component can either be provided via `label` tag combined with `id` prop or using `aria-labelledby`, `aria-label` props.
+
+```tsx
+<label htmlFor="switch1">Remember Me</label>
+<Switch inputId="switch1" />
+
+<span id="switch2">Remember Me</span>
+<Switch aria-labelledby="switch2" />
+
+<Switch aria-label="Remember Me" />
+```
+
+### Keyboard Support
+
+| Key     | Function                   |
+| ------- | -------------------------- |
+| `tab`   | Moves focus to the switch. |
+| `space` | Toggles the checked state. |

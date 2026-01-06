@@ -1,8 +1,8 @@
 'use client';
-import { Button } from 'primereact/button';
+import { Button } from '@primereact/ui/button';
 
-function DocButton({ ...props }: React.ComponentProps<typeof Button>) {
-    return <Button {...props} />;
+function DocButton({ ...props }: React.ComponentProps<typeof Button.Root>) {
+    return <Button.Root {...props} />;
 }
 
 export default DocButton;

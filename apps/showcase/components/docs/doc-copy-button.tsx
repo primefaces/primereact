@@ -22,7 +22,7 @@ export default function DocCopyButton({ source, timeout = 2000, className, ...pr
             disabled={isCopied}
             onClick={onCopy}
             className={cn(
-                'size-8 flex items-center justify-center rounded-md hover:text-surface-900 dark:hover:text-surface-0 hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 dark:text-surface-400 transition-colors disabled:pointer-events-none ',
+                'size-8 text-sm flex items-center justify-center rounded-md hover:text-surface-900 dark:hover:text-surface-0 hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 dark:text-surface-400 transition-colors disabled:pointer-events-none ',
                 className
             )}
             {...props}

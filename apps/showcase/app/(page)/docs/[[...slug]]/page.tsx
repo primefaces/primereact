@@ -1,3 +1,4 @@
+import DocCopyMarkdownMenu from '@/components/docs/doc-copy-markdown-menu';
 import DocMdx from '@/components/docs/doc-mdx';
 import DocTabMenu from '@/components/docs/doc-tab-menu';
 import DocToc from '@/components/docs/doc-toc';
@@ -66,9 +67,9 @@ async function DocsPage({ params }: PageProps) {
             <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
                 <div className="flex-1 overflow-hidden pb-12">
                     <div className="grid grid-cols-[1fr_auto] gap-2 items-start">
-                        <h1 className="text-4xl font-semibold leading-[1.2] text-(--high-contrast-text-color)">{doc.title}</h1>
-                        {/*<DocCopyMarkdownMenu className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />*/}
-                        <p className="text-xl leading-6.5 col-span-2">{doc.description}</p>
+                        <h1 className="text-[2rem] leading-tight font-semibold text-(--high-contrast-text-color)">{doc.title}</h1>
+                        {!(doc.hideCopyPage === true) && <DocCopyMarkdownMenu className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />}
+                        <p className="text-lg leading-6.5 col-span-2 opacity-75">{doc.description}</p>
                     </div>
 
                     <DocMdx code={doc.body.code} />

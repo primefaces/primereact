@@ -1,8 +1,8 @@
 'use client';
 import { cn } from '@primeuix/utils';
 import { allDocs } from 'contentlayer/generated';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Button } from 'primereact/button';
 import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
 
@@ -17,7 +17,6 @@ export default function DocCopyMarkdownMenu({
 }) {
     const params = useParams();
     const [isCopied, setIsCopied] = React.useState(false);
-    const [isMarkdownLinkCopied, setIsMarkdownLinkCopied] = React.useState(false);
 
     const [markdownLink, githubLink, chatGPTLink, claudeLink] = React.useMemo(() => {
         const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
@@ -29,7 +28,7 @@ export default function DocCopyMarkdownMenu({
         if (component) {
             const componentName = params?.slug?.[1];
 
-            githubSlug = `${slugArray.join('/')}${params?.slug?.[2] ? '' : '/features'}`;
+            githubSlug = `${slugArray.join('/')}${['theming', 'pt', 'api']?.includes(slugArray[slugArray.length - 1]) ? '' : '/features'}`;
             link = `${baseUrl}/docs/components/${componentName}.md`;
         } else {
             githubSlug = slugArray.join('/');
@@ -90,26 +89,21 @@ export default function DocCopyMarkdownMenu({
         }, 2000);
     };
 
-    const handleCopyMarkdownLink = () => {
-        window.navigator.clipboard.writeText(markdownLink);
-        setIsMarkdownLinkCopied(true);
-        setTimeout(() => {
-            setIsMarkdownLinkCopied(false);
-        }, 2000);
-    };
-
     return (
         <div className={cn('flex items-center gap-4 relative', className)} {...props}>
-            <Button className="hidden opacity-0 absolute w-0 h-0"></Button>
-            <div className="rounded-border border border-surface flex divide-x divide-(--p-content-border-color) bg-(--p-button-secondary-background) overflow-hidden text-(--p-button-secondary-color) font-(--p-button-label-font-weight)">
-                <button onClick={handleCopy} disabled={isCopied} className="px-3 py-2 flex items-center gap-2 hover:bg-(--p-button-secondary-hover-background)/60 transition-colors cursor-pointer disabled:opacity-50 disabled:pointer-events-none">
-                    {isCopied ? <i className="pi pi-check"></i> : <i className="pi pi-copy"></i>}
-                    Copy Markdown
+            <div className="bg-surface-0 dark:bg-surface-900 overflow-hidden flex rounded-lg border border-surface shadow-xs divide-x divide-(--p-content-border-color)">
+                <button
+                    onClick={handleCopy}
+                    disabled={isCopied}
+                    className="inline-flex items-center gap-2 text-sm font-medium pl-2.5 pr-3 py-1.5 hover:bg-surface-50 dark:hover:bg-surface-800 text-surface-600 hover:text-surface-950 dark:text-surface-300 dark:hover:text-surface-0 transition-colors duration-150 disabled:opacity-75 disabled:pointer-events-none"
+                >
+                    <i className={`pi ${isCopied ? 'pi-check' : 'pi-copy'}`}></i>
+                    <span className="">Copy Page</span>
                 </button>
                 <StyleClass
                     as="button"
                     type="button"
-                    className="px-3 flex items-center justify-center hover:bg-(--p-button-secondary-hover-background)/60 transition-colors cursor-pointer"
+                    className="px-2.5 flex items-center justify-center transition-colors cursor-pointer hover:bg-surface-50 dark:hover:bg-surface-800 text-surface-600 hover:text-surface-950 dark:text-surface-300 dark:hover:text-surface-0"
                     aria-label="App Configurator"
                     selector=".copy-markdown-dropdown"
                     enterFromClassName="hidden"
@@ -121,59 +115,67 @@ export default function DocCopyMarkdownMenu({
                     <i className="pi pi-chevron-down text-sm"></i>
                 </StyleClass>
             </div>
-            <div className="copy-markdown-dropdown hidden absolute top-[calc(100%+4px)] right-0 inset-inline-end-0 w-[13.5rem] p-[0.25rem] bg-(--overlay-background) rounded-[6px] border border-(--border-color) origin-top shadow-[0_4px_6px_-1px_rgb(0_0_0_/_0.1),_0_2px_4px_-2px_rgb(0_0_0_/_0.1)] z-50">
+            <div className="copy-markdown-dropdown hidden absolute top-[calc(100%+4px)] right-0 inset-inline-end-0 w-48 p-1 bg-(--overlay-background) rounded-lg border border-surface origin-top shadow-md z-50">
                 <div className="flex flex-col gap-0.5">
-                    <button onClick={handleCopyMarkdownLink} disabled={isMarkdownLinkCopied} className="flex items-center gap-2 pl-3 p-2 rounded-[4px] hover:bg-(--p-button-secondary-hover-background)/60 transition-colors">
-                        {isMarkdownLinkCopied ? <i className="pi pi-check"></i> : <i className="pi pi-link text-surface-900 dark:text-surface-0"></i>}
-                        <span>Copy Markdown Link</span>
-                    </button>
-                    <a href={githubLink} target="_blank" className="flex items-center gap-2 pl-3 p-2 rounded-[4px] hover:bg-(--p-button-secondary-hover-background)/60 transition-colors">
-                        <i className="pi pi-github text-surface-900 dark:text-surface-0"></i>
-                        <span>Open in Github</span>
-                        <i className="pi pi-arrow-up-right text-xs opacity-50 ml-auto"></i>
-                    </a>
-                    <a href={chatGPTLink} target="_blank" className="flex items-center gap-2 pl-3 p-2 rounded-[4px] hover:bg-(--p-button-secondary-hover-background)/60 transition-colors">
-                        <span className="w-4 h-4 relative">
-                            <svg className="absolute w-6 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 721 721" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <mask id="mask0_1390_2313" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="0" y="0" width="721" height="721">
-                                    <path d="M720.607 0.0996094H0.607422V720.1H720.607V0.0996094Z" fill="white" />
-                                </mask>
-                                <g mask="url(#mask0_1390_2313)">
-                                    <mask id="mask1_1390_2313" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="118" y="119" width="485" height="481">
-                                        <path d="M602.697 119.957H118.558V599.775H602.697V119.957Z" fill="white" />
-                                    </mask>
-                                    <g mask="url(#mask1_1390_2313)">
-                                        <path
-                                            className="fill-surface-900 dark:fill-surface-0"
-                                            d="M304.247 294.61V249.027C304.247 245.188 305.688 242.308 309.045 240.391L400.693 187.611C413.168 180.414 428.043 177.057 443.395 177.057C500.972 177.057 537.441 221.681 537.441 269.181C537.441 272.539 537.441 276.378 536.96 280.217L441.955 224.557C436.198 221.2 430.438 221.2 424.681 224.557L304.247 294.61ZM518.246 472.144V363.223C518.246 356.504 515.365 351.706 509.609 348.348L389.175 278.295L428.52 255.742C431.878 253.825 434.758 253.825 438.116 255.742L529.763 308.522C556.155 323.878 573.906 356.504 573.906 388.17C573.906 424.635 552.316 458.224 518.246 472.14V472.144ZM275.938 376.181L236.593 353.151C233.236 351.234 231.795 348.353 231.795 344.514V238.955C231.795 187.616 271.14 148.748 324.401 148.748C344.556 148.748 363.265 155.467 379.103 167.462L284.579 222.163C278.823 225.52 275.943 230.318 275.943 237.038V376.185L275.938 376.181ZM360.627 425.121L304.247 393.454V326.282L360.627 294.615L417.003 326.282V393.454L360.627 425.121ZM396.853 570.988C376.699 570.988 357.99 564.269 342.152 552.275L436.675 497.573C442.432 494.216 445.312 489.418 445.312 482.698V343.551L485.139 366.581C488.496 368.498 489.937 371.378 489.937 375.218V480.777C489.937 532.116 450.11 570.984 396.853 570.984V570.988ZM283.135 463.989L191.487 411.21C165.095 395.853 147.344 363.228 147.344 331.561C147.344 294.615 169.416 261.508 203.481 247.592V356.99C203.481 363.709 206.362 368.507 212.118 371.865L332.075 441.436L292.73 463.989C289.373 465.906 286.492 465.906 283.135 463.989ZM277.86 542.679C223.64 542.679 183.814 501.894 183.814 451.513C183.814 447.674 184.295 443.835 184.772 439.996L279.296 494.697C285.052 498.055 290.813 498.055 296.569 494.697L417.003 425.126V470.709C417.003 474.548 415.563 477.428 412.205 479.345L320.558 532.125C308.082 539.322 293.207 542.679 277.855 542.679H277.86ZM396.853 599.775C454.912 599.775 503.371 558.512 514.411 503.811C568.15 489.895 602.697 439.514 602.697 388.175C602.697 354.586 588.304 321.961 562.393 298.449C564.792 288.372 566.232 278.295 566.232 268.223C566.232 199.61 510.572 148.266 446.275 148.266C433.323 148.266 420.847 150.183 408.371 154.504C386.776 133.391 357.027 119.957 324.401 119.957C266.343 119.957 217.884 161.219 206.844 215.92C153.105 229.836 118.558 280.217 118.558 331.556C118.558 365.145 132.951 397.77 158.862 421.282C156.463 431.359 155.023 441.436 155.023 451.509C155.023 520.122 210.683 571.465 274.979 571.465C287.932 571.465 300.408 569.548 312.884 565.227C334.474 586.34 364.223 599.775 396.853 599.775Z"
-                                        />
-                                    </g>
-                                </g>
-                            </svg>
-                        </span>
-
-                        <span>Open in ChatGPT</span>
-                        <i className="pi pi-arrow-up-right text-xs opacity-50 ml-auto"></i>
-                    </a>
-                    <a href={claudeLink} target="_blank" className="flex items-center gap-2 pl-3 p-2 rounded-[4px] hover:bg-(--p-button-secondary-hover-background)/60 transition-colors">
-                        <span className="w-4 h-4 relative">
-                            <svg className="absolute w-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 93 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clipPath="url(#clip0_1391_2325)">
-                                    <path d="M66.5 0H52.4L78.1 65H92.2L66.5 0ZM25.7 0L0 65H14.4L19.7 51.4H46.6L51.8 65H66.2L40.5 0H25.7ZM24.3 39.3L33.1 16.5L41.9 39.3H24.3Z" className="fill-surface-900 dark:fill-surface-0" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_1391_2325">
-                                        <rect width="92.2" height="65" className="fill-surface-900 dark:fill-surface-0" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </span>
-
-                        <span>Open in Claude</span>
-                        <i className="pi pi-arrow-up-right text-xs opacity-50 ml-auto"></i>
-                    </a>
+                    <DocCopyMarkdownMenuItem href={markdownLink} target="_blank">
+                        {markdownIcon}
+                        View as Markdown
+                    </DocCopyMarkdownMenuItem>
+                    <DocCopyMarkdownMenuItem href={githubLink} target="_blank">
+                        <i className="pi pi-github leading-none! text-sm"></i>
+                        Open in Github
+                    </DocCopyMarkdownMenuItem>
+                    <DocCopyMarkdownMenuItem href={chatGPTLink} target="_blank">
+                        {chatGPTIcon}
+                        Open in ChatGPT
+                    </DocCopyMarkdownMenuItem>
+                    <DocCopyMarkdownMenuItem href={claudeLink} target="_blank">
+                        {claudeIcon}
+                        Open in Claude
+                    </DocCopyMarkdownMenuItem>
                 </div>
             </div>
         </div>
     );
 }
+
+function DocCopyMarkdownMenuItem({ className, ...props }: React.ComponentProps<typeof Link>) {
+    return (
+        <Link
+            className={cn(
+                'text-sm [&_svg]:size-3.5 inline-flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-600 hover:text-surface-950 dark:text-surface-300 dark:hover:text-surface-0 transition-colors duration-150',
+                className
+            )}
+            {...props}
+        />
+    );
+}
+
+const markdownIcon = (
+    <svg strokeLinejoin="round" viewBox="0 0 22 16">
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M19.5 2.25H2.5C1.80964 2.25 1.25 2.80964 1.25 3.5V12.5C1.25 13.1904 1.80964 13.75 2.5 13.75H19.5C20.1904 13.75 20.75 13.1904 20.75 12.5V3.5C20.75 2.80964 20.1904 2.25 19.5 2.25ZM2.5 1C1.11929 1 0 2.11929 0 3.5V12.5C0 13.8807 1.11929 15 2.5 15H19.5C20.8807 15 22 13.8807 22 12.5V3.5C22 2.11929 20.8807 1 19.5 1H2.5ZM3 4.5H4H4.25H4.6899L4.98715 4.82428L7 7.02011L9.01285 4.82428L9.3101 4.5H9.75H10H11V5.5V11.5H9V7.79807L7.73715 9.17572L7 9.97989L6.26285 9.17572L5 7.79807V11.5H3V5.5V4.5ZM15 8V4.5H17V8H19.5L17 10.5L16 11.5L15 10.5L12.5 8H15Z"
+            fill="currentColor"
+        ></path>
+    </svg>
+);
+
+const claudeIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+            d="m4.714 15.956 4.718-2.648.079-.23-.08-.128h-.23l-.79-.048-2.695-.073-2.337-.097-2.265-.122-.57-.121-.535-.704.055-.353.48-.321.685.06 1.518.104 2.277.157 1.651.098 2.447.255h.389l.054-.158-.133-.097-.103-.098-2.356-1.596-2.55-1.688-1.336-.972-.722-.491L2 6.223l-.158-1.008.655-.722.88.06.225.061.893.686 1.906 1.476 2.49 1.833.364.304.146-.104.018-.072-.164-.274-1.354-2.446-1.445-2.49-.644-1.032-.17-.619a2.972 2.972 0 0 1-.103-.729L6.287.133 6.7 0l.995.134.42.364.619 1.415L9.735 4.14l1.555 3.03.455.898.243.832.09.255h.159V9.01l.127-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.583.28.48.685-.067.444-.286 1.851-.558 2.903-.365 1.942h.213l.243-.242.983-1.306 1.652-2.064.728-.82.85-.904.547-.431h1.032l.759 1.129-.34 1.166-1.063 1.347-.88 1.142-1.263 1.7-.79 1.36.074.11.188-.02 2.853-.606 1.542-.28 1.84-.315.832.388.09.395-.327.807-1.967.486-2.307.462-3.436.813-.043.03.049.061 1.548.146.662.036h1.62l3.018.225.79.522.473.638-.08.485-1.213.62-1.64-.389-3.825-.91-1.31-.329h-.183v.11l1.093 1.068 2.003 1.81 2.508 2.33.127.578-.321.455-.34-.049-2.204-1.657-.85-.747-1.925-1.62h-.127v.17l.443.649 2.343 3.521.122 1.08-.17.353-.607.213-.668-.122-1.372-1.924-1.415-2.168-1.141-1.943-.14.08-.674 7.254-.316.37-.728.28-.607-.461-.322-.747.322-1.476.388-1.924.316-1.53.285-1.9.17-.632-.012-.042-.14.018-1.432 1.967-2.18 2.945-1.724 1.845-.413.164-.716-.37.066-.662.401-.589 2.386-3.036 1.439-1.882.929-1.086-.006-.158h-.055L4.138 18.56l-1.13.146-.485-.456.06-.746.231-.243 1.907-1.312Z"
+            fill="currentColor"
+        ></path>
+    </svg>
+);
+
+const chatGPTIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+            d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08-4.778 2.758a.795.795 0 0 0-.393.681zm1.097-2.365 2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5Z"
+            fill="currentColor"
+        ></path>
+    </svg>
+);

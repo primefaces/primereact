@@ -116,12 +116,8 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
                 y < 5 ? '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_80px,rgb(0,0,0)_100%,_transparent_100%)]' : '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_80px,rgb(0,0,0)_90%,_transparent_100%)]'
             )}
         >
-            <div className="flex items-center gap-2 ">
-                <i className="pi pi-align-left opacity-50 !text-sm !leading-none"></i>
-                <span className="font-medium uppercase text-sm tracking-wide">On this page</span>
-            </div>
             <div
-                className="relative mt-4 pl-4
+                className="relative pl-4
     after:content-[''] after:absolute after:rounded-full after:left-0 after:transition-[top,height] after:duration-300 after:top-(--top) after:h-(--height) after:bg-primary after:w-px
     before:content-[''] before:absolute before:rounded-full before:left-0 before:top-0 before:h-full before:bg-surface-200 dark:before:bg-surface-800 before:w-px"
             >
@@ -129,12 +125,12 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
                     {toc.map(
                         (item, index) =>
                             item.slug !== undefined && (
-                                <li key={item.slug + index} className="mb-2" style={{ paddingLeft: `${(item.level - 2) * 14}px` }}>
+                                <li key={item.slug + index} className="mb-1.25" style={{ paddingLeft: `${(item.level - 2) * 16}px` }}>
                                     <a
                                         onClick={() => onItemClick(item.slug)}
                                         id={'toc-' + item.slug}
                                         href={`#${item.slug}`}
-                                        className={cn('leading-6 text-surface-500 hover:text-primary transition-colors duration-200', activeId === item.slug && '!text-primary')}
+                                        className={cn('text-surface-500 hover:text-primary transition-colors duration-200 text-sm', activeId === item.slug && '!text-primary')}
                                     >
                                         {item.text}
                                     </a>
@@ -152,8 +148,12 @@ interface DocTocProps {
 }
 
 export default function DocToc({ toc }: DocTocProps) {
+    if (toc.length === 0) {
+        return null;
+    }
+
     return (
-        <div className="w-[236px] sticky top-34 lg:block hidden">
+        <div className="w-[236px] sticky top-24 lg:block hidden">
             <DocTocList toc={toc} />
             {/* <DocTocAd /> */}
         </div>

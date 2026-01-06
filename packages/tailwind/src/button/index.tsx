@@ -5,24 +5,24 @@ import { ButtonRoot } from 'primereact/button';
 import * as React from 'react';
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-[3px]",
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium text-sm transition-[background-color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2",
     {
         variants: {
             variant: {
                 default: '',
                 link: 'hover:underline',
-                text: '',
+                text: 'focus-visible:outline-offset-0!',
                 outlined: ''
             },
             severity: {
-                default: 'focus-visible:border-primary focus-visible:ring-primary-500/20 dark:focus-visible:ring-primary-500/30',
-                secondary: 'focus-visible:ring-surface-500/20 dark:focus-visible:ring-surface-500/30',
-                info: ' focus-visible:ring-blue-500/30',
-                success: 'focus-visible:ring-green-500/30',
-                warn: 'focus-visible:ring-amber-500/30',
-                danger: 'focus-visible:ring-red-500/30',
-                contrast: 'focus-visible:ring-surface-500/30',
-                help: 'focus-visible:ring-purple-500/30'
+                default: 'focus-visible:outline-primary focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/30',
+                secondary: 'focus-visible:outline-surface-500/20 dark:focus-visible:outline-surface-500/30',
+                info: ' focus-visible:outline-blue-500/50',
+                success: 'focus-visible:outline-green-500/50',
+                warn: 'focus-visible:outline-amber-500/50',
+                danger: 'focus-visible:outline-red-500/50',
+                contrast: 'focus-visible:outline-surface-500/50',
+                help: 'focus-visible:outline-purple-500/50'
             },
             raised: {
                 true: 'shadow'
@@ -36,7 +36,7 @@ const buttonVariants = cva(
             size: {
                 small: 'h-8 gap-1.5 px-3 has-[>svg]:px-2.5',
                 normal: 'h-9 px-4 py-2 has-[>svg]:px-3',
-                large: 'h-10.5 px-4 has-[>svg]:px-3'
+                large: 'h-10 px-6 has-[>svg]:px-4'
             }
         },
         defaultVariants: {

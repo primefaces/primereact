@@ -23,7 +23,7 @@ export default function DocNpmWrapper({
 
     return (
         <div className={cn('', className)} {...props}>
-            <div className="flex items-center justify-between gap-8 overflow-x-auto overflow-y-hidden border-b border-surface-200 dark:border-surface-800 p-1.5 bg-surface-100/50 dark:bg-surface-950/50">
+            <div className="flex items-center justify-between gap-8 overflow-x-auto overflow-y-hidden border-b border-surface-200 dark:border-surface-800 p-1 bg-surface-100/50 dark:bg-surface-950/50">
                 <div className="flex items-center gap-1 ">
                     {Object.keys(commands).map((item) =>
                         commands[item as keyof Command] ? (
@@ -33,7 +33,7 @@ export default function DocNpmWrapper({
                                     setSelectedCommand(item as keyof Command);
                                 }}
                                 data-selected={selectedCommand === item}
-                                className="px-2 py-1 rounded-md hover:bg-surface-200/50 dark:hover:bg-surface-800 font-mono text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-300 transition-colors data-[selected=true]:bg-surface-200/50 data-[selected=true]:text-surface-950 dark:data-[selected=true]:bg-surface-800 dark:data-[selected=true]:text-surface-0 "
+                                className="px-2 py-1 text-sm  rounded-md hover:bg-surface-200/50 dark:hover:bg-surface-800 font-mono text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-300 transition-colors data-[selected=true]:bg-surface-200/50 data-[selected=true]:text-surface-950 dark:data-[selected=true]:bg-surface-800 dark:data-[selected=true]:text-surface-0 "
                             >
                                 {item}
                             </button>
@@ -42,7 +42,7 @@ export default function DocNpmWrapper({
                 </div>
                 {commands[selectedCommand] && <DocCopyButton source={commands[selectedCommand]} />}
             </div>
-            {commands[selectedCommand] && <div className="p-3.5 font-mono text-surface-800 dark:text-surface-100" dangerouslySetInnerHTML={{ __html: commands[selectedCommand] }} />}
+            {commands[selectedCommand] && <div className="px-3 py-3 font-mono text-sm text-surface-800 dark:text-surface-100" dangerouslySetInnerHTML={{ __html: commands[selectedCommand] }} />}
         </div>
     );
 }

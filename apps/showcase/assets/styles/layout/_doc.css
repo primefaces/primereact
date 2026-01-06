@@ -1,7 +1,7 @@
 .mark {
-    border-radius: 6px;
-    padding: 2px 6px;
-    font-size: 1rem;
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem;
+    font-size: 0.875rem;
     font-weight: 500;
     font-style: normal;
     background: var(--mark-background);
@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     overflow: auto;
     position: relative;
 
@@ -34,11 +34,11 @@
             background-color: transparent;
             border: 0 none;
             display: block;
-            padding-block: 0 1rem;
-            padding-inline: 2rem;
+            padding-block: 0 0.875rem;
+            padding-inline: 1.75rem;
             text-align: center;
             color: var(--text-color);
-            font-size: 1rem;
+            font-size: 0.875rem;
             letter-spacing: 1px;
             cursor: pointer;
             margin: 0;
@@ -47,8 +47,8 @@
                 border-color 0.2s;
             outline-color: transparent;
             border-bottom: 1px solid transparent;
-            border-start-end-radius: 6px;
-            border-start-start-radius: 6px;
+            border-start-end-radius: 4px;
+            border-start-start-radius: 4px;
             white-space: nowrap;
             --p-focus-ring-offset: -1px;
 
@@ -92,20 +92,21 @@
 }
 
 .doc-intro {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 
     p {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         margin: 0;
 
         a {
             color: var(--primary-text-color);
             font-weight: 500;
+            font-size: 0.875rem;
             transition:
                 outline-color 0.2s,
                 border-color 0.2s;
             outline-color: transparent;
-            border-radius: 6px;
+            border-radius: 4px;
 
             &:focus-visible {
                 outline: 1px solid var(--primary-color);
@@ -122,11 +123,12 @@
 .doc-link {
     color: var(--primary-text-color);
     font-weight: 500;
+    font-size: 0.875rem;
     transition:
         outline-color 0.2s,
         border-color 0.2s;
     outline-color: transparent;
-    border-radius: 6px;
+    border-radius: 4px;
 
     &:focus-visible {
         outline: 1px solid var(--primary-color);
@@ -141,12 +143,12 @@
 .doc-section-label {
     display: flex;
     align-items: center;
-    scroll-margin-top: 6.5rem;
+    scroll-margin-top: 6rem;
 
     > a {
         color: var(--primary-text-color);
         opacity: 0.7;
-        margin-inline-start: 1rem;
+        margin-inline-start: 0.875rem;
         display: none;
         transition:
             outline-color 0.2s,
@@ -182,12 +184,12 @@
 
 .doc-section-description {
     > p {
-        font-size: 1.125rem;
+        font-size: 1rem;
 
         i {
             border-radius: 6px;
             padding: 2px 6px;
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 500;
             font-style: normal;
             background: var(--mark-background);
@@ -197,6 +199,7 @@
         a {
             color: var(--primary-text-color);
             font-weight: 500;
+            font-size: 0.875rem;
             transition:
                 outline-color 0.2s,
                 border-color 0.2s;
@@ -215,18 +218,18 @@
     }
 
     li {
-        font-size: 1.125rem;
+        font-size: 1rem;
     }
 }
 
 .doc-notification {
-    line-height: 1.5;
     padding: 1rem;
     font-weight: 500;
-    border-radius: 10px;
+    font-size: 0.875rem;
+    border-radius: 8px;
     background: var(--mark-background);
     color: var(--mark-text);
-    margin-bottom: 1rem;
+    margin-bottom: 0.875rem;
 }
 
 .doc-section-nav {
@@ -392,6 +395,7 @@
     margin-bottom: 1.5rem;
 
     th {
+        font-size: 0.875rem;
         border-bottom: 1px solid var(--border-color);
         padding-block: 0.75rem;
         padding-inline: 1rem;
@@ -409,7 +413,7 @@
             padding-inline: 1rem;
             border-bottom: 1px solid var(--border-color);
             white-space: pre-line;
-            line-height: 1.5;
+            font-size: 0.875rem;
             scroll-margin-top: 6.5rem;
 
             &:first-child {
@@ -572,7 +576,7 @@
         justify-content: center;
         border-color: var(--border-color);
         border-width: 0 1px 0 0;
-        padding: 1rem;
+        padding: 0.875rem;
         width: 75%;
     }
 

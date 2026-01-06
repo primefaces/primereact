@@ -17,15 +17,15 @@
 }
 
 .layout-topbar-inner {
-    height: 4rem;
-    padding: 0 4rem;
+    height: 3.5rem;
+    padding: 0 3.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     .layout-topbar-logo-container {
         width: 250px;
-        margin-inline-end: 4rem;
+        margin-inline-end: 3.5rem;
     }
 
     .layout-topbar-logo,
@@ -81,8 +81,9 @@
             justify-content: center;
             flex-shrink: 0;
             border: 1px solid var(--border-color);
-            width: 2rem;
-            height: 2rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            font-size: 0.875rem;
             transition:
                 outline-color 0.2s,
                 border-color 0.2s;
@@ -104,6 +105,7 @@
 
             i,
             span {
+                font-size: 0.875rem;
                 color: var(--text-color);
             }
         }
@@ -120,7 +122,7 @@
             position: absolute;
             top: calc(100% + 2px);
             inset-inline-end: 0;
-            width: 18rem;
+            width: 16rem;
             padding: 0.75rem;
             background-color: var(--overlay-background);
             border-radius: 6px;
@@ -140,7 +142,6 @@
                 font-size: 0.875rem;
                 color: var(--text-secondary-color);
                 font-weight: 600;
-                line-height: 1;
             }
 
             .config-panel-colors {
@@ -152,15 +153,15 @@
 
                     button {
                         border: none;
-                        width: 1.25rem;
-                        height: 1.25rem;
+                        width: 1.125rem;
+                        height: 1.125rem;
                         border-radius: 50%;
                         padding: 0;
                         cursor: pointer;
                         outline-color: transparent;
                         outline-width: 2px;
                         outline-style: solid;
-                        outline-offset: 1px;
+                        outline-offset: 2px;
 
                         &.active-color {
                             outline-color: var(--primary-color);
@@ -211,7 +212,7 @@
                 list-style-type: none;
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
+                gap: 2px;
 
                 li {
                     margin: 2px;
@@ -220,12 +221,13 @@
                 a {
                     display: inline-flex;
                     justify-content: center;
-                    padding: 0.5rem 0.75rem;
+                    padding: 0.375rem 0.625rem;
                     border-radius: 6px;
                     width: 100%;
                     overflow: hidden;
                     color: var(--text-color);
                     white-space: nowrap;
+                    font-size: 0.875rem;
 
                     &:hover {
                         background-color: var(--hover-background);

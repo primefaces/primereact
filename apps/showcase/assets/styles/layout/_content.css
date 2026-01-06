@@ -1,18 +1,18 @@
 .layout-content {
-    padding: 6rem 4rem 0 4rem;
+    padding: 4rem 2rem 0 2rem;
     display: flex;
 
     .layout-content-slot {
         flex: 1 1 auto;
         width: 1%;
-        padding-top: 0.5rem;
+        padding-top: 0.25rem;
     }
 }
 
 .card {
     background: var(--card-background);
     border: var(--card-border);
-    padding: 2rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+    padding: 1.75rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 0.875rem;
 }

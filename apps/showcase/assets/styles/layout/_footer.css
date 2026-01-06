@@ -1,11 +1,12 @@
 .layout-footer {
-    padding: 2rem 4rem;
-    margin-top: 4rem;
+    padding: 1.75rem 3.5rem;
+    margin-top: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     font-weight: 500;
+    font-size: 0.875rem;
     color: var(--text-color);
     border-top: 1px solid var(--border-color);
 

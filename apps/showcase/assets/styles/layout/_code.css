@@ -3,7 +3,8 @@
     color: var(--code-figure-color);
     border-radius: var(--radius-lg);
     border: 1px solid var(--code-figure-border);
-    margin-top: calc(var(--spacing) * 4);
+    margin-top: calc(var(--spacing) * 2);
+    margin-bottom: calc(var(--spacing) * 4);
     overflow: hidden;
     outline: none;
     position: relative;
@@ -17,7 +18,7 @@
 [data-rehype-pretty-code-figure] [data-rehype-pretty-code-pre] {
     min-width: 0;
     overflow-x: auto;
-    padding: calc(var(--spacing) * 3.5) calc(var(--spacing) * 4);
+    padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4);
     outline: none;
     background: transparent !important;
 }
@@ -43,8 +44,8 @@
     counter-increment: line;
     content: counter(line);
     display: inline-block;
-    width: calc(var(--spacing) * 15);
-    padding-right: calc(var(--spacing) * 5);
+    width: calc(var(--spacing) * 12);
+    padding-right: calc(var(--spacing) * 4);
     text-align: right;
     color: var(--code-figure-number-color);
     background-color: var(--code-figure-background);
@@ -57,10 +58,11 @@
 }
 
 [data-rehype-pretty-code-figure] [data-line] {
-    padding-top: calc(var(--spacing) * 0.75);
-    padding-bottom: calc(var(--spacing) * 0.75);
-    min-height: calc(var(--spacing) * 0.75);
+    padding-top: calc(var(--spacing) * 0.5);
+    padding-bottom: calc(var(--spacing) * 0.5);
+    min-height: calc(var(--spacing) * 0.5);
     width: 100%;
+    font-size: 0.875rem;
     display: inline-block;
 }
 
@@ -90,7 +92,7 @@
 
 [data-rehype-pretty-code-figure] [data-highlighted-chars] {
     border-radius: var(--radius-sm);
-    padding-inline: 0.3rem;
+    padding-inline: 0.2rem;
     padding-block: 0.1rem;
     font-size: 0.96rem;
     border: 1px solid var(--code-figure-border);

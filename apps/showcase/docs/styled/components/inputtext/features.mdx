@@ -1,0 +1,43 @@
+---
+title: InputText
+description: InputText is an extension to standard input element with icons and theming.
+component: inputtext
+---
+
+<DocDemoViewer name="inputtext:example" hideCode/>
+
+## Usage
+
+```tsx
+import { InputText } from 'primereact/inputtext';
+```
+
+```tsx
+<InputText placeholder="Enter text" />
+```
+
+## Examples
+
+### Filled
+
+Specify the `variant` property as `filled` to display the component with a higher visual emphasis than the default `outlined` style.
+
+<DocDemoViewer name="inputtext:filled-demo" />
+
+### Sizes
+
+InputText provides `small` and `large` sizes as alternatives to the base by setting the `size` property.
+
+<DocDemoViewer name="inputtext:sizes-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocDemoViewer name="inputtext:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused.
+
+<DocDemoViewer name="inputtext:disabled-demo" />

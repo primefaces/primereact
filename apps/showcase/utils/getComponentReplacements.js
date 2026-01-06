@@ -13,11 +13,11 @@ export function replaceComponentViewer(content) {
 
             if (!nameMatch) continue;
 
-            const [component, demo] = nameMatch[1].split(':');
+            const [component, folder, demo] = nameMatch[1].split(':');
 
-            if (!Store[component]?.[demo]) continue;
+            if (!Store[component]?.[folder]?.[demo]) continue;
 
-            const filePath = Store[component][demo].filePath;
+            const filePath = Store[component][folder][demo].filePath;
             const source = fs.readFileSync(filePath, 'utf8');
 
             content = content.replace(match, `\`\`\`tsx\n${source}\n\`\`\``);

@@ -5,12 +5,12 @@ import { InputText as InputTextPrime } from 'primereact/inputtext';
 import * as React from 'react';
 
 const inputTextVariants = cva(
-    ' rounded-lg w-full min-w-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-[3px] focus-visible:ring-primary-500/20 dark:focus-visible:ring-primary-500/30 aria-invalid:ring-red-500/20 dark:aria-invalid:ring-red-500/30 outline-none placeholder:text-surface-500 dark:placeholder:text-surface-400 aria-invalid:placeholder:text-red-500 dark:aria-invalid:placeholder:text-red-400 aria-invalid:text-red-500 dark:aria-invalid:text-red-400',
+    ' rounded-lg w-full min-w-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/30 aria-invalid:outline-red-500/20 dark:aria-invalid:outline-red-500/30 placeholder:text-surface-500 dark:placeholder:text-surface-400 aria-invalid:placeholder:text-red-500 dark:aria-invalid:placeholder:text-red-400 aria-invalid:text-red-500 dark:aria-invalid:text-red-400',
     {
         variants: {
             variant: {
                 filled: 'bg-surface-100 dark:bg-surface-800 aria-invalid:bg-red-500/10 transition-[color,box-shadow]',
-                outlined: 'bg-transparent border border-surface focus-visible:border-primary shadow-xs aria-invalid:border-red-500 transition-[color,box-shadow,border-color]'
+                outlined: 'bg-transparent border border-surface shadow-xs aria-invalid:border-red-500 transition-[color,box-shadow,border-color]'
             },
             size: {
                 small: 'h-8 px-2.5 py-1 text-sm',

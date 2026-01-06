@@ -49,7 +49,7 @@ function DocTabsTab({
     return (
         <Component
             className={cn(
-                'py-2 border-b border-transparent data-active:border-surface-800 dark:data-active:border-surface-200 text-surface-500 data-active:text-surface-800 dark:data-active:text-surface-200 hover:text-surface-700 dark:hover:text-surface-300 cursor-pointer transition-colors',
+                'py-1 px-px border-b-2 border-transparent data-active:border-surface-800 dark:data-active:border-surface-200 text-surface-500 data-active:text-surface-800 dark:data-active:text-surface-200 hover:text-surface-700 dark:hover:text-surface-300 cursor-pointer transition-colors',
                 size === 'sm' && 'text-sm',
                 size === 'md' && 'text-base font-medium',
                 size === 'lg' && 'text-lg font-medium',
@@ -64,7 +64,7 @@ function DocTabsTab({
 }
 
 function DocTabsList({ className, ...props }: React.ComponentProps<'div'>) {
-    return <div className={cn('flex gap-4', className)} {...props} />;
+    return <div className={cn('flex gap-4 mb-4', className)} {...props} />;
 }
 
 function DocTabsPanel({

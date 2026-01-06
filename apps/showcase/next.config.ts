@@ -70,17 +70,27 @@ const nextConfig: NextConfig = {
             .flat();
 
         return [
+            // {
+            //     source: '/docs/components',
+            //     destination: '/docs/gettingstarted/introduction',
+            //     permanent: true
+            // },
+            // {
+            //     source: '/docs',
+            //     destination: '/docs/gettingstarted/introduction',
+            //     permanent: true
+            // },
+            ...componentRedirects,
             {
-                source: '/docs/components',
-                destination: '/docs/gettingstarted/introduction',
+                source: '/docs/styled',
+                destination: '/docs/styled/components/button',
                 permanent: true
             },
             {
-                source: '/docs',
-                destination: '/docs/gettingstarted/introduction',
+                source: '/docs/tailwind',
+                destination: '/docs/tailwind/components/button',
                 permanent: true
-            },
-            ...componentRedirects
+            }
         ];
     },
     async rewrites() {
