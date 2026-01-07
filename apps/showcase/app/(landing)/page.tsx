@@ -15,7 +15,7 @@ export default function LandingPage() {
                     </div>
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                         <Link
-                            href={'/docs'}
+                            href={'/docs/general/gettingstarted/introduction'}
                             className="px-5 lg:px-7 h-10 lg:h-12 flex items-center justify-center text-base lg:text-lg rounded-full bg-primary text-primary-contrast font-medium hover:bg-primary-emphasis transition-colors whitespace-nowrap"
                         >
                             Get Started
