@@ -123,6 +123,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/avatar/badge-demo')),
                 'filePath': 'demo/styled/avatar/badge-demo.tsx',
             },
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/avatar/basic-demo')),
+                'filePath': 'demo/styled/avatar/basic-demo.tsx',
+            },
             'fallback-demo': {
                 'component': React.lazy(() => import('demo/styled/avatar/fallback-demo')),
                 'filePath': 'demo/styled/avatar/fallback-demo.tsx',
@@ -375,13 +379,13 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/colorpicker/advanced-demo')),
                 'filePath': 'demo/styled/colorpicker/advanced-demo.tsx',
             },
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/colorpicker/basic-demo')),
+                'filePath': 'demo/styled/colorpicker/basic-demo.tsx',
+            },
             'controlled-demo': {
                 'component': React.lazy(() => import('demo/styled/colorpicker/controlled-demo')),
                 'filePath': 'demo/styled/colorpicker/controlled-demo.tsx',
-            },
-            'example': {
-                'component': React.lazy(() => import('demo/styled/colorpicker/example')),
-                'filePath': 'demo/styled/colorpicker/example.tsx',
             },
             'popover-demo': {
                 'component': React.lazy(() => import('demo/styled/colorpicker/popover-demo')),
@@ -705,6 +709,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/fluid/basic-demo')),
                 'filePath': 'demo/styled/fluid/basic-demo.tsx',
             },
+            'comparision-demo': {
+                'component': React.lazy(() => import('demo/styled/fluid/comparision-demo')),
+                'filePath': 'demo/styled/fluid/comparision-demo.tsx',
+            },
             'fluid-pt': {
                 'component': React.lazy(() => import('demo/styled/fluid/fluid-pt')),
                 'filePath': 'demo/styled/fluid/fluid-pt.tsx',
@@ -821,6 +829,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'inputnumber': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/inputnumber/basic-demo')),
+                'filePath': 'demo/styled/inputnumber/basic-demo.tsx',
+            },
             'buttons-demo': {
                 'component': React.lazy(() => import('demo/styled/inputnumber/buttons-demo')),
                 'filePath': 'demo/styled/inputnumber/buttons-demo.tsx',
@@ -943,13 +955,13 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'inputtext': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/inputtext/basic-demo')),
+                'filePath': 'demo/styled/inputtext/basic-demo.tsx',
+            },
             'disabled-demo': {
                 'component': React.lazy(() => import('demo/styled/inputtext/disabled-demo')),
                 'filePath': 'demo/styled/inputtext/disabled-demo.tsx',
-            },
-            'example': {
-                'component': React.lazy(() => import('demo/styled/inputtext/example')),
-                'filePath': 'demo/styled/inputtext/example.tsx',
             },
             'filled-demo': {
                 'component': React.lazy(() => import('demo/styled/inputtext/filled-demo')),
@@ -1064,6 +1076,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'apps-demo': {
                 'component': React.lazy(() => import('demo/styled/menu/apps-demo')),
                 'filePath': 'demo/styled/menu/apps-demo.tsx',
+            },
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/menu/basic-demo')),
+                'filePath': 'demo/styled/menu/basic-demo.tsx',
             },
             'composite-demo': {
                 'component': React.lazy(() => import('demo/styled/menu/composite-demo')),
@@ -1377,6 +1393,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'radiobutton': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/radiobutton/basic-demo')),
+                'filePath': 'demo/styled/radiobutton/basic-demo.tsx',
+            },
             'card-demo': {
                 'component': React.lazy(() => import('demo/styled/radiobutton/card-demo')),
                 'filePath': 'demo/styled/radiobutton/card-demo.tsx',
@@ -1459,6 +1479,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'skeleton': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/skeleton/basic-demo')),
+                'filePath': 'demo/styled/skeleton/basic-demo.tsx',
+            },
             'card-demo': {
                 'component': React.lazy(() => import('demo/styled/skeleton/card-demo')),
                 'filePath': 'demo/styled/skeleton/card-demo.tsx',
@@ -1515,6 +1539,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'speeddial': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/speeddial/basic-demo')),
+                'filePath': 'demo/styled/speeddial/basic-demo.tsx',
+            },
             'circle-demo': {
                 'component': React.lazy(() => import('demo/styled/speeddial/circle-demo')),
                 'filePath': 'demo/styled/speeddial/circle-demo.tsx',
@@ -1545,6 +1573,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'splitter': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/splitter/basic-demo')),
+                'filePath': 'demo/styled/splitter/basic-demo.tsx',
+            },
             'horizontal-demo': {
                 'component': React.lazy(() => import('demo/styled/splitter/horizontal-demo')),
                 'filePath': 'demo/styled/splitter/horizontal-demo.tsx',
@@ -1567,6 +1599,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'stepper': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/stepper/basic-demo')),
+                'filePath': 'demo/styled/stepper/basic-demo.tsx',
+            },
             'horizontal-demo': {
                 'component': React.lazy(() => import('demo/styled/stepper/horizontal-demo')),
                 'filePath': 'demo/styled/stepper/horizontal-demo.tsx',
@@ -1607,6 +1643,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'switch': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/switch/basic-demo')),
+                'filePath': 'demo/styled/switch/basic-demo.tsx',
+            },
             'controlled-demo': {
                 'component': React.lazy(() => import('demo/styled/switch/controlled-demo')),
                 'filePath': 'demo/styled/switch/controlled-demo.tsx',
@@ -1618,10 +1658,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'disabled-demo': {
                 'component': React.lazy(() => import('demo/styled/switch/disabled-demo')),
                 'filePath': 'demo/styled/switch/disabled-demo.tsx',
-            },
-            'example': {
-                'component': React.lazy(() => import('demo/styled/switch/example')),
-                'filePath': 'demo/styled/switch/example.tsx',
             },
             'invalid-demo': {
                 'component': React.lazy(() => import('demo/styled/switch/invalid-demo')),
@@ -1872,6 +1908,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'arrow-demo': {
                 'component': React.lazy(() => import('demo/styled/tooltip/arrow-demo')),
                 'filePath': 'demo/styled/tooltip/arrow-demo.tsx',
+            },
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/tooltip/basic-demo')),
+                'filePath': 'demo/styled/tooltip/basic-demo.tsx',
             },
             'delay-demo': {
                 'component': React.lazy(() => import('demo/styled/tooltip/delay-demo')),

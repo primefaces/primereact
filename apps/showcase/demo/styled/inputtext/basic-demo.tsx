@@ -2,7 +2,7 @@
 
 import { InputText } from '@primereact/ui/inputtext';
 
-export default function Example() {
+export default function BasicDemo() {
     return (
         <div className="flex justify-center">
             <InputText placeholder="Enter text" />

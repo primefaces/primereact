@@ -4,10 +4,12 @@ description: MeterGroup displays scalar measurements within a known range.
 component: metergroup
 ---
 
+<DocDemoViewer name="metergroup:basic-demo" hideCode/>
+
 ## Usage
 
 ```tsx
-import { MeterGroup } from 'primereact/metergroup';
+import { MeterGroup } from '@primereact/ui/metergroup';
 ```
 
 ```tsx
@@ -26,15 +28,9 @@ import { MeterGroup } from 'primereact/metergroup';
 
 ## Examples
 
-### Basic
-
-`MeterGroup` consists of `MeterGroup.Meters` and `MeterGroup.Labels` components. Data is displayed in the `MeterGroup.Meter` component using the `value` and `color` properties.
-
-<DocDemoViewer name="metergroup:basic-demo" />
-
 ### Multiple
 
-Adding more `MeterGroup.Meter` components displays the meters in a group. Pass `index` to `MeterGroup.Meter` and `MeterGroup.Marker` to identify the meter's and label's position to get the color.
+Data is displayed in the `MeterGroup.Meter` component using the `value` and `color` properties. Adding more `MeterGroup.Meter` components displays the meters in a group. Pass `index` to `MeterGroup.Meter` and `MeterGroup.Marker` to identify the meter's and label's position to get the color.
 
 <DocDemoViewer name="metergroup:multiple-demo" />
 

@@ -4,26 +4,31 @@ description: Panel is a grouping component providing with content toggle feature
 component: panel
 ---
 
-## Import
+<DocDemoViewer name="panel:basic-demo" hideCode/>
+
+## Usage
 
 ```tsx
-import { Panel } from 'primereact/panel';
+import { Panel } from '@primereact/ui/panel';
 ```
 
-## Basic
+```tsx
+<Panel.Root>
+    <Panel.Header></Panel.Header>
+    <Panel.Content></Panel.Content>
+</Panel.Root>
+```
 
-Panel is a container component with a _Panel.Header_ and _Panel.Content_.
+## Examples
 
-<DocDemoViewer name="panel:basic-demo" />
-
-## Toggleable
+### Toggleable
 
 Panel can be made toggleable by using the _Motion_ component or an animation library to animate the visibility of the content.
 The _Panel.Header_ contains a button to toggle the visibility of the content, and the _Panel.Content_ is wrapped inside the _Motion_ component to handle the animation.
 
 <DocDemoViewer name="panel:toggleable-demo" />
 
-## Template
+### Template
 
 Header and footer sections of the panel can be customized using _Panel.Header_ and _Panel.Footer_ components.
 

@@ -4,10 +4,12 @@ description: Accordion groups a collection of contents in panels.
 component: accordion
 ---
 
+<DocDemoViewer name="accordion:basic-demo" hideCode/>
+
 ## Usage
 
 ```tsx
-import { Accordion } from 'primereact/accordion';
+import { Accordion } from '@primereact/ui/accordion';
 ```
 
 ```tsx
@@ -24,15 +26,9 @@ import { Accordion } from 'primereact/accordion';
 
 ## Examples
 
-### Basic
-
-Accordion is defined using `Accordion`, `Accordion.Panel`, `Accordion.Header`, `Accordion.HeaderIndicator` and `Accordion.Content` components. Each `Accordion.Panel` must contain a unique `value` property to specify the active item.
-
-<DocDemoViewer name="accordion:basic-demo" />
-
 ### Multiple
 
-Only one tab at a time can be active by default, enabling `multiple` property changes this behavior to allow multiple panels. In this case `multiple` needs to be an array.
+Each `Accordion.Panel` must contain a unique `value` property to specify the active item. Only one tab at a time can be active by default, enabling `multiple` property changes this behavior to allow multiple panels. In this case `multiple` needs to be an array.
 
 <DocDemoViewer name="accordion:multiple-demo" />
 
