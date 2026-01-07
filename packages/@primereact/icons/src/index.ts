@@ -1,3 +1,4 @@
+'use client';
 /***************** PrimeReact Icons (Auto-Generated) *****************/
 
 // AngleDoubleDownIcon

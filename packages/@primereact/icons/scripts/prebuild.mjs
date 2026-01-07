@@ -14,7 +14,8 @@ updatePackageJson(pkg);
 const modules = {
     ignoredFolders: [],
     esm: [
-        `/***************** PrimeReact Icons (Auto-Generated) *****************/
+        `'use client';\n
+        /***************** PrimeReact Icons (Auto-Generated) *****************/
 
 `
     ]
