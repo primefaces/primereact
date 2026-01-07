@@ -13,19 +13,24 @@ export default function LandingPage() {
                     <div className="mt-4 font-medium text-surface-900/60 dark:text-surface-0/50 text-base sm:text-lg lg:text-xl text-center">
                         Enhance your web applications with PrimeReact&apos;s comprehensive suite of customizable, feature-rich UI components.
                     </div>
-                    <div className="mt-8 flex items-center justify-center gap-4">
-                        <Link href={'/docs'} className="px-5 lg:px-7 h-10 lg:h-12 flex items-center justify-center text-base lg:text-lg rounded-full bg-primary text-primary-contrast font-medium hover:bg-primary-emphasis transition-colors">
+                    <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:gap-4">
+                        <Link
+                            href={'/docs'}
+                            className="px-5 lg:px-7 h-10 lg:h-12 flex items-center justify-center text-base lg:text-lg rounded-full bg-primary text-primary-contrast font-medium hover:bg-primary-emphasis transition-colors whitespace-nowrap"
+                        >
                             Get Started
                         </Link>
                         <Link
-                            href={'https://github.com/primefaces/primereact'}
-                            target="_blank"
-                            className="px-5 lg:px-7 h-10 lg:h-12 flex items-center justify-center gap-2 text-base lg:text-lg font-medium rounded-full border border-surface bg-surface-0 hover:bg-surface-100 dark:bg-surface-900 dark:hover:bg-surface-800 text-surface-600 dark:text-surface-400 transition-colors"
+                            href={'/docs/components'}
+                            className="px-4 lg:px-5 h-10 lg:h-12 flex items-center justify-center gap-2 text-base lg:text-lg font-medium rounded-full border border-surface bg-surface-0 hover:bg-surface-100 dark:bg-surface-900 dark:hover:bg-surface-800 text-surface-600 dark:text-surface-400 transition-colors shadow-xs whitespace-nowrap"
                         >
-                            <i className="pi pi-star-fill text-yellow-500"></i>
-                            Give a Star
+                            View Components
                         </Link>
                     </div>
+                    <Link href={'https://github.com/primefaces/primereact'} target="_blank" className="inline-flex items-center gap-1.5 text-sm mt-8 text-surface-900 dark:text-surface-0 opacity-50 hover:opacity-75 transition-opacity">
+                        Support us on GitHub
+                        <i className="pi pi-arrow-up-right text-[12px]! opacity-80"></i>
+                    </Link>
                 </div>
             </div>
         </div>

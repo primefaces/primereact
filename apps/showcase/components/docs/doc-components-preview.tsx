@@ -1,4 +1,5 @@
 'use client';
+import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { allDocs } from 'contentlayer/generated';
 import Link from 'next/link';
@@ -52,22 +53,36 @@ export default function DocComponentsPreview() {
             return type === '' || component[type as 'styled' | 'tailwind'];
         });
 
+    const count = Math.floor(result.length / 5) * 5;
+    const roundedCount = count === result.length ? count - 5 : count;
+
     return (
-        <div className="space-y-6 mt-6" suppressHydrationWarning>
-            <div className="flex gap-4">
-                <InputText value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} placeholder="Search components..." />
-                <div className="flex items-center w-fit bg-surface-0 dark:bg-surface-900 border border-surface shadow-xs rounded-lg p-0.75">
-                    {TYPES.map((item) => (
-                        <button
-                            key={item}
-                            onClick={() => setType((prev) => (prev === item ? '' : item))}
-                            className={`px-3 h-full capitalize font-medium text-sm cursor-pointer border ${item === type ? ' border-surface bg-surface-100 dark:bg-surface-800 text-surface-950 dark:text-surface-0' : 'border-transparent bg-transparent text-surface-500 dark:text-surface-400 hover:text-surface-800 dark:hover:text-surface-100'} rounded-[0.42rem] transition-colors`}
-                        >
-                            {item}
-                        </button>
-                    ))}
+        <div suppressHydrationWarning>
+            <div className="flex flex-wrap gap-4 items-end justify-between">
+                <p className="text-surface-500 dark:text-surface-400 text-sm sm:text-base md:text-lg max-w-156 mt-0.5 [&>span]:text-surface-950 [&>span]:dark:text-surface-0 [&>span]:font-medium">
+                    Discover <span>{roundedCount}+</span> accessible UI components in <span>Tailwind</span> and <span>Styled</span> versions — built for easy customization and production use.
+                </p>
+                <div className="flex gap-2">
+                    <IconField.Root>
+                        <IconField.InputIcon>
+                            <i className="pi pi-search" />
+                        </IconField.InputIcon>
+                        <InputText value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} placeholder="Search components..." />
+                    </IconField.Root>
+                    <div className="flex items-center w-fit bg-surface-0 dark:bg-surface-950 border border-surface shadow-xs rounded-md p-0.5">
+                        {TYPES.map((item) => (
+                            <button
+                                key={item}
+                                onClick={() => setType((prev) => (prev === item ? '' : item))}
+                                className={`px-2 h-full capitalize font-medium text-sm cursor-pointer border ${item === type ? ' border-surface bg-surface-100 dark:bg-surface-800 text-surface-900 dark:text-surface-0' : 'border-transparent bg-transparent text-surface-500 dark:text-surface-400 hover:text-surface-800 dark:hover:text-surface-100'} rounded-[0.35rem] transition-colors`}
+                            >
+                                {item}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
+            <div className="my-8 h-px w-full bg-(--p-content-border-color)"></div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 sm:gap-x-4 md:gap-x-6 xl:gap-x-8 gap-y-10">
                 {filteredResult.map((component) => (
                     <div key={component.title} className="">
