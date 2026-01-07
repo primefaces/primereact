@@ -1,45 +1,29 @@
-import { Geist, Gelasio } from 'next/font/google';
 import Link from 'next/link';
-
-const geist = Geist({
-    subsets: ['latin'],
-    weight: ['400', '500', '600', '700'],
-    variable: '--font-sans'
-});
-
-const gelasio = Gelasio({
-    subsets: ['latin'],
-    weight: ['400', '500', '600', '700'],
-    variable: '--font-serif'
-});
 
 export default function LandingPage() {
     return (
-        <div className={`${geist.variable} ${gelasio.variable} font-sans`}>
-            <div className="w-full h-full min-h-[90vh] flex flex-col items-center pt-20">
-                <div className="max-w-3xl mx-auto w-full">
-                    <div className="text-5xl lg:text-7xl font-bold text-surface-800 dark:text-surface-0 text-center">
-                        The Next-Gen
-                        <br />
-                        UI <span className="italic font-light font-serif tracking-tight -ml-0.5 mr-1">Suite</span> for React
+        <div>
+            <div className="w-full h-full min-h-[90vh] flex flex-col items-center pt-8 lg:pt-12">
+                <div className="max-w-3xl mx-auto w-full flex flex-col items-center">
+                    <div className="relative p-1 pr-2.5 h-7 inline-flex justify-center gap-1.5 rounded-full w-fit text-sm font-medium select-none border border-surface bg-surface-0 shadow-xs dark:bg-surface-800 before:pointer-events-none before:bg-linear-to-b before:transition-opacity before:from-white/20 before:absolute before:inset-0 before:z-1 before:opacity-25 hover:before:opacity-100 dark:hover:before:opacity-50 before:rounded-full">
+                        <span className="uppercase flex items-center justify-center px-1.5 rounded-full bg-primary text-primary-contrast font-bold text-[10px] leading-none">new</span>
+                        <span className="leading-none flex items-center justify-center text-surface-800 dark:text-surface-50">PrimeReact is now in alpha.</span>
                     </div>
-                    <div className="mt-6 lg:max-w-full max-w-xl mx-auto text-base lg:text-xl leading-normal text-center w-full text-surface-700 dark:text-surface-400">
-                        Enhance your web applications with <span className="underline underline-offset-4 decoration-primary-500 decoration-2">PrimeReact</span>&apos;s comprehensive suite of customizable, feature-rich UI components. With{' '}
-                        <span className="underline underline-offset-4 decoration-primary-500 decoration-2">PrimeReact</span>, turning your development vision into reality has never been easier.{' '}
+                    <h1 className={`mt-10 sm:mt-16 font-semibold text-5xl sm:text-6xl lg:text-[5.75rem] text-center text-surface-900 dark:text-surface-0 tracking-tight`}>UI Suite for React</h1>
+                    <div className="mt-4 font-medium text-surface-900/60 dark:text-surface-0/50 text-base sm:text-lg lg:text-xl text-center">
+                        Enhance your web applications with PrimeReact&apos;s comprehensive suite of customizable, feature-rich UI components.
                     </div>
-                    <div className="mt-6 flex items-center justify-center gap-4">
-                        <Link href={'/docs'} className="relative px-5 lg:px-6 py-2 lg:py-2.5 text-base lg:text-lg rounded-lg text-white font-medium overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-b from-primary-500 to-primary-600 transition-opacity" />
-                            <div className="absolute inset-0 bg-gradient-to-b from-primary-500 to-primary-700 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="relative">Get Started</span>
+                    <div className="mt-8 flex items-center justify-center gap-4">
+                        <Link href={'/docs'} className="px-5 lg:px-7 h-10 lg:h-12 flex items-center justify-center text-base lg:text-lg rounded-full bg-primary text-primary-contrast font-medium hover:bg-primary-emphasis transition-colors">
+                            Get Started
                         </Link>
                         <Link
                             href={'https://github.com/primefaces/primereact'}
                             target="_blank"
-                            className="px-5 lg:px-6 py-2 lg:py-2.5 flex items-center gap-2.5 text-base lg:text-lg rounded-lg border border-surface-300 dark:border-surface-700 hover:bg-surface-200 dark:hover:bg-surface-800 transition-all font-medium"
+                            className="px-5 lg:px-7 h-10 lg:h-12 flex items-center justify-center gap-2 text-base lg:text-lg font-medium rounded-full border border-surface bg-surface-0 hover:bg-surface-100 dark:bg-surface-900 dark:hover:bg-surface-800 text-surface-600 dark:text-surface-400 transition-colors"
                         >
-                            Give a Star
                             <i className="pi pi-star-fill text-yellow-500"></i>
+                            Give a Star
                         </Link>
                     </div>
                 </div>
