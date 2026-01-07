@@ -1,5 +1,3 @@
-'use client';
-
 import { Icon } from '@primereact/core/icon';
 import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import Link from 'next/link';

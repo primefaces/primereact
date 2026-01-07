@@ -1,5 +1,3 @@
-'use client';
-
 import { Avatar } from '@primereact/ui/avatar';
 
 export default function BasicDemo() {

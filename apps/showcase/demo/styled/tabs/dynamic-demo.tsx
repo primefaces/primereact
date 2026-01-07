@@ -1,5 +1,3 @@
-'use client';
-
 import { Tabs } from '@primereact/ui/tabs';
 
 const tabs = [

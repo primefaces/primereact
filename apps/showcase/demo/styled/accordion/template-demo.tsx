@@ -1,5 +1,4 @@
 'use client';
-
 import { Icon } from '@primereact/core/icon';
 import type { AccordionHeaderInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from '@primereact/ui/accordion';
@@ -46,7 +45,7 @@ export default function TemplateDemo() {
                             </Accordion.HeaderIndicator>
                         </Accordion.Header>
                         <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-13">
-                            <p>{item.content}</p>
+                            <p className="text-sm">{item.content}</p>
                         </Accordion.Content>
                     </Accordion.Panel>
                 ))}

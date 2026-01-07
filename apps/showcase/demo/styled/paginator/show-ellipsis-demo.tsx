@@ -1,5 +1,3 @@
-'use client';
-
 import { Paginator } from '@primereact/ui/paginator';
 
 function ShowEllipsisDemo() {

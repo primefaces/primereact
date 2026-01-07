@@ -1,5 +1,3 @@
-'use client';
-
 import { Switch } from '@primereact/ui/switch';
 
 export default function UncontrolledDemo() {

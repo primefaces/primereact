@@ -1,5 +1,3 @@
-'use client';
-
 import { ChevronDownIcon, ChevronUpIcon } from '@primereact/icons';
 import { PanelCollapseInstance } from '@primereact/types/shared/panel';
 import { Button } from '@primereact/ui/button';

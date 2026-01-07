@@ -1,5 +1,3 @@
-'use client';
-
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 
 export default function BasicDemo() {

@@ -1,5 +1,3 @@
-'use client';
-
 import { SpeedDial } from '@primereact/ui/speeddial';
 
 export default function BasicDemo() {

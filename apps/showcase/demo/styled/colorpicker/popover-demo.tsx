@@ -1,5 +1,3 @@
-'use client';
-
 import { ColorPicker } from '@primereact/ui/colorpicker';
 import { Popover } from '@primereact/ui/popover';
 

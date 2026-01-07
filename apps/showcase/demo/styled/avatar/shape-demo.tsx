@@ -1,5 +1,3 @@
-'use client';
-
 import { Avatar } from '@primereact/ui/avatar';
 
 const ShapeDemo = () => {

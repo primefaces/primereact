@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@primereact/ui/button';
 import { Card } from '@primereact/ui/card';
 import { InputText } from '@primereact/ui/inputtext';

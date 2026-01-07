@@ -1,5 +1,3 @@
-'use client';
-
 import { Badge } from '@primereact/ui/badge';
 
 export default function BadgePT() {

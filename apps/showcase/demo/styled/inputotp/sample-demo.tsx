@@ -1,5 +1,3 @@
-'use client';
-
 import { MinusIcon } from '@primereact/icons';
 import { Button } from '@primereact/ui/button';
 import { InputOtp } from '@primereact/ui/inputotp';

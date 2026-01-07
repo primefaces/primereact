@@ -1,5 +1,4 @@
 'use client';
-
 import { PaginatorPagesInstance } from '@primereact/types/shared/paginator';
 import { Paginator } from '@primereact/ui/paginator';
 

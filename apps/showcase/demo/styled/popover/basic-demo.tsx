@@ -1,5 +1,3 @@
-'use client';
-
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import { Popover } from '@primereact/ui/popover';

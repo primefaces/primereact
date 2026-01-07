@@ -1,5 +1,3 @@
-'use client';
-
 import { InputText } from '@primereact/ui/inputtext';
 
 export default function InputTextPT() {

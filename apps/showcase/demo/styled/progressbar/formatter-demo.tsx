@@ -1,5 +1,4 @@
 'use client';
-
 import { ProgressBar } from '@primereact/ui/progressbar';
 
 export default function FormatterDemo() {

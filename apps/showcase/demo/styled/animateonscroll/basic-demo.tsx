@@ -1,5 +1,3 @@
-'use client';
-
 import { AnimateOnScroll } from '@primereact/ui/animateonscroll';
 import { Avatar } from '@primereact/ui/avatar';
 import { Button } from '@primereact/ui/button';

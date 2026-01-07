@@ -1,5 +1,4 @@
 'use client';
-
 import { PasswordPortalInstance, PasswordStrengthResult } from '@primereact/types/shared/password';
 import { Password } from '@primereact/ui/password';
 

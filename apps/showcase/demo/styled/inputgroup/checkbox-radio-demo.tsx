@@ -1,5 +1,3 @@
-'use client';
-
 import { Checkbox } from '@primereact/ui/checkbox';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';

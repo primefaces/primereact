@@ -1,5 +1,4 @@
 'use client';
-
 import { toast } from '@primereact/headless/toast';
 import { FileUploadInstance } from '@primereact/types/shared/fileupload';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';

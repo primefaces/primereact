@@ -1,5 +1,3 @@
-'use client';
-
 import { Checkbox } from '@primereact/ui/checkbox';
 
 export default function CheckboxPT() {

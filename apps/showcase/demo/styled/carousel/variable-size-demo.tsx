@@ -1,5 +1,3 @@
-'use client';
-
 import { Carousel } from '@primereact/ui/carousel';
 
 const items = ['120px', '80px', '200px', '160px', '220px', '180px', '280px', '100px'];

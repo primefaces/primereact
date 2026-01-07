@@ -1,5 +1,4 @@
 'use client';
-
 import { CheckIcon, TimesIcon } from '@primereact/icons';
 import type { SwitchThumbInstance } from '@primereact/types/shared/switch';
 import { Switch } from '@primereact/ui/switch';

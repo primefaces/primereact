@@ -1,5 +1,3 @@
-'use client';
-
 import { Rating } from '@primereact/ui/rating';
 
 function TemplateDemo() {

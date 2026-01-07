@@ -1,5 +1,3 @@
-'use client';
-
 import { Message } from '@primereact/ui/message';
 
 export default function BasicDemo() {

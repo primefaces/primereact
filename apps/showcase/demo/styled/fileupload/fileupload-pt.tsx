@@ -1,5 +1,4 @@
 'use client';
-
 import { FileUploadInstance } from '@primereact/types/shared/fileupload';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';

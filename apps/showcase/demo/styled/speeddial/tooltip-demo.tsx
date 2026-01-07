@@ -1,5 +1,3 @@
-'use client';
-
 import { SpeedDial } from '@primereact/ui/speeddial';
 import { Tooltip } from '@primereact/ui/tooltip';
 

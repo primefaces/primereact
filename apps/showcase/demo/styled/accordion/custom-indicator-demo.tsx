@@ -1,5 +1,4 @@
 'use client';
-
 import { MinusIcon, PlusIcon } from '@primereact/icons';
 import type { AccordionHeaderIndicatorInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from '@primereact/ui/accordion';
@@ -16,7 +15,7 @@ export default function CustomIndicatorDemo() {
                         </Accordion.HeaderIndicator>
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>
+                        <p className="text-sm">
                             This service helps you manage your projects more efficiently by offering real-time collaboration, task tracking, and
                             powerful analytics. Whether you&apos;re working solo or in a team, it&apos;s built to scale with your needs.
                         </p>
@@ -30,7 +29,7 @@ export default function CustomIndicatorDemo() {
                         </Accordion.HeaderIndicator>
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>
+                        <p className="text-sm">
                             Yes. We use end-to-end encryption and follow industry best practices to ensure your data is protected. Your information is
                             stored on secure servers and regularly backed up.
                         </p>
@@ -42,7 +41,7 @@ export default function CustomIndicatorDemo() {
                         Can I upgrade or downgrade my plan later?
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>
+                        <p className="text-sm">
                             Absolutely. You can change your subscription plan at any time from your account settings. Changes take effect immediately,
                             and any billing adjustments are handled automatically.
                         </p>

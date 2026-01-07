@@ -1,5 +1,4 @@
 'use client';
-
 import { KnobTextInstance } from '@primereact/types/shared/knob';
 import { Knob } from '@primereact/ui/knob';
 

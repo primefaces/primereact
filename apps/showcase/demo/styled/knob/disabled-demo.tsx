@@ -1,5 +1,3 @@
-'use client';
-
 import { Knob } from '@primereact/ui/knob';
 
 export default function DisabledDemo() {

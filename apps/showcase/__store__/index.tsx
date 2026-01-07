@@ -103,9 +103,9 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/accordion/template-demo')),
                 'filePath': 'demo/styled/accordion/template-demo.tsx',
             },
-            'use-with-radiobutton': {
-                'component': React.lazy(() => import('demo/styled/accordion/use-with-radiobutton')),
-                'filePath': 'demo/styled/accordion/use-with-radiobutton.tsx',
+            'with-radiobutton-demo': {
+                'component': React.lazy(() => import('demo/styled/accordion/with-radiobutton-demo')),
+                'filePath': 'demo/styled/accordion/with-radiobutton-demo.tsx',
             },
         },
         'animateonscroll': {
@@ -205,6 +205,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/button/badge-demo')),
                 'filePath': 'demo/styled/button/badge-demo.tsx',
             },
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/button/basic-demo')),
+                'filePath': 'demo/styled/button/basic-demo.tsx',
+            },
             'button-pt': {
                 'component': React.lazy(() => import('demo/styled/button/button-pt')),
                 'filePath': 'demo/styled/button/button-pt.tsx',
@@ -216,10 +220,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'disabled-demo': {
                 'component': React.lazy(() => import('demo/styled/button/disabled-demo')),
                 'filePath': 'demo/styled/button/disabled-demo.tsx',
-            },
-            'example': {
-                'component': React.lazy(() => import('demo/styled/button/example')),
-                'filePath': 'demo/styled/button/example.tsx',
             },
             'group-demo': {
                 'component': React.lazy(() => import('demo/styled/button/group-demo')),

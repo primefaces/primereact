@@ -1,5 +1,3 @@
-'use client';
-
 import { Accordion } from '@primereact/ui/accordion';
 
 export default function DisabledDemo() {
@@ -12,7 +10,7 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>
+                        <p className="text-sm">
                             You can reset your password by clicking the “Forgot password?” link on the login page. We’ll send a password reset link to
                             your registered email address.
                         </p>
@@ -24,7 +22,7 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>
+                        <p className="text-sm">
                             Yes. Our Team and Business plans are designed for collaboration. You can invite team members, assign roles, and manage
                             permissions easily from your dashboard.
                         </p>
@@ -38,7 +36,7 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>
+                        <p className="text-sm">
                             If you go over your plan limits (e.g., storage or API requests), you’ll receive a notification. You can either upgrade
                             your plan or wait until the next billing cycle resets.
                         </p>
@@ -50,7 +48,9 @@ export default function DisabledDemo() {
                         <Accordion.HeaderIndicator />
                     </Accordion.Header>
                     <Accordion.Content>
-                        <p>Yes, we offer both iOS and Android apps so you can manage your account and stay connected on the go.</p>
+                        <p className="text-sm">
+                            Yes, we offer both iOS and Android apps so you can manage your account and stay connected on the go.
+                        </p>
                     </Accordion.Content>
                 </Accordion.Panel>
             </Accordion.Root>

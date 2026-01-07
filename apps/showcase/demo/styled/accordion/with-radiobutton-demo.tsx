@@ -28,7 +28,7 @@ const items = [
     }
 ];
 
-export default function UseWithRadioButton() {
+export default function WithRadioButtonDemo() {
     const [selected, setSelected] = React.useState<string>('1');
 
     return (
@@ -48,16 +48,16 @@ export default function UseWithRadioButton() {
                             <Accordion.Panel key={item.value} value={item.value} className="last:border-none transition-all ease-out">
                                 <Accordion.Header
                                     onClick={() => setSelected(item.value)}
-                                    className="flex items-center justify-between bg-transparent py-3.5"
+                                    className="flex items-center justify-between bg-transparent py-3"
                                 >
                                     <span className="flex items-center gap-4">
                                         <RadioButton.Root inputId={`radio-${item.value}`} name="price" value={item.value} />
-                                        <span className="font-semibold text-xl">{item.label}</span>
+                                        <span className="font-semibold text-base">{item.label}</span>
                                     </span>
-                                    <span className="text-xl font-semibold">{item.price}</span>
+                                    <span className="font-semibold text-base">{item.price}</span>
                                 </Accordion.Header>
-                                <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-14">
-                                    <p>{item.description}</p>
+                                <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-12.5">
+                                    <p className="text-sm">{item.description}</p>
                                 </Accordion.Content>
                             </Accordion.Panel>
                         ))}

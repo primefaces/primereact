@@ -1,5 +1,3 @@
-'use client';
-
 import { DialogContentInstance } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';

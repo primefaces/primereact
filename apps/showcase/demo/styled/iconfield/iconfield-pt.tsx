@@ -1,5 +1,3 @@
-'use client';
-
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 

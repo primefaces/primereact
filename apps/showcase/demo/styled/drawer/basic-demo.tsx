@@ -1,5 +1,3 @@
-'use client';
-
 import { DrawerContentInstance } from '@primereact/types/shared/drawer';
 import { Avatar } from '@primereact/ui/avatar';
 import { Button } from '@primereact/ui/button';

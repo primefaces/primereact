@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@primereact/ui/button';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { FocusTrap } from '@primereact/ui/focustrap';

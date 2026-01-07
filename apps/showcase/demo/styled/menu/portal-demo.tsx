@@ -1,5 +1,3 @@
-'use client';
-
 import { Avatar } from '@primereact/ui/avatar';
 import { Menu } from '@primereact/ui/menu';
 

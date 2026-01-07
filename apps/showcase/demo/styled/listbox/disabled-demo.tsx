@@ -1,5 +1,3 @@
-'use client';
-
 import { Listbox } from '@primereact/ui/listbox';
 
 const cities = [

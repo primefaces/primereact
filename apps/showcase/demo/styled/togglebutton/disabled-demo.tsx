@@ -1,5 +1,3 @@
-'use client';
-
 import { ToggleButton } from '@primereact/ui/togglebutton';
 
 export default function DisabledDemo() {

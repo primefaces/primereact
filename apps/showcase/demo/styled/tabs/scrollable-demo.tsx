@@ -1,5 +1,3 @@
-'use client';
-
 import { Tabs } from '@primereact/ui/tabs';
 
 const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i + 1}`, content: `Tab ${i + 1} Content`, value: `${i}` }));

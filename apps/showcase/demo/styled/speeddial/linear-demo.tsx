@@ -1,5 +1,3 @@
-'use client';
-
 import { SpeedDialProps } from '@primereact/types/shared/speeddial';
 import { SpeedDial } from '@primereact/ui/speeddial';
 

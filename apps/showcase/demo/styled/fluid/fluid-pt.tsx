@@ -1,5 +1,3 @@
-'use client';
-
 import { Fluid } from '@primereact/ui/fluid';
 import { InputText } from '@primereact/ui/inputtext';
 

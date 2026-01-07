@@ -1,5 +1,3 @@
-'use client';
-
 import { InputNumber } from '@primereact/ui/inputnumber';
 import { Label } from '@primereact/ui/label';
 

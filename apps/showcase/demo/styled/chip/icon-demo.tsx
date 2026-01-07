@@ -1,5 +1,3 @@
-'use client';
-
 import { Chip } from '@primereact/ui/chip';
 
 export default function IconDemo() {

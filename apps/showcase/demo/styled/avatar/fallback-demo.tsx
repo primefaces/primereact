@@ -1,5 +1,3 @@
-'use client';
-
 import { CheckIcon } from '@primereact/icons';
 import { Avatar } from '@primereact/ui/avatar';
 

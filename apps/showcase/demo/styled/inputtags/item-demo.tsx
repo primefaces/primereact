@@ -1,5 +1,4 @@
 'use client';
-
 import { SpinnerIcon } from '@primereact/icons';
 import { InputTagsInstance } from '@primereact/types/shared/inputtags';
 import { IconField } from '@primereact/ui/iconfield';

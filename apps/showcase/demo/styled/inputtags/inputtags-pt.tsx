@@ -1,5 +1,4 @@
 'use client';
-
 import { InputTagsInstance } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
 

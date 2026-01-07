@@ -1,5 +1,3 @@
-'use client';
-
 import { OrgChartSubtreeInstance, TreeNode } from '@primereact/types/shared/orgchart';
 import { OrgChart } from '@primereact/ui/orgchart';
 

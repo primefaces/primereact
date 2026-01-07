@@ -1,5 +1,4 @@
 'use client';
-
 import { ToggleButton } from '@primereact/ui/togglebutton';
 import { Tooltip } from '@primereact/ui/tooltip';
 

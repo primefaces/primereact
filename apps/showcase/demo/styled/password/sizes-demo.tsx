@@ -1,5 +1,3 @@
-'use client';
-
 import { Password } from '@primereact/ui/password';
 
 export default function SizesDemo() {

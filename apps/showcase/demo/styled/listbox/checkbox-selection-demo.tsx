@@ -33,7 +33,7 @@ export default function CheckboxDemo() {
                 className="w-full md:w-56"
             >
                 <Listbox.Header>
-                    <Checkbox
+                    <Checkbox.Root
                         indeterminate={indeterminate}
                         checked={isAllSelected}
                         onCheckedChange={(e: CheckboxChangeEvent) => setSelectedCity(e.checked ? cities.map((city) => city.code) : [])}

@@ -1,5 +1,3 @@
-'use client';
-
 import { Skeleton } from '@primereact/ui/skeleton';
 
 export default function GridDemo() {

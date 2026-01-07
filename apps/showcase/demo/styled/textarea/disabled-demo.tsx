@@ -1,5 +1,3 @@
-'use client';
-
 import { Textarea } from '@primereact/ui/textarea';
 
 export default function DisabledDemo() {

@@ -1,5 +1,3 @@
-'use client';
-
 import { Splitter } from '@primereact/ui/splitter';
 
 export default function VerticalDemo() {

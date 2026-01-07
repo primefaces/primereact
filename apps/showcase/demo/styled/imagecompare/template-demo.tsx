@@ -1,5 +1,3 @@
-'use client';
-
 import { ImageCompare } from '@primereact/ui/imagecompare';
 
 export default function TemplateDemo() {
@@ -13,7 +11,7 @@ export default function TemplateDemo() {
                     style={{ clipPath: `polygon(0 0,var(--p-imagecompare-scope-x,50%) 0,var(--p-imagecompare-scope-x,50%) 100%,0 100%)` }}
                 >
                     <svg className="absolute w-full h-full" viewBox="0 0 644 189" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_1381_2302)">
+                        <g clipPath="url(#clip0_1381_2302)">
                             <path
                                 d="M0.5 118.499C0.5 118.499 82 102.999 113.5 89.4989C145 75.9989 188.444 87.7869 235 77.4989C272.684 69.1719 293.654 62.4939 329 46.9989C409.332 11.7849 479.5 86.5 510.5 78C541.5 69.5 635.951 0.848863 644 1.49886"
                                 stroke="var(--p-primary-color)"

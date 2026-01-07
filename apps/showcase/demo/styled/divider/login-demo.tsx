@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@primereact/ui/button';
 import { Divider } from '@primereact/ui/divider';
 import { InputText } from '@primereact/ui/inputtext';

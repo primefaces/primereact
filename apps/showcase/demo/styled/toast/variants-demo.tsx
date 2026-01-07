@@ -1,5 +1,4 @@
 'use client';
-
 import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from '@primereact/ui/button';

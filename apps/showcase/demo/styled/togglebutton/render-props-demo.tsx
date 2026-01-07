@@ -1,5 +1,4 @@
 'use client';
-
 import { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 

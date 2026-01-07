@@ -1,5 +1,3 @@
-'use client';
-
 import { OrgChart } from '@primereact/ui/orgchart';
 
 const data = [

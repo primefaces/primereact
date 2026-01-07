@@ -1,5 +1,3 @@
-'use client';
-
 import { Stepper } from '@primereact/ui/stepper';
 
 export default function HorizontalDemo() {

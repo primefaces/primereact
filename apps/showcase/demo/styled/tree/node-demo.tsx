@@ -1,5 +1,4 @@
 'use client';
-
 import { Icon } from '@primereact/core/icon';
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import type { TreeContentInstance, TreeNode as TreeNodeType } from '@primereact/types/shared/tree';

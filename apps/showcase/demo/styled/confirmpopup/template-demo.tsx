@@ -1,5 +1,3 @@
-'use client';
-
 import { ConfirmPopup } from '@primereact/ui/confirmpopup';
 
 export default function TemplateDemo() {

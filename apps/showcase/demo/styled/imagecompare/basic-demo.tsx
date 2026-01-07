@@ -1,5 +1,3 @@
-'use client';
-
 import { ImageCompare } from '@primereact/ui/imagecompare';
 
 export default function BasicDemo() {

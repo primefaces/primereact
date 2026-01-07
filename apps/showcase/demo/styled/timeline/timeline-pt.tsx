@@ -1,5 +1,3 @@
-'use client';
-
 import { Timeline } from '@primereact/ui/timeline';
 
 export default function TimelinePTDemo() {

@@ -1,5 +1,3 @@
-'use client';
-
 import { MeterGroup } from '@primereact/ui/metergroup';
 
 export default function MultipleDemo() {
