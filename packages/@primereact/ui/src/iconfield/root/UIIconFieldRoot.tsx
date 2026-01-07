@@ -7,7 +7,7 @@ import { IconFieldRoot, defaultRootProps } from 'primereact/iconfield';
 import * as React from 'react';
 
 export const UIIconFieldRoot = withComponent({
-    name: 'IconFieldRoot',
+    name: 'UIIconFieldRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

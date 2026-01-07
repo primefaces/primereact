@@ -6,8 +6,8 @@ import { mergeProps } from '@primeuix/utils';
 import { PanelRoot, defaultRootProps } from 'primereact/panel';
 import * as React from 'react';
 
-export const UIPanelRoot = withComponent({
-    name: 'PanelRoot',
+export const UIPlacerRoot = withComponent({
+    name: 'UIPlacerRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

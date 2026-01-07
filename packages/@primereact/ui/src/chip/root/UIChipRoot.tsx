@@ -7,7 +7,7 @@ import { ChipRoot, defaultRootProps } from 'primereact/chip';
 import * as React from 'react';
 
 export const UIChipRoot = withComponent({
-    name: 'ChipRoot',
+    name: 'UIChipRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

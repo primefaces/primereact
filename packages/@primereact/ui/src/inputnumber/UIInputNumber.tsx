@@ -7,7 +7,7 @@ import { InputNumber, defaultProps } from 'primereact/inputnumber';
 import * as React from 'react';
 
 export const UIInputNumber = withComponent({
-    name: 'InputNumber',
+    name: 'UIInputNumber',
     defaultProps,
     render(instance) {
         const { props, inProps } = instance;

@@ -7,7 +7,7 @@ import { RatingRoot, defaultRootProps } from 'primereact/rating';
 import * as React from 'react';
 
 export const UIRatingRoot = withComponent({
-    name: 'RatingRoot',
+    name: 'UIRatingRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

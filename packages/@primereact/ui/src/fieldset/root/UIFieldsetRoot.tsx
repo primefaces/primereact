@@ -7,7 +7,7 @@ import { FieldsetRoot, defaultRootProps } from 'primereact/fieldset';
 import * as React from 'react';
 
 export const UIFieldsetRoot = withComponent({
-    name: 'FieldsetRoot',
+    name: 'UIFieldsetRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

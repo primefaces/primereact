@@ -7,7 +7,7 @@ import { Fluid, defaultProps } from 'primereact/fluid';
 import * as React from 'react';
 
 export const UIFluid = withComponent({
-    name: 'Fluid',
+    name: 'UIFluid',
     defaultProps,
     render(instance) {
         const { props, inProps } = instance;

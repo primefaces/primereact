@@ -7,7 +7,7 @@ import { LabelRoot, defaultRootProps } from 'primereact/label';
 import * as React from 'react';
 
 export const UILabelRoot = withComponent({
-    name: 'LabelRoot',
+    name: 'UILabelRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

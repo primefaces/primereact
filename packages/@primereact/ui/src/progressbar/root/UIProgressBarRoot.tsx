@@ -7,7 +7,7 @@ import { ProgressBarRoot, defaultRootProps } from 'primereact/progressbar';
 import * as React from 'react';
 
 export const UIProgressBarRoot = withComponent({
-    name: 'ProgressBarRoot',
+    name: 'UIProgressBarRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

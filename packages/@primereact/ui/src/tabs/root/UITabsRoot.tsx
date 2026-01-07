@@ -7,7 +7,7 @@ import { TabsRoot, defaultRootProps } from 'primereact/tabs';
 import * as React from 'react';
 
 export const UITabsRoot = withComponent({
-    name: 'TabsRoot',
+    name: 'UITabsRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

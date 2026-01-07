@@ -7,7 +7,7 @@ import { MeterGroupRoot, defaultRootProps } from 'primereact/metergroup';
 import * as React from 'react';
 
 export const UIMeterGroupRoot = withComponent({
-    name: 'MeterGroupRoot',
+    name: 'UIMeterGroupRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

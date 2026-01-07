@@ -7,7 +7,7 @@ import { TreeRoot, defaultRootProps } from 'primereact/tree';
 import * as React from 'react';
 
 export const UITreeRoot = withComponent({
-    name: 'TreeRoot',
+    name: 'UITreeRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

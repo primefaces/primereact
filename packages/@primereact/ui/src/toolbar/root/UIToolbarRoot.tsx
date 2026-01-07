@@ -7,7 +7,7 @@ import { ToolbarRoot, defaultRootProps } from 'primereact/toolbar';
 import * as React from 'react';
 
 export const UIToolbarRoot = withComponent({
-    name: 'ToolbarRoot',
+    name: 'UIToolbarRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

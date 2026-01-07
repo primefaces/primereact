@@ -7,7 +7,7 @@ import { ConfirmDialogRoot, defaultRootProps } from 'primereact/confirmdialog';
 import * as React from 'react';
 
 export const UIConfirmDialogRoot = withComponent({
-    name: 'ConfirmDialogRoot',
+    name: 'UIConfirmDialogRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

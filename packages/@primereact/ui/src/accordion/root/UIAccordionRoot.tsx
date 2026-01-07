@@ -7,7 +7,7 @@ import { AccordionRoot, defaultRootProps } from 'primereact/accordion';
 import * as React from 'react';
 
 export const UIAccordionRoot = withComponent({
-    name: 'AccordionRoot',
+    name: 'UIAccordionRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

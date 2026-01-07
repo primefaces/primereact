@@ -7,7 +7,7 @@ import { PasswordRoot, defaultRootProps } from 'primereact/password';
 import * as React from 'react';
 
 export const UIPasswordRoot = withComponent({
-    name: 'PasswordRoot',
+    name: 'UIPasswordRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

@@ -7,7 +7,7 @@ import { InplaceRoot, defaultRootProps } from 'primereact/inplace';
 import * as React from 'react';
 
 export const UIInplaceRoot = withComponent({
-    name: 'InplaceRoot',
+    name: 'UIInplaceRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

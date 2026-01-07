@@ -7,7 +7,7 @@ import { TimelineRoot, defaultRootProps } from 'primereact/timeline';
 import * as React from 'react';
 
 export const UITimelineRoot = withComponent({
-    name: 'TimelineRoot',
+    name: 'UITimelineRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

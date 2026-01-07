@@ -7,7 +7,7 @@ import { CommandMenuRoot, defaultRootProps } from 'primereact/commandmenu';
 import * as React from 'react';
 
 export const UICommandMenuRoot = withComponent({
-    name: 'CommandMenuRoot',
+    name: 'UICommandMenuRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

@@ -7,7 +7,7 @@ import { InputOtpRoot, defaultRootProps } from 'primereact/inputotp';
 import * as React from 'react';
 
 export const UIInputOtpRoot = withComponent({
-    name: 'InputOtpRoot',
+    name: 'UIInputOtpRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

@@ -7,7 +7,7 @@ import { ToastRoot, defaultRootProps } from 'primereact/toast';
 import * as React from 'react';
 
 export const UIToastRoot = withComponent({
-    name: 'ToastRoot',
+    name: 'UIToastRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

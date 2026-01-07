@@ -7,7 +7,7 @@ import { BadgeRoot, defaultRootProps } from 'primereact/badge';
 import * as React from 'react';
 
 export const UIBadgeRoot = withComponent({
-    name: 'BadgeRoot',
+    name: 'UIBadgeRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

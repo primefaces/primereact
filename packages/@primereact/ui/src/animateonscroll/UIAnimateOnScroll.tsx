@@ -7,7 +7,7 @@ import { AnimateOnScroll, defaultProps } from 'primereact/animateonscroll';
 import * as React from 'react';
 
 export const UIAnimateOnScroll = withComponent({
-    name: 'AnimateOnScroll',
+    name: 'UIAnimateOnScroll',
     defaultProps,
     render(instance) {
         const { props, inProps } = instance;

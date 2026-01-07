@@ -7,7 +7,7 @@ import { FocusTrap, defaultProps } from 'primereact/focustrap';
 import * as React from 'react';
 
 export const UIFocusTrap = withComponent({
-    name: 'FocusTrap',
+    name: 'UIFocusTrap',
     defaultProps: defaultProps,
     render(instance) {
         const { props, inProps } = instance;

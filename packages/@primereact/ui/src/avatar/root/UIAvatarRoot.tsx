@@ -7,7 +7,7 @@ import { AvatarRoot, defaultRootProps } from 'primereact/avatar';
 import * as React from 'react';
 
 export const UIAvatarRoot = withComponent({
-    name: 'AvatarRoot',
+    name: 'UIAvatarRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

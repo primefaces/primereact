@@ -7,7 +7,7 @@ import { ListboxRoot, defaultRootProps } from 'primereact/listbox';
 import * as React from 'react';
 
 export const UIListboxRoot = withComponent({
-    name: 'ListboxRoot',
+    name: 'UIListboxRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

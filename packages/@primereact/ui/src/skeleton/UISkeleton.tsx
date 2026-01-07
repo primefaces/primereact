@@ -7,7 +7,7 @@ import { Skeleton, defaultProps } from 'primereact/skeleton';
 import * as React from 'react';
 
 export const UISkeleton = withComponent({
-    name: 'Skeleton',
+    name: 'UISkeleton',
     defaultProps,
     render(instance) {
         const { props, inProps } = instance;

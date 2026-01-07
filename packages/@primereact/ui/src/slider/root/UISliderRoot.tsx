@@ -7,7 +7,7 @@ import { SliderRoot, defaultRootProps } from 'primereact/slider';
 import * as React from 'react';
 
 export const UISliderRoot = withComponent({
-    name: 'SliderRoot',
+    name: 'UISliderRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

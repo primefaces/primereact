@@ -7,7 +7,7 @@ import { Button, defaultProps } from 'primereact/button';
 import * as React from 'react';
 
 export const UIButton = withComponent({
-    name: 'Button',
+    name: 'UIButton',
     defaultProps,
     render(instance) {
         const { props, inProps } = instance;

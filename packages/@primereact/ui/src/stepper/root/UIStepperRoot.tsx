@@ -7,7 +7,7 @@ import { StepperRoot, defaultRootProps } from 'primereact/stepper';
 import * as React from 'react';
 
 export const UIStepperRoot = withComponent({
-    name: 'StepperRoot',
+    name: 'UIStepperRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

@@ -6,7 +6,7 @@ import { ButtonGroup, defaultProps } from 'primereact/buttongroup';
 import * as React from 'react';
 
 export const UIButtonGroup = withComponent({
-    name: 'ButtonGroup',
+    name: 'UIButtonGroup',
     defaultProps,
     render(instance) {
         const { props, inProps } = instance;

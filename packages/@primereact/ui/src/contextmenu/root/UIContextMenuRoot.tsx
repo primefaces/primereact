@@ -7,7 +7,7 @@ import { ContextMenuRoot, defaultRootProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuRoot = withComponent({
-    name: 'ContextMenuRoot',
+    name: 'UIContextMenuRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

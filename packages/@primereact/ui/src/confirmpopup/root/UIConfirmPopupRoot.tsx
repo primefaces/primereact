@@ -7,7 +7,7 @@ import { ConfirmPopupRoot, defaultRootProps } from 'primereact/confirmpopup';
 import * as React from 'react';
 
 export const UIConfirmPopupRoot = withComponent({
-    name: 'ConfirmPopupRoot',
+    name: 'UIConfirmPopupRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

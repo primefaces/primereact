@@ -7,7 +7,7 @@ import { PanelRoot, defaultRootProps } from 'primereact/panel';
 import * as React from 'react';
 
 export const UIPanelRoot = withComponent({
-    name: 'PanelRoot',
+    name: 'UIPanelRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

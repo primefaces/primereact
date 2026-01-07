@@ -7,7 +7,7 @@ import { TooltipRoot, defaultRootProps } from 'primereact/tooltip';
 import * as React from 'react';
 
 export const UITooltipRoot = withComponent({
-    name: 'TooltipRoot',
+    name: 'UITooltipRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

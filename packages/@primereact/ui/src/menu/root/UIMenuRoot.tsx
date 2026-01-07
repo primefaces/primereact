@@ -7,7 +7,7 @@ import { MenuRoot, defaultRootProps } from 'primereact/menu';
 import * as React from 'react';
 
 export const UIMenuRoot = withComponent({
-    name: 'MenuRoot',
+    name: 'UIMenuRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

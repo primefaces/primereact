@@ -7,7 +7,7 @@ import { MessageRoot, defaultRootProps } from 'primereact/message';
 import * as React from 'react';
 
 export const UIMessageRoot = withComponent({
-    name: 'MessageRoot',
+    name: 'UIMessageRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;

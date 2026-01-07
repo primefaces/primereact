@@ -7,7 +7,7 @@ import { DrawerRoot, defaultRootProps } from 'primereact/drawer';
 import * as React from 'react';
 
 export const UIDrawerRoot = withComponent({
-    name: 'DrawerRoot',
+    name: 'UIDrawerRoot',
     defaultProps: defaultRootProps,
     render(instance) {
         const { props, inProps } = instance;
