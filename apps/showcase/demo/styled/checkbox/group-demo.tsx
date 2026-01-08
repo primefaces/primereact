@@ -2,6 +2,7 @@
 
 import type { CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from '@primereact/ui/checkbox';
+import { Label } from '@primereact/ui/label';
 import React from 'react';
 
 export default function GroupDemo() {
@@ -17,19 +18,19 @@ export default function GroupDemo() {
             >
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="cheese" value="Cheese" />
-                    <label htmlFor="cheese">Cheese</label>
+                    <Label.Root htmlFor="cheese">Cheese</Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="mushroom" value="Mushroom" />
-                    <label htmlFor="mushroom">Mushroom</label>
+                    <Label.Root htmlFor="mushroom">Mushroom</Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="pepper" value="Pepper" />
-                    <label htmlFor="pepper">Pepper</label>
+                    <Label.Root htmlFor="pepper">Pepper</Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="onion" value="Onion" />
-                    <label htmlFor="onion">Onion</label>
+                    <Label.Root htmlFor="onion">Onion</Label.Root>
                 </div>
             </Checkbox.Group>
         </div>

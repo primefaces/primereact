@@ -4,7 +4,7 @@ import { Label } from '@primereact/ui/label';
 
 export default function IftaLabelDemo() {
     return (
-        <div className="flex justify-center">
+        <div className="max-w-xs mx-auto">
             <InputGroup.Root>
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>

@@ -1,13 +1,14 @@
 import { Checkbox } from '@primereact/ui/checkbox';
+import { Label } from '@primereact/ui/label';
 
 const BasicDemo = () => {
     return (
         <div className="flex items-center justify-center">
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="basic-checkbox" />
-                <label htmlFor="basic-checkbox">
+                <Label.Root htmlFor="basic-checkbox">
                     I accept the <a className="font-semibold">Terms of Service</a>
-                </label>
+                </Label.Root>
             </div>
         </div>
     );

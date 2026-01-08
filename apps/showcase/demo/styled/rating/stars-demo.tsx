@@ -4,7 +4,7 @@ function StarsDemo() {
     return (
         <div className="flex justify-center">
             <Rating.Root stars={10}>
-                <Rating.Option />
+                <Rating.Option className="[&_svg]:size-5!" />
             </Rating.Root>
         </div>
     );

@@ -3,8 +3,8 @@ import { InputText } from '@primereact/ui/inputtext';
 
 export default function MultipleDemo() {
     return (
-        <div className="flex justify-center">
-            <InputGroup.Root className="sm:!w-96">
+        <div className="max-w-sm mx-auto">
+            <InputGroup.Root>
                 <InputGroup.Addon>
                     <i className="pi pi-clock"></i>
                 </InputGroup.Addon>

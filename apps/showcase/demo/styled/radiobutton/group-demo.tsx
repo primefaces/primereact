@@ -1,6 +1,7 @@
 'use client';
 
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
+import { Label } from '@primereact/ui/label';
 import { RadioButton } from '@primereact/ui/radiobutton';
 import * as React from 'react';
 
@@ -16,19 +17,19 @@ export default function GroupDemo() {
             >
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient1" name="pizza" value="cheese" />
-                    <label htmlFor="ingredient1">Cheese</label>
+                    <Label.Root htmlFor="ingredient1">Cheese</Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient2" name="pizza" value="mushroom" />
-                    <label htmlFor="ingredient2">Mushroom</label>
+                    <Label.Root htmlFor="ingredient2">Mushroom</Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient3" name="pizza" value="pepper" />
-                    <label htmlFor="ingredient3">Pepper</label>
+                    <Label.Root htmlFor="ingredient3">Pepper</Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient4" name="pizza" value="onion" />
-                    <label htmlFor="ingredient4">Onion</label>
+                    <Label.Root htmlFor="ingredient4">Onion</Label.Root>
                 </div>
             </RadioButton.Group>
         </div>

@@ -4,7 +4,7 @@ import { InputText } from '@primereact/ui/inputtext';
 
 export default function ButtonDemo() {
     return (
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="space-y-4 max-w-xs mx-auto">
             <InputGroup.Root>
                 <Button>Search</Button>
                 <InputText placeholder="Keyword" />

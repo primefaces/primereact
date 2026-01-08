@@ -1465,6 +1465,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/scrollarea/basic-demo')),
                 'filePath': 'demo/styled/scrollarea/basic-demo.tsx',
             },
+            'both-scrollbars-demo': {
+                'component': React.lazy(() => import('demo/styled/scrollarea/both-scrollbars-demo')),
+                'filePath': 'demo/styled/scrollarea/both-scrollbars-demo.tsx',
+            },
             'custom-demo': {
                 'component': React.lazy(() => import('demo/styled/scrollarea/custom-demo')),
                 'filePath': 'demo/styled/scrollarea/custom-demo.tsx',

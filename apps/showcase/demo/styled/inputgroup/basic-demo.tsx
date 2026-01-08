@@ -3,7 +3,7 @@ import { InputText } from '@primereact/ui/inputtext';
 
 export default function BasicDemo() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-4 max-w-xs mx-auto">
             <InputGroup.Root>
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>

@@ -2,7 +2,6 @@
 
 import { PhotoService } from '@/services/photo.service';
 import { ScrollArea } from '@primereact/ui/scrollarea';
-import Image from 'next/image';
 import * as React from 'react';
 
 interface ImageData {
@@ -21,29 +20,21 @@ export default function HorizontalDemo() {
 
     return (
         <div className="flex justify-center">
-            <ScrollArea.Root className="border border-surface-200 dark:border-surface-700 rounded-md" style={{ width: '632px', height: '200px' }}>
-                <ScrollArea.Viewport className="p-4">
-                    <ScrollArea.Content>
-                        <div className="flex w-max gap-4" style={{ minWidth: '3000px' }}>
-                            {images &&
-                                images.map((image, index) => (
-                                    <figure key={index} className="shrink-0">
-                                        <Image
-                                            width={150}
-                                            height={100}
-                                            src={image.itemImageSrc}
-                                            alt={image.title}
-                                            className="w-full object-cover rounded-md"
-                                        />
-                                        <figcaption className="pt-2 text-xs">
-                                            Photo by <span className="font-semibold">{image.title}</span>
-                                        </figcaption>
-                                    </figure>
-                                ))}
-                        </div>
+            <ScrollArea.Root className="border border-surface-200 dark:border-surface-700 rounded-lg max-w-md">
+                <ScrollArea.Viewport>
+                    <ScrollArea.Content className="flex gap-4 p-4">
+                        {images &&
+                            images.map((image, index) => (
+                                <figure key={index} className="flex-1 min-w-48">
+                                    <img src={image.itemImageSrc} alt={image.title} className="object-cover rounded-md" />
+                                    <figcaption className="mt-2 text-xs">
+                                        <span className="opacity-60">Photo by</span> <span className="font-medium">{image.title}</span>
+                                    </figcaption>
+                                </figure>
+                            ))}
                     </ScrollArea.Content>
                 </ScrollArea.Viewport>
-                <ScrollArea.ThumbX />
+                <ScrollArea.ThumbX className="h-2" />
             </ScrollArea.Root>
         </div>
     );

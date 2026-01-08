@@ -14,29 +14,27 @@ const CardDemo = () => {
     ];
 
     return (
-        <div className="flex items-center justify-center">
-            <div>
-                <span className="font-semibold">Payment Method</span>
-                <RadioButton.Group
-                    value={selectedCard}
-                    onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelectedCard(e.value as string)}
-                    className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4"
-                >
-                    {cards.map((card) => (
-                        <label
-                            key={card.id}
-                            htmlFor={card.id}
-                            className={`flex-1 flex items-start gap-2 p-4 rounded-md border border-surface-200 dark:border-surface-800 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${selectedCard === card.id ? '!border-primary' : ''}`}
-                        >
-                            <RadioButton.Root inputId={card.id} name="card" value={card.id} />
-                            <div className="flex-1 flex flex-col gap-2">
-                                <div className="text-lg font-bold leading-none">{card.name}</div>
-                                <div className="text-sm text-surface-500">{card.description}</div>
-                            </div>
-                        </label>
-                    ))}
-                </RadioButton.Group>
-            </div>
+        <div className="max-w-xs mx-auto">
+            <h5 className="font-medium">Select a payment method:</h5>
+            <RadioButton.Group
+                value={selectedCard}
+                onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelectedCard(e.value as string)}
+                className="mt-4 flex flex-col gap-3"
+            >
+                {cards.map((card) => (
+                    <label
+                        key={card.id}
+                        htmlFor={card.id}
+                        className={`flex-1 flex items-start gap-2 p-4 rounded-md border  hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${selectedCard === card.id ? 'border-primary' : 'border-surface'}`}
+                    >
+                        <RadioButton.Root inputId={card.id} name="card" value={card.id} />
+                        <div className="flex-1 flex flex-col gap-2">
+                            <h5 className="font-medium leading-none">{card.name}</h5>
+                            <p className="text-sm text-surface-500">{card.description}</p>
+                        </div>
+                    </label>
+                ))}
+            </RadioButton.Group>
         </div>
     );
 };

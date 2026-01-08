@@ -3,33 +3,34 @@ import { ScrollArea } from '@primereact/ui/scrollarea';
 export default function BasicDemo() {
     return (
         <div className="flex justify-center">
-            <ScrollArea.Root style={{ width: '600px', height: '200px' }}>
+            <ScrollArea.Root className="max-w-sm h-48">
                 <ScrollArea.Viewport>
                     <ScrollArea.Content>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                            quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                            nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-                        </p>
-                        <p>
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
-                            deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam
-                            libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                        </p>
-                        <p className="m-0">
-                            Quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et
-                            aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
-                            Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
-                            perferendis doloribus asperiores repellat
-                        </p>
+                        <div className="space-y-6 text-sm">
+                            <p>
+                                This panel provides an overview of recent activity associated with your account, including system updates,
+                                configuration changes, and important user actions that may require your attention. It is designed to surface relevant
+                                information in a compact space without overwhelming the main layout or distracting you from your current task.
+                            </p>
+
+                            <p>
+                                As activity accumulates over time, new entries are continuously added to this section while older records remain
+                                available for review. Scrolling allows you to explore past events at your own pace, making it easier to understand
+                                changes and patterns without navigating away from the current context.
+                            </p>
+
+                            <p>
+                                Activity data may include security-related events, billing notifications, feature updates, and changes made by team
+                                members across your workspace. Keeping this information in a dedicated scrollable area helps maintain clarity and
+                                focus within the interface while still providing access to detailed historical information.
+                            </p>
+
+                            <p>
+                                Use this area to monitor recent changes, verify completed actions, and stay informed about updates that may affect
+                                your workflow or account status. For a more comprehensive view, additional filters, search options, or detailed logs
+                                may be available elsewhere in the application.
+                            </p>
+                        </div>
                     </ScrollArea.Content>
                 </ScrollArea.Viewport>
                 <ScrollArea.ThumbY />

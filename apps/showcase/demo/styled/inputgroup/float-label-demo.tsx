@@ -11,7 +11,7 @@ export default function FloatLabelDemo() {
     const [value3, setValue3] = React.useState('');
 
     return (
-        <div className="flex flex-col md:items-end md:flex-row gap-4">
+        <div className="space-y-4 max-w-xs mx-auto">
             <InputGroup.Root>
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>

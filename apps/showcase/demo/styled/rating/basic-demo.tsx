@@ -4,7 +4,7 @@ function BasicDemo() {
     return (
         <div className="flex justify-center">
             <Rating.Root value={3.5}>
-                <Rating.Option />
+                <Rating.Option className="[&_svg]:size-5!" />
             </Rating.Root>
         </div>
     );

@@ -2,6 +2,7 @@
 
 import type { CheckboxChangeEvent, CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from '@primereact/ui/checkbox';
+import { Label } from '@primereact/ui/label';
 import React from 'react';
 
 const categories = [
@@ -26,7 +27,7 @@ export default function IndeterminateDemo() {
                         checked={isAllSelected}
                         onCheckedChange={(e: CheckboxChangeEvent) => setValue(e.checked ? categories.map((category) => category.key) : [])}
                     />
-                    <label htmlFor="indeterminate-checkbox">Email Notifications</label>
+                    <Label.Root htmlFor="indeterminate-checkbox">Email Notifications</Label.Root>
                 </div>
                 <Checkbox.Group
                     value={value}
@@ -36,7 +37,7 @@ export default function IndeterminateDemo() {
                     {categories.map((item) => (
                         <div key={item.key} className="flex items-center gap-2">
                             <Checkbox.Root inputId={item.key} value={item.key} />
-                            <label htmlFor={item.key}>{item.name}</label>
+                            <Label.Root htmlFor={item.key}>{item.name}</Label.Root>
                         </div>
                     ))}
                 </Checkbox.Group>

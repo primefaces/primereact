@@ -21,13 +21,13 @@ function GalleryDemo() {
 
     return (
         <div className="mt-8 mb-16">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-2xl mx-auto">
                 <Carousel.Root
                     slide={selectedImage}
                     onSlideChange={(e: useCarouselChangeEvent) => setSelectedImage(Number(e.value ?? 0))}
                     align="center"
                 >
-                    <Carousel.Content className="h-[400px]">
+                    <Carousel.Content className="h-[396px]">
                         {images.map((_, i) => (
                             <Carousel.Item key={i} className="basis-full! ">
                                 <img draggable={false} src={images[i]} alt={`Image ${i + 1}`} className="h-full w-full object-cover select-none" />

@@ -5,7 +5,7 @@ export default function GroupDemo() {
         <div className="flex justify-center">
             <Avatar.Group>
                 <Avatar.Root shape="circle">
-                    <Avatar.Image className="w-2" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
+                    <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                     <Avatar.Fallback>A</Avatar.Fallback>
                 </Avatar.Root>
                 <Avatar.Root shape="circle">
@@ -13,7 +13,7 @@ export default function GroupDemo() {
                     <Avatar.Fallback>A</Avatar.Fallback>
                 </Avatar.Root>
                 <Avatar.Root shape="circle">
-                    <Avatar.Image className="w-2" src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
+                    <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
                     <Avatar.Fallback>O</Avatar.Fallback>
                 </Avatar.Root>
                 <Avatar.Root shape="circle">

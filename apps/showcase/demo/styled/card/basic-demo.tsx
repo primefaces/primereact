@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function BasicDemo() {
     return (
-        <Card.Root className="mb-4 max-w-sm mx-auto p-1.5">
+        <Card.Root className="max-w-sm mx-auto">
             <Card.Body className="space-y-4">
                 <Card.Caption>
                     <Card.Title>Welcome back</Card.Title>
@@ -36,7 +36,7 @@ export default function BasicDemo() {
                     <Button severity="secondary" variant="outlined">
                         Login with Google
                     </Button>
-                    <div className="mt-2 text-center text-surface-500">
+                    <div className="mt-2 text-center text-surface-500 text-sm">
                         Don’t have an account?{' '}
                         <Button as={Link} href="/signup" variant="link" className="p-0">
                             Sign up

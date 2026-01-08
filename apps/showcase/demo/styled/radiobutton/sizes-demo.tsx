@@ -1,3 +1,4 @@
+import { Label } from '@primereact/ui/label';
 import { RadioButton } from '@primereact/ui/radiobutton';
 
 export default function SizesDemo() {
@@ -6,19 +7,21 @@ export default function SizesDemo() {
             <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="size_small" name="size" size="small" />
-                    <label htmlFor="size_small" className="text-sm">
+                    <Label.Root htmlFor="size_small" className="text-sm">
                         Small
-                    </label>
+                    </Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="size_normal" name="size" />
-                    <label htmlFor="size_normal">Normal</label>
+                    <Label.Root htmlFor="size_normal" className="">
+                        Normal
+                    </Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="size_large" name="size" size="large" />
-                    <label htmlFor="size_large" className="text-lg">
+                    <Label.Root htmlFor="size_large" className="text-lg">
                         Large
-                    </label>
+                    </Label.Root>
                 </div>
             </div>
         </div>

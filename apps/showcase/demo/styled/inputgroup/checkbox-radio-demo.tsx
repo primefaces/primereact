@@ -5,7 +5,7 @@ import { RadioButton } from '@primereact/ui/radiobutton';
 
 export default function CheckboxRadioDemo() {
     return (
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="space-y-4 max-w-xs mx-auto">
             <InputGroup.Root>
                 <InputText placeholder="Price" />
                 <InputGroup.Addon>

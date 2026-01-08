@@ -34,7 +34,7 @@ export default function TemplateDemo() {
                         </MeterGroup.Label>
                     ))}
                 </MeterGroup.Labels>
-                <div className="flex justify-between mt-4 mb-2 relative">
+                <div className="flex justify-between mt-4 mb-2 relative text-sm">
                     <span>Storage</span>
                     <span style={{ width: totalPercent + '%' }} className="absolute text-right">
                         {totalPercent}%

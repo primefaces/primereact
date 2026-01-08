@@ -47,7 +47,7 @@ export default function StepsDemo() {
     return (
         <div>
             <div className="max-w-sm mx-auto">
-                <div className="mb-3 font-medium">{orderProgress[step].status}</div>
+                <div className="mb-3 font-medium text-sm">{orderProgress[step].status}</div>
                 <ProgressBar.Root value={step} min={0} max={4}>
                     {() => {
                         const { colors } = orderProgress[step] ?? {};

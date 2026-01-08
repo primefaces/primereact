@@ -2,6 +2,7 @@
 
 import type { CheckboxGroupValueChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from '@primereact/ui/checkbox';
+import { Label } from '@primereact/ui/label';
 import React from 'react';
 
 export default function DynamicDemo() {
@@ -23,7 +24,7 @@ export default function DynamicDemo() {
                 {categories.map((category) => (
                     <div key={category.key} className="flex items-center gap-2">
                         <Checkbox.Root inputId={category.key} value={category.key} />
-                        <label htmlFor={category.key}>{category.name}</label>
+                        <Label.Root htmlFor={category.key}>{category.name}</Label.Root>
                     </div>
                 ))}
             </Checkbox.Group>

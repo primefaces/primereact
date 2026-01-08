@@ -1,6 +1,7 @@
 'use client';
 
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
+import { Label } from '@primereact/ui/label';
 import { RadioButton } from '@primereact/ui/radiobutton';
 import * as React from 'react';
 
@@ -23,7 +24,7 @@ export default function DynamicDemo() {
                 {categories.map((item) => (
                     <div key={item.key} className="flex items-center gap-2">
                         <RadioButton.Root inputId={item.key} name="category" value={item.key} />
-                        <label htmlFor={item.key}>{item.name}</label>
+                        <Label.Root htmlFor={item.key}>{item.name}</Label.Root>
                     </div>
                 ))}
             </RadioButton.Group>

@@ -23,7 +23,7 @@ export default function Example() {
                         </div>
                     </div>
                     <div className="flex gap-2">
-                        <select value={format} onChange={(e) => setFormat(e.target.value as ColorSpace)}>
+                        <select value={format} onChange={(e) => setFormat(e.target.value as ColorSpace)} className="text-sm">
                             <option value="hex">HEX</option>
                             <option value="rgba">RGBA</option>
                             <option value="hsba">HSBA</option>

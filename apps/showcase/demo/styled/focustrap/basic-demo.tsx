@@ -2,21 +2,23 @@ import { Button } from '@primereact/ui/button';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { FocusTrap } from '@primereact/ui/focustrap';
 import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 
 export default function BasicDemo() {
     return (
         <div>
-            <FocusTrap className="max-w-80 mx-auto flex flex-col gap-6">
+            <FocusTrap className="max-w-xs mx-auto space-y-4">
+                <h5 className="font-medium">Register</h5>
                 <InputText id="input" type="text" placeholder="Name" fluid />
 
                 <InputText id="email" type="email" placeholder="Email" fluid />
 
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="accept" name="accept" value="Accept" />
-                    <label htmlFor="accept">I agree to the terms and conditions.</label>
+                    <Label.Root htmlFor="accept">I agree to the terms and conditions.</Label.Root>
                 </div>
 
-                <Button type="submit" className="mt-2">
+                <Button type="submit" className="w-full">
                     Submit
                 </Button>
             </FocusTrap>

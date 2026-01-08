@@ -15,7 +15,8 @@ export default function LifeDemo() {
             {visible && (
                 <Message.Root life={3000} severity="success" onClose={() => setVisible(false)}>
                     <Message.Content>
-                        <Message.Text>Auto Disappear Message</Message.Text>
+                        <Message.Icon className="pi pi-check" />
+                        <Message.Text>Your account is now ready.</Message.Text>
                     </Message.Content>
                 </Message.Root>
             )}

@@ -10,7 +10,7 @@ export default function AdvancedDemo() {
     return (
         <div>
             <div className="max-w-md space-y-4">
-                <select value={format} onChange={(e) => setFormat(e.target.value as ColorSpace)}>
+                <select value={format} onChange={(e) => setFormat(e.target.value as ColorSpace)} className="text-sm">
                     <option value="rgba">RGBA</option>
                     <option value="hsba">HSBA</option>
                     <option value="hsla">HSLA</option>

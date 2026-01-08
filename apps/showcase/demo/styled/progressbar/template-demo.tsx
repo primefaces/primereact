@@ -30,7 +30,7 @@ export default function TemplateDemo() {
             <div className="max-w-sm mx-auto space-y-8">
                 {/* Basic percentage formatter */}
                 <ProgressBar.Root value={uploadedFileSize} max={maxFileSize} formatter={(value: number) => `${value.toFixed(1)}%`}>
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-3 text-sm">
                         <span className="font-medium">Basic Percentage</span>
                         <ProgressBar.Value />
                     </div>
@@ -49,7 +49,7 @@ export default function TemplateDemo() {
                         return `${formatFileSize(currentSize)} / ${formatFileSize(maxFileSize)}`;
                     }}
                 >
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-3 text-sm">
                         <span className="font-medium">File Size Progress</span>
                         <ProgressBar.Value />
                     </div>
@@ -68,7 +68,7 @@ export default function TemplateDemo() {
                         return `${value.toFixed(0)}% (${remaining}s remaining)`;
                     }}
                 >
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-3 text-sm">
                         <span className="font-medium">Time Remaining</span>
                         <ProgressBar.Value />
                     </div>
@@ -88,7 +88,7 @@ export default function TemplateDemo() {
                         else return 'Upload complete';
                     }}
                 >
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-3 text-sm">
                         <span className="font-medium">Upload Status Steps</span>
                         <ProgressBar.Value />
                     </div>

@@ -44,7 +44,7 @@ export default function TemplateDemo() {
                                 )}
                             </Accordion.HeaderIndicator>
                         </Accordion.Header>
-                        <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-13">
+                        <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-11.5">
                             <p className="text-sm">{item.content}</p>
                         </Accordion.Content>
                     </Accordion.Panel>
