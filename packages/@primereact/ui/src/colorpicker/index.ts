@@ -6,7 +6,6 @@ export {
     ColorPickerAreaBackground,
     ColorPickerAreaThumb,
     ColorPickerEyeDropper,
-    ColorPickerInput,
     ColorPickerProps,
     ColorPickerProvider,
     ColorPickerSlider,
@@ -29,4 +28,5 @@ export {
     defaultTransparencyGridProps,
     useColorPickerContext
 } from 'primereact/colorpicker';
+export { UIColorPickerInput as ColorPickerInput } from './input';
 export { UIColorPickerRoot as ColorPickerRoot } from './root';

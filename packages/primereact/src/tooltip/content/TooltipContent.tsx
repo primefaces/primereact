@@ -1,6 +1,5 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { Motion } from '@primereact/core/motion';
 import { mergeProps } from '@primeuix/utils/mergeprops';
 import * as React from 'react';
 import { useTooltipContext } from '../Tooltip.context';
@@ -16,9 +15,12 @@ export const TooltipContent = withComponent({
     },
     render(instance) {
         const { props, ptmi, tooltip } = instance;
+        const { as, ...restProps } = props;
+
         const shouldAnimateOnEnter = tooltip?.state.shouldAnimateOnEnter;
         const shouldAnimateOnLeave = tooltip?.state.shouldAnimateOnLeave;
         const rootProps = mergeProps(
+            restProps,
             {
                 className: tooltip?.cx('root'),
                 appear: true,
@@ -37,10 +39,10 @@ export const TooltipContent = withComponent({
                 'data-open': tooltip?.state?.visible,
                 'data-closed': !tooltip?.state?.visible
             },
-            ptmi('root'),
-            tooltip?.ptm('root')
+            tooltip?.ptm('root'),
+            ptmi('root')
         );
 
-        return <Component as={Motion} instance={instance} attrs={rootProps} children={props.children} ref={tooltip?.contentRef as React.RefObject<HTMLDivElement | null>} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} ref={tooltip?.contentRef as React.RefObject<HTMLDivElement | null>} />;
     }
 });

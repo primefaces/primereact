@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Dialog, useDialogContext } from 'primereact/dialog';
+import { useDialogContext } from 'primereact/dialog';
 import * as React from 'react';
 import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultContentProps } from './ConfirmDialogContent.props';
@@ -17,10 +17,10 @@ export const ConfirmDialogContent = withComponent({
     },
     render(instance) {
         const { props, ptmi, confirmdialog } = instance;
+        const { as, ...restProps } = props;
 
-        const rootProps = mergeProps(ptmi('root'));
+        const rootProps = mergeProps(restProps, confirmdialog?.ptm('content'), ptmi('root'));
 
-        // @ts-expect-error: Dialog.Content expects a type prop, but we are using it as a content.
-        return <Component as={Dialog.Content} instance={instance} attrs={rootProps} pt={confirmdialog?.ptm('content')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

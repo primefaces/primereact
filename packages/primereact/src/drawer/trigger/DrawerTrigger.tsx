@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useDrawerContext } from '../Drawer.context';
 import { defaultTriggerProps } from './DrawerTrigger.props';
@@ -16,8 +15,10 @@ export const DrawerTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, drawer } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: drawer?.cx('trigger'),
                 type: 'button',
@@ -25,10 +26,10 @@ export const DrawerTrigger = withComponent({
                 'aria-controls': drawer?.id,
                 onClick: drawer?.onOpenStateChange
             },
+            drawer?.ptm('trigger'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a trigger.
-        return <Component as={Button} instance={instance} attrs={rootProps} pt={drawer?.ptm('trigger')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

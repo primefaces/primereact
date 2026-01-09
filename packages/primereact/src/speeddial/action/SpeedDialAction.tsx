@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useSpeedDialContext } from '../SpeedDial.context';
 import { defaultActionProps } from './SpeedDialAction.props';
@@ -16,8 +15,10 @@ export const SpeedDialAction = withComponent({
     },
     render(instance) {
         const { props, ptmi, speeddial } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: speeddial?.cx('action'),
@@ -26,10 +27,10 @@ export const SpeedDialAction = withComponent({
                 onClick: speeddial?.onItemClick,
                 onKeyDown: speeddial?.onItemKeyDown
             },
+            speeddial?.ptm('action'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a button.
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={speeddial?.ptm('button')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

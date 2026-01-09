@@ -19,7 +19,7 @@ export const ToastRoot = withComponent({
 
         return (
             <ToastProvider value={instance}>
-                <Component as={React.Fragment} instance={instance} attrs={{}} children={props.children} />
+                <Component instance={instance} children={props.children} />
             </ToastProvider>
         );
     }

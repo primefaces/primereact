@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useConfirmPopupContext } from '../ConfirmPopup.context';
 import { defaultRejectProps } from './ConfirmPopupReject.props';
@@ -16,16 +15,18 @@ export const ConfirmPopupReject = withComponent({
     },
     render(instance) {
         const { props, ptmi, confirmpopup } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: confirmpopup?.cx('reject'),
                 onClick: confirmpopup?.close
             },
+            confirmpopup?.ptm('reject'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a reject.
-        return <Component ref={confirmpopup?.rejectRef} as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={confirmpopup?.ptm('reject')} children={props.children} />;
+        return <Component ref={confirmpopup?.rejectRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

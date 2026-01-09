@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { TimesIcon } from '@primereact/icons';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { usePopoverContext } from '../Popover.context';
 import { defaultCloseProps } from './PopoverClose.props';
@@ -17,8 +16,10 @@ export const PopoverClose = withComponent({
     },
     render(instance) {
         const { props, ptmi, popover } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: popover?.cx('close'),
@@ -37,6 +38,6 @@ export const PopoverClose = withComponent({
 
         const icon = createIconElement();
 
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} children={props.children ?? icon} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children ?? icon} />;
     }
 });

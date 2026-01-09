@@ -1,3 +1,4 @@
+export { MenuCheckboxGroup as CheckboxGroup } from './checkboxgroup';
 export { MenuCheckboxIcon as CheckboxIcon } from './checkboxicon';
 export { MenuCheckboxItem as CheckboxItem } from './checkboxitem';
 export { MenuIcon as Icon } from './icon';

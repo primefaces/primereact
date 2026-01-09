@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { useInputOtpContext } from '../InputOtp.context';
 import { defaultTextProps } from './InputOtpText.props';
@@ -16,6 +15,7 @@ export const InputOtpText = withComponent({
     },
     render(instance) {
         const { props, ptmi, inputotp } = instance;
+        const { as, ...restProps } = props;
         const indexRef = React.useRef<number | null>(null);
 
         if (indexRef.current === null && inputotp?.registerText) {
@@ -25,6 +25,7 @@ export const InputOtpText = withComponent({
         const index = indexRef.current ?? 0;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 value: inputotp?.state.tokens[index] ?? '',
                 type: inputotp?.inputType(),
@@ -39,10 +40,10 @@ export const InputOtpText = withComponent({
                 onKeyDown: inputotp?.onKeyDown,
                 onPaste: inputotp?.onPaste
             },
+            inputotp?.ptm('pcInputText'),
             ptmi('root')
         );
 
-        // @ts-expect-error: InputText expects a type prop, but we are using it as a text.
-        return <Component as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={inputotp?.ptm('pcInputText')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

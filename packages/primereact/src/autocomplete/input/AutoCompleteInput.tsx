@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { cn, mergeProps } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultInputProps } from './AutoCompleteInput.props';
@@ -16,8 +15,10 @@ export const AutoCompleteInput = withComponent({
     },
     render(instance) {
         const { props, ptmi, autocomplete } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: cn(autocomplete?.cx('input'), autocomplete?.props.inputClassName),
                 tabIndex: autocomplete?.props.disabled ? -1 : autocomplete?.props.tabIndex,
@@ -47,7 +48,6 @@ export const AutoCompleteInput = withComponent({
             ptmi('root')
         );
 
-        // @ts-expect-error: InputText expects a type prop, but we are using it as a text.
-        return <Component ref={autocomplete?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={autocomplete?.ptm('pcInputText')} children={props.children} />;
+        return <Component ref={autocomplete?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

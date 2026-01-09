@@ -1,3 +1,4 @@
+'use client';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 

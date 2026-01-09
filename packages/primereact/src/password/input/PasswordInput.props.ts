@@ -1,6 +1,7 @@
 import type { PasswordInputProps } from '@primereact/types/shared/password';
-import * as InputText from 'primereact/inputtext';
+import { InputText, InputTextProps } from 'primereact/inputtext';
 
 export const defaultInputProps: PasswordInputProps = {
-    ...(InputText.defaultProps as PasswordInputProps)
+    ...(InputTextProps.defaultProps as PasswordInputProps),
+    as: InputText
 };

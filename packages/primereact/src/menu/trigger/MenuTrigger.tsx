@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps, resolve } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useMenuContext } from '../Menu.context';
 import { useMenuLevelContext } from '../MenuLevel.context';
@@ -73,6 +72,7 @@ export const MenuTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, menu, submenu, portal, level, itemId, focused, disabled, ariaLevel, ariaPosInSet, ariaSetSize } = instance;
+        const { as, ...restProps } = props;
 
         const onItemMouseMove = () => {
             if (!disabled && itemId !== undefined && menu?.state.focused) {
@@ -153,12 +153,16 @@ export const MenuTrigger = withComponent({
                   onMouseEnter: onItemMouseEnter,
                   onMouseLeave: onItemMouseLeave
               })
-            : mergeProps({
-                  className: menu?.cx('trigger'),
-                  'aria-haspopup': 'true',
-                  'aria-expanded': menu?.state.opened,
-                  onClick: menu?.onTriggerClick
-              });
+            : mergeProps(
+                  restProps,
+                  {
+                      className: menu?.cx('trigger'),
+                      'aria-haspopup': 'true',
+                      'aria-expanded': menu?.state.opened,
+                      onClick: menu?.onTriggerClick
+                  },
+                  menu?.ptm('trigger')
+              );
 
         const rootProps = mergeProps(computedProps, ptmi('root'));
 
@@ -167,8 +171,7 @@ export const MenuTrigger = withComponent({
                 {resolve(props.children, instance)}
             </div>
         ) : (
-            // @ts-expect-error: Button expects a type prop, but we are using it as a trigger.
-            <Component ref={menu?.triggerRef} as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={menu?.ptm('trigger')} children={props.children} />
+            <Component ref={menu?.triggerRef} as={as} instance={instance} attrs={rootProps} children={props.children} />
         );
     }
 });

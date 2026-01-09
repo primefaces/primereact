@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { PlusIcon } from '@primereact/icons';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useSpeedDialContext } from '../SpeedDial.context';
 import { defaultButtonProps } from './SpeedDialButton.props';
@@ -17,8 +16,10 @@ export const SpeedDialButton = withComponent({
     },
     render(instance) {
         const { props, ptmi, speeddial } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: speeddial?.cx('button'),
@@ -28,6 +29,7 @@ export const SpeedDialButton = withComponent({
                 onClick: speeddial?.onClick,
                 onKeyDown: speeddial?.onTogglerKeydown
             },
+            speeddial?.ptm('button'),
             ptmi('root')
         );
 
@@ -37,7 +39,6 @@ export const SpeedDialButton = withComponent({
 
         const icon = createIconElement();
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a button.
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={speeddial?.ptm('button')} children={props.children ?? icon} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children ?? icon} />;
     }
 });

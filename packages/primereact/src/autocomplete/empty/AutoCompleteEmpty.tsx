@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Listbox } from 'primereact/listbox';
 import * as React from 'react';
 import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultEmptyProps } from './AutoCompleteEmpty.props';
@@ -16,8 +15,10 @@ export const AutoCompleteEmpty = withComponent({
     },
     render(instance) {
         const { props, ptmi, autocomplete } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: autocomplete?.cx('empty')
             },
@@ -25,7 +26,6 @@ export const AutoCompleteEmpty = withComponent({
             ptmi('root')
         );
 
-        // @ts-expect-error: Listbox.Empty expects a type prop, but we are using it as a listbox.
-        return <Component as={Listbox.Empty} instance={instance} attrs={rootProps} pt={autocomplete?.ptm('empty')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

@@ -42,7 +42,7 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
         return { ...defaultProps, ...globalDefaults?.props } as DProps;
     }, [defaultProps, $primereact?.config?.defaults?.[name]]);
 
-    const { props, attrs } = useProps(inProps, computedDefaultProps);
+    const { props, attrs } = useProps(computedDefaultProps, inProps);
 
     const common = React.useMemo<CommonInstance<typeof props, IProps>>(
         () => ({

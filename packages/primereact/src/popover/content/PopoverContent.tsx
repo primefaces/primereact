@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { FocusTrap } from 'primereact/focustrap';
 import * as React from 'react';
 import { usePopoverContext } from '../Popover.context';
 import { defaultContentProps } from './PopoverContent.props';
@@ -16,7 +15,10 @@ export const PopoverContent = withComponent({
     },
     render(instance) {
         const { props, ptmi, popover } = instance;
+        const { as, ...restProps } = props;
+
         const rootProps = mergeProps(
+            restProps,
             {
                 autoFocus: props.autoFocus,
                 className: popover?.cx('content'),
@@ -30,6 +32,6 @@ export const PopoverContent = withComponent({
             ptmi('root')
         );
 
-        return <Component as={FocusTrap} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

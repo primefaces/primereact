@@ -17,8 +17,10 @@ export const AutoCompleteList = withComponent({
     },
     render(instance) {
         const { props, ptmi, autocomplete } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: autocomplete?.cx('list'),
                 options: autocomplete?.props.options,
@@ -36,10 +38,11 @@ export const AutoCompleteList = withComponent({
                 onValueChange: (e: useListboxValueChangeEvent) => autocomplete?.onOptionSelect(e),
                 listboxInstance: autocomplete?.listbox
             },
+            autocomplete?.ptm('pcListbox'),
             ptmi('root')
         );
 
         // @ts-expect-error: Listbox.Root expects a type prop, but we are using it as a root.
-        return <Component ref={autocomplete?.listRef} as={Listbox.Root} instance={instance} attrs={rootProps} pt={autocomplete?.ptm('pcListbox')} children={props.children ?? <Listbox.Options />} />;
+        return <Component ref={autocomplete?.listRef} as={as} instance={instance} attrs={rootProps} children={props.children ?? <Listbox.Options />} />;
     }
 });

@@ -1,6 +1,7 @@
 import { DialogTriggerProps } from '@primereact/types/shared/dialog';
-import { ButtonProps } from 'primereact/button';
+import { Button, ButtonProps } from 'primereact/button';
 
 export const defaultTriggerProps: DialogTriggerProps = {
-    ...(ButtonProps.defaultProps as DialogTriggerProps)
+    ...(ButtonProps.defaultProps as DialogTriggerProps),
+    as: Button
 };

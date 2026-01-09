@@ -1,2 +1,2 @@
-export { InputOtpText as Text } from 'primereact/inputotp';
 export { UIInputOtpRoot as Root } from './root';
+export { UIInputOtpText as Text } from './text';

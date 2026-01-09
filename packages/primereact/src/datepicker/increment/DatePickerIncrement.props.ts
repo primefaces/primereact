@@ -1,8 +1,9 @@
 import { DatePickerIncrementProps } from '@primereact/types/shared/datepicker';
-import { ButtonProps } from 'primereact/button';
+import { Button, ButtonProps } from 'primereact/button';
 
 export const defaultIncrementProps: DatePickerIncrementProps = {
     ...(ButtonProps.defaultProps as DatePickerIncrementProps),
+    as: Button,
     iconOnly: true,
     variant: 'text',
     rounded: true,

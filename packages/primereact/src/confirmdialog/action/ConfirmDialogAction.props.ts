@@ -1,6 +1,7 @@
 import { ConfirmDialogActionProps } from '@primereact/types/shared/confirmdialog';
-import { ButtonProps } from 'primereact/button';
+import { Button, ButtonProps } from 'primereact/button';
 
 export const defaultActionProps: ConfirmDialogActionProps = {
-    ...(ButtonProps.defaultProps as ConfirmDialogActionProps)
+    ...(ButtonProps.defaultProps as ConfirmDialogActionProps),
+    as: Button
 };

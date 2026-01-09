@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Menu, useMenuContext } from 'primereact/menu';
+import { useMenuContext } from 'primereact/menu';
 import * as React from 'react';
 import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultCheckboxGroupProps } from './ContextMenuCheckboxGroup.props';
@@ -17,10 +17,10 @@ export const ContextMenuCheckboxGroup = withComponent({
     },
     render(instance) {
         const { props, ptmi, contextmenu } = instance;
+        const { as, ...restProps } = props;
 
-        const rootProps = mergeProps(ptmi('root'));
+        const rootProps = mergeProps(restProps, contextmenu?.ptm('checkboxGroup'), ptmi('root'));
 
-        // @ts-expect-error: Menu.CheckboxGroup expects a type prop, but we are using it as a checkbox group.
-        return <Component as={Menu.CheckboxGroup} instance={instance} attrs={rootProps} pt={contextmenu?.ptm('checkboxGroup')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

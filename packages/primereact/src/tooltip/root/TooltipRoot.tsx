@@ -17,10 +17,7 @@ export const TooltipRoot = withComponent({
         const { props } = instance;
 
         return (
-            <TooltipProvider
-                // @ts-expect-error - Temporary fix for type compatibility
-                value={instance}
-            >
+            <TooltipProvider value={instance}>
                 <Component
                     as={React.Fragment}
                     // @ts-expect-error - Temporary fix for type compatibility

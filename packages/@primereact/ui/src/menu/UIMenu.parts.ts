@@ -1,4 +1,5 @@
 export {
+    MenuCheckboxGroup as CheckboxGroup,
     MenuCheckboxIcon as CheckboxIcon,
     MenuCheckboxItem as CheckboxItem,
     MenuIcon as Icon,
@@ -10,7 +11,7 @@ export {
     MenuRadioIcon as RadioIcon,
     MenuRadioItem as RadioItem,
     MenuSeparator as Separator,
-    MenuSub as Sub,
-    MenuTrigger as Trigger
+    MenuSub as Sub
 } from 'primereact/menu';
 export { UIMenuRoot as Root } from './root';
+export { UIMenuTrigger as Trigger } from './trigger';

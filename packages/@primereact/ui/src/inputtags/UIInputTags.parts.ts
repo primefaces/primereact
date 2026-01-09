@@ -1,2 +1,4 @@
-export { InputTagsHiddenInput as HiddenInput, InputTagsInput as Input, InputTagsItem as Item } from 'primereact/inputtags';
+export { InputTagsHiddenInput as HiddenInput } from 'primereact/inputtags';
+export { UIInputTagsInput as Input } from './input';
+export { UIInputTagsItem as Item } from './item';
 export { UIInputTagsRoot as Root } from './root';

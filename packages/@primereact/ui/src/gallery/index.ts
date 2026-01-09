@@ -20,11 +20,11 @@ export {
     GalleryPrev,
     GalleryProps,
     GalleryProvider,
-    GalleryThumbnail,
-    GalleryThumbnailContent,
-    GalleryThumbnailItem,
     GalleryToolbar,
     GalleryToolbarItem,
     useGalleryContext
 } from 'primereact/gallery';
 export { UIGalleryRoot as GalleryRoot } from './root';
+export { UIGalleryThumbnail as GalleryThumbnail } from './thumbnail';
+export { UIGalleryThumbnailContent as GalleryThumbnailContent } from './thumbnailcontent';
+export { UIGalleryThumbnailItem as GalleryThumbnailItem } from './thumbnailitem';

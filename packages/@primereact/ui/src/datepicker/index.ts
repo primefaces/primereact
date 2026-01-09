@@ -9,21 +9,16 @@ export {
     DatePickerClearIcon,
     DatePickerContainer,
     DatePickerDecade,
-    DatePickerDecrement,
     DatePickerDropdown,
     DatePickerDropdownIcon,
     DatePickerFooter,
     DatePickerHeader,
     DatePickerHour,
-    DatePickerIncrement,
-    DatePickerInput,
     DatePickerInputIconContainer,
     DatePickerMinute,
-    DatePickerNext,
     DatePickerPanel,
     DatePickerPicker,
     DatePickerPortal,
-    DatePickerPrev,
     DatePickerProps,
     DatePickerProvider,
     DatePickerSecond,
@@ -42,7 +37,6 @@ export {
     DatePickerTableHeadWeekCell,
     DatePickerTime,
     DatePickerTitle,
-    DatePickerToday,
     defaultAmPmProps,
     defaultButtonbarProps,
     defaultCalendarProps,
@@ -85,4 +79,10 @@ export {
     defaultTodayProps,
     useDatePickerContext
 } from 'primereact/datepicker';
+export { UIDatePickerDecrement as DatePickerDecrement } from './decrement';
+export { UIDatePickerIncrement as DatePickerIncrement } from './increment';
+export { UIDatePickerInput as DatePickerInput } from './input';
+export { UIDatePickerNext as DatePickerNext } from './next';
+export { UIDatePickerPrev as DatePickerPrev } from './prev';
 export { UIDatePickerRoot as DatePickerRoot } from './root';
+export { UIDatePickerToday as DatePickerToday } from './today';

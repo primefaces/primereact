@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Menu, useMenuContext } from 'primereact/menu';
+import { useMenuContext } from 'primereact/menu';
 import * as React from 'react';
 import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultListProps } from './ContextMenuList.props';
@@ -17,15 +17,17 @@ export const ContextMenuList = withComponent({
     },
     render(instance) {
         const { props, ptmi, contextmenu } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: contextmenu?.cx('list')
             },
+            contextmenu?.ptm('list'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Menu.List expects a type prop, but we are using it as a list.
-        return <Component as={Menu.List} instance={instance} attrs={rootProps} pt={contextmenu?.ptm('list')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

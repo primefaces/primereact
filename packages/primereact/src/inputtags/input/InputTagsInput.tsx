@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { useInputTagsContext } from '../InputTags.context';
 import { defaultInputProps } from './InputTagsInput.props';
@@ -16,8 +15,10 @@ export const InputTagsInput = withComponent({
     },
     render(instance) {
         const { props, ptmi, inputtags } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: inputtags?.cx('input'),
                 value: inputtags?.state.inputValue,
@@ -31,10 +32,10 @@ export const InputTagsInput = withComponent({
                 onPaste: inputtags?.onPaste,
                 onBlur: inputtags?.onBlur
             },
+            inputtags?.ptm('pcInputText'),
             ptmi('root')
         );
 
-        // @ts-expect-error: InputText expects a type prop, but we are using it as a inputtags input.
-        return <Component ref={inputtags?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={inputtags?.ptm('pcInputText')} children={props.children} />;
+        return <Component ref={inputtags?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

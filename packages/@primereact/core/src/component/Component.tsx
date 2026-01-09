@@ -24,15 +24,25 @@ export function Component<I extends ComponentInstance = ComponentInstance>(inPro
     const styles = resolve(style || instance?.props?.style, instance) as React.CSSProperties | undefined;
     const classNames = resolve(className || instance?.props?.className, instance) as string | undefined;
 
-    return renderAsChild || isFragment ? (
-        <React.Fragment>{content}</React.Fragment>
-    ) : isValidElement(AsComponent) ? (
-        resolve(AsComponent, instance)
-    ) : (
-        <AsComponent {...attrs} ref={ref} style={{ ...attrs.style, ...styles }} className={cn(attrs.className, classNames)}>
-            {content}
-        </AsComponent>
-    );
+    if (renderAsChild || isFragment) {
+        return <React.Fragment>{content}</React.Fragment>;
+    } else if (isValidElement(AsComponent)) {
+        return resolve(AsComponent, instance);
+    } else {
+        const asProps = {
+            ...attrs,
+            style: { ...attrs.style, ...styles },
+            className: cn(attrs.className, classNames)
+        } as React.HTMLAttributes<HTMLElement>;
+
+        return asProps.children ? (
+            <AsComponent {...asProps} ref={ref} />
+        ) : (
+            <AsComponent ref={ref} {...asProps}>
+                {content}
+            </AsComponent>
+        );
+    }
 }
 
 Component.displayName = 'PrimeReact.Component';

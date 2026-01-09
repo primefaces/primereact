@@ -1,6 +1,7 @@
 import type { AutoCompleteOptionsProps } from '@primereact/types/shared/autocomplete';
-import * as Listbox from 'primereact/listbox';
+import { ListboxOptions, ListboxProps } from 'primereact/listbox';
 
 export const defaultOptionsProps: AutoCompleteOptionsProps = {
-    ...(Listbox.defaultOptionsProps as AutoCompleteOptionsProps)
+    ...(ListboxProps.defaultOptionsProps as AutoCompleteOptionsProps),
+    as: ListboxOptions
 };

@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { cn, mergeProps } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { useDatePickerContext } from '../DatePicker.context';
 import { defaultInputProps } from './DatePickerInput.props';
@@ -16,8 +15,10 @@ export const DatePickerInput = withComponent({
     },
     render(instance) {
         const { props, ptmi, datepicker } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 defaultValue: datepicker?.inputFieldValue,
                 id: datepicker?.props.inputId,
@@ -47,10 +48,10 @@ export const DatePickerInput = withComponent({
                 onFocus: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputFocus(event),
                 onBlur: (event: React.FocusEvent<HTMLInputElement>) => datepicker?.onInputBlur(event)
             },
+            datepicker?.ptm('pcInputText'),
             ptmi('root')
         );
 
-        // @ts-expect-error: InputText expects a type prop, but we are using it as a input.
-        return <Component ref={datepicker?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('pcInputText')} children={props.children} />;
+        return <Component ref={datepicker?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

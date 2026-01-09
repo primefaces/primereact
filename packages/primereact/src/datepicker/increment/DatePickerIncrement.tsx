@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { ChevronUpIcon } from '@primereact/icons';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useDatePickerContext } from '../DatePicker.context';
 import { useDatePickerPickerContext } from '../picker/DatePickerPicker.context';
@@ -19,6 +18,7 @@ export const DatePickerIncrement = withComponent({
     },
     render(instance) {
         const { props, ptmi, datepicker, picker } = instance;
+        const { as, ...restProps } = props;
 
         const direction = picker?.props.type === 'hour' ? 0 : picker?.props.type === 'minute' ? 1 : 2;
 
@@ -37,11 +37,13 @@ export const DatePickerIncrement = withComponent({
                   };
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: datepicker?.cx('increment'),
                 ...eventHandlers
             },
+            datepicker?.ptm('increment'),
             ptmi('root')
         );
 
@@ -51,7 +53,6 @@ export const DatePickerIncrement = withComponent({
 
         const icon = createIconElement();
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a previous button.
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('increment')} children={props.children ?? icon} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children ?? icon} />;
     }
 });

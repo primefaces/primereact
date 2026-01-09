@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Dialog, useDialogContext } from 'primereact/dialog';
+import { useDialogContext } from 'primereact/dialog';
 import * as React from 'react';
 import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultTitleProps } from './ConfirmDialogTitle.props';
@@ -17,10 +17,10 @@ export const ConfirmDialogTitle = withComponent({
     },
     render(instance) {
         const { props, ptmi, confirmdialog } = instance;
+        const { as, ...restProps } = props;
 
-        const rootProps = mergeProps(ptmi('root'));
+        const rootProps = mergeProps(restProps, confirmdialog?.ptm('title'), ptmi('root'));
 
-        // @ts-expect-error: Dialog.Title expects a type prop, but we are using it as a title.
-        return <Component as={Dialog.Title} instance={instance} attrs={rootProps} pt={confirmdialog?.ptm('title')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

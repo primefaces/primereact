@@ -3,6 +3,7 @@ export * as Menu from './Menu.parts';
 export * as MenuProps from './Menu.props';
 
 // Named runtime exports to maximize tree-shaking
+export { defaultCheckboxGroupProps, MenuCheckboxGroup } from './checkboxgroup';
 export { defaultCheckboxIconProps, MenuCheckboxIcon } from './checkboxicon';
 export { defaultCheckboxItemProps, MenuCheckboxItem } from './checkboxitem';
 export { defaultIconProps, MenuIcon } from './icon';

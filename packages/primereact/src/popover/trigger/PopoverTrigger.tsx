@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useButton } from '@primereact/headless/button';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { usePopoverContext } from '../Popover.context';
 import { defaultTriggerProps } from './PopoverTrigger.props';
@@ -19,8 +18,10 @@ export const PopoverTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, popover, cx } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: cx('trigger'),
                 onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -33,6 +34,6 @@ export const PopoverTrigger = withComponent({
             ptmi('root')
         );
 
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} children={props.children} ref={popover?.triggerRef} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} ref={popover?.triggerRef} />;
     }
 });

@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useColorPickerInput } from '@primereact/headless/colorpicker/input';
 import { mergeProps } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { useColorPickerContext } from '../ColorPicker.context';
 import { ColorPickerInputProvider } from './ColorPickerInput.context';
@@ -19,8 +18,10 @@ export const ColorPickerInput = withComponent({
     },
     render(instance) {
         const { props, ptmi, colorpicker, type, channelRange, channelValue, handleBlur, handleKeyDown } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 id: props.inputId,
                 className: colorpicker?.cx('input'),
@@ -43,8 +44,7 @@ export const ColorPickerInput = withComponent({
 
         return (
             <ColorPickerInputProvider value={instance}>
-                {/* @ts-expect-error: InputText expects a type prop, but we are using it as a text input. */}
-                <Component as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={colorpicker?.ptm('input')} children={props.children} ref={colorpicker?.registerInputEl} />
+                <Component ref={colorpicker?.registerInputEl} as={as} instance={instance} attrs={rootProps} children={props.children} />
             </ColorPickerInputProvider>
         );
     }

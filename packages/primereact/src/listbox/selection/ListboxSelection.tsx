@@ -35,7 +35,7 @@ export const ListboxSelection = withComponent({
             if (checkmark) {
                 return selected ? <CheckIcon {...rootProps} /> : <BlankIcon {...rootProps} />;
             } else if (checkbox) {
-                return <Checkbox defaultChecked={selected} tabIndex={-1} readOnly pt-root={rootProps} />;
+                return <Checkbox.Root defaultChecked={selected} tabIndex={-1} readOnly pt-root={rootProps} />;
             }
 
             return null;

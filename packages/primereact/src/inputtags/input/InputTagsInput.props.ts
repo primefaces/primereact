@@ -1,6 +1,7 @@
 import type { InputTagsInputProps } from '@primereact/types/shared/inputtags';
-import * as InputText from 'primereact/inputtext';
+import { InputText, InputTextProps } from 'primereact/inputtext';
 
 export const defaultInputProps: InputTagsInputProps = {
-    ...(InputText.defaultProps as InputTagsInputProps)
+    ...(InputTextProps.defaultProps as InputTagsInputProps),
+    as: InputText
 };

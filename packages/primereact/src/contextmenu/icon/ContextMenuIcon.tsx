@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Menu, useMenuContext } from 'primereact/menu';
+import { useMenuContext } from 'primereact/menu';
 import * as React from 'react';
 import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultIconProps } from './ContextMenuIcon.props';
@@ -17,15 +17,17 @@ export const ContextMenuIcon = withComponent({
     },
     render(instance) {
         const { props, ptmi, contextmenu } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: contextmenu?.cx('icon')
             },
+            contextmenu?.ptm('icon'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Menu.Icon expects a type prop, but we are using it as a icon.
-        return <Component as={Menu.Icon} instance={instance} attrs={rootProps} pt={contextmenu?.ptm('icon')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

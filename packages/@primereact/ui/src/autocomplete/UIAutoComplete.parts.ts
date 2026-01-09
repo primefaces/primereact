@@ -1,15 +1,10 @@
-export {
-    AutoCompleteButton as Button,
-    AutoCompleteClearIcon as ClearIcon,
-    AutoCompleteEmpty as Empty,
-    AutoCompleteFooter as Footer,
-    AutoCompleteHeader as Header,
-    AutoCompleteInput as Input,
-    AutoCompleteList as List,
-    AutoCompleteOption as Option,
-    AutoCompleteOptions as Options,
-    AutoCompletePortal as Portal,
-    AutoCompleteSelection as Selection
-} from 'primereact/autocomplete';
-
+export { AutoCompleteButton as Button, AutoCompleteClearIcon as ClearIcon, AutoCompletePortal as Portal } from 'primereact/autocomplete';
+export { UIAutoCompleteEmpty as Empty } from './empty';
+export { UIAutoCompleteFooter as Footer } from './footer';
+export { UIAutoCompleteHeader as Header } from './header';
+export { UIAutoCompleteInput as Input } from './input';
+export { UIAutoCompleteList as List } from './list';
+export { UIAutoCompleteOption as Option } from './option';
+export { UIAutoCompleteOptions as Options } from './options';
 export { UIAutoCompleteRoot as Root } from './root';
+export { UIAutoCompleteSelection as Selection } from './selection';

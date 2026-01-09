@@ -9,7 +9,7 @@ import { defaultThemeProps } from './Theme.props';
 export const ThemeContext = React.createContext<ThemeProps | null>(null);
 
 export const ThemeProvider = (inProps: ThemeProps = {}) => {
-    const { props } = useProps(inProps, defaultThemeProps);
+    const { props } = useProps(defaultThemeProps, inProps);
     const { stylesheet, preset, ...rest } = props;
 
     const value = {

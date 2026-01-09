@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps, resolve } from '@primeuix/utils';
-import { Listbox, useListboxContext, useListboxOptionContext } from 'primereact/listbox';
+import { useListboxContext, useListboxOptionContext } from 'primereact/listbox';
 import * as React from 'react';
 import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultOptionProps } from './AutoCompleteOption.props';
@@ -34,20 +34,22 @@ export const AutoCompleteOption = withComponent({
     },
     render(instance) {
         const { props, ptmi, autocomplete } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: autocomplete?.cx('option'),
                 index: props.index,
                 uKey: props.uKey,
                 group: props.group
             },
+            autocomplete?.ptm('option'),
             ptmi('root')
         );
 
         return (
-            // @ts-expect-error: Listbox.Option expects a type prop, but we are using it as a option.
-            <Component as={Listbox.Option} instance={instance} attrs={rootProps} pt={autocomplete?.ptm('option')}>
+            <Component as={as} instance={instance} attrs={rootProps}>
                 <AutoCompleteOptionContent>{props.children}</AutoCompleteOptionContent>
             </Component>
         );

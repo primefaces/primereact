@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Menu, useMenuContext } from 'primereact/menu';
+import { useMenuContext } from 'primereact/menu';
 import * as React from 'react';
 import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultRadioIconProps } from './ContextMenuRadioIcon.props';
@@ -17,15 +17,17 @@ export const ContextMenuRadioIcon = withComponent({
     },
     render(instance) {
         const { props, ptmi, contextmenu } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: contextmenu?.cx('radioIcon')
             },
+            contextmenu?.ptm('radioIcon'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Menu.RadioIcon expects a type prop, but we are using it as a radio icon.
-        return <Component as={Menu.RadioIcon} instance={instance} attrs={rootProps} pt={contextmenu?.ptm('radioIcon')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

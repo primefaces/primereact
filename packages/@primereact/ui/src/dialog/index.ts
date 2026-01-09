@@ -12,17 +12,17 @@ export {
     defaultRootProps,
     defaultTitleProps,
     defaultTriggerProps,
-    DialogClose,
     DialogContent,
     DialogFooter,
     DialogHeader,
     DialogHeaderActions,
-    DialogMaximizable,
     DialogPortal,
     DialogProps,
     DialogProvider,
     DialogTitle,
-    DialogTrigger,
     useDialogContext
 } from 'primereact/dialog';
+export { UIDialogClose as DialogClose } from './close';
+export { UIDialogMaximizable as DialogMaximizable } from './maximizable';
 export { UIDialogRoot as DialogRoot } from './root';
+export { UIDialogTrigger as DialogTrigger } from './trigger';

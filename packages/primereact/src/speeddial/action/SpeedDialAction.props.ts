@@ -1,8 +1,9 @@
 import { SpeedDialActionProps } from '@primereact/types/shared/speeddial';
-import { ButtonProps } from 'primereact/button';
+import { Button, ButtonProps } from 'primereact/button';
 
 export const defaultActionProps: SpeedDialActionProps = {
     ...(ButtonProps.defaultProps as SpeedDialActionProps),
+    as: Button,
     iconOnly: true,
     severity: 'secondary',
     rounded: true,

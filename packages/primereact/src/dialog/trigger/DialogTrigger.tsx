@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useDialogContext } from '../Dialog.context';
 import { defaultTriggerProps } from './DialogTrigger.props';
@@ -16,8 +15,10 @@ export const DialogTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, dialog } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: dialog?.cx('trigger'),
                 type: 'button',
@@ -25,10 +26,10 @@ export const DialogTrigger = withComponent({
                 'aria-controls': dialog?.id,
                 onClick: dialog?.onOpenStateChange
             },
+            dialog?.ptm('trigger'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a trigger.
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={dialog?.ptm('trigger')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

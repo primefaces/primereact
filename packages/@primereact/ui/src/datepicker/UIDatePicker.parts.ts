@@ -2,25 +2,19 @@ export {
     DatePickerAmPm as AmPm,
     DatePickerButtonbar as Buttonbar,
     DatePickerCalendar as Calendar,
-    DatePickerClear as Clear,
     DatePickerClearIcon as ClearIcon,
     DatePickerContainer as Container,
     DatePickerDecade as Decade,
-    DatePickerDecrement as Decrement,
     DatePickerDropdown as Dropdown,
     DatePickerDropdownIcon as DropdownIcon,
     DatePickerFooter as Footer,
     DatePickerHeader as Header,
     DatePickerHour as Hour,
-    DatePickerIncrement as Increment,
-    DatePickerInput as Input,
     DatePickerInputIconContainer as InputIconContainer,
     DatePickerMinute as Minute,
-    DatePickerNext as Next,
     DatePickerPanel as Panel,
     DatePickerPicker as Picker,
     DatePickerPortal as Portal,
-    DatePickerPrev as Prev,
     DatePickerSecond as Second,
     DatePickerSelectMonth as SelectMonth,
     DatePickerSelectYear as SelectYear,
@@ -36,7 +30,13 @@ export {
     DatePickerTableHeadRow as TableHeadRow,
     DatePickerTableHeadWeekCell as TableHeadWeekCell,
     DatePickerTime as Time,
-    DatePickerTitle as Title,
-    DatePickerToday as Today
+    DatePickerTitle as Title
 } from 'primereact/datepicker';
+export { UIDatePickerClear as Clear } from './clear';
+export { UIDatePickerDecrement as Decrement } from './decrement';
+export { UIDatePickerIncrement as Increment } from './increment';
+export { UIDatePickerInput as Input } from './input';
+export { UIDatePickerNext as Next } from './next';
+export { UIDatePickerPrev as Prev } from './prev';
 export { UIDatePickerRoot as Root } from './root';
+export { UIDatePickerToday as Today } from './today';

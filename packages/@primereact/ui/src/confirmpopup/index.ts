@@ -2,7 +2,6 @@ export * as ConfirmPopup from './UIConfirmPopup.parts';
 
 // Named runtime exports to maximize tree-shaking
 export {
-    ConfirmPopupAccept,
     ConfirmPopupContent,
     ConfirmPopupFooter,
     ConfirmPopupIcon,
@@ -10,8 +9,6 @@ export {
     ConfirmPopupPortal,
     ConfirmPopupProps,
     ConfirmPopupProvider,
-    ConfirmPopupReject,
-    ConfirmPopupTrigger,
     defaultAcceptProps,
     defaultContentProps,
     defaultFooterProps,
@@ -23,4 +20,7 @@ export {
     defaultTriggerProps,
     useConfirmPopupContext
 } from 'primereact/confirmpopup';
+export { UIConfirmPopupAccept as ConfirmPopupAccept } from './accept';
+export { UIConfirmPopupReject as ConfirmPopupReject } from './reject';
 export { UIConfirmPopupRoot as ConfirmPopupRoot } from './root';
+export { UIConfirmPopupTrigger as ConfirmPopupTrigger } from './trigger';

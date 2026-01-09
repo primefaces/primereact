@@ -1,8 +1,9 @@
 import { DatePickerPrevProps } from '@primereact/types/shared/datepicker';
-import { ButtonProps } from 'primereact/button';
+import { Button, ButtonProps } from 'primereact/button';
 
 export const defaultPrevProps: DatePickerPrevProps = {
     ...(ButtonProps.defaultProps as DatePickerPrevProps),
+    as: Button,
     iconOnly: true,
     variant: 'text',
     rounded: true,

@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { WindowMaximizeIcon, WindowMinimizeIcon } from '@primereact/icons';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useDialogContext } from '../Dialog.context';
 import { defaultMaximizableProps } from './DialogMaximizable.props';
@@ -17,13 +16,16 @@ export const DialogMaximizable = withComponent({
     },
     render(instance) {
         const { props, ptmi, dialog } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: dialog?.cx('maximizable'),
                 onClick: dialog?.toggleMaximized
             },
+            dialog?.ptm('maximizable'),
             ptmi('root')
         );
 
@@ -35,7 +37,6 @@ export const DialogMaximizable = withComponent({
 
         const icon = createIconElement();
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a maximizable button.
-        return <Component ref={dialog?.maximizableButtonRef} as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={dialog?.ptm('maximizable')} children={props.children ?? icon} />;
+        return <Component ref={dialog?.maximizableButtonRef} as={as} instance={instance} attrs={rootProps} children={props.children ?? icon} />;
     }
 });

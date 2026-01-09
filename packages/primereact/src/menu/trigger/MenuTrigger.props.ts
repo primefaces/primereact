@@ -1,6 +1,7 @@
 import { MenuTriggerProps } from '@primereact/types/shared/menu';
-import { ButtonProps } from 'primereact/button';
+import { Button, ButtonProps } from 'primereact/button';
 
 export const defaultTriggerProps: MenuTriggerProps = {
-    ...(ButtonProps.defaultProps as MenuTriggerProps)
+    ...(ButtonProps.defaultProps as MenuTriggerProps),
+    as: Button
 };

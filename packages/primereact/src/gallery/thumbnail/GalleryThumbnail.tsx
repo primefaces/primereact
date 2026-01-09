@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Carousel } from 'primereact/carousel';
 import * as React from 'react';
 import { useGalleryContext } from '../Gallery.context';
 import { defaultThumbnailProps } from './GalleryThumbnail.props';
@@ -16,14 +15,17 @@ export const GalleryThumbnail = withComponent({
     },
     render(instance) {
         const { props, ptmi, gallery } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: gallery?.cx('thumbnail')
             },
+            gallery?.ptm('thumbnail'),
             ptmi('root')
         );
 
-        return <Component as={Carousel.Root} instance={instance} attrs={rootProps} children={props.children} ref={gallery?.thumbnailRef} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} ref={gallery?.thumbnailRef} />;
     }
 });

@@ -16,6 +16,7 @@ export const InputTagsItem = withComponent({
     },
     render(instance) {
         const { props, ptmi, inputtags } = instance;
+        const { as, ...restProps } = props;
         const removeIconRef = React.useRef<HTMLElement>(null);
 
         React.useEffect(() => {
@@ -29,17 +30,18 @@ export const InputTagsItem = withComponent({
         }, [inputtags, props.index]);
 
         const rootProps = mergeProps(
+            omit(restProps, 'index'),
             {
                 className: inputtags?.cx('item', { focused: props.index === inputtags?.state.focusedItemIndex }),
                 'data-p-index': props.index,
                 onKeyDown: inputtags?.onKeyDown
             },
+            inputtags?.ptm('item'),
             ptmi('root')
         );
 
         return (
-            // @ts-expect-error: Chip expects a type prop, but we are using it as a InputTags item.
-            <Component as={Chip} instance={instance} attrs={{ ...omit(props, 'index'), ...rootProps }} pt={inputtags?.ptm('item')}>
+            <Component as={as} instance={instance} attrs={rootProps}>
                 {props.children ? (
                     resolve(props.children, instance)
                 ) : (

@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { cn, mergeProps } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
 import * as React from 'react';
 import { usePasswordContext } from '../Password.context';
 import { defaultInputProps } from './PasswordInput.props';
@@ -16,8 +15,10 @@ export const PasswordInput = withComponent({
     },
     render(instance) {
         const { props, ptmi, password } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 id: password?.props.inputId,
                 className: cn(password?.cx('input'), password?.props.inputClass),
@@ -38,10 +39,10 @@ export const PasswordInput = withComponent({
                 onFocus: password?.onFocus,
                 onBlur: password?.onBlur
             },
+            password?.ptm('pcInputText'),
             ptmi('root')
         );
 
-        // @ts-expect-error: InputText expects a type prop, but we are using it as a password input.
-        return <Component ref={password?.inputRef} as={InputText} instance={instance} attrs={{ ...props, ...rootProps }} pt={password?.ptm('pcInputText')} children={props.children} />;
+        return <Component ref={password?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

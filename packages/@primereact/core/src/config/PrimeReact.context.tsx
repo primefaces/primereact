@@ -11,7 +11,7 @@ import { defaultConfigProps } from './PrimeReact.props';
 export const PrimeReactContext = React.createContext<PrimeReactProps | undefined>(undefined);
 
 export function PrimeReactProvider(inProps: React.PropsWithChildren<PrimeReactProps> = {}) {
-    const { props, attrs } = useProps(inProps, defaultConfigProps);
+    const { props, attrs } = useProps(defaultConfigProps, inProps);
 
     // states
     const [inputVariant, setInputVariant] = React.useState(props.inputVariant);

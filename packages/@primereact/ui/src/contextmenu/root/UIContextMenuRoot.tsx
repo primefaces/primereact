@@ -1,8 +1,8 @@
 'use client';
 import { Component } from '@primereact/core/component';
+import { mergeDefaultProps } from '@primereact/core/utils';
 import { styles } from '@primereact/styles/contextmenu';
 import { withComponent } from '@primereact/ui/base';
-import { mergeProps } from '@primeuix/utils';
 import { ContextMenuRoot, defaultRootProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
@@ -10,10 +10,8 @@ export const UIContextMenuRoot = withComponent({
     name: 'UIContextMenuRoot',
     defaultProps: defaultRootProps,
     render(instance) {
-        const { props, inProps } = instance;
+        const rootProps = mergeDefaultProps({ styles }, instance.inProps);
 
-        const rootProps = mergeProps({ styles }, inProps);
-
-        return <Component as={ContextMenuRoot} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={ContextMenuRoot} attrs={rootProps} />;
     }
 });

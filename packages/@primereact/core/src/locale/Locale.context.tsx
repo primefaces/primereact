@@ -8,7 +8,7 @@ import { defaultLocaleProps } from './Locale.props';
 export const LocaleContext = React.createContext<LocaleProps | undefined>(undefined);
 
 export const LocaleProvider = (inProps: React.PropsWithChildren<LocaleProps> = {}) => {
-    const { attrs } = useProps(inProps, defaultLocaleProps as LocaleProps);
+    const { attrs } = useProps(defaultLocaleProps as LocaleProps, inProps);
     const value = undefined;
 
     return <LocaleContext.Provider value={value}>{resolve(attrs.children, value)}</LocaleContext.Provider>;

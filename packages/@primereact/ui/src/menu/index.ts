@@ -16,6 +16,7 @@ export {
     defaultSeparatorProps,
     defaultSubProps,
     defaultTriggerProps,
+    MenuCheckboxGroup,
     MenuCheckboxIcon,
     MenuCheckboxItem,
     MenuIcon,
@@ -30,7 +31,7 @@ export {
     MenuRadioItem,
     MenuSeparator,
     MenuSub,
-    MenuTrigger,
     useMenuContext
 } from 'primereact/menu';
 export { UIMenuRoot as MenuRoot } from './root';
+export { UIMenuTrigger as MenuTrigger } from './trigger';

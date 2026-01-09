@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import { useDialogContext } from 'primereact/dialog';
 import * as React from 'react';
 import { useConfirmDialogContext } from '../ConfirmDialog.context';
@@ -18,17 +17,19 @@ export const ConfirmDialogCancel = withComponent({
     },
     render(instance) {
         const { props, ptmi, confirmdialog, dialog } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: confirmdialog?.cx('cancel'),
                 onClick: dialog?.close
             },
+            confirmdialog?.ptm('cancel'),
             ptmi('root')
         );
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a close button.
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={confirmdialog?.ptm('cancel')} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

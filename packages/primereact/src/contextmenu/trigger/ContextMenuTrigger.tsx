@@ -19,8 +19,10 @@ export const ContextMenuTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, contextmenu, submenu, menu } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 className: contextmenu?.cx('trigger'),
                 onContextMenu: menu?.onTriggerClick
@@ -29,6 +31,6 @@ export const ContextMenuTrigger = withComponent({
             ptmi('root')
         );
 
-        return submenu ? <Component as={Menu.Trigger} instance={instance} attrs={{}} children={props.children} /> : <Component instance={instance} attrs={rootProps} children={props.children} />;
+        return submenu ? <Component as={Menu.Trigger} instance={instance} attrs={{}} children={props.children} /> : <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

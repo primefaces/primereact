@@ -1,6 +1,7 @@
 import type { AutoCompleteEmptyProps } from '@primereact/types/shared/autocomplete';
-import * as Listbox from 'primereact/listbox';
+import { ListboxEmpty, ListboxProps } from 'primereact/listbox';
 
 export const defaultEmptyProps: AutoCompleteEmptyProps = {
-    ...(Listbox.defaultEmptyProps as AutoCompleteEmptyProps)
+    ...(ListboxProps.defaultEmptyProps as AutoCompleteEmptyProps),
+    as: ListboxEmpty
 };

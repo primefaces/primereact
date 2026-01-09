@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
-import { Button } from 'primereact/button';
 import * as React from 'react';
 import { useDatePickerContext } from '../DatePicker.context';
 import { defaultTodayProps } from './DatePickerToday.props';
@@ -16,14 +15,17 @@ export const DatePickerToday = withComponent({
     },
     render(instance) {
         const { props, ptmi, datepicker } = instance;
+        const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
                 type: 'button',
                 className: datepicker?.cx('today'),
                 onClick: datepicker?.onTodayButtonClick,
                 onKeyDown: datepicker?.onContainerButtonKeydown
             },
+            datepicker?.ptm('today'),
             ptmi('root')
         );
 
@@ -31,7 +33,6 @@ export const DatePickerToday = withComponent({
             return <>{datepicker?.todayLabel}</>;
         };
 
-        // @ts-expect-error: Button expects a type prop, but we are using it as a today button.
-        return <Component as={Button} instance={instance} attrs={{ ...props, ...rootProps }} pt={datepicker?.ptm('today')} children={props.children ?? label()} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children ?? label()} />;
     }
 });

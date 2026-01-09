@@ -10,7 +10,6 @@ export {
     defaultRootProps,
     defaultTitleProps,
     defaultTriggerProps,
-    DrawerClose,
     DrawerContent,
     DrawerFooter,
     DrawerHeader,
@@ -18,7 +17,8 @@ export {
     DrawerProps,
     DrawerProvider,
     DrawerTitle,
-    DrawerTrigger,
     useDrawerContext
 } from 'primereact/drawer';
+export { UIDrawerClose as DrawerClose } from './close';
 export { UIDrawerRoot as DrawerRoot } from './root';
+export { UIDrawerTrigger as DrawerTrigger } from './trigger';

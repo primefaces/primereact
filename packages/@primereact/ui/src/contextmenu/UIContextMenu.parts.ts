@@ -1,17 +1,15 @@
-export {
-    ContextMenuCheckboxGroup as CheckboxGroup,
-    ContextMenuCheckboxIcon as CheckboxIcon,
-    ContextMenuCheckboxItem as CheckboxItem,
-    ContextMenuIcon as Icon,
-    ContextMenuItem as Item,
-    ContextMenuLabel as Label,
-    ContextMenuList as List,
-    ContextMenuPortal as Portal,
-    ContextMenuRadioGroup as RadioGroup,
-    ContextMenuRadioIcon as RadioIcon,
-    ContextMenuRadioItem as RadioItem,
-    ContextMenuSeparator as Separator,
-    ContextMenuSub as Sub,
-    ContextMenuTrigger as Trigger
-} from 'primereact/contextmenu';
+export { ContextMenuTrigger as Trigger } from 'primereact/contextmenu';
+export { UIContextMenuCheckboxGroup as CheckboxGroup } from './checkboxgroup';
+export { UIContextMenuCheckboxIcon as CheckboxIcon } from './checkboxicon';
+export { UIContextMenuCheckboxItem as CheckboxItem } from './checkboxitem';
+export { UIContextMenuIcon as Icon } from './icon';
+export { UIContextMenuItem as Item } from './item';
+export { UIContextMenuLabel as Label } from './label';
+export { UIContextMenuList as List } from './list';
+export { UIContextMenuPortal as Portal } from './portal';
+export { UIContextMenuRadioGroup as RadioGroup } from './radiogroup';
+export { UIContextMenuRadioIcon as RadioIcon } from './radioicon';
+export { UIContextMenuRadioItem as RadioItem } from './radioitem';
 export { UIContextMenuRoot as Root } from './root';
+export { UIContextMenuSeparator as Separator } from './separator';
+export { UIContextMenuSub as Sub } from './sub';

@@ -1,8 +1,8 @@
 'use client';
 import { Component } from '@primereact/core/component';
+import { mergeDefaultProps } from '@primereact/core/utils';
 import { styles } from '@primereact/styles/avatar';
 import { withComponent } from '@primereact/ui/base';
-import { mergeProps } from '@primeuix/utils';
 import { AvatarRoot, defaultRootProps } from 'primereact/avatar';
 import * as React from 'react';
 
@@ -10,10 +10,8 @@ export const UIAvatarRoot = withComponent({
     name: 'UIAvatarRoot',
     defaultProps: defaultRootProps,
     render(instance) {
-        const { props, inProps } = instance;
+        const rootProps = mergeDefaultProps({ styles }, instance.inProps);
 
-        const rootProps = mergeProps({ styles }, inProps);
-
-        return <Component as={AvatarRoot} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={AvatarRoot} attrs={rootProps} />;
     }
 });
