@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useListboxExposes, useListboxProps, useListboxState, useListboxValueChangeEvent } from './useListbox.types';
+import type { useListboxExposes, useListboxInstance, useListboxProps, useListboxState, useListboxValueChangeEvent } from './useListbox.types';
 
 /**
  * Defines passthrough(pt) options type in Listbox component.
@@ -97,6 +97,11 @@ export interface ListboxRootProps extends BaseComponentProps<ListboxRootInstance
      * @defaultValue 0
      */
     tabIndex?: number;
+    /**
+     * An existing listbox instance to use instead of creating a new one.
+     * This is used internally by components like AutoComplete that compose Listbox.
+     */
+    listboxInstance?: useListboxInstance;
 }
 
 /**

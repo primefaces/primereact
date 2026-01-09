@@ -1,0 +1,31 @@
+import type { useAutoCompleteProps } from '@primereact/types/shared/autocomplete';
+
+export const defaultProps: useAutoCompleteProps = {
+    value: undefined,
+    defaultValue: undefined,
+    inputValue: undefined,
+    defaultInputValue: '',
+    options: [],
+    optionKey: undefined,
+    optionLabel: undefined,
+    optionValue: undefined,
+    optionDisabled: undefined,
+    optionGroupLabel: undefined,
+    optionGroupChildren: undefined,
+    disabled: false,
+    locale: undefined,
+    autoOptionFocus: true,
+    selectOnFocus: false,
+    focusOnHover: true,
+    minLength: 1,
+    delay: 300,
+    appendTo: 'body',
+    forceSelection: false,
+    completeOnFocus: false,
+    dropdownMode: 'blank',
+    ariaLabel: undefined,
+    ariaLabelledBy: undefined,
+    onValueChange: undefined,
+    onInputValueChange: undefined,
+    onComplete: undefined
+};

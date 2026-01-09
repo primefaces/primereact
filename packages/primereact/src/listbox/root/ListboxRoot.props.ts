@@ -7,5 +7,7 @@ export const defaultRootProps: ListboxRootProps = {
     checkmark: false,
     checkbox: false,
     invalid: false,
-    tabIndex: 0
+    tabIndex: 0,
+    // TODO: review
+    listboxInstance: undefined
 };

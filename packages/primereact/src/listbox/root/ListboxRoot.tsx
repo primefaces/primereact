@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useListbox } from '@primereact/headless/listbox';
-import { mergeProps, resolve } from '@primeuix/utils';
+import { mergeProps, resolve, omit } from '@primeuix/utils';
 import * as React from 'react';
 import { ListboxProvider } from '../Listbox.context';
 import { defaultRootProps } from './ListboxRoot.props';
@@ -10,7 +10,7 @@ export const ListboxRoot = withComponent({
     name: 'ListboxRoot',
     defaultProps: defaultRootProps,
     setup(instance) {
-        const listbox = useListbox(instance?.inProps);
+        const listbox = (instance?.inProps?.listboxInstance as unknown as Record<PropertyKey, unknown>) ?? useListbox(omit(instance?.inProps, 'listboxInstance'));
 
         return listbox;
     },
@@ -46,8 +46,8 @@ export const ListboxRoot = withComponent({
             return <span ref={ref} {...hiddenProps} />;
         };
 
-        const firstHiddenFocusable = createHiddenFocusableElement('firstHiddenFocusable', firstHiddenFocusableRef, onFirstHiddenFocus);
-        const lastHiddenFocusable = createHiddenFocusableElement('lastHiddenFocusable', lastHiddenFocusableRef, onLastHiddenFocus);
+        const firstHiddenFocusable = createHiddenFocusableElement('firstHiddenFocusable', firstHiddenFocusableRef as React.Ref<HTMLSpanElement>, onFirstHiddenFocus as (event: React.FocusEvent) => void);
+        const lastHiddenFocusable = createHiddenFocusableElement('lastHiddenFocusable', lastHiddenFocusableRef as React.Ref<HTMLSpanElement>, onLastHiddenFocus as (event: React.FocusEvent) => void);
 
         const rootProps = mergeProps(
             {

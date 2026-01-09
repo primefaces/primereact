@@ -228,7 +228,6 @@ export interface useListboxExposes {
     onListFocus: () => void;
     /**
      * Callback when the list loses focus.
-     * @param {React.FocusEvent} event - The focus event.
      */
     onListBlur: () => void;
     /**
@@ -236,6 +235,27 @@ export interface useListboxExposes {
      * @param {React.KeyboardEvent} event - The keyboard event.
      */
     onListKeyDown: (event: React.KeyboardEvent) => void;
+    /**
+     * Handles arrow down key press.
+     * @param {React.KeyboardEvent} event - The keyboard event.
+     */
+    onArrowDownKey: (event: React.KeyboardEvent) => void;
+    /**
+     * Handles arrow up key press.
+     * @param {React.KeyboardEvent} event - The keyboard event.
+     */
+    onArrowUpKey: (event: React.KeyboardEvent) => void;
+    /**
+     * Handles arrow left key press.
+     * @param {React.KeyboardEvent} event - The keyboard event.
+     * @param {boolean} [pressedInInputText] - Whether the key was pressed in an input field.
+     */
+    onArrowLeftKey: (event: React.KeyboardEvent, pressedInInputText?: boolean) => void;
+    /**
+     * Handles enter key press.
+     * @param {React.KeyboardEvent} event - The keyboard event.
+     */
+    onEnterKey: (event: React.KeyboardEvent) => void;
     /**
      * Callback when an option is selected.
      * @param {React.MouseEvent | React.KeyboardEvent} event - The event.
@@ -257,20 +277,16 @@ export interface useListboxExposes {
     onOptionMouseMove: (event: React.MouseEvent, index: number) => void;
     /**
      * Callback when touch ends on an option.
-     * @param {React.TouchEvent} event - The touch event.
-     * @param {number} index - The index of the option.
      */
-    onOptionTouchEnd: (event: React.TouchEvent, index: number) => void;
+    onOptionTouchEnd: () => void;
     /**
      * Callback when the filter value changes.
-     * @param {React.ChangeEvent} event - The change event.
      */
-    onFilterChange: (event: React.ChangeEvent) => void;
+    onFilterChange: () => void;
     /**
      * Callback when the filter input loses focus.
-     * @param {React.FocusEvent} event - The focus event.
      */
-    onFilterBlur: (event: React.FocusEvent) => void;
+    onFilterBlur: () => void;
     /**
      * Callback for keyboard events on the filter input.
      * @param {React.KeyboardEvent} event - The keyboard event.
@@ -279,10 +295,9 @@ export interface useListboxExposes {
     /**
      * Checks if an option matches the search value.
      * @param {unknown} option - The option to check.
-     * @param {string} searchValue - The search value.
      * @returns {boolean} True if the option matches.
      */
-    isOptionMatched: (option: unknown, searchValue: string) => boolean;
+    isOptionMatched: (option: unknown) => boolean;
     /**
      * Checks if an option is valid (not disabled and not a group).
      * @param {unknown} option - The option to check.
@@ -304,29 +319,36 @@ export interface useListboxExposes {
     /**
      * Changes the focused option index.
      * @param {React.MouseEvent | React.KeyboardEvent} event - The event.
-     * @param {number} index - The new focused index.
+     * @param {number} [index] - The new focused index.
      */
-    changeFocusedOptionIndex: (event: React.MouseEvent | React.KeyboardEvent, index: number) => void;
+    changeFocusedOptionIndex: (event: React.MouseEvent | React.KeyboardEvent, index?: number) => void;
+    /**
+     * Finds the index of the selected option.
+     * @returns {number} The index of the selected option, or -1 if not found.
+     */
+    findSelectedOptionIndex: () => number;
+    /**
+     * Finds the index of the first focused option.
+     * @returns {number} The index of the first focused option.
+     */
+    findFirstFocusedOptionIndex: () => number;
     /**
      * Scrolls the option at the given index into view.
-     * @param {number} index - The index of the option.
+     * @param {number} [index] - The index of the option.
      */
-    scrollInView: (index: number) => void;
+    scrollInView: (index?: number) => void;
     /**
      * Updates the listbox model with a new value.
-     * @param {React.MouseEvent | React.KeyboardEvent} event - The event.
+     * @param {React.SyntheticEvent} event - The event.
      * @param {unknown} value - The new value.
      */
-    updateModel: (event: React.MouseEvent | React.KeyboardEvent, value: unknown) => void;
+    updateModel: (event: React.SyntheticEvent, value: unknown) => void;
     /**
      * Automatically updates the model based on option selection.
-     * @param {React.MouseEvent | React.KeyboardEvent} event - The event.
-     * @param {unknown} option - The selected option.
      */
-    autoUpdateModel: (event: React.MouseEvent | React.KeyboardEvent, option: unknown) => void;
+    autoUpdateModel: () => void;
     /**
      * Property name used for equality comparison.
-     * @returns {string | undefined} The equality key.
      */
     equalityKey: string | undefined;
     /**
@@ -334,6 +356,13 @@ export interface useListboxExposes {
      * @returns {boolean} True if there is a value.
      */
     hasValue: () => boolean;
+    /**
+     * Checks if two values are equal using the equality key.
+     * @param {unknown} value1 - The first value.
+     * @param {unknown} value2 - The second value.
+     * @returns {boolean} True if the values are equal.
+     */
+    isEquals: (value1: unknown, value2: unknown) => boolean;
 }
 
 /**

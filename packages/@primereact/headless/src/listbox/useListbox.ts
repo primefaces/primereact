@@ -1,6 +1,6 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import { equals, findLastIndex, findSingle, focus, getFirstFocusableElement, isElement, isNotEmpty, isPrintableCharacter, isString, resolveFieldData } from '@primeuix/utils';
+import { equals, findLastIndex, findSingle, focus, getFirstFocusableElement, isElement, isNotEmpty, isNumber, isPrintableCharacter, isString, resolveFieldData } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useListbox.props';
 
@@ -42,7 +42,7 @@ export const useListbox = withHeadless({
         };
 
         const getOptionLabel = (option: unknown) => {
-            return props.optionLabel ? resolveFieldData(option, props.optionLabel) : isString(option) ? option : null;
+            return props.optionLabel ? resolveFieldData(option, props.optionLabel) : isString(option) || isNumber(option) ? option : null;
         };
 
         const getOptionValue = (option: unknown) => {
@@ -631,7 +631,7 @@ export const useListbox = withHeadless({
             if (focusedOptionIndexState !== index) {
                 setFocusedOptionIndexState(index);
 
-                scrollInView();
+                scrollInView(index);
 
                 if (props.selectOnFocus && !props.multiple) {
                     onOptionSelect(event, getOptions()[index]);
@@ -733,6 +733,10 @@ export const useListbox = withHeadless({
             onListFocus,
             onListBlur,
             onListKeyDown,
+            onArrowDownKey,
+            onArrowUpKey,
+            onArrowLeftKey,
+            onEnterKey,
             onOptionSelect,
             onOptionMouseDown,
             onOptionMouseMove,
@@ -745,11 +749,14 @@ export const useListbox = withHeadless({
             isValidSelectedOption,
             isSelected,
             changeFocusedOptionIndex,
+            findSelectedOptionIndex,
+            findFirstFocusedOptionIndex,
             scrollInView,
             updateModel,
             autoUpdateModel,
             equalityKey,
-            hasValue
+            hasValue,
+            isEquals
         };
     }
 });

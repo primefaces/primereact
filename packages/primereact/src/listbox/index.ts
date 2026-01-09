@@ -7,7 +7,7 @@ export { defaultEmptyProps, ListboxEmpty } from './empty';
 export { defaultFilterProps, ListboxFilter } from './filter';
 export { defaultFooterProps, ListboxFooter } from './footer';
 export { defaultHeaderProps, ListboxHeader } from './header';
-export { defaultOptionProps, ListboxOption } from './option';
+export { defaultOptionProps, ListboxOptionProvider, useListboxOptionContext, ListboxOption } from './option';
 export { defaultOptionsProps, ListboxOptions } from './options';
 export { defaultRootProps, ListboxRoot } from './root';
 export { defaultSelectionProps, ListboxSelection } from './selection';
