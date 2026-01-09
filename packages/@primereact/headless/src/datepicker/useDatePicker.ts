@@ -7,6 +7,14 @@ import { defaultProps } from './useDatePicker.props';
 
 const TICKS_TO_1970 = ((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) + Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000;
 
+const getSafeDate = (value: any, viewDate: Date) => {
+    if (Array.isArray(value)) {
+        return value[0] || value[1] || viewDate;
+    }
+
+    return value || viewDate;
+};
+
 const primereact = {
     config: {
         locale: {
@@ -285,26 +293,31 @@ export const useDatePicker = withHeadless({
         };
 
         const isYearSelected = (year: number) => {
-            if (typeof rawValueState !== 'string' && rawValueState !== null) {
-                return (rawValueState as Date).getFullYear() === year;
-            } else if (Array.isArray(rawValueState)) {
+            if (Array.isArray(rawValueState)) {
                 if (isMultipleSelection()) {
-                    return rawValueState?.some((currentValue) => {
+                    return rawValueState.some((currentValue) => {
                         const parsedDate = parseValueForComparison(currentValue);
-
                         return parsedDate ? parsedDate.getFullYear() === year : false;
                     });
-                } else if (isRangeSelection()) {
-                    const parsedStart = rawValueState?.[0] ? parseValueForComparison(rawValueState[0]) : null;
-                    const parsedEnd = rawValueState?.[1] ? parseValueForComparison(rawValueState[1]) : null;
+                }
 
-                    const start = parsedStart ? parsedStart.getFullYear() : null;
-                    const end = parsedEnd ? parsedEnd.getFullYear() : null;
+                if (isRangeSelection()) {
+                    const parsedStart = rawValueState[0] ? parseValueForComparison(rawValueState[0]) : null;
+                    const parsedEnd = rawValueState[1] ? parseValueForComparison(rawValueState[1]) : null;
 
-                    if (!start || !end) return false;
+                    const start = parsedStart?.getFullYear();
+                    const end = parsedEnd?.getFullYear();
+
+                    if (start == null || end == null) return false;
 
                     return start === year || end === year || (start < year && end > year);
                 }
+
+                return false;
+            }
+
+            if (rawValueState instanceof Date) {
+                return rawValueState.getFullYear() === year;
             }
 
             return false;
