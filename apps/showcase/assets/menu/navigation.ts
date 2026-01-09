@@ -209,6 +209,10 @@ export const menu = {
                     name: 'Form',
                     children: [
                         {
+                            name: 'AutoComplete',
+                            to: '/docs/styled/components/autocomplete'
+                        },
+                        {
                             name: 'Checkbox',
                             to: '/docs/styled/components/checkbox'
                         },

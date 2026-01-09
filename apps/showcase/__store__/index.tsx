@@ -114,6 +114,72 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'filePath': 'demo/styled/animateonscroll/basic-demo.tsx',
             },
         },
+        'autocomplete': {
+            'autocomplete-pt': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/autocomplete-pt')),
+                'filePath': 'demo/styled/autocomplete/autocomplete-pt.tsx',
+            },
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/basic-demo')),
+                'filePath': 'demo/styled/autocomplete/basic-demo.tsx',
+            },
+            'checkmark-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/checkmark-demo')),
+                'filePath': 'demo/styled/autocomplete/checkmark-demo.tsx',
+            },
+            'clear-icon-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/clear-icon-demo')),
+                'filePath': 'demo/styled/autocomplete/clear-icon-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/disabled-demo')),
+                'filePath': 'demo/styled/autocomplete/disabled-demo.tsx',
+            },
+            'dropdown-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/dropdown-demo')),
+                'filePath': 'demo/styled/autocomplete/dropdown-demo.tsx',
+            },
+            'filled-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/filled-demo')),
+                'filePath': 'demo/styled/autocomplete/filled-demo.tsx',
+            },
+            'float-label-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/float-label-demo')),
+                'filePath': 'demo/styled/autocomplete/float-label-demo.tsx',
+            },
+            'fluid-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/fluid-demo')),
+                'filePath': 'demo/styled/autocomplete/fluid-demo.tsx',
+            },
+            'forceselection-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/forceselection-demo')),
+                'filePath': 'demo/styled/autocomplete/forceselection-demo.tsx',
+            },
+            'group-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/group-demo')),
+                'filePath': 'demo/styled/autocomplete/group-demo.tsx',
+            },
+            'ifta-label-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/ifta-label-demo')),
+                'filePath': 'demo/styled/autocomplete/ifta-label-demo.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/invalid-demo')),
+                'filePath': 'demo/styled/autocomplete/invalid-demo.tsx',
+            },
+            'loading-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/loading-demo')),
+                'filePath': 'demo/styled/autocomplete/loading-demo.tsx',
+            },
+            'option-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/option-demo')),
+                'filePath': 'demo/styled/autocomplete/option-demo.tsx',
+            },
+            'sizes-demo': {
+                'component': React.lazy(() => import('demo/styled/autocomplete/sizes-demo')),
+                'filePath': 'demo/styled/autocomplete/sizes-demo.tsx',
+            },
+        },
         'avatar': {
             'avatar-pt': {
                 'component': React.lazy(() => import('demo/styled/avatar/avatar-pt')),
