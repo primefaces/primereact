@@ -4,7 +4,7 @@ import { Checkbox } from '../checkbox/Checkbox';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { MultiStateCheckboxBase } from './MultiStateCheckboxBase';
 
 export const MultiStateCheckbox = React.memo(
@@ -167,9 +167,12 @@ export const MultiStateCheckbox = React.memo(
             ptm('root')
         );
 
+        const inputId = React.useMemo(() => props.id || UniqueComponentId(), [props.id]);
+
         const checkboxProps = mergeProps(
             {
-                id: props.id + '_checkbox',
+                id: inputId + '_checkbox',
+                inputId: props.inputId || inputId + '_multistatecheckbox',
                 className: cx('checkbox'),
                 style: sx('checkbox', { selectedOption }),
                 tabIndex: props.tabIndex,
