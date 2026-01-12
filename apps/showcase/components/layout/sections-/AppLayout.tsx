@@ -2,7 +2,7 @@
 import { useApp } from '@/hooks/useApp';
 import { cn } from '@primeuix/utils';
 import * as React from 'react';
-import { AppFooter, AppMenu, AppNews, AppTopbar } from './sections';
+import { AppFooter, AppMenu, AppNews, AppTopbar } from '.';
 
 export default function AppLayout({
     children

@@ -23,14 +23,14 @@ export default function DocDemoWrapper({
     const isSourceNotAvailable = !highlightedCode || !source;
 
     return (
-        <div className={cn('mb-16 mt-2', className)} {...props}>
-            {component && <div className="bg-(--code-figure-background) p-8 rounded-lg border border-(--code-figure-border) overflow-hidden">{component}</div>}
+        <div className={cn('mb-16 mt-2 border border-(--code-figure-border) p-1.5 space-y-1.5 rounded-[calc(var(--radius-lg)*1.5)] bg-surface-100 dark:bg-surface-900', className)} {...props}>
+            {component && <div className="bg-(--code-figure-background) p-6 md:p-8 rounded-lg border border-(--code-figure-border)">{component}</div>}
             {!isSourceNotAvailable && (
-                <div className="mt-4 border border-(--code-figure-border) rounded-lg bg-(--code-figure-background) overflow-hidden">
+                <div className="border border-(--code-figure-border) rounded-lg bg-(--code-figure-background) overflow-hidden">
                     <div className="p-1.5 flex items-center gap-2 border-b border-(--code-figure-border)">
                         <div className="inline-flex py-1.5 px-2 items-center gap-2">
-                            <TypescriptLogo className="size-3.5 fill-surface-500" />
-                            <span className="font-mono text-sm text-surface-500 whitespace-nowrap leading-none">{demo}.tsx</span>
+                            <ReactLogo className="size-3.5 fill-surface-500" />
+                            <span className="font-mono text-sm text-surface-500 dark:text-surface-400 whitespace-nowrap leading-none">{demo}.tsx</span>
                         </div>
                         <div className="flex items-center justify-end flex-1">
                             <div className="flex items-center gap-px">
@@ -53,7 +53,7 @@ export default function DocDemoWrapper({
     );
 }
 
-const TypescriptLogo = ({ ...props }: React.ComponentProps<'svg'>) => {
+const ReactLogo = ({ ...props }: React.ComponentProps<'svg'>) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="175.7 78 490.6 436.9" {...props}>
             <g>

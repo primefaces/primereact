@@ -37,12 +37,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         openGraph: {
             title: doc.title + ' - PrimeReact',
             description: doc.description,
-            type: 'article'
+            type: 'article',
+            images: [
+                {
+                    url: `/og?title=${encodeURIComponent(doc.title)}&description=${encodeURIComponent(doc.description ?? '')}`
+                }
+            ]
         },
         twitter: {
             card: 'summary_large_image',
             title: doc.title + ' - PrimeReact',
-            description: doc.description
+            description: doc.description,
+            images: [
+                {
+                    url: `/og?title=${encodeURIComponent(doc.title)}&description=${encodeURIComponent(doc.description ?? '')}`
+                }
+            ]
         }
     };
 }
@@ -62,21 +72,20 @@ async function DocsPage({ params }: PageProps) {
     }
 
     return (
-        <>
+        <div className="flex flex-col pt-(--docs-layout-spacing)">
             {doc.component && <DocTabMenu componentName={doc.component} />}
-            <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
-                <div className="flex-1 overflow-hidden pb-12">
+            <div className="flex-1 flex items-stretch w-full gap-(--docs-layout-gap)">
+                <div className="flex-1 min-w-0 pb-12">
                     <div className="grid grid-cols-[1fr_auto] gap-2 items-start">
                         <h1 className="text-[2rem] leading-tight font-semibold text-(--high-contrast-text-color)">{doc.title}</h1>
                         {!(doc.hideCopyPage === true) && <DocCopyMarkdownMenu className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />}
-                        <p className="text-lg leading-6.5 col-span-2 opacity-75">{doc.description}</p>
+                        <p className="text-lg col-span-2 opacity-50 text-surface-900 dark:text-surface-0">{doc.description}</p>
                     </div>
-
                     <DocMdx code={doc.body.code} />
                 </div>
                 <DocToc toc={doc.toc} />
             </div>
-        </>
+        </div>
     );
 }
 

@@ -29,6 +29,8 @@ export default function DocTabMenu({ componentName }: React.ComponentProps<'ul'>
         })
         .sort((a, b) => TAB_ORDER.indexOf(a.key) - TAB_ORDER.indexOf(b.key));
 
+    if (tabs.length < 0) return null;
+
     return (
         <ul className="doc-tabmenu">
             {tabs.map((doc, index) => (

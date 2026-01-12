@@ -4,8 +4,6 @@ import { getMDXComponent } from 'next-contentlayer2/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
-import DocButton from './doc-button';
-import DocComponentsPreview from './doc-components-preview';
 import DocCopyButton from './doc-copy-button';
 import DocDemoViewer from './doc-demo-viewer';
 import DocLinkCard from './doc-link-card';
@@ -15,6 +13,7 @@ import DocSourceViewer from './doc-source-viewer';
 import DocStepper, { DocStep } from './doc-stepper';
 import DocTable from './doc-table';
 import { DocTabs, DocTabsList, DocTabsPanel, DocTabsTab } from './doc-tabs';
+import { Button } from '@primereact/ui/button';
 
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mb-2 scroll-m-32 text-3xl font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
@@ -103,12 +102,11 @@ const components = {
 
         return <code className={cn('font-mono text-sm', className)} {...props} />;
     },
-    Button: DocButton,
+    Button: Button,
     DocTabs,
     DocTabsTab,
     DocTabsList,
     DocTabsPanel,
-    DocComponentsPreview,
     DocSourceViewer
 };
 

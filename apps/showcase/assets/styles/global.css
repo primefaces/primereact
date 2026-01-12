@@ -4,6 +4,27 @@
 @import "./tailwind/main.css";
 @import "./layout/layout.css";
 
+:root {
+    --news-height: 0rem;
+    --topbar-height: 3.5rem;
+    --sticky-offset-top: calc(var(--news-height) + var(--topbar-height) + 1px);
+    --sidebar-width: 216px;
+}
+
+:root:has(.layout-news) {
+    --news-height: 1.75rem;
+}
+
+@media (min-width: 1280px) {
+    :root {
+        --sidebar-width: 236px;
+    }
+}
+
+@utility container {
+    @apply max-w-[1728px] mx-auto w-full px-4 xl:px-14;
+}
+
 .p-placer-content-enter-from,
 .p-placer-content-leave-to {
     opacity: 0;

@@ -22,6 +22,28 @@ const appConfig: AppConfig = {
             url: 'https://v9.primereact.org'
         }
     ],
+    navigation: [
+        {
+            name: 'Docs',
+            href: '/docs'
+        },
+        {
+            name: 'Components',
+            href: '/components'
+        },
+        {
+            name: 'Blocks',
+            href: 'https://primeblocks.org/'
+        },
+        {
+            name: 'Templates',
+            href: 'https://primeui.store/templates'
+        },
+        {
+            name: 'UI Kit',
+            href: 'https://primeui.store/uikit'
+        }
+    ],
     primereact: {
         theme: {
             preset: Noir,

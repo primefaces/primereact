@@ -1,6 +1,10 @@
 import type { PrimeReactProps } from '@primereact/types/core';
 import type { Metadata, Viewport } from 'next';
 
+interface Navigation {
+    name: string;
+    href: string;
+}
 export interface AppConfig {
     preset?: string;
     primary?: string;
@@ -16,6 +20,7 @@ export interface AppConfig {
     primereact?: PrimeReactProps;
     metadata?: Metadata;
     viewport?: Viewport;
+    navigation?: Navigation[];
 }
 
 export interface AppContextProps extends Omit<AppConfig, 'metadata' | 'viewport' | 'font'> {
@@ -61,4 +66,12 @@ export interface AppMenuItemData {
 export interface AppMenuItemProps {
     root?: boolean;
     menu?: AppMenuItemData[];
+}
+
+export interface ComponentPreviewType {
+    title: string;
+    description: string | undefined;
+    componentSlug: string;
+    styled: boolean;
+    tailwind: boolean;
 }

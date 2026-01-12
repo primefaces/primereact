@@ -1,30 +1,28 @@
 export const navigation = [
     {
         name: 'General',
+        icon: 'pi pi-book',
+        href: '/docs/general'
+    },
+    {
+        name: 'Styled',
+        icon: 'pi-palette',
+        href: '/docs/styled'
+    },
+    {
+        name: 'Tailwind',
+        icon: 'tailwind',
+        href: '/docs/tailwind'
+    },
+    {
+        name: 'Headless',
+        icon: 'pi pi-hammer',
+        href: '/docs/headless'
+    },
+    {
+        name: 'Primitives',
         icon: 'pi pi-bullseye',
-        to: '/docs/general'
-    },
-    {
-        name: 'Components',
-        icon: 'pi pi-compass',
-        to: '/docs/components',
-        items: [
-            {
-                name: 'Styled',
-                icon: 'pi-palette',
-                to: '/docs/styled'
-            },
-            {
-                name: 'Tailwind',
-                icon: 'pi pi-hammer',
-                to: '/docs/tailwind'
-            }
-        ]
-    },
-    {
-        name: 'Add-ons',
-        icon: 'pi pi-eye',
-        to: '/docs/addons'
+        href: '/docs/primitives'
     }
 ];
 
@@ -36,28 +34,28 @@ export const menu = {
             children: [
                 {
                     name: 'Introduction',
-                    to: '/docs/general/gettingstarted/introduction'
+                    href: '/docs/general/gettingstarted/introduction'
                 },
                 {
                     name: 'Setup',
-                    to: '/docs/general/gettingstarted/setup'
+                    href: '/docs/general/gettingstarted/setup'
+                },
+                {
+                    name: 'LLMs.txt',
+                    icon: 'pi pi-file',
+                    href: '/docs/general/llms'
+                },
+                {
+                    name: 'Pass Through',
+                    icon: 'pi pi-directions',
+                    href: '/docs/general/passthrough'
+                },
+                {
+                    name: 'Tailwind CSS',
+                    icon: 'pi pi-star',
+                    href: '/docs/general/tailwind'
                 }
             ]
-        },
-        {
-            name: 'LLMs.txt',
-            icon: 'pi pi-file',
-            to: '/docs/general/llms'
-        },
-        {
-            name: 'Pass Through',
-            icon: 'pi pi-directions',
-            to: '/docs/general/passthrough'
-        },
-        {
-            name: 'Tailwind CSS',
-            icon: 'pi pi-star',
-            to: '/docs/general/tailwind'
         },
         {
             name: 'Icons',
@@ -65,11 +63,11 @@ export const menu = {
             children: [
                 {
                     name: 'Prime Icons',
-                    to: '/docs/general/icons/primeicons'
+                    href: '/docs/general/icons/primeicons'
                 },
                 {
                     name: 'Custom Icons',
-                    to: '/docs/general/icons/customicons'
+                    href: '/docs/general/icons/customicons'
                 }
             ]
         },
@@ -79,15 +77,15 @@ export const menu = {
             children: [
                 {
                     name: 'useKeyFilter',
-                    to: '/docs/general/hooks/usekeyfilter'
+                    href: '/docs/general/hooks/usekeyfilter'
                 },
                 {
                     name: 'useMask',
-                    to: '/docs/general/hooks/usemask'
+                    href: '/docs/general/hooks/usemask'
                 },
                 {
                     name: 'useScrollTop',
-                    to: '/docs/general/hooks/usescrolltop'
+                    href: '/docs/general/hooks/usescrolltop'
                 }
             ]
         },
@@ -97,7 +95,7 @@ export const menu = {
             children: [
                 {
                     name: 'Accessibility',
-                    to: '/docs/general/guides/accessibility'
+                    href: '/docs/general/guides/accessibility'
                 },
                 {
                     name: 'PrimeTV',
@@ -105,7 +103,7 @@ export const menu = {
                 },
                 {
                     name: 'RTL',
-                    to: '/docs/general/guides/rtl'
+                    href: '/docs/general/guides/rtl'
                 }
             ]
         },
@@ -123,7 +121,7 @@ export const menu = {
                 },
                 {
                     name: 'PRO Support',
-                    to: '/support'
+                    href: '/support'
                 }
             ]
         },
@@ -133,7 +131,7 @@ export const menu = {
             children: [
                 {
                     name: 'About Us',
-                    to: '/team'
+                    href: '/team'
                 },
                 {
                     name: 'Source Code',
@@ -145,7 +143,7 @@ export const menu = {
                 },
                 {
                     name: 'Contribution',
-                    to: '/docs/general/discover/contribution',
+                    href: '/docs/general/discover/contribution',
                     icon: 'pi pi-users'
                 },
                 {
@@ -174,18 +172,18 @@ export const menu = {
             children: [
                 {
                     name: 'Vite',
-                    to: '/docs/styled/installation/vite'
+                    href: '/docs/styled/installation/vite'
                 },
                 {
                     name: 'Next.js',
-                    to: '/docs/styled/installation/nextjs'
+                    href: '/docs/styled/installation/nextjs'
                 }
             ]
         },
         {
             name: 'Configuration',
             icon: 'pi pi-cog',
-            to: '/docs/styled/configuration'
+            href: '/docs/styled/configuration'
         },
         {
             name: 'Theming',
@@ -193,339 +191,333 @@ export const menu = {
             children: [
                 {
                     name: 'Styled Mode',
-                    to: '/docs/styled/theming/styled'
+                    href: '/docs/styled/theming/styled'
                 },
                 {
                     name: 'Unstyled Mode',
-                    to: '/docs/styled/theming/unstyled'
+                    href: '/docs/styled/theming/unstyled'
                 }
             ]
         },
         {
-            name: 'Components',
-            icon: 'pi pi-compass',
+            name: 'Form',
             children: [
                 {
-                    name: 'Form',
-                    children: [
-                        {
-                            name: 'AutoComplete',
-                            to: '/docs/styled/components/autocomplete'
-                        },
-                        {
-                            name: 'Checkbox',
-                            to: '/docs/styled/components/checkbox'
-                        },
-                        {
-                            name: 'ColorPicker',
-                            to: '/docs/styled/components/colorpicker',
-                            badge: 'New'
-                        },
-                        {
-                            name: 'InputText',
-                            to: '/docs/styled/components/inputtext'
-                        },
-                        {
-                            name: 'DatePicker',
-                            to: '/docs/styled/components/datepicker'
-                        },
-                        {
-                            name: 'FloatLabel',
-                            to: '/docs/styled/components/floatlabel'
-                        },
-                        {
-                            name: 'IconField',
-                            to: '/docs/styled/components/iconfield'
-                        },
-                        {
-                            name: 'IftaLabel',
-                            to: '/docs/styled/components/iftalabel'
-                        },
-                        {
-                            name: 'InputGroup',
-                            to: '/docs/styled/components/inputgroup'
-                        },
-                        {
-                            name: 'InputNumber',
-                            to: '/docs/styled/components/inputnumber',
-                            badge: 'New'
-                        },
-                        {
-                            name: 'InputOtp',
-                            to: '/docs/styled/components/inputotp'
-                        },
-                        {
-                            name: 'InputTags',
-                            to: '/docs/styled/components/inputtags'
-                        },
-                        {
-                            name: 'Knob',
-                            to: '/docs/styled/components/knob'
-                        },
-                        {
-                            name: 'Listbox',
-                            to: '/docs/styled/components/listbox'
-                        },
-                        {
-                            name: 'Password',
-                            to: '/docs/styled/components/password'
-                        },
-                        {
-                            name: 'RadioButton',
-                            to: '/docs/styled/components/radiobutton'
-                        },
-                        {
-                            name: 'Rating',
-                            to: '/docs/styled/components/rating'
-                        },
-                        {
-                            name: 'Slider',
-                            to: '/docs/styled/components/slider'
-                        },
-                        {
-                            name: 'Switch',
-                            to: '/docs/styled/components/switch'
-                        },
-                        {
-                            name: 'Textarea',
-                            to: '/docs/styled/components/textarea'
-                        },
-                        {
-                            name: 'ToggleButton',
-                            to: '/docs/styled/components/togglebutton'
-                        }
-                    ]
+                    name: 'AutoComplete',
+                    href: '/docs/styled/components/autocomplete'
                 },
+                {
+                    name: 'Checkbox',
+                    href: '/docs/styled/components/checkbox'
+                },
+                {
+                    name: 'ColorPicker',
+                    href: '/docs/styled/components/colorpicker',
+                    badge: 'New'
+                },
+                {
+                    name: 'InputText',
+                    href: '/docs/styled/components/inputtext'
+                },
+                {
+                    name: 'DatePicker',
+                    href: '/docs/styled/components/datepicker'
+                },
+                {
+                    name: 'FloatLabel',
+                    href: '/docs/styled/components/floatlabel'
+                },
+                {
+                    name: 'IconField',
+                    href: '/docs/styled/components/iconfield'
+                },
+                {
+                    name: 'IftaLabel',
+                    href: '/docs/styled/components/iftalabel'
+                },
+                {
+                    name: 'InputGroup',
+                    href: '/docs/styled/components/inputgroup'
+                },
+                {
+                    name: 'InputNumber',
+                    href: '/docs/styled/components/inputnumber',
+                    badge: 'New'
+                },
+                {
+                    name: 'InputOtp',
+                    href: '/docs/styled/components/inputotp'
+                },
+                {
+                    name: 'InputTags',
+                    href: '/docs/styled/components/inputtags'
+                },
+                {
+                    name: 'Knob',
+                    href: '/docs/styled/components/knob'
+                },
+                {
+                    name: 'Listbox',
+                    href: '/docs/styled/components/listbox'
+                },
+                {
+                    name: 'Password',
+                    href: '/docs/styled/components/password'
+                },
+                {
+                    name: 'RadioButton',
+                    href: '/docs/styled/components/radiobutton'
+                },
+                {
+                    name: 'Rating',
+                    href: '/docs/styled/components/rating'
+                },
+                {
+                    name: 'Slider',
+                    href: '/docs/styled/components/slider'
+                },
+                {
+                    name: 'Switch',
+                    href: '/docs/styled/components/switch'
+                },
+                {
+                    name: 'Textarea',
+                    href: '/docs/styled/components/textarea'
+                },
+                {
+                    name: 'ToggleButton',
+                    href: '/docs/styled/components/togglebutton'
+                }
+            ]
+        },
+        {
+            name: 'Button',
+            children: [
                 {
                     name: 'Button',
-                    children: [
-                        {
-                            name: 'Button',
-                            to: '/docs/styled/components/button'
-                        },
-                        {
-                            name: 'SpeedDial',
-                            to: '/docs/styled/components/speeddial'
-                        }
-                    ]
+                    href: '/docs/styled/components/button'
                 },
                 {
-                    name: 'Data',
-                    children: [
-                        {
-                            name: 'DataView',
-                            to: '/docs/styled/components/dataview'
-                        },
-                        {
-                            name: 'OrgChart',
-                            to: '/docs/styled/components/orgchart',
-                            badge: 'New'
-                        },
-                        {
-                            name: 'Paginator',
-                            to: '/docs/styled/components/paginator'
-                        },
-                        {
-                            name: 'Timeline',
-                            to: '/docs/styled/components/timeline'
-                        },
-                        {
-                            name: 'Tree',
-                            to: '/docs/styled/components/tree'
-                        }
-                    ]
+                    name: 'SpeedDial',
+                    href: '/docs/styled/components/speeddial'
+                }
+            ]
+        },
+        {
+            name: 'Data',
+            children: [
+                {
+                    name: 'DataView',
+                    href: '/docs/styled/components/dataview'
+                },
+                {
+                    name: 'OrgChart',
+                    href: '/docs/styled/components/orgchart',
+                    badge: 'New'
+                },
+                {
+                    name: 'Paginator',
+                    href: '/docs/styled/components/paginator'
+                },
+                {
+                    name: 'Timeline',
+                    href: '/docs/styled/components/timeline'
+                },
+                {
+                    name: 'Tree',
+                    href: '/docs/styled/components/tree'
+                }
+            ]
+        },
+        {
+            name: 'Panel',
+            children: [
+                {
+                    name: 'Accordion',
+                    href: '/docs/styled/components/accordion'
+                },
+                {
+                    name: 'Card',
+                    href: '/docs/styled/components/card'
+                },
+                {
+                    name: 'Divider',
+                    href: '/docs/styled/components/divider'
+                },
+                {
+                    name: 'Fieldset',
+                    href: '/docs/styled/components/fieldset'
                 },
                 {
                     name: 'Panel',
-                    children: [
-                        {
-                            name: 'Accordion',
-                            to: '/docs/styled/components/accordion'
-                        },
-                        {
-                            name: 'Card',
-                            to: '/docs/styled/components/card'
-                        },
-                        {
-                            name: 'Divider',
-                            to: '/docs/styled/components/divider'
-                        },
-                        {
-                            name: 'Fieldset',
-                            to: '/docs/styled/components/fieldset'
-                        },
-                        {
-                            name: 'Panel',
-                            to: '/docs/styled/components/panel'
-                        },
-                        {
-                            name: 'ScrollArea',
-                            to: '/docs/styled/components/scrollarea'
-                        },
-                        {
-                            name: 'Splitter',
-                            to: '/docs/styled/components/splitter'
-                        },
-                        {
-                            name: 'Stepper',
-                            to: '/docs/styled/components/stepper'
-                        },
-                        {
-                            name: 'Tabs',
-                            to: '/docs/styled/components/tabs'
-                        },
-                        {
-                            name: 'Toolbar',
-                            to: '/docs/styled/components/toolbar'
-                        }
-                    ]
+                    href: '/docs/styled/components/panel'
                 },
                 {
-                    name: 'Overlay',
-                    children: [
-                        {
-                            name: 'ConfirmDialog',
-                            to: '/docs/styled/components/confirmdialog'
-                        },
-                        {
-                            name: 'ConfirmPopup',
-                            to: '/docs/styled/components/confirmpopup'
-                        },
-                        {
-                            name: 'Dialog',
-                            to: '/docs/styled/components/dialog'
-                        },
-                        {
-                            name: 'Drawer',
-                            to: '/docs/styled/components/drawer'
-                        },
-                        {
-                            name: 'Popover',
-                            to: '/docs/styled/components/popover'
-                        },
-                        {
-                            name: 'Tooltip',
-                            to: '/docs/styled/components/tooltip'
-                        }
-                    ]
+                    name: 'ScrollArea',
+                    href: '/docs/styled/components/scrollarea'
                 },
                 {
-                    name: 'File',
-                    children: [
-                        {
-                            name: 'Upload',
-                            to: '/docs/styled/components/fileupload'
-                        }
-                    ]
+                    name: 'Splitter',
+                    href: '/docs/styled/components/splitter'
+                },
+                {
+                    name: 'Stepper',
+                    href: '/docs/styled/components/stepper'
+                },
+                {
+                    name: 'Tabs',
+                    href: '/docs/styled/components/tabs'
+                },
+                {
+                    name: 'Toolbar',
+                    href: '/docs/styled/components/toolbar'
+                }
+            ]
+        },
+        {
+            name: 'Overlay',
+            children: [
+                {
+                    name: 'ConfirmDialog',
+                    href: '/docs/styled/components/confirmdialog'
+                },
+                {
+                    name: 'ConfirmPopup',
+                    href: '/docs/styled/components/confirmpopup'
+                },
+                {
+                    name: 'Dialog',
+                    href: '/docs/styled/components/dialog'
+                },
+                {
+                    name: 'Drawer',
+                    href: '/docs/styled/components/drawer'
+                },
+                {
+                    name: 'Popover',
+                    href: '/docs/styled/components/popover'
+                },
+                {
+                    name: 'Tooltip',
+                    href: '/docs/styled/components/tooltip'
+                }
+            ]
+        },
+        {
+            name: 'File',
+            children: [
+                {
+                    name: 'Upload',
+                    href: '/docs/styled/components/fileupload'
+                }
+            ]
+        },
+        {
+            name: 'Menu',
+            children: [
+                {
+                    name: 'Breadcrumb',
+                    href: '/docs/styled/components/breadcrumb'
+                },
+                {
+                    name: 'ContextMenu',
+                    href: '/docs/styled/components/contextmenu'
+                },
+                {
+                    name: 'CommandMenu',
+                    href: '/docs/styled/components/commandmenu'
                 },
                 {
                     name: 'Menu',
-                    children: [
-                        {
-                            name: 'Breadcrumb',
-                            to: '/docs/styled/components/breadcrumb'
-                        },
-                        {
-                            name: 'ContextMenu',
-                            to: '/docs/styled/components/contextmenu'
-                        },
-                        {
-                            name: 'CommandMenu',
-                            to: '/docs/styled/components/commandmenu'
-                        },
-                        {
-                            name: 'Menu',
-                            to: '/docs/styled/components/menu'
-                        }
-                    ]
+                    href: '/docs/styled/components/menu'
+                }
+            ]
+        },
+        {
+            name: 'Messages',
+            children: [
+                {
+                    name: 'Message',
+                    href: '/docs/styled/components/message'
                 },
                 {
-                    name: 'Messages',
-                    children: [
-                        {
-                            name: 'Message',
-                            to: '/docs/styled/components/message'
-                        },
-                        {
-                            name: 'Toast',
-                            to: '/docs/styled/components/toast',
-                            badge: 'New'
-                        }
-                    ]
+                    name: 'Toast',
+                    href: '/docs/styled/components/toast',
+                    badge: 'New'
+                }
+            ]
+        },
+        {
+            name: 'Media',
+            children: [
+                {
+                    name: 'ImageCompare',
+                    href: '/docs/styled/components/imagecompare'
                 },
                 {
-                    name: 'Media',
-                    children: [
-                        {
-                            name: 'ImageCompare',
-                            to: '/docs/styled/components/imagecompare'
-                        },
-                        {
-                            name: 'Carousel',
-                            to: '/docs/styled/components/carousel'
-                        },
-                        {
-                            name: 'Gallery',
-                            to: '/docs/styled/components/gallery'
-                        }
-                    ]
+                    name: 'Carousel',
+                    href: '/docs/styled/components/carousel'
                 },
                 {
-                    name: 'Misc',
-                    children: [
-                        {
-                            name: 'AnimateOnScroll',
-                            to: '/docs/styled/components/animateonscroll'
-                        },
-                        {
-                            name: 'Avatar',
-                            to: '/docs/styled/components/avatar'
-                        },
-                        {
-                            name: 'Inplace',
-                            to: '/docs/styled/components/inplace'
-                        },
-                        {
-                            name: 'Badge',
-                            to: '/docs/styled/components/badge'
-                        },
-                        {
-                            name: 'Chip',
-                            to: '/docs/styled/components/chip'
-                        },
-                        {
-                            name: 'Fluid',
-                            to: '/docs/styled/components/fluid'
-                        },
-                        {
-                            name: 'FocusTrap',
-                            to: '/docs/styled/components/focustrap'
-                        },
-                        {
-                            name: 'MeterGroup',
-                            to: '/docs/styled/components/metergroup'
-                        },
-                        {
-                            name: 'ProgressBar',
-                            to: '/docs/styled/components/progressbar'
-                        },
-                        {
-                            name: 'ProgressSpinner',
-                            to: '/docs/styled/components/progressspinner'
-                        },
-                        {
-                            name: 'Skeleton',
-                            to: '/docs/styled/components/skeleton'
-                        },
-                        {
-                            name: 'Tag',
-                            to: '/docs/styled/components/tag'
-                        },
-                        {
-                            name: 'Terminal',
-                            to: '/docs/styled/components/terminal'
-                        }
-                    ]
+                    name: 'Gallery',
+                    href: '/docs/styled/components/gallery'
+                }
+            ]
+        },
+        {
+            name: 'Misc',
+            children: [
+                {
+                    name: 'AnimateOnScroll',
+                    href: '/docs/styled/components/animateonscroll'
+                },
+                {
+                    name: 'Avatar',
+                    href: '/docs/styled/components/avatar'
+                },
+                {
+                    name: 'Inplace',
+                    href: '/docs/styled/components/inplace'
+                },
+                {
+                    name: 'Badge',
+                    href: '/docs/styled/components/badge'
+                },
+                {
+                    name: 'Chip',
+                    href: '/docs/styled/components/chip'
+                },
+                {
+                    name: 'Fluid',
+                    href: '/docs/styled/components/fluid'
+                },
+                {
+                    name: 'FocusTrap',
+                    href: '/docs/styled/components/focustrap'
+                },
+                {
+                    name: 'MeterGroup',
+                    href: '/docs/styled/components/metergroup'
+                },
+                {
+                    name: 'ProgressBar',
+                    href: '/docs/styled/components/progressbar'
+                },
+                {
+                    name: 'ProgressSpinner',
+                    href: '/docs/styled/components/progressspinner'
+                },
+                {
+                    name: 'Skeleton',
+                    href: '/docs/styled/components/skeleton'
+                },
+                {
+                    name: 'Tag',
+                    href: '/docs/styled/components/tag'
+                },
+                {
+                    name: 'Terminal',
+                    href: '/docs/styled/components/terminal'
                 }
             ]
         }
@@ -537,48 +529,42 @@ export const menu = {
             children: [
                 {
                     name: 'Vite',
-                    to: '/docs/tailwind/installation/vite'
+                    href: '/docs/tailwind/installation/vite'
                 },
                 {
                     name: 'Next.js',
-                    to: '/docs/tailwind/installation/nextjs'
+                    href: '/docs/tailwind/installation/nextjs'
                 }
             ]
         },
         {
-            name: 'Components',
-            icon: 'pi pi-compass',
+            name: 'Form',
             children: [
                 {
-                    name: 'Form',
-                    children: [
-                        {
-                            name: 'ColorPicker',
-                            to: '/docs/tailwind/components/colorpicker',
-                            badge: 'New'
-                        },
-                        {
-                            name: 'InputText',
-                            to: '/docs/tailwind/components/inputtext'
-                        },
-                        {
-                            name: 'Switch',
-                            to: '/docs/tailwind/components/switch'
-                        }
-                    ]
+                    name: 'ColorPicker',
+                    href: '/docs/tailwind/components/colorpicker',
+                    badge: 'New'
                 },
                 {
+                    name: 'InputText',
+                    href: '/docs/tailwind/components/inputtext'
+                },
+                {
+                    name: 'Switch',
+                    href: '/docs/tailwind/components/switch'
+                }
+            ]
+        },
+        {
+            name: 'Button',
+            children: [
+                {
                     name: 'Button',
-                    children: [
-                        {
-                            name: 'Button',
-                            to: '/docs/tailwind/components/button'
-                        },
-                        {
-                            name: 'SpeedDial',
-                            to: '/docs/tailwind/components/speeddial'
-                        }
-                    ]
+                    href: '/docs/tailwind/components/button'
+                },
+                {
+                    name: 'SpeedDial',
+                    href: '/docs/tailwind/components/speeddial'
                 }
             ]
         }

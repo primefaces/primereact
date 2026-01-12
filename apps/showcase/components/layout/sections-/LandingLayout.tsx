@@ -2,7 +2,7 @@
 import { useApp } from '@/hooks/useApp';
 import { blockBodyScroll, cn, unblockBodyScroll } from '@primeuix/utils';
 import * as React from 'react';
-import { AppFooter, AppNews, AppTopbar } from './sections';
+import { AppFooter, AppNews, AppTopbar } from '.';
 
 export default function LandingLayout({
     children

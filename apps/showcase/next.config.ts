@@ -70,17 +70,16 @@ const nextConfig: NextConfig = {
             .flat();
 
         return [
-            // {
-            //     source: '/docs/components',
-            //     destination: '/docs/gettingstarted/introduction',
-            //     permanent: true
-            // },
-            // {
-            //     source: '/docs',
-            //     destination: '/docs/gettingstarted/introduction',
-            //     permanent: true
-            // },
-            ...componentRedirects,
+            {
+                source: '/docs',
+                destination: '/docs/general/gettingstarted/introduction',
+                permanent: true
+            },
+            {
+                source: '/docs/general',
+                destination: '/docs',
+                permanent: true
+            },
             {
                 source: '/docs/styled',
                 destination: '/docs/styled/components/button',
@@ -90,7 +89,8 @@ const nextConfig: NextConfig = {
                 source: '/docs/tailwind',
                 destination: '/docs/tailwind/components/button',
                 permanent: true
-            }
+            },
+            ...componentRedirects
         ];
     },
     async rewrites() {

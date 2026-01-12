@@ -112,8 +112,8 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
                 } as React.CSSProperties
             }
             className={cn(
-                'max-h-[calc(90vh-300px)] overflow-y-auto pb-16 mb-2',
-                y < 5 ? '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_80px,rgb(0,0,0)_100%,_transparent_100%)]' : '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_80px,rgb(0,0,0)_90%,_transparent_100%)]'
+                ' overflow-y-auto pb-10 mb-6 max-h-[calc(90vh-424px)] h-full',
+                y < 5 ? '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_60px,rgb(0,0,0)_100%,_transparent_100%)]' : '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_60px,rgb(0,0,0)_90%,_transparent_100%)]'
             )}
         >
             <div
@@ -125,7 +125,7 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
                     {toc.map(
                         (item, index) =>
                             item.slug !== undefined && (
-                                <li key={item.slug + index} className="mb-1.25" style={{ paddingLeft: `${(item.level - 2) * 16}px` }}>
+                                <li key={item.slug + index} className="mb-1" style={{ paddingLeft: `${(item.level - 2) * 16}px` }}>
                                     <a
                                         onClick={() => onItemClick(item.slug)}
                                         id={'toc-' + item.slug}
@@ -153,24 +153,9 @@ export default function DocToc({ toc }: DocTocProps) {
     }
 
     return (
-        <div className="w-[236px] sticky top-24 lg:block hidden">
+        <aside className="w-(--sidebar-width) sticky h-full top-[calc(var(--sticky-offset-top)+var(--docs-layout-spacing))] lg:block hidden ">
+            <span className="uppercase font-mono text-xs text-color">On this page</span>
             <DocTocList toc={toc} />
-            {/* <DocTocAd /> */}
-        </div>
+        </aside>
     );
 }
-
-// function DocTocAd() {
-//     return (
-//         <div className="rounded-lg border border-surface-200 dark:border-surface-800 px-4 py-6 bg-surface-0 dark:bg-surface-900">
-//             <div className="text-2xl font-semibold flex flex-col gap-2 text-center">
-//                 <span className="leading-none">Build Faster </span>
-//                 <span className="leading-none  text-primary">Design Better</span>
-//             </div>
-//             <div className="text-center text-[14px] mt-4 text-surface-500">490+ ready to use UI blocks to build spectacular applications in no time</div>
-//             <Button as={'a'} href="https://primeblocks.org/" target="_blank" rounded variant="outlined" className="!mx-auto mt-4 !flex !w-fit">
-//                 Browse Components
-//             </Button>
-//         </div>
-//     );
-// }
