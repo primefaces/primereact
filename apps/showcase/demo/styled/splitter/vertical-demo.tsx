@@ -2,14 +2,12 @@ import { Splitter } from '@primereact/ui/splitter';
 
 export default function VerticalDemo() {
     return (
-        <div>
-            <Splitter.Root orientation="vertical" style={{ height: '300px' }}>
-                <Splitter.Panel className="flex items-center justify-center"> Panel 1 </Splitter.Panel>
-                <Splitter.Gutter>
-                    <Splitter.Thumb />
-                </Splitter.Gutter>
-                <Splitter.Panel className="flex items-center justify-center"> Panel 2 </Splitter.Panel>
-            </Splitter.Root>
-        </div>
+        <Splitter.Root orientation="vertical" className="h-60 max-w-lg mx-auto">
+            <Splitter.Panel className="flex items-center justify-center"> Panel 1 </Splitter.Panel>
+            <Splitter.Gutter>
+                <Splitter.Thumb />
+            </Splitter.Gutter>
+            <Splitter.Panel className="flex items-center justify-center"> Panel 2 </Splitter.Panel>
+        </Splitter.Root>
     );
 }

@@ -25,13 +25,14 @@ const CardDemo = () => {
                     <label
                         key={card.id}
                         htmlFor={card.id}
-                        className={`flex-1 flex items-start gap-2 p-4 rounded-md border  hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${selectedCard === card.id ? 'border-primary' : 'border-surface'}`}
+                        className={`flex-1 flex items-start gap-2 p-4 rounded-lg border hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${selectedCard === card.id ? 'border-primary' : 'border-surface'}`}
                     >
-                        <RadioButton.Root inputId={card.id} name="card" value={card.id} />
                         <div className="flex-1 flex flex-col gap-2">
                             <h5 className="font-medium leading-none">{card.name}</h5>
                             <p className="text-sm text-surface-500">{card.description}</p>
                         </div>
+
+                        <RadioButton.Root inputId={card.id} name="card" value={card.id} />
                     </label>
                 ))}
             </RadioButton.Group>

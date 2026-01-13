@@ -353,6 +353,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/card/basic-demo')),
                 'filePath': 'demo/styled/card/basic-demo.tsx',
             },
+            'with-form-demo': {
+                'component': React.lazy(() => import('demo/styled/card/with-form-demo')),
+                'filePath': 'demo/styled/card/with-form-demo.tsx',
+            },
         },
         'carousel': {
             'alignment-demo': {
@@ -684,10 +688,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'divider-pt': {
                 'component': React.lazy(() => import('demo/styled/divider/divider-pt')),
                 'filePath': 'demo/styled/divider/divider-pt.tsx',
-            },
-            'login-demo': {
-                'component': React.lazy(() => import('demo/styled/divider/login-demo')),
-                'filePath': 'demo/styled/divider/login-demo.tsx',
             },
             'type-demo': {
                 'component': React.lazy(() => import('demo/styled/divider/type-demo')),

@@ -1,47 +1,21 @@
 import { Button } from '@primereact/ui/button';
 import { Card } from '@primereact/ui/card';
-import { InputText } from '@primereact/ui/inputtext';
-import { Label } from '@primereact/ui/label';
-import Link from 'next/link';
 
 export default function BasicDemo() {
     return (
         <Card.Root className="max-w-sm mx-auto">
             <Card.Body className="space-y-4">
                 <Card.Caption>
-                    <Card.Title>Welcome back</Card.Title>
-                    <Card.Subtitle>Sign in with your email to continue.</Card.Subtitle>
+                    <Card.Title> Pro Subscription</Card.Title>
+                    <Card.Subtitle>Everything you need to scale your workflow</Card.Subtitle>
                 </Card.Caption>
                 <Card.Content>
-                    <form className="space-y-6">
-                        <div className="flex flex-col gap-2">
-                            <Label.Root htmlFor="email">Email</Label.Root>
-                            <InputText id="email" type="email" />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <div className="flex items-center justify-between">
-                                <Label.Root htmlFor="password" className="flex-1">
-                                    Password
-                                </Label.Root>
-                                <Button as={Link} href="/forgot-password" variant="link" className="p-0">
-                                    Forgot password?
-                                </Button>
-                            </div>
-                            <InputText id="password" type="password" />
-                        </div>
-                    </form>
+                    <p> Get unlimited access to all features, priority support, and advanced analytics to help your team grow faster.</p>
                 </Card.Content>
                 <Card.Footer className="flex flex-col gap-4">
-                    <Button>Login</Button>
-                    <Button severity="secondary" variant="outlined">
-                        Login with Google
-                    </Button>
-                    <div className="mt-2 text-center text-surface-500 text-sm">
-                        Don’t have an account?{' '}
-                        <Button as={Link} href="/signup" variant="link" className="p-0">
-                            Sign up
-                        </Button>
-                    </div>
+                    <span className="text-lg font-medium">$29 / month</span>
+
+                    <Button fluid>Upgrade</Button>
                 </Card.Footer>
             </Card.Body>
         </Card.Root>

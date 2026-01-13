@@ -2,40 +2,39 @@ import { Divider } from '@primereact/ui/divider';
 
 export default function BasicDemo() {
     return (
-        <div>
-            <p className="m-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+        <div className="max-w-md mx-auto">
+            <div className="flex">
+                <div>
+                    <div className="uppercase font-mono text-xs">Invoice No</div>
+                    <div className="font-light">0000123</div>
+                </div>
+                <Divider.Root orientation="vertical" />
+                <div>
+                    <div className="uppercase font-mono text-xs">Issued</div>
+                    <div className="font-light">01/01/2026</div>
+                </div>
+                <Divider.Root orientation="vertical" />
+                <div>
+                    <div className="uppercase font-mono text-xs">Due Date</div>
+                    <div className="font-light">02/02/2026</div>
+                </div>
+            </div>
 
             <Divider.Root />
 
-            <p className="m-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-                ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-                aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
-                velit, sed quia non numquam eius modi.
-            </p>
-
-            <Divider.Root />
-
-            <p className="m-0">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-                et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id
-                est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                eligendi optio cumque nihil impedit quo minus.
-            </p>
-
-            <Divider.Root />
-
-            <p className="m-0">
-                Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et
-                molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur
-                aut perferendis doloribus asperiores repellat. Donec vel volutpat ipsum. Integer nunc magna, posuere ut tincidunt eget, egestas vitae
-                sapien. Morbi dapibus luctus odio.
-            </p>
+            <div className="flex">
+                <div className="flex-1">
+                    <div className="uppercase font-mono text-xs">From</div>
+                    <div className="font-semibold text-2xl ">PrimeTek</div>
+                    <div className="w-full h-12 mt-4 bg-surface-100 dark:bg-surface-900 rounded-lg"></div>
+                </div>
+                <Divider.Root orientation="vertical" />
+                <div className="flex-1">
+                    <div className="uppercase font-mono text-xs">To</div>
+                    <div className="h-7 mt-2 rounded-lg bg-surface-100 dark:bg-surface-900"></div>
+                    <div className="w-full h-12 mt-2 bg-surface-100 dark:bg-surface-900 rounded-lg"></div>
+                </div>
+            </div>
         </div>
     );
 }

@@ -16,16 +16,18 @@ export default function BasicDemo() {
                 onValueChange={(e: RadioButtonGroupValueChangeEvent) => setIngredient(e.value as string)}
             >
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="ingredient1" name="pizza" value="cheese" />
-                    <Label.Root htmlFor="ingredient1">Cheese</Label.Root>
+                    <RadioButton.Root inputId="ingredient-strawberry" name="fruit" value="strawberry" />
+                    <Label.Root htmlFor="ingredient-strawberry">🍓 Strawberry</Label.Root>
                 </div>
+
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="ingredient2" name="pizza" value="mushroom" />
-                    <Label.Root htmlFor="ingredient2">Mushroom</Label.Root>
+                    <RadioButton.Root inputId="ingredient-banana" name="fruit" value="banana" />
+                    <Label.Root htmlFor="ingredient-banana">🍌 Banana</Label.Root>
                 </div>
+
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="ingredient3" name="pizza" value="pepper" />
-                    <Label.Root htmlFor="ingredient3">Mushroom</Label.Root>
+                    <RadioButton.Root inputId="ingredient-watermelon" name="fruit" value="watermelon" />
+                    <Label.Root htmlFor="ingredient-watermelon">🍉 Watermelon</Label.Root>
                 </div>
             </RadioButton.Group>
         </div>
