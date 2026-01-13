@@ -113,6 +113,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/animateonscroll/basic-demo')),
                 'filePath': 'demo/styled/animateonscroll/basic-demo.tsx',
             },
+            'enter-leave-demo': {
+                'component': React.lazy(() => import('demo/styled/animateonscroll/enter-leave-demo')),
+                'filePath': 'demo/styled/animateonscroll/enter-leave-demo.tsx',
+            },
         },
         'autocomplete': {
             'autocomplete-pt': {
