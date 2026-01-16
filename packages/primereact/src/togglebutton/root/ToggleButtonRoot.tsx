@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useToggleButton } from '@primereact/headless/togglebutton';
-import type { ToggleButtonChangeEvent } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonRootChangeEvent } from '@primereact/types/shared/togglebutton';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { ToggleButtonProvider } from '../ToggleButton.context';
@@ -20,11 +20,11 @@ export const ToggleButtonRoot = withComponent({
                   ...inProps,
                   pressed: group.isPressed(group.state.value, props.value),
                   defaultPressed: group.isPressed(group.props.defaultValue, props.value),
-                  onPressedChange: group.updateChange ? (event: ToggleButtonChangeEvent) => group.updateChange!({ ...event, value: props.value }) : undefined
+                  onPressedChange: group.updateChange ? (event: ToggleButtonRootChangeEvent) => group.updateChange!({ ...event, value: props.value }) : undefined
               }
             : {
                   ...inProps,
-                  onPressedChange: props.onPressedChange ? (event: ToggleButtonChangeEvent) => props.onPressedChange!({ ...event, value: props.value }) : undefined
+                  onPressedChange: props.onPressedChange ? (event: ToggleButtonRootChangeEvent) => props.onPressedChange!({ ...event, value: props.value }) : undefined
               };
 
         const togglebutton = useToggleButton(useToggleButtonProps);

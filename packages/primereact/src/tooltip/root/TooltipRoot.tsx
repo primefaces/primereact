@@ -2,6 +2,7 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useTooltip } from '@primereact/headless/tooltip';
 import * as React from 'react';
+import type { TooltipRootInstance } from '@primereact/types/shared/tooltip';
 import { TooltipProvider } from '../Tooltip.context';
 import { defaultRootProps } from './TooltipRoot.props';
 
@@ -17,7 +18,7 @@ export const TooltipRoot = withComponent({
         const { props } = instance;
 
         return (
-            <TooltipProvider value={instance}>
+            <TooltipProvider value={instance as unknown as TooltipRootInstance}>
                 <Component
                     as={React.Fragment}
                     // @ts-expect-error - Temporary fix for type compatibility
