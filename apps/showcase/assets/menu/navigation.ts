@@ -273,6 +273,10 @@ export const menu = {
                     href: '/docs/styled/components/rating'
                 },
                 {
+                    name: 'Select',
+                    href: '/docs/styled/components/select'
+                },
+                {
                     name: 'Slider',
                     href: '/docs/styled/components/slider'
                 },

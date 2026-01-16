@@ -1552,6 +1552,64 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'filePath': 'demo/styled/scrollarea/scrollarea-pt.tsx',
             },
         },
+        'select': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/select/basic-demo')),
+                'filePath': 'demo/styled/select/basic-demo.tsx',
+            },
+            'checkmark-demo': {
+                'component': React.lazy(() => import('demo/styled/select/checkmark-demo')),
+                'filePath': 'demo/styled/select/checkmark-demo.tsx',
+            },
+            'clear-icon-demo': {
+                'component': React.lazy(() => import('demo/styled/select/clear-icon-demo')),
+                'filePath': 'demo/styled/select/clear-icon-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/styled/select/disabled-demo')),
+                'filePath': 'demo/styled/select/disabled-demo.tsx',
+            },
+            'filled-demo': {
+                'component': React.lazy(() => import('demo/styled/select/filled-demo')),
+                'filePath': 'demo/styled/select/filled-demo.tsx',
+            },
+            'filter-demo': {
+                'component': React.lazy(() => import('demo/styled/select/filter-demo')),
+                'filePath': 'demo/styled/select/filter-demo.tsx',
+            },
+            'float-label-demo': {
+                'component': React.lazy(() => import('demo/styled/select/float-label-demo')),
+                'filePath': 'demo/styled/select/float-label-demo.tsx',
+            },
+            'fluid-demo': {
+                'component': React.lazy(() => import('demo/styled/select/fluid-demo')),
+                'filePath': 'demo/styled/select/fluid-demo.tsx',
+            },
+            'group-demo': {
+                'component': React.lazy(() => import('demo/styled/select/group-demo')),
+                'filePath': 'demo/styled/select/group-demo.tsx',
+            },
+            'ifta-label-demo': {
+                'component': React.lazy(() => import('demo/styled/select/ifta-label-demo')),
+                'filePath': 'demo/styled/select/ifta-label-demo.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/styled/select/invalid-demo')),
+                'filePath': 'demo/styled/select/invalid-demo.tsx',
+            },
+            'option-demo': {
+                'component': React.lazy(() => import('demo/styled/select/option-demo')),
+                'filePath': 'demo/styled/select/option-demo.tsx',
+            },
+            'select-pt': {
+                'component': React.lazy(() => import('demo/styled/select/select-pt')),
+                'filePath': 'demo/styled/select/select-pt.tsx',
+            },
+            'sizes-demo': {
+                'component': React.lazy(() => import('demo/styled/select/sizes-demo')),
+                'filePath': 'demo/styled/select/sizes-demo.tsx',
+            },
+        },
         'skeleton': {
             'basic-demo': {
                 'component': React.lazy(() => import('demo/styled/skeleton/basic-demo')),

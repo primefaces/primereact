@@ -1,0 +1,106 @@
+---
+title: Select
+description: Select is used to choose an item from a collection of options.
+component: select
+---
+
+## Usage
+
+```tsx
+import { Select } from 'primereact/select';
+```
+
+```tsx
+<Select.Root>
+    <Select.Trigger />
+    <Select.Dropdown />
+    <Select.ClearIcon />
+    <Select.Portal>
+        <Select.Header />
+        <Select.Filter />
+        <Select.List>
+            <Select.Options />
+        </Select.List>
+        <Select.Footer />
+        <Select.Empty />
+    </Select.Portal>
+</Select.Root>
+```
+
+## Examples
+
+### Basic
+
+Select is used as a controlled component with `value` and `onValueChange` properties along with an `options` collection. Label and value of an option are defined with the `optionLabel` and `optionValue` properties respectively.
+
+<DocDemoViewer name="select:basic-demo" />
+
+### Option
+
+Options can be defined manually using `Select.Option` component for custom rendering. Each option requires a `uKey` or `index` prop for identification. The `optionKey` property on the Select specifies which field from the data corresponds to the option keys.
+
+<DocDemoViewer name="select:option-demo" />
+
+### Group
+
+Options can be organized into groups with headers. Use `optionGroupLabel` to specify the label field for groups and `optionGroupChildren` to define the field that contains the items in each group.
+
+<DocDemoViewer name="select:group-demo" />
+
+### Filter
+
+<DocDemoViewer name="select:filter-demo" />
+
+### Float Label
+
+FloatLabel visually integrates a label with its form element. Visit [FloatLabel](/docs/components/floatlabel) documentation for more information.
+
+<DocDemoViewer name="select:float-label-demo" />
+
+### Ifta Label
+
+IftaLabel is used to create infield top aligned labels. Visit [IftaLabel](/docs/components/iftalabel) documentation for more information.
+
+<DocDemoViewer name="select:ifta-label-demo" />
+
+### Clear Icon
+
+When `Select.ClearIcon` component is used, a clear icon is added to reset the Select.
+
+<DocDemoViewer name="select:clear-icon-demo" />
+
+### Checkmark
+
+A checkmark icon is displayed next to the selected option when `checkmark` property is enabled.
+
+<DocDemoViewer name="select:checkmark-demo" />
+
+### Sizes
+
+Select provides `small` and `large` sizes as alternatives to the base.
+
+<DocDemoViewer name="select:sizes-demo" />
+
+### Fluid
+
+The fluid prop makes the component take up the full width of its container when set to true.
+
+<DocDemoViewer name="select:fluid-demo" />
+
+### Filled
+
+Specify the `filled` property to display the component with a higher visual emphasis than the default outlined style.
+
+<DocDemoViewer name="select:filled-demo" />
+
+### Disabled
+
+Use the `disabled` property to disable a select.
+
+<DocDemoViewer name="select:disabled-demo" />
+
+### Invalid
+
+Specify the `invalid` property to display the component with a red border.
+
+<DocDemoViewer name="select:invalid-demo" />
