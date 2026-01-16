@@ -24,7 +24,7 @@ export const ListboxSelection = withComponent({
         const { checkmark, checkbox } = listbox?.props || {};
 
         const rootProps = mergeProps(
-            omit(props, 'as'),
+            omit(props, 'as', 'asChild', 'pIf', 'ptOptions'),
             {
                 className: listbox?.cx('selection')
             },
