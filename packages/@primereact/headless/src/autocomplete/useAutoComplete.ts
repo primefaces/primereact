@@ -33,7 +33,6 @@ export const useAutoComplete = withHeadless({
 
         const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
         const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
-        const overlayRef = React.useRef<HTMLDivElement | null>(null);
         const searchTimeout = React.useRef<NodeJS.Timeout | null>(null);
         const focusOnShow = React.useRef<boolean>(false);
 
@@ -464,7 +463,6 @@ export const useAutoComplete = withHeadless({
             // refs
             inputRef,
             portalRef,
-            overlayRef,
             // methods
             onChange,
             onFocus,

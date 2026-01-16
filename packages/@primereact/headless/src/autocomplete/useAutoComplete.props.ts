@@ -23,8 +23,6 @@ export const defaultProps: useAutoCompleteProps = {
     forceSelection: false,
     completeOnFocus: false,
     dropdownMode: 'blank',
-    ariaLabel: undefined,
-    ariaLabelledBy: undefined,
     onValueChange: undefined,
     onInputValueChange: undefined,
     onComplete: undefined

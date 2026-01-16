@@ -10,7 +10,6 @@ export const usePassword = withHeadless({
     defaultProps,
     setup({ props, elementRef }) {
         const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
-        const overlayRef = React.useRef<HTMLDivElement | null>(null);
         const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
         const [valueState, setValueState] = useControlledState({
             value: props.value,
@@ -178,7 +177,6 @@ export const usePassword = withHeadless({
             state,
             // refs
             inputRef,
-            overlayRef,
             portalRef,
             // methods
             testRequirement,

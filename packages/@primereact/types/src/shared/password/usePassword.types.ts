@@ -151,10 +151,6 @@ export interface usePasswordExposes {
      */
     inputRef: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
     /**
-     * Overlay ref for accessing the overlay element.
-     */
-    overlayRef: React.RefObject<HTMLDivElement | null>;
-    /**
      * Portal ref for accessing the portal container element.
      */
     portalRef: React.RefObject<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>;

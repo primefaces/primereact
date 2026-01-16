@@ -185,14 +185,6 @@ export interface useAutoCompleteProps {
      */
     dropdownMode?: 'blank' | 'current';
     /**
-     * Used to define a string that labels the input element.
-     */
-    ariaLabel?: string;
-    /**
-     * Identifier of the underlying input element.
-     */
-    ariaLabelledBy?: string;
-    /**
      * Callback to invoke when the selected value changes.
      * @param {useAutoCompleteValueChangeEvent} event - Custom change event.
      */
@@ -263,10 +255,6 @@ export interface useAutoCompleteExposes {
      * Reference to the portal element.
      */
     portalRef: React.RefObject<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>;
-    /**
-     * Reference to the overlay element.
-     */
-    overlayRef: React.RefObject<HTMLDivElement | null>;
     /**
      * Callback when the input value changes.
      * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
