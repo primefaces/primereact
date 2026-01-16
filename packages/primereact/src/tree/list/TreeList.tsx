@@ -1,6 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import type { CheckboxRootChangeEvent } from '@primereact/types/shared/checkbox';
 import type { TreeNode as TreeNodeType, TreeNodeValueChangeEvent } from '@primereact/types/shared/tree';
 import { mergeProps, resolve } from '@primeuix/utils';
 import { Checkbox } from 'primereact/checkbox';
@@ -64,11 +64,11 @@ export const TreeList = withComponent({
                         <TreeContent>
                             <TreeToggle />
                             {tree?.props.selectionMode === 'checkbox' && (
-                                <Checkbox
+                                <Checkbox.Root
                                     className={tree?.cx('pcCheckbox')}
                                     checked={isChecked}
                                     indeterminate={isPartialChecked}
-                                    onCheckedChange={(event: CheckboxChangeEvent) => tree?.onCheckboxChange(event.originalEvent as React.ChangeEvent<HTMLInputElement>, node)}
+                                    onCheckedChange={(event: CheckboxRootChangeEvent) => tree?.onCheckboxChange(event.originalEvent as React.ChangeEvent<HTMLInputElement>, node)}
                                     tabIndex={-1}
                                     pt={tree?.ptm('pcCheckbox')}
                                 />
