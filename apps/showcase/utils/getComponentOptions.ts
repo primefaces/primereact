@@ -216,8 +216,16 @@ const setEventsData = (moduleName: string, events: EventDefinition[]) => {
 };
 
 export const getPTOptions = (name: string): { data: unknown[]; description?: string } => {
-    const { props, description } = typedAPIDocs[name.toLowerCase()]?.interfaces?.values[`${name}PassThrough`] as PropsDefinition;
+    const ptDefinition = typedAPIDocs[name.toLowerCase()]?.interfaces?.values[`${name}PassThrough`] as PropsDefinition | undefined;
 
+    if (!ptDefinition) {
+        return {
+            data: [],
+            description: undefined
+        };
+    }
+
+    const { props, description } = ptDefinition;
     const data = [];
 
     for (const [, prop] of props.entries()) {

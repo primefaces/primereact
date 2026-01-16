@@ -129,10 +129,12 @@ const getTypeDoc = async (typeDocOptions) => {
                             const event_props_description = event.comment && event.comment.summary.map((s) => s.text || '').join(' ');
                             const values = (event.type && event.type.toString()) || '';
 
-                            doc[name]['types'].values[event.name] = {
-                                values,
-                                description: event_props_description
-                            };
+                            if (doc[name]['types']) {
+                                doc[name]['types'].values[event.name] = {
+                                    values,
+                                    description: event_props_description
+                                };
+                            }
                         });
                     }
 
