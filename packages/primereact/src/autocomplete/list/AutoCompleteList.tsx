@@ -42,7 +42,6 @@ export const AutoCompleteList = withComponent({
             ptmi('root')
         );
 
-        // @ts-expect-error: Listbox.Root expects a type prop, but we are using it as a root.
-        return <Component ref={autocomplete?.listRef} as={as} instance={instance} attrs={rootProps} children={props.children ?? <Listbox.Options />} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children ?? <Listbox.Options />} />;
     }
 });

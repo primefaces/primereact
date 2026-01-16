@@ -32,8 +32,6 @@ export const AutoCompleteInput = withComponent({
                 fluid: autocomplete?.props.fluid,
                 required: autocomplete?.props.required,
                 disabled: autocomplete?.props.disabled,
-                'aria-label': autocomplete?.props.ariaLabel,
-                'aria-labelledby': autocomplete?.props.ariaLabelledBy,
                 'aria-autocomplete': 'list',
                 'aria-haspopup': 'listbox',
                 'aria-expanded': autocomplete?.state.overlayVisible,
@@ -42,12 +40,13 @@ export const AutoCompleteInput = withComponent({
                 onChange: autocomplete?.onChange,
                 onFocus: autocomplete?.onFocus,
                 onBlur: autocomplete?.onBlur,
-                onKeyDown: autocomplete?.onKeyDown
+                onKeyDown: autocomplete?.onKeyDown,
+                ref: autocomplete?.inputRef
             },
             autocomplete?.ptm('pcInputText'),
             ptmi('root')
         );
 
-        return <Component ref={autocomplete?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

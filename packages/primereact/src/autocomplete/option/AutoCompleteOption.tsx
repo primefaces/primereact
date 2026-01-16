@@ -39,10 +39,7 @@ export const AutoCompleteOption = withComponent({
         const rootProps = mergeProps(
             restProps,
             {
-                className: autocomplete?.cx('option'),
-                index: props.index,
-                uKey: props.uKey,
-                group: props.group
+                className: autocomplete?.cx('option')
             },
             autocomplete?.ptm('option'),
             ptmi('root')

@@ -34,11 +34,7 @@ export const AutoCompletePortal = withComponent({
                 ptmi('panel')
             );
 
-            return (
-                <div ref={autocomplete?.overlayRef} {...panelProps}>
-                    {resolve(props.children, instance)}
-                </div>
-            );
+            return <div {...panelProps}>{resolve(props.children, instance)}</div>;
         };
 
         return (
