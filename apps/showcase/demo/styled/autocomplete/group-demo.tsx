@@ -3,51 +3,51 @@ import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocom
 import { AutoComplete } from '@primereact/ui/autocomplete';
 import * as React from 'react';
 
-interface City {
+interface Technology {
     label: string;
     value: string;
 }
 
-interface CountryGroup {
+interface TechCategory {
     label: string;
     code: string;
-    items: City[];
+    items: Technology[];
 }
 
-const groupedCities: CountryGroup[] = [
+const techStack: TechCategory[] = [
     {
-        label: 'Germany',
-        code: 'DE',
+        label: 'Frontend',
+        code: 'FE',
         items: [
-            { label: 'Berlin', value: 'Berlin' },
-            { label: 'Frankfurt', value: 'Frankfurt' },
-            { label: 'Hamburg', value: 'Hamburg' },
-            { label: 'Munich', value: 'Munich' }
+            { label: 'React', value: 'react' },
+            { label: 'Vue', value: 'vue' },
+            { label: 'Angular', value: 'angular' },
+            { label: 'Svelte', value: 'svelte' }
         ]
     },
     {
-        label: 'USA',
-        code: 'US',
+        label: 'Backend',
+        code: 'BE',
         items: [
-            { label: 'Chicago', value: 'Chicago' },
-            { label: 'Los Angeles', value: 'Los Angeles' },
-            { label: 'New York', value: 'New York' },
-            { label: 'San Francisco', value: 'San Francisco' }
+            { label: 'Node.js', value: 'nodejs' },
+            { label: 'Python', value: 'python' },
+            { label: 'Java', value: 'java' },
+            { label: 'Go', value: 'go' }
         ]
     },
     {
-        label: 'Japan',
-        code: 'JP',
+        label: 'Database',
+        code: 'DB',
         items: [
-            { label: 'Kyoto', value: 'Kyoto' },
-            { label: 'Osaka', value: 'Osaka' },
-            { label: 'Tokyo', value: 'Tokyo' },
-            { label: 'Yokohama', value: 'Yokohama' }
+            { label: 'PostgreSQL', value: 'postgresql' },
+            { label: 'MongoDB', value: 'mongodb' },
+            { label: 'Redis', value: 'redis' },
+            { label: 'MySQL', value: 'mysql' }
         ]
     }
 ];
 
-const filterItems = (items: City[], query: string): City[] => {
+const filterItems = (items: Technology[], query: string): Technology[] => {
     if (!query) return items;
 
     const normalizedQuery = query.toLowerCase();
@@ -56,27 +56,27 @@ const filterItems = (items: City[], query: string): City[] => {
 };
 
 export default function GroupDemo() {
-    const [filteredCities, setFilteredCities] = React.useState<CountryGroup[]>([]);
+    const [filteredTech, setFilteredTech] = React.useState<TechCategory[]>([]);
 
     const search = (event: AutoCompleteCompleteEvent) => {
         const query = event.query;
-        const _filteredCities: CountryGroup[] = [];
+        const _filteredTech: TechCategory[] = [];
 
-        for (const country of groupedCities) {
-            const filteredItems = filterItems(country.items, query);
+        for (const category of techStack) {
+            const filteredItems = filterItems(category.items, query);
 
             if (filteredItems.length) {
-                _filteredCities.push({ ...country, items: filteredItems });
+                _filteredTech.push({ ...category, items: filteredItems });
             }
         }
 
-        setFilteredCities(_filteredCities);
+        setFilteredTech(_filteredTech);
     };
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={filteredCities} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" onComplete={search}>
-                <AutoComplete.Input placeholder="Hint: type 'a'" />
+            <AutoComplete.Root options={filteredTech} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" onComplete={search}>
+                <AutoComplete.Input placeholder="Search technologies..." />
 
                 <AutoComplete.Portal>
                     <AutoComplete.List>

@@ -11,16 +11,14 @@ export default function AutoCompletePTDemo() {
     };
 
     return (
-        <div className="flex justify-center">
-            <AutoComplete.Root className="border border-surface-300" options={items} onComplete={search}>
-                <AutoComplete.Input />
+        <AutoComplete.Root options={items} onComplete={search}>
+            <AutoComplete.Input />
 
-                <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
-                </AutoComplete.Portal>
-            </AutoComplete.Root>
-        </div>
+            <AutoComplete.Portal>
+                <AutoComplete.List>
+                    <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                </AutoComplete.List>
+            </AutoComplete.Portal>
+        </AutoComplete.Root>
     );
 }
