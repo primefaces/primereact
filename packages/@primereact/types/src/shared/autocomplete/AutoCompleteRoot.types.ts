@@ -10,8 +10,67 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps } from '..';
-import type { AutoCompletePassThrough } from './AutoComplete.types';
 import type { useAutoCompleteCompleteEvent, useAutoCompleteExposes, useAutoCompleteInputValueChangeEvent, useAutoCompleteProps, useAutoCompleteState, useAutoCompleteValueChangeEvent } from './useAutoComplete.types';
+import type { PassThroughType } from '..';
+
+/**
+ * Defines passthrough(pt) options type in AutoComplete component.
+ */
+export type AutoCompleteRootPassThroughType<E> = PassThroughType<AutoCompleteRootInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of AutoComplete component.
+ */
+export interface AutoCompleteRootPassThrough {
+    /**
+     * Used to pass attributes to the root's DOM element.
+     */
+    root?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the pcInputText's DOM element.
+     */
+    pcInputText?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the portal's DOM element.
+     */
+    portal?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the panel's DOM element.
+     */
+    panel?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the pcListbox's DOM element.
+     */
+    pcListbox?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the option's DOM element.
+     */
+    option?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to pass attributes to the button's DOM element.
+     */
+    button?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Used to pass attributes to the clearIcon's DOM element.
+     */
+    clearIcon?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the selection's DOM element.
+     */
+    selection?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the header's DOM element.
+     */
+    header?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the footer's DOM element.
+     */
+    footer?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the empty's DOM element.
+     */
+    empty?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Event fired when the autocomplete's value changes.
@@ -53,7 +112,7 @@ export interface AutoCompleteCompleteEvent extends useAutoCompleteCompleteEvent 
 /**
  * Defines valid properties in AutoComplete component.
  */
-export interface AutoCompleteRootProps extends BaseComponentProps<AutoCompleteRootInstance, Omit<useAutoCompleteProps, 'onValueChange' | 'onInputValueChange' | 'onComplete'>, AutoCompletePassThrough> {
+export interface AutoCompleteRootProps extends BaseComponentProps<AutoCompleteRootInstance, Omit<useAutoCompleteProps, 'onValueChange' | 'onInputValueChange' | 'onComplete'>, AutoCompleteRootPassThrough> {
     /**
      * When present, it specifies that the component should have invalid state style.
      */
@@ -126,8 +185,3 @@ export interface AutoCompleteRootExposes extends useAutoCompleteExposes {}
  * Instance of AutoCompleteRoot component.
  */
 export type AutoCompleteRootInstance = ComponentInstance<AutoCompleteRootProps, AutoCompleteRootState, AutoCompleteRootExposes>;
-
-/**
- * Instance of AutoComplete component.
- */
-export type AutoCompleteInstance = ComponentInstance<AutoCompleteRootProps, AutoCompleteRootState, AutoCompleteRootExposes>;

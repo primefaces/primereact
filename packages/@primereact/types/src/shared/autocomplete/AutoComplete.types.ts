@@ -9,68 +9,6 @@
  *
  */
 
-import type { PassThroughType } from '..';
-import type { AutoCompleteRootInstance } from './AutoCompleteRoot.types';
-
-/**
- * Defines passthrough(pt) options type in AutoComplete component.
- */
-export type AutoCompletePassThroughType<E> = PassThroughType<AutoCompleteRootInstance, E>;
-
-/**
- * Defines passthrough(pt) options of AutoComplete component.
- */
-export interface AutoCompletePassThrough {
-    /**
-     * Used to pass attributes to the root's DOM element.
-     */
-    root?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the pcInputText's DOM element.
-     */
-    pcInputText?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Used to pass attributes to the portal's DOM element.
-     */
-    portal?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the panel's DOM element.
-     */
-    panel?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the pcListbox's DOM element.
-     */
-    pcListbox?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the option's DOM element.
-     */
-    option?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the button's DOM element.
-     */
-    button?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the clearIcon's DOM element.
-     */
-    clearIcon?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Used to pass attributes to the selection's DOM element.
-     */
-    selection?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the header's DOM element.
-     */
-    header?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the footer's DOM element.
-     */
-    footer?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the empty's DOM element.
-     */
-    empty?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
 /**
  * Defines the CSS class names used in the AutoComplete component.
  */
