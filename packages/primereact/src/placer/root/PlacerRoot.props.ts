@@ -1,7 +1,7 @@
 import * as HeadlessPlacer from '@primereact/headless/placer';
-import type { PlacerRootProps } from '@primereact/types/shared/placer';
+import type { PlacerProps } from '@primereact/types/shared/placer';
 
-export const defaultRootProps: PlacerRootProps = {
+export const defaultRootProps: PlacerProps = {
     ...HeadlessPlacer.defaultProps,
     as: 'div'
 };

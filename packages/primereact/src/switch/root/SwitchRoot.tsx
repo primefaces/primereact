@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useSwitch } from '@primereact/headless/switch';
-import { SwitchChangeEvent } from '@primereact/types/shared/switch';
+import { SwitchRootChangeEvent } from '@primereact/types/shared/switch';
 import { cn, mergeProps, resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { SwitchProvider } from '../Switch.context';
@@ -15,7 +15,7 @@ export const SwitchRoot = withComponent({
 
         const useSwitchButtonProps = {
             ...inProps,
-            onCheckedChange: props.onCheckedChange ? (event: SwitchChangeEvent) => props.onCheckedChange!({ ...event, value: props.checked }) : undefined
+            onCheckedChange: props.onCheckedChange ? (event: SwitchRootChangeEvent) => props.onCheckedChange!({ ...event, value: props.checked }) : undefined
         };
 
         const switchHook = useSwitch(useSwitchButtonProps);

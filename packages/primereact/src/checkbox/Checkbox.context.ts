@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { CheckboxInstance } from '@primereact/types/shared/checkbox';
+import type { CheckboxRootInstance } from '@primereact/types/shared/checkbox';
 
-export const [CheckboxProvider, useCheckboxContext] = createOptionalContext<CheckboxInstance>();
+export const [CheckboxProvider, useCheckboxContext] = createOptionalContext<CheckboxRootInstance>();

@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { TimelineInstance } from '@primereact/types/shared/timeline';
+import type { TimelineRootInstance } from '@primereact/types/shared/timeline';
 
-export const [TimelineProvider, useTimelineContext] = createOptionalContext<TimelineInstance>();
+export const [TimelineProvider, useTimelineContext] = createOptionalContext<TimelineRootInstance>();

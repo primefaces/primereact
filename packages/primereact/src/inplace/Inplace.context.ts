@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { InplaceInstance } from '@primereact/types/shared/inplace';
+import type { InplaceRootInstance } from '@primereact/types/shared/inplace';
 
-export const [InplaceProvider, useInplaceContext] = createOptionalContext<InplaceInstance>();
+export const [InplaceProvider, useInplaceContext] = createOptionalContext<InplaceRootInstance>();

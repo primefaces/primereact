@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { DatePickerInstance } from '@primereact/types/shared/datepicker';
+import type { DatePickerRootInstance } from '@primereact/types/shared/datepicker';
 
-export const [DatePickerProvider, useDatePickerContext] = createOptionalContext<DatePickerInstance>();
+export const [DatePickerProvider, useDatePickerContext] = createOptionalContext<DatePickerRootInstance>();

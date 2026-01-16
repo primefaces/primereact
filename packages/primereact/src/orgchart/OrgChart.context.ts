@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { OrgChartInstance } from '@primereact/types/shared/orgchart';
+import type { OrgChartRootInstance } from '@primereact/types/shared/orgchart';
 
-export const [OrgChartProvider, useOrgChartContext] = createOptionalContext<OrgChartInstance>();
+export const [OrgChartProvider, useOrgChartContext] = createOptionalContext<OrgChartRootInstance>();

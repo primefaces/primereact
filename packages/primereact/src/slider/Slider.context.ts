@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { SliderInstance } from '@primereact/types/shared/slider';
+import type { SliderRootInstance } from '@primereact/types/shared/slider';
 
-export const [SliderProvider, useSliderContext] = createOptionalContext<SliderInstance>();
+export const [SliderProvider, useSliderContext] = createOptionalContext<SliderRootInstance>();

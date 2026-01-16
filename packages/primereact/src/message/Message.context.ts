@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { MessageInstance } from '@primereact/types/shared/message';
+import type { MessageRootInstance } from '@primereact/types/shared/message';
 
-export const [MessageProvider, useMessageContext] = createOptionalContext<MessageInstance>();
+export const [MessageProvider, useMessageContext] = createOptionalContext<MessageRootInstance>();

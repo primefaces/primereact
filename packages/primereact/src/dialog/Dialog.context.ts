@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { DialogInstance } from '@primereact/types/shared/dialog';
+import type { DialogRootInstance } from '@primereact/types/shared/dialog';
 
-export const [DialogProvider, useDialogContext] = createOptionalContext<DialogInstance>();
+export const [DialogProvider, useDialogContext] = createOptionalContext<DialogRootInstance>();

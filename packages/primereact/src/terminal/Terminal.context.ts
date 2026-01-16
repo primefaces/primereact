@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { TerminalInstance } from '@primereact/types/shared/terminal';
+import type { TerminalRootInstance } from '@primereact/types/shared/terminal';
 
-export const [TerminalProvider, useTerminalContext] = createOptionalContext<TerminalInstance>();
+export const [TerminalProvider, useTerminalContext] = createOptionalContext<TerminalRootInstance>();

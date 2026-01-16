@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { RadioButtonInstance } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonRootInstance } from '@primereact/types/shared/radiobutton';
 
-export const [RadioButtonProvider, useRadioButtonContext] = createOptionalContext<RadioButtonInstance>();
+export const [RadioButtonProvider, useRadioButtonContext] = createOptionalContext<RadioButtonRootInstance>();

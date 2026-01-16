@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ListboxInstance } from '@primereact/types/shared/listbox';
+import type { ListboxRootInstance } from '@primereact/types/shared/listbox';
 
-export const [ListboxProvider, useListboxContext] = createOptionalContext<ListboxInstance>();
+export const [ListboxProvider, useListboxContext] = createOptionalContext<ListboxRootInstance>();

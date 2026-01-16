@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ToggleButtonInstance } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonRootInstance } from '@primereact/types/shared/togglebutton';
 
-export const [ToggleButtonProvider, useToggleButtonContext] = createOptionalContext<ToggleButtonInstance>();
+export const [ToggleButtonProvider, useToggleButtonContext] = createOptionalContext<ToggleButtonRootInstance>();

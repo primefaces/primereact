@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ToolbarInstance } from '@primereact/types/shared/toolbar';
+import type { ToolbarRootInstance } from '@primereact/types/shared/toolbar';
 
-export const [ToolbarProvider, useToolbarContext] = createOptionalContext<ToolbarInstance>();
+export const [ToolbarProvider, useToolbarContext] = createOptionalContext<ToolbarRootInstance>();

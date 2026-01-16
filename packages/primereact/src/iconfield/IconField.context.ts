@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { IconFieldInstance } from '@primereact/types/shared/iconfield';
+import type { IconFieldRootInstance } from '@primereact/types/shared/iconfield';
 
-export const [IconFieldProvider, useIconFieldContext] = createOptionalContext<IconFieldInstance>();
+export const [IconFieldProvider, useIconFieldContext] = createOptionalContext<IconFieldRootInstance>();

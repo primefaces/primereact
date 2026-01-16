@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ChipInstance } from '@primereact/types/shared/chip';
+import type { ChipRootInstance } from '@primereact/types/shared/chip';
 
-export const [ChipProvider, useChipContext] = createOptionalContext<ChipInstance>();
+export const [ChipProvider, useChipContext] = createOptionalContext<ChipRootInstance>();

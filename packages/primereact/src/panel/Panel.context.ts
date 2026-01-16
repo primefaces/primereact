@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { PanelInstance } from '@primereact/types/shared/panel';
+import type { PanelRootInstance } from '@primereact/types/shared/panel';
 
-export const [PanelProvider, usePanelContext] = createOptionalContext<PanelInstance>();
+export const [PanelProvider, usePanelContext] = createOptionalContext<PanelRootInstance>();

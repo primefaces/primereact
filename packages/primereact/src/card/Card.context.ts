@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { CardInstance } from '@primereact/types/shared/card';
+import type { CardRootInstance } from '@primereact/types/shared/card';
 
-export const [CardProvider, useCardContext] = createOptionalContext<CardInstance>();
+export const [CardProvider, useCardContext] = createOptionalContext<CardRootInstance>();

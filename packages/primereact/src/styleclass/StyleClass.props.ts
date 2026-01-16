@@ -1,6 +1,6 @@
 import * as HeadlessStyleClass from '@primereact/headless/styleclass';
-import type { StyleClassRootProps } from '@primereact/types/shared/styleclass';
+import type { StyleClassProps } from '@primereact/types/shared/styleclass';
 
-export const defaultRootProps: StyleClassRootProps = {
+export const defaultRootProps: StyleClassProps = {
     ...HeadlessStyleClass.defaultProps
 };

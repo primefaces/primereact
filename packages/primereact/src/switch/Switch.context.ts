@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { SwitchInstance } from '@primereact/types/shared/switch';
+import type { SwitchRootInstance } from '@primereact/types/shared/switch';
 
-export const [SwitchProvider, useSwitchContext] = createOptionalContext<SwitchInstance>();
+export const [SwitchProvider, useSwitchContext] = createOptionalContext<SwitchRootInstance>();

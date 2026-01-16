@@ -4,6 +4,7 @@ import { useOrgChart } from '@primereact/headless/orgchart';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { OrgChartProvider } from '../OrgChart.context';
+import { OrgChartSubtree } from '../subtree/OrgChartSubtree';
 import { defaultRootProps } from './OrgChartRoot.props';
 
 export const OrgChartRoot = withComponent({

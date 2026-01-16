@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
-import type { RadioButtonChangeEvent } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonRootChangeEvent } from '@primereact/types/shared/radiobutton';
 import { cn, equals, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { RadioButtonProvider } from '../RadioButton.context';
@@ -20,11 +20,11 @@ export const RadioButtonRoot = withComponent({
                   ...inProps,
                   checked: equals(group.props.value, props.value),
                   defaultChecked: equals(group.props.defaultValue, props.value),
-                  onCheckedChange: React.useCallback((event: RadioButtonChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
+                  onCheckedChange: React.useCallback((event: RadioButtonRootChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
               }
             : {
                   ...inProps,
-                  onCheckedChange: React.useCallback((event: RadioButtonChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }), [props.onCheckedChange])
+                  onCheckedChange: React.useCallback((event: RadioButtonRootChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }), [props.onCheckedChange])
               };
 
         const radioButton = useRadioButton(useRadioButtonProps);

@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { DividerInstance } from '@primereact/types/shared/divider';
+import type { DividerRootInstance } from '@primereact/types/shared/divider';
 
-export const [DividerProvider, useDividerContext] = createOptionalContext<DividerInstance>();
+export const [DividerProvider, useDividerContext] = createOptionalContext<DividerRootInstance>();

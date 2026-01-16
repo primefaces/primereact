@@ -1,7 +1,7 @@
-import type { MenuInstance, MenuPortalInstance } from '@primereact/types/shared/menu';
+import type { MenuRootInstance, MenuPortalInstance } from '@primereact/types/shared/menu';
 import * as React from 'react';
 
-export const MenuItemHandlers = (params: { isDisabled: boolean; itemId: string | undefined; itemRef: React.RefObject<HTMLElement | null>; menu: MenuInstance | undefined; portal: MenuPortalInstance | undefined }) => {
+export const MenuItemHandlers = (params: { isDisabled: boolean; itemId: string | undefined; itemRef: React.RefObject<HTMLElement | null>; menu: MenuRootInstance | undefined; portal: MenuPortalInstance | undefined }) => {
     const { isDisabled, itemId, itemRef, menu, portal } = params;
 
     const onItemMouseDown = React.useCallback(

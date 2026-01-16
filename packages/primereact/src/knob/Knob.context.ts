@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { KnobInstance } from '@primereact/types/shared/knob';
+import type { KnobRootInstance } from '@primereact/types/shared/knob';
 
-export const [KnobProvider, useKnobContext] = createOptionalContext<KnobInstance>();
+export const [KnobProvider, useKnobContext] = createOptionalContext<KnobRootInstance>();

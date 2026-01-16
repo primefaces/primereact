@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useConfirmPopup } from '@primereact/headless/confirmpopup';
-import { ConfirmPopupInstance } from '@primereact/types/shared/confirmpopup';
+import { ConfirmPopupRootInstance } from '@primereact/types/shared/confirmpopup';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { ConfirmPopupProvider } from '../ConfirmPopup.context';
@@ -27,7 +27,7 @@ export const ConfirmPopupRoot = withComponent({
         );
 
         return (
-            <ConfirmPopupProvider value={instance as ConfirmPopupInstance}>
+            <ConfirmPopupProvider value={instance as ConfirmPopupRootInstance}>
                 <Component instance={instance} attrs={rootProps} children={props.children} />
             </ConfirmPopupProvider>
         );

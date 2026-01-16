@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { BadgeInstance } from '@primereact/types/shared/badge';
+import type { BadgeRootInstance } from '@primereact/types/shared/badge';
 
-export const [BadgeProvider, useBadgeContext] = createOptionalContext<BadgeInstance>();
+export const [BadgeProvider, useBadgeContext] = createOptionalContext<BadgeRootInstance>();

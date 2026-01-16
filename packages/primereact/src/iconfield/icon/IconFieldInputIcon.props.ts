@@ -1,5 +1,5 @@
-import { IconFieldInputIconProps } from '@primereact/types/shared/iconfield';
+import { InputIconProps } from '@primereact/types/shared/iconfield';
 
-export const defaultInputIconProps: IconFieldInputIconProps = {
+export const defaultInputIconProps: InputIconProps = {
     as: 'div'
 };

@@ -1,7 +1,7 @@
 import * as HeadlessSpeedDial from '@primereact/headless/speeddial';
-import type { SpeedDialProps } from '@primereact/types/shared/speeddial';
+import type { SpeedDialRootProps } from '@primereact/types/shared/speeddial';
 
-export const defaultRootProps: SpeedDialProps = {
+export const defaultRootProps: SpeedDialRootProps = {
     ...HeadlessSpeedDial.defaultProps,
     as: 'div',
     disabled: false,

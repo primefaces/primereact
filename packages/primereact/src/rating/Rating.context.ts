@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { RatingInstance } from '@primereact/types/shared/rating';
+import type { RatingRootInstance } from '@primereact/types/shared/rating';
 
-export const [RatingProvider, useRatingContext] = createOptionalContext<RatingInstance>();
+export const [RatingProvider, useRatingContext] = createOptionalContext<RatingRootInstance>();

@@ -1,7 +1,7 @@
 'use client';
 import { withComponent } from '@primereact/core/component';
 import { useContextMenu } from '@primereact/headless/contextmenu';
-import { ContextMenuInstance, ContextMenuProps } from '@primereact/types/shared/contextmenu';
+import { ContextMenuRootInstance, ContextMenuRootProps } from '@primereact/types/shared/contextmenu';
 import { mergeProps } from '@primeuix/utils';
 import { Menu, useMenuContext } from 'primereact/menu';
 import * as React from 'react';
@@ -32,8 +32,8 @@ export const ContextMenuRoot = withComponent({
         );
 
         return (
-            <ContextMenuProvider value={instance as unknown as ContextMenuInstance}>
-                <Menu.Root {...(props as ContextMenuProps)} composite {...rootProps}>
+            <ContextMenuProvider value={instance as unknown as ContextMenuRootInstance}>
+                <Menu.Root {...(props as ContextMenuRootProps)} composite {...rootProps}>
                     {props.children}
                 </Menu.Root>
             </ContextMenuProvider>

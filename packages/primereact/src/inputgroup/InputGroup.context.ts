@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { InputGroupInstance } from '@primereact/types/shared/inputgroup';
+import type { InputGroupRootInstance } from '@primereact/types/shared/inputgroup';
 
-export const [InputGroupProvider, useInputGroupContext] = createOptionalContext<InputGroupInstance>();
+export const [InputGroupProvider, useInputGroupContext] = createOptionalContext<InputGroupRootInstance>();

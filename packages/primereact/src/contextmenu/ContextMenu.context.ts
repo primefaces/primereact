@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { ContextMenuInstance } from '@primereact/types/shared/contextmenu';
+import type { ContextMenuRootInstance } from '@primereact/types/shared/contextmenu';
 
-export const [ContextMenuProvider, useContextMenuContext] = createOptionalContext<ContextMenuInstance>();
+export const [ContextMenuProvider, useContextMenuContext] = createOptionalContext<ContextMenuRootInstance>();

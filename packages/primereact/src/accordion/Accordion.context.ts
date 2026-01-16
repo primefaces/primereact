@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { AccordionInstance } from '@primereact/types/shared/accordion';
+import type { AccordionRootInstance } from '@primereact/types/shared/accordion';
 
-export const [AccordionProvider, useAccordionContext] = createOptionalContext<AccordionInstance>();
+export const [AccordionProvider, useAccordionContext] = createOptionalContext<AccordionRootInstance>();

@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { MeterGroupInstance } from '@primereact/types/shared/metergroup';
+import type { MeterGroupRootInstance } from '@primereact/types/shared/metergroup';
 
-export const [MeterGroupProvider, useMeterGroupContext] = createOptionalContext<MeterGroupInstance>();
+export const [MeterGroupProvider, useMeterGroupContext] = createOptionalContext<MeterGroupRootInstance>();

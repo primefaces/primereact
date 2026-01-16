@@ -1,5 +1,5 @@
 'use client';
 import { createOptionalContext } from '@primereact/core/utils';
-import type { FileUploadInstance } from '@primereact/types/shared/fileupload';
+import type { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 
-export const [FileUploadProvider, useFileUploadContext] = createOptionalContext<FileUploadInstance>();
+export const [FileUploadProvider, useFileUploadContext] = createOptionalContext<FileUploadRootInstance>();
