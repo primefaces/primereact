@@ -3,7 +3,7 @@ import { Component, withComponent } from '@primereact/core/component';
 import { BlankIcon } from '@primereact/icons/blank';
 import { CheckIcon } from '@primereact/icons/check';
 import type { ListboxOptionInstance } from '@primereact/types/shared/listbox';
-import { mergeProps, resolve } from '@primeuix/utils';
+import { mergeProps, resolve, omit } from '@primeuix/utils';
 import { Checkbox } from 'primereact/checkbox';
 import * as React from 'react';
 import { useListboxContext } from '../Listbox.context';
@@ -24,6 +24,7 @@ export const ListboxSelection = withComponent({
         const { checkmark, checkbox } = listbox?.props || {};
 
         const rootProps = mergeProps(
+            omit(props, 'as'),
             {
                 className: listbox?.cx('selection')
             },
