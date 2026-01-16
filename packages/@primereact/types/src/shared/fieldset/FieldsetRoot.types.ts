@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/fieldset/)
  *
- * @module fieldset
+ * @module fieldsetroot
  * @group components
  *
  */

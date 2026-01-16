@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/gallery/)
  *
- * @module gallery
+ * @module galleryroot
  * @group components
  *
  */

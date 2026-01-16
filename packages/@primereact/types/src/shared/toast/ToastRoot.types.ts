@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/toast/)
  *
- * @module toast
+ * @module toastroot
  * @group components
  *
  */

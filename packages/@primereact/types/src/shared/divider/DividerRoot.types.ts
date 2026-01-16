@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/divider/)
  *
- * @module divider
+ * @module dividerroot
  * @group components
  *
  */

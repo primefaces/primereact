@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/contextmenu/)
  *
- * @module contextmenu
+ * @module contextmenuroot
  * @group components
  *
  */

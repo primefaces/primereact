@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/confirmdialog/)
  *
- * @module confirmdialog
+ * @module confirmdialogroot
  * @group components
  *
  */

@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/progressbar/)
  *
- * @module progressbar
+ * @module progressbarroot
  * @group components
  *
  */

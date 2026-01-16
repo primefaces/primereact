@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/dialog/)
  *
- * @module dialog
+ * @module dialogroot
  * @group components
  *
  */

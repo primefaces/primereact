@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/confirmpopup/)
  *
- * @module confirmpopup
+ * @module confirmpopuproot
  * @group components
  *
  */

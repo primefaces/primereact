@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/inputotp/)
  *
- * @module inputotp
+ * @module inputotproot
  * @group components
  *
  */

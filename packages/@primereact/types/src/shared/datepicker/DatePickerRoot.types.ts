@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/datepicker/)
  *
- * @module datepicker
+ * @module datepickerroot
  * @group components
  *
  */

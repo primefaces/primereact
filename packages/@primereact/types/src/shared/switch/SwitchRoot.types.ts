@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/switch/)
  *
- * @module switch
+ * @module switchroot
  * @group components
  *
  */
