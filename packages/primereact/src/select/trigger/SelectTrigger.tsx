@@ -30,19 +30,26 @@ export const SelectTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, select } = instance;
+        const showPlaceholder = React.useRef(false);
 
         const createLabel = () => {
             if (props.children) {
+                showPlaceholder.current = false;
+
                 return resolve(props.children, instance);
             }
 
             const selectedLabel = select?.getSelectedOptionLabel();
 
             if (isNotEmpty(selectedLabel)) {
+                showPlaceholder.current = false;
+
                 return selectedLabel as string;
             }
 
-            return '&nbsp;';
+            showPlaceholder.current = true;
+
+            return props.placeholder ?? '&nbsp;';
         };
 
         const label = createLabel();
@@ -50,7 +57,7 @@ export const SelectTrigger = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: select?.cx('label', { empty: isLabelEmpty }),
+                className: select?.cx('label', { empty: isLabelEmpty, showPlaceholder: showPlaceholder.current }),
                 tabIndex: select?.props.disabled ? -1 : select?.props.tabIndex,
                 role: 'combobox',
                 disabled: select?.props.disabled,

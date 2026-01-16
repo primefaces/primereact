@@ -41,7 +41,8 @@ export const styles = createStyles<SelectRootInstance>({
         label: ({ context }) => [
             'p-select-label',
             {
-                'p-select-label-empty': context?.empty
+                'p-select-label-empty': context?.empty,
+                'p-placeholder': context?.showPlaceholder
             }
         ],
         clearIcon: 'p-select-clear-icon',
