@@ -1,1 +1,1 @@
-export * from './UIDataviewRoot';
+export * from './UIDataViewRoot';

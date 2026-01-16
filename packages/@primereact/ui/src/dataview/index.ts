@@ -1,3 +1,3 @@
-export * from './DataView';
-export * from './DataView.context';
-export * from './DataView.props';
+// Named runtime exports to maximize tree-shaking
+export { defaultRootProps, DataViewProvider, useDataViewContext } from 'primereact/dataview';
+export { UIDataViewRoot as DataView } from './root';
