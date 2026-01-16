@@ -3,6 +3,7 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useListbox } from '@primereact/headless/listbox';
 import { mergeProps, resolve, omit } from '@primeuix/utils';
 import * as React from 'react';
+import type { ListboxRootInstance } from '@primereact/types/shared/listbox';
 import { ListboxProvider } from '../Listbox.context';
 import { defaultRootProps } from './ListboxRoot.props';
 
@@ -62,7 +63,7 @@ export const ListboxRoot = withComponent({
         const content = resolve(props.children, instance, rootProps);
 
         return (
-            <ListboxProvider value={instance}>
+            <ListboxProvider value={instance as unknown as ListboxRootInstance}>
                 <Component instance={instance} attrs={rootProps}>
                     {firstHiddenFocusable}
                     {content}
