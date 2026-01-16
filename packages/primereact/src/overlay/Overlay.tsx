@@ -6,11 +6,11 @@ import { mergeProps, resolve } from '@primeuix/utils';
 import { Portal } from 'primereact/portal';
 import * as React from 'react';
 import { OverlayProvider } from './Overlay.context';
-import { defaultRootProps } from './Overlay.props';
+import { defaultProps } from './Overlay.props';
 
 export const Overlay = withComponent({
     name: 'Overlay',
-    defaultProps: defaultRootProps,
+    defaultProps: defaultProps,
     setup(instance) {
         const overlay = useOverlay(instance?.inProps);
 
