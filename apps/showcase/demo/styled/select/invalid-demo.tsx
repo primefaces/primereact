@@ -26,9 +26,7 @@ export default function InvalidDemo() {
                 value={value}
                 onValueChange={(event: SelectValueChangeEvent) => setValue(event.value as string)}
             >
-                <Select.Trigger>
-                    <span>Select a City</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Select a City" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>
@@ -49,9 +47,7 @@ export default function InvalidDemo() {
                 value={value2}
                 onValueChange={(event: SelectValueChangeEvent) => setValue2(event.value as string)}
             >
-                <Select.Trigger>
-                    <span>Select a City</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Select a City" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>

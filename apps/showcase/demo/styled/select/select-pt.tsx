@@ -13,9 +13,7 @@ const cities = [
 export default function SelectPTDemo() {
     return (
         <Select.Root id="city" options={cities} optionLabel="name" className="w-full md:w-56">
-            <Select.Trigger>
-                <span>Select a City</span>
-            </Select.Trigger>
+            <Select.Trigger placeholder="Select a City" />
             <Select.Dropdown>
                 <ChevronDownIcon />
             </Select.Dropdown>

@@ -15,9 +15,7 @@ export default function FluidDemo() {
     return (
         <div>
             <Select.Root options={cities} optionLabel="name" fluid>
-                <Select.Trigger>
-                    <span>Select a City</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Select a City" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>

@@ -30,9 +30,7 @@ export default function BasicDemo() {
                 optionValue="value"
                 className="w-full md:w-56"
             >
-                <Select.Trigger id="language" className={language === '' ? 'text-surface-400' : ''}>
-                    <span>{languages.find((l) => l.value === language)?.label}</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Select a language" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>

@@ -13,24 +13,22 @@ const themes = [
 ];
 
 export default function CheckmarkDemo() {
-    const [theme, setTheme] = React.useState<string>('system');
-    const selectedTheme = themes.find((t) => t.value === theme);
+    const [theme, setTheme] = React.useState(themes[2]);
 
     return (
         <div className="flex justify-center">
             <Select.Root
                 value={theme}
-                onValueChange={(e: SelectValueChangeEvent) => setTheme(e.value as string)}
+                onValueChange={(e: SelectValueChangeEvent) => setTheme(e.value as (typeof themes)[number])}
                 options={themes}
                 optionLabel="label"
-                optionValue="value"
                 checkmark
                 className="w-full md:w-64"
             >
                 <Select.Trigger>
                     <span className="flex items-center gap-2">
-                        <span>{selectedTheme?.icon}</span>
-                        <span>{selectedTheme?.label}</span>
+                        <span>{theme?.icon}</span>
+                        <span>{theme?.label}</span>
                     </span>
                 </Select.Trigger>
                 <Select.Dropdown>

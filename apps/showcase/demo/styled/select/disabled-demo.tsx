@@ -13,9 +13,7 @@ export default function DisabledDemo() {
     return (
         <div className="flex justify-center">
             <Select.Root options={cities} optionLabel="name" disabled className="w-full md:w-56">
-                <Select.Trigger>
-                    <span>Select a City</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Select a City" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>

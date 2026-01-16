@@ -10,7 +10,7 @@ import * as React from 'react';
 const productCategories = [
     { label: 'Electronics', value: 'electronics', count: 1247 },
     { label: 'Clothing', value: 'clothing', count: 856 },
-    { label: 'Home & Garden', value: 'home', count: 634 },
+    { label: 'Garden', value: 'home', count: 634 },
     { label: 'Sports', value: 'sports', count: 421 },
     { label: 'Books', value: 'books', count: 2103 },
     { label: 'Toys', value: 'toys', count: 312 }
@@ -24,27 +24,24 @@ const priceRanges = [
     { label: 'Over $200', value: '200+' }
 ];
 
-export default function ClearIconDemo() {
-    const [category, setCategory] = React.useState<string | null>(null);
-    const [priceRange, setPriceRange] = React.useState<string | null>(null);
+type CategoryOption = (typeof productCategories)[number] | null;
+type PriceRangeOption = (typeof priceRanges)[number] | null;
 
-    const selectedCategory = productCategories.find((c) => c.value === category);
-    const hasFilters = category !== null || priceRange !== null;
+export default function ClearIconDemo() {
+    const [category, setCategory] = React.useState<CategoryOption>(null);
+    const [priceRange, setPriceRange] = React.useState<PriceRangeOption>(null);
 
     return (
         <div className="flex flex-col items-center gap-4">
             <div className="flex gap-3">
                 <Select.Root
                     value={category}
-                    onValueChange={(e: SelectValueChangeEvent) => setCategory(e.value as string | null)}
+                    onValueChange={(e: SelectValueChangeEvent) => setCategory(e.value as CategoryOption)}
                     options={productCategories}
                     optionLabel="label"
-                    optionValue="value"
                     className="w-40"
                 >
-                    <Select.Trigger>
-                        <span className={category ? '' : 'text-surface-400'}>{selectedCategory?.label || 'Category'}</span>
-                    </Select.Trigger>
+                    <Select.Trigger placeholder="Category" />
                     {category && (
                         <Select.ClearIcon>
                             <TimesIcon />
@@ -73,17 +70,12 @@ export default function ClearIconDemo() {
 
                 <Select.Root
                     value={priceRange}
-                    onValueChange={(e: SelectValueChangeEvent) => setPriceRange(e.value as string | null)}
+                    onValueChange={(e: SelectValueChangeEvent) => setPriceRange(e.value as PriceRangeOption)}
                     options={priceRanges}
                     optionLabel="label"
-                    optionValue="value"
                     className="w-40"
                 >
-                    <Select.Trigger>
-                        <span className={priceRange ? '' : 'text-surface-400'}>
-                            {priceRanges.find((p) => p.value === priceRange)?.label || 'Price'}
-                        </span>
-                    </Select.Trigger>
+                    <Select.Trigger placeholder="Price" />
                     {priceRange && (
                         <Select.ClearIcon>
                             <TimesIcon className="w-3 h-3" />
@@ -102,22 +94,20 @@ export default function ClearIconDemo() {
 
             <div className="flex items-center gap-2 h-6">
                 <span className="text-sm text-surface-500">Active filters:</span>
-                {hasFilters && (
-                    <>
-                        {category && (
-                            <Chip.Root onRemove={() => setCategory(null)}>
-                                <Chip.Label>{selectedCategory?.label}</Chip.Label>
-                                <Chip.RemoveIcon />
-                            </Chip.Root>
-                        )}
-                        {priceRange && (
-                            <Chip.Root onRemove={() => setPriceRange(null)}>
-                                <Chip.Label>{priceRanges.find((p) => p.value === priceRange)?.label}</Chip.Label>
-                                <Chip.RemoveIcon />
-                            </Chip.Root>
-                        )}
-                    </>
-                )}
+                <>
+                    {category && (
+                        <Chip.Root onRemove={() => setCategory(null)}>
+                            <Chip.Label>{category.label}</Chip.Label>
+                            <Chip.RemoveIcon />
+                        </Chip.Root>
+                    )}
+                    {priceRange && (
+                        <Chip.Root onRemove={() => setPriceRange(null)}>
+                            <Chip.Label>{priceRange.label}</Chip.Label>
+                            <Chip.RemoveIcon />
+                        </Chip.Root>
+                    )}
+                </>
             </div>
         </div>
     );

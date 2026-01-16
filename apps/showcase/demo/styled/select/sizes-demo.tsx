@@ -15,9 +15,7 @@ export default function SizesDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <Select.Root options={cities} optionLabel="name" size="small" className="w-full md:w-56">
-                <Select.Trigger>
-                    <span>Small</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Small" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>
@@ -30,9 +28,7 @@ export default function SizesDemo() {
             </Select.Root>
 
             <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
-                <Select.Trigger>
-                    <span>Normal</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Normal" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>
@@ -45,9 +41,7 @@ export default function SizesDemo() {
             </Select.Root>
 
             <Select.Root options={cities} optionLabel="name" size="large" className="w-full md:w-56">
-                <Select.Trigger>
-                    <span>Large</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Large" />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>

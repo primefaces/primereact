@@ -47,25 +47,24 @@ const jobCategories = [
     }
 ];
 
+type Option = (typeof jobCategories)[number]['items'][number] | null;
+
 export default function GroupDemo() {
-    const [position, setPosition] = React.useState<string | null>(null);
-    const allPositions = jobCategories.flatMap((g) => g.items);
-    const selectedPosition = allPositions.find((p) => p.value === position);
+    const [position, setPosition] = React.useState<Option | null>(null);
 
     return (
         <div className="flex justify-center">
             <Select.Root
                 value={position}
-                onValueChange={(e: SelectValueChangeEvent) => setPosition(e.value as string | null)}
+                onValueChange={(e: SelectValueChangeEvent) => setPosition(e.value as Option)}
                 options={jobCategories}
                 optionLabel="label"
+                optionValue="value"
                 optionGroupLabel="label"
                 optionGroupChildren="items"
                 className="w-full md:w-56"
             >
-                <Select.Trigger>
-                    <span className={position ? '' : 'text-surface-400'}>{selectedPosition?.label || 'Select a position...'}</span>
-                </Select.Trigger>
+                <Select.Trigger placeholder="Select a position..." />
                 <Select.Dropdown>
                     <ChevronDownIcon />
                 </Select.Dropdown>
