@@ -1,8 +1,5 @@
-export * from './Placer.context';
-export * as Placer from './Placer.parts';
-export * as PlacerProps from './Placer.props';
+export * as Placer from './UIPlacer.parts';
 
 // Named runtime exports to maximize tree-shaking
-export { defaultAnchorProps, PlacerAnchor } from './anchor';
-export { defaultArrowProps, PlacerArrow } from './arrow';
-export { defaultRootProps, PlacerRoot } from './root';
+export { defaultAnchorProps, defaultArrowProps, defaultRootProps, PlacerAnchor, PlacerArrow, PlacerProps, PlacerProvider, usePlacerContext } from 'primereact/placer';
+export { UIPlacerRoot as PlacerRoot } from './root';
