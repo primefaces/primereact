@@ -29,11 +29,11 @@ export interface SelectRootPassThrough {
     /**
      * Used to pass attributes to the trigger's DOM element.
      */
-    trigger?: SelectRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    trigger?: SelectRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Used to pass attributes to the value's DOM element.
+     * Used to pass attributes to the dropdown's DOM element.
      */
-    value?: SelectRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    dropdown?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the portal's DOM element.
      */
@@ -43,17 +43,17 @@ export interface SelectRootPassThrough {
      */
     panel?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Used to pass attributes to the filter container's DOM element.
-     */
-    filterContainer?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Used to pass attributes to the filter's DOM element.
      */
     filter?: SelectRootPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
-     * Used to pass attributes to the pcListbox's DOM element.
+     * Used to pass attributes to the listbox's DOM element.
      */
     pcListbox?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the options' DOM element.
+     */
+    options?: SelectRootPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Used to pass attributes to the option's DOM element.
      */
@@ -62,6 +62,10 @@ export interface SelectRootPassThrough {
      * Used to pass attributes to the clearIcon's DOM element.
      */
     clearIcon?: SelectRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the clearIcon's DOM element.
+     */
+    selection?: SelectRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
      * Used to pass attributes to the header's DOM element.
      */

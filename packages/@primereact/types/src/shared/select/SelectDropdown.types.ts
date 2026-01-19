@@ -24,7 +24,7 @@ export interface SelectDropdownPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: SelectDropdownPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    root?: SelectDropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

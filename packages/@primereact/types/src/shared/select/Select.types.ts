@@ -18,13 +18,13 @@ export const SelectClassNames = {
      */
     root: 'p-select',
     /**
-     * Class name of the trigger element.
+     * Class name of the dropdown element.
      */
-    trigger: 'p-select-trigger',
+    dropdown: 'p-select-dropdown',
     /**
-     * Class name of the value element.
+     * Class name of the label element.
      */
-    value: 'p-select-label',
+    label: 'p-select-label',
     /**
      * Class name of the clear icon element.
      */
@@ -49,6 +49,10 @@ export const SelectClassNames = {
      * Class name of the option element.
      */
     option: 'p-select-option',
+    /**
+     * Class name of the selection element.
+     */
+    selection: 'p-select-selection',
     /**
      * Class name of the empty message element.
      */

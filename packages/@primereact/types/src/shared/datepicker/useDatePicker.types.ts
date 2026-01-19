@@ -344,11 +344,6 @@ export interface useDatePickerProps {
      */
     manualInput?: boolean | undefined;
     /**
-     * When enabled, a clear icon is displayed to clear the value.
-     * @default false
-     */
-    showClear?: boolean | undefined;
-    /**
      * Defines the size of the component.
      */
     size?: 'small' | 'large' | undefined;

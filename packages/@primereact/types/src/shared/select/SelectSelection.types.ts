@@ -25,7 +25,7 @@ export interface SelectSelectionPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: SelectSelectionPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    root?: SelectSelectionPassThroughType<React.HTMLAttributes<HTMLElement>>;
 }
 
 /**

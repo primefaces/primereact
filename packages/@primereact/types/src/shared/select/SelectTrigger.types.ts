@@ -24,13 +24,18 @@ export interface SelectTriggerPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: SelectTriggerPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    root?: SelectTriggerPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
  * Defines valid properties in SelectTrigger component.
  */
-export interface SelectTriggerProps extends BaseComponentProps<SelectTriggerInstance, unknown, SelectTriggerPassThrough> {}
+export interface SelectTriggerProps extends BaseComponentProps<SelectTriggerInstance, unknown, SelectTriggerPassThrough> {
+    /**
+     * Placeholder text to display when no option is selected.
+     */
+    placeholder?: string;
+}
 
 /**
  * Defines valid state in SelectTrigger component.

@@ -27,6 +27,10 @@ export interface AutoCompleteRootPassThrough {
      */
     root?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Used to pass attributes to the trigger's DOM element.
+     */
+    trigger?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
      * Used to pass attributes to the pcInputText's DOM element.
      */
     pcInputText?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
@@ -43,13 +47,13 @@ export interface AutoCompleteRootPassThrough {
      */
     pcListbox?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Used to pass attributes to the options' DOM element.
+     */
+    options?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
      * Used to pass attributes to the option's DOM element.
      */
     option?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to pass attributes to the button's DOM element.
-     */
-    button?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Used to pass attributes to the clearIcon's DOM element.
      */
