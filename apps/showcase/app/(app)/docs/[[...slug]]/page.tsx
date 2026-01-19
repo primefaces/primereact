@@ -1,7 +1,7 @@
-import DocCopyMarkdownMenu from '@/components/docs/doc-copy-markdown-menu';
-import DocMdx from '@/components/docs/doc-mdx';
-import DocTabMenu from '@/components/docs/doc-tab-menu';
-import DocToc from '@/components/docs/doc-toc';
+import DocCopyMarkdownMenu from '@/shared/components/docs/doc-copy-markdown-menu';
+import DocMdx from '@/shared/components/docs/doc-mdx';
+import DocTabMenu from '@/shared/components/docs/doc-tab-menu';
+import DocToc from '@/shared/components/docs/doc-toc';
 import { allDocs } from 'contentlayer/generated';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -81,7 +81,7 @@ async function DocsPage({ params }: PageProps) {
                         {!(doc.hideCopyPage === true) && <DocCopyMarkdownMenu className="row-start-3 sm:row-start-1 sm:col-start-2" llm={doc.llm} component={doc.component} />}
                         <p className="text-lg col-span-2 opacity-50 text-surface-900 dark:text-surface-0">{doc.description}</p>
                     </div>
-                    <DocMdx code={doc.body.code} />
+                    <DocMdx code={doc.body.code} siteUrl={doc.siteUrl} />
                 </div>
                 <DocToc toc={doc.toc} />
             </div>

@@ -1,0 +1,160 @@
+{
+    "$schema": "https://ui.shadcn.com/schema/registry.json",
+    "name": "primereact",
+    "homepage": "https://v11.primereact.org",
+    "items": [
+        {
+            "name": "index",
+            "type": "registry:style",
+            "dependencies": ["primereact@11.0.0-alpha.1", "@primeuix/utils", "@primereact/types"],
+            "registryDependencies": ["https://v11.primereact.org/public/r/utils.json"],
+            "files": [],
+            "css": {
+                ":root": {
+                    "--p-primary-50": "oklch(98.5% 0 0)",
+                    "--p-primary-100": "oklch(97% 0 0)",
+                    "--p-primary-200": "oklch(92.2% 0 0)",
+                    "--p-primary-300": "oklch(87% 0 0)",
+                    "--p-primary-400": "oklch(70.8% 0 0)",
+                    "--p-primary-500": "oklch(55.6% 0 0)",
+                    "--p-primary-600": "oklch(43.9% 0 0)",
+                    "--p-primary-700": "oklch(37.1% 0 0)",
+                    "--p-primary-800": "oklch(26.9% 0 0)",
+                    "--p-primary-900": "oklch(20.5% 0 0)",
+                    "--p-primary-950": "oklch(14.5% 0 0)",
+                    "--p-surface-0": "oklch(100% 0 0)",
+                    "--p-surface-50": "oklch(98.5% 0 0)",
+                    "--p-surface-100": "oklch(97% 0 0)",
+                    "--p-surface-200": "oklch(92.2% 0 0)",
+                    "--p-surface-300": "oklch(87% 0 0)",
+                    "--p-surface-400": "oklch(70.8% 0 0)",
+                    "--p-surface-500": "oklch(55.6% 0 0)",
+                    "--p-surface-600": "oklch(43.9% 0 0)",
+                    "--p-surface-700": "oklch(37.1% 0 0)",
+                    "--p-surface-800": "oklch(26.9% 0 0)",
+                    "--p-surface-900": "oklch(20.5% 0 0)",
+                    "--p-surface-950": "oklch(14.5% 0 0)",
+                    "--p-content-border-radius": "6px",
+                    "--p-primary-color": "var(--p-primary-500)",
+                    "--p-primary-contrast-color": "var(--p-surface-0)",
+                    "--p-primary-hover-color": "var(--p-primary-600)",
+                    "--p-primary-active-color": "var(--p-primary-700)",
+                    "--p-content-border-color": "var(--p-surface-200)",
+                    "--p-content-hover-background": "var(--p-surface-100)",
+                    "--p-content-hover-color": "var(--p-surface-800)",
+                    "--p-highlight-background": "var(--p-primary-50)",
+                    "--p-highlight-color": "var(--p-primary-700)",
+                    "--p-highlight-focus-background": "var(--p-primary-100)",
+                    "--p-highlight-focus-color": "var(--p-primary-800)",
+                    "--p-text-color": "var(--p-surface-700)",
+                    "--p-text-hover-color": "var(--p-surface-800)",
+                    "--p-text-muted-color": "var(--p-surface-500)",
+                    "--p-text-hover-muted-color": "var(--p-surface-600)"
+                },
+                "@media (prefers-color-scheme: dark)": {
+                    ":root": {
+                        "--p-primary-color": "var(--p-primary-400)",
+                        "--p-primary-contrast-color": "var(--p-surface-900)",
+                        "--p-primary-hover-color": "var(--p-primary-300)",
+                        "--p-primary-active-color": "var(--p-primary-200)",
+                        "--p-content-border-color": "var(--p-surface-700)",
+                        "--p-content-hover-background": "var(--p-surface-800)",
+                        "--p-content-hover-color": "var(--p-surface-0)",
+                        "--p-highlight-background": "color-mix(in srgb, var(--p-primary-400), transparent 84%)",
+                        "--p-highlight-color": "rgba(255, 255, 255, 0.87)",
+                        "--p-highlight-focus-background": "color-mix(in srgb, var(--p-primary-400), transparent 76%)",
+                        "--p-highlight-focus-color": "rgba(255, 255, 255, 0.87)",
+                        "--p-text-color": "var(--p-surface-0)",
+                        "--p-text-hover-color": "var(--p-surface-0)",
+                        "--p-text-muted-color": "var(--p-surface-400)",
+                        "--p-text-hover-muted-color": "var(--p-surface-300)"
+                    }
+                }
+            }
+        },
+        {
+            "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+            "name": "button",
+            "type": "registry:ui",
+            "dependencies": ["class-variance-authority"],
+            "registryDependencies": ["https://v11.primereact.org/public/r/utils.json"],
+            "files": [
+                {
+                    "path": "components/ui/button.tsx",
+                    "type": "registry:ui",
+                    "content": "import type { ButtonProps } from '@primereact/types/shared/button';\nimport { cn } from '@/lib/utils';\nimport { cva, VariantProps } from 'class-variance-authority';\nimport { Button as PRButton } from 'primereact/button';\nimport * as React from 'react';\n\nconst buttonVariants = cva(\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium text-sm transition-[background-color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2\",\n    {\n        variants: {\n            variant: {\n                default: '',\n                link: 'hover:underline',\n                text: 'focus-visible:outline-offset-0!',\n                outlined: ''\n            },\n            severity: {\n                default: 'focus-visible:outline-primary focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/30',\n                secondary: 'focus-visible:outline-surface-500/20 dark:focus-visible:outline-surface-500/30',\n                info: ' focus-visible:outline-blue-500/50',\n                success: 'focus-visible:outline-green-500/50',\n                warn: 'focus-visible:outline-amber-500/50',\n                danger: 'focus-visible:outline-red-500/50',\n                contrast: 'focus-visible:outline-surface-500/50',\n                help: 'focus-visible:outline-purple-500/50'\n            },\n            raised: {\n                true: 'shadow'\n            },\n            rounded: {\n                true: 'rounded-full!'\n            },\n            iconOnly: {\n                true: 'p-0'\n            },\n            size: {\n                small: 'h-8 gap-1.5 px-3 has-[>svg]:px-2.5',\n                normal: 'h-9 px-4 py-2 has-[>svg]:px-3',\n                large: 'h-10 px-6 has-[>svg]:px-4'\n            }\n        },\n        defaultVariants: {\n            variant: 'default',\n            size: 'normal',\n            severity: 'default',\n            raised: false,\n            rounded: false\n        },\n        compoundVariants: [\n            {\n                variant: 'default',\n                severity: 'default',\n                className: 'bg-primary hover:bg-primary-emphasis text-primary-contrast '\n            },\n            {\n                variant: 'default',\n                severity: 'secondary',\n                className: 'bg-surface-100 hover:bg-surface-200 dark:bg-surface-800 dark:hover:bg-surface-700 '\n            },\n            {\n                variant: 'default',\n                severity: 'info',\n                className: 'bg-blue-500 text-surface-0 hover:bg-blue-600'\n            },\n            {\n                variant: 'default',\n                severity: 'success',\n                className: 'bg-green-500 text-surface-0 hover:bg-green-600'\n            },\n            {\n                variant: 'default',\n                severity: 'warn',\n                className: 'bg-amber-500 text-surface-0 hover:bg-amber-600'\n            },\n            {\n                variant: 'default',\n                severity: 'danger',\n                className: 'bg-red-500 text-surface-0 hover:bg-red-600'\n            },\n            {\n                variant: 'default',\n                severity: 'help',\n                className: 'bg-purple-500 text-surface-0 hover:bg-purple-600'\n            },\n            {\n                variant: 'default',\n                severity: 'contrast',\n                className: 'bg-surface-950 text-surface-0 hover:bg-surface-800 dark:bg-surface-0 dark:hover:bg-surface-200 dark:text-surface-950'\n            },\n            {\n                variant: 'outlined',\n                severity: 'default',\n                className: 'border border-primary hover:bg-primary/10 text-primary'\n            },\n            {\n                variant: 'outlined',\n                severity: 'secondary',\n                className: 'border border-surface-200 dark:border-surface-800 hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500'\n            },\n            {\n                variant: 'outlined',\n                severity: 'info',\n                className: 'border border-blue-500 hover:bg-blue-500/10 text-blue-500'\n            },\n            {\n                variant: 'outlined',\n                severity: 'success',\n                className: 'border border-green-500 hover:bg-green-500/10 text-green-500'\n            },\n            {\n                variant: 'outlined',\n                severity: 'warn',\n                className: 'border border-amber-500 hover:bg-amber-500/10 text-amber-500'\n            },\n            {\n                variant: 'outlined',\n                severity: 'danger',\n                className: 'border border-red-500 hover:bg-red-500/10 text-red-500'\n            },\n            {\n                variant: 'outlined',\n                severity: 'contrast',\n                className: 'border border-gray-500 hover:bg-gray-500/10 text-gray-500'\n            },\n            {\n                variant: 'outlined',\n                severity: 'help',\n                className: 'border border-purple-500 hover:bg-purple-500/10 text-purple-500'\n            },\n            {\n                variant: 'text',\n                severity: 'default',\n                className: 'text-primary hover:bg-primary/10'\n            },\n            {\n                variant: 'text',\n                severity: 'secondary',\n                className: 'text-surface-500 hover:bg-surface-100 dark:text-surface-400 dark:hover:bg-surface-800'\n            },\n            {\n                variant: 'text',\n                severity: 'info',\n                className: 'text-blue-500 hover:bg-blue-500/10'\n            },\n            {\n                variant: 'text',\n                severity: 'success',\n                className: 'text-green-500 hover:bg-green-500/10'\n            },\n            {\n                variant: 'text',\n                severity: 'warn',\n                className: 'text-amber-500 hover:bg-amber-500/10'\n            },\n            {\n                variant: 'text',\n                severity: 'danger',\n                className: 'text-red-500 hover:bg-red-500/10'\n            },\n            {\n                variant: 'text',\n                severity: 'contrast',\n                className: 'text-surface-950 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800'\n            },\n            {\n                variant: 'text',\n                severity: 'help',\n                className: 'text-purple-500 hover:bg-purple-500/10'\n            },\n            {\n                iconOnly: true,\n                size: 'small',\n                className: 'size-8'\n            },\n            {\n                iconOnly: true,\n                size: 'normal',\n                className: 'size-9'\n            },\n            {\n                iconOnly: true,\n                size: 'large',\n                className: 'size-10.5'\n            }\n        ]\n    }\n);\n\nfunction Button({ className, variant, size, severity, raised, rounded, iconOnly, ...props }: ButtonProps & VariantProps<typeof buttonVariants>) {\n    return <PRButton className={cn(buttonVariants({ variant, size, severity, raised, rounded, iconOnly, className }))} {...props} />;\n}\n\nexport { Button, buttonVariants };\n"
+                }
+            ]
+        },
+        {
+            "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+            "name": "colorpicker",
+            "type": "registry:ui",
+            "dependencies": [],
+            "registryDependencies": ["https://v11.primereact.org/public/r/utils.json", "https://v11.primereact.org/public/r/inputtext.json"],
+            "files": [
+                {
+                    "path": "components/ui/colorpicker.tsx",
+                    "type": "registry:ui",
+                    "content": "import * as React from 'react';\nimport { ColorPickerAreaProps, ColorPickerEyeDropperProps, ColorPickerInputProps, ColorPickerRootProps, ColorPickerSliderProps, ColorPickerSwatchProps } from '@primereact/types/shared/colorpicker';\nimport { ColorPicker as ColorPickerPrime } from 'primereact/colorpicker';\nimport { cn } from '@/lib/utils';\nimport { inputTextVariants } from '@/components/ui/inputtext';\n\nfunction ColorPicker({ ...props }: ColorPickerRootProps) {\n    return <ColorPickerPrime.Root {...props} />;\n}\n\nfunction ColorPickerArea({ className, ...props }: ColorPickerAreaProps) {\n    return (\n        <ColorPickerPrime.Area className={cn('aspect-4/3 relative rounded-md min-w-3xs', className)} {...props}>\n            <ColorPickerPrime.AreaBackground className=\"[background:var(--area-gradient)] size-full rounded-[inherit] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)_inset]\" />\n            <ColorPickerPrime.AreaThumb className=\"[background:var(--thumb-background)] size-4 absolute top-(--thumb-position-top) left-(--thumb-position-left) -translate-y-1/2 -translate-x-1/2 border-2 border-white rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" />\n        </ColorPickerPrime.Area>\n    );\n}\n\nfunction ColorPickerSlider({ className, ...props }: ColorPickerSliderProps) {\n    return (\n        <ColorPickerPrime.Slider className={cn('relative rounded-sm data-[orientation=vertical]:w-4 data-[orientation=horizontal]:h-4', className)} {...props}>\n            <ColorPickerTransparencyGrid />\n            <ColorPickerPrime.SliderTrack className=\"rounded-[inherit] [background:var(--slider-background)] absolute top-0 left-0 size-full z-2 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)_inset]\" />\n            <ColorPickerPrime.SliderThumb className=\"absolute aspect-square data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full bg-(--thumb-background) border-2 border-white rounded-full z-3 top-(--thumb-position-top) left-(--thumb-position-left) -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary\" />\n        </ColorPickerPrime.Slider>\n    );\n}\n\nfunction ColorPickerSwatch({ className, ...props }: ColorPickerSwatchProps) {\n    return (\n        <ColorPickerPrime.Swatch className={cn('relative rounded-sm size-10 bg-white', className)} {...props}>\n            <ColorPickerTransparencyGrid />\n            <ColorPickerPrime.SwatchBackground className=\"absolute z-2 rounded-[inherit] size-full top-0 left-0 [background:var(--swatch-background)] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.1)_inset]\" />\n        </ColorPickerPrime.Swatch>\n    );\n}\n\nfunction ColorPickerTransparencyGrid({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n    return (\n        <ColorPickerPrime.TransparencyGrid\n            className={cn(\n                'absolute rounded-[inherit] top-0 left-0 size-full z-1 bg-white bg-[conic-gradient(rgb(238,238,238)_0deg,rgb(238,238,238)_25%,transparent_0deg,transparent_50%,rgb(238,238,238)_0deg,rgb(238,238,238)_75%,transparent_0deg)] bg-size-[0.5rem_0.5rem]',\n                className\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction ColorPickerInput({ className, ...props }: ColorPickerInputProps) {\n    return <ColorPickerPrime.Input className={inputTextVariants({ className })} {...props} />;\n}\n\nfunction ColorPickerEyeDropper({ ...props }: ColorPickerEyeDropperProps) {\n    return <ColorPickerPrime.EyeDropper {...props} />;\n}\n\nexport { ColorPicker, ColorPickerArea, ColorPickerEyeDropper, ColorPickerInput, ColorPickerSlider, ColorPickerSwatch, ColorPickerTransparencyGrid };\n"
+                }
+            ]
+        },
+        {
+            "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+            "name": "inputtext",
+            "type": "registry:ui",
+            "dependencies": ["class-variance-authority"],
+            "registryDependencies": ["https://v11.primereact.org/public/r/utils.json"],
+            "files": [
+                {
+                    "path": "components/ui/inputtext.tsx",
+                    "type": "registry:ui",
+                    "content": "import type { InputTextProps } from '@primereact/types/shared/inputtext';\nimport { cn } from '@/lib/utils';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { InputText as PRInputText } from 'primereact/inputtext';\nimport * as React from 'react';\n\nconst inputTextVariants = cva(\n    ' rounded-lg w-full min-w-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/30 aria-invalid:outline-red-500/20 dark:aria-invalid:outline-red-500/30 placeholder:text-surface-500 dark:placeholder:text-surface-400 aria-invalid:placeholder:text-red-500 dark:aria-invalid:placeholder:text-red-400 aria-invalid:text-red-500 dark:aria-invalid:text-red-400',\n    {\n        variants: {\n            variant: {\n                filled: 'bg-surface-100 dark:bg-surface-800 aria-invalid:bg-red-500/10 transition-[color,box-shadow]',\n                outlined: 'bg-transparent border border-surface shadow-xs aria-invalid:border-red-500 transition-[color,box-shadow,border-color]'\n            },\n            size: {\n                small: 'h-8 px-2.5 py-1 text-sm',\n                normal: 'h-9 px-3 py-1.5 text-base',\n                large: 'h-10.5 px-3.5 py-2 text-lg'\n            }\n        },\n        defaultVariants: {\n            variant: 'outlined',\n            size: 'normal'\n        }\n    }\n);\n\nfunction InputText({ className, size, variant, invalid, ...props }: InputTextProps & VariantProps<typeof inputTextVariants>) {\n    return <PRInputText className={cn(inputTextVariants({ size, variant, className }))} {...props} aria-invalid={invalid} />;\n}\n\nexport { InputText, inputTextVariants };\n"
+                }
+            ]
+        },
+        {
+            "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+            "name": "paginator",
+            "type": "registry:ui",
+            "dependencies": [],
+            "registryDependencies": ["https://v11.primereact.org/public/r/utils.json"],
+            "files": [
+                {
+                    "path": "components/ui/paginator.tsx",
+                    "type": "registry:ui",
+                    "content": "'use client';\nimport { PaginatorEllipsisProps, PaginatorFirstProps, PaginatorLastProps, PaginatorNextProps, PaginatorPageProps, PaginatorPagesInstance, PaginatorPagesProps, PaginatorPrevProps, PaginatorRootProps } from '@primereact/types/shared/paginator';\nimport { cn } from '@/lib/utils';\nimport { Paginator as PrimePaginator } from 'primereact/paginator';\nimport * as React from 'react';\n\nfunction Paginator({ className, ...props }: PaginatorRootProps) {\n    return <PrimePaginator.Root className={cn('flex items-center gap-2', className)} {...props} />;\n}\n\nfunction PaginatorPages({ className, ...props }: PaginatorPagesProps) {\n    return (\n        <PrimePaginator.Pages className={cn('flex items-center gap-2', className)} {...props}>\n            {({ paginator }: PaginatorPagesInstance) => paginator?.pages.map((page, index) => (page.type === 'page' ? <PaginatorPage key={index} value={page.value} /> : <PaginatorEllipsis key={index} />))}\n        </PrimePaginator.Pages>\n    );\n}\n\nfunction PaginatorPage({ className, ...props }: PaginatorPageProps) {\n    return <PrimePaginator.Page className={cn('cursor-pointer size-9 rounded-lg border border-surface hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors', className)} {...props} />;\n}\n\nfunction PaginatorEllipsis({ className, ...props }: PaginatorEllipsisProps) {\n    return <PrimePaginator.Ellipsis className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorFirst({ className, ...props }: PaginatorFirstProps) {\n    return <PrimePaginator.First className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorLast({ className, ...props }: PaginatorLastProps) {\n    return <PrimePaginator.Last className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorPrev({ className, ...props }: PaginatorPrevProps) {\n    return <PrimePaginator.Prev className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorNext({ className, ...props }: PaginatorNextProps) {\n    return <PrimePaginator.Next className={cn('', className)} {...props} />;\n}\n\nexport { Paginator, PaginatorFirst, PaginatorLast, PaginatorNext, PaginatorPage, PaginatorPages, PaginatorPrev };\n"
+                }
+            ]
+        },
+        {
+            "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+            "name": "switch",
+            "type": "registry:ui",
+            "dependencies": [],
+            "registryDependencies": ["https://v11.primereact.org/public/r/utils.json"],
+            "files": [
+                {
+                    "path": "components/ui/switch.tsx",
+                    "type": "registry:ui",
+                    "content": "import type { SwitchRootProps } from '@primereact/types/shared/switch';\nimport { cn } from '@/lib/utils';\nimport { Switch as SwitchPrime } from 'primereact/switch';\nimport * as React from 'react';\n\nfunction Switch({ className, invalid, children, ...props }: SwitchRootProps & { children?: React.ReactNode }) {\n    return (\n        <SwitchPrime.Root\n            className={cn(\n                'peer group relative disabled:pointer-events-none disabled:opacity-60',\n                '[&>input]:size-full [&>input]:whitespace-nowrap [&>input]:outline-none [&>input]:absolute [&>input]:top-0 [&>input]:left-0 [&>input]:opacity-0',\n                className\n            )}\n            aria-invalid={invalid}\n            {...props}\n        >\n            <SwitchPrime.Control\n                aria-invalid={invalid}\n                className={cn(\n                    'w-10 h-6 border-2 border-transparent bg-surface-200 hover:bg-surface-300 dark:bg-surface-700 aria-invalid:bg-red-500/50 dark:hover:bg-surface-600 group-data-[p-checked=true]:bg-primary group-data-[p-checked=true]:hover:bg-primary-emphasis rounded-full transition-[background,box-shadow] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500/50 aria-invalid:focus-visible:outline-red-500'\n                )}\n            >\n                <SwitchPrime.Thumb className={cn('h-full aspect-square group-data-[p-checked=true]:translate-x-[calc(100%-3px)] bg-primary-contrast rounded-full transition-[translate,width] pointer-events-none')} children={children} />\n            </SwitchPrime.Control>\n        </SwitchPrime.Root>\n    );\n}\n\nexport { Switch };\n"
+                }
+            ]
+        },
+        {
+            "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+            "name": "utils",
+            "type": "registry:lib",
+            "dependencies": ["tailwind-merge"],
+            "registryDependencies": [],
+            "files": [
+                {
+                    "path": "lib/utils.ts",
+                    "type": "registry:lib",
+                    "content": "import { cn as primeuixcn } from '@primeuix/utils';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: Parameters<typeof primeuixcn>) {\n    return twMerge(primeuixcn(inputs));\n}\n"
+                }
+            ]
+        }
+    ]
+}

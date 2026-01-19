@@ -1,6 +1,6 @@
 'use client';
 
-import { ProductService } from '@/services/product.service';
+import { ProductService } from '@/shared/services/product.service';
 import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';
 import { Tag } from '@primereact/ui/tag';

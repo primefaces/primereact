@@ -1,4 +1,4 @@
-import { Button } from 'primereact/button';
+import { Button } from '@/components/ui/button';
 import { ButtonGroup } from 'primereact/buttongroup';
 
 export default function GroupDemo() {

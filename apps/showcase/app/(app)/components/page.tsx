@@ -1,4 +1,4 @@
-import AllComponentPreviews from '@/components/all-components-previews';
+import AllComponentPreviews from '@/shared/components/all-components-previews';
 import { allDocs } from 'contentlayer/generated';
 import type { Metadata } from 'next';
 

@@ -8,7 +8,7 @@ export default function LandingPage() {
                     <span className="uppercase flex items-center justify-center px-1.5 rounded-full bg-primary text-primary-contrast font-bold text-[10px] leading-none">new</span>
                     <span className="leading-none flex items-center justify-center text-surface-800 dark:text-surface-50">PrimeReact is now in alpha.</span>
                 </div>
-                <h1 className={`mt-10 sm:mt-16 font-medium text-5xl sm:text-6xl lg:text-[5.75rem] text-center text-surface-900 dark:text-surface-0 tracking-tight`}>UI Suite for React</h1>
+                <h1 className={`mt-10 sm:mt-16 font-semibold text-4xl sm:text-5xl lg:text-6xl text-center text-surface-900 dark:text-surface-0 tracking-tight`}>UI Suite for React</h1>
                 <div className="mt-4 text-surface-900/60 dark:text-surface-0/50 text-base sm:text-lg lg:text-xl text-center">Enhance your web applications with PrimeReact&apos;s comprehensive suite of customizable, feature-rich UI components.</div>
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                     <Link

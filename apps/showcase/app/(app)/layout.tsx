@@ -1,6 +1,6 @@
-import AppFooter from '@/components/layout/app-footer';
-import AppNews from '@/components/layout/app-news';
-import AppTopbar from '@/components/layout/app-topbar';
+import AppFooter from '@/shared/components/layout/app-footer';
+import AppNews from '@/shared/components/layout/app-news';
+import AppTopbar from '@/shared/components/layout/app-topbar';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
     return (

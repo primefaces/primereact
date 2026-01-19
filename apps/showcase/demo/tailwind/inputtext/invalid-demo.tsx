@@ -1,6 +1,6 @@
 'use client';
 
-import { InputText } from '@/ui/inputtext';
+import { InputText } from '@/components/ui/inputtext';
 import * as React from 'react';
 
 export default function InvalidDemo() {

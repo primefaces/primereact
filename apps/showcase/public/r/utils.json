@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "type": "registry:lib",
+  "dependencies": [
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { cn as primeuixcn } from '@primeuix/utils';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: Parameters<typeof primeuixcn>) {\n    return twMerge(primeuixcn(inputs));\n}\n"
+    }
+  ]
+}

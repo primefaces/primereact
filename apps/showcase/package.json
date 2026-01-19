@@ -8,15 +8,16 @@
         "clean": "npx rimraf --glob ./__store__ ./.contentlayer ./.next",
         "scan": "npm run dev && react-scan localhost:3000",
         "build": "npm run build:init && next build",
-        "build:init": "npm run build:store && npm run build:content",
+        "build:init": "npm run build:store && npm run build:content && npm run build:registry",
         "build:content": "contentlayer2 build",
         "build:store": "node ./scripts/generate-store.mjs",
         "build:apidoc": "node ./scripts/build-apidoc.mjs",
+        "build:registry": "node scripts/build-registry.mjs",
         "start": "next start",
         "lint": "next lint"
     },
     "dependencies": {
-        "@/ui": "workspace:*",
+        "@/components": "workspace:*",
         "@primereact/hooks": "workspace:*",
         "@primereact/icons": "workspace:*",
         "@primeuix/themes": "catalog:",

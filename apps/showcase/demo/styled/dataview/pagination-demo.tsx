@@ -1,6 +1,6 @@
 'use client';
 
-import { ProductService } from '@/services/product.service';
+import { ProductService } from '@/shared/services/product.service';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';

@@ -1,5 +1,5 @@
-import DocAds from '@/components/docs/doc-ads';
-import DocSidebar from '@/components/docs/doc-sidebar';
+import DocAds from '@/shared/components/docs/doc-ads';
+import DocSidebar from '@/shared/components/docs/doc-sidebar';
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
     return (

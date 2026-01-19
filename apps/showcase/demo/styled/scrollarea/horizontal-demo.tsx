@@ -1,6 +1,6 @@
 'use client';
 
-import { PhotoService } from '@/services/photo.service';
+import { PhotoService } from '@/shared/services/photo.service';
 import { ScrollArea } from '@primereact/ui/scrollarea';
 import * as React from 'react';
 

@@ -1,6 +1,13 @@
 'use client';
 
-import { ColorPicker, ColorPickerArea, ColorPickerEyeDropper, ColorPickerInput, ColorPickerSlider, ColorPickerSwatch } from '@/ui/colorpicker';
+import {
+    ColorPicker,
+    ColorPickerArea,
+    ColorPickerEyeDropper,
+    ColorPickerInput,
+    ColorPickerSlider,
+    ColorPickerSwatch
+} from '@/components/ui/colorpicker';
 import type { ColorSpace } from '@primereact/types/shared/colorpicker';
 import * as React from 'react';
 

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "paginator",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://v11.primereact.org/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/paginator.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport { PaginatorEllipsisProps, PaginatorFirstProps, PaginatorLastProps, PaginatorNextProps, PaginatorPageProps, PaginatorPagesInstance, PaginatorPagesProps, PaginatorPrevProps, PaginatorRootProps } from '@primereact/types/shared/paginator';\nimport { cn } from '@/lib/utils';\nimport { Paginator as PrimePaginator } from 'primereact/paginator';\nimport * as React from 'react';\n\nfunction Paginator({ className, ...props }: PaginatorRootProps) {\n    return <PrimePaginator.Root className={cn('flex items-center gap-2', className)} {...props} />;\n}\n\nfunction PaginatorPages({ className, ...props }: PaginatorPagesProps) {\n    return (\n        <PrimePaginator.Pages className={cn('flex items-center gap-2', className)} {...props}>\n            {({ paginator }: PaginatorPagesInstance) => paginator?.pages.map((page, index) => (page.type === 'page' ? <PaginatorPage key={index} value={page.value} /> : <PaginatorEllipsis key={index} />))}\n        </PrimePaginator.Pages>\n    );\n}\n\nfunction PaginatorPage({ className, ...props }: PaginatorPageProps) {\n    return <PrimePaginator.Page className={cn('cursor-pointer size-9 rounded-lg border border-surface hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors', className)} {...props} />;\n}\n\nfunction PaginatorEllipsis({ className, ...props }: PaginatorEllipsisProps) {\n    return <PrimePaginator.Ellipsis className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorFirst({ className, ...props }: PaginatorFirstProps) {\n    return <PrimePaginator.First className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorLast({ className, ...props }: PaginatorLastProps) {\n    return <PrimePaginator.Last className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorPrev({ className, ...props }: PaginatorPrevProps) {\n    return <PrimePaginator.Prev className={cn('', className)} {...props} />;\n}\n\nfunction PaginatorNext({ className, ...props }: PaginatorNextProps) {\n    return <PrimePaginator.Next className={cn('', className)} {...props} />;\n}\n\nexport { Paginator, PaginatorFirst, PaginatorLast, PaginatorNext, PaginatorPage, PaginatorPages, PaginatorPrev };\n"
+    }
+  ]
+}

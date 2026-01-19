@@ -1,7 +1,7 @@
 'use client';
 
-import { Switch } from '@/ui/switch';
-import { SwitchChangeEvent } from '@primereact/types/shared/switch';
+import { Switch } from '@/components/ui/switch';
+import { SwitchRootChangeEvent } from '@primereact/types/shared/switch';
 import React from 'react';
 
 export default function ControlledDemo() {
@@ -9,7 +9,7 @@ export default function ControlledDemo() {
 
     return (
         <div className="flex justify-center items-center gap-2">
-            <Switch inputId="mode" checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)} />
+            <Switch inputId="mode" checked={checked} onCheckedChange={(event: SwitchRootChangeEvent) => setChecked(event.checked)} />
             <label htmlFor="mode">Airplane Mode</label>
         </div>
     );

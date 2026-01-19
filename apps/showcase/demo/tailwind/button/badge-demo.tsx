@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/ui/button';
 import { Badge } from 'primereact/badge';
+import { Button } from '@/components/ui/button';
 
 export default function BadgeDemo() {
     return (

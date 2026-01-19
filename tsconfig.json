@@ -38,7 +38,7 @@
             "@primereact/types/*": ["packages/@primereact/types/src/*"],
             "@primereact/ui/*": ["./packages/@primereact/ui/src/*"],
             "primereact/*": ["./packages/primereact/src/*"],
-            "@/ui/*": ["./packages/tailwind/src/*"],
+            "@/components/ui/*": ["./packages/tailwind/src/*"],
         },
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

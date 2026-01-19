@@ -1,5 +1,5 @@
 'use client';
-import { CountryService } from '@/services/country.service';
+import { CountryService } from '@/shared/services/country.service';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
 import * as React from 'react';

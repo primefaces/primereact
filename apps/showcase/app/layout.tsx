@@ -1,8 +1,8 @@
 import '@/assets/styles/global.css';
 import appConfig from '@/app.config';
 import { Geist_Mono } from 'next/font/google';
-import { AppProvider } from '@/context/App.context';
-import StyleRegistry from '@/components/style-registry';
+import { AppProvider } from '@/shared/components/layout/app-provider';
+import StyleRegistry from '@/shared/components/style-registry';
 
 export const { metadata, viewport, ...rest } = appConfig;
 

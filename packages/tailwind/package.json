@@ -1,5 +1,5 @@
 {
-    "name": "@/ui",
+    "name": "@/components",
     "private": true,
     "author": "PrimeTek Informatics",
     "description": "A Tailwind CSS based UI component library for React.",
@@ -14,10 +14,11 @@
         "url": "https://github.com/primefaces/primereact/issues"
     },
     "exports": {
-        "./*": "./src/*/index.tsx"
+        "./ui/*": "./src/*.tsx"
     },
     "dependencies": {
         "class-variance-authority": "^0.7.1",
+        "tailwind-merge": "^3.0.1",
         "primereact": "workspace:*",
         "tailwindcss-primeui": "catalog:"
     }

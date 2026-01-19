@@ -1,4 +1,4 @@
-import { useApp } from '@/hooks/useApp';
+import { useApp } from '@/shared/hooks/useApp';
 import Image from 'next/image';
 import * as React from 'react';
 

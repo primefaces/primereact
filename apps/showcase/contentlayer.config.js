@@ -6,9 +6,9 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import { codeImport } from 'remark-code-import';
 import remarkGfm from 'remark-gfm';
-import { replaceApiTable, replaceComponentViewer } from './utils/getComponentReplacements';
-import { themes } from './utils/highlight-code';
-import { rehypeAttachMeta, rehypeDemoViewer, rehypeNpmCommandMeta, rehypeReAttachMeta } from './utils/rehype-source-transform';
+import { replaceApiTable, replaceComponentViewer } from './shared/utils/getComponentReplacements';
+import { themes } from './shared/utils/highlight-code';
+import { rehypeAttachMeta, rehypeDemoViewer, rehypeNpmCommandMeta, rehypeReAttachMeta } from './shared/utils/rehype-source-transform';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',

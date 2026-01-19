@@ -1,5 +1,5 @@
 import Noir from '@/themes/noir';
-import type { AppConfig } from '@/types/App.types';
+import type { AppConfig } from '@/shared/types/App.types';
 
 const appConfig: AppConfig = {
     preset: 'Aura',

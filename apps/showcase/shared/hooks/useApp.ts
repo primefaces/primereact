@@ -1,0 +1,19 @@
+'use client';
+import appConfig from '@/app.config';
+import { AppContext } from '@/shared/components/layout/app-provider';
+import pkg from '@/package.json';
+import * as React from 'react';
+
+export function useApp() {
+    const context = React.useContext(AppContext);
+
+    if (!context) {
+        throw new Error('useApp must be used within an AppProvider');
+    }
+
+    return {
+        ...context,
+        config: appConfig,
+        pkg
+    };
+}

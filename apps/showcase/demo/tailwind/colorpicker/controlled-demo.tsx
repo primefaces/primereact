@@ -1,6 +1,13 @@
 'use client';
 
-import { ColorPicker, ColorPickerArea, ColorPickerEyeDropper, ColorPickerInput, ColorPickerSlider, ColorPickerSwatch } from '@/ui/colorpicker';
+import {
+    ColorPicker,
+    ColorPickerArea,
+    ColorPickerEyeDropper,
+    ColorPickerInput,
+    ColorPickerSlider,
+    ColorPickerSwatch
+} from '@/components/ui/colorpicker';
 import { parseColor } from '@primereact/headless/colorpicker';
 import type { ColorInstance, ColorSpace } from '@primereact/types/shared/colorpicker';
 import { useColorPickerChangeEvent } from '@primereact/types/shared/colorpicker';

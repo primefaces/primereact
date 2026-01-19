@@ -1,4 +1,4 @@
-import { Paginator, PaginatorFirst, PaginatorLast, PaginatorNext, PaginatorPages, PaginatorPrev } from '@/ui/paginator';
+import { Paginator, PaginatorFirst, PaginatorLast, PaginatorNext, PaginatorPages, PaginatorPrev } from '@/components/ui/paginator';
 
 function BasicDemo() {
     return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { ProductService } from '@/services/product.service';
+import { ProductService } from '@/shared/services/product.service';
 import { useDataView } from '@primereact/headless/dataview';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { Button } from '@primereact/ui/button';

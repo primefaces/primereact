@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://v11.primereact.org/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "type": "registry:ui",
+      "content": "import type { SwitchRootProps } from '@primereact/types/shared/switch';\nimport { cn } from '@/lib/utils';\nimport { Switch as SwitchPrime } from 'primereact/switch';\nimport * as React from 'react';\n\nfunction Switch({ className, invalid, children, ...props }: SwitchRootProps & { children?: React.ReactNode }) {\n    return (\n        <SwitchPrime.Root\n            className={cn(\n                'peer group relative disabled:pointer-events-none disabled:opacity-60',\n                '[&>input]:size-full [&>input]:whitespace-nowrap [&>input]:outline-none [&>input]:absolute [&>input]:top-0 [&>input]:left-0 [&>input]:opacity-0',\n                className\n            )}\n            aria-invalid={invalid}\n            {...props}\n        >\n            <SwitchPrime.Control\n                aria-invalid={invalid}\n                className={cn(\n                    'w-10 h-6 border-2 border-transparent bg-surface-200 hover:bg-surface-300 dark:bg-surface-700 aria-invalid:bg-red-500/50 dark:hover:bg-surface-600 group-data-[p-checked=true]:bg-primary group-data-[p-checked=true]:hover:bg-primary-emphasis rounded-full transition-[background,box-shadow] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500/50 aria-invalid:focus-visible:outline-red-500'\n                )}\n            >\n                <SwitchPrime.Thumb className={cn('h-full aspect-square group-data-[p-checked=true]:translate-x-[calc(100%-3px)] bg-primary-contrast rounded-full transition-[translate,width] pointer-events-none')} children={children} />\n            </SwitchPrime.Control>\n        </SwitchPrime.Root>\n    );\n}\n\nexport { Switch };\n"
+    }
+  ]
+}

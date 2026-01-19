@@ -96,3 +96,8 @@
     font-size: 0.96rem;
     border: 1px solid var(--code-figure-border);
 }
+
+[data-rehype-pretty-code-figure] [data-line] a {
+    background-color: color-mix(in srgb, var(--color-blue-500) 20%, transparent);
+    text-decoration: underline;
+}

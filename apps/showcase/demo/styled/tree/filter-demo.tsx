@@ -1,6 +1,6 @@
 'use client';
 
-import { NodeService } from '@/services/node.service';
+import { NodeService } from '@/shared/services/node.service';
 import type { TreeNode } from '@primereact/types/shared/tree';
 import { Fluid } from '@primereact/ui/fluid';
 import { IconField } from '@primereact/ui/iconfield';
