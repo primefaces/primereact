@@ -1,4 +1,4 @@
-export { defaultButtonProps } from './button';
+export { defaultTriggerProps } from './trigger';
 export { defaultClearIconProps } from './clearicon';
 export { defaultEmptyProps } from './empty';
 export { defaultFooterProps } from './footer';

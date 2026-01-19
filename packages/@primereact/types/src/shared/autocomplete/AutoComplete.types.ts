@@ -26,9 +26,9 @@ export const AutoCompleteClassNames = {
      */
     clearIcon: 'p-autocomplete-clear-icon',
     /**
-     * Class name of the button element.
+     * Class name of the trigger element.
      */
-    button: 'p-autocomplete-dropdown',
+    trigger: 'p-autocomplete-dropdown',
     /**
      * Class name of the panel element.
      */
@@ -45,6 +45,10 @@ export const AutoCompleteClassNames = {
      * Class name of the option element.
      */
     option: 'p-autocomplete-option',
+    /**
+     * Class name of the selection element.
+     */
+    selection: 'p-autocomplete-selection',
     /**
      * Class name of the empty message element.
      */

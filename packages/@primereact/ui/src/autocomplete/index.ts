@@ -2,12 +2,12 @@ export * as AutoComplete from './UIAutoComplete.parts';
 
 // Named runtime exports to maximize tree-shaking
 export {
-    AutoCompleteButton,
+    AutoCompleteTrigger,
     AutoCompleteClearIcon,
     AutoCompletePortal,
     AutoCompleteProps,
     AutoCompleteProvider,
-    defaultButtonProps,
+    defaultTriggerProps,
     defaultClearIconProps,
     defaultEmptyProps,
     defaultFooterProps,

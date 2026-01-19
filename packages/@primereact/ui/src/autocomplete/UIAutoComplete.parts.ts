@@ -1,4 +1,4 @@
-export { AutoCompleteButton as Button, AutoCompleteClearIcon as ClearIcon, AutoCompletePortal as Portal } from 'primereact/autocomplete';
+export { AutoCompleteTrigger as Trigger, AutoCompleteClearIcon as ClearIcon, AutoCompletePortal as Portal } from 'primereact/autocomplete';
 export { UIAutoCompleteEmpty as Empty } from './empty';
 export { UIAutoCompleteFooter as Footer } from './footer';
 export { UIAutoCompleteHeader as Header } from './header';

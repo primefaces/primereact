@@ -273,7 +273,7 @@ export const useAutoComplete = withHeadless({
             event.preventDefault();
         };
 
-        const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const onTriggerClick = (event: React.MouseEvent<HTMLButtonElement>) => {
             if (!props.disabled) {
                 if (!overlayVisibleState) {
                     focus(inputRef.current?.elementRef.current as HTMLInputElement);
@@ -286,6 +286,8 @@ export const useAutoComplete = withHeadless({
                     }
 
                     setOverlayVisibleState(true);
+
+                    listbox.onListFocus();
                 } else {
                     setOverlayVisibleState(false);
                     setSearchingState(false);
@@ -468,7 +470,7 @@ export const useAutoComplete = withHeadless({
             onFocus,
             onBlur,
             onKeyDown,
-            onButtonClick,
+            onTriggerClick,
             onClearClick,
             onOverlayEnter,
             onOverlayAfterEnter,

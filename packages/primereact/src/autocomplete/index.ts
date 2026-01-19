@@ -3,7 +3,7 @@ export * as AutoComplete from './AutoComplete.parts';
 export * as AutoCompleteProps from './AutoComplete.props';
 
 // Named runtime exports to maximize tree-shaking
-export { AutoCompleteButton, defaultButtonProps } from './button';
+export { AutoCompleteTrigger, defaultTriggerProps } from './trigger';
 export { AutoCompleteClearIcon, defaultClearIconProps } from './clearicon';
 export { AutoCompleteEmpty, defaultEmptyProps } from './empty';
 export { AutoCompleteFooter, defaultFooterProps } from './footer';

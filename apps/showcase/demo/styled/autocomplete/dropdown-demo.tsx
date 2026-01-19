@@ -16,9 +16,9 @@ export default function DropdownDemo() {
             <AutoComplete.Root options={items} onComplete={search}>
                 <AutoComplete.Input />
 
-                <AutoComplete.Button>
+                <AutoComplete.Trigger>
                     <ChevronDownIcon />
-                </AutoComplete.Button>
+                </AutoComplete.Trigger>
 
                 <AutoComplete.Portal>
                     <AutoComplete.List>

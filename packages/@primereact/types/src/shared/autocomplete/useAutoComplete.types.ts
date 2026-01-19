@@ -276,10 +276,10 @@ export interface useAutoCompleteExposes {
      */
     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     /**
-     * Callback when the dropdown button is clicked.
+     * Callback when the dropdown trigger is clicked.
      * @param {React.MouseEvent<HTMLButtonElement>} event - The mouse event.
      */
-    onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onTriggerClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     /**
      * Callback when the clear button is clicked.
      * @param {React.MouseEvent<HTMLButtonElement>} event - The mouse event.

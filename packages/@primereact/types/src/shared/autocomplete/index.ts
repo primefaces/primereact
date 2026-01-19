@@ -1,5 +1,5 @@
 export * from './AutoComplete.types';
-export * from './AutoCompleteButton.types';
+export * from './AutoCompleteTrigger.types';
 export * from './AutoCompleteClearIcon.types';
 export * from './AutoCompleteEmpty.types';
 export * from './AutoCompleteFooter.types';

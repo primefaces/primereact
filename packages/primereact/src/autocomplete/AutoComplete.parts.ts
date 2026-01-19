@@ -1,4 +1,4 @@
-export { AutoCompleteButton as Button } from './button';
+export { AutoCompleteTrigger as Trigger } from './trigger';
 export { AutoCompleteClearIcon as ClearIcon } from './clearicon';
 export { AutoCompleteEmpty as Empty } from './empty';
 export { AutoCompleteFooter as Footer } from './footer';

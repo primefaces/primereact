@@ -36,7 +36,7 @@ export const styles = createStyles<AutoCompleteRootInstance>({
         ],
         input: 'p-autocomplete-input',
         clearIcon: 'p-autocomplete-clear-icon',
-        button: 'p-autocomplete-dropdown',
+        trigger: 'p-autocomplete-dropdown',
         panel: 'p-autocomplete-list-container',
         list: 'p-autocomplete-list',
         options: 'p-autocomplete-options',
