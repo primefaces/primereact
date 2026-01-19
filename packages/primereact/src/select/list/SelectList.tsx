@@ -25,6 +25,7 @@ export const SelectList = withComponent({
                 checkmark: select?.props.checkmark,
                 listboxInstance: select?.listbox
             },
+            select?.ptm('pcListbox'),
             ptmi('root')
         );
 
