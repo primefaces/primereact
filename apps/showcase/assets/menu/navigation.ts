@@ -545,6 +545,10 @@ export const menu = {
             name: 'Form',
             children: [
                 {
+                    name: 'Checkbox',
+                    href: '/docs/tailwind/components/checkbox'
+                },
+                {
                     name: 'ColorPicker',
                     href: '/docs/tailwind/components/colorpicker',
                     badge: 'New'
@@ -552,6 +556,10 @@ export const menu = {
                 {
                     name: 'InputText',
                     href: '/docs/tailwind/components/inputtext'
+                },
+                {
+                    name: 'RadioButton',
+                    href: '/docs/tailwind/components/radiobutton'
                 },
                 {
                     name: 'Switch',
@@ -569,6 +577,24 @@ export const menu = {
                 {
                     name: 'SpeedDial',
                     href: '/docs/tailwind/components/speeddial'
+                }
+            ]
+        },
+        {
+            name: 'Media',
+            children: [
+                {
+                    name: 'Carousel',
+                    href: '/docs/tailwind/components/carousel'
+                }
+            ]
+        },
+        {
+            name: 'Misc',
+            children: [
+                {
+                    name: 'Avatar',
+                    href: '/docs/styled/components/avatar'
                 }
             ]
         }
