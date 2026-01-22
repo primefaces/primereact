@@ -58,14 +58,14 @@ export default function AllComponentPreviews({ components }: { components: Compo
                     </div>
                 </div>
             </div>
-            <div className="border-t border-surface py-12 flex-1 h-full">
+            <div className="border-t border-(--border-color) py-12 flex-1 h-full">
                 <div className="container grid grid-cols-1 min-[684px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                     {filteredResult.length > 0 ? (
                         filteredResult.map((component) => (
-                            <div key={component.title} className="group relative overflow-hidden rounded-lg border border-surface ">
+                            <div key={component.title} className="group relative overflow-hidden rounded-lg border border-(--border-color) ">
                                 <div className="relative aspect-5/4 overflow-hidden flex flex-col group-hover:scale-[1.01] transition-transform ease-[cubic-bezier(0,.55,.45,1)] duration-200">
                                     <div className="flex-1"></div>
-                                    <div className=" lg:h-16 px-4 pt-2 lg:pb-2 pb-3 border-t border-surface bg-surface-0 dark:bg-surface-900">
+                                    <div className=" lg:h-16 px-4 pt-2 lg:pb-2 pb-3 border-t border-(--border-color) bg-surface-0 dark:bg-surface-900">
                                         <h3 className="font-medium">{component.title}</h3>
                                         <p className="text-surface-500 line-clamp-1 text-ellipsis">{component.description}</p>
                                         <div
@@ -79,7 +79,7 @@ export default function AllComponentPreviews({ components }: { components: Compo
                                                         <Link
                                                             key={component.componentSlug + item}
                                                             href={'/docs/' + component.componentSlug.replace('styled/', item.toLowerCase() + '/')}
-                                                            className="capitalize text-color font-medium py-2 lg:py-0 lg:text-base text-sm flex-1 flex items-center justify-center bg-surface-0 dark:bg-surface-900 hover:bg-primary hover:text-primary-contrast hover:border-primary transition-colors duration-150 rounded-lg border border-surface"
+                                                            className="capitalize text-color font-medium py-2 lg:py-0 lg:text-base text-sm flex-1 flex items-center justify-center bg-surface-0 dark:bg-surface-900 hover:bg-primary hover:text-primary-contrast hover:border-primary transition-colors duration-150 rounded-lg border border-(--border-color)"
                                                         >
                                                             {item}
                                                         </Link>
@@ -92,13 +92,13 @@ export default function AllComponentPreviews({ components }: { components: Compo
                         ))
                     ) : (
                         <div className="col-span-full flex flex-col items-center justify-center flex-wrap pt-24">
-                            <div className="aspect-5/4 max-w-3xs w-full rounded-lg border border-surface flex flex-col overflow-hidden">
+                            <div className="aspect-5/4 max-w-3xs w-full rounded-lg border border-(--border-color) flex flex-col overflow-hidden">
                                 <div className="flex-1 p-3">
                                     <div className="bg-surface-100 dark:bg-surface-900 size-full rounded-md flex items-center justify-center">
                                         <i className="pi pi-ticket leading-none! text-3xl text-surface-300 dark:text-surface-600 mb-3" />
                                     </div>
                                 </div>
-                                <div className="px-3 py-1.5 border-t border-surface bg-surface-0 dark:bg-surface-900">
+                                <div className="px-3 py-1.5 border-t border-(--border-color) bg-surface-0 dark:bg-surface-900">
                                     <h3 className="font-medium ">{search}</h3>
                                     <div className="mt-0.5 h-5 bg-surface-100 dark:bg-surface-800 rounded-md w-3/4"></div>
                                 </div>

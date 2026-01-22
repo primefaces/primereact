@@ -43,7 +43,7 @@ export default function DocSidebar() {
                     </Link>
                 ))}
             </div>
-            <div ref={scrollContainerRef} className="space-y-8 overflow-auto flex-1 border-t border-surface pt-2 pb-6">
+            <div ref={scrollContainerRef} className="space-y-8 overflow-auto flex-1 border-t border-(--border-color) pt-2 pb-6">
                 {(menu[pathname.split('/')[2] as keyof typeof menu] || []).map((item, i) => (
                     <div key={item.name + i}>
                         <span className="text-xs text-surface-500 dark:text-surface-400 pl-3 font-mono uppercase">{item.name}</span>
@@ -63,6 +63,11 @@ export default function DocSidebar() {
                                             {...(isActive ? { 'data-active': '' } : {})}
                                         >
                                             {child.name}
+                                            {'badge' in child && child?.badge && (
+                                                <span className="uppercase flex items-center justify-center px-1 py-0.5 rounded-sm bg-primary-500/10 dark:bg-primary-400/10 border border-primary-500/15 dark:border-primary-400/15 text-primary font-bold text-[10px] tracking-tight leading-none ml-auto mr-0">
+                                                    {child.badge}
+                                                </span>
+                                            )}
                                             {isExternalLink && <i className="pi pi-arrow-up-right ml-auto mr-0 text-xs! opacity-60"></i>}
                                         </Link>
                                     </li>

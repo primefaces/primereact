@@ -54,7 +54,7 @@ export default function DocDemoWrapper({
                             </div>
                         </div>
                     </div>
-                    <figure data-rehype-pretty-code-figure="in-wrapper" data-expanded={isExpanded} className="data-[expanded=true]:[&_pre]:max-h-[600px] [&_pre]:max-h-[300px] [&_pre]:pt-1.5!">
+                    <figure data-rehype-pretty-code-figure="in-wrapper" data-expanded={isExpanded} className="data-[expanded=true]:[&_pre]:max-h-max [&_pre]:max-h-[300px] [&_pre]:pt-1.5!">
                         <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
                     </figure>
                 </div>

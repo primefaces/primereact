@@ -51,7 +51,7 @@ export default function DocAds() {
                             data-level={level}
                             onPointerEnter={stopInterval}
                             onPointerLeave={startInterval}
-                            className="group perspective-[900px] absolute bottom-0 left-0 translate-y-[calc(var(--ad-level)*-20px)] scale-[calc(1-var(--ad-level)*0.1)] z-[calc(100-var(--ad-level))] w-full h-auto rounded-lg p-2.5 xl:p-3 bg-surface-0 dark:bg-surface-900 shadow-xs border border-surface dark:border-surface-800 transition-transform duration-500 "
+                            className="group perspective-[900px] absolute bottom-0 left-0 translate-y-[calc(var(--ad-level)*-20px)] scale-[calc(1-var(--ad-level)*0.1)] z-[calc(100-var(--ad-level))] w-full h-auto rounded-lg p-2.5 xl:p-3 bg-surface-0 dark:bg-surface-900 shadow-xs border border-(--border-color) transition-transform duration-500 "
                         >
                             <div className="group-data-[level=0]:opacity-100 opacity-25 group-data-[level=0]:blur-[0] blur-[0.5px] transition-[opacity,filter] duration-700">
                                 <h4 className="text-sm font-semibold text-surface-700 dark:text-surface-200">{item.title}</h4>

@@ -30,7 +30,7 @@ export default function AppTopbar() {
 
     return (
         <header
-            className="sticky top-(--news-height) z-50 w-full gap-4 border-b border-transparent data-scrolled:border-surface data-scrolled:bg-(--topbar-sticky-background) data-scrolled:backdrop-blur-sm transition-colors duration-500"
+            className="sticky top-(--news-height) z-50 w-full gap-4 border-b border-transparent data-scrolled:border-(--border-color) data-scrolled:bg-(--topbar-sticky-background) data-scrolled:backdrop-blur-sm transition-colors duration-500"
             {...(y > 10 && { 'data-scrolled': '' })}
         >
             <div className="container h-(--topbar-height) flex items-center justify-center">
@@ -122,7 +122,7 @@ export function AppTopbarButton<T extends React.ElementType = 'button'>({ as, cl
     return (
         <Component
             className={cn(
-                'inline-flex items-center justify-center gap-2 border border-surface size-7 rounded-md  lg:[&_i]:text-sm lg:text-sm text-color bg-(--card-background) hover:border-primary focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-(--p-focus-ring-offset) [transiton:outline-color_0.2s,border_0.2s]',
+                'inline-flex items-center justify-center gap-2 border border-(--border-color) size-7 rounded-md  lg:[&_i]:text-sm lg:text-sm text-color bg-(--card-background) hover:border-primary focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-(--p-focus-ring-offset) [transiton:outline-color_0.2s,border_0.2s]',
                 className
             )}
             {...props}

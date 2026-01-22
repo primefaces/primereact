@@ -119,7 +119,7 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
             <div
                 className="relative pl-4
     after:content-[''] after:absolute after:rounded-full after:left-0 after:transition-[top,height] after:duration-300 after:top-(--top) after:h-(--height) after:bg-primary after:w-px
-    before:content-[''] before:absolute before:rounded-full before:left-0 before:top-0 before:h-full before:bg-surface-200 dark:before:bg-surface-800 before:w-px"
+    before:content-[''] before:absolute before:rounded-full before:left-0 before:top-0 before:h-full before:bg-(--border-color) before:w-px"
             >
                 <ul className="mt-2">
                     {toc.map(

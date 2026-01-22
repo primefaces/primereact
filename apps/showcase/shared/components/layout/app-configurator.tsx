@@ -306,7 +306,7 @@ export default function AppConfigurator() {
     };
 
     return (
-        <div className="hidden absolute top-[calc(100%+4px)] w-68 space-y-4 p-3 bg-(--overlay-background) rounded-md border border-surface origin-top shadow-md" style={{ insetInlineEnd: 0 }}>
+        <div className="hidden absolute top-[calc(100%+4px)] w-68 space-y-4 p-3 bg-(--overlay-background) rounded-md border border-(--border-color) origin-top shadow-md" style={{ insetInlineEnd: 0 }}>
             <div>
                 <div className="text-sm text-(--text-secondary-color) font-semibold text-balance mb-1.5">Primary</div>
                 <div className="flex flex-wrap gap-2">

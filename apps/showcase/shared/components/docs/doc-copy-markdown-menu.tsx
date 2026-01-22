@@ -92,7 +92,7 @@ export default function DocCopyMarkdownMenu({
 
     return (
         <div className={cn('flex items-center gap-4 relative', className)} {...props}>
-            <div className="bg-surface-0 dark:bg-surface-900 overflow-hidden flex rounded-lg border border-surface shadow-xs divide-x divide-(--p-content-border-color)">
+            <div className="bg-surface-0 dark:bg-surface-900 overflow-hidden flex rounded-lg border border-(--border-color) shadow-xs divide-x divide-(--border-color)">
                 <button
                     onClick={handleCopy}
                     disabled={isCopied}
@@ -116,7 +116,7 @@ export default function DocCopyMarkdownMenu({
                     <i className="pi pi-chevron-down text-sm"></i>
                 </StyleClass>
             </div>
-            <div className="copy-markdown-dropdown hidden absolute top-[calc(100%+4px)] right-0 inset-inline-end-0 w-48 p-1 bg-(--overlay-background) rounded-lg border border-surface origin-top shadow-md z-50">
+            <div className="copy-markdown-dropdown hidden absolute top-[calc(100%+4px)] right-0 inset-inline-end-0 w-48 p-1 bg-(--overlay-background) rounded-lg border border-(--border-color) origin-top shadow-md z-50">
                 <div className="flex flex-col gap-0.5">
                     <DocCopyMarkdownMenuItem href={markdownLink} target="_blank">
                         <MarkdownIcon />
