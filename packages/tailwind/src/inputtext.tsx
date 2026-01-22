@@ -5,17 +5,17 @@ import { InputText as PRInputText } from 'primereact/inputtext';
 import * as React from 'react';
 
 const inputTextVariants = cva(
-    ' rounded-lg w-full min-w-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500/20 dark:focus-visible:outline-primary-500/30 aria-invalid:outline-red-500/20 dark:aria-invalid:outline-red-500/30 placeholder:text-surface-500 dark:placeholder:text-surface-400 aria-invalid:placeholder:text-red-500 dark:aria-invalid:placeholder:text-red-400 aria-invalid:text-red-500 dark:aria-invalid:text-red-400',
+    'appearance-none rounded-md w-full outline-hidden bg-surface-0 dark:bg-surface-950 text-surface-700 dark:text-surface-0 placeholder:text-surface-500 dark:placeholder:text-surface-400 border border-surface-300 dark:border-surface-700 transition-colors duration-200 shadow-[0_1px_2px_0_rgba(18,18,23,0.05)] disabled:bg-surface-200 disabled:text-surface-500 dark:disabled:bg-surface-700 dark:disabled:text-surface-400 aria-invalid:border-red-400 dark:aria-invalid:border-red-300 aria-invalid:placeholder:text-red-600 dark:aria-invalid:placeholder:text-red-400 hover:border-surface-400 dark:hover:border-surface-600 focus-visible:border-primary! file:font-medium',
     {
         variants: {
             variant: {
-                filled: 'bg-surface-100 dark:bg-surface-800 aria-invalid:bg-red-500/10 transition-[color,box-shadow]',
-                outlined: 'bg-transparent border border-surface shadow-xs aria-invalid:border-red-500 transition-[color,box-shadow,border-color]'
+                filled: 'bg-surface-50 dark:bg-surface-800',
+                outlined: ''
             },
             size: {
-                small: 'h-8 px-2.5 py-1 text-sm',
-                normal: 'h-9 px-3 py-1.5 text-base',
-                large: 'h-10.5 px-3.5 py-2 text-lg'
+                small: 'py-1 px-2 text-xs',
+                normal: 'py-1.5 px-2.5 text-sm',
+                large: 'py-2 px-3'
             }
         },
         defaultVariants: {
