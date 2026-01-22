@@ -37,6 +37,26 @@ export interface InputTagsRootPassThrough {
      * Used to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: InputTagsRootPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the list's DOM element.
+     */
+    list?: InputTagsRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the pcListbox's DOM element.
+     */
+    pcListbox?: InputTagsRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the panel's DOM element.
+     */
+    panel?: InputTagsRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the options' DOM element.
+     */
+    options?: InputTagsRootPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Used to pass attributes to the option's DOM element.
+     */
+    option?: InputTagsRootPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
 }
 
 /**

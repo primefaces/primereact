@@ -17,6 +17,7 @@ export const InputTagsInput = withComponent({
         const { props, ptmi, inputtags } = instance;
         const { as, ...restProps } = props;
 
+        const hasDropdown = !!inputtags?.props.onComplete;
         const rootProps = mergeProps(
             restProps,
             {
@@ -27,9 +28,16 @@ export const InputTagsInput = withComponent({
                 variant: inputtags?.props.variant,
                 fluid: inputtags?.props.fluid,
                 disabled: inputtags?.props.disabled,
+                role: hasDropdown ? 'combobox' : undefined,
+                'aria-autocomplete': hasDropdown ? 'list' : undefined,
+                'aria-haspopup': hasDropdown ? 'listbox' : undefined,
+                'aria-expanded': hasDropdown ? inputtags?.state.overlayVisible : undefined,
+                'aria-controls': hasDropdown && inputtags?.state.overlayVisible ? `${inputtags?.id}_list` : undefined,
+                'aria-activedescendant': hasDropdown && inputtags?.state.overlayVisible ? inputtags?.getFocusedOptionId() : undefined,
                 onChange: inputtags?.onChange,
                 onKeyDown: inputtags?.onKeyDown,
                 onPaste: inputtags?.onPaste,
+                onFocus: inputtags?.onFocus,
                 onBlur: inputtags?.onBlur
             },
             inputtags?.ptm('pcInputText'),

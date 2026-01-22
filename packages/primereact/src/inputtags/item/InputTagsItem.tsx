@@ -34,6 +34,8 @@ export const InputTagsItem = withComponent({
             {
                 className: inputtags?.cx('item', { focused: props.index === inputtags?.state.focusedItemIndex }),
                 'data-p-index': props.index,
+                role: 'option',
+                'aria-selected': props.index === inputtags?.state.focusedItemIndex,
                 onKeyDown: inputtags?.onKeyDown
             },
             inputtags?.ptm('item'),

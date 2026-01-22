@@ -21,6 +21,8 @@ export const InputTagsRoot = withComponent({
             {
                 id,
                 className: cx('root'),
+                role: 'listbox',
+                'aria-orientation': 'horizontal',
                 onClick: onClick
             },
             ptmi('root')

@@ -6,4 +6,8 @@ export * as InputTagsProps from './InputTags.props';
 export { defaultHiddenInputProps, InputTagsHiddenInput } from './hiddeninput';
 export { defaultInputProps, InputTagsInput } from './input';
 export { defaultItemProps, InputTagsItem } from './item';
+export { defaultListProps, InputTagsList } from './list';
+export { defaultOptionProps, InputTagsOption } from './option';
+export { defaultOptionsProps, InputTagsOptions } from './options';
+export { defaultPortalProps, InputTagsPortal } from './portal';
 export { defaultRootProps, InputTagsRoot } from './root';

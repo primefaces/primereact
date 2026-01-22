@@ -9,6 +9,8 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
+import type { useListboxInstance } from '@primereact/types/shared/listbox';
+import * as React from 'react';
 
 /**
  * Custom change event for InputTags component.
@@ -45,6 +47,34 @@ export interface useInputTagsRemoveEvent {
 }
 
 /**
+ * Event fired when the input value changes.
+ */
+export interface useInputTagsInputValueChangeEvent<E = React.SyntheticEvent> {
+    /**
+     * The original event that triggered the change.
+     */
+    originalEvent: E;
+    /**
+     * The current input value (query).
+     */
+    query: string;
+}
+
+/**
+ * Event fired when the autocomplete triggers a search/complete action.
+ */
+export interface useInputTagsCompleteEvent<E = React.SyntheticEvent> {
+    /**
+     * The original event that triggered the complete.
+     */
+    originalEvent: E;
+    /**
+     * The current query string.
+     */
+    query: string;
+}
+
+/**
  * Defines valid properties in useInputTags.
  */
 export interface useInputTagsProps {
@@ -56,6 +86,14 @@ export interface useInputTagsProps {
      * Value of the items.
      */
     value?: string[] | undefined;
+    /**
+     * Default value of the input field.
+     */
+    defaultInputValue?: string | undefined;
+    /**
+     * Value of the input field (controlled).
+     */
+    inputValue?: string | undefined;
     /**
      * Maximum number of items allowed.
      */
@@ -81,6 +119,49 @@ export interface useInputTagsProps {
      */
     addOnTab?: boolean | undefined;
     /**
+     * An array of options to display in dropdown.
+     */
+    options?: unknown[];
+    /**
+     * Unique key for each option.
+     */
+    optionKey?: string;
+    /**
+     * Label field for each option.
+     */
+    optionLabel?: string;
+    /**
+     * Value field for each option.
+     */
+    optionValue?: string;
+    /**
+     * Field to check if an option is disabled.
+     */
+    optionDisabled?: string;
+    /**
+     * Label field for option groups.
+     */
+    optionGroupLabel?: string;
+    /**
+     * Field that contains the children options in a group.
+     */
+    optionGroupChildren?: string;
+    /**
+     * Delay between keystrokes to wait before sending a query.
+     * @defaultValue 300
+     */
+    delay?: number;
+    /**
+     * Minimum number of characters to initiate a search.
+     * @defaultValue 1
+     */
+    minLength?: number;
+    /**
+     * A valid query selector or an HTMLElement to specify where the overlay gets attached.
+     * @defaultValue 'body'
+     */
+    appendTo?: 'body' | 'self' | HTMLElement;
+    /**
      * Callback to invoke when value changes.
      */
     onValueChange?: (event: useInputTagsValueChangeEvent) => void;
@@ -96,6 +177,16 @@ export interface useInputTagsProps {
      * @returns void
      */
     onRemove?: (event: useInputTagsRemoveEvent) => void;
+    /**
+     * Callback when the input value changes.
+     * @param {useInputTagsInputValueChangeEvent} event - The input value change event.
+     */
+    onInputValueChange?: (event: useInputTagsInputValueChangeEvent) => void;
+    /**
+     * Callback to invoke to search for suggestions.
+     * @param {useInputTagsCompleteEvent} event - Custom complete event.
+     */
+    onComplete?: (event: useInputTagsCompleteEvent) => void;
 }
 
 /**
@@ -114,6 +205,18 @@ export interface useInputTagsState {
      * Index of the currently focused item item (-1 if none).
      */
     focusedItemIndex: number;
+    /**
+     * Whether the overlay is visible.
+     */
+    overlayVisible: boolean;
+    /**
+     * Whether a search is in progress.
+     */
+    searching: boolean;
+    /**
+     * The index of the currently focused option. -1 if no option is focused.
+     */
+    focusedOptionIndex: number;
 }
 
 /**
@@ -125,13 +228,17 @@ export interface useInputTagsExposes {
      */
     state: useInputTagsState;
     /**
-     * Reference to the control element.
+     * The listbox instance used internally for option management.
      */
-    controlRef: React.RefObject<HTMLDivElement | null>;
+    listbox: useListboxInstance;
     /**
      * Reference to the input element.
      */
     inputRef: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
+    /**
+     * Reference to the portal element.
+     */
+    portalRef: React.RefObject<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>;
     /**
      * Map of item refs by index.
      */
@@ -157,6 +264,10 @@ export interface useInputTagsExposes {
      */
     onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
     /**
+     * Focus event handler.
+     */
+    onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
      * Remove icon click handler.
      */
     onItemRemoveClick: (index: number) => void;
@@ -164,6 +275,24 @@ export interface useInputTagsExposes {
      * Removes all items.
      */
     onRemoveAllItems: () => void;
+    /**
+     * Changes the visibility state of the overlay.
+     * @param {boolean} isVisible - The new visibility state.
+     */
+    changeVisibleState: (isVisible: boolean) => void;
+    /**
+     * Callback when the overlay enters.
+     */
+    onOverlayEnter: () => void;
+    /**
+     * Callback after the overlay has entered.
+     */
+    onOverlayAfterEnter: () => void;
+    /**
+     * Returns the ID of the currently focused option.
+     * @returns The focused option ID or null if no option is focused.
+     */
+    getFocusedOptionId: () => string | null;
 }
 
 /**

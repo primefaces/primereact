@@ -46,6 +46,8 @@ const style = /*css*/ `
     }
 
     .p-inputtags .p-inputtags-input {
+        display: inline-flex;
+        flex: 1 1 auto;
         border: 0 none;
         outline: 0 none;
         background-color: transparent;
@@ -67,6 +69,18 @@ const style = /*css*/ `
 
     .p-inputtags.p-variant-filled {
         background: dt('inputtext.filled.background');
+    }
+
+    .p-inputtags-panel {
+        background: dt('overlay.select.background');
+        color: dt('overlay.select.color');
+        border: 1px solid dt('overlay.select.border.color');
+        border-radius: dt('overlay.select.border.radius');
+        box-shadow: dt('overlay.select.shadow');
+    }
+
+    .p-inputtags-list.p-listbox {
+        border: unset;
     }
 `;
 
@@ -90,6 +104,10 @@ export const styles = createStyles<InputTagsRootInstance>({
                 'p-focused': context.focused
             }
         ],
-        input: 'p-inputtags-input'
+        input: 'p-inputtags-input',
+        panel: 'p-inputtags-panel',
+        list: 'p-inputtags-list',
+        options: 'p-inputtags-options',
+        option: 'p-inputtags-option'
     }
 });

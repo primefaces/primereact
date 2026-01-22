@@ -1,15 +1,19 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import { focus } from '@primeuix/utils';
+import { useListbox } from '@primereact/headless/listbox';
+import type { useListboxValueChangeEvent } from '@primereact/types/shared/listbox';
+import { focus, getOuterWidth } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useInputTags.props';
 
 export const useInputTags = withHeadless({
     name: 'useInputTags',
     defaultProps,
-    setup({ props }) {
-        const [inputValueState, setInputValueState] = React.useState('');
+    setup({ props, elementRef }) {
         const [focusedItemIndexState, setFocusedItemIndexState] = React.useState<number>(-1);
+        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
+        const [searchingState, setSearchingState] = React.useState<boolean>(false);
+        const [focusedState, setFocusedState] = React.useState<boolean>(false);
 
         const defaultValueRef = React.useRef(props.defaultValue ?? []);
         const [valueState, setValueState] = useControlledState({
@@ -18,17 +22,114 @@ export const useInputTags = withHeadless({
             onChange: props.onValueChange
         });
 
-        const controlRef = React.useRef<HTMLDivElement>(null);
-        const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
+        const [inputValueState, setInputValueState] = useControlledState({
+            value: props.inputValue,
+            defaultValue: props.defaultInputValue ?? '',
+            onChange: props.onInputValueChange
+        });
+
+        const onListboxValueChange = React.useRef<((event: useListboxValueChangeEvent) => void) | null>(null);
+        const listbox = useListbox({
+            options: props.options,
+            optionKey: props.optionKey,
+            optionLabel: props.optionLabel,
+            optionValue: props.optionValue,
+            optionDisabled: props.optionDisabled,
+            optionGroupLabel: props.optionGroupLabel,
+            optionGroupChildren: props.optionGroupChildren,
+            multiple: false,
+            disabled: props.disabled,
+            onValueChange: (event: useListboxValueChangeEvent) => onListboxValueChange.current?.(event)
+        });
+
+        const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null); //TODO:
+        const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
         const itemRefs = React.useRef<Map<number, HTMLElement>>(new Map());
+        const searchTimeout = React.useRef<NodeJS.Timeout | null>(null);
+        const focusOnShow = React.useRef<boolean>(false);
+
+        const hasDropdown = !!props.onComplete;
 
         const state = {
             value: valueState ?? [],
-            inputValue: inputValueState,
-            focusedItemIndex: focusedItemIndexState
+            inputValue: inputValueState ?? '',
+            focusedItemIndex: focusedItemIndexState,
+            overlayVisible: overlayVisibleState,
+            searching: searchingState,
+            focused: focusedState,
+            focusedOptionIndex: listbox.state.focusedOptionIndex
         };
 
-        // methods
+        const search = (event: React.SyntheticEvent, query: string) => {
+            //allow empty string but not undefined or null
+            if (query === undefined || query === null) {
+                return;
+            }
+
+            if (props.onComplete) {
+                props.onComplete({
+                    originalEvent: event,
+                    query
+                });
+            }
+        };
+
+        const show = () => {
+            setOverlayVisibleState(true);
+        };
+
+        const hide = () => {
+            setOverlayVisibleState(false);
+            setSearchingState(false);
+            listbox.changeFocusedOptionIndex(new Event('blur') as unknown as React.KeyboardEvent, -1);
+        };
+
+        const changeVisibleState = (isVisible: boolean) => {
+            setOverlayVisibleState(isVisible);
+        };
+
+        const onOverlayEnter = () => {
+            if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
+                const element = portalRef.current.containerRef.current.elementRef.current;
+
+                if (elementRef?.current) {
+                    element.style.minWidth = getOuterWidth(elementRef.current) + 'px';
+                }
+            }
+        };
+
+        const onOverlayAfterEnter = () => {
+            if (focusOnShow.current) {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        const focusedOptionIndex = listbox.state.focusedOptionIndex;
+                        const indexToFocus = focusedOptionIndex !== -1 ? focusedOptionIndex : listbox.findFirstFocusedOptionIndex();
+
+                        listbox.changeFocusedOptionIndex(new Event('focus') as unknown as React.KeyboardEvent, indexToFocus);
+                        focusOnShow.current = false;
+                    });
+                });
+            }
+        };
+
+        const onOptionSelect = (event: { originalEvent: React.SyntheticEvent; value: unknown }) => {
+            const selectedValue = event.value;
+            const option = listbox.getOptions().find((opt: unknown) => {
+                const optValue = listbox.getOptionValue(opt);
+
+                return listbox.isEquals(optValue, selectedValue);
+            });
+
+            const optionLabel = option ? listbox.getOptionLabel(option) : String(selectedValue);
+
+            addItem(optionLabel);
+            listbox.changeFocusedOptionIndex(new Event('select') as unknown as React.KeyboardEvent, -1);
+            focus(inputRef.current?.elementRef.current as HTMLInputElement);
+        };
+
+        // Connect listbox onValueChange to onOptionSelect
+        onListboxValueChange.current = onOptionSelect;
+
         const addItem = (tag: string) => {
             const trimmedTag = tag.trim();
 
@@ -53,7 +154,12 @@ export const useInputTags = withHeadless({
                 });
             }
 
-            setInputValueState('');
+            setInputValueState([
+                '',
+                {
+                    query: ''
+                }
+            ]);
         };
 
         const removeItem = (index: number) => {
@@ -78,74 +184,47 @@ export const useInputTags = withHeadless({
             setFocusedItemIndexState(-1);
         };
 
-        const onArrowLeft = () => {
-            let focusIndex = focusedItemIndexState;
-
-            if (inputValueState.length === 0 && valueState && valueState.length > 0) {
-                focusIndex = focusIndex === -1 ? valueState.length - 1 : focusIndex - 1;
-
-                if (focusIndex < 0) {
-                    focusIndex = 0;
-                }
-            }
-
-            setFocusedItemIndexState(focusIndex);
-        };
-
-        const onArrowRight = () => {
-            let focusIndex = focusedItemIndexState;
-
-            if (inputValueState.length === 0 && valueState && valueState.length > 0) {
-                if (focusIndex === valueState.length - 1) {
-                    focusIndex = -1;
-
-                    if (inputRef.current) {
-                        focus(inputRef.current?.elementRef.current);
-                    }
-                } else if (focusIndex !== -1) {
-                    focusIndex++;
-                }
-            }
-
-            setFocusedItemIndexState(focusIndex);
-        };
-
-        const onBackspace = () => {
-            if (!inputValueState && valueState && valueState.length > 0) {
-                const lastIndex = valueState.length - 1;
-
-                removeItem(lastIndex);
-            }
-
-            if (focusedItemIndexState !== -1) {
-                removeItem(focusedItemIndexState);
-            }
-        };
-
         const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            if (searchTimeout.current) {
+                clearTimeout(searchTimeout.current);
+            }
+
             const newValue = event.target.value;
 
             if (focusedItemIndexState !== -1) {
                 setFocusedItemIndexState(-1);
             }
 
-            if (!props.delimiter) {
-                setInputValueState(newValue);
+            if (props.delimiter) {
+                const delimiterRegex = typeof props.delimiter === 'string' ? new RegExp(props.delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) : props.delimiter;
 
-                return;
+                if (delimiterRegex.test(newValue)) {
+                    const tags = newValue
+                        .split(delimiterRegex)
+                        .map((tag) => tag.trim())
+                        .filter((tag) => tag.length > 0);
+
+                    tags.forEach((tag) => addItem(tag));
+
+                    return;
+                }
             }
 
-            const delimiterRegex = typeof props.delimiter === 'string' ? new RegExp(props.delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) : props.delimiter;
+            setInputValueState([
+                newValue,
+                {
+                    originalEvent: event,
+                    query: newValue
+                }
+            ]);
 
-            if (delimiterRegex.test(newValue)) {
-                const tags = newValue
-                    .split(delimiterRegex)
-                    .map((tag) => tag.trim())
-                    .filter((tag) => tag.length > 0);
+            if (hasDropdown) {
+                setSearchingState(true);
 
-                tags.forEach((tag) => addItem(tag));
-            } else {
-                setInputValueState(newValue);
+                searchTimeout.current = setTimeout(() => {
+                    search(event, newValue);
+                    listbox.changeFocusedOptionIndex(new Event('input') as unknown as React.KeyboardEvent, -1);
+                }, props.delay);
             }
         };
 
@@ -154,37 +233,63 @@ export const useInputTags = withHeadless({
 
             switch (event.key) {
                 case 'Tab':
-                    if (props.addOnTab && inputValueState.trim()) {
-                        addItem(inputValueState);
-                    }
-
+                    onTabKey();
                     break;
 
                 case 'Enter':
-                    if (inputValueState.trim()) {
-                        addItem(inputValueState);
+                    onEnterKey(event);
+                    break;
+
+                case 'ArrowDown':
+                case 'ArrowUp':
+                    if (hasDropdown) {
+                        if (!overlayVisibleState && inputValueState && inputValueState.length >= (props.minLength ?? 1)) {
+                            focusOnShow.current = true;
+                            show();
+                        }
+
+                        listbox.onListKeyDown(event);
+                        event.preventDefault();
                     }
 
                     break;
 
                 case 'ArrowLeft':
-                    onArrowLeft();
+                    onArrowLeftKey();
 
                     break;
 
                 case 'ArrowRight':
-                    onArrowRight();
+                    onArrowRightKey();
 
                     break;
 
                 case 'Backspace':
-                    onBackspace();
+                    onBackspaceKey();
+
+                    break;
+
+                case 'Escape':
+                    if (overlayVisibleState) {
+                        hide();
+                        event.preventDefault();
+                    }
+
+                    break;
+
+                case 'Home':
+                case 'End':
+                case 'PageUp':
+                case 'PageDown':
+                    if (hasDropdown && overlayVisibleState) {
+                        listbox.onListKeyDown(event);
+                    }
 
                     break;
 
                 default:
-                    if (inputValueState.trim() && props.delimiter && typeof props.delimiter === 'string' && event.key === props.delimiter) {
-                        addItem(inputValueState);
+                    if (hasInputValue && props.delimiter && typeof props.delimiter === 'string' && event.key === props.delimiter) {
+                        addItem(inputValueState!);
                     }
 
                     break;
@@ -218,17 +323,111 @@ export const useInputTags = withHeadless({
             }
 
             setTimeout(() => {
-                setInputValueState('');
+                setInputValueState([
+                    '',
+                    {
+                        query: ''
+                    }
+                ]);
             }, 0);
         };
 
+        const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+            if (props.disabled) {
+                return;
+            }
+
+            setFocusedState(true);
+
+            if (hasDropdown) {
+                search(event, event.target.value);
+
+                if (props.options && props.options.length > 0) {
+                    show();
+                }
+            }
+        };
+
         const onBlur = () => {
-            if (props.addOnBlur && inputValueState.trim()) {
-                addItem(inputValueState);
+            setFocusedState(false);
+
+            if (props.addOnBlur && hasInputValue) {
+                addItem(inputValueState!);
             }
 
             if (focusedItemIndexState !== -1) {
                 setFocusedItemIndexState(-1);
+            }
+        };
+
+        const onArrowLeftKey = () => {
+            let focusIndex = focusedItemIndexState;
+
+            if (isInputEmpty && valueState && valueState.length > 0) {
+                focusIndex = focusIndex === -1 ? valueState.length - 1 : focusIndex - 1;
+
+                if (focusIndex < 0) {
+                    focusIndex = 0;
+                }
+            }
+
+            setFocusedItemIndexState(focusIndex);
+        };
+
+        const onArrowRightKey = () => {
+            let focusIndex = focusedItemIndexState;
+
+            if (isInputEmpty && valueState && valueState.length > 0) {
+                if (focusIndex === valueState.length - 1) {
+                    focusIndex = -1;
+
+                    if (inputRef.current) {
+                        focus(inputRef.current?.elementRef.current);
+                    }
+                } else if (focusIndex !== -1) {
+                    focusIndex++;
+                }
+            }
+
+            setFocusedItemIndexState(focusIndex);
+        };
+
+        const onTabKey = () => {
+            if (props.addOnTab && hasInputValue) {
+                addItem(inputValueState!);
+            }
+
+            if (overlayVisibleState) {
+                hide();
+            }
+        };
+
+        const onEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (hasDropdown && overlayVisibleState && listbox.state.focusedOptionIndex !== -1) {
+                const selectedOption = listbox.getOptions()[listbox.state.focusedOptionIndex];
+
+                if (selectedOption) {
+                    onOptionSelect({
+                        originalEvent: event,
+                        value: listbox.getOptionValue(selectedOption)
+                    });
+                }
+
+                event.preventDefault();
+            } else if (hasInputValue) {
+                addItem(inputValueState!);
+            }
+        };
+
+        const onBackspaceKey = () => {
+            if (!inputValueState && valueState && valueState.length > 0) {
+                const lastIndex = valueState.length - 1;
+
+                removeItem(lastIndex);
+            }
+
+            if (focusedItemIndexState !== -1) {
+                removeItem(focusedItemIndexState);
             }
         };
 
@@ -260,11 +459,42 @@ export const useInputTags = withHeadless({
             ]);
         };
 
+        const getFocusedOptionId = () => {
+            return listbox.getFocusedOptionId();
+        };
+
+        // Computed
+        const isInputEmpty = React.useMemo(() => !inputValueState || inputValueState.length === 0, [inputValueState]);
+        const hasInputValue = React.useMemo(() => inputValueState && inputValueState.trim(), [inputValueState]);
+
+        // Effects
+        React.useEffect(() => {
+            if (searchTimeout.current) {
+                clearTimeout(searchTimeout.current);
+                searchTimeout.current = null;
+            }
+        }, []);
+
+        React.useEffect(() => {
+            if (!hasDropdown) return;
+
+            setSearchingState(false);
+
+            const hasOptions = props.options && props.options.length > 0;
+
+            if (hasOptions && focusedState && !overlayVisibleState) {
+                show();
+            } else if (!hasOptions && overlayVisibleState) {
+                hide();
+            }
+        }, [props.options]);
+
         return {
             state,
+            listbox,
             // refs
-            controlRef,
             inputRef,
+            portalRef,
             itemRefs,
             // methods
             onClick,
@@ -272,8 +502,13 @@ export const useInputTags = withHeadless({
             onKeyDown,
             onPaste,
             onBlur,
+            onFocus,
             onItemRemoveClick,
-            onRemoveAllItems
+            onRemoveAllItems,
+            changeVisibleState,
+            onOverlayEnter,
+            onOverlayAfterEnter,
+            getFocusedOptionId
         };
     }
 });
