@@ -6,31 +6,19 @@ export default function SizesDemo() {
         <div className="flex justify-center">
             <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="size_small" name="size" size="small">
-                        <RadioButton.Box>
-                            <RadioButton.Indicator />
-                        </RadioButton.Box>
-                    </RadioButton.Root>
+                    <RadioButton.Root inputId="size_small" name="size" size="small" />
                     <Label.Root htmlFor="size_small" className="text-sm">
                         Small
                     </Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="size_normal" name="size">
-                        <RadioButton.Box>
-                            <RadioButton.Indicator />
-                        </RadioButton.Box>
-                    </RadioButton.Root>
+                    <RadioButton.Root inputId="size_normal" name="size" />
                     <Label.Root htmlFor="size_normal" className="">
                         Normal
                     </Label.Root>
                 </div>
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="size_large" name="size" size="large">
-                        <RadioButton.Box>
-                            <RadioButton.Indicator />
-                        </RadioButton.Box>
-                    </RadioButton.Root>
+                    <RadioButton.Root inputId="size_large" name="size" size="large" />
                     <Label.Root htmlFor="size_large" className="text-lg">
                         Large
                     </Label.Root>

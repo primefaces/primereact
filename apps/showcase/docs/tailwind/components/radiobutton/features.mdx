@@ -6,21 +6,41 @@ component: radiobutton
 
 <DocDemoViewer name="radiobutton:basic-demo" hideCode/>
 
+## Installation
+
+<DocTabs value="CLI">
+<DocTabsList>
+    <DocTabsTab value="CLI">CLI</DocTabsTab>
+    <DocTabsTab value="Manual">Manual</DocTabsTab>
+</DocTabsList>
+<DocTabsPanel value="CLI">
+```bash
+npx shadcn@latest add @primereact/ui/radiobutton
+```
+</DocTabsPanel>
+<DocTabsPanel value="Manual">
+<DocStepper>
+<DocStep>
+Copy and paste the following code into your project
+<DocSourceViewer name="components/ui/radiobutton" />
+</DocStep>
+<DocStep>
+Update the import paths to match your project setup.
+</DocStep>
+</DocStepper>
+</DocTabsPanel>
+</DocTabs>
+
 ## Usage
 
 ```tsx
-import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
 import { RadioButton } from '@primereact/ui/radiobutton';
 ```
 
 ```tsx
-<RadioButtonGroup>
-    <RadioButton.Root>
-        <RadioButton.Box>
-            <RadioButton.Indicator />
-        </RadioButton.Box>
-    </RadioButton.Root>
-</RadioButtonGroup>
+<RadioButton.Group>
+    <RadioButton />
+</RadioButton.Group>
 ```
 
 ## Examples

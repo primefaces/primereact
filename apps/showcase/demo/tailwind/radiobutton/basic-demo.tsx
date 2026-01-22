@@ -1,9 +1,8 @@
 'use client';
 
-import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
 import { Label } from '@primereact/ui/label';
-import { RadioButton } from '@primereact/ui/radiobutton';
+import { RadioButton, RadioButtonGroup } from '@/components/ui/radiobutton';
 import * as React from 'react';
 
 export default function BasicDemo() {
@@ -17,29 +16,17 @@ export default function BasicDemo() {
                 onValueChange={(e: RadioButtonGroupValueChangeEvent) => setIngredient(e.value as string)}
             >
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="ingredient-strawberry" name="fruit" value="strawberry">
-                        <RadioButton.Box>
-                            <RadioButton.Indicator />
-                        </RadioButton.Box>
-                    </RadioButton.Root>
+                    <RadioButton inputId="ingredient-strawberry" name="fruit" value="strawberry" />
                     <Label.Root htmlFor="ingredient-strawberry">🍓 Strawberry</Label.Root>
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="ingredient-banana" name="fruit" value="banana">
-                        <RadioButton.Box>
-                            <RadioButton.Indicator />
-                        </RadioButton.Box>
-                    </RadioButton.Root>
+                    <RadioButton inputId="ingredient-banana" name="fruit" value="banana" />
                     <Label.Root htmlFor="ingredient-banana">🍌 Banana</Label.Root>
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <RadioButton.Root inputId="ingredient-watermelon" name="fruit" value="watermelon">
-                        <RadioButton.Box>
-                            <RadioButton.Indicator />
-                        </RadioButton.Box>
-                    </RadioButton.Root>
+                    <RadioButton inputId="ingredient-watermelon" name="fruit" value="watermelon" />
                     <Label.Root htmlFor="ingredient-watermelon">🍉 Watermelon</Label.Root>
                 </div>
             </RadioButtonGroup>
