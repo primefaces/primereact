@@ -7,7 +7,7 @@ export default function MultipleDemo() {
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         What is this service about?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -19,7 +19,7 @@ export default function MultipleDemo() {
                 <Accordion.Panel value="2">
                     <Accordion.Header>
                         Is my data secure?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -31,7 +31,7 @@ export default function MultipleDemo() {
                 <Accordion.Panel value="3">
                     <Accordion.Header>
                         Can I upgrade or downgrade my plan later?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

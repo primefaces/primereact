@@ -7,7 +7,7 @@ import { AccordionProvider } from '../Accordion.context';
 import { defaultRootProps } from './AccordionRoot.props';
 
 export const AccordionRoot = withComponent({
-    name: 'AccordionRoot',
+    name: 'Accordion.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const accordion = useAccordion(instance.inProps);
@@ -20,7 +20,7 @@ export const AccordionRoot = withComponent({
         const rootProps = mergeProps(
             {
                 className: cx('root'),
-                'data-p-disabled': props.disabled
+                'data-disabled': props.disabled
             },
             ptmi('root')
         );

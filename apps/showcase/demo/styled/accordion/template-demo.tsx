@@ -38,11 +38,11 @@ export default function TemplateDemo() {
                                 <i className={item.icon}></i>
                                 <span className="font-medium">{item.label}</span>
                             </span>
-                            <Accordion.HeaderIndicator>
+                            <Accordion.Trigger>
                                 {({ accordionpanel }: AccordionHeaderInstance) => (
                                     <Icon className="pi pi-plus transition-transform ease-out" rotate={accordionpanel?.active ? 45 : 0} />
                                 )}
-                            </Accordion.HeaderIndicator>
+                            </Accordion.Trigger>
                         </Accordion.Header>
                         <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-11.5">
                             <p className="text-sm">{item.content}</p>

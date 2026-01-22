@@ -1,3 +1,4 @@
+'use client';
 import { defaultIconProps, styles, withIcon } from '@primereact/core/icon';
 import type { withBaseIconOptions } from '@primereact/types/core';
 import { cn, mergeProps, resolve } from '@primeuix/utils';

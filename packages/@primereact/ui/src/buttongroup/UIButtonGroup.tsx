@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { styles } from '@primereact/styles/buttongroup';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { ButtonGroup, defaultProps } from 'primereact/buttongroup';
 import * as React from 'react';
 

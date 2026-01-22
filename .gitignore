@@ -47,3 +47,6 @@ next-env.d.ts
 
 # contentlayer
 .contentlayer
+
+# registry
+registry.json

@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { CarouselRoot } from '@primereact/ui/carousel';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { GalleryThumbnail, defaultThumbnailProps } from 'primereact/gallery';
 import * as React from 'react';
 

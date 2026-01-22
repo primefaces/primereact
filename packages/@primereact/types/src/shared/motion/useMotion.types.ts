@@ -16,6 +16,25 @@ import type { ClassNameOptions, MotionEvent, MotionOptions } from '@primeuix/mot
  */
 export interface useMotionProps {
     /**
+     * The ref of the element to apply the motion to.
+     */
+    elementRef?: React.Ref<unknown> | undefined;
+    /**
+     * Whether the element is visible or not.
+     * @default false
+     */
+    visible?: boolean | undefined;
+    /**
+     * Whether the motion should be applied when the element is mounted.
+     * @default true
+     */
+    mountOnEnter?: boolean | undefined;
+    /**
+     * Whether the element should be unmounted when the motion is not applied.
+     * @default true
+     */
+    unmountOnLeave?: boolean | undefined;
+    /**
      * The name of the motion. It can be a predefined motion name or a custom one.
      * phases:
      *     [name]-enter
@@ -89,10 +108,6 @@ export interface useMotionProps {
      */
     leaveActiveClassName?: ClassNameOptions['active'] | undefined;
     /**
-     * The motion options. Shortcut to customize all options of MotionOptions.
-     */
-    options?: MotionOptions | undefined;
-    /**
      * Callback fired before the enter transition/animation starts.
      * @param {MotionEvent} [event] - The event object containing details about the motion.
      * @param {Element} event.element - The element being transitioned/animated.
@@ -145,16 +160,38 @@ export interface useMotionProps {
 /**
  * Defines valid state in useMotion.
  */
-export interface useMotionState {}
+export interface useMotionState {
+    /**
+     * Indicates whether the element is rendered.
+     */
+    rendered: boolean;
+}
 
 /**
  * Defines the methods and properties exposed by useMotion.
  */
 export interface useMotionExposes {
-    motionRef?: React.Ref<unknown> | null;
+    /**
+     * Triggers the enter motion.
+     * @returns void
+     */
     enter?: () => void;
+    /**
+     * Triggers the leave motion.
+     * @returns void
+     */
     leave?: () => void;
+    /**
+     * Cancels the ongoing motion.
+     * @returns void
+     */
     cancel?: () => void;
+    /**
+     * Updates the motion with new properties.
+     * @param {Element} element - The element to apply the motion to.
+     * @param {useMotionProps} [motionProps] - The motion properties to update.
+     * @returns void
+     */
     update?: (element: Element, motionProps?: useMotionProps) => void;
 }
 

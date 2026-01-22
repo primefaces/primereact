@@ -10,9 +10,9 @@ export default function CustomIndicatorDemo() {
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         What is this service about?
-                        <Accordion.HeaderIndicator className="group">
+                        <Accordion.Trigger className="group">
                             <PlusIcon className="group-data-[p-active=true]:rotate-45 transition-transform ease-out" />
-                        </Accordion.HeaderIndicator>
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -24,9 +24,9 @@ export default function CustomIndicatorDemo() {
                 <Accordion.Panel value="2">
                     <Accordion.Header>
                         Is my data secure?
-                        <Accordion.HeaderIndicator>
+                        <Accordion.Trigger>
                             {({ accordionpanel }: AccordionHeaderIndicatorInstance) => (accordionpanel?.active ? <MinusIcon /> : <PlusIcon />)}
-                        </Accordion.HeaderIndicator>
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -37,7 +37,7 @@ export default function CustomIndicatorDemo() {
                 </Accordion.Panel>
                 <Accordion.Panel value="3">
                     <Accordion.Header className="justify-start gap-2">
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                         Can I upgrade or downgrade my plan later?
                     </Accordion.Header>
                     <Accordion.Content>

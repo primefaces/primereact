@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { DialogClose } from '@primereact/ui/dialog';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { ConfirmDialogClose, defaultCloseProps } from 'primereact/confirmdialog';
 import * as React from 'react';
 

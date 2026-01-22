@@ -68,7 +68,6 @@ export interface useAccordionState {
     value: null | undefined | string | number | (string | number)[];
 }
 
-export type NavigationDirection = 'next' | 'previous' | 'first' | 'last';
 /**
  * Defines the methods and properties exposed by useAccordion.
  */
@@ -90,26 +89,26 @@ export interface useAccordionExposes {
      */
     isItemActive: (key: null | undefined | string | number) => boolean;
     /**
-     * The method to handle the click event of the accordion header.
+     * The method to handle the click event of the accordion trigger.
      * @param event The event that triggered the click.
      * @param value The value of the accordion.
      * @returns void
      */
-    onHeaderClick: (event: React.MouseEvent<HTMLButtonElement>, value: null | undefined | string | number) => void;
+    onTriggerClick: (event: React.MouseEvent<HTMLButtonElement>, value: null | undefined | string | number) => void;
     /**
-     * The method to handle the focus event of the accordion header.
+     * The method to handle the focus event of the accordion trigger.
      * @param event The event that triggered the focus.
      * @param value The value of the accordion.
      * @returns void
      */
-    onHeaderFocus: (event: React.FocusEvent<HTMLButtonElement>, value: null | undefined | string | number) => void;
+    onTriggerFocus: (event: React.FocusEvent<HTMLButtonElement>, value: null | undefined | string | number) => void;
     /**
-     * The method to handle the key down event of the accordion header.
+     * The method to handle the key down event of the accordion trigger.
      * @param event The event that triggered the key down.
      * @param value The value of the accordion.
      * @returns void
      */
-    onHeaderKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>, value: null | undefined | string | number) => void;
+    onTriggerKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>, value: null | undefined | string | number) => void;
 }
 
 /**

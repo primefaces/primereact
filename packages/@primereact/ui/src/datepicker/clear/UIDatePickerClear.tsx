@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { Button } from '@primereact/ui/button';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { DatePickerClear, defaultClearProps } from 'primereact/datepicker';
 import * as React from 'react';
 

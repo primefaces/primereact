@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { ListboxOption } from '@primereact/ui/listbox';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { defaultOptionProps, InputTagsOption } from 'primereact/inputtags';
 import * as React from 'react';
 

@@ -1,3 +1,5 @@
+'use client';
+import { ChevronDownIcon } from '@primereact/icons/chevrondown';
 import { Accordion } from '@primereact/ui/accordion';
 
 export default function BasicDemo() {
@@ -6,8 +8,10 @@ export default function BasicDemo() {
             <Accordion.Root className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>
-                        What is this service about?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger className="flex justify-between items-center w-full">
+                            What is this service about?
+                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -18,8 +22,10 @@ export default function BasicDemo() {
                 </Accordion.Panel>
                 <Accordion.Panel value="2">
                     <Accordion.Header>
-                        Is my data secure?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger className="flex justify-between items-center w-full">
+                            Is my data secure?
+                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -30,8 +36,7 @@ export default function BasicDemo() {
                 </Accordion.Panel>
                 <Accordion.Panel value="3">
                     <Accordion.Header>
-                        Can I upgrade or downgrade my plan later?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger>Can I upgrade or downgrade my plan later?</Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

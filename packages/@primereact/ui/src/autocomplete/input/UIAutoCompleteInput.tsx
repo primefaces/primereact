@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { InputText } from '@primereact/ui/inputtext';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { AutoCompleteInput, defaultInputProps } from 'primereact/autocomplete';
 import * as React from 'react';
 

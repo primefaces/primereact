@@ -1,22 +1,27 @@
 import { withHeadless } from '@primereact/core/headless';
-import type { NavigationDirection } from '@primereact/types/shared/accordion';
-import { useAccordionProps } from '@primereact/types/shared/accordion';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { findSingle, focus, getAttribute } from '@primeuix/utils/dom';
 import * as React from 'react';
 import { defaultProps } from './useAccordion.props';
+
+export type NavigationDirection = 'next' | 'previous' | 'first' | 'last';
 
 export const useAccordion = withHeadless({
     name: 'useAccordion',
     defaultProps,
     setup({ props, elementRef }) {
-        const [activeValueState, setActiveValueState] = React.useState<useAccordionProps['value']>(props.value ?? props.defaultValue ?? null);
+        const [activeValueState, setActiveValueState] = useControlledState({
+            value: props.value,
+            defaultValue: props.defaultValue ?? null,
+            onChange: props.onValueChange
+        });
 
         const state = {
             value: activeValueState
         };
 
         // methods
-        const updateValue = (key: null | undefined | string | number) => {
+        const updateValue = (event: React.SyntheticEvent, key: null | undefined | string | number) => {
             if (key === undefined) return;
 
             let activeValue = activeValueState;
@@ -30,7 +35,13 @@ export const useAccordion = withHeadless({
                 activeValue = isActive ? null : key;
             }
 
-            setActiveValueState(activeValue);
+            setActiveValueState([
+                activeValue,
+                {
+                    originalEvent: event,
+                    value: activeValue
+                }
+            ]);
         };
 
         const isItemActive = (key: null | undefined | string | number): boolean => {
@@ -47,7 +58,7 @@ export const useAccordion = withHeadless({
 
         const focusPanel = (accordionHeader: HTMLElement | null, direction: NavigationDirection): void => {
             const findHeader = (panelElement: HTMLElement): HTMLElement | null => {
-                return findSingle(panelElement, '[data-pc-name="accordionheader"]') as HTMLElement | null;
+                return findSingle(panelElement, '[data-scope="accordion"][data-part="trigger"]') as HTMLElement | null;
             };
 
             const findAdjacentPanel = (panelElement: HTMLElement, direction: 'next' | 'previous', selfCheck = false): HTMLElement | null => {
@@ -58,7 +69,7 @@ export const useAccordion = withHeadless({
                     return null;
                 }
 
-                if (getAttribute(element, 'data-p-disabled')) {
+                if (getAttribute(element, 'data-disabled')) {
                     return findAdjacentPanel(element, direction);
                 }
 
@@ -79,7 +90,7 @@ export const useAccordion = withHeadless({
                 return findAdjacentPanel(targetChild as HTMLElement, direction, true);
             };
 
-            const currentPanel = accordionHeader?.closest('[data-pc-name="accordionpanel"]') as HTMLElement | null;
+            const currentPanel = accordionHeader?.closest('[data-scope="accordion"][data-part="panel"]') as HTMLElement | null;
 
             if (!currentPanel) return;
 
@@ -118,19 +129,19 @@ export const useAccordion = withHeadless({
             }
         };
 
-        const onHeaderClick = (event: React.MouseEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
+        const onTriggerClick = (event: React.MouseEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
             if (!props.selectOnFocus) {
-                updateValue(value);
+                updateValue(event, value);
             }
         };
 
-        const onHeaderFocus = (event: React.FocusEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
+        const onTriggerFocus = (event: React.FocusEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
             if (props.selectOnFocus) {
-                updateValue(value);
+                updateValue(event, value);
             }
         };
 
-        const onHeaderKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
+        const onTriggerKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
             switch (event.code) {
                 case 'ArrowDown':
                     focusPanel(event.currentTarget, 'next');
@@ -151,7 +162,7 @@ export const useAccordion = withHeadless({
                 case 'Enter':
                 case 'NumpadEnter':
                 case 'Space':
-                    updateValue(value);
+                    updateValue(event, value);
                     break;
 
                 case 'Tab':
@@ -164,16 +175,14 @@ export const useAccordion = withHeadless({
             event.preventDefault();
         };
 
-        // effects
-
         return {
             state,
             // methods
             updateValue,
             isItemActive,
-            onHeaderClick,
-            onHeaderFocus,
-            onHeaderKeyDown
+            onTriggerClick,
+            onTriggerFocus,
+            onTriggerKeyDown
         };
     }
 });

@@ -1,7 +1,7 @@
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
 import type { GlobalComponentProps, Instance, PassThroughOptions, useComponentPTReturnType } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils/mergeprops';
-import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase } from '@primeuix/utils/object';
+import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase, toKebabCase } from '@primeuix/utils/object';
 import * as React from 'react';
 
 /**
@@ -13,6 +13,7 @@ import * as React from 'react';
  */
 export function useComponentPT<Props extends GlobalComponentProps, IProps, Params>(instance: Instance<Props, IProps>, $params?: Params): useComponentPTReturnType {
     const { id, name, props, attrs, $primereact, $attrSelector } = instance || {};
+    const [scope, part] = name!.toLocaleLowerCase().split('.');
 
     // methods
     const _hook = React.useCallback(
@@ -46,21 +47,23 @@ export function useComponentPT<Props extends GlobalComponentProps, IProps, Param
 
     const _getPTDatasets = React.useCallback(
         (key = '') => {
-            const datasetPrefix = 'data-pc-';
-            const isExtended = key === 'root' && isNotEmpty(props?.pt?.['data-pc-section']);
+            const datasetPrefix = 'data-';
+            const isExtended = key === 'root' && isNotEmpty(attrs['data-scope']);
 
-            return (
-                key !== 'transition' && {
-                    ...(key === 'root' && {
-                        [`${datasetPrefix}name`]: toFlatCase((isExtended ? props.pt?.['data-pc-section'] : name) as string),
-                        ...(isExtended && { [`${datasetPrefix}extend`]: toFlatCase(name!) }),
-                        [`${datasetPrefix}id`]: $attrSelector
-                    }),
-                    [`${datasetPrefix}section`]: toFlatCase(key)
-                }
-            );
+            return isExtended
+                ? {
+                      [`${datasetPrefix}extend`]: scope
+                  }
+                : {
+                      [`${datasetPrefix}scope`]: scope,
+                      ...(key === 'root' && {
+                          [`${datasetPrefix}part`]: toKebabCase(part),
+                          [`${datasetPrefix}id`]: $attrSelector
+                      }),
+                      [`${datasetPrefix}slot`]: key
+                  };
         },
-        [props.pt, $attrSelector]
+        [props.pt, $attrSelector, name]
     );
 
     const _getPTClassValue = React.useCallback((obj: Record<string, unknown> = {}, key = '', params?: Record<string, unknown>) => {

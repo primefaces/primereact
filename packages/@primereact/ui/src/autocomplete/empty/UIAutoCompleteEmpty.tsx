@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { ListboxEmpty } from '@primereact/ui/listbox';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { AutoCompleteEmpty, defaultEmptyProps } from 'primereact/autocomplete';
 import * as React from 'react';
 

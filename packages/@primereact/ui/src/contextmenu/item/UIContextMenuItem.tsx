@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { MenuItem } from '@primereact/ui/menu';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { ContextMenuItem, defaultItemProps } from 'primereact/contextmenu';
 import * as React from 'react';
 

@@ -1,8 +1,8 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { styles } from '@primereact/styles/iconfield';
 import { withComponent } from '@primereact/ui/base';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { IconFieldRoot, defaultRootProps } from 'primereact/iconfield';
 import * as React from 'react';
 

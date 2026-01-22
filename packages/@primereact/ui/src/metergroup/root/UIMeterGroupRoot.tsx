@@ -1,8 +1,8 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { styles } from '@primereact/styles/metergroup';
 import { withComponent } from '@primereact/ui/base';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { MeterGroupRoot, defaultRootProps } from 'primereact/metergroup';
 import * as React from 'react';
 

@@ -1,5 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
+import { isElementOfType } from '@primereact/core/utils';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useAccordionContext } from '../Accordion.context';
@@ -7,7 +8,7 @@ import { AccordionPanelProvider } from './AccordionPanel.context';
 import { defaultPanelProps } from './AccordionPanel.props';
 
 export const AccordionPanel = withComponent({
-    name: 'AccordionPanel',
+    name: 'Accordion.Panel',
     defaultProps: defaultPanelProps,
     setup({ props }) {
         const accordion = useAccordionContext();
@@ -23,12 +24,21 @@ export const AccordionPanel = withComponent({
     },
     render(instance) {
         const { props, ptmi, active, accordion } = instance;
+        const { as, ...restProps } = props;
+
+        const asProps = isElementOfType(as, 'Collapsible.Root')
+            ? {
+                  defaultOpen: active
+              }
+            : undefined;
 
         const rootProps = mergeProps(
+            restProps,
+            asProps,
             {
                 className: accordion?.cx('panel', { active, disabled: props.disabled || accordion?.props.disabled }),
-                'data-p-disabled': props.disabled,
-                'data-p-active': active
+                'data-disabled': props.disabled || accordion?.props.disabled,
+                [active ? 'data-open' : 'data-closed']: ''
             },
             accordion?.ptm('panel'),
             ptmi('root')
@@ -36,7 +46,7 @@ export const AccordionPanel = withComponent({
 
         return (
             <AccordionPanelProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
+                <Component as={as} instance={instance} attrs={rootProps} children={props.children} />
             </AccordionPanelProvider>
         );
     }

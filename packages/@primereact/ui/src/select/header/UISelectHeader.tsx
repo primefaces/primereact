@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { ListboxHeader } from '@primereact/ui/listbox';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { SelectHeader, defaultHeaderProps } from 'primereact/select';
 import * as React from 'react';
 

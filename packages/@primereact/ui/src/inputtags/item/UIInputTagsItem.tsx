@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { ChipRoot } from '@primereact/ui/chip';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { InputTagsItem, defaultItemProps } from 'primereact/inputtags';
 import * as React from 'react';
 

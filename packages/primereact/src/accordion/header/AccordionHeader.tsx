@@ -7,7 +7,7 @@ import { useAccordionPanelContext } from '../panel/AccordionPanel.context';
 import { defaultHeaderProps } from './AccordionHeader.props';
 
 export const AccordionHeader = withComponent({
-    name: 'AccordionHeader',
+    name: 'Accordion.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const accordion = useAccordionContext();
@@ -21,22 +21,7 @@ export const AccordionHeader = withComponent({
         const rootProps = mergeProps(
             {
                 className: accordion?.cx('header'),
-                onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
-                    accordion?.onHeaderClick(event, accordionpanel?.props.value);
-                },
-                onFocus: (event: React.FocusEvent<HTMLButtonElement>) => {
-                    accordion?.onHeaderFocus(event, accordionpanel?.props.value);
-                },
-                onKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => {
-                    accordion?.onHeaderKeyDown(event, accordionpanel?.props.value);
-                },
-                style: { userSelect: 'none' },
-                disabled: accordionpanel?.props.disabled,
-                tabIndex: accordion?.props.tabIndex,
-                'data-p-active': accordionpanel?.active,
-                'data-p-disabled': accordionpanel?.props.disabled,
-                'aria-expanded': accordionpanel?.active,
-                'aria-disabled': accordionpanel?.props.disabled
+                [accordionpanel?.active ? 'data-open' : 'data-closed']: ''
             },
             accordion?.ptm('header'),
             ptmi('root')

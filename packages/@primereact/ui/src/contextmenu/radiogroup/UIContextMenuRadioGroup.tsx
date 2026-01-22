@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { MenuRadioGroup } from '@primereact/ui/menu';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { ContextMenuRadioGroup, defaultRadioGroupProps } from 'primereact/contextmenu';
 import * as React from 'react';
 

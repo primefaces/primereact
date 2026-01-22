@@ -1,29 +1,28 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll": "never",
-        "source.fixAll.eslint": "never",
-        "source.organizeImports": "never"
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
     },
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "javascript.referencesCodeLens.enabled": true,
     "typescript.tsserver.useSyntaxServer": "auto",
     "typescript.tsserver.experimental.enableProjectDiagnostics": false,
     "typescript.tsserver.maxTsServerMemory": 4096,
     "eslint.useFlatConfig": true,
     "[javascript]": {
-        "editor.defaultFormatter": "prettier.prettier-vscode",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[typescript]": {
-        "editor.defaultFormatter": "prettier.prettier-vscode",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "prettier.prettier-vscode",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[json]": {
-        "editor.defaultFormatter": "prettier.prettier-vscode",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
     "[css]": {
@@ -35,7 +34,7 @@
         "editor.formatOnSave": true
     },
     "[mdx]": {
-        "editor.defaultFormatter": "prettier.prettier-vscode",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     }
 }

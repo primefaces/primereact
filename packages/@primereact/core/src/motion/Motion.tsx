@@ -1,6 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeProps, nextFrame } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { MotionProvider } from './Motion.context';
 import { defaultMotionProps } from './Motion.props';
@@ -10,73 +10,12 @@ export const Motion = withComponent({
     name: 'Motion',
     defaultProps: defaultMotionProps,
     setup(instance) {
-        const { props } = instance;
+        const motion = useMotion(instance.inProps);
 
-        const [rendered, setRendered] = React.useState(() => props.in || !props.mountOnEnter);
-        const isInitialMount = React.useRef(true);
-        const motion = useMotion(props);
-
-        React.useEffect(() => {
-            if (props.in && !rendered) {
-                setRendered(true);
-            }
-        }, [props.in]);
-
-        React.useLayoutEffect(() => {
-            const element = motion?.elementRef?.current;
-
-            if (!element || !rendered) {
-                isInitialMount.current = false;
-
-                return;
-            }
-
-            let cancelled = false;
-            const shouldAppear = isInitialMount.current && props.in && props.appear;
-
-            element.style.display = '';
-            motion.update?.(element, props);
-
-            if (props.in) {
-                if (shouldAppear || !isInitialMount.current) {
-                    motion.enter?.();
-                }
-            } else {
-                motion.leave?.()?.then(() => {
-                    if (!element || cancelled || props.in) return;
-
-                    if (props.unmountOnLeave) {
-                        element.style.display = 'none';
-                        nextFrame().then(() => {
-                            if (!cancelled) setRendered(false);
-                        });
-                    } else {
-                        element.style.display = 'none';
-                    }
-                });
-            }
-
-            isInitialMount.current = false;
-
-            return () => {
-                cancelled = true;
-                motion.cancel?.();
-            };
-        }, [props.in, rendered, props.unmountOnLeave, props.appear]);
-
-        React.useEffect(() => {
-            return () => {
-                isInitialMount.current = true;
-            };
-        }, []);
-
-        return {
-            ...motion,
-            rendered
-        };
+        return motion;
     },
     render(instance) {
-        const { id, props, ptmi, rendered } = instance;
+        const { id, props, state, ptmi } = instance;
 
         const rootProps = mergeProps(
             {
@@ -87,7 +26,7 @@ export const Motion = withComponent({
 
         return (
             <MotionProvider value={instance}>
-                <Component pIf={rendered} instance={instance} attrs={rootProps} children={props.children} />
+                <Component pIf={state.rendered} instance={instance} attrs={rootProps} children={props.children} />
             </MotionProvider>
         );
     }

@@ -7,7 +7,7 @@ export default function DisabledDemo() {
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         How do I reset my password?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -19,7 +19,7 @@ export default function DisabledDemo() {
                 <Accordion.Panel value="2">
                     <Accordion.Header>
                         Do you offer team accounts?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -33,7 +33,7 @@ export default function DisabledDemo() {
                 <Accordion.Panel value="1">
                     <Accordion.Header>
                         What happens if I exceed my usage limit?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -45,7 +45,7 @@ export default function DisabledDemo() {
                 <Accordion.Panel value="2" disabled>
                     <Accordion.Header>
                         Is there a mobile app available?
-                        <Accordion.HeaderIndicator />
+                        <Accordion.Trigger />
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

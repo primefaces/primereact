@@ -1,13 +1,19 @@
 import type { useMotionProps } from '@primereact/types/shared/motion';
 
 export const defaultUseMotionProps: useMotionProps = {
+    elementRef: undefined,
+    visible: false,
+    mountOnEnter: true,
+    unmountOnLeave: true,
     name: undefined,
     type: undefined,
     safe: false,
+    disabled: false,
     appear: false,
     enter: true,
     leave: true,
     duration: undefined,
+    hideStrategy: 'display',
     enterFromClassName: undefined,
     enterToClassName: undefined,
     enterActiveClassName: undefined,

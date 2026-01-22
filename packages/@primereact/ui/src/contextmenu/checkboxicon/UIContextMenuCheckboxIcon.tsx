@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeDefaultProps } from '@primereact/core/utils';
 import { MenuCheckboxIcon } from '@primereact/ui/menu';
+import { mergeDefaultProps } from '@primeuix/utils';
 import { ContextMenuCheckboxIcon, defaultCheckboxIconProps } from 'primereact/contextmenu';
 import * as React from 'react';
 

@@ -13,15 +13,14 @@ import { Accordion } from '@primereact/ui/accordion';
 ```
 
 ```tsx
-<Accordion>
+<Accordion.Root>
     <Accordion.Panel value="1">
         <Accordion.Header>
-            Title
-            <Accordion.HeaderIndicator />
+            <Accordion.Trigger>Title</Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Content>Content</Accordion.Content>
     </Accordion.Panel>
-</Accordion>
+</Accordion.Root>
 ```
 
 ## Examples

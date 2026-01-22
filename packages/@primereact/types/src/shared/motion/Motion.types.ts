@@ -30,26 +30,7 @@ export interface MotionPassThrough {
 /**
  * Defines valid properties in Motion component.
  */
-export interface MotionProps extends BaseComponentProps<MotionInstance, useMotionProps, MotionPassThrough> {
-    /**
-     * Whether the motion should be applied to the component.
-     * When set to true, the component will animate in.
-     * @default false
-     */
-    in?: boolean | undefined;
-    /**
-     * Whether the motion should be applied when the component is mounted.
-     * When set to true, the component will animate in on mount.
-     * @default true
-     */
-    mountOnEnter?: boolean | undefined;
-    /**
-     * Whether the component should be unmounted when the motion is not applied.
-     * When set to true, the component will be removed from the DOM when it is not visible.
-     * @default true
-     */
-    unmountOnLeave?: boolean | undefined;
-}
+export interface MotionProps extends BaseComponentProps<MotionInstance, useMotionProps, MotionPassThrough> {}
 
 /**
  * Defines valid state in Motion component.
