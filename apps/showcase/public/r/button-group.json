@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://v11.primereact.org/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { ButtonGroup as PRButtonGroup } from 'primereact/buttongroup';\nimport { ButtonGroupProps } from '@primereact/types/shared/buttongroup';\nimport { cn } from '@/lib/utils';\n\nfunction ButtonGroup({ className, ...props }: ButtonGroupProps) {\n    return <PRButtonGroup className={cn('*:rounded-none *:first:rounded-s-md *:last:rounded-e-md *:focus-visible:relative *:focus-visible:z-10 *:not-last:border-r-0', className)} {...props} />;\n}\n\nexport { ButtonGroup };\n"
+    }
+  ]
+}

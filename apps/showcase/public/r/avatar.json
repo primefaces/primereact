@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://v11.primereact.org/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Avatar as PRAvatar } from 'primereact/avatar';\nimport { AvatarFallbackProps, AvatarGroupProps, AvatarImageProps, AvatarRootProps } from '@primereact/types/shared/avatar';\nimport { cva, VariantProps } from 'class-variance-authority';\nimport { cn } from '@/lib/utils';\n\nconst avatarVariants = cva('relative flex shrink-0 overflow-hidden', {\n    variants: {\n        size: {\n            normal: 'size-8 text-sm font-medium',\n            large: 'size-9 font-semibold',\n            xlarge: 'size-10 text-lg font-semibold'\n        },\n        shape: {\n            circle: 'rounded-full',\n            square: 'rounded-md'\n        }\n    },\n    defaultVariants: {\n        size: 'normal',\n        shape: 'square'\n    }\n});\n\nfunction Avatar({ className, size, shape = 'square', ...props }: AvatarRootProps & VariantProps<typeof avatarVariants>) {\n    return <PRAvatar.Root className={cn(avatarVariants({ size, shape, className }))} {...props} />;\n}\n\nfunction AvatarImage({ className, ...props }: AvatarImageProps) {\n    return <PRAvatar.Image className={cn('size-full aspect-square', className)} {...props} />;\n}\n\nfunction AvatarFallback({ className, ...props }: AvatarFallbackProps) {\n    return <PRAvatar.Fallback className={cn('size-full rounded-[inherit] flex items-center justify-center bg-emphasis', className)} {...props} />;\n}\n\nfunction AvatarGroup({ className, ...props }: AvatarGroupProps) {\n    return <PRAvatar.Group className={cn('-space-x-2 **:data-[pc-name=avatarroot]:ring-2 **:data-[pc-name=avatarroot]:ring-white', className)} {...props} />;\n}\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup };\n"
+    }
+  ]
+}
