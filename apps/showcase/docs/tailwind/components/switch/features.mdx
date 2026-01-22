@@ -4,7 +4,7 @@ description: Switch is used to select a boolean value.
 component: switch
 ---
 
-<DocDemoViewer name="switch:example" hideCode/>
+<DocDemoViewer name="switch:basic-demo" hideCode/>
 
 ## Installation
 
@@ -19,9 +19,15 @@ npx shadcn@latest add @primereact/ui/switch
 ```
 </DocTabsPanel>
 <DocTabsPanel value="Manual">
-▸  Copy and paste the following code into your project
-<DocSourceViewer name="ui/switch" />
-▸  Update the import paths to match your project setup.
+<DocStepper>
+<DocStep>
+Copy and paste the following code into your project
+<DocSourceViewer name="components/ui/switch" />
+</DocStep>
+<DocStep>
+Update the import paths to match your project setup.
+</DocStep>
+</DocStepper>
 </DocTabsPanel>
 </DocTabs>
 
@@ -58,12 +64,6 @@ For an uncontrolled Switch component, `defaultChecked` is used to set the initia
 `Switch.Thumb` also allows displaying custom content inside itself.
 
 <DocDemoViewer name="switch:template-demo" />
-
-### Customization
-
-`Switch` component supports customization through CSS classes. The appearance, including colors and other visual properties, can be modified by applying custom classes to the component.
-
-<DocDemoViewer name="switch:customization-demo" />
 
 ### Invalid
 
