@@ -7,7 +7,7 @@ import { ScrollAreaRoot, defaultRootProps } from 'primereact/scrollarea';
 import * as React from 'react';
 
 export const UIScrollAreaRoot = withComponent({
-    name: 'UIScrollAreaRoot',
+    name: 'ScrollArea.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

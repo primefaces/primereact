@@ -6,7 +6,7 @@ import { useTabsContext } from '../Tabs.context';
 import { defaultTabProps } from './TabsTab.props';
 
 export const TabsTab = withComponent({
-    name: 'Tab',
+    name: 'Tabs.Tab',
     defaultProps: defaultTabProps,
     setup(instance) {
         const { props } = instance;

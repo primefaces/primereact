@@ -7,7 +7,7 @@ import { DialogRoot, defaultRootProps } from 'primereact/dialog';
 import * as React from 'react';
 
 export const UIDialogRoot = withComponent({
-    name: 'UIDialogRoot',
+    name: 'Dialog.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

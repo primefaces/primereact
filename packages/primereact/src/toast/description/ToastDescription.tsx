@@ -7,7 +7,7 @@ import { useToastContext } from '../Toast.context';
 import { defaultDescriptionProps } from './ToastDescription.props';
 
 export const ToastDescription = withComponent({
-    name: 'ToastDescription',
+    name: 'Toast.Description',
     defaultProps: defaultDescriptionProps,
     setup() {
         const toastItem = useToastItemContext();

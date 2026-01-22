@@ -8,7 +8,7 @@ import { usePasswordContext } from '../Password.context';
 import { defaultPortalProps } from './PasswordPortal.props';
 
 export const PasswordPortal = withComponent({
-    name: 'PasswordPortal',
+    name: 'Password.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const password = usePasswordContext();

@@ -9,7 +9,7 @@ import { ToggleButtonGroupProvider } from './ToggleButtonGroup.context';
 import { defaultGroupProps } from './ToggleButtonGroup.props';
 
 export const ToggleButtonGroup = withComponent({
-    name: 'ToggleButtonGroup',
+    name: 'ToggleButton.Group',
     defaultProps: defaultGroupProps,
     styles: groupStyles,
     setup(instance) {

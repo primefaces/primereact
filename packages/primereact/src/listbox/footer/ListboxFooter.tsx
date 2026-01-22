@@ -6,7 +6,7 @@ import { useListboxContext } from '../Listbox.context';
 import { defaultFooterProps } from './ListboxFooter.props';
 
 export const ListboxFooter = withComponent({
-    name: 'ListboxFooter',
+    name: 'Listbox.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const listbox = useListboxContext();

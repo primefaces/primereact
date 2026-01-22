@@ -6,7 +6,7 @@ import { defaultButtonProps, SpeedDialButton } from 'primereact/speeddial';
 import * as React from 'react';
 
 export const UISpeedDialButton = withComponent({
-    name: 'UISpeedDialButton',
+    name: 'SpeedDial.Button',
     defaultProps: defaultButtonProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

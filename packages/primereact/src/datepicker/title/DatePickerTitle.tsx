@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultTitleProps } from './DatePickerTitle.props';
 
 export const DatePickerTitle = withComponent({
-    name: 'DatePickerTitle',
+    name: 'DatePicker.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const datepicker = useDatePickerContext();

@@ -6,7 +6,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultEmptyProps } from './SelectEmpty.props';
 
 export const SelectEmpty = withComponent({
-    name: 'SelectEmpty',
+    name: 'Select.Empty',
     defaultProps: defaultEmptyProps,
     setup() {
         const select = useSelectContext();

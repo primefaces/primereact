@@ -7,7 +7,7 @@ import { OrgChartRoot, defaultRootProps } from 'primereact/orgchart';
 import * as React from 'react';
 
 export const UIOrgChartRoot = withComponent({
-    name: 'UIOrgChartRoot',
+    name: 'OrgChart.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

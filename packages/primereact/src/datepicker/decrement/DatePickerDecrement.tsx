@@ -8,7 +8,7 @@ import { useDatePickerPickerContext } from '../picker/DatePickerPicker.context';
 import { defaultDecrementProps } from './DatePickerDecrement.props';
 
 export const DatePickerDecrement = withComponent({
-    name: 'DatePickerDecrement',
+    name: 'DatePicker.Decrement',
     defaultProps: defaultDecrementProps,
     setup() {
         const datepicker = useDatePickerContext();

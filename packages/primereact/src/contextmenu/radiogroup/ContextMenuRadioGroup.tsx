@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultRadioGroupProps } from './ContextMenuRadioGroup.props';
 
 export const ContextMenuRadioGroup = withComponent({
-    name: 'ContextMenuRadioGroup',
+    name: 'ContextMenu.RadioGroup',
     defaultProps: defaultRadioGroupProps,
     setup() {
         const contextmenu = useContextMenuContext();

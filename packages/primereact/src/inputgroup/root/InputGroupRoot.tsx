@@ -7,7 +7,7 @@ import { InputGroupProvider } from '../InputGroup.context';
 import { defaultRootProps } from './InputGroupRoot.props';
 
 export const InputGroupRoot = withComponent({
-    name: 'InputGroupRoot',
+    name: 'InputGroup.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const inputgroup = useInputGroup(instance?.inProps);

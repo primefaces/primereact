@@ -7,7 +7,7 @@ import { useMeterGroupContext } from '../MeterGroup.context';
 import { defaultIconProps } from './MeterGroupIcon.props';
 
 export const MeterGroupIcon = withComponent({
-    name: 'MeterGroupIcon',
+    name: 'MeterGroup.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const metergroup = useMeterGroupContext();

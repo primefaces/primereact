@@ -6,7 +6,7 @@ import { useInplaceContext } from '../Inplace.context';
 import { defaultContentProps } from './InplaceContent.props';
 
 export const InplaceContent = withComponent({
-    name: 'InplaceContent',
+    name: 'Inplace.Content',
     defaultProps: defaultContentProps,
     setup() {
         const inplace = useInplaceContext();

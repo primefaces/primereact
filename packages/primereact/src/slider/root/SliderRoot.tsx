@@ -7,7 +7,7 @@ import { SliderProvider } from '../Slider.context';
 import { defaultRootProps } from './SliderRoot.props';
 
 export const SliderRoot = withComponent({
-    name: 'SliderRoot',
+    name: 'Slider.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const slider = useSlider(instance.inProps);

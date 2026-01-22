@@ -8,7 +8,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultPortalProps } from './AutoCompletePortal.props';
 
 export const AutoCompletePortal = withComponent({
-    name: 'AutoCompletePortal',
+    name: 'AutoComplete.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

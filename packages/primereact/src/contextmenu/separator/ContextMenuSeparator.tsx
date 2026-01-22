@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultSeparatorProps } from './ContextMenuSeparator.props';
 
 export const ContextMenuSeparator = withComponent({
-    name: 'ContextMenuSeparator',
+    name: 'ContextMenu.Separator',
     defaultProps: defaultSeparatorProps,
     setup() {
         const contextmenu = useContextMenuContext();

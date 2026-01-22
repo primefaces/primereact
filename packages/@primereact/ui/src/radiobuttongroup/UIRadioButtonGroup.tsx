@@ -7,7 +7,7 @@ import { RadioButtonGroup, defaultProps } from 'primereact/radiobuttongroup';
 import * as React from 'react';
 
 export const UIRadioButtonGroup = withComponent({
-    name: 'UIRadioButtonGroup',
+    name: 'RadioButtonGroup',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

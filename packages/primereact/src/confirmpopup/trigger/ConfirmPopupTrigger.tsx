@@ -6,7 +6,7 @@ import { useConfirmPopupContext } from '../ConfirmPopup.context';
 import { defaultTriggerProps } from './ConfirmPopupTrigger.props';
 
 export const ConfirmPopupTrigger = withComponent({
-    name: 'ConfirmPopupTrigger',
+    name: 'ConfirmPopup.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const confirmpopup = useConfirmPopupContext();

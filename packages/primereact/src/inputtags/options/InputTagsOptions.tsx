@@ -7,7 +7,7 @@ import { useInputTagsContext } from '../InputTags.context';
 import { defaultOptionsProps } from './InputTagsOptions.props';
 
 export const InputTagsOptions = withComponent({
-    name: 'InputTagsOptions',
+    name: 'InputTags.Options',
     defaultProps: defaultOptionsProps,
     setup() {
         const inputtags = useInputTagsContext();

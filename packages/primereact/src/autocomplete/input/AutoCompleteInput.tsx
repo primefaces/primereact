@@ -6,7 +6,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultInputProps } from './AutoCompleteInput.props';
 
 export const AutoCompleteInput = withComponent({
-    name: 'AutoCompleteInput',
+    name: 'AutoComplete.Input',
     defaultProps: defaultInputProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

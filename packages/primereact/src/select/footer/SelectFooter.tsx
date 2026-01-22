@@ -6,7 +6,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultFooterProps } from './SelectFooter.props';
 
 export const SelectFooter = withComponent({
-    name: 'SelectFooter',
+    name: 'Select.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const select = useSelectContext();

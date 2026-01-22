@@ -7,7 +7,7 @@ import { PasswordProvider } from '../Password.context';
 import { defaultRootProps } from './PasswordRoot.props';
 
 export const PasswordRoot = withComponent({
-    name: 'PasswordRoot',
+    name: 'Password.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const password = usePassword(instance?.inProps);

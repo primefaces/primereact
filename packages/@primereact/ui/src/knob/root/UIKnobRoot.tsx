@@ -7,7 +7,7 @@ import { KnobRoot, defaultRootProps } from 'primereact/knob';
 import * as React from 'react';
 
 export const UIKnobRoot = withComponent({
-    name: 'UIKnobRoot',
+    name: 'Knob.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

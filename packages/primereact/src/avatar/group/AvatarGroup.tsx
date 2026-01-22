@@ -6,7 +6,7 @@ import * as React from 'react';
 import { defaultGroupProps } from './AvatarGroup.props';
 
 export const AvatarGroup = withComponent({
-    name: 'AvatarGroup',
+    name: 'Avatar.Group',
     defaultProps: defaultGroupProps,
     styles: groupStyles,
     render(instance) {

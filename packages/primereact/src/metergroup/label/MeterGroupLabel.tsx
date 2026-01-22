@@ -6,7 +6,7 @@ import { useMeterGroupContext } from '../MeterGroup.context';
 import { defaultLabelProps } from './MeterGroupLabel.props';
 
 export const MeterGroupLabel = withComponent({
-    name: 'MeterGroupLabel',
+    name: 'MeterGroup.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const metergroup = useMeterGroupContext();

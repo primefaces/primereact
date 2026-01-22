@@ -6,7 +6,7 @@ import { useIconFieldContext } from '../IconField.context';
 import { defaultInputIconProps } from './IconFieldInputIcon.props';
 
 export const IconFieldInputIcon = withComponent({
-    name: 'IconFieldInputIcon',
+    name: 'IconField.InputIcon',
     defaultProps: defaultInputIconProps,
     setup() {
         const iconfield = useIconFieldContext();

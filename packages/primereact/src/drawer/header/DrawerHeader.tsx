@@ -6,7 +6,7 @@ import { useDrawerContext } from '../Drawer.context';
 import { defaultHeaderProps } from './DrawerHeader.props';
 
 export const DrawerHeader = withComponent({
-    name: 'DrawerHeader',
+    name: 'Drawer.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const drawer = useDrawerContext();

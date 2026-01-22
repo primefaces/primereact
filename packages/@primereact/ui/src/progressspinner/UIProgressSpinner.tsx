@@ -7,7 +7,7 @@ import { ProgressSpinner, defaultProps } from 'primereact/progressspinner';
 import * as React from 'react';
 
 export const UIProgressSpinner = withComponent({
-    name: 'UIProgressSpinner',
+    name: 'ProgressSpinner',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

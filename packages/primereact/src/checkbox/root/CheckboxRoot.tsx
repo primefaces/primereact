@@ -11,7 +11,7 @@ import { useCheckboxGroupContext } from '../group';
 import { defaultRootProps } from './CheckboxRoot.props';
 
 export const CheckboxRoot = withComponent({
-    name: 'CheckboxRoot',
+    name: 'Checkbox.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const { props, inProps } = instance;

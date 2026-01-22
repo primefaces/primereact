@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultBodyProps } from './CardBody.props';
 
 export const CardBody = withComponent({
-    name: 'CardBody',
+    name: 'Card.Body',
     defaultProps: defaultBodyProps,
     setup() {
         const card = useCardContext();

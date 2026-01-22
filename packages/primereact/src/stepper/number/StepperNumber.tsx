@@ -6,7 +6,7 @@ import { useStepperContext } from '../Stepper.context';
 import { defaultNumberProps } from './StepperNumber.props';
 
 export const StepperNumber = withComponent({
-    name: 'StepperNumber',
+    name: 'Stepper.Number',
     defaultProps: defaultNumberProps,
     setup() {
         const stepper = useStepperContext();

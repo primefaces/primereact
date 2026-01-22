@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultButtonbarProps } from './DatePickerButtonbar.props';
 
 export const DatePickerButtonbar = withComponent({
-    name: 'DatePickerButtonbar',
+    name: 'DatePicker.Buttonbar',
     defaultProps: defaultButtonbarProps,
     setup() {
         const datepicker = useDatePickerContext();

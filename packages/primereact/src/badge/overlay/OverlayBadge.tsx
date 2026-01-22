@@ -7,7 +7,7 @@ import { OverlayBadgeProvider } from './OverlayBadge.context';
 import { defaultOverlayProps } from './OverlayBadge.props';
 
 export const OverlayBadge = withComponent({
-    name: 'OverlayBadge',
+    name: 'Badge.Overlay',
     defaultProps: defaultOverlayProps,
     styles: overlayStyles,
     render(instance) {

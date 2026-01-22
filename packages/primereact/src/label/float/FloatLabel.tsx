@@ -7,7 +7,7 @@ import { useLabelContext } from '../Label.context';
 import { defaultFloatProps } from './FloatLabel.props';
 
 export const FloatLabel = withComponent({
-    name: 'FloatLabel',
+    name: 'Label.Float',
     defaultProps: defaultFloatProps,
     styles: floatStyles,
     setup() {

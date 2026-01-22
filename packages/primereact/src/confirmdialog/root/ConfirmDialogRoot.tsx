@@ -9,7 +9,7 @@ import { ConfirmDialogProvider } from '../ConfirmDialog.context';
 import { defaultRootProps } from './ConfirmDialogRoot.props';
 
 export const ConfirmDialogRoot = withComponent({
-    name: 'ConfirmDialogRoot',
+    name: 'ConfirmDialog.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const confirmdialog = useConfirmDialog(instance.inProps);

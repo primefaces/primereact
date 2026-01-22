@@ -10,7 +10,7 @@ import { useMenuSubContext } from '../sub/MenuSub.context';
 import { defaultIconProps } from './MenuIcon.props';
 
 export const MenuIcon = withComponent({
-    name: 'MenuIcon',
+    name: 'Menu.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const menu = useMenuContext();

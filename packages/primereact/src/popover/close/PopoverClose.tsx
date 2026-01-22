@@ -7,7 +7,7 @@ import { usePopoverContext } from '../Popover.context';
 import { defaultCloseProps } from './PopoverClose.props';
 
 export const PopoverClose = withComponent({
-    name: 'PopoverClose',
+    name: 'Popover.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const popover = usePopoverContext();

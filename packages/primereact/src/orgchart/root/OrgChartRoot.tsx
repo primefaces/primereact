@@ -8,7 +8,7 @@ import { OrgChartSubtree } from '../subtree/OrgChartSubtree';
 import { defaultRootProps } from './OrgChartRoot.props';
 
 export const OrgChartRoot = withComponent({
-    name: 'OrgChartRoot',
+    name: 'OrgChart.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const orgchart = useOrgChart(instance.inProps);

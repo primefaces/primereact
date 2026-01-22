@@ -8,7 +8,7 @@ import { usePopoverContext } from '../Popover.context';
 import { defaultPortalProps } from './PopoverPortal.props';
 
 export const PopoverPortal = withComponent({
-    name: 'PopoverPortal',
+    name: 'Popover.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const popover = usePopoverContext();

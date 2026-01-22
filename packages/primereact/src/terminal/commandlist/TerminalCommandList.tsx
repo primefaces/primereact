@@ -8,7 +8,7 @@ import { TerminalCommandListProvider } from './TerminalCommandList.context';
 import { defaultCommandListProps } from './TerminalCommandList.props';
 
 export const TerminalCommandList = withComponent({
-    name: 'TerminalCommandList',
+    name: 'Terminal.CommandList',
     defaultProps: defaultCommandListProps,
     setup() {
         const terminal = useTerminalContext();

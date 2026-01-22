@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultContentProps } from './CardContent.props';
 
 export const CardContent = withComponent({
-    name: 'CardContent',
+    name: 'Card.Content',
     defaultProps: defaultContentProps,
     setup() {
         const card = useCardContext();

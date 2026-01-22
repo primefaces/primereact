@@ -1,8 +1,8 @@
 import type { useAccordionProps } from '@primereact/types/shared/accordion';
 
 export const defaultProps: useAccordionProps = {
-    defaultValue: null,
-    value: null,
+    defaultValue: undefined,
+    value: undefined,
     multiple: false,
     onValueChange: undefined,
     selectOnFocus: false

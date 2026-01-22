@@ -6,7 +6,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultHeaderProps } from './AutoCompleteHeader.props';
 
 export const AutoCompleteHeader = withComponent({
-    name: 'AutoCompleteHeader',
+    name: 'AutoComplete.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

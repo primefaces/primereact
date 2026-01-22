@@ -6,7 +6,7 @@ import { useKnobContext } from '../Knob.context';
 import { defaultValueProps } from './KnobValue.props';
 
 export const KnobValue = withComponent({
-    name: 'KnobValue',
+    name: 'Knob.Value',
     defaultProps: defaultValueProps,
     setup() {
         const knob = useKnobContext();

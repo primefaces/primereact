@@ -7,7 +7,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultListProps } from './AutoCompleteList.props';
 
 export const AutoCompleteList = withComponent({
-    name: 'AutoCompleteList',
+    name: 'AutoComplete.List',
     defaultProps: defaultListProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

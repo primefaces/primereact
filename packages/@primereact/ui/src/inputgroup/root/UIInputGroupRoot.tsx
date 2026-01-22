@@ -7,7 +7,7 @@ import { InputGroupRoot, defaultRootProps } from 'primereact/inputgroup';
 import * as React from 'react';
 
 export const UIInputGroupRoot = withComponent({
-    name: 'UIInputGroupRoot',
+    name: 'InputGroup.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

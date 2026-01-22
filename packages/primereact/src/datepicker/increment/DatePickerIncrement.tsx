@@ -8,7 +8,7 @@ import { useDatePickerPickerContext } from '../picker/DatePickerPicker.context';
 import { defaultIncrementProps } from './DatePickerIncrement.props';
 
 export const DatePickerIncrement = withComponent({
-    name: 'DatePickerIncrement',
+    name: 'DatePicker.Increment',
     defaultProps: defaultIncrementProps,
     setup() {
         const datepicker = useDatePickerContext();

@@ -6,7 +6,7 @@ import { useStepperContext } from '../Stepper.context';
 import { defaultListProps } from './StepperList.props';
 
 export const StepperList = withComponent({
-    name: 'StepperList',
+    name: 'Stepper.List',
     defaultProps: defaultListProps,
     setup() {
         const stepper = useStepperContext();

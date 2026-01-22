@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultDropdownProps } from './DatePickerDropdown.props';
 
 export const DatePickerDropdown = withComponent({
-    name: 'DatePickerDropdown',
+    name: 'DatePicker.Dropdown',
     defaultProps: defaultDropdownProps,
     setup() {
         const datepicker = useDatePickerContext();

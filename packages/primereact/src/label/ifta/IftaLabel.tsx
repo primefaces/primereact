@@ -7,7 +7,7 @@ import { useLabelContext } from '../Label.context';
 import { defaultIftaProps } from './IftaLabel.props';
 
 export const IftaLabel = withComponent({
-    name: 'IftaLabel',
+    name: 'Label.Ifta',
     defaultProps: defaultIftaProps,
     styles: iftaStyles,
     setup() {

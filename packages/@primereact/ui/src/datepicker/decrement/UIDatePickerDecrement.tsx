@@ -6,7 +6,7 @@ import { DatePickerDecrement, defaultDecrementProps } from 'primereact/datepicke
 import * as React from 'react';
 
 export const UIDatePickerDecrement = withComponent({
-    name: 'UIDatePickerDecrement',
+    name: 'DatePicker.Decrement',
     defaultProps: defaultDecrementProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

@@ -7,7 +7,7 @@ import { ToolbarStartProvider } from './ToolbarStart.context';
 import { defaultStartProps } from './ToolbarStart.props';
 
 export const ToolbarStart = withComponent({
-    name: 'ToolbarStart',
+    name: 'Toolbar.Start',
     defaultProps: defaultStartProps,
     setup() {
         const toolbar = useToolbarContext();

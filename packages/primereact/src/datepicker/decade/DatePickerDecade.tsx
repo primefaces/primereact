@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultDecadeProps } from './DatePickerDecade.props';
 
 export const DatePickerDecade = withComponent({
-    name: 'DatePickerDecade',
+    name: 'DatePicker.Decade',
     defaultProps: defaultDecadeProps,
     setup() {
         const datepicker = useDatePickerContext();

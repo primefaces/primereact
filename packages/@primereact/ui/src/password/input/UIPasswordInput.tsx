@@ -6,7 +6,7 @@ import { defaultInputProps, PasswordInput } from 'primereact/password';
 import * as React from 'react';
 
 export const UIPasswordInput = withComponent({
-    name: 'UIPasswordInput',
+    name: 'Password.Input',
     defaultProps: defaultInputProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: InputText }, instance.inProps);

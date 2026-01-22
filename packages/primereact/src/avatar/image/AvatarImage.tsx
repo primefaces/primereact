@@ -6,7 +6,7 @@ import { useAvatarContext } from '../Avatar.context';
 import { defaultImageProps } from './AvatarImage.props';
 
 export const AvatarImage = withComponent({
-    name: 'AvatarImage',
+    name: 'Avatar.Image',
     defaultProps: defaultImageProps,
     setup(instance) {
         const { props } = instance;

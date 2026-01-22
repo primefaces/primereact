@@ -5,7 +5,7 @@ import { PlacerRoot, defaultRootProps } from 'primereact/placer';
 import * as React from 'react';
 
 export const UIPlacerRoot = withComponent({
-    name: 'UIPlacerRoot',
+    name: 'Placer.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         return <Component as={PlacerRoot} attrs={instance.inProps} />;

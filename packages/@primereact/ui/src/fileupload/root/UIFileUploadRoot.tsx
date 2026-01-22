@@ -7,7 +7,7 @@ import { FileUploadRoot, defaultRootProps } from 'primereact/fileupload';
 import * as React from 'react';
 
 export const UIFileUploadRoot = withComponent({
-    name: 'UIFileUploadRoot',
+    name: 'FileUpload.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

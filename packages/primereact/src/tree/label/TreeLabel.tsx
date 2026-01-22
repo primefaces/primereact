@@ -7,7 +7,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultLabelProps } from './TreeLabel.props';
 
 export const TreeLabel = withComponent({
-    name: 'TreeLabel',
+    name: 'Tree.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const tree = useTreeContext();

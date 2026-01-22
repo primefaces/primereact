@@ -6,7 +6,7 @@ import { ContextMenuList, defaultListProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuList = withComponent({
-    name: 'UIContextMenuList',
+    name: 'ContextMenu.List',
     defaultProps: defaultListProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuList }, instance.inProps);

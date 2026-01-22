@@ -1,3 +1,5 @@
+'use client';
+import { ChevronDownIcon } from '@primereact/icons/chevrondown';
 import { Accordion } from '@primereact/ui/accordion';
 
 export default function MultipleDemo() {
@@ -6,20 +8,24 @@ export default function MultipleDemo() {
             <Accordion.Root multiple className="max-w-md mx-auto">
                 <Accordion.Panel value="1">
                     <Accordion.Header>
-                        What is this service about?
-                        <Accordion.Trigger />
+                        <Accordion.Trigger className="flex justify-between items-center w-full">
+                            What is this service about?
+                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
                             This service helps you manage your projects more efficiently by offering real-time collaboration, task tracking, and
-                            powerful analytics. Whether you’re working solo or in a team, it’s built to scale with your needs.
+                            powerful analytics. Whether you're working solo or in a team, it's built to scale with your needs.
                         </p>
                     </Accordion.Content>
                 </Accordion.Panel>
                 <Accordion.Panel value="2">
                     <Accordion.Header>
-                        Is my data secure?
-                        <Accordion.Trigger />
+                        <Accordion.Trigger className="flex justify-between items-center w-full">
+                            Is my data secure?
+                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -30,8 +36,10 @@ export default function MultipleDemo() {
                 </Accordion.Panel>
                 <Accordion.Panel value="3">
                     <Accordion.Header>
-                        Can I upgrade or downgrade my plan later?
-                        <Accordion.Trigger />
+                        <Accordion.Trigger className="flex justify-between items-center w-full">
+                            Can I upgrade or downgrade my plan later?
+                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

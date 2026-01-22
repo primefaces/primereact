@@ -7,7 +7,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultCloseProps } from './DialogClose.props';
 
 export const DialogClose = withComponent({
-    name: 'DialogClose',
+    name: 'Dialog.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const dialog = useDialogContext();

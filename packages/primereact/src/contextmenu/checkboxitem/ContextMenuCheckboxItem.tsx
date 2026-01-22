@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultCheckboxItemProps } from './ContextMenuCheckboxItem.props';
 
 export const ContextMenuCheckboxItem = withComponent({
-    name: 'ContextMenuCheckboxItem',
+    name: 'ContextMenu.CheckboxItem',
     defaultProps: defaultCheckboxItemProps,
     setup() {
         const contextmenu = useContextMenuContext();

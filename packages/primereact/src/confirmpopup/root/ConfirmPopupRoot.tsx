@@ -8,7 +8,7 @@ import { ConfirmPopupProvider } from '../ConfirmPopup.context';
 import { defaultRootProps } from './ConfirmPopupRoot.props';
 
 export const ConfirmPopupRoot = withComponent({
-    name: 'ConfirmPopupRoot',
+    name: 'ConfirmPopup.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const confirmpopup = useConfirmPopup(instance.inProps);

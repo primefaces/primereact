@@ -7,7 +7,7 @@ import { useColorPickerSliderContext } from '../slider/ColorPickerSlider.context
 import { defaultSliderTrackProps } from './ColorPickerSliderTrack.props';
 
 export const ColorPickerSliderTrack = withComponent({
-    name: 'ColorPickerSliderTrack',
+    name: 'ColorPicker.SliderTrack',
     defaultProps: defaultSliderTrackProps,
     setup() {
         const colorpicker = useColorPickerContext();

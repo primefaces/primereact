@@ -6,7 +6,7 @@ import { useDrawerContext } from '../Drawer.context';
 import { defaultTriggerProps } from './DrawerTrigger.props';
 
 export const DrawerTrigger = withComponent({
-    name: 'DrawerTrigger',
+    name: 'Drawer.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const drawer = useDrawerContext();

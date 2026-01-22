@@ -6,7 +6,7 @@ import { ColorPickerInput, defaultInputProps } from 'primereact/colorpicker';
 import * as React from 'react';
 
 export const UIColorPickerInput = withComponent({
-    name: 'UIColorPickerInput',
+    name: 'ColorPicker.Input',
     defaultProps: defaultInputProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: InputText }, instance.inProps);

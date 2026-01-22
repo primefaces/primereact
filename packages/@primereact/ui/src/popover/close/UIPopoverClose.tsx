@@ -6,7 +6,7 @@ import { defaultCloseProps, PopoverClose } from 'primereact/popover';
 import * as React from 'react';
 
 export const UIPopoverClose = withComponent({
-    name: 'UIPopoverClose',
+    name: 'Popover.Close',
     defaultProps: defaultCloseProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

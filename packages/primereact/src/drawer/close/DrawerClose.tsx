@@ -7,7 +7,7 @@ import { useDrawerContext } from '../Drawer.context';
 import { defaultCloseProps } from './DrawerClose.props';
 
 export const DrawerClose = withComponent({
-    name: 'DrawerClose',
+    name: 'Drawer.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const drawer = useDrawerContext();

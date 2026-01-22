@@ -7,7 +7,7 @@ import { RatingProvider } from '../Rating.context';
 import { defaultRootProps } from './RatingRoot.props';
 
 export const RatingRoot = withComponent({
-    name: 'RatingRoot',
+    name: 'Rating.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const rating = useRating(instance.inProps);

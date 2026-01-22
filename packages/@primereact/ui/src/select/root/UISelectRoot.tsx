@@ -7,7 +7,7 @@ import { SelectRoot, defaultRootProps } from 'primereact/select';
 import * as React from 'react';
 
 export const UISelectRoot = withComponent({
-    name: 'UISelectRoot',
+    name: 'Select.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

@@ -9,7 +9,7 @@ import { useToggleButtonGroupContext } from '../group';
 import { defaultRootProps } from './ToggleButtonRoot.props';
 
 export const ToggleButtonRoot = withComponent({
-    name: 'ToggleButtonRoot',
+    name: 'ToggleButton.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const { props, inProps } = instance;

@@ -6,7 +6,7 @@ import { useCommandMenuContext } from '../CommandMenu.context';
 import { defaultEmptyProps } from './CommandMenuEmpty.props';
 
 export const CommandMenuEmpty = withComponent({
-    name: 'CommandMenuEmpty',
+    name: 'CommandMenu.Empty',
     defaultProps: defaultEmptyProps,
     setup() {
         const commandmenu = useCommandMenuContext();

@@ -6,7 +6,7 @@ import { DatePickerIncrement, defaultIncrementProps } from 'primereact/datepicke
 import * as React from 'react';
 
 export const UIDatePickerIncrement = withComponent({
-    name: 'UIDatePickerIncrement',
+    name: 'DatePicker.Increment',
     defaultProps: defaultIncrementProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

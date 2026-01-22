@@ -7,7 +7,7 @@ import { useMessageContext } from '../Message.context';
 import { defaultCloseProps } from './MessageClose.props';
 
 export const MessageClose = withComponent({
-    name: 'MessageClose',
+    name: 'Message.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const message = useMessageContext();

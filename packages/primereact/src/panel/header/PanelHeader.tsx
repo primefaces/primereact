@@ -6,7 +6,7 @@ import { usePanelContext } from '../Panel.context';
 import { defaultHeaderProps } from './PanelHeader.props';
 
 export const PanelHeader = withComponent({
-    name: 'PanelHeader',
+    name: 'Panel.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const panel = usePanelContext();

@@ -7,7 +7,7 @@ import { PlacerProvider } from '../Placer.context';
 import { defaultRootProps } from './PlacerRoot.props';
 
 export const PlacerRoot = withComponent({
-    name: 'PlacerRoot',
+    name: 'Placer.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const placer = usePlacer(instance.inProps);

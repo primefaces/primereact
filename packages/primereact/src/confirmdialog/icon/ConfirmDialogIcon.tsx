@@ -6,7 +6,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultIconProps } from './ConfirmDialogIcon.props';
 
 export const ConfirmDialogIcon = withComponent({
-    name: 'ConfirmDialogIcon',
+    name: 'ConfirmDialog.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

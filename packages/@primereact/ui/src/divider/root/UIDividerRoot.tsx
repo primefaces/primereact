@@ -7,7 +7,7 @@ import { DividerRoot, defaultRootProps } from 'primereact/divider';
 import * as React from 'react';
 
 export const UIDividerRoot = withComponent({
-    name: 'UIDividerRoot',
+    name: 'Divider.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

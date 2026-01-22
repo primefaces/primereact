@@ -6,7 +6,7 @@ import { useCarouselContext } from '../Carousel.context';
 import { defaultPrevProps } from './CarouselPrev.props';
 
 export const CarouselPrev = withComponent({
-    name: 'CarouselPrev',
+    name: 'Carousel.Prev',
     defaultProps: defaultPrevProps,
     setup() {
         const carousel = useCarouselContext();

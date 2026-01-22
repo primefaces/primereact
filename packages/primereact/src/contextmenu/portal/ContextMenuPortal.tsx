@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultPortalProps } from './ContextMenuPortal.props';
 
 export const ContextMenuPortal = withComponent({
-    name: 'ContextMenuPortal',
+    name: 'ContextMenu.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const contextmenu = useContextMenuContext();

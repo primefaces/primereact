@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultTodayProps } from './DatePickerToday.props';
 
 export const DatePickerToday = withComponent({
-    name: 'DatePickerToday',
+    name: 'DatePicker.Today',
     defaultProps: defaultTodayProps,
     setup() {
         const datepicker = useDatePickerContext();

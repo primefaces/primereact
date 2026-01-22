@@ -7,7 +7,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultFooterProps } from './ConfirmDialogFooter.props';
 
 export const ConfirmDialogFooter = withComponent({
-    name: 'ConfirmDialogFooter',
+    name: 'ConfirmDialog.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

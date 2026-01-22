@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultClearProps } from './DatePickerClear.props';
 
 export const DatePickerClear = withComponent({
-    name: 'DatePickerClear',
+    name: 'DatePicker.Clear',
     defaultProps: defaultClearProps,
     setup() {
         const datepicker = useDatePickerContext();

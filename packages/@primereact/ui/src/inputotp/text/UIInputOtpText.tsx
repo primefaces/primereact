@@ -6,7 +6,7 @@ import { defaultTextProps, InputOtpText } from 'primereact/inputotp';
 import * as React from 'react';
 
 export const UIInputOtpText = withComponent({
-    name: 'UIInputOtpText',
+    name: 'InputOtp.Text',
     defaultProps: defaultTextProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: InputText }, instance.inProps);

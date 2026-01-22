@@ -6,7 +6,7 @@ import { useColorPickerContext } from '../ColorPicker.context';
 import { defaultSwatchBackgroundProps } from './ColorPickerSwatchBackground.props';
 
 export const ColorPickerSwatchBackground = withComponent({
-    name: 'ColorPickerSwatchBackground',
+    name: 'ColorPicker.SwatchBackground',
     defaultProps: defaultSwatchBackgroundProps,
     setup() {
         const colorpicker = useColorPickerContext();

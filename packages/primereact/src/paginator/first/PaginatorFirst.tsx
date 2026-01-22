@@ -7,7 +7,7 @@ import { usePaginatorContext } from '../Paginator.context';
 import { defaultFirstProps } from './PaginatorFirst.props';
 
 export const PaginatorFirst = withComponent({
-    name: 'PaginatorFirst',
+    name: 'Paginator.First',
     defaultProps: defaultFirstProps,
     setup() {
         const paginator = usePaginatorContext();

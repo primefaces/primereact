@@ -6,7 +6,7 @@ import { useKnobContext } from '../Knob.context';
 import { defaultRangeProps } from './KnobRange.props';
 
 export const KnobRange = withComponent({
-    name: 'KnobRange',
+    name: 'Knob.Range',
     defaultProps: defaultRangeProps,
     setup() {
         const knob = useKnobContext();

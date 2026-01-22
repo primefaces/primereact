@@ -7,7 +7,7 @@ import { InputOtpProvider } from '../InputOtp.context';
 import { defaultRootProps } from './InputOtpRoot.props';
 
 export const InputOtpRoot = withComponent({
-    name: 'InputOtpRoot',
+    name: 'InputOtp.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const inputotp = useInputOtp(instance?.inProps);

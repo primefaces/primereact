@@ -6,7 +6,7 @@ import { useInputOtpContext } from '../InputOtp.context';
 import { defaultTextProps } from './InputOtpText.props';
 
 export const InputOtpText = withComponent({
-    name: 'InputOtpText',
+    name: 'InputOtp.Text',
     defaultProps: defaultTextProps,
     setup() {
         const inputotp = useInputOtpContext();

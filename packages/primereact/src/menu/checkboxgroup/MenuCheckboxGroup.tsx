@@ -7,7 +7,7 @@ import { MenuCheckboxGroupProvider } from './MenuCheckboxGroup.context';
 import { defaultCheckboxGroupProps } from './MenuCheckboxGroup.props';
 
 export const MenuCheckboxGroup = withComponent({
-    name: 'MenuCheckboxGroup',
+    name: 'Menu.CheckboxGroup',
     defaultProps: defaultCheckboxGroupProps,
     setup({ props }) {
         const menu = useMenuContext();

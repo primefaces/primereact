@@ -6,7 +6,7 @@ import { ContextMenuCheckboxIcon, defaultCheckboxIconProps } from 'primereact/co
 import * as React from 'react';
 
 export const UIContextMenuCheckboxIcon = withComponent({
-    name: 'UIContextMenuCheckboxIcon',
+    name: 'ContextMenu.CheckboxIcon',
     defaultProps: defaultCheckboxIconProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuCheckboxIcon }, instance.inProps);

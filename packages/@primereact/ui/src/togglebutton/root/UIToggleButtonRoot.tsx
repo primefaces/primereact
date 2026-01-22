@@ -7,7 +7,7 @@ import { ToggleButtonRoot, defaultRootProps } from 'primereact/togglebutton';
 import * as React from 'react';
 
 export const UIToggleButtonRoot = withComponent({
-    name: 'UIToggleButtonRoot',
+    name: 'ToggleButton.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

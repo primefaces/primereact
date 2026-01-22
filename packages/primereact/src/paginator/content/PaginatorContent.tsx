@@ -6,7 +6,7 @@ import { usePaginatorContext } from '../Paginator.context';
 import { defaultContentProps } from './PaginatorContent.props';
 
 export const PaginatorContent = withComponent({
-    name: 'PaginatorContent',
+    name: 'Paginator.Content',
     defaultProps: defaultContentProps,
     setup() {
         const paginator = usePaginatorContext();

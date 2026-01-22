@@ -7,7 +7,7 @@ import { TimelineOppositeProvider } from './TimelineOpposite.context';
 import { defaultOppositeProps } from './TimelineOpposite.props';
 
 export const TimelineOpposite = withComponent({
-    name: 'TimelineOpposite',
+    name: 'Timeline.Opposite',
     defaultProps: defaultOppositeProps,
     setup() {
         const timeline = useTimelineContext();

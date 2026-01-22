@@ -6,7 +6,7 @@ import { useFieldsetContext } from '../Fieldset.context';
 import { defaultLegendProps } from './FieldsetLegend.props';
 
 export const FieldsetLegend = withComponent({
-    name: 'FieldsetLegend',
+    name: 'Fieldset.Legend',
     defaultProps: defaultLegendProps,
     setup() {
         const fieldset = useFieldsetContext();

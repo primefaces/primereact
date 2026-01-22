@@ -9,7 +9,7 @@ import { ContextMenuProvider } from '../ContextMenu.context';
 import { defaultRootProps } from './ContextMenuRoot.props';
 
 export const ContextMenuRoot = withComponent({
-    name: 'ContextMenuRoot',
+    name: 'ContextMenu.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const contextmenu = useContextMenu(instance?.inProps);

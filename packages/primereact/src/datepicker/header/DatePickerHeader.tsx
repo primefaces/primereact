@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultHeaderProps } from './DatePickerHeader.props';
 
 export const DatePickerHeader = withComponent({
-    name: 'DatePickerHeader',
+    name: 'DatePicker.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const datepicker = useDatePickerContext();

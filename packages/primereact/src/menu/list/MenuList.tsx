@@ -9,7 +9,7 @@ import { useMenuSubContext } from '../sub/MenuSub.context';
 import { defaultListProps } from './MenuList.props';
 
 export const MenuList = withComponent({
-    name: 'MenuList',
+    name: 'Menu.List',
     defaultProps: defaultListProps,
     setup() {
         const menu = useMenuContext();

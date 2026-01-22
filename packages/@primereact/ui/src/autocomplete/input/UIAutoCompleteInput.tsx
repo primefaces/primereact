@@ -6,7 +6,7 @@ import { AutoCompleteInput, defaultInputProps } from 'primereact/autocomplete';
 import * as React from 'react';
 
 export const UIAutoCompleteInput = withComponent({
-    name: 'UIAutoCompleteInput',
+    name: 'AutoComplete.Input',
     defaultProps: defaultInputProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: InputText }, instance.inProps);

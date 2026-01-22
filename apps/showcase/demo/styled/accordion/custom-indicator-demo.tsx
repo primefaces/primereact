@@ -1,17 +1,23 @@
 'use client';
-import { MinusIcon, PlusIcon } from '@primereact/icons';
-import type { AccordionHeaderIndicatorInstance } from '@primereact/types/shared/accordion';
+import { PlusIcon } from '@primereact/icons';
+import type { AccordionTriggerInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from '@primereact/ui/accordion';
 
 export default function CustomIndicatorDemo() {
+    const test = (instance: AccordionTriggerInstance) => {
+        //console.log(instance);
+
+        return instance.accordionpanel?.active ? 'True' : 'False';
+    };
+
     return (
         <div>
             <Accordion.Root className="max-w-md mx-auto" multiple>
                 <Accordion.Panel value="1">
                     <Accordion.Header>
-                        What is this service about?
-                        <Accordion.Trigger className="group">
-                            <PlusIcon className="group-data-[p-active=true]:rotate-45 transition-transform ease-out" />
+                        <Accordion.Trigger className="flex justify-between items-center w-full group">
+                            What is this service about?
+                            <PlusIcon className="group-[[data-content-open]>&]:rotate-45 transition-transform ease-out" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -24,9 +30,7 @@ export default function CustomIndicatorDemo() {
                 <Accordion.Panel value="2">
                     <Accordion.Header>
                         Is my data secure?
-                        <Accordion.Trigger>
-                            {({ accordionpanel }: AccordionHeaderIndicatorInstance) => (accordionpanel?.active ? <MinusIcon /> : <PlusIcon />)}
-                        </Accordion.Trigger>
+                        <Accordion.Trigger className="flex justify-between items-center">{test}</Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">
@@ -36,9 +40,11 @@ export default function CustomIndicatorDemo() {
                     </Accordion.Content>
                 </Accordion.Panel>
                 <Accordion.Panel value="3">
-                    <Accordion.Header className="justify-start gap-2">
-                        <Accordion.Trigger />
-                        Can I upgrade or downgrade my plan later?
+                    <Accordion.Header>
+                        <Accordion.Trigger className="flex justify-start items-center w-full gap-2">
+                            <PlusIcon className="[[data-content-open]>&]:rotate-45 transition-transform ease-out" />
+                            Can I upgrade or downgrade my plan later?
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

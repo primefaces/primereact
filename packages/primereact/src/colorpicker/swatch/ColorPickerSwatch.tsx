@@ -8,7 +8,7 @@ import { ColorPickerTransparencyGrid } from '../transparencygrid';
 import { defaultSwatchProps } from './ColorPickerSwatch.props';
 
 export const ColorPickerSwatch = withComponent({
-    name: 'ColorPickerSwatch',
+    name: 'ColorPicker.Swatch',
     defaultProps: defaultSwatchProps,
     setup() {
         const colorpicker = useColorPickerContext();

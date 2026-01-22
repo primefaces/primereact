@@ -7,7 +7,7 @@ import { PaginatorRoot, defaultRootProps } from 'primereact/paginator';
 import * as React from 'react';
 
 export const UIPaginatorRoot = withComponent({
-    name: 'UIPaginatorRoot',
+    name: 'Paginator.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

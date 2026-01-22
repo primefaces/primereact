@@ -7,7 +7,7 @@ import { TimelineEventProvider } from './TimelineEvent.context';
 import { defaultEventProps } from './TimelineEvent.props';
 
 export const TimelineEvent = withComponent({
-    name: 'TimelineEvent',
+    name: 'Timeline.Event',
     defaultProps: defaultEventProps,
     setup() {
         const timeline = useTimelineContext();

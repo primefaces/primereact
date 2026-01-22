@@ -10,7 +10,7 @@ import { useMenuRadioItemContext } from '../radioitem/MenuRadioItem.context';
 import { defaultRadioIconProps } from './MenuRadioIcon.props';
 
 export const MenuRadioIcon = withComponent({
-    name: 'MenuRadioIcon',
+    name: 'Menu.RadioIcon',
     defaultProps: defaultRadioIconProps,
     setup() {
         const menu = useMenuContext();

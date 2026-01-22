@@ -6,7 +6,7 @@ import { useMessageContext } from '../Message.context';
 import { defaultContentProps } from './MessageContent.props';
 
 export const MessageContent = withComponent({
-    name: 'MessageContent',
+    name: 'Message.Content',
     defaultProps: defaultContentProps,
     setup() {
         const message = useMessageContext();

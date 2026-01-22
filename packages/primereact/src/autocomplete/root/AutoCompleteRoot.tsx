@@ -7,7 +7,7 @@ import { AutoCompleteProvider } from '../AutoComplete.context';
 import { defaultRootProps } from './AutoCompleteRoot.props';
 
 export const AutoCompleteRoot = withComponent({
-    name: 'AutoCompleteRoot',
+    name: 'AutoComplete.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const autocomplete = useAutoComplete(instance.inProps);

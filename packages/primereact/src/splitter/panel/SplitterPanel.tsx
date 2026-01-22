@@ -6,7 +6,7 @@ import { useSplitterContext } from '../Splitter.context';
 import { defaultPanelProps } from './SplitterPanel.props';
 
 export const SplitterPanel = withComponent({
-    name: 'SplitterPanel',
+    name: 'Splitter.Panel',
     defaultProps: defaultPanelProps,
     setup() {
         const splitter = useSplitterContext();

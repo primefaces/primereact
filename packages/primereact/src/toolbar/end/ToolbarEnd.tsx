@@ -7,7 +7,7 @@ import { ToolbarEndProvider } from './ToolbarEnd.context';
 import { defaultEndProps } from './ToolbarEnd.props';
 
 export const ToolbarEnd = withComponent({
-    name: 'ToolbarEnd',
+    name: 'Toolbar.End',
     defaultProps: defaultEndProps,
     setup() {
         const toolbar = useToolbarContext();

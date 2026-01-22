@@ -7,7 +7,7 @@ import { DividerProvider } from '../Divider.context';
 import { defaultRootProps } from './DividerRoot.props';
 
 export const DividerRoot = withComponent({
-    name: 'DividerRoot',
+    name: 'Divider.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const divider = useDivider(instance.inProps);

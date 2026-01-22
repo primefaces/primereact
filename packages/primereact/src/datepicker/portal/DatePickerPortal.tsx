@@ -8,7 +8,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultPortalProps } from './DatePickerPortal.props';
 
 export const DatePickerPortal = withComponent({
-    name: 'DatePickerPortal',
+    name: 'DatePicker.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const datepicker = useDatePickerContext();

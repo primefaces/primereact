@@ -6,7 +6,7 @@ import { useSliderContext } from '../Slider.context';
 import { defaultContentProps } from './SliderRange.props';
 
 export const SliderRange = withComponent({
-    name: 'SliderRange',
+    name: 'Slider.Range',
     defaultProps: defaultContentProps,
     setup() {
         const slider = useSliderContext();

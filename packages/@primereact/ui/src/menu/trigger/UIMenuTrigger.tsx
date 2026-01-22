@@ -6,7 +6,7 @@ import { MenuTrigger, defaultTriggerProps } from 'primereact/menu';
 import * as React from 'react';
 
 export const UIMenuTrigger = withComponent({
-    name: 'UIMenuTrigger',
+    name: 'Menu.Trigger',
     defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

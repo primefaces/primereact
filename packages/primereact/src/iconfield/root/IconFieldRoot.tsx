@@ -7,7 +7,7 @@ import { IconFieldProvider } from '../IconField.context';
 import { defaultRootProps } from './IconFieldRoot.props';
 
 export const IconFieldRoot = withComponent({
-    name: 'IconFieldRoot',
+    name: 'IconField.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const inputicon = useIconField(instance?.inProps);

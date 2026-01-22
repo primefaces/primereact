@@ -6,7 +6,7 @@ import { useConfirmPopupContext } from '../ConfirmPopup.context';
 import { defaultContentProps } from './ConfirmPopupContent.props';
 
 export const ConfirmPopupContent = withComponent({
-    name: 'ConfirmPopupContent',
+    name: 'ConfirmPopup.Content',
     defaultProps: defaultContentProps,
     setup() {
         const confirmpopup = useConfirmPopupContext();

@@ -6,7 +6,7 @@ import { AutoCompleteList, defaultListProps } from 'primereact/autocomplete';
 import * as React from 'react';
 
 export const UIAutoCompleteList = withComponent({
-    name: 'UIAutoCompleteList',
+    name: 'AutoComplete.List',
     defaultProps: defaultListProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxRoot }, instance.inProps);

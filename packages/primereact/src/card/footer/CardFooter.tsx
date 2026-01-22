@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultFooterProps } from './CardFooter.props';
 
 export const CardFooter = withComponent({
-    name: 'CardFooter',
+    name: 'Card.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const card = useCardContext();

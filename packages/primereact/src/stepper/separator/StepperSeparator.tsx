@@ -6,7 +6,7 @@ import { useStepperContext } from '../Stepper.context';
 import { defaultSeparatorProps } from './StepperSeparator.props';
 
 export const StepperSeparator = withComponent({
-    name: 'StepperSeparator',
+    name: 'Stepper.Separator',
     defaultProps: defaultSeparatorProps,
     setup() {
         const stepper = useStepperContext();

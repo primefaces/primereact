@@ -6,7 +6,7 @@ import { useTagContext } from '../Tag.context';
 import { defaultLabelProps } from './TagLabel.props';
 
 export const TagLabel = withComponent({
-    name: 'TagLabel',
+    name: 'Tag.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const tag = useTagContext();

@@ -6,7 +6,7 @@ import { ContextMenuSeparator, defaultSeparatorProps } from 'primereact/contextm
 import * as React from 'react';
 
 export const UIContextMenuSeparator = withComponent({
-    name: 'UIContextMenuSeparator',
+    name: 'ContextMenu.Separator',
     defaultProps: defaultSeparatorProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuSeparator }, instance.inProps);

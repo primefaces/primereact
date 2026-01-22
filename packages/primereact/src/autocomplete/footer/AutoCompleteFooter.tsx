@@ -6,7 +6,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultFooterProps } from './AutoCompleteFooter.props';
 
 export const AutoCompleteFooter = withComponent({
-    name: 'AutoCompleteFooter',
+    name: 'AutoComplete.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

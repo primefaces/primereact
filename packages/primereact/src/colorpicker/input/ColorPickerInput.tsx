@@ -8,7 +8,7 @@ import { ColorPickerInputProvider } from './ColorPickerInput.context';
 import { defaultInputProps } from './ColorPickerInput.props';
 
 export const ColorPickerInput = withComponent({
-    name: 'ColorPickerInput',
+    name: 'ColorPicker.Input',
     defaultProps: defaultInputProps,
     setup(instance) {
         const colorpicker = useColorPickerContext();

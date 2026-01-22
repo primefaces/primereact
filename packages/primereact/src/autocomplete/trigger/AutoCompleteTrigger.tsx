@@ -6,7 +6,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultTriggerProps } from './AutoCompleteTrigger.props';
 
 export const AutoCompleteTrigger = withComponent({
-    name: 'AutoCompleteTrigger',
+    name: 'AutoComplete.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

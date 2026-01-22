@@ -6,7 +6,7 @@ import { useStepperContext } from '../Stepper.context';
 import { defaultTitleProps } from './StepperTitle.props';
 
 export const StepperTitle = withComponent({
-    name: 'StepperTitle',
+    name: 'Stepper.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const stepper = useStepperContext();

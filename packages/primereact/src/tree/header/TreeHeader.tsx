@@ -6,7 +6,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultHeaderProps } from './TreeHeader.props';
 
 export const TreeHeader = withComponent({
-    name: 'TreeHeader',
+    name: 'Tree.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const tree = useTreeContext();

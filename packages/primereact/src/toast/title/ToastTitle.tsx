@@ -7,7 +7,7 @@ import { useToastContext } from '../Toast.context';
 import { defaultTitleProps } from './ToastTitle.props';
 
 export const ToastTitle = withComponent({
-    name: 'ToastTitle',
+    name: 'Toast.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const toastItem = useToastItemContext();

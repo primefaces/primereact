@@ -6,7 +6,7 @@ import { useColorPickerContext } from '../ColorPicker.context';
 import { defaultTransparencyGridProps } from './ColorPickerTransparencyGrid.props';
 
 export const ColorPickerTransparencyGrid = withComponent({
-    name: 'ColorPickerTransparencyGrid',
+    name: 'ColorPicker.TransparencyGrid',
     defaultProps: defaultTransparencyGridProps,
     setup() {
         const colorpicker = useColorPickerContext();

@@ -7,7 +7,7 @@ import { usePaginatorContext } from '../Paginator.context';
 import { defaultLastProps } from './PaginatorLast.props';
 
 export const PaginatorLast = withComponent({
-    name: 'PaginatorLast',
+    name: 'Paginator.Last',
     defaultProps: defaultLastProps,
     setup() {
         const paginator = usePaginatorContext();

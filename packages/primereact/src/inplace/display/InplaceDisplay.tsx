@@ -6,7 +6,7 @@ import { useInplaceContext } from '../Inplace.context';
 import { defaultDisplayProps } from './InplaceDisplay.props';
 
 export const InplaceDisplay = withComponent({
-    name: 'InplaceDisplay',
+    name: 'Inplace.Display',
     defaultProps: defaultDisplayProps,
     setup() {
         const inplace = useInplaceContext();

@@ -7,7 +7,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultTitleProps } from './ConfirmDialogTitle.props';
 
 export const ConfirmDialogTitle = withComponent({
-    name: 'ConfirmDialogTitle',
+    name: 'ConfirmDialog.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

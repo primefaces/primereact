@@ -6,7 +6,7 @@ import { useColorPickerContext } from '../ColorPicker.context';
 import { defaultAreaThumbProps } from './ColorPickerAreaThumb.props';
 
 export const ColorPickerAreaThumb = withComponent({
-    name: 'ColorPickerAreaThumb',
+    name: 'ColorPicker.AreaThumb',
     defaultProps: defaultAreaThumbProps,
     setup() {
         const colorpicker = useColorPickerContext();

@@ -7,7 +7,7 @@ import { DatePickerRoot, defaultRootProps } from 'primereact/datepicker';
 import * as React from 'react';
 
 export const UIDatePickerRoot = withComponent({
-    name: 'UIDatePickerRoot',
+    name: 'DatePicker.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

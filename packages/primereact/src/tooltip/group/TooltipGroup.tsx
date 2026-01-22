@@ -7,7 +7,7 @@ import { TooltipGroupProvider } from './TooltipGroup.context';
 import { defaultGroupProps } from './TooltipGroup.props';
 
 export const TooltipGroup = withComponent({
-    name: 'TooltipGroup',
+    name: 'Tooltip.Group',
     defaultProps: defaultGroupProps,
     setup(instance) {
         const tooltipgroup = useTooltipGroup(instance.inProps);

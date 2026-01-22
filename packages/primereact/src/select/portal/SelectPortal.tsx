@@ -8,7 +8,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultPortalProps } from './SelectPortal.props';
 
 export const SelectPortal = withComponent({
-    name: 'SelectPortal',
+    name: 'Select.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const select = useSelectContext();

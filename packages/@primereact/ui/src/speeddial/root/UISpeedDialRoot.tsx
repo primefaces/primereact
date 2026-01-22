@@ -7,7 +7,7 @@ import { SpeedDialRoot, defaultRootProps } from 'primereact/speeddial';
 import * as React from 'react';
 
 export const UISpeedDialRoot = withComponent({
-    name: 'UISpeedDialRoot',
+    name: 'SpeedDial.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

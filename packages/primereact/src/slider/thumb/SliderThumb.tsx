@@ -6,7 +6,7 @@ import { useSliderContext } from '../Slider.context';
 import { defaultThumbProps } from './SliderThumb.props';
 
 export const SliderThumb = withComponent({
-    name: 'SliderThumb',
+    name: 'Slider.Thumb',
     defaultProps: defaultThumbProps,
     setup() {
         const slider = useSliderContext();

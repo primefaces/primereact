@@ -6,7 +6,7 @@ import { ConfirmDialogClose, defaultCloseProps } from 'primereact/confirmdialog'
 import * as React from 'react';
 
 export const UIConfirmDialogClose = withComponent({
-    name: 'UIConfirmDialogClose',
+    name: 'ConfirmDialog.Close',
     defaultProps: defaultCloseProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: DialogClose }, instance.inProps);

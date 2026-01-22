@@ -6,7 +6,7 @@ import { ContextMenuCheckboxGroup, defaultCheckboxGroupProps } from 'primereact/
 import * as React from 'react';
 
 export const UIContextMenuCheckboxGroup = withComponent({
-    name: 'UIContextMenuCheckboxGroup',
+    name: 'ContextMenu.CheckboxGroup',
     defaultProps: defaultCheckboxGroupProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuCheckboxGroup }, instance.inProps);

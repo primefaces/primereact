@@ -7,7 +7,7 @@ import { useChipContext } from '../Chip.context';
 import { defaultRemoveIconProps } from './ChipRemoveIcon.props';
 
 export const ChipRemoveIcon = withComponent({
-    name: 'ChipRemoveIcon',
+    name: 'Chip.RemoveIcon',
     defaultProps: defaultRemoveIconProps,
     setup() {
         const chip = useChipContext();

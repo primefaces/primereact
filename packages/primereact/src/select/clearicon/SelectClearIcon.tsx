@@ -6,7 +6,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultClearIconProps } from './SelectClearIcon.props';
 
 export const SelectClearIcon = withComponent({
-    name: 'SelectClearIcon',
+    name: 'Select.ClearIcon',
     defaultProps: defaultClearIconProps,
     setup() {
         const select = useSelectContext();

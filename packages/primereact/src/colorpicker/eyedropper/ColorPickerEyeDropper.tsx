@@ -8,7 +8,7 @@ import { useColorPickerContext } from '../ColorPicker.context';
 import { defaultEyeDropperProps } from './ColorPickerEyeDropper.props';
 
 export const ColorPickerEyeDropper = withComponent({
-    name: 'ColorPickerEyeDropper',
+    name: 'ColorPicker.EyeDropper',
     defaultProps: defaultEyeDropperProps,
     setup() {
         const colorpicker = useColorPickerContext();

@@ -7,7 +7,7 @@ import { usePaginatorContext } from '../Paginator.context';
 import { defaultNextProps } from './PaginatorNext.props';
 
 export const PaginatorNext = withComponent({
-    name: 'PaginatorNext',
+    name: 'Paginator.Next',
     defaultProps: defaultNextProps,
     setup() {
         const paginator = usePaginatorContext();

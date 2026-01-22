@@ -6,7 +6,7 @@ import { useSpeedDialContext } from '../SpeedDial.context';
 import { defaultItemProps } from './SpeedDialItem.props';
 
 export const SpeedDialItem = withComponent({
-    name: 'SpeedDialItem',
+    name: 'SpeedDial.Item',
     defaultProps: defaultItemProps,
     setup() {
         const speeddial = useSpeedDialContext();

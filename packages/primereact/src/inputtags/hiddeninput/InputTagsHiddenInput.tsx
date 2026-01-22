@@ -6,7 +6,7 @@ import { useInputTagsContext } from '../InputTags.context';
 import { defaultHiddenInputProps } from './InputTagsHiddenInput.props';
 
 export const InputTagsHiddenInput = withComponent({
-    name: 'InputTagsHiddenInput',
+    name: 'InputTags.HiddenInput',
     defaultProps: defaultHiddenInputProps,
     setup() {
         const inputtags = useInputTagsContext();

@@ -7,7 +7,7 @@ import { DatePickerInputIconContainerProvider } from './DatePickerInputIconConta
 import { defaultInputIconContainerProps } from './DatePickerInputIconContainer.props';
 
 export const DatePickerInputIconContainer = withComponent({
-    name: 'DatePickerInputIconContainer',
+    name: 'DatePicker.InputIconContainer',
     defaultProps: defaultInputIconContainerProps,
     setup() {
         const datepicker = useDatePickerContext();

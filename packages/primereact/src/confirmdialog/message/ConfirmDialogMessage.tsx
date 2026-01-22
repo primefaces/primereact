@@ -6,7 +6,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultMessageProps } from './ConfirmDialogMessage.props';
 
 export const ConfirmDialogMessage = withComponent({
-    name: 'ConfirmDialogMessage',
+    name: 'ConfirmDialog.Message',
     defaultProps: defaultMessageProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

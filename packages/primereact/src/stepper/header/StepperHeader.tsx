@@ -8,7 +8,7 @@ import { useStepperContext } from '../Stepper.context';
 import { defaultHeaderProps } from './StepperHeader.props';
 
 export const StepperHeader = withComponent({
-    name: 'StepperHeader',
+    name: 'Stepper.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const stepper = useStepperContext();

@@ -6,7 +6,7 @@ import { ConfirmDialogTrigger, defaultTriggerProps } from 'primereact/confirmdia
 import * as React from 'react';
 
 export const UIConfirmDialogTrigger = withComponent({
-    name: 'UIConfirmDialogTrigger',
+    name: 'ConfirmDialog.Trigger',
     defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: DialogTrigger }, instance.inProps);

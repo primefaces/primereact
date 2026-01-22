@@ -7,7 +7,7 @@ import { TabsRoot, defaultRootProps } from 'primereact/tabs';
 import * as React from 'react';
 
 export const UITabsRoot = withComponent({
-    name: 'UITabsRoot',
+    name: 'Tabs.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultSeparatorContainerProps } from './DatePickerSeparatorContainer.props';
 
 export const DatePickerSeparatorContainer = withComponent({
-    name: 'DatePickerSeparatorContainer',
+    name: 'DatePicker.SeparatorContainer',
     defaultProps: defaultSeparatorContainerProps,
     setup() {
         const datepicker = useDatePickerContext();

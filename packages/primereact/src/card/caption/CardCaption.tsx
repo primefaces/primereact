@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultCaptionProps } from './CardCaption.props';
 
 export const CardCaption = withComponent({
-    name: 'CardCaption',
+    name: 'Card.Caption',
     defaultProps: defaultCaptionProps,
     setup() {
         const card = useCardContext();

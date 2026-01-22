@@ -7,7 +7,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultIconProps } from './TreeIcon.props';
 
 export const TreeIcon = withComponent({
-    name: 'TreeIcon',
+    name: 'Tree.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const tree = useTreeContext();

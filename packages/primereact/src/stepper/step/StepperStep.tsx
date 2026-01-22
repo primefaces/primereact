@@ -8,7 +8,7 @@ import { StepperStepProvider } from './StepperStep.context';
 import { defaultStepProps } from './StepperStep.props';
 
 export const StepperStep = withComponent({
-    name: 'StepperStep',
+    name: 'Stepper.Step',
     defaultProps: defaultStepProps,
     setup({ props }) {
         const stepper = useStepperContext();

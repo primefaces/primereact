@@ -6,7 +6,7 @@ import { useListboxContext } from '../Listbox.context';
 import { defaultHeaderProps } from './ListboxHeader.props';
 
 export const ListboxHeader = withComponent({
-    name: 'ListboxHeader',
+    name: 'Listbox.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const listbox = useListboxContext();

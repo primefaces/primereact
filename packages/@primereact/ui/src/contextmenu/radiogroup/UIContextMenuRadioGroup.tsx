@@ -6,7 +6,7 @@ import { ContextMenuRadioGroup, defaultRadioGroupProps } from 'primereact/contex
 import * as React from 'react';
 
 export const UIContextMenuRadioGroup = withComponent({
-    name: 'UIContextMenuRadioGroup',
+    name: 'ContextMenu.RadioGroup',
     defaultProps: defaultRadioGroupProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuRadioGroup }, instance.inProps);

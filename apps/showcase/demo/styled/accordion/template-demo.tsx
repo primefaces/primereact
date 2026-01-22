@@ -1,6 +1,5 @@
 'use client';
-import { Icon } from '@primereact/core/icon';
-import type { AccordionHeaderInstance } from '@primereact/types/shared/accordion';
+import { PlusIcon } from '@primereact/icons/plus';
 import { Accordion } from '@primereact/ui/accordion';
 
 const items = [
@@ -34,14 +33,12 @@ export default function TemplateDemo() {
                 {items.map((item) => (
                     <Accordion.Panel key={item.value} value={item.value} className="last:border-none transition-all ease-out">
                         <Accordion.Header className="bg-transparent py-3.5">
-                            <span className="flex items-center gap-4">
-                                <i className={item.icon}></i>
-                                <span className="font-medium">{item.label}</span>
-                            </span>
-                            <Accordion.Trigger>
-                                {({ accordionpanel }: AccordionHeaderInstance) => (
-                                    <Icon className="pi pi-plus transition-transform ease-out" rotate={accordionpanel?.active ? 45 : 0} />
-                                )}
+                            <Accordion.Trigger className="flex justify-between items-center w-full">
+                                <span className="flex items-center gap-4">
+                                    <i className={item.icon}></i>
+                                    <span className="font-medium">{item.label}</span>
+                                </span>
+                                <PlusIcon className="transition-transform ease-out [[data-content-open]>&]:rotate-45" />
                             </Accordion.Trigger>
                         </Accordion.Header>
                         <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-11.5">

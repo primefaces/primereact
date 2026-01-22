@@ -7,7 +7,7 @@ import { CommandMenuGroupProvider } from './CommandMenuGroup.context';
 import { defaultGroupProps } from './CommandMenuGroup.props';
 
 export const CommandMenuGroup = withComponent({
-    name: 'CommandMenuGroup',
+    name: 'CommandMenu.Group',
     defaultProps: defaultGroupProps,
     setup(instance) {
         const { props, id } = instance;

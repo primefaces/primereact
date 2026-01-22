@@ -7,7 +7,7 @@ import { ColorPickerRoot, defaultRootProps } from 'primereact/colorpicker';
 import * as React from 'react';
 
 export const UIColorPickerRoot = withComponent({
-    name: 'UIColorPickerRoot',
+    name: 'ColorPicker.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

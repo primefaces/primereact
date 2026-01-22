@@ -7,7 +7,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultOptionsProps } from './SelectOptions.props';
 
 export const SelectOptions = withComponent({
-    name: 'SelectOptions',
+    name: 'Select.Options',
     defaultProps: defaultOptionsProps,
     setup() {
         const select = useSelectContext();

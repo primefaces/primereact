@@ -7,7 +7,7 @@ import { MessageProvider } from '../Message.context';
 import { defaultRootProps } from './MessageRoot.props';
 
 export const MessageRoot = withComponent({
-    name: 'MessageRoot',
+    name: 'Message.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const message = useMessage(instance.inProps);

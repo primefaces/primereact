@@ -6,7 +6,7 @@ import { useTooltipContext } from '../Tooltip.context';
 import { defaultContentProps } from './TooltipContent.props';
 
 export const TooltipContent = withComponent({
-    name: 'TooltipContent',
+    name: 'Tooltip.Content',
     defaultProps: defaultContentProps,
     setup() {
         const tooltip = useTooltipContext();

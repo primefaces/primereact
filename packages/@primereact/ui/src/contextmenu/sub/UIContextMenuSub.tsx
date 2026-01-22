@@ -6,7 +6,7 @@ import { ContextMenuSub, defaultSubProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuSub = withComponent({
-    name: 'UIContextMenuSub',
+    name: 'ContextMenu.Sub',
     defaultProps: defaultSubProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuSub }, instance.inProps);

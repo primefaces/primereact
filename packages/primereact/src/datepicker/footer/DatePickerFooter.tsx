@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultFooterProps } from './DatePickerFooter.props';
 
 export const DatePickerFooter = withComponent({
-    name: 'DatePickerFooter',
+    name: 'DatePicker.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const datepicker = useDatePickerContext();

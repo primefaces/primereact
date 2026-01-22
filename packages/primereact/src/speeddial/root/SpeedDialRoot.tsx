@@ -7,7 +7,7 @@ import { SpeedDialProvider } from '../SpeedDial.context';
 import { defaultRootProps } from './SpeedDialRoot.props';
 
 export const SpeedDialRoot = withComponent({
-    name: 'SpeedDialRoot',
+    name: 'SpeedDial.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const speeddial = useSpeedDial(instance.inProps);

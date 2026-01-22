@@ -7,7 +7,7 @@ import { TimelineSeparatorProvider } from './TimelineSeparator.context';
 import { defaultSeparatorProps } from './TimelineSeparator.props';
 
 export const TimelineSeparator = withComponent({
-    name: 'TimelineSeparator',
+    name: 'Timeline.Separator',
     defaultProps: defaultSeparatorProps,
     setup() {
         const timeline = useTimelineContext();

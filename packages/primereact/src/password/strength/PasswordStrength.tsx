@@ -7,7 +7,7 @@ import { usePasswordContext } from '../Password.context';
 import { defaultStrengthProps } from './PasswordStrength.props';
 
 export const PasswordStrength = withComponent({
-    name: 'PasswordStrength',
+    name: 'Password.Strength',
     defaultProps: defaultStrengthProps,
     setup() {
         const password = usePasswordContext();

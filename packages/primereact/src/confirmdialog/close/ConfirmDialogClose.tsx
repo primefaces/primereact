@@ -7,7 +7,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultCloseProps } from './ConfirmDialogClose.props';
 
 export const ConfirmDialogClose = withComponent({
-    name: 'ConfirmDialogClose',
+    name: 'ConfirmDialog.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

@@ -7,7 +7,7 @@ import { SwitchRoot, defaultRootProps } from 'primereact/switch';
 import * as React from 'react';
 
 export const UISwitchRoot = withComponent({
-    name: 'UISwitchRoot',
+    name: 'Switch.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

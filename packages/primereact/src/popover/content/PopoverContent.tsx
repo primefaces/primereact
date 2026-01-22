@@ -6,7 +6,7 @@ import { usePopoverContext } from '../Popover.context';
 import { defaultContentProps } from './PopoverContent.props';
 
 export const PopoverContent = withComponent({
-    name: 'PopoverContent',
+    name: 'Popover.Content',
     defaultProps: defaultContentProps,
     setup() {
         const popover = usePopoverContext();

@@ -7,7 +7,7 @@ import { defaultCloseProps } from './InplaceClose.props';
 
 // @todo
 export const InplaceClose = withComponent({
-    name: 'InplaceClose',
+    name: 'Inplace.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const inplace = useInplaceContext();

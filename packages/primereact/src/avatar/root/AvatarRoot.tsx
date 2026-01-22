@@ -7,7 +7,7 @@ import { AvatarProvider } from '../Avatar.context';
 import { defaultRootProps } from './AvatarRoot.props';
 
 export const AvatarRoot = withComponent({
-    name: 'AvatarRoot',
+    name: 'Avatar.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const avatar = useAvatar(instance.inProps);

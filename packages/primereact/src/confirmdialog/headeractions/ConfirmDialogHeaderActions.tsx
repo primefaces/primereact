@@ -7,7 +7,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultHeaderActionsProps } from './ConfirmDialogHeaderActions.props';
 
 export const ConfirmDialogHeaderActions = withComponent({
-    name: 'ConfirmDialogHeaderActions',
+    name: 'ConfirmDialog.HeaderActions',
     defaultProps: defaultHeaderActionsProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

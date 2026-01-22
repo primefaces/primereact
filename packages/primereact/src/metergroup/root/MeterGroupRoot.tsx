@@ -20,7 +20,7 @@ export const METERGROUP_DEFAULT_COLORS = {
 };
 
 export const MeterGroupRoot = withComponent({
-    name: 'MeterGroupRoot',
+    name: 'MeterGroup.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const metergroup = useMeterGroup(instance.inProps);

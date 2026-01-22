@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultTableHeadProps } from './DatePickerTableHead.props';
 
 export const DatePickerTableHead = withComponent({
-    name: 'DatePickerTableHead',
+    name: 'DatePicker.TableHead',
     defaultProps: defaultTableHeadProps,
     setup() {
         const datepicker = useDatePickerContext();

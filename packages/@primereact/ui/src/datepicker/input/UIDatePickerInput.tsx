@@ -6,7 +6,7 @@ import { DatePickerInput, defaultInputProps } from 'primereact/datepicker';
 import * as React from 'react';
 
 export const UIDatePickerInput = withComponent({
-    name: 'UIDatePickerInput',
+    name: 'DatePicker.Input',
     defaultProps: defaultInputProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: InputText }, instance.inProps);

@@ -6,7 +6,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultContentProps } from './DialogContent.props';
 
 export const DialogContent = withComponent({
-    name: 'DialogContent',
+    name: 'Dialog.Content',
     defaultProps: defaultContentProps,
     setup() {
         const dialog = useDialogContext();

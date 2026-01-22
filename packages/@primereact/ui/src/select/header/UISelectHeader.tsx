@@ -6,7 +6,7 @@ import { SelectHeader, defaultHeaderProps } from 'primereact/select';
 import * as React from 'react';
 
 export const UISelectHeader = withComponent({
-    name: 'UISelectHeader',
+    name: 'Select.Header',
     defaultProps: defaultHeaderProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxHeader }, instance.inProps);

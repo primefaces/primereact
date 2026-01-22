@@ -6,7 +6,7 @@ import { useConfirmPopupContext } from '../ConfirmPopup.context';
 import { defaultRejectProps } from './ConfirmPopupReject.props';
 
 export const ConfirmPopupReject = withComponent({
-    name: 'ConfirmPopupReject',
+    name: 'ConfirmPopup.Reject',
     defaultProps: defaultRejectProps,
     setup() {
         const confirmpopup = useConfirmPopupContext();

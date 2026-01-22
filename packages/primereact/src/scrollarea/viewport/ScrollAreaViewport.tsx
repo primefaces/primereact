@@ -6,7 +6,7 @@ import { useScrollAreaContext } from '../ScrollArea.context';
 import { defaultViewportProps } from './ScrollAreaViewport.props';
 
 export const ScrollAreaViewport = withComponent({
-    name: 'ScrollAreaViewport',
+    name: 'ScrollArea.Viewport',
     defaultProps: defaultViewportProps,
     setup() {
         const scrollarea = useScrollAreaContext();

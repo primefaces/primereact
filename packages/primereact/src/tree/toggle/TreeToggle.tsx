@@ -9,7 +9,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultToggleProps } from './TreeToggle.props';
 
 export const TreeToggle = withComponent({
-    name: 'TreeToggle',
+    name: 'Tree.Toggle',
     defaultProps: defaultToggleProps,
     setup() {
         const tree = useTreeContext();

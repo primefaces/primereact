@@ -7,7 +7,7 @@ import { TerminalWelcomeProvider } from './TerminalWelcome.context';
 import { defaultWelcomeProps } from './TerminalWelcome.props';
 
 export const TerminalWelcome = withComponent({
-    name: 'TerminalWelcome',
+    name: 'Terminal.Welcome',
     defaultProps: defaultWelcomeProps,
     setup() {
         const terminal = useTerminalContext();

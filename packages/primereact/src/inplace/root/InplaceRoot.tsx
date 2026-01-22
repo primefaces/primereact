@@ -7,7 +7,7 @@ import { InplaceProvider } from '../Inplace.context';
 import { defaultRootProps } from './InplaceRoot.props';
 
 export const InplaceRoot = withComponent({
-    name: 'InplaceRoot',
+    name: 'Inplace.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const inplace = useInplace(instance.inProps);

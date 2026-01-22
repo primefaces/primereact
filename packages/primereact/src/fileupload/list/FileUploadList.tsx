@@ -15,7 +15,7 @@ interface FileUploadBadgeConfig {
 }
 
 export const FileUploadList = withComponent({
-    name: 'FileUploadList',
+    name: 'FileUpload.List',
     defaultProps: defaultListProps,
     setup() {
         const fileupload = useFileUploadContext();

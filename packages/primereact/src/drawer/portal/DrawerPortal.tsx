@@ -8,7 +8,7 @@ import { useDrawerContext } from '../Drawer.context';
 import { defaultPortalProps } from './DrawerPortal.props';
 
 export const DrawerPortal = withComponent({
-    name: 'DrawerPortal',
+    name: 'Drawer.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const drawer = useDrawerContext();

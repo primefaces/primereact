@@ -7,7 +7,7 @@ import { BreadcrumbProvider } from '../Breadcrumb.context';
 import { defaultRootProps } from './BreadcrumbRoot.props';
 
 export const BreadcrumbRoot = withComponent({
-    name: 'BreadcrumbRoot',
+    name: 'Breadcrumb.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const breadcrumb = useBreadcrumb(instance.inProps);

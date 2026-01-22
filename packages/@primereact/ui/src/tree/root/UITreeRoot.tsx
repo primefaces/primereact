@@ -7,7 +7,7 @@ import { TreeRoot, defaultRootProps } from 'primereact/tree';
 import * as React from 'react';
 
 export const UITreeRoot = withComponent({
-    name: 'UITreeRoot',
+    name: 'Tree.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

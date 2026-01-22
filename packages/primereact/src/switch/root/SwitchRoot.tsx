@@ -8,7 +8,7 @@ import { SwitchProvider } from '../Switch.context';
 import { defaultRootProps } from './SwitchRoot.props';
 
 export const SwitchRoot = withComponent({
-    name: 'SwitchRoot',
+    name: 'Switch.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const { props, inProps } = instance;

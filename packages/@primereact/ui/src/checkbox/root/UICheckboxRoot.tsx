@@ -7,7 +7,7 @@ import { CheckboxRoot, defaultRootProps } from 'primereact/checkbox';
 import * as React from 'react';
 
 export const UICheckboxRoot = withComponent({
-    name: 'UICheckboxRoot',
+    name: 'Checkbox.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

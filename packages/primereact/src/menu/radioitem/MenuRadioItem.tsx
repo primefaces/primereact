@@ -9,7 +9,7 @@ import { MenuRadioItemProvider } from './MenuRadioItem.context';
 import { defaultRadioItemProps } from './MenuRadioItem.props';
 
 export const MenuRadioItem = withComponent({
-    name: 'MenuRadioItem',
+    name: 'Menu.RadioItem',
     defaultProps: defaultRadioItemProps,
     setup({ props }) {
         const itemSetup = MenuItemSetup(props);

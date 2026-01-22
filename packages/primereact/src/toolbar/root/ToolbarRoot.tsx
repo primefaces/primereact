@@ -7,7 +7,7 @@ import { ToolbarProvider } from '../Toolbar.context';
 import { defaultRootProps } from './ToolbarRoot.props';
 
 export const ToolbarRoot = withComponent({
-    name: 'ToolbarRoot',
+    name: 'Toolbar.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const toolbar = useToolbar(instance.inProps);

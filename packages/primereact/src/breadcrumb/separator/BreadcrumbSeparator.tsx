@@ -7,7 +7,7 @@ import { useBreadcrumbContext } from '../Breadcrumb.context';
 import { defaultSeparatorProps } from './BreadcrumbSeparator.props';
 
 export const BreadcrumbSeparator = withComponent({
-    name: 'BreadcrumbSeparator',
+    name: 'Breadcrumb.Separator',
     defaultProps: defaultSeparatorProps,
     setup() {
         const breadcrumb = useBreadcrumbContext();

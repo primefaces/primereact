@@ -7,7 +7,7 @@ import { OrgChartTreeProvider, useOrgChartTreeContext } from './OrgChartTree.con
 import { defaultTreeProps } from './OrgChartTree.props';
 
 export const OrgChartTree = withComponent({
-    name: 'OrgChartTree',
+    name: 'OrgChart.Tree',
     defaultProps: defaultTreeProps,
     setup() {
         const orgchart = useOrgChartContext();

@@ -6,7 +6,7 @@ import { useToastContext } from '../Toast.context';
 import { defaultRegionProps } from './ToastRegion.props';
 
 export const ToastRegion = withComponent({
-    name: 'ToastRegion',
+    name: 'Toast.Region',
     defaultProps: defaultRegionProps,
     setup() {
         const toast = useToastContext();

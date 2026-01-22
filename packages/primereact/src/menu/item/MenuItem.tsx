@@ -7,7 +7,7 @@ import { MenuItemSetup } from '../MenuItemSetup';
 import { defaultItemProps } from './MenuItem.props';
 
 export const MenuItem = withComponent({
-    name: 'MenuItem',
+    name: 'Menu.Item',
     defaultProps: defaultItemProps,
     setup({ props }) {
         return MenuItemSetup(props);

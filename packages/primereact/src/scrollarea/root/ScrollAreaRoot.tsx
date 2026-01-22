@@ -7,7 +7,7 @@ import { ScrollAreaProvider } from '../ScrollArea.context';
 import { defaultRootProps } from './ScrollAreaRoot.props';
 
 export const ScrollAreaRoot = withComponent({
-    name: 'ScrollAreaRoot',
+    name: 'ScrollArea.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const scrollarea = useScrollArea(instance.inProps);

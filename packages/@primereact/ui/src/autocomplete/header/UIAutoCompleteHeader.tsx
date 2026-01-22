@@ -6,7 +6,7 @@ import { AutoCompleteHeader, defaultHeaderProps } from 'primereact/autocomplete'
 import * as React from 'react';
 
 export const UIAutoCompleteHeader = withComponent({
-    name: 'UIAutoCompleteHeader',
+    name: 'AutoComplete.Header',
     defaultProps: defaultHeaderProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxHeader }, instance.inProps);

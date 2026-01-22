@@ -6,7 +6,7 @@ import { useCommandMenuContext } from '../CommandMenu.context';
 import { defaultGroupHeadingProps } from './CommandMenuGroupHeading.props';
 
 export const CommandMenuGroupHeading = withComponent({
-    name: 'CommandMenuGroupHeading',
+    name: 'CommandMenu.GroupHeading',
     defaultProps: defaultGroupHeadingProps,
     setup() {
         const commandmenu = useCommandMenuContext();

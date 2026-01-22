@@ -6,7 +6,7 @@ import { ContextMenuPortal, defaultPortalProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuPortal = withComponent({
-    name: 'UIContextMenuPortal',
+    name: 'ContextMenu.Portal',
     defaultProps: defaultPortalProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuPortal }, instance.inProps);

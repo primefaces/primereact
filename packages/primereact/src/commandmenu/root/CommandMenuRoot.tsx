@@ -7,7 +7,7 @@ import { CommandMenuProvider } from '../CommandMenu.context';
 import { defaultRootProps } from './CommandMenuRoot.props';
 
 export const CommandMenuRoot = withComponent({
-    name: 'CommandMenuRoot',
+    name: 'CommandMenu.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const commandmenu = useCommandMenu(instance.inProps);

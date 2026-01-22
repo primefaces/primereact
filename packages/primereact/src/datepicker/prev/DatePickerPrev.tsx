@@ -7,7 +7,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultPrevProps } from './DatePickerPrev.props';
 
 export const DatePickerPrev = withComponent({
-    name: 'DatePickerPrev',
+    name: 'DatePicker.Prev',
     defaultProps: defaultPrevProps,
     setup() {
         const datepicker = useDatePickerContext();

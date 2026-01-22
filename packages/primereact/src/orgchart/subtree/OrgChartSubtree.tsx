@@ -10,7 +10,7 @@ import { OrgChartTree } from '../tree/OrgChartTree';
 import { defaultSubtreeProps } from './OrgChartSubtree.props';
 
 export const OrgChartSubtree = withComponent({
-    name: 'OrgChartSubtree',
+    name: 'OrgChart.Subtree',
     defaultProps: defaultSubtreeProps,
     setup() {
         const orgchart = useOrgChartContext();

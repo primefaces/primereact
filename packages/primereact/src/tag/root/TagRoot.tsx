@@ -7,7 +7,7 @@ import { TagProvider } from '../Tag.context';
 import { defaultRootProps } from './TagRoot.props';
 
 export const TagRoot = withComponent({
-    name: 'TagRoot',
+    name: 'Tag.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const tag = useTag(instance.inProps);

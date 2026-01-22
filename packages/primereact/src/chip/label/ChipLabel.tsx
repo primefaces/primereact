@@ -6,7 +6,7 @@ import { useChipContext } from '../Chip.context';
 import { defaultLabelProps } from './ChipLabel.props';
 
 export const ChipLabel = withComponent({
-    name: 'ChipLabel',
+    name: 'Chip.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const chip = useChipContext();

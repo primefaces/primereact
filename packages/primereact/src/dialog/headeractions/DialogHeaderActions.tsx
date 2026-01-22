@@ -6,7 +6,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultHeaderActionsProps } from './DialogHeaderActions.props';
 
 export const DialogHeaderActions = withComponent({
-    name: 'DialogHeaderActions',
+    name: 'Dialog.HeaderActions',
     defaultProps: defaultHeaderActionsProps,
     setup() {
         const dialog = useDialogContext();

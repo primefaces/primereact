@@ -7,7 +7,7 @@ import { defaultRootProps } from './ToastRoot.props';
 //import './styles.css';
 
 export const ToastRoot = withComponent({
-    name: 'ToastRoot',
+    name: 'Toast.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const toast = useToast(instance.inProps);

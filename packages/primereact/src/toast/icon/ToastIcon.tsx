@@ -18,7 +18,7 @@ const defaultIcons: ToastIconProps['icons'] = {
 };
 
 export const ToastIcon = withComponent({
-    name: 'ToastIcon',
+    name: 'Toast.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const toast = useToastContext();

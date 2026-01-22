@@ -6,7 +6,7 @@ import { SelectSelection, defaultSelectionProps } from 'primereact/select';
 import * as React from 'react';
 
 export const UISelectSelection = withComponent({
-    name: 'UISelectSelection',
+    name: 'Select.Selection',
     defaultProps: defaultSelectionProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxSelection }, instance.inProps);

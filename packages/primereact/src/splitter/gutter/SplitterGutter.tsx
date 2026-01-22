@@ -6,7 +6,7 @@ import { useSplitterContext } from '../Splitter.context';
 import { defaultGutterProps } from './SplitterGutter.props';
 
 export const SplitterGutter = withComponent({
-    name: 'SplitterGutter',
+    name: 'Splitter.Gutter',
     defaultProps: defaultGutterProps,
     setup() {
         const splitter = useSplitterContext();

@@ -7,7 +7,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultClearIconProps } from './DatePickerClearIcon.props';
 
 export const DatePickerClearIcon = withComponent({
-    name: 'DatePickerClearIcon',
+    name: 'DatePicker.ClearIcon',
     defaultProps: defaultClearIconProps,
     setup() {
         const datepicker = useDatePickerContext();

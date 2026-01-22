@@ -9,7 +9,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultPortalProps } from './ConfirmDialogPortal.props';
 
 export const ConfirmDialogPortal = withComponent({
-    name: 'ConfirmDialogPortal',
+    name: 'ConfirmDialog.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

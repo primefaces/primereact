@@ -7,7 +7,7 @@ import { TimelineMarkerProvider } from './TimelineMarker.context';
 import { defaultMarkerProps } from './TimelineMarker.props';
 
 export const TimelineMarker = withComponent({
-    name: 'TimelineMarker',
+    name: 'Timeline.Marker',
     defaultProps: defaultMarkerProps,
     setup() {
         const timeline = useTimelineContext();

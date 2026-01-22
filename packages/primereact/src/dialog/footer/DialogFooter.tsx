@@ -6,7 +6,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultFooterProps } from './DialogFooter.props';
 
 export const DialogFooter = withComponent({
-    name: 'DialogFooter',
+    name: 'Dialog.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const dialog = useDialogContext();

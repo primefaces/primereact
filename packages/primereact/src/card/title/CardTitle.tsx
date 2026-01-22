@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultTitleProps } from './CardTitle.props';
 
 export const CardTitle = withComponent({
-    name: 'CardTitle',
+    name: 'Card.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const card = useCardContext();

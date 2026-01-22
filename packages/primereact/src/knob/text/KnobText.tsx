@@ -6,7 +6,7 @@ import { useKnobContext } from '../Knob.context';
 import { defaultTextProps } from './KnobText.props';
 
 export const KnobText = withComponent({
-    name: 'KnobText',
+    name: 'Knob.Text',
     defaultProps: defaultTextProps,
     setup() {
         const knob = useKnobContext();

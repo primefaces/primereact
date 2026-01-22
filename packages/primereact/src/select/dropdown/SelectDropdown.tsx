@@ -6,7 +6,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultDropdownProps } from './SelectDropdown.props';
 
 export const SelectDropdown = withComponent({
-    name: 'SelectDropdown',
+    name: 'Select.Dropdown',
     defaultProps: defaultDropdownProps,
     setup() {
         const select = useSelectContext();

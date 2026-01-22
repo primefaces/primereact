@@ -6,7 +6,7 @@ import { ContextMenuLabel, defaultLabelProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuLabel = withComponent({
-    name: 'UIContextMenuLabel',
+    name: 'ContextMenu.Label',
     defaultProps: defaultLabelProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuLabel }, instance.inProps);

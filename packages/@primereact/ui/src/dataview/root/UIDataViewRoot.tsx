@@ -7,7 +7,7 @@ import { DataView, defaultRootProps } from 'primereact/dataview';
 import * as React from 'react';
 
 export const UIDataViewRoot = withComponent({
-    name: 'UIDataViewRoot',
+    name: 'DataView.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

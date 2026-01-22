@@ -7,7 +7,7 @@ import { usePopoverContext } from '../Popover.context';
 import { defaultTriggerProps } from './PopoverTrigger.props';
 
 export const PopoverTrigger = withComponent({
-    name: 'PopoverTrigger',
+    name: 'Popover.Trigger',
     defaultProps: defaultTriggerProps,
     setup(instance) {
         const popover = usePopoverContext();

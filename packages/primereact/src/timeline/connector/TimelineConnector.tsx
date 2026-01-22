@@ -7,7 +7,7 @@ import { TimelineConnectorProvider } from './TimelineConnector.context';
 import { defaultConnectorProps } from './TimelineConnector.props';
 
 export const TimelineConnector = withComponent({
-    name: 'TimelineConnector',
+    name: 'Timeline.Connector',
     defaultProps: defaultConnectorProps,
     setup() {
         const timeline = useTimelineContext();

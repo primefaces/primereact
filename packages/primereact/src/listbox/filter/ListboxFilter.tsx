@@ -6,7 +6,7 @@ import { useListboxContext } from '../Listbox.context';
 import { defaultFilterProps } from './ListboxFilter.props';
 
 export const ListboxFilter = withComponent({
-    name: 'ListboxFilter',
+    name: 'Listbox.Filter',
     defaultProps: defaultFilterProps,
     setup() {
         const listbox = useListboxContext();

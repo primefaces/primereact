@@ -7,7 +7,7 @@ import { FileUploadProvider } from '../FileUpload.context';
 import { defaultRootProps } from './FileUploadRoot.props';
 
 export const FileUploadRoot = withComponent({
-    name: 'FileUploadRoot',
+    name: 'FileUpload.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const fileupload = useFileUpload(instance.inProps);

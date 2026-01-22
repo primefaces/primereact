@@ -6,7 +6,7 @@ import { ConfirmDialogFooter, defaultFooterProps } from 'primereact/confirmdialo
 import * as React from 'react';
 
 export const UIConfirmDialogFooter = withComponent({
-    name: 'UIConfirmDialogFooter',
+    name: 'ConfirmDialog.Footer',
     defaultProps: defaultFooterProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: DialogFooter }, instance.inProps);

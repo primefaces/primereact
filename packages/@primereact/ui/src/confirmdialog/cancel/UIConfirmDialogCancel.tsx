@@ -6,7 +6,7 @@ import { ConfirmDialogCancel, defaultCancelProps } from 'primereact/confirmdialo
 import * as React from 'react';
 
 export const UIConfirmDialogCancel = withComponent({
-    name: 'UIConfirmDialogCancel',
+    name: 'ConfirmDialog.Cancel',
     defaultProps: defaultCancelProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

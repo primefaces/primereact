@@ -6,7 +6,7 @@ import { useDividerContext } from '../Divider.context';
 import { defaultContentProps } from './DividerContent.props';
 
 export const DividerContent = withComponent({
-    name: 'DividerContent',
+    name: 'Divider.Content',
     defaultProps: defaultContentProps,
     setup() {
         const divider = useDividerContext();

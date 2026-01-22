@@ -6,7 +6,7 @@ import { useFileUploadContext } from '../FileUpload.context';
 import { defaultContentProps } from './FileUploadContent.props';
 
 export const FileUploadContent = withComponent({
-    name: 'FileUploadContent',
+    name: 'FileUpload.Content',
     defaultProps: defaultContentProps,
     setup() {
         const fileupload = useFileUploadContext();

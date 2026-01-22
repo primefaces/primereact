@@ -6,7 +6,7 @@ import { usePasswordContext } from '../Password.context';
 import { defaultInputProps } from './PasswordInput.props';
 
 export const PasswordInput = withComponent({
-    name: 'PasswordInput',
+    name: 'Password.Input',
     defaultProps: defaultInputProps,
     setup() {
         const password = usePasswordContext();

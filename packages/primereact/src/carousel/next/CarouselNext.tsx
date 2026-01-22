@@ -6,7 +6,7 @@ import { useCarouselContext } from '../Carousel.context';
 import { defaultNextProps } from './CarouselNext.props';
 
 export const CarouselNext = withComponent({
-    name: 'CarouselNext',
+    name: 'Carousel.Next',
     defaultProps: defaultNextProps,
     setup() {
         const carousel = useCarouselContext();

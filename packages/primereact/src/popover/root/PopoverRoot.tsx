@@ -6,7 +6,7 @@ import { PopoverProvider } from '../Popover.context';
 import { defaultRootProps } from './PopoverRoot.props';
 
 export const PopoverRoot = withComponent({
-    name: 'PopoverRoot',
+    name: 'Popover.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const popover = usePopover(instance.inProps);

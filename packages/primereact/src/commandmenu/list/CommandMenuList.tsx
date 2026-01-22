@@ -6,7 +6,7 @@ import { useCommandMenuContext } from '../CommandMenu.context';
 import { defaultListProps } from './CommandMenuList.props';
 
 export const CommandMenuList = withComponent({
-    name: 'CommandMenuList',
+    name: 'CommandMenu.List',
     defaultProps: defaultListProps,
     setup() {
         const commandmenu = useCommandMenuContext();

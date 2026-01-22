@@ -7,7 +7,7 @@ import { StepperProvider } from '../Stepper.context';
 import { defaultRootProps } from './StepperRoot.props';
 
 export const StepperRoot = withComponent({
-    name: 'StepperRoot',
+    name: 'Stepper.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const stepper = useStepper(instance.inProps);

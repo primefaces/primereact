@@ -11,7 +11,7 @@ import { useListboxOptionContext } from '../option';
 import { defaultSelectionProps } from './ListboxSelection.props';
 
 export const ListboxSelection = withComponent({
-    name: 'ListboxSelection',
+    name: 'Listbox.Selection',
     defaultProps: defaultSelectionProps,
     setup() {
         const listbox = useListboxContext();

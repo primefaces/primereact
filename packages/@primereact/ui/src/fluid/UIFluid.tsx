@@ -7,7 +7,7 @@ import { Fluid, defaultProps } from 'primereact/fluid';
 import * as React from 'react';
 
 export const UIFluid = withComponent({
-    name: 'UIFluid',
+    name: 'Fluid',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

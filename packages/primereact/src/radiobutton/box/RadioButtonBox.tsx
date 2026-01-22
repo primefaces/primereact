@@ -6,7 +6,7 @@ import { useRadioButtonContext } from '../RadioButton.context';
 import { defaultBoxProps } from './RadioButtonBox.props';
 
 export const RadioButtonBox = withComponent({
-    name: 'RadioButtonBox',
+    name: 'RadioButton.Box',
     defaultProps: defaultBoxProps,
     setup() {
         const radiobutton = useRadioButtonContext();

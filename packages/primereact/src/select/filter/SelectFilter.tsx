@@ -7,7 +7,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultFilterProps } from './SelectFilter.props';
 
 export const SelectFilter = withComponent({
-    name: 'SelectFilter',
+    name: 'Select.Filter',
     defaultProps: defaultFilterProps,
     setup() {
         const select = useSelectContext();

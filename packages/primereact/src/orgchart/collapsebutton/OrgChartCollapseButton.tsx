@@ -9,7 +9,7 @@ import { useOrgChartTreeContext } from '../tree/OrgChartTree.context';
 import { defaultCollapseButtonProps } from './OrgChartCollapseButton.props';
 
 export const OrgChartCollapseButton = withComponent({
-    name: 'OrgChartCollapseButton',
+    name: 'OrgChart.CollapseButton',
     defaultProps: defaultCollapseButtonProps,
     setup() {
         const orgchart = useOrgChartContext();

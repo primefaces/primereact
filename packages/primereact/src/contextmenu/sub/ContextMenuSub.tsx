@@ -8,7 +8,7 @@ import { ContextMenuSubProvider } from './ContextMenuSub.context';
 import { defaultSubProps } from './ContextMenuSub.props';
 
 export const ContextMenuSub = withComponent({
-    name: 'ContextMenuSub',
+    name: 'ContextMenu.Sub',
     defaultProps: defaultSubProps,
     setup() {
         const contextmenu = useContextMenuContext();

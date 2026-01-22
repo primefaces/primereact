@@ -9,7 +9,7 @@ import { defaultRootProps } from './RadioButtonRoot.props';
 import { useRadioButtonGroupContext } from 'primereact/radiobuttongroup';
 
 export const RadioButtonRoot = withComponent({
-    name: 'RadioButtonRoot',
+    name: 'RadioButton.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const { props, inProps } = instance;

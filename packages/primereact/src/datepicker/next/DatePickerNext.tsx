@@ -7,7 +7,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultNextProps } from './DatePickerNext.props';
 
 export const DatePickerNext = withComponent({
-    name: 'DatePickerNext',
+    name: 'DatePicker.Next',
     defaultProps: defaultNextProps,
     setup() {
         const datepicker = useDatePickerContext();

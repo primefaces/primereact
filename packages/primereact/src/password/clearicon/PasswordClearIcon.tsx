@@ -7,7 +7,7 @@ import { usePasswordContext } from '../Password.context';
 import { defaultClearIconProps } from './PasswordClearIcon.props';
 
 export const PasswordClearIcon = withComponent({
-    name: 'PasswordClearIcon',
+    name: 'Password.ClearIcon',
     defaultProps: defaultClearIconProps,
     setup() {
         const password = usePasswordContext();

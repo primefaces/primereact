@@ -6,7 +6,7 @@ import { ConfirmDialogTitle, defaultTitleProps } from 'primereact/confirmdialog'
 import * as React from 'react';
 
 export const UIConfirmDialogTitle = withComponent({
-    name: 'UIConfirmDialogTitle',
+    name: 'ConfirmDialog.Title',
     defaultProps: defaultTitleProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: DialogTitle }, instance.inProps);

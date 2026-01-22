@@ -7,7 +7,7 @@ import { InputTagsProvider } from '../InputTags.context';
 import { defaultRootProps } from './InputTagsRoot.props';
 
 export const InputTagsRoot = withComponent({
-    name: 'InputTagsRoot',
+    name: 'InputTags.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const inputtags = useInputTags(instance?.inProps);

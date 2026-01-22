@@ -6,7 +6,7 @@ import { useListboxContext } from '../Listbox.context';
 import { defaultEmptyProps } from './ListboxEmpty.props';
 
 export const ListboxEmpty = withComponent({
-    name: 'ListboxEmpty',
+    name: 'Listbox.Empty',
     defaultProps: defaultEmptyProps,
     setup() {
         const listbox = useListboxContext();

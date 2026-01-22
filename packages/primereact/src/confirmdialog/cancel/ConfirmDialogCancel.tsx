@@ -7,7 +7,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultCancelProps } from './ConfirmDialogCancel.props';
 
 export const ConfirmDialogCancel = withComponent({
-    name: 'ConfirmDialogCancel',
+    name: 'ConfirmDialog.Cancel',
     defaultProps: defaultCancelProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

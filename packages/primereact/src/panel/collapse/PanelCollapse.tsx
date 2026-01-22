@@ -9,7 +9,7 @@ import { usePanelContext } from '../Panel.context';
 import { defaultCollapseProps } from './PanelCollapse.props';
 
 export const PanelCollapse = withComponent({
-    name: 'PanelCollapse',
+    name: 'Panel.Collapse',
     defaultProps: defaultCollapseProps,
     setup() {
         const panel = usePanelContext();

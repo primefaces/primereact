@@ -7,7 +7,7 @@ import { usePaginatorContext } from '../Paginator.context';
 import { defaultPrevProps } from './PaginatorPrev.props';
 
 export const PaginatorPrev = withComponent({
-    name: 'PaginatorPrev',
+    name: 'Paginator.Prev',
     defaultProps: defaultPrevProps,
     setup() {
         const paginator = usePaginatorContext();

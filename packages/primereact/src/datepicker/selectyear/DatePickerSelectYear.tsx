@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultSelectYearProps } from './DatePickerSelectYear.props';
 
 export const DatePickerSelectYear = withComponent({
-    name: 'DatePickerSelectYear',
+    name: 'DatePicker.SelectYear',
     defaultProps: defaultSelectYearProps,
     setup() {
         const datepicker = useDatePickerContext();

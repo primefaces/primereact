@@ -6,7 +6,7 @@ import { useDrawerContext } from '../Drawer.context';
 import { defaultFooterProps } from './DrawerFooter.props';
 
 export const DrawerFooter = withComponent({
-    name: 'DrawerFooter',
+    name: 'Drawer.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const drawer = useDrawerContext();

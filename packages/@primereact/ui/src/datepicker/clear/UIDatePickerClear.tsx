@@ -6,7 +6,7 @@ import { DatePickerClear, defaultClearProps } from 'primereact/datepicker';
 import * as React from 'react';
 
 export const UIDatePickerClear = withComponent({
-    name: 'UIDatePickerClear',
+    name: 'DatePicker.Clear',
     defaultProps: defaultClearProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

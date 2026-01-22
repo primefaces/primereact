@@ -6,7 +6,7 @@ import { useMenuContext } from '../Menu.context';
 import { defaultLabelProps } from './MenuLabel.props';
 
 export const MenuLabel = withComponent({
-    name: 'MenuLabel',
+    name: 'Menu.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const menu = useMenuContext();

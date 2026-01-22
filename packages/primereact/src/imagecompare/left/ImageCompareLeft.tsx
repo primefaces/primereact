@@ -6,7 +6,7 @@ import { useImageCompareContext } from '../ImageCompare.context';
 import { defaultLeftProps } from './ImageCompareLeft.props';
 
 export const ImageCompareLeft = withComponent({
-    name: 'ImageCompareLeft',
+    name: 'ImageCompare.Left',
     defaultProps: defaultLeftProps,
     setup() {
         const imagecompare = useImageCompareContext();

@@ -6,7 +6,7 @@ import { usePasswordContext } from '../Password.context';
 import { defaultMeterProps } from './PasswordMeter.props';
 
 export const PasswordMeter = withComponent({
-    name: 'PasswordMeter',
+    name: 'Password.Meter',
     defaultProps: defaultMeterProps,
     setup() {
         const password = usePasswordContext();

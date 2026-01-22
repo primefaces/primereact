@@ -6,7 +6,7 @@ import { useBreadcrumbContext } from '../Breadcrumb.context';
 import { defaultListProps } from './BreadcrumbList.props';
 
 export const BreadcrumbList = withComponent({
-    name: 'BreadcrumbList',
+    name: 'Breadcrumb.List',
     defaultProps: defaultListProps,
     setup() {
         const breadcrumb = useBreadcrumbContext();

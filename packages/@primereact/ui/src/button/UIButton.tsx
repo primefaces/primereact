@@ -7,7 +7,7 @@ import { Button, defaultProps } from 'primereact/button';
 import * as React from 'react';
 
 export const UIButton = withComponent({
-    name: 'UIButton',
+    name: 'Button',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

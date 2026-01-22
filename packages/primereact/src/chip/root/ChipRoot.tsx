@@ -7,7 +7,7 @@ import { ChipProvider } from '../Chip.context';
 import { defaultRootProps } from './ChipRoot.props';
 
 export const ChipRoot = withComponent({
-    name: 'ChipRoot',
+    name: 'Chip.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const chip = useChip(instance.inProps);

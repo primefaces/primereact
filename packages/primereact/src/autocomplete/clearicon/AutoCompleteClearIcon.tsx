@@ -6,7 +6,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultClearIconProps } from './AutoCompleteClearIcon.props';
 
 export const AutoCompleteClearIcon = withComponent({
-    name: 'AutoCompleteClearIcon',
+    name: 'AutoComplete.ClearIcon',
     defaultProps: defaultClearIconProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

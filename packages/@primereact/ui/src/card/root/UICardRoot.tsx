@@ -7,7 +7,7 @@ import { CardRoot, defaultRootProps } from 'primereact/card';
 import * as React from 'react';
 
 export const UICardRoot = withComponent({
-    name: 'UICardRoot',
+    name: 'Card.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

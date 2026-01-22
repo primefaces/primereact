@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultPanelProps } from './DatePickerPanel.props';
 
 export const DatePickerPanel = withComponent({
-    name: 'DatePickerPanel',
+    name: 'DatePicker.Panel',
     defaultProps: defaultPanelProps,
     setup() {
         const datepicker = useDatePickerContext();

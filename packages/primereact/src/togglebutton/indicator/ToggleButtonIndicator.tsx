@@ -6,7 +6,7 @@ import { useToggleButtonContext } from '../ToggleButton.context';
 import { defaultIndicatorProps } from './ToggleButtonIndicator.props';
 
 export const ToggleButtonIndicator = withComponent({
-    name: 'ToggleButtonIndicator',
+    name: 'ToggleButton.Indicator',
     defaultProps: defaultIndicatorProps,
     setup() {
         const togglebutton = useToggleButtonContext();

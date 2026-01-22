@@ -6,7 +6,7 @@ import { ContextMenuItem, defaultItemProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuItem = withComponent({
-    name: 'UIContextMenuItem',
+    name: 'ContextMenu.Item',
     defaultProps: defaultItemProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuItem }, instance.inProps);

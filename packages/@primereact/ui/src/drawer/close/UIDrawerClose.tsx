@@ -6,7 +6,7 @@ import { DrawerClose, defaultCloseProps } from 'primereact/drawer';
 import * as React from 'react';
 
 export const UIDrawerClose = withComponent({
-    name: 'UIDrawerClose',
+    name: 'Drawer.Close',
     defaultProps: defaultCloseProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

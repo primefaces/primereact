@@ -6,7 +6,7 @@ import { useGalleryContext } from '../Gallery.context';
 import { defaultToolbarItemProps } from './GalleryToolbarItem.props';
 
 export const GalleryToolbarItem = withComponent({
-    name: 'GalleryToolbarItem',
+    name: 'Gallery.ToolbarItem',
     defaultProps: defaultToolbarItemProps,
     setup() {
         const gallery = useGalleryContext();

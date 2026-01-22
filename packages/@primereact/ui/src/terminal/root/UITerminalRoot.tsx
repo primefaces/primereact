@@ -7,7 +7,7 @@ import { TerminalRoot, defaultRootProps } from 'primereact/terminal';
 import * as React from 'react';
 
 export const UITerminalRoot = withComponent({
-    name: 'UITerminalRoot',
+    name: 'Terminal.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

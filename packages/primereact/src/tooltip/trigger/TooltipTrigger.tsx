@@ -6,7 +6,7 @@ import { useTooltipContext } from '../Tooltip.context';
 import { defaultTriggerProps } from './TooltipTrigger.props';
 
 export const TooltipTrigger = withComponent({
-    name: 'TooltipTrigger',
+    name: 'Tooltip.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const tooltip = useTooltipContext();

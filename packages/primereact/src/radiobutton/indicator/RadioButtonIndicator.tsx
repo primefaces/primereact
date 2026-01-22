@@ -6,7 +6,7 @@ import { useRadioButtonContext } from '../RadioButton.context';
 import { defaultIndicatorProps } from './RadioButtonIndicator.props';
 
 export const RadioButtonIndicator = withComponent({
-    name: 'RadioButtonIndicator',
+    name: 'RadioButton.Indicator',
     defaultProps: defaultIndicatorProps,
     setup() {
         const radiobutton = useRadioButtonContext();

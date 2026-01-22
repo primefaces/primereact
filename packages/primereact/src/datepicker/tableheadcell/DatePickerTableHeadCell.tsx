@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultTableHeadCellProps } from './DatePickerTableHeadCell.props';
 
 export const DatePickerTableHeadCell = withComponent({
-    name: 'DatePickerTableHeadCell',
+    name: 'DatePicker.TableHeadCell',
     defaultProps: defaultTableHeadCellProps,
     setup() {
         const datepicker = useDatePickerContext();

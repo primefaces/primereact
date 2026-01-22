@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultLabelProps } from './ContextMenuLabel.props';
 
 export const ContextMenuLabel = withComponent({
-    name: 'ContextMenuLabel',
+    name: 'ContextMenu.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const contextmenu = useContextMenuContext();

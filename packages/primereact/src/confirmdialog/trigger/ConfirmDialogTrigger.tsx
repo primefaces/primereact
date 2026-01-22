@@ -7,7 +7,7 @@ import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultTriggerProps } from './ConfirmDialogTrigger.props';
 
 export const ConfirmDialogTrigger = withComponent({
-    name: 'ConfirmDialogTrigger',
+    name: 'ConfirmDialog.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();

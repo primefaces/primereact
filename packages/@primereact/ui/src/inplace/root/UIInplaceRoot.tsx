@@ -7,7 +7,7 @@ import { InplaceRoot, defaultRootProps } from 'primereact/inplace';
 import * as React from 'react';
 
 export const UIInplaceRoot = withComponent({
-    name: 'UIInplaceRoot',
+    name: 'Inplace.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

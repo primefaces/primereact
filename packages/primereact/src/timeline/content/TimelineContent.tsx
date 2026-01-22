@@ -7,7 +7,7 @@ import { TimelineContentProvider } from './TimelineContent.context';
 import { defaultContentProps } from './TimelineContent.props';
 
 export const TimelineContent = withComponent({
-    name: 'TimelineContent',
+    name: 'Timeline.Content',
     defaultProps: defaultContentProps,
     setup() {
         const timeline = useTimelineContext();

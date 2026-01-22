@@ -6,7 +6,7 @@ import { useDrawerContext } from '../Drawer.context';
 import { defaultTitleProps } from './DrawerTitle.props';
 
 export const DrawerTitle = withComponent({
-    name: 'DrawerTitle',
+    name: 'Drawer.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const drawer = useDrawerContext();

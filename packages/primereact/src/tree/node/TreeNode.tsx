@@ -8,7 +8,7 @@ import { TreeNodeProvider, useTreeNodeContext } from './TreeNode.context';
 import { defaultNodeProps } from './TreeNode.props';
 
 export const TreeNode = withComponent({
-    name: 'TreeNode',
+    name: 'Tree.Node',
     defaultProps: defaultNodeProps,
     setup({ props }) {
         const tree = useTreeContext();

@@ -6,7 +6,7 @@ import { useProgressBarContext } from '../ProgressBar.context';
 import { defaultLabelProps } from './ProgressBarLabel.props';
 
 export const ProgressBarLabel = withComponent({
-    name: 'ProgressBarLabel',
+    name: 'ProgressBar.Label',
     defaultProps: defaultLabelProps,
     setup() {
         const progressbar = useProgressBarContext();

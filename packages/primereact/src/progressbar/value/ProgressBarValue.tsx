@@ -5,7 +5,7 @@ import { useProgressBarContext } from '../ProgressBar.context';
 import { defaultValueProps } from './ProgressBarValue.props';
 
 export const ProgressBarValue = withComponent({
-    name: 'ProgressBarValue',
+    name: 'ProgressBar.Value',
     defaultProps: defaultValueProps,
     setup() {
         const progressbar = useProgressBarContext();

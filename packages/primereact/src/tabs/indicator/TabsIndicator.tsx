@@ -6,7 +6,7 @@ import { useTabsContext } from '../Tabs.context';
 import { defaultIndicatorProps } from './TabsIndicator.props';
 
 export const TabsIndicator = withComponent({
-    name: 'TabsIndicator',
+    name: 'Tabs.Indicator',
     defaultProps: defaultIndicatorProps,
     setup() {
         const tabs = useTabsContext();

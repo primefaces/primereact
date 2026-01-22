@@ -7,7 +7,7 @@ import { PanelProvider } from '../Panel.context';
 import { defaultRootProps } from './PanelRoot.props';
 
 export const PanelRoot = withComponent({
-    name: 'PanelRoot',
+    name: 'Panel.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const panel = usePanel(instance?.inProps);

@@ -7,7 +7,7 @@ import { CarouselProvider } from '../Carousel.context';
 import { defaultRootProps } from './CarouselRoot.props';
 
 export const CarouselRoot = withComponent({
-    name: 'CarouselRoot',
+    name: 'Carousel.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const carousel = useCarousel(instance.inProps);

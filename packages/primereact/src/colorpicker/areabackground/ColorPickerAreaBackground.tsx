@@ -6,7 +6,7 @@ import { useColorPickerContext } from '../ColorPicker.context';
 import { defaultAreaBackgroundProps } from './ColorPickerAreaBackground.props';
 
 export const ColorPickerAreaBackground = withComponent({
-    name: 'ColorPickerAreaBackground',
+    name: 'ColorPicker.AreaBackground',
     defaultProps: defaultAreaBackgroundProps,
     setup() {
         const colorpicker = useColorPickerContext();

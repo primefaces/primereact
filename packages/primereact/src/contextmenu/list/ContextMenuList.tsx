@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultListProps } from './ContextMenuList.props';
 
 export const ContextMenuList = withComponent({
-    name: 'ContextMenuList',
+    name: 'ContextMenu.List',
     defaultProps: defaultListProps,
     setup() {
         const contextmenu = useContextMenuContext();

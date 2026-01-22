@@ -6,7 +6,7 @@ import { DrawerTrigger, defaultTriggerProps } from 'primereact/drawer';
 import * as React from 'react';
 
 export const UIDrawerTrigger = withComponent({
-    name: 'UIDrawerTrigger',
+    name: 'Drawer.Trigger',
     defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

@@ -6,7 +6,7 @@ import { DatePickerNext, defaultNextProps } from 'primereact/datepicker';
 import * as React from 'react';
 
 export const UIDatePickerNext = withComponent({
-    name: 'UIDatePickerNext',
+    name: 'DatePicker.Next',
     defaultProps: defaultNextProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

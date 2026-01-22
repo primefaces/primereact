@@ -8,7 +8,7 @@ import { useRatingContext } from '../Rating.context';
 import { defaultOptionProps } from './RatingOption.props';
 
 export const RatingOption = withComponent({
-    name: 'RatingOption',
+    name: 'Rating.Option',
     defaultProps: defaultOptionProps,
     setup() {
         const rating = useRatingContext();

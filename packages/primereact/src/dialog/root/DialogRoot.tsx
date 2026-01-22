@@ -7,7 +7,7 @@ import { DialogProvider } from '../Dialog.context';
 import { defaultRootProps } from './DialogRoot.props';
 
 export const DialogRoot = withComponent({
-    name: 'DialogRoot',
+    name: 'Dialog.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const dialog = useDialog(instance.inProps);

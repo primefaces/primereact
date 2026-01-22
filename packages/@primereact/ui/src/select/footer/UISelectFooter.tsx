@@ -6,7 +6,7 @@ import { SelectFooter, defaultFooterProps } from 'primereact/select';
 import * as React from 'react';
 
 export const UISelectFooter = withComponent({
-    name: 'UISelectFooter',
+    name: 'Select.Footer',
     defaultProps: defaultFooterProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxFooter }, instance.inProps);

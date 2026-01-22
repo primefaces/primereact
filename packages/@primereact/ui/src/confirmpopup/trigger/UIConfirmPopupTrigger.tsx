@@ -6,7 +6,7 @@ import { ConfirmPopupTrigger, defaultTriggerProps } from 'primereact/confirmpopu
 import * as React from 'react';
 
 export const UIConfirmPopupTrigger = withComponent({
-    name: 'UIConfirmPopupTrigger',
+    name: 'ConfirmPopup.Trigger',
     defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

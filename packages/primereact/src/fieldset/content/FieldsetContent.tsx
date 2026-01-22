@@ -6,7 +6,7 @@ import { useFieldsetContext } from '../Fieldset.context';
 import { defaultContentProps } from './FieldsetContent.props';
 
 export const FieldsetContent = withComponent({
-    name: 'FieldsetContent',
+    name: 'Fieldset.Content',
     defaultProps: defaultContentProps,
     setup() {
         const fieldset = useFieldsetContext();

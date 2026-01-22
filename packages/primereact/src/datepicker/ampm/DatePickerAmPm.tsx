@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultAmPmProps } from './DatePickerAmPm.props';
 
 export const DatePickerAmPm = withComponent({
-    name: 'DatePickerAmPm',
+    name: 'DatePicker.AmPm',
     defaultProps: defaultAmPmProps,
     setup() {
         const datepicker = useDatePickerContext();

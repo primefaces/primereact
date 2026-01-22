@@ -6,7 +6,7 @@ import { useSplitterContext } from '../Splitter.context';
 import { defaultThumbProps } from './SplitterThumb.props';
 
 export const SplitterThumb = withComponent({
-    name: 'SplitterThumb',
+    name: 'Splitter.Thumb',
     defaultProps: defaultThumbProps,
     setup() {
         const splitter = useSplitterContext();

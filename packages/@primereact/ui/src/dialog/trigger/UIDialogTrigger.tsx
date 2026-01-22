@@ -6,7 +6,7 @@ import { DialogTrigger, defaultTriggerProps } from 'primereact/dialog';
 import * as React from 'react';
 
 export const UIDialogTrigger = withComponent({
-    name: 'UIDialogTrigger',
+    name: 'Dialog.Trigger',
     defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

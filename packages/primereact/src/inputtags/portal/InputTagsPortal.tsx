@@ -8,7 +8,7 @@ import { useInputTagsContext } from '../InputTags.context';
 import { defaultPortalProps } from './InputTagsPortal.props';
 
 export const InputTagsPortal = withComponent({
-    name: 'InputTagsPortal',
+    name: 'InputTags.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const inputtags = useInputTagsContext();

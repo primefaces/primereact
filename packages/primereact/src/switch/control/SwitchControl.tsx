@@ -6,7 +6,7 @@ import { useSwitchContext } from '../Switch.context';
 import { defaultControlProps } from './SwitchControl.props';
 
 export const SwitchControl = withComponent({
-    name: 'SwitchControl',
+    name: 'Switch.Control',
     defaultProps: defaultControlProps,
     setup() {
         const switchContext = useSwitchContext();

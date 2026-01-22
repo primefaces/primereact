@@ -6,7 +6,7 @@ import { SelectEmpty, defaultEmptyProps } from 'primereact/select';
 import * as React from 'react';
 
 export const UISelectEmpty = withComponent({
-    name: 'UISelectEmpty',
+    name: 'Select.Empty',
     defaultProps: defaultEmptyProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxEmpty }, instance.inProps);

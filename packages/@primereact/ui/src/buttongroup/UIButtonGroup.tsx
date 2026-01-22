@@ -6,7 +6,7 @@ import { ButtonGroup, defaultProps } from 'primereact/buttongroup';
 import * as React from 'react';
 
 export const UIButtonGroup = withComponent({
-    name: 'UIButtonGroup',
+    name: 'ButtonGroup',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

@@ -7,7 +7,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultTriggerProps } from './SelectTrigger.props';
 
 export const SelectTrigger = withComponent({
-    name: 'SelectTrigger',
+    name: 'Select.Trigger',
     defaultProps: defaultTriggerProps,
     setup({ id }) {
         const select = useSelectContext();

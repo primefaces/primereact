@@ -2,7 +2,7 @@ import { usePrimeReact } from '@primereact/core/config';
 import { combinedRefs } from '@primereact/core/utils';
 import { useAttrSelector, useId, useProps } from '@primereact/hooks';
 import type { BaseInstance, BaseSetup, CommonInstance, Instance, useBaseOptions } from '@primereact/types/core';
-import { resolve } from '@primeuix/utils';
+import { resolve, toKebabCase } from '@primeuix/utils';
 import * as React from 'react';
 
 /**
@@ -19,22 +19,24 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
 
     const id = useId(inProps?.id as string | undefined);
     const $attrSelector = useAttrSelector('pc_');
+    const [scope, part] = React.useMemo(() => name.toLowerCase().split('.'), [name]);
 
     const ref = React.useRef(inProps?.ref ?? null);
     const elementRef = React.useRef<HTMLElement | null>(null);
 
-    const base = React.useMemo<BaseInstance<IProps>>(
-        () => ({
+    const base = React.useMemo<BaseInstance<IProps>>(() => {
+        return {
             ref,
             elementRef,
             id,
             name,
+            scope,
+            part: toKebabCase(part),
             inProps,
             $attrSelector,
             $primereact
-        }),
-        [id, inProps, $attrSelector, $primereact]
-    );
+        };
+    }, [id, inProps, $attrSelector, $primereact, name]);
 
     const computedDefaultProps = React.useMemo<DProps>(() => {
         const globalDefaults = resolve($primereact?.config?.defaults?.[name] || $primereact?.config?.defaults?.[name.toLowerCase()], base) as { props?: DProps } | undefined;

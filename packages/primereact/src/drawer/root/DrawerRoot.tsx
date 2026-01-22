@@ -7,7 +7,7 @@ import { DrawerProvider } from '../Drawer.context';
 import { defaultRootProps } from './DrawerRoot.props';
 
 export const DrawerRoot = withComponent({
-    name: 'DrawerRoot',
+    name: 'Drawer.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const drawer = useDrawer(instance.inProps);

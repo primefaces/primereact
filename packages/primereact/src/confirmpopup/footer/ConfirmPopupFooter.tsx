@@ -6,7 +6,7 @@ import { useConfirmPopupContext } from '../ConfirmPopup.context';
 import { defaultFooterProps } from './ConfirmPopupFooter.props';
 
 export const ConfirmPopupFooter = withComponent({
-    name: 'ConfirmPopupFooter',
+    name: 'ConfirmPopup.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const confirmpopup = useConfirmPopupContext();

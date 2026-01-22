@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultSecondProps } from './DatePickerSecond.props';
 
 export const DatePickerSecond = withComponent({
-    name: 'DatePickerSecond',
+    name: 'DatePicker.Second',
     defaultProps: defaultSecondProps,
     setup() {
         const datepicker = useDatePickerContext();

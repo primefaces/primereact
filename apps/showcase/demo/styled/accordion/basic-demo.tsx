@@ -36,7 +36,10 @@ export default function BasicDemo() {
                 </Accordion.Panel>
                 <Accordion.Panel value="3">
                     <Accordion.Header>
-                        <Accordion.Trigger>Can I upgrade or downgrade my plan later?</Accordion.Trigger>
+                        <Accordion.Trigger className="flex justify-between items-center w-full">
+                            Can I upgrade or downgrade my plan later?
+                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

@@ -15,7 +15,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultListProps } from './TreeList.props';
 
 export const TreeList = withComponent({
-    name: 'TreeList',
+    name: 'Tree.List',
     defaultProps: defaultListProps,
     setup() {
         const tree = useTreeContext();

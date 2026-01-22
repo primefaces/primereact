@@ -6,7 +6,7 @@ import { usePanelContext } from '../Panel.context';
 import { defaultHeaderActionsProps } from './PanelHeaderActions.props';
 
 export const PanelHeaderActions = withComponent({
-    name: 'PanelHeaderActions',
+    name: 'Panel.HeaderActions',
     defaultProps: defaultHeaderActionsProps,
     setup() {
         const panel = usePanelContext();

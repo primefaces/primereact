@@ -6,7 +6,7 @@ import { usePlacerContext } from '../Placer.context';
 import { defaultArrowProps } from './PlacerArrow.props';
 
 export const PlacerArrow = withComponent({
-    name: 'PlacerArrow',
+    name: 'Placer.Arrow',
     defaultProps: defaultArrowProps,
     setup() {
         const placer = usePlacerContext();

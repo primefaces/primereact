@@ -8,7 +8,7 @@ import { MenuLevelProvider } from '../MenuLevel.context';
 import { defaultRootProps } from './MenuRoot.props';
 
 export const MenuRoot = withComponent({
-    name: 'MenuRoot',
+    name: 'Menu.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const menu = useMenu(instance?.inProps);

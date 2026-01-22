@@ -6,7 +6,7 @@ import { ContextMenuRadioIcon, defaultRadioIconProps } from 'primereact/contextm
 import * as React from 'react';
 
 export const UIContextMenuRadioIcon = withComponent({
-    name: 'UIContextMenuRadioIcon',
+    name: 'ContextMenu.RadioIcon',
     defaultProps: defaultRadioIconProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuRadioIcon }, instance.inProps);

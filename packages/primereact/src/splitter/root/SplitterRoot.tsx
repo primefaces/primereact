@@ -7,7 +7,7 @@ import { SplitterProvider } from '../Splitter.context';
 import { defaultRootProps } from './SplitterRoot.props';
 
 export const SplitterRoot = withComponent({
-    name: 'SplitterRoot',
+    name: 'Splitter.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const splitter = useSplitter(instance.inProps);

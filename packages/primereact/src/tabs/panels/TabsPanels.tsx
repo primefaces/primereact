@@ -6,7 +6,7 @@ import { useTabsContext } from '../Tabs.context';
 import { defaultPanelsProps } from './TabsPanels.props';
 
 export const TabsPanels = withComponent({
-    name: 'TabPanels',
+    name: 'Tabs.Panels',
     defaultProps: defaultPanelsProps,
     setup() {
         const tabs = useTabsContext();

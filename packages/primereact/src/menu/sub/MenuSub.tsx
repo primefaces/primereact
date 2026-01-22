@@ -9,7 +9,7 @@ import { MenuSubProvider } from './MenuSub.context';
 import { defaultSubProps } from './MenuSub.props';
 
 export const MenuSub = withComponent({
-    name: 'MenuSub',
+    name: 'Menu.Sub',
     defaultProps: defaultSubProps,
     setup(instance) {
         const submenu = useMenuSub(instance?.inProps);

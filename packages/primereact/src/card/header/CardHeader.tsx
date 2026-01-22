@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultHeaderProps } from './CardHeader.props';
 
 export const CardHeader = withComponent({
-    name: 'CardHeader',
+    name: 'Card.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const card = useCardContext();

@@ -7,7 +7,7 @@ import { AutoCompleteRoot, defaultRootProps } from 'primereact/autocomplete';
 import * as React from 'react';
 
 export const UIAutoCompleteRoot = withComponent({
-    name: 'UIAutoCompleteRoot',
+    name: 'AutoComplete.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

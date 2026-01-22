@@ -7,7 +7,7 @@ import { TagRoot, defaultRootProps } from 'primereact/tag';
 import * as React from 'react';
 
 export const UITagRoot = withComponent({
-    name: 'UITagRoot',
+    name: 'Tag.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

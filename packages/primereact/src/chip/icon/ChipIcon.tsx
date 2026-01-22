@@ -6,7 +6,7 @@ import { useChipContext } from '../Chip.context';
 import { defaultIconProps } from './ChipIcon.props';
 
 export const ChipIcon = withComponent({
-    name: 'ChipIcon',
+    name: 'Chip.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const chip = useChipContext();

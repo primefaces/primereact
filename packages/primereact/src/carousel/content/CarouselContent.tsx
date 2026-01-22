@@ -6,7 +6,7 @@ import { useCarouselContext } from '../Carousel.context';
 import { defaultContentProps } from './CarouselContent.props';
 
 export const CarouselContent = withComponent({
-    name: 'CarouselContent',
+    name: 'Carousel.Content',
     defaultProps: defaultContentProps,
     setup() {
         const carousel = useCarouselContext();

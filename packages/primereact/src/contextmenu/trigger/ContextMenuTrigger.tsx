@@ -8,7 +8,7 @@ import { useContextMenuSubContext } from '../sub/ContextMenuSub.context';
 import { defaultTriggerProps } from './ContextMenuTrigger.props';
 
 export const ContextMenuTrigger = withComponent({
-    name: 'ContextMenuTrigger',
+    name: 'ContextMenu.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const contextmenu = useContextMenuContext();

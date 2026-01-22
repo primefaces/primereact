@@ -6,7 +6,7 @@ import { usePanelContext } from '../Panel.context';
 import { defaultFooterProps } from './PanelFooter.props';
 
 export const PanelFooter = withComponent({
-    name: 'PanelFooter',
+    name: 'Panel.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const panel = usePanelContext();

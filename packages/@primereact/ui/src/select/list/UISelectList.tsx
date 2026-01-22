@@ -6,7 +6,7 @@ import { SelectList, defaultListProps } from 'primereact/select';
 import * as React from 'react';
 
 export const UISelectList = withComponent({
-    name: 'UISelectList',
+    name: 'Select.List',
     defaultProps: defaultListProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxRoot }, instance.inProps);

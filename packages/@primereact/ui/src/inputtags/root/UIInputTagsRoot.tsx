@@ -7,7 +7,7 @@ import { InputTagsRoot, defaultRootProps } from 'primereact/inputtags';
 import * as React from 'react';
 
 export const UIInputTagsRoot = withComponent({
-    name: 'UIInputTagsRoot',
+    name: 'InputTags.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

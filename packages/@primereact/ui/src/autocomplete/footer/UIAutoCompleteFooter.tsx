@@ -6,7 +6,7 @@ import { AutoCompleteFooter, defaultFooterProps } from 'primereact/autocomplete'
 import * as React from 'react';
 
 export const UIAutoCompleteFooter = withComponent({
-    name: 'UIAutoCompleteFooter',
+    name: 'AutoComplete.Footer',
     defaultProps: defaultFooterProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxFooter }, instance.inProps);

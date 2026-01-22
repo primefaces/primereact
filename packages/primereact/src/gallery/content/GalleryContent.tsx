@@ -6,7 +6,7 @@ import { useGalleryContext } from '../Gallery.context';
 import { defaultContentProps } from './GalleryContent.props';
 
 export const GalleryContent = withComponent({
-    name: 'GalleryContent',
+    name: 'Gallery.Content',
     defaultProps: defaultContentProps,
     setup() {
         const gallery = useGalleryContext();

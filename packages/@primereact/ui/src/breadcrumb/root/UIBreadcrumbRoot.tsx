@@ -7,7 +7,7 @@ import { BreadcrumbRoot, defaultRootProps } from 'primereact/breadcrumb';
 import * as React from 'react';
 
 export const UIBreadcrumbRoot = withComponent({
-    name: 'UIBreadcrumbRoot',
+    name: 'Breadcrumb.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

@@ -6,7 +6,7 @@ import { usePanelContext } from '../Panel.context';
 import { defaultTitleProps } from './PanelTitle.props';
 
 export const PanelTitle = withComponent({
-    name: 'PanelTitle',
+    name: 'Panel.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const panel = usePanelContext();

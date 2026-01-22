@@ -6,7 +6,7 @@ import { useCarouselContext } from '../Carousel.context';
 import { defaultIndicatorProps } from './CarouselIndicator.props';
 
 export const CarouselIndicator = withComponent({
-    name: 'CarouselIndicator',
+    name: 'Carousel.Indicator',
     defaultProps: defaultIndicatorProps,
     setup() {
         const carousel = useCarouselContext();

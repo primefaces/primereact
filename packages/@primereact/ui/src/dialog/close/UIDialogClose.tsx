@@ -6,7 +6,7 @@ import { DialogClose, defaultCloseProps } from 'primereact/dialog';
 import * as React from 'react';
 
 export const UIDialogClose = withComponent({
-    name: 'UIDialogClose',
+    name: 'Dialog.Close',
     defaultProps: defaultCloseProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

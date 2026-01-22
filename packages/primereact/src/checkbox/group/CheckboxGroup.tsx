@@ -9,7 +9,7 @@ import { CheckboxGroupProvider } from './CheckboxGroup.context';
 import { defaultGroupProps } from './CheckboxGroup.props';
 
 export const CheckboxGroup = withComponent({
-    name: 'CheckboxGroup',
+    name: 'Checkbox.Group',
     defaultProps: defaultGroupProps,
     styles: groupStyles,
     setup(instance) {

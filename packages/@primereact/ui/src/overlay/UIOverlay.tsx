@@ -6,7 +6,7 @@ import { Overlay, defaultProps } from 'primereact/overlay';
 import * as React from 'react';
 
 export const UIOverlay = withComponent({
-    name: 'UIOverlay',
+    name: 'Overlay',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({}, instance.inProps);

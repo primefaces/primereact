@@ -8,7 +8,7 @@ import { ToastItemProvider } from './ToastItem.context';
 import { defaultItemProps } from './ToastItem.props';
 
 export const ToastItem = withComponent({
-    name: 'ToastItem',
+    name: 'Toast.Item',
     defaultProps: defaultItemProps,
     setup(instance) {
         const toastItem = useToastItem(instance.inProps);

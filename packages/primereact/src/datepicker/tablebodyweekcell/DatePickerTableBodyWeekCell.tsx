@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultTableBodyWeekCellProps } from './DatePickerTableBodyWeekCell.props';
 
 export const DatePickerTableBodyWeekCell = withComponent({
-    name: 'DatePickerTableBodyWeekCell',
+    name: 'DatePicker.TableBodyWeekCell',
     defaultProps: defaultTableBodyWeekCellProps,
     setup() {
         const datepicker = useDatePickerContext();

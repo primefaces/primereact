@@ -7,7 +7,7 @@ import { useToastContext } from '../Toast.context';
 import { defaultActionProps } from './ToastAction.props';
 
 export const ToastAction = withComponent({
-    name: 'ToastAction',
+    name: 'Toast.Action',
     defaultProps: defaultActionProps,
     setup() {
         const toastItem = useToastItemContext();

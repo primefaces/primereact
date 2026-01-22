@@ -6,7 +6,7 @@ import { useMeterGroupContext } from '../MeterGroup.context';
 import { defaultTextProps } from './MeterGroupText.props';
 
 export const MeterGroupText = withComponent({
-    name: 'MeterGroupText',
+    name: 'MeterGroup.Text',
     defaultProps: defaultTextProps,
     setup() {
         const metergroup = useMeterGroupContext();

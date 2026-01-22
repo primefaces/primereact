@@ -7,7 +7,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultMaximizableProps } from './DialogMaximizable.props';
 
 export const DialogMaximizable = withComponent({
-    name: 'DialogMaximizable',
+    name: 'Dialog.Maximizable',
     defaultProps: defaultMaximizableProps,
     setup() {
         const dialog = useDialogContext();

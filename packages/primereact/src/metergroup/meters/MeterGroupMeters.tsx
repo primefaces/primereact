@@ -6,7 +6,7 @@ import { useMeterGroupContext } from '../MeterGroup.context';
 import { defaultMetersProps } from './MeterGroupMeters.props';
 
 export const MeterGroupMeters = withComponent({
-    name: 'MeterGroupMeters',
+    name: 'MeterGroup.Meters',
     defaultProps: defaultMetersProps,
     setup() {
         const metergroup = useMeterGroupContext();

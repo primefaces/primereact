@@ -8,7 +8,7 @@ import { useDatePickerTableBodyContext } from '../tablebody/DatePickerTableBody.
 import { defaultTableBodyCellProps } from './DatePickerTableBodyCell.props';
 
 export const DatePickerTableBodyCell = withComponent({
-    name: 'DatePickerTableBodyCell',
+    name: 'DatePicker.TableBodyCell',
     defaultProps: defaultTableBodyCellProps,
     setup() {
         const datepicker = useDatePickerContext();

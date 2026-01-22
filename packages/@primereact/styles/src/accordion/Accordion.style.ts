@@ -7,15 +7,15 @@ ${accordion_style}
 
 /* @todo review styles */
 .p-accordiontrigger {
-    display: flex;
+    /*display: flex;
     width: 100%;
     height: 100%;
-    padding: var(--p-accordion-header-padding);
+    padding: var(--p-accordion-header-padding);*/
     cursor: pointer;
 }
 
 .p-accordionheader {
-    padding: 0;
+    /*padding: 0;*/
 }
 `;
 

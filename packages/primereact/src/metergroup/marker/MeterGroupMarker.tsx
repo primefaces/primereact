@@ -7,7 +7,7 @@ import { useMeterGroupContext } from '../MeterGroup.context';
 import { defaultMarkerProps } from './MeterGroupMarker.props';
 
 export const MeterGroupMarker = withComponent({
-    name: 'MeterGroupMarker',
+    name: 'MeterGroup.Marker',
     defaultProps: defaultMarkerProps,
     setup() {
         const metergroup = useMeterGroupContext();

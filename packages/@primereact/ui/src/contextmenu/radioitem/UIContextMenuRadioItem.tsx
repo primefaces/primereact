@@ -6,7 +6,7 @@ import { ContextMenuRadioItem, defaultRadioItemProps } from 'primereact/contextm
 import * as React from 'react';
 
 export const UIContextMenuRadioItem = withComponent({
-    name: 'UIContextMenuRadioItem',
+    name: 'ContextMenu.RadioItem',
     defaultProps: defaultRadioItemProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuRadioItem }, instance.inProps);

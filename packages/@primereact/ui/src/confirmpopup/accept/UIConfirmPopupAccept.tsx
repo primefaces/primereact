@@ -6,7 +6,7 @@ import { ConfirmPopupAccept, defaultAcceptProps } from 'primereact/confirmpopup'
 import * as React from 'react';
 
 export const UIConfirmPopupAccept = withComponent({
-    name: 'UIConfirmPopupAccept',
+    name: 'ConfirmPopup.Accept',
     defaultProps: defaultAcceptProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

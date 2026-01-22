@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultIconProps } from './ContextMenuIcon.props';
 
 export const ContextMenuIcon = withComponent({
-    name: 'ContextMenuIcon',
+    name: 'ContextMenu.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const contextmenu = useContextMenuContext();

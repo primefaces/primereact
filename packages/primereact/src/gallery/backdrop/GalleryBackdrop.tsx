@@ -6,7 +6,7 @@ import { useGalleryContext } from '../Gallery.context';
 import { defaultBackdropProps } from './GalleryBackdrop.props';
 
 export const GalleryBackdrop = withComponent({
-    name: 'GalleryBackdrop',
+    name: 'Gallery.Backdrop',
     defaultProps: defaultBackdropProps,
     setup() {
         const gallery = useGalleryContext();

@@ -33,12 +33,12 @@ export const AccordionTrigger = withComponent({
                     accordion?.onTriggerKeyDown(event, accordionpanel?.props.value);
                 },
                 style: { userSelect: 'none' },
-                disabled: accordionpanel?.props.disabled,
+                disabled: accordion?.props.disabled || accordionpanel?.props.disabled,
                 tabIndex: accordion?.props.tabIndex,
                 'aria-expanded': accordionpanel?.active,
-                'aria-disabled': accordionpanel?.props.disabled,
+                'aria-disabled': accordion?.props.disabled || accordionpanel?.props.disabled,
                 [accordionpanel?.active ? 'data-content-open' : 'data-content-closed']: '',
-                'data-disabled': accordionpanel?.props.disabled
+                'data-disabled': accordion?.props.disabled || accordionpanel?.props.disabled
             },
             accordion?.ptm('trigger'),
             ptmi('root')

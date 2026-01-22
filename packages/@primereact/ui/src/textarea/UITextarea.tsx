@@ -7,7 +7,7 @@ import { Textarea, defaultProps } from 'primereact/textarea';
 import * as React from 'react';
 
 export const UITextarea = withComponent({
-    name: 'UITextarea',
+    name: 'Textarea',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

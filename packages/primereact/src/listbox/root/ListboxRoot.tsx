@@ -8,7 +8,7 @@ import { ListboxProvider } from '../Listbox.context';
 import { defaultRootProps } from './ListboxRoot.props';
 
 export const ListboxRoot = withComponent({
-    name: 'ListboxRoot',
+    name: 'Listbox.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const listbox = (instance?.inProps?.listboxInstance as unknown as Record<PropertyKey, unknown>) ?? useListbox(omit(instance?.inProps, 'listboxInstance'));

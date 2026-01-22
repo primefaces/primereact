@@ -7,7 +7,7 @@ import { TimelineProvider } from '../Timeline.context';
 import { defaultRootProps } from './TimelineRoot.props';
 
 export const TimelineRoot = withComponent({
-    name: 'TimelineRoot',
+    name: 'Timeline.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const timeline = useTimeline(instance.inProps);

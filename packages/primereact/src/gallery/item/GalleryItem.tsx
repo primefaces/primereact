@@ -8,7 +8,7 @@ import { GalleryItemProvider } from './GalleryItem.context';
 import { defaultItemProps } from './GalleryItem.props';
 
 export const GalleryItem = withComponent({
-    name: 'GalleryItem',
+    name: 'Gallery.Item',
     defaultProps: defaultItemProps,
     setup(instance) {
         const gallery = useGalleryContext();

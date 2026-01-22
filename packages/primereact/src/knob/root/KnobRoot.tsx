@@ -7,7 +7,7 @@ import { KnobProvider } from '../Knob.context';
 import { defaultRootProps } from './KnobRoot.props';
 
 export const KnobRoot = withComponent({
-    name: 'KnobRoot',
+    name: 'Knob.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const knob = useKnob(instance?.inProps);

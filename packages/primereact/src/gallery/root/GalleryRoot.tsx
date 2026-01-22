@@ -7,7 +7,7 @@ import { GalleryProvider } from '../Gallery.context';
 import { defaultRootProps } from './GalleryRoot.props';
 
 export const GalleryRoot = withComponent({
-    name: 'GalleryRoot',
+    name: 'Gallery.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const gallery = useGallery(instance.inProps);

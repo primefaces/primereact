@@ -10,7 +10,7 @@ import { useTabsContext } from '../Tabs.context';
 import { defaultListProps } from './TabsList.props';
 
 export const TabsList = withComponent({
-    name: 'TabList',
+    name: 'Tabs.List',
     defaultProps: defaultListProps,
     setup() {
         const tabs = useTabsContext();

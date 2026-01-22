@@ -7,7 +7,7 @@ import { ImageCompareProvider } from '../ImageCompare.context';
 import { defaultRootProps } from './ImageCompareRoot.props';
 
 export const ImageCompareRoot = withComponent({
-    name: 'ImageCompareRoot',
+    name: 'ImageCompare.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const imagecompare = useImageCompare(instance.inProps);

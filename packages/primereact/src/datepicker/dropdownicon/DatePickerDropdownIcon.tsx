@@ -8,7 +8,7 @@ import { useDatePickerInputIconContainerContext } from '../inputiconcontainer/Da
 import { defaultDropdownIconProps } from './DatePickerDropdownIcon.props';
 
 export const DatePickerDropdownIcon = withComponent({
-    name: 'DatePickerDropdownIcon',
+    name: 'DatePicker.DropdownIcon',
     defaultProps: defaultDropdownIconProps,
     setup() {
         const datepicker = useDatePickerContext();

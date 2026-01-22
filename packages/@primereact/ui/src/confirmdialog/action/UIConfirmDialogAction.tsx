@@ -6,7 +6,7 @@ import { ConfirmDialogAction, defaultActionProps } from 'primereact/confirmdialo
 import * as React from 'react';
 
 export const UIConfirmDialogAction = withComponent({
-    name: 'UIConfirmDialogAction',
+    name: 'ConfirmDialog.Action',
     defaultProps: defaultActionProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

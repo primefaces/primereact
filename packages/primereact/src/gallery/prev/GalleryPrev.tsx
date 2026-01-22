@@ -6,7 +6,7 @@ import { useGalleryContext } from '../Gallery.context';
 import { defaultPrevProps } from './GalleryPrev.props';
 
 export const GalleryPrev = withComponent({
-    name: 'GalleryPrev',
+    name: 'Gallery.Prev',
     defaultProps: defaultPrevProps,
     setup() {
         const gallery = useGalleryContext();

@@ -55,6 +55,14 @@ export type BaseInstance<IProps = Record<PropertyKey, unknown>, Ref = unknown, E
      */
     name?: string | undefined;
     /**
+     * The headless/component scope.
+     */
+    scope?: string | undefined;
+    /**
+     * The headless/component part.
+     */
+    part?: string | undefined;
+    /**
      * The headless/component props that are passed by the user.
      */
     inProps?: SafeRecord<IProps> | undefined;

@@ -7,7 +7,7 @@ import { MenuRadioGroupProvider } from './MenuRadioGroup.context';
 import { defaultRadioGroupProps } from './MenuRadioGroup.props';
 
 export const MenuRadioGroup = withComponent({
-    name: 'MenuRadioGroup',
+    name: 'Menu.RadioGroup',
     defaultProps: defaultRadioGroupProps,
     setup({ props }) {
         const menu = useMenuContext();

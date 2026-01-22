@@ -6,7 +6,7 @@ import { ConfirmPopupReject, defaultRejectProps } from 'primereact/confirmpopup'
 import * as React from 'react';
 
 export const UIConfirmPopupReject = withComponent({
-    name: 'UIConfirmPopupReject',
+    name: 'ConfirmPopup.Reject',
     defaultProps: defaultRejectProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

@@ -7,7 +7,7 @@ import { BadgeProvider } from '../Badge.context';
 import { defaultRootProps } from './BadgeRoot.props';
 
 export const BadgeRoot = withComponent({
-    name: 'BadgeRoot',
+    name: 'Badge.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const badge = useBadge(instance.inProps);

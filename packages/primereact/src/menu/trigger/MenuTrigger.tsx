@@ -9,7 +9,7 @@ import { useMenuSubContext } from '../sub/MenuSub.context';
 import { defaultTriggerProps } from './MenuTrigger.props';
 
 export const MenuTrigger = withComponent({
-    name: 'MenuTrigger',
+    name: 'Menu.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const menu = useMenuContext();

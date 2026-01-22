@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultCalendarProps } from './DatePickerCalendar.props';
 
 export const DatePickerCalendar = withComponent({
-    name: 'DatePickerCalendar',
+    name: 'DatePicker.Calendar',
     defaultProps: defaultCalendarProps,
     setup() {
         const datepicker = useDatePickerContext();

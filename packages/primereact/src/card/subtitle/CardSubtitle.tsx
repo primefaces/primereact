@@ -6,7 +6,7 @@ import { useCardContext } from '../Card.context';
 import { defaultSubtitleProps } from './CardSubtitle.props';
 
 export const CardSubtitle = withComponent({
-    name: 'CardSubtitle',
+    name: 'Card.Subtitle',
     defaultProps: defaultSubtitleProps,
     setup() {
         const card = useCardContext();

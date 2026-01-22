@@ -6,7 +6,7 @@ import { useAvatarContext } from '../Avatar.context';
 import { defaultFallbackProps } from './AvatarFallback.props';
 
 export const AvatarFallback = withComponent({
-    name: 'AvatarFallback',
+    name: 'Avatar.Fallback',
     defaultProps: defaultFallbackProps,
     setup() {
         const avatar = useAvatarContext();

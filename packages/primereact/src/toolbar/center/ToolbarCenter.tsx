@@ -7,7 +7,7 @@ import { ToolbarCenterProvider } from './ToolbarCenter.context';
 import { defaultCenterProps } from './ToolbarCenter.props';
 
 export const ToolbarCenter = withComponent({
-    name: 'ToolbarCenter',
+    name: 'Toolbar.Center',
     defaultProps: defaultCenterProps,
     setup() {
         const toolbar = useToolbarContext();

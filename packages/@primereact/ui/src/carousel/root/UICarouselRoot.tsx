@@ -7,7 +7,7 @@ import { CarouselRoot, defaultRootProps } from 'primereact/carousel';
 import * as React from 'react';
 
 export const UICarouselRoot = withComponent({
-    name: 'UICarouselRoot',
+    name: 'Carousel.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

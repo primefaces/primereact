@@ -6,7 +6,7 @@ import { ConfirmDialogHeaderActions, defaultHeaderActionsProps } from 'primereac
 import * as React from 'react';
 
 export const UIConfirmDialogHeaderActions = withComponent({
-    name: 'UIConfirmDialogHeaderActions',
+    name: 'ConfirmDialog.HeaderActions',
     defaultProps: defaultHeaderActionsProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: DialogHeaderActions }, instance.inProps);

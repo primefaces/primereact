@@ -9,7 +9,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultContentProps } from './TreeContent.props';
 
 export const TreeContent = withComponent({
-    name: 'TreeContent',
+    name: 'Tree.Content',
     defaultProps: defaultContentProps,
     setup() {
         const tree = useTreeContext();

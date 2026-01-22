@@ -7,7 +7,7 @@ import { TooltipProvider } from '../Tooltip.context';
 import { defaultRootProps } from './TooltipRoot.props';
 
 export const TooltipRoot = withComponent({
-    name: 'TooltipRoot',
+    name: 'Tooltip.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const tooltip = useTooltip(instance.inProps);

@@ -7,7 +7,7 @@ import { SplitterRoot, defaultRootProps } from 'primereact/splitter';
 import * as React from 'react';
 
 export const UISplitterRoot = withComponent({
-    name: 'UISplitterRoot',
+    name: 'Splitter.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

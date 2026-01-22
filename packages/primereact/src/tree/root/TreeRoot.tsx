@@ -7,7 +7,7 @@ import { TreeProvider } from '../Tree.context';
 import { defaultRootProps } from './TreeRoot.props';
 
 export const TreeRoot = withComponent({
-    name: 'TreeRoot',
+    name: 'Tree.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const tree = useTree(instance.inProps);

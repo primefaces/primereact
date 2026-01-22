@@ -6,7 +6,7 @@ import { DatePickerPrev, defaultPrevProps } from 'primereact/datepicker';
 import * as React from 'react';
 
 export const UIDatePickerPrev = withComponent({
-    name: 'UIDatePickerPrev',
+    name: 'DatePicker.Prev',
     defaultProps: defaultPrevProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

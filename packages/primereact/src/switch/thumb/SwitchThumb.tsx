@@ -6,7 +6,7 @@ import { useSwitchContext } from '../Switch.context';
 import { defaultThumbProps } from './SwitchThumb.props';
 
 export const SwitchThumb = withComponent({
-    name: 'SwitchThumb',
+    name: 'Switch.Thumb',
     defaultProps: defaultThumbProps,
     setup() {
         const switchContext = useSwitchContext();

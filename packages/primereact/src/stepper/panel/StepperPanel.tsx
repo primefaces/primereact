@@ -7,7 +7,7 @@ import { useStepperItemContext } from '../item/StepperItem.context';
 import { defaultPanelProps } from './StepperPanel.props';
 
 export const StepperPanel = withComponent({
-    name: 'StepperPanel',
+    name: 'Stepper.Panel',
     defaultProps: defaultPanelProps,
     setup({ props }) {
         const stepper = useStepperContext();

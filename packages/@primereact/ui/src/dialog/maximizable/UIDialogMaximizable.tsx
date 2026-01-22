@@ -6,7 +6,7 @@ import { DialogMaximizable, defaultMaximizableProps } from 'primereact/dialog';
 import * as React from 'react';
 
 export const UIDialogMaximizable = withComponent({
-    name: 'UIDialogMaximizable',
+    name: 'Dialog.Maximizable',
     defaultProps: defaultMaximizableProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

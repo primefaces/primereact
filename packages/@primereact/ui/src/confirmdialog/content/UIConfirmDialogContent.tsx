@@ -6,7 +6,7 @@ import { ConfirmDialogContent, defaultContentProps } from 'primereact/confirmdia
 import * as React from 'react';
 
 export const UIConfirmDialogContent = withComponent({
-    name: 'UIConfirmDialogContent',
+    name: 'ConfirmDialog.Content',
     defaultProps: defaultContentProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: DialogContent }, instance.inProps);

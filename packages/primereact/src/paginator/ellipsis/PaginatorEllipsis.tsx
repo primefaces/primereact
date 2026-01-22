@@ -6,7 +6,7 @@ import { usePaginatorContext } from '../Paginator.context';
 import { defaultEllipsisProps } from './PaginatorEllipsis.props';
 
 export const PaginatorEllipsis = withComponent({
-    name: 'PaginatorEllipsis',
+    name: 'Paginator.Ellipsis',
     defaultProps: defaultEllipsisProps,
     setup() {
         const paginator = usePaginatorContext();

@@ -6,7 +6,7 @@ import { usePanelContext } from '../Panel.context';
 import { defaultContentProps } from './PanelContent.props';
 
 export const PanelContent = withComponent({
-    name: 'PanelContent',
+    name: 'Panel.Content',
     defaultProps: defaultContentProps,
     setup() {
         const panel = usePanelContext();

@@ -7,7 +7,7 @@ import { useMessageContext } from '../Message.context';
 import { defaultIconProps } from './MessageIcon.props';
 
 export const MessageIcon = withComponent({
-    name: 'MessageIcon',
+    name: 'Message.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const message = useMessageContext();

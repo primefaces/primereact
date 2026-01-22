@@ -6,7 +6,7 @@ import { useDatePickerContext } from '../DatePicker.context';
 import { defaultMinuteProps } from './DatePickerMinute.props';
 
 export const DatePickerMinute = withComponent({
-    name: 'DatePickerMinute',
+    name: 'DatePicker.Minute',
     defaultProps: defaultMinuteProps,
     setup() {
         const datepicker = useDatePickerContext();

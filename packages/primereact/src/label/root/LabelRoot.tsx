@@ -7,7 +7,7 @@ import { LabelProvider } from '../Label.context';
 import { defaultRootProps } from './LabelRoot.props';
 
 export const LabelRoot = withComponent({
-    name: 'LabelRoot',
+    name: 'Label.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const label = useLabel(instance.inProps);

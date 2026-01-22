@@ -6,7 +6,7 @@ import { useMenuContext } from '../Menu.context';
 import { defaultSeparatorProps } from './MenuSeparator.props';
 
 export const MenuSeparator = withComponent({
-    name: 'MenuSeparator',
+    name: 'Menu.Separator',
     defaultProps: defaultSeparatorProps,
     setup() {
         const menu = useMenuContext();

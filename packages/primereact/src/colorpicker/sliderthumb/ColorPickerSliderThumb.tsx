@@ -7,7 +7,7 @@ import { useColorPickerSliderContext } from '../slider/ColorPickerSlider.context
 import { defaultSliderThumbProps } from './ColorPickerSliderThumb.props';
 
 export const ColorPickerSliderThumb = withComponent({
-    name: 'ColorPickerSliderThumb',
+    name: 'ColorPicker.SliderThumb',
     defaultProps: defaultSliderThumbProps,
     setup() {
         const colorpicker = useColorPickerContext();

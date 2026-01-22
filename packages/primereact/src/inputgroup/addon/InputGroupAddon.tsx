@@ -6,7 +6,7 @@ import { useInputGroupContext } from '../InputGroup.context';
 import { defaultAddonProps } from './InputGroupAddon.props';
 
 export const InputGroupAddon = withComponent({
-    name: 'InputGroupAddon',
+    name: 'InputGroup.Addon',
     defaultProps: defaultAddonProps,
     setup() {
         const inputgroup = useInputGroupContext();

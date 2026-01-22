@@ -7,7 +7,7 @@ import { RadioButtonRoot, defaultRootProps } from 'primereact/radiobutton';
 import * as React from 'react';
 
 export const UIRadioButtonRoot = withComponent({
-    name: 'UIRadioButtonRoot',
+    name: 'RadioButton.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

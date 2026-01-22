@@ -6,7 +6,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultFooterProps } from './TreeFooter.props';
 
 export const TreeFooter = withComponent({
-    name: 'TreeFooter',
+    name: 'Tree.Footer',
     defaultProps: defaultFooterProps,
     setup() {
         const tree = useTreeContext();

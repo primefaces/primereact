@@ -7,7 +7,7 @@ import { PaginatorProvider } from '../Paginator.context';
 import { defaultRootProps } from './PaginatorRoot.props';
 
 export const PaginatorRoot = withComponent({
-    name: 'PaginatorRoot',
+    name: 'Paginator.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const paginator = usePaginator(instance?.inProps);

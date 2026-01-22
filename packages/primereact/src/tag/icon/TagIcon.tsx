@@ -6,7 +6,7 @@ import { useTagContext } from '../Tag.context';
 import { defaultIconProps } from './TagIcon.props';
 
 export const TagIcon = withComponent({
-    name: 'TagIcon',
+    name: 'Tag.Icon',
     defaultProps: defaultIconProps,
     setup() {
         const tag = useTagContext();

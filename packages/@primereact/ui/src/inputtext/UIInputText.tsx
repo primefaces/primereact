@@ -7,7 +7,7 @@ import { InputText, defaultProps } from 'primereact/inputtext';
 import * as React from 'react';
 
 export const UIInputText = withComponent({
-    name: 'UIInputText',
+    name: 'InputText',
     defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

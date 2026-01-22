@@ -6,7 +6,7 @@ import { useGalleryContext } from '../Gallery.context';
 import { defaultThumbnailProps } from './GalleryThumbnail.props';
 
 export const GalleryThumbnail = withComponent({
-    name: 'GalleryThumbnail',
+    name: 'Gallery.Thumbnail',
     defaultProps: defaultThumbnailProps,
     setup() {
         const gallery = useGalleryContext();

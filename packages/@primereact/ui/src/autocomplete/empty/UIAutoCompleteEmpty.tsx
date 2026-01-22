@@ -6,7 +6,7 @@ import { AutoCompleteEmpty, defaultEmptyProps } from 'primereact/autocomplete';
 import * as React from 'react';
 
 export const UIAutoCompleteEmpty = withComponent({
-    name: 'UIAutoCompleteEmpty',
+    name: 'AutoComplete.Empty',
     defaultProps: defaultEmptyProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxEmpty }, instance.inProps);

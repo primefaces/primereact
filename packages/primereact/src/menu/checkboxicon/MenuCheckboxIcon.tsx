@@ -10,7 +10,7 @@ import { useMenuCheckboxItemContext } from '../checkboxitem/MenuCheckboxItem.con
 import { defaultCheckboxIconProps } from './MenuCheckboxIcon.props';
 
 export const MenuCheckboxIcon = withComponent({
-    name: 'MenuCheckboxIcon',
+    name: 'Menu.CheckboxIcon',
     defaultProps: defaultCheckboxIconProps,
     setup() {
         const menu = useMenuContext();

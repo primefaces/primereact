@@ -7,7 +7,7 @@ import { TerminalProvider } from '../Terminal.context';
 import { defaultRootProps } from './TerminalRoot.props';
 
 export const TerminalRoot = withComponent({
-    name: 'TerminalRoot',
+    name: 'Terminal.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const terminal = useTerminal(instance.inProps);

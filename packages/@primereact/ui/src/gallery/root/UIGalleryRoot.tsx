@@ -7,7 +7,7 @@ import { GalleryRoot, defaultRootProps } from 'primereact/gallery';
 import * as React from 'react';
 
 export const UIGalleryRoot = withComponent({
-    name: 'UIGalleryRoot',
+    name: 'Gallery.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

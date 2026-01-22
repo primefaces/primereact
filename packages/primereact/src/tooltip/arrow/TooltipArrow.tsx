@@ -6,7 +6,7 @@ import { useTooltipContext } from '../Tooltip.context';
 import { defaultArrowProps } from './TooltipArrow.props';
 
 export const TooltipArrow = withComponent({
-    name: 'TooltipArrow',
+    name: 'Tooltip.Arrow',
     defaultProps: defaultArrowProps,
     setup() {
         const tooltip = useTooltipContext();

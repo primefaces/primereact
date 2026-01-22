@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultItemProps } from './ContextMenuItem.props';
 
 export const ContextMenuItem = withComponent({
-    name: 'ContextMenuItem',
+    name: 'ContextMenu.Item',
     defaultProps: defaultItemProps,
     setup() {
         const contextmenu = useContextMenuContext();

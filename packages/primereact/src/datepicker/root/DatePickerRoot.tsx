@@ -7,7 +7,7 @@ import { DatePickerProvider } from '../DatePicker.context';
 import { defaultRootProps } from './DatePickerRoot.props';
 
 export const DatePickerRoot = withComponent({
-    name: 'DatePickerRoot',
+    name: 'DatePicker.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const datepicker = useDatePicker(instance.inProps);

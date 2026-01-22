@@ -6,7 +6,7 @@ import { useSelectContext } from '../Select.context';
 import { defaultHeaderProps } from './SelectHeader.props';
 
 export const SelectHeader = withComponent({
-    name: 'SelectHeader',
+    name: 'Select.Header',
     defaultProps: defaultHeaderProps,
     setup() {
         const select = useSelectContext();

@@ -6,7 +6,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultTriggerProps } from './DialogTrigger.props';
 
 export const DialogTrigger = withComponent({
-    name: 'DialogTrigger',
+    name: 'Dialog.Trigger',
     defaultProps: defaultTriggerProps,
     setup() {
         const dialog = useDialogContext();

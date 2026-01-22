@@ -6,7 +6,7 @@ import { usePlacerContext } from '../Placer.context';
 import { defaultAnchorProps } from './PlacerAnchor.props';
 
 export const PlacerAnchor = withComponent({
-    name: 'PlacerAnchor',
+    name: 'Placer.Anchor',
     defaultProps: defaultAnchorProps,
     setup() {
         const placer = usePlacerContext();

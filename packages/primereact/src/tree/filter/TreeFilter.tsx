@@ -6,7 +6,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultFilterProps } from './TreeFilter.props';
 
 export const TreeFilter = withComponent({
-    name: 'TreeFilter',
+    name: 'Tree.Filter',
     defaultProps: defaultFilterProps,
     setup() {
         const tree = useTreeContext();

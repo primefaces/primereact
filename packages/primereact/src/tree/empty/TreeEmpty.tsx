@@ -6,7 +6,7 @@ import { useTreeContext } from '../Tree.context';
 import { defaultEmptyProps } from './TreeEmpty.props';
 
 export const TreeEmpty = withComponent({
-    name: 'TreeEmpty',
+    name: 'Tree.Empty',
     defaultProps: defaultEmptyProps,
     setup() {
         const tree = useTreeContext();

@@ -6,7 +6,7 @@ import { defaultTriggerProps, PopoverTrigger } from 'primereact/popover';
 import * as React from 'react';
 
 export const UIPopoverTrigger = withComponent({
-    name: 'UIPopoverTrigger',
+    name: 'Popover.Trigger',
     defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);

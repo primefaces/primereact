@@ -6,7 +6,7 @@ import { useGalleryContext } from '../Gallery.context';
 import { defaultNextProps } from './GalleryNext.props';
 
 export const GalleryNext = withComponent({
-    name: 'GalleryNext',
+    name: 'Gallery.Next',
     defaultProps: defaultNextProps,
     setup() {
         const gallery = useGalleryContext();

@@ -6,7 +6,7 @@ import { InputTagsItem, defaultItemProps } from 'primereact/inputtags';
 import * as React from 'react';
 
 export const UIInputTagsItem = withComponent({
-    name: 'UIInputTagsItem',
+    name: 'InputTags.Item',
     defaultProps: defaultItemProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ChipRoot }, instance.inProps);

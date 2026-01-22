@@ -7,7 +7,7 @@ import { StepperItemProvider } from './StepperItem.context';
 import { defaultItemProps } from './StepperItem.props';
 
 export const StepperItem = withComponent({
-    name: 'StepperItem',
+    name: 'Stepper.Item',
     defaultProps: defaultItemProps,
     setup({ props }) {
         const stepper = useStepperContext();

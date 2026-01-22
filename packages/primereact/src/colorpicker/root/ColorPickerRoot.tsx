@@ -6,7 +6,7 @@ import { ColorPickerProvider } from '../ColorPicker.context';
 import { defaultRootProps } from './ColorPickerRoot.props';
 
 export const ColorPickerRoot = withComponent({
-    name: 'ColorPickerRoot',
+    name: 'ColorPicker.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const colorpicker = useColorPicker(instance.inProps);

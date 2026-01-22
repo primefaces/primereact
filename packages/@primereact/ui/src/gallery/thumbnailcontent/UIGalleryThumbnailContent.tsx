@@ -6,7 +6,7 @@ import { GalleryThumbnailContent, defaultThumbnailContentProps } from 'primereac
 import * as React from 'react';
 
 export const UIGalleryThumbnailContent = withComponent({
-    name: 'UIGalleryThumbnailContent',
+    name: 'Gallery.ThumbnailContent',
     defaultProps: defaultThumbnailContentProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: CarouselContent }, instance.inProps);

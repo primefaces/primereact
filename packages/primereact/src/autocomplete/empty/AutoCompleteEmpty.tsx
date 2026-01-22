@@ -6,7 +6,7 @@ import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultEmptyProps } from './AutoCompleteEmpty.props';
 
 export const AutoCompleteEmpty = withComponent({
-    name: 'AutoCompleteEmpty',
+    name: 'AutoComplete.Empty',
     defaultProps: defaultEmptyProps,
     setup() {
         const autocomplete = useAutoCompleteContext();

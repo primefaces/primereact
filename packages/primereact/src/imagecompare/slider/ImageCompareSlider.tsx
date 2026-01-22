@@ -6,7 +6,7 @@ import { useImageCompareContext } from '../ImageCompare.context';
 import { defaultSliderProps } from './ImageCompareSlider.props';
 
 export const ImageCompareSlider = withComponent({
-    name: 'ImageCompareSlider',
+    name: 'ImageCompare.Slider',
     defaultProps: defaultSliderProps,
     setup() {
         const imagecompare = useImageCompareContext();

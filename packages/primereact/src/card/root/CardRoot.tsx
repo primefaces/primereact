@@ -7,7 +7,7 @@ import { CardProvider } from '../Card.context';
 import { defaultRootProps } from './CardRoot.props';
 
 export const CardRoot = withComponent({
-    name: 'CardRoot',
+    name: 'Card.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const card = useCard(instance.inProps);

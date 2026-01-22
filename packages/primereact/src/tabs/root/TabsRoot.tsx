@@ -7,7 +7,7 @@ import { TabsProvider } from '../Tabs.context';
 import { defaultRootProps } from './TabsRoot.props';
 
 export const TabsRoot = withComponent({
-    name: 'TabsRoot',
+    name: 'Tabs.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const tabs = useTabs(instance.inProps);

@@ -6,7 +6,7 @@ import { AutoCompleteOptions, defaultOptionsProps } from 'primereact/autocomplet
 import * as React from 'react';
 
 export const UIAutoCompleteOptions = withComponent({
-    name: 'UIAutoCompleteOptions',
+    name: 'AutoComplete.Options',
     defaultProps: defaultOptionsProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxOptions }, instance.inProps);

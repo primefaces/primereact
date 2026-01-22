@@ -7,7 +7,7 @@ import { SelectProvider } from '../Select.context';
 import { defaultRootProps } from './SelectRoot.props';
 
 export const SelectRoot = withComponent({
-    name: 'SelectRoot',
+    name: 'Select.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const select = useSelect(instance.inProps);

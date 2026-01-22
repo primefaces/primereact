@@ -9,7 +9,7 @@ import { MenuCheckboxItemProvider } from './MenuCheckboxItem.context';
 import { defaultCheckboxItemProps } from './MenuCheckboxItem.props';
 
 export const MenuCheckboxItem = withComponent({
-    name: 'MenuCheckboxItem',
+    name: 'Menu.CheckboxItem',
     defaultProps: defaultCheckboxItemProps,
     setup(instance) {
         const { props, inProps } = instance;

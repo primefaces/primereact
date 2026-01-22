@@ -6,7 +6,7 @@ import { ProgressBarProvider } from '../ProgressBar.context';
 import { defaultRootProps } from './ProgressBarRoot.props';
 
 export const ProgressBarRoot = withComponent({
-    name: 'ProgressBarRoot',
+    name: 'ProgressBar.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const progressBar = useProgressBar(instance.inProps);

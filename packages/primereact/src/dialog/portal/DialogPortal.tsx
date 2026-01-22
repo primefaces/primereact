@@ -8,7 +8,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultPortalProps } from './DialogPortal.props';
 
 export const DialogPortal = withComponent({
-    name: 'DialogPortal',
+    name: 'Dialog.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const dialog = useDialogContext();

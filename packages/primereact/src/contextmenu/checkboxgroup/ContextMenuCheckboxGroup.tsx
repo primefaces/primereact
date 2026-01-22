@@ -7,7 +7,7 @@ import { useContextMenuContext } from '../ContextMenu.context';
 import { defaultCheckboxGroupProps } from './ContextMenuCheckboxGroup.props';
 
 export const ContextMenuCheckboxGroup = withComponent({
-    name: 'ContextMenuCheckboxGroup',
+    name: 'ContextMenu.CheckboxGroup',
     defaultProps: defaultCheckboxGroupProps,
     setup() {
         const contextmenu = useContextMenuContext();

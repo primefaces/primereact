@@ -6,7 +6,7 @@ import { useChipContext } from '../Chip.context';
 import { defaultImageProps } from './ChipImage.props';
 
 export const ChipImage = withComponent({
-    name: 'ChipImage',
+    name: 'Chip.Image',
     defaultProps: defaultImageProps,
     setup() {
         const chip = useChipContext();

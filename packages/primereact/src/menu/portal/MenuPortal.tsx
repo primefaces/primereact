@@ -9,7 +9,7 @@ import { MenuPortalProvider } from './MenuPortal.context';
 import { defaultPortalProps } from './MenuPortal.props';
 
 export const MenuPortal = withComponent({
-    name: 'MenuPortal',
+    name: 'Menu.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const menu = useMenuContext();

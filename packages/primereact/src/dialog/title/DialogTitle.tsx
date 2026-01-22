@@ -6,7 +6,7 @@ import { useDialogContext } from '../Dialog.context';
 import { defaultTitleProps } from './DialogTitle.props';
 
 export const DialogTitle = withComponent({
-    name: 'DialogTitle',
+    name: 'Dialog.Title',
     defaultProps: defaultTitleProps,
     setup() {
         const dialog = useDialogContext();

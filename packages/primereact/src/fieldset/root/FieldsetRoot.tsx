@@ -7,7 +7,7 @@ import { FieldsetProvider } from '../Fieldset.context';
 import { defaultRootProps } from './FieldsetRoot.props';
 
 export const FieldsetRoot = withComponent({
-    name: 'FieldsetRoot',
+    name: 'Fieldset.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
         const fieldset = useFieldset(instance.inProps);

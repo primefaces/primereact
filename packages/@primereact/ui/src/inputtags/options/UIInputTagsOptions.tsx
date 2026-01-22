@@ -6,7 +6,7 @@ import { defaultOptionsProps, InputTagsOptions } from 'primereact/inputtags';
 import * as React from 'react';
 
 export const UIInputTagsOptions = withComponent({
-    name: 'UIInputTagsOptions',
+    name: 'InputTags.Options',
     defaultProps: defaultOptionsProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: ListboxOptions }, instance.inProps);

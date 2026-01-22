@@ -8,7 +8,7 @@ import { useConfirmPopupContext } from '../ConfirmPopup.context';
 import { defaultPortalProps } from './ConfirmPopupPortal.props';
 
 export const ConfirmPopupPortal = withComponent({
-    name: 'ConfirmPopupPortal',
+    name: 'ConfirmPopup.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const confirmpopup = useConfirmPopupContext();

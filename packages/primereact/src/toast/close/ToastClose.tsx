@@ -7,7 +7,7 @@ import { useToastContext } from '../Toast.context';
 import { defaultCloseProps } from './ToastClose.props';
 
 export const ToastClose = withComponent({
-    name: 'ToastClose',
+    name: 'Toast.Close',
     defaultProps: defaultCloseProps,
     setup() {
         const toastItem = useToastItemContext();

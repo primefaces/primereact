@@ -6,7 +6,7 @@ import { useScrollAreaContext } from '../ScrollArea.context';
 import { defaultThumbYProps } from './ScrollAreaThumbY.props';
 
 export const ScrollAreaThumbY = withComponent({
-    name: 'ScrollAreaThumbY',
+    name: 'ScrollArea.ThumbY',
     defaultProps: defaultThumbYProps,
     setup() {
         const scrollarea = useScrollAreaContext();

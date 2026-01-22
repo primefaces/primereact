@@ -6,7 +6,7 @@ import { useCommandMenuContext } from '../CommandMenu.context';
 import { defaultInputProps } from './CommandMenuInput.props';
 
 export const CommandMenuInput = withComponent({
-    name: 'CommandMenuInput',
+    name: 'CommandMenu.Input',
     defaultProps: defaultInputProps,
     setup() {
         const commandmenu = useCommandMenuContext();

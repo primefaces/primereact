@@ -7,7 +7,7 @@ import { PopoverRoot, defaultRootProps } from 'primereact/popover';
 import * as React from 'react';
 
 export const UIPopoverRoot = withComponent({
-    name: 'UIPopoverRoot',
+    name: 'Popover.Root',
     defaultProps: defaultRootProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);

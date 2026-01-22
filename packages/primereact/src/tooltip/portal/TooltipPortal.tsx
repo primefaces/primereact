@@ -8,7 +8,7 @@ import { useTooltipContext } from '../Tooltip.context';
 import { defaultPortalProps } from './TooltipPortal.props';
 
 export const TooltipPortal = withComponent({
-    name: 'TooltipPortal',
+    name: 'Tooltip.Portal',
     defaultProps: defaultPortalProps,
     setup() {
         const tooltip = useTooltipContext();

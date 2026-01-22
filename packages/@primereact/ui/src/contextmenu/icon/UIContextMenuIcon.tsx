@@ -6,7 +6,7 @@ import { ContextMenuIcon, defaultIconProps } from 'primereact/contextmenu';
 import * as React from 'react';
 
 export const UIContextMenuIcon = withComponent({
-    name: 'UIContextMenuIcon',
+    name: 'ContextMenu.Icon',
     defaultProps: defaultIconProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: MenuIcon }, instance.inProps);
