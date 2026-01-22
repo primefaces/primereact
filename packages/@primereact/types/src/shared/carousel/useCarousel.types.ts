@@ -125,18 +125,14 @@ export interface useCarouselExposes {
      */
     state: useCarouselState;
     /**
-     * Styles applied to the content element.
-     */
-    contentStyles: React.CSSProperties;
-    /**
-     * Styles applied to the item elements.
-     */
-    itemStyles: React.CSSProperties;
-    /**
      * Ref to the content element.
      * @returns React.RefObject<HTMLDivElement | null>
      */
     contentRef: React.RefObject<HTMLDivElement | null>;
+    /**
+     * Number of slides displayed per page.
+     */
+    slidesPerPage: number;
     /**
      * Navigates to the previous slide.
      * @returns void
@@ -195,6 +191,12 @@ export interface useCarouselExposes {
      * @returns void
      */
     onContentWheel: (event: React.WheelEvent<HTMLDivElement>) => void;
+    /**
+     * Computes the appropriate CSS `scroll-snap-type` value
+     * based on orientation and snapping behavior.
+     * @returns The resolved `scroll-snap-type` CSS value.
+     */
+    resolveSnapType: () => string;
 }
 
 /**

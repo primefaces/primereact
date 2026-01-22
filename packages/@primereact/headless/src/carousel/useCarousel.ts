@@ -251,8 +251,8 @@ export const useCarousel = withHeadless({
             intersectionObserverRef.current = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
-                        if (entry.isIntersecting) entry.target.setAttribute('data-inview', 'true');
-                        else entry.target.setAttribute('data-inview', 'false');
+                        if (entry.isIntersecting) entry.target.setAttribute('data-inview', '');
+                        else entry.target.removeAttribute('data-inview');
                     });
                 },
                 {
@@ -386,30 +386,7 @@ export const useCarousel = withHeadless({
             return `${axis} ${props.snapType ?? 'mandatory'}`;
         };
 
-        const contentStyles = {
-            position: 'relative',
-            scrollSnapType: resolveSnapType(),
-            overflowX: props.orientation === 'vertical' ? '' : 'scroll',
-            overflowY: props.orientation === 'horizontal' ? '' : 'scroll',
-            scrollbarWidth: 'none',
-            overscrollBehaviorX: props.orientation === 'vertical' ? '' : 'contain',
-            overscrollBehaviorY: props.orientation === 'horizontal' ? '' : 'contain',
-            display: 'flex',
-            flexDirection: props.orientation === 'horizontal' ? '' : 'column',
-            '--spacing-items': props.spacing + 'px',
-            gap: props.spacing + 'px'
-        } as React.CSSProperties;
-
         const slidesPerPage = props.slidesPerPage && props.slidesPerPage > 0 ? props.slidesPerPage : 1;
-        const basis = props.autoSize ? 'auto' : `calc(100% /${slidesPerPage} - var(--spacing-items) * (${slidesPerPage} - 1) / ${slidesPerPage})`;
-
-        const itemStyles = {
-            scrollSnapAlign: props.align,
-            flexGrow: 0,
-            flexShrink: 0,
-            minWidth: 0,
-            flexBasis: basis
-        } as React.CSSProperties;
 
         const state = {
             swiping,
@@ -421,9 +398,8 @@ export const useCarousel = withHeadless({
 
         return {
             state,
-            contentStyles,
-            itemStyles,
             contentRef,
+            slidesPerPage,
             onContentPointerDown,
             onContentPointerMove,
             onContentPointerUp,
@@ -433,7 +409,8 @@ export const useCarousel = withHeadless({
             scrollToPage,
             scrollTo,
             scrollToSlide,
-            setToClosest
+            setToClosest,
+            resolveSnapType
         };
     }
 });

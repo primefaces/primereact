@@ -31,8 +31,7 @@ export interface CarouselIndicatorPassThrough {
  * Defines valid properties in CarouselIndicator component.
  */
 export interface CarouselIndicatorProps extends BaseComponentProps<CarouselIndicatorInstance, unknown, CarouselIndicatorPassThrough> {
-    snap?: number;
-    index?: number;
+    page?: number;
 }
 
 /**

@@ -19,11 +19,22 @@ export const CarouselContent = withComponent({
         const contentProps = mergeProps(
             {
                 className: carousel?.cx('content'),
-                style: { ...carousel?.contentStyles, ...carousel?.sx('content') },
+                style: {
+                    ...{
+                        '--slides-per-page': carousel?.slidesPerPage,
+                        '--spacing-items': carousel?.props.spacing + 'px',
+                        '--scroll-snap-type': carousel?.resolveSnapType()
+                    },
+                    ...carousel?.sx('content')
+                },
                 onPointerDown: carousel?.onContentPointerDown,
                 onPointerMove: carousel?.onContentPointerMove,
                 onPointerUp: carousel?.onContentPointerUp,
-                onWheel: carousel?.onContentWheel
+                onWheel: carousel?.onContentWheel,
+                'data-orientation': carousel?.props.orientation,
+                'data-align': carousel?.props.align,
+                ...(carousel?.props.autoSize ? { 'data-autosize': '' } : {}),
+                ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },
             carousel?.ptm('content'),
             ptmi('root')

@@ -19,7 +19,10 @@ export const CarouselIndicators = withComponent({
 
         const contentProps = mergeProps(
             {
-                className: carousel?.cx('indicators')
+                className: carousel?.cx('indicators'),
+                'data-orientation': carousel?.props.orientation,
+                'data-align': carousel?.props.align,
+                ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },
             carousel?.ptm('indicators'),
             ptmi('root')

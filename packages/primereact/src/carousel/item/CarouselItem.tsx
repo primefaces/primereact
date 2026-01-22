@@ -21,12 +21,15 @@ export const CarouselItem = withComponent({
                 id,
                 className: carousel?.cx('item'),
                 style: {
-                    ...(carousel?.itemStyles || {}),
-                    ...(carousel?.sx('item') || {})
+                    ...carousel?.sx('item')
                 },
                 'data-value': props.value,
                 'data-item': '',
-                'data-inview': 'false'
+                'data-inview': 'false',
+                'data-orientation': carousel?.props.orientation,
+                'data-align': carousel?.props.align,
+                ...(carousel?.state.swiping ? { 'data-swiping': '' } : {}),
+                ...(carousel?.props.autoSize ? { 'data-autosize': '' } : {})
             },
             carousel?.ptm('item'),
             ptmi('root')

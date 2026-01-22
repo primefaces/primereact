@@ -21,7 +21,10 @@ export const CarouselNext = withComponent({
             {
                 className: carousel?.cx('next', { disabled }),
                 onClick: carousel?.next,
-                disabled
+                disabled,
+                'data-orientation': carousel?.props.orientation,
+                'data-align': carousel?.props.align,
+                ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },
             carousel?.ptm('prev'),
             ptmi('root')

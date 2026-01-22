@@ -21,8 +21,11 @@ export const CarouselIndicator = withComponent({
         const contentProps = mergeProps(
             {
                 className: carousel?.cx('indicator', { active: isActive }),
-                onClick: () => carousel?.scrollToPage(props.page),
-                'data-active': isActive
+                onClick: () => carousel?.scrollToPage(props.page ?? 0),
+                'data-orientation': carousel?.props.orientation,
+                'data-align': carousel?.props.align,
+                ...(isActive && { 'data-active': '' }),
+                ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },
             carousel?.ptm('indicator'),
             ptmi('root')

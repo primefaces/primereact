@@ -21,7 +21,10 @@ export const CarouselRoot = withComponent({
             {
                 id,
                 className: cx('root'),
-                'data-swiping': state.swiping
+                'data-orientation': props.orientation,
+                'data-align': props.align,
+                ...(state.swiping ? { 'data-swiping': '' } : {}),
+                ...(props.autoSize ? { 'data-autosize': '' } : {})
             },
             ptmi('root')
         );
