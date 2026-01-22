@@ -67,8 +67,9 @@ export const SwitchRoot = withComponent({
                 id,
                 className: cx('root'),
                 style: sx('root'),
-                'data-p-checked': state.checked,
-                'data-p-disabled': props.disabled || undefined
+                ...(state.checked ? { 'data-checked': '' } : { 'data-unchecked': '' }),
+                ...((props.disabled || undefined) && { 'data-disabled': '' }),
+                ...((props.invalid || undefined) && { 'data-invalid': '' })
             },
             ptmi('root')
         );

@@ -18,7 +18,10 @@ export const SwitchControl = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: switchContext?.cx('control')
+                className: switchContext?.cx('control'),
+                ...(switchContext?.state.checked ? { 'data-checked': '' } : { 'data-unchecked': '' }),
+                ...((switchContext?.props.disabled || undefined) && { 'data-disabled': '' }),
+                ...((switchContext?.props.invalid || undefined) && { 'data-invalid': '' })
             },
             switchContext?.ptm('control'),
             ptmi('root')

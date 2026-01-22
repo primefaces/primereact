@@ -18,7 +18,10 @@ export const SwitchThumb = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: switchContext?.cx('thumb')
+                className: switchContext?.cx('thumb'),
+                ...(switchContext?.state.checked ? { 'data-checked': '' } : { 'data-unchecked': '' }),
+                ...((switchContext?.props.disabled || undefined) && { 'data-disabled': '' }),
+                ...((switchContext?.props.invalid || undefined) && { 'data-invalid': '' })
             },
             switchContext?.ptm('thumb'),
             ptmi('root')
