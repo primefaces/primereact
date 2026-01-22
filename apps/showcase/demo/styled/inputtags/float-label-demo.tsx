@@ -1,6 +1,6 @@
 'use client';
 
-import { InputTagsInstance, InputTagsValueChangeEvent } from '@primereact/types/shared/inputtags';
+import { InputTagsRootInstance, InputTagsRootValueChangeEvent } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -10,8 +10,8 @@ export default function FloatLabelDemo() {
 
     return (
         <Label.Float>
-            <InputTags.Root value={tags} onValueChange={(e: InputTagsValueChangeEvent) => setTags(e.value as string[])}>
-                {(instance: InputTagsInstance) => {
+            <InputTags.Root value={tags} onValueChange={(e: InputTagsRootValueChangeEvent) => setTags(e.value as string[])}>
+                {(instance: InputTagsRootInstance) => {
                     return (
                         <>
                             {instance?.state.value.map((value, index) => (

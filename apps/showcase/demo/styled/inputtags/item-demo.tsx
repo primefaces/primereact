@@ -1,6 +1,6 @@
 'use client';
 import { SpinnerIcon } from '@primereact/icons';
-import { InputTagsInstance } from '@primereact/types/shared/inputtags';
+import { InputTagsRootInstance } from '@primereact/types/shared/inputtags';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputTags } from '@primereact/ui/inputtags';
 import { Tag } from '@primereact/ui/tag';
@@ -8,7 +8,7 @@ import { Tag } from '@primereact/ui/tag';
 export default function ItemDemo() {
     return (
         <InputTags.Root>
-            {(instance: InputTagsInstance) => {
+            {(instance: InputTagsRootInstance) => {
                 return (
                     <>
                         <SpinnerIcon spin className="mx-1" />

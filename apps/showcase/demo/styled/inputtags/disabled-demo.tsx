@@ -1,11 +1,11 @@
 'use client';
-import { InputTagsInstance } from '@primereact/types/shared/inputtags';
+import { InputTagsRootInstance } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
 
 export default function DisabledDemo() {
     return (
         <InputTags.Root disabled>
-            {(instance: InputTagsInstance) => {
+            {(instance: InputTagsRootInstance) => {
                 return (
                     <>
                         {instance?.state.value.map((value, index) => (

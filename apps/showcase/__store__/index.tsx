@@ -1023,6 +1023,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/inputtags/item-demo')),
                 'filePath': 'demo/styled/inputtags/item-demo.tsx',
             },
+            'typeahead-demo': {
+                'component': React.lazy(() => import('demo/styled/inputtags/typeahead-demo')),
+                'filePath': 'demo/styled/inputtags/typeahead-demo.tsx',
+            },
         },
         'inputtext': {
             'basic-demo': {

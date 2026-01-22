@@ -24,7 +24,7 @@ import { InputTags } from '@primereact/ui/inputtags';
 
 ### Delimiter
 
-A new chip is added when `enter` key is pressed, `delimiter` property allows definining an additional key. Currently only valid value is `,` to create a new item when comma key is pressed.
+A new tag is added when `enter` key is pressed, `delimiter` property allows definining an additional key. Currently only valid value is `,` to create a new item when comma key is pressed.
 
 <DocDemoViewer name="inputtags:delimiter-demo" />
 
@@ -33,6 +33,12 @@ A new chip is added when `enter` key is pressed, `delimiter` property allows def
 The `InputTags.Control` component accepts a render function that provides access to the component instance, allowing full customization of tags, input field, and additional UI elements. You can add custom icons, implement remove actions with `onItemRemoveClick` and `onRemoveAllItems`, or wrap components with additional functionality.
 
 <DocDemoViewer name="inputtags:item-demo" />
+
+### Typeahead
+
+InputTags can be combined with typeahead functionality to provide suggestions as users type. Define an `options` array along with `optionLabel` to specify the display field. For grouped suggestions, use `optionGroupLabel` and `optionGroupChildren` properties. The `onComplete` callback is triggered on input change, allowing you to filter and update suggestions dynamically.
+
+<DocDemoViewer name="inputtags:typeahead-demo" />
 
 ### Filled
 
@@ -57,3 +63,38 @@ Invalid state is displayed using the `invalid` prop to indicate a failed validat
 When `disabled` is present, the element cannot be edited and focused.
 
 <DocDemoViewer name="inputtags:disabled-demo" />
+
+## Accessibility
+
+The input element has `textbox` role in addition to `aria-describedby` attribute. The tag list uses `listbox` role with `aria-orientation` set to horizontal..
+
+When typeahead is enabled, the input element has `combobox` role in addition to `aria-autocomplete`, `aria-haspopup` and `aria-expanded` attributes. The relation between the input and the popup is created with `aria-controls` and `aria-activedescendant` attribute is used to instruct screen reader which option to read during keyboard navigation within the popup list.
+
+### Keyboard Support
+
+| Key           | Function                                             |
+| ------------- | ---------------------------------------------------- |
+| `tab`         | Moves focus to the input element.                    |
+| `enter`       | Adds a new tag with the current input value.         |
+| `backspace`   | Removes the last tag when input is empty.            |
+| `left arrow`  | Moves focus to the previous tag when input is empty. |
+| `right arrow` | Moves focus to the next tag when focused on a tag.   |
+
+### Tag Keyboard Support
+
+| Key         | Function                 |
+| ----------- | ------------------------ |
+| `backspace` | Removes the focused tag. |
+| `delete`    | Removes the focused tag. |
+
+### Popup Keyboard Support (Typeahead)
+
+| Key          | Function                                                                                   |
+| ------------ | ------------------------------------------------------------------------------------------ |
+| `tab`        | Selects the focused option and closes the popup, then moves focus to next element in page. |
+| `enter`      | Selects the focused option and closes the popup.                                           |
+| `escape`     | Closes the popup.                                                                          |
+| `down arrow` | Moves focus to the next option.                                                            |
+| `up arrow`   | Moves focus to the previous option.                                                        |
+| `home`       | Moves focus to the first option.                                                           |
+| `end`        | Moves focus to the last option.                                                            |
