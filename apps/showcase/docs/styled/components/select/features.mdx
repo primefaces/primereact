@@ -104,3 +104,59 @@ Use the `disabled` property to disable a select.
 Specify the `invalid` property to display the component with a red border.
 
 <DocDemoViewer name="select:invalid-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Value to describe the component can either be provided with `aria-labelledby` or `aria-label` props. The select element has a `combobox` role in addition to `aria-haspopup` and `aria-expanded` attributes. If the
+editable option is enabled `aria-autocomplete` is also added. The relation between the combobox and the popup is created with `aria-controls` and `aria-activedescendant` attribute is used to instruct screen reader which
+option to read during keyboard navigation within the popup list.
+
+The popup list has an id that refers to the `aria-controls` attribute of the `combobox` element and uses `listbox` as the role. Each list item has an `option` role, an id to match the `aria-activedescendant` of
+the input element along with `aria-label`, `aria-selected` and `aria-disabled` attributes.
+
+### Closed State Keyboard Support
+
+| Key                       | Function                                                                                                                                                                            |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tab`                     | Moves focus to the select element.                                                                                                                                                  |
+| `space`                   | Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.                                                               |
+| `enter`                   | Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.                                                               |
+| `down arrow`              | Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.                                                               |
+| `up arrow`                | Opens the popup and moves visual focus to the selected option, if there is none then last option receives the focus.                                                                |
+| `any printable character` | Opens the popup and moves focus to the option whose label starts with the characters being typed, if there is none and select is not editable then first option receives the focus. |
+
+### Popup Keyboard Support
+
+| Key                       | Function                                                                                                                                                                           |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tab`                     | Moves focus to the next focusable element in the popup. If there is none, the focusable option is selected and the overlay is closed then moves focus to next element in page.     |
+| `shift` + `tab`           | Moves focus to the previous focusable element in the popup. If there is none, the focusable option is selected and the overlay is closed then moves focus to next element in page. |
+| `enter`                   | Selects the focused option and closes the popup, then moves focus to the select element.                                                                                           |
+| `space`                   | Selects the focused option and closes the popup, then moves focus to the select element.                                                                                           |
+| `escape`                  | Closes the popup, then moves focus to the select element.                                                                                                                          |
+| `down arrow`              | Moves focus to the next option, if there is none then visual focus does not change.                                                                                                |
+| `up arrow`                | Moves focus to the previous option, if there is none then visual focus does not change.                                                                                            |
+| `alt` + `up arrow`        | Selects the focused option and closes the popup, then moves focus to the select element.                                                                                           |
+| `left arrow`              | If the select is editable, removes the visual focus from the current option and moves input cursor to one character left.                                                          |
+| `right arrow`             | If the select is editable, removes the visual focus from the current option and moves input cursor to one character right.                                                         |
+| `home`                    | If the select is editable, moves input cursor at the end, if not then moves focus to the first option.                                                                             |
+| `end`                     | If the select is editable, moves input cursor at the beginning, if not then moves focus to the last option.                                                                        |
+| `pageUp`                  | Jumps visual focus to first option.                                                                                                                                                |
+| `pageDown`                | Jumps visual focus to last option.                                                                                                                                                 |
+| `any printable character` | Moves focus to the option whose label starts with the characters being typed if select is not editable.                                                                            |
+
+### Filter Input Keyboard Support
+
+| Key           | Function                                                                                                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `down arrow`  | Moves focus to the next option, if there is none then visual focus does not change.                                                                                            |
+| `up arrow`    | Moves focus to the previous option, if there is none then visual focus does not change.                                                                                        |
+| `left arrow`  | Removes the visual focus from the current option and moves input cursor to one character left.                                                                                 |
+| `right arrow` | Removes the visual focus from the current option and moves input cursor to one character right.                                                                                |
+| `home`        | Moves input cursor at the end, if not then moves focus to the first option.                                                                                                    |
+| `end`         | Moves input cursor at the beginning, if not then moves focus to the last option.                                                                                               |
+| `enter`       | Closes the popup and moves focus to the select element.                                                                                                                        |
+| `escape`      | Closes the popup and moves focus to the select element.                                                                                                                        |
+| `tab`         | Moves focus to the next focusable element in the popup. If there is none, the focusable option is selected and the overlay is closed then moves focus to next element in page. |
