@@ -1,6 +1,6 @@
 'use client';
 
-import { TerminalCommandItem, TerminalInstance } from '@primereact/types/shared/terminal';
+import { TerminalCommandItem, TerminalRootInstance } from '@primereact/types/shared/terminal';
 import { Terminal } from '@primereact/ui/terminal';
 import { TerminalService } from 'primereact/terminalservice';
 import * as React from 'react';
@@ -62,7 +62,7 @@ export default function BasicDemo() {
                     promptLabel: 'font-medium'
                 }}
             >
-                {(instance: TerminalInstance) => {
+                {(instance: TerminalRootInstance) => {
                     const { state } = instance;
 
                     return (

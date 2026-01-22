@@ -1,6 +1,6 @@
 'use client';
 
-import { SpeedDialChangeEvent, SpeedDialInstance } from '@primereact/types/shared/speeddial';
+import { SpeedDialRootChangeEvent, SpeedDialRootInstance } from '@primereact/types/shared/speeddial';
 import { Button } from '@primereact/ui/button';
 import { SpeedDial } from '@primereact/ui/speeddial';
 import * as React from 'react';
@@ -20,12 +20,12 @@ export default function TemplateDemo() {
             <div className="flex items-end justify-center" style={{ position: 'relative', height: '400px' }}>
                 <SpeedDial.Root
                     visible={visible}
-                    onVisibleChange={(e: SpeedDialChangeEvent) => setVisible(e.value as boolean)}
+                    onVisibleChange={(e: SpeedDialRootChangeEvent) => setVisible(e.value as boolean)}
                     direction="up"
                     transitionDelay={80}
                     style={{ position: 'absolute' }}
                 >
-                    {(instance: SpeedDialInstance) => {
+                    {(instance: SpeedDialRootInstance) => {
                         return (
                             <>
                                 <Button variant="outlined" className="border" onClick={instance.onClick}>

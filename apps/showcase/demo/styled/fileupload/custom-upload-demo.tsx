@@ -1,6 +1,6 @@
 'use client';
 
-import { FileUploadHandlerEvent, FileUploadInstance } from '@primereact/types/shared/fileupload';
+import { FileUploadHandlerEvent, FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
 import * as React from 'react';
@@ -24,7 +24,7 @@ export default function CustomUploadDemo() {
     return (
         <div className="flex flex-col items-center gap-6">
             <FileUpload.Root url="/api/upload" auto customUpload uploadHandler={onFileSelect}>
-                {(instance: FileUploadInstance) => {
+                {(instance: FileUploadRootInstance) => {
                     return (
                         <div className="flex flex-wrap items-center gap-3">
                             <Button onClick={instance.choose} severity="secondary" variant="outlined">

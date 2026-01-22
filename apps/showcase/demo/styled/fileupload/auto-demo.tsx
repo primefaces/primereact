@@ -1,6 +1,6 @@
 'use client';
 import { toast } from '@primereact/headless/toast';
-import { FileUploadInstance } from '@primereact/types/shared/fileupload';
+import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
@@ -19,7 +19,7 @@ export default function AutoDemo() {
     return (
         <div className="flex justify-center">
             <FileUpload.Root name="demo[]" url="/api/upload" auto accept="image/*" maxFileSize={1000000} onUpload={onUpload}>
-                {(instance: FileUploadInstance) => {
+                {(instance: FileUploadRootInstance) => {
                     return (
                         <>
                             {instance.state.messages &&

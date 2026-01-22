@@ -1,5 +1,5 @@
 'use client';
-import { FileUploadInstance } from '@primereact/types/shared/fileupload';
+import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
 import { Message } from '@primereact/ui/message';
@@ -14,7 +14,7 @@ export default function FileUploadPTDemo() {
             maxFileSize={1000000}
             className="border border-surface-200 dark:border-surface-700 rounded-md"
         >
-            {(instance: FileUploadInstance) => {
+            {(instance: FileUploadRootInstance) => {
                 return (
                     <>
                         <div className="flex items-center p-5 gap-2">

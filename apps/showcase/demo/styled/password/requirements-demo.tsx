@@ -1,5 +1,5 @@
 'use client';
-import { PasswordInstance, PasswordStrengthResult } from '@primereact/types/shared/password';
+import { PasswordRootInstance, PasswordStrengthResult } from '@primereact/types/shared/password';
 import { Password } from '@primereact/ui/password';
 
 const requirements = [
@@ -34,7 +34,7 @@ export default function RequirementsDemo() {
     return (
         <div className="flex justify-center">
             <Password.Root className="flex-col">
-                {(instance: PasswordInstance) => {
+                {(instance: PasswordRootInstance) => {
                     return (
                         <>
                             <Password.Input />

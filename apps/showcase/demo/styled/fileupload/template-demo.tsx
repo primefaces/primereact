@@ -1,6 +1,6 @@
 'use client';
 
-import { FileUploadInstance, FileUploadSelectEvent } from '@primereact/types/shared/fileupload';
+import { FileUploadRootInstance, FileUploadSelectEvent } from '@primereact/types/shared/fileupload';
 import { Badge } from '@primereact/ui/badge';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
@@ -9,7 +9,7 @@ import { ProgressBar } from '@primereact/ui/progressbar';
 import * as React from 'react';
 
 export default function TemplateDemo() {
-    const fileUploadRef = React.useRef<FileUploadInstance>(null);
+    const fileUploadRef = React.useRef<FileUploadRootInstance>(null);
     const [totalSize, setTotalSize] = React.useState(0);
     const [totalSizePercent, setTotalSizePercent] = React.useState(0);
 
@@ -52,7 +52,7 @@ export default function TemplateDemo() {
                 className="border border-surface-200 dark:border-surface-700 rounded-md"
                 onSelect={onSelect}
             >
-                {(instance: FileUploadInstance) => {
+                {(instance: FileUploadRootInstance) => {
                     return (
                         <>
                             <div className="flex items-center p-5 gap-2">

@@ -1,5 +1,5 @@
 'use client';
-import { PasswordInstance } from '@primereact/types/shared/password';
+import { PasswordRootInstance } from '@primereact/types/shared/password';
 import { Password } from '@primereact/ui/password';
 import { Tag } from '@primereact/ui/tag';
 
@@ -41,7 +41,7 @@ export default function TemplateDemo() {
                     { id: 2, value: 'Strong', minDiversity: 4, minLength: 12 }
                 ]}
             >
-                {(instance: PasswordInstance) => {
+                {(instance: PasswordRootInstance) => {
                     const { strength } = instance?.state ?? {};
                     const currentLevel = strength?.id ?? -1;
                     const colors = ['#ef4444', '#f59e0b', '#3b82f6'];
