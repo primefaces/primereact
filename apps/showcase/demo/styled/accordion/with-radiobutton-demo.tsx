@@ -5,6 +5,7 @@ import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/
 import { Accordion } from '@primereact/ui/accordion';
 import { Button } from '@primereact/ui/button';
 import { RadioButton } from '@primereact/ui/radiobutton';
+import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
 import * as React from 'react';
 
 const items = [
@@ -34,7 +35,7 @@ export default function WithRadioButtonDemo() {
     return (
         <div>
             <div className="max-w-md mx-auto w-full">
-                <RadioButton.Group
+                <RadioButtonGroup
                     className="w-full"
                     value={selected}
                     onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelected(e.value as string)}
@@ -62,7 +63,7 @@ export default function WithRadioButtonDemo() {
                             </Accordion.Panel>
                         ))}
                     </Accordion.Root>
-                </RadioButton.Group>
+                </RadioButtonGroup>
                 <Button className="w-full mt-4" size="large">
                     Buy Now for {items.find((item) => item.value === selected)?.price}
                 </Button>

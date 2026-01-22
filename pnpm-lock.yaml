@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@primeuix/motion':
-      specifier: ^0.0.10
-      version: 0.0.10
+      specifier: ^0.0.11
+      version: 0.0.11
     '@primeuix/styled':
       specifier: ^0.7.4
       version: 0.7.4
@@ -19,7 +19,7 @@ catalogs:
       specifier: ^3.0.0-alpha.1
       version: 3.0.0-alpha.1
     '@primeuix/utils':
-      specifier: ^0.6.2
+      specifier: ^0.6.4
       version: 0.6.4
     primeicons:
       specifier: ^7.0.0
@@ -72,7 +72,7 @@ importers:
         version: 8.53.1(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       '@vitest/coverage-v8':
         specifier: ^3.2.3
-        version: 3.2.4(vitest@3.2.4)
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.30)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))
       '@vitest/ui':
         specifier: ^3.2.3
         version: 3.2.4(vitest@3.2.4)
@@ -108,7 +108,7 @@ importers:
         version: 3.8.1
       react-scan:
         specifier: 0.3.3
-        version: 0.3.3(@types/react@19.2.9)(next@15.5.9(@babel/core@7.28.6)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.56.0)
+        version: 0.3.3(@types/react@19.2.9)(next@15.5.9(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.56.0)
       rimraf:
         specifier: ^6.0.1
         version: 6.1.2
@@ -271,7 +271,7 @@ importers:
         version: link:../hooks
       '@primeuix/motion':
         specifier: 'catalog:'
-        version: 0.0.10
+        version: 0.0.11
       '@primeuix/styled':
         specifier: 'catalog:'
         version: 0.7.4
@@ -330,7 +330,7 @@ importers:
     dependencies:
       '@primeuix/motion':
         specifier: 'catalog:'
-        version: 0.0.10
+        version: 0.0.11
       '@primeuix/styled':
         specifier: 'catalog:'
         version: 0.7.4
@@ -362,7 +362,7 @@ importers:
         version: link:../@primereact/styles
       '@primeuix/motion':
         specifier: 'catalog:'
-        version: 0.0.10
+        version: 0.0.11
       '@primeuix/styled':
         specifier: 'catalog:'
         version: 0.7.4
@@ -1518,8 +1518,8 @@ packages:
     peerDependencies:
       preact: 10.x
 
-  '@primeuix/motion@0.0.10':
-    resolution: {integrity: sha512-PsZwOPq79Scp7/ionshRcQ5xKVf9+zuLcyY5mf6onK8chHT5C9JGphmcIZ4CzcqxuGEpsm8AIbTGy+zS3RtzLA==}
+  '@primeuix/motion@0.0.11':
+    resolution: {integrity: sha512-JVAhJ+j2FTRvKHgWaeHbyc1F7mn6LsYKtZR2iu4HQrmSoRKe7BAGgH4CRR9GVexflxlUYmofLrlTslgxIb6a3g==}
     engines: {node: '>=12.11.0'}
 
   '@primeuix/styled@0.7.4':
@@ -2615,8 +2615,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.267:
-    resolution: {integrity: sha512-0Drusm6MVRXSOJpGbaSVgcQsuB4hEkMpHXaVstcPmhu5LIedxs1xNK/nIxmQIU/RPC0+1/o0AVZfBTkTNJOdUw==}
+  electron-to-chromium@1.5.277:
+    resolution: {integrity: sha512-wKXFZw4erWmmOz5N/grBoJ2XrNJGDFMu2+W5ACHza5rHtvsqrK4gb6rnLC7XxKB9WlJ+RmyQatuEXmtm86xbnw==}
 
   emoji-regex-xs@1.0.0:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
@@ -6282,7 +6282,7 @@ snapshots:
       '@preact/signals-core': 1.12.2
       preact: 10.28.2
 
-  '@primeuix/motion@0.0.10':
+  '@primeuix/motion@0.0.11':
     dependencies:
       '@primeuix/utils': 0.6.4
 
@@ -6834,7 +6834,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vitest/coverage-v8@3.2.4(vitest@3.2.4)':
+  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.30)(@vitest/ui@3.2.4)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -7093,7 +7093,7 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.9.17
       caniuse-lite: 1.0.30001765
-      electron-to-chromium: 1.5.267
+      electron-to-chromium: 1.5.277
       node-releases: 2.0.27
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
 
@@ -7389,7 +7389,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.267: {}
+  electron-to-chromium@1.5.277: {}
 
   emoji-regex-xs@1.0.0: {}
 
@@ -7643,7 +7643,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2(jiti@2.6.1)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.2(jiti@2.6.1)))(eslint@9.39.2(jiti@2.6.1)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -7665,7 +7665,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.39.2(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2(jiti@2.6.1))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.2(jiti@2.6.1)))(eslint@9.39.2(jiti@2.6.1))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -9581,7 +9581,7 @@ snapshots:
 
   react-is@17.0.2: {}
 
-  react-scan@0.3.3(@types/react@19.2.9)(next@15.5.9(@babel/core@7.28.6)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.56.0):
+  react-scan@0.3.3(@types/react@19.2.9)(next@15.5.9(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.56.0):
     dependencies:
       '@babel/core': 7.28.6
       '@babel/generator': 7.28.6

@@ -54,11 +54,9 @@
     "dependencies": {
         "@primereact/headless": "workspace:*",
         "@primereact/hooks": "workspace:*",
-        "@primeuix/styled": "catalog:",
         "@primeuix/utils": "catalog:",
         "@primeuix/motion": "catalog:",
-        "@primeuix/styles": "catalog:",
-        "@primereact/icons": "workspace:*",
-        "@primereact/styles": "workspace:*"
+        "@primeuix/styled": "catalog:",
+        "@primereact/icons": "workspace:*"
     }
 }
