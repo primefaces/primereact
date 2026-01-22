@@ -357,18 +357,12 @@ importers:
       '@primereact/icons':
         specifier: workspace:*
         version: link:../@primereact/icons
-      '@primereact/styles':
-        specifier: workspace:*
-        version: link:../@primereact/styles
       '@primeuix/motion':
         specifier: 'catalog:'
         version: 0.0.11
       '@primeuix/styled':
         specifier: 'catalog:'
         version: 0.7.4
-      '@primeuix/styles':
-        specifier: 'catalog:'
-        version: 3.0.0-alpha.1
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.6.4
