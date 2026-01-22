@@ -2,11 +2,11 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
 import type { RadioButtonRootChangeEvent } from '@primereact/types/shared/radiobutton';
-import { cn, equals, mergeProps } from '@primeuix/utils';
+import { cn, equals, mergeProps, resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { RadioButtonProvider } from '../RadioButton.context';
-import { useRadioButtonGroupContext } from '../group';
 import { defaultRootProps } from './RadioButtonRoot.props';
+import { useRadioButtonGroupContext } from 'primereact/radiobuttongroup';
 
 export const RadioButtonRoot = withComponent({
     name: 'RadioButtonRoot',
@@ -66,7 +66,10 @@ export const RadioButtonRoot = withComponent({
                     'aria-invalid': props.invalid || group?.props.invalid || undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
-                    onChange: !props.readOnly ? onChange : undefined
+                    onChange: !props.readOnly ? onChange : undefined,
+                    ...(state.checked ? { 'data-checked': '' } : { 'data-unchecked': '' }),
+                    ...(props.disabled && { 'data-disabled': '' }),
+                    ...(props.invalid && { 'data-invalid': '' })
                 },
                 ptm('input')
             );
@@ -74,30 +77,7 @@ export const RadioButtonRoot = withComponent({
             return <input {...inputProps} />;
         };
 
-        const createBoxElement = () => {
-            const boxProps = mergeProps(
-                {
-                    className: cx('box')
-                },
-                ptm('box')
-            );
-
-            const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
-            );
-
-            return (
-                <div {...boxProps}>
-                    <div {...iconProps} />
-                </div>
-            );
-        };
-
         const input = createInputElement();
-        const box = createBoxElement();
 
         const rootProps = mergeProps(
             {
@@ -111,7 +91,7 @@ export const RadioButtonRoot = withComponent({
             <RadioButtonProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {input}
-                    {box}
+                    {resolve(props.children, instance)}
                 </Component>
             </RadioButtonProvider>
         );

@@ -1,8 +1,8 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { RadioButtonGroupInstance } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonGroupInstance } from '@primereact/types/shared/radiobuttongroup';
 import { style } from '@primeuix/styles/radiobuttongroup';
 
-export const groupStyles = createStyles<RadioButtonGroupInstance>({
+export const styles = createStyles<RadioButtonGroupInstance>({
     name: 'radiobuttongroup',
     style,
     classes: {

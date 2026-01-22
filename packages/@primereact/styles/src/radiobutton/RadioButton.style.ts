@@ -19,7 +19,7 @@ export const styles = createStyles<RadioButtonRootInstance>({
         ],
         box: 'p-radiobutton-box',
         input: 'p-radiobutton-input',
-        icon: 'p-radiobutton-icon',
+        indicator: 'p-radiobutton-icon',
         group: 'p-radiobutton-group p-component'
     }
 });

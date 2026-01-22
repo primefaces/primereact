@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { RadioButtonRootChangeEvent } from './RadioButtonRoot.types';
+import { useRadioButtonGroupExposes, useRadioButtonGroupProps, useRadioButtonGroupState } from './useRadioButtonGroup.types';
 
 /**
  * Defines passthrough(pt) options type in RadioButtonGroup component.
@@ -28,33 +28,9 @@ export interface RadioButtonGroupPassThrough {
 }
 
 /**
- * Event fired when the radio button group's value changes.
- */
-export interface RadioButtonGroupValueChangeEvent {
-    /**
-     * The value of the radio button group.
-     */
-    value: unknown | undefined;
-}
-
-/**
- * Used to update the radio button group value.
- * @extends RadioButtonRootChangeEvent
- */
-export interface RadioButtonGroupUpdateChangeEvent extends RadioButtonRootChangeEvent {}
-
-/**
  * Defines valid properties in RadioButtonGroup component.
  */
-export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGroupInstance, unknown, RadioButtonGroupPassThrough> {
-    /**
-     * Value of the radio button group.
-     */
-    value?: unknown | undefined;
-    /**
-     * The default value of the radio button group.
-     */
-    defaultValue?: unknown | undefined;
+export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGroupInstance, useRadioButtonGroupProps, RadioButtonGroupPassThrough> {
     /**
      * The name of the radio buttons.
      */
@@ -69,30 +45,17 @@ export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGro
      * @default false
      */
     invalid?: boolean | undefined;
-    /**
-     * Callback function that is called when the radio button group value changes.
-     */
-    onValueChange?: (event: RadioButtonGroupValueChangeEvent) => void;
 }
 
 /**
  * Defines valid state in RadioButtonGroup component.
  */
-export interface RadioButtonGroupState {}
+export interface RadioButtonGroupState extends useRadioButtonGroupState {}
 
 /**
  * Defines the methods and properties exposed by RadioButtonGroup component.
  */
-export interface RadioButtonGroupExposes {
-    /**
-     * Updates the value of the radio button group.
-     * @param event The event that triggered the change.
-     * @param event.originalEvent The original event that triggered the change.
-     * @param event.value The new value of the radio button group.
-     * @returns void
-     */
-    updateChange: (event: RadioButtonGroupUpdateChangeEvent) => void;
-}
+export interface RadioButtonGroupExposes extends useRadioButtonGroupExposes {}
 
 /**
  * Defines the CSS class names used in the RadioButtonGroup component
@@ -105,7 +68,7 @@ export const RadioButtonGroupClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the RadioButton component.
+ * Type representing the CSS class names used in the RadioButtonGroup component.
  */
 export type RadioButtonGroupClassNamesType = (typeof RadioButtonGroupClassNames)[keyof typeof RadioButtonGroupClassNames];
 
