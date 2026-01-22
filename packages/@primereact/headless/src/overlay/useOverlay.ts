@@ -191,9 +191,21 @@ export const useOverlay = withHeadless({
 
             if (!containerElement) return;
 
-            const target = event.target as Node;
+            const clickedElement = event.target as Node;
 
-            return !(containerElement.isSameNode(target) || containerElement.contains(target));
+            // Check if click is inside the overlay container
+            if (containerElement.isSameNode(clickedElement) || containerElement.contains(clickedElement)) {
+                return false;
+            }
+
+            // Check if click is on the target element (e.g., the input that triggered the overlay)
+            if (props.target && props.target instanceof HTMLElement) {
+                if (props.target.isSameNode(clickedElement) || props.target.contains(clickedElement)) {
+                    return false;
+                }
+            }
+
+            return true;
         };
 
         const onScroll = () => {

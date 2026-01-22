@@ -36,7 +36,7 @@ export interface useOverlayProps {
      * The target element to attach the overlay to.
      * Can be an HTMLElement or a virtual target with coordinates.
      */
-    target?: HTMLElement | VirtualTarget | undefined;
+    target?: HTMLElement | VirtualTarget | undefined | null;
     /**
      * Default open state for uncontrolled mode.
      */
