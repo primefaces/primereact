@@ -78,10 +78,11 @@ export interface useAccordionExposes {
     state: useAccordionState;
     /**
      * The method to update the value of the active panel.
+     * @param event The event that triggered the update.
      * @param key The key of the panel.
      * @returns void
      */
-    updateValue: (key: null | undefined | string | number) => void;
+    updateValue: (event: React.SyntheticEvent, key: null | undefined | string | number) => void;
     /**
      * The method to check if the panel is active.
      * @param key The key of the panel.
