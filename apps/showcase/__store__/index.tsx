@@ -87,9 +87,9 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/accordion/basic-demo')),
                 'filePath': 'demo/styled/accordion/basic-demo.tsx',
             },
-            'custom-indicator-demo': {
-                'component': React.lazy(() => import('demo/styled/accordion/custom-indicator-demo')),
-                'filePath': 'demo/styled/accordion/custom-indicator-demo.tsx',
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/styled/accordion/controlled-demo')),
+                'filePath': 'demo/styled/accordion/controlled-demo.tsx',
             },
             'disabled-demo': {
                 'component': React.lazy(() => import('demo/styled/accordion/disabled-demo')),
@@ -102,6 +102,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'template-demo': {
                 'component': React.lazy(() => import('demo/styled/accordion/template-demo')),
                 'filePath': 'demo/styled/accordion/template-demo.tsx',
+            },
+            'trigger-demo': {
+                'component': React.lazy(() => import('demo/styled/accordion/trigger-demo')),
+                'filePath': 'demo/styled/accordion/trigger-demo.tsx',
             },
             'with-radiobutton-demo': {
                 'component': React.lazy(() => import('demo/styled/accordion/with-radiobutton-demo')),

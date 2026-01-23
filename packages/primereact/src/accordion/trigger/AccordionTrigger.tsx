@@ -17,7 +17,7 @@ export const AccordionTrigger = withComponent({
     },
     render(instance) {
         const { props, ptmi, accordion, accordionpanel } = instance;
-        const { as, ...restProps } = props;
+        const { as, children, ...restProps } = props;
 
         const rootProps = mergeProps(
             restProps,
@@ -44,6 +44,6 @@ export const AccordionTrigger = withComponent({
             ptmi('root')
         );
 
-        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={children} />;
     }
 });

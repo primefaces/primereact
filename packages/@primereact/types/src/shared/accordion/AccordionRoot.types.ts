@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useAccordionExposes, useAccordionProps, useAccordionState } from './useAccordion.types';
+import type { useAccordionChangeEvent, useAccordionExposes, useAccordionProps, useAccordionState } from './useAccordion.types';
 
 /**
  * Defines passthrough(pt) options type in Accordion component.
@@ -44,9 +44,15 @@ export interface AccordionRootPassThrough {
 }
 
 /**
+ * Event fired when the accordion's value state changes.
+ * @extends useAccordionChangeEvent
+ */
+export interface AccordionRootValueChangeEvent extends useAccordionChangeEvent<React.ChangeEvent<HTMLButtonElement>> {}
+
+/**
  * Defines valid properties in Accordion component.
  */
-export interface AccordionRootProps extends BaseComponentProps<AccordionRootInstance, useAccordionProps, AccordionRootPassThrough> {
+export interface AccordionRootProps extends BaseComponentProps<AccordionRootInstance, Omit<useAccordionProps, 'onValueChange'>, AccordionRootPassThrough> {
     /**
      * When enabled, hidden tabs are not rendered at all. Defaults to false that hides tabs with css.
      * @default false
@@ -57,6 +63,14 @@ export interface AccordionRootProps extends BaseComponentProps<AccordionRootInst
      * @default 0
      */
     tabIndex?: number | undefined;
+    /**
+     * Callback fired when the accordion's value changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The value of the accordion.
+     * @returns void
+     */
+    onValueChange?: (event: AccordionRootValueChangeEvent) => void;
 }
 
 /**

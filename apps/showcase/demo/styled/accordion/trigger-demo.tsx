@@ -1,15 +1,9 @@
 'use client';
-import { PlusIcon } from '@primereact/icons';
+import { MinusIcon, PlusIcon } from '@primereact/icons';
 import type { AccordionTriggerInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from '@primereact/ui/accordion';
 
-export default function CustomIndicatorDemo() {
-    const test = (instance: AccordionTriggerInstance) => {
-        //console.log(instance);
-
-        return instance.accordionpanel?.active ? 'True' : 'False';
-    };
-
+export default function TriggerDemo() {
     return (
         <div>
             <Accordion.Root className="max-w-md mx-auto" multiple>
@@ -29,8 +23,10 @@ export default function CustomIndicatorDemo() {
                 </Accordion.Panel>
                 <Accordion.Panel value="2">
                     <Accordion.Header>
-                        Is my data secure?
-                        <Accordion.Trigger className="flex justify-between items-center">{test}</Accordion.Trigger>
+                        <p className="pl-4">Is my data secure?</p>
+                        <Accordion.Trigger className="flex justify-between items-center">
+                            {({ accordionpanel }: AccordionTriggerInstance) => (accordionpanel?.active ? <MinusIcon /> : <PlusIcon />)}
+                        </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
                         <p className="text-sm">

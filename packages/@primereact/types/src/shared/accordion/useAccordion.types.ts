@@ -44,10 +44,10 @@ export interface useAccordionProps {
      */
     multiple?: boolean | undefined;
     /**
-     * When enabled, the accordion will be selected on focus.
+     * When enabled, the accordion panel will be opened on focus.
      * @default false
      */
-    selectOnFocus?: boolean | undefined;
+    openOnFocus?: boolean | undefined;
     /**
      * Callback fired when the accordion's value changes.
      * @param event The event that triggered the change.

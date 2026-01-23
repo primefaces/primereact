@@ -7,15 +7,21 @@ ${accordion_style}
 
 /* @todo review styles */
 .p-accordiontrigger {
-    /*display: flex;
-    width: 100%;
+    padding: dt('accordion.header.padding');
     height: 100%;
-    padding: var(--p-accordion-header-padding);*/
     cursor: pointer;
+    outline: 0 none;
 }
 
 .p-accordionheader {
-    /*padding: 0;*/
+    padding: 0;
+    cursor: initial;
+}
+
+.p-accordionheader:has(.p-accordiontrigger:focus-visible) {
+    box-shadow: dt('accordion.header.focus.ring.shadow');
+    outline: dt('accordion.header.focus.ring.width') dt('accordion.header.focus.ring.style') dt('accordion.header.focus.ring.color');
+    outline-offset: dt('accordion.header.focus.ring.offset');
 }
 `;
 

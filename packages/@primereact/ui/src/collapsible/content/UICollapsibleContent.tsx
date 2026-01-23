@@ -20,7 +20,7 @@ export const UICollapsibleContent = withComponent({
                         {
                             className: collapsible?.cx('outer')
                         },
-                        inPtm('contentOuter'),
+                        inPtm('outer'),
                         collapsible?.ptm('outer')
                     );
 
@@ -28,7 +28,7 @@ export const UICollapsibleContent = withComponent({
                         {
                             className: collapsible?.cx('inner')
                         },
-                        inPtm('contentInner'),
+                        inPtm('inner'),
                         collapsible?.ptm('inner')
                     );
 

@@ -28,7 +28,8 @@ export const AccordionPanel = withComponent({
 
         const asProps = isElementOfType(as, 'Collapsible.Root')
             ? {
-                  defaultOpen: active
+                  defaultOpen: active,
+                  pt: accordion?.ptm('pcCollapsible')
               }
             : undefined;
 

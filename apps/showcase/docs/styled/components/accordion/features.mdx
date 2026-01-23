@@ -27,25 +27,31 @@ import { Accordion } from '@primereact/ui/accordion';
 
 ### Multiple
 
-Each `Accordion.Panel` must contain a unique `value` property to specify the active item. Only one tab at a time can be active by default, enabling `multiple` property changes this behavior to allow multiple panels. In this case `multiple` needs to be an array.
+Each `Accordion.Panel` must contain a unique `value` property to specify the active item. Only one panel at a time can be active by default, enabling `multiple` property on `Accordion.Root` changes this behavior to allow multiple panels to be open simultaneously.
 
 <DocDemoViewer name="accordion:multiple-demo" />
 
-### Custom Indicator
+### Controlled
 
-The `Accordion.HeaderIndicator` component is used to display the indicator of the header. It can be customized by passing a function that returns a React element or `data-p-active` attribute.
+Accordion can be used in controlled mode by using `value` and `onValueChange` props. This allows you to manage the active panel state externally.
 
-<DocDemoViewer name="accordion:custom-indicator-demo" />
+<DocDemoViewer name="accordion:controlled-demo" />
+
+### Trigger
+
+The `Accordion.Trigger` component is used to toggle the visibility of the content. It can be customized by passing a function that receives the `accordionpanel` instance or using `data-content-open` attribute for styling.
+
+<DocDemoViewer name="accordion:trigger-demo" />
 
 ### Disabled
 
-Enabling `disabled` property of an `Accordion.Panel` prevents user interaction of the panel or enable `disabled` of the `Accordion` component disables all panels.
+Enabling `disabled` property of an `Accordion.Panel` prevents user interaction of that panel. Alternatively, enabling `disabled` on `Accordion.Root` disables all panels.
 
 <DocDemoViewer name="accordion:disabled-demo" />
 
 ### Template
 
-The optional `as` property controls the default container element of a header, for example setting it to a div renders a div for the header instead of a button. The `asChild` option enables the headless mode for further customization by passing callbacks and properties to implement your own header.
+Accordion panels can be created dynamically by iterating over a data source. This approach allows for cleaner code when rendering multiple panels with consistent structure and custom styling.
 
 <DocDemoViewer name="accordion:template-demo" />
 

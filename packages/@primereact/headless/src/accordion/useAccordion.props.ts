@@ -5,5 +5,5 @@ export const defaultProps: useAccordionProps = {
     value: undefined,
     multiple: false,
     onValueChange: undefined,
-    selectOnFocus: false
+    openOnFocus: false
 };

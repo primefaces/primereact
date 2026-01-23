@@ -32,7 +32,7 @@ export default function TemplateDemo() {
             <Accordion.Root className="max-w-md mx-auto border border-surface-200 dark:border-surface-700 rounded-md divide-y divide-surface-200 dark:divide-surface-700">
                 {items.map((item) => (
                     <Accordion.Panel key={item.value} value={item.value} className="last:border-none transition-all ease-out">
-                        <Accordion.Header className="bg-transparent py-3.5">
+                        <Accordion.Header className="bg-transparent">
                             <Accordion.Trigger className="flex justify-between items-center w-full">
                                 <span className="flex items-center gap-4">
                                     <i className={item.icon}></i>
@@ -41,7 +41,10 @@ export default function TemplateDemo() {
                                 <PlusIcon className="transition-transform ease-out [[data-content-open]>&]:rotate-45" />
                             </Accordion.Trigger>
                         </Accordion.Header>
-                        <Accordion.Content className="bg-transparent px-4 pb-3.5 leading-6 pl-11.5">
+                        <Accordion.Content
+                            className="bg-transparent px-4 leading-6 pl-8"
+                            pt-pccollapsible-content={{ inner: { className: 'bg-transparent' } }}
+                        >
                             <p className="text-sm">{item.content}</p>
                         </Accordion.Content>
                     </Accordion.Panel>

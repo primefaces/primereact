@@ -15,18 +15,20 @@ export const UIAccordionPanel = withComponent({
     },
     render(instance) {
         const { accordion, inProps } = instance;
-        const collapsibleStyles = React.useMemo(
+        const collapsibleRootProps = React.useMemo(
             () => ({
-                classes: {
-                    content: accordion?.cx('content'),
-                    outer: accordion?.cx('contentOuter'),
-                    inner: accordion?.cx('contentInner')
+                styles: {
+                    classes: {
+                        content: accordion?.cx('content'),
+                        outer: accordion?.cx('contentOuter'),
+                        inner: accordion?.cx('contentInner')
+                    }
                 }
             }),
             [accordion]
         );
 
-        const rootProps = mergeDefaultProps({ as: CollapsibleRoot, styles: collapsibleStyles }, inProps);
+        const rootProps = mergeDefaultProps({ as: CollapsibleRoot }, collapsibleRootProps, inProps);
 
         return <Component as={AccordionPanel} attrs={rootProps} />;
     }

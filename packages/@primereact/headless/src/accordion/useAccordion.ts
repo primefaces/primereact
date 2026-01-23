@@ -130,13 +130,13 @@ export const useAccordion = withHeadless({
         };
 
         const onTriggerClick = (event: React.MouseEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
-            if (!props.selectOnFocus) {
+            if (!props.openOnFocus) {
                 updateValue(event, value);
             }
         };
 
         const onTriggerFocus = (event: React.FocusEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
-            if (props.selectOnFocus) {
+            if (props.openOnFocus) {
                 updateValue(event, value);
             }
         };
