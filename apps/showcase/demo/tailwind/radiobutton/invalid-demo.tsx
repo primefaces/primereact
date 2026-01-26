@@ -1,9 +1,9 @@
-import { RadioButton } from '@primereact/ui/radiobutton';
+import { RadioButton } from '@/components/ui/radiobutton';
 
 export default function InvalidDemo() {
     return (
         <div className="flex justify-center">
-            <RadioButton.Root invalid />
+            <RadioButton invalid />
         </div>
     );
 }

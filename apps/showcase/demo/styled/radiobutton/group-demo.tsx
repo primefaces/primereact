@@ -1,9 +1,9 @@
 'use client';
 
-import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
-import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonGroupChangeEvent } from '@primereact/types/shared/radiobuttongroup';
 import { Label } from '@primereact/ui/label';
 import { RadioButton } from '@primereact/ui/radiobutton';
+import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
 import * as React from 'react';
 
 export default function GroupDemo() {
@@ -14,7 +14,7 @@ export default function GroupDemo() {
             <RadioButtonGroup
                 className="flex flex-wrap gap-4"
                 value={ingredient}
-                onValueChange={(e: RadioButtonGroupValueChangeEvent) => setIngredient(e.value as string)}
+                onValueChange={(e: RadioButtonGroupChangeEvent) => setIngredient(e.value as string)}
             >
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient1" name="pizza" value="cheese">

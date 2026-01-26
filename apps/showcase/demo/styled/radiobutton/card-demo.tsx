@@ -1,8 +1,8 @@
 'use client';
 
-import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
-import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonGroupChangeEvent } from '@primereact/types/shared/radiobuttongroup';
 import { RadioButton } from '@primereact/ui/radiobutton';
+import { RadioButtonGroup } from '@primereact/ui/radiobuttongroup';
 import React from 'react';
 
 const CardDemo = () => {
@@ -19,7 +19,7 @@ const CardDemo = () => {
             <h5 className="font-medium">Select a payment method:</h5>
             <RadioButtonGroup
                 value={selectedCard}
-                onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelectedCard(e.value as string)}
+                onValueChange={(e: RadioButtonGroupChangeEvent) => setSelectedCard(e.value as string)}
                 className="mt-4 flex flex-col gap-3"
             >
                 {cards.map((card) => (

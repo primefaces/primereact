@@ -1,5 +1,9 @@
-import { RadioButton } from '@primereact/ui/radiobutton';
+import { RadioButton, RadioButtonGroup } from '@/components/ui/radiobutton';
 
 export default function RadioButtonPT() {
-    return <RadioButton.Root />;
+    return (
+        <RadioButtonGroup>
+            <RadioButton />
+        </RadioButtonGroup>
+    );
 }
