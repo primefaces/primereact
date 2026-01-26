@@ -211,6 +211,10 @@ export const menu = {
                     href: '/docs/styled/components/checkbox'
                 },
                 {
+                    name: 'CheckboxGroup',
+                    href: '/docs/styled/components/checkboxgroup'
+                },
+                {
                     name: 'ColorPicker',
                     href: '/docs/styled/components/colorpicker',
                     badge: 'New'
@@ -549,6 +553,10 @@ export const menu = {
                     href: '/docs/tailwind/components/checkbox'
                 },
                 {
+                    name: 'CheckboxGroup',
+                    href: '/docs/tailwind/components/checkboxgroup'
+                },
+                {
                     name: 'ColorPicker',
                     href: '/docs/tailwind/components/colorpicker',
                     badge: 'New'
@@ -594,7 +602,7 @@ export const menu = {
             children: [
                 {
                     name: 'Avatar',
-                    href: '/docs/styled/components/avatar'
+                    href: '/docs/tailwind/components/avatar'
                 }
             ]
         }
