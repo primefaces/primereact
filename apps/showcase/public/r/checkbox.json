@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://v11.primereact.org/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/checkbox.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport { cn } from '@/lib/utils';\nimport { CheckIcon } from '@primereact/icons/check';\nimport { MinusIcon } from '@primereact/icons/minus';\nimport { CheckboxRootProps } from '@primereact/types/shared/checkbox';\nimport { cva } from 'class-variance-authority';\nimport { Checkbox as PRCheckbox } from 'primereact/checkbox';\nimport * as React from 'react';\n\nconst checkboxVariants = cva(\n    `\n        relative inline-flex items-center justify-center select-none align-bottom\n        rounded-sm border border-surface-300 dark:border-surface-700\n        text-surface-700 dark:text-surface-0\n        has-[input:hover]:border-surface-400 dark:has-[input:hover]:border-surface-600\n        data-checked:border-primary data-checked:bg-primary data-checked:text-primary-contrast\n        has-[input:hover]:data-checked:bg-primary-emphasis has-[input:hover]:data-checked:border-primary-emphasis\n        has-[input:focus-visible]:outline-1 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-primary has-[input:focus-visible]:outline \n        data-invalid:border-red-400 dark:data-invalid:border-red-300\n        shadow-[0_1px_2px_0_rgba(18,18,23,0.05)] transition-colors duration-200\n        data-disabled:pointer-events-none data-disabled:bg-surface-200 dark:data-disabled:bg-surface-700 data-disabled:border-surface-300 dark:data-disabled:border-surface-600 data-disabled:text-surface-700 dark:data-disabled:text-surface-400\n    `,\n    {\n        variants: {\n            variant: {\n                outlined: 'bg-surface-0 dark:bg-surface-950',\n                filled: 'bg-surface-50 dark:bg-surface-800'\n            },\n            size: {\n                small: 'size-3.5 **:data-[scope=checkboxindicator]:size-2.5!',\n                normal: 'size-4.5 **:data-[scope=checkboxindicator]:size-3.5!',\n                large: 'size-5 **:data-[scope=checkboxindicator]:size-4!'\n            }\n        },\n        defaultVariants: {\n            size: 'normal',\n            variant: 'outlined'\n        }\n    }\n);\n\nfunction Checkbox({ variant, size, className, ...props }: CheckboxRootProps) {\n    return (\n        <PRCheckbox.Root\n            className={cn(checkboxVariants({ size, variant, className }))}\n            inputClassName=\"peer cursor-pointer disabled:cursor-default appearance-none \n        absolute start-0 top-0 w-full h-full m-0 p-0 opacity-0 z-10\n        border border-transparent rounded-xs\"\n            {...props}\n        >\n            <PRCheckbox.Indicator className=\"data-checked:block! hidden!\" as={CheckIcon} />\n            <PRCheckbox.Indicator className=\"data-indeterminate:data-unchecked:block! hidden!\" as={MinusIcon} />\n        </PRCheckbox.Root>\n    );\n}\n\nexport { Checkbox };\n"
+    }
+  ]
+}

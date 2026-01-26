@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkboxgroup",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://v11.primereact.org/public/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/checkboxgroup.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport { cn } from '@/lib/utils';\nimport { CheckboxGroupProps } from '@primereact/types/shared/checkboxgroup';\nimport { CheckboxGroup as PRCheckboxGroup } from 'primereact/checkboxgroup';\nimport * as React from 'react';\n\nfunction CheckboxGroup({\n    orientation = 'horizontal',\n    className,\n    ...props\n}: CheckboxGroupProps & {\n    orientation?: 'horizontal' | 'vertical';\n}) {\n    return <PRCheckboxGroup className={cn('flex flex-wrap gap-4 data-[orientation=vertical]:flex-col data-[orientation=vertical]:gap-2', className)} data-orientation={orientation} {...props} />;\n}\n\nexport { CheckboxGroup };\n"
+    }
+  ]
+}
