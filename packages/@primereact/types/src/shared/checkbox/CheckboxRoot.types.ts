@@ -10,7 +10,6 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { CheckboxGroupInstance } from './CheckboxGroup.types';
 import type { useCheckboxChangeEvent, useCheckboxExposes, useCheckboxProps, useCheckboxState } from './useCheckbox.types';
 
 /**
@@ -139,12 +138,7 @@ export interface CheckboxRootState extends useCheckboxState {}
  * Defines the methods and properties exposed by CheckboxRoot component.
  * @extends useCheckboxExposes
  */
-export interface CheckboxRootExposes extends useCheckboxExposes {
-    /**
-     * The group instance of the checkbox.
-     */
-    group?: CheckboxGroupInstance | undefined | null;
-}
+export interface CheckboxRootExposes extends useCheckboxExposes {}
 
 /**
  * Instance of CheckboxRoot component.

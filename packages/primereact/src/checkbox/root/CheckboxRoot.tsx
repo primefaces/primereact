@@ -1,13 +1,11 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useCheckbox } from '@primereact/headless/checkbox';
-import { CheckIcon } from '@primereact/icons/check';
-import { MinusIcon } from '@primereact/icons/minus';
 import type { CheckboxRootChangeEvent } from '@primereact/types/shared/checkbox';
-import { cn, mergeProps } from '@primeuix/utils';
+import { cn, mergeProps, resolve } from '@primeuix/utils';
+import { useCheckboxGroupContext } from 'primereact/checkboxgroup';
 import * as React from 'react';
 import { CheckboxProvider } from '../Checkbox.context';
-import { useCheckboxGroupContext } from '../group';
 import { defaultRootProps } from './CheckboxRoot.props';
 
 export const CheckboxRoot = withComponent({
@@ -69,7 +67,11 @@ export const CheckboxRoot = withComponent({
                     'aria-checked': state.indeterminate ? 'mixed' : undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
-                    onChange: !props.readOnly ? onChange : undefined
+                    onChange: !props.readOnly ? onChange : undefined,
+                    [state.checked ? 'data-checked' : 'data-unchecked']: '',
+                    ...(props.disabled && { 'data-disabled': '' }),
+                    ...(props.invalid && { 'data-invalid': '' }),
+                    ...(props.indeterminate && { 'data-indeterminate': '' })
                 },
                 ptm('input')
             );
@@ -77,33 +79,16 @@ export const CheckboxRoot = withComponent({
             return <input {...inputProps} />;
         };
 
-        const createBoxElement = () => {
-            const boxProps = mergeProps(
-                {
-                    className: cx('box')
-                },
-                ptm('box')
-            );
-
-            const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
-            );
-
-            const icon = state.checked ? <CheckIcon {...iconProps} /> : state.indeterminate ? <MinusIcon {...iconProps} /> : null;
-
-            return <div {...boxProps}>{icon}</div>;
-        };
-
         const input = createInputElement();
-        const box = createBoxElement();
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                [state.checked ? 'data-checked' : 'data-unchecked']: '',
+                ...(props.disabled && { 'data-disabled': '' }),
+                ...(props.invalid && { 'data-invalid': '' }),
+                ...(props.indeterminate && { 'data-indeterminate': '' })
             },
             ptmi('root')
         );
@@ -112,7 +97,7 @@ export const CheckboxRoot = withComponent({
             <CheckboxProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {input}
-                    {box}
+                    {resolve(props.children, instance)}
                 </Component>
             </CheckboxProvider>
         );

@@ -19,6 +19,6 @@ export const styles = createStyles<CheckboxRootInstance>({
         ],
         box: 'p-checkbox-box',
         input: 'p-checkbox-input',
-        icon: 'p-checkbox-icon'
+        indicator: 'p-checkbox-icon'
     }
 });
