@@ -9,20 +9,17 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import * as React from 'react';
+import { RadioButtonRootProps } from '../radiobutton/RadioButtonRoot.types';
+import { useRadioButtonChangeEvent } from '../radiobutton/useRadioButton.types';
 
 /**
  * Event fired when the radio button's checked state changes.
  */
-export interface useRadioButtonGroupChangeEvent<E = React.SyntheticEvent> {
-    /**
-     * The original event that triggered the change.
-     */
-    originalEvent: E;
+export interface useRadioButtonGroupChangeEvent {
     /**
      * The checked state of the radio button.
      */
-    value: string;
+    value: unknown | undefined;
 }
 
 /**
@@ -72,7 +69,7 @@ export interface useRadioButtonGroupExposes {
      * @param event.value The new value of the radio button group.
      * @returns void
      */
-    updateChange: (event: useRadioButtonGroupChangeEvent) => void;
+    updateChange: (event: useRadioButtonChangeEvent & { value: RadioButtonRootProps['value'] }) => void;
 }
 
 /**

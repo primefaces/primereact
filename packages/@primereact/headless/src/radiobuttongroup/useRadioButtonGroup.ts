@@ -1,8 +1,8 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import { defaultProps } from './useRadioButtonGroup.props';
+import type { useRadioButtonGroupExposes } from '@primereact/types/shared/radiobuttongroup';
 import * as React from 'react';
-import type { useRadioButtonGroupChangeEvent } from '@primereact/types/shared/radiobuttongroup';
+import { defaultProps } from './useRadioButtonGroup.props';
 
 export const useRadioButtonGroup = withHeadless({
     name: 'useRadioButtonGroup',
@@ -20,7 +20,7 @@ export const useRadioButtonGroup = withHeadless({
 
         // methods
         const updateChange = React.useCallback(
-            (event: useRadioButtonGroupChangeEvent) => {
+            (event: Parameters<useRadioButtonGroupExposes['updateChange']>[0]) => {
                 const newValue = event.checked ? event.value : undefined;
 
                 setValueState?.([newValue, { originalEvent: event.originalEvent, value: newValue }]);

@@ -3,10 +3,10 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
 import type { RadioButtonRootChangeEvent } from '@primereact/types/shared/radiobutton';
 import { cn, equals, mergeProps, resolve } from '@primeuix/utils';
+import { useRadioButtonGroupContext } from 'primereact/radiobuttongroup';
 import * as React from 'react';
 import { RadioButtonProvider } from '../RadioButton.context';
 import { defaultRootProps } from './RadioButtonRoot.props';
-import { useRadioButtonGroupContext } from 'primereact/radiobuttongroup';
 
 export const RadioButtonRoot = withComponent({
     name: 'RadioButton.Root',
@@ -67,7 +67,7 @@ export const RadioButtonRoot = withComponent({
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
                     onChange: !props.readOnly ? onChange : undefined,
-                    ...(state.checked ? { 'data-checked': '' } : { 'data-unchecked': '' }),
+                    [state.checked ? 'data-checked' : 'data-unchecked']: '',
                     ...(props.disabled && { 'data-disabled': '' }),
                     ...(props.invalid && { 'data-invalid': '' })
                 },
@@ -82,7 +82,10 @@ export const RadioButtonRoot = withComponent({
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                [state.checked ? 'data-checked' : 'data-unchecked']: '',
+                ...(props.disabled && { 'data-disabled': '' }),
+                ...(props.invalid && { 'data-invalid': '' })
             },
             ptmi('root')
         );

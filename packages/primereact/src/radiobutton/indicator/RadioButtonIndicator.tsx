@@ -20,7 +20,7 @@ export const RadioButtonIndicator = withComponent({
             {
                 id,
                 className: radiobutton?.cx('indicator'),
-                ...(radiobutton?.state.checked ? { 'data-checked': '' } : { 'data-unchecked': '' }),
+                [radiobutton?.state.checked ? 'data-checked' : 'data-unchecked']: '',
                 ...(radiobutton?.props.disabled && { 'data-disabled': '' }),
                 ...(radiobutton?.props.invalid && { 'data-invalid': '' })
             },

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { useRadioButtonGroupExposes, useRadioButtonGroupProps, useRadioButtonGroupState } from './useRadioButtonGroup.types';
+import { useRadioButtonGroupChangeEvent, useRadioButtonGroupExposes, useRadioButtonGroupProps, useRadioButtonGroupState } from './useRadioButtonGroup.types';
 
 /**
  * Defines passthrough(pt) options type in RadioButtonGroup component.
@@ -28,9 +28,20 @@ export interface RadioButtonGroupPassThrough {
 }
 
 /**
+ * Event fired when the radio button's checked state changes.
+ * @extends useRadioButtonChangeEvent
+ */
+export interface RadioButtonGroupChangeEvent extends useRadioButtonGroupChangeEvent {
+    /**
+     * Value of the radio button.
+     */
+    value: unknown | undefined;
+}
+
+/**
  * Defines valid properties in RadioButtonGroup component.
  */
-export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGroupInstance, useRadioButtonGroupProps, RadioButtonGroupPassThrough> {
+export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGroupInstance, Omit<useRadioButtonGroupProps, 'onValueChange'>, RadioButtonGroupPassThrough> {
     /**
      * The name of the radio buttons.
      */
@@ -45,6 +56,13 @@ export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGro
      * @default false
      */
     invalid?: boolean | undefined;
+    /**
+     * Callback fired when the checkboxgroup's value state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @returns void
+     */
+    onValueChange?: (event: RadioButtonGroupChangeEvent) => void;
 }
 
 /**

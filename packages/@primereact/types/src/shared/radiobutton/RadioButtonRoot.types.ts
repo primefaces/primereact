@@ -10,7 +10,6 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { RadioButtonGroupInstance } from './RadioButtonGroup.types';
 import type { useRadioButtonChangeEvent, useRadioButtonExposes, useRadioButtonProps, useRadioButtonState } from './useRadioButton.types';
 
 /**
@@ -139,12 +138,7 @@ export interface RadioButtonRootState extends useRadioButtonState {}
  * Defines the methods and properties exposed by RadioButton component.
  * @extends useRadioButtonExposes
  */
-export interface RadioButtonRootExposes extends useRadioButtonExposes {
-    /**
-     * The group instance of the radio button.
-     */
-    group?: RadioButtonGroupInstance | undefined | null;
-}
+export interface RadioButtonRootExposes extends useRadioButtonExposes {}
 
 /**
  * Instance of RadioButton component.
