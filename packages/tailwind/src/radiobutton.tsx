@@ -1,11 +1,23 @@
-import * as React from 'react';
-import { RadioButton as PRRadioButton } from 'primereact/radiobutton';
-import { RadioButtonGroupProps, RadioButtonRootProps } from '@primereact/types/shared/radiobutton';
 import { cn } from '@/components/ui/utils';
+import { RadioButtonRootProps } from '@primereact/types/shared/radiobutton';
+import { RadioButtonGroupProps } from '@primereact/types/shared/radiobuttongroup';
 import { cva, VariantProps } from 'class-variance-authority';
+import { RadioButton as PRRadioButton } from 'primereact/radiobutton';
+import { RadioButtonGroup as PRRadioButtonGroup } from 'primereact/radiobuttongroup';
+import * as React from 'react';
 
 const radioButtonVariants = cva(
-    'relative select-none inline-flex items-center justify-center rounded-full border border-surface-300 dark:border-surface-700 peer-enabled:peer-hover:border-surface-400 dark:peer-enabled:peer-hover:border-surface-600 data-checked:border-primary data-checked:bg-primary peer-hover:data-checked:bg-primary-emphasis peer-hover:data-checked:border-primary-emphasis peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary peer-focus-visible:outline data-invalid:border-red-400 dark:data-invalid:border-red-300 data-disabled:bg-surface-200 dark:data-disabled:bg-surface-400 data-disabled:border-surface-300 dark:data-disabled:border-surface-700 shadow-[0_1px_2px_0_rgba(18,18,23,0.05)] transition-colors duration-200',
+    `
+        relative inline-flex items-center justify-center select-none rounded-full overflow-hidden
+        border border-surface-300 dark:border-surface-700 
+        has-[input:hover]:border-surface-400 dark:has-[input:hover]:border-surface-600
+        data-checked:border-primary data-checked:bg-primary
+        has-[input:hover]:data-checked:bg-primary-emphasis   has-[input:hover]:data-checked:border-primary-emphasis
+        has-[input:focus-visible]:outline-1 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-primary has-[input:focus-visible]:outline 
+        data-invalid:border-red-400 dark:data-invalid:border-red-300
+        data-disabled:bg-surface-200 dark:data-disabled:bg-surface-400 data-disabled:border-surface-300 dark:data-disabled:border-surface-700 data-disabled:pointer-events-none
+        shadow-[0_1px_2px_0_rgba(18,18,23,0.05)] transition-colors duration-200
+    `,
     {
         variants: {
             variant: {
@@ -13,9 +25,9 @@ const radioButtonVariants = cva(
                 filled: 'bg-surface-50 dark:bg-surface-800'
             },
             size: {
-                small: 'size-3',
-                normal: 'size-4',
-                large: 'size-5'
+                small: 'size-3.5 *:data-[part=indicator]:size-2',
+                normal: 'size-4.5 *:data-[part=indicator]:size-2.5',
+                large: 'size-5 *:data-[part=indicator]:size-3'
             }
         },
         defaultVariants: {
@@ -33,13 +45,32 @@ function RadioButton({ className, size, variant, ...props }: RadioButtonRootProp
         border border-transparent rounded-full"
             {...props}
         >
-            <PRRadioButton.Indicator className="bg-transparent text-xs w-3 h-3 rounded-full transition-all duration-200 backface-hidden scale-[0.1] data-checked:bg-primary-contrast data-checked:visible data-checked:scale-100 data-disabled:bg-surface-700 dark:data-disabled:bg-surface-400 p-small:w-2 p-small:h-2 p-large:w-4 p-large:h-4" />
+            <PRRadioButton.Indicator
+                className={`
+                    bg-transparent text-xs rounded-full
+                    transition-[background-color,scale] will-change-transform duration-200 backface-hidden scale-[0.1] 
+                    data-checked:bg-primary-contrast data-checked:visible data-checked:scale-100
+                    data-disabled:bg-surface-700 dark:data-disabled:bg-surface-400
+                `}
+            />
         </PRRadioButton.Root>
     );
 }
 
-function RadioButtonGroup({ ...props }: RadioButtonGroupProps) {
-    return <PRRadioButton.Group {...props} />;
+const radioButtonGroupVariants = cva('flex flex-wrap', {
+    variants: {
+        orientation: {
+            horizontal: 'gap-4',
+            vertical: 'flex-col gap-2'
+        }
+    },
+    defaultVariants: {
+        orientation: 'horizontal'
+    }
+});
+
+function RadioButtonGroup({ className, orientation = 'horizontal', ...props }: RadioButtonGroupProps & VariantProps<typeof radioButtonGroupVariants>) {
+    return <PRRadioButtonGroup data-orientation={orientation} className={cn(radioButtonGroupVariants({ orientation, className }))} {...props} />;
 }
 
-export { RadioButton, RadioButtonGroup };
+export { RadioButton, RadioButtonGroup, radioButtonVariants };
