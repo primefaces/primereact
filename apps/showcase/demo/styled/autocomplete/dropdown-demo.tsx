@@ -1,8 +1,8 @@
 'use client';
+import { ChevronDownIcon } from '@primereact/icons';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
 import * as React from 'react';
-import { ChevronDownIcon } from '@primereact/icons';
 
 export default function DropdownDemo() {
     const [items, setItems] = React.useState<string[] | number[]>([...Array(10).keys()]);

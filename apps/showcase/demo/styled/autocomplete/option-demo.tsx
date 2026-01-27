@@ -1,9 +1,9 @@
 'use client';
 import type { AutoCompleteCompleteEvent, AutoCompleteValueChangeEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
-import * as React from 'react';
 import { Avatar } from '@primereact/ui/avatar';
 import { Tag } from '@primereact/ui/tag';
+import * as React from 'react';
 
 interface User {
     id: number;
@@ -87,6 +87,7 @@ export default function OptionDemo() {
                                 </AutoComplete.Option>
                             ))}
                         </AutoComplete.Options>
+                        <AutoComplete.Empty className="text-sm">No users found</AutoComplete.Empty>
                     </AutoComplete.List>
                 </AutoComplete.Portal>
             </AutoComplete.Root>

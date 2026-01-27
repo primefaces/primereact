@@ -37,6 +37,7 @@ export default function ForceSelectionDemo() {
                 <AutoComplete.Portal>
                     <AutoComplete.List>
                         <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                        <AutoComplete.Empty className="text-sm">No countries found</AutoComplete.Empty>
                     </AutoComplete.List>
                 </AutoComplete.Portal>
             </AutoComplete.Root>

@@ -1,12 +1,12 @@
 'use client';
 
 import { ChevronDownIcon } from '@primereact/icons';
-import { Select } from '@primereact/ui/select';
-import * as React from 'react';
-import Image from 'next/image';
+import { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
-import { SelectValueChangeEvent } from '@primereact/types/shared/select';
+import { Select } from '@primereact/ui/select';
+import Image from 'next/image';
+import * as React from 'react';
 
 type Country = {
     name: string;
@@ -80,6 +80,7 @@ export default function FilterDemo() {
                                 </Select.Option>
                             ))}
                         </Select.Options>
+                        <Select.Empty className="text-sm">No countries found</Select.Empty>
                     </Select.List>
                 </Select.Portal>
             </Select.Root>

@@ -49,6 +49,7 @@ export default function CheckmarkDemo() {
                                 </AutoComplete.Option>
                             ))}
                         </AutoComplete.Options>
+                        <AutoComplete.Empty className="text-sm">No shipping methods found</AutoComplete.Empty>
                     </AutoComplete.List>
                 </AutoComplete.Portal>
             </AutoComplete.Root>

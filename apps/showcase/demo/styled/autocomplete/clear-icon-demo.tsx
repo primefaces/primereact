@@ -1,7 +1,7 @@
 'use client';
+import { TimesIcon } from '@primereact/icons';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
-import { TimesIcon } from '@primereact/icons';
 import * as React from 'react';
 
 interface Recipe {
@@ -58,6 +58,7 @@ export default function ClearIconDemo() {
                                 </AutoComplete.Option>
                             ))}
                         </AutoComplete.Options>
+                        <AutoComplete.Empty className="text-sm">No recipes found</AutoComplete.Empty>
                     </AutoComplete.List>
                 </AutoComplete.Portal>
             </AutoComplete.Root>

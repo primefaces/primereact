@@ -81,6 +81,7 @@ export default function GroupDemo() {
                 <AutoComplete.Portal>
                     <AutoComplete.List>
                         <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                        <AutoComplete.Empty className="text-sm">No option found</AutoComplete.Empty>
                     </AutoComplete.List>
                 </AutoComplete.Portal>
             </AutoComplete.Root>

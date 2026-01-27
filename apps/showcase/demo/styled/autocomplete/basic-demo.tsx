@@ -49,6 +49,7 @@ export default function BasicDemo() {
                                 </AutoComplete.Option>
                             ))}
                         </AutoComplete.Options>
+                        <AutoComplete.Empty className="text-sm">No commands found</AutoComplete.Empty>
                     </AutoComplete.List>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
