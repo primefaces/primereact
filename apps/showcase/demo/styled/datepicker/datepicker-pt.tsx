@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -16,7 +16,7 @@ export default function DatePickerPTDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
 
     return (
-        <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+        <DatePicker.Root value={date} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
             <DatePicker.Container>
                 <DatePicker.Calendar>
                     <DatePicker.Header>

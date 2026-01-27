@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -23,7 +23,7 @@ export default function InvalidDemo() {
                 value={date}
                 invalid={!date}
                 placeholder="Date"
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.Portal>
@@ -137,7 +137,7 @@ export default function InvalidDemo() {
                 invalid={!date2}
                 variant="filled"
                 placeholder="Date"
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.Portal>

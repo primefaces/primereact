@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -22,7 +22,7 @@ export default function MultipleDemo() {
                 value={date}
                 selectionMode="multiple"
                 manualInput={false}
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.Portal>

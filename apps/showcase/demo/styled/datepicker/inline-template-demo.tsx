@@ -2,8 +2,8 @@
 
 import type {
     DatePickerContainerInstance,
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData
 } from '@primereact/types/shared/datepicker';
 import { DatePicker } from '@primereact/ui/datepicker';
@@ -29,7 +29,11 @@ export default function InlineTemplateDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker.Root value={value} numberOfMonths={2} onValueChange={(event: DatePickerValueChangeEvent) => setValue(event.value as Date)}>
+            <DatePicker.Root
+                value={value}
+                numberOfMonths={2}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setValue(event.value as Date)}
+            >
                 <DatePicker.Panel>
                     <DatePicker.Container>
                         {(instance: DatePickerContainerInstance) => {

@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -37,7 +37,7 @@ export default function MinMaxDemo() {
                 minDate={minDate}
                 maxDate={maxDate}
                 manualInput={false}
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.Portal>

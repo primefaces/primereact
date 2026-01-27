@@ -2,7 +2,7 @@
 
 import type {
     DatePickerContainerInstance,
-    DatePickerValueChangeEvent,
+    DatePickerRootValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -16,7 +16,7 @@ export default function MultipleMonthsDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker.Root value={date} numberOfMonths={2} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} numberOfMonths={2} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>

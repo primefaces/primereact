@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -23,7 +23,7 @@ export default function ModelTypeDemo() {
                 <Label.Root htmlFor="datetype" className="font-bold block mb-2">
                     Date Type Model
                 </Label.Root>
-                <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="datetype" />
                     <DatePicker.Portal>
                         <DatePicker.Container>
@@ -140,7 +140,7 @@ export default function ModelTypeDemo() {
                     value={date2}
                     updateModelType="string"
                     fluid
-                    onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}
+                    onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}
                 >
                     <DatePicker.Input id="stringtype" />
                     <DatePicker.Portal>

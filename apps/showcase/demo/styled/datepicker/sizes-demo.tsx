@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -24,7 +24,7 @@ export default function SizesDemo() {
                 value={date}
                 size="small"
                 placeholder="Small"
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>
@@ -136,7 +136,7 @@ export default function SizesDemo() {
                     </DatePicker.Container>
                 </DatePicker.Portal>
             </DatePicker.Root>
-            <DatePicker.Root value={date2} placeholder="Normal" onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
+            <DatePicker.Root value={date2} placeholder="Normal" onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>
                     <DatePicker.DropdownIcon />
@@ -251,7 +251,7 @@ export default function SizesDemo() {
                 value={date3}
                 size="large"
                 placeholder="Large"
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate3(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.InputIconContainer>

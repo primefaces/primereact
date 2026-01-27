@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -18,7 +18,7 @@ export default function InlineDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker.Root value={date} className="w-full sm:w-120" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} className="w-full sm:w-120" onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Panel>
                     <DatePicker.Container>
                         <DatePicker.Calendar>

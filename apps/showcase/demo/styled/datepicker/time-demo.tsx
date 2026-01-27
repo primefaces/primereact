@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -30,7 +30,7 @@ export default function TimeDemo() {
                         showTime
                         hourFormat="12"
                         fluid
-                        onValueChange={(event: DatePickerValueChangeEvent) => setDate1(event.value)}
+                        onValueChange={(event: DatePickerRootValueChangeEvent) => setDate1(event.value)}
                     >
                         <DatePicker.Input id="datepicker-12h" />
                         <DatePicker.Portal>
@@ -172,7 +172,7 @@ export default function TimeDemo() {
                         showTime
                         hourFormat="24"
                         fluid
-                        onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}
+                        onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}
                     >
                         <DatePicker.Input id="datepicker-24h" />
                         <DatePicker.Portal>
@@ -301,7 +301,7 @@ export default function TimeDemo() {
                     <Label.Root htmlFor="datepicker-timeonly" className="font-bold block mb-2">
                         Time Only
                     </Label.Root>
-                    <DatePicker.Root value={date3} timeOnly fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
+                    <DatePicker.Root value={date3} timeOnly fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate3(event.value)}>
                         <DatePicker.Input id="datepicker-timeonly" />
                         <DatePicker.Portal>
                             <DatePicker.Time>

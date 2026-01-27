@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerProps,
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
@@ -16,7 +16,7 @@ export default function YearPickerDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker.Root value={date} view="year" dateFormat="yy" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} view="year" dateFormat="yy" onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>

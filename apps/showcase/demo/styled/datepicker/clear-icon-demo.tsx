@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -17,7 +17,7 @@ export default function ClearIconDemo() {
 
     return (
         <div className="flex justify-center">
-            <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)} inputClass="w-56">
+            <DatePicker.Root value={date} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)} inputClass="w-56">
                 <DatePicker.Input />
                 <DatePicker.ClearIcon />
                 <DatePicker.Portal>

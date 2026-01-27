@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -21,7 +21,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
             <Label.Float>
-                <DatePicker.Root value={date} onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                <DatePicker.Root value={date} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="over_label" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -136,7 +136,7 @@ export default function FloatLabelDemo() {
             </Label.Float>
 
             <Label.Float variant="in">
-                <DatePicker.Root value={date2} onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
+                <DatePicker.Root value={date2} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}>
                     <DatePicker.Input id="in_label" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -251,7 +251,7 @@ export default function FloatLabelDemo() {
             </Label.Float>
 
             <Label.Float variant="on">
-                <DatePicker.Root value={date3} onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
+                <DatePicker.Root value={date3} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate3(event.value)}>
                     <DatePicker.Input id="on_label" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />

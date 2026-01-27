@@ -1,9 +1,9 @@
 'use client';
 
 import {
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -19,7 +19,7 @@ export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
             <Label.Ifta>
-                <DatePicker.Root value={date} variant="filled" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                <DatePicker.Root value={date} variant="filled" onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="date" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />

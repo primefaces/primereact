@@ -2,9 +2,9 @@
 
 import {
     DatePickerButtonbarInstance,
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -20,7 +20,7 @@ export default function ButtonbarDemo() {
 
     return (
         <div className="flex justify-center gap-4 flex-wrap">
-            <DatePicker.Root value={date} placeholder="Basic" onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+            <DatePicker.Root value={date} placeholder="Basic" onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                 <DatePicker.Input />
                 <DatePicker.Portal>
                     <DatePicker.Container>
@@ -137,7 +137,7 @@ export default function ButtonbarDemo() {
                 placeholder="Customized"
                 selectionMode="range"
                 manualInput={false}
-                onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}
+                onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}
             >
                 <DatePicker.Input />
                 <DatePicker.Portal>

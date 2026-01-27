@@ -2,9 +2,9 @@
 
 import {
     DatePickerInputIconContainerInstance,
+    DatePickerRootValueChangeEvent,
     DatePickerTableBodyInstance,
     DatePickerTableHeadRowInstance,
-    DatePickerValueChangeEvent,
     useDatePickerMonthData,
     useDatePickerMonthOptions,
     useDatePickerProps,
@@ -25,7 +25,7 @@ export default function IconDemo() {
                 <Label.Root htmlFor="buttondisplay" className="font-bold block mb-2">
                     Button
                 </Label.Root>
-                <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate(event.value)}>
+                <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="buttondisplay" />
                     <DatePicker.Dropdown>
                         <DatePicker.DropdownIcon />
@@ -141,7 +141,7 @@ export default function IconDemo() {
                 <Label.Root htmlFor="icondisplay" className="font-bold block mb-2">
                     Default Icon
                 </Label.Root>
-                <DatePicker.Root value={date2} fluid onValueChange={(event: DatePickerValueChangeEvent) => setDate2(event.value)}>
+                <DatePicker.Root value={date2} fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}>
                     <DatePicker.Input id="icondisplay" />
                     <DatePicker.InputIconContainer>
                         <DatePicker.DropdownIcon />
@@ -257,7 +257,7 @@ export default function IconDemo() {
                 <Label.Root htmlFor="templatedisplay" className="font-bold block mb-2">
                     Custom Icon
                 </Label.Root>
-                <DatePicker.Root value={date3} fluid timeOnly onValueChange={(event: DatePickerValueChangeEvent) => setDate3(event.value)}>
+                <DatePicker.Root value={date3} fluid timeOnly onValueChange={(event: DatePickerRootValueChangeEvent) => setDate3(event.value)}>
                     <DatePicker.Input id="templatedisplay" />
                     <DatePicker.InputIconContainer>
                         {(instance: DatePickerInputIconContainerInstance) => {
