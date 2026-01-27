@@ -44,7 +44,7 @@ export const InputTagsPortal = withComponent({
                     appendTo={inputtags?.props.appendTo}
                     target={inputtags?.elementRef?.current}
                     type="overlay"
-                    open={inputtags?.state.overlayVisible}
+                    open={inputtags?.state.opened}
                     onOpenChange={({ value }: useOverlayOpenChangeEvent) => inputtags?.changeVisibleState(value)}
                     onEnter={inputtags?.onOverlayEnter}
                     onAfterEnter={inputtags?.onOverlayAfterEnter}

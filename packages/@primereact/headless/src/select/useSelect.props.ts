@@ -5,6 +5,8 @@ export const defaultProps: useSelectProps = {
     defaultValue: undefined,
     filterValue: undefined,
     defaultFilterValue: '',
+    open: undefined,
+    defaultOpen: undefined,
     options: [],
     optionKey: undefined,
     optionLabel: undefined,
@@ -19,5 +21,6 @@ export const defaultProps: useSelectProps = {
     focusOnHover: true,
     appendTo: 'body',
     onValueChange: undefined,
-    onFilterValueChange: undefined
+    onFilterValueChange: undefined,
+    onOpenChange: undefined
 };

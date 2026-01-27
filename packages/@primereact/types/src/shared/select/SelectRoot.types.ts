@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps } from '..';
-import type { useSelectExposes, useSelectFilterValueChangeEvent, useSelectProps, useSelectState, useSelectValueChangeEvent } from './useSelect.types';
+import type { useSelectExposes, useSelectFilterValueChangeEvent, useSelectOpenChangeEvent, useSelectProps, useSelectState, useSelectValueChangeEvent } from './useSelect.types';
 import type { PassThroughType } from '..';
 
 /**
@@ -104,6 +104,17 @@ export interface SelectFilterValueChangeEvent extends useSelectFilterValueChange
      * The current filter query.
      */
     query: string;
+}
+
+/**
+ * Event object for the onOpenChange callback.
+ * @extends useSelectOpenChangeEvent
+ */
+export interface SelectOpenChangeEvent extends useSelectOpenChangeEvent {
+    /**
+     * The new value of the select's open state.
+     */
+    value: boolean;
 }
 
 /**

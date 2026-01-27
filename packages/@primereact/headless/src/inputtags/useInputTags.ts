@@ -11,7 +11,11 @@ export const useInputTags = withHeadless({
     defaultProps,
     setup({ props, elementRef }) {
         const [focusedItemIndexState, setFocusedItemIndexState] = React.useState<number>(-1);
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
         const [searchingState, setSearchingState] = React.useState<boolean>(false);
         const [focusedState, setFocusedState] = React.useState<boolean>(false);
 
@@ -54,7 +58,7 @@ export const useInputTags = withHeadless({
             value: valueState ?? [],
             inputValue: inputValueState ?? '',
             focusedItemIndex: focusedItemIndexState,
-            overlayVisible: overlayVisibleState,
+            opened: openState,
             searching: searchingState,
             focused: focusedState,
             focusedOptionIndex: listbox.state.focusedOptionIndex
@@ -75,17 +79,17 @@ export const useInputTags = withHeadless({
         };
 
         const show = () => {
-            setOverlayVisibleState(true);
+            setOpenState([true, { value: true }]);
         };
 
         const hide = () => {
-            setOverlayVisibleState(false);
+            setOpenState([false, { value: false }]);
             setSearchingState(false);
             listbox.changeFocusedOptionIndex(new Event('blur') as unknown as React.KeyboardEvent, -1);
         };
 
         const changeVisibleState = (isVisible: boolean) => {
-            setOverlayVisibleState(isVisible);
+            setOpenState([isVisible, { value: isVisible }]);
         };
 
         const onOverlayEnter = () => {
@@ -243,7 +247,7 @@ export const useInputTags = withHeadless({
                 case 'ArrowDown':
                 case 'ArrowUp':
                     if (hasDropdown) {
-                        if (!overlayVisibleState && inputValueState && inputValueState.length >= (props.minLength ?? 1)) {
+                        if (!openState && inputValueState && inputValueState.length >= (props.minLength ?? 1)) {
                             focusOnShow.current = true;
                             show();
                         }
@@ -270,7 +274,7 @@ export const useInputTags = withHeadless({
                     break;
 
                 case 'Escape':
-                    if (overlayVisibleState) {
+                    if (openState) {
                         hide();
                         event.preventDefault();
                     }
@@ -281,7 +285,7 @@ export const useInputTags = withHeadless({
                 case 'End':
                 case 'PageUp':
                 case 'PageDown':
-                    if (hasDropdown && overlayVisibleState) {
+                    if (hasDropdown && openState) {
                         listbox.onListKeyDown(event);
                     }
 
@@ -397,13 +401,13 @@ export const useInputTags = withHeadless({
                 addItem(inputValueState!);
             }
 
-            if (overlayVisibleState) {
+            if (openState) {
                 hide();
             }
         };
 
         const onEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            if (hasDropdown && overlayVisibleState && listbox.state.focusedOptionIndex !== -1) {
+            if (hasDropdown && openState && listbox.state.focusedOptionIndex !== -1) {
                 const selectedOption = listbox.getOptions()[listbox.state.focusedOptionIndex];
 
                 if (selectedOption) {
@@ -482,9 +486,9 @@ export const useInputTags = withHeadless({
 
             const hasOptions = props.options && props.options.length > 0;
 
-            if (hasOptions && focusedState && !overlayVisibleState) {
+            if (hasOptions && focusedState && !openState) {
                 show();
-            } else if (!hasOptions && overlayVisibleState) {
+            } else if (!hasOptions && openState) {
                 hide();
             }
         }, [props.options]);

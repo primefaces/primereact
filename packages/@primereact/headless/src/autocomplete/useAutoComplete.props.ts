@@ -5,6 +5,8 @@ export const defaultProps: useAutoCompleteProps = {
     defaultValue: undefined,
     inputValue: undefined,
     defaultInputValue: '',
+    open: undefined,
+    defaultOpen: undefined,
     options: [],
     optionKey: undefined,
     optionLabel: undefined,
@@ -25,5 +27,6 @@ export const defaultProps: useAutoCompleteProps = {
     dropdownMode: 'blank',
     onValueChange: undefined,
     onInputValueChange: undefined,
-    onComplete: undefined
+    onComplete: undefined,
+    onOpenChange: undefined
 };

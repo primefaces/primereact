@@ -1,10 +1,10 @@
 import { withHeadless } from '@primereact/core/headless';
+import { useListbox } from '@primereact/headless/listbox';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import { getOuterWidth, isNotEmpty, getFocusableElements, focus, getFirstFocusableElement } from '@primeuix/utils';
+import type { useListboxValueChangeEvent } from '@primereact/types/shared/listbox';
+import { focus, getFirstFocusableElement, getFocusableElements, getOuterWidth, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useSelect.props';
-import { useListbox } from '@primereact/headless/listbox';
-import type { useListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 
 export const useSelect = withHeadless({
     name: 'useSelect',
@@ -42,27 +42,31 @@ export const useSelect = withHeadless({
             onChange: props.onValueChange
         });
 
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
         const [focusedState, setFocusedState] = React.useState(false);
 
         const state = {
             value: valueState,
-            overlayVisible: overlayVisibleState,
+            opened: openState,
             focused: focusedState,
             focusedOptionIndex: listbox.state.focusedOptionIndex
         };
 
         const show = () => {
-            setOverlayVisibleState(true);
+            setOpenState([true, { value: true }]);
         };
 
         const hide = () => {
-            setOverlayVisibleState(false);
+            setOpenState([false, { value: false }]);
             listbox.changeFocusedOptionIndex(new Event('blur') as unknown as React.KeyboardEvent, -1);
         };
 
         const toggle = () => {
-            if (overlayVisibleState) {
+            if (openState) {
                 hide();
             } else {
                 show();
@@ -115,14 +119,14 @@ export const useSelect = withHeadless({
                 case 'End':
                 case 'PageUp':
                 case 'PageDown':
-                    if (overlayVisibleState) {
+                    if (openState) {
                         listbox.onListKeyDown(event);
                     }
 
                     break;
 
                 case 'Escape':
-                    if (overlayVisibleState) {
+                    if (openState) {
                         hide();
                     }
 
@@ -141,7 +145,7 @@ export const useSelect = withHeadless({
                     break;
 
                 default:
-                    if (overlayVisibleState) {
+                    if (openState) {
                         listbox.onListKeyDown(event);
                     }
 
@@ -150,7 +154,7 @@ export const useSelect = withHeadless({
         };
 
         const onArrowDownKey = (event: React.KeyboardEvent<HTMLElement>) => {
-            if (!overlayVisibleState) {
+            if (!openState) {
                 focusOnShow.current = true;
                 show();
             } else {
@@ -161,7 +165,7 @@ export const useSelect = withHeadless({
         };
 
         const onArrowUpKey = (event: React.KeyboardEvent<HTMLElement>) => {
-            if (!overlayVisibleState) {
+            if (!openState) {
                 focusOnShow.current = true;
                 show();
             } else {
@@ -185,7 +189,7 @@ export const useSelect = withHeadless({
         };
 
         const onEnterKey = (event: React.KeyboardEvent<HTMLElement>) => {
-            if (!overlayVisibleState) {
+            if (!openState) {
                 onArrowDownKey(event);
             } else {
                 const focusedOptionIndex = listbox.state.focusedOptionIndex;
@@ -216,7 +220,7 @@ export const useSelect = withHeadless({
         };
 
         const onTabKey = (event: React.KeyboardEvent<HTMLElement>) => {
-            if (overlayVisibleState) {
+            if (openState) {
                 if (hasFocusableElements()) {
                     const firstFocusable = getFirstFocusableElement(overlayRef.current!, ':not([data-p-hidden-focusable="true"])');
 
@@ -294,7 +298,7 @@ export const useSelect = withHeadless({
 
             listbox.updateModel(event, null);
 
-            if (overlayVisibleState) {
+            if (openState) {
                 hide();
             }
         };
@@ -366,7 +370,7 @@ export const useSelect = withHeadless({
         onListboxValueChange.current = onOptionSelect;
 
         const changeVisibleState = (isVisible: boolean) => {
-            setOverlayVisibleState(isVisible);
+            setOpenState([isVisible, { value: isVisible }]);
         };
 
         const getFocusedOptionId = () => {

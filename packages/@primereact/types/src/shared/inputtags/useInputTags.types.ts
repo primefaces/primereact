@@ -75,25 +75,43 @@ export interface useInputTagsCompleteEvent<E = React.SyntheticEvent> {
 }
 
 /**
+ * Event object for the onOpenChange callback.
+ */
+export interface useInputTagsOpenChangeEvent {
+    /**
+     * The new value of the input tags overlay's open state.
+     */
+    value: boolean;
+}
+
+/**
  * Defines valid properties in useInputTags.
  */
 export interface useInputTagsProps {
-    /**
-     * Default value of the items.
-     */
-    defaultValue?: string[] | undefined;
     /**
      * Value of the items.
      */
     value?: string[] | undefined;
     /**
-     * Default value of the input field.
+     * Default value of the items.
      */
-    defaultInputValue?: string | undefined;
+    defaultValue?: string[] | undefined;
     /**
      * Value of the input field (controlled).
      */
     inputValue?: string | undefined;
+    /**
+     * Default value of the input field.
+     */
+    defaultInputValue?: string | undefined;
+    /**
+     * Controlled open state of the input tags overlay.
+     */
+    open?: boolean;
+    /**
+     * Default open state for uncontrolled mode.
+     */
+    defaultOpen?: boolean;
     /**
      * Maximum number of items allowed.
      */
@@ -187,6 +205,11 @@ export interface useInputTagsProps {
      * @param {useInputTagsCompleteEvent} event - Custom complete event.
      */
     onComplete?: (event: useInputTagsCompleteEvent) => void;
+    /**
+     * Callback to invoke when the open state changes.
+     * @param {useInputTagsOpenChangeEvent} event - Custom change event.
+     */
+    onOpenChange?: (event: useInputTagsOpenChangeEvent) => void;
 }
 
 /**
@@ -206,9 +229,9 @@ export interface useInputTagsState {
      */
     focusedItemIndex: number;
     /**
-     * Whether the overlay is visible.
+     * Whether the overlay is open.
      */
-    overlayVisible: boolean;
+    opened: boolean;
     /**
      * Whether a search is in progress.
      */

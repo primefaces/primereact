@@ -1,4 +1,5 @@
 import { withHeadless } from '@primereact/core/headless';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { useMountEffect } from '@primereact/hooks';
 import { useDatePickerDateMeta, useDatePickerProps } from '@primereact/types/shared/datepicker';
 import { find, findSingle, getAttribute, getFocusableElements, getIndex, getOuterWidth, isDate, isEmpty, isNotEmpty } from '@primeuix/utils';
@@ -147,7 +148,11 @@ export const useDatePicker = withHeadless({
         const selectionStart = React.useRef<number | null>(null);
         const selectionEnd = React.useRef<number | null>(null);
         const [showClearIcon, setShowClearIcon] = React.useState(true);
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
         const [currentView, setCurrentView] = React.useState(props.view);
         const [currentMonth, setCurrentMonth] = React.useState<number>(0);
         const [currentYear, setCurrentYear] = React.useState<number>(0);
@@ -175,7 +180,7 @@ export const useDatePicker = withHeadless({
 
         const state = {
             rawValue: rawValueState,
-            overlayVisible: overlayVisibleState,
+            opened: openState,
             currentView,
             showClearIcon,
             hoveredDate: hoveredDateState
@@ -575,11 +580,11 @@ export const useDatePicker = withHeadless({
 
         const onButtonClick = () => {
             if (isEnabled()) {
-                if (!overlayVisibleState) {
+                if (!openState) {
                     inputRef.current?.elementRef.current?.focus();
-                    setOverlayVisibleState(true);
+                    setOpenState([true, { value: true }]);
                 } else {
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                 }
             }
         };
@@ -644,7 +649,7 @@ export const useDatePicker = withHeadless({
                 }
 
                 setTimeout(() => {
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                 }, 150);
             }
         };
@@ -1026,7 +1031,7 @@ export const useDatePicker = withHeadless({
 
         const onClearButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
             updateModel(null);
-            setOverlayVisibleState(false);
+            setOpenState([false, { value: false }]);
             setShowClearIcon(false);
 
             if (props.onClearButtonClick) {
@@ -1062,7 +1067,7 @@ export const useDatePicker = withHeadless({
                     break;
 
                 case 'Escape':
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                     event.preventDefault();
                     break;
 
@@ -1824,7 +1829,7 @@ export const useDatePicker = withHeadless({
                     cellContent.tabIndex = -1;
 
                     if (event.altKey) {
-                        setOverlayVisibleState(true);
+                        setOpenState([true, { value: true }]);
                     } else {
                         const prevRow = cell.parentElement?.previousElementSibling;
 
@@ -1927,7 +1932,7 @@ export const useDatePicker = withHeadless({
                 }
 
                 case 'Escape': {
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                     event.preventDefault();
                     break;
                 }
@@ -2119,7 +2124,7 @@ export const useDatePicker = withHeadless({
                 }
 
                 case 'Escape': {
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                     event.preventDefault();
                     break;
                 }
@@ -2223,7 +2228,7 @@ export const useDatePicker = withHeadless({
                 }
 
                 case 'Escape': {
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                     event.preventDefault();
                     break;
                 }
@@ -2387,7 +2392,7 @@ export const useDatePicker = withHeadless({
         const onClearClick = () => {
             updateModel(null);
             setShowClearIcon(false);
-            setOverlayVisibleState(false);
+            setOpenState([false, { value: false }]);
         };
 
         const onInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -2413,29 +2418,29 @@ export const useDatePicker = withHeadless({
         };
 
         const onInputClick = () => {
-            if (props.showOnFocus && isEnabled() && !overlayVisibleState) {
-                setOverlayVisibleState(true);
+            if (props.showOnFocus && isEnabled() && !openState) {
+                setOpenState([true, { value: true }]);
             }
         };
 
         const onInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            if (event.code === 'ArrowDown' && overlayVisibleState) {
+            if (event.code === 'ArrowDown' && openState) {
                 trapFocus(event);
-            } else if (event.code === 'ArrowDown' && !overlayVisibleState) {
-                setOverlayVisibleState(true);
+            } else if (event.code === 'ArrowDown' && !openState) {
+                setOpenState([true, { value: true }]);
             } else if (event.code === 'Escape') {
-                if (overlayVisibleState) {
-                    setOverlayVisibleState(false);
+                if (openState) {
+                    setOpenState([false, { value: false }]);
                     event.preventDefault();
                     event.stopPropagation();
                 }
             } else if (event.code === 'Tab') {
-                if (overlayVisibleState && overlayRef.current) {
+                if (openState && overlayRef.current) {
                     (getFocusableElements(overlayRef.current) as HTMLElement[]).forEach((el) => (el.tabIndex = -1));
                 }
 
-                if (overlayVisibleState) {
-                    setOverlayVisibleState(false);
+                if (openState) {
+                    setOpenState([false, { value: false }]);
                 }
             } else if (event.code === 'Enter') {
                 if (props.manualInput && (event.target as HTMLInputElement).value !== null && (event.target as HTMLInputElement).value?.trim() !== '') {
@@ -2443,7 +2448,7 @@ export const useDatePicker = withHeadless({
                         const value = parseValue((event.target as HTMLInputElement).value) as Date | Date[];
 
                         if (isValidSelection(value)) {
-                            setOverlayVisibleState(false);
+                            setOpenState([false, { value: false }]);
                         }
                     } catch {
                         /* NoOp */
@@ -2458,7 +2463,7 @@ export const useDatePicker = withHeadless({
 
         const onInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
             if (props.showonInputFocus && isEnabled()) {
-                setOverlayVisibleState(true);
+                setOpenState([true, { value: true }]);
             }
 
             if (props.onFocus) {
@@ -2497,7 +2502,7 @@ export const useDatePicker = withHeadless({
         };
 
         const changeVisibleState = (isVisible: boolean) => {
-            setOverlayVisibleState(isVisible);
+            setOpenState([isVisible, { value: isVisible }]);
         };
 
         const viewDate = React.useMemo<Date>(() => {
@@ -2822,16 +2827,16 @@ export const useDatePicker = withHeadless({
         }, [rawValueState]);
 
         React.useEffect(() => {
-            if (props.showTime && overlayVisibleState) {
+            if (props.showTime && openState) {
                 updateModelTime();
             }
         }, [pm]);
 
         React.useEffect(() => {
-            if (!overlayVisibleState && hoveredDateState) {
+            if (!openState && hoveredDateState) {
                 setHoveredDateState(null);
             }
-        }, [overlayVisibleState]);
+        }, [openState]);
 
         return {
             state,

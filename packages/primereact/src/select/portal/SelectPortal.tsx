@@ -48,7 +48,7 @@ export const SelectPortal = withComponent({
                     appendTo={select?.props.appendTo}
                     target={select?.triggerRef?.current ?? undefined}
                     type="overlay"
-                    open={select?.state.overlayVisible}
+                    open={select?.state.opened}
                     onOpenChange={({ value }: useOverlayOpenChangeEvent) => select?.changeVisibleState(value)}
                     onEnter={select?.onOverlayEnter}
                     onAfterEnter={select?.onOverlayAfterEnter}

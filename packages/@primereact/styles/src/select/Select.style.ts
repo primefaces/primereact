@@ -31,7 +31,7 @@ export const styles = createStyles<SelectRootInstance>({
                 'p-focus': state.focused,
                 'p-variant-filled': props.variant === 'filled',
                 'p-inputwrapper-filled': isNotEmpty(state.value),
-                'p-inputwrapper-focus': state.focused || state.overlayVisible,
+                'p-inputwrapper-focus': state.focused || state.opened,
                 'p-select-fluid': props.fluid ?? context.$fluid,
                 'p-disabled': props.disabled,
                 'p-select-sm p-inputfield-sm': props.size === 'small',

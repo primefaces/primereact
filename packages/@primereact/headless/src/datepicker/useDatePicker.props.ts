@@ -1,8 +1,10 @@
 import type { useDatePickerProps } from '@primereact/types/shared/datepicker';
 
 export const defaultProps: useDatePickerProps = {
-    defaultValue: undefined,
     value: undefined,
+    defaultValue: undefined,
+    open: undefined,
+    defaultOpen: undefined,
     updateModelType: 'date',
     selectionMode: 'single',
     dateFormat: undefined,
@@ -37,5 +39,6 @@ export const defaultProps: useDatePickerProps = {
     onInput: undefined,
     onKeyDown: undefined,
     onFocus: undefined,
-    onBlur: undefined
+    onBlur: undefined,
+    onOpenChange: undefined
 };

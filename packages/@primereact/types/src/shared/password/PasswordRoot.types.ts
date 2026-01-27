@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { usePasswordChangeEvent, usePasswordExposes, usePasswordProps, usePasswordState } from './usePassword.types';
+import type { usePasswordChangeEvent, usePasswordExposes, usePasswordOpenChangeEvent, usePasswordProps, usePasswordState } from './usePassword.types';
 
 /**
  * Defines passthrough(pt) options type in Password component.
@@ -60,6 +60,17 @@ export interface PasswordRootChangeEvent extends usePasswordChangeEvent<React.Ch
      * The new password value.
      */
     value: string | null;
+}
+
+/**
+ * Event object for the onOpenChange callback.
+ * @extends usePasswordOpenChangeEvent
+ */
+export interface PasswordOpenChangeEvent extends usePasswordOpenChangeEvent {
+    /**
+     * The new value of the password overlay's open state.
+     */
+    value: boolean;
 }
 
 /**

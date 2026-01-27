@@ -73,6 +73,16 @@ export interface usePasswordChangeEvent<E = React.SyntheticEvent> {
 }
 
 /**
+ * Event object for the onOpenChange callback.
+ */
+export interface usePasswordOpenChangeEvent {
+    /**
+     * The new value of the password overlay's open state.
+     */
+    value: boolean;
+}
+
+/**
  * Props for the usePassword hook.
  */
 export interface usePasswordProps {
@@ -84,6 +94,14 @@ export interface usePasswordProps {
      * The default value for uncontrolled mode.
      */
     defaultValue?: string | undefined;
+    /**
+     * Controlled open state of the password overlay.
+     */
+    open?: boolean;
+    /**
+     * Default open state for uncontrolled mode.
+     */
+    defaultOpen?: boolean;
     /**
      * Custom strength levels for password calculation.
      */
@@ -98,6 +116,11 @@ export interface usePasswordProps {
      * Callback fired when the password value changes.
      */
     onValueChange?: (event: usePasswordChangeEvent) => void;
+    /**
+     * Callback to invoke when the open state changes.
+     * @param {usePasswordOpenChangeEvent} event - Custom change event.
+     */
+    onOpenChange?: (event: usePasswordOpenChangeEvent) => void;
 }
 
 /**
@@ -113,9 +136,9 @@ export interface usePasswordState {
      */
     strength: PasswordStrengthResult | null;
     /**
-     * Whether the overlay is visible.
+     * Whether the overlay is open.
      */
-    overlayVisible: boolean;
+    opened: boolean;
     /**
      * Number of strength levels.
      */

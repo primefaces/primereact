@@ -59,6 +59,16 @@ export interface useAutoCompleteCompleteEvent<E = React.SyntheticEvent> {
 }
 
 /**
+ * Event object for the onOpenChange callback.
+ */
+export interface useAutoCompleteOpenChangeEvent {
+    /**
+     * The new value of the autocomplete's open state.
+     */
+    value: boolean;
+}
+
+/**
  * Props for the useAutoComplete hook.
  */
 export interface useAutoCompleteProps {
@@ -79,6 +89,14 @@ export interface useAutoCompleteProps {
      * @defaultValue ''
      */
     defaultInputValue?: string;
+    /**
+     * Controlled open state of the input tags overlay.
+     */
+    open?: boolean;
+    /**
+     * Default open state for uncontrolled mode.
+     */
+    defaultOpen?: boolean;
     /**
      * An array of options to display.
      */
@@ -199,6 +217,11 @@ export interface useAutoCompleteProps {
      * @param {useAutoCompleteCompleteEvent} event - Custom complete event.
      */
     onComplete?: (event: useAutoCompleteCompleteEvent) => void;
+    /**
+     * Callback to invoke when the open state changes.
+     * @param {useAutoCompleteOpenChangeEvent} event - Custom change event.
+     */
+    onOpenChange?: (event: useAutoCompleteOpenChangeEvent) => void;
 }
 
 /**
@@ -214,9 +237,9 @@ export interface useAutoCompleteState {
      */
     inputValue?: string;
     /**
-     * Whether the overlay is visible.
+     * Whether the overlay is open.
      */
-    overlayVisible?: boolean;
+    opened?: boolean;
     /**
      * Whether the clear icon should be shown.
      */

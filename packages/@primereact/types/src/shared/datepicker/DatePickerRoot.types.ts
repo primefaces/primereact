@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useDatePickerExposes, useDatePickerProps, useDatePickerState, useDatePickerValueChangeEvent } from './useDatePicker.types';
+import type { useDatePickerExposes, useDatePickerOpenChangeEvent, useDatePickerProps, useDatePickerState, useDatePickerValueChangeEvent } from './useDatePicker.types';
 
 /**
  * Defines passthrough(pt) options type in DatePicker component.
@@ -244,6 +244,17 @@ export interface DatePickerRootPassThrough {
  * @extends useDatePickerValueChangeEvent
  */
 export interface DatePickerRootValueChangeEvent extends useDatePickerValueChangeEvent {}
+
+/**
+ * Event object for the onOpenChange callback.
+ * @extends useDatePickerOpenChangeEvent
+ */
+export interface DatePickerOpenChangeEvent extends useDatePickerOpenChangeEvent {
+    /**
+     * The new value of the datepicker's open state.
+     */
+    value: boolean;
+}
 
 /**
  * Defines valid properties in DatePicker component.

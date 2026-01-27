@@ -16,7 +16,11 @@ export const usePassword = withHeadless({
             defaultValue: props.defaultValue,
             onChange: props.onValueChange
         });
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
         const [showClearIcon, setShowClearIcon] = React.useState(true);
         const [unmaskedState, setUnmaskedState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -87,7 +91,7 @@ export const usePassword = withHeadless({
         const state = {
             value: valueState,
             strength,
-            overlayVisible: overlayVisibleState,
+            opened: openState,
             levelsCount: props.strengthOptions?.length ?? 4,
             showClearIcon,
             unmasked: unmaskedState,
@@ -103,8 +107,8 @@ export const usePassword = withHeadless({
         );
 
         const onInputClick = () => {
-            if (!overlayVisibleState) {
-                setOverlayVisibleState(true);
+            if (!openState) {
+                setOpenState([true, { value: true }]);
             }
         };
 
@@ -130,7 +134,7 @@ export const usePassword = withHeadless({
         };
 
         const changeVisibleState = (isVisible: boolean) => {
-            setOverlayVisibleState(isVisible);
+            setOpenState([isVisible, { value: isVisible }]);
         };
 
         const onOverlayEnter = () => {
@@ -153,8 +157,8 @@ export const usePassword = withHeadless({
             ]);
             setShowClearIcon(false);
 
-            if (overlayVisibleState) {
-                setOverlayVisibleState(false);
+            if (openState) {
+                setOpenState([false, { value: false }]);
             }
 
             // Clear the input value from DOM when using defaultValue (uncontrolled)

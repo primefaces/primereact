@@ -43,7 +43,7 @@ export const PasswordPortal = withComponent({
                     appendTo={password?.props.appendTo}
                     target={password?.inputRef?.current?.elementRef?.current}
                     type="overlay"
-                    open={password?.state.overlayVisible}
+                    open={password?.state.opened}
                     onOpenChange={({ value }: useOverlayOpenChangeEvent) => password?.changeVisibleState(value)}
                     onEnter={password?.onOverlayEnter}
                 >

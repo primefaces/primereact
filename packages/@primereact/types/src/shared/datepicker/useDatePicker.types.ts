@@ -167,19 +167,37 @@ export interface useDatePickerBlurEvent {
 }
 
 /**
+ * Event object for the onOpenChange callback.
+ */
+export interface useDatePickerOpenChangeEvent {
+    /**
+     * The new value of the datepicker's open state.
+     */
+    value: boolean;
+}
+
+/**
  * Defines valid properties in useDatePicker.
  */
 export interface useDatePickerProps {
+    /**
+     * Value of the component.
+     * @default null
+     */
+    value?: Date | string | Date[] | string[] | (Date | null)[] | (string | null)[] | null | undefined;
     /**
      * The default value for the input when not controlled by `modelValue`.
      * @default null
      */
     defaultValue?: Date | string | Date[] | string[] | (Date | null)[] | (string | null)[] | null | undefined;
     /**
-     * Value of the component.
-     * @default null
+     * Controlled open state of the input tags overlay.
      */
-    value?: Date | string | Date[] | string[] | (Date | null)[] | (string | null)[] | null | undefined;
+    open?: boolean;
+    /**
+     * Default open state for uncontrolled mode.
+     */
+    defaultOpen?: boolean;
     /**
      * The name attribute for the element, typically used in form submissions.
      */
@@ -454,6 +472,11 @@ export interface useDatePickerProps {
      * @returns void
      */
     onBlur?: (event: useDatePickerBlurEvent) => void;
+    /**
+     * Callback to invoke when the open state changes.
+     * @param {useDatePickerOpenChangeEvent} event - Custom change event.
+     */
+    onOpenChange?: (event: useDatePickerOpenChangeEvent) => void;
 }
 
 /**
@@ -465,9 +488,9 @@ export interface useDatePickerState {
      */
     rawValue: useDatePickerProps['value'];
     /**
-     * Whether the overlay is visible.
+     * Whether the overlay is open.
      */
-    overlayVisible: boolean;
+    opened: boolean;
     /**
      * Current view state information.
      */

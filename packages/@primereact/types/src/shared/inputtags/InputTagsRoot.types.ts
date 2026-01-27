@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useInputTagsExposes, useInputTagsProps, useInputTagsState, useInputTagsValueChangeEvent } from './useInputTags.types';
+import type { useInputTagsExposes, useInputTagsOpenChangeEvent, useInputTagsProps, useInputTagsState, useInputTagsValueChangeEvent } from './useInputTags.types';
 
 /**
  * Defines passthrough(pt) options type in InputTags component.
@@ -68,6 +68,17 @@ export interface InputTagsRootValueChangeEvent extends useInputTagsValueChangeEv
      * Value of the inputtags.
      */
     value: string[] | undefined;
+}
+
+/**
+ * Event object for the onOpenChange callback.
+ * @extends useInputTagsOpenChangeEvent
+ */
+export interface InputTagsOpenChangeEvent extends useInputTagsOpenChangeEvent {
+    /**
+     * The new value of the input tags overlay's open state.
+     */
+    value: boolean;
 }
 
 /**

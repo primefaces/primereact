@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps } from '..';
-import type { useAutoCompleteCompleteEvent, useAutoCompleteExposes, useAutoCompleteInputValueChangeEvent, useAutoCompleteProps, useAutoCompleteState, useAutoCompleteValueChangeEvent } from './useAutoComplete.types';
+import type { useAutoCompleteCompleteEvent, useAutoCompleteExposes, useAutoCompleteInputValueChangeEvent, useAutoCompleteOpenChangeEvent, useAutoCompleteProps, useAutoCompleteState, useAutoCompleteValueChangeEvent } from './useAutoComplete.types';
 import type { PassThroughType } from '..';
 
 /**
@@ -111,6 +111,17 @@ export interface AutoCompleteCompleteEvent extends useAutoCompleteCompleteEvent 
      * The current query string.
      */
     query: string;
+}
+
+/**
+ * Event object for the onOpenChange callback.
+ * @extends useAutoCompleteOpenChangeEvent
+ */
+export interface AutoCompleteOpenChangeEvent extends useAutoCompleteOpenChangeEvent {
+    /**
+     * The new value of the autocomplete's open state.
+     */
+    value: boolean;
 }
 
 /**

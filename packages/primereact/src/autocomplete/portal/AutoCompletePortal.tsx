@@ -44,7 +44,7 @@ export const AutoCompletePortal = withComponent({
                     appendTo={autocomplete?.props.appendTo}
                     target={autocomplete?.inputRef?.current?.elementRef?.current}
                     type="overlay"
-                    open={autocomplete?.state.overlayVisible}
+                    open={autocomplete?.state.opened}
                     onOpenChange={({ value }: useOverlayOpenChangeEvent) => autocomplete?.changeVisibleState(value)}
                     onEnter={autocomplete?.onOverlayEnter}
                     onAfterEnter={autocomplete?.onOverlayAfterEnter}

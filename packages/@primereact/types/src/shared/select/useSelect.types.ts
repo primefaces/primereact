@@ -31,6 +31,16 @@ export interface useSelectValueChangeEvent<E = React.SyntheticEvent> {
 }
 
 /**
+ * Event object for the onOpenChange callback.
+ */
+export interface useSelectOpenChangeEvent {
+    /**
+     * The new value of the select's open state.
+     */
+    value: boolean;
+}
+
+/**
  * Event fired when the select's filter value changes.
  */
 export interface useSelectFilterValueChangeEvent<E = React.SyntheticEvent> {
@@ -65,6 +75,14 @@ export interface useSelectProps {
      * @defaultValue ''
      */
     defaultFilterValue?: string;
+    /**
+     * Controlled open state of the select overlay.
+     */
+    open?: boolean;
+    /**
+     * Default open state for uncontrolled mode.
+     */
+    defaultOpen?: boolean;
     /**
      * An array of options to display.
      */
@@ -150,6 +168,11 @@ export interface useSelectProps {
      * @param {useSelectFilterValueChangeEvent} event - The filter value change event.
      */
     onFilterValueChange?: (event: useSelectFilterValueChangeEvent) => void;
+    /**
+     * Callback to invoke when the open state changes.
+     * @param {useSelectOpenChangeEvent} event - Custom change event.
+     */
+    onOpenChange?: (event: useSelectOpenChangeEvent) => void;
 }
 
 /**
@@ -165,9 +188,9 @@ export interface useSelectState {
      */
     filterValue?: string;
     /**
-     * Whether the overlay is visible.
+     * Whether the overlay is open.
      */
-    overlayVisible?: boolean;
+    opened?: boolean;
     /**
      * Whether the trigger is focused.
      */

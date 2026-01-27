@@ -48,7 +48,12 @@ export const useAutoComplete = withHeadless({
             onChange: props.onInputValueChange
         });
 
-        const [overlayVisibleState, setOverlayVisibleState] = React.useState<boolean>(false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
+
         const [showClearIcon, setShowClearIcon] = React.useState(true);
         const [focusedState, setFocusedState] = React.useState(false);
         const [searchingState, setSearchingState] = React.useState<boolean>(false);
@@ -56,7 +61,7 @@ export const useAutoComplete = withHeadless({
         const state = {
             value: valueState,
             inputValue: inputValueState,
-            overlayVisible: overlayVisibleState,
+            opened: openState,
             showClearIcon,
             focused: focusedState,
             focusedOptionIndex: listbox.state.focusedOptionIndex,
@@ -83,11 +88,11 @@ export const useAutoComplete = withHeadless({
         };
 
         const show = () => {
-            setOverlayVisibleState(true);
+            setOpenState([true, { value: true }]);
         };
 
         const hide = () => {
-            setOverlayVisibleState(false);
+            setOpenState([false, { value: false }]);
             setSearchingState(false);
             listbox.changeFocusedOptionIndex(new Event('blur') as unknown as React.KeyboardEvent, -1);
         };
@@ -198,7 +203,7 @@ export const useAutoComplete = withHeadless({
                 case 'End':
                 case 'PageUp':
                 case 'PageDown':
-                    if (overlayVisibleState) {
+                    if (openState) {
                         listbox.onListKeyDown(event);
                     }
 
@@ -206,7 +211,7 @@ export const useAutoComplete = withHeadless({
 
                 case 'Escape':
                 case 'Tab':
-                    if (overlayVisibleState) {
+                    if (openState) {
                         hide();
                     }
 
@@ -218,7 +223,7 @@ export const useAutoComplete = withHeadless({
         };
 
         const onArrowDownKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            if (!overlayVisibleState && inputValueState && inputValueState?.length >= (props.minLength ?? 1)) {
+            if (!openState && inputValueState && inputValueState?.length >= (props.minLength ?? 1)) {
                 focusOnShow.current = true;
                 show();
             }
@@ -229,7 +234,7 @@ export const useAutoComplete = withHeadless({
         };
 
         const onArrowUpKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            if (!overlayVisibleState && inputValueState && inputValueState?.length >= (props.minLength ?? 1)) {
+            if (!openState && inputValueState && inputValueState?.length >= (props.minLength ?? 1)) {
                 focusOnShow.current = true;
                 show();
             }
@@ -244,7 +249,7 @@ export const useAutoComplete = withHeadless({
                     });
                 }
 
-                if (overlayVisibleState) {
+                if (openState) {
                     hide();
                 }
             } else {
@@ -257,7 +262,7 @@ export const useAutoComplete = withHeadless({
         const onEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
             const focusedOptionIndex = listbox.state.focusedOptionIndex;
 
-            if (overlayVisibleState && focusedOptionIndex !== -1) {
+            if (openState && focusedOptionIndex !== -1) {
                 listbox.onEnterKey(event);
 
                 const selectedOption = listbox.getOptions()[focusedOptionIndex];
@@ -275,7 +280,7 @@ export const useAutoComplete = withHeadless({
 
         const onTriggerClick = (event: React.MouseEvent<HTMLButtonElement>) => {
             if (!props.disabled) {
-                if (!overlayVisibleState) {
+                if (!openState) {
                     focus(inputRef.current?.elementRef.current as HTMLInputElement);
                     setSearchingState(true);
 
@@ -285,11 +290,11 @@ export const useAutoComplete = withHeadless({
                         search(event, inputRef.current?.elementRef.current?.value ?? '', 'dropdown');
                     }
 
-                    setOverlayVisibleState(true);
+                    setOpenState([true, { value: true }]);
 
                     listbox.onListFocus();
                 } else {
-                    setOverlayVisibleState(false);
+                    setOpenState([false, { value: false }]);
                     setSearchingState(false);
                 }
             }
@@ -305,8 +310,8 @@ export const useAutoComplete = withHeadless({
             ]);
             setShowClearIcon(false);
 
-            if (overlayVisibleState) {
-                setOverlayVisibleState(false);
+            if (openState) {
+                setOpenState([false, { value: false }]);
             }
 
             if (inputRef.current?.elementRef?.current) {
@@ -430,7 +435,7 @@ export const useAutoComplete = withHeadless({
         };
 
         const changeVisibleState = (isVisible: boolean) => {
-            setOverlayVisibleState(isVisible);
+            setOpenState([isVisible, { value: isVisible }]);
         };
 
         const getFocusedOptionId = () => {

@@ -47,7 +47,7 @@ export const DatePickerPortal = withComponent({
                     appendTo={datepicker?.props.appendTo}
                     target={datepicker?.inputRef?.current?.elementRef?.current}
                     type="overlay"
-                    open={datepicker?.state.overlayVisible}
+                    open={datepicker?.state.opened}
                     onOpenChange={({ value }: useOverlayOpenChangeEvent) => datepicker?.changeVisibleState(value)}
                     onEnter={datepicker?.onOverlayEnter}
                 >

@@ -23,7 +23,7 @@ export const DatePickerDropdown = withComponent({
                 disabled: datepicker?.props.disabled,
                 'aria-label': 'Choose Date', //TODO:
                 'aria-haspopup': 'dialog',
-                'aria-expanded': datepicker?.state.overlayVisible,
+                'aria-expanded': datepicker?.state.opened,
                 'aria-controls': datepicker?.id + '_panel',
                 onClick: datepicker?.onButtonClick
             },

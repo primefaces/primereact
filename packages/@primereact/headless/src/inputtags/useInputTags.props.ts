@@ -5,6 +5,8 @@ export const defaultProps: useInputTagsProps = {
     value: undefined,
     defaultInputValue: '',
     inputValue: undefined,
+    open: undefined,
+    defaultOpen: undefined,
     max: undefined,
     delimiter: undefined,
     allowDuplicate: undefined,
@@ -25,5 +27,6 @@ export const defaultProps: useInputTagsProps = {
     onRemove: undefined,
     onValueChange: undefined,
     onInputValueChange: undefined,
-    onComplete: undefined
+    onComplete: undefined,
+    onOpenChange: undefined
 };
