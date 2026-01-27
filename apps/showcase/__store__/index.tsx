@@ -393,10 +393,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/checkbox/basic-demo')),
                 'filePath': 'demo/styled/checkbox/basic-demo.tsx',
             },
-            'card-demo': {
-                'component': React.lazy(() => import('demo/styled/checkbox/card-demo')),
-                'filePath': 'demo/styled/checkbox/card-demo.tsx',
-            },
             'checkbox-pt': {
                 'component': React.lazy(() => import('demo/styled/checkbox/checkbox-pt')),
                 'filePath': 'demo/styled/checkbox/checkbox-pt.tsx',
@@ -405,17 +401,9 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/checkbox/disabled-demo')),
                 'filePath': 'demo/styled/checkbox/disabled-demo.tsx',
             },
-            'dynamic-demo': {
-                'component': React.lazy(() => import('demo/styled/checkbox/dynamic-demo')),
-                'filePath': 'demo/styled/checkbox/dynamic-demo.tsx',
-            },
             'filled-demo': {
                 'component': React.lazy(() => import('demo/styled/checkbox/filled-demo')),
                 'filePath': 'demo/styled/checkbox/filled-demo.tsx',
-            },
-            'group-demo': {
-                'component': React.lazy(() => import('demo/styled/checkbox/group-demo')),
-                'filePath': 'demo/styled/checkbox/group-demo.tsx',
             },
             'indeterminate-demo': {
                 'component': React.lazy(() => import('demo/styled/checkbox/indeterminate-demo')),
@@ -428,6 +416,28 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'sizes-demo': {
                 'component': React.lazy(() => import('demo/styled/checkbox/sizes-demo')),
                 'filePath': 'demo/styled/checkbox/sizes-demo.tsx',
+            },
+        },
+        'checkboxgroup': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/checkboxgroup/basic-demo')),
+                'filePath': 'demo/styled/checkboxgroup/basic-demo.tsx',
+            },
+            'card-demo': {
+                'component': React.lazy(() => import('demo/styled/checkboxgroup/card-demo')),
+                'filePath': 'demo/styled/checkboxgroup/card-demo.tsx',
+            },
+            'checkboxgroup-pt': {
+                'component': React.lazy(() => import('demo/styled/checkboxgroup/checkboxgroup-pt')),
+                'filePath': 'demo/styled/checkboxgroup/checkboxgroup-pt.tsx',
+            },
+            'dynamic-demo': {
+                'component': React.lazy(() => import('demo/styled/checkboxgroup/dynamic-demo')),
+                'filePath': 'demo/styled/checkboxgroup/dynamic-demo.tsx',
+            },
+            'indeterminate-demo': {
+                'component': React.lazy(() => import('demo/styled/checkboxgroup/indeterminate-demo')),
+                'filePath': 'demo/styled/checkboxgroup/indeterminate-demo.tsx',
             },
         },
         'chip': {
@@ -2266,6 +2276,58 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'variable-size-demo': {
                 'component': React.lazy(() => import('demo/tailwind/carousel/variable-size-demo')),
                 'filePath': 'demo/tailwind/carousel/variable-size-demo.tsx',
+            },
+        },
+        'checkbox': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/basic-demo')),
+                'filePath': 'demo/tailwind/checkbox/basic-demo.tsx',
+            },
+            'checkbox-pt': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/checkbox-pt')),
+                'filePath': 'demo/tailwind/checkbox/checkbox-pt.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/disabled-demo')),
+                'filePath': 'demo/tailwind/checkbox/disabled-demo.tsx',
+            },
+            'filled-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/filled-demo')),
+                'filePath': 'demo/tailwind/checkbox/filled-demo.tsx',
+            },
+            'indeterminate-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/indeterminate-demo')),
+                'filePath': 'demo/tailwind/checkbox/indeterminate-demo.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/invalid-demo')),
+                'filePath': 'demo/tailwind/checkbox/invalid-demo.tsx',
+            },
+            'sizes-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkbox/sizes-demo')),
+                'filePath': 'demo/tailwind/checkbox/sizes-demo.tsx',
+            },
+        },
+        'checkboxgroup': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkboxgroup/basic-demo')),
+                'filePath': 'demo/tailwind/checkboxgroup/basic-demo.tsx',
+            },
+            'card-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkboxgroup/card-demo')),
+                'filePath': 'demo/tailwind/checkboxgroup/card-demo.tsx',
+            },
+            'checkboxgroup-pt': {
+                'component': React.lazy(() => import('demo/tailwind/checkboxgroup/checkboxgroup-pt')),
+                'filePath': 'demo/tailwind/checkboxgroup/checkboxgroup-pt.tsx',
+            },
+            'dynamic-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkboxgroup/dynamic-demo')),
+                'filePath': 'demo/tailwind/checkboxgroup/dynamic-demo.tsx',
+            },
+            'indeterminate-demo': {
+                'component': React.lazy(() => import('demo/tailwind/checkboxgroup/indeterminate-demo')),
+                'filePath': 'demo/tailwind/checkboxgroup/indeterminate-demo.tsx',
             },
         },
         'colorpicker': {
