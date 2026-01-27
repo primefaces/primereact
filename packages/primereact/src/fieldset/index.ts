@@ -6,3 +6,5 @@ export * as FieldsetProps from './Fieldset.props';
 export { defaultContentProps, FieldsetContent } from './content';
 export { defaultLegendProps, FieldsetLegend } from './legend';
 export { defaultRootProps, FieldsetRoot } from './root';
+export { defaultTitleProps, FieldsetTitle } from './title';
+export { defaultTriggerProps, FieldsetTrigger } from './trigger';

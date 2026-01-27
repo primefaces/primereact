@@ -26,6 +26,7 @@ dist
 **/.DS_Store
 *.pem
 *.code-workspace
+.claude
 
 # debug
 npm-debug.log*

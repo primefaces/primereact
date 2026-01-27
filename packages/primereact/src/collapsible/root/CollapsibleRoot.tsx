@@ -21,6 +21,7 @@ export const CollapsibleRoot = withComponent({
             {
                 id,
                 className: cx('root'),
+                ...(props.disabled ? { 'data-disabled': '' } : undefined),
                 [state.open ? 'data-open' : 'data-closed']: ''
             },
             ptmi('root')

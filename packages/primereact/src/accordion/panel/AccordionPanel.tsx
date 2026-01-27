@@ -17,13 +17,16 @@ export const AccordionPanel = withComponent({
             return accordion?.isItemActive(props.value) ?? false;
         }, [accordion?.state.value, props.value]);
 
+        const disabled = props.disabled || accordion?.props.disabled;
+
         return {
             active,
+            disabled,
             accordion
         };
     },
     render(instance) {
-        const { props, ptmi, active, accordion } = instance;
+        const { props, ptmi, active, disabled, accordion } = instance;
         const { as, ...restProps } = props;
 
         const asProps = isElementOfType(as, 'Collapsible.Root')
@@ -37,8 +40,8 @@ export const AccordionPanel = withComponent({
             restProps,
             asProps,
             {
-                className: accordion?.cx('panel', { active, disabled: props.disabled || accordion?.props.disabled }),
-                'data-disabled': props.disabled || accordion?.props.disabled,
+                className: accordion?.cx('panel', { active, disabled }),
+                ...(disabled ? { 'data-disabled': '' } : undefined),
                 [active ? 'data-open' : 'data-closed']: ''
             },
             accordion?.ptm('panel'),

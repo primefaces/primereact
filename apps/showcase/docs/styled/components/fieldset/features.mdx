@@ -1,6 +1,6 @@
 ---
 title: Fieldset
-description: Fieldset visually integrates a label with its form element.
+description: Fieldset is a grouping component with a legend and content toggle feature.
 component: fieldset
 ---
 
@@ -13,25 +13,34 @@ import { Fieldset } from '@primereact/ui/fieldset';
 ```
 
 ```tsx
-<Fieldset>
-    <Fieldset.Legend />
-    <Fieldset.Content />
-</Fieldset>
+<Fieldset.Root>
+    <Fieldset.Legend>
+        <Fieldset.Trigger>Toggle</Fieldset.Trigger>
+        <Fieldset.Title>Title</Fieldset.Title>
+    </Fieldset.Legend>
+    <Fieldset.Content>Content</Fieldset.Content>
+</Fieldset.Root>
 ```
 
 ## Examples
 
 ### Toggleable
 
-Shows a fieldset with collapsible content that can be shown or hidden by clicking on the legend.
+Fieldset can be made toggleable by using the _Fieldset.Trigger_ component inside the legend. The _defaultOpen_ prop sets the initial open state. Content visibility is animated automatically with the built-in collapsible behavior.
 
 <DocDemoViewer name="fieldset:toggleable-demo" />
+
+### Controlled
+
+Fieldset can be controlled externally using the _open_ and _onOpenChange_ props. This allows full control over the fieldset's open state from the parent component.
+
+<DocDemoViewer name="fieldset:controlled-toggleable-demo" />
 
 ## Accessibility
 
 ### Screen Reader
 
-Fieldset component uses the semantic fieldset element.
+Fieldset component uses the semantic fieldset element. Toggleable fieldsets use a trigger button that has _aria-controls_ to define the id of the content section along with _aria-expanded_ for the visibility state.
 
 ### Keyboard Support
 

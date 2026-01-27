@@ -5,9 +5,9 @@ export default function PanelPT() {
         <Panel.Root toggleable>
             <Panel.Header>
                 <Panel.Title>Header</Panel.Title>
-                <Panel.HeaderActions>
-                    <Panel.Collapse />
-                </Panel.HeaderActions>
+                <Panel.Trigger>
+                    <span className="pi pi-chevron-down transition-transform duration-200 [[data-open]_&]:rotate-180" />
+                </Panel.Trigger>
             </Panel.Header>
             <Panel.Content>
                 <p className="m-0">

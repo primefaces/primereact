@@ -1,5 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
+import { isElementOfType } from '@primereact/core/utils';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useFieldsetContext } from '../Fieldset.context';
@@ -14,16 +15,28 @@ export const FieldsetContent = withComponent({
         return { fieldset };
     },
     render(instance) {
-        const { props, ptmi, fieldset } = instance;
+        const { props, ptmi, ptm, fieldset } = instance;
+        const { as, ...restProps } = props;
+
+        const asProps = isElementOfType(as, 'Collapsible.Content')
+            ? {
+                  pt: ptm('pcCollapsible.content')
+              }
+            : undefined;
 
         const rootProps = mergeProps(
+            restProps,
+            asProps,
             {
-                className: fieldset?.cx('content')
+                id: fieldset?.id + '_content',
+                className: fieldset?.cx('content'),
+                role: 'region',
+                [fieldset?.state.collapsed ? 'data-closed' : 'data-open']: ''
             },
             fieldset?.ptm('content'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

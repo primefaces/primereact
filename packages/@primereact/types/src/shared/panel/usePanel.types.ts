@@ -4,97 +4,54 @@
  *
  * [Live Demo](https://www.primereact.org/panel/)
  *
- * @module usepanel
+ * @module usePanel
  * @group headless
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
+import type { useCollapsibleExposes, useCollapsibleOpenChangeEvent, useCollapsibleProps, useCollapsibleState } from '@primereact/types/shared/collapsible';
 import * as React from 'react';
 
 /**
  * Event object for the onToggle callback.
+ * @extends useCollapsibleOpenChangeEvent
  */
-export interface usePanelToggleEvent {
-    /**
-     * The original event that triggered the toggle.
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * The new value of the panel's toggle state.
-     */
-    value: boolean;
-}
+export interface usePanelOpenChangeEvent<E = React.SyntheticEvent> extends useCollapsibleOpenChangeEvent<E> {}
 
 /**
  * Props for the usePanel hook.
+ * @extends useCollapsibleProps
  */
-export interface usePanelProps {
+export interface usePanelProps extends Omit<useCollapsibleProps, 'onOpenChange'> {
     /**
-     * Whether the panel is collapsed.
-     * @default false
+     * Callback triggered when the content's toggle state changes.
+     * @param event The event that triggered the toggle.
+     * @param event.originalEvent The original event that triggered the toggle.
+     * @param event.value The new value of the open state.
+     * @returns void
      */
-    collapsed?: boolean | undefined;
-    /**
-     * Indicates if the panel can be toggled.
-     * @default false
-     */
-    toggleable?: boolean | undefined;
-    /**
-     * Callback triggered when the panel is collapsed.
-     */
-    onCollapse?: (event: React.SyntheticEvent) => void;
-    /**
-     * Callback triggered when the panel is expanded.
-     */
-    onExpand?: ((event: React.SyntheticEvent) => void) | undefined;
-    /**
-     * Callback triggered when the panel's toggle state changes.
-     */
-    onToggle?: ((event: usePanelToggleEvent) => void) | undefined;
+    onOpenChange?: ((event: usePanelOpenChangeEvent) => void) | undefined;
 }
 
 /**
  * Defines valid state in usePanel.
+ * @extends useCollapsibleState
  */
-export interface usePanelState {
-    /**
-     * Whether the panel is collapsed.
-     */
-    collapsed?: boolean | undefined;
-}
+export interface usePanelState extends useCollapsibleState {}
 
 /**
  * Defines the methods and properties exposed by usePanel.
  */
-export interface usePanelExposes {
+export interface usePanelExposes extends Omit<useCollapsibleExposes, 'state'> {
     /**
      * The state of the usePanel.
      */
     state: usePanelState;
     /**
-     * Reference to the content element of the panel.
+     * Callback to be invoked when the trigger is clicked.
+     * @param event The click event.
      */
-    contentRef: React.RefObject<HTMLDivElement | null>;
-    /**
-     * Toggles the collapsed state of the panel.
-     * @param {React.SyntheticEvent} event - Browser event
-     */
-    toggle: (event: React.SyntheticEvent) => void;
-    /**
-     * Expands the panel.
-     * @param {React.SyntheticEvent} event - Browser event
-     */
-    expand: (event: React.SyntheticEvent) => void;
-    /**
-     * Collapses the panel.
-     * @param {React.SyntheticEvent} event - Browser event
-     */
-    collapse: (event: React.SyntheticEvent) => void;
-    /**
-     * Callback for when the toggle button is clicked.
-     * @param {React.SyntheticEvent} event - Browser event
-     */
-    onButtonClick: (event: React.SyntheticEvent) => void;
+    onTriggerClick?: (event?: React.SyntheticEvent) => void;
 }
 
 /**

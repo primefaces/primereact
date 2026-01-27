@@ -735,6 +735,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/fieldset/basic-demo')),
                 'filePath': 'demo/styled/fieldset/basic-demo.tsx',
             },
+            'controlled-toggleable-demo': {
+                'component': React.lazy(() => import('demo/styled/fieldset/controlled-toggleable-demo')),
+                'filePath': 'demo/styled/fieldset/controlled-toggleable-demo.tsx',
+            },
             'fieldset-pt': {
                 'component': React.lazy(() => import('demo/styled/fieldset/fieldset-pt')),
                 'filePath': 'demo/styled/fieldset/fieldset-pt.tsx',
@@ -1339,10 +1343,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/panel/basic-demo')),
                 'filePath': 'demo/styled/panel/basic-demo.tsx',
             },
-            'controlled-demo': {
-                'component': React.lazy(() => import('demo/styled/panel/controlled-demo')),
-                'filePath': 'demo/styled/panel/controlled-demo.tsx',
-            },
             'panel-pt': {
                 'component': React.lazy(() => import('demo/styled/panel/panel-pt')),
                 'filePath': 'demo/styled/panel/panel-pt.tsx',
@@ -1351,13 +1351,13 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/panel/template-demo')),
                 'filePath': 'demo/styled/panel/template-demo.tsx',
             },
+            'toggleable-controlled-demo': {
+                'component': React.lazy(() => import('demo/styled/panel/toggleable-controlled-demo')),
+                'filePath': 'demo/styled/panel/toggleable-controlled-demo.tsx',
+            },
             'toggleable-demo': {
                 'component': React.lazy(() => import('demo/styled/panel/toggleable-demo')),
                 'filePath': 'demo/styled/panel/toggleable-demo.tsx',
-            },
-            'uncontrolled-demo': {
-                'component': React.lazy(() => import('demo/styled/panel/uncontrolled-demo')),
-                'filePath': 'demo/styled/panel/uncontrolled-demo.tsx',
             },
         },
         'password': {

@@ -41,11 +41,11 @@ export interface useCollapsibleProps {
     /**
      * Callback triggered when the content is opened.
      */
-    onOpen?: (event: React.SyntheticEvent) => void;
+    onOpen?: (event?: React.SyntheticEvent) => void;
     /**
      * Callback triggered when the content is closed.
      */
-    onClose?: (event: React.SyntheticEvent) => void;
+    onClose?: (event?: React.SyntheticEvent) => void;
     /**
      * Callback triggered when the content's toggle state changes.
      * @param event The event that triggered the toggle.
@@ -79,19 +79,19 @@ export interface useCollapsibleExposes {
      * @param event The event that triggered the open.
      * @returns void
      */
-    open: (event: React.SyntheticEvent) => void;
+    open: (event?: React.SyntheticEvent) => void;
     /**
      * The method to close the collapsible content.
      * @param event The event that triggered the close.
      * @returns void
      */
-    close: (event: React.SyntheticEvent) => void;
+    close: (event?: React.SyntheticEvent) => void;
     /**
      * The method to toggle the collapsible content.
      * @param event The event that triggered the toggle.
      * @returns void
      */
-    toggle: (event: React.SyntheticEvent) => void;
+    toggle: (event?: React.SyntheticEvent) => void;
 }
 
 /**

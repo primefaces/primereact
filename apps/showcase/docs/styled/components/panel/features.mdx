@@ -14,8 +14,11 @@ import { Panel } from '@primereact/ui/panel';
 
 ```tsx
 <Panel.Root>
-    <Panel.Header></Panel.Header>
-    <Panel.Content></Panel.Content>
+    <Panel.Header>
+        <Panel.Title>Title</Panel.Title>
+        <Panel.Trigger>Toggle</Panel.Trigger>
+    </Panel.Header>
+    <Panel.Content>Content</Panel.Content>
 </Panel.Root>
 ```
 
@@ -23,14 +26,19 @@ import { Panel } from '@primereact/ui/panel';
 
 ### Toggleable
 
-Panel can be made toggleable by using the _Motion_ component or an animation library to animate the visibility of the content.
-The _Panel.Header_ contains a button to toggle the visibility of the content, and the _Panel.Content_ is wrapped inside the _Motion_ component to handle the animation.
+Panel can be made toggleable by using the _Panel.Trigger_ component in the header. The _defaultOpen_ prop sets the initial open state. Content visibility is animated automatically with the built-in collapsible behavior.
 
 <DocDemoViewer name="panel:toggleable-demo" />
 
+### Controlled
+
+Panel can be controlled externally using the _open_ and _onOpenChange_ props. This allows full control over the panel's open state from the parent component.
+
+<DocDemoViewer name="panel:toggleable-controlled-demo" />
+
 ### Template
 
-Header and footer sections of the panel can be customized using _Panel.Header_ and _Panel.Footer_ components.
+The header section can be customized with custom content like avatars, action buttons, and more alongside the _Panel.Trigger_ for toggling.
 
 <DocDemoViewer name="panel:template-demo" />
 

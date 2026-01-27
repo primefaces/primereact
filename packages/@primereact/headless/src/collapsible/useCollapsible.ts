@@ -18,7 +18,7 @@ export const useCollapsible = withHeadless({
         };
 
         // methods
-        const toggle = (event: React.SyntheticEvent) => {
+        const toggle = (event?: React.SyntheticEvent) => {
             if (openState) {
                 close(event);
             } else {
@@ -26,7 +26,7 @@ export const useCollapsible = withHeadless({
             }
         };
 
-        const open = (event: React.SyntheticEvent) => {
+        const open = (event?: React.SyntheticEvent) => {
             setOpenState([
                 true,
                 {
@@ -38,7 +38,7 @@ export const useCollapsible = withHeadless({
             props.onOpen?.(event);
         };
 
-        const close = (event: React.SyntheticEvent) => {
+        const close = (event?: React.SyntheticEvent) => {
             setOpenState([
                 false,
                 {

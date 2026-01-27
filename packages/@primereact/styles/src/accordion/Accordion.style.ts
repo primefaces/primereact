@@ -30,11 +30,11 @@ export const styles = createStyles<AccordionRootInstance>({
     style,
     classes: {
         root: 'p-accordion p-component',
+        header: 'p-accordionheader',
+        trigger: 'p-accordiontrigger',
         content: 'p-accordioncontent',
         contentOuter: 'p-accordioncontent-wrapper',
         contentInner: 'p-accordioncontent-content',
-        header: 'p-accordionheader',
-        trigger: 'p-accordiontrigger',
         panel: ({ context }) => {
             return [
                 'p-accordionpanel',

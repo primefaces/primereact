@@ -3,11 +3,11 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { usePanelContext } from '../Panel.context';
-import { defaultHeaderActionsProps } from './PanelHeaderActions.props';
+import { defaultTriggerProps } from './PanelTrigger.props';
 
-export const PanelHeaderActions = withComponent({
-    name: 'Panel.HeaderActions',
-    defaultProps: defaultHeaderActionsProps,
+export const PanelTrigger = withComponent({
+    name: 'Panel.Trigger',
+    defaultProps: defaultTriggerProps,
     setup() {
         const panel = usePanelContext();
 
@@ -15,15 +15,18 @@ export const PanelHeaderActions = withComponent({
     },
     render(instance) {
         const { props, ptmi, panel } = instance;
+        const { as, children, ...restProps } = props;
 
         const rootProps = mergeProps(
+            restProps,
             {
-                className: panel?.cx('headerActions')
+                className: panel?.cx('trigger'),
+                onClick: panel?.onTriggerClick
             },
-            panel?.ptm('headerActions'),
+            panel?.ptm('trigger'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={children} />;
     }
 });
