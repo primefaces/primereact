@@ -30,7 +30,7 @@ export const DrawerPortal = withComponent({
         const motionProps = mergeProps(
             {
                 id: drawer?.id,
-                in: drawer?.state.opened,
+                visible: drawer?.state.opened,
                 appear: true,
                 name: 'p-drawer',
                 className: drawer?.cx('root'),

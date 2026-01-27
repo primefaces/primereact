@@ -21,7 +21,7 @@ export const ConfirmPopupPortal = withComponent({
         const motionProps = mergeProps(
             {
                 id: confirmpopup?.id,
-                in: confirmpopup?.state.opened,
+                visible: confirmpopup?.state.opened,
                 appear: true,
                 name: 'p-confirmpopup',
                 className: confirmpopup?.cx('root'),

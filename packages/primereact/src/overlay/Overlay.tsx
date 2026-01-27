@@ -22,7 +22,7 @@ export const Overlay = withComponent({
         const containerProps = mergeProps(
             {
                 id,
-                in: state.visible,
+                visible: state.visible,
                 name: 'p-connected-overlay',
                 onEnter: onOverlayEnter,
                 onAfterEnter: onOverlayAfterEnter,

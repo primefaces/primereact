@@ -33,7 +33,7 @@ export const ConfirmDialogPortal = withComponent({
         const motionProps = mergeProps(
             {
                 id: dialog?.id,
-                in: dialog?.state.opened,
+                visible: dialog?.state.opened,
                 appear: true,
                 name: 'p-dialog',
                 className: cn(dialog?.cx('root'), confirmdialog?.cx('root')),
