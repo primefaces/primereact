@@ -8,8 +8,8 @@ export default function ToggleableDemo() {
         <Fieldset.Root defaultOpen>
             <Fieldset.Legend>
                 <Fieldset.Trigger className="flex items-center gap-2">
-                    {(instance: FieldsetTriggerInstance) => {
-                        const open = instance.fieldset?.state.open;
+                    {({ fieldset }: FieldsetTriggerInstance) => {
+                        const open = fieldset?.state.open;
 
                         return (
                             <>
