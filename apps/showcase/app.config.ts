@@ -57,6 +57,7 @@ const appConfig: AppConfig = {
         }
     },
     metadata: {
+        metadataBase: new URL('https://primereact.org'),
         title: 'PrimeReact - React UI Component Library',
         description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
         robots: 'index, follow',
