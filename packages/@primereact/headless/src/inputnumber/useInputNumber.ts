@@ -1,5 +1,5 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useControlledState, useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
 import { useInputNumberProps } from '@primereact/types/shared/inputnumber';
 import { clearSelection, getSelection, isEmpty, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
@@ -9,8 +9,12 @@ export const useInputNumber = withHeadless({
     name: 'useInputNumber',
     defaultProps,
     setup({ props }) {
-        const [focused, setFocused] = React.useState<boolean>(false);
-        const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
+        const [valueState, setValueState] = useControlledState({
+            value: props.value,
+            defaultValue: props.defaultValue,
+            onChange: props.onValueChange
+        });
+
         const timer = React.useRef<NodeJS.Timeout | null>(null);
         const lastValue = React.useRef<string | null>(null);
         const numberFormat = React.useRef<Intl.NumberFormat | null>(null);
@@ -28,7 +32,8 @@ export const useInputNumber = withHeadless({
         const _index = React.useRef<((d: string) => number | undefined) | null>(null);
 
         const state = {
-            focused
+            value: valueState,
+            formattedValue: undefined as string | undefined
         };
 
         const getOptions = () => {
@@ -224,36 +229,6 @@ export const useInputNumber = withHeadless({
             return null;
         };
 
-        const getInputElement = (): HTMLInputElement | null => {
-            const extractHTMLInput = (ref: HTMLInputElement | { elementRef?: React.RefObject<HTMLInputElement>; inputRef?: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> }> } | null): HTMLInputElement | null => {
-                if (!ref) return null;
-
-                if ('tagName' in ref && ref.tagName === 'INPUT') {
-                    return ref;
-                } else {
-                    if ('inputRef' in ref && ref.inputRef?.current?.elementRef?.current) {
-                        return ref.inputRef.current.elementRef.current;
-                    }
-
-                    if ('elementRef' in ref && ref.elementRef?.current) {
-                        return ref.elementRef.current;
-                    }
-                }
-
-                return null;
-            };
-
-            let targetRef = null;
-
-            if (props.target) {
-                targetRef = 'current' in props.target ? props.target.current : props.target;
-            }
-
-            const refToUse = targetRef || inputRef.current;
-
-            return extractHTMLInput(refToUse);
-        };
-
         const addWithPrecision = (base: number, increment: number) => {
             const baseStr = base.toString();
             const stepStr = increment.toString();
@@ -283,7 +258,7 @@ export const useInputNumber = withHeadless({
         };
 
         const spin = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | null, dir: number) => {
-            const inputEl = getInputElement();
+            /*const inputEl = getInputElement();
 
             if (inputEl) {
                 const step = (props.step ?? 1) * dir;
@@ -293,11 +268,11 @@ export const useInputNumber = withHeadless({
                 updateInput(newValue as number, null, 'spin', String(currentValue));
                 updateModel(event, newValue as useInputNumberProps['value']);
                 handleOnInput(event, String(currentValue), newValue as number);
-            }
+            }*/
         };
 
         const increment = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => {
-            if (!props.disabled) {
+            /*if (!props.disabled) {
                 const inputEl = getInputElement();
 
                 if (inputEl) {
@@ -306,11 +281,11 @@ export const useInputNumber = withHeadless({
 
                 repeat(event, undefined, dir ?? props.step ?? 1);
                 event.preventDefault();
-            }
+            }*/
         };
 
         const decrement = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => {
-            if (!props.disabled) {
+            /*if (!props.disabled) {
                 const inputEl = getInputElement();
 
                 if (inputEl) {
@@ -319,7 +294,7 @@ export const useInputNumber = withHeadless({
 
                 repeat(event, undefined, dir ?? (props.step ?? 1) * -1);
                 event.preventDefault();
-            }
+            }*/
         };
 
         const stopSpin = () => {
@@ -334,7 +309,7 @@ export const useInputNumber = withHeadless({
             }
 
             if (isSpecialChar.current) {
-                (event.target as HTMLInputElement).value = lastValue.current ?? '';
+                event.currentTarget.value = lastValue.current ?? '';
             }
 
             isSpecialChar.current = false;
@@ -345,7 +320,7 @@ export const useInputNumber = withHeadless({
                 return;
             }
 
-            const inputElement = event.target as HTMLInputElement;
+            const inputElement = event.currentTarget;
 
             if (event.altKey || event.ctrlKey || event.metaKey) {
                 isSpecialChar.current = true;
@@ -378,7 +353,7 @@ export const useInputNumber = withHeadless({
                     if (selectionRange > 1) {
                         const cursorPosition = isNumeralChar(inputValue.charAt(selectionStart)) ? selectionStart + 1 : selectionStart + 2;
 
-                        (event.target as HTMLInputElement).setSelectionRange(cursorPosition, cursorPosition);
+                        event.currentTarget.setSelectionRange(cursorPosition, cursorPosition);
                     } else if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                         event.preventDefault();
                     }
@@ -389,7 +364,7 @@ export const useInputNumber = withHeadless({
                     if (selectionRange > 1) {
                         const cursorPosition = selectionEnd - 1;
 
-                        (event.target as HTMLInputElement).setSelectionRange(cursorPosition, cursorPosition);
+                        event.currentTarget.setSelectionRange(cursorPosition, cursorPosition);
                     } else if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                         event.preventDefault();
                     }
@@ -400,8 +375,8 @@ export const useInputNumber = withHeadless({
                 case 'Enter':
                 case 'NumpadEnter':
                     newValueStr = validateValue(parseValue(inputValue)) as useInputNumberProps['value'];
-                    (event.target as HTMLInputElement).value = formatValue(newValueStr);
-                    (event.target as HTMLInputElement).setAttribute('aria-valuenow', newValueStr != null ? String(newValueStr) : '');
+                    event.currentTarget.value = formatValue(newValueStr);
+                    event.currentTarget.setAttribute('aria-valuenow', newValueStr != null ? String(newValueStr) : '');
                     updateModel(event, newValueStr);
                     break;
 
@@ -411,7 +386,7 @@ export const useInputNumber = withHeadless({
                     if (selectionStart === selectionEnd) {
                         if (selectionStart >= inputValue.length && suffixChar.current !== null) {
                             selectionStart = inputValue.length - suffixChar.current.length;
-                            (event.target as HTMLInputElement).setSelectionRange(selectionStart, selectionStart);
+                            event.currentTarget.setSelectionRange(selectionStart, selectionStart);
                         }
 
                         const deleteChar = inputValue.charAt(selectionStart - 1);
@@ -430,7 +405,7 @@ export const useInputNumber = withHeadless({
                                 }
 
                                 if (decimalLength) {
-                                    (event.target as HTMLInputElement).setSelectionRange(selectionStart - 1, selectionStart - 1);
+                                    event.currentTarget.setSelectionRange(selectionStart - 1, selectionStart - 1);
                                 } else {
                                     newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                                 }
@@ -474,7 +449,7 @@ export const useInputNumber = withHeadless({
                                 _decimal.current.lastIndex = 0;
 
                                 if (decimalLength) {
-                                    (event.target as HTMLInputElement).setSelectionRange(selectionStart + 1, selectionStart + 1);
+                                    event.currentTarget.setSelectionRange(selectionStart + 1, selectionStart + 1);
                                 } else {
                                     newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                                 }
@@ -541,7 +516,7 @@ export const useInputNumber = withHeadless({
             }
         };
 
-        const onPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+        const onInputPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
             if (props.readOnly) {
                 return;
             }
@@ -727,8 +702,8 @@ export const useInputNumber = withHeadless({
             return newValueStr;
         };
 
-        const initCursor = () => {
-            const inputEl = getInputElement();
+        const initCursor = (event: React.MouseEvent<HTMLInputElement>) => {
+            const inputEl = event.currentTarget;
 
             if (!inputEl) return 0;
 
@@ -787,7 +762,7 @@ export const useInputNumber = withHeadless({
             return index || 0;
         };
 
-        const onInputClick = () => {
+        const onInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
             const inputEl = getInputElement();
 
             if (!inputEl) return;
@@ -795,7 +770,7 @@ export const useInputNumber = withHeadless({
             const currentValue = inputEl.value;
 
             if (!props.readOnly && currentValue !== getSelection()) {
-                initCursor();
+                initCursor(event);
             }
         };
 
@@ -997,17 +972,24 @@ export const useInputNumber = withHeadless({
         const updateInputValue = (newValue: useInputNumberProps['value']) => {
             newValue = evaluateEmpty(newValue);
 
-            const inputEl = getInputElement();
+            //const inputEl = getInputElement();
 
-            if (!inputEl) return;
+            //if (!inputEl) return;
 
-            const value = inputEl.value;
+            //const value = inputEl.value;
             const _formattedValue = formatValue(newValue);
 
-            if (value !== _formattedValue) {
+            setValueState([
+                newValue,
+                {
+                    value: _formattedValue
+                }
+            ]);
+
+            /*if (value !== _formattedValue) {
                 inputEl.value = _formattedValue;
                 inputEl.setAttribute('aria-valuenow', String(newValue));
-            }
+            }*/
         };
 
         const concatValues = (val1: string, val2: string) => {
@@ -1117,13 +1099,12 @@ export const useInputNumber = withHeadless({
         useMountEffect(() => {
             constructParser();
 
-            const initialValue = props.value ?? props.defaultValue ?? null;
-            const newValue = validateValue(initialValue as number | null);
+            const newValue = validateValue(valueState as number | null);
             const valueForInput = typeof newValue === 'number' ? newValue : null;
 
             updateInputValue(valueForInput);
 
-            if (initialValue !== null && initialValue !== newValue) {
+            if (valueState !== null && valueState !== newValue) {
                 updateModel(null, newValue as number);
             }
         });
@@ -1145,14 +1126,13 @@ export const useInputNumber = withHeadless({
 
         return {
             state,
-            inputRef,
             // methods
             onChange: onInput,
             onInput,
             onInputKeyDown,
             onInputKeyPress,
             onInputClick,
-            onPaste,
+            onInputPaste,
             onInputFocus,
             onInputBlur,
             onValueChange: props.onValueChange,

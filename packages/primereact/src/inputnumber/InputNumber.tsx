@@ -1,8 +1,8 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
+import { isElementOfType } from '@primereact/core/utils';
 import { useInputNumber } from '@primereact/headless/inputnumber';
-import { mergeProps, resolve } from '@primeuix/utils';
-import { InputText } from 'primereact/inputtext';
+import { mergeProps, omit } from '@primeuix/utils';
 import * as React from 'react';
 import { InputNumberProvider } from './InputNumber.context';
 import { defaultProps } from './InputNumber.props';
@@ -16,17 +16,38 @@ export const InputNumber = withComponent({
         return inputnumber;
     },
     render(instance) {
-        const { id, props, ptmi, ptm, cx, state, inputRef, onInput, onInputKeyDown, onInputKeyPress, onInputClick, onPaste, onInputFocus, onInputBlur } = instance;
+        const { id, props, ptmi, cx, state, onInput, onInputKeyDown, onInputKeyPress, onInputClick, onInputPaste, onInputFocus, onInputBlur } = instance;
+        const { as, ...restProps } = props;
+
+        const asProps = isElementOfType(as, 'InputText')
+            ? {
+                  defaultValue: state.formattedValue
+              }
+            : undefined;
 
         const rootProps = mergeProps(
+            omit(restProps, 'styles'),
+            asProps,
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                role: 'spinbutton',
+                'aria-valuemin': props.min,
+                'aria-valuemax': props.max,
+                'aria-valuenow': state.value,
+                inputMode: props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal',
+                onInput: onInput,
+                onKeyDown: onInputKeyDown,
+                onKeyPress: onInputKeyPress,
+                onClick: onInputClick,
+                onPaste: onInputPaste,
+                onFocus: onInputFocus,
+                onBlur: onInputBlur
             },
             ptmi('root')
         );
 
-        const createText = () => {
+        /*const createText = () => {
             const textProps = mergeProps({
                 defaultValue: state.value,
                 id: props.inputId,
@@ -57,16 +78,11 @@ export const InputNumber = withComponent({
             });
 
             return <InputText ref={inputRef} {...textProps} pt={ptm('pcInputText')} />;
-        };
-
-        const text = createText();
+        };*/
 
         return (
             <InputNumberProvider value={instance}>
-                <Component instance={instance} attrs={rootProps}>
-                    {text}
-                    {resolve(props.children, instance)}
-                </Component>
+                <Component as={as} instance={instance} attrs={rootProps} children={props.children} />
             </InputNumberProvider>
         );
     }
