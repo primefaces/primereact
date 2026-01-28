@@ -18,7 +18,9 @@ export const DividerContent = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: divider?.cx('content')
+                className: divider?.cx('content'),
+                'data-orientation': divider?.props.orientation,
+                'data-align': divider?.props.align
             },
             divider?.ptm('content'),
             ptmi('root')

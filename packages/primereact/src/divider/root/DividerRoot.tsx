@@ -23,7 +23,9 @@ export const DividerRoot = withComponent({
                 className: cx('root'),
                 style: sx('root'),
                 role: 'separator',
-                'aria-orientation': props.orientation
+                'aria-orientation': props.orientation,
+                'data-orientation': props.orientation,
+                'data-align': props.align
             },
             ptmi('root')
         );
