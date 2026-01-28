@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { Align, Popover, PopoverArrow, PopoverContent, PopoverPortal, PopoverPositioner, PopoverTrigger, Side } from './popover';
+import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverPortal, PopoverPositioner, PopoverTrigger } from './popover';
+
+import { Align, Side } from './placer';
 
 const items = [
     { side: 'top', align: 'start' },
@@ -22,15 +24,20 @@ const items = [
 export default function Playground() {
     return (
         <div className="w-full h-full overflow-auto">
-            <div className="min-h-screen min-w-[200vw] flex flex-col gap-60 py-60 items-start justify-center">
+            <div className="min-h-screen min-w-[200vw] flex flex-col gap-72 py-60 items-start justify-center">
                 {items.map(({ side, align }) => (
                     <Popover key={side + align}>
                         <PopoverTrigger className="ml-96">Open Popover</PopoverTrigger>
                         <PopoverPortal>
-                            <PopoverPositioner className="max-w-72 w-full" side={side} align={align}>
+                            <PopoverPositioner className="max-w-64 w-full" side={side} align={align}>
                                 <PopoverContent>
-                                    <p className="text-surface-500 dark:text-surface-400 text-sm text-balance"> Review this information carefully. Once you’re ready, continue to the next step to complete the setup.</p>
-                                    <div className="flex items-center mt-4">
+                                    <div className="flex items-start justify-between">
+                                        <h3 className="text-surface-900 dark:text-surface-0 text-sm font-medium">Add a custom image</h3>
+                                        <PopoverClose className="absolute top-2 right-2" />
+                                    </div>
+                                    <p className="text-surface-500 dark:text-surface-400 text-sm  mt-2">Upload an image to personalize your profile. </p>
+                                    <img src="https://pbs.twimg.com/media/G-Dg9iDWwAAuBBF?format=jpg&name=4096x4096" className="w-full h-auto rounded-md border border-surface mt-2" />
+                                    <div className="flex items-center mt-3">
                                         <span className="text-xs text-surface-500 dark:text-surface-400 ">1 of 3</span>
                                         <div className="flex-1 flex items-center justify-end gap-2">
                                             <Button severity="secondary" variant="outlined" size="small">
