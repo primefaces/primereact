@@ -1,5 +1,4 @@
 'use client';
-
 import { usePresence } from '@primereact/hooks';
 import { useGalleryChangeEvent } from '@primereact/types/shared/gallery';
 import { Gallery } from '@primereact/ui/gallery';

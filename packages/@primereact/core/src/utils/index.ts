@@ -20,3 +20,18 @@ export function isElementOfType(obj: any, name: string): boolean {
 
     return displayName === name || displayName?.includes(`PrimeReact.${name}`) || displayName?.includes(`PrimeReact.UI${name}`);
 }
+
+// @todo - move to @primeuix/utils
+export function isCssSupported(property: keyof CSSStyleDeclaration | string, value: string): boolean;
+
+export function isCssSupported(condition: string): boolean;
+
+export function isCssSupported(input: keyof CSSStyleDeclaration | string, value?: string): boolean {
+    if (value !== undefined) {
+        const prop = input.toString().replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+
+        return CSS.supports(prop, value);
+    }
+
+    return CSS.supports(input.toString());
+}

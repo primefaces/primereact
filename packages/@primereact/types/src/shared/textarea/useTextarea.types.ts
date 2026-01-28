@@ -32,9 +32,15 @@ export interface useTextareaState {}
 export interface useTextareaExposes {
     /**
      * Event handler for input events on the textarea.
-     * @returns void
+     * @param event - The input event object.
      */
-    onInput: () => void;
+    onInput: (event: React.FormEvent<HTMLTextAreaElement>) => void;
+    /**
+     * Manually triggers the resize calculation for the textarea.
+     * Useful when programmatically changing the textarea value.
+     * @param element - The textarea element to resize.
+     */
+    resize: (element: HTMLTextAreaElement) => void;
 }
 
 /**

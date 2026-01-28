@@ -1,5 +1,4 @@
 'use client';
-
 import { ColorPicker, ColorPickerArea, ColorPickerSlider } from '@/components/ui/colorpicker';
 
 function VerticalSliderDemo() {

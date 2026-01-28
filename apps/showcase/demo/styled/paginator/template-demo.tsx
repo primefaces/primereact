@@ -1,5 +1,4 @@
 'use client';
-
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Paginator } from '@primereact/ui/paginator';
 import React from 'react';

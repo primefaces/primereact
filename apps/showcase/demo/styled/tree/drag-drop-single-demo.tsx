@@ -1,5 +1,4 @@
 'use client';
-
 import type { TreeNode, useTreeValueChangeEvent } from '@primereact/types/shared/tree';
 import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';

@@ -23,6 +23,12 @@ export const Textarea = withComponent({
             {
                 id,
                 className: cx('root', { $fluid: !!fluid }),
+                'aria-invalid': props.invalid,
+                ...(props.invalid
+                    ? {
+                          'data-invalid': props.invalid
+                      }
+                    : undefined),
                 onInput
             },
             ptmi('root')

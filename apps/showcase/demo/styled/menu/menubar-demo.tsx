@@ -1,5 +1,4 @@
 'use client';
-
 import { MenuInstance } from '@primereact/types/shared/menu';
 import { Menu } from '@primereact/ui/menu';
 import * as React from 'react';

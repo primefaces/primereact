@@ -1,5 +1,4 @@
 'use client';
-
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';

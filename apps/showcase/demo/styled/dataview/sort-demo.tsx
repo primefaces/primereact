@@ -1,13 +1,12 @@
 'use client';
-
 import { ProductService } from '@/shared/services/product.service';
 import { useDataView } from '@primereact/headless/dataview';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { Button } from '@primereact/ui/button';
-import { DataView } from 'primereact/dataview';
 import { Tag } from '@primereact/ui/tag';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 import Image from 'next/image';
+import { DataView } from 'primereact/dataview';
 import * as React from 'react';
 
 interface Product {

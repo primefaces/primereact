@@ -1,5 +1,4 @@
 'use client';
-
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
 import { InputTextInstance } from '@primereact/types/shared/inputtext';
 import { InputText } from 'primereact/inputtext';

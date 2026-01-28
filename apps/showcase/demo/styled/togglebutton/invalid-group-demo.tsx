@@ -1,5 +1,4 @@
 'use client';
-
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 import * as React from 'react';

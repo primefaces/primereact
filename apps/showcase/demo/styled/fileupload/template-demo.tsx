@@ -1,5 +1,4 @@
 'use client';
-
 import { FileUploadRootInstance, FileUploadSelectEvent } from '@primereact/types/shared/fileupload';
 import { Badge } from '@primereact/ui/badge';
 import { Button } from '@primereact/ui/button';

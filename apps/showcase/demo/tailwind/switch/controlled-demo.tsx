@@ -1,5 +1,4 @@
 'use client';
-
 import { Switch } from '@/components/ui/switch';
 import { SwitchRootChangeEvent } from '@primereact/types/shared/switch';
 import React from 'react';

@@ -1,5 +1,4 @@
 'use client';
-
 import { SliderChangeEvent } from '@primereact/types/shared/slider';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { Slider } from '@primereact/ui/slider';

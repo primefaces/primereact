@@ -1,5 +1,4 @@
 'use client';
-
 import type { useCarouselChangeEvent } from '@primereact/types/shared/carousel';
 import { Carousel } from '@primereact/ui/carousel';
 import * as React from 'react';

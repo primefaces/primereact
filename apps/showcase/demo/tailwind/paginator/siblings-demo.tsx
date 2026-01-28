@@ -1,5 +1,4 @@
 'use client';
-
 import { Paginator } from 'primereact/paginator';
 
 function SiblingsDemo() {

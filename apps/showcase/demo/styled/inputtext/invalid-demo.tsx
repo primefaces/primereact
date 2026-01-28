@@ -1,5 +1,4 @@
 'use client';
-
 import { InputText } from '@primereact/ui/inputtext';
 import * as React from 'react';
 

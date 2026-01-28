@@ -1,5 +1,4 @@
 'use client';
-
 import { PasswordChangeEvent, usePasswordProps } from '@primereact/types/shared/password';
 import { Password } from '@primereact/ui/password';
 import * as React from 'react';

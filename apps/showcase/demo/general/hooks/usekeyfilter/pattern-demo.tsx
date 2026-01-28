@@ -1,5 +1,4 @@
 'use client';
-
 import { useKeyFilter } from '@primereact/hooks';
 import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';

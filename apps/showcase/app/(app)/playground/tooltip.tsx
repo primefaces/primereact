@@ -1,5 +1,4 @@
 'use client';
-
 import { useControlledState, usePresence } from '@primereact/hooks';
 import { cn } from '@primeuix/utils';
 import { Portal } from 'primereact/portal';
@@ -145,8 +144,8 @@ function TooltipArrow({ className, ...props }: React.ComponentProps<typeof Place
         <PlacerArrow
             className={cn(
                 `
-                tooltip-arrow absolute bg-surface-900 dark:bg-surface-0 text-surface-0 size-2 rounded-bl-[2.5px] [clip-path:polygon(0_100%,0_0,100%_100%)] 
-                data-[side=top]:-rotate-45 data-[side=bottom]:rotate-135 data-[side=right]:rotate-45 data-[side=left]:-rotate-135 
+                tooltip-arrow absolute bg-surface-900 dark:bg-surface-0 text-surface-0 size-2 rounded-bl-[2.5px] [clip-path:polygon(0_100%,0_0,100%_100%)]
+                data-[side=top]:-rotate-45 data-[side=bottom]:rotate-135 data-[side=right]:rotate-45 data-[side=left]:-rotate-135
                 data-[side=top]:-bottom-1
                 data-[side=bottom]:-top-1
                 data-[side=right]:-left-1

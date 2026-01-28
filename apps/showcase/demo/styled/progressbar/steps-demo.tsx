@@ -1,5 +1,4 @@
 'use client';
-
 import { Button } from '@primereact/ui/button';
 import { ProgressBar } from '@primereact/ui/progressbar';
 import { cn } from '@primeuix/utils';

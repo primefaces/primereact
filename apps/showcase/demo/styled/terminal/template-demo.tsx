@@ -1,5 +1,4 @@
 'use client';
-
 import { TerminalCommandItem, TerminalRootInstance } from '@primereact/types/shared/terminal';
 import { Terminal } from '@primereact/ui/terminal';
 import { TerminalService } from 'primereact/terminalservice';

@@ -1,5 +1,4 @@
 'use client';
-
 import { useInputNumber } from '@primereact/headless/inputnumber';
 import type { InputNumberInstance, useInputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
 import { Button } from '@primereact/ui/button';

@@ -1,7 +1,6 @@
 'use client';
-
-import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { ChevronDownIcon } from '@primereact/icons';
+import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
 

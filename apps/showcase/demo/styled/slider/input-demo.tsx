@@ -1,5 +1,4 @@
 'use client';
-
 import { SliderChangeEvent } from '@primereact/types/shared/slider';
 import { InputText } from '@primereact/ui/inputtext';
 import { Slider } from '@primereact/ui/slider';

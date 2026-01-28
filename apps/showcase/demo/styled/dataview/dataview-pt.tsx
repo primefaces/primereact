@@ -1,5 +1,4 @@
 'use client';
-
 import { ProductService } from '@/shared/services/product.service';
 import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';

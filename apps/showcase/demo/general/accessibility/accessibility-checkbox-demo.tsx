@@ -1,5 +1,4 @@
 'use client';
-
 import { Checkbox } from 'primereact/checkbox';
 
 export default function AccessibilityCheckboxDemo() {

@@ -1,5 +1,4 @@
 'use client';
-
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';

@@ -1,5 +1,4 @@
 'use client';
-
 import { NodeService } from '@/shared/services/node.service';
 import { SwitchChangeEvent } from '@primereact/types/shared/switch';
 import type { TreeNode } from '@primereact/types/shared/tree';

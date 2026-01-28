@@ -1,5 +1,4 @@
 'use client';
-
 import { InputText } from '@/components/ui/inputtext';
 
 export default function Example() {

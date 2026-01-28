@@ -1,5 +1,4 @@
 'use client';
-
 import { PlusIcon } from '@primereact/icons';
 import { SpeedDialRootVisibleChangeEvent } from '@primereact/types/shared/speeddial';
 import { SpeedDial } from '@primereact/ui/speeddial';

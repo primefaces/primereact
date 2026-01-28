@@ -1,5 +1,4 @@
 'use client';
-
 import type { useAccordionChangeEvent } from '@primereact/types/shared/accordion';
 import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
 import { Accordion } from '@primereact/ui/accordion';

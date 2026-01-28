@@ -1,5 +1,4 @@
 'use client';
-
 import { IconService } from '@/shared/services/icon.service';
 import { InputText } from 'primereact/inputtext';
 import * as React from 'react';

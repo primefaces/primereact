@@ -1,5 +1,4 @@
 'use client';
-
 import { TabsProps, useTabsChangeEvent } from '@primereact/types/shared/tabs';
 import { Button } from '@primereact/ui/button';
 import { Tabs } from '@primereact/ui/tabs';

@@ -1,5 +1,4 @@
 'use client';
-
 import { CheckIcon } from '@primereact/icons';
 import type { CheckboxGroupChangeEvent } from '@primereact/types/shared/checkboxgroup';
 import { Checkbox } from '@primereact/ui/checkbox';

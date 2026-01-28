@@ -1,5 +1,4 @@
 'use client';
-
 import type { ListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { Listbox } from '@primereact/ui/listbox';
 import { useState } from 'react';

@@ -1,5 +1,4 @@
 'use client';
-
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { InputText } from 'primereact/inputtext';
 import { Paginator } from 'primereact/paginator';

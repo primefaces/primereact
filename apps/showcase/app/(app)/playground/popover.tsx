@@ -1,5 +1,4 @@
 'use client';
-
 import { useControlledState, usePresence } from '@primereact/hooks';
 import { TimesIcon } from '@primereact/icons';
 import { cn } from '@primeuix/utils';

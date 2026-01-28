@@ -1,5 +1,4 @@
 'use client';
-
 import { useScrollTop } from '@primereact/hooks';
 import { Button } from 'primereact/button';
 import * as React from 'react';

@@ -1,10 +1,9 @@
 'use client';
-
-import type { SelectOptionInstance, SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { ChevronDownIcon } from '@primereact/icons';
+import type { SelectOptionInstance, SelectValueChangeEvent } from '@primereact/types/shared/select';
+import { Avatar } from '@primereact/ui/avatar';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
-import { Avatar } from '@primereact/ui/avatar';
 
 const teamMembers = [
     { id: 1, name: 'Sarah Chen', role: 'Engineering Lead', avatar: 'SC', status: 'away', className: 'bg-amber-400' },

@@ -1,5 +1,4 @@
 'use client';
-
 import { Icon } from '@primereact/core/icon';
 import { Badge } from '@primereact/ui/badge';
 import { Breadcrumb } from '@primereact/ui/breadcrumb';

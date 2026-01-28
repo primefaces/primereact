@@ -1,12 +1,11 @@
 'use client';
-
 import { ProductService } from '@/shared/services/product.service';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Button } from '@primereact/ui/button';
-import { DataView } from 'primereact/dataview';
 import { Paginator } from '@primereact/ui/paginator';
 import { Tag } from '@primereact/ui/tag';
 import Image from 'next/image';
+import { DataView } from 'primereact/dataview';
 import * as React from 'react';
 
 interface Product {

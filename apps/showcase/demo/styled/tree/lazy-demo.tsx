@@ -1,5 +1,4 @@
 'use client';
-
 import { Icon } from '@primereact/core/icon';
 import type { TreeNode, TreeNodeInstance, useTreeExpandEvent } from '@primereact/types/shared/tree';
 import { Tree } from '@primereact/ui/tree';

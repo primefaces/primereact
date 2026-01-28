@@ -1,5 +1,4 @@
 'use client';
-
 import { ConfirmDialogChangeEvent, ConfirmDialogProps } from '@primereact/types/shared/confirmdialog';
 import { Button } from '@primereact/ui/button';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';

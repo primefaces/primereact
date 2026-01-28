@@ -1,5 +1,4 @@
 'use client';
-
 import { InputTagsRootInstance, InputTagsRootValueChangeEvent } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
 import { Label } from '@primereact/ui/label';

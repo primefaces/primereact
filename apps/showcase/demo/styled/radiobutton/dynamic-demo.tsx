@@ -1,5 +1,4 @@
 'use client';
-
 import type { RadioButtonGroupChangeEvent } from '@primereact/types/shared/radiobuttongroup';
 import { Label } from '@primereact/ui/label';
 import { RadioButton } from '@primereact/ui/radiobutton';

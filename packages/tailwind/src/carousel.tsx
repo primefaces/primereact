@@ -1,19 +1,18 @@
 'use client';
-
-import * as React from 'react';
-import { Carousel as PRCarousel } from 'primereact/carousel';
-import { cn } from '@/components/ui/utils';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/components/ui/utils';
 import {
-    type CarouselRootProps,
     type CarouselContentProps,
-    type CarouselNextProps,
-    type CarouselPrevProps,
+    type CarouselIndicatorProps,
+    type CarouselIndicatorsInstance,
     type CarouselIndicatorsProps,
     type CarouselItemProps,
-    type CarouselIndicatorsInstance,
-    type CarouselIndicatorProps
+    type CarouselNextProps,
+    type CarouselPrevProps,
+    type CarouselRootProps
 } from '@primereact/types/shared/carousel';
+import { Carousel as PRCarousel } from 'primereact/carousel';
+import * as React from 'react';
 
 function Carousel({ ...props }: CarouselRootProps) {
     return <PRCarousel.Root {...props} />;
@@ -77,4 +76,4 @@ function CarouselPrev({ className, ...props }: CarouselPrevProps) {
     );
 }
 
-export { Carousel, CarouselContent, CarouselItem, CarouselIndicator, CarouselIndicators, CarouselNext, CarouselPrev };
+export { Carousel, CarouselContent, CarouselIndicator, CarouselIndicators, CarouselItem, CarouselNext, CarouselPrev };

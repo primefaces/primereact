@@ -1,5 +1,4 @@
 'use client';
-
 import { ContextMenuCheckboxItemCheckedChangeEvent, ContextMenuRadioGroupValueChangeEvent } from '@primereact/types/shared/contextmenu';
 import { ContextMenu } from '@primereact/ui/contextmenu';
 import * as React from 'react';

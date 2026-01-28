@@ -1,5 +1,4 @@
 'use client';
-
 import { EyeIcon } from '@primereact/icons/eye';
 import { EyeSlashIcon } from '@primereact/icons/eyeslash';
 import { PasswordInstance } from '@primereact/types/shared/password';

@@ -1,5 +1,4 @@
 'use client';
-
 import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import Link from 'next/link';
 import * as React from 'react';

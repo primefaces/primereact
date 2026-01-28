@@ -1,5 +1,4 @@
 'use client';
-
 import { NodeService } from '@/shared/services/node.service';
 import type { TreeNode } from '@primereact/types/shared/tree';
 import { Tree } from '@primereact/ui/tree';

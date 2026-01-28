@@ -1,5 +1,4 @@
 'use client';
-
 import { useMask, type UseMaskChangeEvent } from '@primereact/hooks';
 import * as React from 'react';
 

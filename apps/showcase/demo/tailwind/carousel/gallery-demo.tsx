@@ -1,7 +1,6 @@
 'use client';
-
-import type { useCarouselChangeEvent } from '@primereact/types/shared/carousel';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import type { useCarouselChangeEvent } from '@primereact/types/shared/carousel';
 import * as React from 'react';
 
 const images = [

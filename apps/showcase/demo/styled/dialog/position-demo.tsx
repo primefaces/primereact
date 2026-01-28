@@ -1,5 +1,4 @@
 'use client';
-
 import { DialogChangeEvent, DialogContentInstance, DialogProps } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';

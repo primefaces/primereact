@@ -1,5 +1,4 @@
 'use client';
-
 import { Panel } from 'primereact/panel';
 
 export default function BasicDemo() {

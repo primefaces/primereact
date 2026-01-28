@@ -1,7 +1,6 @@
 'use client';
-
-import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { ChevronDownIcon, TimesIcon } from '@primereact/icons';
+import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Chip } from '@primereact/ui/chip';
 import { Select } from '@primereact/ui/select';
 import { Tag } from '@primereact/ui/tag';

@@ -1,5 +1,4 @@
 'use client';
-
 import { parseColor } from '@primereact/headless/colorpicker';
 import type { ColorInstance, ColorSpace } from '@primereact/types/shared/colorpicker';
 import { useColorPickerChangeEvent } from '@primereact/types/shared/colorpicker';

@@ -1,10 +1,9 @@
 'use client';
-
 import { ProductService } from '@/shared/services/product.service';
 import { Button } from '@primereact/ui/button';
-import { DataView } from 'primereact/dataview';
 import { Tag } from '@primereact/ui/tag';
 import Image from 'next/image';
+import { DataView } from 'primereact/dataview';
 import * as React from 'react';
 
 interface Product {

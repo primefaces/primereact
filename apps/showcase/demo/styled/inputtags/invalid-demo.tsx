@@ -1,5 +1,4 @@
 'use client';
-
 import { InputTagsRootInstance, useInputTagsValueChangeEvent } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
 import * as React from 'react';
