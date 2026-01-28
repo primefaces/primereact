@@ -21,9 +21,7 @@ export const UIPanelRoot = withComponent({
     name: 'Panel.Root',
     defaultProps: defaultRootProps,
     render(instance) {
-        const { inProps } = instance;
-
-        const rootProps = mergeDefaultProps({ as: CollapsibleRoot, styles }, inProps);
+        const rootProps = mergeDefaultProps({ as: CollapsibleRoot, styles }, instance.inProps);
 
         return <Component as={PanelRoot} attrs={rootProps} />;
     }
