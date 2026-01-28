@@ -231,31 +231,31 @@ export interface useAutoCompleteState {
     /**
      * The current selected value.
      */
-    value?: unknown;
+    value: unknown;
     /**
      * The current input text value.
      */
-    inputValue?: string;
+    inputValue: string;
     /**
      * Whether the overlay is open.
      */
-    opened?: boolean;
+    opened: boolean;
     /**
      * Whether the clear icon should be shown.
      */
-    showClearIcon?: boolean;
+    showClearIcon: boolean;
     /**
      * Whether the input is focused.
      */
-    focused?: boolean;
+    focused: boolean;
     /**
      * The index of the currently focused option. -1 if no option is focused.
      */
-    focusedOptionIndex?: number;
+    focusedOptionIndex: number;
     /**
      * Whether a search is in progress.
      */
-    searching?: boolean;
+    searching: boolean;
 }
 
 /**

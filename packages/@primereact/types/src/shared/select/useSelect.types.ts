@@ -182,23 +182,23 @@ export interface useSelectState {
     /**
      * The current selected value.
      */
-    value?: unknown;
+    value: unknown | undefined;
     /**
      * The current filter text value.
      */
-    filterValue?: string;
+    filterValue: string;
     /**
      * Whether the overlay is open.
      */
-    opened?: boolean;
+    opened: boolean;
     /**
      * Whether the trigger is focused.
      */
-    focused?: boolean;
+    focused: boolean;
     /**
      * The index of the currently focused option. -1 if no option is focused.
      */
-    focusedOptionIndex?: number;
+    focusedOptionIndex: number;
 }
 
 /**
