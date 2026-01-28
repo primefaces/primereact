@@ -2,15 +2,15 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { Button } from '@primereact/ui/button';
 import { mergeDefaultProps } from '@primeuix/utils';
-import { defaultButtonProps, SpeedDialButton } from 'primereact/speeddial';
+import { defaultTriggerProps, SpeedDialTrigger } from 'primereact/speeddial';
 import * as React from 'react';
 
-export const UISpeedDialButton = withComponent({
-    name: 'SpeedDial.Button',
-    defaultProps: defaultButtonProps,
+export const UISpeedDialTrigger = withComponent({
+    name: 'SpeedDial.Trigger',
+    defaultProps: defaultTriggerProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ as: Button }, instance.inProps);
 
-        return <Component as={SpeedDialButton} attrs={rootProps} />;
+        return <Component as={SpeedDialTrigger} attrs={rootProps} />;
     }
 });

@@ -46,7 +46,7 @@ export interface SpeedDialRootPassThrough {
 /**
  * Event fired when the speeddial's visibility changes.
  */
-export interface SpeedDialRootChangeEvent {
+export interface SpeedDialRootVisibleChangeEvent {
     /**
      * The value of the speeddial.
      */
@@ -63,17 +63,12 @@ export interface SpeedDialRootProps extends BaseComponentProps<SpeedDialRootInst
      */
     disabled?: boolean | undefined;
     /**
-     * Defined to rotate showIcon when hideIcon is not present.
-     * @default true
-     */
-    rotateAnimation?: boolean | undefined;
-    /**
      * Callback fired when the speeddial's visibility changes.
      * @param event The event that triggered the change.
      * @param event.value The value of the speeddial.
      * @returns void
      */
-    onVisibleChange?: (event: SpeedDialRootChangeEvent) => void;
+    onVisibleChange?: (event: SpeedDialRootVisibleChangeEvent) => void;
 }
 
 /**

@@ -1,14 +1,13 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { PlusIcon } from '@primereact/icons';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useSpeedDialContext } from '../SpeedDial.context';
-import { defaultButtonProps } from './SpeedDialButton.props';
+import { defaultTriggerProps } from './SpeedDialTrigger.props';
 
-export const SpeedDialButton = withComponent({
-    name: 'SpeedDial.Button',
-    defaultProps: defaultButtonProps,
+export const SpeedDialTrigger = withComponent({
+    name: 'SpeedDial.Trigger',
+    defaultProps: defaultTriggerProps,
     setup() {
         const speeddial = useSpeedDialContext();
 
@@ -22,23 +21,18 @@ export const SpeedDialButton = withComponent({
             restProps,
             {
                 type: 'button',
-                className: speeddial?.cx('button'),
+                className: speeddial?.cx('trigger'),
                 'aria-expanded': speeddial?.state.visible,
                 'aria-haspopup': 'true',
                 'aria-controls': `${speeddial?.id}_list`,
-                onClick: speeddial?.onClick,
-                onKeyDown: speeddial?.onTogglerKeydown
+                [speeddial?.state.visible ? 'data-open' : 'data-closed']: '',
+                onClick: speeddial?.onTriggerClick,
+                onKeyDown: speeddial?.onTriggerKeyDown
             },
-            speeddial?.ptm('button'),
+            speeddial?.ptm('trigger'),
             ptmi('root')
         );
 
-        const createIconElement = () => {
-            return <PlusIcon pt={speeddial?.ptm('icon')} />;
-        };
-
-        const icon = createIconElement();
-
-        return <Component as={as} instance={instance} attrs={rootProps} children={props.children ?? icon} />;
+        return <Component as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

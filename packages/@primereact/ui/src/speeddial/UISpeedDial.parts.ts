@@ -1,4 +1,4 @@
 export { SpeedDialItem as Item, SpeedDialList as List } from 'primereact/speeddial';
 export { UISpeedDialAction as Action } from './action';
-export { UISpeedDialButton as Button } from './button';
+export { UISpeedDialTrigger as Trigger } from './trigger';
 export { UISpeedDialRoot as Root } from './root';

@@ -1,5 +1,5 @@
 export { defaultActionProps } from './action';
-export { defaultButtonProps } from './button';
+export { defaultTriggerProps } from './trigger';
 export { defaultItemProps } from './item';
 export { defaultListProps } from './list';
 export { defaultRootProps } from './root';

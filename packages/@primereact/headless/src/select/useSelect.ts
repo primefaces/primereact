@@ -47,6 +47,7 @@ export const useSelect = withHeadless({
             defaultValue: props.defaultOpen ?? false,
             onChange: props.onOpenChange
         });
+
         const [focusedState, setFocusedState] = React.useState(false);
 
         const state = {

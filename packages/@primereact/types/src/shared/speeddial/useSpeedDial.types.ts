@@ -26,12 +26,10 @@ export interface useSpeedDialChangeEvent {
 export interface useSpeedDialProps {
     /**
      * Whether the speeddial is visible or not.
-     * @default false
      */
     visible?: boolean | undefined;
     /**
      * Whether the speeddial is visible or not.
-     * @default false
      */
     defaultVisible?: boolean | undefined;
     /**
@@ -75,7 +73,7 @@ export interface useSpeedDialState {
     /**
      * Visible state of the component.
      */
-    visible: boolean;
+    visible: boolean | undefined;
     /**
      * Current focused option index.
      */
@@ -121,13 +119,13 @@ export interface useSpeedDialExposes {
      * Handler for click event.
      * @returns void
      */
-    onClick: () => void;
+    onTriggerClick: () => void;
     /**
      * Handler for keydown events on toggler.
      * @param event - Touch event
      * @returns void
      */
-    onTogglerKeydown: (event: React.KeyboardEvent) => void;
+    onTriggerKeyDown: (event: React.KeyboardEvent) => void;
     /**
      * Handler for click event on items.
      * @param event - Click event

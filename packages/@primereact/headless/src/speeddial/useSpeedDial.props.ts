@@ -1,8 +1,8 @@
 import type { useSpeedDialProps } from '@primereact/types/shared/speeddial';
 
 export const defaultProps: useSpeedDialProps = {
-    visible: false,
-    defaultVisible: false,
+    visible: undefined,
+    defaultVisible: undefined,
     direction: 'up',
     transitionDelay: 30,
     type: 'linear',

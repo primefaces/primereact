@@ -28,7 +28,8 @@ export const SpeedDialItem = withComponent({
                 id: `${speeddial?.id}_${index}`,
                 className: speeddial?.cx('item'),
                 style: speeddial?.getItemStyle(index),
-                role: 'none'
+                role: 'none',
+                'data-active': speeddial?.state.focusedOptionIndex === index ? '' : undefined
             },
             ptmi('root')
         );
