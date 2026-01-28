@@ -12,7 +12,7 @@ export default function SpeedDialPTDemo() {
     return (
         <div style={{ position: 'relative', height: '300px' }}>
             <SpeedDial.Root direction="down" style={{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }}>
-                <SpeedDial.Button />
+                <SpeedDial.Trigger />
                 <SpeedDial.List>
                     {items.map((action) => (
                         <SpeedDial.Item key={action.icon}>

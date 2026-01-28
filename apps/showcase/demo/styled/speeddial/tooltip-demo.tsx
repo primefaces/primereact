@@ -1,3 +1,4 @@
+import { PlusIcon } from '@primereact/icons';
 import { SpeedDial } from '@primereact/ui/speeddial';
 import { Tooltip } from '@primereact/ui/tooltip';
 
@@ -14,14 +15,16 @@ export default function TooltipDemo() {
         <div>
             <div style={{ position: 'relative', height: '350px' }}>
                 <SpeedDial.Root direction="up" style={{ position: 'absolute', right: 0, bottom: 0 }}>
-                    <SpeedDial.Button severity="help" />
+                    <SpeedDial.Trigger severity="help" className="transition-transform duration-200 data-open:rotate-45">
+                        <PlusIcon />
+                    </SpeedDial.Trigger>
                     <SpeedDial.List>
                         <Tooltip.Group>
                             {items.map((action) => (
                                 <Tooltip.Root key={action.icon} side="left">
                                     <Tooltip.Trigger as={SpeedDial.Item}>
                                         <SpeedDial.Action>
-                                            <i className={action.icon}></i>
+                                            <i className={action.icon} />
                                         </SpeedDial.Action>
                                     </Tooltip.Trigger>
                                     <Tooltip.Portal>
@@ -36,14 +39,16 @@ export default function TooltipDemo() {
                     </SpeedDial.List>
                 </SpeedDial.Root>
                 <SpeedDial.Root direction="up" style={{ position: 'absolute', left: 0, bottom: 0 }}>
-                    <SpeedDial.Button severity="danger" />
+                    <SpeedDial.Trigger severity="danger" className="transition-transform duration-200 data-open:rotate-45">
+                        <PlusIcon />
+                    </SpeedDial.Trigger>
                     <SpeedDial.List>
                         <Tooltip.Group>
                             {items.map((action) => (
                                 <Tooltip.Root key={action.icon} side="right">
                                     <Tooltip.Trigger as={SpeedDial.Item}>
                                         <SpeedDial.Action>
-                                            <i className={action.icon}></i>
+                                            <i className={action.icon} />
                                         </SpeedDial.Action>
                                     </Tooltip.Trigger>
                                     <Tooltip.Portal>

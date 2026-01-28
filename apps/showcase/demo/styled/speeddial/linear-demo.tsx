@@ -1,4 +1,5 @@
-import { SpeedDialProps } from '@primereact/types/shared/speeddial';
+import { PlusIcon } from '@primereact/icons';
+import { useSpeedDialProps } from '@primereact/types/shared/speeddial';
 import { SpeedDial } from '@primereact/ui/speeddial';
 
 const directions = [
@@ -21,13 +22,19 @@ export default function LinearDemo() {
         <div>
             <div style={{ position: 'relative', height: '500px' }}>
                 {directions.map((item, index) => (
-                    <SpeedDial.Root key={index} direction={item.direction as SpeedDialProps['direction']} style={item.style as React.CSSProperties}>
-                        <SpeedDial.Button />
+                    <SpeedDial.Root
+                        key={index}
+                        direction={item.direction as useSpeedDialProps['direction']}
+                        style={item.style as React.CSSProperties}
+                    >
+                        <SpeedDial.Trigger className="transition-transform duration-200 data-open:rotate-45">
+                            <PlusIcon />
+                        </SpeedDial.Trigger>
                         <SpeedDial.List>
                             {items.map((action) => (
                                 <SpeedDial.Item key={action.icon}>
                                     <SpeedDial.Action>
-                                        <i className={action.icon}></i>
+                                        <i className={action.icon} />
                                     </SpeedDial.Action>
                                 </SpeedDial.Item>
                             ))}

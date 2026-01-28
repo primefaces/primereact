@@ -1,3 +1,4 @@
+import { PlusIcon } from '@primereact/icons';
 import { SpeedDial } from '@primereact/ui/speeddial';
 
 export default function BasicDemo() {
@@ -12,13 +13,15 @@ export default function BasicDemo() {
     return (
         <div>
             <div style={{ position: 'relative', height: '240px' }}>
-                <SpeedDial.Root direction={'up'} style={{ position: 'absolute', right: 0, bottom: 0 }}>
-                    <SpeedDial.Button />
+                <SpeedDial.Root direction="up" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+                    <SpeedDial.Trigger className="transition-transform duration-200 data-open:rotate-45">
+                        <PlusIcon />
+                    </SpeedDial.Trigger>
                     <SpeedDial.List>
                         {items.map((action) => (
                             <SpeedDial.Item key={action.icon}>
                                 <SpeedDial.Action>
-                                    <i className={action.icon}></i>
+                                    <i className={action.icon} />
                                 </SpeedDial.Action>
                             </SpeedDial.Item>
                         ))}

@@ -1,6 +1,6 @@
 ---
 title: SpeedDial
-description: SpeedDial component is used to categorize content.
+description: SpeedDial is a floating action button with a popup menu displaying a set of actions.
 component: speeddial
 ---
 
@@ -8,60 +8,83 @@ component: speeddial
 ## Usage
 
 ```tsx
+import { PlusIcon } from '@primereact/icons';
 import { SpeedDial } from '@primereact/ui/speeddial';
 ```
 
 ```tsx
-<SpeedDial>
-    <SpeedDial.Button />
+<SpeedDial.Root direction="up">
+    <SpeedDial.Trigger>
+        <PlusIcon />
+    </SpeedDial.Trigger>
     <SpeedDial.List>
         <SpeedDial.Item>
-            <SpeedDial.Action />
+            <SpeedDial.Action>
+                <i className="pi pi-pencil" />
+            </SpeedDial.Action>
         </SpeedDial.Item>
     </SpeedDial.List>
-</SpeedDial>
+</SpeedDial.Root>
 ```
 
 ## Examples
 
 ### Linear
 
+When `type` is set to `linear` (default), items are displayed in a line based on the `direction` prop. The direction can be `up`, `down`, `left`, or `right`.
+
 <DocDemoViewer name="speeddial:linear-demo" />
 
 ### Circle
 
-Items can be displayed around the button when _type_ is set to _circle_. Additional _radius_ property defines the radius of the circle.
+Items can be displayed around the button when `type` is set to `circle`. Additional `radius` property defines the radius of the circle.
 
 <DocDemoViewer name="speeddial:circle-demo" />
 
 ### Semi Circle
 
-When _type_ is defined as _semi-circle_, items are displayed in a half-circle around the button.
+When `type` is defined as `semi-circle`, items are displayed in a half-circle around the button.
 
 <DocDemoViewer name="speeddial:semicircle-demo" />
 
 ### Quarter Circle
 
-Setting _type_ as _quarter-circle_ displays the items at one of four corners of a button based on the _direction_.
+Setting `type` as `quarter-circle` displays the items at one of four corners of a button based on the `direction`.
 
 <DocDemoViewer name="speeddial:quartercircle-demo" />
 
+### Transition Delay
+
+The `transitionDelay` property specifies the delay in milliseconds between each action item's appearance animation.
+
+<DocDemoViewer name="speeddial:transitiondelay-demo" />
+
 ### Template
+
+SpeedDial supports full customization of the button and action items using render props or custom components.
 
 <DocDemoViewer name="speeddial:template-demo" />
 
 ### Tooltip
 
+SpeedDial can be combined with Tooltip component to display labels for action items.
+
 <DocDemoViewer name="speeddial:tooltip-demo" />
+
+### Mask
+
+SpeedDial can be combined with Motion component to display a mask overlay when opened.
+
+<DocDemoViewer name="speeddial:mask-demo" />
 
 ## Accessibility
 
 ### Screen Reader
 
-SpeedDial component renders a native button element that implicitly includes any passed prop. Text to describe the button can be defined with the <i>aria-labelledby</i> or <i>aria-label</i> props. Addititonally the button includes
-<i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button. can be added to implement custom key handlers.
+SpeedDial component renders a native button element that implicitly includes any passed prop. Text to describe the button can be defined with the `aria-labelledby` or `aria-label` props. Addititonally the button includes
+`aria-haspopup`, `aria-expanded` for states along with `aria-controls` to define the relation between the popup and the button. can be added to implement custom key handlers.
 
-The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the button.
+The popup overlay uses `menu` role on the list and each action item has a `menuitem` role with an `aria-label` as the menuitem label. The id of the menu refers to the `aria-controls` of the button.
 
 ### Keyboard Support
 

@@ -1701,6 +1701,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/speeddial/linear-demo')),
                 'filePath': 'demo/styled/speeddial/linear-demo.tsx',
             },
+            'mask-demo': {
+                'component': React.lazy(() => import('demo/styled/speeddial/mask-demo')),
+                'filePath': 'demo/styled/speeddial/mask-demo.tsx',
+            },
             'quartercircle-demo': {
                 'component': React.lazy(() => import('demo/styled/speeddial/quartercircle-demo')),
                 'filePath': 'demo/styled/speeddial/quartercircle-demo.tsx',
@@ -1720,6 +1724,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'tooltip-demo': {
                 'component': React.lazy(() => import('demo/styled/speeddial/tooltip-demo')),
                 'filePath': 'demo/styled/speeddial/tooltip-demo.tsx',
+            },
+            'transitiondelay-demo': {
+                'component': React.lazy(() => import('demo/styled/speeddial/transitiondelay-demo')),
+                'filePath': 'demo/styled/speeddial/transitiondelay-demo.tsx',
             },
         },
         'splitter': {

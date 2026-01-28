@@ -1,3 +1,5 @@
+import { PlusIcon } from '@primereact/icons';
+import { useSpeedDialProps } from '@primereact/types/shared/speeddial';
 import { SpeedDial } from '@primereact/ui/speeddial';
 
 const directions = [
@@ -20,13 +22,21 @@ export default function SemiCircleDemo() {
         <div>
             <div style={{ position: 'relative', height: '500px' }}>
                 {directions.map((item) => (
-                    <SpeedDial.Root key={item.direction} radius={80} type="semi-circle" direction={item.direction} style={item.style}>
-                        <SpeedDial.Button />
+                    <SpeedDial.Root
+                        key={item.direction}
+                        radius={80}
+                        type="semi-circle"
+                        direction={item.direction as useSpeedDialProps['direction']}
+                        style={item.style as React.CSSProperties}
+                    >
+                        <SpeedDial.Trigger severity="success" className="transition-transform duration-200 data-open:rotate-45">
+                            <PlusIcon />
+                        </SpeedDial.Trigger>
                         <SpeedDial.List>
                             {items.map((action) => (
                                 <SpeedDial.Item key={action.icon}>
                                     <SpeedDial.Action>
-                                        <i className={action.icon}></i>
+                                        <i className={action.icon} />
                                     </SpeedDial.Action>
                                 </SpeedDial.Item>
                             ))}
