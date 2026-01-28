@@ -35,12 +35,6 @@ export interface useTextareaExposes {
      * @param event - The input event object.
      */
     onInput: (event: React.FormEvent<HTMLTextAreaElement>) => void;
-    /**
-     * Manually triggers the resize calculation for the textarea.
-     * Useful when programmatically changing the textarea value.
-     * @param element - The textarea element to resize.
-     */
-    resize: (element: HTMLTextAreaElement) => void;
 }
 
 /**
