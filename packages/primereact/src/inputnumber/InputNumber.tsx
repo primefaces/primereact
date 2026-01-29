@@ -21,8 +21,7 @@ export const InputNumber = withComponent({
 
         const asProps = isElementOfType(as, 'InputText')
             ? {
-                  defaultValue: state.formattedValue,
-                  onInput: onInput
+                  defaultValue: state.formattedValue
               }
             : undefined;
 
