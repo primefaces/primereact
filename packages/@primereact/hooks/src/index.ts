@@ -7,6 +7,7 @@ export * from './use-key-filter';
 export * from './use-mask';
 export * from './use-match-media';
 export * from './use-mount-effect';
+export * from './use-number-formatter';
 export * from './use-presence';
 export * from './use-previous';
 export * from './use-props';

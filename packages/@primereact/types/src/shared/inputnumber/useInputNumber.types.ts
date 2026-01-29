@@ -124,10 +124,6 @@ export interface useInputNumberProps {
      */
     highlightOnFocus?: boolean | undefined;
     /**
-     * Reference to external input element for InputGroup integration.
-     */
-    target?: HTMLInputElement | React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
-    /**
      * Callback to invoke when value changes.
      * @param {useInputNumberValueChangeEvent} event - Custom change event.
      * @returns void
@@ -146,9 +142,13 @@ export interface useInputNumberProps {
  */
 export interface useInputNumberState {
     /**
-     * Indicates whether the input field is currently focused.
+     * Current value.
      */
-    focused: boolean;
+    value: number | null | undefined;
+    /**
+     * Formatted value.
+     */
+    formattedValue: string;
 }
 
 /**
@@ -160,9 +160,11 @@ export interface useInputNumberExposes {
      */
     state: useInputNumberState;
     /**
-     * Reference to the input element.
+     * Change event handler (alias for onInput).
+     * @param {React.ChangeEvent<HTMLInputElement>} event - Change event.
+     * @returns void
      */
-    inputRef: React.RefObject<{ elementRef: React.RefObject<HTMLInputElement> } | null>;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     /**
      * Input event handler.
      * @param {React.ChangeEvent<HTMLInputElement>} event - Change event.
@@ -185,13 +187,13 @@ export interface useInputNumberExposes {
      * Input click event handler.
      * @returns void
      */
-    onInputClick: () => void;
+    onInputClick: (event: React.MouseEvent<HTMLInputElement>) => void;
     /**
      * Paste event handler.
      * @param {React.ClipboardEvent<HTMLInputElement>} event - Clipboard event.
      * @returns void
      */
-    onPaste: (event: React.ClipboardEvent<HTMLInputElement>) => void;
+    onInputPaste: (event: React.ClipboardEvent<HTMLInputElement>) => void;
     /**
      * Input focus event handler.
      * @param {React.FocusEvent<HTMLInputElement>} event - Focus event.
@@ -215,19 +217,31 @@ export interface useInputNumberExposes {
      */
     minBoundry: () => boolean;
     /**
-     * Increments the input number value.
+     * Increments the input number value (requires event from input element).
      * @param {React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>} event - Browser event.
      * @param {number} dir - Direction value for increment.
      * @returns void
      */
     increment: (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => void;
     /**
-     * Decrements the input number value.
+     * Decrements the input number value (requires event from input element).
      * @param {React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>} event - Browser event.
      * @param {number} dir - Direction value for decrement.
      * @returns void
      */
     decrement: (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement>, dir: number) => void;
+    /**
+     * Increments the input number value without requiring an event. Use this for external buttons.
+     * @param {number} step - Optional step value for increment. Defaults to props.step or 1.
+     * @returns void
+     */
+    stepUp: (step?: number) => void;
+    /**
+     * Decrements the input number value without requiring an event. Use this for external buttons.
+     * @param {number} step - Optional step value for decrement. Defaults to props.step or 1.
+     * @returns void
+     */
+    stepDown: (step?: number) => void;
     /**
      * Stops the spinning/repeating increment/decrement actions.
      * @returns void

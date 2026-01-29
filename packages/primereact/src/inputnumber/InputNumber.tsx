@@ -21,12 +21,13 @@ export const InputNumber = withComponent({
 
         const asProps = isElementOfType(as, 'InputText')
             ? {
-                  defaultValue: state.formattedValue
+                  defaultValue: state.formattedValue,
+                  onInput: onInput
               }
             : undefined;
 
         const rootProps = mergeProps(
-            omit(restProps, 'styles'),
+            omit(restProps, 'styles', 'format', 'useGrouping', 'allowEmpty', 'highlightOnFocus', 'minFractionDigits', 'maxFractionDigits', 'currencyDisplay', 'onValueChange', 'value', 'defaultValue'),
             asProps,
             {
                 id,
@@ -46,39 +47,6 @@ export const InputNumber = withComponent({
             },
             ptmi('root')
         );
-
-        /*const createText = () => {
-            const textProps = mergeProps({
-                defaultValue: state.value,
-                id: props.inputId,
-                className: cx('text'),
-                role: 'spinbutton',
-                'aria-valuemin': props.min,
-                'aria-valuemax': props.max,
-                'aria-valuenow': state.value,
-                'aria-labelledby': props['aria-labelledby'],
-                'aria-label': props['aria-label'],
-                inputMode: props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal',
-                name: props.name,
-                disabled: props.disabled,
-                readOnly: props.readonly,
-                placeholder: props.placeholder,
-                required: props.required,
-                size: props.size,
-                invalid: props.invalid,
-                variant: props.variant,
-                fluid: props.fluid,
-                onInput: onInput,
-                onKeyDown: onInputKeyDown,
-                onKeyPress: onInputKeyPress,
-                onClick: onInputClick,
-                onPaste,
-                onFocus: onInputFocus,
-                onBlur: onInputBlur
-            });
-
-            return <InputText ref={inputRef} {...textProps} pt={ptm('pcInputText')} />;
-        };*/
 
         return (
             <InputNumberProvider value={instance}>
