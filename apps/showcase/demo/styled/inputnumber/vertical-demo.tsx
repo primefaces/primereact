@@ -10,7 +10,7 @@ import * as React from 'react';
 export default function VerticalDemo() {
     const [value, setValue] = React.useState(50);
 
-    const inputNumber = useInputNumber({
+    const { state, onInput, onInputKeyDown, onInputKeyPress } = useInputNumber({
         value: value,
         onValueChange: (e: useInputNumberValueChangeEvent) => setValue(e.value)
     });
@@ -28,11 +28,11 @@ export default function VerticalDemo() {
                     <i className="pi pi-plus"></i>
                 </InputGroup.Addon>
                 <InputText
-                    value={inputNumber.state.formattedValue}
+                    value={state.formattedValue}
                     className="w-12 text-center rounded-none"
-                    onChange={inputNumber.onInput}
-                    onKeyDown={inputNumber.onInputKeyDown}
-                    onKeyPress={inputNumber.onInputKeyPress}
+                    onChange={onInput}
+                    onKeyDown={onInputKeyDown}
+                    onKeyPress={onInputKeyPress}
                 />
                 <InputGroup.Addon
                     as={Button}
