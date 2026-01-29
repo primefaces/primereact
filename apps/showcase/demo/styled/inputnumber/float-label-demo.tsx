@@ -1,4 +1,5 @@
 'use client';
+
 import type { InputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
 import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputNumber } from '@primereact/ui/inputnumber';
@@ -16,7 +17,7 @@ export default function FloatLabelDemo() {
                 <InputNumber
                     value={value1}
                     onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)}
-                    inputId="over_label"
+                    id="over_label"
                     mode="currency"
                     currency="USD"
                     locale="en-US"
@@ -28,7 +29,7 @@ export default function FloatLabelDemo() {
                 <InputNumber
                     value={value2}
                     onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)}
-                    inputId="in_label"
+                    id="in_label"
                     mode="currency"
                     currency="USD"
                     locale="en-US"
@@ -41,7 +42,7 @@ export default function FloatLabelDemo() {
                 <InputNumber
                     value={value3}
                     onValueChange={(e: InputNumberValueChangeEvent) => setValue3(e.value)}
-                    inputId="on_label"
+                    id="on_label"
                     mode="currency"
                     currency="USD"
                     locale="en-US"

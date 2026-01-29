@@ -6,7 +6,7 @@ export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
             <IftaLabel>
-                <InputNumber defaultValue={1} inputId="price_input" mode="currency" currency="USD" locale="en-US" variant="filled" />
+                <InputNumber defaultValue={1} id="price_input" mode="currency" currency="USD" locale="en-US" variant="filled" />
                 <Label htmlFor="price_input">Price</Label>
             </IftaLabel>
         </div>
