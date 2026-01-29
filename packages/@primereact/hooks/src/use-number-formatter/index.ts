@@ -5,6 +5,10 @@ import * as React from 'react';
  */
 export interface UseNumberFormatterOptions {
     /**
+     * The numeric value to be formatted.
+     */
+    value?: number | string | null | undefined;
+    /**
      * Locale to be used in formatting.
      */
     locale?: string;
@@ -66,6 +70,10 @@ export interface UseNumberFormatterOptions {
  * The exposes for the `useNumberFormatter` hook.
  */
 export interface UseNumberFormatterExposes {
+    /**
+     * The formatted value based on the provided value and options.
+     */
+    formattedValue: string;
     /**
      * Formats a numeric value to a localized string.
      * @param value - The value to format
@@ -169,6 +177,7 @@ export interface UseNumberFormatterExposes {
  * @example
  * ```tsx
  * const formatter = useNumberFormatter({
+ *     value: 1234.56,
  *     locale: 'en-US',
  *     mode: 'currency',
  *     currency: 'USD'
@@ -179,7 +188,7 @@ export interface UseNumberFormatterExposes {
  * ```
  */
 export function useNumberFormatter(options: UseNumberFormatterOptions = {}): UseNumberFormatterExposes {
-    const { locale, localeMatcher, mode = 'decimal', currency, currencyDisplay, useGrouping = true, minFractionDigits, maxFractionDigits, roundingMode, prefix, suffix, min, format = true } = options;
+    const { value, locale, localeMatcher, mode = 'decimal', currency, currencyDisplay, useGrouping = true, minFractionDigits, maxFractionDigits, roundingMode, prefix, suffix, min, format = true } = options;
 
     // Internal refs for regex patterns
     const numberFormat = React.useRef<Intl.NumberFormat | null>(null);
@@ -557,6 +566,7 @@ export function useNumberFormatter(options: UseNumberFormatterOptions = {}): Use
     }, [locale, localeMatcher, mode, currency, currencyDisplay, useGrouping, minFractionDigits, maxFractionDigits, roundingMode, prefix, suffix]);
 
     return {
+        formattedValue: formatValue(value),
         formatValue,
         parseValue,
         addWithPrecision,

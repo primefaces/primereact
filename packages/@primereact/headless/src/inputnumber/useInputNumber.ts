@@ -16,6 +16,7 @@ export const useInputNumber = withHeadless({
         });
 
         const formatter = useNumberFormatter({
+            value: valueState,
             locale: props.locale,
             localeMatcher: props.localeMatcher,
             mode: props.mode,
@@ -32,6 +33,7 @@ export const useInputNumber = withHeadless({
         });
 
         const {
+            formattedValue,
             formatValue,
             parseValue,
             addWithPrecision,
@@ -59,7 +61,7 @@ export const useInputNumber = withHeadless({
 
         const state = {
             value: valueState,
-            formattedValue: formatValue(valueState)
+            formattedValue
         };
 
         const spin = (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement> | React.PointerEvent<HTMLButtonElement> | null, dir: number) => {
