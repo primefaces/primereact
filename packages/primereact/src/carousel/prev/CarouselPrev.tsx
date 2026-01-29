@@ -24,6 +24,8 @@ export const CarouselPrev = withComponent({
                 disabled,
                 'data-orientation': carousel?.props.orientation,
                 'data-align': carousel?.props.align,
+                'data-page': carousel?.state.page,
+                'data-disabled': disabled,
                 ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },
             carousel?.ptm('prev'),

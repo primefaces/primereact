@@ -3,48 +3,6 @@ import type { CarouselRootInstance } from '@primereact/types/shared/carousel';
 
 const theme = `
 
-.p-carousel-content {
-    position: relative;
-    scrollbar-width: none;
-    display: flex;
-    gap: var(--spacing-items);
-    scroll-snap-type: var(--scroll-snap-type);
-}
-
-.p-carousel-content[data-orientation="vertical"] {
-    overflow-y: scroll;
-    overscroll-behavior-y: contain;
-    flex-direction: column;
-}
-
-.p-carousel-content[data-orientation="horizontal"] {
-    overflow-x: scroll;
-    overscroll-behavior-x: contain;
-}
-
-.p-carousel-item {
-    flex-grow: 0;
-    flex-shrink: 0;
-    min-width: 0;
-    flex-basis: calc(100% / var(--slides-per-page) - var(--spacing-items) * (var(--slides-per-page) - 1) / var(--slides-per-page));
-}
-
-.p-carousel-item[data-autosize=""] {
-    flex-basis: auto;
-}
-
-.p-carousel-item[data-align="start"] {
-    scroll-snap-align: start;
-}
-
-.p-carousel-item[data-align="center"] {
-    scroll-snap-align: center;
-}
-
-.p-carousel-item[data-align="end"] {
-    scroll-snap-align: end;
-}
-
 .p-carousel-indicator-list {
     display: flex;
     flex-direction: row;

@@ -24,6 +24,7 @@ export const CarouselIndicator = withComponent({
                 onClick: () => carousel?.scrollToPage(props.page ?? 0),
                 'data-orientation': carousel?.props.orientation,
                 'data-align': carousel?.props.align,
+                'data-page': carousel?.state.page,
                 ...(isActive && { 'data-active': '' }),
                 ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },

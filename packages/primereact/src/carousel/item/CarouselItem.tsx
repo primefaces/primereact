@@ -21,6 +21,11 @@ export const CarouselItem = withComponent({
                 id,
                 className: carousel?.cx('item'),
                 style: {
+                    flexGrow: 0,
+                    flexShrink: 0,
+                    minWidth: 0,
+                    flexBasis: carousel?.props.autoSize ? 'auto' : `calc(100% / var(--slides-per-page) - var(--spacing-items) * (var(--slides-per-page) - 1) / var(--slides-per-page))`,
+                    scrollSnapAlign: carousel?.props.align,
                     ...carousel?.sx('item')
                 },
                 'data-value': props.value,
@@ -28,6 +33,7 @@ export const CarouselItem = withComponent({
                 'data-inview': 'false',
                 'data-orientation': carousel?.props.orientation,
                 'data-align': carousel?.props.align,
+                'data-page': carousel?.state.page,
                 ...(carousel?.state.swiping ? { 'data-swiping': '' } : {}),
                 ...(carousel?.props.autoSize ? { 'data-autosize': '' } : {})
             },

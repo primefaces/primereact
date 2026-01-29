@@ -22,6 +22,7 @@ export const CarouselIndicators = withComponent({
                 className: carousel?.cx('indicators'),
                 'data-orientation': carousel?.props.orientation,
                 'data-align': carousel?.props.align,
+                'data-page': carousel?.state.page,
                 ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },
             carousel?.ptm('indicators'),

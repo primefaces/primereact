@@ -23,6 +23,7 @@ export const CarouselRoot = withComponent({
                 className: cx('root'),
                 'data-orientation': props.orientation,
                 'data-align': props.align,
+                'data-page': state.page,
                 ...(state.swiping ? { 'data-swiping': '' } : {}),
                 ...(props.autoSize ? { 'data-autosize': '' } : {})
             },

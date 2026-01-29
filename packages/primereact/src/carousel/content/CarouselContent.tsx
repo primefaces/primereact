@@ -20,11 +20,19 @@ export const CarouselContent = withComponent({
             {
                 className: carousel?.cx('content'),
                 style: {
-                    ...{
-                        '--slides-per-page': carousel?.slidesPerPage,
-                        '--spacing-items': carousel?.props.spacing + 'px',
-                        '--scroll-snap-type': carousel?.resolveSnapType()
-                    },
+                    '--slides-per-page': carousel?.slidesPerPage,
+                    '--spacing-items': carousel?.props.spacing + 'px',
+                    '--scroll-snap-type': carousel?.resolveSnapType(),
+                    position: 'relative',
+                    scrollbarWidth: 'none',
+                    display: 'flex',
+                    flexDirection: carousel?.props.orientation === 'vertical' ? 'column' : 'row',
+                    overflowX: carousel?.props.orientation === 'horizontal' ? 'scroll' : undefined,
+                    overflowY: carousel?.props.orientation === 'vertical' ? 'scroll' : undefined,
+                    overscrollBehaviorX: carousel?.props.orientation === 'horizontal' ? 'contain' : undefined,
+                    overscrollBehaviorY: carousel?.props.orientation === 'vertical' ? 'contain' : undefined,
+                    gap: 'var(--spacing-items)',
+                    scrollSnapType: 'var(--scroll-snap-type)',
                     ...carousel?.sx('content')
                 },
                 onPointerDown: carousel?.onContentPointerDown,
@@ -33,6 +41,7 @@ export const CarouselContent = withComponent({
                 onWheel: carousel?.onContentWheel,
                 'data-orientation': carousel?.props.orientation,
                 'data-align': carousel?.props.align,
+                'data-page': carousel?.state.page,
                 ...(carousel?.props.autoSize ? { 'data-autosize': '' } : {}),
                 ...(carousel?.state.swiping ? { 'data-swiping': '' } : {})
             },

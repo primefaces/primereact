@@ -28,6 +28,7 @@ export const useCarousel = withHeadless({
         const snapPointsRef = React.useRef<Set<number>>(new Set());
         const scrollSnapsRef = React.useRef<number[]>([]);
         const initialPageAppliedRef = React.useRef(false);
+        const initialControlledScrollRef = React.useRef(false);
 
         const mutationObserverRef = React.useRef<MutationObserver>(null);
         const intersectionObserverRef = React.useRef<IntersectionObserver>(null);
@@ -37,6 +38,22 @@ export const useCarousel = withHeadless({
 
         const swipeStartPointRef = React.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
         const isRealSwipeRef = React.useRef(false);
+
+        function observeResizeItems(content: HTMLDivElement) {
+            const observer = resizeObserverRef.current;
+
+            if (!observer) return;
+
+            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => observer.observe(item));
+        }
+
+        function observeIntersectionItems(content: HTMLDivElement) {
+            const observer = intersectionObserverRef.current;
+
+            if (!observer) return;
+
+            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => observer.observe(item));
+        }
 
         function computeSnapPoints() {
             const content = contentRef.current;
@@ -152,7 +169,7 @@ export const useCarousel = withHeadless({
             });
         }
 
-        function scrollToSlide(slide: number) {
+        function scrollToSlide(slide: number, instant = false) {
             const points = snapPointsRef.current;
             const snaps = scrollSnapsRef.current;
 
@@ -162,7 +179,7 @@ export const useCarousel = withHeadless({
 
             const snap = snaps[clampedSlide];
 
-            scrollTo(snap);
+            scrollTo(snap, instant);
 
             const page = Array.from(points).indexOf(snap);
 
@@ -182,7 +199,7 @@ export const useCarousel = withHeadless({
             });
 
             resizeObserverRef.current.observe(content);
-            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => resizeObserverRef.current?.observe(item));
+            observeResizeItems(content);
 
             computeSnapPoints();
 
@@ -195,6 +212,10 @@ export const useCarousel = withHeadless({
         React.useLayoutEffect(() => {
             if (initialPageAppliedRef.current) return;
 
+            if (props.page !== undefined && props.page !== null) return;
+
+            if (props.slide !== undefined && props.slide !== null) return;
+
             const size = snapPointsRef.current.size || snapPoints.size;
 
             if (size === 0) return;
@@ -203,21 +224,29 @@ export const useCarousel = withHeadless({
             scrollToPage(props.defaultPage ?? 0, true);
         }, [snapPoints, props.page, props.defaultPage]);
 
-        React.useEffect(() => {
-            if (props.page === undefined || props.page === null || props.slide !== undefined || props.slide !== null) return;
+        React.useLayoutEffect(() => {
+            if (props.page === undefined || props.page === null) return;
+
+            if (props.slide !== undefined && props.slide !== null) return;
 
             if (snapPointsRef.current.size === 0 && snapPoints.size === 0) return;
 
-            scrollToPage(props.page);
-        }, [props.page, snapPoints]);
+            const instant = !initialControlledScrollRef.current;
 
-        React.useEffect(() => {
+            initialControlledScrollRef.current = true;
+            scrollToPage(props.page, instant);
+        }, [props.page, props.slide, snapPoints]);
+
+        React.useLayoutEffect(() => {
             if (props.slide === undefined || props.slide === null) return;
 
             if (snapPointsRef.current.size === 0 && snapPoints.size === 0) return;
 
-            scrollToSlide(props.slide);
-        }, [props.slide]);
+            const instant = !initialControlledScrollRef.current;
+
+            initialControlledScrollRef.current = true;
+            scrollToSlide(props.slide, instant);
+        }, [props.slide, snapPoints]);
 
         React.useEffect(() => {
             const content = contentRef.current;
@@ -227,6 +256,8 @@ export const useCarousel = withHeadless({
             mutationObserverRef.current = new MutationObserver((mutations) => {
                 mutations.forEach(() => {
                     computeSnapPoints();
+                    observeResizeItems(content);
+                    observeIntersectionItems(content);
                     requestAnimationFrame(() => {
                         const closest = setToClosest();
 
@@ -261,7 +292,7 @@ export const useCarousel = withHeadless({
                 }
             );
 
-            content.querySelectorAll<HTMLElement>(ITEM_SELECTOR).forEach((item) => intersectionObserverRef.current?.observe(item));
+            observeIntersectionItems(content);
 
             return () => {
                 intersectionObserverRef.current?.disconnect();
@@ -292,6 +323,14 @@ export const useCarousel = withHeadless({
                 scrollTimeoutRef.current = null;
 
                 content.removeEventListener('scroll', onScroll);
+            };
+        }, []);
+
+        React.useEffect(() => {
+            return () => {
+                if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
+
+                wheelTimeoutRef.current = null;
             };
         }, []);
 
