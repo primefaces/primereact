@@ -1,6 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { cn, mergeProps } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useDatePickerContext } from '../DatePicker.context';
 import { defaultInputProps } from './DatePickerInput.props';
@@ -21,8 +21,7 @@ export const DatePickerInput = withComponent({
             restProps,
             {
                 defaultValue: datepicker?.inputFieldValue,
-                id: datepicker?.props.inputId,
-                className: cn(datepicker?.cx('input'), datepicker?.props.inputClass),
+                className: datepicker?.cx('input'),
                 role: 'combobox',
                 placeholder: datepicker?.props.placeholder,
                 name: datepicker?.props.name,

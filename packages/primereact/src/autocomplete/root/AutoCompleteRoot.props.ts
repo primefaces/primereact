@@ -10,6 +10,5 @@ export const defaultRootProps: AutoCompleteRootProps = {
     disabled: undefined,
     size: undefined,
     checkmark: false,
-    tabIndex: 0,
-    inputClassName: undefined
+    tabIndex: 0
 };

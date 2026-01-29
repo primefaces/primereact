@@ -12,7 +12,5 @@ export const defaultRootProps: DatePickerRootProps = {
     required: undefined,
     disabled: undefined,
     readOnly: undefined,
-    size: undefined,
-    inputId: undefined,
-    inputClass: undefined
+    size: undefined
 };

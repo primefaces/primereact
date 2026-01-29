@@ -1,6 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { cn, mergeProps } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultInputProps } from './AutoCompleteInput.props';
@@ -20,7 +20,7 @@ export const AutoCompleteInput = withComponent({
         const rootProps = mergeProps(
             restProps,
             {
-                className: cn(autocomplete?.cx('input'), autocomplete?.props.inputClassName),
+                className: autocomplete?.cx('input'),
                 tabIndex: autocomplete?.props.disabled ? -1 : autocomplete?.props.tabIndex,
                 value: autocomplete?.state.inputValue ?? '',
                 autoComplete: 'off',

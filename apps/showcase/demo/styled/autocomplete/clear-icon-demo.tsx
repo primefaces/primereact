@@ -37,8 +37,8 @@ export default function ClearIconDemo() {
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={filteredRecipes} optionKey="id" optionLabel="name" onComplete={search} inputClassName="w-64">
-                <AutoComplete.Input placeholder="Search recipes..." />
+            <AutoComplete.Root options={filteredRecipes} optionKey="id" optionLabel="name" onComplete={search}>
+                <AutoComplete.Input placeholder="Search recipes..." className="w-64" />
 
                 <AutoComplete.ClearIcon>
                     <TimesIcon className="align-text-top!" />

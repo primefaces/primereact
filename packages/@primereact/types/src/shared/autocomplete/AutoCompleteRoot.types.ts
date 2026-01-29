@@ -9,9 +9,8 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useAutoCompleteCompleteEvent, useAutoCompleteExposes, useAutoCompleteInputValueChangeEvent, useAutoCompleteOpenChangeEvent, useAutoCompleteProps, useAutoCompleteState, useAutoCompleteValueChangeEvent } from './useAutoComplete.types';
-import type { PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in AutoComplete component.
@@ -149,14 +148,6 @@ export interface AutoCompleteRootProps extends BaseComponentProps<AutoCompleteRo
      * Defines the size of the checkbox.
      */
     size?: 'small' | 'large' | undefined;
-    /**
-     * Style class of the input field.
-     */
-    inputClassName?: string | undefined;
-    /**
-     * Inline style of the input field.
-     */
-    inputStyle?: React.CSSProperties | undefined;
     /**
      * Callback fired when the autocomplete's input value is changed.
      * @param event The event that triggered the change.
