@@ -10,7 +10,6 @@ export const styles = createStyles<TreeRootInstance>({
             'p-tree p-component',
             {
                 'p-tree-selectable': props.selectionMode != null,
-                'p-tree-flex-scrollable': props.scrollHeight === 'flex',
                 'p-tree-node-dragover': state.dragHover
             }
         ],

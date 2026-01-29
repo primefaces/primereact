@@ -32,8 +32,7 @@ export const TreeRoot = withComponent({
         const createWrapper = () => {
             const wrapperProps = mergeProps(
                 {
-                    className: cx('wrapper'),
-                    style: { maxHeight: props.scrollHeight }
+                    className: cx('wrapper')
                 },
                 ptm('wrapper')
             );

@@ -9,7 +9,6 @@ export const defaultProps: useTreeProps = {
     selectionMode: undefined,
     metaKeySelection: false,
     highlightOnSelect: false,
-    scrollHeight: undefined,
     draggableNodes: undefined,
     droppableNodes: undefined,
     draggableScope: undefined,

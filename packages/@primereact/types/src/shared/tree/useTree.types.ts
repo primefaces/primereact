@@ -311,10 +311,6 @@ export interface useTreeProps {
      */
     metaKeySelection?: boolean;
     /**
-     * Height of the scroll viewport in fixed units or the 'flex' keyword for a dynamic size.
-     */
-    scrollHeight?: 'flex' | undefined;
-    /**
      *  Highlights automatically the first item.
      *  @default false
      */
