@@ -3,27 +3,13 @@ import { Tag } from '@primereact/ui/tag';
 export default function SeverityDemo() {
     return (
         <div className="flex flex-wrap justify-center gap-2">
-            <Tag.Root>
-                <Tag.Label>Primary</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="secondary">
-                <Tag.Label>Secondary</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="success">
-                <Tag.Label>Success</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="info">
-                <Tag.Label>Info</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="warn">
-                <Tag.Label>Warn</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="danger">
-                <Tag.Label>Danger</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="contrast">
-                <Tag.Label>Contrast</Tag.Label>
-            </Tag.Root>
+            <Tag>Primary</Tag>
+            <Tag severity="secondary">Secondary</Tag>
+            <Tag severity="success">Success</Tag>
+            <Tag severity="info">Info</Tag>
+            <Tag severity="warn">Warn</Tag>
+            <Tag severity="danger">Danger</Tag>
+            <Tag severity="contrast">Contrast</Tag>
         </div>
     );
 }

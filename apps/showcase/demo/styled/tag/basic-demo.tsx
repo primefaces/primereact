@@ -3,60 +3,44 @@ import { Tag } from '@primereact/ui/tag';
 export default function BasicDemo() {
     return (
         <div className="flex items-center justify-center flex-wrap gap-3 max-w-xs mx-auto">
-            <Tag.Root severity="secondary">
-                <Tag.Label>Draft</Tag.Label>
-            </Tag.Root>
+            <Tag severity="secondary">Draft</Tag>
 
-            <Tag.Root severity="info">
-                <Tag.Icon>
-                    <i className="pi pi-info-circle" />
-                </Tag.Icon>
-                <Tag.Label>Info</Tag.Label>
-            </Tag.Root>
+            <Tag severity="info">
+                <i className="pi pi-info-circle" />
+                Info
+            </Tag>
 
-            <Tag.Root severity="success" rounded>
-                <Tag.Label>Active</Tag.Label>
-            </Tag.Root>
+            <Tag severity="success" rounded>
+                Active
+            </Tag>
 
-            <Tag.Root severity="warn">
-                <Tag.Icon>
-                    <i className="pi pi-exclamation-triangle" />
-                </Tag.Icon>
-                <Tag.Label>Attention</Tag.Label>
-            </Tag.Root>
+            <Tag severity="warn">
+                <i className="pi pi-exclamation-triangle" />
+                Attention
+            </Tag>
 
-            <Tag.Root severity="danger" rounded>
-                <Tag.Icon>
-                    <i className="pi pi-times-circle" />
-                </Tag.Icon>
-                <Tag.Label>Error</Tag.Label>
-            </Tag.Root>
+            <Tag severity="danger" rounded>
+                <i className="pi pi-times-circle" />
+                Error
+            </Tag>
 
-            <Tag.Root severity="contrast">
-                <Tag.Label>Featured</Tag.Label>
-            </Tag.Root>
+            <Tag severity="contrast">Featured</Tag>
 
-            <Tag.Root severity="info">
-                <Tag.Label>New</Tag.Label>
-            </Tag.Root>
+            <Tag severity="info">New</Tag>
 
-            <Tag.Root severity="secondary" rounded>
-                <Tag.Label>Archived</Tag.Label>
-            </Tag.Root>
+            <Tag severity="secondary" rounded>
+                Archived
+            </Tag>
 
-            <Tag.Root severity="warn" rounded>
-                <Tag.Icon>
-                    <i className="pi pi-clock" />
-                </Tag.Icon>
-                <Tag.Label>Pending</Tag.Label>
-            </Tag.Root>
+            <Tag severity="warn" rounded>
+                <i className="pi pi-clock" />
+                Pending
+            </Tag>
 
-            <Tag.Root severity="success">
-                <Tag.Icon>
-                    <i className="pi pi-check" />
-                </Tag.Icon>
-                <Tag.Label>Verified</Tag.Label>
-            </Tag.Root>
+            <Tag severity="success">
+                <i className="pi pi-check" />
+                Verified
+            </Tag>
         </div>
     );
 }

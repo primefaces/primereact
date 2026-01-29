@@ -20,12 +20,12 @@ export default function AdvancedDemo() {
                 <Card.Caption>
                     <Card.Title className="font-bold text-xl">Sakura Fresh Market</Card.Title>
                     <div className="flex items-center gap-2">
-                        <Tag.Root className="w-fit" severity="info">
+                        <Tag className="w-fit" severity="info">
                             Daily
-                        </Tag.Root>
-                        <Tag.Root className="w-fit" severity="info">
+                        </Tag>
+                        <Tag className="w-fit" severity="info">
                             Premium
-                        </Tag.Root>
+                        </Tag>
                     </div>
                 </Card.Caption>
                 <Card.Content className="space-y-4">

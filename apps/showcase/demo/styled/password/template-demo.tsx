@@ -57,13 +57,13 @@ export default function TemplateDemo() {
                                     </div>
 
                                     {strength?.value !== '' && (
-                                        <Tag.Root
+                                        <Tag
                                             style={{
                                                 backgroundColor: colors[currentLevel]
                                             }}
                                         >
-                                            <Tag.Label className="text-white">{strength?.value === '' ? 'Weak' : strength?.value}</Tag.Label>
-                                        </Tag.Root>
+                                            {strength?.value === '' ? 'Weak' : strength?.value}
+                                        </Tag>
                                     )}
                                 </>
                             </Password.Strength>

@@ -56,9 +56,9 @@ export default function ClearIconDemo() {
                                     <Select.Option key={cat.value} index={index} uKey={cat.value}>
                                         <div className="flex items-center justify-between w-full">
                                             <span>{cat.label}</span>
-                                            <Tag.Root severity="secondary" rounded>
-                                                <Tag.Label>{cat.count}</Tag.Label>
-                                            </Tag.Root>
+                                            <Tag severity="secondary" rounded>
+                                                {cat.count}
+                                            </Tag>
                                         </div>
                                     </Select.Option>
                                 ))}

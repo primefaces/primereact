@@ -77,9 +77,7 @@ export default function OptionDemo() {
                                         <div className="flex flex-col flex-1">
                                             <div className="flex items-center justify-between gap-2">
                                                 <span className="font-medium text-surface-900 dark:text-surface-0">{user.name}</span>
-                                                <Tag.Root severity="info">
-                                                    <Tag.Label>{user.role}</Tag.Label>
-                                                </Tag.Root>
+                                                <Tag severity="info">{user.role}</Tag>
                                             </div>
                                             <span className="text-sm text-surface-500 dark:text-surface-400">@{user.username}</span>
                                         </div>

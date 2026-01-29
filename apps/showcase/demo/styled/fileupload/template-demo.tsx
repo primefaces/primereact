@@ -124,7 +124,7 @@ export default function TemplateDemo() {
                                                             {file.name}
                                                         </span>
                                                         <div>{instance?.formatSize(file.size)}</div>
-                                                        <Badge.Root severity="warn">Pending</Badge.Root>
+                                                        <Badge severity="warn">Pending</Badge>
                                                         <Button
                                                             variant="text"
                                                             rounded
@@ -162,9 +162,9 @@ export default function TemplateDemo() {
                                                             {file.name}
                                                         </span>
                                                         <div>{instance.formatSize(file.size)}</div>
-                                                        <Badge.Root severity="success" className="mt-4">
+                                                        <Badge severity="success" className="mt-4">
                                                             Completed
-                                                        </Badge.Root>
+                                                        </Badge>
                                                         <Button
                                                             variant="text"
                                                             rounded

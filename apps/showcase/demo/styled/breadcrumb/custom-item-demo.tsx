@@ -43,7 +43,7 @@ export default function CustomItemDemo() {
                     <Breadcrumb.Item>
                         <Link href="#" className="flex items-center gap-2">
                             Laptops
-                            <Badge.Root shape="circle">5</Badge.Root>
+                            <Badge shape="circle">5</Badge>
                         </Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Separator />

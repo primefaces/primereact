@@ -3,9 +3,7 @@ import { Tag } from '@primereact/ui/tag';
 export default function ButtonDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
-            <Tag.Root as="button">
-                <Tag.Label>Button</Tag.Label>
-            </Tag.Root>
+            <Tag as="button">Button</Tag>
         </div>
     );
 }

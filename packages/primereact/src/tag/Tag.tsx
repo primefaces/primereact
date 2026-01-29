@@ -3,12 +3,12 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useTag } from '@primereact/headless/tag';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { TagProvider } from '../Tag.context';
-import { defaultRootProps } from './TagRoot.props';
+import { TagProvider } from './Tag.context';
+import { defaultProps } from './Tag.props';
 
-export const TagRoot = withComponent({
-    name: 'Tag.Root',
-    defaultProps: defaultRootProps,
+export const Tag = withComponent({
+    name: 'Tag',
+    defaultProps,
     setup(instance) {
         const tag = useTag(instance.inProps);
 

@@ -45,7 +45,7 @@ export const FileUploadList = withComponent({
                             {fileupload?.formatSize(file.size)}
                         </div>
                     </div>
-                    <Badge.Root severity={badgeConfig.severity}>{badgeConfig.label}</Badge.Root>
+                    <Badge severity={badgeConfig.severity}>{badgeConfig.label}</Badge>
                     <div className={fileupload?.cx('fileActions')} {...fileupload?.ptm('fileActions')}>
                         <Button variant="text" rounded iconOnly severity="danger" onClick={() => onRemove(index)}>
                             <TimesIcon aria-hidden="true" />

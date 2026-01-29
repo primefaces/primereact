@@ -4,12 +4,13 @@
  *
  * [Live Demo](https://www.primereact.org/badge/)
  *
- * @module overlaybadge
+ * @module OverlayBadge
  * @group components
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import type { useOverlayBadgeExposes, useOverlayBadgeProps, useOverlayBadgeState } from './useOverlayBadge.types';
 
 /**
  * Defines passthrough(pt) options type in OverlayBadge component.
@@ -29,17 +30,19 @@ export interface OverlayBadgePassThrough {
 /**
  * Defines valid properties in OverlayBadge component.
  */
-export interface OverlayBadgeProps extends BaseComponentProps<OverlayBadgeInstance, unknown, OverlayBadgePassThrough> {}
+export interface OverlayBadgeProps extends BaseComponentProps<OverlayBadgeInstance, useOverlayBadgeProps, OverlayBadgePassThrough> {}
 
 /**
  * Defines valid state in OverlayBadge component.
+ * @extends useOverlayBadgeState
  */
-export interface OverlayBadgeState {}
+export interface OverlayBadgeState extends useOverlayBadgeState {}
 
 /**
  * Defines the methods and properties exposed by OverlayBadge component.
+ * @extends useOverlayBadgeExposes
  */
-export interface OverlayBadgeExposes {}
+export interface OverlayBadgeExposes extends useOverlayBadgeExposes {}
 
 /**
  * Defines the CSS class names used in the OverlayBadge component.

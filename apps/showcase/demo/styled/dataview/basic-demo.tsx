@@ -60,9 +60,7 @@ export default function BasicDemo() {
                                     height={160}
                                 />
                                 <div className="absolute bg-black/70 rounded-border" style={{ left: '4px', top: '4px' }}>
-                                    <Tag.Root severity={getSeverity(product)}>
-                                        <Tag.Label>{product.inventoryStatus}</Tag.Label>
-                                    </Tag.Root>
+                                    <Tag severity={getSeverity(product)}>{product.inventoryStatus}</Tag>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">

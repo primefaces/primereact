@@ -1,3 +1,9 @@
-export { defaultIconProps } from './icon';
-export { defaultLabelProps } from './label';
-export { defaultRootProps } from './root';
+import * as HeadlessTag from '@primereact/headless/tag';
+import type { TagProps } from '@primereact/types/shared/tag';
+
+export const defaultProps: TagProps = {
+    ...HeadlessTag.defaultProps,
+    as: 'span',
+    severity: undefined,
+    rounded: false
+};

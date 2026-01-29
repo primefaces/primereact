@@ -7,9 +7,9 @@ export default function ButtonPT() {
         <Button severity="secondary">
             <i className="pi pi-user" />
             Profile
-            <Badge.Root severity="contrast" shape="circle">
+            <Badge severity="contrast" shape="circle">
                 2
-            </Badge.Root>
+            </Badge>
         </Button>
     );
 }

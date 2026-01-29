@@ -13,12 +13,11 @@ export default function ItemDemo() {
                     <>
                         <SpinnerIcon spin className="mx-1" />
                         {instance?.state.value.map((value, index) => (
-                            <Tag.Root key={`${value}_${index}`}>
-                                <Tag.Label>{value}</Tag.Label>
-                                <Tag.Icon>
-                                    <i className="pi pi-trash" onClick={() => instance?.onItemRemoveClick(index)} />
-                                </Tag.Icon>
-                            </Tag.Root>
+                            <Tag key={`${value}_${index}`}>
+                                {value}
+
+                                <i className="pi pi-trash" onClick={() => instance?.onItemRemoveClick(index)} />
+                            </Tag>
                         ))}
                         <IconField.Root className="static">
                             <InputTags.Input />

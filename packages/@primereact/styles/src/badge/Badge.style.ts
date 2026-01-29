@@ -1,9 +1,9 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { BadgeRootInstance } from '@primereact/types/shared/badge';
+import type { BadgeInstance } from '@primereact/types/shared/badge';
 import { style } from '@primeuix/styles/badge';
 import { isEmpty, isNotEmpty } from '@primeuix/utils/object';
 
-export const styles = createStyles<BadgeRootInstance>({
+export const styles = createStyles<BadgeInstance>({
     name: 'badge',
     style,
     classes: {

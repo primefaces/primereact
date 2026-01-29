@@ -1,30 +1,31 @@
 import { Badge } from '@primereact/ui/badge';
 import { Button } from '@primereact/ui/button';
+import { OverlayBadge } from '@primereact/ui/overlaybadge';
 
 export default function BadgeDemo() {
     return (
         <div className="flex justify-center flex-wrap gap-4">
             <Button type="button">
                 Emails
-                <Badge.Root severity="secondary" shape="circle">
+                <Badge severity="secondary" shape="circle">
                     2
-                </Badge.Root>
+                </Badge>
             </Button>
 
             <Button type="button" variant="outlined">
                 <i className="pi pi-users" />
                 Messages
-                <Badge.Root severity="contrast" shape="circle">
+                <Badge severity="contrast" shape="circle">
                     2
-                </Badge.Root>
+                </Badge>
             </Button>
 
-            <Badge.Overlay>
+            <OverlayBadge>
                 <Button type="button" variant="outlined">
                     <i className="pi pi-bell" />
                 </Button>
-                <Badge.Root severity="info" className="animate-pulse" />
-            </Badge.Overlay>
+                <Badge severity="info" className="animate-pulse" />
+            </OverlayBadge>
         </div>
     );
 }

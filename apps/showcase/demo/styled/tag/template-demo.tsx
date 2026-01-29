@@ -3,7 +3,7 @@ import { Tag } from '@primereact/ui/tag';
 export default function TemplateDemo() {
     return (
         <div className="flex justify-center">
-            <Tag.Root
+            <Tag
                 className="flex items-center gap-2 px-3"
                 style={{ border: '2px solid var(--border-color)', background: 'transparent', color: 'var(--text-color)' }}
             >
@@ -14,7 +14,7 @@ export default function TemplateDemo() {
                     style={{ width: '18px' }}
                 />
                 <span className="text-base">Italy</span>
-            </Tag.Root>
+            </Tag>
         </div>
     );
 }

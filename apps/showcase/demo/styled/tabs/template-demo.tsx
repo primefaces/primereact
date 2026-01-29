@@ -36,7 +36,7 @@ export default function TemplateDemo() {
                         <Tabs.Tab key={tab.id} value={tab.id} className="flex items-center gap-2">
                             <i className={tab.icon}></i>
                             {tab.title}
-                            {tab.badge && <Badge.Root size="small">{tab.badge}</Badge.Root>}
+                            {tab.badge && <Badge size="small">{tab.badge}</Badge>}
                         </Tabs.Tab>
                     ))}
                     <Tabs.Indicator />

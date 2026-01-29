@@ -1,25 +1,26 @@
 import { Avatar } from '@primereact/ui/avatar';
 import { Badge } from '@primereact/ui/badge';
+import { OverlayBadge } from '@primereact/ui/overlaybadge';
 
 const BadgeDemo = () => {
     return (
         <div className="flex items-center justify-center gap-8">
-            <Badge.Overlay>
+            <OverlayBadge>
                 <Avatar.Root size="large" shape="circle">
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
                     <Avatar.Fallback>O</Avatar.Fallback>
                 </Avatar.Root>
-                <Badge.Root size="small" shape="circle" severity="success">
+                <Badge size="small" shape="circle" severity="success">
                     2
-                </Badge.Root>
-            </Badge.Overlay>
-            <Badge.Overlay>
+                </Badge>
+            </OverlayBadge>
+            <OverlayBadge>
                 <Avatar.Root size="large">
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/organization/walter.jpg" />
                     <Avatar.Fallback>W</Avatar.Fallback>
                 </Avatar.Root>
-                <Badge.Root shape="circle" severity="danger"></Badge.Root>
-            </Badge.Overlay>
+                <Badge shape="circle" severity="danger"></Badge>
+            </OverlayBadge>
         </div>
     );
 };

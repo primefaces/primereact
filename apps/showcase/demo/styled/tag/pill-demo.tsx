@@ -3,27 +3,25 @@ import { Tag } from '@primereact/ui/tag';
 export default function BasicDemo() {
     return (
         <div className="flex flex-wrap justify-center gap-2">
-            <Tag.Root rounded>
-                <Tag.Label>Primary</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="secondary" rounded>
-                <Tag.Label>Secondary</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="success" rounded>
-                <Tag.Label>Success</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="info" rounded>
-                <Tag.Label>Info</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="warn" rounded>
-                <Tag.Label>Warn</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="danger" rounded>
-                <Tag.Label>Danger</Tag.Label>
-            </Tag.Root>
-            <Tag.Root severity="contrast" rounded>
-                <Tag.Label>Contrast</Tag.Label>
-            </Tag.Root>
+            <Tag rounded>Primary</Tag>
+            <Tag severity="secondary" rounded>
+                Secondary
+            </Tag>
+            <Tag severity="success" rounded>
+                Success
+            </Tag>
+            <Tag severity="info" rounded>
+                Info
+            </Tag>
+            <Tag severity="warn" rounded>
+                Warn
+            </Tag>
+            <Tag severity="danger" rounded>
+                Danger
+            </Tag>
+            <Tag severity="contrast" rounded>
+                Contrast
+            </Tag>
         </div>
     );
 }

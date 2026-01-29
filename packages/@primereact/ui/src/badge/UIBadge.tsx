@@ -3,15 +3,15 @@ import { Component } from '@primereact/core/component';
 import { styles } from '@primereact/styles/badge';
 import { withComponent } from '@primereact/ui/base';
 import { mergeDefaultProps } from '@primeuix/utils';
-import { BadgeRoot, defaultRootProps } from 'primereact/badge';
+import { Badge, defaultProps } from 'primereact/badge';
 import * as React from 'react';
 
-export const UIBadgeRoot = withComponent({
-    name: 'Badge.Root',
-    defaultProps: defaultRootProps,
+export const UIBadge = withComponent({
+    name: 'Badge',
+    defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);
 
-        return <Component as={BadgeRoot} attrs={rootProps} />;
+        return <Component as={Badge} attrs={rootProps} />;
     }
 });

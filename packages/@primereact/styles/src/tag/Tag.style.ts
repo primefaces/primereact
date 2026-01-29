@@ -17,8 +17,6 @@ export const styles = createStyles<TagRootInstance>({
                 'p-tag-contrast': props.severity === 'contrast',
                 'p-tag-rounded': props.rounded
             }
-        ],
-        icon: 'p-tag-icon',
-        label: 'p-tag-label'
+        ]
     }
 });

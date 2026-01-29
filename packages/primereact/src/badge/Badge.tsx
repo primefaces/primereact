@@ -3,12 +3,12 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useBadge } from '@primereact/headless/badge';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { BadgeProvider } from '../Badge.context';
-import { defaultRootProps } from './BadgeRoot.props';
+import { BadgeProvider } from './Badge.context';
+import { defaultProps } from './Badge.props';
 
-export const BadgeRoot = withComponent({
-    name: 'Badge.Root',
-    defaultProps: defaultRootProps,
+export const Badge = withComponent({
+    name: 'Badge',
+    defaultProps,
     setup(instance) {
         const badge = useBadge(instance.inProps);
 

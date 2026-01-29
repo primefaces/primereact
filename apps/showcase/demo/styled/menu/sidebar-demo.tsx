@@ -22,9 +22,9 @@ export default function SidebarDemo() {
                             <Menu.Item>
                                 <i className="pi pi-home" />
                                 Dashboard
-                                <Badge.Root shape="circle" className="ml-auto">
+                                <Badge shape="circle" className="ml-auto">
                                     8
-                                </Badge.Root>
+                                </Badge>
                             </Menu.Item>
 
                             <Menu.Sub defaultOpen={true}>
@@ -174,9 +174,9 @@ export default function SidebarDemo() {
                             <Menu.Item>
                                 <i className="pi pi-bookmark-fill text-blue-500" />
                                 Bookmarks
-                                <Badge.Root shape="circle" severity="secondary" className="ml-auto">
+                                <Badge shape="circle" severity="secondary" className="ml-auto">
                                     5
-                                </Badge.Root>
+                                </Badge>
                             </Menu.Item>
                         </Menu.List>
                     </Menu.Root>
