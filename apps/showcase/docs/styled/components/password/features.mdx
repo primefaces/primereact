@@ -1,6 +1,6 @@
 ---
 title: Password
-description: Password displays strength indicator for password fields.
+description: Password is an enhanced input for password entry with strength metering, mask toggling, and controlled or uncontrolled usage.
 component: password
 ---
 
@@ -13,42 +13,16 @@ import { Password } from '@primereact/ui/password';
 ```
 
 ```tsx
-<Password>
-    <Password.Input />
-    <Password.Strength />
-    <Password.Portal />
-</Password>
+<Password />
 ```
 
 ## Examples
-
-### Strength
-
-`Password.Strength` displays a visual indicator that shows the strength level of the entered password. The strength is automatically calculated based on character diversity (lowercase, uppercase, numbers, symbols) and password length according to the defined strength options.
-
-<DocDemoViewer name="password:strength-demo" />
-
-### Requirements
-
-<DocDemoViewer name="password:requirements-demo" />
-
-### Portal
-
-`Password.Portal` renders the overlay content (strength indicator and requirements) in a portal container, allowing it to be positioned outside the normal DOM hierarchy.
-
-<DocDemoViewer name="password:portal-demo" />
 
 ### Toggle Visibility
 
 Adding a toggle icon to show or hide the password, allowing users to verify their input.
 
 <DocDemoViewer name="password:toggle-mask-demo" />
-
-### Template
-
-Customize the appearance and layout of strength indicators and requirements using render functions. You have full control over the template structure, allowing you to add custom styling, icons, and components like tags or badges.
-
-<DocDemoViewer name="password:template-demo" />
 
 ### Float Label
 

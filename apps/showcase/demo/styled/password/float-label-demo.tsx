@@ -13,23 +13,17 @@ export default function FloatLabelDemo() {
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
             <FloatLabel>
-                <Password.Root value={value} onValueChange={(e: PasswordChangeEvent) => setValue(e.value as string)}>
-                    <Password.Input />
-                </Password.Root>
+                <Password value={value} onValueChange={(e: PasswordChangeEvent) => setValue(e.value as string)} />
                 <Label htmlFor="over_label">Over Label</Label>
             </FloatLabel>
 
             <FloatLabel variant="in">
-                <Password.Root value={value2} onValueChange={(e: PasswordChangeEvent) => setValue2(e.value as string)}>
-                    <Password.Input id="in_label" />
-                </Password.Root>
+                <Password value={value2} onValueChange={(e: PasswordChangeEvent) => setValue2(e.value as string)} />
                 <Label htmlFor="in_label">In Label</Label>
             </FloatLabel>
 
             <FloatLabel variant="on">
-                <Password.Root value={value3} onValueChange={(e: PasswordChangeEvent) => setValue3(e.value as string)}>
-                    <Password.Input id="on_label" />
-                </Password.Root>
+                <Password value={value3} onValueChange={(e: PasswordChangeEvent) => setValue3(e.value as string)} />
                 <Label htmlFor="on_label">On Label</Label>
             </FloatLabel>
         </div>

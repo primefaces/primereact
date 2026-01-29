@@ -3,9 +3,7 @@ import { Password } from '@primereact/ui/password';
 export default function FluidDemo() {
     return (
         <div>
-            <Password.Root fluid>
-                <Password.Input />
-            </Password.Root>
+            <Password fluid>{/* <Password.Input /> */}</Password>
         </div>
     );
 }

@@ -1,27 +1,20 @@
 'use client';
 import { EyeIcon } from '@primereact/icons/eye';
 import { EyeSlashIcon } from '@primereact/icons/eyeslash';
-import { PasswordInstance } from '@primereact/types/shared/password';
 import { IconField } from '@primereact/ui/iconfield';
 import { Password } from '@primereact/ui/password';
 import * as React from 'react';
 
 export default function ToggleMaskDemo() {
-    const passwordRef = React.useRef<PasswordInstance>(null);
-    const [unmasked, setUnmasked] = React.useState(false);
-
-    const handleToggle = () => {
-        passwordRef.current?.onMaskToggle();
-        setUnmasked((prev) => !prev);
-    };
+    const [type, setType] = React.useState<'text' | 'password'>('password');
 
     return (
         <div className="flex justify-center">
             <IconField.Root>
-                <Password.Root ref={passwordRef}>
-                    <Password.Input />
-                </Password.Root>
-                <IconField.InputIcon>{unmasked ? <EyeSlashIcon onClick={handleToggle} /> : <EyeIcon onClick={handleToggle} />}</IconField.InputIcon>
+                <Password type={type} />
+                <IconField.InputIcon>
+                    {type === 'password' ? <EyeIcon onClick={() => setType('text')} /> : <EyeSlashIcon onClick={() => setType('password')} />}
+                </IconField.InputIcon>
             </IconField.Root>
         </div>
     );
