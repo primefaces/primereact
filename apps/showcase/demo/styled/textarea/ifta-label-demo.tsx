@@ -1,4 +1,5 @@
 'use client';
+import { IftaLabel } from '@primereact/ui/iftalabel';
 import { Label } from '@primereact/ui/label';
 import { Textarea } from '@primereact/ui/textarea';
 import * as React from 'react';
@@ -8,7 +9,7 @@ export default function IftaLabelDemo() {
 
     return (
         <div className="flex justify-center">
-            <Label.Ifta>
+            <IftaLabel>
                 <Textarea
                     id="description"
                     value={value}
@@ -17,8 +18,8 @@ export default function IftaLabelDemo() {
                     cols={30}
                     style={{ resize: 'none' }}
                 />
-                <Label.Root htmlFor="description">Description</Label.Root>
-            </Label.Ifta>
+                <Label htmlFor="description">Description</Label>
+            </IftaLabel>
         </div>
     );
 }

@@ -12,19 +12,19 @@ export default function BasicDemo() {
                         <div className="flex flex-col gap-2 p-2 max-w-xs">
                             <p className="text-lg font-semibold mb-0.5">Dimensions</p>
                             <div className="grid grid-cols-2 items-center">
-                                <Label.Root htmlFor="width">Width</Label.Root>
+                                <Label htmlFor="width">Width</Label>
                                 <InputText id="width" fluid />
                             </div>
                             <div className="grid grid-cols-2 items-center">
-                                <Label.Root htmlFor="maxWidth">Max. width</Label.Root>
+                                <Label htmlFor="maxWidth">Max. width</Label>
                                 <InputText id="maxWidth" fluid />
                             </div>
                             <div className="grid grid-cols-2 items-center">
-                                <Label.Root htmlFor="height">Height</Label.Root>
+                                <Label htmlFor="height">Height</Label>
                                 <InputText id="height" fluid />
                             </div>
                             <div className="grid grid-cols-2 items-center">
-                                <Label.Root htmlFor="maxHeight">Max. height</Label.Root>
+                                <Label htmlFor="maxHeight">Max. height</Label>
                                 <InputText id="maxHeight" fluid />
                             </div>
                         </div>

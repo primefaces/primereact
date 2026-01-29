@@ -11,9 +11,9 @@ export default function SizesDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="size_small" className="text-sm">
+                    <Label htmlFor="size_small" className="text-sm">
                         Small
-                    </Label.Root>
+                    </Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="size_normal" name="size">
@@ -21,9 +21,9 @@ export default function SizesDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="size_normal" className="">
+                    <Label htmlFor="size_normal" className="">
                         Normal
-                    </Label.Root>
+                    </Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="size_large" name="size" size="large">
@@ -31,9 +31,9 @@ export default function SizesDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="size_large" className="text-lg">
+                    <Label htmlFor="size_large" className="text-lg">
                         Large
-                    </Label.Root>
+                    </Label>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 'use client';
 import { PasswordChangeEvent, usePasswordProps } from '@primereact/types/shared/password';
+import { IftaLabel } from '@primereact/ui/iftalabel';
 import { Label } from '@primereact/ui/label';
 import { Password } from '@primereact/ui/password';
-
 import * as React from 'react';
 
 export default function IftaLabelDemo() {
@@ -10,7 +10,7 @@ export default function IftaLabelDemo() {
 
     return (
         <div className="flex justify-center">
-            <Label.Ifta>
+            <IftaLabel>
                 <Password.Root
                     value={value}
                     inputId="new-password"
@@ -19,10 +19,10 @@ export default function IftaLabelDemo() {
                 >
                     <Password.Input />
                 </Password.Root>
-                <Label.Root htmlFor="new-password" className="mb-2">
+                <Label htmlFor="new-password" className="mb-2">
                     Password
-                </Label.Root>
-            </Label.Ifta>
+                </Label>
+            </IftaLabel>
         </div>
     );
 }

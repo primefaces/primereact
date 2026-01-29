@@ -1,4 +1,5 @@
 'use client';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -9,25 +10,25 @@ export default function VariantsDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <InputText
                     id="in_label"
                     value={value1}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)}
                     autoComplete="off"
                 />
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <InputText
                     id="on_label"
                     value={value2}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)}
                     autoComplete="off"
                 />
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

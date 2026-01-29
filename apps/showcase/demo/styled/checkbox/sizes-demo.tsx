@@ -11,7 +11,7 @@ export default function SizesDemo() {
                         <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                     </Checkbox.Box>
                 </Checkbox.Root>
-                <Label.Root htmlFor="small">Small</Label.Root>
+                <Label htmlFor="small">Small</Label>
             </div>
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="normal" size="normal">
@@ -19,7 +19,7 @@ export default function SizesDemo() {
                         <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                     </Checkbox.Box>
                 </Checkbox.Root>
-                <Label.Root htmlFor="normal">Normal</Label.Root>
+                <Label htmlFor="normal">Normal</Label>
             </div>
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="large" size="large">
@@ -27,7 +27,7 @@ export default function SizesDemo() {
                         <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                     </Checkbox.Box>
                 </Checkbox.Root>
-                <Label.Root htmlFor="large">Large</Label.Root>
+                <Label htmlFor="large">Large</Label>
             </div>
         </div>
     );

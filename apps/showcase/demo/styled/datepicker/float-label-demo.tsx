@@ -9,6 +9,7 @@ import {
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
 import { DatePicker } from '@primereact/ui/datepicker';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
@@ -19,7 +20,7 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <DatePicker.Root value={date} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="over_label" />
                     <DatePicker.InputIconContainer>
@@ -131,10 +132,10 @@ export default function FloatLabelDemo() {
                         </DatePicker.Container>
                     </DatePicker.Portal>
                 </DatePicker.Root>
-                <Label.Root htmlFor="over_label">Over Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="over_label">Over Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <DatePicker.Root value={date2} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}>
                     <DatePicker.Input id="in_label" />
                     <DatePicker.InputIconContainer>
@@ -246,10 +247,10 @@ export default function FloatLabelDemo() {
                         </DatePicker.Container>
                     </DatePicker.Portal>
                 </DatePicker.Root>
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <DatePicker.Root value={date3} onValueChange={(event: DatePickerRootValueChangeEvent) => setDate3(event.value)}>
                     <DatePicker.Input id="on_label" />
                     <DatePicker.InputIconContainer>
@@ -361,8 +362,8 @@ export default function FloatLabelDemo() {
                         </DatePicker.Container>
                     </DatePicker.Portal>
                 </DatePicker.Root>
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

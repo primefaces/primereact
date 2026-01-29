@@ -28,7 +28,7 @@ export default function IndeterminateDemo() {
                         checked={isAllSelected}
                         onCheckedChange={(e: CheckboxRootChangeEvent) => setValue(e.checked ? categories.map((category) => category.key) : [])}
                     />
-                    <Label.Root htmlFor="indeterminate-checkbox">Email Notifications</Label.Root>
+                    <Label htmlFor="indeterminate-checkbox">Email Notifications</Label>
                 </div>
                 <CheckboxGroup
                     value={value}
@@ -38,7 +38,7 @@ export default function IndeterminateDemo() {
                     {categories.map((item) => (
                         <div key={item.key} className="flex items-center gap-2">
                             <Checkbox inputId={item.key} value={item.key} />
-                            <Label.Root htmlFor={item.key}>{item.name}</Label.Root>
+                            <Label htmlFor={item.key}>{item.name}</Label>
                         </div>
                     ))}
                 </CheckboxGroup>

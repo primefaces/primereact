@@ -36,7 +36,7 @@ export default function CardDemo() {
                 className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4"
             >
                 {interests.map((interest) => (
-                    <Label.Root
+                    <Label
                         key={interest.id}
                         className={`flex-1 select-none flex items-start gap-3 p-4 rounded-md border  hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors cursor-pointer ${value.includes(interest.id) ? 'border-primary' : 'border-surface'}`}
                     >
@@ -49,7 +49,7 @@ export default function CardDemo() {
                             <h6 className="font-medium leading-none">{interest.title}</h6>
                             <p className="text-sm text-surface-500">{interest.description}</p>
                         </div>
-                    </Label.Root>
+                    </Label>
                 ))}
             </CheckboxGroup>
         </div>

@@ -11,7 +11,7 @@ export default function IndeterminateDemo() {
                     <Checkbox.Indicator className="data-indeterminate:data-unchecked:block! hidden!" as={MinusIcon} />
                 </Checkbox.Box>
             </Checkbox.Root>
-            <Label.Root htmlFor="indeterminate-checkbox">Email Notifications</Label.Root>
+            <Label htmlFor="indeterminate-checkbox">Email Notifications</Label>
         </div>
     );
 }

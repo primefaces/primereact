@@ -6,16 +6,16 @@ export default function ComparisionDemo() {
     return (
         <div className="flex flex-col gap-6">
             <div>
-                <Label.Root htmlFor="non-fluid" className="font-bold mb-2 block">
+                <Label htmlFor="non-fluid" className="font-bold mb-2 block">
                     Non-Fluid
-                </Label.Root>
+                </Label>
                 <InputText id="non-fluid" />
             </div>
 
             <div>
-                <Label.Root htmlFor="fluid" className="font-bold mb-2 block">
+                <Label htmlFor="fluid" className="font-bold mb-2 block">
                     Fluid Prop
-                </Label.Root>
+                </Label>
                 <InputText id="fluid" fluid />
             </div>
 

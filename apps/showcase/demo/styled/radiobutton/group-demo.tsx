@@ -21,7 +21,7 @@ export default function GroupDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient1">Cheese</Label.Root>
+                    <Label htmlFor="ingredient1">Cheese</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient2" name="pizza" value="mushroom">
@@ -29,7 +29,7 @@ export default function GroupDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient2">Mushroom</Label.Root>
+                    <Label htmlFor="ingredient2">Mushroom</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient3" name="pizza" value="pepper">
@@ -37,7 +37,7 @@ export default function GroupDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient3">Pepper</Label.Root>
+                    <Label htmlFor="ingredient3">Pepper</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <RadioButton.Root inputId="ingredient4" name="pizza" value="onion">
@@ -45,7 +45,7 @@ export default function GroupDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient4">Onion</Label.Root>
+                    <Label htmlFor="ingredient4">Onion</Label>
                 </div>
             </RadioButtonGroup>
         </div>

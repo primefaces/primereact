@@ -1,7 +1,8 @@
 'use client';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
-import { Label } from 'primereact/label';
+import { IftaLabel } from '@primereact/ui/iftalabel';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function IftaLabelDemo() {
@@ -13,7 +14,7 @@ export default function IftaLabelDemo() {
 
     return (
         <div className="flex justify-center">
-            <Label.Ifta>
+            <IftaLabel>
                 <AutoComplete.Root options={items} variant="filled" onComplete={search}>
                     <AutoComplete.Input id="autocomplete" />
 
@@ -24,10 +25,10 @@ export default function IftaLabelDemo() {
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 
-                <Label.Root htmlFor="autocomplete" className="mb-2">
+                <Label htmlFor="autocomplete" className="mb-2">
                     Search
-                </Label.Root>
-            </Label.Ifta>
+                </Label>
+            </IftaLabel>
         </div>
     );
 }

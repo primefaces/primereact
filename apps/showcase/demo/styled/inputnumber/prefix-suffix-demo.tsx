@@ -5,27 +5,27 @@ export default function PrefixSuffixDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label.Root htmlFor="mile" className="font-bold block mb-2">
+                <Label htmlFor="mile" className="font-bold block mb-2">
                     Mile
-                </Label.Root>
+                </Label>
                 <InputNumber defaultValue={20} inputId="mile" suffix=" mi" fluid />
             </div>
             <div className="flex-auto">
-                <Label.Root htmlFor="percent" className="font-bold block mb-2">
+                <Label htmlFor="percent" className="font-bold block mb-2">
                     Percent
-                </Label.Root>
+                </Label>
                 <InputNumber defaultValue={50} inputId="percent" prefix="%" fluid />
             </div>
             <div className="flex-auto">
-                <Label.Root htmlFor="expiry" className="font-bold block mb-2">
+                <Label htmlFor="expiry" className="font-bold block mb-2">
                     Expiry
-                </Label.Root>
+                </Label>
                 <InputNumber defaultValue={10} inputId="expiry" prefix="Expires in " suffix=" days" fluid />
             </div>
             <div className="flex-auto">
-                <Label.Root htmlFor="temperature" className="font-bold block mb-2">
+                <Label htmlFor="temperature" className="font-bold block mb-2">
                     Temperature
-                </Label.Root>
+                </Label>
                 <InputNumber defaultValue={20} inputId="temperature" prefix="&uarr; " suffix="℃" min={0} max={40} fluid />
             </div>
         </div>

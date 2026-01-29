@@ -11,7 +11,7 @@ export default function FilledDemo() {
                         <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                     </Checkbox.Box>
                 </Checkbox.Root>
-                <Label.Root htmlFor="filled">Filled</Label.Root>
+                <Label htmlFor="filled">Filled</Label>
             </div>
         </div>
     );

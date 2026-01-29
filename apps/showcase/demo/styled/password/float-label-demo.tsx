@@ -1,5 +1,6 @@
 'use client';
 import { PasswordChangeEvent, usePasswordProps } from '@primereact/types/shared/password';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { Label } from '@primereact/ui/label';
 import { Password } from '@primereact/ui/password';
 import * as React from 'react';
@@ -11,26 +12,26 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <Password.Root value={value} onValueChange={(e: PasswordChangeEvent) => setValue(e.value as string)}>
                     <Password.Input />
                 </Password.Root>
-                <Label.Root htmlFor="over_label">Over Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="over_label">Over Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <Password.Root value={value2} onValueChange={(e: PasswordChangeEvent) => setValue2(e.value as string)}>
                     <Password.Input id="in_label" />
                 </Password.Root>
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <Password.Root value={value3} onValueChange={(e: PasswordChangeEvent) => setValue3(e.value as string)}>
                     <Password.Input id="on_label" />
                 </Password.Root>
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

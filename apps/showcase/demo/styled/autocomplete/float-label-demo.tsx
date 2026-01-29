@@ -1,7 +1,8 @@
 'use client';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
-import { Label } from 'primereact/label';
+import { FloatLabel } from '@primereact/ui/floatlabel';
+import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
 export default function FloatLabelDemo() {
@@ -13,7 +14,7 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <AutoComplete.Root options={items} onComplete={search}>
                     <AutoComplete.Input id="over_label" />
 
@@ -24,10 +25,10 @@ export default function FloatLabelDemo() {
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 
-                <Label.Root htmlFor="over_label">Over Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="over_label">Over Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <AutoComplete.Root options={items} onComplete={search}>
                     <AutoComplete.Input id="in_label" />
 
@@ -38,10 +39,10 @@ export default function FloatLabelDemo() {
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <AutoComplete.Root options={items} onComplete={search}>
                     <AutoComplete.Input id="on_label" />
 
@@ -52,8 +53,8 @@ export default function FloatLabelDemo() {
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

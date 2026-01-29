@@ -11,9 +11,9 @@ export default function InvalidDemo() {
                         <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                     </Checkbox.Box>
                 </Checkbox.Root>
-                <Label.Root htmlFor="invalid" className="text-red-500 dark:text-red-400">
+                <Label htmlFor="invalid" className="text-red-500 dark:text-red-400">
                     Invalid
-                </Label.Root>
+                </Label>
             </div>
         </div>
     );

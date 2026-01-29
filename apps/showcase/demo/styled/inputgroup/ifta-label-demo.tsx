@@ -1,3 +1,4 @@
+import { IftaLabel } from '@primereact/ui/iftalabel';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
@@ -9,10 +10,10 @@ export default function IftaLabelDemo() {
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>
                 </InputGroup.Addon>
-                <Label.Ifta>
+                <IftaLabel>
                     <InputText id="name" defaultValue="Amy" />
-                    <Label.Root htmlFor="name">Name</Label.Root>
-                </Label.Ifta>
+                    <Label htmlFor="name">Name</Label>
+                </IftaLabel>
             </InputGroup.Root>
         </div>
     );

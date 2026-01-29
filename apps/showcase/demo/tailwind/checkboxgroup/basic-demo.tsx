@@ -18,19 +18,19 @@ export default function BasicDemo() {
             >
                 <div className="flex items-center gap-2">
                     <Checkbox inputId="cheese" value="Cheese" />
-                    <Label.Root htmlFor="cheese">Cheese</Label.Root>
+                    <Label htmlFor="cheese">Cheese</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox inputId="mushroom" value="Mushroom" />
-                    <Label.Root htmlFor="mushroom">Mushroom</Label.Root>
+                    <Label htmlFor="mushroom">Mushroom</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox inputId="pepper" value="Pepper" />
-                    <Label.Root htmlFor="pepper">Pepper</Label.Root>
+                    <Label htmlFor="pepper">Pepper</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox inputId="onion" value="Onion" />
-                    <Label.Root htmlFor="onion">Onion</Label.Root>
+                    <Label htmlFor="onion">Onion</Label>
                 </div>
             </CheckboxGroup>
         </div>

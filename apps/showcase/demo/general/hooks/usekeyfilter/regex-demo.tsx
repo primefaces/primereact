@@ -15,9 +15,9 @@ export default function RegexDemo() {
         <div>
             <div className="flex flex-wrap gap-3">
                 <div className="flex-auto">
-                    <Label.Root for="spacekey" className="font-bold block mb-2">
+                    <Label for="spacekey" className="font-bold block mb-2">
                         Block Space
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="spacekey"
                         value={spacekey}
@@ -27,9 +27,9 @@ export default function RegexDemo() {
                     />
                 </div>
                 <div className="flex-auto">
-                    <Label.Root htmlFor="chars" className="font-bold block mb-2">
+                    <Label htmlFor="chars" className="font-bold block mb-2">
                         Block &lt; &gt; * !
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="chars"
                         value={chars}

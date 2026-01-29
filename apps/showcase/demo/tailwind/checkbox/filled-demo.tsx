@@ -6,7 +6,7 @@ export default function FilledDemo() {
         <div className="flex items-center justify-center">
             <div className="flex items-center gap-2">
                 <Checkbox inputId="filled" variant="filled" />
-                <Label.Root htmlFor="filled">Filled</Label.Root>
+                <Label htmlFor="filled">Filled</Label>
             </div>
         </div>
     );

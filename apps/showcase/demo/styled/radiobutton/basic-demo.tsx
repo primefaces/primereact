@@ -21,7 +21,7 @@ export default function BasicDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient-strawberry">🍓 Strawberry</Label.Root>
+                    <Label htmlFor="ingredient-strawberry">🍓 Strawberry</Label>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -30,7 +30,7 @@ export default function BasicDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient-banana">🍌 Banana</Label.Root>
+                    <Label htmlFor="ingredient-banana">🍌 Banana</Label>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -39,7 +39,7 @@ export default function BasicDemo() {
                             <RadioButton.Indicator />
                         </RadioButton.Box>
                     </RadioButton.Root>
-                    <Label.Root htmlFor="ingredient-watermelon">🍉 Watermelon</Label.Root>
+                    <Label htmlFor="ingredient-watermelon">🍉 Watermelon</Label>
                 </div>
             </RadioButtonGroup>
         </div>

@@ -6,15 +6,15 @@ export default function SizesDemo() {
         <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="flex items-center gap-2">
                 <Checkbox inputId="small" size="small" />
-                <Label.Root htmlFor="small">Small</Label.Root>
+                <Label htmlFor="small">Small</Label>
             </div>
             <div className="flex items-center gap-2">
                 <Checkbox inputId="normal" size="normal" />
-                <Label.Root htmlFor="normal">Normal</Label.Root>
+                <Label htmlFor="normal">Normal</Label>
             </div>
             <div className="flex items-center gap-2">
                 <Checkbox inputId="large" size="large" />
-                <Label.Root htmlFor="large">Large</Label.Root>
+                <Label htmlFor="large">Large</Label>
             </div>
         </div>
     );

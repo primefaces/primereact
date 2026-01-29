@@ -23,7 +23,7 @@ export default function BasicDemo() {
                             <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                         </Checkbox.Box>
                     </Checkbox.Root>
-                    <Label.Root htmlFor="cheese">Cheese</Label.Root>
+                    <Label htmlFor="cheese">Cheese</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="mushroom" value="Mushroom">
@@ -31,7 +31,7 @@ export default function BasicDemo() {
                             <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                         </Checkbox.Box>
                     </Checkbox.Root>
-                    <Label.Root htmlFor="mushroom">Mushroom</Label.Root>
+                    <Label htmlFor="mushroom">Mushroom</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="pepper" value="Pepper">
@@ -39,7 +39,7 @@ export default function BasicDemo() {
                             <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                         </Checkbox.Box>
                     </Checkbox.Root>
-                    <Label.Root htmlFor="pepper">Pepper</Label.Root>
+                    <Label htmlFor="pepper">Pepper</Label>
                 </div>
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="onion" value="Onion">
@@ -47,7 +47,7 @@ export default function BasicDemo() {
                             <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                         </Checkbox.Box>
                     </Checkbox.Root>
-                    <Label.Root htmlFor="onion">Onion</Label.Root>
+                    <Label htmlFor="onion">Onion</Label>
                 </div>
             </CheckboxGroup>
         </div>

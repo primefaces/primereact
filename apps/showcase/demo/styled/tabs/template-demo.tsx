@@ -50,11 +50,11 @@ export default function TemplateDemo() {
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1">
-                                        <Label.Root htmlFor="username">Username</Label.Root>
+                                        <Label htmlFor="username">Username</Label>
                                         <InputText id="username" placeholder="john.doe" />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <Label.Root htmlFor="email">Email</Label.Root>
+                                        <Label htmlFor="email">Email</Label>
                                         <InputText id="email" placeholder="john.doe@example.com" />
                                     </div>
                                 </div>
@@ -70,15 +70,15 @@ export default function TemplateDemo() {
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1">
-                                        <Label.Root htmlFor="cardName">Cardholder Name</Label.Root>
+                                        <Label htmlFor="cardName">Cardholder Name</Label>
                                         <InputText id="cardName" placeholder="John Doe" />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <Label.Root htmlFor="cardNumber">Card Number</Label.Root>
+                                        <Label htmlFor="cardNumber">Card Number</Label>
                                         <InputText id="cardNumber" placeholder="0000 0000 0000 0000" />
                                     </div>
                                     <div className="flex flex-col gap-1">
-                                        <Label.Root htmlFor="expiryDate">Expiry Date</Label.Root>
+                                        <Label htmlFor="expiryDate">Expiry Date</Label>
                                         <InputText id="expiryDate" placeholder="MM/YY" />
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ export default function TemplateDemo() {
                             <form>
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <Label.Root htmlFor="darkMode">Dark Mode</Label.Root>
+                                        <Label htmlFor="darkMode">Dark Mode</Label>
                                         <Switch.Root inputId="darkMode">
                                             <Switch.Control>
                                                 <Switch.Thumb />
@@ -102,7 +102,7 @@ export default function TemplateDemo() {
                                         </Switch.Root>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <Label.Root htmlFor="emailNotifications">Email Notifications</Label.Root>
+                                        <Label htmlFor="emailNotifications">Email Notifications</Label>
                                         <Switch.Root inputId="emailNotifications" defaultChecked>
                                             <Switch.Control>
                                                 <Switch.Thumb />
@@ -110,7 +110,7 @@ export default function TemplateDemo() {
                                         </Switch.Root>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <Label.Root htmlFor="desktopNotifications">Desktop Notifications</Label.Root>
+                                        <Label htmlFor="desktopNotifications">Desktop Notifications</Label>
                                         <Switch.Root inputId="desktopNotifications">
                                             <Switch.Control>
                                                 <Switch.Thumb />

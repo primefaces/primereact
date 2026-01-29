@@ -21,9 +21,9 @@ export default function IconDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label.Root htmlFor="buttondisplay" className="font-bold block mb-2">
+                <Label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Button
-                </Label.Root>
+                </Label>
                 <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="buttondisplay" />
                     <DatePicker.Dropdown>
@@ -137,9 +137,9 @@ export default function IconDemo() {
                 </DatePicker.Root>
             </div>
             <div className="flex-auto">
-                <Label.Root htmlFor="icondisplay" className="font-bold block mb-2">
+                <Label htmlFor="icondisplay" className="font-bold block mb-2">
                     Default Icon
-                </Label.Root>
+                </Label>
                 <DatePicker.Root value={date2} fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate2(event.value)}>
                     <DatePicker.Input id="icondisplay" />
                     <DatePicker.InputIconContainer>
@@ -253,9 +253,9 @@ export default function IconDemo() {
                 </DatePicker.Root>
             </div>
             <div className="flex-auto">
-                <Label.Root htmlFor="templatedisplay" className="font-bold block mb-2">
+                <Label htmlFor="templatedisplay" className="font-bold block mb-2">
                     Custom Icon
-                </Label.Root>
+                </Label>
                 <DatePicker.Root value={date3} fluid timeOnly onValueChange={(event: DatePickerRootValueChangeEvent) => setDate3(event.value)}>
                     <DatePicker.Input id="templatedisplay" />
                     <DatePicker.InputIconContainer>

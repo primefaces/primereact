@@ -1,4 +1,5 @@
 'use client';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -7,9 +8,9 @@ export default function FloatLabelDemo() {
     const [value, setValue] = React.useState('');
 
     return (
-        <Label.Float>
+        <FloatLabel>
             <InputText value={value} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} id="username" />
-            <Label.Root htmlFor="username">InputText</Label.Root>
-        </Label.Float>
+            <Label htmlFor="username">Username</Label>
+        </FloatLabel>
     );
 }

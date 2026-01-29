@@ -15,7 +15,7 @@ export default function BasicDemo() {
 
                 <div className="flex items-center gap-2">
                     <Checkbox.Root inputId="accept" name="accept" value="Accept" />
-                    <Label.Root htmlFor="accept">I agree to the terms and conditions.</Label.Root>
+                    <Label htmlFor="accept">I agree to the terms and conditions.</Label>
                 </div>
 
                 <Button type="submit" className="w-full">

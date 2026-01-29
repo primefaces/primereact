@@ -23,7 +23,7 @@ export default function SingleSelectionDemo() {
                         <Switch.Thumb />
                     </Switch.Control>
                 </Switch.Root>
-                <Label.Root htmlFor="input-metakey">MetaKey</Label.Root>
+                <Label htmlFor="input-metakey">MetaKey</Label>
             </div>
             <Tree.Root value={nodes} selectionMode="multiple" metaKeySelection={checked} className="w-full md:w-120">
                 <Tree.List />

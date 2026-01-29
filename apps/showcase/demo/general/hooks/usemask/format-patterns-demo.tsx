@@ -75,9 +75,9 @@ export default function FormatPatternsDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label.Root htmlFor="ssn" className="font-bold block mb-2">
+                <Label htmlFor="ssn" className="font-bold block mb-2">
                     SSN
-                </Label.Root>
+                </Label>
                 <InputText
                     ref={input1}
                     value={value1}
@@ -94,9 +94,9 @@ export default function FormatPatternsDemo() {
             </div>
 
             <div className="flex-auto">
-                <Label.Root htmlFor="phone" className="font-bold block mb-2">
+                <Label htmlFor="phone" className="font-bold block mb-2">
                     Phone
-                </Label.Root>
+                </Label>
                 <InputText
                     ref={input2}
                     value={value2}
@@ -113,9 +113,9 @@ export default function FormatPatternsDemo() {
             </div>
 
             <div className="flex-auto">
-                <Label.Root htmlFor="serial" className="font-bold block mb-2">
+                <Label htmlFor="serial" className="font-bold block mb-2">
                     Serial
-                </Label.Root>
+                </Label>
                 <InputText
                     ref={input3}
                     value={value3}

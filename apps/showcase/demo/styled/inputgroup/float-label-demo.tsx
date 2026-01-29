@@ -1,4 +1,5 @@
 'use client';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
@@ -15,27 +16,27 @@ export default function FloatLabelDemo() {
                 <InputGroup.Addon>
                     <i className="pi pi-user"></i>
                 </InputGroup.Addon>
-                <Label.Float>
+                <FloatLabel>
                     <InputText id="over_label" value={value1} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)} />
-                    <Label.Root htmlFor="over_label">Over Label</Label.Root>
-                </Label.Float>
+                    <Label htmlFor="over_label">Over Label</Label>
+                </FloatLabel>
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputGroup.Addon>$</InputGroup.Addon>
-                <Label.Float variant="in">
+                <FloatLabel variant="in">
                     <InputText id="in_label" value={value2} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)} />
-                    <Label.Root htmlFor="in_label">In Label</Label.Root>
-                </Label.Float>
+                    <Label htmlFor="in_label">In Label</Label>
+                </FloatLabel>
                 <InputGroup.Addon>.00</InputGroup.Addon>
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputGroup.Addon>www</InputGroup.Addon>
-                <Label.Float variant="on">
+                <FloatLabel variant="on">
                     <InputText id="on_label" value={value3} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue3(e.currentTarget.value)} />
-                    <Label.Root htmlFor="on_label">On Label</Label.Root>
-                </Label.Float>
+                    <Label htmlFor="on_label">On Label</Label>
+                </FloatLabel>
             </InputGroup.Root>
         </div>
     );

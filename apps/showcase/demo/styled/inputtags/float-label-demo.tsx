@@ -1,5 +1,6 @@
 'use client';
 import { InputTagsRootInstance, InputTagsRootValueChangeEvent } from '@primereact/types/shared/inputtags';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputTags } from '@primereact/ui/inputtags';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -8,7 +9,7 @@ export default function FloatLabelDemo() {
     const [tags, setTags] = React.useState<string[]>([]);
 
     return (
-        <Label.Float>
+        <FloatLabel>
             <InputTags.Root value={tags} onValueChange={(e: InputTagsRootValueChangeEvent) => setTags(e.value as string[])}>
                 {(instance: InputTagsRootInstance) => {
                     return (
@@ -21,7 +22,7 @@ export default function FloatLabelDemo() {
                     );
                 }}
             </InputTags.Root>
-            <Label.Root htmlFor="over_label">Over Label</Label.Root>
-        </Label.Float>
+            <Label htmlFor="over_label">Over Label</Label>
+        </FloatLabel>
     );
 }

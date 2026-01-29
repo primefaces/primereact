@@ -1,4 +1,5 @@
 'use client';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -10,17 +11,17 @@ export default function InvalidDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <InputText
                     id="value1"
                     value={value1}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)}
                     invalid={!value1}
                 />
-                <Label.Root htmlFor="value1">Username</Label.Root>
-            </Label.Float>
+                <Label htmlFor="value1">Username</Label>
+            </FloatLabel>
 
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <InputText
                     id="value2"
                     value={value2}
@@ -28,10 +29,10 @@ export default function InvalidDemo() {
                     autoComplete="off"
                     invalid={!value2}
                 />
-                <Label.Root htmlFor="value2">Username</Label.Root>
-            </Label.Float>
+                <Label htmlFor="value2">Username</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <InputText
                     id="value3"
                     value={value3}
@@ -39,8 +40,8 @@ export default function InvalidDemo() {
                     autoComplete="off"
                     invalid={!value3}
                 />
-                <Label.Root htmlFor="value3">Username</Label.Root>
-            </Label.Float>
+                <Label htmlFor="value3">Username</Label>
+            </FloatLabel>
         </div>
     );
 }

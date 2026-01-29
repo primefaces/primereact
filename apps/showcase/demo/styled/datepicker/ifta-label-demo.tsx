@@ -9,6 +9,7 @@ import {
     useDatePickerYearOptions
 } from '@primereact/types/shared/datepicker';
 import { DatePicker } from '@primereact/ui/datepicker';
+import { IftaLabel } from '@primereact/ui/iftalabel';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
 
@@ -17,7 +18,7 @@ export default function IftaLabelDemo() {
 
     return (
         <div className="flex justify-center">
-            <Label.Ifta>
+            <IftaLabel>
                 <DatePicker.Root value={date} variant="filled" onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="date" />
                     <DatePicker.InputIconContainer>
@@ -129,10 +130,10 @@ export default function IftaLabelDemo() {
                         </DatePicker.Container>
                     </DatePicker.Portal>
                 </DatePicker.Root>
-                <Label.Root htmlFor="date" className="mb-2">
+                <Label htmlFor="date" className="mb-2">
                     Date
-                </Label.Root>
-            </Label.Ifta>
+                </Label>
+            </IftaLabel>
         </div>
     );
 }

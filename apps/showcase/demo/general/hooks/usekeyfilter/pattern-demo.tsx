@@ -23,9 +23,9 @@ export default function PatternDemo() {
         <div>
             <div className="flex flex-wrap gap-3 mb-4">
                 <div className="flex-auto">
-                    <Label.Root htmlFor="integer" className="font-bold block mb-2">
+                    <Label htmlFor="integer" className="font-bold block mb-2">
                         Integer
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="integer"
                         value={integer}
@@ -35,9 +35,9 @@ export default function PatternDemo() {
                     />
                 </div>
                 <div className="flex-auto">
-                    <Label.Root htmlFor="number" className="font-bold block mb-2">
+                    <Label htmlFor="number" className="font-bold block mb-2">
                         Number
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="number"
                         value={number}
@@ -47,9 +47,9 @@ export default function PatternDemo() {
                     />
                 </div>
                 <div className="flex-auto">
-                    <Label.Root htmlFor="money" className="font-bold block mb-2">
+                    <Label htmlFor="money" className="font-bold block mb-2">
                         Money
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="money"
                         value={money}
@@ -61,9 +61,9 @@ export default function PatternDemo() {
             </div>
             <div className="flex flex-wrap gap-3">
                 <div className="flex-auto">
-                    <Label.Root htmlFor="hex" className="font-bold block mb-2">
+                    <Label htmlFor="hex" className="font-bold block mb-2">
                         Hex
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="hex"
                         value={hex}
@@ -73,9 +73,9 @@ export default function PatternDemo() {
                     />
                 </div>
                 <div className="flex-auto">
-                    <Label.Root htmlFor="alphabetic" className="font-bold block mb-2">
+                    <Label htmlFor="alphabetic" className="font-bold block mb-2">
                         Alphabetic
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="alphabetic"
                         value={alphabetic}
@@ -85,9 +85,9 @@ export default function PatternDemo() {
                     />
                 </div>
                 <div className="flex-auto">
-                    <Label.Root htmlFor="alphanumeric" className="font-bold block mb-2">
+                    <Label htmlFor="alphanumeric" className="font-bold block mb-2">
                         Alphanumeric
-                    </Label.Root>
+                    </Label>
                     <InputText
                         id="alphanumeric"
                         value={alphanumeric}

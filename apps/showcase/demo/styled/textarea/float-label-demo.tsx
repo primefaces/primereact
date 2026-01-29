@@ -1,4 +1,5 @@
 'use client';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { Label } from '@primereact/ui/label';
 import { Textarea } from '@primereact/ui/textarea';
 import * as React from 'react';
@@ -10,7 +11,7 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-stretch gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <Textarea
                     value={value1}
                     onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue1(e.currentTarget.value)}
@@ -20,9 +21,9 @@ export default function FloatLabelDemo() {
                     style={{ resize: 'none' }}
                     className="h-full"
                 />
-                <Label.Root htmlFor="over_label">Over Label</Label.Root>
-            </Label.Float>
-            <Label.Float variant="in">
+                <Label htmlFor="over_label">Over Label</Label>
+            </FloatLabel>
+            <FloatLabel variant="in">
                 <Textarea
                     value={value2}
                     onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue2(e.currentTarget.value)}
@@ -32,9 +33,9 @@ export default function FloatLabelDemo() {
                     style={{ resize: 'none' }}
                     className="h-full"
                 />
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
-            <Label.Float variant="on">
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
+            <FloatLabel variant="on">
                 <Textarea
                     value={value3}
                     onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setValue3(e.currentTarget.value)}
@@ -44,8 +45,8 @@ export default function FloatLabelDemo() {
                     style={{ resize: 'none' }}
                     className="h-full"
                 />
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

@@ -28,7 +28,7 @@ export default function DynamicDemo() {
                                 <RadioButton.Indicator />
                             </RadioButton.Box>
                         </RadioButton.Root>
-                        <Label.Root htmlFor={item.key}>{item.name}</Label.Root>
+                        <Label htmlFor={item.key}>{item.name}</Label>
                     </div>
                 ))}
             </RadioButtonGroup>

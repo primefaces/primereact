@@ -16,17 +16,17 @@ export default function BasicDemo() {
             >
                 <div className="flex items-center gap-2">
                     <RadioButton inputId="ingredient-strawberry" name="fruit" value="strawberry" />
-                    <Label.Root htmlFor="ingredient-strawberry">🍓 Strawberry</Label.Root>
+                    <Label htmlFor="ingredient-strawberry">🍓 Strawberry</Label>
                 </div>
 
                 <div className="flex items-center gap-2">
                     <RadioButton inputId="ingredient-banana" name="fruit" value="banana" />
-                    <Label.Root htmlFor="ingredient-banana">🍌 Banana</Label.Root>
+                    <Label htmlFor="ingredient-banana">🍌 Banana</Label>
                 </div>
 
                 <div className="flex items-center gap-2">
                     <RadioButton inputId="ingredient-watermelon" name="fruit" value="watermelon" />
-                    <Label.Root htmlFor="ingredient-watermelon">🍉 Watermelon</Label.Root>
+                    <Label htmlFor="ingredient-watermelon">🍉 Watermelon</Label>
                 </div>
             </RadioButtonGroup>
         </div>

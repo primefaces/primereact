@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/label/)
  *
- * @module uselabel
+ * @module useLabel
  * @group headless
  *
  */

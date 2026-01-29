@@ -1,4 +1,5 @@
 'use client';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
@@ -11,7 +12,7 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <IconField.Root>
                     <IconField.InputIcon>
                         <i className="pi pi-search" />
@@ -23,10 +24,10 @@ export default function FloatLabelDemo() {
                         autoComplete="off"
                     />
                 </IconField.Root>
-                <Label.Root htmlFor="over_label">Over Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="over_label">Over Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <IconField.Root>
                     <IconField.InputIcon>
                         <i className="pi pi-search" />
@@ -39,10 +40,10 @@ export default function FloatLabelDemo() {
                         variant="filled"
                     />
                 </IconField.Root>
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <IconField.Root>
                     <IconField.InputIcon>
                         <i className="pi pi-search" />
@@ -54,8 +55,8 @@ export default function FloatLabelDemo() {
                         autoComplete="off"
                     />
                 </IconField.Root>
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

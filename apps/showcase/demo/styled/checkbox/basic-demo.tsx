@@ -11,9 +11,9 @@ const BasicDemo = () => {
                         <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                     </Checkbox.Box>
                 </Checkbox.Root>
-                <Label.Root htmlFor="basic-checkbox">
+                <Label htmlFor="basic-checkbox">
                     I accept the <a className="font-semibold">Terms of Service</a>
-                </Label.Root>
+                </Label>
             </div>
         </div>
     );

@@ -6,9 +6,9 @@ export default function BasicDemo() {
     return (
         <div>
             <Fluid>
-                <Label.Root htmlFor="with-fluid" className="font-bold mb-2 block">
+                <Label htmlFor="with-fluid" className="font-bold mb-2 block">
                     With Fluid
-                </Label.Root>
+                </Label>
                 <InputText id="with-fluid" placeholder="Type..." />
             </Fluid>
         </div>

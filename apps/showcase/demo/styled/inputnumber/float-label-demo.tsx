@@ -1,5 +1,6 @@
 'use client';
 import type { InputNumberValueChangeEvent } from '@primereact/types/shared/inputnumber';
+import { FloatLabel } from '@primereact/ui/floatlabel';
 import { InputNumber } from '@primereact/ui/inputnumber';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -11,7 +12,7 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
-            <Label.Float>
+            <FloatLabel>
                 <InputNumber
                     value={value1}
                     onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)}
@@ -20,10 +21,10 @@ export default function FloatLabelDemo() {
                     currency="USD"
                     locale="en-US"
                 />
-                <Label.Root htmlFor="over_label">Over Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="over_label">Over Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="in">
+            <FloatLabel variant="in">
                 <InputNumber
                     value={value2}
                     onValueChange={(e: InputNumberValueChangeEvent) => setValue2(e.value)}
@@ -33,10 +34,10 @@ export default function FloatLabelDemo() {
                     locale="en-US"
                     variant="filled"
                 />
-                <Label.Root htmlFor="in_label">In Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="in_label">In Label</Label>
+            </FloatLabel>
 
-            <Label.Float variant="on">
+            <FloatLabel variant="on">
                 <InputNumber
                     value={value3}
                     onValueChange={(e: InputNumberValueChangeEvent) => setValue3(e.value)}
@@ -45,8 +46,8 @@ export default function FloatLabelDemo() {
                     currency="USD"
                     locale="en-US"
                 />
-                <Label.Root htmlFor="on_label">On Label</Label.Root>
-            </Label.Float>
+                <Label htmlFor="on_label">On Label</Label>
+            </FloatLabel>
         </div>
     );
 }

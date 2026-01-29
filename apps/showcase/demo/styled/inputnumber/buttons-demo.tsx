@@ -42,9 +42,9 @@ export default function ButtonsDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label.Root htmlFor="stacked-buttons" className="font-bold block mb-2">
+                <Label htmlFor="stacked-buttons" className="font-bold block mb-2">
                     Stacked
-                </Label.Root>
+                </Label>
                 <InputGroup.Root>
                     <InputNumber
                         ref={inputRef1}
@@ -77,9 +77,9 @@ export default function ButtonsDemo() {
             </div>
 
             <div className="flex-auto">
-                <Label.Root htmlFor="minmax-buttons" className="font-bold block mb-2">
+                <Label htmlFor="minmax-buttons" className="font-bold block mb-2">
                     Min-Max
-                </Label.Root>
+                </Label>
                 <InputGroup.Root>
                     <InputGroup.Addon
                         as={Button}
@@ -114,9 +114,9 @@ export default function ButtonsDemo() {
             </div>
 
             <div className="flex-auto">
-                <Label.Root htmlFor="horizontal-buttons" className="font-bold block mb-2">
+                <Label htmlFor="horizontal-buttons" className="font-bold block mb-2">
                     Horizontal with Step
-                </Label.Root>
+                </Label>
                 <IconField.Root>
                     <IconField.InputIcon
                         onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => inputRef3.current?.increment(e, 0.25)}

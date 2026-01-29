@@ -19,9 +19,9 @@ export default function ModelTypeDemo() {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="flex-auto">
-                <Label.Root htmlFor="datetype" className="font-bold block mb-2">
+                <Label htmlFor="datetype" className="font-bold block mb-2">
                     Date Type Model
-                </Label.Root>
+                </Label>
                 <DatePicker.Root value={date} fluid onValueChange={(event: DatePickerRootValueChangeEvent) => setDate(event.value)}>
                     <DatePicker.Input id="datetype" />
                     <DatePicker.Portal>
@@ -132,9 +132,9 @@ export default function ModelTypeDemo() {
                 </DatePicker.Root>
             </div>
             <div className="flex-auto">
-                <Label.Root htmlFor="stringtype" className="font-bold block mb-2">
+                <Label htmlFor="stringtype" className="font-bold block mb-2">
                     String Type Model
-                </Label.Root>
+                </Label>
                 <DatePicker.Root
                     value={date2}
                     updateModelType="string"

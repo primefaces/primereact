@@ -20,7 +20,7 @@ export default function DynamicDemo() {
                 {categories.map((category) => (
                     <div key={category.key} className="flex items-center gap-2">
                         <Checkbox inputId={category.key} value={category.key} />
-                        <Label.Root htmlFor={category.key}>{category.name}</Label.Root>
+                        <Label htmlFor={category.key}>{category.name}</Label>
                     </div>
                 ))}
             </CheckboxGroup>

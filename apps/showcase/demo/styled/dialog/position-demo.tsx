@@ -71,15 +71,15 @@ export default function PositionDemo() {
                                 <>
                                     <span className="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
                                     <div className="flex items-center gap-4 mb-4">
-                                        <Label.Root htmlFor="username" className="font-semibold w-24">
+                                        <Label htmlFor="username" className="font-semibold w-24">
                                             Username
-                                        </Label.Root>
+                                        </Label>
                                         <InputText id="username" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex items-center gap-4 mb-8">
-                                        <Label.Root htmlFor="email" className="font-semibold w-24">
+                                        <Label htmlFor="email" className="font-semibold w-24">
                                             Email
-                                        </Label.Root>
+                                        </Label>
                                         <InputText id="email" className="flex-auto" autoComplete="off" />
                                     </div>
                                     <div className="flex justify-end gap-2">

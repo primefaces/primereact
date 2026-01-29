@@ -25,7 +25,7 @@ export default function DynamicDemo() {
                                 <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
                             </Checkbox.Box>
                         </Checkbox.Root>
-                        <Label.Root htmlFor={category.key}>{category.name}</Label.Root>
+                        <Label htmlFor={category.key}>{category.name}</Label>
                     </div>
                 ))}
             </CheckboxGroup>
