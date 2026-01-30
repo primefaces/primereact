@@ -6,7 +6,6 @@ export const styles = createStyles<IconFieldRootInstance>({
     name: 'iconfield',
     style,
     classes: {
-        root: 'p-iconfield',
-        icon: 'p-inputicon'
+        root: 'p-iconfield'
     }
 });

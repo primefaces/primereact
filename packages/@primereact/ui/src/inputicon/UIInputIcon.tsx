@@ -1,17 +1,17 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { styles } from '@primereact/styles/iconfield';
+import { styles } from '@primereact/styles/inputicon';
 import { withComponent } from '@primereact/ui/base';
 import { mergeDefaultProps } from '@primeuix/utils';
-import { IconFieldRoot, defaultRootProps } from 'primereact/iconfield';
+import { InputIcon, defaultProps } from 'primereact/inputicon';
 import * as React from 'react';
 
-export const UIIconFieldRoot = withComponent({
-    name: 'IconField.Root',
-    defaultProps: defaultRootProps,
+export const UIInputIcon = withComponent({
+    name: 'InputIcon',
+    defaultProps,
     render(instance) {
         const rootProps = mergeDefaultProps({ styles }, instance.inProps);
 
-        return <Component as={IconFieldRoot} attrs={rootProps} />;
+        return <Component as={InputIcon} attrs={rootProps} />;
     }
 });

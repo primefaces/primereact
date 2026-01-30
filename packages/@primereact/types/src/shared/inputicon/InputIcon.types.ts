@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { IconFieldRootInstance } from './IconFieldRoot.types';
+import type { useInputIconExposes, useInputIconProps, useInputIconState } from './useInputIcon.types';
 
 /**
  * Defines passthrough(pt) options type in InputIcon component.
@@ -24,28 +24,25 @@ export interface InputIconPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: InputIconPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: InputIconPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
  * Defines valid properties in InputIcon component.
  */
-export interface InputIconProps extends BaseComponentProps<InputIconInstance, unknown, InputIconPassThrough> {}
+export interface InputIconProps extends BaseComponentProps<InputIconInstance, useInputIconProps, InputIconPassThrough> {}
 
 /**
  * Defines valid state in InputIcon component.
+ * @extends useInputIconState
  */
-export interface InputIconState {}
+export interface InputIconState extends useInputIconState {}
 
 /**
  * Defines the methods and properties exposed by InputIcon component.
+ * @extends useInputIconExposes
  */
-export interface InputIconExposes {
-    /**
-     * Instance of the IconField component.
-     */
-    iconfield: IconFieldRootInstance | undefined | null;
-}
+export interface InputIconExposes extends useInputIconExposes {}
 
 /**
  * Defines the CSS class names used in the InputIcon component.

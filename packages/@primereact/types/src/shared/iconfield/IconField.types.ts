@@ -16,11 +16,7 @@ export const IconFieldClassNames = {
     /**
      * Class name of the root element
      */
-    root: 'p-iconfield',
-    /**
-     * Class name of the icon element
-     */
-    icon: 'p-inputicon'
+    root: 'p-iconfield'
 } as const;
 
 /**

@@ -3,16 +3,16 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useIconField } from '@primereact/headless/iconfield';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { IconFieldProvider } from '../IconField.context';
-import { defaultRootProps } from './IconFieldRoot.props';
+import { IconFieldProvider } from './IconField.context';
+import { defaultProps } from './IconField.props';
 
-export const IconFieldRoot = withComponent({
-    name: 'IconField.Root',
-    defaultProps: defaultRootProps,
+export const IconField = withComponent({
+    name: 'IconField',
+    defaultProps,
     setup(instance) {
-        const inputicon = useIconField(instance?.inProps);
+        const iconfield = useIconField(instance?.inProps);
 
-        return inputicon;
+        return iconfield;
     },
     render(instance) {
         const { id, props, ptmi, cx } = instance;
