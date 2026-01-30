@@ -22,14 +22,12 @@ export const Password = withComponent({
         const asProps = isElementOfType(as, 'InputText') ? (isControlled ? { value: state.value } : { defaultValue: state.value }) : undefined;
 
         const rootProps = mergeProps(
-            omit(restProps, 'styles', 'strengthOptions', 'appendTo', 'onValueChange', 'value', 'defaultValue'),
+            omit(restProps, 'styles', 'onValueChange', 'value', 'defaultValue', 'mask', 'defaultMask', 'onMaskChange'),
             asProps,
             {
                 id,
                 className: cx('root'),
-                type: 'password',
-                'aria-expanded': state.opened ? 'true' : undefined,
-                'aria-haspopup': state.opened ? 'true' : undefined,
+                type: state.mask ? 'password' : 'text',
                 onChange: onInputChange
             },
             ptmi('root')
