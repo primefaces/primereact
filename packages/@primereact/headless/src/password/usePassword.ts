@@ -13,8 +13,15 @@ export const usePassword = withHeadless({
             onChange: props.onValueChange
         });
 
+        const [maskState, setMaskState] = useControlledState({
+            value: props.mask,
+            defaultValue: props.defaultMask ?? true,
+            onChange: props.onMaskChange
+        });
+
         const state = {
-            value: valueState
+            value: valueState,
+            mask: maskState ?? true
         };
 
         const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,10 +36,15 @@ export const usePassword = withHeadless({
             ]);
         };
 
+        const toggleMask = () => {
+            setMaskState([!maskState, { value: !maskState }]);
+        };
+
         return {
             state,
             // methods
-            onInputChange
+            onInputChange,
+            toggleMask
         };
     }
 });

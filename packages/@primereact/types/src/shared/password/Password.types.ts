@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { usePasswordExposes, usePasswordProps, usePasswordState, usePasswordValueChangeEvent } from './usePassword.types';
+import type { usePasswordExposes, usePasswordMaskChangeEvent, usePasswordProps, usePasswordState, usePasswordValueChangeEvent } from './usePassword.types';
 
 /**
  * Defines passthrough(pt) options type in Password component.
@@ -39,9 +39,15 @@ export interface PasswordValueChangeEvent extends usePasswordValueChangeEvent<Re
 }
 
 /**
+ * Event fired when the password's mask state changes.
+ * @extends usePasswordMaskChangeEvent
+ */
+export interface PasswordMaskChangeEvent extends usePasswordMaskChangeEvent {}
+
+/**
  * Defines valid properties in Password component.
  */
-export interface PasswordProps extends BaseComponentProps<PasswordInstance, Omit<usePasswordProps, 'onValueChange'>, PasswordPassThrough> {
+export interface PasswordProps extends BaseComponentProps<PasswordInstance, Omit<usePasswordProps, 'onValueChange' | 'onMaskChange'>, PasswordPassThrough> {
     /**
      * Callback fired when the password value changes.
      * @param event The event that triggered the change.
@@ -50,6 +56,13 @@ export interface PasswordProps extends BaseComponentProps<PasswordInstance, Omit
      * @returns void
      */
     onValueChange?: (event: PasswordValueChangeEvent) => void;
+    /**
+     * Callback fired when the mask state changes.
+     * @param event The event that triggered the change.
+     * @param event.value Whether the password is masked.
+     * @returns void
+     */
+    onMaskChange?: (event: PasswordMaskChangeEvent) => void;
 }
 
 /**
