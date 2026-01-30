@@ -1,5 +1,6 @@
 'use client';
 import { IconField } from '@primereact/ui/iconfield';
+import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import * as React from 'react';
 
@@ -8,15 +9,15 @@ export default function ClickableDemo() {
 
     return (
         <div className="flex flex-wrap justify-center gap-4">
-            <IconField.Root>
-                <IconField.InputIcon>
+            <IconField>
+                <InputIcon>
                     <i className="pi pi-search" />
-                </IconField.InputIcon>
+                </InputIcon>
                 <InputText value={value} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} placeholder="Search" />
-                <IconField.InputIcon>
+                <InputIcon>
                     <i className="pi pi-times cursor-pointer" onClick={() => setValue('')} />
-                </IconField.InputIcon>
-            </IconField.Root>
+                </InputIcon>
+            </IconField>
         </div>
     );
 }

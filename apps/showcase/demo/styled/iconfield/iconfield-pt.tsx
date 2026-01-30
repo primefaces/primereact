@@ -1,23 +1,24 @@
 import { IconField } from '@primereact/ui/iconfield';
+import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 
 export default function IconFieldPTDemo() {
     return (
         <div className="flex justify-center">
-            <IconField.Root
+            <IconField
                 pt={{
                     root: 'border border-primary rounded-lg p-1'
                 }}
             >
-                <IconField.InputIcon
+                <InputIcon
                     pt={{
                         root: 'text-primary'
                     }}
                 >
                     <i className="pi pi-search" />
-                </IconField.InputIcon>
+                </InputIcon>
                 <InputText placeholder="Search" />
-            </IconField.Root>
+            </IconField>
         </div>
     );
 }

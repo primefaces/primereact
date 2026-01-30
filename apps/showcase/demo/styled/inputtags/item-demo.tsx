@@ -2,6 +2,7 @@
 import { SpinnerIcon } from '@primereact/icons';
 import { InputTagsRootInstance } from '@primereact/types/shared/inputtags';
 import { IconField } from '@primereact/ui/iconfield';
+import { InputIcon } from '@primereact/ui/inputicon';
 import { InputTags } from '@primereact/ui/inputtags';
 import { Tag } from '@primereact/ui/tag';
 
@@ -19,12 +20,12 @@ export default function ItemDemo() {
                                 <i className="pi pi-trash" onClick={() => instance?.onItemRemoveClick(index)} />
                             </Tag>
                         ))}
-                        <IconField.Root className="static">
+                        <IconField className="static">
                             <InputTags.Input />
-                            <IconField.InputIcon>
+                            <InputIcon>
                                 <i className="pi pi-times" onClick={() => instance?.onRemoveAllItems()} />
-                            </IconField.InputIcon>
-                        </IconField.Root>
+                            </InputIcon>
+                        </IconField>
                     </>
                 );
             }}

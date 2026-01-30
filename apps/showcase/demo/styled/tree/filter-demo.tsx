@@ -3,6 +3,7 @@ import { NodeService } from '@/shared/services/node.service';
 import type { TreeNode } from '@primereact/types/shared/tree';
 import { Fluid } from '@primereact/ui/fluid';
 import { IconField } from '@primereact/ui/iconfield';
+import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
@@ -40,16 +41,16 @@ export default function FilterDemo() {
     return (
         <Tree.Root value={filteredNodes} className="w-full md:w-120">
             <Tree.Header>
-                <IconField.Root as={Fluid}>
+                <IconField as={Fluid}>
                     <Tree.Filter
                         as={InputText}
                         value={filterValue}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                     />
-                    <IconField.InputIcon>
+                    <InputIcon>
                         <i className="pi pi-search" />
-                    </IconField.InputIcon>
-                </IconField.Root>
+                    </InputIcon>
+                </IconField>
             </Tree.Header>
             <Tree.List />
             <Tree.Empty className="mt-2">No options found.</Tree.Empty>

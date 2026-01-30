@@ -1,6 +1,7 @@
 'use client';
 import { ComponentPreviewType } from '@/shared/types/App.types';
 import { IconField } from '@primereact/ui/iconfield';
+import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 import Link from 'next/link';
@@ -49,12 +50,12 @@ export default function AllComponentPreviews({ components }: { components: Compo
                             ))}
                         </ToggleButton.Group>
 
-                        <IconField.Root>
-                            <IconField.InputIcon>
+                        <IconField>
+                            <InputIcon>
                                 <i className="pi pi-search" />
-                            </IconField.InputIcon>
+                            </InputIcon>
                             <InputText value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} placeholder="Search components..." />
-                        </IconField.Root>
+                        </IconField>
                     </div>
                 </div>
             </div>
