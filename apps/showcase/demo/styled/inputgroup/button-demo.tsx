@@ -7,13 +7,14 @@ export default function ButtonDemo() {
         <div className="space-y-4 max-w-xs mx-auto">
             <InputGroup.Root>
                 <Button>Search</Button>
-                <InputText placeholder="Keyword" />
+                <InputText placeholder="Keyword" className="border-r-0" />
+                <InputGroup.Addon className="text-xs">8 results</InputGroup.Addon>
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputText placeholder="Keyword" />
                 <InputGroup.Addon>
-                    <Button severity="secondary" variant="text">
+                    <Button severity="secondary" variant="text" iconOnly>
                         <i className="pi pi-search" />
                     </Button>
                 </InputGroup.Addon>
@@ -21,13 +22,13 @@ export default function ButtonDemo() {
 
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Button severity="secondary">
+                    <Button severity="secondary" iconOnly>
                         <i className="pi pi-check" />
                     </Button>
                 </InputGroup.Addon>
                 <InputText placeholder="Vote" />
                 <InputGroup.Addon>
-                    <Button severity="secondary">
+                    <Button severity="secondary" iconOnly>
                         <i className="pi pi-times" />
                     </Button>
                 </InputGroup.Addon>

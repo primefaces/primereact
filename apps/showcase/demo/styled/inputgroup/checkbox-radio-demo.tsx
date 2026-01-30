@@ -1,3 +1,4 @@
+import { CheckIcon } from '@primereact/icons';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
@@ -9,24 +10,40 @@ export default function CheckboxRadioDemo() {
             <InputGroup.Root>
                 <InputText placeholder="Price" />
                 <InputGroup.Addon>
-                    <RadioButton.Root name="rb1" value="rb1" />
+                    <RadioButton.Root>
+                        <RadioButton.Box>
+                            <RadioButton.Indicator />
+                        </RadioButton.Box>
+                    </RadioButton.Root>
                 </InputGroup.Addon>
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Checkbox.Root />
+                    <Checkbox.Root>
+                        <Checkbox.Box>
+                            <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        </Checkbox.Box>
+                    </Checkbox.Root>
                 </InputGroup.Addon>
                 <InputText placeholder="Username" />
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <Checkbox.Root />
+                    <Checkbox.Root>
+                        <Checkbox.Box>
+                            <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        </Checkbox.Box>
+                    </Checkbox.Root>
                 </InputGroup.Addon>
                 <InputText placeholder="Website" />
                 <InputGroup.Addon>
-                    <RadioButton.Root name="rb2" value="rb2" />
+                    <RadioButton.Root>
+                        <RadioButton.Box>
+                            <RadioButton.Indicator />
+                        </RadioButton.Box>
+                    </RadioButton.Root>
                 </InputGroup.Addon>
             </InputGroup.Root>
         </div>

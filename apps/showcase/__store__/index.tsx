@@ -827,6 +827,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/iconfield/basic-demo')),
                 'filePath': 'demo/styled/iconfield/basic-demo.tsx',
             },
+            'clickable-demo': {
+                'component': React.lazy(() => import('demo/styled/iconfield/clickable-demo')),
+                'filePath': 'demo/styled/iconfield/clickable-demo.tsx',
+            },
             'float-label-demo': {
                 'component': React.lazy(() => import('demo/styled/iconfield/float-label-demo')),
                 'filePath': 'demo/styled/iconfield/float-label-demo.tsx',
@@ -899,6 +903,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/inputgroup/checkbox-radio-demo')),
                 'filePath': 'demo/styled/inputgroup/checkbox-radio-demo.tsx',
             },
+            'fileupload-demo': {
+                'component': React.lazy(() => import('demo/styled/inputgroup/fileupload-demo')),
+                'filePath': 'demo/styled/inputgroup/fileupload-demo.tsx',
+            },
             'float-label-demo': {
                 'component': React.lazy(() => import('demo/styled/inputgroup/float-label-demo')),
                 'filePath': 'demo/styled/inputgroup/float-label-demo.tsx',
@@ -914,6 +922,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'multiple-demo': {
                 'component': React.lazy(() => import('demo/styled/inputgroup/multiple-demo')),
                 'filePath': 'demo/styled/inputgroup/multiple-demo.tsx',
+            },
+            'select-demo': {
+                'component': React.lazy(() => import('demo/styled/inputgroup/select-demo')),
+                'filePath': 'demo/styled/inputgroup/select-demo.tsx',
             },
         },
         'inputnumber': {
@@ -1423,6 +1435,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'popover': {
+            'alignment-demo': {
+                'component': React.lazy(() => import('demo/styled/popover/alignment-demo')),
+                'filePath': 'demo/styled/popover/alignment-demo.tsx',
+            },
             'basic-demo': {
                 'component': React.lazy(() => import('demo/styled/popover/basic-demo')),
                 'filePath': 'demo/styled/popover/basic-demo.tsx',
