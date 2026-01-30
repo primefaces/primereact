@@ -1,5 +1,4 @@
 'use client';
-import { Component } from '@primereact/core/component';
 import { styles } from '@primereact/styles/popover';
 import { withComponent } from '@primereact/ui/base';
 import { mergeDefaultProps } from '@primeuix/utils';
@@ -10,8 +9,9 @@ export const UIPopoverRoot = withComponent({
     name: 'Popover.Root',
     defaultProps: defaultRootProps,
     render(instance) {
-        const rootProps = mergeDefaultProps({ styles }, instance.inProps);
+        const { children, ...restProps } = instance.inProps;
+        const rootProps = mergeDefaultProps({ styles }, restProps);
 
-        return <Component as={PopoverRoot} attrs={rootProps} />;
+        return <PopoverRoot {...rootProps}>{children}</PopoverRoot>;
     }
 });

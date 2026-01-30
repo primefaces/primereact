@@ -7,29 +7,9 @@
  * @group headless
  *
  */
+import { usePresence } from '@primereact/hooks/use-presence';
 import type { HeadlessInstance } from '@primereact/types/core';
 
-/**
- * Popover breakpoint metadata.
- */
-export interface PopoverBreakpoints {
-    /**
-     * Breakpoint for responsive mode.
-     *
-     * Example:
-     *
-     * <Popover :breakpoints="{'960px': '75vw', '640px': '100vw'}" ... />
-     *
-     * Result:
-     *
-     * @media screen and (max-width: ${breakpoint[key]}) {
-     *      .p-popover[attributeSelector] {
-     *          width: ${breakpoint[value]} !important;
-     *      }
-     * }
-     */
-    [key: string]: string;
-}
 /**
  * Event fired when the checkbox's checked state changes.
  */
@@ -60,30 +40,6 @@ export interface usePopoverProps {
      */
     onOpenChange?: (event: usePopoverOpenChangeEvent) => void;
     /**
-     * Enables to hide the overlay when outside is clicked.
-     * @default true
-     */
-    dismissable?: boolean;
-    /**
-     * A valid query selector or an HTMLElement to specify where the overlay gets attached.
-     * @default body
-     */
-    appendTo?: 'body' | 'self' | undefined | HTMLElement;
-    /**
-     * Base zIndex value to use in layering.
-     * @default 0
-     */
-    baseZIndex?: number;
-    /**
-     * Whether to automatically manage layering.
-     * @default true
-     */
-    autoZIndex?: boolean;
-    /**
-     * Object literal to define widths per screen size.
-     */
-    breakpoints?: PopoverBreakpoints;
-    /**
      * Specifies if pressing escape key should hide the dialog.
      * @default true
      */
@@ -95,10 +51,21 @@ export interface usePopoverProps {
  */
 export interface usePopoverState {
     /**
-     * Current visible state as a boolean.
-     * @default false
+     * Whether the popover is open.
      */
-    visible: boolean;
+    open: boolean | undefined;
+    /**
+     * The anchor element.
+     */
+    anchorEl: HTMLElement | null;
+    /**
+     * The positioner element.
+     */
+    positionerEl: HTMLDivElement | null;
+    /**
+     * The arrow element.
+     */
+    arrowEl: HTMLDivElement | null;
 }
 
 /**
@@ -106,43 +73,29 @@ export interface usePopoverState {
  */
 export interface usePopoverExposes {
     /**
-     * Hides the popover.
+     * The state of the usePopover.
      */
-    hide: () => void;
+    state: usePopoverState;
     /**
-     * Shows the popover.
+     * The presence of the usePopover.
      */
-    show: () => void;
+    presence: ReturnType<typeof usePresence>;
     /**
-     * The function to handle the content keydown event.
+     * Sets the open state.
      */
-    onContentKeydown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+    setOpen?: (open: boolean, originalEvent?: Event) => void;
     /**
-     * A valid query selector or an HTMLElement to specify where the trigger gets attached.
-     * @default undefined
+     * Sets the arrow element.
      */
-    triggerRef?: React.RefObject<{ elementRef: React.RefObject<HTMLElement> }> | undefined;
+    setArrowRef?: (node: HTMLDivElement | null) => void;
     /**
-     * A valid query selector or an HTMLElement to specify where the container gets attached.
-     * @default undefined
+     * Sets the anchor element.
      */
-    containerRef?: React.RefObject<{ elementRef: React.RefObject<HTMLElement> }> | undefined;
+    setAnchorRef?: (node: HTMLElement | null) => void;
     /**
-     * Callback fired before enter animation.
+     * Sets the positioner element.
      */
-    onBeforeEnter?: () => void;
-    /**
-     * Callback fired on leave.
-     */
-    onLeave?: () => void;
-    /**
-     * Callback fired after leave animation.
-     */
-    onAfterLeave?: () => void;
-    /**
-     * Callback fired when the overlay is clicked.
-     */
-    onOverlayClick?: () => void;
+    setPositionerRef?: (node: HTMLDivElement | null) => void;
 }
 
 /**

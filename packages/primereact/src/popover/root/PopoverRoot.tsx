@@ -1,6 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { usePopover } from '@primereact/headless/popover';
+import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { PopoverProvider } from '../Popover.context';
 import { defaultRootProps } from './PopoverRoot.props';
@@ -14,19 +15,13 @@ export const PopoverRoot = withComponent({
         return popover;
     },
     render(instance) {
-        const { props } = instance;
+        const { props, ptmi } = instance;
+
+        const rootProps = mergeProps({}, ptmi('root'));
 
         return (
-            <PopoverProvider
-                // @ts-expect-error - Temporary fix for type compatibility
-                value={instance}
-            >
-                <Component
-                    // @ts-expect-error - Temporary fix for type compatibility
-                    instance={instance}
-                    children={props.children}
-                    as={React.Fragment}
-                />
+            <PopoverProvider value={instance}>
+                <Component as={React.Fragment} instance={instance} attrs={rootProps} children={props.children} />
             </PopoverProvider>
         );
     }

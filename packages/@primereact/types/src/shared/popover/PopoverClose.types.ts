@@ -10,7 +10,6 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ButtonProps } from '@primereact/types/shared/button';
 import type { PopoverRootInstance } from './PopoverRoot.types';
 
 /**
@@ -31,7 +30,7 @@ export interface PopoverClosePassThrough {
 /**
  * Defines valid properties in PopoverClose component.
  */
-export interface PopoverCloseProps extends BaseComponentProps<PopoverCloseInstance, ButtonProps, PopoverClosePassThrough> {}
+export interface PopoverCloseProps extends BaseComponentProps<PopoverCloseInstance, unknown, PopoverClosePassThrough> {}
 
 /**
  * Defines valid state in PopoverClose component.

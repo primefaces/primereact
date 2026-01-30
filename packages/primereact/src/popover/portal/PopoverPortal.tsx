@@ -1,6 +1,5 @@
 'use client';
 import { withComponent } from '@primereact/core/component';
-import { Motion } from '@primereact/core/motion';
 import { mergeProps } from '@primeuix/utils';
 import { Portal } from 'primereact/portal';
 import * as React from 'react';
@@ -20,25 +19,12 @@ export const PopoverPortal = withComponent({
 
         const containerProps = mergeProps(
             {
-                in: popover?.state.visible,
-                className: popover?.cx('overlay'),
-                name: 'p-popover',
-                role: 'dialog',
-                'aria-modal': popover?.state.visible,
-                onBeforeEnter: popover?.onBeforeEnter,
-                onAfterLeave: popover?.onAfterLeave,
-                onLeave: popover?.onLeave,
-                onClick: popover?.onOverlayClick,
-                appear: true
+                className: popover?.cx('portal')
             },
-            popover?.ptm('overlay'),
+            popover?.ptm('portal'),
             ptmi('root')
         );
 
-        return (
-            <Portal appendTo={props.appendTo}>
-                <Motion {...containerProps} ref={popover?.containerRef} children={props.children} />
-            </Portal>
-        );
+        return <Portal instance={instance} attrs={containerProps} children={props.children} />;
     }
 });

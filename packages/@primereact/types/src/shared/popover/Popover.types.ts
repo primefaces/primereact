@@ -20,7 +20,15 @@ export const PopoverClassNames = {
     /**
      * Class name of the content element
      */
-    content: 'p-popover-content'
+    content: 'p-popover-content',
+    /**
+     * Class name of the positioner element
+     */
+    positioner: 'p-popover-positioner',
+    /**
+     * Class name of the arrow element
+     */
+    arrow: 'p-popover-arrow'
 } as const;
 
 /**
