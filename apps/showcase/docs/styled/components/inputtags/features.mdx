@@ -30,13 +30,13 @@ A new tag is added when `enter` key is pressed, `delimiter` property allows defi
 
 ### Item
 
-The `InputTags.Control` component accepts a render function that provides access to the component instance, allowing full customization of tags, input field, and additional UI elements. You can add custom icons, implement remove actions with `onItemRemoveClick` and `onRemoveAllItems`, or wrap components with additional functionality.
+The `InputTags.Control` component accepts a render function that provides access to the component instance, allowing full customization of tags, input field, and additional UI elements. Custom icons can be added, remove actions can be implemented with `onItemRemoveClick` and `onRemoveAllItems`, or components can be wrapped with additional functionality.
 
 <DocDemoViewer name="inputtags:item-demo" />
 
 ### Typeahead
 
-InputTags can be combined with typeahead functionality to provide suggestions as users type. Define an `options` array along with `optionLabel` to specify the display field. For grouped suggestions, use `optionGroupLabel` and `optionGroupChildren` properties. The `onComplete` callback is triggered on input change, allowing you to filter and update suggestions dynamically.
+InputTags can be combined with typeahead functionality to provide suggestions as users type. Define an `options` array along with `optionLabel` to specify the display field. For grouped suggestions, use `optionGroupLabel` and `optionGroupChildren` properties. The `onComplete` callback is triggered on input change, enabling dynamic filtering and updating of suggestions.
 
 <DocDemoViewer name="inputtags:typeahead-demo" />
 
@@ -54,7 +54,7 @@ A floating label is displayed when the input is focused or filled.
 
 ### Invalid
 
-Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. This style is useful when integrating with form validation libraries.
 
 <DocDemoViewer name="inputtags:invalid-demo" />
 

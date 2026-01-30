@@ -78,7 +78,7 @@ toast.delete(id);
 
 ### update method
 
-The `update` method updates a toast by its ID. It accepts an object with the properties you want to update.
+The `update` method updates a toast by its ID. It accepts an object with the properties to update.
 
 ```tsx showLineNumbers "id"
 const id = toast.loading({
@@ -101,7 +101,7 @@ toast.update(id, {
 
 ### promise method
 
-The `promise` method is a wrapper around the `toast` function that allows you to create a toast that is based on the result of a promise. Each state has its own toast configuration.
+The `promise` method is a wrapper around the `toast` function that creates a toast based on the result of a promise. Each state has its own toast configuration.
 
 ```tsx showLineNumbers {2,7,12}
 toast.promise(Promise, {
@@ -136,7 +136,7 @@ toast.custom(<div>Hello</div>, {
 
 ### action prop
 
-The `action` prop accepts all `Toast.Action` component properties - any props you pass will be directly forwarded to the underlying `Toast.Action` component, including `children`, `onClick`, `className`, and other Button-specific properties.
+The `action` prop accepts all `Toast.Action` component properties - any props passed will be directly forwarded to the underlying `Toast.Action` component, including `children`, `onClick`, `className`, and other Button-specific properties.
 
 ```tsx showLineNumbers {4-9}
 toast({
@@ -153,7 +153,7 @@ toast({
 
 ### duration prop
 
-The `duration` prop is the duration of the toast in milliseconds. If you pass `Infinity`, the toast will stay visible until the user removes it manually.
+The `duration` prop is the duration of the toast in milliseconds. Passing `Infinity` keeps the toast visible until it is removed manually.
 
 ```tsx showLineNumbers {2}
 toast({
