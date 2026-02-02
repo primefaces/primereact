@@ -34,10 +34,6 @@ export interface DialogRootPassThrough {
      */
     trigger?: DialogRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Used to pass attributes to the trigger icon's DOM element.
-     */
-    triggerIcon?: DialogRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
-    /**
      * Used to pass attributes to the portal's DOM element.
      */
     portal?: DialogRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;

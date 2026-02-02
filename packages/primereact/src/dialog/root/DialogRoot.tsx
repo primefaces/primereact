@@ -22,8 +22,9 @@ export const DialogRoot = withComponent({
                 id,
                 className: cx('root'),
                 style: sx('root'),
-                'data-p-opened': state.opened,
-                'data-p-maximized': state.maximized
+                'data-opened': state.opened ? '' : undefined,
+                'data-maximized': state.maximized ? '' : undefined,
+                'data-position': props.position
             },
             ptmi('root')
         );

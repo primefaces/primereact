@@ -28,7 +28,7 @@ export const useDialog = withHeadless({
         const dragging = React.useRef(false);
 
         const state = {
-            opened: openState,
+            opened: openState ?? false,
             maximized: maximizedState,
             maskVisible: maskVisibleState
         };
