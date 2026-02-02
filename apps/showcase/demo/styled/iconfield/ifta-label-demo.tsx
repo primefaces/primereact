@@ -1,7 +1,6 @@
 'use client';
 import { IconField } from '@primereact/ui/iconfield';
 import { IftaLabel } from '@primereact/ui/iftalabel';
-import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -12,10 +11,10 @@ export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
             <IftaLabel>
-                <IconField>
-                    <InputIcon>
+                <IconField.Root>
+                    <IconField.Icon>
                         <i className="pi pi-envelope" />
-                    </InputIcon>
+                    </IconField.Icon>
                     <InputText
                         id="email"
                         value={value}
@@ -23,10 +22,10 @@ export default function IftaLabelDemo() {
                         autoComplete="off"
                         variant="filled"
                     />
-                    <InputIcon>
+                    <IconField.Icon>
                         <i className="pi pi-check" />
-                    </InputIcon>
-                </IconField>
+                    </IconField.Icon>
+                </IconField.Root>
                 <Label htmlFor="email">Email</Label>
             </IftaLabel>
         </div>

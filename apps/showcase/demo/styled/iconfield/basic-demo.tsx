@@ -1,22 +1,21 @@
 import { IconField } from '@primereact/ui/iconfield';
-import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 
 export default function BasicDemo() {
     return (
         <div className="flex flex-wrap justify-center gap-4">
-            <IconField>
-                <InputIcon>
+            <IconField.Root>
+                <IconField.Icon>
                     <i className="pi pi-search" />
-                </InputIcon>
+                </IconField.Icon>
                 <InputText placeholder="Search" />
-            </IconField>
-            <IconField>
+            </IconField.Root>
+            <IconField.Root>
                 <InputText variant="filled" />
-                <InputIcon>
+                <IconField.Icon>
                     <i className="pi pi-spin pi-spinner" />
-                </InputIcon>
-            </IconField>
+                </IconField.Icon>
+            </IconField.Root>
         </div>
     );
 }

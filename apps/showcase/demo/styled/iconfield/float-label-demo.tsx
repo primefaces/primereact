@@ -1,7 +1,6 @@
 'use client';
 import { FloatLabel } from '@primereact/ui/floatlabel';
 import { IconField } from '@primereact/ui/iconfield';
-import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -14,25 +13,25 @@ export default function FloatLabelDemo() {
     return (
         <div className="flex flex-wrap justify-center items-end gap-4">
             <FloatLabel>
-                <IconField>
-                    <InputIcon>
+                <IconField.Root>
+                    <IconField.Icon>
                         <i className="pi pi-search" />
-                    </InputIcon>
+                    </IconField.Icon>
                     <InputText
                         value={value1}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)}
                         id="over_label"
                         autoComplete="off"
                     />
-                </IconField>
+                </IconField.Root>
                 <Label htmlFor="over_label">Over Label</Label>
             </FloatLabel>
 
             <FloatLabel variant="in">
-                <IconField>
-                    <InputIcon>
+                <IconField.Root>
+                    <IconField.Icon>
                         <i className="pi pi-search" />
-                    </InputIcon>
+                    </IconField.Icon>
                     <InputText
                         value={value2}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => setValue2(e.currentTarget.value)}
@@ -40,22 +39,22 @@ export default function FloatLabelDemo() {
                         autoComplete="off"
                         variant="filled"
                     />
-                </IconField>
+                </IconField.Root>
                 <Label htmlFor="in_label">In Label</Label>
             </FloatLabel>
 
             <FloatLabel variant="on">
-                <IconField>
-                    <InputIcon>
+                <IconField.Root>
+                    <IconField.Icon>
                         <i className="pi pi-search" />
-                    </InputIcon>
+                    </IconField.Icon>
                     <InputText
                         value={value3}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => setValue3(e.currentTarget.value)}
                         id="on_label"
                         autoComplete="off"
                     />
-                </IconField>
+                </IconField.Root>
                 <Label htmlFor="on_label">On Label</Label>
             </FloatLabel>
         </div>

@@ -10,14 +10,13 @@ component: iconfield
 
 ```tsx
 import { IconField } from '@primereact/ui/iconfield';
-import { InputIcon } from '@primereact/ui/inputicon';
 ```
 
 ```tsx
-<IconField>
-    <InputIcon />
+<IconField.Root>
+    <IconField.Icon />
     <InputText />
-</IconField>
+</IconField.Root>
 ```
 
 ## Examples
@@ -36,7 +35,7 @@ IftaLabel is used to create infield top aligned labels. Visit [IftaLabel](/docs/
 
 ### Clickable
 
-Icons inside InputIcon can be interactive with event handlers like onClick.
+Icons inside IconField.Icon can be interactive with event handlers like onClick.
 
 <DocDemoViewer name="iconfield:clickable-demo" />
 
@@ -50,7 +49,7 @@ IconField is compatible with the size setting of the input field.
 
 ### Screen Reader
 
-IconField and InputIcon do not require any roles and attributes.
+IconField.Root and IconField.Icon do not require any roles and attributes.
 
 ### Keyboard Support
 

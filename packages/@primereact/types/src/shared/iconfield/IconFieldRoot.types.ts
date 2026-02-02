@@ -25,6 +25,10 @@ export interface IconFieldRootPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: IconFieldRootPassThroughType<React.InputHTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the icon's DOM element.
+     */
+    icon?: IconFieldRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

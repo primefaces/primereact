@@ -1,3 +1,5 @@
+export * as IconField from './UIIconField.parts';
+
 // Named runtime exports to maximize tree-shaking
-export { defaultProps, IconFieldProps, IconFieldProvider, useIconFieldContext } from 'primereact/iconfield';
-export { UIIconField as IconField } from './UIIconField';
+export { defaultIconProps, defaultRootProps, IconFieldIcon, IconFieldProps, IconFieldProvider, useIconFieldContext } from 'primereact/iconfield';
+export { UIIconFieldRoot as IconFieldRoot } from './root';

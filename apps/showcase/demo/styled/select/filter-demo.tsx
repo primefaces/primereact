@@ -2,7 +2,6 @@
 import { ChevronDownIcon } from '@primereact/icons';
 import { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { IconField } from '@primereact/ui/iconfield';
-import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import { Select } from '@primereact/ui/select';
 import Image from 'next/image';
@@ -52,16 +51,16 @@ export default function FilterDemo() {
                 <Select.Portal>
                     <Select.List>
                         <Select.Header>
-                            <IconField>
+                            <IconField.Root>
                                 <Select.Filter
                                     as={InputText}
                                     value={filterValue}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                                 />
-                                <InputIcon>
+                                <IconField.Icon>
                                     <i className="pi pi-search" />
-                                </InputIcon>
-                            </IconField>
+                                </IconField.Icon>
+                            </IconField.Root>
                         </Select.Header>
                         <Select.Options style={{ maxHeight: '14rem' }}>
                             {filteredCountries.map((country, index) => (

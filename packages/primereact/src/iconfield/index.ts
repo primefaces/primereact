@@ -1,6 +1,7 @@
-export * from './IconField';
 export * from './IconField.context';
+export * as IconField from './IconField.parts';
 export * as IconFieldProps from './IconField.props';
 
 // Named runtime exports to maximize tree-shaking
-export { defaultProps } from './IconField.props';
+export { defaultIconProps, IconFieldIcon } from './icon';
+export { defaultRootProps, IconFieldRoot } from './root';

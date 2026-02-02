@@ -3,7 +3,6 @@ import { EyeIcon } from '@primereact/icons/eye';
 import { EyeSlashIcon } from '@primereact/icons/eyeslash';
 import { PasswordValueChangeEvent } from '@primereact/types/shared/password';
 import { IconField } from '@primereact/ui/iconfield';
-import { InputIcon } from '@primereact/ui/inputicon';
 import { Password } from '@primereact/ui/password';
 import { Tag } from '@primereact/ui/tag';
 import * as React from 'react';
@@ -56,7 +55,7 @@ export default function TemplateDemo() {
     return (
         <div className="flex justify-center">
             <div className="flex flex-col gap-3 w-64">
-                <IconField>
+                <IconField.Root>
                     <Password
                         type={type}
                         value={value}
@@ -64,14 +63,14 @@ export default function TemplateDemo() {
                         placeholder="Create a password"
                         fluid
                     />
-                    <InputIcon>
+                    <IconField.Icon>
                         {type === 'password' ? (
                             <EyeIcon className="cursor-pointer" onClick={() => setType('text')} />
                         ) : (
                             <EyeSlashIcon className="cursor-pointer" onClick={() => setType('password')} />
                         )}
-                    </InputIcon>
-                </IconField>
+                    </IconField.Icon>
+                </IconField.Root>
 
                 {value && (
                     <div className="flex flex-col gap-3">

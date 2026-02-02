@@ -5,7 +5,6 @@ import type { useInputNumberValueChangeEvent } from '@primereact/types/shared/in
 import { Button } from '@primereact/ui/button';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputGroup } from '@primereact/ui/inputgroup';
-import { InputIcon } from '@primereact/ui/inputicon';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
@@ -102,10 +101,10 @@ export default function ButtonsDemo() {
                 <Label htmlFor="horizontal-buttons" className="font-bold text-sm block mb-2">
                     Horizontal with Step
                 </Label>
-                <IconField>
-                    <InputIcon onClick={() => setValue3((prev) => Number(prev) + 0.25)} className="cursor-pointer">
+                <IconField.Root>
+                    <IconField.Icon onClick={() => setValue3((prev) => Number(prev) + 0.25)} className="cursor-pointer">
                         <i className="pi pi-plus"></i>
-                    </InputIcon>
+                    </IconField.Icon>
                     <InputText
                         value={inputNumber3.state.formattedValue}
                         id="horizontal-buttons"
@@ -114,10 +113,10 @@ export default function ButtonsDemo() {
                         onKeyDown={inputNumber3.onInputKeyDown}
                         onKeyPress={inputNumber3.onInputKeyPress}
                     />
-                    <InputIcon onClick={() => setValue3((prev) => Number(prev) - 0.25)} className="cursor-pointer">
+                    <IconField.Icon onClick={() => setValue3((prev) => Number(prev) - 0.25)} className="cursor-pointer">
                         <i className="pi pi-minus"></i>
-                    </InputIcon>
-                </IconField>
+                    </IconField.Icon>
+                </IconField.Root>
             </div>
         </div>
     );
