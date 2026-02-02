@@ -34,6 +34,7 @@ export const ConfirmPopupPortal = withComponent({
                 onAfterLeave: confirmpopup?.onMotionAfterLeave
             },
             {
+                className: inProps?.className,
                 style: inProps?.style
             },
             confirmpopup?.ptm('root')

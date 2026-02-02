@@ -48,6 +48,7 @@ export const ConfirmDialogPortal = withComponent({
                 onAfterLeave: dialog?.onMotionAfterLeave
             },
             {
+                className: inProps?.className,
                 style: inProps?.style
             },
             confirmdialog?.ptm('mask')
