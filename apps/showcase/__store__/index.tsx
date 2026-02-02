@@ -502,6 +502,24 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'filePath': 'demo/styled/commandmenu/with-dialog-demo.tsx',
             },
         },
+        'compare': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/compare/basic-demo')),
+                'filePath': 'demo/styled/compare/basic-demo.tsx',
+            },
+            'hover-demo': {
+                'component': React.lazy(() => import('demo/styled/compare/hover-demo')),
+                'filePath': 'demo/styled/compare/hover-demo.tsx',
+            },
+            'template-demo': {
+                'component': React.lazy(() => import('demo/styled/compare/template-demo')),
+                'filePath': 'demo/styled/compare/template-demo.tsx',
+            },
+            'vertical-demo': {
+                'component': React.lazy(() => import('demo/styled/compare/vertical-demo')),
+                'filePath': 'demo/styled/compare/vertical-demo.tsx',
+            },
+        },
         'confirmdialog': {
             'basic-demo': {
                 'component': React.lazy(() => import('demo/styled/confirmdialog/basic-demo')),
@@ -860,16 +878,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'invalid-demo': {
                 'component': React.lazy(() => import('demo/styled/iftalabel/invalid-demo')),
                 'filePath': 'demo/styled/iftalabel/invalid-demo.tsx',
-            },
-        },
-        'imagecompare': {
-            'basic-demo': {
-                'component': React.lazy(() => import('demo/styled/imagecompare/basic-demo')),
-                'filePath': 'demo/styled/imagecompare/basic-demo.tsx',
-            },
-            'template-demo': {
-                'component': React.lazy(() => import('demo/styled/imagecompare/template-demo')),
-                'filePath': 'demo/styled/imagecompare/template-demo.tsx',
             },
         },
         'inplace': {
