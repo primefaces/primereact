@@ -26,12 +26,10 @@ export interface useDialogChangeEvent {
 export interface useDialogProps {
     /**
      * Specifies the visibility of the dialog.
-     * @default undefined
      */
     open?: boolean | undefined;
     /**
      * Specifies the default visibility of the dialog.
-     * @default undefined
      */
     defaultOpen?: boolean | undefined;
     /**
@@ -56,7 +54,6 @@ export interface useDialogProps {
     minY?: number | undefined;
     /**
      * Defines if background should be blocked when dialog is displayed.
-     * @default undefined
      */
     modal?: boolean | undefined;
     /**

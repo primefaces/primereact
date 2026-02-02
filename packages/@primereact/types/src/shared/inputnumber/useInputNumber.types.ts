@@ -31,12 +31,10 @@ export interface useInputNumberValueChangeEvent {
 export interface useInputNumberProps {
     /**
      * Specifies whether a inputnumber should be checked or not.
-     * @default undefined
      */
     value?: number | undefined | null;
     /**
      * Specifies whether a inputnumber should be checked or not.
-     * @default undefined
      */
     defaultValue?: number | undefined | null;
     /**

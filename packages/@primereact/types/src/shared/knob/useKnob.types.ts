@@ -26,12 +26,10 @@ export interface useKnobChangeEvent {
 export interface useKnobProps {
     /**
      * Value of the knob.
-     * @default undefined
      */
     defaultValue?: number | undefined | null;
     /**
      * The default value of the knob.
-     * @default undefined
      */
     value?: number | undefined | null;
     /**
