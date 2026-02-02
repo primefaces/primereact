@@ -1,3 +1,7 @@
+'use client';
+import { TimesIcon } from '@primereact/icons/times';
+import { WindowMaximizeIcon } from '@primereact/icons/windowmaximize';
+import { WindowMinimizeIcon } from '@primereact/icons/windowminimize';
 import { Dialog } from '@primereact/ui/dialog';
 
 export default function MaximizableDemo() {
@@ -7,20 +11,48 @@ export default function MaximizableDemo() {
                 <Dialog.Trigger>Show</Dialog.Trigger>
                 <Dialog.Portal style={{ width: '50rem' }}>
                     <Dialog.Header>
-                        <Dialog.Title>Header</Dialog.Title>
+                        <Dialog.Title>Article Preview</Dialog.Title>
                         <Dialog.HeaderActions>
-                            <Dialog.Maximizable />
-                            <Dialog.Close />
+                            <Dialog.Maximizable>
+                                <WindowMaximizeIcon className="in-data-maximized:hidden!" />
+                                <WindowMinimizeIcon className="in-data-minimized:hidden!" />
+                            </Dialog.Maximizable>
+                            <Dialog.Close>
+                                <TimesIcon />
+                            </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>
                     <Dialog.Content>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex items-center gap-2 text-sm text-surface-500 dark:text-surface-400">
+                                <span>Published on Feb 1, 2026</span>
+                                <span>·</span>
+                                <span>5 min read</span>
+                            </div>
+                            <h2 className="text-xl font-bold mt-0 mb-0">Getting Started with Component-Driven Development</h2>
+                            <p className="leading-relaxed mt-0 mb-0">
+                                Component-driven development is an approach that focuses on building loosely coupled, independent components that can
+                                be composed together to build complex user interfaces. This methodology promotes reusability, testability, and
+                                maintainability.
+                            </p>
+                            <p className="leading-relaxed mt-0 mb-0">
+                                By breaking down the UI into smaller, self-contained pieces, teams can work in parallel on different parts of the
+                                application without stepping on each other&apos;s toes. Each component encapsulates its own logic, styles, and
+                                behavior, making it easier to reason about and test in isolation.
+                            </p>
+                            <p className="leading-relaxed mt-0 mb-0">
+                                Modern frameworks and libraries have embraced this pattern, providing tools and conventions that make it
+                                straightforward to create, compose, and manage components at scale. The result is a more predictable, scalable, and
+                                enjoyable development experience.
+                            </p>
+                        </div>
                     </Dialog.Content>
+                    <Dialog.Footer>
+                        <div className="flex items-center justify-between w-full text-sm text-surface-500 dark:text-surface-400">
+                            <span>Last updated: Feb 1, 2026</span>
+                            <span>Author: Jane Doe</span>
+                        </div>
+                    </Dialog.Footer>
                 </Dialog.Portal>
             </Dialog.Root>
         </div>

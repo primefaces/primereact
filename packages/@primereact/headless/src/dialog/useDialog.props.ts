@@ -14,5 +14,6 @@ export const defaultProps: useDialogProps = {
     baseZIndex: 0,
     autoZIndex: true,
     appendTo: 'body',
+    fullScreen: false,
     onOpenChange: undefined
 };

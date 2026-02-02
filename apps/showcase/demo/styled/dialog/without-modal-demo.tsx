@@ -1,3 +1,5 @@
+'use client';
+import { TimesIcon } from '@primereact/icons/times';
 import { DialogContentInstance } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';
@@ -13,7 +15,9 @@ export default function WithoutModalDemo() {
                     <Dialog.Header>
                         <Dialog.Title>Edit Profile</Dialog.Title>
                         <Dialog.HeaderActions>
-                            <Dialog.Close />
+                            <Dialog.Close>
+                                <TimesIcon />
+                            </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>
                     <Dialog.Content>
@@ -21,19 +25,19 @@ export default function WithoutModalDemo() {
                             const { dialog } = instance;
 
                             return (
-                                <>
-                                    <span className="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <Label htmlFor="username" className="font-semibold w-24">
+                                <div className="flex flex-col gap-6">
+                                    <span className="text-surface-500 dark:text-surface-400">Update your information.</span>
+                                    <div className="flex flex-col gap-1">
+                                        <Label htmlFor="username" className="font-semibold">
                                             Username
                                         </Label>
-                                        <InputText id="username" className="flex-auto" autoComplete="off" />
+                                        <InputText id="username" />
                                     </div>
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <Label htmlFor="email" className="font-semibold w-24">
+                                    <div className="flex flex-col gap-1">
+                                        <Label htmlFor="email" className="font-semibold">
                                             Email
                                         </Label>
-                                        <InputText id="email" className="flex-auto" autoComplete="off" />
+                                        <InputText id="email" />
                                     </div>
                                     <div className="flex justify-end gap-2">
                                         <Button type="button" severity="secondary" onClick={dialog?.close}>
@@ -43,7 +47,7 @@ export default function WithoutModalDemo() {
                                             Save
                                         </Button>
                                     </div>
-                                </>
+                                </div>
                             );
                         }}
                     </Dialog.Content>

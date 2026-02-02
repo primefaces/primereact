@@ -10,7 +10,7 @@ export const useDialog = withHeadless({
     defaultProps,
     setup: ({ props, $primereact }) => {
         const [openState, setOpenState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
-        const [maximizedState, setMaximizedState] = React.useState<boolean>(false);
+        const [maximizedState, setMaximizedState] = React.useState<boolean>(props.fullScreen ?? false);
         const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
         const maskRef = React.useRef<HTMLDivElement | null>(null);
         const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
@@ -39,6 +39,10 @@ export const useDialog = withHeadless({
                 setMaskVisibleState(true);
             }
         }, [props.open, props.defaultOpen]);
+
+        useUpdateEffect(() => {
+            setMaximizedState(props.fullScreen ?? false);
+        }, [props.fullScreen]);
 
         useUpdateEffect(() => {
             if (maskVisibleState && !openState) {
@@ -149,13 +153,13 @@ export const useDialog = withHeadless({
         };
 
         const enableDocumentSettings = () => {
-            if (props.blockScroll) {
+            if (props.modal || (!props.modal && props.blockScroll) || maximizedState) {
                 blockBodyScroll({ variableName: $dt('scrollbar.width').name });
             }
         };
 
         const disableDocumentSettings = () => {
-            if (props.blockScroll) {
+            if (props.modal || (!props.modal && props.blockScroll) || maximizedState) {
                 unblockBodyScroll({ variableName: $dt('scrollbar.width').name });
             }
         };
@@ -209,7 +213,6 @@ export const useDialog = withHeadless({
                 }
 
                 document.body.setAttribute('data-p-unselectable-text', 'true');
-                // isUnstyled
                 addStyle(document.body, { 'user-select': 'none' });
             }
         };
@@ -272,7 +275,6 @@ export const useDialog = withHeadless({
             if (dragging.current) {
                 dragging.current = false;
                 document.body.removeAttribute('data-p-unselectable-text');
-                // isUnstyled
                 addStyle(document.body, { 'user-select': '' });
             }
         };

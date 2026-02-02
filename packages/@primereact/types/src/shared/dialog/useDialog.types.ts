@@ -90,6 +90,11 @@ export interface useDialogProps {
      */
     appendTo?: HTMLElement | 'body' | 'self' | undefined;
     /**
+     * Whether the dialog should open in full screen (maximized) mode.
+     * @default false
+     */
+    fullScreen?: boolean | undefined;
+    /**
      * Callback function that is called when the trigger is clicked.
      * @param event The event that triggered the change.
      * @param event.originalEvent The original event that triggered the change.

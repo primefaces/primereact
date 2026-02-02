@@ -1,5 +1,6 @@
 'use client';
-import { DialogChangeEvent, DialogContentInstance, DialogProps } from '@primereact/types/shared/dialog';
+import { TimesIcon } from '@primereact/icons/times';
+import { DialogContentInstance, DialogRootChangeEvent, DialogRootProps } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';
 import { InputText } from '@primereact/ui/inputtext';
@@ -8,9 +9,9 @@ import * as React from 'react';
 
 export default function PositionDemo() {
     const [open, setOpen] = React.useState<boolean>(false);
-    const [position, setPosition] = React.useState<DialogProps['position']>('center');
+    const [position, setPosition] = React.useState<DialogRootProps['position']>('center');
 
-    const openPosition = (position: DialogProps['position']) => {
+    const openPosition = (position: DialogRootProps['position']) => {
         setOpen(true);
         setPosition(position);
     };
@@ -55,12 +56,20 @@ export default function PositionDemo() {
                     <i className="pi pi-arrow-up-left" />
                 </Button>
             </div>
-            <Dialog.Root open={open} onOpenChange={(e: DialogChangeEvent) => setOpen(e.value as boolean)} modal position={position} draggable={false}>
+            <Dialog.Root
+                open={open}
+                onOpenChange={(e: DialogRootChangeEvent) => setOpen(e.value as boolean)}
+                modal
+                position={position}
+                draggable={false}
+            >
                 <Dialog.Portal style={{ width: '25rem' }}>
                     <Dialog.Header>
                         <Dialog.Title>Edit Profile</Dialog.Title>
                         <Dialog.HeaderActions>
-                            <Dialog.Close />
+                            <Dialog.Close>
+                                <TimesIcon />
+                            </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>
                     <Dialog.Content>
@@ -68,19 +77,19 @@ export default function PositionDemo() {
                             const { dialog } = instance;
 
                             return (
-                                <>
-                                    <span className="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <Label htmlFor="username" className="font-semibold w-24">
+                                <div className="flex flex-col gap-6">
+                                    <span className="text-surface-500 dark:text-surface-400">Update your information.</span>
+                                    <div className="flex flex-col gap-1">
+                                        <Label htmlFor="username" className="font-semibold">
                                             Username
                                         </Label>
-                                        <InputText id="username" className="flex-auto" autoComplete="off" />
+                                        <InputText id="username" />
                                     </div>
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <Label htmlFor="email" className="font-semibold w-24">
+                                    <div className="flex flex-col gap-1">
+                                        <Label htmlFor="email" className="font-semibold">
                                             Email
                                         </Label>
-                                        <InputText id="email" className="flex-auto" autoComplete="off" />
+                                        <InputText id="email" />
                                     </div>
                                     <div className="flex justify-end gap-2">
                                         <Button type="button" severity="secondary" onClick={dialog?.close}>
@@ -90,7 +99,7 @@ export default function PositionDemo() {
                                             Save
                                         </Button>
                                     </div>
-                                </>
+                                </div>
                             );
                         }}
                     </Dialog.Content>

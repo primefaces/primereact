@@ -46,6 +46,7 @@ export const DialogPortal = withComponent({
                 onAfterLeave: dialog?.onMotionAfterLeave
             },
             {
+                className: inProps?.className,
                 style: inProps?.style
             },
             dialog?.ptm('mask')

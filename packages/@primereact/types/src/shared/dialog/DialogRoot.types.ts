@@ -58,17 +58,9 @@ export interface DialogRootPassThrough {
      */
     maximizable?: DialogRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Used to pass attributes to the maximizable icon's DOM element.
-     */
-    maximizableIcon?: DialogRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
-    /**
      * Used to pass attributes to the close's DOM element.
      */
     close?: DialogRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the close icon's DOM element.
-     */
-    closeIcon?: DialogRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
      * Used to pass attributes to the content's DOM element.
      */

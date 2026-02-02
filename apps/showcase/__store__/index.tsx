@@ -691,9 +691,21 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/dialog/basic-demo')),
                 'filePath': 'demo/styled/dialog/basic-demo.tsx',
             },
+            'confirmation-demo': {
+                'component': React.lazy(() => import('demo/styled/dialog/confirmation-demo')),
+                'filePath': 'demo/styled/dialog/confirmation-demo.tsx',
+            },
             'dialog-pt': {
                 'component': React.lazy(() => import('demo/styled/dialog/dialog-pt')),
                 'filePath': 'demo/styled/dialog/dialog-pt.tsx',
+            },
+            'fullscreen-demo': {
+                'component': React.lazy(() => import('demo/styled/dialog/fullscreen-demo')),
+                'filePath': 'demo/styled/dialog/fullscreen-demo.tsx',
+            },
+            'long-content-demo': {
+                'component': React.lazy(() => import('demo/styled/dialog/long-content-demo')),
+                'filePath': 'demo/styled/dialog/long-content-demo.tsx',
             },
             'maximizable-demo': {
                 'component': React.lazy(() => import('demo/styled/dialog/maximizable-demo')),
@@ -702,6 +714,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'position-demo': {
                 'component': React.lazy(() => import('demo/styled/dialog/position-demo')),
                 'filePath': 'demo/styled/dialog/position-demo.tsx',
+            },
+            'responsive-demo': {
+                'component': React.lazy(() => import('demo/styled/dialog/responsive-demo')),
+                'filePath': 'demo/styled/dialog/responsive-demo.tsx',
             },
             'without-modal-demo': {
                 'component': React.lazy(() => import('demo/styled/dialog/without-modal-demo')),
