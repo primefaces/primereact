@@ -1,5 +1,6 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useEventListener, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { $dt } from '@primeuix/styled';
 import { addClass, addStyle, blockBodyScroll, focus, getOuterHeight, getOuterWidth, getViewport, unblockBodyScroll, ZIndex } from '@primeuix/utils';
 import * as React from 'react';
@@ -9,7 +10,11 @@ export const useDialog = withHeadless({
     name: 'useDialog',
     defaultProps,
     setup: ({ props, $primereact }) => {
-        const [openState, setOpenState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
         const [maximizedState, setMaximizedState] = React.useState<boolean>(props.fullScreen ?? false);
         const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
         const maskRef = React.useRef<HTMLDivElement | null>(null);
@@ -28,27 +33,21 @@ export const useDialog = withHeadless({
             maskVisible: maskVisibleState
         };
 
-        useMountEffect(() => {
-            if (props.open || props.defaultOpen) {
-                setMaskVisibleState(true);
-            }
-        });
-
         useUpdateEffect(() => {
-            if (props.open || (props.defaultOpen && !maskVisibleState)) {
+            if (openState && !maskVisibleState) {
                 setMaskVisibleState(true);
             }
-        }, [props.open, props.defaultOpen]);
+        }, [openState]);
+
+        React.useLayoutEffect(() => {
+            if (maskVisibleState && props.autoZIndex && maskRef.current) {
+                ZIndex.set('modal', maskRef.current as HTMLDivElement, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
+            }
+        }, [maskVisibleState]);
 
         useUpdateEffect(() => {
             setMaximizedState(props.fullScreen ?? false);
         }, [props.fullScreen]);
-
-        useUpdateEffect(() => {
-            if (maskVisibleState && !openState) {
-                setOpenState(true);
-            }
-        }, [maskVisibleState]);
 
         useUnmountEffect(() => {
             setMaskVisibleState(false);
@@ -60,10 +59,7 @@ export const useDialog = withHeadless({
 
         // methods
         const close = () => {
-            setOpenState(false);
-            props?.onOpenChange?.({
-                value: false
-            });
+            setOpenState([false, { value: false }]);
         };
 
         const toggleMaximized = () => setMaximizedState((prev) => !prev);
@@ -75,25 +71,13 @@ export const useDialog = withHeadless({
                 setMaskVisibleState(true);
             }
 
-            props?.onOpenChange?.({
-                value: newOpenState
-            });
-        };
-
-        const onOpenChange = () => {
-            props?.onOpenChange?.({
-                value: state.opened
-            });
+            setOpenState([newOpenState, { value: newOpenState }]);
         };
 
         const onMotionEnter = () => {
             target.current = document.activeElement as HTMLElement;
             enableDocumentSettings();
             bindGlobalListeners();
-
-            if (props.autoZIndex) {
-                ZIndex.set('modal', maskRef.current as HTMLDivElement, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
-            }
         };
 
         const onMotionAfterEnter = () => {
@@ -102,8 +86,8 @@ export const useDialog = withHeadless({
 
         const onMotionBeforeLeave = () => {
             if (props.modal) {
-                // && !isUnstyled
-                addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave');
+                // && !isUnstyled //TODO:
+                addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave-active');
             }
         };
 
@@ -199,7 +183,9 @@ export const useDialog = withHeadless({
         const onDragStart = (event: React.MouseEvent) => {
             if (!motionRef.current?.elementRef.current) return;
 
-            if ((event.target as Element).closest('div')?.getAttribute('data-pc-section') === 'headeractions') {
+            const targetEl = event.target as Element;
+
+            if (targetEl.closest('[data-part="maximizable"]') || targetEl.closest('[data-part="close"]')) {
                 return;
             }
 
@@ -218,56 +204,41 @@ export const useDialog = withHeadless({
         };
 
         const onDrag = (event: React.MouseEvent) => {
-            if (dragging.current) {
-                if (!motionRef.current?.elementRef.current) return;
+            if (!dragging.current) return;
 
-                if (lastPageX.current === null || lastPageY.current === null) return;
+            const el = motionRef.current?.elementRef.current;
 
-                const width = getOuterWidth(motionRef.current?.elementRef.current);
-                const height = getOuterHeight(motionRef.current?.elementRef.current);
-                const deltaX = event.pageX - lastPageX.current;
-                const deltaY = event.pageY - lastPageY.current;
-                const offset = motionRef.current?.elementRef.current.getBoundingClientRect();
-                const leftPos = offset.left + deltaX;
-                const topPos = offset.top + deltaY;
-                const viewport = getViewport();
-                const containerComputedStyle = getComputedStyle(motionRef.current?.elementRef.current);
-                const marginLeft = parseFloat(containerComputedStyle.marginLeft);
-                const marginTop = parseFloat(containerComputedStyle.marginTop);
+            if (!el || lastPageX.current === null || lastPageY.current === null) return;
 
-                if (motionRef.current && motionRef.current.elementRef.current) {
-                    motionRef.current.elementRef.current.style.position = 'fixed';
-                }
+            const width = getOuterWidth(el);
+            const height = getOuterHeight(el);
+            const deltaX = event.pageX - lastPageX.current;
+            const deltaY = event.pageY - lastPageY.current;
+            const offset = el.getBoundingClientRect();
+            const leftPos = offset.left + deltaX;
+            const topPos = offset.top + deltaY;
+            const viewport = getViewport();
+            const containerComputedStyle = getComputedStyle(el);
+            const marginLeft = parseFloat(containerComputedStyle.marginLeft);
+            const marginTop = parseFloat(containerComputedStyle.marginTop);
 
-                if (props.keepInViewport) {
-                    if (leftPos >= (props.minX ?? 0) && leftPos + width < viewport.width) {
-                        lastPageX.current = event.pageX;
+            el.style.position = 'fixed';
 
-                        if (motionRef.current?.elementRef.current) {
-                            motionRef.current.elementRef.current.style.left = leftPos - marginLeft + 'px';
-                        }
-                    }
-
-                    if (topPos >= (props.minY ?? 0) && topPos + height < viewport.height) {
-                        lastPageY.current = event.pageY;
-
-                        if (motionRef.current?.elementRef.current) {
-                            motionRef.current.elementRef.current.style.top = topPos - marginTop + 'px';
-                        }
-                    }
-                } else {
+            if (props.keepInViewport) {
+                if (leftPos >= (props.minX ?? 0) && leftPos + width < viewport.width) {
                     lastPageX.current = event.pageX;
-
-                    if (motionRef.current?.elementRef.current) {
-                        motionRef.current.elementRef.current.style.left = leftPos - marginLeft + 'px';
-                    }
-
-                    lastPageY.current = event.pageY;
-
-                    if (motionRef.current?.elementRef.current) {
-                        motionRef.current.elementRef.current.style.top = topPos - marginTop + 'px';
-                    }
+                    el.style.left = leftPos - marginLeft + 'px';
                 }
+
+                if (topPos >= (props.minY ?? 0) && topPos + height < viewport.height) {
+                    lastPageY.current = event.pageY;
+                    el.style.top = topPos - marginTop + 'px';
+                }
+            } else {
+                lastPageX.current = event.pageX;
+                el.style.left = leftPos - marginLeft + 'px';
+                lastPageY.current = event.pageY;
+                el.style.top = topPos - marginTop + 'px';
             }
         };
 
@@ -294,7 +265,6 @@ export const useDialog = withHeadless({
             closeButtonRef,
             // methods
             onOpenStateChange,
-            onOpenChange,
             close,
             toggleMaximized,
             onMaskMouseDown,

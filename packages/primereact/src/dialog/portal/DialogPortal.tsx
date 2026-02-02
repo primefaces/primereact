@@ -32,7 +32,6 @@ export const DialogPortal = withComponent({
             {
                 id: dialog?.id,
                 visible: dialog?.state.opened,
-                appear: true,
                 name: 'p-dialog',
                 className: dialog?.cx('root'),
                 style: dialog?.sx('root'),

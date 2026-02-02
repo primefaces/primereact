@@ -26,12 +26,12 @@ export interface useDialogChangeEvent {
 export interface useDialogProps {
     /**
      * Specifies the visibility of the dialog.
-     * @default false
+     * @default undefined
      */
     open?: boolean | undefined;
     /**
      * Specifies the default visibility of the dialog.
-     * @default false
+     * @default undefined
      */
     defaultOpen?: boolean | undefined;
     /**
@@ -129,7 +129,7 @@ export interface useDialogExposes {
     /**
      * Current state of the dialog.
      */
-    state?: useDialogState;
+    state: useDialogState;
     /**
      * Reference to the mask element.
      */

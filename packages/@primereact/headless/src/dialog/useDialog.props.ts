@@ -1,8 +1,8 @@
 import type { useDialogProps } from '@primereact/types/shared/dialog';
 
 export const defaultProps: useDialogProps = {
-    open: false,
-    defaultOpen: false,
+    open: undefined,
+    defaultOpen: undefined,
     draggable: true,
     keepInViewport: true,
     minX: 0,
