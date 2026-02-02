@@ -459,12 +459,12 @@ export const menu = {
             name: 'Media',
             children: [
                 {
-                    name: 'ImageCompare',
-                    href: '/docs/styled/components/imagecompare'
-                },
-                {
                     name: 'Carousel',
                     href: '/docs/styled/components/carousel'
+                },
+                {
+                    name: 'Compare',
+                    href: '/docs/styled/components/compare'
                 },
                 {
                     name: 'Gallery',
