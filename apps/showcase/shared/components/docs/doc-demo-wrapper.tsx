@@ -33,10 +33,10 @@ export default function DocDemoWrapper({
         : (highlightedCode as string);
 
     return (
-        <div className={cn('mb-16 mt-2 border border-(--code-figure-border) p-1.5 space-y-1.5 rounded-[calc(var(--radius-lg)*1.5)] bg-surface-100 dark:bg-surface-900', className)} {...props}>
-            {component && <div className="bg-(--code-figure-background) p-6 md:p-8 rounded-lg border border-(--code-figure-border)">{component}</div>}
+        <div className={cn('mb-16 mt-2 p-2 space-y-2 rounded-[20px] bg-surface-100 dark:bg-surface-900 shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]', className)} {...props}>
+            {component && <div className="bg-surface-0 dark:bg-surface-950 p-8 md:p-10 rounded-[12px] shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]">{component}</div>}
             {!isSourceNotAvailable && (
-                <div className="border border-(--code-figure-border) rounded-lg bg-(--code-figure-background) overflow-hidden">
+                <div className=" rounded-[12px] bg-(--code-figure-background) overflow-hidden  shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]">
                     <div className="p-1.5 flex items-center gap-2 border-b border-(--code-figure-border)">
                         <div className="inline-flex py-1.5 px-2 items-center gap-2">
                             <ReactLogo className="size-3.5 fill-surface-500" />
