@@ -1,29 +1,39 @@
 ---
-title: ImageCompare
-description: Compare two images side by side with a slider.
+title: Compare
+description: Compare two items side by side with a slider.
 ---
 
-<DocDemoViewer name="imagecompare:basic-demo" hideCode/>
+<DocDemoViewer name="compare:basic-demo" hideCode/>
 
 ## Usage
 
 ```tsx
-import { ImageCompare } from '@primereact/ui/imagecompare';
+import { Compare } from '@primereact/ui/compare';
 ```
 
 ```tsx
-<ImageCompare>
-    <ImageCompare.Left src="" />
-    <ImageCompare.Right src="" />
-    <ImageCompare.Slider />
-</ImageCompare>
+<Compare>
+    <Compare.Item position="before"></Compare.Item>
+    <Compare.Item position="after"></Compare.Item>
+    <Compare.Slider>
+        <Compare.Thumb />
+    </Compare.Slider>
+</Compare>
 ```
 
 ## Examples
 
+### Hover
+
+<DocDemoViewer name="compare:hover-demo" />
+
+### Vertical
+
+<DocDemoViewer name="compare:vertical-demo" />
+
 ### Template
 
-<DocDemoViewer name="imagecompare:template-demo" />
+<DocDemoViewer name="compare:template-demo" />
 
 ## Accessibility
 
