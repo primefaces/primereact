@@ -1,6 +1,5 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { TimesIcon } from '@primereact/icons';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useDrawerContext } from '../Drawer.context';
@@ -29,12 +28,6 @@ export const DrawerClose = withComponent({
             ptmi('root')
         );
 
-        const createIconElement = () => {
-            return <TimesIcon pt={drawer?.ptm('closeIcon')} />;
-        };
-
-        const icon = createIconElement();
-
-        return <Component ref={drawer?.closeButtonRef} as={as} instance={instance} attrs={rootProps} children={props.children ?? icon} />;
+        return <Component ref={drawer?.closeButtonRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

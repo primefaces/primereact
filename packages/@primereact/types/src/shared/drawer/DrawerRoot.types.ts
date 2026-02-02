@@ -34,10 +34,6 @@ export interface DrawerRootPassThrough {
      */
     trigger?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Used to pass attributes to the trigger icon's DOM element.
-     */
-    triggerIcon?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
-    /**
      * Used to pass attributes to the portal's DOM element.
      */
     portal?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -53,10 +49,6 @@ export interface DrawerRootPassThrough {
      * Used to pass attributes to the close's DOM element.
      */
     close?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Used to pass attributes to the close icon's DOM element.
-     */
-    closeIcon?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
      * Used to pass attributes to the content's DOM element.
      */

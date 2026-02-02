@@ -1,5 +1,10 @@
 'use client';
-import { DrawerChangeEvent } from '@primereact/types/shared/drawer';
+import { AngleDownIcon } from '@primereact/icons/angledown';
+import { AngleLeftIcon } from '@primereact/icons/angleleft';
+import { AngleRightIcon } from '@primereact/icons/angleright';
+import { AngleUpIcon } from '@primereact/icons/angleup';
+import { TimesIcon } from '@primereact/icons/times';
+import { DrawerRootChangeEvent } from '@primereact/types/shared/drawer';
 import { Button } from '@primereact/ui/button';
 import { Drawer } from '@primereact/ui/drawer';
 import * as React from 'react';
@@ -13,25 +18,27 @@ export default function PositionDemo() {
     return (
         <div>
             <div className="flex gap-2 justify-center">
-                <Button onClick={() => setVisibleLeft(true)}>
-                    <i className="pi pi-arrow-right" />
+                <Button iconOnly onClick={() => setVisibleLeft(true)}>
+                    <AngleRightIcon />
                 </Button>
-                <Button onClick={() => setVisibleRight(true)}>
-                    <i className="pi pi-arrow-left" />
+                <Button iconOnly onClick={() => setVisibleRight(true)}>
+                    <AngleLeftIcon />
                 </Button>
-                <Button onClick={() => setVisibleTop(true)}>
-                    <i className="pi pi-arrow-down" />
+                <Button iconOnly onClick={() => setVisibleTop(true)}>
+                    <AngleDownIcon />
                 </Button>
-                <Button onClick={() => setVisibleBottom(true)}>
-                    <i className="pi pi-arrow-up" />
+                <Button iconOnly onClick={() => setVisibleBottom(true)}>
+                    <AngleUpIcon />
                 </Button>
             </div>
 
-            <Drawer.Root open={visibleLeft} onOpenChange={(e: DrawerChangeEvent) => setVisibleLeft(e.value as boolean)}>
-                <Drawer.Portal>
+            <Drawer.Root open={visibleLeft} onOpenChange={(e: DrawerRootChangeEvent) => setVisibleLeft(e.value as boolean)}>
+                <Drawer.Portal className="w-full md:w-80">
                     <Drawer.Header>
                         <Drawer.Title>Left Drawer</Drawer.Title>
-                        <Drawer.Close />
+                        <Drawer.Close>
+                            <TimesIcon />
+                        </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
@@ -42,11 +49,13 @@ export default function PositionDemo() {
                 </Drawer.Portal>
             </Drawer.Root>
 
-            <Drawer.Root position="right" open={visibleRight} onOpenChange={(e: DrawerChangeEvent) => setVisibleRight(e.value as boolean)}>
-                <Drawer.Portal>
+            <Drawer.Root position="right" open={visibleRight} onOpenChange={(e: DrawerRootChangeEvent) => setVisibleRight(e.value as boolean)}>
+                <Drawer.Portal className="w-full md:w-80">
                     <Drawer.Header>
                         <Drawer.Title>Right Drawer</Drawer.Title>
-                        <Drawer.Close />
+                        <Drawer.Close>
+                            <TimesIcon />
+                        </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
@@ -60,13 +69,15 @@ export default function PositionDemo() {
             <Drawer.Root
                 position="top"
                 open={visibleTop}
-                onOpenChange={(e: DrawerChangeEvent) => setVisibleTop(e.value as boolean)}
+                onOpenChange={(e: DrawerRootChangeEvent) => setVisibleTop(e.value as boolean)}
                 style={{ height: 'auto' }}
             >
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Top Drawer</Drawer.Title>
-                        <Drawer.Close />
+                        <Drawer.Close>
+                            <TimesIcon />
+                        </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>
@@ -80,13 +91,15 @@ export default function PositionDemo() {
             <Drawer.Root
                 position="bottom"
                 open={visibleBottom}
-                onOpenChange={(e: DrawerChangeEvent) => setVisibleBottom(e.value as boolean)}
+                onOpenChange={(e: DrawerRootChangeEvent) => setVisibleBottom(e.value as boolean)}
                 style={{ height: 'auto' }}
             >
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Bottom Drawer</Drawer.Title>
-                        <Drawer.Close />
+                        <Drawer.Close>
+                            <TimesIcon />
+                        </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
                         <p>

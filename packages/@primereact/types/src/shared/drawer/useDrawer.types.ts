@@ -121,6 +121,10 @@ export interface useDrawerExposes {
      */
     onMotionBeforeLeave?: () => void;
     /**
+     * Handler for motion leave events.
+     */
+    onMotionLeave?: () => void;
+    /**
      * Handler for motion after leave events.
      */
     onMotionAfterLeave?: () => void;

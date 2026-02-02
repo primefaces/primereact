@@ -31,7 +31,6 @@ export const DrawerPortal = withComponent({
             {
                 id: drawer?.id,
                 visible: drawer?.state.opened,
-                appear: true,
                 name: 'p-drawer',
                 className: drawer?.cx('root'),
                 style: drawer?.sx('root'),
@@ -40,9 +39,11 @@ export const DrawerPortal = withComponent({
                 onEnter: drawer?.onMotionEnter,
                 onAfterEnter: drawer?.onMotionAfterEnter,
                 onBeforeLeave: drawer?.onMotionBeforeLeave,
+                onLeave: drawer?.onMotionLeave,
                 onAfterLeave: drawer?.onMotionAfterLeave
             },
             {
+                className: inProps?.className,
                 style: inProps?.style
             },
             drawer?.ptmi('root')

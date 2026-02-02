@@ -1,8 +1,8 @@
 import type { useDrawerProps } from '@primereact/types/shared/drawer';
 
 export const defaultProps: useDrawerProps = {
-    open: false,
-    defaultOpen: false,
+    open: undefined,
+    defaultOpen: undefined,
     modal: true,
     blockScroll: false,
     dismissable: true,

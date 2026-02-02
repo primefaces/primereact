@@ -763,6 +763,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/drawer/position-demo')),
                 'filePath': 'demo/styled/drawer/position-demo.tsx',
             },
+            'responsive-demo': {
+                'component': React.lazy(() => import('demo/styled/drawer/responsive-demo')),
+                'filePath': 'demo/styled/drawer/responsive-demo.tsx',
+            },
         },
         'fieldset': {
             'basic-demo': {

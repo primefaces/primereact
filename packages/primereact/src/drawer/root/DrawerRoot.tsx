@@ -22,7 +22,8 @@ export const DrawerRoot = withComponent({
                 id,
                 className: cx('root'),
                 style: sx('root'),
-                'data-p-opened': state.opened
+                'data-opened': state.opened ? '' : undefined,
+                'data-position': props.position
             },
             ptmi('root')
         );

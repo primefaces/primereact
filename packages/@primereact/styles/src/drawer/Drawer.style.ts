@@ -2,9 +2,29 @@ import { createStyles } from '@primereact/styles/utils';
 import type { DrawerRootInstance } from '@primereact/types/shared/drawer';
 import { style } from '@primeuix/styles/drawer';
 
+const _style = /*css*/ `
+    ${style}
+
+    .p-drawer-left .p-drawer {
+        width: unset;
+    }
+
+    .p-drawer-right .p-drawer {
+        width: unset;
+    }
+
+    .p-drawer-top .p-drawer {
+        height: unset;
+    }
+
+    .p-drawer-bottom .p-drawer {
+        height: unset;
+    }
+`;
+
 export const styles = createStyles<DrawerRootInstance>({
     name: 'drawer',
-    style,
+    style: _style,
     classes: {
         mask: ({ props, state }) => {
             const positions = ['left', 'right', 'top', 'bottom'];
@@ -13,7 +33,7 @@ export const styles = createStyles<DrawerRootInstance>({
             return [
                 'p-drawer-mask',
                 {
-                    'p-overlay-mask p-overlay-mask-enter': props.modal,
+                    'p-overlay-mask p-overlay-mask-enter-active': props.modal,
                     'p-drawer-open': state.opened,
                     'p-drawer-full': props.position === 'full'
                 },

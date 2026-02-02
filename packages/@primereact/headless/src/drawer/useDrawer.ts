@@ -1,5 +1,6 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useEventListener, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { $dt } from '@primeuix/styled';
 import { addClass, blockBodyScroll, focus, unblockBodyScroll, ZIndex } from '@primeuix/utils';
 import * as React from 'react';
@@ -9,32 +10,31 @@ export const useDrawer = withHeadless({
     name: 'useDrawer',
     defaultProps,
     setup: ({ props, elementRef, $primereact }) => {
-        const [openState, setOpenState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
+        const [openState, setOpenState] = useControlledState({
+            value: props.open,
+            defaultValue: props.defaultOpen ?? false,
+            onChange: props.onOpenChange
+        });
         const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
         const maskRef = React.useRef<HTMLDivElement | null>(null);
         const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
         const closeButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
+        const target = React.useRef<HTMLElement | null>(null);
 
         const state = {
-            opened: openState,
+            opened: openState ?? false,
             maskVisible: maskVisibleState
         };
 
-        useMountEffect(() => {
-            if (props.open || props.defaultOpen) {
+        useUpdateEffect(() => {
+            if (openState && !maskVisibleState) {
                 setMaskVisibleState(true);
             }
-        });
+        }, [openState]);
 
-        useUpdateEffect(() => {
-            if (props.open || (props.defaultOpen && !maskVisibleState)) {
-                setMaskVisibleState(true);
-            }
-        }, [props.open, props.defaultOpen]);
-
-        useUpdateEffect(() => {
-            if (maskVisibleState && !openState) {
-                setOpenState(true);
+        React.useLayoutEffect(() => {
+            if (maskVisibleState && props.autoZIndex && maskRef.current) {
+                ZIndex.set('modal', maskRef.current as HTMLDivElement, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
             }
         }, [maskVisibleState]);
 
@@ -48,11 +48,7 @@ export const useDrawer = withHeadless({
 
         //methods
         const close = () => {
-            setOpenState(false);
-
-            props?.onOpenChange?.({
-                value: false
-            });
+            setOpenState([false, { value: false }]);
         };
 
         const onOpenStateChange = () => {
@@ -62,26 +58,13 @@ export const useDrawer = withHeadless({
                 setMaskVisibleState(true);
             }
 
-            //setOpenState(newOpenState);
-
-            props?.onOpenChange?.({
-                value: newOpenState
-            });
-        };
-
-        const onOpenChange = () => {
-            props?.onOpenChange?.({
-                value: state.opened
-            });
+            setOpenState([newOpenState, { value: newOpenState }]);
         };
 
         const onMotionEnter = () => {
+            target.current = document.activeElement as HTMLElement;
             enableDocumentSettings();
             bindDocumentKeyDownListener();
-
-            if (props.autoZIndex) {
-                ZIndex.set('modal', maskRef.current as HTMLDivElement, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
-            }
         };
 
         const onMotionAfterEnter = () => {
@@ -90,9 +73,14 @@ export const useDrawer = withHeadless({
 
         const onMotionBeforeLeave = () => {
             if (props.modal) {
-                // && !isUnstyled
-                addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave');
+                // && !isUnstyled //TODO:
+                addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave-active');
             }
+        };
+
+        const onMotionLeave = () => {
+            focus(target.current as HTMLElement);
+            target.current = null;
         };
 
         const onMotionAfterLeave = () => {
@@ -180,10 +168,10 @@ export const useDrawer = withHeadless({
             // methods
             close,
             onOpenStateChange,
-            onOpenChange,
             onMotionEnter,
             onMotionAfterEnter,
             onMotionBeforeLeave,
+            onMotionLeave,
             onMotionAfterLeave,
             onMaskClick
         };
