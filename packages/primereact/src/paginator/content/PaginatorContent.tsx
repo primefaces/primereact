@@ -26,6 +26,5 @@ export const PaginatorContent = withComponent({
         );
 
         return <Component instance={instance} attrs={rootProps} children={props.children} />;
-    },
-    components: {}
+    }
 });

@@ -1,6 +1,5 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { AngleLeftIcon } from '@primereact/icons/angleleft';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { usePaginatorContext } from '../Paginator.context';
@@ -15,7 +14,7 @@ export const PaginatorPrev = withComponent({
         return { paginator };
     },
     render(instance) {
-        const { id, props, ptmi, ptm, paginator } = instance;
+        const { id, props, ptmi, paginator } = instance;
 
         const disabled = !paginator?.state.canPrev || paginator?.props.disabled || props.disabled;
         const rootProps = mergeProps(
@@ -24,13 +23,13 @@ export const PaginatorPrev = withComponent({
                 className: paginator?.cx('prev', { disabled }),
                 onClick: paginator?.prev,
                 disabled,
-                'aria-label': paginator?.getAriaLabel('prevPageLabel')
+                'aria-label': paginator?.getAriaLabel('prevPageLabel'),
+                ...(disabled && { 'data-disabled': '' })
             },
             paginator?.ptmi('prev'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children ?? <AngleLeftIcon className={paginator?.cx('prevIcon')} {...ptm('prevIcon')} />} />;
-    },
-    components: {}
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+    }
 });

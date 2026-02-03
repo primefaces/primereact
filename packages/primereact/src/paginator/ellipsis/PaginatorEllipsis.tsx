@@ -25,7 +25,6 @@ export const PaginatorEllipsis = withComponent({
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children ?? '...'} />;
-    },
-    components: {}
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+    }
 });

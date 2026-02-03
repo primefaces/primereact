@@ -17,7 +17,9 @@ function CustomizationDemo() {
                                 page.type === 'page' ? (
                                     <Paginator.Page key={index} value={page.value} className="rounded-md border border-surface" />
                                 ) : (
-                                    <Paginator.Ellipsis key={index} />
+                                    <Paginator.Ellipsis key={index}>
+                                        <i className="pi pi-ellipsis-h" />
+                                    </Paginator.Ellipsis>
                                 )
                             )
                         }

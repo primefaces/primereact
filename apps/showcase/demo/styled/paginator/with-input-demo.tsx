@@ -1,4 +1,5 @@
 'use client';
+import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon } from '@primereact/icons';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { InputText } from '@primereact/ui/inputtext';
 import { Paginator } from '@primereact/ui/paginator';
@@ -22,19 +23,29 @@ function WithInputDemo() {
                 }}
             >
                 <Paginator.Content>
-                    <Paginator.First />
-                    <Paginator.Prev />
+                    <Paginator.First>
+                        <AngleDoubleLeftIcon />
+                    </Paginator.First>
+                    <Paginator.Prev>
+                        <AngleLeftIcon />
+                    </Paginator.Prev>
                     <div className="flex items-center gap-2">
                         <InputText
-                            className="max-w-14 px-2 py-1"
-                            type="number"
+                            size="small"
+                            min={1}
+                            max={maxPage}
                             value={page}
+                            className="max-w-12"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPage(Number(e.target.value))}
                         />
-                        <span>of {maxPage}</span>
+                        <span className="flex-1 whitespace-nowrap text-sm">of {maxPage}</span>
                     </div>
-                    <Paginator.Next />
-                    <Paginator.Last />
+                    <Paginator.Next>
+                        <AngleRightIcon />
+                    </Paginator.Next>
+                    <Paginator.Last>
+                        <AngleDoubleRightIcon />
+                    </Paginator.Last>
                 </Paginator.Content>
             </Paginator.Root>
         </div>

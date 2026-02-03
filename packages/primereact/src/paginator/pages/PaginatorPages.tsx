@@ -2,8 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { PaginatorEllipsis } from '../ellipsis';
-import { PaginatorPage } from '../page/PaginatorPage';
 import { usePaginatorContext } from '../Paginator.context';
 import { defaultPagesProps } from './PaginatorPages.props';
 
@@ -28,8 +26,6 @@ export const PaginatorPages = withComponent({
             ptmi('root')
         );
 
-        const pages = paginator?.pages.map((page, index) => (page.type === 'page' ? <PaginatorPage key={index} value={page.value} /> : <PaginatorEllipsis key={index} />));
-
-        return <Component instance={instance} attrs={rootProps} children={props.children ?? pages} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

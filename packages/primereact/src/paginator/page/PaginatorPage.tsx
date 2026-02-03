@@ -15,7 +15,7 @@ export const PaginatorPage = withComponent({
     },
     render(instance) {
         const { id, props, ptmi, paginator, $primereact } = instance;
-        // @ts-expect-error - TODO: fix this
+
         const ariaLabel = $primereact.config?.locale?.aria ? $primereact.config.locale.aria.pageLabel.replace(/{page}/g, props.value) : undefined;
         const disabled = paginator?.props.disabled || props.disabled;
         const rootProps = mergeProps(
@@ -26,13 +26,13 @@ export const PaginatorPage = withComponent({
                 disabled,
                 'aria-label': ariaLabel,
                 'aria-current': paginator?.state.activePage === props.value ? 'page' : undefined,
-                'data-p-active': paginator?.state.activePage === props.value
+                ...(paginator?.state.activePage === props.value && { 'data-active': '' }),
+                ...(disabled && { 'data-disabled': '' })
             },
             paginator?.ptmi('page'),
             ptmi('root')
         );
 
         return <Component instance={instance} attrs={rootProps} children={props.children ?? props.value} />;
-    },
-    components: {}
+    }
 });
