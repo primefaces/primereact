@@ -295,6 +295,10 @@ export const menu = {
                 {
                     name: 'ToggleButton',
                     href: '/docs/styled/components/togglebutton'
+                },
+                {
+                    name: 'ToggleButtonGroup',
+                    href: '/docs/styled/components/togglebuttongroup'
                 }
             ]
         },
