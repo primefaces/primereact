@@ -5,7 +5,13 @@ import path from 'node:path';
 import React from 'react';
 import DocDemoWrapper from './doc-demo-wrapper';
 
-export default async function DocDemoViewer({ name, hideCode, __pathname__, ...props }: React.ComponentProps<'div'> & { name: string; hideCode?: boolean; __pathname__: string }) {
+export interface DocDemoViewerProps extends React.ComponentProps<'div'> {
+    name: string;
+    mode?: 'full' | 'compact' | 'hidden' | 'collapsible';
+    __pathname__: string;
+}
+
+export default async function DocDemoViewer({ name, mode = 'compact', __pathname__, ...props }: DocDemoViewerProps) {
     const match = __pathname__?.match(/\/docs\/([^/]+)\//);
     const type = match?.[1];
 
@@ -28,7 +34,7 @@ export default async function DocDemoViewer({ name, hideCode, __pathname__, ...p
     let highlightedCode = undefined;
     let source = undefined;
 
-    if (!hideCode) {
+    if (mode !== 'hidden') {
         try {
             const filePath = `demo/${type ? type + '/' : ''}${component}/${demo}.tsx`;
 
@@ -40,5 +46,5 @@ export default async function DocDemoViewer({ name, hideCode, __pathname__, ...p
         }
     }
 
-    return <DocDemoWrapper name={name} component={<Demo />} source={source} highlightedCode={highlightedCode} {...props} />;
+    return <DocDemoWrapper name={name} component={<Demo />} source={source} highlightedCode={highlightedCode} mode={mode} {...props} />;
 }
