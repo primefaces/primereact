@@ -2035,10 +2035,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'togglebutton': {
-            'all-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/all-demo')),
-                'filePath': 'demo/styled/togglebutton/all-demo.tsx',
-            },
             'basic-demo': {
                 'component': React.lazy(() => import('demo/styled/togglebutton/basic-demo')),
                 'filePath': 'demo/styled/togglebutton/basic-demo.tsx',
@@ -2047,33 +2043,13 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/togglebutton/controlled-demo')),
                 'filePath': 'demo/styled/togglebutton/controlled-demo.tsx',
             },
-            'controlled-group-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/controlled-group-demo')),
-                'filePath': 'demo/styled/togglebutton/controlled-group-demo.tsx',
-            },
             'disabled-demo': {
                 'component': React.lazy(() => import('demo/styled/togglebutton/disabled-demo')),
                 'filePath': 'demo/styled/togglebutton/disabled-demo.tsx',
             },
-            'disabled-group-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/disabled-group-demo')),
-                'filePath': 'demo/styled/togglebutton/disabled-group-demo.tsx',
-            },
-            'group-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/group-demo')),
-                'filePath': 'demo/styled/togglebutton/group-demo.tsx',
-            },
             'invalid-demo': {
                 'component': React.lazy(() => import('demo/styled/togglebutton/invalid-demo')),
                 'filePath': 'demo/styled/togglebutton/invalid-demo.tsx',
-            },
-            'invalid-group-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/invalid-group-demo')),
-                'filePath': 'demo/styled/togglebutton/invalid-group-demo.tsx',
-            },
-            'multiple-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/multiple-demo')),
-                'filePath': 'demo/styled/togglebutton/multiple-demo.tsx',
             },
             'render-props-demo': {
                 'component': React.lazy(() => import('demo/styled/togglebutton/render-props-demo')),
@@ -2083,13 +2059,35 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/togglebutton/sizes-demo')),
                 'filePath': 'demo/styled/togglebutton/sizes-demo.tsx',
             },
-            'sizes-group-demo': {
-                'component': React.lazy(() => import('demo/styled/togglebutton/sizes-group-demo')),
-                'filePath': 'demo/styled/togglebutton/sizes-group-demo.tsx',
-            },
             'togglebutton-pt': {
                 'component': React.lazy(() => import('demo/styled/togglebutton/togglebutton-pt')),
                 'filePath': 'demo/styled/togglebutton/togglebutton-pt.tsx',
+            },
+        },
+        'togglebuttongroup': {
+            'basic-demo': {
+                'component': React.lazy(() => import('demo/styled/togglebuttongroup/basic-demo')),
+                'filePath': 'demo/styled/togglebuttongroup/basic-demo.tsx',
+            },
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/styled/togglebuttongroup/controlled-demo')),
+                'filePath': 'demo/styled/togglebuttongroup/controlled-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/styled/togglebuttongroup/disabled-demo')),
+                'filePath': 'demo/styled/togglebuttongroup/disabled-demo.tsx',
+            },
+            'invalid-demo': {
+                'component': React.lazy(() => import('demo/styled/togglebuttongroup/invalid-demo')),
+                'filePath': 'demo/styled/togglebuttongroup/invalid-demo.tsx',
+            },
+            'multiple-demo': {
+                'component': React.lazy(() => import('demo/styled/togglebuttongroup/multiple-demo')),
+                'filePath': 'demo/styled/togglebuttongroup/multiple-demo.tsx',
+            },
+            'sizes-demo': {
+                'component': React.lazy(() => import('demo/styled/togglebuttongroup/sizes-demo')),
+                'filePath': 'demo/styled/togglebuttongroup/sizes-demo.tsx',
             },
         },
         'toolbar': {
