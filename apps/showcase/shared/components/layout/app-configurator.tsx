@@ -2,14 +2,15 @@
 import { useApp } from '@/shared/hooks/useApp';
 import { useViewTransition } from '@primereact/hooks';
 import { SwitchRootChangeEvent } from '@primereact/types/shared/switch';
-import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebuttongroup';
+import { Switch } from '@primereact/ui/switch';
+import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Material from '@primeuix/themes/material';
 import Nora from '@primeuix/themes/nora';
-import { Switch } from '@primereact/ui/switch';
-import { ToggleButton } from '@primereact/ui/togglebutton';
 import * as React from 'react';
 
 interface PaletteType {
@@ -341,13 +342,13 @@ export default function AppConfigurator() {
             </div>
             <div>
                 <div className="text-sm text-(--text-secondary-color) font-semibold text-balance mb-1.5">Theme</div>
-                <ToggleButton.Group value={app.preset} onValueChange={onPresetChange} allowEmpty={false} size="small">
+                <ToggleButtonGroup value={app.preset} onValueChange={onPresetChange} allowEmpty={false} size="small">
                     {Object.keys(presets).map((label) => (
                         <ToggleButton.Root key={label} value={label}>
                             <ToggleButton.Indicator>{label}</ToggleButton.Indicator>
                         </ToggleButton.Root>
                     ))}
-                </ToggleButton.Group>
+                </ToggleButtonGroup>
             </div>
             <div className="flex justify-between items-end">
                 <div className="text-sm text-(--text-secondary-color) font-semibold text-balance mb-1.5">RTL</div>
