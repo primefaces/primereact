@@ -1,8 +1,9 @@
 'use client';
-import { SliderChangeEvent } from '@primereact/types/shared/slider';
-import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
+import { SliderRootChangeEvent } from '@primereact/types/shared/slider';
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebuttongroup';
 import { Slider } from '@primereact/ui/slider';
 import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 import Image from 'next/image';
 import * as React from 'react';
 
@@ -26,7 +27,7 @@ export default function FilterDemo() {
                 width={320}
                 height={240}
             />
-            <ToggleButton.Group value={filter} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setFilter(e.value as number)}>
+            <ToggleButtonGroup value={filter} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setFilter(e.value as number)}>
                 <ToggleButton.Root value={0}>
                     <ToggleButton.Indicator>Contrast</ToggleButton.Indicator>
                 </ToggleButton.Root>
@@ -36,10 +37,10 @@ export default function FilterDemo() {
                 <ToggleButton.Root value={2}>
                     <ToggleButton.Indicator>Sepia</ToggleButton.Indicator>
                 </ToggleButton.Root>
-            </ToggleButton.Group>
+            </ToggleButtonGroup>
             <Slider.Root
                 value={filterValues[filter]}
-                onValueChange={(e: SliderChangeEvent) =>
+                onValueChange={(e: SliderRootChangeEvent) =>
                     setFilterValues((prev) => {
                         const updated = [...prev];
 
