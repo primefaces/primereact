@@ -20,7 +20,11 @@ export const ToggleButtonGroup = withComponent({
         const rootProps = mergeProps(
             {
                 role: 'group',
-                className: cx('root')
+                className: cx('root'),
+                ...(props.disabled && { 'data-disabled': '' }),
+                ...(props.invalid && { 'data-invalid': '' }),
+                ...(props.multiple && { 'data-multiple': '' }),
+                ...(props.allowEmpty && { 'data-allow-empty': '' })
             },
             ptmi('root')
         );

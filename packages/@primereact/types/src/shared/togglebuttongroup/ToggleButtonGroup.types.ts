@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import { useToggleButtonGroupExposes, useToggleButtonGroupProps, useToggleButtonGroupState } from './useToggleButtonGroup.types';
+import { useToggleButtonGroupChangeEvent, useToggleButtonGroupExposes, useToggleButtonGroupProps, useToggleButtonGroupState } from './useToggleButtonGroup.types';
 
 /**
  * Defines passthrough(pt) options type in ToggleButton component.
@@ -29,19 +29,15 @@ export interface ToggleButtonGroupPassThrough {
 
 /**
  * Event fired when the ToggleButton group's value changes.
+ * @extends useToggleButtonGroupChangeEvent
  */
-export interface ToggleButtonGroupValueChangeEvent {
-    /**
-     * The value of the ToggleButton group.
-     */
-    value: unknown | unknown[] | undefined;
-}
+export interface ToggleButtonGroupValueChangeEvent extends useToggleButtonGroupChangeEvent {}
 
 /**
  * Defines valid properties in ToggleButtonGroup component.
  * @extends useToggleButtonGroupProps
  */
-export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonGroupInstance, useToggleButtonGroupProps, ToggleButtonGroupPassThrough> {
+export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonGroupInstance, Omit<useToggleButtonGroupProps, 'onValueChange'>, ToggleButtonGroupPassThrough> {
     /**
      * Defines the size of the ToggleButton components.
      */

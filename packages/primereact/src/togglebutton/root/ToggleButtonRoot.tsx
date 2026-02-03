@@ -46,13 +46,20 @@ export const ToggleButtonRoot = withComponent({
             onChange
         } = instance;
 
+        const disabled = props.disabled ?? group?.props.disabled;
+        const invalid = props.invalid ?? group?.props.invalid;
+
         const rootProps = mergeProps(
             {
                 id,
                 className: cx('root'),
                 type: props.as === 'button' ? 'button' : undefined,
-                disabled: props.disabled ?? group?.props.disabled,
+                disabled,
                 'aria-pressed': state.pressed,
+                'aria-disabled': disabled,
+                ...(state.pressed && { 'data-pressed': '' }),
+                ...(disabled && { 'data-disabled': '' }),
+                ...(invalid && { 'data-invalid': '' }),
                 onClick: onChange
             },
             ptmi('root')
