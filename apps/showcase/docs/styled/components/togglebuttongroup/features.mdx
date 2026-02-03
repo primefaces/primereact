@@ -1,0 +1,49 @@
+---
+title: ToggleButtonGroup
+description: ToggleButtonGroup component is used to create a group of toggle buttons.
+component: togglebuttongroup
+---
+
+<DocDemoViewer name="togglebuttongroup:basic-demo" hideCode/>
+
+## Usage
+
+```tsx
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
+```
+
+```tsx
+<ToggleButtonGroup></ToggleButtonGroup>
+```
+
+## Examples
+
+### Controlled
+
+Use `value` and `onValueChange` properties to control the state of the `ToggleButton.Group`.
+
+<DocDemoViewer name="togglebuttongroup:controlled-demo" />
+
+### Multiple
+
+`ToggleButton.Group` allows selecting only one item by default and setting `multiple` option enables choosing more than one item. In multiple case, model property should be an array.
+
+<DocDemoViewer name="togglebuttongroup:multiple-demo" />
+
+### Sizes
+
+`ToggleButton.Group` provides small and large sizes as alternatives to the base by using the `size` property.
+
+<DocDemoViewer name="togglebuttongroup:sizes-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. This style is useful when integrating with form validation libraries.
+
+<DocDemoViewer name="togglebuttongroup:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused entirely. Certain options can also be disabled using their `disabled` properties.
+
+<DocDemoViewer name="togglebuttongroup:disabled-demo" />

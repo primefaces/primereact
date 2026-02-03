@@ -1,8 +1,8 @@
 'use client';
-import { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 
-export default function StateDemo() {
+export default function RenderPropsDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
             <ToggleButton.Root>
@@ -37,13 +37,6 @@ export default function StateDemo() {
                                 <i className="pi pi-volume-off"></i>Unmute
                             </>
                         )
-                    }
-                </ToggleButton.Indicator>
-            </ToggleButton.Root>
-            <ToggleButton.Root>
-                <ToggleButton.Indicator className="w-8 h-8">
-                    {({ togglebutton }: ToggleButtonIndicatorInstance) =>
-                        togglebutton?.state.pressed ? <i className="pi pi-heart-fill"></i> : <i className="pi pi-heart"></i>
                     }
                 </ToggleButton.Indicator>
             </ToggleButton.Root>

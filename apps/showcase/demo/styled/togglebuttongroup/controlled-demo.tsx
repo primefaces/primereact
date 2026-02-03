@@ -1,14 +1,15 @@
 'use client';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 import * as React from 'react';
 
-export default function ControlledGroupDemo() {
+export default function ControlledDemo() {
     const [value, setValue] = React.useState<string[]>([]);
 
     return (
         <div className="flex items-center justify-center">
-            <ToggleButton.Group
+            <ToggleButtonGroup
                 allowEmpty={false}
                 value={value}
                 onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string[])}
@@ -33,7 +34,7 @@ export default function ControlledGroupDemo() {
                         <i className="pi pi-align-justify"></i>
                     </ToggleButton.Indicator>
                 </ToggleButton.Root>
-            </ToggleButton.Group>
+            </ToggleButtonGroup>
         </div>
     );
 }

@@ -1,9 +1,10 @@
 import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 
-export default function GroupDemo() {
+export default function BasicDemo() {
     return (
         <div className="flex items-center justify-center">
-            <ToggleButton.Group allowEmpty={false}>
+            <ToggleButtonGroup allowEmpty={false}>
                 <ToggleButton.Root value="left">
                     <ToggleButton.Indicator>
                         <i className="pi pi-align-left"></i>
@@ -24,7 +25,7 @@ export default function GroupDemo() {
                         <i className="pi pi-align-justify"></i>
                     </ToggleButton.Indicator>
                 </ToggleButton.Root>
-            </ToggleButton.Group>
+            </ToggleButtonGroup>
         </div>
     );
 }

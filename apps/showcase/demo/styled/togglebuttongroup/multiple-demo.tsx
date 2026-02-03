@@ -1,9 +1,10 @@
 import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 
 export default function MultipleDemo() {
     return (
         <div className="flex items-center justify-center">
-            <ToggleButton.Group multiple>
+            <ToggleButtonGroup multiple>
                 <ToggleButton.Root value="bold">
                     <ToggleButton.Indicator>Bold</ToggleButton.Indicator>
                 </ToggleButton.Root>
@@ -13,7 +14,7 @@ export default function MultipleDemo() {
                 <ToggleButton.Root value="underline">
                     <ToggleButton.Indicator>Underline</ToggleButton.Indicator>
                 </ToggleButton.Root>
-            </ToggleButton.Group>
+            </ToggleButtonGroup>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 'use client';
-import type { ToggleButtonChangeEvent } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonRootChangeEvent } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 import * as React from 'react';
 
@@ -10,7 +10,7 @@ export default function InvalidDemo() {
         <div className="flex items-center justify-center">
             <ToggleButton.Root
                 pressed={pressedState}
-                onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}
+                onPressedChange={(e: ToggleButtonRootChangeEvent) => setPressedState(e.pressed)}
                 invalid={!pressedState}
             >
                 <ToggleButton.Indicator>Invalid</ToggleButton.Indicator>
