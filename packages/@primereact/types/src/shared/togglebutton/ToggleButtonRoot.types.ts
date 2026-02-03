@@ -10,7 +10,6 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ToggleButtonGroupInstance } from './ToggleButtonGroup.types';
 import type { useToggleButtonChangeEvent, useToggleButtonExposes, useToggleButtonProps, useToggleButtonState } from './useToggleButton.types';
 
 /**
@@ -85,12 +84,7 @@ export interface ToggleButtonRootState extends useToggleButtonState {}
  * Defines the methods and properties exposed by ToggleButton component.
  * @extends useToggleButtonExposes
  */
-export interface ToggleButtonRootExposes extends useToggleButtonExposes {
-    /**
-     * The group instance of the ToggleButton.
-     */
-    group?: ToggleButtonGroupInstance | undefined | null;
-}
+export interface ToggleButtonRootExposes extends useToggleButtonExposes {}
 
 /**
  * Instance of ToggleButton component.

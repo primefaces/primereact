@@ -3,9 +3,9 @@ import { Component, withComponent } from '@primereact/core/component';
 import { useToggleButton } from '@primereact/headless/togglebutton';
 import type { ToggleButtonRootChangeEvent } from '@primereact/types/shared/togglebutton';
 import { mergeProps } from '@primeuix/utils';
+import { useToggleButtonGroupContext } from 'primereact/togglebuttongroup';
 import * as React from 'react';
 import { ToggleButtonProvider } from '../ToggleButton.context';
-import { useToggleButtonGroupContext } from '../group';
 import { defaultRootProps } from './ToggleButtonRoot.props';
 
 export const ToggleButtonRoot = withComponent({

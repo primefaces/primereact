@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ToggleButtonRootChangeEvent } from './ToggleButtonRoot.types';
+import { useToggleButtonGroupExposes, useToggleButtonGroupProps, useToggleButtonGroupState } from './useToggleButtonGroup.types';
 
 /**
  * Defines passthrough(pt) options type in ToggleButton component.
@@ -38,37 +38,15 @@ export interface ToggleButtonGroupValueChangeEvent {
 }
 
 /**
- * Used to update the ToggleButton group value.
- * @extends ToggleButtonRootChangeEvent
- */
-export interface ToggleButtonGroupUpdateChangeEvent extends ToggleButtonRootChangeEvent {}
-
-/**
  * Defines valid properties in ToggleButtonGroup component.
+ * @extends useToggleButtonGroupProps
  */
-export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonGroupInstance, unknown, ToggleButtonGroupPassThrough> {
-    /**
-     * Value of the ToggleButton group.
-     */
-    value?: unknown | unknown[] | undefined;
-    /**
-     * The default value of the ToggleButton group.
-     */
-    defaultValue?: unknown | unknown[] | undefined;
+export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonGroupInstance, useToggleButtonGroupProps, ToggleButtonGroupPassThrough> {
     /**
      * Defines the size of the ToggleButton components.
      */
     size?: 'small' | 'normal' | 'large' | undefined;
-    /**
-     * When present, it specifies that the ToggleButton group allows multiple selections.
-     * @default false
-     */
-    multiple?: boolean | undefined;
-    /**
-     * When present, it specifies that the ToggleButton group allows empty selection.
-     * @default true
-     */
-    allowEmpty?: boolean | undefined;
+
     /**
      * When present, it specifies that the ToggleButton group should be disabled.
      * @default false
@@ -87,38 +65,19 @@ export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonG
 
 /**
  * Defines valid state in ToggleButtonGroup component.
+ * @extends useToggleButtonGroupState
  */
-export interface ToggleButtonGroupState {
-    /**
-     * Value of the ToggleButton group.
-     */
-    value: unknown | unknown[] | undefined;
-}
+export interface ToggleButtonGroupState extends useToggleButtonGroupState {}
 
 /**
  * Defines the methods and properties exposed by ToggleButtonGroup component.
+ * @extends useToggleButtonGroupExposes
  */
-export interface ToggleButtonGroupExposes {
+export interface ToggleButtonGroupExposes extends useToggleButtonGroupExposes {
     /**
      * The state of the ToggleButton group.
      */
     state: ToggleButtonGroupState;
-    /**
-     * Updates the value of the ToggleButton group.
-     * @param event The event that triggered the change.
-     * @param event.originalEvent The original event that triggered the change.
-     * @param event.value The new value of the ToggleButton group.
-     * @returns void
-     */
-    updateChange: (event: ToggleButtonGroupUpdateChangeEvent) => void;
-    /**
-     * Checks if a toggle button is pressed.
-     * Returns true if the toggle button is pressed, false if not pressed, or undefined if the value is undefined.
-     * @param value The current value of the ToggleButton group.
-     * @param toggleButtonValue The value of the toggle button to check.
-     * @returns boolean | undefined
-     */
-    isPressed: (value: unknown | unknown[] | undefined, toggleButtonValue: unknown) => boolean | undefined;
 }
 
 /**
