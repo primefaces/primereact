@@ -507,6 +507,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/compare/basic-demo')),
                 'filePath': 'demo/styled/compare/basic-demo.tsx',
             },
+            'chart-demo': {
+                'component': React.lazy(() => import('demo/styled/compare/chart-demo')),
+                'filePath': 'demo/styled/compare/chart-demo.tsx',
+            },
             'hover-demo': {
                 'component': React.lazy(() => import('demo/styled/compare/hover-demo')),
                 'filePath': 'demo/styled/compare/hover-demo.tsx',
