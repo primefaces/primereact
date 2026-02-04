@@ -1533,7 +1533,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 restoreColumnWidths();
             }
         }
-    }, [context?.locale]);
+    }, [context]);
 
     useUpdateEffect(() => {
         const filters = cloneFilters(props.filters);
