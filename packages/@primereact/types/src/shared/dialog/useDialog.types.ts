@@ -113,10 +113,6 @@ export interface useDialogState {
      * Whether the dialog is currently maximized.
      */
     maximized: boolean;
-    /**
-     * Whether the mask is currently visible.
-     */
-    maskVisible: boolean;
 }
 
 /**
@@ -130,11 +126,11 @@ export interface useDialogExposes {
     /**
      * Reference to the mask element.
      */
-    maskRef?: React.RefObject<HTMLDivElement | null>;
+    maskRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement | null> } | null>;
     /**
-     * Reference to the close button element.
+     * Reference to the root element.
      */
-    motionRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement> } | null>;
+    rootRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement> } | null>;
     /**
      * Reference to the close button element.
      */
@@ -175,10 +171,6 @@ export interface useDialogExposes {
      * Handler for motion after enter events.
      */
     onMotionAfterEnter?: () => void;
-    /**
-     * Handler for motion before leave events.
-     */
-    onMotionBeforeLeave?: () => void;
     /**
      * Handler for motion leave events.
      */

@@ -2,7 +2,7 @@ import { withHeadless } from '@primereact/core/headless';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { $dt } from '@primeuix/styled';
-import { addClass, addStyle, blockBodyScroll, focus, getOuterHeight, getOuterWidth, getViewport, unblockBodyScroll, ZIndex } from '@primeuix/utils';
+import { addStyle, blockBodyScroll, focus, getOuterHeight, getOuterWidth, getViewport, unblockBodyScroll, ZIndex } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useDialog.props';
 
@@ -16,9 +16,8 @@ export const useDialog = withHeadless({
             onChange: props.onOpenChange
         });
         const [maximizedState, setMaximizedState] = React.useState<boolean>(props.fullScreen ?? false);
-        const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
-        const maskRef = React.useRef<HTMLDivElement | null>(null);
-        const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
+        const maskRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement | null> } | null>(null);
+        const rootRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
         const maximizableButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
         const closeButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
         const maskMouseDownTarget = React.useRef<EventTarget | null>(null);
@@ -26,34 +25,20 @@ export const useDialog = withHeadless({
         const lastPageX = React.useRef<number | null>(null);
         const lastPageY = React.useRef<number | null>(null);
         const dragging = React.useRef(false);
+        const documentSettingsEnabled = React.useRef(false);
 
         const state = {
             opened: openState ?? false,
-            maximized: maximizedState,
-            maskVisible: maskVisibleState
+            maximized: maximizedState
         };
-
-        useUpdateEffect(() => {
-            if (openState && !maskVisibleState) {
-                setMaskVisibleState(true);
-            }
-        }, [openState]);
-
-        React.useLayoutEffect(() => {
-            if (maskVisibleState && props.autoZIndex && maskRef.current) {
-                ZIndex.set('modal', maskRef.current as HTMLDivElement, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
-            }
-        }, [maskVisibleState]);
 
         useUpdateEffect(() => {
             setMaximizedState(props.fullScreen ?? false);
         }, [props.fullScreen]);
 
         useUnmountEffect(() => {
-            setMaskVisibleState(false);
-
-            if (props.autoZIndex) {
-                ZIndex.clear(maskRef.current as HTMLDivElement);
+            if (props.autoZIndex && maskRef.current) {
+                ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
             }
         });
 
@@ -67,47 +52,41 @@ export const useDialog = withHeadless({
         const onOpenStateChange = () => {
             const newOpenState = !openState;
 
-            if (newOpenState && !maskVisibleState) {
-                setMaskVisibleState(true);
-            }
-
             setOpenState([newOpenState, { value: newOpenState }]);
         };
 
-        const onMotionEnter = () => {
+        const onMaskEnter = () => {
+            if (props.autoZIndex && maskRef.current?.elementRef.current) {
+                ZIndex.set('modal', maskRef.current.elementRef.current, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
+            }
+        };
+
+        const onEnter = () => {
             target.current = document.activeElement as HTMLElement;
             enableDocumentSettings();
             bindGlobalListeners();
         };
 
-        const onMotionAfterEnter = () => {
+        const onAfterEnter = () => {
             focusElement();
         };
 
-        const onMotionBeforeLeave = () => {
-            if (props.modal) {
-                // && !isUnstyled //TODO:
-                addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave-active');
-            }
-        };
-
-        const onMotionLeave = () => {
+        const onLeave = () => {
             focus(target.current as HTMLElement);
             target.current = null;
         };
 
-        const onMotionAfterLeave = () => {
-            if (props.autoZIndex) {
-                ZIndex.clear(maskRef.current as HTMLDivElement);
-            }
-
+        const onAfterLeave = () => {
             disableDocumentSettings();
             unbindGlobalListeners();
-            setMaskVisibleState(false);
+
+            if (props.autoZIndex && maskRef.current?.elementRef.current) {
+                ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
+            }
         };
 
         const focusElement = () => {
-            let focusTarget = findFocusableElement(motionRef.current?.elementRef.current ?? null);
+            let focusTarget = findFocusableElement(rootRef.current?.elementRef.current ?? null);
 
             if (!focusTarget) {
                 if (maximizableButtonRef.current) {
@@ -131,18 +110,26 @@ export const useDialog = withHeadless({
         };
 
         const onMaskMouseUp = () => {
-            if (props.dismissableMask && props.modal && maskRef.current === maskMouseDownTarget.current) {
+            if (props.dismissableMask && props.modal && maskRef.current?.elementRef.current === maskMouseDownTarget.current) {
                 close();
             }
         };
 
         const enableDocumentSettings = () => {
+            if (documentSettingsEnabled.current) return;
+
+            documentSettingsEnabled.current = true;
+
             if (props.modal || (!props.modal && props.blockScroll) || maximizedState) {
                 blockBodyScroll({ variableName: $dt('scrollbar.width').name });
             }
         };
 
         const disableDocumentSettings = () => {
+            if (!documentSettingsEnabled.current) return;
+
+            documentSettingsEnabled.current = false;
+
             if (props.modal || (!props.modal && props.blockScroll) || maximizedState) {
                 unblockBodyScroll({ variableName: $dt('scrollbar.width').name });
             }
@@ -181,7 +168,7 @@ export const useDialog = withHeadless({
         };
 
         const onDragStart = (event: React.MouseEvent) => {
-            if (!motionRef.current?.elementRef.current) return;
+            if (!rootRef.current?.elementRef.current) return;
 
             const targetEl = event.target as Element;
 
@@ -194,8 +181,8 @@ export const useDialog = withHeadless({
                 lastPageX.current = event.pageX;
                 lastPageY.current = event.pageY;
 
-                if (motionRef.current?.elementRef.current) {
-                    motionRef.current.elementRef.current.style.margin = '0';
+                if (rootRef.current?.elementRef.current) {
+                    rootRef.current.elementRef.current.style.margin = '0';
                 }
 
                 document.body.setAttribute('data-p-unselectable-text', 'true');
@@ -206,7 +193,7 @@ export const useDialog = withHeadless({
         const onDrag = (event: React.MouseEvent) => {
             if (!dragging.current) return;
 
-            const el = motionRef.current?.elementRef.current;
+            const el = rootRef.current?.elementRef.current;
 
             if (!el || lastPageX.current === null || lastPageY.current === null) return;
 
@@ -260,7 +247,7 @@ export const useDialog = withHeadless({
             state,
             // refs
             maskRef,
-            motionRef,
+            rootRef,
             maximizableButtonRef,
             closeButtonRef,
             // methods
@@ -270,11 +257,12 @@ export const useDialog = withHeadless({
             onMaskMouseDown,
             onMaskMouseUp,
             onDragStart,
-            onMotionEnter,
-            onMotionAfterEnter,
-            onMotionBeforeLeave,
-            onMotionLeave,
-            onMotionAfterLeave
+            // motion callbacks
+            onMaskEnter,
+            onEnter,
+            onAfterEnter,
+            onLeave,
+            onAfterLeave
         };
     }
 });

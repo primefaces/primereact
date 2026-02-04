@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { Motion } from '@primereact/core/motion';
 import { mergeProps } from '@primeuix/utils';
+import { Backdrop } from 'primereact/backdrop';
 import { Portal } from 'primereact/portal';
 import * as React from 'react';
 import { useDialogContext } from '../Dialog.context';
@@ -20,47 +20,57 @@ export const DialogPortal = withComponent({
 
         const maskProps = mergeProps(
             {
+                visible: dialog?.state.opened,
                 className: dialog?.cx('mask'),
                 style: dialog?.sx('mask'),
-                onMouseDown: (event: React.MouseEvent) => dialog?.onMaskMouseDown?.(event),
+                motionProps: {
+                    name: 'p-overlay-mask',
+                    appear: true,
+                    onEnter: dialog?.onMaskEnter
+                },
+                onMouseDown: dialog?.onMaskMouseDown,
                 onMouseUp: dialog?.onMaskMouseUp
             },
             dialog?.ptm('mask')
         );
 
-        const motionProps = mergeProps(
+        const rootProps = mergeProps(
             {
                 id: dialog?.id,
                 visible: dialog?.state.opened,
-                name: 'p-dialog',
                 className: dialog?.cx('root'),
                 style: dialog?.sx('root'),
+                motionProps: {
+                    name: 'p-dialog',
+                    appear: true,
+                    onEnter: dialog?.onEnter,
+                    onAfterEnter: dialog?.onAfterEnter,
+                    onLeave: dialog?.onLeave,
+                    onAfterLeave: dialog?.onAfterLeave
+                },
                 role: 'dialog',
                 'aria-labelledby': dialog?.inProps?.ariaLabelledby ?? dialog?.id + '_header',
-                'aria-modal': dialog?.props.modal,
-                onEnter: dialog?.onMotionEnter,
-                onAfterEnter: dialog?.onMotionAfterEnter,
-                onBeforeLeave: dialog?.onMotionBeforeLeave,
-                onLeave: dialog?.onMotionLeave,
-                onAfterLeave: dialog?.onMotionAfterLeave
+                'aria-modal': dialog?.props.modal ? '' : undefined,
+                'data-open': dialog?.state.opened ? '' : undefined,
+                'data-position': dialog?.props.position
             },
             {
                 className: inProps?.className,
                 style: inProps?.style
             },
-            dialog?.ptm('mask')
+            ptmi('root')
         );
 
         const portalProps = mergeProps(dialog?.ptm('portal'), ptmi('root'));
 
         const portalElement = (
-            <Component pIf={dialog?.state.maskVisible} as="div" attrs={maskProps} ref={dialog?.maskRef}>
-                <Motion {...motionProps} ref={dialog?.motionRef}>
+            <Backdrop {...maskProps} ref={dialog?.maskRef}>
+                <Backdrop {...rootProps} ref={dialog?.rootRef}>
                     <Component instance={instance} attrs={portalProps} children={props.children} />
-                </Motion>
-            </Component>
+                </Backdrop>
+            </Backdrop>
         );
 
-        return <Portal element={portalElement} appendTo={dialog?.props.appendTo} visible />;
+        return <Portal element={portalElement} appendTo={dialog?.props.appendTo} />;
     }
 });
