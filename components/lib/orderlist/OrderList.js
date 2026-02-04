@@ -71,13 +71,12 @@ export const OrderList = React.memo(
             } else {
                 if (metaKey) {
                     const merged = [...selectionState, value];
-
-                    // sort selection by original list order
                     newSelection = merged.sort((a, b) => props.value.indexOf(a) - props.value.indexOf(b));
                 } else {
                     newSelection = [value];
                 }
             }
+            
             setSelectionState(newSelection);
         };
 
