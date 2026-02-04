@@ -1,6 +1,9 @@
 'use client';
 import { ProductService } from '@/shared/services/product.service';
-import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
+import { AngleDoubleLeftIcon } from '@primereact/icons/angledoubleleft';
+import { AngleLeftIcon } from '@primereact/icons/angleleft';
+import { AngleRightIcon } from '@primereact/icons/angleright';
+import { PaginatorPagesInstance, usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Button } from '@primereact/ui/button';
 import { Paginator } from '@primereact/ui/paginator';
 import { Tag } from '@primereact/ui/tag';
@@ -112,11 +115,31 @@ export default function PaginationDemo() {
                     className="border-t border-surface-200 dark:border-surface-700 pt-4"
                 >
                     <Paginator.Content>
-                        <Paginator.First />
-                        <Paginator.Prev />
-                        <Paginator.Pages />
-                        <Paginator.Next />
-                        <Paginator.Last />
+                        <Paginator.First>
+                            <AngleDoubleLeftIcon />
+                        </Paginator.First>
+                        <Paginator.Prev>
+                            <AngleLeftIcon />
+                        </Paginator.Prev>
+                        <Paginator.Pages>
+                            {({ paginator }: PaginatorPagesInstance) =>
+                                paginator?.pages.map((page, index) =>
+                                    page.type === 'page' ? (
+                                        <Paginator.Page key={index} value={page.value} />
+                                    ) : (
+                                        <Paginator.Ellipsis key={index}>
+                                            <i className="pi pi-ellipsis-h" />
+                                        </Paginator.Ellipsis>
+                                    )
+                                )
+                            }
+                        </Paginator.Pages>
+                        <Paginator.Next>
+                            <AngleRightIcon />
+                        </Paginator.Next>
+                        <Paginator.Last>
+                            <AngleDoubleLeftIcon />
+                        </Paginator.Last>
                     </Paginator.Content>
                 </Paginator.Root>
             </DataView>

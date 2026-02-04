@@ -1,10 +1,11 @@
 'use client';
 import { ProductService } from '@/shared/services/product.service';
 import { useDataView } from '@primereact/headless/dataview';
-import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebuttongroup';
 import { Button } from '@primereact/ui/button';
 import { Tag } from '@primereact/ui/tag';
 import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 import Image from 'next/image';
 import { DataView } from 'primereact/dataview';
 import * as React from 'react';
@@ -59,7 +60,7 @@ export default function SortDemo() {
         <div>
             <DataView>
                 <div className="flex justify-center border-b border-surface-200 dark:border-surface-700 pb-4">
-                    <ToggleButton.Group
+                    <ToggleButtonGroup
                         value={value}
                         onValueChange={(e: ToggleButtonGroupValueChangeEvent) => onSortChange(e.value as string)}
                         allowEmpty={false}
@@ -70,7 +71,7 @@ export default function SortDemo() {
                         <ToggleButton.Root value="lowtohigh">
                             <ToggleButton.Indicator>Price Low to High</ToggleButton.Indicator>
                         </ToggleButton.Root>
-                    </ToggleButton.Group>
+                    </ToggleButtonGroup>
                 </div>
                 <div className="flex flex-col">
                     {products.map((product, index) => (

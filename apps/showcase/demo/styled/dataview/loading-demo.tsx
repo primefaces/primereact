@@ -1,7 +1,8 @@
 'use client';
-import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebuttongroup';
 import { Skeleton } from '@primereact/ui/skeleton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
+import { ToggleButtonGroup } from '@primereact/ui/togglebuttongroup';
 import { DataView } from 'primereact/dataview';
 import * as React from 'react';
 
@@ -71,7 +72,7 @@ export default function LayoutDemo() {
         <div>
             <DataView>
                 <div className="flex justify-end border-b border-surface-200 dark:border-surface-700 pb-4">
-                    <ToggleButton.Group
+                    <ToggleButtonGroup
                         value={value}
                         onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string)}
                         allowEmpty={false}
@@ -86,7 +87,7 @@ export default function LayoutDemo() {
                                 <i className="pi pi-table"></i>
                             </ToggleButton.Indicator>
                         </ToggleButton.Root>
-                    </ToggleButton.Group>
+                    </ToggleButtonGroup>
                 </div>
                 {value === 'list' ? list : grid}
             </DataView>
