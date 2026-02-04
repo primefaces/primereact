@@ -21,7 +21,12 @@ export default function BasicDemo() {
                     <InputText placeholder="Search" />
                 </Toolbar.Center>
                 <Toolbar.End>
-                    <Button>Save</Button>
+                    <Button severity="secondary" variant="outlined" size="small">
+                        Cancel
+                    </Button>
+                    <Button size="small" className="ml-2">
+                        Save
+                    </Button>
                 </Toolbar.End>
             </Toolbar.Root>
         </div>

@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useToolbarContext } from '../Toolbar.context';
-import { ToolbarCenterProvider } from './ToolbarCenter.context';
 import { defaultCenterProps } from './ToolbarCenter.props';
 
 export const ToolbarCenter = withComponent({
@@ -25,10 +24,6 @@ export const ToolbarCenter = withComponent({
             ptmi('root')
         );
 
-        return (
-            <ToolbarCenterProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </ToolbarCenterProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

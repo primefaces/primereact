@@ -4,7 +4,7 @@ description: Toolbar is a grouping component for buttons and other content.
 component: toolbar
 ---
 
-<DocDemoViewer name="toolbar:basic-demo" mode="collapsible"/>
+<DocDemoViewer name="toolbar:basic-demo" mode="collapsible" />
 
 ## Usage
 
@@ -13,7 +13,11 @@ import { Toolbar } from '@primereact/ui/toolbar';
 ```
 
 ```tsx
-<Toolbar></Toolbar>
+<Toolbar.Root>
+    <Toolbar.Start />
+    <Toolbar.Center />
+    <Toolbar.End />
+</Toolbar.Root>
 ```
 
 ## Examples
