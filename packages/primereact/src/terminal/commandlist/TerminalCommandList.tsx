@@ -4,7 +4,10 @@ import { TerminalCommandItem } from '@primereact/types/shared/terminal';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTerminalContext } from '../Terminal.context';
-import { TerminalCommandListProvider } from './TerminalCommandList.context';
+import { TerminalCommand } from '../command';
+import { TerminalCommandPromptLabel } from '../commandpromptlabel';
+import { TerminalCommandResponse } from '../commandresponse';
+import { TerminalCommandValue } from '../commandvalue';
 import { defaultCommandListProps } from './TerminalCommandList.props';
 
 export const TerminalCommandList = withComponent({
@@ -16,7 +19,7 @@ export const TerminalCommandList = withComponent({
         return { terminal };
     },
     render(instance) {
-        const { ptmi, terminal } = instance;
+        const { props, ptmi, terminal } = instance;
 
         const rootProps = mergeProps(
             {
@@ -26,48 +29,20 @@ export const TerminalCommandList = withComponent({
             ptmi('root')
         );
 
-        const createCommand = (command: TerminalCommandItem, index: number) => {
-            const { text, response } = command;
-            const key = text + '_' + index;
-
-            const promptLabelProps = mergeProps(
-                {
-                    className: terminal?.cx('promptLabel')
-                },
-                terminal?.ptm('promptLabel')
-            );
-
-            const commandsProps = mergeProps({}, terminal?.ptm('commands'));
-
-            const commandProps = mergeProps(
-                {
-                    className: terminal?.cx('commandValue')
-                },
-                terminal?.ptm('commandValue')
-            );
-            const responseProps = mergeProps(
-                {
-                    className: terminal?.cx('commandResponse'),
-                    'aria-live': 'polite'
-                },
-                terminal?.ptm('commandResponse')
-            );
-
-            return (
-                <div key={key} {...commandsProps}>
-                    <span {...promptLabelProps}>{terminal?.props.prompt}&nbsp;</span>
-                    <span {...commandProps}>{text}</span>
-                    <div {...responseProps}>{response}</div>
-                </div>
-            );
+        const createDefaultCommands = () => {
+            return terminal?.state.commands?.map((command: TerminalCommandItem, index: number) => {
+                return (
+                    <TerminalCommand key={`${command.text}_${index}`} index={index}>
+                        <TerminalCommandPromptLabel />
+                        <TerminalCommandValue />
+                        <TerminalCommandResponse />
+                    </TerminalCommand>
+                );
+            });
         };
 
-        const content = terminal?.state.commands.map(createCommand);
+        const content = props.children ?? createDefaultCommands();
 
-        return (
-            <TerminalCommandListProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={content} />
-            </TerminalCommandListProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={content} />;
     }
 });

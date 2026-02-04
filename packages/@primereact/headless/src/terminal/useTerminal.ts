@@ -1,57 +1,65 @@
 import { withHeadless } from '@primereact/core/headless';
-import { TerminalCommandItem } from '@primereact/types/shared/terminal';
+import { TerminalCommandItem, TerminalResponse } from '@primereact/types/shared/terminal';
 import { focus } from '@primeuix/utils';
-import { TerminalService } from 'primereact/terminalservice';
 import * as React from 'react';
 import { defaultProps } from './useTerminal.props';
 
 export const useTerminal = withHeadless({
     name: 'useTerminal',
     defaultProps,
-    setup({ elementRef }) {
+    setup({ props, elementRef }) {
         const [commandTextState, setCommandTextState] = React.useState<string>('');
         const [commandsState, setCommandsState] = React.useState<TerminalCommandItem[]>([]);
         const [indexState, setIndexState] = React.useState<number>(0);
-        const [emittedTextState, setEmittedTextState] = React.useState<string>('');
         const inputRef = React.useRef<HTMLInputElement>(null);
-        const isEmitted = React.useRef<boolean>(false);
 
         const state = {
             commandText: commandTextState,
             commands: commandsState
         };
 
-        React.useEffect(() => {
-            const response = (res: unknown) => {
-                if (commandsState && commandsState.length > 0) {
-                    const commands = [...commandsState];
+        const clear = React.useCallback(() => {
+            setCommandsState([]);
+            setIndexState(0);
+        }, []);
 
-                    commands[commands.length - 1].response = String(res);
+        const handleResponse = React.useCallback(
+            (response: TerminalResponse) => {
+                if (response === null) {
+                    clear();
+                } else if (response !== undefined) {
+                    setCommandsState((prev) => {
+                        if (prev.length === 0) return prev;
 
-                    setCommandsState(commands);
+                        const commands = [...prev];
+
+                        commands[commands.length - 1].response = response;
+
+                        return commands;
+                    });
                 }
-            };
+            },
+            [clear]
+        );
 
-            const clear = () => {
-                setCommandsState([]);
-                setIndexState(0);
-            };
+        const executeCommand = React.useCallback(
+            async (text: string) => {
+                if (!props.onCommand) return;
 
-            TerminalService.on('response', response);
-            TerminalService.on('clear', clear);
+                const result = props.onCommand(text);
 
-            return () => {
-                TerminalService.off('response', response);
-                TerminalService.off('clear', clear);
-            };
-        }, [commandsState]);
+                if (result instanceof Promise) {
+                    const response = await result;
+
+                    handleResponse(response);
+                } else {
+                    handleResponse(result);
+                }
+            },
+            [props.onCommand, handleResponse]
+        );
 
         React.useEffect(() => {
-            if (isEmitted.current) {
-                TerminalService.emit('command', emittedTextState);
-                isEmitted.current = false;
-            }
-
             if (elementRef.current) {
                 elementRef.current.scrollTop = elementRef.current.scrollHeight;
             }
@@ -86,8 +94,7 @@ export const useTerminal = withHeadless({
                         setIndexState((prevIndex) => prevIndex + 1);
                         setCommandTextState('');
                         setCommandsState(newCommands);
-                        setEmittedTextState(commandTextState);
-                        isEmitted.current = true;
+                        executeCommand(commandTextState);
                     }
 
                     break;
@@ -106,7 +113,8 @@ export const useTerminal = withHeadless({
             inputRef,
             onClick,
             onKeyDown,
-            onInputChange
+            onInputChange,
+            clear
         };
     }
 });

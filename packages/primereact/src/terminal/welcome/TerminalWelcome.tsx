@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTerminalContext } from '../Terminal.context';
-import { TerminalWelcomeProvider } from './TerminalWelcome.context';
 import { defaultWelcomeProps } from './TerminalWelcome.props';
 
 export const TerminalWelcome = withComponent({
@@ -25,10 +24,6 @@ export const TerminalWelcome = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TerminalWelcomeProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TerminalWelcomeProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

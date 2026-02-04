@@ -1,3 +1,10 @@
+export { TerminalCommand as Command } from './command';
 export { TerminalCommandList as CommandList } from './commandlist';
+export { TerminalCommandPromptLabel as CommandPromptLabel } from './commandpromptlabel';
+export { TerminalCommandResponse as CommandResponse } from './commandresponse';
+export { TerminalCommandValue as CommandValue } from './commandvalue';
+export { TerminalPrompt as Prompt } from './prompt';
+export { TerminalPromptLabel as PromptLabel } from './promptlabel';
+export { TerminalPromptValue as PromptValue } from './promptvalue';
 export { TerminalRoot as Root } from './root';
 export { TerminalWelcome as Welcome } from './welcome';

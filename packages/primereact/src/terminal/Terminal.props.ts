@@ -1,3 +1,10 @@
+export { defaultCommandProps } from './command';
 export { defaultCommandListProps } from './commandlist';
+export { defaultCommandPromptLabelProps } from './commandpromptlabel';
+export { defaultCommandResponseProps } from './commandresponse';
+export { defaultCommandValueProps } from './commandvalue';
+export { defaultPromptProps } from './prompt';
+export { defaultPromptLabelProps } from './promptlabel';
+export { defaultPromptValueProps } from './promptvalue';
 export { defaultRootProps } from './root';
 export { defaultWelcomeProps } from './welcome';

@@ -1939,9 +1939,17 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'terminal': {
+            'assistant-demo': {
+                'component': React.lazy(() => import('demo/styled/terminal/assistant-demo')),
+                'filePath': 'demo/styled/terminal/assistant-demo.tsx',
+            },
             'basic-demo': {
                 'component': React.lazy(() => import('demo/styled/terminal/basic-demo')),
                 'filePath': 'demo/styled/terminal/basic-demo.tsx',
+            },
+            'filesystem-demo': {
+                'component': React.lazy(() => import('demo/styled/terminal/filesystem-demo')),
+                'filePath': 'demo/styled/terminal/filesystem-demo.tsx',
             },
             'template-demo': {
                 'component': React.lazy(() => import('demo/styled/terminal/template-demo')),

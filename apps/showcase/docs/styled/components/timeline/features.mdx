@@ -13,7 +13,7 @@ import { Timeline } from '@primereact/ui/timeline';
 ```
 
 ```tsx
-<Timeline>
+<Timeline.Root>
     <Timeline.Event>
         <Timeline.Opposite />
         <Timeline.Separator>
@@ -22,14 +22,14 @@ import { Timeline } from '@primereact/ui/timeline';
         </Timeline.Separator>
         <Timeline.Content />
     </Timeline.Event>
-</Timeline>
+</Timeline.Root>
 ```
 
 ## Examples
 
 ### Alignment
 
-Content location relative the line is defined with the _align_ property.
+Content location relative to the line is defined with the _align_ property.
 
 <DocDemoViewer name="timeline:alignment-demo" />
 
@@ -41,12 +41,24 @@ Additional content at the other side of the line can be provided with the _oppos
 
 ### Horizontal
 
-TimeLine orientation is controlled with the _orientation_ property, default is _vertical_ having _horizontal_ as the alternative.
+Timeline orientation is controlled with the _orientation_ property, default is _vertical_ having _horizontal_ as the alternative.
 
 <DocDemoViewer name="timeline:horizontal-demo" />
 
 ### Custom
 
-Sample implementation with custom content and styled markers.
+Sample implementation with custom content, styled markers, and rich event cards.
 
 <DocDemoViewer name="timeline:custom-demo" />
+
+### Interactive
+
+Build interactive step-based workflows with progress tracking and state management.
+
+<DocDemoViewer name="timeline:interactive-demo" />
+
+### Activity Feed
+
+Display real-time activity streams with user avatars and contextual information.
+
+<DocDemoViewer name="timeline:activity-demo" />

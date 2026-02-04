@@ -15,61 +15,20 @@ export const TerminalRoot = withComponent({
         return terminal;
     },
     render(instance) {
-        const { id, props, ptmi, ptm, cx, onKeyDown, onClick, onInputChange, inputRef, state } = instance;
+        const { id, props, ptmi, cx, onClick } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                onClick
             },
             ptmi('root')
         );
 
-        const createPrompt = () => {
-            const promptProps = mergeProps(
-                {
-                    className: cx('prompt')
-                },
-                ptm('prompt')
-            );
-
-            const promptLabelProps = mergeProps(
-                {
-                    className: cx('promptLabel')
-                },
-                ptm('promptLabel')
-            );
-
-            const promptValueProps = mergeProps(
-                {
-                    ref: inputRef,
-                    value: state.commandText,
-                    type: 'text',
-                    className: cx('promptValue'),
-                    autoComplete: 'off',
-                    onChange: (event: React.ChangeEvent<HTMLInputElement>) => onInputChange(event),
-                    onKeyDown,
-                    onClick
-                },
-                ptm('promptValue')
-            );
-
-            return (
-                <div {...promptProps}>
-                    <span {...promptLabelProps}>{props.prompt}&nbsp;</span>
-                    <input {...promptValueProps} />
-                </div>
-            );
-        };
-
-        const prompt = createPrompt();
-
         return (
             <TerminalProvider value={instance}>
-                <Component instance={instance} attrs={rootProps}>
-                    {resolve(props.children, instance)}
-                    {prompt}
-                </Component>
+                <Component instance={instance} attrs={rootProps} children={resolve(props.children, instance)} />
             </TerminalProvider>
         );
     }

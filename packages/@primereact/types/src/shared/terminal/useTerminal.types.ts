@@ -11,6 +11,19 @@
 import type { HeadlessInstance } from '@primereact/types/core';
 
 /**
+ * Response type for terminal commands.
+ * - React.ReactNode: Display as response
+ * - null: Clear the terminal
+ * - undefined: No response (command only)
+ */
+export type TerminalResponse = React.ReactNode | null | undefined;
+
+/**
+ * Callback function for handling terminal commands.
+ */
+export type TerminalCommandHandler = (text: string) => TerminalResponse | Promise<TerminalResponse>;
+
+/**
  * Represents a command item in the terminal history.
  */
 export interface TerminalCommandItem {
@@ -21,7 +34,7 @@ export interface TerminalCommandItem {
     /**
      * Optional response or output from the command execution.
      */
-    response?: string;
+    response?: React.ReactNode;
 }
 
 /**
@@ -32,6 +45,15 @@ export interface useTerminalProps {
      * Prompt text for each command.
      */
     prompt?: string | undefined;
+    /**
+     * Callback function invoked when a command is entered.
+     * Return value determines the response:
+     * - React.ReactNode: Displayed as command response
+     * - null: Clears the terminal
+     * - undefined: No response shown
+     * Supports async functions for delayed responses.
+     */
+    onCommand?: TerminalCommandHandler | undefined;
 }
 
 /**
@@ -72,6 +94,10 @@ export interface useTerminalExposes {
      * Input change handler.
      */
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    /**
+     * Clears all commands from the terminal.
+     */
+    clear: () => void;
 }
 
 /**

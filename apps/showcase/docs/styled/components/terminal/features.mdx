@@ -1,6 +1,6 @@
 ---
 title: Terminal
-description: Terminal is a grouping component for buttons and other content.
+description: Terminal is a text-based interface component that emulates a command line experience, enabling users to enter commands and receive responses.
 component: terminal
 ---
 
@@ -13,17 +13,31 @@ import { Terminal } from '@primereact/ui/terminal';
 ```
 
 ```tsx
-<Terminal>
+<Terminal.Root>
     <Terminal.Welcome />
     <Terminal.CommandList />
-</Terminal>
+</Terminal.Root>
 ```
 
 ## Examples
 
 ### Template
 
+Use the render function to create a custom command display with full control over the output styling.
+
 <DocDemoViewer name="terminal:template-demo" />
+
+### File System
+
+An interactive file browser demonstrating navigation commands like `ls`, `cd`, `cat`, and `pwd`.
+
+<DocDemoViewer name="terminal:filesystem-demo" />
+
+### AI Assistant
+
+A chat-style interface with typing indicators, demonstrating how Terminal can be styled for conversational experiences.
+
+<DocDemoViewer name="terminal:assistant-demo" />
 
 ## Accessibility
 
@@ -33,7 +47,8 @@ The element that lists the previous commands has `aria-live` so that changes are
 
 ### Keyboard Support
 
-| Key     | Function                                                 |
-| ------- | -------------------------------------------------------- |
-| `tab`   | Moves focus through the input element.                   |
-| `enter` | Executes the command when focus in on the input element. |
+| Key        | Function                                                 |
+| ---------- | -------------------------------------------------------- |
+| `tab`      | Moves focus through the input element.                   |
+| `enter`    | Executes the command when focus in on the input element. |
+| `arrow up` | Recalls the previous command from history.               |
