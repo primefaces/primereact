@@ -71,7 +71,7 @@ export const OrderList = React.memo(
             } else {
                 if (metaKey) {
                     const merged = [...selectionState, value];
-                    
+
                     newSelection = merged.sort((a, b) => props.value.indexOf(a) - props.value.indexOf(b));
                 } else {
                     newSelection = [value];
