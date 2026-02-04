@@ -83,6 +83,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const columnSortFunction = React.useRef(null);
     const columnField = React.useRef(null);
     const filterTimeout = React.useRef(null);
+    const restoredRef = React.useRef(false);
 
     if (props.rows !== d_rowsState && !props.onPage) {
         setRowsState(props.rows);
@@ -341,16 +342,18 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             }
 
             if (restoredState.filters) {
-                setD_filtersState(cloneFilters(restoredState.filters));
+                const clonedFilters = cloneFilters(restoredState.filters);
+
+                setD_filtersState(clonedFilters);
 
                 if (props.onFilter) {
                     props.onFilter(
                         createEvent({
-                            filters: restoredState.filters
+                            filters: clonedFilters
                         })
                     );
                 } else {
-                    setFiltersState(cloneFilters(restoredState.filters));
+                    setFiltersState(clonedFilters);
                 }
             }
 
@@ -1507,16 +1510,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             elementRef.current.setAttribute(attributeSelector.current, '');
         }
 
-        //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
-
-        if (isStateful()) {
-            restoreState();
-
-            if (props.resizableColumns) {
-                restoreColumnWidths();
-            }
-        }
     });
 
     useUpdateEffect(() => {
@@ -1528,6 +1522,18 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             destroyResponsiveStyle();
         };
     }, [props.breakpoint]);
+
+    useUpdateEffect(() => {
+        if (!restoredRef.current && isStateful()) {
+            restoredRef.current = true;
+
+            restoreState();
+
+            if (props.resizableColumns) {
+                restoreColumnWidths();
+            }
+        }
+    }, [context?.locale]);
 
     useUpdateEffect(() => {
         const filters = cloneFilters(props.filters);
