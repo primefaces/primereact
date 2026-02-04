@@ -76,7 +76,7 @@ export const OrderList = React.memo(
                     newSelection = [value];
                 }
             }
-            
+
             setSelectionState(newSelection);
         };
 
