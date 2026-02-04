@@ -1,63 +1,41 @@
 'use client';
+import { TerminalResponse } from '@primereact/types/shared/terminal';
 import { Terminal } from '@primereact/ui/terminal';
-import { TerminalService } from 'primereact/terminalservice';
-import * as React from 'react';
 
-export default function TerminalPTDemo() {
-    const commandHandler = (text: unknown): void => {
-        if (typeof text !== 'string') return;
-
-        let response: string | number | null;
+export default function BasicDemo() {
+    const commandHandler = (text: string): TerminalResponse => {
         const argsIndex: number = text.indexOf(' ');
         const command: string = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
 
         switch (command) {
-            case 'date':
-                response = 'Today is ' + new Date().toDateString();
-                break;
+            case 'help':
+                return 'Available commands:\n  date    - Display current date and time\n  greet   - Get a personalized greeting\n  random  - Generate a random number\n  clear   - Clear the terminal';
 
-            case 'greet':
-                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
-                break;
+            case 'date':
+                return new Date().toLocaleString();
+
+            case 'greet': {
+                const name = text.substring(argsIndex + 1).trim() || 'World';
+
+                return `Hello, ${name}!`;
+            }
 
             case 'random':
-                response = Math.floor(Math.random() * 100);
-                break;
+                return `Your random number: ${Math.floor(Math.random() * 100)}`;
 
             case 'clear':
-                response = null;
-                break;
+                return null;
 
             default:
-                response = 'Unknown command: ' + command;
-                break;
-        }
-
-        if (response) {
-            TerminalService.emit('response', response);
-        } else {
-            TerminalService.emit('clear');
+                return `Command not found: ${command}. Type "help" for available commands.`;
         }
     };
 
-    React.useEffect(() => {
-        TerminalService.on('command', commandHandler);
-
-        return () => {
-            TerminalService.off('command', commandHandler);
-        };
-    }, []);
-
     return (
-        <div>
-            <p className="mb-4">
-                Enter &quot;<strong>date</strong>&quot; to display the current date, &quot;<strong>greet {0}</strong>&quot; for a message and &quot;
-                <strong>random</strong>&quot; to get a random number.
-            </p>
-            <Terminal.Root prompt="primereact $">
-                <Terminal.Welcome>Welcome to PrimeReact</Terminal.Welcome>
-                <Terminal.CommandList />
-            </Terminal.Root>
-        </div>
+        <Terminal.Root prompt="$" onCommand={commandHandler}>
+            <Terminal.Welcome>Welcome to PrimeReact Terminal. Type &quot;help&quot; for available commands.</Terminal.Welcome>
+            <Terminal.CommandList />
+            <Terminal.Prompt />
+        </Terminal.Root>
     );
 }
