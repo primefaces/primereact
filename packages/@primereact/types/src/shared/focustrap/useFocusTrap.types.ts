@@ -25,11 +25,6 @@ export interface useFocusTrapProps {
      * @default true
      */
     autoFocus?: boolean | undefined;
-    /**
-     * The container element to focus trap.
-     * @default null
-     */
-    container?: HTMLElement | null | undefined;
 }
 
 /**
@@ -41,7 +36,30 @@ export interface useFocusTrapState {}
  * Defines the methods and properties exposed by useFocusTrap.
  */
 export interface useFocusTrapExposes {
-    hiddenElements: [React.ReactElement | null, React.ReactElement | null];
+    /**
+     * The state of the useFocusTrap.
+     */
+    state: useFocusTrapState;
+    /**
+     * Reference to the container element of the focus trap.
+     */
+    containerRef: React.RefObject<HTMLElement | null>;
+    /**
+     * Reference to the first hidden focusable element for accessibility.
+     */
+    firstHiddenElementRef: React.RefObject<HTMLElement | null>;
+    /**
+     * Reference to the last hidden focusable element for accessibility.
+     */
+    lastHiddenElementRef: React.RefObject<HTMLElement | null>;
+    /**
+     * Function to handle the focus of the first hidden element.
+     */
+    onFirstHiddenFocus: (event: React.FocusEvent<HTMLElement>) => void;
+    /**
+     * Function to handle the focus of the last hidden element.
+     */
+    onLastHiddenFocus: (event: React.FocusEvent<HTMLElement>) => void;
 }
 
 /**

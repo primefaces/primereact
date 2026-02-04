@@ -1,6 +1,5 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useUnmountEffect } from '@primereact/hooks/use-unmount-effect';
-import { mergeProps } from '@primeuix/utils';
 import { focus, getFirstFocusableElement, getLastFocusableElement, isFocusableElement } from '@primeuix/utils/dom';
 import { isNotEmpty } from '@primeuix/utils/object';
 import * as React from 'react';
@@ -9,22 +8,18 @@ import { defaultProps } from './useFocusTrap.props';
 export const useFocusTrap = withHeadless({
     name: 'useFocusTrap',
     defaultProps,
-    setup: ({ props, elementRef }) => {
-        const { disabled, autoFocus, container } = props;
+    setup: ({ props }) => {
+        const { disabled, autoFocus } = props;
         const firstHiddenElementRef = React.useRef<HTMLSpanElement>(null);
         const lastHiddenElementRef = React.useRef<HTMLSpanElement>(null);
         const observerRef = React.useRef<MutationObserver | null>(null);
         const containerRef = React.useRef<HTMLElement | null>(null);
         const state = {};
 
-        React.useEffect(() => {
-            containerRef.current = container || elementRef.current;
-        }, [container, elementRef]);
-
         // methods
-        const getComputedSelector = (selector?: string) => `:not(.p-hidden-focusable):not([data-p-hidden-focusable="true"])${selector ?? ''}`;
+        const getComputedSelector = (selector?: string) => `:not([data-focus-trap-hidden=""])${selector ?? ''}`;
 
-        const handleFirstHiddenFocus = (event: React.FocusEvent<HTMLSpanElement>) => {
+        const onFirstHiddenFocus = (event: React.FocusEvent<HTMLSpanElement>) => {
             const containerElement = containerRef.current;
 
             const relatedTarget = event.relatedTarget as HTMLElement | null;
@@ -39,7 +34,7 @@ export const useFocusTrap = withHeadless({
             }
         };
 
-        const handleLastHiddenFocus = (event: React.FocusEvent<HTMLSpanElement>) => {
+        const onLastHiddenFocus = (event: React.FocusEvent<HTMLSpanElement>) => {
             const containerElement = containerRef.current;
 
             const relatedTarget = event.relatedTarget as HTMLElement | null;
@@ -77,21 +72,39 @@ export const useFocusTrap = withHeadless({
 
             if (!containerElement || disabled || !(containerElement instanceof Element)) return;
 
-            containerElement.setAttribute('data-p-focus-trap', 'true');
+            containerElement.setAttribute('data-focus-trap', '');
             observerRef.current = new MutationObserver((mutationList) => {
                 for (const mutation of mutationList) {
                     if (mutation.type === 'childList' && !containerElement.contains(document.activeElement)) {
-                        const findNextFocusableElement = (_el: Node | null): HTMLElement | null => {
+                        function findNextFocusableElement(_el: Node | null): HTMLElement | null {
                             if (!_el || !('nodeType' in _el)) return null;
 
-                            const focusableElement = isFocusableElement(_el as HTMLElement)
-                                ? isFocusableElement(_el as HTMLElement, getComputedSelector(''))
-                                    ? (_el as HTMLElement)
-                                    : getFirstFocusableElement(containerElement, getComputedSelector(''))
-                                : getFirstFocusableElement(_el as HTMLElement);
+                            if (!(_el instanceof Element)) {
+                                return _el.nextSibling ? findNextFocusableElement(_el.nextSibling) : null;
+                            }
 
-                            return isNotEmpty(focusableElement) ? (focusableElement as HTMLElement) : _el.nextSibling ? findNextFocusableElement(_el.nextSibling) : null;
-                        };
+                            let focusableElement: HTMLElement | null = null;
+
+                            if (isFocusableElement(_el)) {
+                                if (isFocusableElement(_el, getComputedSelector(''))) {
+                                    focusableElement = _el as HTMLElement;
+                                } else {
+                                    focusableElement = getFirstFocusableElement(containerElement!, getComputedSelector('')) as HTMLElement | null;
+                                }
+                            } else {
+                                focusableElement = getFirstFocusableElement(_el) as HTMLElement | null;
+                            }
+
+                            if (isNotEmpty(focusableElement)) {
+                                return focusableElement;
+                            } else {
+                                if (_el.nextSibling) {
+                                    return findNextFocusableElement(_el.nextSibling);
+                                } else {
+                                    return null;
+                                }
+                            }
+                        }
 
                         const nextElement = findNextFocusableElement(mutation.nextSibling);
 
@@ -110,7 +123,7 @@ export const useFocusTrap = withHeadless({
 
             if (!containerElement) return;
 
-            containerElement.removeAttribute('data-p-focus-trap');
+            containerElement.removeAttribute('data-focus-trap');
 
             if (observerRef.current) {
                 observerRef.current.disconnect();
@@ -118,36 +131,6 @@ export const useFocusTrap = withHeadless({
             }
         };
 
-        const createHiddenElements = (): [React.ReactElement | null, React.ReactElement | null] => {
-            const hiddenElementProps = {
-                className: 'p-hidden-accessible p-hidden-focusable',
-                tabIndex: 0,
-                role: 'presentation',
-                'aria-hidden': true,
-                'data-p-hidden-accessible': true,
-                'data-p-hidden-focusable': true
-            };
-
-            // @todo - remove elements
-            const hiddenElements: [React.ReactElement | null, React.ReactElement | null] = [
-                <span
-                    {...mergeProps({
-                        ref: firstHiddenElementRef,
-                        onFocus: handleFirstHiddenFocus,
-                        ...hiddenElementProps
-                    })}
-                />,
-                <span
-                    {...mergeProps({
-                        ref: lastHiddenElementRef,
-                        onFocus: handleLastHiddenFocus,
-                        ...hiddenElementProps
-                    })}
-                />
-            ];
-
-            return hiddenElements;
-        };
         // effects
 
         React.useEffect(() => {
@@ -167,7 +150,11 @@ export const useFocusTrap = withHeadless({
 
         return {
             state,
-            hiddenElements: !disabled ? createHiddenElements() : ([null, null] as [null, null])
+            containerRef,
+            onFirstHiddenFocus,
+            onLastHiddenFocus,
+            firstHiddenElementRef,
+            lastHiddenElementRef
         };
     }
 });
