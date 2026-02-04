@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTimelineContext } from '../Timeline.context';
-import { TimelineConnectorProvider } from './TimelineConnector.context';
 import { defaultConnectorProps } from './TimelineConnector.props';
 
 export const TimelineConnector = withComponent({
@@ -25,10 +24,6 @@ export const TimelineConnector = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TimelineConnectorProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TimelineConnectorProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

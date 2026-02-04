@@ -1,7 +1,7 @@
 import { Timeline } from '@primereact/ui/timeline';
 
 export default function HorizontalDemo() {
-    const events = ['2020', '2021', '2022', '2023'];
+    const events = ['2026', '2027', '2028', '2029'];
 
     return (
         <div className="flex flex-col gap-4">

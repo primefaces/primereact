@@ -1991,6 +1991,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             },
         },
         'timeline': {
+            'activity-demo': {
+                'component': React.lazy(() => import('demo/styled/timeline/activity-demo')),
+                'filePath': 'demo/styled/timeline/activity-demo.tsx',
+            },
             'alignment-demo': {
                 'component': React.lazy(() => import('demo/styled/timeline/alignment-demo')),
                 'filePath': 'demo/styled/timeline/alignment-demo.tsx',
@@ -2006,6 +2010,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'horizontal-demo': {
                 'component': React.lazy(() => import('demo/styled/timeline/horizontal-demo')),
                 'filePath': 'demo/styled/timeline/horizontal-demo.tsx',
+            },
+            'interactive-demo': {
+                'component': React.lazy(() => import('demo/styled/timeline/interactive-demo')),
+                'filePath': 'demo/styled/timeline/interactive-demo.tsx',
             },
             'opposite-demo': {
                 'component': React.lazy(() => import('demo/styled/timeline/opposite-demo')),

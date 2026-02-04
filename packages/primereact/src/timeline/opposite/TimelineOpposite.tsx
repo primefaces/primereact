@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTimelineContext } from '../Timeline.context';
-import { TimelineOppositeProvider } from './TimelineOpposite.context';
 import { defaultOppositeProps } from './TimelineOpposite.props';
 
 export const TimelineOpposite = withComponent({
@@ -25,10 +24,6 @@ export const TimelineOpposite = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TimelineOppositeProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TimelineOppositeProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

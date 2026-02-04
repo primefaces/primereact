@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTimelineContext } from '../Timeline.context';
-import { TimelineSeparatorProvider } from './TimelineSeparator.context';
 import { defaultSeparatorProps } from './TimelineSeparator.props';
 
 export const TimelineSeparator = withComponent({
@@ -25,10 +24,6 @@ export const TimelineSeparator = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TimelineSeparatorProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TimelineSeparatorProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

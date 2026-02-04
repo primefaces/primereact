@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTimelineContext } from '../Timeline.context';
-import { TimelineContentProvider } from './TimelineContent.context';
 import { defaultContentProps } from './TimelineContent.props';
 
 export const TimelineContent = withComponent({
@@ -25,10 +24,6 @@ export const TimelineContent = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TimelineContentProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TimelineContentProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

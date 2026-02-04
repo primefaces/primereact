@@ -2,10 +2,10 @@ import { Timeline } from '@primereact/ui/timeline';
 
 export default function OppositeDemo() {
     const events = [
-        { status: 'Ordered', date: '15/10/2020 10:30' },
-        { status: 'Processing', date: '15/10/2020 14:00' },
-        { status: 'Shipped', date: '15/10/2020 16:15' },
-        { status: 'Delivered', date: '16/10/2020 10:00' }
+        { status: 'Ordered', date: '15/10/2026 10:30' },
+        { status: 'Processing', date: '15/10/2026 14:00' },
+        { status: 'Shipped', date: '15/10/2026 16:15' },
+        { status: 'Delivered', date: '16/10/2026 10:00' }
     ];
 
     return (

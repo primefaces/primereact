@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTimelineContext } from '../Timeline.context';
-import { TimelineEventProvider } from './TimelineEvent.context';
 import { defaultEventProps } from './TimelineEvent.props';
 
 export const TimelineEvent = withComponent({
@@ -25,10 +24,6 @@ export const TimelineEvent = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TimelineEventProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TimelineEventProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

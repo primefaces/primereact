@@ -3,7 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useTimelineContext } from '../Timeline.context';
-import { TimelineMarkerProvider } from './TimelineMarker.context';
 import { defaultMarkerProps } from './TimelineMarker.props';
 
 export const TimelineMarker = withComponent({
@@ -25,10 +24,6 @@ export const TimelineMarker = withComponent({
             ptmi('root')
         );
 
-        return (
-            <TimelineMarkerProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
-            </TimelineMarkerProvider>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

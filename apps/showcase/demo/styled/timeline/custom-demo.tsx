@@ -1,61 +1,104 @@
+import { Avatar } from '@primereact/ui/avatar';
 import { Button } from '@primereact/ui/button';
-import { Card } from '@primereact/ui/card';
 import { Timeline } from '@primereact/ui/timeline';
 
 export default function CustomDemo() {
     const events = [
-        { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
-        { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
-        { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
-        { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
+        {
+            status: 'Order Placed',
+            date: 'Oct 15, 2026',
+            time: '10:30 AM',
+            icon: 'pi pi-shopping-cart',
+            color: 'bg-blue-500',
+            user: 'JD',
+            description: 'Your order #12345 has been confirmed and is being prepared for processing.',
+            details: ['2x Wireless Headphones', '1x Phone Case', '1x USB-C Cable']
+        },
+        {
+            status: 'Payment Confirmed',
+            date: 'Oct 15, 2026',
+            time: '10:32 AM',
+            icon: 'pi pi-credit-card',
+            color: 'bg-green-500',
+            user: 'SY',
+            description: 'Payment of $149.99 was successfully processed via Credit Card ending in 4242.'
+        },
+        {
+            status: 'Shipped',
+            date: 'Oct 16, 2026',
+            time: '02:15 PM',
+            icon: 'pi pi-truck',
+            color: 'bg-orange-500',
+            user: 'MK',
+            description: 'Package has been handed to the carrier and is on its way.',
+            tracking: 'TRK-892374651'
+        },
+        {
+            status: 'Delivered',
+            date: 'Oct 18, 2026',
+            time: '11:20 AM',
+            icon: 'pi pi-check-circle',
+            color: 'bg-lime-500',
+            user: 'JD',
+            description: 'Package was delivered and signed for at the front door.'
+        }
     ];
 
     return (
-        <div>
-            <Timeline.Root align="alternate">
-                {events.map((event, index) => (
-                    <Timeline.Event key={index} className={index % 2 === 1 ? 'max-[960px]:flex-row' : undefined}>
-                        <Timeline.Opposite />
-                        <Timeline.Separator>
-                            <span
-                                className={[
-                                    'flex w-8 h-8 items-center justify-center rounded-full z-10 shadow-sm',
-                                    index !== events.length - 1 ? 'text-white bg-primary' : ''
-                                ].join(' ')}
-                            >
-                                <i className={event.icon}></i>
+        <Timeline.Root align="alternate" className="w-full">
+            {events.map((event, index) => (
+                <Timeline.Event key={index} className={`mt-4 ${index % 2 === 1 ? 'max-[960px]:flex-row' : ''}`}>
+                    <Timeline.Opposite>
+                        <div className={index % 2 === 0 ? 'text-right' : 'text-left'}>
+                            <div className="font-medium text-surface-700 dark:text-surface-200">{event.date}</div>
+                            <div className="text-sm text-surface-500 dark:text-surface-400">{event.time}</div>
+                        </div>
+                    </Timeline.Opposite>
+                    <Timeline.Separator>
+                        <>
+                            <span className={`flex items-center justify-center w-12 h-12 rounded-full ${event.color} text-white shadow-lg`}>
+                                <i className={`${event.icon} text-lg`} />
                             </span>
-                            {index !== events.length - 1 && <Timeline.Connector />}
-                        </Timeline.Separator>
-                        <Timeline.Content className={index % 2 === 1 ? 'max-[960px]:!text-left' : undefined}>
-                            <Card.Root className="mt-4">
-                                <Card.Body>
-                                    <Card.Caption>
-                                        <Card.Title>{event.status}</Card.Title>
-                                        <Card.Subtitle>{event.date}</Card.Subtitle>
-                                    </Card.Caption>
-                                    <Card.Content>
-                                        {event.image && (
-                                            <img
-                                                src={`https://primefaces.org/cdn/primevue/images/product/${event.image}`}
-                                                alt={event.status}
-                                                width="200"
-                                                className="shadow-sm"
-                                            />
-                                        )}
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
-                                            numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
-                                            cupiditate neque quas!
-                                        </p>
-                                        <Button variant="text">Read more</Button>
-                                    </Card.Content>
-                                </Card.Body>
-                            </Card.Root>
-                        </Timeline.Content>
-                    </Timeline.Event>
-                ))}
-            </Timeline.Root>
-        </div>
+
+                            {index !== events.length - 1 && <Timeline.Connector className="bg-surface-300 dark:bg-surface-600" />}
+                        </>
+                    </Timeline.Separator>
+                    <Timeline.Content className={index % 2 === 1 ? 'max-[960px]:text-left!' : undefined}>
+                        <div className="p-5 rounded-xl bg-surface-0 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 shadow-sm mt-2">
+                            <div className="flex items-center gap-3 mb-3">
+                                <Avatar.Root shape="circle" size="normal" className="bg-primary/10 text-primary font-semibold">
+                                    <Avatar.Fallback>{event.user}</Avatar.Fallback>
+                                </Avatar.Root>
+                                <div>
+                                    <div className="font-bold text-surface-900 dark:text-surface-0">{event.status}</div>
+                                </div>
+                            </div>
+                            <p className="text-surface-600 dark:text-surface-300 text-sm leading-relaxed">{event.description}</p>
+                            {event.details && (
+                                <ul className="mt-3 space-y-1">
+                                    {event.details.map((detail, i) => (
+                                        <li key={i} className="text-sm text-surface-500 dark:text-surface-400 flex items-center gap-2">
+                                            <i className="pi pi-box text-xs" />
+                                            {detail}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            {event.tracking && (
+                                <div className="mt-4 p-3 rounded-lg bg-surface-100 dark:bg-surface-700 flex items-center justify-between">
+                                    <span className="text-sm text-surface-600 dark:text-surface-300">
+                                        <i className="pi pi-map-marker mr-2" />
+                                        Tracking: {event.tracking}
+                                    </span>
+                                    <Button variant="text" size="small">
+                                        Track
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                    </Timeline.Content>
+                </Timeline.Event>
+            ))}
+        </Timeline.Root>
     );
 }
