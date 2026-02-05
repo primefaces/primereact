@@ -15,20 +15,31 @@ export const SliderRoot = withComponent({
         return slider;
     },
     render(instance) {
-        const { id, props, ptmi, cx } = instance;
+        const { id, props, ptmi, cx, sx, state, setRootRef, onTrackPointerDown, onTrackPointerMove, onTrackPointerUp } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
                 className: cx('root'),
-                onClick: instance.onBarClick
+                style: {
+                    position: 'relative',
+                    touchAction: 'none',
+                    ...sx('root')
+                },
+                onPointerDown: onTrackPointerDown,
+                onPointerMove: onTrackPointerMove,
+                onPointerUp: onTrackPointerUp,
+                'data-orientation': props.orientation,
+                ...(props.disabled && { 'data-disabled': '' }),
+                ...(props.invalid && { 'data-invalid': '' }),
+                ...(state.isDragging && { 'data-dragging': '' })
             },
             ptmi('root')
         );
 
         return (
             <SliderProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
+                <Component instance={instance} attrs={rootProps} children={props.children} ref={setRootRef} />
             </SliderProvider>
         );
     }

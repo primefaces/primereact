@@ -5,3 +5,4 @@ export * from './useSlider.types';
 export * from './SliderRange.types';
 export * from './SliderRoot.types';
 export * from './SliderThumb.types';
+export * from './SliderTrack.types';

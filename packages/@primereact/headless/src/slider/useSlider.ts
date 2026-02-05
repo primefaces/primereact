@@ -1,401 +1,369 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useEventListener } from '@primereact/hooks';
-import { useSliderProps } from '@primereact/types/shared/slider';
-import { focus, getAttribute, getWindowScrollLeft, getWindowScrollTop, isRTL } from '@primeuix/utils';
+import { useControlledState } from '@primereact/hooks';
+import { isRTL } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useSlider.props';
 
 export const useSlider = withHeadless({
     name: 'useSlider',
     defaultProps,
-    setup({ props, elementRef }) {
-        const [activeValue, setActiveValue] = React.useState<useSliderProps['value']>(props.value ?? props.defaultValue ?? undefined);
-        const handleIndex = React.useRef(0);
-        const dragging = React.useRef(false);
-        const thumbCounter = React.useRef(0);
-        const initX = React.useRef(0);
-        const initY = React.useRef(0);
-        const barWidth = React.useRef<number | null>(null);
-        const barHeight = React.useRef<number | null>(null);
+    setup({ props }) {
+        const [valueState, setValueState] = useControlledState({
+            value: props.value,
+            defaultValue: props.defaultValue,
+            onChange: props.onValueChange
+        });
+        const [isDragging, setIsDragging] = React.useState(false);
+        const activeIndex = React.useRef(0);
+        const focusedIndex = React.useRef<number | null>(null);
+        const rootRef = React.useRef<HTMLDivElement | null>(null);
+        const min = props.min ?? 0;
+        const max = props.max ?? 100;
+        const step = props.step ?? 1;
+        const minStepsBetweenThumbs = props.minStepsBetweenThumbs ?? 0;
+        const isHorizontal = props.orientation === 'horizontal';
+        const isThumbPointerDown = React.useRef(false);
+        const dragOffset = React.useRef(0);
 
-        React.useEffect(() => {
-            if (props.value !== undefined) {
-                setActiveValue(props.value);
+        // methods
+        function clamp(value: number, minValue: number, maxValue: number) {
+            return Math.min(Math.max(value, minValue), maxValue);
+        }
+
+        function getPrecision(stepValue: number) {
+            const stepString = stepValue.toString();
+
+            if (stepString.includes('e-')) {
+                return Number(stepString.split('e-')[1] || 0);
             }
-        }, [props.value]);
+
+            const dotIndex = stepString.indexOf('.');
+
+            return dotIndex >= 0 ? stepString.length - dotIndex - 1 : 0;
+        }
+
+        function roundToStep(value: number, stepValue: number, minValue: number) {
+            if (!stepValue) return value;
+
+            const precision = getPrecision(stepValue);
+            const rounded = Math.round((value - minValue) / stepValue) * stepValue + minValue;
+
+            return Number(rounded.toFixed(precision));
+        }
+
+        const normalizeValue = (value: number) => clamp(roundToStep(value, step, min), min, max);
+
+        function range() {
+            return Array.isArray(valueState);
+        }
+
+        function getValues() {
+            const sourceValue = valueState !== undefined ? valueState : (props.value ?? props.defaultValue);
+            const rawValues = Array.isArray(sourceValue) ? sourceValue : sourceValue !== undefined ? [sourceValue] : [min];
+
+            return rawValues.map((value) => normalizeValue(value));
+        }
+
+        function getValueState() {
+            const values = getValues();
+
+            if (range()) {
+                return values;
+            }
+
+            return values[0];
+        }
+
+        function getThumbElement(index: number) {
+            return rootRef.current?.querySelector<HTMLElement>(`[data-index="${index}"]`) ?? null;
+        }
+
+        function isThumbDisabled(index: number) {
+            return getThumbElement(index)?.hasAttribute('data-disabled') ?? false;
+        }
+
+        function blurFocusedThumbIfDifferent(nextIndex: number) {
+            if (focusedIndex.current === null || focusedIndex.current === nextIndex) return;
+
+            const rootNode = rootRef.current;
+
+            if (!rootNode) {
+                focusedIndex.current = null;
+
+                return;
+            }
+
+            const input = rootNode.querySelector<HTMLInputElement>(`[data-index="${focusedIndex.current}"] input[type="range"]`);
+
+            focusedIndex.current = null;
+            input?.blur();
+        }
+
+        function getClosestEnabledValueIndex(values: number[], nextValue: number, event?: React.PointerEvent<HTMLDivElement>) {
+            const indices = values.map((_, index) => index);
+            const enabledIndices = rootRef.current ? indices.filter((index) => !isThumbDisabled(index)) : indices;
+
+            if (!enabledIndices.length) return -1;
+
+            let closestIndex = enabledIndices[0];
+            let smallestDistance = Math.abs(values[closestIndex] - nextValue);
+            const pointerAxis = event ? (isHorizontal ? event.clientX : event.clientY) : null;
+
+            for (const index of enabledIndices.slice(1)) {
+                const distance = Math.abs(values[index] - nextValue);
+
+                if (distance < smallestDistance) {
+                    closestIndex = index;
+                    smallestDistance = distance;
+                } else if (distance === smallestDistance && pointerAxis !== null) {
+                    const closestElement = getThumbElement(closestIndex);
+                    const candidateElement = getThumbElement(index);
+
+                    if (closestElement && candidateElement) {
+                        const closestRect = closestElement.getBoundingClientRect();
+                        const candidateRect = candidateElement.getBoundingClientRect();
+                        const closestCenter = isHorizontal ? closestRect.left + closestRect.width / 2 : closestRect.top + closestRect.height / 2;
+                        const candidateCenter = isHorizontal ? candidateRect.left + candidateRect.width / 2 : candidateRect.top + candidateRect.height / 2;
+
+                        if (closestCenter === candidateCenter) {
+                            closestIndex = pointerAxis < closestCenter ? Math.min(closestIndex, index) : Math.max(closestIndex, index);
+                        } else {
+                            const closestDelta = Math.abs(pointerAxis - closestCenter);
+                            const candidateDelta = Math.abs(pointerAxis - candidateCenter);
+
+                            if (candidateDelta < closestDelta) {
+                                closestIndex = index;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return closestIndex;
+        }
+
+        function getThumbValue(index: number) {
+            const values = getValues();
+
+            return values[index] ?? min;
+        }
+
+        function getValuePercent(value: number) {
+            const rangeValue = max - min;
+
+            if (!rangeValue) return 0;
+
+            return clamp(((value - min) / rangeValue) * 100, 0, 100);
+        }
+
+        function getRangeStyle(): React.CSSProperties {
+            const values = getValues();
+            const isRange = range();
+            const minValue = values.length ? Math.min(...values) : min;
+            const maxValue = values.length ? Math.max(...values) : min;
+            const startValue = isRange ? minValue : min;
+            const endValue = isRange ? maxValue : (values[0] ?? min);
+            const startPercent = getValuePercent(startValue);
+            const endPercent = getValuePercent(endValue);
+            const sizePercent = Math.max(endPercent - startPercent, 0);
+
+            return isHorizontal
+                ? {
+                      position: 'absolute',
+                      insetInlineStart: `${startPercent}%`,
+                      width: `${sizePercent}%`
+                  }
+                : {
+                      position: 'absolute',
+                      bottom: `${startPercent}%`,
+                      height: `${sizePercent}%`
+                  };
+        }
+
+        function getThumbStyle(index: number): React.CSSProperties {
+            const value = getThumbValue(index);
+            const percent = getValuePercent(value);
+
+            return isHorizontal
+                ? {
+                      position: 'absolute',
+                      insetInlineStart: `${percent}%`,
+                      translate: '-50% 0'
+                  }
+                : {
+                      position: 'absolute',
+                      bottom: `${percent}%`,
+                      translate: '0 50%'
+                  };
+        }
+
+        function setRootRef(node: HTMLDivElement | null) {
+            rootRef.current = node;
+        }
+
+        function getRootRect(event: React.PointerEvent<HTMLDivElement>) {
+            return rootRef.current?.getBoundingClientRect() ?? event.currentTarget.getBoundingClientRect();
+        }
+
+        function getValueFromPointer(event: React.PointerEvent<HTMLDivElement>) {
+            const rect = getRootRect(event);
+            const size = isHorizontal ? rect.width : rect.height;
+
+            if (!size) return min;
+
+            const position = isHorizontal ? (event.clientX - rect.left) / rect.width : (event.clientY - rect.top) / rect.height;
+            const clampedPosition = clamp(position, 0, 1);
+            const isRtl = isHorizontal && isRTL(rootRef.current ?? event.currentTarget);
+            const orientedPosition = isHorizontal ? (isRtl ? 1 - clampedPosition : clampedPosition) : 1 - clampedPosition;
+            const value = min + orientedPosition * (max - min);
+
+            return normalizeValue(value);
+        }
+
+        function updateValueAt(index: number, nextValue: number, originalEvent: React.PointerEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement> | React.ChangeEvent<HTMLInputElement>) {
+            const values = getValues();
+            const minDistance = Math.max(minStepsBetweenThumbs * (step || 1), 0);
+            const minValue = index > 0 ? values[index - 1] + minDistance : min;
+            const maxValue = index < values.length - 1 ? values[index + 1] - minDistance : max;
+            const lowerBound = Math.min(minValue, maxValue);
+            const upperBound = Math.max(minValue, maxValue);
+            const clampedValue = clamp(normalizeValue(nextValue), lowerBound, upperBound);
+            const nextValues = [...values];
+
+            nextValues[index] = clampedValue;
+
+            const nextValueState = range() ? nextValues : nextValues[0];
+
+            setValueState([
+                nextValueState,
+                {
+                    originalEvent,
+                    value: nextValueState
+                }
+            ]);
+
+            return nextValueState;
+        }
+
+        function onTrackPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+            if (props.disabled || props.readOnly) return;
+
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+            event.preventDefault();
+            event.currentTarget.setPointerCapture(event.pointerId);
+            setIsDragging(true);
+
+            if (isThumbPointerDown.current) {
+                dragOffset.current = getThumbValue(activeIndex.current) - getValueFromPointer(event);
+                isThumbPointerDown.current = false;
+
+                return;
+            }
+
+            const nextValue = getValueFromPointer(event);
+            const values = getValues();
+            const closestIndex = getClosestEnabledValueIndex(values, nextValue, event);
+
+            if (closestIndex === -1) return;
+
+            blurFocusedThumbIfDifferent(closestIndex);
+            activeIndex.current = closestIndex;
+            dragOffset.current = 0;
+            updateValueAt(activeIndex.current, nextValue, event);
+        }
+
+        function onTrackPointerMove(event: React.PointerEvent<HTMLDivElement>) {
+            if (props.disabled || props.readOnly) return;
+
+            if (!isDragging) return;
+
+            if (isThumbDisabled(activeIndex.current)) return;
+
+            event.preventDefault();
+            updateValueAt(activeIndex.current, getValueFromPointer(event) + dragOffset.current, event);
+        }
+
+        function onTrackPointerUp(event: React.PointerEvent<HTMLDivElement>) {
+            if (props.disabled || props.readOnly) return;
+
+            event.preventDefault();
+            event.currentTarget.releasePointerCapture(event.pointerId);
+            setIsDragging(false);
+            isThumbPointerDown.current = false;
+            dragOffset.current = 0;
+
+            props.onValueChangeEnd?.({
+                originalEvent: event,
+                value: getValueState()
+            });
+        }
+
+        function onThumbPointerDown(event: React.PointerEvent<HTMLDivElement>, index: number) {
+            if (props.disabled || props.readOnly) return;
+
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+            event.preventDefault();
+            blurFocusedThumbIfDifferent(index);
+            activeIndex.current = index;
+            isThumbPointerDown.current = true;
+        }
+
+        function onInputChange(event: React.ChangeEvent<HTMLInputElement>, index: number) {
+            if (props.disabled || props.readOnly) return;
+
+            activeIndex.current = index;
+            const nextValueState = updateValueAt(index, Number(event.target.value), event);
+
+            props.onValueChangeEnd?.({
+                originalEvent: event,
+                value: nextValueState
+            });
+        }
+
+        function onInputFocus(event: React.FocusEvent<HTMLInputElement>, index: number) {
+            if (props.disabled || props.readOnly) return;
+
+            focusedIndex.current = index;
+            activeIndex.current = index;
+        }
+
+        function onInputBlur(event: React.FocusEvent<HTMLInputElement>, index: number) {
+            if (props.disabled || props.readOnly) return;
+
+            activeIndex.current = index;
+
+            if (focusedIndex.current === index) {
+                focusedIndex.current = null;
+            }
+
+            props.onValueChangeEnd?.({
+                originalEvent: event,
+                value: getValueState()
+            });
+        }
 
         const state = {
-            value: activeValue
+            value: valueState,
+            isDragging
         };
-
-        const registerThumb = React.useCallback(() => {
-            const index = thumbCounter.current;
-
-            thumbCounter.current += 1;
-
-            return index;
-        }, []);
-
-        React.useEffect(() => {
-            thumbCounter.current = 0;
-
-            return () => {
-                thumbCounter.current = 0;
-            };
-        }, []);
-
-        const range = React.useCallback(() => {
-            return Array.isArray(state.value) || thumbCounter.current > 1;
-        }, [state.value]);
-
-        const updateDomData = () => {
-            const rect = elementRef.current?.getBoundingClientRect();
-
-            initX.current = (rect?.left ?? 0) + getWindowScrollLeft();
-            initY.current = (rect?.top ?? 0) + getWindowScrollTop();
-            barWidth.current = elementRef.current?.offsetWidth ?? null;
-            barHeight.current = elementRef.current?.offsetHeight ?? null;
-        };
-
-        const handleValue = (event: React.MouseEvent | React.TouchEvent) => {
-            let rawValue;
-            const touchEvent = event as React.TouchEvent;
-            const mouseEvent = event as React.MouseEvent;
-            const pageX = touchEvent.touches ? touchEvent.touches[0].pageX : mouseEvent.pageX;
-            const pageY = touchEvent.touches ? touchEvent.touches[0].pageY : mouseEvent.pageY;
-
-            if (horizontal()) {
-                if (!elementRef.current) return;
-
-                if (isRTL(elementRef.current)) {
-                    rawValue = ((initX.current + (barWidth.current as number) - pageX) * 100) / (barWidth.current as number);
-                } else {
-                    rawValue = ((pageX - initX.current) * 100) / (barWidth.current as number);
-                }
-            } else {
-                rawValue = ((initY.current + (barHeight.current as number) - pageY) * 100) / (barHeight.current as number);
-            }
-
-            let newValue = ((props.max as number) - (props.min as number)) * (rawValue / 100) + (props.min as number);
-
-            if (props.step) {
-                const oldValue: number = range() ? (Array.isArray(state.value) ? (state.value[handleIndex.current] ?? 0) : 0) : typeof state.value === 'number' ? state.value : 0;
-                const diff = newValue - oldValue;
-
-                if (diff < 0) newValue = oldValue + Math.ceil(newValue / props.step - oldValue / props.step) * props.step;
-                else if (diff > 0) newValue = oldValue + Math.floor(newValue / props.step - oldValue / props.step) * props.step;
-            } else {
-                newValue = Math.floor(newValue);
-            }
-
-            updateValue(event, newValue);
-        };
-
-        const updateValue = (event: React.MouseEvent | React.TouchEvent | React.KeyboardEvent, value: number) => {
-            let newValue = Math.round(value * 100) / 100;
-            let updatedValue;
-
-            if (range()) {
-                updatedValue = Array.isArray(state.value) ? [...state.value] : [0, 0];
-
-                if (handleIndex.current == 0) {
-                    if (newValue < (props.min ?? 0)) {
-                        newValue = props.min as number;
-                    } else if (newValue >= (props.max ?? 100)) {
-                        newValue = props.max as number;
-                    }
-
-                    updatedValue[0] = newValue;
-                } else {
-                    if (newValue > (props.max ?? 100)) {
-                        newValue = props.max as number;
-                    } else if (newValue <= (props.min ?? 0)) {
-                        newValue = props.min as number;
-                    }
-
-                    updatedValue[1] = newValue;
-                }
-            } else {
-                if (newValue < (props.min ?? 0)) {
-                    newValue = props.min as number;
-                } else if (newValue > (props.max ?? 100)) {
-                    newValue = props.max as number;
-                }
-
-                updatedValue = newValue;
-            }
-
-            setActiveValue(updatedValue);
-
-            if (props.onValueChange) {
-                props.onValueChange({
-                    originalEvent: event,
-                    value: updatedValue
-                });
-            }
-        };
-
-        const onDragStart = (event: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>, index: number = 0) => {
-            if (props.disabled) {
-                return;
-            }
-
-            elementRef.current?.setAttribute('data-p-sliding', 'true');
-            dragging.current = true;
-            updateDomData();
-
-            if (range() && Array.isArray(state.value) && state.value[0] === props.max) {
-                handleIndex.current = 0;
-            } else {
-                handleIndex.current = index;
-            }
-
-            focus(event.currentTarget as HTMLElement);
-        };
-
-        const onDrag = (event: React.MouseEvent | React.TouchEvent) => {
-            if (dragging.current) {
-                handleValue(event);
-            }
-        };
-
-        const onDragEnd = () => {
-            if (dragging.current) {
-                dragging.current = false;
-                elementRef.current?.removeAttribute('data-p-sliding');
-
-                unbindThumbMouseMoveListener();
-                unbindThumbMouseUpListener();
-                unbindDocumentTouchMoveListener();
-                unbindDocumentTouchEndListener();
-            }
-        };
-
-        const onTouchStart = (event: React.TouchEvent<HTMLElement>, index: number) => {
-            bindDocumentTouchMoveListener();
-            bindDocumentTouchEndListener();
-            onDragStart(event, index);
-        };
-
-        const onMouseDown = (event: React.MouseEvent<HTMLElement>, index: number) => {
-            bindThumbMouseMoveListener();
-            bindThumbMouseUpListener();
-            onDragStart(event, index);
-        };
-
-        const onKeyDown = (event: React.KeyboardEvent, index: number) => {
-            handleIndex.current = index;
-
-            switch (event.code) {
-                case 'ArrowDown':
-                case 'ArrowLeft':
-                    decrementValue(event, index);
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowUp':
-                case 'ArrowRight':
-                    incrementValue(event, index);
-                    event.preventDefault();
-                    break;
-
-                case 'PageDown':
-                    decrementValue(event, index, true);
-                    event.preventDefault();
-                    break;
-
-                case 'PageUp':
-                    incrementValue(event, index, true);
-                    event.preventDefault();
-                    break;
-
-                case 'Home':
-                    updateValue(event, props.min ?? 0);
-                    event.preventDefault();
-                    break;
-
-                case 'End':
-                    updateValue(event, props.max ?? 100);
-                    event.preventDefault();
-                    break;
-
-                default:
-                    break;
-            }
-        };
-
-        const onBarClick = (event: React.MouseEvent) => {
-            if (props.disabled) {
-                return;
-            }
-
-            if (getAttribute(event.target as Element, 'data-pc-name') !== 'sliderthumb') {
-                updateDomData();
-                handleValue(event);
-            }
-        };
-
-        const [bindThumbMouseMoveListener, unbindThumbMouseMoveListener] = useEventListener({
-            type: 'mousemove',
-            listener: (event: Event) => onDrag(event as unknown as React.MouseEvent)
-        });
-
-        const [bindThumbMouseUpListener, unbindThumbMouseUpListener] = useEventListener({
-            type: 'mouseup',
-            listener: () => onDragEnd()
-        });
-
-        const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({
-            type: 'touchmove',
-            listener: (event: Event) => onDrag(event as unknown as React.MouseEvent)
-        });
-
-        const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({
-            type: 'touchend',
-            listener: () => onDragEnd()
-        });
-
-        const decrementValue = (event: React.KeyboardEvent, index: number, pageKey = false) => {
-            let newValue;
-
-            if (range()) {
-                if (Array.isArray(state.value)) {
-                    if (props.step) newValue = (state.value[index] ?? 0) - props.step;
-                    else newValue = (state.value[index] ?? 0) - 1;
-                } else {
-                    newValue = 0;
-                }
-            } else {
-                if (typeof state.value === 'number') {
-                    if (props.step) newValue = state.value - props.step;
-                    else if (!props.step && pageKey) newValue = state.value - 10;
-                    else newValue = state.value - 1;
-                } else {
-                    newValue = 0;
-                }
-            }
-
-            updateValue(event, newValue);
-            event.preventDefault();
-        };
-
-        const incrementValue = (event: React.KeyboardEvent, index: number, pageKey = false) => {
-            let newValue;
-
-            if (range()) {
-                if (Array.isArray(state.value)) {
-                    if (props.step) newValue = (state.value[index] ?? 0) + props.step;
-                    else newValue = (state.value[index] ?? 0) + 1;
-                } else {
-                    newValue = 0;
-                }
-            } else {
-                if (props.step) newValue = (typeof state.value === 'number' ? state.value : 0) + props.step;
-                else if (!props.step && pageKey) newValue = (typeof state.value === 'number' ? state.value : 0) + 10;
-                else newValue = (typeof state.value === 'number' ? state.value : 0) + 1;
-            }
-
-            updateValue(event, newValue);
-            event.preventDefault();
-        };
-
-        const handlePosition = React.useCallback(() => {
-            const value = state.value;
-            const min = props.min ?? 0;
-            const max = props.max ?? 100;
-
-            if (value === undefined || Array.isArray(value)) return 0;
-
-            if (value < min) return 0;
-            else if (value > max) return 100;
-            else return ((value - min) * 100) / (max - min);
-        }, [state.value, props.min, props.max]);
-
-        const rangeStartPosition = React.useCallback(() => {
-            const value = state.value;
-            const min = props.min ?? 0;
-            const max = props.max ?? 100;
-
-            if (Array.isArray(value) && value[0] !== undefined) {
-                if (value[0] < min) return 0;
-                else return ((value[0] - min) * 100) / (max - min);
-            } else return 0;
-        }, [state.value, props.min, props.max]);
-
-        const rangeEndPosition = React.useCallback(() => {
-            const value = state.value;
-            const min = props.min ?? 0;
-            const max = props.max ?? 100;
-
-            if (Array.isArray(value) && value.length === 2 && value[1] !== undefined) {
-                if (value[1] > max) return 100;
-                else return ((value[1] - min) * 100) / (max - min);
-            } else return 100;
-        }, [state.value, props.min, props.max]);
-
-        const rangeStyle = () => {
-            if (range()) {
-                const rangeSliderWidth = rangeEndPosition() > rangeStartPosition() ? rangeEndPosition() - rangeStartPosition() : rangeStartPosition() - rangeEndPosition();
-                const rangeSliderPosition = rangeEndPosition() > rangeStartPosition() ? rangeStartPosition() : rangeEndPosition();
-
-                if (horizontal()) {
-                    return { insetInlineStart: rangeSliderPosition + '%', width: rangeSliderWidth + '%' };
-                } else {
-                    return { bottom: rangeSliderPosition + '%', height: rangeSliderWidth + '%' };
-                }
-            } else {
-                if (horizontal()) {
-                    return { width: handlePosition() + '%' };
-                } else {
-                    return { height: handlePosition() + '%' };
-                }
-            }
-        };
-
-        const handleThumbStyle = () => {
-            if (horizontal()) {
-                return { insetInlineStart: handlePosition() + '%' };
-            } else {
-                return { bottom: handlePosition() + '%' };
-            }
-        };
-
-        const rangeStartHandleStyle = () => {
-            if (horizontal()) {
-                return { insetInlineStart: rangeStartPosition() + '%' };
-            } else {
-                return { bottom: rangeStartPosition() + '%' };
-            }
-        };
-
-        const rangeEndHandleStyle = () => {
-            if (horizontal()) {
-                return { insetInlineStart: rangeEndPosition() + '%' };
-            } else {
-                return { bottom: rangeEndPosition() + '%' };
-            }
-        };
-
-        const horizontal = React.useCallback(() => {
-            return props.orientation === 'horizontal';
-        }, []);
 
         return {
             state,
-            registerThumb,
-            thumbCounter,
-            //methods
+            // methods
             range,
-            onTouchStart,
-            onDrag,
-            onDragEnd,
-            onMouseDown,
-            onKeyDown,
-            onBarClick,
-            rangeStyle,
-            handleThumbStyle,
-            rangeStartHandleStyle,
-            rangeEndHandleStyle
+            getThumbValue,
+            getRangeStyle,
+            getThumbStyle,
+            setRootRef,
+            onTrackPointerDown,
+            onTrackPointerMove,
+            onTrackPointerUp,
+            onThumbPointerDown,
+            onInputChange,
+            onInputFocus,
+            onInputBlur
         };
     }
 });

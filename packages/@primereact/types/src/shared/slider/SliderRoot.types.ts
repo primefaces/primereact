@@ -55,6 +55,11 @@ export interface SliderRootProps extends BaseComponentProps<SliderRootInstance, 
      */
     disabled?: boolean | undefined;
     /**
+     * When present, it specifies that the element should be invalid.
+     * @default false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Callback fired when the ToggleButton's pressed state changes.
      * @param event The event that triggered the change.
      * @param event.originalEvent The original event that triggered the change.
@@ -62,6 +67,14 @@ export interface SliderRootProps extends BaseComponentProps<SliderRootInstance, 
      * @returns void
      */
     onValueChange?: (event: SliderRootChangeEvent) => void;
+    /**
+     * Callback fired when the pointer interaction ends.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The new value of the slider.
+     * @returns void
+     */
+    onValueChangeEnd?: (event: SliderRootChangeEvent) => void;
 }
 
 /**

@@ -6,6 +6,10 @@ export const defaultProps: useSliderProps = {
     orientation: 'horizontal',
     min: 0,
     max: 100,
-    step: undefined,
-    onValueChange: undefined
+    step: 1,
+    minStepsBetweenThumbs: 0,
+    onValueChange: undefined,
+    onValueChangeEnd: undefined,
+    disabled: false,
+    readOnly: false
 };

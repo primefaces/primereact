@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import type * as React from 'react';
 import type { SliderRootInstance } from './SliderRoot.types';
 
 /**
@@ -32,6 +33,11 @@ export interface SliderThumbPassThrough {
  */
 export interface SliderThumbProps extends BaseComponentProps<SliderThumbInstance, unknown, SliderThumbPassThrough> {
     /**
+     * Index of the thumb.
+     * @default 0
+     */
+    index?: number | undefined;
+    /**
      * Index of the element in tabbing order.
      * @default 0
      */
@@ -44,6 +50,49 @@ export interface SliderThumbProps extends BaseComponentProps<SliderThumbInstance
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledby?: string | undefined;
+    /**
+     * Name attribute of the input.
+     */
+    name?: string | undefined;
+    /**
+     * Id of the input.
+     */
+    inputId?: string | undefined;
+    /**
+     * Style of the input element.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Style class of the input element.
+     */
+    inputClassName?: string | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that the element should be read-only.
+     * @default false
+     */
+    readOnly?: boolean | undefined;
+    /**
+     * When present, it specifies that the element is invalid.
+     * @default false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * When present, it specifies that the element is required.
+     */
+    required?: boolean | undefined;
+    /**
+     * Callback fired on focus.
+     */
+    onFocus?: React.FocusEventHandler<HTMLInputElement> | undefined;
+    /**
+     * Callback fired on blur.
+     */
+    onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
 }
 
 /**

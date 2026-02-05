@@ -3,7 +3,7 @@ import type { SliderRootProps } from '@primereact/types/shared/slider';
 
 export const defaultRootProps: SliderRootProps = {
     ...HeadlessSlider.defaultProps,
-    as: 'div',
+    as: 'span',
     disabled: undefined,
     tabIndex: 0
 };

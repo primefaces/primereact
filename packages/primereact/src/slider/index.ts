@@ -6,3 +6,4 @@ export * as SliderProps from './Slider.props';
 export { defaultContentProps, SliderRange } from './range';
 export { defaultRootProps, SliderRoot } from './root';
 export { defaultThumbProps, SliderThumb } from './thumb';
+export { defaultTrackProps, SliderTrack } from './track';

@@ -3,11 +3,11 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useSliderContext } from '../Slider.context';
-import { defaultContentProps } from './SliderRange.props';
+import { defaultTrackProps } from './SliderTrack.props';
 
-export const SliderRange = withComponent({
-    name: 'Slider.Range',
-    defaultProps: defaultContentProps,
+export const SliderTrack = withComponent({
+    name: 'Slider.Track',
+    defaultProps: defaultTrackProps,
     setup() {
         const slider = useSliderContext();
 
@@ -18,14 +18,14 @@ export const SliderRange = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: slider?.cx('range'),
-                style: { ...slider?.getRangeStyle?.(), ...slider?.sx('range') },
+                className: slider?.cx('track'),
+                style: { ...slider?.sx('track') },
                 'data-orientation': slider?.props.orientation,
                 ...(slider?.props.disabled && { 'data-disabled': '' }),
                 ...(slider?.props.invalid && { 'data-invalid': '' }),
                 ...(slider?.state.isDragging && { 'data-dragging': '' })
             },
-            slider?.ptm('range'),
+            slider?.ptm('track'),
             ptmi('root')
         );
 

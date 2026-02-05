@@ -9,6 +9,7 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
+import type * as React from 'react';
 
 /**
  * Event fired when the Slider's value changes.
@@ -57,6 +58,11 @@ export interface useSliderProps {
      */
     step?: number | undefined;
     /**
+     * Minimum steps between thumbs.
+     * @default 0
+     */
+    minStepsBetweenThumbs?: number | undefined;
+    /**
      * Callback fired when the ToggleButton's pressed state changes.
      * @param event The event that triggered the change.
      * @param event.originalEvent The original event that triggered the change.
@@ -64,6 +70,24 @@ export interface useSliderProps {
      * @returns void
      */
     onValueChange?: (event: useSliderChangeEvent) => void;
+    /**
+     * Callback fired when the pointer interaction ends.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The new value of the slider.
+     * @returns void
+     */
+    onValueChangeEnd?: (event: useSliderChangeEvent) => void;
+    /**
+     * Whether the component is disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * Whether the component is read-only.
+     * @default false
+     */
+    readOnly?: boolean | undefined;
 }
 
 /**
@@ -74,6 +98,10 @@ export interface useSliderState {
      * Value of the component.
      */
     value?: number | number[] | undefined;
+    /**
+     * Whether the slider is being dragged.
+     */
+    isDragging?: boolean;
 }
 
 /**
@@ -85,53 +113,53 @@ export interface useSliderExposes {
      */
     state: useSliderState;
     /**
-     * Registers a thumb and returns its index.
-     */
-    registerThumb: () => number;
-    /**
-     * Counter for tracking number of thumbs.
-     */
-    thumbCounter: React.RefObject<number>;
-    /**
      * Determines if the slider is in range mode.
      */
     range: () => boolean;
     /**
-     * Handler for touch start events.
+     * Returns the value for a specific thumb.
      */
-    onTouchStart: (event: React.TouchEvent<HTMLElement>, index: number) => void;
+    getThumbValue: (index: number) => number;
     /**
-     * Handler for drag events.
+     * Returns the style object for the range element.
      */
-    onDrag: (event: React.MouseEvent | React.TouchEvent) => void;
+    getRangeStyle: () => React.CSSProperties;
     /**
-     * Handler for drag end events.
+     * Returns the style object for a thumb.
      */
-    onDragEnd: () => void;
+    getThumbStyle: (index: number) => React.CSSProperties;
     /**
-     * Handler for mouse down events.
+     * Sets the root element ref.
      */
-    onMouseDown: (event: React.MouseEvent<HTMLElement>, index: number) => void;
+    setRootRef: (node: HTMLDivElement | null) => void;
     /**
-     * Handler for key down events.
+     * Pointer handlers for the root element.
      */
-    onKeyDown: (event: React.KeyboardEvent, index: number) => void;
+    onTrackPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
-     * Returns the style object for the range.
+     * Pointer handlers for the root element.
      */
-    rangeStyle: () => React.CSSProperties;
+    onTrackPointerMove: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
-     * Returns the style object for the handle thumb.
+     * Pointer handlers for the root element.
      */
-    handleThumbStyle: () => React.CSSProperties;
+    onTrackPointerUp: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
-     * Returns the style object for the range start handle.
+     * Pointer handlers for thumbs.
      */
-    rangeStartHandleStyle: () => React.CSSProperties;
+    onThumbPointerDown: (event: React.PointerEvent<HTMLDivElement>, index: number) => void;
     /**
-     * Returns the style object for the range end handle.
+     * Input change handler for thumbs.
      */
-    rangeEndHandleStyle: () => React.CSSProperties;
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+    /**
+     * Input focus handler for thumbs.
+     */
+    onInputFocus: (event: React.FocusEvent<HTMLInputElement>, index: number) => void;
+    /**
+     * Input blur handler for thumbs.
+     */
+    onInputBlur: (event: React.FocusEvent<HTMLInputElement>, index: number) => void;
 }
 
 /**
