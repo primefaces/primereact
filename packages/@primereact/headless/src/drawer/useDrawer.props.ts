@@ -8,5 +8,6 @@ export const defaultProps: useDrawerProps = {
     dismissable: true,
     baseZIndex: 0,
     autoZIndex: true,
+    appendTo: 'body',
     onOpenChange: undefined
 };

@@ -57,6 +57,11 @@ export interface useDrawerProps {
      */
     autoZIndex?: boolean | undefined;
     /**
+     * A valid query selector or an HTMLElement to specify where the drawer gets attached.
+     * @default body
+     */
+    appendTo?: HTMLElement | 'body' | 'self' | undefined;
+    /**
      * Callback function that is called when the trigger is clicked.
      * @param event The event that triggered the change.
      * @param event.originalEvent The original event that triggered the change.
@@ -74,10 +79,6 @@ export interface useDrawerState {
      * Whether the drawer is currently opened.
      */
     opened: boolean;
-    /**
-     * Whether the mask is currently visible.
-     */
-    maskVisible: boolean;
 }
 
 /**
@@ -91,11 +92,11 @@ export interface useDrawerExposes {
     /**
      * Reference to the mask element.
      */
-    maskRef?: React.RefObject<HTMLDivElement | null>;
+    maskRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement | null> } | null>;
     /**
-     * Reference to the motion element.
+     * Reference to the root element.
      */
-    motionRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement> } | null>;
+    rootRef?: React.RefObject<{ elementRef: React.RefObject<HTMLDivElement> } | null>;
     /**
      * Reference to the close button element.
      */
@@ -109,25 +110,33 @@ export interface useDrawerExposes {
      */
     close?: () => void;
     /**
-     * Handler for motion enter events.
+     * Handler for mask mouse down events.
      */
-    onMotionEnter?: () => void;
+    onMaskMouseDown?: (event: React.MouseEvent) => void;
     /**
-     * Handler for motion after enter events.
+     * Handler for mask mouse up events.
      */
-    onMotionAfterEnter?: () => void;
+    onMaskMouseUp?: () => void;
     /**
-     * Handler for motion before leave events.
+     * Handler for mask enter events.
      */
-    onMotionBeforeLeave?: () => void;
+    onMaskEnter?: () => void;
     /**
-     * Handler for motion leave events.
+     * Handler for enter events.
      */
-    onMotionLeave?: () => void;
+    onEnter?: () => void;
     /**
-     * Handler for motion after leave events.
+     * Handler for after enter events.
      */
-    onMotionAfterLeave?: () => void;
+    onAfterEnter?: () => void;
+    /**
+     * Handler for leave events.
+     */
+    onLeave?: () => void;
+    /**
+     * Handler for after leave events.
+     */
+    onAfterLeave?: () => void;
 }
 
 /**

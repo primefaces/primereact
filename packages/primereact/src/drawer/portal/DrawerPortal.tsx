@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { Motion } from '@primereact/core/motion';
 import { mergeProps } from '@primeuix/utils';
+import { Backdrop } from 'primereact/backdrop';
 import { Portal } from 'primereact/portal';
 import * as React from 'react';
 import { useDrawerContext } from '../Drawer.context';
@@ -20,45 +20,56 @@ export const DrawerPortal = withComponent({
 
         const maskProps = mergeProps(
             {
+                visible: drawer?.state.opened,
                 className: drawer?.cx('mask'),
                 style: drawer?.sx('mask'),
-                onMouseDown: drawer?.onMaskClick
+                motionProps: {
+                    name: 'p-overlay-mask',
+                    appear: true,
+                    onEnter: drawer?.onMaskEnter
+                },
+                onMouseDown: drawer?.onMaskMouseDown,
+                onMouseUp: drawer?.onMaskMouseUp
             },
             drawer?.ptm('mask')
         );
 
-        const motionProps = mergeProps(
+        const rootProps = mergeProps(
             {
                 id: drawer?.id,
                 visible: drawer?.state.opened,
-                name: 'p-drawer',
                 className: drawer?.cx('root'),
                 style: drawer?.sx('root'),
+                motionProps: {
+                    name: 'p-drawer',
+                    appear: true,
+                    onEnter: drawer?.onEnter,
+                    onAfterEnter: drawer?.onAfterEnter,
+                    onLeave: drawer?.onLeave,
+                    onAfterLeave: drawer?.onAfterLeave
+                },
                 role: 'complementary',
-                'aria-modal': drawer?.props.modal,
-                onEnter: drawer?.onMotionEnter,
-                onAfterEnter: drawer?.onMotionAfterEnter,
-                onBeforeLeave: drawer?.onMotionBeforeLeave,
-                onLeave: drawer?.onMotionLeave,
-                onAfterLeave: drawer?.onMotionAfterLeave
+                'aria-modal': drawer?.props.modal ? '' : undefined,
+                'data-open': drawer?.state.opened ? '' : undefined,
+                'data-position': drawer?.props.position
             },
             {
                 className: inProps?.className,
                 style: inProps?.style
             },
-            drawer?.ptmi('root')
+            ptmi('root')
         );
 
         const portalProps = mergeProps(drawer?.ptm('portal'), ptmi('root'));
 
         const portalElement = (
-            <Component pIf={drawer?.state.maskVisible} as="div" attrs={maskProps} ref={drawer?.maskRef}>
-                <Motion {...motionProps} ref={drawer?.motionRef}>
+            <Backdrop {...maskProps} ref={drawer?.maskRef}>
+                <Backdrop {...rootProps} ref={drawer?.rootRef}>
                     <Component instance={instance} attrs={portalProps} children={props.children} />
-                </Motion>
-            </Component>
+                </Backdrop>
+            </Backdrop>
         );
 
-        return <Portal element={portalElement} visible />;
+        return <Portal element={portalElement} appendTo={drawer?.props.appendTo} />;
     }
 });

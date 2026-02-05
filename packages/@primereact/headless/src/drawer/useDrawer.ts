@@ -1,8 +1,8 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useEventListener, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import { useEventListener, useUnmountEffect } from '@primereact/hooks';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { $dt } from '@primeuix/styled';
-import { addClass, blockBodyScroll, focus, unblockBodyScroll, ZIndex } from '@primeuix/utils';
+import { blockBodyScroll, focus, unblockBodyScroll, ZIndex } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useDrawer.props';
 
@@ -15,34 +15,19 @@ export const useDrawer = withHeadless({
             defaultValue: props.defaultOpen ?? false,
             onChange: props.onOpenChange
         });
-        const [maskVisibleState, setMaskVisibleState] = React.useState<boolean>(props.open ?? props.defaultOpen ?? false);
-        const maskRef = React.useRef<HTMLDivElement | null>(null);
-        const motionRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
+        const maskRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement | null> } | null>(null);
+        const rootRef = React.useRef<{ elementRef: React.RefObject<HTMLDivElement> } | null>(null);
         const closeButtonRef = React.useRef<{ elementRef: React.RefObject<HTMLButtonElement> } | null>(null);
+        const maskMouseDownTarget = React.useRef<EventTarget | null>(null);
         const target = React.useRef<HTMLElement | null>(null);
 
         const state = {
-            opened: openState ?? false,
-            maskVisible: maskVisibleState
+            opened: openState ?? false
         };
 
-        useUpdateEffect(() => {
-            if (openState && !maskVisibleState) {
-                setMaskVisibleState(true);
-            }
-        }, [openState]);
-
-        React.useLayoutEffect(() => {
-            if (maskVisibleState && props.autoZIndex && maskRef.current) {
-                ZIndex.set('modal', maskRef.current as HTMLDivElement, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
-            }
-        }, [maskVisibleState]);
-
         useUnmountEffect(() => {
-            setMaskVisibleState(false);
-
-            if (props.autoZIndex) {
-                ZIndex.clear(maskRef.current as HTMLDivElement);
+            if (props.autoZIndex && maskRef.current) {
+                ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
             }
         });
 
@@ -54,47 +39,41 @@ export const useDrawer = withHeadless({
         const onOpenStateChange = () => {
             const newOpenState = !openState;
 
-            if (newOpenState && !maskVisibleState) {
-                setMaskVisibleState(true);
-            }
-
             setOpenState([newOpenState, { value: newOpenState }]);
         };
 
-        const onMotionEnter = () => {
+        const onMaskEnter = () => {
+            if (props.autoZIndex && maskRef.current?.elementRef.current) {
+                ZIndex.set('modal', maskRef.current.elementRef.current, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
+            }
+        };
+
+        const onEnter = () => {
             target.current = document.activeElement as HTMLElement;
             enableDocumentSettings();
             bindDocumentKeyDownListener();
         };
 
-        const onMotionAfterEnter = () => {
+        const onAfterEnter = () => {
             focusElement();
         };
 
-        const onMotionBeforeLeave = () => {
-            if (props.modal) {
-                // && !isUnstyled //TODO:
-                addClass(maskRef.current as HTMLDivElement, 'p-overlay-mask-leave-active');
-            }
-        };
-
-        const onMotionLeave = () => {
+        const onLeave = () => {
             focus(target.current as HTMLElement);
             target.current = null;
         };
 
-        const onMotionAfterLeave = () => {
-            if (props.autoZIndex) {
-                ZIndex.clear(maskRef.current as HTMLDivElement);
-            }
-
+        const onAfterLeave = () => {
             unbindDocumentKeyDownListener();
             disableDocumentSettings();
-            setMaskVisibleState(false);
+
+            if (props.autoZIndex && maskRef.current?.elementRef.current) {
+                ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
+            }
         };
 
         const focusElement = () => {
-            let focusTarget = findFocusableElement(motionRef.current?.elementRef.current ?? null);
+            let focusTarget = findFocusableElement(rootRef.current?.elementRef.current ?? null);
 
             if (!focusTarget) {
                 if (closeButtonRef.current) {
@@ -153,8 +132,12 @@ export const useDrawer = withHeadless({
             }
         };
 
-        const onMaskClick = (event: React.MouseEvent) => {
-            if (props.dismissable && props.modal && maskRef.current === event.target) {
+        const onMaskMouseDown = (event: React.MouseEvent) => {
+            maskMouseDownTarget.current = event.target;
+        };
+
+        const onMaskMouseUp = () => {
+            if (props.dismissable && props.modal && maskRef.current?.elementRef.current === maskMouseDownTarget.current) {
                 close();
             }
         };
@@ -163,17 +146,19 @@ export const useDrawer = withHeadless({
             state,
             // refs
             maskRef,
-            motionRef,
+            rootRef,
             closeButtonRef,
             // methods
             close,
             onOpenStateChange,
-            onMotionEnter,
-            onMotionAfterEnter,
-            onMotionBeforeLeave,
-            onMotionLeave,
-            onMotionAfterLeave,
-            onMaskClick
+            onMaskMouseDown,
+            onMaskMouseUp,
+            // motion callbacks
+            onMaskEnter,
+            onEnter,
+            onAfterEnter,
+            onLeave,
+            onAfterLeave
         };
     }
 });
