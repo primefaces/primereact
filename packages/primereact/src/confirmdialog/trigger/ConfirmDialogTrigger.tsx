@@ -1,7 +1,6 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { cn, mergeProps } from '@primeuix/utils';
-import { useDialogContext } from 'primereact/dialog';
+import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useConfirmDialogContext } from '../ConfirmDialog.context';
 import { defaultTriggerProps } from './ConfirmDialogTrigger.props';
@@ -11,18 +10,21 @@ export const ConfirmDialogTrigger = withComponent({
     defaultProps: defaultTriggerProps,
     setup() {
         const confirmdialog = useConfirmDialogContext();
-        const dialog = useDialogContext();
 
-        return { confirmdialog, dialog };
+        return { confirmdialog };
     },
     render(instance) {
-        const { props, ptmi, confirmdialog, dialog } = instance;
+        const { props, ptmi, confirmdialog } = instance;
         const { as, ...restProps } = props;
 
         const rootProps = mergeProps(
             restProps,
             {
-                className: cn(dialog?.cx('trigger'), confirmdialog?.cx('trigger'))
+                className: confirmdialog?.cx('trigger'),
+                type: 'button',
+                'aria-expanded': confirmdialog?.state.opened,
+                'aria-controls': confirmdialog?.id,
+                onClick: confirmdialog?.onOpenStateChange
             },
             confirmdialog?.ptm('trigger'),
             ptmi('root')

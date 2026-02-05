@@ -1,5 +1,5 @@
 import type { SelectListProps } from '@primereact/types/shared/select';
-import { ListboxRoot, ListboxProps } from 'primereact/listbox';
+import { ListboxProps, ListboxRoot } from 'primereact/listbox';
 
 export const defaultListProps: SelectListProps = {
     ...(ListboxProps.defaultRootProps as SelectListProps),

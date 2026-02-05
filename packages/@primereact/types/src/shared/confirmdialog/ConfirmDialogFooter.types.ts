@@ -10,7 +10,6 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { DialogRootInstance } from '@primereact/types/shared/dialog';
 import type { ConfirmDialogRootInstance } from './ConfirmDialogRoot.types';
 
 /**
@@ -46,10 +45,6 @@ export interface ConfirmDialogFooterExposes {
      * The ConfirmDialog component instance.
      */
     confirmdialog: ConfirmDialogRootInstance | undefined | null;
-    /**
-     * Instance of the Dialog component.
-     */
-    dialog: DialogRootInstance | undefined | null;
 }
 
 /**

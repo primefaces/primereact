@@ -8,6 +8,10 @@ export const styles = createStyles<ConfirmDialogRootInstance>({
     classes: {
         root: 'p-confirmdialog',
         trigger: 'p-confirmdialog-trigger-button',
+        content: 'p-confirmdialog-content',
+        header: 'p-confirmdialog-header',
+        footer: 'p-confirmdialog-footer',
+        title: 'p-confirmdialog-title',
         icon: 'p-confirmdialog-icon',
         message: 'p-confirmdialog-message',
         close: 'p-confirmdialog-reject-button',

@@ -1,7 +1,8 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useDialog } from '@primereact/headless/dialog';
-import { mergeProps } from '@primeuix/utils';
+import type { DialogRootInstance } from '@primereact/types/shared/dialog';
+import { mergeProps, omit } from '@primeuix/utils';
 import * as React from 'react';
 import { DialogProvider } from '../Dialog.context';
 import { defaultRootProps } from './DialogRoot.props';
@@ -10,7 +11,12 @@ export const DialogRoot = withComponent({
     name: 'Dialog.Root',
     defaultProps: defaultRootProps,
     setup(instance) {
-        const dialog = useDialog(instance.inProps);
+        const dialogInstance = instance?.inProps?.dialogInstance as unknown as Record<PropertyKey, unknown> | undefined;
+        const dialog = dialogInstance ?? useDialog(omit(instance?.inProps, 'dialogInstance'));
+
+        if (dialogInstance?.props) {
+            Object.assign(instance.props, dialogInstance.props);
+        }
 
         return dialog;
     },
@@ -30,8 +36,8 @@ export const DialogRoot = withComponent({
         );
 
         return (
-            <DialogProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
+            <DialogProvider value={instance as unknown as DialogRootInstance}>
+                <Component instance={instance as unknown as DialogRootInstance} attrs={rootProps} children={props.children} />
             </DialogProvider>
         );
     }

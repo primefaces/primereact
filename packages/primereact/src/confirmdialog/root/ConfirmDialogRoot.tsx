@@ -1,9 +1,7 @@
 'use client';
-import { withComponent } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useConfirmDialog } from '@primereact/headless/confirmdialog';
-import { ConfirmDialogRootInstance, ConfirmDialogRootProps } from '@primereact/types/shared/confirmdialog';
 import { mergeProps } from '@primeuix/utils';
-import { Dialog } from 'primereact/dialog';
 import * as React from 'react';
 import { ConfirmDialogProvider } from '../ConfirmDialog.context';
 import { defaultRootProps } from './ConfirmDialogRoot.props';
@@ -17,24 +15,21 @@ export const ConfirmDialogRoot = withComponent({
         return confirmdialog;
     },
     render(instance) {
-        const { id, props, state, ptmi, cx, sx } = instance;
+        const { id, props, ptmi, cx, sx, dialog } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
                 className: cx('root'),
                 style: sx('root'),
-                'data-p-opened': state.opened,
-                'data-p-maximized': state.maximized
+                dialogInstance: dialog
             },
             ptmi('root')
         );
 
         return (
-            <ConfirmDialogProvider value={instance as unknown as ConfirmDialogRootInstance}>
-                <Dialog.Root {...(props as ConfirmDialogRootProps)} {...rootProps}>
-                    {props.children}
-                </Dialog.Root>
+            <ConfirmDialogProvider value={instance}>
+                <Component instance={instance} attrs={rootProps} children={props.children} />
             </ConfirmDialogProvider>
         );
     }

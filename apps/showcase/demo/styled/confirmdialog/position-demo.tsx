@@ -1,14 +1,15 @@
 'use client';
-import { ConfirmDialogChangeEvent, ConfirmDialogProps } from '@primereact/types/shared/confirmdialog';
+import { TimesIcon } from '@primereact/icons/times';
+import { ConfirmDialogRootChangeEvent, ConfirmDialogRootProps } from '@primereact/types/shared/confirmdialog';
 import { Button } from '@primereact/ui/button';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 import * as React from 'react';
 
 export default function PositionDemo() {
     const [open, setOpen] = React.useState<boolean>(false);
-    const [position, setPosition] = React.useState<ConfirmDialogProps['position']>('center');
+    const [position, setPosition] = React.useState<ConfirmDialogRootProps['position']>('center');
 
-    const openPosition = (position: ConfirmDialogProps['position']) => {
+    const openPosition = (position: ConfirmDialogRootProps['position']) => {
         setOpen(true);
         setPosition(position);
     };
@@ -53,14 +54,16 @@ export default function PositionDemo() {
                     <i className="pi pi-arrow-up-left" />
                 </Button>
             </div>
-            <ConfirmDialog.Root open={open} onOpenChange={(e: ConfirmDialogChangeEvent) => setOpen(e.value as boolean)} position={position}>
+            <ConfirmDialog.Root open={open} onOpenChange={(e: ConfirmDialogRootChangeEvent) => setOpen(e.value as boolean)} position={position}>
                 <ConfirmDialog.Portal>
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Edit Profile</ConfirmDialog.Title>
-                        <ConfirmDialog.Close />
+                        <ConfirmDialog.Close>
+                            <TimesIcon />
+                        </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
-                        <ConfirmDialog.Icon className="pi pi-exclamation-triangle" />
+                        <i className="pi pi-exclamation-triangle text-2xl" />
                         <ConfirmDialog.Message>Are you sure you want to proceed?</ConfirmDialog.Message>
                     </ConfirmDialog.Content>
                     <ConfirmDialog.Footer>

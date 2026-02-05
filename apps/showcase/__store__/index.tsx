@@ -533,6 +533,14 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/confirmdialog/confirmdialog-pt')),
                 'filePath': 'demo/styled/confirmdialog/confirmdialog-pt.tsx',
             },
+            'delete-demo': {
+                'component': React.lazy(() => import('demo/styled/confirmdialog/delete-demo')),
+                'filePath': 'demo/styled/confirmdialog/delete-demo.tsx',
+            },
+            'logout-demo': {
+                'component': React.lazy(() => import('demo/styled/confirmdialog/logout-demo')),
+                'filePath': 'demo/styled/confirmdialog/logout-demo.tsx',
+            },
             'position-demo': {
                 'component': React.lazy(() => import('demo/styled/confirmdialog/position-demo')),
                 'filePath': 'demo/styled/confirmdialog/position-demo.tsx',

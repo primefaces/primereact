@@ -1,8 +1,8 @@
 import type { useConfirmDialogProps } from '@primereact/types/shared/confirmdialog';
 
 export const defaultProps: useConfirmDialogProps = {
-    open: false,
-    defaultOpen: false,
+    open: undefined,
+    defaultOpen: undefined,
     draggable: true,
     keepInViewport: true,
     modal: true,

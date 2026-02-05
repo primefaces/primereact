@@ -1,4 +1,4 @@
-export { ConfirmDialogIcon as Icon, ConfirmDialogMessage as Message, ConfirmDialogPortal as Portal } from 'primereact/confirmdialog';
+export { ConfirmDialogIcon as Icon, ConfirmDialogMessage as Message } from 'primereact/confirmdialog';
 export { UIConfirmDialogAction as Action } from './action';
 export { UIConfirmDialogCancel as Cancel } from './cancel';
 export { UIConfirmDialogClose as Close } from './close';
@@ -6,6 +6,7 @@ export { UIConfirmDialogContent as Content } from './content';
 export { UIConfirmDialogFooter as Footer } from './footer';
 export { UIConfirmDialogHeader as Header } from './header';
 export { UIConfirmDialogHeaderActions as HeaderActions } from './headeractions';
+export { UIConfirmDialogPortal as Portal } from './portal';
 export { UIConfirmDialogRoot as Root } from './root';
 export { UIConfirmDialogTitle as Title } from './title';
 export { UIConfirmDialogTrigger as Trigger } from './trigger';

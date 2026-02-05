@@ -1,8 +1,7 @@
 import { ConfirmDialogTriggerProps } from '@primereact/types/shared/confirmdialog';
-import { ButtonProps } from 'primereact/button';
-import { DialogTrigger } from 'primereact/dialog';
+import { DialogProps, DialogTrigger } from 'primereact/dialog';
 
 export const defaultTriggerProps: ConfirmDialogTriggerProps = {
-    ...(ButtonProps.defaultProps as ConfirmDialogTriggerProps),
+    ...(DialogProps.defaultTriggerProps as ConfirmDialogTriggerProps),
     as: DialogTrigger
 };

@@ -4,7 +4,6 @@ export * as ConfirmDialog from './UIConfirmDialog.parts';
 export {
     ConfirmDialogIcon,
     ConfirmDialogMessage,
-    ConfirmDialogPortal,
     ConfirmDialogProps,
     ConfirmDialogProvider,
     defaultActionProps,
@@ -29,6 +28,7 @@ export { UIConfirmDialogContent as ConfirmDialogContent } from './content';
 export { UIConfirmDialogFooter as ConfirmDialogFooter } from './footer';
 export { UIConfirmDialogHeader as ConfirmDialogHeader } from './header';
 export { UIConfirmDialogHeaderActions as ConfirmDialogHeaderActions } from './headeractions';
+export { UIConfirmDialogPortal as ConfirmDialogPortal } from './portal';
 export { UIConfirmDialogRoot as ConfirmDialogRoot } from './root';
 export { UIConfirmDialogTitle as ConfirmDialogTitle } from './title';
 export { UIConfirmDialogTrigger as ConfirmDialogTrigger } from './trigger';

@@ -1,3 +1,5 @@
+'use client';
+import { TimesIcon } from '@primereact/icons/times';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 
 export default function BasicDemo() {
@@ -8,10 +10,12 @@ export default function BasicDemo() {
                 <ConfirmDialog.Portal>
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Edit Profile</ConfirmDialog.Title>
-                        <ConfirmDialog.Close />
+                        <ConfirmDialog.Close>
+                            <TimesIcon />
+                        </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
-                        <ConfirmDialog.Icon className="pi pi-exclamation-triangle" />
+                        <i className="pi pi-exclamation-triangle text-2xl" />
                         <ConfirmDialog.Message>Are you sure you want to proceed?</ConfirmDialog.Message>
                     </ConfirmDialog.Content>
                     <ConfirmDialog.Footer>
@@ -27,10 +31,11 @@ export default function BasicDemo() {
                 <ConfirmDialog.Portal>
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Danger Zone</ConfirmDialog.Title>
-                        <ConfirmDialog.Close />
+                        <ConfirmDialog.Close>
+                            <TimesIcon />
+                        </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
-                        <ConfirmDialog.Icon className="pi pi-exclamation-triangle" />
                         <ConfirmDialog.Message>Do you want to delete this record?</ConfirmDialog.Message>
                     </ConfirmDialog.Content>
                     <ConfirmDialog.Footer>

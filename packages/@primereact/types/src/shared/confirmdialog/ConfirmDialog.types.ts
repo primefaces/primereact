@@ -22,6 +22,22 @@ export const ConfirmDialogClassNames = {
      */
     trigger: 'p-confirmdialog-trigger-button',
     /**
+     * Class name of the content element
+     */
+    content: 'p-confirmdialog-content',
+    /**
+     * Class name of the header element
+     */
+    header: 'p-confirmdialog-header',
+    /**
+     * Class name of the footer element
+     */
+    footer: 'p-confirmdialog-footer',
+    /**
+     * Class name of the title element
+     */
+    title: 'p-confirmdialog-title',
+    /**
      * Class name of the icon element
      */
     icon: 'p-confirmdialog-icon',

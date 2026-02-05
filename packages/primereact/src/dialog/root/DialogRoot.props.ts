@@ -3,5 +3,6 @@ import type { DialogRootProps } from '@primereact/types/shared/dialog';
 
 export const defaultRootProps: DialogRootProps = {
     ...HeadlessDialog.defaultProps,
-    position: 'center'
+    position: 'center',
+    dialogInstance: undefined
 };

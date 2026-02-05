@@ -13,7 +13,7 @@ export const styles = createStyles<DialogRootInstance>({
             return [
                 'p-dialog-mask',
                 {
-                    'p-overlay-mask p-overlay-mask-enter-active': props.modal,
+                    'p-overlay-mask': props.modal,
                     'p-dialog-open': state.opened
                 },
                 pos ? `p-dialog-${pos}` : ''
