@@ -1711,13 +1711,21 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/slider/basic-demo')),
                 'filePath': 'demo/styled/slider/basic-demo.tsx',
             },
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/styled/slider/controlled-demo')),
+                'filePath': 'demo/styled/slider/controlled-demo.tsx',
+            },
+            'custom-demo': {
+                'component': React.lazy(() => import('demo/styled/slider/custom-demo')),
+                'filePath': 'demo/styled/slider/custom-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/styled/slider/disabled-demo')),
+                'filePath': 'demo/styled/slider/disabled-demo.tsx',
+            },
             'filter-demo': {
                 'component': React.lazy(() => import('demo/styled/slider/filter-demo')),
                 'filePath': 'demo/styled/slider/filter-demo.tsx',
-            },
-            'input-demo': {
-                'component': React.lazy(() => import('demo/styled/slider/input-demo')),
-                'filePath': 'demo/styled/slider/input-demo.tsx',
             },
             'range-demo': {
                 'component': React.lazy(() => import('demo/styled/slider/range-demo')),
@@ -1730,6 +1738,14 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'step-demo': {
                 'component': React.lazy(() => import('demo/styled/slider/step-demo')),
                 'filePath': 'demo/styled/slider/step-demo.tsx',
+            },
+            'thumbs-distance-demo': {
+                'component': React.lazy(() => import('demo/styled/slider/thumbs-distance-demo')),
+                'filePath': 'demo/styled/slider/thumbs-distance-demo.tsx',
+            },
+            'value-change-demo': {
+                'component': React.lazy(() => import('demo/styled/slider/value-change-demo')),
+                'filePath': 'demo/styled/slider/value-change-demo.tsx',
             },
             'vertical-demo': {
                 'component': React.lazy(() => import('demo/styled/slider/vertical-demo')),
