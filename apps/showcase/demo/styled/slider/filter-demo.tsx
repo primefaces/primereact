@@ -53,7 +53,9 @@ export default function FilterDemo() {
                 min={0}
                 max={200}
             >
-                <Slider.Range />
+                <Slider.Track>
+                    <Slider.Range />
+                </Slider.Track>
                 <Slider.Thumb />
             </Slider.Root>
         </div>

@@ -2,11 +2,11 @@ import { Slider } from '@primereact/ui/slider';
 
 export default function BasicDemo() {
     return (
-        <div className="flex justify-center">
-            <Slider.Root defaultValue={50} className="w-56">
+        <Slider.Root defaultValue={50} className="max-w-3xs mx-auto w-full">
+            <Slider.Track>
                 <Slider.Range />
-                <Slider.Thumb />
-            </Slider.Root>
-        </div>
+            </Slider.Track>
+            <Slider.Thumb />
+        </Slider.Root>
     );
 }
