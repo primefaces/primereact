@@ -3,11 +3,11 @@ import { Component, withComponent } from '@primereact/core/component';
 import { cn, mergeProps, resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { useCompareContext } from '../Compare.context';
-import { defaultThumbProps } from './CompareThumb.props';
+import { defaultHandleProps } from './CompareHandle.props';
 
-export const CompareThumb = withComponent({
-    name: 'Compare.Thumb',
-    defaultProps: defaultThumbProps,
+export const CompareHandle = withComponent({
+    name: 'Compare.Handle',
+    defaultProps: defaultHandleProps,
     setup() {
         const compare = useCompareContext();
 
@@ -16,17 +16,20 @@ export const CompareThumb = withComponent({
     render(instance) {
         const { props, ptmi, compare } = instance;
 
-        const thumbProps = mergeProps(
+        const rootProps = mergeProps(
             {
                 tabIndex: -1,
-                className: compare?.cx('thumb', { disabled: compare?.props.disabled }),
-                onPointerDown: compare?.onThumbPointerDown,
-                onPointerMove: compare?.onThumbPointerMove,
-                onPointerUp: compare?.onThumbPointerUp,
+                className: compare?.cx('handle', { disabled: compare?.props.disabled }),
+                style: {
+                    ...compare?.getHandleStyle?.(),
+                    ...compare?.sx('handle')
+                },
                 'data-orientation': compare?.props.orientation,
-                'data-dragging': compare?.state.isDragging
+                ...(compare?.props.disabled && { 'data-disabled': '' }),
+                ...(compare?.props.invalid && { 'data-invalid': '' }),
+                ...(compare?.state.isDragging && { 'data-dragging': '' })
             },
-            compare?.ptm('thumb'),
+            compare?.ptm('handle'),
             ptmi('root')
         );
 
@@ -44,7 +47,6 @@ export const CompareThumb = withComponent({
                     tabIndex: compare?.props.tabIndex,
                     disabled: compare?.props.disabled,
                     readOnly: compare?.props.readOnly,
-                    required: compare?.props.required,
                     'aria-labelledby': compare?.props.ariaLabelledby,
                     'aria-label': compare?.props.ariaLabel,
                     'aria-valuemin': compare?.props.min,
@@ -64,7 +66,7 @@ export const CompareThumb = withComponent({
         const input = createInputElement();
 
         return (
-            <Component instance={instance} attrs={thumbProps}>
+            <Component instance={instance} attrs={rootProps}>
                 {input}
                 {resolve(props.children, instance)}
             </Component>

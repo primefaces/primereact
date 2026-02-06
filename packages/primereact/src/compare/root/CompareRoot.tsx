@@ -25,7 +25,9 @@ export const CompareRoot = withComponent({
                 onPointerMove: onRootPointerMove,
                 onPointerUp: onRootPointerUp,
                 'data-orientation': props.orientation,
-                'data-dragging': state.isDragging
+                ...(props.disabled && { 'data-disabled': '' }),
+                ...(props.invalid && { 'data-invalid': '' }),
+                ...(state.isDragging && { 'data-dragging': '' })
             },
             ptmi('root')
         );

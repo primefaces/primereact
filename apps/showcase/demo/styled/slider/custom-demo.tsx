@@ -49,7 +49,7 @@ export default function CustomDemo() {
                                 />
                                 <span
                                     className="h-full bg-surface-100 dark:bg-surface-900 rounded-full"
-                                    style={{ width: `calc(100% - ${slider?.state.value}% - 1.25rem)` }}
+                                    style={{ width: `calc(100% - ${slider?.state.value}% - 2.5rem)` }}
                                 />
                             </>
                         );

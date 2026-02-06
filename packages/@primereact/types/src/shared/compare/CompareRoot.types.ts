@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useCompareExposes, useCompareProps, useCompareState } from './useCompare.types';
+import type { useCompareChangeEvent, useCompareExposes, useCompareProps, useCompareState } from './useCompare.types';
 
 /**
  * Defines passthrough(pt) options type in Compare component.
@@ -28,9 +28,64 @@ export interface CompareRootPassThrough {
 }
 
 /**
+ * Event fired when the Slider's value changes.
+ */
+export interface CompareRootChangeEvent extends useCompareChangeEvent<React.SyntheticEvent> {
+    /**
+     * The pressed state of the ToggleButton.
+     */
+    value: number | number[] | undefined;
+}
+
+/**
  * Defines valid properties in Compare component.
  */
-export interface CompareRootProps extends BaseComponentProps<CompareRootInstance, useCompareProps, CompareRootPassThrough> {}
+export interface CompareRootProps extends BaseComponentProps<CompareRootInstance, Omit<useCompareProps, 'onValueChange'>, CompareRootPassThrough> {
+    /**
+     * The name of the compare.
+     */
+    name?: string | undefined;
+    /**
+     * The tab index of the compare.
+     */
+    tabIndex?: number | undefined;
+    /**
+     * The input id of the compare.
+     */
+    inputId?: string | undefined;
+    /**
+     * The input style of the compare.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * The input class name of the compare.
+     */
+    inputClassName?: string | undefined;
+    /**
+     * Establishes a string value that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledby?: string | undefined;
+    /**
+     * Callback fired when the compare is focused.
+     */
+    onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+    /**
+     * Callback fired when the compare loses focus.
+     */
+    onBlur?: (event: React.FocusEvent<HTMLDivElement>) => void;
+    /**
+     * Callback fired when the ToggleButton's pressed state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The new value of the slider.
+     * @returns void
+     */
+    onValueChange?: (event: CompareRootChangeEvent) => void;
+}
 
 /**
  * Defines valid state in Compare component.

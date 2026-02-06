@@ -13,11 +13,11 @@ export default function TemplateDemo() {
             <Compare.Item position="after">
                 <ThemePanel theme="primary" />
             </Compare.Item>
-            <Compare.Slider>
-                <Compare.Thumb className="group flex items-center justify-center border border-surface">
+            <Compare.Handle>
+                <Compare.Indicator className="group flex items-center justify-center border border-surface">
                     <i className="pi pi-code group-data-[orientation=vertical]:rotate-90" />
-                </Compare.Thumb>
-            </Compare.Slider>
+                </Compare.Indicator>
+            </Compare.Handle>
         </Compare.Root>
     );
 }

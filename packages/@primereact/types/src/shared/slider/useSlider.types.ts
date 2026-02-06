@@ -145,6 +145,10 @@ export interface useSliderExposes {
      */
     onTrackPointerUp: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
+     * Updates value from a pointer position without dragging.
+     */
+    updateValueFromPointer: (event: React.PointerEvent<HTMLDivElement>) => void;
+    /**
      * Pointer handlers for thumbs.
      */
     onThumbPointerDown: (event: React.PointerEvent<HTMLDivElement>, index: number) => void;

@@ -8,21 +8,21 @@ const theme = /*css*/ `
         overflow: hidden;
     }
 
-    .p-compare-slider{
+    .p-compare-handle{
         background: light-dark(var(--p-surface-0), var(--p-surface-950));
     }
 
-    .p-compare-slider[data-orientation="horizontal"]{
+    .p-compare-handle[data-orientation="horizontal"]{
         width: 0.15rem;
         height: 100%;
     }
 
-    .p-compare-slider[data-orientation="vertical"]{
+    .p-compare-handle[data-orientation="vertical"]{
         width: 100%;
         height: 0.15rem;
     }
 
-    .p-compare-thumb{
+    .p-compare-indicator{
         position: absolute;
         top: 50%;
         left: 50%;
@@ -32,11 +32,6 @@ const theme = /*css*/ `
         background: light-dark(var(--p-surface-0), var(--p-surface-950));
         cursor: pointer;
         border-radius: 0.325rem;
-
-        &:has(.p-compare-input:focus-visible){
-            outline: 2px solid light-dark(var(--p-surface-0), var(--p-surface-950));
-            outline-offset: 2px;
-        }
     }
 
     .p-compare-input{
@@ -53,6 +48,11 @@ const theme = /*css*/ `
         left: 0;
     }
 
+    .p-compare-handle:has(.p-compare-input:focus-visible) .p-compare-indicator{
+        outline: 2px solid light-dark(var(--p-surface-0), var(--p-surface-950));
+        outline-offset: 2px;
+    }
+
 
 `;
 
@@ -63,17 +63,17 @@ export const styles = createStyles<CompareRootInstance>({
         root: 'p-compare',
         item: 'p-compare-item',
         input: 'p-compare-input',
-        thumb: ({ context }) => {
+        indicator: ({ context }) => {
             return [
-                'p-compare-thumb',
+                'p-compare-indicator',
                 {
                     'p-disabled': context.disabled
                 }
             ];
         },
-        slider: ({ context }) => {
+        handle: ({ context }) => {
             return [
-                'p-compare-slider',
+                'p-compare-handle',
                 {
                     'p-disabled': context.disabled
                 }

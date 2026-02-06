@@ -5,5 +5,5 @@ export * as CompareProps from './Compare.props';
 // Named runtime exports to maximize tree-shaking
 export { CompareItem, defaultItemProps } from './item';
 export { CompareRoot, defaultRootProps } from './root';
-export { CompareSlider, defaultSliderProps } from './slider';
-export { CompareThumb, defaultThumbProps } from './thumb';
+export { CompareHandle, defaultHandleProps } from './handle';
+export { CompareIndicator, defaultIndicatorProps } from './indicator';

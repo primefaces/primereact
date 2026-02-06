@@ -245,6 +245,19 @@ export const useSlider = withHeadless({
             return nextValueState;
         }
 
+        function updateValueFromPointer(event: React.PointerEvent<HTMLDivElement>) {
+            const nextValue = getValueFromPointer(event);
+            const values = getValues();
+            const closestIndex = getClosestEnabledValueIndex(values, nextValue, event);
+
+            if (closestIndex === -1) return;
+
+            blurFocusedThumbIfDifferent(closestIndex);
+            activeIndex.current = closestIndex;
+            dragOffset.current = 0;
+            updateValueAt(activeIndex.current, nextValue, event);
+        }
+
         function onTrackPointerDown(event: React.PointerEvent<HTMLDivElement>) {
             if (props.disabled || props.readOnly) return;
 
@@ -261,16 +274,7 @@ export const useSlider = withHeadless({
                 return;
             }
 
-            const nextValue = getValueFromPointer(event);
-            const values = getValues();
-            const closestIndex = getClosestEnabledValueIndex(values, nextValue, event);
-
-            if (closestIndex === -1) return;
-
-            blurFocusedThumbIfDifferent(closestIndex);
-            activeIndex.current = closestIndex;
-            dragOffset.current = 0;
-            updateValueAt(activeIndex.current, nextValue, event);
+            updateValueFromPointer(event);
         }
 
         function onTrackPointerMove(event: React.PointerEvent<HTMLDivElement>) {
@@ -360,6 +364,7 @@ export const useSlider = withHeadless({
             onTrackPointerDown,
             onTrackPointerMove,
             onTrackPointerUp,
+            updateValueFromPointer,
             onThumbPointerDown,
             onInputChange,
             onInputFocus,

@@ -1,13 +1,13 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { mergeProps } from '@primeuix/utils';
+import { mergeProps, resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { useCompareContext } from '../Compare.context';
-import { defaultItemProps } from './CompareItem.props';
+import { defaultIndicatorProps } from './CompareIndicator.props';
 
-export const CompareItem = withComponent({
-    name: 'Compare.Item',
-    defaultProps: defaultItemProps,
+export const CompareIndicator = withComponent({
+    name: 'Compare.Indicator',
+    defaultProps: defaultIndicatorProps,
     setup() {
         const compare = useCompareContext();
 
@@ -16,24 +16,23 @@ export const CompareItem = withComponent({
     render(instance) {
         const { props, ptmi, compare } = instance;
 
-        const itemProps = mergeProps(
+        const rootProps = mergeProps(
             {
-                className: compare?.cx('item'),
-                style: {
-                    position: 'absolute',
-                    inset: 0,
-                    ...compare?.getItemStyle(props.position),
-                    ...compare?.sx('item')
-                },
+                className: compare?.cx('indicator', { disabled: compare?.props.disabled }),
+                style: { ...compare?.sx('indicator') },
                 'data-orientation': compare?.props.orientation,
                 ...(compare?.props.disabled && { 'data-disabled': '' }),
                 ...(compare?.props.invalid && { 'data-invalid': '' }),
                 ...(compare?.state.isDragging && { 'data-dragging': '' })
             },
-            compare?.ptm('item'),
+            compare?.ptm('indicator'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={itemProps} children={props.children} />;
+        return (
+            <Component instance={instance} attrs={rootProps}>
+                {resolve(props.children, instance)}
+            </Component>
+        );
     }
 });

@@ -18,9 +18,13 @@ export const CompareClassNames = {
      */
     root: 'p-imagecompare',
     /**
-     * Class name of the slider element
+     * Class name of the handle element
      */
-    slider: 'p-imagecompare-slider'
+    handle: 'p-imagecompare-handle',
+    /**
+     * Class name of the indicator element
+     */
+    indicator: 'p-imagecompare-indicator'
 } as const;
 
 /**

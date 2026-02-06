@@ -9,11 +9,11 @@ export default function VerticalDemo() {
             <Compare.Item position="after">
                 <img src="https://primefaces.org/cdn/primevue/images/compare/island1.jpg" />
             </Compare.Item>
-            <Compare.Slider>
-                <Compare.Thumb className="group flex items-center justify-center">
+            <Compare.Handle>
+                <Compare.Indicator className="group flex items-center justify-center">
                     <i className="pi pi-code group-data-[orientation=vertical]:rotate-90" />
-                </Compare.Thumb>
-            </Compare.Slider>
+                </Compare.Indicator>
+            </Compare.Handle>
         </Compare.Root>
     );
 }
