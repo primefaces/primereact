@@ -494,7 +494,7 @@ export const useInputNumber = withHeadless({
         };
 
         const changeValue = () => {
-            const _value = props.value ?? props.defaultValue ?? null;
+            const _value = valueState ?? null;
             const val = validateValueByLimit(_value);
 
             updateInputValue(val);
@@ -725,11 +725,11 @@ export const useInputNumber = withHeadless({
         };
 
         const maxBoundry = () => {
-            return props.max !== undefined && (props.value ?? props.defaultValue ?? 0) >= props.max;
+            return props.max !== undefined && (valueState ?? 0) >= props.max;
         };
 
         const minBoundry = () => {
-            return props.min !== undefined && (props.value ?? props.defaultValue ?? 0) <= props.min;
+            return props.min !== undefined && (valueState ?? 0) <= props.min;
         };
 
         useUnmountEffect(() => {
