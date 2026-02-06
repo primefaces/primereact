@@ -42,14 +42,17 @@ export default function CustomDemo() {
                     {({ slider }: SliderTrackInstance) => {
                         return (
                             <>
-                                <span className="bg-linear-to-r from-sky-200 via-indigo-200 to-blue-400 flex-1 h-full rounded-full" />
+                                <span
+                                    className="bg-linear-to-r from-sky-200 via-indigo-200 to-blue-400 h-full rounded-full"
+                                    style={{ width: `calc(${slider?.state.value}% - 1.25rem)` }}
+                                />
                                 <Slider.Thumb
                                     style={{ insetInlineStart: 'auto', translate: 'auto' }}
-                                    className="relative! before:hidden size-8! bg-surface-0 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-full shadow-sm"
+                                    className="relative! before:hidden size-8! shrink-0 bg-surface-0 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-full shadow-sm"
                                 />
                                 <span
                                     className="h-full bg-surface-100 dark:bg-surface-900 rounded-full"
-                                    style={{ width: `calc(100% - ${slider?.state.value}% - 2.5rem)` }}
+                                    style={{ width: `calc(100% - ${slider?.state.value}% - 1.25rem)` }}
                                 />
                             </>
                         );
