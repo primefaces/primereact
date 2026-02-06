@@ -42,11 +42,6 @@ export interface useDrawerProps {
      */
     dismissable?: boolean | undefined;
     /**
-     * Whether background scroll should be blocked when drawer is visible.
-     * @default false
-     */
-    blockScroll?: boolean | undefined;
-    /**
      * Base zIndex value to use in layering.
      * @default 0
      */
