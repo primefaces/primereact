@@ -18,7 +18,7 @@ export interface useInputOtpValueChangeEvent {
     /**
      * Original browser event.
      */
-    originalEvent: React.FormEvent<HTMLInputElement>;
+    originalEvent: React.SyntheticEvent<HTMLInputElement>;
     /**
      * New value.
      */
@@ -83,22 +83,20 @@ export interface useInputOtpExposes {
      */
     registerText: () => number;
     /**
-     * Returns the input type based on configuration.
-     * @returns {string} The input type ('text' or 'password').
+     * The input type based on configuration ('text' or 'password').
      */
-    inputType: () => string;
+    inputType: string;
     /**
-     * Returns the input mode for mobile keyboards.
-     * @returns {string} The input mode ('numeric' when integerOnly is true, 'text' otherwise).
+     * The input mode for mobile keyboards ('numeric' when integerOnly is true, 'text' otherwise).
      */
-    inputMode: () => string;
+    inputMode: string;
     /**
      * Input event handler.
      * @param event - Form event
      * @param index - Input index
      * @returns void
      */
-    onInput: (event: React.FormEvent<HTMLInputElement>, index: number) => void;
+    onInput: (event: React.SyntheticEvent<HTMLInputElement>, index: number) => void;
     /**
      * Click event handler.
      * @param event - Mouse event

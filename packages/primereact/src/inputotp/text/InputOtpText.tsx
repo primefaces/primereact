@@ -28,14 +28,14 @@ export const InputOtpText = withComponent({
             restProps,
             {
                 value: inputotp?.state.tokens[index] ?? '',
-                type: inputotp?.inputType(),
-                inputMode: inputotp?.inputMode(),
+                type: inputotp?.inputType,
+                inputMode: inputotp?.inputMode,
                 className: inputotp?.cx('text'),
                 size: inputotp?.props.size ?? props.size,
                 variant: inputotp?.props.variant ?? props.variant,
                 disabled: inputotp?.props.disabled ?? props.disabled,
                 'data-pc-index': index,
-                onInput: (e: React.FormEvent<HTMLInputElement>) => inputotp?.onInput?.(e, index),
+                onInput: (e: React.SyntheticEvent<HTMLInputElement>) => inputotp?.onInput?.(e, index),
                 onClick: inputotp?.onClick,
                 onKeyDown: inputotp?.onKeyDown,
                 onPaste: inputotp?.onPaste

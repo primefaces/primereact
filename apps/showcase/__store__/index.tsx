@@ -1031,9 +1031,17 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/inputotp/basic-demo')),
                 'filePath': 'demo/styled/inputotp/basic-demo.tsx',
             },
+            'controlled-demo': {
+                'component': React.lazy(() => import('demo/styled/inputotp/controlled-demo')),
+                'filePath': 'demo/styled/inputotp/controlled-demo.tsx',
+            },
             'custom-demo': {
                 'component': React.lazy(() => import('demo/styled/inputotp/custom-demo')),
                 'filePath': 'demo/styled/inputotp/custom-demo.tsx',
+            },
+            'disabled-demo': {
+                'component': React.lazy(() => import('demo/styled/inputotp/disabled-demo')),
+                'filePath': 'demo/styled/inputotp/disabled-demo.tsx',
             },
             'filled-demo': {
                 'component': React.lazy(() => import('demo/styled/inputotp/filled-demo')),

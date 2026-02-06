@@ -1,5 +1,5 @@
 import { withHeadless } from '@primereact/core/headless';
-import { useInputOtpProps } from '@primereact/types/shared/inputotp';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { isTouchDevice } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useInputOtp.props';
@@ -8,12 +8,18 @@ export const useInputOtp = withHeadless({
     name: 'useInputOtp',
     defaultProps,
     setup({ props }) {
-        const [valueState, setValueState] = React.useState<useInputOtpProps['value']>(props.value ?? props.defaultValue ?? null);
-        const [tokens, setTokens] = React.useState<string[]>(() => {
-            const initialValue = props.value ?? props.defaultValue ?? '';
-
-            return initialValue && typeof initialValue === 'string' ? initialValue.split('') : [];
+        const [valueState, setValueState] = useControlledState({
+            value: props.value,
+            defaultValue: props.defaultValue,
+            onChange: props.onValueChange
         });
+
+        const tokens = React.useMemo(() => {
+            const val = valueState ?? '';
+
+            return typeof val === 'string' && val ? val.split('') : [];
+        }, [valueState]);
+
         const textCounter = React.useRef(0);
 
         const state = {
@@ -29,33 +35,35 @@ export const useInputOtp = withHeadless({
             return index;
         }, []);
 
-        const inputMode = React.useCallback(() => {
+        const isDigit = (key: string) => key >= '0' && key <= '9';
+
+        const inputMode = React.useMemo(() => {
             return props.integerOnly ? 'numeric' : 'text';
         }, [props.integerOnly]);
 
-        const inputType = React.useCallback(() => {
+        const inputType = React.useMemo(() => {
             return props.mask ? 'password' : 'text';
-        }, [props.maks]);
+        }, [props.mask]);
 
-        const updateValue = (event: React.FormEvent<HTMLInputElement> | React.ClipboardEvent<HTMLInputElement>) => {
-            const newValue = tokens.join('');
+        const updateTokens = (event: React.SyntheticEvent<HTMLInputElement>, currentTokens: string[]) => {
+            const newValue = currentTokens.join('');
 
-            setValueState(newValue);
-
-            props.onValueChange?.({
-                originalEvent: event,
-                value: newValue
-            });
+            setValueState([
+                newValue,
+                {
+                    originalEvent: event,
+                    value: newValue
+                }
+            ]);
         };
 
-        const onInput = (event: React.FormEvent<HTMLInputElement>, index: number) => {
+        const onInput = (event: React.SyntheticEvent<HTMLInputElement>, index: number) => {
             const inputEvent = event.nativeEvent as InputEvent;
             const target = event.target as HTMLInputElement;
             const currentTokens = [...tokens];
 
             currentTokens[index] = target.value;
-            setTokens(currentTokens);
-            updateValue(event);
+            updateTokens(event, currentTokens);
 
             if (inputEvent.inputType === 'deleteContentBackward') {
                 moveToPrev(event);
@@ -64,7 +72,7 @@ export const useInputOtp = withHeadless({
             }
         };
 
-        const moveToPrev = (event: React.FormEvent<HTMLInputElement>) => {
+        const moveToPrev = (event: React.SyntheticEvent<HTMLInputElement>) => {
             const prevInput = findPrevInput(event.target as HTMLInputElement);
 
             if (prevInput) {
@@ -73,7 +81,7 @@ export const useInputOtp = withHeadless({
             }
         };
 
-        const moveToNext = (event: React.FormEvent<HTMLInputElement>) => {
+        const moveToNext = (event: React.SyntheticEvent<HTMLInputElement>) => {
             const nextInput = findNextInput(event.target as HTMLInputElement);
 
             if (nextInput) {
@@ -140,7 +148,7 @@ export const useInputOtp = withHeadless({
                     break;
 
                 default:
-                    if ((props.integerOnly && !(event.code !== 'Space' && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= textCounter.current && event.code !== 'Delete')) {
+                    if ((props.integerOnly && (event.code === 'Space' || !isDigit(event.key))) || (tokens.length >= textCounter.current && event.code !== 'Delete')) {
                         event.preventDefault();
                     }
 
@@ -157,8 +165,7 @@ export const useInputOtp = withHeadless({
                 if (!props.integerOnly || !isNaN(Number(pastedCode))) {
                     const newTokens = pastedCode.split('');
 
-                    setTokens(newTokens);
-                    updateValue(event);
+                    updateTokens(event, newTokens);
                 }
             }
 

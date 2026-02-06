@@ -13,12 +13,18 @@ import { InputOtp } from '@primereact/ui/inputotp';
 ```
 
 ```tsx
-<InputOtp>
+<InputOtp.Root>
     <InputOtp.Text />
-</InputOtp>
+</InputOtp.Root>
 ```
 
 ## Examples
+
+### Controlled
+
+InputOtp can be used as a controlled component with `value` and `onValueChange` properties.
+
+<DocDemoViewer name="inputotp:controlled-demo" />
 
 ### Mask
 
@@ -43,6 +49,12 @@ Specify the `variant` property as `filled` to display the component with a highe
 InputOtp provides `small` and `large` sizes as alternatives to the base.
 
 <DocDemoViewer name="inputotp:sizes-demo" />
+
+### Disabled
+
+When `disabled` is present, the component becomes non-interactive.
+
+<DocDemoViewer name="inputotp:disabled-demo" />
 
 ### Custom
 

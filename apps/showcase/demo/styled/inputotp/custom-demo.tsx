@@ -4,14 +4,12 @@ export default function CustomDemo() {
     return (
         <div className="flex justify-center">
             <InputOtp.Root>
-                {Array.from({ length: 4 }, (_, index) => {
-                    return (
-                        <InputOtp.Text
-                            key={index}
-                            className="w-[40px] text-4xl appearance-none shadow-none text-center transition-all duration-200 bg-transparent border-0 border-b-2 border-b-[var(--p-inputtext-border-color)] rounded-none focus:outline-none focus:border-b-[var(--p-primary-color)]"
-                        />
-                    );
-                })}
+                {Array.from({ length: 4 }, (_, index) => (
+                    <InputOtp.Text
+                        key={index}
+                        className="w-12 h-12 text-3xl text-center bg-transparent border-0 border-b-2 border-surface-300 dark:border-surface-600 rounded-none outline-none transition-colors duration-200 focus:border-primary"
+                    />
+                ))}
             </InputOtp.Root>
         </div>
     );
