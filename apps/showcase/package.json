@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@/components": "workspace:*",
+        "@primeicons/react": "catalog:",
         "@primereact/hooks": "workspace:*",
         "@primereact/icons": "workspace:*",
         "@primeuix/themes": "catalog:",

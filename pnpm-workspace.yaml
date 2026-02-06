@@ -10,8 +10,9 @@ catalog:
   '@primeuix/motion': ^0.0.11
   '@primeuix/styles': ^3.0.0-alpha.1
   '@primeuix/themes': ^3.0.0-alpha.1
+  '@primeicons/react': ^8.0.0-alpha.3
   'tailwindcss-primeui': ^0.5.1
-  'primeicons': ^7.0.0
+  'primeicons': ^8.0.0-alpha.3
 
 catalogs:
   react19:
