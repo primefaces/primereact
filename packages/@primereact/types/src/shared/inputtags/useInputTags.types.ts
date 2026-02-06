@@ -231,11 +231,15 @@ export interface useInputTagsState {
     /**
      * Whether the overlay is open.
      */
-    opened: boolean;
+    opened: boolean | undefined;
     /**
      * Whether a search is in progress.
      */
     searching: boolean;
+    /**
+     * Whether the input is focused.
+     */
+    focused: boolean;
     /**
      * The index of the currently focused option. -1 if no option is focused.
      */

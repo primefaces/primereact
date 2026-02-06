@@ -1073,6 +1073,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/inputtags/disabled-demo')),
                 'filePath': 'demo/styled/inputtags/disabled-demo.tsx',
             },
+            'events-demo': {
+                'component': React.lazy(() => import('demo/styled/inputtags/events-demo')),
+                'filePath': 'demo/styled/inputtags/events-demo.tsx',
+            },
             'filled-demo': {
                 'component': React.lazy(() => import('demo/styled/inputtags/filled-demo')),
                 'filePath': 'demo/styled/inputtags/filled-demo.tsx',
@@ -1092,6 +1096,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'item-demo': {
                 'component': React.lazy(() => import('demo/styled/inputtags/item-demo')),
                 'filePath': 'demo/styled/inputtags/item-demo.tsx',
+            },
+            'max-demo': {
+                'component': React.lazy(() => import('demo/styled/inputtags/max-demo')),
+                'filePath': 'demo/styled/inputtags/max-demo.tsx',
             },
             'typeahead-demo': {
                 'component': React.lazy(() => import('demo/styled/inputtags/typeahead-demo')),

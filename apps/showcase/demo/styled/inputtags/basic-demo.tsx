@@ -1,10 +1,13 @@
 'use client';
-import { InputTagsRootInstance } from '@primereact/types/shared/inputtags';
+import { InputTagsRootInstance, InputTagsRootValueChangeEvent } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
+import * as React from 'react';
 
 export default function BasicDemo() {
+    const [tags, setTags] = React.useState<string[]>(['React']);
+
     return (
-        <InputTags.Root>
+        <InputTags.Root value={tags} onValueChange={(e: InputTagsRootValueChangeEvent) => setTags(e.value as string[])}>
             {(instance: InputTagsRootInstance) => {
                 return (
                     <>
@@ -12,7 +15,6 @@ export default function BasicDemo() {
                             <InputTags.Item key={`${value}_${index}`} index={index} />
                         ))}
                         <InputTags.Input />
-                        <InputTags.HiddenInput />
                     </>
                 );
             }}

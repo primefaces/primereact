@@ -4,7 +4,7 @@ import { InputTags } from '@primereact/ui/inputtags';
 
 export default function DisabledDemo() {
     return (
-        <InputTags.Root disabled>
+        <InputTags.Root defaultValue={['React']} disabled>
             {(instance: InputTagsRootInstance) => {
                 return (
                     <>

@@ -44,6 +44,20 @@ export const InputTagsInput = withComponent({
             ptmi('root')
         );
 
-        return <Component ref={inputtags?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />;
+        const hiddenInputProps = mergeProps(
+            {
+                value: inputtags?.state.value.join(', '),
+                type: 'hidden',
+                name: inputtags?.props.name
+            },
+            inputtags?.ptm('hiddenInput')
+        );
+
+        return (
+            <>
+                <Component ref={inputtags?.inputRef} as={as} instance={instance} attrs={rootProps} children={props.children} />
+                <input {...hiddenInputProps} />
+            </>
+        );
     }
 });

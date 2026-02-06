@@ -1,4 +1,3 @@
-export { InputTagsHiddenInput as HiddenInput } from './hiddeninput';
 export { InputTagsInput as Input } from './input';
 export { InputTagsItem as Item } from './item';
 export { InputTagsList as List } from './list';

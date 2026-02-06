@@ -1,4 +1,4 @@
-export { InputTagsHiddenInput as HiddenInput, InputTagsPortal as Portal } from 'primereact/inputtags';
+export { InputTagsPortal as Portal } from 'primereact/inputtags';
 export { UIInputTagsInput as Input } from './input';
 export { UIInputTagsItem as Item } from './item';
 export { UIInputTagsList as List } from './list';

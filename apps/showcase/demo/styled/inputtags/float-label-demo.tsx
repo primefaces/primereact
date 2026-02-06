@@ -22,7 +22,7 @@ export default function FloatLabelDemo() {
                     );
                 }}
             </InputTags.Root>
-            <Label htmlFor="over_label">Over Label</Label>
+            <Label htmlFor="over_label">Technologies</Label>
         </FloatLabel>
     );
 }

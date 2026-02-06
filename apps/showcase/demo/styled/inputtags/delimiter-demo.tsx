@@ -2,7 +2,7 @@
 import { InputTagsRootInstance } from '@primereact/types/shared/inputtags';
 import { InputTags } from '@primereact/ui/inputtags';
 
-export default function BasicDemo() {
+export default function DelimiterDemo() {
     return (
         <InputTags.Root delimiter=",">
             {(instance: InputTagsRootInstance) => {

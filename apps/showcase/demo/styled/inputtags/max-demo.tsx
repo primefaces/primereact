@@ -3,11 +3,11 @@ import { InputTagsRootInstance, InputTagsRootValueChangeEvent } from '@primereac
 import { InputTags } from '@primereact/ui/inputtags';
 import * as React from 'react';
 
-export default function FilledDemo() {
+export default function MaxDemo() {
     const [tags, setTags] = React.useState<string[]>(['React']);
 
     return (
-        <InputTags.Root value={tags} onValueChange={(e: InputTagsRootValueChangeEvent) => setTags(e.value as string[])} variant="filled">
+        <InputTags.Root value={tags} onValueChange={(e: InputTagsRootValueChangeEvent) => setTags(e.value as string[])} max={5}>
             {(instance: InputTagsRootInstance) => {
                 return (
                     <>

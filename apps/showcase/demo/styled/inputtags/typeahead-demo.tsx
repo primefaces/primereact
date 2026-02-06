@@ -22,7 +22,9 @@ const techStack: TechCategory[] = [
             { label: 'React', value: 'react' },
             { label: 'Vue', value: 'vue' },
             { label: 'Angular', value: 'angular' },
-            { label: 'Svelte', value: 'svelte' }
+            { label: 'Svelte', value: 'svelte' },
+            { label: 'Next.js', value: 'nextjs' },
+            { label: 'Nuxt', value: 'nuxt' }
         ]
     },
     {
@@ -32,7 +34,8 @@ const techStack: TechCategory[] = [
             { label: 'Node.js', value: 'nodejs' },
             { label: 'Python', value: 'python' },
             { label: 'Java', value: 'java' },
-            { label: 'Go', value: 'go' }
+            { label: 'Go', value: 'go' },
+            { label: 'Rust', value: 'rust' }
         ]
     },
     {
@@ -42,7 +45,8 @@ const techStack: TechCategory[] = [
             { label: 'PostgreSQL', value: 'postgresql' },
             { label: 'MongoDB', value: 'mongodb' },
             { label: 'Redis', value: 'redis' },
-            { label: 'MySQL', value: 'mysql' }
+            { label: 'MySQL', value: 'mysql' },
+            { label: 'SQLite', value: 'sqlite' }
         ]
     }
 ];
@@ -74,11 +78,11 @@ export default function TypeaheadDemo() {
     return (
         <InputTags.Root
             value={skills}
-            onValueChange={(e: InputTagsRootValueChangeEvent) => setSkills(e.value ?? [])}
             options={filteredTech}
             optionLabel="label"
             optionGroupLabel="label"
             optionGroupChildren="items"
+            onValueChange={(e: InputTagsRootValueChangeEvent) => setSkills(e.value ?? [])}
             onComplete={(e: useInputTagsCompleteEvent) => setQuery(e.query)}
         >
             {(instance: InputTagsRootInstance) => (
@@ -87,7 +91,6 @@ export default function TypeaheadDemo() {
                         <InputTags.Item key={`${skill}_${index}`} index={index} />
                     ))}
                     <InputTags.Input placeholder="Search technologies..." />
-                    <InputTags.HiddenInput />
 
                     <InputTags.Portal>
                         <InputTags.List>
