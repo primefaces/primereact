@@ -3,6 +3,7 @@ export * as Dialog from './Dialog.parts';
 export * as DialogProps from './Dialog.props';
 
 // Named runtime exports to maximize tree-shaking
+export { defaultBackdropProps, DialogBackdrop } from './backdrop';
 export { defaultCloseProps, DialogClose } from './close';
 export { defaultContentProps, DialogContent } from './content';
 export { defaultFooterProps, DialogFooter } from './footer';

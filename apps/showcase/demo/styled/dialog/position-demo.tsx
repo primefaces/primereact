@@ -63,6 +63,7 @@ export default function PositionDemo() {
                 position={position}
                 draggable={false}
             >
+                <Dialog.Backdrop />
                 <Dialog.Portal style={{ width: '25rem' }}>
                     <Dialog.Header>
                         <Dialog.Title>Edit Profile</Dialog.Title>

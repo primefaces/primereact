@@ -2,29 +2,104 @@ import { createStyles } from '@primereact/styles/utils';
 import type { DialogRootInstance } from '@primereact/types/shared/dialog';
 import { style } from '@primeuix/styles/dialog';
 
+const _style = /*css*/ `
+${style}
+
+/* For PrimeReact */
+.p-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.p-dialog-backdrop.p-overlay-mask {
+    pointer-events: auto;
+}
+
+.p-dialog {
+    position: fixed;
+    top: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.p-dialog[data-position='left'] {
+    inset-inline-start: 1rem;
+    translate: 0 -50%;
+}
+
+.p-dialog[data-position='right'] {
+    inset-inline-start: auto;
+    inset-inline-end: 1rem;
+    translate: 0 -50%;
+}
+
+.p-dialog[data-position='top'] {
+    top: 1rem;
+    translate: -50% 0;
+}
+
+.p-dialog[data-position='bottom'] {
+    top: auto;
+    bottom: 1rem;
+    translate: -50% 0;
+}
+
+.p-dialog[data-position='topleft'] {
+    top: 1rem;
+    inset-inline-start: 1rem;
+    translate: none;
+}
+
+.p-dialog[data-position='topright'] {
+    top: 1rem;
+    inset-inline-start: auto;
+    inset-inline-end: 1rem;
+    translate: none;
+}
+
+.p-dialog[data-position='bottomleft'] {
+    top: auto;
+    bottom: 1rem;
+    inset-inline-start: 1rem;
+    translate: none;
+}
+
+.p-dialog[data-position='bottomright'] {
+    top: auto;
+    bottom: 1rem;
+    inset-inline-start: auto;
+    inset-inline-end: 1rem;
+    translate: none;
+}
+
+.p-dialog-maximized {
+    translate: none !important;
+}
+
+`;
+
+//TODO: rename for backdrop
 export const styles = createStyles<DialogRootInstance>({
     name: 'dialog',
-    style,
+    style: _style,
     classes: {
-        mask: ({ props, state }) => {
+        backdrop: 'p-dialog-backdrop p-overlay-mask',
+        root: ({ props, state }) => {
             const positions = ['left', 'right', 'top', 'topleft', 'topright', 'bottom', 'bottomleft', 'bottomright'];
             const pos = positions.find((item) => item === props.position);
 
             return [
-                'p-dialog-mask',
+                'p-dialog p-component',
                 {
-                    'p-overlay-mask': props.modal,
-                    'p-dialog-open': state.opened
+                    'p-dialog-maximized': state.maximized
                 },
                 pos ? `p-dialog-${pos}` : ''
             ];
         },
-        root: ({ state }) => [
-            'p-dialog p-component',
-            {
-                'p-dialog-maximized': state.maximized
-            }
-        ],
         trigger: 'p-dialog-trigger-button',
         header: 'p-dialog-header',
         title: 'p-dialog-title',
@@ -33,25 +108,5 @@ export const styles = createStyles<DialogRootInstance>({
         close: 'p-dialog-close-button',
         content: 'p-dialog-content',
         footer: 'p-dialog-footer'
-    },
-    inlineStyles: {
-        mask: ({ props }) => ({
-            position: 'fixed',
-            height: '100%',
-            width: '100%',
-            left: 0,
-            top: 0,
-            display: 'flex',
-            justifyContent:
-                props.position === 'left' || props.position === 'topleft' || props.position === 'bottomleft' ? 'flex-start' : props.position === 'right' || props.position === 'topright' || props.position === 'bottomright' ? 'flex-end' : 'center',
-            alignItems:
-                props.position === 'top' || props.position === 'topleft' || props.position === 'topright' ? 'flex-start' : props.position === 'bottom' || props.position === 'bottomleft' || props.position === 'bottomright' ? 'flex-end' : 'center',
-            pointerEvents: props.modal ? 'auto' : 'none'
-        }),
-        root: {
-            display: 'flex',
-            flexDirection: 'column',
-            pointerEvents: 'auto'
-        }
     }
 });

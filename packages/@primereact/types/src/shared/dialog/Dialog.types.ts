@@ -14,9 +14,9 @@
  */
 export const DialogClassNames = {
     /**
-     * Class name of the mask element
+     * Class name of the backdrop element
      */
-    mask: 'p-dialog-mask',
+    backdrop: 'p-dialog-backdrop',
     /**
      * Class name of the root element
      */

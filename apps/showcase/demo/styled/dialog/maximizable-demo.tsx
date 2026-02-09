@@ -9,6 +9,7 @@ export default function MaximizableDemo() {
         <div className="flex justify-center">
             <Dialog.Root modal>
                 <Dialog.Trigger>Show</Dialog.Trigger>
+                <Dialog.Backdrop />
                 <Dialog.Portal style={{ width: '50rem' }}>
                     <Dialog.Header>
                         <Dialog.Title>Article Preview</Dialog.Title>

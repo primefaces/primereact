@@ -1,3 +1,4 @@
+export { defaultBackdropProps } from './backdrop';
 export { defaultCloseProps } from './close';
 export { defaultContentProps } from './content';
 export { defaultFooterProps } from './footer';

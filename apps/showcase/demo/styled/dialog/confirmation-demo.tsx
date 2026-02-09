@@ -9,6 +9,7 @@ export default function ConfirmationDemo() {
         <div className="flex justify-center">
             <Dialog.Root modal>
                 <Dialog.Trigger severity="danger">Delete Account</Dialog.Trigger>
+                <Dialog.Backdrop />
                 <Dialog.Portal style={{ width: '26rem' }}>
                     <Dialog.Header>
                         <Dialog.Title>Confirm Deletion</Dialog.Title>

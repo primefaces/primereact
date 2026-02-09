@@ -6,7 +6,8 @@ export default function DialogPT() {
             <Dialog.Root />
             <div
                 className="p-dialog-mask !relative"
-                data-pc-section="mask"
+                data-pc-section="root"
+                data-pc-name="dialogbackdrop"
                 style={{
                     position: 'fixed',
                     height: '100%',

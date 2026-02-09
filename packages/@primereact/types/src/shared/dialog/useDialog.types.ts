@@ -53,10 +53,6 @@ export interface useDialogProps {
      */
     minY?: number | undefined;
     /**
-     * Defines if background should be blocked when dialog is displayed.
-     */
-    modal?: boolean | undefined;
-    /**
      * Specifies if clicking the modal background should hide the dialog.
      * @default false
      */

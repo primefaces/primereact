@@ -2,6 +2,7 @@ export * from './Dialog.types';
 export * from './useDialog.types';
 
 // parts
+export * from './DialogBackdrop.types';
 export * from './DialogClose.types';
 export * from './DialogContent.types';
 export * from './DialogFooter.types';

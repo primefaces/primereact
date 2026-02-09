@@ -26,9 +26,9 @@ export interface DialogRootPassThrough {
      */
     root?: DialogRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Used to pass attributes to the mask's DOM element.
+     * Used to pass attributes to the backdrop's DOM element.
      */
-    mask?: DialogRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    backdrop?: DialogRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the trigger's DOM element.
      */

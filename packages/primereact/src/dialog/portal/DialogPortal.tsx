@@ -18,22 +18,6 @@ export const DialogPortal = withComponent({
     render(instance) {
         const { dialog, props, ptmi, inProps } = instance;
 
-        const maskProps = mergeProps(
-            {
-                visible: dialog?.state.opened,
-                className: dialog?.cx('mask'),
-                style: dialog?.sx('mask'),
-                motionProps: {
-                    name: 'p-overlay-mask',
-                    appear: true,
-                    onEnter: dialog?.onMaskEnter
-                },
-                onMouseDown: dialog?.onMaskMouseDown,
-                onMouseUp: dialog?.onMaskMouseUp
-            },
-            dialog?.ptm('mask')
-        );
-
         const rootProps = mergeProps(
             {
                 id: dialog?.id,
@@ -50,7 +34,6 @@ export const DialogPortal = withComponent({
                 },
                 role: 'dialog',
                 'aria-labelledby': dialog?.inProps?.ariaLabelledby ?? dialog?.id + '_header',
-                'aria-modal': dialog?.props.modal ? '' : undefined,
                 'data-open': dialog?.state.opened ? '' : undefined,
                 'data-position': dialog?.props.position
             },
@@ -64,10 +47,8 @@ export const DialogPortal = withComponent({
         const portalProps = mergeProps(dialog?.ptm('portal'), ptmi('root'));
 
         const portalElement = (
-            <Backdrop {...maskProps} ref={dialog?.maskRef}>
-                <Backdrop {...rootProps} ref={dialog?.rootRef}>
-                    <Component instance={instance} attrs={portalProps} children={props.children} />
-                </Backdrop>
+            <Backdrop {...rootProps} ref={dialog?.rootRef}>
+                <Component instance={instance} attrs={portalProps} children={props.children} />
             </Backdrop>
         );
 

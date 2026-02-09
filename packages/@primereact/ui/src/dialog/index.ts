@@ -2,6 +2,7 @@ export * as Dialog from './UIDialog.parts';
 
 // Named runtime exports to maximize tree-shaking
 export {
+    defaultBackdropProps,
     defaultCloseProps,
     defaultContentProps,
     defaultFooterProps,
@@ -22,6 +23,7 @@ export {
     DialogTitle,
     useDialogContext
 } from 'primereact/dialog';
+export { UIDialogBackdrop as DialogBackdrop } from './backdrop';
 export { UIDialogClose as DialogClose } from './close';
 export { UIDialogMaximizable as DialogMaximizable } from './maximizable';
 export { UIDialogRoot as DialogRoot } from './root';

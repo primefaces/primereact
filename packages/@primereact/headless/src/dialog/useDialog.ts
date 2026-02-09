@@ -37,8 +37,14 @@ export const useDialog = withHeadless({
         }, [props.fullScreen]);
 
         useUnmountEffect(() => {
-            if (props.autoZIndex && maskRef.current) {
-                ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
+            if (props.autoZIndex) {
+                if (maskRef.current) {
+                    ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
+                }
+
+                if (rootRef.current) {
+                    ZIndex.clear(rootRef.current?.elementRef.current as HTMLDivElement);
+                }
             }
         });
 
@@ -65,6 +71,10 @@ export const useDialog = withHeadless({
             target.current = document.activeElement as HTMLElement;
             enableDocumentSettings();
             bindGlobalListeners();
+
+            if (props.autoZIndex && rootRef.current?.elementRef.current) {
+                ZIndex.set('modal', rootRef.current.elementRef.current, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
+            }
         };
 
         const onAfterEnter = () => {
@@ -110,7 +120,7 @@ export const useDialog = withHeadless({
         };
 
         const onMaskMouseUp = () => {
-            if (props.dismissableMask && props.modal && maskRef.current?.elementRef.current === maskMouseDownTarget.current) {
+            if (props.dismissableMask && maskRef.current?.elementRef.current === maskMouseDownTarget.current) {
                 close();
             }
         };
@@ -120,7 +130,7 @@ export const useDialog = withHeadless({
 
             documentSettingsEnabled.current = true;
 
-            if (props.modal || (!props.modal && props.blockScroll) || maximizedState) {
+            if (props.blockScroll || maximizedState) {
                 blockBodyScroll({ variableName: $dt('scrollbar.width').name });
             }
         };
@@ -130,7 +140,7 @@ export const useDialog = withHeadless({
 
             documentSettingsEnabled.current = false;
 
-            if (props.modal || (!props.modal && props.blockScroll) || maximizedState) {
+            if (props.blockScroll || maximizedState) {
                 unblockBodyScroll({ variableName: $dt('scrollbar.width').name });
             }
         };

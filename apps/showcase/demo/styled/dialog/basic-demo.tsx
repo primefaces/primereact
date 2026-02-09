@@ -12,6 +12,7 @@ export default function BasicDemo() {
         <div className="flex justify-center">
             <Dialog.Root modal>
                 <Dialog.Trigger>Edit Profile</Dialog.Trigger>
+                <Dialog.Backdrop />
                 <Dialog.Portal style={{ width: '28rem' }}>
                     <Dialog.Header>
                         <Dialog.Title>Edit Profile</Dialog.Title>

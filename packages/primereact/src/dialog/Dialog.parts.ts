@@ -1,3 +1,4 @@
+export { DialogBackdrop as Backdrop } from './backdrop';
 export { DialogClose as Close } from './close';
 export { DialogContent as Content } from './content';
 export { DialogFooter as Footer } from './footer';

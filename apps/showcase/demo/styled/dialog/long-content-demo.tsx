@@ -8,6 +8,7 @@ export default function LongContentDemo() {
         <div className="flex justify-center">
             <Dialog.Root modal>
                 <Dialog.Trigger>Terms of Service</Dialog.Trigger>
+                <Dialog.Backdrop />
                 <Dialog.Portal style={{ width: '40rem' }}>
                     <Dialog.Header>
                         <Dialog.Title>Terms of Service</Dialog.Title>

@@ -11,6 +11,7 @@ export default function ResponsiveDemo() {
         <div className="flex justify-center">
             <Dialog.Root modal>
                 <Dialog.Trigger>New Event</Dialog.Trigger>
+                <Dialog.Backdrop />
                 <Dialog.Portal className="w-[90vw] md:w-[75vw] lg:w-[50vw]">
                     <Dialog.Header>
                         <Dialog.Title>Create Event</Dialog.Title>

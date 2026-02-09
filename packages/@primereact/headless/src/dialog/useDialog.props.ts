@@ -7,7 +7,6 @@ export const defaultProps: useDialogProps = {
     keepInViewport: true,
     minX: 0,
     minY: 0,
-    modal: undefined,
     dismissableMask: false,
     closeOnEscape: true,
     blockScroll: false,

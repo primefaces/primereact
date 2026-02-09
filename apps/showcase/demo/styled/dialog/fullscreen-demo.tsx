@@ -9,6 +9,7 @@ export default function FullScreenDemo() {
         <div className="flex justify-center">
             <Dialog.Root modal fullScreen>
                 <Dialog.Trigger>View Gallery</Dialog.Trigger>
+                <Dialog.Backdrop />
                 <Dialog.Portal>
                     <Dialog.Header>
                         <Dialog.Title>Photo Gallery</Dialog.Title>
