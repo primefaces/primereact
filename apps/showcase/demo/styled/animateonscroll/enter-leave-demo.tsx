@@ -1,3 +1,6 @@
+import { ArrowDown, ArrowsV, Building, Database, Wifi } from '@primeicons/react';
+import { User } from '@primeicons/react/user';
+import { Users } from '@primeicons/react/users';
 import { AnimateOnScroll } from '@primereact/ui/animateonscroll';
 import { Avatar } from '@primereact/ui/avatar';
 
@@ -7,7 +10,7 @@ export default function EnterLeaveDemo() {
             <div className="flex flex-col items-center gap-4">
                 <div className="text-2xl font-medium">Scroll Down</div>
                 <div className="animate-bounce h-8 w-8 bg-primary text-primary-contrast rounded-full inline-flex items-center justify-center">
-                    <i className="pi pi-arrow-down" />
+                    <ArrowDown />
                 </div>
             </div>
             <div className="h-[30rem]"></div>
@@ -18,7 +21,7 @@ export default function EnterLeaveDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
                     <div className="rounded-full bg-primary text-primary-contrast w-12 h-12 flex items-center justify-center">
-                        <i className="pi pi-user !text-2xl"></i>
+                        <User className="!text-2xl"></User>
                     </div>
                     <span className="text-2xl font-bold">Individual</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
@@ -29,7 +32,7 @@ export default function EnterLeaveDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
                     <div className="rounded-full bg-primary text-primary-contrast w-12 h-12 flex items-center justify-center">
-                        <i className="pi pi-users !text-2xl"></i>
+                        <Users className="!text-2xl"></Users>
                     </div>
                     <span className="text-2xl font-bold">Team</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
@@ -39,7 +42,7 @@ export default function EnterLeaveDemo() {
                     enterClassName="animate-enter fade-in-10 slide-in-from-r-8 animate-duration-1000"
                 >
                     <div className="rounded-full bg-primary text-primary-contrast w-12 h-12 flex items-center justify-center">
-                        <i className="pi pi-building !text-2xl"></i>
+                        <Building className="!text-2xl"></Building>
                     </div>
                     <span className="text-2xl font-bold">Enterprise</span>
                     <span className="text-muted-color text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
@@ -119,7 +122,7 @@ export default function EnterLeaveDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
                     <div className="rounded-full border-2 border-white w-12 h-12 flex items-center justify-center">
-                        <i className="pi pi-wifi !text-2xl"></i>
+                        <Wifi className="text-2xl!" />
                     </div>
                     <span className="text-2xl font-bold">Bandwidth</span>
                     <span className="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
@@ -130,7 +133,7 @@ export default function EnterLeaveDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-1000"
                 >
                     <div className="rounded-full border-2 border-white w-12 h-12 flex items-center justify-center">
-                        <i className="pi pi-database !text-2xl"></i>
+                        <Database className="text-2xl!" />
                     </div>
                     <span className="text-2xl font-bold">Storage</span>
                     <span className="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
@@ -142,7 +145,7 @@ export default function EnterLeaveDemo() {
                     leaveClassName="animate-leave fade-out-0 animate-duration-100"
                 >
                     <div className="rounded-full border-2 border-white w-12 h-12 flex items-center justify-center">
-                        <i className="pi pi-arrows-v !text-2xl"></i>
+                        <ArrowsV className="text-2xl!" />
                     </div>
                     <span className="text-2xl font-bold">Requests</span>
                     <span className="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>

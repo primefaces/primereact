@@ -1,4 +1,6 @@
 import { Carousel } from '@primereact/ui/carousel';
+import { ChevronLeft } from '@primeicons/react/chevron-left';
+import { ChevronRight } from '@primeicons/react/chevron-right';
 
 function LoopDemo() {
     return (
@@ -17,10 +19,10 @@ function LoopDemo() {
                     <Carousel.Indicators />
                     <div className="flex items-center justify-end gap-2 flex-1">
                         <Carousel.Prev className="w-9 h-9 flex items-center justify-center rounded-full border border-surface bg-surface-0 dark:bg-surface-800 text-surface-500 dark:text-surface-400 hover:opacity-75 cursor-pointer transition-opacity">
-                            <i className="pi pi-chevron-left text-lg"></i>
+                            <ChevronLeft className="text-lg"></ChevronLeft>
                         </Carousel.Prev>
                         <Carousel.Next className="w-9 h-9 flex items-center justify-center rounded-full border border-surface bg-surface-0 dark:bg-surface-800 text-surface-500 dark:text-surface-400 hover:opacity-75 cursor-pointer transition-opacity">
-                            <i className="pi pi-chevron-right text-lg"></i>
+                            <ChevronRight className="text-lg"></ChevronRight>
                         </Carousel.Next>
                     </div>
                 </div>

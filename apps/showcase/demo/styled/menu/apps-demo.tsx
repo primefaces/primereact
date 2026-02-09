@@ -1,4 +1,5 @@
 import { Menu } from '@primereact/ui/menu';
+import { Bars } from '@primeicons/react/bars';
 
 const apps = [
     { label: 'Search', icon: 'pi-search', gradient: 'from-sky-400 to-cyan-500' },
@@ -17,7 +18,7 @@ export default function AppsDemo() {
         <div className="flex justify-center">
             <Menu.Root className="w-116">
                 <Menu.Trigger rounded iconOnly>
-                    <i className="pi pi-bars" />
+                    <Bars />
                 </Menu.Trigger>
 
                 <Menu.Portal>

@@ -1,5 +1,6 @@
-import { CheckIcon } from '@primereact/icons';
 import { Avatar } from '@primereact/ui/avatar';
+import { User } from '@primeicons/react/user';
+import { Check } from '@primeicons/react/check';
 
 export default function LabelDemo() {
     return (
@@ -12,12 +13,12 @@ export default function LabelDemo() {
             </Avatar.Root>
             <Avatar.Root>
                 <Avatar.Fallback>
-                    <CheckIcon className="size-4" />
+                    <Check className="size-4" />
                 </Avatar.Fallback>
             </Avatar.Root>
             <Avatar.Root className="bg-blue-100 dark:bg-blue-950/50 text-blue-500 dark:text-blue-500">
                 <Avatar.Fallback>
-                    <i className="pi pi-user" />
+                    <User />
                 </Avatar.Fallback>
             </Avatar.Root>
         </div>

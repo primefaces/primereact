@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { menu, navigation } from '@/assets/menu/navigation';
 import { usePathname } from 'next/navigation';
 import { TailwindLogoIcon } from '../icons';
+import { Bars } from '@primeicons/react/bars';
+import { Times } from '@primeicons/react/times';
 
 export default function AppMobileMenu() {
     const [open, setOpen] = React.useState(false);
@@ -53,7 +55,7 @@ export default function AppMobileMenu() {
     return (
         <>
             <AppTopbarButton className="xl:hidden flex" onClick={toggleOpen}>
-                {open ? <i className="pi pi-times" /> : <i className="pi pi-bars" />}
+                {open ? <Times /> : <Bars />}
             </AppTopbarButton>
 
             <Portal>
@@ -80,7 +82,7 @@ export default function AppMobileMenu() {
                                             <TailwindLogoIcon className="w-5 h-auto absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 fill-(--text-color) group-data-active:fill-primary!" />
                                         </span>
                                     ) : (
-                                        <i className={`pi ${nav.icon} text-base!`}></i>
+                                        <i className={`pi ${nav.icon} text-base!`} />
                                     )}
                                     {nav.name}
                                 </Link>
@@ -100,7 +102,7 @@ export default function AppMobileMenu() {
                                                 <li key={child.name + j}>
                                                     <Link href={child.href} target={isExternalLink ? '_blank' : ''} className="text-xl font-medium" {...(isActive ? { 'data-active': '' } : {})} onClick={toggleOpen}>
                                                         {child.name}
-                                                        {isExternalLink && <i className="pi pi-arrow-up-right ml-2 text-lg! opacity-50"></i>}
+                                                        {isExternalLink && <i className="pi pi-arrow-up-right ml-2 text-lg! opacity-50" />}
                                                     </Link>
                                                 </li>
                                             );

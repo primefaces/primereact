@@ -4,6 +4,8 @@ import { IftaLabel } from '@primereact/ui/iftalabel';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
+import { Check } from '@primeicons/react/check';
+import { Envelope } from '@primeicons/react/envelope';
 
 export default function IftaLabelDemo() {
     const [value, setValue] = React.useState('');
@@ -13,7 +15,7 @@ export default function IftaLabelDemo() {
             <IftaLabel>
                 <IconField.Root>
                     <IconField.Icon>
-                        <i className="pi pi-envelope" />
+                        <Envelope />
                     </IconField.Icon>
                     <InputText
                         id="email"
@@ -23,7 +25,7 @@ export default function IftaLabelDemo() {
                         variant="filled"
                     />
                     <IconField.Icon>
-                        <i className="pi pi-check" />
+                        <Check />
                     </IconField.Icon>
                 </IconField.Root>
                 <Label htmlFor="email">Email</Label>

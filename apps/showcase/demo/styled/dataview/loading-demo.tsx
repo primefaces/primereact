@@ -1,4 +1,6 @@
 'use client';
+import { Table } from '@primeicons/react';
+import { Bars } from '@primeicons/react/bars';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebuttongroup';
 import { Skeleton } from '@primereact/ui/skeleton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
@@ -79,12 +81,12 @@ export default function LayoutDemo() {
                     >
                         <ToggleButton.Root value="list">
                             <ToggleButton.Indicator>
-                                <i className="pi pi-bars"></i>
+                                <Bars></Bars>
                             </ToggleButton.Indicator>
                         </ToggleButton.Root>
                         <ToggleButton.Root value="grid">
                             <ToggleButton.Indicator>
-                                <i className="pi pi-table"></i>
+                                <Table />
                             </ToggleButton.Indicator>
                         </ToggleButton.Root>
                     </ToggleButtonGroup>

@@ -1,4 +1,5 @@
 import { Compare } from '@primereact/ui/compare';
+import { Code } from '@primeicons/react/code';
 
 export default function HoverDemo() {
     return (
@@ -11,7 +12,7 @@ export default function HoverDemo() {
             </Compare.Item>
             <Compare.Handle>
                 <Compare.Indicator className="group flex items-center justify-center">
-                    <i className="pi pi-code group-data-[orientation=vertical]:rotate-90" />
+                    <Code className="group-data-[orientation=vertical]:rotate-90" />
                 </Compare.Indicator>
             </Compare.Handle>
         </Compare.Root>

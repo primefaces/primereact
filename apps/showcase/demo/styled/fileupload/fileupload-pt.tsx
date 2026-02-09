@@ -3,6 +3,9 @@ import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
 import { Message } from '@primereact/ui/message';
+import { Plus } from '@primeicons/react/plus';
+import { Times } from '@primeicons/react/times';
+import { Upload } from '@primeicons/react/upload';
 
 export default function FileUploadPTDemo() {
     return (
@@ -19,15 +22,15 @@ export default function FileUploadPTDemo() {
                     <>
                         <div className="flex items-center p-5 gap-2">
                             <Button onClick={instance.choose}>
-                                <i className="pi pi-plus" />
+                                <Plus />
                                 Choose
                             </Button>
                             <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.upload}>
-                                <i className="pi pi-upload" />
+                                <Upload />
                                 Upload
                             </Button>
                             <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.clear}>
-                                <i className="pi pi-times" />
+                                <Times />
                                 Cancel
                             </Button>
                         </div>

@@ -1,6 +1,6 @@
-import { CheckIcon } from '@primereact/icons';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { Label } from '@primereact/ui/label';
+import { Check } from '@primeicons/react/check';
 
 export default function InvalidDemo() {
     return (
@@ -8,7 +8,7 @@ export default function InvalidDemo() {
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="invalid" invalid>
                     <Checkbox.Box>
-                        <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                     </Checkbox.Box>
                 </Checkbox.Root>
                 <Label htmlFor="invalid" className="text-red-500 dark:text-red-400">

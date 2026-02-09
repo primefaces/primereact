@@ -2,6 +2,9 @@
 import { MenuInstance } from '@primereact/types/shared/menu';
 import { Menu } from '@primereact/ui/menu';
 import * as React from 'react';
+import { File } from '@primeicons/react/file';
+import { Github } from '@primeicons/react/github';
+import { Refresh } from '@primeicons/react/refresh';
 
 export default function MenubarDemo() {
     const menuRefs = React.useRef<Array<MenuInstance | null>>([]);
@@ -79,7 +82,7 @@ export default function MenubarDemo() {
                     <Menu.Portal>
                         <Menu.List>
                             <Menu.Item onClick={handleItemClick}>
-                                <i className="pi pi-file" />
+                                <File />
                                 New Document
                                 <span className="ml-auto text-xs opacity-60">⌘ N</span>
                             </Menu.Item>
@@ -150,7 +153,7 @@ export default function MenubarDemo() {
                                 <span className="ml-auto text-xs opacity-60">⌘ C</span>
                             </Menu.Item>
                             <Menu.Item onClick={handleItemClick}>
-                                <i className="pi pi-file" />
+                                <File />
                                 Paste
                                 <span className="ml-auto text-xs opacity-60">⌘ V</span>
                             </Menu.Item>
@@ -185,7 +188,7 @@ export default function MenubarDemo() {
                                 <span className="ml-auto text-xs opacity-60">⌘ -</span>
                             </Menu.Item>
                             <Menu.Item onClick={handleItemClick}>
-                                <i className="pi pi-refresh" />
+                                <Refresh />
                                 Reset Zoom
                                 <span className="ml-auto text-xs opacity-60">⌘ 0</span>
                             </Menu.Item>
@@ -222,7 +225,7 @@ export default function MenubarDemo() {
                                 Documentation
                             </Menu.Item>
                             <Menu.Item onClick={handleItemClick}>
-                                <i className="pi pi-github" />
+                                <Github />
                                 View on GitHub
                             </Menu.Item>
                             <Menu.Item onClick={handleItemClick}>

@@ -1,5 +1,9 @@
 'use client';
-import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon } from '@primereact/icons';
+import { EllipsisH } from '@primeicons/react';
+import { AngleDoubleLeft } from '@primeicons/react/angle-double-left';
+import { AngleDoubleRight } from '@primeicons/react/angle-double-right';
+import { AngleLeft } from '@primeicons/react/angle-left';
+import { AngleRight } from '@primeicons/react/angle-right';
 import { PaginatorPagesInstance } from '@primereact/types/shared/paginator';
 import { Paginator } from '@primereact/ui/paginator';
 
@@ -9,10 +13,10 @@ function SiblingsDemo() {
             <Paginator.Root total={100} itemsPerPage={5} page={6} siblings={2}>
                 <Paginator.Content>
                     <Paginator.First>
-                        <AngleDoubleLeftIcon />
+                        <AngleDoubleLeft />
                     </Paginator.First>
                     <Paginator.Prev>
-                        <AngleLeftIcon />
+                        <AngleLeft />
                     </Paginator.Prev>
                     <Paginator.Pages>
                         {({ paginator }: PaginatorPagesInstance) =>
@@ -21,17 +25,17 @@ function SiblingsDemo() {
                                     <Paginator.Page key={index} value={page.value} />
                                 ) : (
                                     <Paginator.Ellipsis key={index}>
-                                        <i className="pi pi-ellipsis-h" />
+                                        <EllipsisH />
                                     </Paginator.Ellipsis>
                                 )
                             )
                         }
                     </Paginator.Pages>
                     <Paginator.Next>
-                        <AngleRightIcon />
+                        <AngleRight />
                     </Paginator.Next>
                     <Paginator.Last>
-                        <AngleDoubleRightIcon />
+                        <AngleDoubleRight />
                     </Paginator.Last>
                 </Paginator.Content>
             </Paginator.Root>

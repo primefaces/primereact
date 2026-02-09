@@ -1,9 +1,9 @@
 'use client';
+import { Spinner } from '@primeicons/react/spinner';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
-import * as React from 'react';
 import { InputGroup } from '@primereact/ui/inputgroup';
-import { SpinnerIcon } from '@primereact/icons';
+import * as React from 'react';
 
 export default function BasicDemo() {
     const [items, setItems] = React.useState<string[]>([]);
@@ -18,7 +18,7 @@ export default function BasicDemo() {
                 <InputGroup.Root>
                     <AutoComplete.Input />
                     <InputGroup.Addon>
-                        <SpinnerIcon spin />
+                        <Spinner className="animate-spin" />
                     </InputGroup.Addon>
                 </InputGroup.Root>
 

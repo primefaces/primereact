@@ -1,9 +1,12 @@
 'use client';
-import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon } from '@primereact/icons';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { InputText } from '@primereact/ui/inputtext';
 import { Paginator } from '@primereact/ui/paginator';
 import React from 'react';
+import { AngleDoubleLeft } from '@primeicons/react/angle-double-left';
+import { AngleDoubleRight } from '@primeicons/react/angle-double-right';
+import { AngleLeft } from '@primeicons/react/angle-left';
+import { AngleRight } from '@primeicons/react/angle-right';
 
 function WithInputDemo() {
     const [page, setPage] = React.useState(1);
@@ -24,10 +27,10 @@ function WithInputDemo() {
             >
                 <Paginator.Content>
                     <Paginator.First>
-                        <AngleDoubleLeftIcon />
+                        <AngleDoubleLeft />
                     </Paginator.First>
                     <Paginator.Prev>
-                        <AngleLeftIcon />
+                        <AngleLeft />
                     </Paginator.Prev>
                     <div className="flex items-center gap-2">
                         <InputText
@@ -41,10 +44,10 @@ function WithInputDemo() {
                         <span className="flex-1 whitespace-nowrap text-sm">of {maxPage}</span>
                     </div>
                     <Paginator.Next>
-                        <AngleRightIcon />
+                        <AngleRight />
                     </Paginator.Next>
                     <Paginator.Last>
-                        <AngleDoubleRightIcon />
+                        <AngleDoubleRight />
                     </Paginator.Last>
                 </Paginator.Content>
             </Paginator.Root>

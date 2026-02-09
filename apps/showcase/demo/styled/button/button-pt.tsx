@@ -1,10 +1,11 @@
 import { Badge } from '@primereact/ui/badge';
 import { Button } from '@primereact/ui/button';
+import { User } from '@primeicons/react/user';
 
 export default function ButtonPT() {
     return (
         <Button severity="secondary">
-            <i className="pi pi-user" />
+            <User />
             Profile
             <Badge severity="contrast" shape="circle">
                 2

@@ -1,3 +1,7 @@
+import { Clock, InfoCircle } from '@primeicons/react';
+import { Check } from '@primeicons/react/check';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { TimesCircle } from '@primeicons/react/times-circle';
 import { Tag } from '@primereact/ui/tag';
 
 export default function BasicDemo() {
@@ -6,7 +10,7 @@ export default function BasicDemo() {
             <Tag severity="secondary">Draft</Tag>
 
             <Tag severity="info">
-                <i className="pi pi-info-circle" />
+                <InfoCircle />
                 Info
             </Tag>
 
@@ -15,12 +19,12 @@ export default function BasicDemo() {
             </Tag>
 
             <Tag severity="warn">
-                <i className="pi pi-exclamation-triangle" />
+                <ExclamationTriangle />
                 Attention
             </Tag>
 
             <Tag severity="danger" rounded>
-                <i className="pi pi-times-circle" />
+                <TimesCircle />
                 Error
             </Tag>
 
@@ -33,12 +37,12 @@ export default function BasicDemo() {
             </Tag>
 
             <Tag severity="warn" rounded>
-                <i className="pi pi-clock" />
+                <Clock />
                 Pending
             </Tag>
 
             <Tag severity="success">
-                <i className="pi pi-check" />
+                <Check />
                 Verified
             </Tag>
         </div>

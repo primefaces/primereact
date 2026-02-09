@@ -1,4 +1,6 @@
 'use client';
+import { ArrowLeft } from '@primeicons/react/arrow-left';
+import { ArrowRight } from '@primeicons/react/arrow-right';
 import { StepperPanelInstance } from '@primereact/types/shared/stepper';
 import { Button } from '@primereact/ui/button';
 import { Stepper } from '@primereact/ui/stepper';
@@ -44,7 +46,7 @@ export default function HorizontalDemo() {
                                     <div className="flex pt-6 justify-end">
                                         <Button onClick={() => stepper?.setActiveStep('2')}>
                                             Next
-                                            <i className="pi pi-arrow-right" />
+                                            <ArrowRight />
                                         </Button>
                                     </div>
                                 </>
@@ -64,12 +66,12 @@ export default function HorizontalDemo() {
                                     </div>
                                     <div className="flex pt-6 justify-between">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep('1')}>
-                                            <i className="pi pi-arrow-left" />
+                                            <ArrowLeft />
                                             Back
                                         </Button>
                                         <Button onClick={() => stepper?.setActiveStep('3')}>
                                             Next
-                                            <i className="pi pi-arrow-right" />
+                                            <ArrowRight />
                                         </Button>
                                     </div>
                                 </>
@@ -89,7 +91,7 @@ export default function HorizontalDemo() {
                                     </div>
                                     <div className="pt-6">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep('2')}>
-                                            <i className="pi pi-arrow-left" />
+                                            <ArrowLeft />
                                             Back
                                         </Button>
                                     </div>

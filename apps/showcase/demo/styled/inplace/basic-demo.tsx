@@ -1,4 +1,5 @@
-import { CheckIcon, TimesIcon } from '@primereact/icons';
+import { Check } from '@primeicons/react/check';
+import { Times } from '@primeicons/react/times';
 import { Button } from '@primereact/ui/button';
 import { Divider } from '@primereact/ui/divider';
 import { Inplace } from '@primereact/ui/inplace';
@@ -21,12 +22,12 @@ export default function BasicDemo() {
                             <InputText placeholder="Enter name" className="flex-1" fluid autoFocus />
                             <InputGroup.Addon>
                                 <Button iconOnly variant="text" severity="success">
-                                    <CheckIcon />
+                                    <Check />
                                 </Button>
                             </InputGroup.Addon>
                             <InputGroup.Addon>
                                 <Inplace.Close as={Button} iconOnly variant="text" severity="danger">
-                                    <TimesIcon />
+                                    <Times />
                                 </Inplace.Close>
                             </InputGroup.Addon>
                         </InputGroup.Root>
@@ -40,12 +41,12 @@ export default function BasicDemo() {
                             <InputText placeholder="Enter email" className="flex-1" fluid autoFocus />
                             <InputGroup.Addon>
                                 <Button iconOnly variant="text" severity="success">
-                                    <CheckIcon />
+                                    <Check />
                                 </Button>
                             </InputGroup.Addon>
                             <InputGroup.Addon>
                                 <Inplace.Close as={Button} iconOnly variant="text" severity="danger">
-                                    <TimesIcon />
+                                    <Times />
                                 </Inplace.Close>
                             </InputGroup.Addon>
                         </InputGroup.Root>
@@ -59,12 +60,12 @@ export default function BasicDemo() {
                             <Password placeholder="Enter password" className="flex-1" fluid mask={true} autoFocus />
                             <InputGroup.Addon>
                                 <Button iconOnly variant="text" severity="success">
-                                    <CheckIcon />
+                                    <Check />
                                 </Button>
                             </InputGroup.Addon>
                             <InputGroup.Addon>
                                 <Inplace.Close as={Button} iconOnly variant="text" severity="danger">
-                                    <TimesIcon />
+                                    <Times />
                                 </Inplace.Close>
                             </InputGroup.Addon>
                         </InputGroup.Root>

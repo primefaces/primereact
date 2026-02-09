@@ -1,4 +1,4 @@
-import { Icon } from '@primereact/core/icon';
+import { Home } from '@primeicons/react';
 import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ export default function RouteDemo() {
                 <Breadcrumb.List>
                     <Breadcrumb.Item>
                         <Link href="/">
-                            <Icon className="pi pi-home" />
+                            <Home />
                         </Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Separator />

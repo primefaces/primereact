@@ -4,6 +4,19 @@ import { Badge } from '@primereact/ui/badge';
 import { Menu } from '@primereact/ui/menu';
 import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
+import { Calendar } from '@primeicons/react/calendar';
+import { Code } from '@primeicons/react/code';
+import { Cog } from '@primeicons/react/cog';
+import { Envelope } from '@primeicons/react/envelope';
+import { File } from '@primeicons/react/file';
+import { Folder } from '@primeicons/react/folder';
+import { Home } from '@primeicons/react/home';
+import { Plus } from '@primeicons/react/plus';
+import { Star } from '@primeicons/react/star';
+import { StarFill } from '@primeicons/react/star-fill';
+import { Trash } from '@primeicons/react/trash';
+import { User } from '@primeicons/react/user';
+import { Users } from '@primeicons/react/users';
 
 export default function SidebarDemo() {
     const menuRef = React.useRef(null);
@@ -20,7 +33,7 @@ export default function SidebarDemo() {
                     <Menu.Root className="border-none">
                         <Menu.List>
                             <Menu.Item>
-                                <i className="pi pi-home" />
+                                <Home />
                                 Dashboard
                                 <Badge shape="circle" className="ml-auto">
                                     8
@@ -35,11 +48,11 @@ export default function SidebarDemo() {
                                 </Menu.Trigger>
                                 <Menu.List>
                                     <Menu.Item>
-                                        <i className="pi pi-envelope" />
+                                        <Envelope />
                                         All Messages
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <i className="pi pi-star" />
+                                        <Star />
                                         Starred
                                     </Menu.Item>
                                     <Menu.Item>
@@ -47,7 +60,7 @@ export default function SidebarDemo() {
                                         Sent
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <i className="pi pi-trash" />
+                                        <Trash />
                                         Trash
                                     </Menu.Item>
                                 </Menu.List>
@@ -55,7 +68,7 @@ export default function SidebarDemo() {
 
                             <Menu.Sub>
                                 <Menu.Trigger>
-                                    <i className="pi pi-folder" />
+                                    <Folder />
                                     Projects
                                     <Menu.Icon />
                                 </Menu.Trigger>
@@ -74,7 +87,7 @@ export default function SidebarDemo() {
                                     </Menu.Item>
                                     <Menu.Separator />
                                     <Menu.Item>
-                                        <i className="pi pi-plus" />
+                                        <Plus />
                                         New Project
                                     </Menu.Item>
                                 </Menu.List>
@@ -82,13 +95,13 @@ export default function SidebarDemo() {
 
                             <Menu.Sub>
                                 <Menu.Trigger>
-                                    <i className="pi pi-users" />
+                                    <Users />
                                     Team
                                     <Menu.Icon />
                                 </Menu.Trigger>
                                 <Menu.List>
                                     <Menu.Item>
-                                        <i className="pi pi-users" />
+                                        <Users />
                                         All Members
                                     </Menu.Item>
                                     <Menu.Sub>
@@ -99,7 +112,7 @@ export default function SidebarDemo() {
                                         </Menu.Trigger>
                                         <Menu.List>
                                             <Menu.Item>
-                                                <i className="pi pi-code" />
+                                                <Code />
                                                 Engineering
                                             </Menu.Item>
                                             <Menu.Item>
@@ -126,7 +139,7 @@ export default function SidebarDemo() {
                             <Menu.Separator />
 
                             <Menu.Item>
-                                <i className="pi pi-calendar" />
+                                <Calendar />
                                 Calendar
                             </Menu.Item>
 
@@ -146,7 +159,7 @@ export default function SidebarDemo() {
                                         Traffic
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <i className="pi pi-users" />
+                                        <Users />
                                         Users
                                     </Menu.Item>
                                     <Menu.Item>
@@ -157,7 +170,7 @@ export default function SidebarDemo() {
                             </Menu.Sub>
 
                             <Menu.Item>
-                                <i className="pi pi-file" />
+                                <File />
                                 Documents
                             </Menu.Item>
 
@@ -168,7 +181,7 @@ export default function SidebarDemo() {
                             </Menu.Label>
 
                             <Menu.Item>
-                                <i className="pi pi-star-fill text-yellow-500" />
+                                <StarFill className="text-yellow-500" />
                                 Important
                             </Menu.Item>
                             <Menu.Item>
@@ -188,11 +201,11 @@ export default function SidebarDemo() {
                         <Menu.Root className="border-none">
                             <Menu.List className="w-56">
                                 <Menu.Item>
-                                    <i className="pi pi-user" />
+                                    <User />
                                     View Profile
                                 </Menu.Item>
                                 <Menu.Item>
-                                    <i className="pi pi-cog" />
+                                    <Cog />
                                     Settings
                                 </Menu.Item>
 

@@ -1,6 +1,15 @@
+import { Check } from '@primeicons/react/check'
+import { Cog } from '@primeicons/react/cog'
+import { Search } from '@primeicons/react/search'
+import { Spinner } from '@primeicons/react/spinner'
+import { Times } from '@primeicons/react/times'
+import { User } from '@primeicons/react/user'
+
 ---
+
 title: Prime Icons
 description: PrimeIcons is the default icon library of PrimeReact with over 250 open source icons developed by PrimeTek. PrimeIcons library is optional as PrimeReact components can use any icon with templating.
+
 ---
 
 ## Download
@@ -25,70 +34,70 @@ PrimeIcons library is now available on [Figma Community](https://www.figma.com/c
 
 ## Basic
 
-PrimeIcons use the `pi pi-{icon}` syntax such as `pi pi-check`. A standalone icon can be displayed using an element such as `i` or `span`.
+PrimeIcons can be displayed using @primeicons/react components. A standalone icon can be displayed easily.
 
 <div className="card flex justify-center gap-4">
-    <i className="pi pi-check"></i>
-    <i className="pi pi-times"></i>
-    <span className="pi pi-search"></span>
-    <span className="pi pi-user"></span>
+    <Check />
+    <Times />
+    <Search />
+    <User />
 </div>
 
 ```tsx
-<i className="pi pi-check"></i>
-<i className="pi pi-times"></i>
-<span className="pi pi-search"></span>
-<span className="pi pi-user"></span>
+<Check />
+<Times />
+<Search />
+<User />
 ```
 
 ## Size
 
-Size of an icon is controlled with the font-size property of the element.
+Size of an icon is controlled with the font-size property of the element or the `className` prop.
 
 <div className="card flex justify-center items-center gap-4">
-    <i className="pi pi-check" style={{ fontSize: '1rem' }}></i>
-    <i className="pi pi-times" style={{ fontSize: '1.5rem' }}></i>
-    <i className="pi pi-search" style={{ fontSize: '2rem' }}></i>
-    <i className="pi pi-user" style={{ fontSize: '2.5rem' }}></i>
+    <Check style={{ fontSize: '1rem' }} />
+    <Times style={{ fontSize: '1.5rem' }} />
+    <Search style={{ fontSize: '2rem' }} />
+    <User style={{ fontSize: '2.5rem' }} />
 </div>
 
 ```tsx
-<i className="pi pi-check" style={{ fontSize: '1rem' }}></i>
-<i className="pi pi-times" style={{ fontSize: '1.5rem' }}></i>
-<i className="pi pi-search" style={{ fontSize: '2rem' }}></i>
-<i className="pi pi-user" style={{ fontSize: '2.5rem' }}></i>
+<Check style={{ fontSize: '1rem' }} />
+<Times style={{ fontSize: '1.5rem' }} />
+<Search style={{ fontSize: '2rem' }} />
+<User style={{ fontSize: '2.5rem' }} />
 ```
 
 ## Color
 
-Icon color is defined with the `color` property which is inherited from parent by default.
+Icon color is defined with inline styles or className and is inherited from parent by default.
 
 <div className="card flex justify-center items-center gap-4">
-    <i className="pi pi-check" style={{ color: 'slateblue' }}></i>
-    <i className="pi pi-times" style={{ color: 'green' }}></i>
-    <i className="pi pi-search" style={{ color: 'var(--p-primary-color)' }}></i>
-    <i className="pi pi-user" style={{ color: '#708090' }}></i>
+    <Check style={{ color: '#22c55e' }} />
+    <Times style={{ color: '#ef4444' }} />
+    <Search style={{ color: '#3b82f6' }} />
+    <User style={{ color: '#a855f7' }} />
 </div>
 
 ```tsx
-<i className="pi pi-check" style={{ color: 'slateblue' }}></i>
-<i className="pi pi-times" style={{ color: 'green' }}></i>
-<i className="pi pi-search" style={{ color: 'var(--p-primary-color)' }}></i>
-<i className="pi pi-user" style={{ color: '#708090' }}></i>
+<Check style={{ color: '#22c55e' }} />
+<Times style={{ color: '#ef4444' }} />
+<Search style={{ color: '#3b82f6' }} />
+<User style={{ color: '#a855f7' }} />
 ```
 
 ## Spin
 
-Special `pi-spin` className applies infinite rotation to an icon.
+The `animate-spin` Tailwind class applies infinite rotation to an icon.
 
 <div className="card flex justify-center gap-4">
-    <i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }}></i>
-    <i className="pi pi-spin pi-cog" style={{ fontSize: '2rem' }}></i>
+    <Spinner className="animate-spin" style={{ fontSize: '2rem' }} />
+    <Cog className="animate-spin" style={{ fontSize: '2rem' }} />
 </div>
 
 ```tsx
-<i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }}></i>
-<i className="pi pi-spin pi-cog" style={{ fontSize: '2rem' }}></i>
+<Spinner className="animate-spin" style={{ fontSize: '2rem' }} />
+<Cog className="animate-spin" style={{ fontSize: '2rem' }} />
 ```
 
 ## List

@@ -1,9 +1,9 @@
 'use client';
-import { AngleDownIcon } from '@primereact/icons/angledown';
-import { AngleLeftIcon } from '@primereact/icons/angleleft';
-import { AngleRightIcon } from '@primereact/icons/angleright';
-import { AngleUpIcon } from '@primereact/icons/angleup';
-import { TimesIcon } from '@primereact/icons/times';
+import { AngleDown } from '@primeicons/react/angle-down';
+import { AngleLeft } from '@primeicons/react/angle-left';
+import { AngleRight } from '@primeicons/react/angle-right';
+import { AngleUp } from '@primeicons/react/angle-up';
+import { Times } from '@primeicons/react/times';
 import { DrawerRootChangeEvent } from '@primereact/types/shared/drawer';
 import { Button } from '@primereact/ui/button';
 import { Drawer } from '@primereact/ui/drawer';
@@ -19,16 +19,16 @@ export default function PositionDemo() {
         <div>
             <div className="flex gap-2 justify-center">
                 <Button iconOnly onClick={() => setVisibleLeft(true)}>
-                    <AngleRightIcon />
+                    <AngleRight />
                 </Button>
                 <Button iconOnly onClick={() => setVisibleRight(true)}>
-                    <AngleLeftIcon />
+                    <AngleLeft />
                 </Button>
                 <Button iconOnly onClick={() => setVisibleTop(true)}>
-                    <AngleDownIcon />
+                    <AngleDown />
                 </Button>
                 <Button iconOnly onClick={() => setVisibleBottom(true)}>
-                    <AngleUpIcon />
+                    <AngleUp />
                 </Button>
             </div>
 
@@ -37,7 +37,7 @@ export default function PositionDemo() {
                     <Drawer.Header>
                         <Drawer.Title>Left Drawer</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
@@ -54,7 +54,7 @@ export default function PositionDemo() {
                     <Drawer.Header>
                         <Drawer.Title>Right Drawer</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
@@ -76,7 +76,7 @@ export default function PositionDemo() {
                     <Drawer.Header>
                         <Drawer.Title>Top Drawer</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
@@ -98,7 +98,7 @@ export default function PositionDemo() {
                     <Drawer.Header>
                         <Drawer.Title>Bottom Drawer</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>

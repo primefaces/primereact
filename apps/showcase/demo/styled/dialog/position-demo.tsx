@@ -1,5 +1,6 @@
 'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { ArrowDown, ArrowDownLeft, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUp, ArrowUpLeft, ArrowUpRight } from '@primeicons/react';
+import { Times } from '@primeicons/react/times';
 import { DialogContentInstance, DialogRootChangeEvent, DialogRootProps } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';
@@ -21,39 +22,39 @@ export default function PositionDemo() {
             <div className="flex flex-wrap justify-center gap-2 mb-2">
                 <Button onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Left
-                    <i className="pi pi-arrow-right" />
+                    <ArrowRight />
                 </Button>
                 <Button onClick={() => openPosition('right')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Right
-                    <i className="pi pi-arrow-left" />
+                    <ArrowLeft />
                 </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
                 <Button onClick={() => openPosition('topleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopLeft
-                    <i className="pi pi-arrow-down-right" />
+                    <ArrowDownRight />
                 </Button>
                 <Button onClick={() => openPosition('top')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Top
-                    <i className="pi pi-arrow-down" />
+                    <ArrowDown />
                 </Button>
                 <Button onClick={() => openPosition('topright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopRight
-                    <i className="pi pi-arrow-down-left" />
+                    <ArrowDownLeft />
                 </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
                 <Button onClick={() => openPosition('bottomleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomLeft
-                    <i className="pi pi-arrow-up-right" />
+                    <ArrowUpRight />
                 </Button>
                 <Button onClick={() => openPosition('bottom')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Bottom
-                    <i className="pi pi-arrow-up" />
+                    <ArrowUp />
                 </Button>
                 <Button onClick={() => openPosition('bottomright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomRight
-                    <i className="pi pi-arrow-up-left" />
+                    <ArrowUpLeft />
                 </Button>
             </div>
             <Dialog.Root
@@ -69,7 +70,7 @@ export default function PositionDemo() {
                         <Dialog.Title>Edit Profile</Dialog.Title>
                         <Dialog.HeaderActions>
                             <Dialog.Close>
-                                <TimesIcon />
+                                <Times />
                             </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>

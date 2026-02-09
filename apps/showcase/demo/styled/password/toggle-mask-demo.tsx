@@ -1,6 +1,6 @@
 'use client';
-import { EyeIcon } from '@primereact/icons/eye';
-import { EyeSlashIcon } from '@primereact/icons/eyeslash';
+import { Eye } from '@primeicons/react/eye';
+import { EyeSlash } from '@primeicons/react/eye-slash';
 import { PasswordMaskChangeEvent } from '@primereact/types/shared/password';
 import { IconField } from '@primereact/ui/iconfield';
 import { Password } from '@primereact/ui/password';
@@ -13,7 +13,7 @@ export default function ToggleMaskDemo() {
         <div className="flex justify-center">
             <IconField.Root>
                 <Password mask={mask} onMaskChange={(e: PasswordMaskChangeEvent) => setMask(e.value)} />
-                <IconField.Icon>{mask ? <EyeIcon onClick={() => setMask(false)} /> : <EyeSlashIcon onClick={() => setMask(true)} />}</IconField.Icon>
+                <IconField.Icon>{mask ? <Eye onClick={() => setMask(false)} /> : <EyeSlash onClick={() => setMask(true)} />}</IconField.Icon>
             </IconField.Root>
         </div>
     );

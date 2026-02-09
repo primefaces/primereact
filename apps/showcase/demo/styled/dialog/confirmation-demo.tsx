@@ -1,5 +1,6 @@
 'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { ExclamationTriangle } from '@primeicons/react';
+import { Times } from '@primeicons/react/times';
 import { DialogContentInstance } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';
@@ -15,7 +16,7 @@ export default function ConfirmationDemo() {
                         <Dialog.Title>Confirm Deletion</Dialog.Title>
                         <Dialog.HeaderActions>
                             <Dialog.Close>
-                                <TimesIcon />
+                                <Times />
                             </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>
@@ -26,7 +27,7 @@ export default function ConfirmationDemo() {
                             return (
                                 <div className="flex flex-col gap-4">
                                     <div className="flex items-start gap-3">
-                                        <i className="pi pi-exclamation-triangle text-orange-500 text-2xl mt-0.5" />
+                                        <ExclamationTriangle className="text-orange-500 text-2xl mt-0.5" />
                                         <div>
                                             <p className="font-semibold mt-0 mb-2">Are you sure you want to delete your account?</p>
                                             <p className="text-surface-500 dark:text-surface-400 text-sm mt-0 mb-0">

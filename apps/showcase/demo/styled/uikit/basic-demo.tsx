@@ -1,6 +1,7 @@
 import { useApp } from '@/shared/hooks/useApp';
 import Image from 'next/image';
 import * as React from 'react';
+import { CheckCircle } from '@primeicons/react/check-circle';
 
 export default function BasicDemo() {
     const { isDarkTheme } = useApp();
@@ -38,27 +39,27 @@ export default function BasicDemo() {
 
                         <ul className="flex flex-wrap m-0 p-0 text-lg">
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Auto Layout</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Variants</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Variables and Styles</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Interactive Components</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Boolean, Instance Swap and Text Properties</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Nested Instances</span>
                             </li>
                         </ul>
@@ -75,19 +76,19 @@ export default function BasicDemo() {
 
                         <ul className="flex flex-wrap m-0 p-0 text-lg">
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Numerous Components</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Icon Library</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Easy Customization</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Atomic Approach</span>
                             </li>
                         </ul>
@@ -122,11 +123,11 @@ export default function BasicDemo() {
 
                         <ul className="flex flex-wrap m-0 p-0 text-lg">
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Aura Light</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Aura Dark</span>
                             </li>
                         </ul>
@@ -143,19 +144,19 @@ export default function BasicDemo() {
 
                         <ul className="flex flex-wrap m-0 p-0 text-lg">
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Countless Design Tokens</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Light and Dark Sets</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Well Documented</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Primitive, Semantic and Component Tokens</span>
                             </li>
                         </ul>
@@ -198,19 +199,19 @@ export default function BasicDemo() {
 
                         <ul className="flex flex-wrap m-0 p-0 text-lg">
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Automatic Mapping</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Eliminate Handoff</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Maintain Perfect Fidelity</span>
                             </li>
                             <li className="flex items-center w-6/12 p-4">
-                                <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                <CheckCircle className="text-green-600 mr-2"></CheckCircle>
                                 <span className="font-bold">Verify Synchorization</span>
                             </li>
                         </ul>
@@ -278,27 +279,27 @@ export default function BasicDemo() {
                                 <hr className="my-4 mx-0 border-t border-0 border-surface-200 dark:border-surface-700" />
                                 <ul className="list-none p-0 m-0 grow text-lg">
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span className="font-bold">1 Designer</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Auto Layout & Variants</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Interactive Components</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Tokens Studio Support</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>1 Year Free Updates</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Use on Unlimited Projects</span>
                                     </li>
                                 </ul>
@@ -325,27 +326,27 @@ export default function BasicDemo() {
                                 <hr className="my-4 mx-0 border-t border-0 border-surface-200 dark:border-surface-700" />
                                 <ul className="list-none p-0 m-0 grow text-lg">
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span className="font-bold">Up to 5 Designers</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Auto Layout & Variants</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Interactive Components</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Tokens Studio Support</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>1 Year Free Updates</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Use on Unlimited Projects</span>
                                     </li>
                                 </ul>
@@ -372,27 +373,27 @@ export default function BasicDemo() {
                                 <hr className="my-4 mx-0 border-t border-0 border-surface-200 dark:border-surface-700" />
                                 <ul className="list-none p-0 m-0 grow text-lg">
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span className="font-bold">Custom Team Size</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Auto Layout & Variants</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Interactive Components</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Tokens Studio Support</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>1 Year Free Updates</span>
                                     </li>
                                     <li className="flex items-center mb-4">
-                                        <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                        <CheckCircle className="text-green-500 mr-2"></CheckCircle>
                                         <span>Use on Unlimited Projects</span>
                                     </li>
                                 </ul>

@@ -1,12 +1,16 @@
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
+import { Lock } from '@primeicons/react/lock';
+import { Search } from '@primeicons/react/search';
+import { Spinner } from '@primeicons/react/spinner';
+import { User } from '@primeicons/react/user';
 
 export default function SizesDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <IconField.Root>
                 <IconField.Icon>
-                    <i className="pi pi-search" />
+                    <Search />
                 </IconField.Icon>
                 <InputText placeholder="Small" size="small" />
             </IconField.Root>
@@ -14,17 +18,17 @@ export default function SizesDemo() {
             <IconField.Root>
                 <InputText placeholder="Normal" />
                 <IconField.Icon>
-                    <i className="pi pi-user" />
+                    <User />
                 </IconField.Icon>
             </IconField.Root>
 
             <IconField.Root>
                 <IconField.Icon>
-                    <i className="pi pi-lock" />
+                    <Lock />
                 </IconField.Icon>
                 <InputText placeholder="Large" size="large" />
                 <IconField.Icon>
-                    <i className="pi pi-spin pi-spinner" />
+                    <Spinner />
                 </IconField.Icon>
             </IconField.Root>
         </div>

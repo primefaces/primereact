@@ -3,6 +3,9 @@ import { ProductService } from '@/shared/services/product.service';
 import { Button } from '@primereact/ui/button';
 import { DataView } from 'primereact/dataview';
 import * as React from 'react';
+import { Heart } from '@primeicons/react/heart';
+import { ShoppingCart } from '@primeicons/react/shopping-cart';
+import { StarFill } from '@primeicons/react/star-fill';
 
 interface Product {
     id: string;
@@ -47,7 +50,7 @@ export default function DataViewPTDemo() {
                                         }}
                                     >
                                         <span className="text-surface-900 font-medium text-sm">{product.rating}</span>
-                                        <i className="pi pi-star-fill text-yellow-500"></i>
+                                        <StarFill className="text-yellow-500"></StarFill>
                                     </div>
                                 </div>
                             </div>
@@ -55,13 +58,13 @@ export default function DataViewPTDemo() {
                                 <span className="text-xl font-semibold">${product.price}</span>
                                 <div className="flex flex-row-reverse md:flex-row gap-2">
                                     <Button variant="outlined">
-                                        <i className="pi pi-heart"></i>
+                                        <Heart></Heart>
                                     </Button>
                                     <Button
                                         disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                         className="flex-auto md:flex-initial whitespace-nowrap"
                                     >
-                                        <i className="pi pi-shopping-cart"></i>
+                                        <ShoppingCart></ShoppingCart>
                                         Buy Now
                                     </Button>
                                 </div>

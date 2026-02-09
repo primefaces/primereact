@@ -1,9 +1,10 @@
 'use client';
-import { MinusIcon, PlusIcon } from '@primereact/icons';
 import type { useFieldsetOpenChangeEvent } from '@primereact/types/shared/fieldset';
 import { Button } from '@primereact/ui/button';
 import { Fieldset } from '@primereact/ui/fieldset';
 import { useState } from 'react';
+import { Minus } from '@primeicons/react/minus';
+import { Plus } from '@primeicons/react/plus';
 
 export default function ControlledToggleableDemo() {
     const [open, setOpen] = useState(true);
@@ -21,7 +22,7 @@ export default function ControlledToggleableDemo() {
             <Fieldset.Root open={open} onOpenChange={(e: useFieldsetOpenChangeEvent) => setOpen(e.value ?? false)}>
                 <Fieldset.Legend>
                     <Fieldset.Trigger className="flex items-center gap-2">
-                        {open ? <MinusIcon /> : <PlusIcon />}
+                        {open ? <Minus /> : <Plus />}
                         Legend
                     </Fieldset.Trigger>
                 </Fieldset.Legend>

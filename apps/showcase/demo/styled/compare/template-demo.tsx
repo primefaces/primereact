@@ -3,6 +3,7 @@ import { Button } from '@primereact/ui/button';
 import { Compare } from '@primereact/ui/compare';
 import { ProgressBar } from '@primereact/ui/progressbar';
 import { Tag } from '@primereact/ui/tag';
+import { Code } from '@primeicons/react/code';
 
 export default function TemplateDemo() {
     return (
@@ -15,7 +16,7 @@ export default function TemplateDemo() {
             </Compare.Item>
             <Compare.Handle>
                 <Compare.Indicator className="group flex items-center justify-center border border-surface">
-                    <i className="pi pi-code group-data-[orientation=vertical]:rotate-90" />
+                    <Code className="group-data-[orientation=vertical]:rotate-90" />
                 </Compare.Indicator>
             </Compare.Handle>
         </Compare.Root>

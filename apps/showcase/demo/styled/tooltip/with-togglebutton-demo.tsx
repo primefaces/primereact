@@ -1,6 +1,8 @@
 'use client';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 import { Tooltip } from '@primereact/ui/tooltip';
+import { ToggleButtonRoot } from 'primereact/togglebutton';
+import { ToggleButtonGroup } from 'primereact/togglebuttongroup';
 
 const content = [
     {
@@ -29,12 +31,12 @@ export default function WithToggleButtonDemo() {
     return (
         <div className="flex items-center justify-center">
             <Tooltip.Group>
-                <ToggleButton.Group allowEmpty={false}>
+                <ToggleButtonGroup allowEmpty={false}>
                     {content.map((item) => (
                         <Tooltip.Root key={item.value}>
-                            <Tooltip.Trigger as={ToggleButton} value={item.value}>
+                            <Tooltip.Trigger as={ToggleButtonRoot} value={item.value}>
                                 <ToggleButton.Indicator>
-                                    <i className={item.icon}></i>
+                                    <i className={item.icon} />
                                 </ToggleButton.Indicator>
                             </Tooltip.Trigger>
                             <Tooltip.Portal>
@@ -45,7 +47,7 @@ export default function WithToggleButtonDemo() {
                             </Tooltip.Portal>
                         </Tooltip.Root>
                     ))}
-                </ToggleButton.Group>
+                </ToggleButtonGroup>
             </Tooltip.Group>
         </div>
     );

@@ -1,5 +1,6 @@
 import { Avatar } from '@primereact/ui/avatar';
 import { Timeline } from '@primereact/ui/timeline';
+import { Minus } from '@primeicons/react/minus';
 
 export default function ActivityDemo() {
     const activities = [
@@ -101,7 +102,7 @@ export default function ActivityDemo() {
                                                     key={i}
                                                     className="text-sm text-surface-600 dark:text-surface-400 font-mono flex items-start gap-2"
                                                 >
-                                                    <i className="pi pi-minus text-xs mt-1.5 text-surface-400" />
+                                                    <Minus className="text-xs mt-1.5 text-surface-400" />
                                                     {detail}
                                                 </li>
                                             ))}

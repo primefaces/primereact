@@ -1,10 +1,11 @@
 'use client';
-import { ChevronDownIcon, TimesIcon } from '@primereact/icons';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Chip } from '@primereact/ui/chip';
 import { Select } from '@primereact/ui/select';
 import { Tag } from '@primereact/ui/tag';
 import * as React from 'react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Times } from '@primeicons/react/times';
 
 const productCategories = [
     { label: 'Electronics', value: 'electronics', count: 1247 },
@@ -43,11 +44,11 @@ export default function ClearIconDemo() {
                     <Select.Trigger placeholder="Category" />
                     {category && (
                         <Select.ClearIcon>
-                            <TimesIcon />
+                            <Times />
                         </Select.ClearIcon>
                     )}
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
                     <Select.Portal>
                         <Select.List>
@@ -77,11 +78,11 @@ export default function ClearIconDemo() {
                     <Select.Trigger placeholder="Price" />
                     {priceRange && (
                         <Select.ClearIcon>
-                            <TimesIcon className="w-3 h-3" />
+                            <Times className="w-3 h-3" />
                         </Select.ClearIcon>
                     )}
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
                     <Select.Portal>
                         <Select.List>

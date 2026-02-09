@@ -1,4 +1,4 @@
-import { CheckIcon } from '@primereact/icons';
+import { Check } from '@primeicons/react/check';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { Label } from '@primereact/ui/label';
 
@@ -8,7 +8,7 @@ const BasicDemo = () => {
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="basic-checkbox">
                     <Checkbox.Box>
-                        <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                     </Checkbox.Box>
                 </Checkbox.Root>
                 <Label htmlFor="basic-checkbox">

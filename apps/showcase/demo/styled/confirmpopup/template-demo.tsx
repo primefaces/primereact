@@ -1,3 +1,6 @@
+import { Check } from '@primeicons/react/check';
+import { ExclemationCircle } from '@primeicons/react/exclemation-circle';
+import { Times } from '@primeicons/react/times';
 import { ConfirmPopup } from '@primereact/ui/confirmpopup';
 
 export default function TemplateDemo() {
@@ -8,17 +11,17 @@ export default function TemplateDemo() {
                 <ConfirmPopup.Portal>
                     <ConfirmPopup.Content>
                         <div className="flex flex-col items-center w-full gap-4 border-b border-surface-200 dark:border-surface-700 p-4 mb-4 pb-0">
-                            <i className="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                            <ExclemationCircle className="text-6xl text-primary-500"></ExclemationCircle>
                             <p>Please confirm to proceed moving forward.</p>
                         </div>
                     </ConfirmPopup.Content>
                     <ConfirmPopup.Footer>
                         <ConfirmPopup.Reject variant="outlined">
-                            <i className="pi pi-times" />
+                            <Times />
                             Cancel
                         </ConfirmPopup.Reject>
                         <ConfirmPopup.Accept>
-                            <i className="pi pi-check" />
+                            <Check />
                             Confirm
                         </ConfirmPopup.Accept>
                     </ConfirmPopup.Footer>

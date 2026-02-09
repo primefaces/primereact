@@ -1,4 +1,6 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Github } from '@primeicons/react/github';
 import { cn } from '@primeuix/utils';
 import { allDocs } from 'contentlayer/generated';
 import Link from 'next/link';
@@ -98,7 +100,7 @@ export default function DocCopyMarkdownMenu({
                     disabled={isCopied}
                     className="inline-flex items-center gap-2 text-sm font-medium pl-2.5 pr-3 py-1.5 hover:bg-surface-50 dark:hover:bg-surface-800 text-surface-600 hover:text-surface-950 dark:text-surface-300 dark:hover:text-surface-0 transition-colors duration-150 disabled:opacity-75 disabled:pointer-events-none"
                 >
-                    <i className={`pi ${isCopied ? 'pi-check' : 'pi-copy'}`}></i>
+                    <i className={`pi ${isCopied ? 'pi-check' : 'pi-copy'}`} />
                     <span className="">Copy Page</span>
                 </button>
                 <StyleClass
@@ -113,7 +115,7 @@ export default function DocCopyMarkdownMenu({
                     leaveActiveClassName="animate-fadeout"
                     hideOnOutsideClick
                 >
-                    <i className="pi pi-chevron-down text-sm"></i>
+                    <ChevronDown className="text-sm"></ChevronDown>
                 </StyleClass>
             </div>
             <div className="copy-markdown-dropdown hidden absolute top-[calc(100%+4px)] right-0 inset-inline-end-0 w-48 p-1 bg-(--overlay-background) rounded-lg border border-(--border-color) origin-top shadow-md z-50">
@@ -123,7 +125,7 @@ export default function DocCopyMarkdownMenu({
                         View as Markdown
                     </DocCopyMarkdownMenuItem>
                     <DocCopyMarkdownMenuItem href={githubLink} target="_blank">
-                        <i className="pi pi-github leading-none! text-sm"></i>
+                        <Github className="leading-none! text-sm"></Github>
                         Open in Github
                     </DocCopyMarkdownMenuItem>
                     <DocCopyMarkdownMenuItem href={chatGPTLink} target="_blank">

@@ -1,5 +1,6 @@
 'use client';
-import { CheckIcon, TimesIcon } from '@primereact/icons';
+import { Check } from '@primeicons/react/check';
+import { Times } from '@primeicons/react/times';
 import type { SwitchThumbInstance } from '@primereact/types/shared/switch';
 import { Switch } from '@primereact/ui/switch';
 
@@ -12,7 +13,7 @@ export default function TemplateDemo() {
                         {(instance: SwitchThumbInstance) => {
                             const { switch: switchContext } = instance;
 
-                            return <>{switchContext?.state.checked ? <CheckIcon /> : <TimesIcon />}</>;
+                            return <>{switchContext?.state.checked ? <Check /> : <Times />}</>;
                         }}
                     </Switch.Thumb>
                 </Switch.Control>

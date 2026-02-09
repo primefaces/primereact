@@ -1,8 +1,8 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const languages = [
     { label: 'Select your language', value: '' },
@@ -31,7 +31,7 @@ export default function BasicDemo() {
             >
                 <Select.Trigger placeholder="Select a language" />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
                 <Select.Portal>
                     <Select.List>

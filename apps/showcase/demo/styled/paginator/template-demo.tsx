@@ -1,8 +1,11 @@
 'use client';
-import { AngleDoubleLeftIcon, AngleDoubleRightIcon, AngleLeftIcon, AngleRightIcon } from '@primereact/icons';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Paginator } from '@primereact/ui/paginator';
 import React from 'react';
+import { AngleDoubleLeft } from '@primeicons/react/angle-double-left';
+import { AngleDoubleRight } from '@primeicons/react/angle-double-right';
+import { AngleLeft } from '@primeicons/react/angle-left';
+import { AngleRight } from '@primeicons/react/angle-right';
 
 function TemplateDemo() {
     const [page, setPage] = React.useState(1);
@@ -12,17 +15,17 @@ function TemplateDemo() {
             <Paginator.Root total={12} itemsPerPage={1} page={1} onPageChange={(e: usePaginatorChangeEvent) => setPage(e.value)}>
                 <Paginator.Content>
                     <Paginator.First>
-                        <AngleDoubleLeftIcon />
+                        <AngleDoubleLeft />
                     </Paginator.First>
                     <Paginator.Prev>
-                        <AngleLeftIcon />
+                        <AngleLeft />
                     </Paginator.Prev>
                     <div className="text-surface-500">({page} of 12)</div>
                     <Paginator.Next>
-                        <AngleRightIcon />
+                        <AngleRight />
                     </Paginator.Next>
                     <Paginator.Last>
-                        <AngleDoubleRightIcon />
+                        <AngleDoubleRight />
                     </Paginator.Last>
                 </Paginator.Content>
             </Paginator.Root>

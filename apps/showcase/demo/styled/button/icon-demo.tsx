@@ -1,29 +1,34 @@
 import { Button } from '@primereact/ui/button';
+import { Check } from '@primeicons/react/check';
+import { Home } from '@primeicons/react/home';
+import { Refresh } from '@primeicons/react/refresh';
+import { Search } from '@primeicons/react/search';
+import { User } from '@primeicons/react/user';
 
 export default function IconDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <div className="flex flex-wrap gap-4 justify-center">
                 <Button aria-label="Save">
-                    <i className="pi pi-home" />
+                    <Home />
                 </Button>
                 <Button>
-                    <i className="pi pi-user" />
+                    <User />
                     Profile
                 </Button>
                 <Button>
                     Save
-                    <i className="pi pi-check" />
+                    <Check />
                 </Button>
             </div>
             <div className="flex flex-wrap gap-4 justify-center">
                 <Button className="flex-col">
-                    <i className="pi pi-search" />
+                    <Search />
                     Search
                 </Button>
                 <Button className="flex-col">
                     Update
-                    <i className="pi pi-refresh" />
+                    <Refresh />
                 </Button>
             </div>
         </div>

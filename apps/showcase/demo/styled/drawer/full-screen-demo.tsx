@@ -1,6 +1,5 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
-import { WindowMaximizeIcon } from '@primereact/icons/windowmaximize';
+import { Times } from '@primeicons/react/times';
+import { WindowMaximize } from '@primeicons/react/window-maximize';
 import { Drawer } from '@primereact/ui/drawer';
 
 export default function FullScreenDemo() {
@@ -8,13 +7,13 @@ export default function FullScreenDemo() {
         <div className="flex justify-center">
             <Drawer.Root position="full">
                 <Drawer.Trigger iconOnly>
-                    <WindowMaximizeIcon />
+                    <WindowMaximize />
                 </Drawer.Trigger>
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Drawer</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>

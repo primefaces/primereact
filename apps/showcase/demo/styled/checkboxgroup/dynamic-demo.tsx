@@ -1,10 +1,10 @@
 'use client';
-import { CheckIcon } from '@primereact/icons';
 import type { CheckboxGroupChangeEvent } from '@primereact/types/shared/checkboxgroup';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { CheckboxGroup } from '@primereact/ui/checkboxgroup';
 import { Label } from '@primereact/ui/label';
 import React from 'react';
+import { Check } from '@primeicons/react/check';
 
 export default function DynamicDemo() {
     const [value, setValue] = React.useState<string[]>([]);
@@ -22,7 +22,7 @@ export default function DynamicDemo() {
                     <div key={category.key} className="flex items-center gap-2">
                         <Checkbox.Root inputId={category.key} value={category.key}>
                             <Checkbox.Box>
-                                <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                                <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                             </Checkbox.Box>
                         </Checkbox.Root>
                         <Label htmlFor={category.key}>{category.name}</Label>

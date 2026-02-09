@@ -1,11 +1,12 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { Select } from '@primereact/ui/select';
 import Image from 'next/image';
 import * as React from 'react';
+import { Search } from '@primeicons/react/search';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 type Country = {
     name: string;
@@ -45,7 +46,7 @@ export default function FilterDemo() {
             >
                 <Select.Trigger placeholder="Select a Country" />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
 
                 <Select.Portal>
@@ -58,7 +59,7 @@ export default function FilterDemo() {
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                                 />
                                 <IconField.Icon>
-                                    <i className="pi pi-search" />
+                                    <Search />
                                 </IconField.Icon>
                             </IconField.Root>
                         </Select.Header>

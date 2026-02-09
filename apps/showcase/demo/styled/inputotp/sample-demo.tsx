@@ -1,4 +1,4 @@
-import { MinusIcon } from '@primereact/icons';
+import { Minus } from '@primeicons/react/minus';
 import { Button } from '@primereact/ui/button';
 import { InputOtp } from '@primereact/ui/inputotp';
 import * as React from 'react';
@@ -29,7 +29,7 @@ export default function SampleDemo() {
                                 <InputOtp.Text className={inputClasses} />
                                 {index === 2 && (
                                     <div className="px-4 flex items-center">
-                                        <MinusIcon />
+                                        <Minus />
                                     </div>
                                 )}
                             </React.Fragment>

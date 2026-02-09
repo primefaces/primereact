@@ -1,6 +1,8 @@
 import { Badge } from '@primereact/ui/badge';
 import { Button } from '@primereact/ui/button';
 import { OverlayBadge } from '@primereact/ui/overlaybadge';
+import { Bell } from '@primeicons/react/bell';
+import { Users } from '@primeicons/react/users';
 
 export default function ButtonDemo() {
     return (
@@ -13,7 +15,7 @@ export default function ButtonDemo() {
             </Button>
 
             <Button type="button" variant="outlined">
-                <i className="pi pi-users" />
+                <Users />
                 Messages
                 <Badge severity="contrast" shape="circle">
                     2
@@ -22,7 +24,7 @@ export default function ButtonDemo() {
 
             <OverlayBadge>
                 <Button type="button" variant="outlined">
-                    <i className="pi pi-bell" />
+                    <Bell />
                 </Button>
                 <Badge severity="info" className="animate-pulse" />
             </OverlayBadge>

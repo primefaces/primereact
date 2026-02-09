@@ -1,7 +1,6 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -17,7 +16,7 @@ export default function SizesDemo() {
             <Select.Root options={cities} optionLabel="name" size="small" className="w-full md:w-56">
                 <Select.Trigger placeholder="Small" />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
 
                 <Select.Portal>
@@ -30,7 +29,7 @@ export default function SizesDemo() {
             <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
                 <Select.Trigger placeholder="Normal" />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
 
                 <Select.Portal>
@@ -43,7 +42,7 @@ export default function SizesDemo() {
             <Select.Root options={cities} optionLabel="name" size="large" className="w-full md:w-56">
                 <Select.Trigger placeholder="Large" />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
 
                 <Select.Portal>

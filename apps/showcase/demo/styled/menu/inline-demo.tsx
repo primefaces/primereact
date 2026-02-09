@@ -1,4 +1,14 @@
 import { Menu } from '@primereact/ui/menu';
+import { Bell } from '@primeicons/react/bell';
+import { CheckCircle } from '@primeicons/react/check-circle';
+import { Code } from '@primeicons/react/code';
+import { Cog } from '@primeicons/react/cog';
+import { Folder } from '@primeicons/react/folder';
+import { Home } from '@primeicons/react/home';
+import { Lock } from '@primeicons/react/lock';
+import { Star } from '@primeicons/react/star';
+import { Users } from '@primeicons/react/users';
+import { Shield } from '@primeicons/react/shield';
 
 export default function InlineDemo() {
     return (
@@ -6,7 +16,7 @@ export default function InlineDemo() {
             <Menu.Root className="w-64">
                 <Menu.List>
                     <Menu.Item>
-                        <i className="pi pi-home" />
+                        <Home />
                         Dashboard
                     </Menu.Item>
 
@@ -21,7 +31,7 @@ export default function InlineDemo() {
 
                     <Menu.Sub defaultOpen={true}>
                         <Menu.Trigger>
-                            <i className="pi pi-folder" />
+                            <Folder />
                             Projects
                             <Menu.Icon />
                         </Menu.Trigger>
@@ -37,13 +47,13 @@ export default function InlineDemo() {
 
                             <Menu.Sub>
                                 <Menu.Trigger>
-                                    <i className="pi pi-star" />
+                                    <Star />
                                     Favorites
                                     <Menu.Icon />
                                 </Menu.Trigger>
                                 <Menu.List>
                                     <Menu.Item>
-                                        <i className="pi pi-code" />
+                                        <Code />
                                         Website Redesign
                                     </Menu.Item>
                                     <Menu.Item>
@@ -58,7 +68,7 @@ export default function InlineDemo() {
                             </Menu.Sub>
 
                             <Menu.Item>
-                                <i className="pi pi-check-circle" />
+                                <CheckCircle />
                                 Completed
                             </Menu.Item>
                         </Menu.List>
@@ -66,7 +76,7 @@ export default function InlineDemo() {
 
                     <Menu.Sub>
                         <Menu.Trigger>
-                            <i className="pi pi-users" />
+                            <Users />
                             Team
                             <Menu.Icon />
                         </Menu.Trigger>
@@ -82,21 +92,21 @@ export default function InlineDemo() {
 
                             <Menu.Sub>
                                 <Menu.Trigger>
-                                    <i className="pi pi-cog" />
+                                    <Cog />
                                     Settings
                                     <Menu.Icon />
                                 </Menu.Trigger>
                                 <Menu.List>
                                     <Menu.Item>
-                                        <i className="pi pi-shield" />
+                                        <Shield />
                                         Permissions
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <i className="pi pi-bell" />
+                                        <Bell />
                                         Notifications
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <i className="pi pi-lock" />
+                                        <Lock />
                                         Privacy
                                     </Menu.Item>
                                 </Menu.List>

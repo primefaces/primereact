@@ -1,11 +1,11 @@
 'use client';
 import { useControlledState, usePresence } from '@primereact/hooks';
-import { TimesIcon } from '@primereact/icons';
 import { cn } from '@primeuix/utils';
 import { Portal } from 'primereact/portal';
 import * as React from 'react';
 import { useFocusTrap } from '../../../../../packages/@primereact/headless/src/focustrap/useFocusTrap';
 import { Placer, PlacerAnchor, PlacerArrow, PlacerContent, usePlacerContext } from './placer';
+import { Times } from '@primeicons/react/times';
 
 interface PopoverContextValue {
     open: boolean;
@@ -103,7 +103,7 @@ function PopoverClose({ className, children, ...props }: React.ComponentProps<'b
             )}
             {...props}
         >
-            {children ?? <TimesIcon className="size-3!" />}
+            {children ?? <Times className="size-3!" />}
         </button>
     );
 }

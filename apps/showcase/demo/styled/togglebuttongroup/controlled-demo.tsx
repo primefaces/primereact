@@ -16,22 +16,22 @@ export default function ControlledDemo() {
             >
                 <ToggleButton.Root value="left">
                     <ToggleButton.Indicator>
-                        <i className="pi pi-align-left"></i>
+                        <i className="pi pi-align-left" />
                     </ToggleButton.Indicator>
                 </ToggleButton.Root>
                 <ToggleButton.Root value="center">
                     <ToggleButton.Indicator>
-                        <i className="pi pi-align-center"></i>
+                        <i className="pi pi-align-center" />
                     </ToggleButton.Indicator>
                 </ToggleButton.Root>
                 <ToggleButton.Root value="right">
                     <ToggleButton.Indicator>
-                        <i className="pi pi-align-right"></i>
+                        <i className="pi pi-align-right" />
                     </ToggleButton.Indicator>
                 </ToggleButton.Root>
                 <ToggleButton.Root value="justify">
                     <ToggleButton.Indicator>
-                        <i className="pi pi-align-justify"></i>
+                        <i className="pi pi-align-justify" />
                     </ToggleButton.Indicator>
                 </ToggleButton.Root>
             </ToggleButtonGroup>

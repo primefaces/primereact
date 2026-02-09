@@ -1,4 +1,9 @@
 'use client';
+import { ArrowsH, ArrowsV, Download, Replay, SearchPlus } from '@primeicons/react';
+import { ArrowLeft } from '@primeicons/react/arrow-left';
+import { ArrowRight } from '@primeicons/react/arrow-right';
+import { Refresh } from '@primeicons/react/refresh';
+import { Times } from '@primeicons/react/times';
 import { usePresence } from '@primereact/hooks';
 import { useGalleryChangeEvent } from '@primereact/types/shared/gallery';
 import { Gallery } from '@primereact/ui/gallery';
@@ -51,32 +56,32 @@ function BasicDemo() {
                         >
                             <Gallery.Backdrop />
                             <Gallery.Prev>
-                                <i className="pi pi-arrow-left"></i>
+                                <ArrowLeft></ArrowLeft>
                             </Gallery.Prev>
                             <Gallery.Next>
-                                <i className="pi pi-arrow-right"></i>
+                                <ArrowRight></ArrowRight>
                             </Gallery.Next>
                             <Gallery.Toolbar>
                                 <Gallery.ToolbarItem action="rotateLeft">
-                                    <i className="pi pi-replay"></i>
+                                    <Replay />
                                 </Gallery.ToolbarItem>
                                 <Gallery.ToolbarItem action="rotateRight">
-                                    <i className="pi pi-refresh"></i>
+                                    <Refresh />
                                 </Gallery.ToolbarItem>
                                 <Gallery.ToolbarItem action="zoomIn">
-                                    <i className="pi pi-search-plus"></i>
+                                    <SearchPlus />
                                 </Gallery.ToolbarItem>
                                 <Gallery.ToolbarItem action="flipX">
-                                    <i className="pi pi-arrows-h"></i>
+                                    <ArrowsH />
                                 </Gallery.ToolbarItem>
                                 <Gallery.ToolbarItem action="flipY">
-                                    <i className="pi pi-arrows-v"></i>
+                                    <ArrowsV />
                                 </Gallery.ToolbarItem>
                                 <Gallery.ToolbarItem action="download">
-                                    <i className="pi pi-download"></i>
+                                    <Download />
                                 </Gallery.ToolbarItem>
                                 <Gallery.ToolbarItem onClick={() => setOpen(false)}>
-                                    <i className="pi pi-times"></i>
+                                    <Times />
                                 </Gallery.ToolbarItem>
                             </Gallery.Toolbar>
                             <Gallery.Content>

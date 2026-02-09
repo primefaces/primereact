@@ -1,3 +1,9 @@
+import { Check } from '@primeicons/react/check';
+import { Cog } from '@primeicons/react/cog';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { Search } from '@primeicons/react/search';
+import { Times } from '@primeicons/react/times';
+import { User } from '@primeicons/react/user';
 import { Tag } from '@primereact/ui/tag';
 
 export default function IconDemo() {
@@ -5,31 +11,31 @@ export default function IconDemo() {
         <div className="flex flex-col items-center gap-4">
             <div className="flex flex-wrap justify-center gap-2">
                 <Tag>
-                    <i className="pi pi-user"></i>
+                    <User></User>
                     Primary
                 </Tag>
                 <Tag severity="secondary">
-                    <i className="pi pi-user" />
+                    <User />
                     Secondary
                 </Tag>
                 <Tag severity="success">
-                    <i className="pi pi-check" />
+                    <Check />
                     Success
                 </Tag>
                 <Tag severity="info">
-                    <i className="pi pi-search" />
+                    <Search />
                     Info
                 </Tag>
                 <Tag severity="warn">
-                    <i className="pi pi-exclamation-triangle" />
+                    <ExclamationTriangle />
                     Warn
                 </Tag>
                 <Tag severity="danger">
-                    <i className="pi pi-times" />
+                    <Times />
                     Danger
                 </Tag>
                 <Tag severity="contrast">
-                    <i className="pi pi-cog" />
+                    <Cog />
                     Contrast
                 </Tag>
             </div>

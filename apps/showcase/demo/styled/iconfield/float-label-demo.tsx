@@ -4,6 +4,7 @@ import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
+import { Search } from '@primeicons/react/search';
 
 export default function FloatLabelDemo() {
     const [value1, setValue1] = React.useState('');
@@ -15,7 +16,7 @@ export default function FloatLabelDemo() {
             <FloatLabel>
                 <IconField.Root>
                     <IconField.Icon>
-                        <i className="pi pi-search" />
+                        <Search />
                     </IconField.Icon>
                     <InputText
                         value={value1}
@@ -30,7 +31,7 @@ export default function FloatLabelDemo() {
             <FloatLabel variant="in">
                 <IconField.Root>
                     <IconField.Icon>
-                        <i className="pi pi-search" />
+                        <Search />
                     </IconField.Icon>
                     <InputText
                         value={value2}
@@ -46,7 +47,7 @@ export default function FloatLabelDemo() {
             <FloatLabel variant="on">
                 <IconField.Root>
                     <IconField.Icon>
-                        <i className="pi pi-search" />
+                        <Search />
                     </IconField.Icon>
                     <InputText
                         value={value3}

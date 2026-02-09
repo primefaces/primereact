@@ -1,5 +1,5 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { Times } from '@primeicons/react/times';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 
 export default function BasicDemo() {
@@ -11,11 +11,11 @@ export default function BasicDemo() {
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Edit Profile</ConfirmDialog.Title>
                         <ConfirmDialog.Close>
-                            <TimesIcon />
+                            <Times />
                         </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
-                        <i className="pi pi-exclamation-triangle text-2xl" />
+                        <ExclamationTriangle className="text-2xl" />
                         <ConfirmDialog.Message>Are you sure you want to proceed?</ConfirmDialog.Message>
                     </ConfirmDialog.Content>
                     <ConfirmDialog.Footer>
@@ -32,7 +32,7 @@ export default function BasicDemo() {
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Danger Zone</ConfirmDialog.Title>
                         <ConfirmDialog.Close>
-                            <TimesIcon />
+                            <Times />
                         </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>

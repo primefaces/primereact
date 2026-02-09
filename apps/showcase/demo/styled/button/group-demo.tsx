@@ -1,20 +1,23 @@
 import { Button } from '@primereact/ui/button';
 import { ButtonGroup } from '@primereact/ui/buttongroup';
+import { Check } from '@primeicons/react/check';
+import { Times } from '@primeicons/react/times';
+import { Trash } from '@primeicons/react/trash';
 
 export default function GroupDemo() {
     return (
         <div className="flex justify-center">
             <ButtonGroup>
                 <Button>
-                    <i className="pi pi-check" />
+                    <Check />
                     Save
                 </Button>
                 <Button>
-                    <i className="pi pi-trash" />
+                    <Trash />
                     Delete
                 </Button>
                 <Button>
-                    <i className="pi pi-times" />
+                    <Times />
                     Cancel
                 </Button>
             </ButtonGroup>

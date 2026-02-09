@@ -1,11 +1,13 @@
 import { Carousel } from '@primereact/ui/carousel';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import { ChevronUp } from '@primeicons/react/chevron-up';
 
 function SizeDemo() {
     return (
         <div className="mt-8 mb-16">
             <Carousel.Root className="max-w-sm mx-auto flex flex-col gap-8 items-center" orientation="vertical" slidesPerPage={1.3}>
                 <Carousel.Prev className="w-10 h-10 flex items-center justify-center rounded-full border border-surface bg-surface-0 dark:bg-surface-800 text-surface-500 dark:text-surface-400 hover:opacity-75 cursor-pointer transition-opacity">
-                    <i className="pi pi-chevron-up text-lg"></i>
+                    <ChevronUp className="text-lg"></ChevronUp>
                 </Carousel.Prev>
                 <Carousel.Content className="h-[240px] w-full">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -17,7 +19,7 @@ function SizeDemo() {
                     ))}
                 </Carousel.Content>
                 <Carousel.Next className="w-10 h-10 flex items-center justify-center rounded-full border border-surface bg-surface-0 dark:bg-surface-800 text-surface-500 dark:text-surface-400 hover:opacity-75 cursor-pointer transition-opacity">
-                    <i className="pi pi-chevron-down text-lg"></i>
+                    <ChevronDown className="text-lg"></ChevronDown>
                 </Carousel.Next>
             </Carousel.Root>
         </div>

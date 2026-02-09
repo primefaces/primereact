@@ -1,5 +1,5 @@
 'use client';
-import { AngleRightIcon } from '@primereact/icons';
+import { AngleRight } from '@primeicons/react/angle-right';
 import { TerminalCommandInstance, TerminalResponse, TerminalRootInstance } from '@primereact/types/shared/terminal';
 import { Terminal } from '@primereact/ui/terminal';
 
@@ -97,7 +97,7 @@ export default function TemplateDemo() {
                                     {(commandInstance: TerminalCommandInstance) => (
                                         <div className="flex flex-col gap-1">
                                             <div className="flex items-center">
-                                                <AngleRightIcon className="text-xs text-green-500 me-2" />
+                                                <AngleRight className="text-xs text-green-500 me-2" />
                                                 <Terminal.CommandValue />
                                             </div>
                                             {commandInstance.command?.response && (
@@ -113,7 +113,7 @@ export default function TemplateDemo() {
 
                         <Terminal.Prompt>
                             <Terminal.PromptLabel>
-                                <AngleRightIcon className="text-xs text-green-500 me-2" />
+                                <AngleRight className="text-xs text-green-500 me-2" />
                             </Terminal.PromptLabel>
                             <Terminal.PromptValue />
                         </Terminal.Prompt>

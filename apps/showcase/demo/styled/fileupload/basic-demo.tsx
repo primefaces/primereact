@@ -1,4 +1,6 @@
 'use client';
+import { Plus } from '@primeicons/react/plus';
+import { Times } from '@primeicons/react/times';
 import { toast } from '@primereact/headless/toast';
 import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
@@ -35,7 +37,7 @@ export default function BasicDemo() {
                             <div className="flex justify-between">
                                 <div className="flex flex-wrap items-center gap-3">
                                     <Button onClick={instance.choose}>
-                                        <i className="pi pi-plus" />
+                                        <Plus />
                                         Choose
                                     </Button>
                                     <span>{instance.hasFiles ? instance.state.files.map((file) => file.name).join(', ') : 'No file chosen'}</span>
@@ -68,7 +70,7 @@ export default function BasicDemo() {
                                     size="small"
                                     className={'absolute top-2 right-2'}
                                 >
-                                    <i className="pi pi-times"></i>
+                                    <Times></Times>
                                 </Toast.Close>
                             </Toast.Item>
                         ))

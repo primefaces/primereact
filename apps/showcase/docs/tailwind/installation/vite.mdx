@@ -9,7 +9,7 @@ description: Setting up PrimeReact in a Vite project.
     <span className='text-2xl font-semibold'>Quickstart your project with our PrimeReact + Vite template</span>
     <div>Use this Vite template pre-configured with PrimeReact to quickly start building your app with ready-to-use UI components and styles.</div>
     <div className='flex items-center gap-2 text-surface-500 dark:text-surface-400'>
-        <i className='pi pi-github opacity-75' />
+        <Github className="opacity-75" />
         <span>github.com/primefaces/primereact-examples</span>
     </div>
 </DocLinkCard>
@@ -91,6 +91,7 @@ Each component can be imported and registered individually so that you only incl
 
 ```tsx showLineNumbers {1,6}
 import { Button } from 'primereact/button';
+import { Github } from '@primeicons/react/github';
 
 export default function VerifyInstallation() {
     return (

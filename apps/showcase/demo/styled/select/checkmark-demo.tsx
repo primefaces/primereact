@@ -1,8 +1,8 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const themes = [
     { label: 'Light', value: 'light', icon: '☀️', description: 'Clean and bright interface' },
@@ -31,7 +31,7 @@ export default function CheckmarkDemo() {
                     </span>
                 </Select.Trigger>
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
                 <Select.Portal>
                     <Select.List>

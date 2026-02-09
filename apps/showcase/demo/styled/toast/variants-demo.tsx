@@ -3,6 +3,7 @@ import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from '@primereact/ui/button';
 import { Toast } from '@primereact/ui/toast';
+import { Times } from '@primeicons/react/times';
 
 function VariantsToast() {
     return (
@@ -28,7 +29,7 @@ function VariantsToast() {
                                     size="small"
                                     className={'absolute top-2 right-2'}
                                 >
-                                    <i className="pi pi-times"></i>
+                                    <Times></Times>
                                 </Toast.Close>
                             </Toast.Item>
                         ))

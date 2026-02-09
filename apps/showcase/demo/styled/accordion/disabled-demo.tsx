@@ -1,5 +1,4 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons/chevrondown';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import { Accordion } from '@primereact/ui/accordion';
 
 export default function DisabledDemo() {
@@ -10,7 +9,7 @@ export default function DisabledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             How do I reset my password?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -24,7 +23,7 @@ export default function DisabledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             Do you offer team accounts?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -40,7 +39,7 @@ export default function DisabledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             What happens if I exceed my usage limit?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -54,7 +53,7 @@ export default function DisabledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             Is there a mobile app available?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>

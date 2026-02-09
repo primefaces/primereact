@@ -4,6 +4,7 @@ import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
+import { User } from '@primeicons/react/user';
 
 export default function FloatLabelDemo() {
     const [value1, setValue1] = React.useState('');
@@ -14,7 +15,7 @@ export default function FloatLabelDemo() {
         <div className="space-y-4 max-w-xs mx-auto">
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <i className="pi pi-user"></i>
+                    <User></User>
                 </InputGroup.Addon>
                 <FloatLabel>
                     <InputText id="over_label" value={value1} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue1(e.currentTarget.value)} />

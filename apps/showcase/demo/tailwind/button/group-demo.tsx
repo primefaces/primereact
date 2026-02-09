@@ -1,34 +1,37 @@
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/buttongroup';
+import { Check } from '@primeicons/react/check';
+import { Times } from '@primeicons/react/times';
+import { Trash } from '@primeicons/react/trash';
 
 export default function GroupDemo() {
     return (
         <div className="flex flex-col items-center justify-center gap-8">
             <ButtonGroup>
                 <Button>
-                    <i className="pi pi-check" />
+                    <Check />
                     Save
                 </Button>
                 <Button>
-                    <i className="pi pi-trash" />
+                    <Trash />
                     Delete
                 </Button>
                 <Button>
-                    <i className="pi pi-times" />
+                    <Times />
                     Cancel
                 </Button>
             </ButtonGroup>
             <ButtonGroup>
                 <Button variant="outlined">
-                    <i className="pi pi-check" />
+                    <Check />
                     Save
                 </Button>
                 <Button variant="outlined">
-                    <i className="pi pi-trash" />
+                    <Trash />
                     Delete
                 </Button>
                 <Button variant="outlined">
-                    <i className="pi pi-times" />
+                    <Times />
                     Cancel
                 </Button>
             </ButtonGroup>

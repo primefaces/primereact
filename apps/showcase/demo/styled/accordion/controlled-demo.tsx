@@ -1,5 +1,5 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons/chevrondown';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import type { AccordionRootValueChangeEvent } from '@primereact/types/shared/accordion';
 import { Accordion } from '@primereact/ui/accordion';
 import { Button } from '@primereact/ui/button';
@@ -33,7 +33,7 @@ export default function ControlledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             What is this service about?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -47,7 +47,7 @@ export default function ControlledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             Is my data secure?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -61,7 +61,7 @@ export default function ControlledDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             Can I upgrade or downgrade my plan later?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>

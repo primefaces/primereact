@@ -1,5 +1,5 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { SignOut } from '@primeicons/react';
+import { Times } from '@primeicons/react/times';
 import { Avatar } from '@primereact/ui/avatar';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 
@@ -8,14 +8,14 @@ export default function LogoutDemo() {
         <div className="flex justify-center">
             <ConfirmDialog.Root>
                 <ConfirmDialog.Trigger variant="text" severity="secondary">
-                    <i className="pi pi-sign-out" />
+                    <SignOut />
                     Sign Out
                 </ConfirmDialog.Trigger>
                 <ConfirmDialog.Portal style={{ width: '24rem' }}>
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Sign Out</ConfirmDialog.Title>
                         <ConfirmDialog.Close>
-                            <TimesIcon />
+                            <Times />
                         </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
@@ -35,7 +35,7 @@ export default function LogoutDemo() {
                     </ConfirmDialog.Content>
                     <ConfirmDialog.Footer className="flex-col gap-2">
                         <ConfirmDialog.Action className="w-full justify-center">
-                            <i className="pi pi-sign-out" />
+                            <SignOut />
                             Sign Out
                         </ConfirmDialog.Action>
                         <ConfirmDialog.Cancel variant="text" className="w-full justify-center">

@@ -1,5 +1,5 @@
-import { ChevronDownIcon } from '@primereact/icons';
 import { Select } from '@primereact/ui/select';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -15,7 +15,7 @@ export default function DisabledDemo() {
             <Select.Root options={cities} optionLabel="name" disabled className="w-full md:w-56">
                 <Select.Trigger placeholder="Select a City" />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
 
                 <Select.Portal>

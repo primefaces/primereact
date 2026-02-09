@@ -40,7 +40,7 @@ export default function CustomSelectionDemo() {
                                                 'pi pi-star-fill opacity-80': isSelected,
                                                 'pi pi-star': !isSelected
                                             })}
-                                        ></i>
+                                        />
                                     </div>
                                 </Listbox.Option>
                             );

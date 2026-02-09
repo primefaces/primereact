@@ -1,5 +1,6 @@
 'use client';
-import { MinusIcon, PlusIcon } from '@primereact/icons';
+import { Minus } from '@primeicons/react/minus';
+import { Plus } from '@primeicons/react/plus';
 import type { FieldsetTriggerInstance } from '@primereact/types/shared/fieldset';
 import { Fieldset } from '@primereact/ui/fieldset';
 
@@ -13,7 +14,7 @@ export default function ToggleableDemo() {
 
                         return (
                             <>
-                                {open ? <MinusIcon /> : <PlusIcon />}
+                                {open ? <Minus /> : <Plus />}
                                 <Fieldset.Title>Legend</Fieldset.Title>
                             </>
                         );

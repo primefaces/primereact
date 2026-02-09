@@ -1,4 +1,6 @@
 'use client';
+import { ArrowLeft } from '@primeicons/react/arrow-left';
+import { ArrowRight } from '@primeicons/react/arrow-right';
 import { PaginatorPagesInstance } from '@primereact/types/shared/paginator';
 import { Paginator } from 'primereact/paginator';
 
@@ -9,7 +11,7 @@ function CustomizationDemo() {
                 <Paginator.Content>
                     <Paginator.First className="min-w-auto px-3 py-2 rounded-md">First</Paginator.First>
                     <Paginator.Prev className="rounded-md border border-surface">
-                        <i className="pi pi-arrow-left text-sm" />
+                        <ArrowLeft className="text-sm" />
                     </Paginator.Prev>
                     <Paginator.Pages>
                         {({ paginator }: PaginatorPagesInstance) =>
@@ -23,7 +25,7 @@ function CustomizationDemo() {
                         }
                     </Paginator.Pages>
                     <Paginator.Next className="rounded-md border border-surface">
-                        <i className="pi pi-arrow-right text-sm" />
+                        <ArrowRight className="text-sm" />
                     </Paginator.Next>
                     <Paginator.Last className="min-w-auto px-3 py-2 rounded-md">Last</Paginator.Last>
                 </Paginator.Content>

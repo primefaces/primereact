@@ -2,6 +2,8 @@
 import { TerminalCommandItem, TerminalResponse, TerminalRootInstance } from '@primereact/types/shared/terminal';
 import { Terminal } from '@primereact/ui/terminal';
 import * as React from 'react';
+import { Sparkles } from '@primeicons/react/sparkles';
+import { User } from '@primeicons/react/user';
 
 const responses: Record<string, string> = {
     hello: "Hello! I'm your AI assistant. How can I help you today?",
@@ -44,7 +46,7 @@ export default function AssistantDemo() {
                         <Terminal.Welcome className="sticky top-0 z-10 bg-inherit py-3">
                             <div className="flex items-center gap-3 pb-2 border-b border-surface-200 dark:border-surface-700">
                                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-contrast">
-                                    <i className="pi pi-sparkles text-sm" />
+                                    <Sparkles className="text-sm" />
                                 </div>
                                 <div>
                                     <div className="font-semibold">PrimeReact Assistant</div>
@@ -58,14 +60,14 @@ export default function AssistantDemo() {
                                 <div key={index} className="flex flex-col gap-2">
                                     <div className="flex items-start gap-2">
                                         <div className="flex items-center justify-center w-6 h-6 rounded-full bg-surface-200 dark:bg-surface-700 shrink-0 mt-0.5">
-                                            <i className="pi pi-user text-xs" />
+                                            <User className="text-xs" />
                                         </div>
                                         <span className="self-center">{command.text}</span>
                                     </div>
                                     {command.response && (
                                         <div className="flex items-start gap-2">
                                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary shrink-0 mt-0.5">
-                                                <i className="pi pi-sparkles text-xs text-primary-contrast" />
+                                                <Sparkles className="text-xs text-primary-contrast" />
                                             </div>
                                             <div className="flex-1 whitespace-pre-wrap self-center">{command.response}</div>
                                         </div>
@@ -75,7 +77,7 @@ export default function AssistantDemo() {
                             {isTyping && (
                                 <div className="flex items-center gap-2">
                                     <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary shrink-0">
-                                        <i className="pi pi-sparkles text-xs text-primary-contrast" />
+                                        <Sparkles className="text-xs text-primary-contrast" />
                                     </div>
                                     <div className="flex gap-1">
                                         <span className="w-2 h-2 bg-muted-color rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />

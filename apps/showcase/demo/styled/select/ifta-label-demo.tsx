@@ -1,8 +1,7 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import { IftaLabel } from '@primereact/ui/iftalabel';
 import { Label } from '@primereact/ui/label';
 import { Select } from '@primereact/ui/select';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -19,7 +18,7 @@ export default function IftaLabelDemo() {
                 <Select.Root options={cities} optionLabel="name" variant="filled" className="w-full md:w-56">
                     <Select.Trigger id="select" />
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
 
                     <Select.Portal>

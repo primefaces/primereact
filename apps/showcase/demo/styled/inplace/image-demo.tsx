@@ -1,10 +1,11 @@
+import { Image as ImageIcon } from '@primeicons/react';
 import { Inplace } from '@primereact/ui/inplace';
 
 export default function ImageDemo() {
     return (
         <Inplace.Root>
             <Inplace.Display>
-                <span className="pi pi-image mr-2"></span>
+                <ImageIcon className="mr-2" />
                 <span>View Photo</span>
             </Inplace.Display>
             <Inplace.Content>

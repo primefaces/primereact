@@ -1,5 +1,8 @@
 'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { Bars } from '@primeicons/react/bars';
+import { Cog } from '@primeicons/react/cog';
+import { Search } from '@primeicons/react/search';
+import { Times } from '@primeicons/react/times';
 import { Avatar } from '@primereact/ui/avatar';
 import { Badge } from '@primereact/ui/badge';
 import { Button } from '@primereact/ui/button';
@@ -42,13 +45,13 @@ export default function BasicDemo() {
         <div className="flex justify-center">
             <Drawer.Root>
                 <Drawer.Trigger iconOnly>
-                    <i className="pi pi-bars" />
+                    <Bars />
                 </Drawer.Trigger>
                 <Drawer.Portal className="w-full md:w-80">
                     <Drawer.Header>
                         <Drawer.Title>Drawer Title</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content pt={{ root: 'p-0' }}>
@@ -57,7 +60,7 @@ export default function BasicDemo() {
                             <div className="px-4 pb-4">
                                 <IconField.Root>
                                     <IconField.Icon>
-                                        <i className="pi pi-search" />
+                                        <Search />
                                     </IconField.Icon>
                                     <InputText
                                         value={search}
@@ -134,7 +137,7 @@ export default function BasicDemo() {
                                 <span className="text-xs text-surface-500 truncate">sarah@primetek.com</span>
                             </div>
                             <Button iconOnly variant="text" severity="secondary" size="small" rounded>
-                                <i className="pi pi-cog text-sm" />
+                                <Cog className="text-sm" />
                             </Button>
                         </div>
                     </Drawer.Footer>

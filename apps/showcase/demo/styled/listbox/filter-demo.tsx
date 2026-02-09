@@ -4,6 +4,7 @@ import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { Listbox } from '@primereact/ui/listbox';
 import { useMemo, useState } from 'react';
+import { Search } from '@primeicons/react/search';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -37,7 +38,7 @@ export default function FilterDemo() {
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                         />
                         <IconField.Icon>
-                            <i className="pi pi-search" />
+                            <Search />
                         </IconField.Icon>
                     </IconField.Root>
                 </Listbox.Header>

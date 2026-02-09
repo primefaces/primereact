@@ -1,8 +1,8 @@
 'use client';
-import { TimesIcon } from '@primereact/icons';
 import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
 import * as React from 'react';
+import { Times } from '@primeicons/react/times';
 
 interface Recipe {
     id: number;
@@ -41,7 +41,7 @@ export default function ClearIconDemo() {
                 <AutoComplete.Input placeholder="Search recipes..." className="w-64" />
 
                 <AutoComplete.ClearIcon>
-                    <TimesIcon className="align-text-top!" />
+                    <Times className="align-text-top!" />
                 </AutoComplete.ClearIcon>
 
                 <AutoComplete.Portal>

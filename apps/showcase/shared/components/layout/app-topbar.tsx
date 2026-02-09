@@ -1,14 +1,16 @@
 'use client';
+import appConfig from '@/app.config';
 import { useApp } from '@/shared/hooks/useApp';
 import useScroll from '@/shared/hooks/useScroll';
+import { AngleDown } from '@primeicons/react/angle-down';
+import { Github } from '@primeicons/react/github';
 import { cn } from '@primeuix/utils';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
-import AppConfigurator from './app-configurator';
-import { usePathname } from 'next/navigation';
 import { PrimeReactLogo, PrimeReactText } from '../logo';
-import appConfig from '@/app.config';
+import AppConfigurator from './app-configurator';
 import AppMobileMenu from './app-mobile-menu';
 
 export default function AppTopbar() {
@@ -54,16 +56,16 @@ export default function AppTopbar() {
                 </div>
                 <div className="flex-1 flex items-center justify-end gap-1.5">
                     <AppTopbarButton as="a" href="https://github.com/primefaces/primereact" target="_blank" rel="noopener noreferrer" aria-label="PrimeReact GitHub">
-                        <i className="pi pi-github"></i>
+                        <Github></Github>
                     </AppTopbarButton>
                     <AppTopbarButton as="a" href="https://discord.gg/gzKFYnpmCY" target="_blank" rel="noopener noreferrer" aria-label="Join PrimeReact Discord">
-                        <i className="pi pi-discord"></i>
+                        <i className="pi pi-discord" />
                     </AppTopbarButton>
                     <AppTopbarButton as="a" href="https://github.com/orgs/primefaces/discussions" target="_blank" rel="noopener noreferrer" aria-label="PrimeReact Discussions">
-                        <i className="pi pi-comments"></i>
+                        <i className="pi pi-comments" />
                     </AppTopbarButton>
                     <AppTopbarButton onClick={toggleDarkMode} aria-label="Toggle Dark Mode">
-                        <i className={cn('pi', { 'pi-moon': isDarkTheme, 'pi-sun': !isDarkTheme })}></i>
+                        <i className={cn('pi', { 'pi-moon': isDarkTheme, 'pi-sun': !isDarkTheme })} />
                     </AppTopbarButton>
                     <div className="relative">
                         <StyleClass
@@ -77,7 +79,7 @@ export default function AppTopbar() {
                             leaveActiveClassName="animate-fadeout"
                             hideOnOutsideClick
                         >
-                            <i className="pi pi-palette"></i>
+                            <i className="pi pi-palette" />
                         </StyleClass>
 
                         <AppConfigurator />
@@ -94,7 +96,7 @@ export default function AppTopbar() {
                             hideOnOutsideClick
                         >
                             {appConfig.versions?.[0].name}
-                            <i className="pi pi-angle-down" />
+                            <AngleDown />
                         </StyleClass>
 
                         <div className="hidden absolute origin-top top-[calc(100%+4px)] bg-(--overlay-background) p-1 rounded-md border border-surface space-y-0.5 shadow-md" style={{ insetInlineEnd: 0 }}>

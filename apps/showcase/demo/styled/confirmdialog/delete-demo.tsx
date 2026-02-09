@@ -1,5 +1,6 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { Times } from '@primeicons/react/times';
+import { Trash } from '@primeicons/react/trash';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
 import { Tag } from '@primereact/ui/tag';
 import Image from 'next/image';
@@ -9,14 +10,14 @@ export default function DeleteDemo() {
         <div className="flex justify-center">
             <ConfirmDialog.Root>
                 <ConfirmDialog.Trigger severity="danger" variant="outlined">
-                    <i className="pi pi-trash" />
+                    <Trash />
                     Delete Product
                 </ConfirmDialog.Trigger>
                 <ConfirmDialog.Portal style={{ width: '28rem' }}>
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Delete Product</ConfirmDialog.Title>
                         <ConfirmDialog.Close>
-                            <TimesIcon />
+                            <Times />
                         </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
@@ -41,7 +42,7 @@ export default function DeleteDemo() {
                                 </div>
                             </div>
                             <div className="flex items-start gap-3 p-3 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
-                                <i className="pi pi-exclamation-triangle text-orange-500 mt-0.5" />
+                                <ExclamationTriangle className="text-orange-500 mt-0.5" />
                                 <div>
                                     <p className="font-medium text-orange-700 dark:text-orange-300 text-sm m-0">Warning</p>
                                     <p className="text-orange-600 dark:text-orange-400 text-xs mt-1 mb-0">
@@ -54,7 +55,7 @@ export default function DeleteDemo() {
                     <ConfirmDialog.Footer>
                         <ConfirmDialog.Cancel variant="outlined">Cancel</ConfirmDialog.Cancel>
                         <ConfirmDialog.Action severity="danger">
-                            <i className="pi pi-trash" />
+                            <Trash />
                             Delete Product
                         </ConfirmDialog.Action>
                     </ConfirmDialog.Footer>

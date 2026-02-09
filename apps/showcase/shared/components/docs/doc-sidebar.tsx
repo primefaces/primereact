@@ -37,7 +37,7 @@ export default function DocSidebar() {
                                 <TailwindLogoIcon className="w-4.5 h-auto absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 fill-surface-500 dark:fill-surface-400 group-hover:fill-surface-900 dark:group-hover:fill-surface-0 group-data-active:fill-primary!" />
                             </span>
                         ) : (
-                            <i className={`pi ${nav.icon} text-sm!`}></i>
+                            <i className={`pi ${nav.icon} text-sm!`} />
                         )}
                         {nav.name}
                     </Link>
@@ -68,7 +68,7 @@ export default function DocSidebar() {
                                                     {child.badge}
                                                 </span>
                                             )}
-                                            {isExternalLink && <i className="pi pi-arrow-up-right ml-auto mr-0 text-xs! opacity-60"></i>}
+                                            {isExternalLink && <i className="pi pi-arrow-up-right ml-auto mr-0 text-xs! opacity-60" />}
                                         </Link>
                                     </li>
                                 );

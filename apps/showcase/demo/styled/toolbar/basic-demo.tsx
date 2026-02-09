@@ -1,6 +1,8 @@
 import { Button } from '@primereact/ui/button';
 import { InputText } from '@primereact/ui/inputtext';
 import { Toolbar } from '@primereact/ui/toolbar';
+import { Plus } from '@primeicons/react/plus';
+import { Upload } from '@primeicons/react/upload';
 
 export default function BasicDemo() {
     return (
@@ -8,13 +10,13 @@ export default function BasicDemo() {
             <Toolbar.Root>
                 <Toolbar.Start>
                     <Button className="mr-2" severity="secondary" variant="text">
-                        <i className="pi pi-plus"></i>
+                        <Plus></Plus>
                     </Button>
                     <Button className="mr-2" severity="secondary" variant="text">
-                        <i className="pi pi-print"></i>
+                        <i className="pi pi-print" />
                     </Button>
                     <Button severity="secondary" variant="text">
-                        <i className="pi pi-upload"></i>
+                        <Upload></Upload>
                     </Button>
                 </Toolbar.Start>
                 <Toolbar.Center>

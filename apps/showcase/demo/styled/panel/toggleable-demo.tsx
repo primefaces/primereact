@@ -1,5 +1,4 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons/chevrondown';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import { Panel } from '@primereact/ui/panel';
 
 export default function ToggleableDemo() {
@@ -8,7 +7,7 @@ export default function ToggleableDemo() {
             <Panel.Header>
                 <Panel.Title>Header</Panel.Title>
                 <Panel.Trigger>
-                    <ChevronDownIcon className="transition-transform duration-200 [[data-open]_&]:rotate-180" />
+                    <ChevronDown className="transition-transform duration-200 [[data-open]_&]:rotate-180" />
                 </Panel.Trigger>
             </Panel.Header>
             <Panel.Content>

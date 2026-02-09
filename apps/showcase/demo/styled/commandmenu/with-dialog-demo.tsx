@@ -107,7 +107,7 @@ export default function BasicDemo() {
                                                         <div
                                                             className={`w-5 h-5 rounded-md ${item.color} flex items-center justify-center text-white`}
                                                         >
-                                                            <i className={`pi ${item.icon} text-xs font-bold`}></i>
+                                                            <i className={`pi ${item.icon} text-xs font-bold`} />
                                                         </div>
                                                         <span>{item.label}</span>
                                                         <span className="opacity-50 ml-auto">{item.category}</span>

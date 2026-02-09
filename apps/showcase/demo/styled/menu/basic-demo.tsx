@@ -1,4 +1,8 @@
 import { Menu } from '@primereact/ui/menu';
+import { CheckCircle } from '@primeicons/react/check-circle';
+import { Folder } from '@primeicons/react/folder';
+import { Home } from '@primeicons/react/home';
+import { Star } from '@primeicons/react/star';
 
 export default function Basic() {
     return (
@@ -6,7 +10,7 @@ export default function Basic() {
             <Menu.Root className="w-64">
                 <Menu.List>
                     <Menu.Item>
-                        <i className="pi pi-home" />
+                        <Home />
                         Dashboard
                     </Menu.Item>
 
@@ -21,7 +25,7 @@ export default function Basic() {
 
                     <Menu.Sub defaultOpen={true}>
                         <Menu.Trigger>
-                            <i className="pi pi-folder" />
+                            <Folder />
                             Projects
                             <Menu.Icon />
                         </Menu.Trigger>
@@ -35,11 +39,11 @@ export default function Basic() {
                                 Recent
                             </Menu.Item>
                             <Menu.Item>
-                                <i className="pi pi-star" />
+                                <Star />
                                 Favorites
                             </Menu.Item>
                             <Menu.Item>
-                                <i className="pi pi-check-circle" />
+                                <CheckCircle />
                                 Completed
                             </Menu.Item>
                         </Menu.List>

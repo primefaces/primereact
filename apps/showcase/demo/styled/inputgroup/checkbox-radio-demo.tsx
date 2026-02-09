@@ -1,8 +1,8 @@
-import { CheckIcon } from '@primereact/icons';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
 import { RadioButton } from '@primereact/ui/radiobutton';
+import { Check } from '@primeicons/react/check';
 
 export default function CheckboxRadioDemo() {
     return (
@@ -22,7 +22,7 @@ export default function CheckboxRadioDemo() {
                 <InputGroup.Addon>
                     <Checkbox.Root>
                         <Checkbox.Box>
-                            <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                            <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                         </Checkbox.Box>
                     </Checkbox.Root>
                 </InputGroup.Addon>
@@ -33,7 +33,7 @@ export default function CheckboxRadioDemo() {
                 <InputGroup.Addon>
                     <Checkbox.Root>
                         <Checkbox.Box>
-                            <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                            <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                         </Checkbox.Box>
                     </Checkbox.Root>
                 </InputGroup.Addon>

@@ -1,9 +1,9 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import type { SelectOptionInstance, SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Avatar } from '@primereact/ui/avatar';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const teamMembers = [
     { id: 1, name: 'Sarah Chen', role: 'Engineering Lead', avatar: 'SC', status: 'away', className: 'bg-amber-400' },
@@ -39,7 +39,7 @@ export default function OptionDemo() {
                     )}
                 </Select.Trigger>
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
                 <Select.Portal>
                     <Select.List>

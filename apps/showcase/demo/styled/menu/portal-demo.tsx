@@ -1,5 +1,9 @@
 import { Avatar } from '@primereact/ui/avatar';
 import { Menu } from '@primereact/ui/menu';
+import { Bell } from '@primeicons/react/bell';
+import { Bookmark } from '@primeicons/react/bookmark';
+import { User } from '@primeicons/react/user';
+import { Shield } from '@primeicons/react/shield';
 
 export default function PortalDemo() {
     return (
@@ -26,19 +30,19 @@ export default function PortalDemo() {
                         <Menu.Separator />
 
                         <Menu.Item>
-                            <i className="pi pi-user" />
+                            <User />
                             Profile Settings
                         </Menu.Item>
                         <Menu.Item>
-                            <i className="pi pi-bell" />
+                            <Bell />
                             Notifications
                         </Menu.Item>
                         <Menu.Item>
-                            <i className="pi pi-bookmark" />
+                            <Bookmark />
                             Saved Items
                         </Menu.Item>
                         <Menu.Item>
-                            <i className="pi pi-shield" />
+                            <Shield />
                             Privacy & Security
                         </Menu.Item>
                         <Menu.Item>

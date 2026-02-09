@@ -1,5 +1,6 @@
 'use client';
-import { MinusIcon, PlusIcon } from '@primereact/icons';
+import { Minus } from '@primeicons/react/minus';
+import { Plus } from '@primeicons/react/plus';
 import type { AccordionTriggerInstance } from '@primereact/types/shared/accordion';
 import { Accordion } from '@primereact/ui/accordion';
 
@@ -11,7 +12,7 @@ export default function TriggerDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full group">
                             What is this service about?
-                            <PlusIcon className="group-[[data-content-open]>&]:rotate-45 transition-transform ease-out" />
+                            <Plus className="group-[[data-content-open]>&]:rotate-45 transition-transform ease-out" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -25,7 +26,7 @@ export default function TriggerDemo() {
                     <Accordion.Header>
                         <p className="pl-4">Is my data secure?</p>
                         <Accordion.Trigger className="flex justify-between items-center">
-                            {({ accordionpanel }: AccordionTriggerInstance) => (accordionpanel?.active ? <MinusIcon /> : <PlusIcon />)}
+                            {({ accordionpanel }: AccordionTriggerInstance) => (accordionpanel?.active ? <Minus /> : <Plus />)}
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -38,7 +39,7 @@ export default function TriggerDemo() {
                 <Accordion.Panel value="3">
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-start items-center w-full gap-2">
-                            <PlusIcon className="[[data-content-open]>&]:rotate-45 transition-transform ease-out" />
+                            <Plus className="[[data-content-open]>&]:rotate-45 transition-transform ease-out" />
                             Can I upgrade or downgrade my plan later?
                         </Accordion.Trigger>
                     </Accordion.Header>

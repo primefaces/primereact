@@ -1,5 +1,5 @@
 'use client';
-import { TimesIcon } from '@primereact/icons';
+import { Times } from '@primeicons/react/times';
 import { PasswordValueChangeEvent, usePasswordProps } from '@primereact/types/shared/password';
 import { IconField } from '@primereact/ui/iconfield';
 import { Password } from '@primereact/ui/password';
@@ -12,7 +12,7 @@ export default function BasicDemo() {
         <div className="flex justify-center">
             <IconField.Root>
                 <Password className="w-56" value={value} onValueChange={(e: PasswordValueChangeEvent) => setValue(e.value)} />
-                <IconField.Icon>{value !== '' && <TimesIcon onClick={() => setValue('')} />}</IconField.Icon>
+                <IconField.Icon>{value !== '' && <Times onClick={() => setValue('')} />}</IconField.Icon>
             </IconField.Root>
         </div>
     );

@@ -6,6 +6,7 @@ import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
+import { Search } from '@primeicons/react/search';
 
 export default function FilterDemo() {
     const [nodes, setNodes] = React.useState<TreeNode[]>([]);
@@ -47,7 +48,7 @@ export default function FilterDemo() {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                     />
                     <IconField.Icon>
-                        <i className="pi pi-search" />
+                        <Search />
                     </IconField.Icon>
                 </IconField.Root>
             </Tree.Header>

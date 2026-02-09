@@ -1,5 +1,5 @@
 'use client';
-import { Icon } from '@primereact/core/icon';
+import { Bolt, ChevronDown, Desktop, Home } from '@primeicons/react';
 import { Badge } from '@primereact/ui/badge';
 import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import { Menu } from '@primereact/ui/menu';
@@ -17,7 +17,7 @@ export default function CustomItemDemo() {
                 <Breadcrumb.List>
                     <Breadcrumb.Item>
                         <Link href="#" className="flex items-center gap-2">
-                            <Icon className="pi pi-home" />
+                            <Home />
                             Home
                         </Link>
                     </Breadcrumb.Item>
@@ -28,14 +28,14 @@ export default function CustomItemDemo() {
                     <Breadcrumb.Separator />
                     <Breadcrumb.Item>
                         <Link href="#" className="flex items-center gap-2">
-                            <Icon className="pi pi-bolt" />
+                            <Bolt />
                             Electronics
                         </Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Separator />
                     <Breadcrumb.Item>
                         <Link href="#" className="flex items-center gap-2">
-                            <Icon className="pi pi-desktop" />
+                            <Desktop />
                             Computers
                         </Link>
                     </Breadcrumb.Item>
@@ -51,7 +51,7 @@ export default function CustomItemDemo() {
                         <Menu.Root>
                             <Menu.Trigger variant="text" className="flex items-center gap-2 px-0">
                                 {selectedBrand}
-                                <Icon className="pi pi-chevron-down text-xs" />
+                                <ChevronDown className="text-xs" />
                             </Menu.Trigger>
 
                             <Menu.Portal>

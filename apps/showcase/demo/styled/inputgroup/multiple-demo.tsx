@@ -1,3 +1,5 @@
+import { Clock } from '@primeicons/react';
+import { StarFill } from '@primeicons/react/star-fill';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputNumber } from '@primereact/ui/inputnumber';
 
@@ -6,10 +8,10 @@ export default function MultipleDemo() {
         <div className="max-w-sm mx-auto">
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <i className="pi pi-clock"></i>
+                    <Clock />
                 </InputGroup.Addon>
                 <InputGroup.Addon>
-                    <i className="pi pi-star-fill"></i>
+                    <StarFill></StarFill>
                 </InputGroup.Addon>
                 <InputNumber placeholder="Price" />
                 <InputGroup.Addon>$</InputGroup.Addon>

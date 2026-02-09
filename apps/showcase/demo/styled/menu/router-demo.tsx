@@ -2,6 +2,7 @@
 import { Menu } from '@primereact/ui/menu';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Home } from '@primeicons/react/home';
 
 export default function RouterDemo() {
     const router = useRouter();
@@ -23,7 +24,7 @@ export default function RouterDemo() {
                         Programmatic
                     </Menu.Item>
                     <Menu.Item as="a" href="https://react.dev/" target="_blank">
-                        <i className="pi pi-home" />
+                        <Home />
                         External
                     </Menu.Item>
                 </Menu.List>

@@ -1,6 +1,6 @@
 'use client';
-import { EyeIcon } from '@primereact/icons/eye';
-import { EyeSlashIcon } from '@primereact/icons/eyeslash';
+import { Eye } from '@primeicons/react/eye';
+import { EyeSlash } from '@primeicons/react/eye-slash';
 import { PasswordMaskChangeEvent, PasswordValueChangeEvent } from '@primereact/types/shared/password';
 import { IconField } from '@primereact/ui/iconfield';
 import { Password } from '@primereact/ui/password';
@@ -72,9 +72,9 @@ export default function PopoverDemo() {
                         />
                         <IconField.Icon>
                             {mask ? (
-                                <EyeIcon className="cursor-pointer" onClick={() => setMask(false)} />
+                                <Eye className="cursor-pointer" onClick={() => setMask(false)} />
                             ) : (
-                                <EyeSlashIcon className="cursor-pointer" onClick={() => setMask(true)} />
+                                <EyeSlash className="cursor-pointer" onClick={() => setMask(true)} />
                             )}
                         </IconField.Icon>
                     </IconField.Root>

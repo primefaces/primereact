@@ -1,3 +1,14 @@
+import { Briefcase, ChartLine, Clock, Database, Mobile, QuestionCircle, Sitemap, UserPlus } from '@primeicons/react';
+import { Bell } from '@primeicons/react/bell';
+import { CheckCircle } from '@primeicons/react/check-circle';
+import { Code } from '@primeicons/react/code';
+import { Cog } from '@primeicons/react/cog';
+import { Folder } from '@primeicons/react/folder';
+import { Home } from '@primeicons/react/home';
+import { Lock } from '@primeicons/react/lock';
+import { Shield } from '@primeicons/react/shield';
+import { Star } from '@primeicons/react/star';
+import { Users } from '@primeicons/react/users';
 import { ContextMenu } from '@primereact/ui/contextmenu';
 
 export default function BasicDemo() {
@@ -10,7 +21,7 @@ export default function BasicDemo() {
                 <ContextMenu.Portal>
                     <ContextMenu.List>
                         <ContextMenu.Item>
-                            <i className="pi pi-home" />
+                            <Home />
                             Dashboard
                         </ContextMenu.Item>
 
@@ -19,50 +30,50 @@ export default function BasicDemo() {
                         <ContextMenu.Label>Workspace</ContextMenu.Label>
 
                         <ContextMenu.Item>
-                            <i className="pi pi-chart-line" />
+                            <ChartLine />
                             Analytics
                         </ContextMenu.Item>
 
                         <ContextMenu.Sub>
                             <ContextMenu.Trigger>
-                                <i className="pi pi-folder" />
+                                <Folder />
                                 Projects
                                 <ContextMenu.Icon />
                             </ContextMenu.Trigger>
                             <ContextMenu.List>
                                 <ContextMenu.Item>
-                                    <i className="pi pi-briefcase" />
+                                    <Briefcase />
                                     Active Projects
                                 </ContextMenu.Item>
                                 <ContextMenu.Item>
-                                    <i className="pi pi-clock" />
+                                    <Clock />
                                     Recent
                                 </ContextMenu.Item>
 
                                 <ContextMenu.Sub>
                                     <ContextMenu.Trigger>
-                                        <i className="pi pi-star" />
+                                        <Star />
                                         Favorites
                                         <ContextMenu.Icon />
                                     </ContextMenu.Trigger>
                                     <ContextMenu.List>
                                         <ContextMenu.Item>
-                                            <i className="pi pi-code" />
+                                            <Code />
                                             Website Redesign
                                         </ContextMenu.Item>
                                         <ContextMenu.Item>
-                                            <i className="pi pi-mobile" />
+                                            <Mobile />
                                             Mobile App
                                         </ContextMenu.Item>
                                         <ContextMenu.Item>
-                                            <i className="pi pi-database" />
+                                            <Database />
                                             API Development
                                         </ContextMenu.Item>
                                     </ContextMenu.List>
                                 </ContextMenu.Sub>
 
                                 <ContextMenu.Item>
-                                    <i className="pi pi-check-circle" />
+                                    <CheckCircle />
                                     Completed
                                 </ContextMenu.Item>
                             </ContextMenu.List>
@@ -70,37 +81,37 @@ export default function BasicDemo() {
 
                         <ContextMenu.Sub>
                             <ContextMenu.Trigger>
-                                <i className="pi pi-users" />
+                                <Users />
                                 Team
                                 <ContextMenu.Icon />
                             </ContextMenu.Trigger>
                             <ContextMenu.List>
                                 <ContextMenu.Item>
-                                    <i className="pi pi-user-plus" />
+                                    <UserPlus />
                                     Add Member
                                 </ContextMenu.Item>
                                 <ContextMenu.Item>
-                                    <i className="pi pi-sitemap" />
+                                    <Sitemap />
                                     Organization
                                 </ContextMenu.Item>
 
                                 <ContextMenu.Sub>
                                     <ContextMenu.Trigger>
-                                        <i className="pi pi-cog" />
+                                        <Cog />
                                         Settings
                                         <ContextMenu.Icon />
                                     </ContextMenu.Trigger>
                                     <ContextMenu.List>
                                         <ContextMenu.Item>
-                                            <i className="pi pi-shield" />
+                                            <Shield />
                                             Permissions
                                         </ContextMenu.Item>
                                         <ContextMenu.Item>
-                                            <i className="pi pi-bell" />
+                                            <Bell />
                                             Notifications
                                         </ContextMenu.Item>
                                         <ContextMenu.Item>
-                                            <i className="pi pi-lock" />
+                                            <Lock />
                                             Privacy
                                         </ContextMenu.Item>
                                     </ContextMenu.List>
@@ -111,7 +122,7 @@ export default function BasicDemo() {
                         <ContextMenu.Separator />
 
                         <ContextMenu.Item>
-                            <i className="pi pi-question-circle" />
+                            <QuestionCircle />
                             Help & Support
                         </ContextMenu.Item>
                     </ContextMenu.List>

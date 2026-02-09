@@ -49,7 +49,7 @@ export default function AppNews() {
     return (
         <div className="layout-news" style={announcement.backgroundStyle}>
             <div className="layout-news-container">
-                <i></i>
+                <i />
                 <div className="layout-news-content">
                     <span className="layout-news-text" style={announcement.textStyle}>
                         {announcement.content}

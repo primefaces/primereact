@@ -1,5 +1,7 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons/chevrondown';
+import { Bookmark } from '@primeicons/react/bookmark';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Cog } from '@primeicons/react/cog';
+import { User } from '@primeicons/react/user';
 import { Avatar } from '@primereact/ui/avatar';
 import { Button } from '@primereact/ui/button';
 import { Panel } from '@primereact/ui/panel';
@@ -19,10 +21,10 @@ export default function TemplateDemo() {
                 </Panel.Title>
                 <div className="flex items-center gap-1">
                     <Button severity="secondary" rounded variant="text" iconOnly>
-                        <i className="pi pi-cog" />
+                        <Cog />
                     </Button>
                     <Panel.Trigger>
-                        <ChevronDownIcon className="transition-transform duration-200 [[data-open]_&]:rotate-180" />
+                        <ChevronDown className="transition-transform duration-200 [[data-open]_&]:rotate-180" />
                     </Panel.Trigger>
                 </div>
             </Panel.Header>
@@ -36,10 +38,10 @@ export default function TemplateDemo() {
                 <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
                     <div className="flex items-center gap-2">
                         <Button iconOnly rounded variant="text">
-                            <i className="pi pi-user" />
+                            <User />
                         </Button>
                         <Button severity="secondary" iconOnly rounded variant="text">
-                            <i className="pi pi-bookmark" />
+                            <Bookmark />
                         </Button>
                     </div>
                     <span className="text-surface-500 dark:text-surface-400">Updated 2 hours ago</span>

@@ -1,3 +1,5 @@
+import { ArrowDown } from '@primeicons/react';
+import { ArrowRight } from '@primeicons/react/arrow-right';
 import { AnimateOnScroll } from '@primereact/ui/animateonscroll';
 import { Button } from '@primereact/ui/button';
 
@@ -7,7 +9,7 @@ export default function BasicDemo() {
             <div className="flex flex-col items-center gap-4">
                 <div className="text-2xl font-medium">Scroll Down</div>
                 <div className="animate-bounce h-8 w-8 bg-primary text-primary-contrast rounded-full inline-flex items-center justify-center">
-                    <i className="pi pi-arrow-down" />
+                    <ArrowDown />
                 </div>
             </div>
             <div className="h-[45rem]"></div>
@@ -39,7 +41,7 @@ export default function BasicDemo() {
                         <Button size="large" variant="outlined" rounded severity="primary">
                             See our plans
                             <span className="bg-surface-200 dark:bg-surface-800 size-6 inline-flex items-center justify-center rounded-full">
-                                <i className="pi pi-arrow-right font-bold! text-sm!"></i>
+                                <ArrowRight className="font-bold! text-sm!"></ArrowRight>
                             </span>
                         </Button>
                     </div>

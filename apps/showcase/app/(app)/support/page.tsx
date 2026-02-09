@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { CheckCircle } from '@primeicons/react/check-circle';
+import { Github } from '@primeicons/react/github';
 
 const title = 'Pro Support - PrimeReact';
 
@@ -18,7 +20,7 @@ export default function SupportPage() {
         <div>
             <div className="flex flex-col md:flex-row mb-8 gap-8">
                 <div className="card flex-1 !m-0 relative overflow-hidden">
-                    <i className="pi pi-github absolute opacity-20" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
+                    <Github className="absolute opacity-20" />
                     <div className="text-2xl font-semibold mb-4 relative">Community Support</div>
                     <p className="m-0 leading-normal relative text-lg">
                         <a href="https://github.com/orgs/primefaces/discussions" className="doc-link" target="_blank" rel="noopener noreferrer">
@@ -50,43 +52,43 @@ export default function SupportPage() {
                     <div className="gap-8 px-4">
                         <ul className="flex-auto list-none m-0 p-0 text-lg">
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Private Issue Tracker</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Response within 1 business day</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Unlimited Number of Tickets</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Hourly Support Model</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">1 year term</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Minimum 25 Hours for initiation</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Shared account per organization</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">Maintenance for Any Version</span>
                             </li>
                             <li className="flex items-center mb-4">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">New Features</span>
                             </li>
                             <li className="flex items-center">
-                                <i className="pi pi-check-circle mr-4 text-green-500"></i>
+                                <CheckCircle className="mr-4 text-green-500" />
                                 <span className="leading-normal">POC implementations of a requirement</span>
                             </li>
                         </ul>

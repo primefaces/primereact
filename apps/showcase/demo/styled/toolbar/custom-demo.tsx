@@ -1,6 +1,7 @@
 import { Avatar } from '@primereact/ui/avatar';
 import { Button } from '@primereact/ui/button';
 import { Toolbar } from '@primereact/ui/toolbar';
+import { Search } from '@primeicons/react/search';
 
 export default function CustomDemo() {
     return (
@@ -30,7 +31,7 @@ export default function CustomDemo() {
             <Toolbar.End>
                 <div className="flex items-center gap-2">
                     <Button variant="text" size="small" className="text-surface-0 hover:bg-surface-700">
-                        <i className="pi pi-search" />
+                        <Search />
                     </Button>
                     <Button severity="contrast" size="small">
                         Get Started

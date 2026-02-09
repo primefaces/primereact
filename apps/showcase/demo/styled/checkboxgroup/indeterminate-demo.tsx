@@ -1,11 +1,12 @@
 'use client';
-import { CheckIcon, MinusIcon } from '@primereact/icons';
 import type { CheckboxRootChangeEvent } from '@primereact/types/shared/checkbox';
 import type { CheckboxGroupChangeEvent } from '@primereact/types/shared/checkboxgroup';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { CheckboxGroup } from '@primereact/ui/checkboxgroup';
 import { Label } from '@primereact/ui/label';
 import React from 'react';
+import { Check } from '@primeicons/react/check';
+import { Minus } from '@primeicons/react/minus';
 
 const categories = [
     { name: 'Product updates', key: 'product-updates' },
@@ -30,8 +31,8 @@ export default function IndeterminateDemo() {
                         onCheckedChange={(e: CheckboxRootChangeEvent) => setValue(e.checked ? categories.map((category) => category.key) : [])}
                     >
                         <Checkbox.Box>
-                            <Checkbox.Indicator className="data-checked:block! hidden!" as={CheckIcon} />
-                            <Checkbox.Indicator className="data-indeterminate:data-unchecked:block! hidden!" as={MinusIcon} />
+                            <Checkbox.Indicator className="data-checked:block! hidden!" as={Check} />
+                            <Checkbox.Indicator className="data-indeterminate:data-unchecked:block! hidden!" as={Minus} />
                         </Checkbox.Box>
                     </Checkbox.Root>
                     <Label htmlFor="indeterminate-checkbox">Email Notifications</Label>
@@ -45,7 +46,7 @@ export default function IndeterminateDemo() {
                         <div key={item.key} className="flex items-center gap-2">
                             <Checkbox.Root inputId={item.key} value={item.key}>
                                 <Checkbox.Box>
-                                    <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                                    <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                                 </Checkbox.Box>
                             </Checkbox.Root>
                             <Label htmlFor={item.key}>{item.name}</Label>

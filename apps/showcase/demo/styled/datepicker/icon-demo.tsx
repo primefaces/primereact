@@ -1,4 +1,5 @@
 'use client';
+import { Clock } from '@primeicons/react';
 import {
     DatePickerInputIconContainerInstance,
     DatePickerRootValueChangeEvent,
@@ -262,7 +263,7 @@ export default function IconDemo() {
                         {(instance: DatePickerInputIconContainerInstance) => {
                             const { datepicker } = instance;
 
-                            return <i className="pi pi-clock" onClick={datepicker?.onButtonClick}></i>;
+                            return <Clock onClick={datepicker?.onButtonClick} />;
                         }}
                     </DatePicker.InputIconContainer>
                     <DatePicker.Portal>

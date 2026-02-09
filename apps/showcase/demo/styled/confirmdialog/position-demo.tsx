@@ -1,5 +1,9 @@
 'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { ArrowDown, ArrowDownLeft, ArrowDownRight, ArrowUp, ArrowUpLeft, ArrowUpRight } from '@primeicons/react';
+import { ArrowLeft } from '@primeicons/react/arrow-left';
+import { ArrowRight } from '@primeicons/react/arrow-right';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { Times } from '@primeicons/react/times';
 import { ConfirmDialogRootChangeEvent, ConfirmDialogRootProps } from '@primereact/types/shared/confirmdialog';
 import { Button } from '@primereact/ui/button';
 import { ConfirmDialog } from '@primereact/ui/confirmdialog';
@@ -19,39 +23,39 @@ export default function PositionDemo() {
             <div className="flex flex-wrap justify-center gap-2 mb-2">
                 <Button onClick={() => openPosition('left')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Left
-                    <i className="pi pi-arrow-right" />
+                    <ArrowRight />
                 </Button>
                 <Button onClick={() => openPosition('right')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Right
-                    <i className="pi pi-arrow-left" />
+                    <ArrowLeft />
                 </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-2 mb-2">
                 <Button onClick={() => openPosition('topleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopLeft
-                    <i className="pi pi-arrow-down-right" />
+                    <ArrowDownRight />
                 </Button>
                 <Button onClick={() => openPosition('top')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Top
-                    <i className="pi pi-arrow-down" />
+                    <ArrowDown />
                 </Button>
                 <Button onClick={() => openPosition('topright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     TopRight
-                    <i className="pi pi-arrow-down-left" />
+                    <ArrowDownLeft />
                 </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
                 <Button onClick={() => openPosition('bottomleft')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomLeft
-                    <i className="pi pi-arrow-up-right" />
+                    <ArrowUpRight />
                 </Button>
                 <Button onClick={() => openPosition('bottom')} severity="secondary" style={{ minWidth: '10rem' }}>
                     Bottom
-                    <i className="pi pi-arrow-up" />
+                    <ArrowUp />
                 </Button>
                 <Button onClick={() => openPosition('bottomright')} severity="secondary" style={{ minWidth: '10rem' }}>
                     BottomRight
-                    <i className="pi pi-arrow-up-left" />
+                    <ArrowUpLeft />
                 </Button>
             </div>
             <ConfirmDialog.Root open={open} onOpenChange={(e: ConfirmDialogRootChangeEvent) => setOpen(e.value as boolean)} position={position}>
@@ -59,11 +63,11 @@ export default function PositionDemo() {
                     <ConfirmDialog.Header>
                         <ConfirmDialog.Title>Edit Profile</ConfirmDialog.Title>
                         <ConfirmDialog.Close>
-                            <TimesIcon />
+                            <Times />
                         </ConfirmDialog.Close>
                     </ConfirmDialog.Header>
                     <ConfirmDialog.Content>
-                        <i className="pi pi-exclamation-triangle text-2xl" />
+                        <ExclamationTriangle className="text-2xl" />
                         <ConfirmDialog.Message>Are you sure you want to proceed?</ConfirmDialog.Message>
                     </ConfirmDialog.Content>
                     <ConfirmDialog.Footer>

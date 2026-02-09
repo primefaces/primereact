@@ -1,5 +1,6 @@
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
+import { Search } from '@primeicons/react/search';
 
 export default function IconFieldPTDemo() {
     return (
@@ -14,7 +15,7 @@ export default function IconFieldPTDemo() {
                         root: 'text-primary'
                     }}
                 >
-                    <i className="pi pi-search" />
+                    <Search />
                 </IconField.Icon>
                 <InputText placeholder="Search" />
             </IconField.Root>

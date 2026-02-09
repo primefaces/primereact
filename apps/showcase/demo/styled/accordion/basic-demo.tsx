@@ -1,5 +1,4 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons/chevrondown';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import { Accordion } from '@primereact/ui/accordion';
 
 export default function BasicDemo() {
@@ -10,7 +9,7 @@ export default function BasicDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             What is this service about?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -24,7 +23,7 @@ export default function BasicDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             Is my data secure?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>
@@ -38,7 +37,7 @@ export default function BasicDemo() {
                     <Accordion.Header>
                         <Accordion.Trigger className="flex justify-between items-center w-full">
                             Can I upgrade or downgrade my plan later?
-                            <ChevronDownIcon className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
+                            <ChevronDown className="transition-transform duration-200 [[data-content-open]>&]:rotate-180" />
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content>

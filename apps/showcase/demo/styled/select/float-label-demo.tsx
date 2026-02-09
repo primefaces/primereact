@@ -1,8 +1,7 @@
-'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import { FloatLabel } from '@primereact/ui/floatlabel';
 import { Label } from '@primereact/ui/label';
 import { Select } from '@primereact/ui/select';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -19,7 +18,7 @@ export default function FloatLabelDemo() {
                 <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
                     <Select.Trigger id="over_label" />
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
 
                     <Select.Portal>
@@ -36,7 +35,7 @@ export default function FloatLabelDemo() {
                 <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
                     <Select.Trigger id="in_label" />
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
 
                     <Select.Portal>
@@ -53,7 +52,7 @@ export default function FloatLabelDemo() {
                 <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
                     <Select.Trigger id="on_label" />
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
 
                     <Select.Portal>

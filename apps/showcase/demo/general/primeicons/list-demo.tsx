@@ -75,7 +75,7 @@ export default function ListDemo() {
                 <div className="grid grid-cols-12 gap-4 text-center">
                     {filteredIcons?.map((icon) => (
                         <div key={icon.properties.name} className="col-span-12 md:col-span-2 mb-8">
-                            <i className={`text-2xl mb-4 text-surface-500 dark:text-surface-400 pi pi-${icon.properties.name}`}></i>
+                            <i className={`text-2xl mb-4 text-surface-500 dark:text-surface-400 pi pi-${icon.properties.name}`} />
                             <div>pi-{icon.properties.name}</div>
                         </div>
                     ))}

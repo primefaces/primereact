@@ -27,7 +27,7 @@ export default function DocCopyButton({ source, timeout = 2000, className, ...pr
             )}
             {...props}
         >
-            <i className={`pi ${isCopied ? 'pi-check' : 'pi-clone'}`}></i>
+            <i className={`pi ${isCopied ? 'pi-check' : 'pi-clone'}`} />
         </button>
     );
 }

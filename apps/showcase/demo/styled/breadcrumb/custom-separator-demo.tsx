@@ -1,4 +1,4 @@
-import { Icon } from '@primereact/core/icon';
+import { Bolt, Home } from '@primeicons/react';
 import { Breadcrumb } from '@primereact/ui/breadcrumb';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ export default function CustomSeparatorDemo() {
                 <Breadcrumb.List>
                     <Breadcrumb.Item>
                         <Link href="/">
-                            <Icon className="pi pi-home" />
+                            <Home />
                         </Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Separator>/</Breadcrumb.Separator>
@@ -19,7 +19,8 @@ export default function CustomSeparatorDemo() {
                     <Breadcrumb.Separator>/</Breadcrumb.Separator>
                     <Breadcrumb.Item>
                         <Link href="#">
-                            <Icon className="pi pi-bolt" /> Electronics
+                            <Bolt />
+                            Electronics
                         </Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Separator>/</Breadcrumb.Separator>

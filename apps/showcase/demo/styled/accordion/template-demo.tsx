@@ -1,26 +1,32 @@
 'use client';
-import { PlusIcon } from '@primereact/icons/plus';
+import { CreditCard } from '@primeicons/react/credit-card';
+import { Lock } from '@primeicons/react/lock';
+import { Plus } from '@primeicons/react/plus';
+import { QuestionCircle } from '@primeicons/react/question-circle';
 import { Accordion } from '@primereact/ui/accordion';
 
 const items = [
     {
         label: 'What is this service about?',
         value: '1',
-        icon: 'pi pi-question-circle text-yellow-500',
+        icon: QuestionCircle,
+        color: 'text-yellow-500',
         content:
-            'This service helps you manage your projects more efficiently by offering real-time collaboration, task tracking, and powerful analytics. Whether you’re working solo or in a team, it’s built to scale with your needs.'
+            "This service helps you manage your projects more efficiently by offering real-time collaboration, task tracking, and powerful analytics. Whether you're working solo or in a team, it's built to scale with your needs."
     },
     {
         label: 'Is my data secure?',
         value: '2',
-        icon: 'pi pi-lock text-blue-500',
+        icon: Lock,
+        color: 'text-blue-500',
         content:
             'Yes. We use end-to-end encryption and follow industry best practices to ensure your data is protected. Your information is stored on secure servers and regularly backed up.'
     },
     {
         label: 'Can I upgrade or downgrade my plan later?',
         value: '3',
-        icon: 'pi pi-credit-card text-green-500',
+        icon: CreditCard,
+        color: 'text-green-500',
         content:
             'Absolutely. You can change your subscription plan at any time from your account settings. Changes take effect immediately, and any billing adjustments are handled automatically.'
     }
@@ -35,10 +41,10 @@ export default function TemplateDemo() {
                         <Accordion.Header className="bg-transparent">
                             <Accordion.Trigger className="flex justify-between items-center w-full">
                                 <span className="flex items-center gap-4">
-                                    <i className={item.icon}></i>
+                                    {item.icon && <item.icon className={item.color} />}
                                     <span className="font-medium">{item.label}</span>
                                 </span>
-                                <PlusIcon className="transition-transform ease-out [[data-content-open]>&]:rotate-45" />
+                                <Plus className="transition-transform ease-out [[data-content-open]>&]:rotate-45" />
                             </Accordion.Trigger>
                         </Accordion.Header>
                         <Accordion.Content

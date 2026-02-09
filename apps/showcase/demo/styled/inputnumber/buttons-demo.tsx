@@ -8,6 +8,10 @@ import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import * as React from 'react';
+import { AngleDown } from '@primeicons/react/angle-down';
+import { AngleUp } from '@primeicons/react/angle-up';
+import { Minus } from '@primeicons/react/minus';
+import { Plus } from '@primeicons/react/plus';
 
 export default function ButtonsDemo() {
     const [value1, setValue1] = React.useState(20);
@@ -52,10 +56,10 @@ export default function ButtonsDemo() {
                     />
                     <InputGroup.Addon className="flex-col">
                         <Button severity="secondary" onClick={() => setValue1((prev) => Number(prev) + 1)} className="py-0 text-[.5rem]">
-                            <i className="pi pi-angle-up" />
+                            <AngleUp />
                         </Button>
                         <Button severity="secondary" onClick={() => setValue1((prev) => Number(prev) - 1)} className="py-0 text-[.5rem]">
-                            <i className="pi pi-angle-down" />
+                            <AngleDown />
                         </Button>
                     </InputGroup.Addon>
                 </InputGroup.Root>
@@ -74,7 +78,7 @@ export default function ButtonsDemo() {
                         disabled={value2 >= 100}
                         onClick={() => setValue2((prev) => Math.min(Number(prev) + 1, 100))}
                     >
-                        <i className="pi pi-plus"></i>
+                        <Plus></Plus>
                     </InputGroup.Addon>
                     <InputText
                         value={inputNumber2.state.formattedValue}
@@ -92,7 +96,7 @@ export default function ButtonsDemo() {
                         disabled={value2 <= 0}
                         onClick={() => setValue2((prev) => Math.max(Number(prev) - 1, 0))}
                     >
-                        <i className="pi pi-minus"></i>
+                        <Minus></Minus>
                     </InputGroup.Addon>
                 </InputGroup.Root>
             </div>
@@ -103,7 +107,7 @@ export default function ButtonsDemo() {
                 </Label>
                 <IconField.Root>
                     <IconField.Icon onClick={() => setValue3((prev) => Number(prev) + 0.25)} className="cursor-pointer">
-                        <i className="pi pi-plus"></i>
+                        <Plus></Plus>
                     </IconField.Icon>
                     <InputText
                         value={inputNumber3.state.formattedValue}
@@ -114,7 +118,7 @@ export default function ButtonsDemo() {
                         onKeyPress={inputNumber3.onInputKeyPress}
                     />
                     <IconField.Icon onClick={() => setValue3((prev) => Number(prev) - 0.25)} className="cursor-pointer">
-                        <i className="pi pi-minus"></i>
+                        <Minus></Minus>
                     </IconField.Icon>
                 </IconField.Root>
             </div>

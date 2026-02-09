@@ -1,4 +1,5 @@
 'use client';
+import { ArrowUp } from '@primeicons/react';
 import { useScrollTop } from '@primereact/hooks';
 import { Button } from 'primereact/button';
 import * as React from 'react';
@@ -27,7 +28,7 @@ export default function ElementDemo() {
                 </p>
                 {visible && (
                     <Button onClick={scrollToTop} iconOnly rounded className="sticky flex ms-auto [inset-block-end:20px] [inset-inline-end:20px]">
-                        <i className="pi pi-arrow-up" />
+                        <ArrowUp />
                     </Button>
                 )}
             </div>

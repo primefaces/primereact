@@ -3,6 +3,8 @@ import type { TreeExpandedKeys, TreeNode, useTreeExpandedChangeEvent } from '@pr
 import { Button } from '@primereact/ui/button';
 import { Tree } from '@primereact/ui/tree';
 import * as React from 'react';
+import { Minus } from '@primeicons/react/minus';
+import { Plus } from '@primeicons/react/plus';
 
 export default function ControlledDemo() {
     const [expandedKeys, setExpandedKeys] = React.useState<TreeExpandedKeys>({ '0': true });
@@ -138,11 +140,11 @@ export default function ControlledDemo() {
         <>
             <div className="flex flex-wrap gap-2 mb-6">
                 <Button type="button" onClick={expandAll}>
-                    <i className="pi pi-plus" />
+                    <Plus />
                     Expand All
                 </Button>
                 <Button type="button" onClick={collapseAll}>
-                    <i className="pi pi-minus" />
+                    <Minus />
                     Collapse All
                 </Button>
             </div>

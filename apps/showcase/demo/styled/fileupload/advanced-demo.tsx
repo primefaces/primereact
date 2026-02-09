@@ -1,4 +1,7 @@
 'use client';
+import { Plus } from '@primeicons/react/plus';
+import { Times } from '@primeicons/react/times';
+import { Upload } from '@primeicons/react/upload';
 import { toast } from '@primereact/headless/toast';
 import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
@@ -33,15 +36,15 @@ export default function AdvancedDemo() {
                         <>
                             <div className="flex items-center p-5 gap-2">
                                 <Button onClick={instance.choose}>
-                                    <i className="pi pi-plus" />
+                                    <Plus />
                                     Choose
                                 </Button>
                                 <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.upload}>
-                                    <i className="pi pi-upload" />
+                                    <Upload />
                                     Upload
                                 </Button>
                                 <Button severity="secondary" disabled={!instance.hasFiles} onClick={instance.clear}>
-                                    <i className="pi pi-times" />
+                                    <Times />
                                     Cancel
                                 </Button>
                             </div>
@@ -100,7 +103,7 @@ export default function AdvancedDemo() {
                                         size="small"
                                         className={'absolute top-2 right-2'}
                                     >
-                                        <i className="pi pi-times"></i>
+                                        <Times></Times>
                                     </Toast.Close>
                                 </Toast.Item>
                             ))

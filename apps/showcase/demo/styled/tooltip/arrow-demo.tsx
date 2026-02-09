@@ -1,4 +1,3 @@
-'use client';
 import { Button } from '@primereact/ui/button';
 import { Tooltip } from '@primereact/ui/tooltip';
 

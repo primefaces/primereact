@@ -1,3 +1,4 @@
+import { ArrowUpRight } from '@primeicons/react';
 import Link from 'next/link';
 
 export default function LandingPage() {
@@ -26,7 +27,7 @@ export default function LandingPage() {
                 </div>
                 <Link href={'https://github.com/primefaces/primereact'} target="_blank" className="inline-flex items-center gap-1.5 text-sm mt-8 text-surface-900 dark:text-surface-0 opacity-50 hover:opacity-75 transition-opacity">
                     Support us on GitHub
-                    <i className="pi pi-arrow-up-right text-[12px]! opacity-80"></i>
+                    <ArrowUpRight className="text-[12px]! opacity-80" />
                 </Link>
             </div>
         </div>

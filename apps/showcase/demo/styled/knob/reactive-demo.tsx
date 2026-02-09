@@ -2,6 +2,8 @@
 import { Button } from '@primereact/ui/button';
 import { Knob } from '@primereact/ui/knob';
 import * as React from 'react';
+import { Minus } from '@primeicons/react/minus';
+import { Plus } from '@primeicons/react/plus';
 
 export default function ReactiveDemo() {
     const [value, setValue] = React.useState(0);
@@ -15,10 +17,10 @@ export default function ReactiveDemo() {
             </Knob.Root>
             <div className="flex gap-2">
                 <Button onClick={() => setValue(value + 1)} disabled={value === 100}>
-                    <i className="pi pi-plus" />
+                    <Plus />
                 </Button>
                 <Button onClick={() => setValue(value - 1)} disabled={value <= 0}>
-                    <i className="pi pi-minus" />
+                    <Minus />
                 </Button>
             </div>
         </div>

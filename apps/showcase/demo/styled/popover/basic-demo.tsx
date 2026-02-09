@@ -1,7 +1,7 @@
-import { TimesIcon } from '@primereact/icons';
 import { Button } from '@primereact/ui/button';
 import { InputText } from '@primereact/ui/inputtext';
 import { Popover } from '@primereact/ui/popover';
+import { Times } from '@primeicons/react/times';
 
 export default function BasicDemo() {
     return (
@@ -30,7 +30,7 @@ export default function BasicDemo() {
                                 </div>
                             </div>
                             <Popover.Close as={Button} severity="secondary" variant="text" size="small" iconOnly className="absolute top-2 right-2">
-                                <TimesIcon />
+                                <Times />
                             </Popover.Close>
                             <Popover.Arrow />
                         </Popover.Content>

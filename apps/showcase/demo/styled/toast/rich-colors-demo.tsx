@@ -1,4 +1,5 @@
 'use client';
+import { Times } from '@primeicons/react/times';
 import { toast } from '@primereact/headless/toast';
 import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
 import { Button } from '@primereact/ui/button';
@@ -28,7 +29,7 @@ function RichColorsToast() {
                                     size="small"
                                     className={'absolute top-2 right-2'}
                                 >
-                                    <i className="pi pi-times"></i>
+                                    <Times></Times>
                                 </Toast.Close>
                             </Toast.Item>
                         ))

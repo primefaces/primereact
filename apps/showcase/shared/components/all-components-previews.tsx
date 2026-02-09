@@ -4,6 +4,8 @@ import { Button } from '@primereact/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
+import { Github } from '@primeicons/react/github';
+import { Search } from '@primeicons/react/search';
 
 const TYPES = ['styled', 'tailwind'] as const;
 
@@ -48,7 +50,7 @@ export default function AllComponentPreviews({ components }: { components: Compo
                 <div className="flex items-center w-full">
                     <span className="h-px flex-1 bg-(--border-color)" />
                     <div className="relative flex items-center rounded-full bg-surface-0 dark:bg-surface-900 border border-(--border-color) shadow-xs max-w-xs w-full has-focus-visible:ring-2 has-focus-visible:ring-(--border-color)">
-                        <i className="pi pi-search text-base absolute top-1/2 -translate-y-1/2 left-4 opacity-50 pointer-events-none"></i>
+                        <Search className="text-base absolute top-1/2 -translate-y-1/2 left-4 opacity-50 pointer-events-none"></Search>
                         <input className="flex-1 text-lg pl-10 pr-6 py-2.5 rounded-full outline-none" placeholder="Search components..." value={search} onChange={(e) => setSearch(e.target.value)} autoFocus />
                     </div>
                     <span className="h-px flex-1 bg-(--border-color)" />
@@ -103,7 +105,7 @@ export default function AllComponentPreviews({ components }: { components: Compo
                         <h3 className="mt-8 text-xl font-medium text-surface-800 dark:text-surface-100 text-center">Oops.. Component not found</h3>
                         <p className="mt-1 text-surface-500 max-w-xs text-center">The component you’re looking for isn’t available yet. You can request it on GitHub if you’d like.</p>
                         <Button as={Link} href={issueUrl} target="_blank" className="mt-6 " severity="secondary" variant="outlined">
-                            <i className="pi pi-github text-base" />
+                            <Github className="text-base" />
                             Request on GitHub
                         </Button>
                     </div>

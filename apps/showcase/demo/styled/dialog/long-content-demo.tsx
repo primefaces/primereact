@@ -1,5 +1,4 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { Times } from '@primeicons/react/times';
 import { Dialog } from '@primereact/ui/dialog';
 import { Tag } from '@primereact/ui/tag';
 
@@ -14,7 +13,7 @@ export default function LongContentDemo() {
                         <Dialog.Title>Terms of Service</Dialog.Title>
                         <Dialog.HeaderActions>
                             <Dialog.Close>
-                                <TimesIcon />
+                                <Times />
                             </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>

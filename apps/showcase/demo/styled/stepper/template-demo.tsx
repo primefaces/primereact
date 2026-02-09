@@ -1,4 +1,9 @@
 'use client';
+import { IdCard } from '@primeicons/react';
+import { ArrowLeft } from '@primeicons/react/arrow-left';
+import { ArrowRight } from '@primeicons/react/arrow-right';
+import { Star } from '@primeicons/react/star';
+import { User } from '@primeicons/react/user';
 import { StepperPanelInstance, StepperStepInstance } from '@primereact/types/shared/stepper';
 import { Button } from '@primereact/ui/button';
 import { Divider } from '@primereact/ui/divider';
@@ -29,7 +34,7 @@ export default function TemplateDemo() {
                                                     : 'border-surface-200 dark:border-surface-700'
                                             }`}
                                         >
-                                            <i className="pi pi-user" />
+                                            <User />
                                         </span>
                                     </button>
                                     <Divider.Root />
@@ -54,7 +59,7 @@ export default function TemplateDemo() {
                                                     : 'border-surface-200 dark:border-surface-700'
                                             }`}
                                         >
-                                            <i className="pi pi-star" />
+                                            <Star />
                                         </span>
                                     </button>
                                     <Divider.Root />
@@ -79,7 +84,7 @@ export default function TemplateDemo() {
                                                     : 'border-surface-200 dark:border-surface-700'
                                             }`}
                                         >
-                                            <i className="pi pi-id-card" />
+                                            <IdCard />
                                         </span>
                                     </button>
                                 </div>
@@ -109,7 +114,7 @@ export default function TemplateDemo() {
                                     <div className="flex pt-6 justify-end">
                                         <Button onClick={() => stepper?.setActiveStep(2)}>
                                             Next
-                                            <i className="pi pi-arrow-right" />
+                                            <ArrowRight />
                                         </Button>
                                     </div>
                                 </>
@@ -159,12 +164,12 @@ export default function TemplateDemo() {
                                     </div>
                                     <div className="flex pt-6 justify-between">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep(1)}>
-                                            <i className="pi pi-arrow-left" />
+                                            <ArrowLeft />
                                             Back
                                         </Button>
                                         <Button onClick={() => stepper?.setActiveStep(3)}>
                                             Next
-                                            <i className="pi pi-arrow-right" />
+                                            <ArrowRight />
                                         </Button>
                                     </div>
                                 </>
@@ -190,7 +195,7 @@ export default function TemplateDemo() {
                                     </div>
                                     <div className="flex pt-6 justify-start">
                                         <Button severity="secondary" onClick={() => stepper?.setActiveStep(2)}>
-                                            <i className="pi pi-arrow-left" />
+                                            <ArrowLeft />
                                             Back
                                         </Button>
                                     </div>

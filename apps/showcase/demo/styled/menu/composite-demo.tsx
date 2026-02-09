@@ -1,4 +1,6 @@
 import { Menu } from '@primereact/ui/menu';
+import { File } from '@primeicons/react/file';
+import { Users } from '@primeicons/react/users';
 
 export default function CompositeDemo() {
     return (
@@ -6,7 +8,7 @@ export default function CompositeDemo() {
             <Menu.Root className="w-56" composite>
                 <Menu.List>
                     <Menu.Item>
-                        <i className="pi pi-file" />
+                        <File />
                         New
                     </Menu.Item>
                     <Menu.Item>
@@ -24,7 +26,7 @@ export default function CompositeDemo() {
                         </Menu.Trigger>
                         <Menu.List>
                             <Menu.Item>
-                                <i className="pi pi-file" />
+                                <File />
                                 From File
                             </Menu.Item>
 
@@ -64,7 +66,7 @@ export default function CompositeDemo() {
                                 Copy Link
                             </Menu.Item>
                             <Menu.Item>
-                                <i className="pi pi-users" />
+                                <Users />
                                 Share with Team
                             </Menu.Item>
                         </Menu.List>

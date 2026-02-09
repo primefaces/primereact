@@ -1469,9 +1469,9 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/password/password-pt')),
                 'filePath': 'demo/styled/password/password-pt.tsx',
             },
-            'portal-demo': {
-                'component': React.lazy(() => import('demo/styled/password/portal-demo')),
-                'filePath': 'demo/styled/password/portal-demo.tsx',
+            'popover-demo': {
+                'component': React.lazy(() => import('demo/styled/password/popover-demo')),
+                'filePath': 'demo/styled/password/popover-demo.tsx',
             },
             'requirements-demo': {
                 'component': React.lazy(() => import('demo/styled/password/requirements-demo')),
@@ -1484,10 +1484,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
             'strength-demo': {
                 'component': React.lazy(() => import('demo/styled/password/strength-demo')),
                 'filePath': 'demo/styled/password/strength-demo.tsx',
-            },
-            'template-demo': {
-                'component': React.lazy(() => import('demo/styled/password/template-demo')),
-                'filePath': 'demo/styled/password/template-demo.tsx',
             },
             'toggle-mask-demo': {
                 'component': React.lazy(() => import('demo/styled/password/toggle-mask-demo')),

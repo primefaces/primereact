@@ -3,6 +3,7 @@ import { FileUploadHandlerEvent, FileUploadRootInstance } from '@primereact/type
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
 import * as React from 'react';
+import { Plus } from '@primeicons/react/plus';
 
 export default function CustomUploadDemo() {
     const [src, setSrc] = React.useState<string | null>(null);
@@ -27,7 +28,7 @@ export default function CustomUploadDemo() {
                     return (
                         <div className="flex flex-wrap items-center gap-3">
                             <Button onClick={instance.choose} severity="secondary" variant="outlined">
-                                <i className="pi pi-plus" />
+                                <Plus />
                                 Browse
                             </Button>
                         </div>

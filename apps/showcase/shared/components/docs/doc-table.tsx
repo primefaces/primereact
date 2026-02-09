@@ -95,7 +95,7 @@ const DocTable = ({ name, category, type, ...props }: DocTableProps) => {
                                     <h4 className="doc-section-label mb-2 mt-2 scroll-m-32 text-lg leading-[1.2] font-semibold text-(--high-contrast-text-color)" id={`${type}.${String(childData.label)}`}>
                                         {String(childData.label)}
                                         <Link href={`#${type}.${String(childData.label)}`}>
-                                            <i className="pi pi-link"></i>
+                                            <i className="pi pi-link" />
                                         </Link>
                                     </h4>
                                 )}
@@ -141,7 +141,7 @@ const DocTable = ({ name, category, type, ...props }: DocTableProps) => {
                                                         <span className={cn('doc-option-name', !!prop.deprecated && 'line-through cursor-pointer')}>
                                                             {v as React.ReactNode}
                                                             <Link href={`#${type}.${String(v)}`} className="doc-option-link">
-                                                                <i className="pi pi-link"></i>
+                                                                <i className="pi pi-link" />
                                                             </Link>
                                                         </span>
                                                     )}

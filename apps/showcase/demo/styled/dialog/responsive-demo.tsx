@@ -1,5 +1,5 @@
 'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { Times } from '@primeicons/react/times';
 import { DialogContentInstance } from '@primereact/types/shared/dialog';
 import { Button } from '@primereact/ui/button';
 import { Dialog } from '@primereact/ui/dialog';
@@ -17,7 +17,7 @@ export default function ResponsiveDemo() {
                         <Dialog.Title>Create Event</Dialog.Title>
                         <Dialog.HeaderActions>
                             <Dialog.Close>
-                                <TimesIcon />
+                                <Times />
                             </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>

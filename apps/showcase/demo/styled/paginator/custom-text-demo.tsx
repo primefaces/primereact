@@ -1,8 +1,9 @@
 'use client';
-import { AngleLeftIcon, AngleRightIcon } from '@primereact/icons';
 import { usePaginatorChangeEvent } from '@primereact/types/shared/paginator';
 import { Paginator } from '@primereact/ui/paginator';
 import React from 'react';
+import { AngleLeft } from '@primeicons/react/angle-left';
+import { AngleRight } from '@primeicons/react/angle-right';
 
 function CustomTextDemo() {
     const [page, setPage] = React.useState(1);
@@ -16,10 +17,10 @@ function CustomTextDemo() {
                 <Paginator.Content>
                     Showing {itemsPerPage * (page - 1) + 1} – {Math.min(total, itemsPerPage * page)} of {total}
                     <Paginator.Prev>
-                        <AngleLeftIcon />
+                        <AngleLeft />
                     </Paginator.Prev>
                     <Paginator.Next>
-                        <AngleRightIcon />
+                        <AngleRight />
                     </Paginator.Next>
                 </Paginator.Content>
             </Paginator.Root>

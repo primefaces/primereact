@@ -1,7 +1,6 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
-import { WindowMaximizeIcon } from '@primereact/icons/windowmaximize';
-import { WindowMinimizeIcon } from '@primereact/icons/windowminimize';
+import { Times } from '@primeicons/react/times';
+import { WindowMaximize } from '@primeicons/react/window-maximize';
+import { WindowMinimize } from '@primeicons/react/window-minimize';
 import { Dialog } from '@primereact/ui/dialog';
 
 export default function MaximizableDemo() {
@@ -15,11 +14,11 @@ export default function MaximizableDemo() {
                         <Dialog.Title>Article Preview</Dialog.Title>
                         <Dialog.HeaderActions>
                             <Dialog.Maximizable>
-                                <WindowMaximizeIcon className="in-data-maximized:hidden!" />
-                                <WindowMinimizeIcon className="in-data-minimized:hidden!" />
+                                <WindowMaximize className="in-data-maximized:hidden!" />
+                                <WindowMinimize className="in-data-minimized:hidden!" />
                             </Dialog.Maximizable>
                             <Dialog.Close>
-                                <TimesIcon />
+                                <Times />
                             </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>

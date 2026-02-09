@@ -1,18 +1,19 @@
 import { Button } from '@primereact/ui/button';
+import { Check } from '@primeicons/react/check';
 
 export default function SizeDemo() {
     return (
         <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="small">
-                <i className="pi pi-check" />
+                <Check />
                 Small
             </Button>
             <Button>
-                <i className="pi pi-check" />
+                <Check />
                 Normal
             </Button>
             <Button size="large">
-                <i className="pi pi-check" />
+                <Check />
                 Large
             </Button>
         </div>

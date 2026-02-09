@@ -1,4 +1,5 @@
 'use client';
+import { VolumeUp } from '@primeicons/react';
 import type { SliderTrackInstance } from '@primereact/types/shared/slider';
 import { Slider } from '@primereact/ui/slider';
 
@@ -24,7 +25,7 @@ export default function CustomDemo() {
                     {({ slider }: SliderTrackInstance) => {
                         return (
                             <>
-                                <i className="pi pi-volume-up absolute left-2 top-1/2 -translate-y-1/2 z-10 text-surface-400"></i>
+                                <VolumeUp className="text-surface-400 absolute left-2 top-1/2 -translate-y-1/2 z-10" />
                                 <Slider.Range
                                     className="rounded-full bg-surface-0"
                                     style={{ width: `clamp(2rem, calc(${slider?.state.value}% + 1rem), 100%)` }}

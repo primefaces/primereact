@@ -2,6 +2,8 @@
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import * as React from 'react';
+import { Search } from '@primeicons/react/search';
+import { Times } from '@primeicons/react/times';
 
 export default function ClickableDemo() {
     const [value, setValue] = React.useState('PrimeReact');
@@ -10,11 +12,11 @@ export default function ClickableDemo() {
         <div className="flex flex-wrap justify-center gap-4">
             <IconField.Root>
                 <IconField.Icon>
-                    <i className="pi pi-search" />
+                    <Search />
                 </IconField.Icon>
                 <InputText value={value} onInput={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)} placeholder="Search" />
                 <IconField.Icon>
-                    <i className="pi pi-times cursor-pointer" onClick={() => setValue('')} />
+                    <Times className="cursor-pointer" onClick={() => setValue('')} />
                 </IconField.Icon>
             </IconField.Root>
         </div>

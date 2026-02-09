@@ -1,6 +1,6 @@
-import { CheckIcon } from '@primereact/icons';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { Label } from '@primereact/ui/label';
+import { Check } from '@primeicons/react/check';
 
 export default function SizesDemo() {
     return (
@@ -8,7 +8,7 @@ export default function SizesDemo() {
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="small" size="small">
                     <Checkbox.Box>
-                        <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                     </Checkbox.Box>
                 </Checkbox.Root>
                 <Label htmlFor="small">Small</Label>
@@ -16,7 +16,7 @@ export default function SizesDemo() {
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="normal" size="normal">
                     <Checkbox.Box>
-                        <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                     </Checkbox.Box>
                 </Checkbox.Root>
                 <Label htmlFor="normal">Normal</Label>
@@ -24,7 +24,7 @@ export default function SizesDemo() {
             <div className="flex items-center gap-2">
                 <Checkbox.Root inputId="large" size="large">
                     <Checkbox.Box>
-                        <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                        <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                     </Checkbox.Box>
                 </Checkbox.Root>
                 <Label htmlFor="large">Large</Label>

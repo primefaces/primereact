@@ -1,5 +1,5 @@
-'use client';
-import { TimesIcon } from '@primereact/icons/times';
+import { Image as ImageIcon } from '@primeicons/react';
+import { Times } from '@primeicons/react/times';
 import { Dialog } from '@primereact/ui/dialog';
 
 const photos = Array.from({ length: 18 }, (_, i) => i + 1);
@@ -15,7 +15,7 @@ export default function FullScreenDemo() {
                         <Dialog.Title>Photo Gallery</Dialog.Title>
                         <Dialog.HeaderActions>
                             <Dialog.Close>
-                                <TimesIcon />
+                                <Times />
                             </Dialog.Close>
                         </Dialog.HeaderActions>
                     </Dialog.Header>
@@ -27,7 +27,7 @@ export default function FullScreenDemo() {
                                         key={i}
                                         className="aspect-square rounded-lg bg-surface-100 dark:bg-surface-800 flex items-center justify-center"
                                     >
-                                        <i className="pi pi-image text-2xl text-surface-400" />
+                                        <ImageIcon className="text-2xl text-surface-400" />
                                     </div>
                                 ))}
                             </div>

@@ -1,6 +1,9 @@
 import { Button } from '@primereact/ui/button';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
+import { Check } from '@primeicons/react/check';
+import { Search } from '@primeicons/react/search';
+import { Times } from '@primeicons/react/times';
 
 export default function ButtonDemo() {
     return (
@@ -15,7 +18,7 @@ export default function ButtonDemo() {
                 <InputText placeholder="Keyword" />
                 <InputGroup.Addon>
                     <Button severity="secondary" variant="text" iconOnly>
-                        <i className="pi pi-search" />
+                        <Search />
                     </Button>
                 </InputGroup.Addon>
             </InputGroup.Root>
@@ -23,13 +26,13 @@ export default function ButtonDemo() {
             <InputGroup.Root>
                 <InputGroup.Addon>
                     <Button severity="secondary" iconOnly>
-                        <i className="pi pi-check" />
+                        <Check />
                     </Button>
                 </InputGroup.Addon>
                 <InputText placeholder="Vote" />
                 <InputGroup.Addon>
                     <Button severity="secondary" iconOnly>
-                        <i className="pi pi-times" />
+                        <Times />
                     </Button>
                 </InputGroup.Addon>
             </InputGroup.Root>

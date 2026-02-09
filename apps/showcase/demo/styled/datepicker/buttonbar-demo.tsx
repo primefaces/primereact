@@ -12,6 +12,7 @@ import {
 import { Button } from '@primereact/ui/button';
 import { DatePicker } from '@primereact/ui/datepicker';
 import * as React from 'react';
+import { Times } from '@primeicons/react/times';
 
 export default function ButtonbarDemo() {
     const [date, setDate] = React.useState<useDatePickerProps['value'] | null>(null);
@@ -262,7 +263,7 @@ export default function ButtonbarDemo() {
                                             Today
                                         </Button>
                                         <Button size="small" severity="danger" variant="outlined" onClick={datepicker?.onClearButtonClick}>
-                                            <i className="pi pi-times" />
+                                            <Times />
                                         </Button>
                                     </div>
                                 </div>

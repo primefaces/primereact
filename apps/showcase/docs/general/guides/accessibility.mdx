@@ -1,6 +1,11 @@
+import { CheckCircle } from '@primeicons/react/check-circle'
+import { TimesCircle } from '@primeicons/react/times-circle'
+
 ---
+
 title: Accessibility
 description: PrimeReact has WCAG 2.1 AA level compliance, refer to the accessibility documentation of each component for detailed information.
+
 ---
 
 ## Introduction
@@ -182,10 +187,10 @@ Highly saturated colors should be avoided when used within a dark design scheme 
 <div className="flex">
     <div className="h-32 w-32 flex flex-col justify-center items-center mr-8 font-bold bg-gray-900 rounded-lg">
         <span className="text-indigo-500">Indigo 500</span>
-        <i className="text-indigo-500 pi pi-times-circle mt-4 text-xl" />
+        <TimesCircle className="text-indigo-500 mt-4 text-xl" />
     </div>
     <div className="h-32 w-32 flex flex-col justify-center items-center mr-8 font-bold bg-gray-900 rounded-lg">
         <span className="text-indigo-200">Indigo 200</span>
-        <i className="text-indigo-200 pi pi-check-circle mt-4 text-xl" />
+        <CheckCircle className="text-indigo-200 mt-4 text-xl" />
     </div>
 </div>

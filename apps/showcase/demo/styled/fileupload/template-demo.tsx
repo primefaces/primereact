@@ -6,6 +6,9 @@ import { FileUpload } from '@primereact/ui/fileupload';
 import { Message } from '@primereact/ui/message';
 import { ProgressBar } from '@primereact/ui/progressbar';
 import * as React from 'react';
+import { Times } from '@primeicons/react/times';
+import { CloudUpload } from '@primeicons/react/cloud-upload';
+import { Images } from '@primeicons/react/images';
 
 export default function TemplateDemo() {
     const fileUploadRef = React.useRef<FileUploadRootInstance>(null);
@@ -58,7 +61,7 @@ export default function TemplateDemo() {
                                 <div className="flex flex-wrap justify-between items-center flex-1 gap-4">
                                     <div className="flex gap-2">
                                         <Button onClick={instance.choose} iconOnly rounded variant="outlined" severity="secondary">
-                                            <i className="pi pi-images" />
+                                            <Images />
                                         </Button>
                                         <Button
                                             onClick={instance.upload}
@@ -68,7 +71,7 @@ export default function TemplateDemo() {
                                             severity="success"
                                             disabled={!instance.hasFiles}
                                         >
-                                            <i className="pi pi-cloud-upload" />
+                                            <CloudUpload />
                                         </Button>
                                         <Button
                                             onClick={instance.clear}
@@ -78,7 +81,7 @@ export default function TemplateDemo() {
                                             severity="danger"
                                             disabled={!instance.hasFiles}
                                         >
-                                            <i className="pi pi-times" />
+                                            <Times />
                                         </Button>
                                     </div>
                                     <ProgressBar.Root value={totalSizePercent}>
@@ -132,7 +135,7 @@ export default function TemplateDemo() {
                                                             severity="danger"
                                                             onClick={() => onRemoveFileCallback(instance?.remove, file, index)}
                                                         >
-                                                            <i className="pi pi-times" />
+                                                            <Times />
                                                         </Button>
                                                     </div>
                                                 ))}
@@ -172,7 +175,7 @@ export default function TemplateDemo() {
                                                             severity="danger"
                                                             onClick={() => instance?.removeUploadedFile(index)}
                                                         >
-                                                            <i className="pi pi-times" />
+                                                            <Times />
                                                         </Button>
                                                     </div>
                                                 ))}
@@ -183,7 +186,7 @@ export default function TemplateDemo() {
                                     {!instance.hasFiles && !instance.hasUploadedFiles && (
                                         <>
                                             <div className="flex items-center justify-center flex-col">
-                                                <i className="pi pi-cloud-upload border-2 rounded-full p-8 text-4xl text-muted-color" />
+                                                <CloudUpload className="border-2 rounded-full p-8 text-4xl text-muted-color" />
                                                 <p className="mt-6 mb-0">Drag and drop files to here to upload.</p>
                                             </div>
                                         </>

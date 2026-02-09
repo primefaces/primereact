@@ -1,5 +1,10 @@
 'use client';
 import { ProductService } from '@/shared/services/product.service';
+import { Table } from '@primeicons/react';
+import { Bars } from '@primeicons/react/bars';
+import { Heart } from '@primeicons/react/heart';
+import { ShoppingCart } from '@primeicons/react/shopping-cart';
+import { StarFill } from '@primeicons/react/star-fill';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebuttongroup';
 import { Button } from '@primereact/ui/button';
 import { Tag } from '@primereact/ui/tag';
@@ -81,7 +86,7 @@ export default function LayoutDemo() {
                                         }}
                                     >
                                         <span className="text-surface-900 font-medium text-sm">{product.rating}</span>
-                                        <i className="pi pi-star-fill text-yellow-500"></i>
+                                        <StarFill className="text-yellow-500"></StarFill>
                                     </div>
                                 </div>
                             </div>
@@ -89,13 +94,13 @@ export default function LayoutDemo() {
                                 <span className="text-xl font-semibold">${product.price}</span>
                                 <div className="flex flex-row-reverse md:flex-row gap-2">
                                     <Button variant="outlined">
-                                        <i className="pi pi-heart"></i>
+                                        <Heart></Heart>
                                     </Button>
                                     <Button
                                         disabled={product.inventoryStatus === 'OUTOFSTOCK'}
                                         className="flex-auto md:flex-initial whitespace-nowrap"
                                     >
-                                        <i className="pi pi-shopping-cart"></i>
+                                        <ShoppingCart></ShoppingCart>
                                         Buy Now
                                     </Button>
                                 </div>
@@ -143,7 +148,7 @@ export default function LayoutDemo() {
                                                 }}
                                             >
                                                 <span className="text-surface-900 font-medium text-sm">{product.rating}</span>
-                                                <i className="pi pi-star-fill text-yellow-500"></i>
+                                                <StarFill className="text-yellow-500"></StarFill>
                                             </div>
                                         </div>
                                     </div>
@@ -151,11 +156,11 @@ export default function LayoutDemo() {
                                         <span className="text-2xl font-semibold">${product.price}</span>
                                         <div className="flex gap-2">
                                             <Button disabled={product.inventoryStatus === 'OUTOFSTOCK'} className="flex-auto whitespace-nowrap">
-                                                <i className="pi pi-shopping-cart"></i>
+                                                <ShoppingCart></ShoppingCart>
                                                 Buy Now
                                             </Button>
                                             <Button variant="outlined">
-                                                <i className="pi pi-heart"></i>
+                                                <Heart></Heart>
                                             </Button>
                                         </div>
                                     </div>
@@ -182,12 +187,12 @@ export default function LayoutDemo() {
                     >
                         <ToggleButton.Root value="list">
                             <ToggleButton.Indicator>
-                                <i className="pi pi-bars"></i>
+                                <Bars></Bars>
                             </ToggleButton.Indicator>
                         </ToggleButton.Root>
                         <ToggleButton.Root value="grid">
                             <ToggleButton.Indicator>
-                                <i className="pi pi-table"></i>
+                                <Table />
                             </ToggleButton.Indicator>
                         </ToggleButton.Root>
                     </ToggleButtonGroup>

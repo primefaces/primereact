@@ -3,6 +3,8 @@ import { cn } from '@primeuix/utils';
 import React from 'react';
 import DocCopyButton from './doc-copy-button';
 import { DocDemoViewerProps } from './doc-demo-viewer';
+import { Code } from '@primeicons/react/code';
+import { Times } from '@primeicons/react/times';
 
 const COMPONENT_PATH_REGEX = /'@\/components\/ui\/[a-zA-Z0-9\-_/]+'/g;
 
@@ -47,17 +49,17 @@ export default function DocDemoWrapper({
                             <div className="flex items-center gap-px">
                                 {mode === 'compact' ? (
                                     <CaptionButton title={isExpanded ? 'Collapse Code' : 'Expand Code'} onClick={() => setIsExpanded((prev) => !prev)}>
-                                        <i className={`pi ${isExpanded ? ' pi-arrow-down-left-and-arrow-up-right-to-center' : 'pi-arrow-up-right-and-arrow-down-left-from-center'}`}></i>
+                                        <i className={`pi ${isExpanded ? ' pi-arrow-down-left-and-arrow-up-right-to-center' : 'pi-arrow-up-right-and-arrow-down-left-from-center'}`} />
                                     </CaptionButton>
                                 ) : (
                                     mode === 'collapsible' && (
                                         <CaptionButton title="Toggle Code" onClick={() => setIsCollapsed((prev) => !prev)}>
-                                            {!isCollapsed ? <i className="pi pi-code" /> : <i className="pi pi-times" />}
+                                            {!isCollapsed ? <Code /> : <Times />}
                                         </CaptionButton>
                                     )
                                 )}
                                 <CaptionButton title="Open in StackBlitz">
-                                    <i className="pi pi-bolt"></i>
+                                    <i className="pi pi-bolt" />
                                 </CaptionButton>
                                 {!isSourceNotAvailable && <DocCopyButton title="Copy Code" className="size-8! [&_i]:text-sm!" source={source} />}
                             </div>

@@ -1,9 +1,9 @@
 'use client';
-import { TimesIcon } from '@primereact/icons';
 import { Button } from '@primereact/ui/button';
 import { InputText } from '@primereact/ui/inputtext';
 import { Popover } from '@primereact/ui/popover';
 import * as React from 'react';
+import { Times } from '@primeicons/react/times';
 
 const sides = ['top', 'right', 'bottom', 'left'] as const;
 const aligns = ['start', 'center', 'end'] as const;
@@ -66,7 +66,7 @@ export default function BasicDemo() {
                                 </div>
                             </div>
                             <Popover.Close as={Button} severity="secondary" variant="text" size="small" iconOnly className="absolute top-2 right-2">
-                                <TimesIcon />
+                                <Times />
                             </Popover.Close>
                             <Popover.Arrow />
                         </Popover.Content>

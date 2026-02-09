@@ -1,4 +1,5 @@
 'use client';
+import { Lock } from '@primeicons/react/lock';
 import type { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from '@primereact/ui/togglebutton';
 
@@ -15,11 +16,12 @@ export default function RenderPropsDemo() {
                     {({ togglebutton }: ToggleButtonIndicatorInstance) =>
                         togglebutton?.state.pressed ? (
                             <>
-                                <i className="pi pi-lock"></i>Locked
+                                <Lock></Lock>Locked
                             </>
                         ) : (
                             <>
-                                <i className="pi pi-lock-open"></i>Unlocked
+                                <i className="pi pi-lock-open" />
+                                Unlocked
                             </>
                         )
                     }
@@ -30,11 +32,13 @@ export default function RenderPropsDemo() {
                     {({ togglebutton }: ToggleButtonIndicatorInstance) =>
                         togglebutton?.state.pressed ? (
                             <>
-                                <i className="pi pi-volume-up"></i>Mute
+                                <i className="pi pi-volume-up" />
+                                Mute
                             </>
                         ) : (
                             <>
-                                <i className="pi pi-volume-off"></i>Unmute
+                                <i className="pi pi-volume-off" />
+                                Unmute
                             </>
                         )
                     }

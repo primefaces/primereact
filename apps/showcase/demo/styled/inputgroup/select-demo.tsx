@@ -1,5 +1,6 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons';
+import { MapMarker } from '@primeicons/react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
@@ -22,7 +23,7 @@ export default function SelectDemo() {
         <div className="space-y-4 max-w-md mx-auto">
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <i className="pi pi-map-marker" />
+                    <MapMarker />
                 </InputGroup.Addon>
                 <Select.Root
                     value={city}
@@ -34,7 +35,7 @@ export default function SelectDemo() {
                 >
                     <Select.Trigger placeholder="Select a City" />
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
                     <Select.Portal>
                         <Select.List>
@@ -57,7 +58,7 @@ export default function SelectDemo() {
                 >
                     <Select.Trigger placeholder="Select a City" />
                     <Select.Dropdown>
-                        <ChevronDownIcon />
+                        <ChevronDown />
                     </Select.Dropdown>
                     <Select.Portal>
                         <Select.List>

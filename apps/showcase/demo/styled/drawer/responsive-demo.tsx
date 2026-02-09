@@ -1,11 +1,10 @@
-'use client';
-import { CheckIcon } from '@primereact/icons/check';
-import { TimesIcon } from '@primereact/icons/times';
+import { Check } from '@primeicons/react/check';
+import { Times } from '@primeicons/react/times';
 import { Button } from '@primereact/ui/button';
 import { Checkbox } from '@primereact/ui/checkbox';
 import { Drawer } from '@primereact/ui/drawer';
-import { Label } from '@primereact/ui/label';
 import { InputText } from '@primereact/ui/inputtext';
+import { Label } from '@primereact/ui/label';
 import { Password } from '@primereact/ui/password';
 
 export default function ResponsiveDemo() {
@@ -17,7 +16,7 @@ export default function ResponsiveDemo() {
                     <Drawer.Header>
                         <Drawer.Title>Responsive Drawer</Drawer.Title>
                         <Drawer.Close>
-                            <TimesIcon />
+                            <Times />
                         </Drawer.Close>
                     </Drawer.Header>
                     <Drawer.Content>
@@ -37,7 +36,7 @@ export default function ResponsiveDemo() {
                             <div className="flex items-center gap-2">
                                 <Checkbox.Root inputId="remember" value="remember">
                                     <Checkbox.Box>
-                                        <Checkbox.Indicator className="data-unchecked:hidden!" as={CheckIcon} />
+                                        <Checkbox.Indicator className="data-unchecked:hidden!" as={Check} />
                                     </Checkbox.Box>
                                 </Checkbox.Root>
                                 <Label htmlFor="remember" className="text-sm">

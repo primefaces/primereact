@@ -1,16 +1,24 @@
-import { PlusIcon } from '@primereact/icons';
 import { SpeedDial } from '@primereact/ui/speeddial';
+import { Plus } from '@primeicons/react/plus';
+import { Pencil } from '@primeicons/react/pencil';
+import { Refresh } from '@primeicons/react/refresh';
+import { Trash } from '@primeicons/react/trash';
+import { Upload } from '@primeicons/react/upload';
+import { ExternalLink } from '@primeicons/react/external-link';
+import { Cog } from '@primeicons/react/cog';
+import { User } from '@primeicons/react/user';
+import { Heart } from '@primeicons/react/heart';
 
 export default function CircleDemo() {
     const items = [
-        { icon: 'pi pi-pencil' },
-        { icon: 'pi pi-refresh' },
-        { icon: 'pi pi-trash' },
-        { icon: 'pi pi-upload' },
-        { icon: 'pi pi-external-link' },
-        { icon: 'pi pi-cog' },
-        { icon: 'pi pi-user' },
-        { icon: 'pi pi-heart' }
+        { icon: Pencil, label: 'Edit' },
+        { icon: Refresh, label: 'Refresh' },
+        { icon: Trash, label: 'Delete' },
+        { icon: Upload, label: 'Upload' },
+        { icon: ExternalLink, label: 'External' },
+        { icon: Cog, label: 'Settings' },
+        { icon: User, label: 'User' },
+        { icon: Heart, label: 'Favorite' }
     ];
 
     return (
@@ -18,16 +26,20 @@ export default function CircleDemo() {
             <div className="flex items-center justify-center" style={{ position: 'relative', height: '500px' }}>
                 <SpeedDial.Root type="circle" radius={80} style={{ position: 'absolute' }}>
                     <SpeedDial.Trigger severity="warn" className="transition-transform duration-200 data-open:rotate-45">
-                        <PlusIcon />
+                        <Plus />
                     </SpeedDial.Trigger>
                     <SpeedDial.List>
-                        {items.map((action) => (
-                            <SpeedDial.Item key={action.icon}>
-                                <SpeedDial.Action>
-                                    <i className={action.icon} />
-                                </SpeedDial.Action>
-                            </SpeedDial.Item>
-                        ))}
+                        {items.map((action) => {
+                            const Icon = action.icon;
+
+                            return (
+                                <SpeedDial.Item key={action.label}>
+                                    <SpeedDial.Action>
+                                        <Icon />
+                                    </SpeedDial.Action>
+                                </SpeedDial.Item>
+                            );
+                        })}
                     </SpeedDial.List>
                 </SpeedDial.Root>
             </div>

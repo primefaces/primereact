@@ -4,25 +4,28 @@ import { InputText } from '@primereact/ui/inputtext';
 import { Label } from '@primereact/ui/label';
 import { Switch } from '@primereact/ui/switch';
 import { Tabs } from '@primereact/ui/tabs';
+import { User } from '@primeicons/react/user';
+import { CreditCard } from '@primeicons/react/credit-card';
+import { Cog } from '@primeicons/react/cog';
 
 const tabs = [
     {
         id: 'tab1',
         title: 'Account Info',
-        icon: 'pi pi-user',
+        icon: User,
         content: 'Update your personal information such as name, email address, and profile picture.'
     },
     {
         id: 'tab2',
         title: 'Payment',
-        icon: 'pi pi-credit-card',
+        icon: CreditCard,
         badge: 'New',
         content: 'Manage your subscription plan, view invoices, and update your payment method.'
     },
     {
         id: 'tab3',
         title: 'Preferences',
-        icon: 'pi pi-cog',
+        icon: Cog,
         content: 'Customize how the application looks and behaves to match your personal preferences.'
     }
 ];
@@ -32,13 +35,17 @@ export default function TemplateDemo() {
         <div>
             <Tabs.Root value="tab1" className="max-w-md mx-auto">
                 <Tabs.List>
-                    {tabs.map((tab) => (
-                        <Tabs.Tab key={tab.id} value={tab.id} className="flex items-center gap-2">
-                            <i className={tab.icon}></i>
-                            {tab.title}
-                            {tab.badge && <Badge size="small">{tab.badge}</Badge>}
-                        </Tabs.Tab>
-                    ))}
+                    {tabs.map((tab) => {
+                        const Icon = tab.icon;
+
+                        return (
+                            <Tabs.Tab key={tab.id} value={tab.id} className="flex items-center gap-2">
+                                <Icon />
+                                {tab.title}
+                                {tab.badge && <Badge size="small">{tab.badge}</Badge>}
+                            </Tabs.Tab>
+                        );
+                    })}
                     <Tabs.Indicator />
                 </Tabs.List>
                 <Tabs.Panels>

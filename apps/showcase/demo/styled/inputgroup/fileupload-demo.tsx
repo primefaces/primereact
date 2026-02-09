@@ -1,4 +1,7 @@
 'use client';
+import { Tag as TagIcon } from '@primeicons/react';
+import { CloudUpload } from '@primeicons/react/cloud-upload';
+import { Upload } from '@primeicons/react/upload';
 import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
@@ -14,7 +17,7 @@ export default function FileUploadDemo() {
                     <FileUpload.Root name="demo1[]" accept="image/*" maxFileSize={1000000}>
                         {(instance: FileUploadRootInstance) => (
                             <Button severity="secondary" variant="outlined" onClick={instance.choose} className="flex-1 justify-start border-none">
-                                <i className="pi pi-upload mr-2" />
+                                <Upload className="mr-2" />
                                 {instance.hasFiles ? instance.state.files.map((file) => file.name).join(', ') : 'Choose file'}
                             </Button>
                         )}
@@ -27,7 +30,7 @@ export default function FileUploadDemo() {
                     <FileUpload.Root name="demo2[]" accept="image/*" maxFileSize={1000000}>
                         {(instance: FileUploadRootInstance) => (
                             <Button severity="secondary" variant="outlined" onClick={instance.choose} className="flex-1 justify-start border-none">
-                                <i className="pi pi-upload mr-2" />
+                                <Upload className="mr-2" />
                                 {instance.hasFiles ? instance.state.files.map((file) => file.name).join(', ') : 'Choose file'}
                             </Button>
                         )}
@@ -35,21 +38,21 @@ export default function FileUploadDemo() {
                 </InputGroup.Addon>
                 <InputGroup.Addon>
                     <Button severity="secondary" variant="text">
-                        <i className="pi pi-cloud-upload" />
+                        <CloudUpload />
                     </Button>
                 </InputGroup.Addon>
             </InputGroup.Root>
 
             <InputGroup.Root>
                 <InputGroup.Addon>
-                    <i className="pi pi-tag" />
+                    <TagIcon />
                 </InputGroup.Addon>
                 <InputText placeholder="Label" />
                 <InputGroup.Addon>
                     <FileUpload.Root name="demo3[]" accept="image/*" maxFileSize={1000000}>
                         {(instance: FileUploadRootInstance) => (
                             <Button severity="secondary" variant="outlined" onClick={instance.choose} className="border-none">
-                                <i className="pi pi-upload mr-2" />
+                                <Upload className="mr-2" />
                                 {instance.hasFiles ? instance.state.files.map((file) => file.name).join(', ') : 'Browse'}
                             </Button>
                         )}

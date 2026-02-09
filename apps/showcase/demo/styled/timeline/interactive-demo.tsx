@@ -2,6 +2,9 @@
 import { Button } from '@primereact/ui/button';
 import { Timeline } from '@primereact/ui/timeline';
 import * as React from 'react';
+import { Check } from '@primeicons/react/check';
+import { CheckCircle } from '@primeicons/react/check-circle';
+import { Refresh } from '@primeicons/react/refresh';
 
 export default function InteractiveDemo() {
     const allSteps = [
@@ -48,7 +51,7 @@ export default function InteractiveDemo() {
                     </p>
                 </div>
                 <Button variant="outlined" size="small" onClick={handleReset} disabled={completedSteps.length === 1}>
-                    <i className="pi pi-refresh mr-2" />
+                    <Refresh className="mr-2" />
                     Reset
                 </Button>
             </div>
@@ -78,7 +81,7 @@ export default function InteractiveDemo() {
                                             ${status === 'pending' ? 'bg-surface-200 dark:bg-surface-700 text-surface-400 cursor-not-allowed' : ''}
                                         `}
                                 >
-                                    {status === 'completed' ? <i className="pi pi-check" /> : <i className={step.icon} />}
+                                    {status === 'completed' ? <Check /> : <i className={step.icon} />}
                                 </button>
 
                                 {index !== allSteps.length - 1 && (
@@ -111,7 +114,7 @@ export default function InteractiveDemo() {
 
             {completedSteps.length === allSteps.length && (
                 <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-center">
-                    <i className="pi pi-check-circle text-2xl text-green-500 mb-2" />
+                    <CheckCircle className="text-2xl text-green-500 mb-2" />
                     <div className="font-semibold text-green-700 dark:text-green-400">Onboarding Complete!</div>
                     <p className="text-sm text-green-600 dark:text-green-500">You&apos;ve completed all the steps.</p>
                 </div>

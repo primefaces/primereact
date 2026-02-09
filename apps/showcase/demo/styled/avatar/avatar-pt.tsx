@@ -1,4 +1,5 @@
 import { Avatar } from '@primereact/ui/avatar';
+import { User } from '@primeicons/react/user';
 
 export default function AvatarPT() {
     return (
@@ -9,7 +10,7 @@ export default function AvatarPT() {
                 </Avatar.Root>
                 <Avatar.Root size="xlarge" shape="circle">
                     <Avatar.Fallback>
-                        <i className="pi pi-user !text-2xl" />
+                        <User className="!text-2xl" />
                     </Avatar.Fallback>
                 </Avatar.Root>
                 <Avatar.Root className="flex items-center justify-center" size="xlarge" shape="circle">

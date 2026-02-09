@@ -1,3 +1,5 @@
+import { Globe, MapMarker, Phone } from '@primeicons/react';
+import { StarFill } from '@primeicons/react/star-fill';
 import { Avatar } from '@primereact/ui/avatar';
 import { Button } from '@primereact/ui/button';
 import { Card } from '@primereact/ui/card';
@@ -31,23 +33,23 @@ export default function AdvancedDemo() {
                 <Card.Content className="space-y-4">
                     <p>Sakura Fresh Market is your go-to store for fresh local produce, Japanese snacks, and daily essentials — all in one place!</p>
                     <div className="flex items-center gap-2">
-                        <i className="pi pi-star-fill text-yellow-500"></i>
+                        <StarFill className="text-yellow-500"></StarFill>
                         <span>
                             <b>4.6</b> (200+ reviews)
                         </span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <i className="pi pi-map-marker"></i>
+                        <MapMarker />
                         <span>Tokyo, Shibuya-ku</span>
                     </div>
                 </Card.Content>
                 <Card.Footer className="flex items-center gap-2 mt-4">
                     <Button className="flex-1" severity="secondary" variant="outlined">
-                        <i className="pi pi-phone"></i>
+                        <Phone />
                         Call Us
                     </Button>
                     <Button className="flex-1">
-                        <i className="pi pi-globe"></i>
+                        <Globe />
                         Visit Site
                     </Button>
                 </Card.Footer>

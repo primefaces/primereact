@@ -1,8 +1,8 @@
 'use client';
-import { ChevronDownIcon } from '@primereact/icons';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const jobCategories = [
     {
@@ -65,7 +65,7 @@ export default function GroupDemo() {
             >
                 <Select.Trigger placeholder="Select a position..." />
                 <Select.Dropdown>
-                    <ChevronDownIcon />
+                    <ChevronDown />
                 </Select.Dropdown>
                 <Select.Portal>
                     <Select.List>

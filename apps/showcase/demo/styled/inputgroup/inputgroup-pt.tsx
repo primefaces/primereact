@@ -1,3 +1,5 @@
+import { Clock } from '@primeicons/react';
+import { StarFill } from '@primeicons/react/star-fill';
 import { InputGroup } from '@primereact/ui/inputgroup';
 import { InputText } from '@primereact/ui/inputtext';
 
@@ -6,10 +8,10 @@ export default function InputGroupPTDemo() {
         <div className="flex justify-center">
             <InputGroup.Root className="sm:!w-96">
                 <InputGroup.Addon>
-                    <i className="pi pi-clock"></i>
+                    <Clock />
                 </InputGroup.Addon>
                 <InputGroup.Addon>
-                    <i className="pi pi-star-fill"></i>
+                    <StarFill></StarFill>
                 </InputGroup.Addon>
                 <InputText placeholder="Price" />
                 <InputGroup.Addon>$</InputGroup.Addon>
