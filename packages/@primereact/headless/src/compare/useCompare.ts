@@ -50,6 +50,7 @@ export const useCompare = withHeadless({
 
         return {
             state,
+            slider,
             getItemStyle,
             getHandleStyle,
             setRootRef: slider.setRootRef,
@@ -65,6 +66,7 @@ export const useCompare = withHeadless({
                 slider.onTrackPointerMove(event);
             },
             onRootPointerUp: slider.onTrackPointerUp,
+            onThumbPointerDown: (event: React.PointerEvent<HTMLDivElement>) => slider.onThumbPointerDown(event, 0),
             onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => slider.onInputChange(event, 0)
         };
     }

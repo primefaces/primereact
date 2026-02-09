@@ -15,7 +15,7 @@ export const CompareRoot = withComponent({
         return compare;
     },
     render(instance) {
-        const { id, props, state, ptmi, cx, setRootRef, onRootPointerDown, onRootPointerMove, onRootPointerUp } = instance;
+        const { id, props, state, ptmi, cx, onRootPointerDown, onRootPointerMove, onRootPointerUp } = instance;
 
         const rootProps = mergeProps(
             {
@@ -34,7 +34,7 @@ export const CompareRoot = withComponent({
 
         return (
             <CompareProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} ref={setRootRef} />
+                <Component instance={instance} attrs={rootProps} children={props.children} />
             </CompareProvider>
         );
     }
