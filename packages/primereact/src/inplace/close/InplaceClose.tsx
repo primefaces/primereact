@@ -19,7 +19,10 @@ export const InplaceClose = withComponent({
 
         const rootProps = mergeProps(
             {
-                onClick: inplace?.close
+                onClick: inplace?.close,
+                ...(inplace?.state.active && { 'data-active': '' }),
+                ...(!inplace?.state.active && { 'data-inactive': '' }),
+                ...(inplace?.props.disabled && { 'data-disabled': '' })
             },
             inplace?.ptm('close'),
             ptmi('root')

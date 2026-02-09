@@ -15,12 +15,15 @@ export const InplaceRoot = withComponent({
         return inplace;
     },
     render(instance) {
-        const { id, props, ptmi, cx } = instance;
+        const { id, props, state, ptmi, cx } = instance;
 
         const rootProps = mergeProps(
             {
                 id,
-                className: cx('root')
+                className: cx('root'),
+                ...(state.active && { 'data-active': '' }),
+                ...(!state.active && { 'data-inactive': '' }),
+                ...(props.disabled && { 'data-disabled': '' })
             },
             ptmi('root')
         );

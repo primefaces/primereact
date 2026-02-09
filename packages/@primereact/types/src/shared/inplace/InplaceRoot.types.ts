@@ -53,12 +53,20 @@ export interface InplaceRootChangeEvent extends useInplaceChangeEvent {
 /**
  * Defines valid properties in Inplace component.
  */
-export interface InplaceRootProps extends BaseComponentProps<InplaceRootInstance, useInplaceProps, InplaceRootPassThrough> {
+export interface InplaceRootProps extends BaseComponentProps<InplaceRootInstance, Omit<useInplaceProps, 'onActiveChange'>, InplaceRootPassThrough> {
     /**
      * When present, it specifies that the element should be disabled.
      * @default false
      */
     disabled?: boolean | undefined;
+    /**
+     * Callback fired when the Inplace's active state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The new active state of the Inplace.
+     * @returns void
+     */
+    onActiveChange?: (event: InplaceRootChangeEvent) => void;
 }
 
 /**

@@ -19,7 +19,10 @@ export const InplaceDisplay = withComponent({
         const rootProps = mergeProps(
             {
                 className: inplace?.cx('display'),
-                onClick: inplace?.open
+                onClick: inplace?.open,
+                ...(inplace?.state.active && { 'data-active': '' }),
+                ...(!inplace?.state.active && { 'data-inactive': '' }),
+                ...(inplace?.props.disabled && { 'data-disabled': '' })
             },
             inplace?.ptm('display'),
             ptmi('root')
