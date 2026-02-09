@@ -1,10 +1,10 @@
-import chokidar from 'chokidar';
+//import chokidar from 'chokidar';
 import fs from 'fs/promises';
-import { globSync } from 'glob';
+//import { globSync } from 'glob';
 import path from 'path';
 import * as prettier from 'prettier';
 
-const INPUT_DIR = 'doc/**/demo.tsx';
+//const INPUT_DIR = 'doc/**/demo.tsx';
 const OUTPUT_FILE = 'source.auto.ts';
 
 /**
@@ -61,6 +61,7 @@ function extractCodeSections(content) {
     return sections;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function generate(filePath) {
     try {
         const content = await fs.readFile(filePath, 'utf8');
@@ -100,7 +101,8 @@ export const source = ${JSON.stringify(source, null, 4)};
 }
 
 export function run() {
-    globSync(INPUT_DIR).forEach(async (filePath) => {
+    /* @todo: improve this script to only build the changed file instead of rebuilding everything */
+    /*globSync(INPUT_DIR).forEach(async (filePath) => {
         const watcher = chokidar.watch(filePath, { ignored: /^\./, persistent: true });
 
         watcher
@@ -120,7 +122,7 @@ export function run() {
             .on('error', function () {
                 //console.error('⛔Error happened', error);
             });
-    });
+    });*/
 }
 
 run();

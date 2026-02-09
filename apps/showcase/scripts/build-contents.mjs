@@ -1,3 +1,5 @@
+/* @todo: improve this script to only build the changed file instead of rebuilding everything */
+/*
 import { exec } from 'child_process';
 import chokidar from 'chokidar';
 
@@ -28,3 +30,4 @@ watcher
     .on('error', function () {
         //console.error('⛔Error happened', error);
     });
+*/
