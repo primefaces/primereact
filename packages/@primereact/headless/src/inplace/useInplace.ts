@@ -34,10 +34,21 @@ export const useInplace = withHeadless({
                 }
             ]);
 
+        function onDisplayKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+            if (event.defaultPrevented) return;
+
+            event.preventDefault();
+
+            if (event.code === 'Enter' || event.code === 'Space') {
+                open();
+            }
+        }
+
         return {
             state,
             open,
-            close
+            close,
+            onDisplayKeyDown
         };
     }
 });

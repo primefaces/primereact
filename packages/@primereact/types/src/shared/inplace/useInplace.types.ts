@@ -70,6 +70,12 @@ export interface useInplaceExposes {
      * Method to close the inplace.
      */
     close: () => void;
+    /**
+     * Keydown event handler for the display.
+     * @param event The keyboard event.
+     * @returns void
+     */
+    onDisplayKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 }
 
 /**

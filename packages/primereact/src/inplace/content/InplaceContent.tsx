@@ -19,8 +19,7 @@ export const InplaceContent = withComponent({
         const rootProps = mergeProps(
             {
                 className: inplace?.cx('content'),
-                ...(inplace?.state.active && { 'data-active': '' }),
-                ...(!inplace?.state.active && { 'data-inactive': '' }),
+                [inplace?.state.active ? 'data-active' : 'data-inactive']: '',
                 ...(inplace?.props.disabled && { 'data-disabled': '' })
             },
             inplace?.ptm('content'),

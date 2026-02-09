@@ -18,10 +18,11 @@ export const InplaceDisplay = withComponent({
 
         const rootProps = mergeProps(
             {
+                tabIndex: 0,
                 className: inplace?.cx('display'),
                 onClick: inplace?.open,
-                ...(inplace?.state.active && { 'data-active': '' }),
-                ...(!inplace?.state.active && { 'data-inactive': '' }),
+                onKeyDown: inplace?.onDisplayKeyDown,
+                [inplace?.state.active ? 'data-active' : 'data-inactive']: '',
                 ...(inplace?.props.disabled && { 'data-disabled': '' })
             },
             inplace?.ptm('display'),

@@ -21,8 +21,7 @@ export const InplaceRoot = withComponent({
             {
                 id,
                 className: cx('root'),
-                ...(state.active && { 'data-active': '' }),
-                ...(!state.active && { 'data-inactive': '' }),
+                [state.active ? 'data-active' : 'data-inactive']: '',
                 ...(props.disabled && { 'data-disabled': '' })
             },
             ptmi('root')
