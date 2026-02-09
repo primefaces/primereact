@@ -22,6 +22,7 @@ export const SliderRoot = withComponent({
                 id,
                 className: cx('root'),
                 style: {
+                    display: 'flex',
                     position: 'relative',
                     touchAction: 'none',
                     ...sx('root')

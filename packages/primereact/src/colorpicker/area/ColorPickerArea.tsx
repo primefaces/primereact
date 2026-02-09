@@ -2,8 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { ColorPickerAreaBackground } from '../areabackground/ColorPickerAreaBackground';
-import { ColorPickerAreaThumb } from '../areathumb/ColorPickerAreaThumb';
 import { useColorPickerContext } from '../ColorPicker.context';
 import { defaultAreaProps } from './ColorPickerArea.props';
 
@@ -30,19 +28,6 @@ export const ColorPickerArea = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component
-                instance={instance}
-                attrs={rootProps}
-                children={
-                    props.children ?? (
-                        <>
-                            <ColorPickerAreaBackground />
-                            <ColorPickerAreaThumb />
-                        </>
-                    )
-                }
-            />
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

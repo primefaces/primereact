@@ -5,5 +5,6 @@ export const defaultProps: useColorPickerProps = {
     value: undefined,
     format: 'hsba',
     disabled: false,
-    onValueChange: undefined
+    onValueChange: undefined,
+    onValueChangeEnd: undefined
 };

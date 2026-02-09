@@ -10,9 +10,6 @@ export const style = /*css*/ `
     }
 
     .p-slider-track {
-        display: block;
-        flex-grow: 1;
-        position: relative;
         background: dt('slider.track.background');
         border-radius: dt('slider.track.border.radius');
     }

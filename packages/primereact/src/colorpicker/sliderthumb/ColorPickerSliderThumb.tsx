@@ -1,9 +1,9 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
+import { SliderThumb } from 'primereact/slider';
 import * as React from 'react';
 import { useColorPickerContext } from '../ColorPicker.context';
-import { useColorPickerSliderContext } from '../slider/ColorPickerSlider.context';
 import { defaultSliderThumbProps } from './ColorPickerSliderThumb.props';
 
 export const ColorPickerSliderThumb = withComponent({
@@ -11,35 +11,25 @@ export const ColorPickerSliderThumb = withComponent({
     defaultProps: defaultSliderThumbProps,
     setup() {
         const colorpicker = useColorPickerContext();
-        const colorpickerslider = useColorPickerSliderContext();
 
-        return { colorpicker, colorpickerslider };
+        return { colorpicker };
     },
     render(instance) {
-        const { props, ptmi, colorpicker, colorpickerslider } = instance;
+        const { props, ptmi, colorpicker } = instance;
 
-        const disabled = !!(colorpickerslider?.props.disabled || colorpicker?.props.disabled);
+        const disabled = !!colorpicker?.props.disabled;
 
         const rootProps = mergeProps(
             {
-                className: colorpicker?.cx('slider-thumb', { disabled: colorpickerslider?.props.disabled || colorpicker?.props.disabled }),
+                className: colorpicker?.cx('slider-thumb', { disabled }),
                 role: 'slider',
                 tabIndex: disabled ? -1 : 0,
-                onKeyDown: colorpickerslider?.handleSliderKeyDown,
-                'data-orientation': colorpickerslider?.props.orientation,
-                'data-channel': colorpickerslider?.props.channel,
-                'aria-orientation': colorpickerslider?.props.orientation,
-                'aria-disabled': disabled,
-                'aria-label': `${colorpickerslider?.props.channel} slider`,
-                'aria-valuemin': colorpickerslider?.channelRange?.min ?? 0,
-                'aria-valuemax': colorpickerslider?.channelRange?.max ?? 100,
-                'aria-valuenow': colorpickerslider?.channelValue,
-                'aria-valuetext': `${colorpickerslider?.props.channel} ${colorpickerslider?.channelValue}`
+                'aria-disabled': disabled
             },
             colorpicker?.ptm('slider-thumb'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+        return <Component as={SliderThumb} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

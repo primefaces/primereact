@@ -22,6 +22,7 @@ export const ColorPickerAreaThumb = withComponent({
             {
                 className: colorpicker?.cx('areaThumb', { disabled }),
                 onKeyDown: colorpicker?.handleAreaKeyDown,
+                onBlur: colorpicker?.handleAreaBlur,
                 role: 'slider',
                 tabIndex: disabled ? -1 : 0,
                 'aria-disabled': disabled,

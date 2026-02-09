@@ -28,5 +28,6 @@ export {
     defaultTransparencyGridProps,
     useColorPickerContext
 } from 'primereact/colorpicker';
-export { UIColorPickerInput as ColorPickerInput } from './input';
+export { UIColorPickerEyeDropper as EyeDropper } from './eyedropper';
+export { UIColorPickerInput as Input } from './input';
 export { UIColorPickerRoot as ColorPickerRoot } from './root';

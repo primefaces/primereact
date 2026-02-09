@@ -11,7 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { ColorPickerRootInstance } from './ColorPickerRoot.types';
-import type { useColorPickerInputExposes, useColorPickerInputProps, useColorPickerInputState } from './useColorPickerInput.types';
+import type { ColorInputChannel } from './colorManager.types';
 
 /**
  * Defines passthrough(pt) options type in ColorPickerInput component.
@@ -31,17 +31,27 @@ export interface ColorPickerInputPassThrough {
 /**
  * Defines valid properties in ColorPickerInput component.
  */
-export interface ColorPickerInputProps extends BaseComponentProps<ColorPickerInputInstance, useColorPickerInputProps, ColorPickerInputPassThrough> {}
+export interface ColorPickerInputComponentProps {
+    /**
+     * The channel of the input.
+     */
+    channel?: ColorInputChannel;
+}
+
+/**
+ * Defines valid properties in ColorPickerInput component.
+ */
+export interface ColorPickerInputProps extends BaseComponentProps<ColorPickerInputInstance, ColorPickerInputComponentProps, ColorPickerInputPassThrough> {}
 
 /**
  * Defines valid state in ColorPickerInput component.
  */
-export interface ColorPickerInputState extends useColorPickerInputState {}
+export interface ColorPickerInputState {}
 
 /**
  * Defines the methods and properties exposed by ColorPickerInput component
  */
-export interface ColorPickerInputExposes extends useColorPickerInputExposes {
+export interface ColorPickerInputExposes {
     /**
      * The ColorPicker component instance.
      */

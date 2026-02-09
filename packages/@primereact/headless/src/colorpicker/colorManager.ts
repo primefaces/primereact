@@ -1,10 +1,16 @@
 import type { Color2DAxes, Color3DAxes, ColorChannel, ColorChannelRange, ColorInputChannel, ColorInstance, ColorOutput, ColorSliderChannel, ColorSpace } from '@primereact/types/shared/colorpicker';
 
 // CONSTANTS
+const RGB_MAX = 255;
+// Matches hsb(...) or hsba(...)
 const HSB_REGEX = /hsb\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%)\)|hsba\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d(.\d+)?)\)/;
+// Matches hsl(...) or hsla(...)
 const HSL_REGEX = /hsl\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%)\)|hsla\(([-+]?\d+(?:.\d+)?\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d+(?:.\d+)?%\s*,\s*[-+]?\d(.\d+)?)\)/;
+// Matches #rgb, #rgba, #rrggbb, #rrggbbaa (hash optional)
 const HEX_REGEX = /^#?([a-fA-F0-9]{3,8})$/;
+// Matches rgb(...) or rgba(...)
 const RGB_REGEX = /^rgba?\(\s*([^)]+)\s*\)$/;
+// Matches oklch(L C H / a)
 const OKLCH_REGEX = /oklch\(\s*([\d.]+)%?\s+([\d.]+)\s+([\d.]+)(deg)?(?:\s*\/\s*([\d.]+))?\)/i;
 
 // UTILS
@@ -50,7 +56,7 @@ abstract class Color {
             return this[channel as keyof this] as number;
         }
 
-        throw new Error(`Channel ${channel} not found`);
+        throw new Error(`Unknown color channel: ${channel}`);
     }
 
     withChannelValue(channel: ColorChannel, value: number): ColorInstance {
@@ -65,7 +71,7 @@ abstract class Color {
             return cloned;
         }
 
-        throw new Error(`Channel ${channel} not found`);
+        throw new Error(`Unknown color channel: ${channel}`);
     }
 
     getSpaceAxes(xyChannels: Color2DAxes): Color3DAxes {
@@ -132,9 +138,7 @@ export class HSBColor extends Color {
             return b - b * s * Math.max(0, Math.min(k, 4 - k, 1));
         }
 
-        const scale = 255;
-
-        return new RGBColor(Math.round(f(5) * scale), Math.round(f(3) * scale), Math.round(f(1) * scale), Number(this.alpha.toFixed(2)));
+        return new RGBColor(Math.round(f(5) * RGB_MAX), Math.round(f(3) * RGB_MAX), Math.round(f(1) * RGB_MAX), Number(this.alpha.toFixed(2)));
     }
 
     private toHSL(): HSLColor {
@@ -214,7 +218,7 @@ export class HSBColor extends Color {
             case 'alpha':
                 return { min: 0, max: 1, step: 0.01 };
             default:
-                throw new Error('Unknown color channel: ' + channel);
+                throw new Error(`Unknown color channel: ${channel}`);
         }
     }
 
@@ -263,9 +267,7 @@ export class HSLColor extends Color {
             return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
         }
 
-        const scale = 255;
-
-        return new RGBColor(Math.round(f(0) * scale), Math.round(f(8) * scale), Math.round(f(4) * scale), Number(this.alpha.toFixed(2)));
+        return new RGBColor(Math.round(f(0) * RGB_MAX), Math.round(f(8) * RGB_MAX), Math.round(f(4) * RGB_MAX), Number(this.alpha.toFixed(2)));
     }
 
     private toHSB(): HSBColor {
@@ -344,7 +346,7 @@ export class HSLColor extends Color {
             case 'alpha':
                 return { min: 0, max: 1, step: 0.01 };
             default:
-                throw new Error('Unknown color channel: ' + channel);
+                throw new Error(`Unknown color channel: ${channel}`);
         }
     }
 
@@ -379,6 +381,13 @@ export class RGBColor extends Color {
         return this.parseHexColor(input) ?? this.parseRgbFunction(input);
     }
 
+    private static expandShortHex(hex: string) {
+        return hex
+            .split('')
+            .map((c) => c + c)
+            .join('');
+    }
+
     private static parseHexColor(input: string): RGBColor | undefined {
         const match = input.match(HEX_REGEX);
 
@@ -386,12 +395,9 @@ export class RGBColor extends Color {
 
         let hex = match[1];
 
-        // Expand shorthand (#abc -> #aabbcc)
+        // Expand shorthand (#abc -> #aabbcc, #abcd -> #aabbccdd)
         if (hex.length <= 4) {
-            hex = hex
-                .split('')
-                .map((c) => c + c)
-                .join('');
+            hex = this.expandShortHex(hex);
         }
 
         if (![6, 8].includes(hex.length)) return undefined;
@@ -399,7 +405,7 @@ export class RGBColor extends Color {
         const r = parseInt(hex.slice(0, 2), 16);
         const g = parseInt(hex.slice(2, 4), 16);
         const b = parseInt(hex.slice(4, 6), 16);
-        const a = hex.length === 8 ? parseInt(hex.slice(6, 8), 16) / 255 : 1;
+        const a = hex.length === 8 ? parseInt(hex.slice(6, 8), 16) / RGB_MAX : 1;
 
         return new RGBColor(r, g, b, a);
     }
@@ -411,9 +417,9 @@ export class RGBColor extends Color {
 
         const [rStr, gStr, bStr, aStr] = match[1].split(',').map((v) => v.trim());
 
-        const r = clamp(Number(rStr), 0, 255);
-        const g = clamp(Number(gStr), 0, 255);
-        const b = clamp(Number(bStr), 0, 255);
+        const r = clamp(Number(rStr), 0, RGB_MAX);
+        const g = clamp(Number(gStr), 0, RGB_MAX);
+        const b = clamp(Number(bStr), 0, RGB_MAX);
         const a = aStr !== undefined ? clamp(Number(aStr), 0, 1) : 1;
 
         if ([r, g, b, a].some((v) => Number.isNaN(v))) return undefined;
@@ -422,8 +428,7 @@ export class RGBColor extends Color {
     }
 
     private toHSB(): HSBColor {
-        const scale = 255;
-        const [r, g, b] = [this.red / scale, this.green / scale, this.blue / scale];
+        const [r, g, b] = [this.red / RGB_MAX, this.green / RGB_MAX, this.blue / RGB_MAX];
 
         const mmax = Math.max(r, g, b);
         const mmin = Math.min(r, g, b);
@@ -459,8 +464,7 @@ export class RGBColor extends Color {
     }
 
     private toHSL(): HSLColor {
-        const scale = 255;
-        const [r, g, b] = [this.red / scale, this.green / scale, this.blue / scale];
+        const [r, g, b] = [this.red / RGB_MAX, this.green / RGB_MAX, this.blue / RGB_MAX];
 
         const mmax = Math.max(r, g, b);
         const mmin = Math.min(r, g, b);
@@ -501,7 +505,7 @@ export class RGBColor extends Color {
     }
 
     private toOKLCH(): OKLCHColor {
-        const rgb = [this.red / 255, this.green / 255, this.blue / 255];
+        const rgb = [this.red / RGB_MAX, this.green / RGB_MAX, this.blue / RGB_MAX];
 
         const rgbLinear = rgb.map((c) => (Math.abs(c) <= 0.04045 ? c / 12.92 : (c < 0 ? -1 : 1) * ((Math.abs(c) + 0.055) / 1.055) ** 2.4));
 
@@ -549,7 +553,7 @@ export class RGBColor extends Color {
             case 'hex':
                 return `#${this.red.toString(16).padStart(2, '0')}${this.green.toString(16).padStart(2, '0')}${this.blue.toString(16).padStart(2, '0')}`;
             case 'hexa':
-                return `#${this.red.toString(16).padStart(2, '0')}${this.green.toString(16).padStart(2, '0')}${this.blue.toString(16).padStart(2, '0')}${Math.round(this.alpha * 255)
+                return `#${this.red.toString(16).padStart(2, '0')}${this.green.toString(16).padStart(2, '0')}${this.blue.toString(16).padStart(2, '0')}${Math.round(this.alpha * RGB_MAX)
                     .toString(16)
                     .padStart(2, '0')}`;
             case 'rgb':
@@ -586,11 +590,11 @@ export class RGBColor extends Color {
             case 'red':
             case 'green':
             case 'blue':
-                return { min: 0, max: 255, step: 1 };
+                return { min: 0, max: RGB_MAX, step: 1 };
             case 'alpha':
                 return { min: 0, max: 1, step: 0.01 };
             default:
-                throw new Error('Unknown color channel: ' + channel);
+                throw new Error(`Unknown color channel: ${channel}`);
         }
     }
 
@@ -647,7 +651,7 @@ export class OKLCHColor extends Color {
 
         [r, g, b2] = [r, g, b2].map((c) => (Math.abs(c) > 0.0031308 ? (c < 0 ? -1 : 1) * (1.055 * Math.abs(c) ** (1 / 2.4) - 0.055) : 12.92 * c));
 
-        return new RGBColor(Math.round(clamp(r, 0, 1) * 255), Math.round(clamp(g, 0, 1) * 255), Math.round(clamp(b2, 0, 1) * 255), Number(this.alpha.toFixed(2)));
+        return new RGBColor(Math.round(clamp(r, 0, 1) * RGB_MAX), Math.round(clamp(g, 0, 1) * RGB_MAX), Math.round(clamp(b2, 0, 1) * RGB_MAX), Number(this.alpha.toFixed(2)));
     }
 
     toJSON(): Record<string, number> {
@@ -726,7 +730,7 @@ export class OKLCHColor extends Color {
             case 'alpha':
                 return { min: 0, max: 1, step: 0.01 };
             default:
-                throw new Error('Unknown color channel: ' + channel);
+                throw new Error(`Unknown color channel: ${channel}`);
         }
     }
 
@@ -802,7 +806,7 @@ export function getChannelColor(color: ColorInstance, channel: ColorChannel) {
         }
 
         default:
-            throw new Error('Unknown color channel: ' + channel);
+            throw new Error(`Unknown color channel: ${channel}`);
     }
 }
 

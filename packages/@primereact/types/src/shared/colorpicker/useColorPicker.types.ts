@@ -9,7 +9,8 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import type { Color2DAxes, ColorInstance, ColorSpace } from '@primereact/types/shared/colorpicker';
+import type { Color2DAxes, ColorChannelRange, ColorInputChannel, ColorInstance, ColorSliderChannel, ColorSpace } from '@primereact/types/shared/colorpicker';
+import type { useSliderChangeEvent } from '@primereact/types/shared/slider';
 import * as React from 'react';
 
 /**
@@ -54,6 +55,10 @@ export interface useColorPickerProps {
      * Callback fired when the color picker's value is changed.
      */
     onValueChange?: (event: useColorPickerChangeEvent) => void;
+    /**
+     * Callback fired when the pointer interaction ends.
+     */
+    onValueChangeEnd?: (event: useColorPickerChangeEvent) => void;
 }
 
 /**
@@ -103,6 +108,10 @@ export interface useColorPickerExposes {
      */
     handleAreaPointerUp: (event: PointerEvent) => void;
     /**
+     * Handles the area blur event.
+     */
+    handleAreaBlur: (event: React.FocusEvent<HTMLElement>) => void;
+    /**
      * Handles the area key down event.
      */
     handleAreaKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
@@ -126,6 +135,31 @@ export interface useColorPickerExposes {
      * Registers an input element.
      */
     registerInputEl: (el: { elementRef: React.RefObject<HTMLInputElement> }) => void;
+    /**
+     * Provides input props for a color channel.
+     */
+    getInputProps: (options?: { channel?: ColorInputChannel; disabled?: boolean }) => {
+        type: 'text' | 'number';
+        channelRange: ColorChannelRange | undefined;
+        channelValue: string;
+        handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+        handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    };
+    /**
+     * Provides slider props and styles for a color channel.
+     */
+    getSliderProps: (options?: { channel?: ColorSliderChannel; orientation?: 'horizontal' | 'vertical'; disabled?: boolean }) => {
+        sliderStyle: React.CSSProperties;
+        channelValue: number;
+        channelRange: ColorChannelRange;
+        value: number;
+        min: number;
+        max: number;
+        step: number;
+        disabled: boolean;
+        onValueChange: (event: useSliderChangeEvent) => void;
+        onValueChangeEnd: (event: useSliderChangeEvent) => void;
+    };
 }
 
 /**

@@ -1,7 +1,7 @@
-import * as HeadlessColorPickerSlider from '@primereact/headless/colorpicker/slider';
 import type { ColorPickerSliderProps } from '@primereact/types/shared/colorpicker';
+import { defaultRootProps } from 'primereact/slider';
 
-export const defaultSliderProps: ColorPickerSliderProps = {
-    ...HeadlessColorPickerSlider.defaultProps,
-    as: 'div'
-};
+export const defaultSliderProps = {
+    ...defaultRootProps,
+    channel: 'hue'
+} as ColorPickerSliderProps;

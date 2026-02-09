@@ -1,9 +1,27 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import type { ColorInputChannel, ColorInstance } from '@primereact/types/shared/colorpicker';
+import type { ColorInputChannel, ColorInstance, ColorSliderChannel } from '@primereact/types/shared/colorpicker';
 import * as React from 'react';
-import { getAreaGradient, getInputChannelValue, parseColor } from './colorManager';
+import { getAreaGradient, getChannelColor, getChannelGradient, getInputChannelRange, getInputChannelValue, parseColor } from './colorManager';
 import { defaultProps } from './useColorPicker.props';
+
+const HEX_REGEX = /^[0-9a-fA-F]{3,8}$/;
+
+function isValidHex(value: string) {
+    return HEX_REGEX.test(value);
+}
+
+function prefixHex(value: string) {
+    if (value.startsWith('#')) return value;
+
+    if (isValidHex(value)) return `#${value}`;
+
+    return value;
+}
+
+function flipVerticalGradient(gradient: string) {
+    return gradient.replace('to bottom', 'to top');
+}
 
 export const useColorPicker = withHeadless({
     name: 'useColorPicker',
@@ -12,10 +30,13 @@ export const useColorPicker = withHeadless({
         const { format = 'hsba', disabled } = props;
         const [isAreaDragging, setIsAreaDragging] = React.useState(false);
         const inputElRefs = React.useRef<HTMLInputElement[]>([]);
+        const areaDragOffset = React.useRef({ x: 0, y: 0 });
+
+        const defaultValueRef = React.useRef<ColorInstance | undefined>(props.defaultValue ?? parseColor('#ff0000').toFormat(props.format || 'hsba'));
 
         const [value, setValue] = useControlledState({
-            value: React.useMemo(() => props.value, [props.value]),
-            defaultValue: React.useMemo(() => props.defaultValue ?? parseColor('#ff0000').toFormat(props.format || 'hsba'), [props.defaultValue]),
+            value: props.value,
+            defaultValue: defaultValueRef.current,
             onChange: props.onValueChange
         });
 
@@ -33,12 +54,25 @@ export const useColorPicker = withHeadless({
             isAreaDragging
         };
 
+        const commitColor = (nextColor: ColorInstance, options?: { originalEvent?: React.SyntheticEvent }) => {
+            setValue([
+                nextColor,
+                {
+                    color: nextColor.toString(format),
+                    value: nextColor,
+                    ...(options?.originalEvent ? { originalEvent: options.originalEvent } : {})
+                }
+            ]);
+
+            syncChannelInputs(nextColor);
+        };
+
         const moveArea = (x: number, y: number, element: HTMLElement) => {
             if (!element || disabled) return;
 
             const rect = element.getBoundingClientRect();
-            const nx = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
-            const ny = Math.max(0, Math.min(1, (y - rect.top) / rect.height));
+            const nx = Math.max(0, Math.min(1, (x - areaDragOffset.current.x - rect.left) / rect.width));
+            const ny = Math.max(0, Math.min(1, (y - areaDragOffset.current.y - rect.top) / rect.height));
 
             const { xChannel, yChannel } = getAreaChannels();
 
@@ -53,21 +87,29 @@ export const useColorPicker = withHeadless({
 
             const newColor = areaValue.incChannelValue(xChannel, xDelta).incChannelValue(yChannel, yDelta);
 
-            setValue([
-                newColor,
-                {
-                    color: newColor.toString(format),
-                    value: newColor
-                }
-            ]);
-
-            syncChannelInputs(newColor);
+            commitColor(newColor);
         };
 
         const handleAreaPointerDown = (event: PointerEvent) => {
             const element = event.currentTarget as HTMLElement;
 
             if (!element || event.button !== 0) return;
+
+            const target = event.target as HTMLElement | null;
+            const thumb = target?.closest?.('[data-part="area-thumb"], .p-color-picker-area-thumb') as HTMLElement | null;
+
+            if (thumb) {
+                const thumbRect = thumb.getBoundingClientRect();
+                const thumbCenterX = thumbRect.left + thumbRect.width / 2;
+                const thumbCenterY = thumbRect.top + thumbRect.height / 2;
+
+                areaDragOffset.current = {
+                    x: event.clientX - thumbCenterX,
+                    y: event.clientY - thumbCenterY
+                };
+            } else {
+                areaDragOffset.current = { x: 0, y: 0 };
+            }
 
             element.setPointerCapture(event.pointerId);
             setIsAreaDragging(true);
@@ -87,6 +129,25 @@ export const useColorPicker = withHeadless({
 
             element.releasePointerCapture(event.pointerId);
             setIsAreaDragging(false);
+            areaDragOffset.current = { x: 0, y: 0 };
+
+            if (props.onValueChangeEnd) {
+                props.onValueChangeEnd({
+                    originalEvent: event as unknown as React.SyntheticEvent,
+                    color: ensuredValue.toString(format),
+                    value: ensuredValue
+                });
+            }
+        };
+
+        const handleAreaBlur = (event: React.FocusEvent<HTMLElement>) => {
+            if (!props.onValueChangeEnd) return;
+
+            props.onValueChangeEnd({
+                originalEvent: event,
+                color: ensuredValue.toString(format),
+                value: ensuredValue
+            });
         };
 
         const handleAreaKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -112,15 +173,15 @@ export const useColorPicker = withHeadless({
 
             if (key === 'ArrowDown') next = next.decChannelValue(yChannel, stepY);
 
-            setValue([
-                next,
-                {
+            commitColor(next);
+
+            if (props.onValueChangeEnd) {
+                props.onValueChangeEnd({
+                    originalEvent: event,
                     color: next.toString(format),
                     value: next
-                }
-            ]);
-
-            syncChannelInputs(next);
+                });
+            }
         };
 
         const getAreaChannels = () => {
@@ -143,14 +204,7 @@ export const useColorPicker = withHeadless({
                 .then((result: { sRGBHex: string }) => {
                     const newColor = parseColor(result.sRGBHex);
 
-                    setValue([
-                        newColor,
-                        {
-                            color: newColor.toString(format),
-                            value: newColor
-                        }
-                    ]);
-                    syncChannelInputs(newColor);
+                    commitColor(newColor);
                 })
                 .catch((e: Error) => {
                     // User cancelled the eyedropper
@@ -175,6 +229,71 @@ export const useColorPicker = withHeadless({
         const swatchStyles = {
             '--swatch-background': ensuredValue.toString('css')
         } as React.CSSProperties;
+
+        const getSliderProps = ({
+            channel = 'hue',
+            orientation = 'horizontal',
+            disabled: sliderDisabled
+        }: {
+            channel?: ColorSliderChannel;
+            orientation?: 'horizontal' | 'vertical';
+            disabled?: boolean;
+        } = {}) => {
+            const isDisabled = disabled || sliderDisabled;
+            const workingValue = channel === 'alpha' ? areaValue : ensuredValue.getChannels().includes(channel) ? ensuredValue : areaValue.getChannels().includes(channel) ? areaValue : ensuredValue.toFormat(format);
+
+            const channelRange = workingValue.getChannelRange(channel);
+            const channelValue = workingValue.getChannelValue(channel);
+
+            const baseGradient = getChannelGradient(channel, workingValue, orientation);
+            const sliderBackground = orientation === 'vertical' ? flipVerticalGradient(baseGradient) : baseGradient;
+
+            const sliderStyle = {
+                '--slider-background': sliderBackground,
+                '--slider-thumb-background': getChannelColor(workingValue, channel).toString('css')
+            } as React.CSSProperties;
+
+            const onValueChange = (event: { originalEvent: React.SyntheticEvent; value: number | number[] | undefined }) => {
+                if (isDisabled) return;
+
+                const nextValue = Array.isArray(event.value) ? event.value[0] : event.value;
+
+                if (nextValue === undefined || Number.isNaN(nextValue)) return;
+
+                const nextColor = workingValue.withChannelValue(channel, nextValue);
+
+                commitColor(nextColor, { originalEvent: event.originalEvent });
+            };
+
+            const onValueChangeEnd = (event: { originalEvent: React.SyntheticEvent; value: number | number[] | undefined }) => {
+                if (isDisabled || !props.onValueChangeEnd) return;
+
+                const nextValue = Array.isArray(event.value) ? event.value[0] : event.value;
+
+                if (nextValue === undefined || Number.isNaN(nextValue)) return;
+
+                const nextColor = workingValue.withChannelValue(channel, nextValue);
+
+                props.onValueChangeEnd({
+                    originalEvent: event.originalEvent,
+                    color: nextColor.toString(format),
+                    value: nextColor
+                });
+            };
+
+            return {
+                sliderStyle,
+                channelValue,
+                channelRange,
+                value: channelValue,
+                min: channelRange.min,
+                max: channelRange.max,
+                step: channelRange.step,
+                disabled: isDisabled,
+                onValueChange,
+                onValueChangeEnd
+            };
+        };
 
         const registerInputEl = (el: { elementRef: React.RefObject<HTMLInputElement> }) => {
             const element = el.elementRef.current;
@@ -204,7 +323,86 @@ export const useColorPicker = withHeadless({
 
         React.useEffect(() => {
             syncChannelInputs();
-        }, [format]);
+        }, [ensuredValue, format]);
+
+        const getInputProps = ({
+            channel = 'hex',
+            disabled: inputDisabled
+        }: {
+            channel?: ColorInputChannel;
+            disabled?: boolean;
+        } = {}) => {
+            const isDisabled = disabled || inputDisabled;
+            const colorValue = ensuredValue as ColorInstance;
+            const colorFormat = format;
+            const channelRange = getInputChannelRange(colorValue, channel);
+            const channelValue = getInputChannelValue(colorValue, channel, colorFormat);
+            const isCssChannel = channel === 'hex' || channel === 'css';
+
+            const changeValue = (value: string | number) => {
+                if (isDisabled) return undefined;
+
+                let newColor: ColorInstance;
+
+                if (isCssChannel) {
+                    try {
+                        newColor = parseColor(channel === 'hex' ? prefixHex(String(value)) : String(value));
+                    } catch {
+                        newColor = colorValue;
+                    }
+                } else {
+                    let current = colorValue;
+
+                    if (channel !== 'alpha') {
+                        current = current.toFormat(colorFormat);
+                    }
+
+                    const parsed = Number.parseFloat(String(value));
+                    const valueAsNumber = Number.isNaN(parsed) ? current.getChannelValue(channel) : parsed;
+
+                    newColor = current.withChannelValue(channel, valueAsNumber);
+                }
+
+                commitColor(newColor);
+
+                return newColor;
+            };
+
+            const commitInputValue = (event: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>) => {
+                const currentTarget = event.currentTarget as HTMLInputElement;
+                const value = isCssChannel ? currentTarget.value : currentTarget.valueAsNumber;
+                const nextColor = changeValue(value);
+
+                if (!nextColor || !props.onValueChangeEnd) return;
+
+                props.onValueChangeEnd({
+                    originalEvent: event,
+                    color: nextColor.toString(format),
+                    value: nextColor
+                });
+            };
+
+            const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+                commitInputValue(event);
+            };
+
+            const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+                if (event.defaultPrevented) return;
+
+                if (event.key === 'Enter') {
+                    commitInputValue(event);
+                    event.preventDefault();
+                }
+            };
+
+            return {
+                type: (isCssChannel ? 'text' : 'number') as 'text' | 'number',
+                channelRange,
+                channelValue,
+                handleBlur,
+                handleKeyDown
+            };
+        };
 
         return {
             state,
@@ -215,12 +413,15 @@ export const useColorPicker = withHeadless({
             handleAreaPointerDown,
             handleAreaPointerMove,
             handleAreaPointerUp,
+            handleAreaBlur,
             handleAreaKeyDown,
             areaStyles,
             swatchStyles,
             openEyeDropper,
             syncChannelInputs,
-            registerInputEl
+            registerInputEl,
+            getInputProps,
+            getSliderProps
         };
     }
 });

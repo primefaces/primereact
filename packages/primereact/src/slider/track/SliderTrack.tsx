@@ -19,7 +19,12 @@ export const SliderTrack = withComponent({
         const rootProps = mergeProps(
             {
                 className: slider?.cx('track'),
-                style: { ...slider?.sx('track') },
+                style: {
+                    display: 'block',
+                    flexGrow: 1,
+                    position: 'relative',
+                    ...slider?.sx('track')
+                },
                 'data-orientation': slider?.props.orientation,
                 ...(slider?.props.disabled && { 'data-disabled': '' }),
                 ...(slider?.props.invalid && { 'data-invalid': '' }),

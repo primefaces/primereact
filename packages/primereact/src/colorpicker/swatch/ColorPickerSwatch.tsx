@@ -3,8 +3,6 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useColorPickerContext } from '../ColorPicker.context';
-import { ColorPickerSwatchBackground } from '../swatchbackground';
-import { ColorPickerTransparencyGrid } from '../transparencygrid';
 import { defaultSwatchProps } from './ColorPickerSwatch.props';
 
 export const ColorPickerSwatch = withComponent({
@@ -27,19 +25,6 @@ export const ColorPickerSwatch = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component
-                instance={instance}
-                attrs={rootProps}
-                children={
-                    props.children ?? (
-                        <>
-                            <ColorPickerTransparencyGrid />
-                            <ColorPickerSwatchBackground />
-                        </>
-                    )
-                }
-            />
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

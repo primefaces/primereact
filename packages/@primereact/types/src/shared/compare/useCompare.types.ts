@@ -8,7 +8,7 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import type { useSliderProps } from '@primereact/types/shared/slider';
+import type { useSliderExposes, useSliderProps } from '@primereact/types/shared/slider';
 import type * as React from 'react';
 
 /**
@@ -59,6 +59,10 @@ export interface useCompareExposes {
      */
     state: useCompareState;
     /**
+     * The slider instance.
+     */
+    slider: useSliderExposes;
+    /**
      * Get item clip style.
      */
     getItemStyle: (position: 'before' | 'after') => React.CSSProperties;
@@ -82,6 +86,10 @@ export interface useCompareExposes {
      * Pointer up handler for root.
      */
     onRootPointerUp: (event: React.PointerEvent<HTMLDivElement>) => void;
+    /**
+     * Pointer down handler for thumb.
+     */
+    onThumbPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
      * Input change handler.
      */

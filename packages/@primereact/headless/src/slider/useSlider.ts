@@ -23,7 +23,7 @@ export const useSlider = withHeadless({
         const minStepsBetweenThumbs = props.minStepsBetweenThumbs ?? 0;
         const isHorizontal = props.orientation === 'horizontal';
         const isThumbPointerDown = React.useRef(false);
-        const dragOffset = React.useRef(0);
+        const dragOffsetPx = React.useRef(0);
 
         // methods
         function clamp(value: number, minValue: number, maxValue: number) {
@@ -205,13 +205,14 @@ export const useSlider = withHeadless({
             return rootRef.current?.getBoundingClientRect() ?? event.currentTarget.getBoundingClientRect();
         }
 
-        function getValueFromPointer(event: React.PointerEvent<HTMLDivElement>) {
+        function getValueFromPointer(event: React.PointerEvent<HTMLDivElement>, offsetPx: number = 0) {
             const rect = getRootRect(event);
             const size = isHorizontal ? rect.width : rect.height;
 
             if (!size) return min;
 
-            const position = isHorizontal ? (event.clientX - rect.left) / rect.width : (event.clientY - rect.top) / rect.height;
+            const pointerPosition = isHorizontal ? event.clientX - rect.left : event.clientY - rect.top;
+            const position = (pointerPosition - offsetPx) / size;
             const clampedPosition = clamp(position, 0, 1);
             const isRtl = isHorizontal && isRTL(rootRef.current ?? event.currentTarget);
             const orientedPosition = isHorizontal ? (isRtl ? 1 - clampedPosition : clampedPosition) : 1 - clampedPosition;
@@ -246,7 +247,7 @@ export const useSlider = withHeadless({
         }
 
         function updateValueFromPointer(event: React.PointerEvent<HTMLDivElement>) {
-            const nextValue = getValueFromPointer(event);
+            const nextValue = getValueFromPointer(event, dragOffsetPx.current);
             const values = getValues();
             const closestIndex = getClosestEnabledValueIndex(values, nextValue, event);
 
@@ -254,7 +255,7 @@ export const useSlider = withHeadless({
 
             blurFocusedThumbIfDifferent(closestIndex);
             activeIndex.current = closestIndex;
-            dragOffset.current = 0;
+            dragOffsetPx.current = 0;
             updateValueAt(activeIndex.current, nextValue, event);
         }
 
@@ -268,11 +269,12 @@ export const useSlider = withHeadless({
             setIsDragging(true);
 
             if (isThumbPointerDown.current) {
-                dragOffset.current = getThumbValue(activeIndex.current) - getValueFromPointer(event);
                 isThumbPointerDown.current = false;
 
                 return;
             }
+
+            dragOffsetPx.current = 0;
 
             updateValueFromPointer(event);
         }
@@ -285,7 +287,7 @@ export const useSlider = withHeadless({
             if (isThumbDisabled(activeIndex.current)) return;
 
             event.preventDefault();
-            updateValueAt(activeIndex.current, getValueFromPointer(event) + dragOffset.current, event);
+            updateValueAt(activeIndex.current, getValueFromPointer(event, dragOffsetPx.current), event);
         }
 
         function onTrackPointerUp(event: React.PointerEvent<HTMLDivElement>) {
@@ -295,7 +297,7 @@ export const useSlider = withHeadless({
             event.currentTarget.releasePointerCapture(event.pointerId);
             setIsDragging(false);
             isThumbPointerDown.current = false;
-            dragOffset.current = 0;
+            dragOffsetPx.current = 0;
 
             props.onValueChangeEnd?.({
                 originalEvent: event,
@@ -309,6 +311,19 @@ export const useSlider = withHeadless({
             if (event.pointerType === 'mouse' && event.button !== 0) return;
 
             event.preventDefault();
+            rootRef.current?.setPointerCapture(event.pointerId);
+            const thumb = getThumbElement(index);
+
+            if (thumb) {
+                const thumbRect = thumb.getBoundingClientRect();
+                const thumbCenter = isHorizontal ? thumbRect.left + thumbRect.width / 2 : thumbRect.top + thumbRect.height / 2;
+                const pointerAxis = isHorizontal ? event.clientX : event.clientY;
+
+                dragOffsetPx.current = pointerAxis - thumbCenter;
+            } else {
+                dragOffsetPx.current = 0;
+            }
+
             blurFocusedThumbIfDifferent(index);
             activeIndex.current = index;
             isThumbPointerDown.current = true;

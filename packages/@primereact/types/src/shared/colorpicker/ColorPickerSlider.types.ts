@@ -11,7 +11,7 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
 import type { ColorPickerRootInstance } from './ColorPickerRoot.types';
-import type { useColorPickerSliderExposes, useColorPickerSliderProps, useColorPickerSliderState } from './useColorPickerSlider.types';
+import type { ColorSliderChannel } from './colorManager.types';
 
 /**
  * Defines passthrough(pt) options type in ColorPickerSlider component.
@@ -31,17 +31,35 @@ export interface ColorPickerSliderPassThrough {
 /**
  * Defines valid properties in ColorPickerSlider component.
  */
-export interface ColorPickerSliderProps extends BaseComponentProps<ColorPickerSliderInstance, useColorPickerSliderProps, ColorPickerSliderPassThrough> {}
+export interface ColorPickerSliderComponentProps {
+    /**
+     * The channel of the slider.
+     */
+    channel?: ColorSliderChannel;
+    /**
+     * The orientation of the slider.
+     */
+    orientation?: 'horizontal' | 'vertical';
+    /**
+     * Whether the slider is disabled.
+     */
+    disabled?: boolean;
+}
+
+/**
+ * Defines valid properties in ColorPickerSlider component.
+ */
+export interface ColorPickerSliderProps extends BaseComponentProps<ColorPickerSliderInstance, ColorPickerSliderComponentProps, ColorPickerSliderPassThrough> {}
 
 /**
  * Defines valid state in ColorPickerSlider component.
  */
-export interface ColorPickerSliderState extends useColorPickerSliderState {}
+export interface ColorPickerSliderState {}
 
 /**
  * Defines the methods and properties exposed by ColorPickerSlider component.
  */
-export interface ColorPickerSliderExposes extends useColorPickerSliderExposes {
+export interface ColorPickerSliderExposes {
     /**
      * The ColorPicker component instance.
      */

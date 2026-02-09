@@ -19,13 +19,16 @@ export default function CustomDemo() {
                 <Slider.Thumb className="before:hidden w-4 h-5 border-2 border-amber-500 bg-surface-0 dark:bg-surface-900 rounded-sm" />
             </Slider.Root>
 
-            <Slider.Root defaultValue={50} className="h-7 rounded-full ">
+            <Slider.Root defaultValue={50} className="h-8 rounded-full ">
                 <Slider.Track className="h-full rounded-full border border-surface-100 dark:border-surface-900 bg-surface-100 dark:bg-surface-800">
                     {({ slider }: SliderTrackInstance) => {
                         return (
                             <>
-                                <i className="pi pi-volume-up absolute left-2 top-1/2 -translate-y-1/2 z-10 text-surface-600"></i>
-                                <Slider.Range className="rounded-full bg-surface-0" style={{ width: `max(${slider?.state.value}%, 1.75rem)` }}>
+                                <i className="pi pi-volume-up absolute left-2 top-1/2 -translate-y-1/2 z-10 text-surface-400"></i>
+                                <Slider.Range
+                                    className="rounded-full bg-surface-0"
+                                    style={{ width: `clamp(2rem, calc(${slider?.state.value}% + 1rem), 100%)` }}
+                                >
                                     <Slider.Thumb
                                         style={{ insetBlockStart: '50%', insetInlineStart: 'auto', insetInlineEnd: '0', translate: '0 -50%' }}
                                         className="z-20 h-[calc(100%+2px)]! dark:h-full! aspect-square! w-auto! before:hidden! bg-surface-0 border border-surface-200 rounded-full shadow-sm"
@@ -38,7 +41,7 @@ export default function CustomDemo() {
             </Slider.Root>
 
             <Slider.Root defaultValue={50}>
-                <Slider.Track className="h-8 flex items-center gap-1 w-full bg-transparent cursor-grab active:cursor-grabbing">
+                <Slider.Track className="h-8 flex! items-center gap-1 w-full bg-transparent cursor-grab active:cursor-grabbing">
                     {({ slider }: SliderTrackInstance) => {
                         return (
                             <>

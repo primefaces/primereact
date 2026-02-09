@@ -1,8 +1,6 @@
 export * from './colorManager.types';
 export * from './ColorPicker.types';
 export * from './useColorPicker.types';
-export * from './useColorPickerInput.types';
-export * from './useColorPickerSlider.types';
 
 // parts
 export * from './ColorPickerArea.types';

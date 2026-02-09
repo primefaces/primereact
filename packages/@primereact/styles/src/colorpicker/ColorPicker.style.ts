@@ -20,13 +20,15 @@ const theme = `
         border-radius: 999px;
         touch-action: none;
         forced-color-adjust: none;
-        border: 3px solid rgb(255,255,255);
         cursor: pointer;
         transform: translate(-50%, -50%);
         top: var(--thumb-position-top)    ;
         left: var(--thumb-position-left);
         background: var(--thumb-background);
+        outline: none;
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border: 3px solid white;
+        transition: border 0.1s ease-in-out;
     }
 
     .p-color-picker-area-background{
@@ -55,7 +57,6 @@ const theme = `
         touch-action: pan-x;
     }
 
-
     .p-color-picker-slider-vertical{
         height: auto;
         width: 1rem;
@@ -63,31 +64,47 @@ const theme = `
     }
 
     .p-color-picker-slider-thumb{
+        position: relative;
         width: 1rem;
         height: 1rem;
         position: absolute;
         z-index: 1;
         border-radius: 999px;
+        outline: none;
         touch-action: none;
-        transform: translate(-50%, -50%);
-        top: var(--thumb-position-top);
-        left: var(--thumb-position-left);
-        background: var(--thumb-background);
-        border: 3px solid rgb(255,255,255);
+        background: var(--slider-thumb-background);
         cursor: pointer;
-        box-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border: 3px solid white;
+        transition: border 0.1s ease-in-out;
+    }
+
+    .p-color-picker-slider-thumb:has(:focus-visible),
+    .p-color-picker-area-thumb:focus-visible{
+        border: 2px solid rgba(255,255,255);
+        outline: 2px solid rgba(255,255,255,0.3);
+        outline-offset: 2px;
     }
 
     .p-color-picker-slider-track{
-        position: absolute;
-        inset: 0;
-        z-index: 0;
         border-radius: inherit;
         pointer-events: none;
         user-select: none;
         touch-action: none;
         box-shadow: inset 0 0 0 1px light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.15));
         background: var(--slider-background);
+    }
+
+    .p-color-picker-slider input {
+        clip-path:inset(50%);
+        overflow:hidden;
+        white-space:nowrap;
+        border:0;
+        padding:0;
+        width:100%;
+        height:100%;
+        margin:-1px;
+        position:fixed;top:0;left:0;
     }
 
     .p-color-picker-transparency-grid{
