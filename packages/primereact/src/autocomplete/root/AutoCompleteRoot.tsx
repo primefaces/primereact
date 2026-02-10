@@ -28,7 +28,7 @@ export const AutoCompleteRoot = withComponent({
 
         return (
             <AutoCompleteProvider value={instance}>
-                <Component instance={instance} attrs={rootProps} children={props.children} />
+                <Component instance={instance} attrs={rootProps} children={props.children} ref={instance.setAnchorRef} />
             </AutoCompleteProvider>
         );
     }

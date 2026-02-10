@@ -21,6 +21,8 @@ export const AutoCompleteList = withComponent({
         const rootProps = mergeProps(
             restProps,
             {
+                className: autocomplete?.cx('list'),
+                checkmark: autocomplete?.props.checkmark,
                 listboxInstance: autocomplete?.listbox
             },
             autocomplete?.ptm('pcListbox'),

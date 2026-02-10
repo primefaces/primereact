@@ -1,8 +1,8 @@
-export { AutoCompleteTrigger as Trigger, AutoCompleteClearIcon as ClearIcon, AutoCompletePortal as Portal } from 'primereact/autocomplete';
+export { AutoCompleteTrigger as Trigger, AutoCompleteClearIcon as ClearIcon, AutoCompletePanel as Panel, AutoCompletePortal as Portal, AutoCompletePositioner as Positioner } from 'primereact/autocomplete';
 export { UIAutoCompleteEmpty as Empty } from './empty';
 export { UIAutoCompleteFooter as Footer } from './footer';
 export { UIAutoCompleteHeader as Header } from './header';
-export { UIAutoCompleteInput as Input } from './input';
+export { UIAutoCompleteValue as Value } from './value';
 export { UIAutoCompleteList as List } from './list';
 export { UIAutoCompleteOption as Option } from './option';
 export { UIAutoCompleteOptions as Options } from './options';

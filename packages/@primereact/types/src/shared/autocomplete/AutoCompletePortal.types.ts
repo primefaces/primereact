@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import type { PortalProps } from '@primereact/types/shared/portal';
 import type { AutoCompleteRootInstance } from './AutoCompleteRoot.types';
 
 /**
@@ -25,16 +26,12 @@ export interface AutoCompletePortalPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: AutoCompletePortalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the panel's DOM element.
-     */
-    panel?: AutoCompletePortalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
  * Defines valid properties in AutoCompletePortal component.
  */
-export interface AutoCompletePortalProps extends BaseComponentProps<AutoCompletePortalInstance, unknown, AutoCompletePortalPassThrough> {}
+export interface AutoCompletePortalProps extends BaseComponentProps<AutoCompletePortalInstance, PortalProps, AutoCompletePortalPassThrough> {}
 
 /**
  * Defines valid state in AutoCompletePortal component.

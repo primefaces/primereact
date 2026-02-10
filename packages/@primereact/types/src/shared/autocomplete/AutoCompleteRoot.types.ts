@@ -38,6 +38,10 @@ export interface AutoCompleteRootPassThrough {
      */
     portal?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Used to pass attributes to the positioner's DOM element.
+     */
+    positioner?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Used to pass attributes to the panel's DOM element.
      */
     panel?: AutoCompleteRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;

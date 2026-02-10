@@ -1,15 +1,17 @@
 import { withHeadless } from '@primereact/core/headless';
+import { useListbox } from '@primereact/headless/listbox';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import { focus, getOuterWidth, isEmpty, isNotEmpty } from '@primeuix/utils';
+import { useEventListener } from '@primereact/hooks/use-event-listener';
+import { usePresence } from '@primereact/hooks/use-presence';
+import type { useListboxValueChangeEvent } from '@primereact/types/shared/listbox';
+import { focus, getOuterWidth, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useAutoComplete.props';
-import { useListbox } from '@primereact/headless/listbox';
-import type { useListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 
 export const useAutoComplete = withHeadless({
     name: 'useAutoComplete',
     defaultProps,
-    setup({ props, elementRef }) {
+    setup({ props }) {
         const onListboxValueChange = React.useRef<((event: useListboxValueChangeEvent) => void) | null>(null);
         const listbox = useListbox({
             value: props.value,
@@ -31,11 +33,6 @@ export const useAutoComplete = withHeadless({
             onValueChange: (event: useListboxValueChangeEvent) => onListboxValueChange.current?.(event)
         });
 
-        const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
-        const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
-        const searchTimeout = React.useRef<NodeJS.Timeout | null>(null);
-        const focusOnShow = React.useRef<boolean>(false);
-
         const [valueState, setValueState] = useControlledState({
             value: props.value,
             defaultValue: props.defaultValue,
@@ -54,18 +51,39 @@ export const useAutoComplete = withHeadless({
             onChange: props.onOpenChange
         });
 
-        const [showClearIcon, setShowClearIcon] = React.useState(true);
+        const presence = usePresence(!!openState);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const [searchingState, setSearchingState] = React.useState<boolean>(false);
+        const searchTimeout = React.useRef<NodeJS.Timeout | null>(null);
+        const focusOnShow = React.useRef<boolean>(false);
+
+        const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+        const [positionerEl, setPositionerEl] = React.useState<HTMLDivElement | null>(null);
+
+        const inputRef = React.useRef<{ elementRef: React.RefObject<HTMLInputElement> } | null>(null);
+        const anchorRef = React.useRef<HTMLElement>(null);
+        const positionerRef = React.useRef<HTMLDivElement>(null);
+
+        const setAnchorRef = React.useCallback((node: HTMLElement | null) => {
+            anchorRef.current = node;
+            setAnchorEl(node);
+        }, []);
+
+        const setPositionerRef = React.useCallback((node: HTMLDivElement | null) => {
+            positionerRef.current = node;
+            setPositionerEl(node);
+        }, []);
 
         const state = {
             value: valueState,
             inputValue: inputValueState,
             opened: openState,
-            showClearIcon,
             focused: focusedState,
             focusedOptionIndex: listbox.state.focusedOptionIndex,
-            searching: searchingState
+            searching: searchingState,
+            anchorEl,
+            positionerEl
         };
 
         const search = (event: React.SyntheticEvent, query: string, source: string) => {
@@ -103,8 +121,6 @@ export const useAutoComplete = withHeadless({
             }
 
             const inputValue = event.target.value;
-
-            setShowClearIcon(!isEmpty(inputValue));
 
             if (hasValue()) {
                 const selectedOptionIndex = listbox.findSelectedOptionIndex();
@@ -225,6 +241,7 @@ export const useAutoComplete = withHeadless({
         const onArrowDownKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (!openState && inputValueState && inputValueState?.length >= (props.minLength ?? 1)) {
                 focusOnShow.current = true;
+                search(event, inputValueState ?? '', 'input');
                 show();
             }
 
@@ -236,6 +253,7 @@ export const useAutoComplete = withHeadless({
         const onArrowUpKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (!openState && inputValueState && inputValueState?.length >= (props.minLength ?? 1)) {
                 focusOnShow.current = true;
+                search(event, inputValueState ?? '', 'input');
                 show();
             }
 
@@ -287,7 +305,7 @@ export const useAutoComplete = withHeadless({
                     if (props.dropdownMode === 'blank') {
                         search(event, '', 'dropdown');
                     } else if (props.dropdownMode === 'current') {
-                        search(event, inputRef.current?.elementRef.current?.value ?? '', 'dropdown');
+                        search(event, inputValueState ?? '', 'dropdown');
                     }
 
                     setOpenState([true, { value: true }]);
@@ -301,45 +319,30 @@ export const useAutoComplete = withHeadless({
         };
 
         const onClearClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-            setInputValueState([
+            event.preventDefault();
+            event.stopPropagation();
+
+            setValueState([
                 null,
+                {
+                    originalEvent: event,
+                    value: null,
+                    option: null
+                }
+            ]);
+
+            setInputValueState([
+                '',
                 {
                     originalEvent: event,
                     query: ''
                 }
             ]);
-            setShowClearIcon(false);
+
+            listbox.updateModel(event, null);
 
             if (openState) {
-                setOpenState([false, { value: false }]);
-            }
-
-            if (inputRef.current?.elementRef?.current) {
-                inputRef.current.elementRef.current.value = '';
-            }
-        };
-
-        const onOverlayEnter = () => {
-            if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
-                const element = portalRef.current.containerRef.current.elementRef.current;
-
-                if (elementRef?.current) {
-                    element.style.minWidth = getOuterWidth(elementRef.current) + 'px';
-                }
-            }
-        };
-
-        const onOverlayAfterEnter = () => {
-            if (focusOnShow.current) {
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        const focusedOptionIndex = listbox.state.focusedOptionIndex;
-                        const indexToFocus = focusedOptionIndex !== -1 ? focusedOptionIndex : listbox.findFirstFocusedOptionIndex();
-
-                        listbox.changeFocusedOptionIndex(new Event('focus') as unknown as React.KeyboardEvent, indexToFocus);
-                        focusOnShow.current = false;
-                    });
-                });
+                hide();
             }
         };
 
@@ -424,18 +427,8 @@ export const useAutoComplete = withHeadless({
                             option: null
                         }
                     ]);
-
-                    if (inputRef.current?.elementRef?.current) {
-                        inputRef.current.elementRef.current.value = '';
-                    }
-
-                    setShowClearIcon(false);
                 }
             }
-        };
-
-        const changeVisibleState = (isVisible: boolean) => {
-            setOpenState([isVisible, { value: isVisible }]);
         };
 
         const getFocusedOptionId = () => {
@@ -446,6 +439,29 @@ export const useAutoComplete = withHeadless({
             return isNotEmpty(valueState);
         };
 
+        // Event listeners
+        const [bindOutsideClickListener, unbindOutsideClickListener] = useEventListener({
+            type: 'click',
+            listener: (event: Event) => {
+                const positionerElement = positionerRef.current;
+                const anchorElement = anchorRef.current;
+
+                if (openState && positionerElement && !positionerElement.contains(event.target as Node) && anchorElement && !anchorElement.contains(event.target as Node)) {
+                    hide();
+                }
+            }
+        });
+
+        const [bindResizeListener, unbindResizeListener] = useEventListener({
+            target: 'window',
+            type: 'resize',
+            listener: () => {
+                if (openState) {
+                    hide();
+                }
+            }
+        });
+
         // effects
         React.useEffect(() => {
             if (searchTimeout.current) {
@@ -455,21 +471,47 @@ export const useAutoComplete = withHeadless({
         }, []);
 
         React.useEffect(() => {
-            if (isEmpty(valueState)) {
-                setShowClearIcon(false);
-            }
-        }, [valueState]);
-
-        React.useEffect(() => {
             setSearchingState(false);
         }, [props.options]);
+
+        React.useEffect(() => {
+            if (openState) {
+                bindOutsideClickListener();
+                bindResizeListener();
+            } else {
+                unbindOutsideClickListener();
+                unbindResizeListener();
+            }
+        }, [openState, bindOutsideClickListener, unbindOutsideClickListener, bindResizeListener, unbindResizeListener]);
+
+        React.useEffect(() => {
+            if (openState && positionerEl) {
+                if (anchorRef.current) {
+                    positionerEl.style.minWidth = getOuterWidth(anchorRef.current) + 'px';
+                }
+
+                if (focusOnShow.current) {
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            const focusedOptionIndex = listbox.state.focusedOptionIndex;
+                            const indexToFocus = focusedOptionIndex !== -1 ? focusedOptionIndex : listbox.findFirstFocusedOptionIndex();
+
+                            listbox.changeFocusedOptionIndex(new Event('focus') as unknown as React.KeyboardEvent, indexToFocus);
+                            focusOnShow.current = false;
+                        });
+                    });
+                }
+            }
+        }, [openState, positionerEl]);
 
         return {
             state,
             listbox,
+            presence,
             // refs
             inputRef,
-            portalRef,
+            setAnchorRef,
+            setPositionerRef,
             // methods
             onChange,
             onFocus,
@@ -477,11 +519,9 @@ export const useAutoComplete = withHeadless({
             onKeyDown,
             onTriggerClick,
             onClearClick,
-            onOverlayEnter,
-            onOverlayAfterEnter,
             onOptionSelect,
-            changeVisibleState,
-            getFocusedOptionId
+            getFocusedOptionId,
+            hasValue
         };
     }
 });

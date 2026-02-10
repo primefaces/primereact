@@ -16,7 +16,7 @@ export const AutoCompleteClearIcon = withComponent({
     render(instance) {
         const { props, ptmi, autocomplete } = instance;
 
-        if (!autocomplete?.state.showClearIcon) {
+        if (!autocomplete?.hasValue()) {
             return null;
         }
 

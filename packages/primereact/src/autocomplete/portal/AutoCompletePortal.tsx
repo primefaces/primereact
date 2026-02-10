@@ -1,8 +1,7 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
-import type { useOverlayOpenChangeEvent } from '@primereact/types/shared/overlay';
-import { mergeProps, resolve } from '@primeuix/utils';
-import { Overlay } from 'primereact/overlay';
+import { withComponent } from '@primereact/core/component';
+import { mergeProps } from '@primeuix/utils';
+import { Portal } from 'primereact/portal';
 import * as React from 'react';
 import { useAutoCompleteContext } from '../AutoComplete.context';
 import { defaultPortalProps } from './AutoCompletePortal.props';
@@ -16,9 +15,9 @@ export const AutoCompletePortal = withComponent({
         return { autocomplete };
     },
     render(instance) {
-        const { props, ptmi, autocomplete } = instance;
+        const { props, autocomplete, ptmi } = instance;
 
-        const rootProps = mergeProps(
+        const containerProps = mergeProps(
             {
                 className: autocomplete?.cx('portal')
             },
@@ -26,32 +25,6 @@ export const AutoCompletePortal = withComponent({
             ptmi('root')
         );
 
-        const createPanel = () => {
-            const panelProps = mergeProps(
-                {
-                    className: autocomplete?.cx('panel')
-                },
-                ptmi('panel')
-            );
-
-            return <div {...panelProps}>{resolve(props.children, instance)}</div>;
-        };
-
-        return (
-            <Component instance={instance} attrs={rootProps}>
-                <Overlay
-                    ref={autocomplete?.portalRef}
-                    appendTo={autocomplete?.props.appendTo}
-                    target={autocomplete?.inputRef?.current?.elementRef?.current}
-                    type="overlay"
-                    open={autocomplete?.state.opened}
-                    onOpenChange={({ value }: useOverlayOpenChangeEvent) => autocomplete?.changeVisibleState(value)}
-                    onEnter={autocomplete?.onOverlayEnter}
-                    onAfterEnter={autocomplete?.onOverlayAfterEnter}
-                >
-                    {createPanel()}
-                </Overlay>
-            </Component>
-        );
+        return <Portal instance={instance} attrs={containerProps} children={props.children} appendTo={autocomplete?.props.appendTo} />;
     }
 });

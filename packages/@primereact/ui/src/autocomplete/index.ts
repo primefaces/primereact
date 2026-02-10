@@ -4,7 +4,9 @@ export * as AutoComplete from './UIAutoComplete.parts';
 export {
     AutoCompleteTrigger,
     AutoCompleteClearIcon,
+    AutoCompletePanel,
     AutoCompletePortal,
+    AutoCompletePositioner,
     AutoCompleteProps,
     AutoCompleteProvider,
     defaultTriggerProps,
@@ -12,10 +14,12 @@ export {
     defaultEmptyProps,
     defaultFooterProps,
     defaultHeaderProps,
-    defaultInputProps,
+    defaultValueProps,
     defaultListProps,
     defaultOptionsProps,
+    defaultPanelProps,
     defaultPortalProps,
+    defaultPositionerProps,
     defaultRootProps,
     defaultSelectionProps,
     useAutoCompleteContext
@@ -23,7 +27,7 @@ export {
 export { UIAutoCompleteEmpty as AutoCompleteEmpty } from './empty';
 export { UIAutoCompleteFooter as AutoCompleteFooter } from './footer';
 export { UIAutoCompleteHeader as AutoCompleteHeader } from './header';
-export { UIAutoCompleteInput as AutoCompleteInput } from './input';
+export { UIAutoCompleteValue as AutoCompleteValue } from './value';
 export { UIAutoCompleteList as AutoCompleteList } from './list';
 export { UIAutoCompleteOption as AutoCompleteOption } from './option';
 export { UIAutoCompleteOptions as AutoCompleteOptions } from './options';

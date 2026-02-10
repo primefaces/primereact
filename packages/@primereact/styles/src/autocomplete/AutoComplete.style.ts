@@ -13,10 +13,23 @@ ${style}
     border: 1px solid dt('autocomplete.overlay.border.color');
     border-radius: dt('autocomplete.overlay.border.radius');
     box-shadow: dt('autocomplete.overlay.shadow');
+    opacity: 0;
+    scale: 0.93;
+    transition: opacity 300ms cubic-bezier(.19,1,.22,1), scale 300ms cubic-bezier(.19,1,.22,1);
+    transform-origin: var(--transform-origin);
+
+    &[data-open]{
+        opacity: 1;
+        scale: 1;
+    }
 }
 
 .p-autocomplete-list.p-listbox {
     border: unset;
+}
+
+.p-autocomplete-clear-icon {
+    display: inline-flex;
 }
 `;
 
@@ -37,6 +50,7 @@ export const styles = createStyles<AutoCompleteRootInstance>({
         input: 'p-autocomplete-input',
         clearIcon: 'p-autocomplete-clear-icon',
         trigger: 'p-autocomplete-dropdown',
+        positioner: 'p-autocomplete-positioner',
         panel: 'p-autocomplete-list-container',
         list: 'p-autocomplete-list',
         options: 'p-autocomplete-options',
