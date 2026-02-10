@@ -1,11 +1,10 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Times } from '@primeicons/react/times';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
-import { Chip } from '@primereact/ui/chip';
 import { Select } from '@primereact/ui/select';
 import { Tag } from '@primereact/ui/tag';
 import * as React from 'react';
-import { ChevronDown } from '@primeicons/react/chevron-down';
-import { Times } from '@primeicons/react/times';
 
 const productCategories = [
     { label: 'Electronics', value: 'electronics', count: 1247 },
@@ -16,20 +15,10 @@ const productCategories = [
     { label: 'Toys', value: 'toys', count: 312 }
 ];
 
-const priceRanges = [
-    { label: 'Under $25', value: '0-25' },
-    { label: '$25 - $50', value: '25-50' },
-    { label: '$50 - $100', value: '50-100' },
-    { label: '$100 - $200', value: '100-200' },
-    { label: 'Over $200', value: '200+' }
-];
-
 type CategoryOption = (typeof productCategories)[number] | null;
-type PriceRangeOption = (typeof priceRanges)[number] | null;
 
 export default function ClearIconDemo() {
     const [category, setCategory] = React.useState<CategoryOption>(null);
-    const [priceRange, setPriceRange] = React.useState<PriceRangeOption>(null);
 
     return (
         <div className="flex flex-col items-center gap-4">
@@ -39,75 +28,40 @@ export default function ClearIconDemo() {
                     onValueChange={(e: SelectValueChangeEvent) => setCategory(e.value as CategoryOption)}
                     options={productCategories}
                     optionLabel="label"
-                    className="w-40"
+                    className="w-full md:w-56"
                 >
-                    <Select.Trigger placeholder="Category" />
-                    {category && (
-                        <Select.ClearIcon>
-                            <Times />
-                        </Select.ClearIcon>
-                    )}
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger>
+                        <Select.Value placeholder="Category" />
+                        {category && (
+                            <Select.ClearIcon>
+                                <Times />
+                            </Select.ClearIcon>
+                        )}
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options>
-                                {productCategories.map((cat, index) => (
-                                    <Select.Option key={cat.value} index={index} uKey={cat.value}>
-                                        <div className="flex items-center justify-between w-full">
-                                            <span>{cat.label}</span>
-                                            <Tag severity="secondary" rounded>
-                                                {cat.count}
-                                            </Tag>
-                                        </div>
-                                    </Select.Option>
-                                ))}
-                            </Select.Options>
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options>
+                                        {productCategories.map((cat, index) => (
+                                            <Select.Option key={cat.value} index={index} uKey={cat.value}>
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>{cat.label}</span>
+                                                    <Tag severity="secondary" rounded>
+                                                        {cat.count}
+                                                    </Tag>
+                                                </div>
+                                            </Select.Option>
+                                        ))}
+                                    </Select.Options>
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
-
-                <Select.Root
-                    value={priceRange}
-                    onValueChange={(e: SelectValueChangeEvent) => setPriceRange(e.value as PriceRangeOption)}
-                    options={priceRanges}
-                    optionLabel="label"
-                    className="w-40"
-                >
-                    <Select.Trigger placeholder="Price" />
-                    {priceRange && (
-                        <Select.ClearIcon>
-                            <Times className="w-3 h-3" />
-                        </Select.ClearIcon>
-                    )}
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
-                    <Select.Portal>
-                        <Select.List>
-                            <Select.Options />
-                        </Select.List>
-                    </Select.Portal>
-                </Select.Root>
-            </div>
-
-            <div className="flex items-center gap-2 h-6">
-                <span className="text-sm text-surface-500">Active filters:</span>
-                <>
-                    {category && (
-                        <Chip.Root onRemove={() => setCategory(null)}>
-                            <Chip.Label>{category.label}</Chip.Label>
-                            <Chip.RemoveIcon />
-                        </Chip.Root>
-                    )}
-                    {priceRange && (
-                        <Chip.Root onRemove={() => setPriceRange(null)}>
-                            <Chip.Label>{priceRange.label}</Chip.Label>
-                            <Chip.RemoveIcon />
-                        </Chip.Root>
-                    )}
-                </>
             </div>
         </div>
     );

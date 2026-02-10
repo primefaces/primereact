@@ -1,8 +1,8 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const themes = [
     { label: 'Light', value: 'light', icon: '☀️', description: 'Clean and bright interface' },
@@ -25,31 +25,37 @@ export default function CheckmarkDemo() {
                 className="w-full md:w-64"
             >
                 <Select.Trigger>
-                    <span className="flex items-center gap-2">
-                        <span>{theme?.icon}</span>
-                        <span>{theme?.label}</span>
-                    </span>
+                    <Select.Value>
+                        <span className="flex items-center gap-2">
+                            <span>{theme?.icon}</span>
+                            <span>{theme?.label}</span>
+                        </span>
+                    </Select.Value>
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
                 </Select.Trigger>
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options>
-                            {themes.map((t, index) => (
-                                <Select.Option key={t.value} index={index} uKey={t.value} className="justify-between">
-                                    <div className="flex items-center gap-3 py-1">
-                                        <span className="text-xl">{t.icon}</span>
-                                        <div className="flex flex-col">
-                                            <span className="font-medium">{t.label}</span>
-                                            <span className="text-xs text-surface-500">{t.description}</span>
-                                        </div>
-                                    </div>
-                                    <Select.Selection className={'ml-4'} />
-                                </Select.Option>
-                            ))}
-                        </Select.Options>
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options>
+                                    {themes.map((t, index) => (
+                                        <Select.Option key={t.value} index={index} uKey={t.value} className="justify-between">
+                                            <div className="flex items-center gap-3 py-1">
+                                                <span className="text-xl">{t.icon}</span>
+                                                <div className="flex flex-col">
+                                                    <span className="font-medium">{t.label}</span>
+                                                    <span className="text-xs text-surface-500">{t.description}</span>
+                                                </div>
+                                            </div>
+                                            <Select.Selection className={'ml-4'} />
+                                        </Select.Option>
+                                    ))}
+                                </Select.Options>
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

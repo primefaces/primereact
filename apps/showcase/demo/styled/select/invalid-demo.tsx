@@ -1,8 +1,8 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
-import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -26,15 +26,21 @@ export default function InvalidDemo() {
                 value={value}
                 onValueChange={(event: SelectValueChangeEvent) => setValue(event.value as string)}
             >
-                <Select.Trigger placeholder="Select a City" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Select a City" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
 
@@ -47,15 +53,21 @@ export default function InvalidDemo() {
                 value={value2}
                 onValueChange={(event: SelectValueChangeEvent) => setValue2(event.value as string)}
             >
-                <Select.Trigger placeholder="Select a City" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Select a City" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

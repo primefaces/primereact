@@ -1,7 +1,7 @@
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import { FloatLabel } from '@primereact/ui/floatlabel';
 import { Label } from '@primereact/ui/label';
 import { Select } from '@primereact/ui/select';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -16,15 +16,21 @@ export default function FloatLabelDemo() {
         <div className="flex flex-wrap justify-center items-end gap-4">
             <FloatLabel>
                 <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
-                    <Select.Trigger id="over_label" />
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger id="over_label">
+                        <Select.Value />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
 
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
 
@@ -33,15 +39,21 @@ export default function FloatLabelDemo() {
 
             <FloatLabel variant="in">
                 <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
-                    <Select.Trigger id="in_label" />
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger id="in_label">
+                        <Select.Value />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
 
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
 
@@ -50,15 +62,21 @@ export default function FloatLabelDemo() {
 
             <FloatLabel variant="on">
                 <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
-                    <Select.Trigger id="on_label" />
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger id="on_label">
+                        <Select.Value />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
 
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
 

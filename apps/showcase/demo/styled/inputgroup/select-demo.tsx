@@ -18,6 +18,7 @@ const cities = [
 
 export default function SelectDemo() {
     const [city, setCity] = React.useState<string>('');
+    const [city2, setCity2] = React.useState<string>('');
 
     return (
         <div className="space-y-4 max-w-md mx-auto">
@@ -33,14 +34,20 @@ export default function SelectDemo() {
                     optionValue="value"
                     className="flex-1"
                 >
-                    <Select.Trigger placeholder="Select a City" />
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger>
+                        <Select.Value placeholder="Select a City" />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
             </InputGroup.Root>
@@ -49,21 +56,27 @@ export default function SelectDemo() {
                 <InputGroup.Addon>www</InputGroup.Addon>
                 <InputText placeholder="Website" className="border-r-0" />
                 <Select.Root
-                    value={city}
-                    onValueChange={(e: SelectValueChangeEvent) => setCity(e.value as string)}
+                    value={city2}
+                    onValueChange={(e: SelectValueChangeEvent) => setCity2(e.value as string)}
                     options={cities}
                     optionLabel="label"
                     optionValue="value"
                     className="flex-1"
                 >
-                    <Select.Trigger placeholder="Select a City" />
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger>
+                        <Select.Value placeholder="Select a City" />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
             </InputGroup.Root>

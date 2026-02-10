@@ -1687,6 +1687,10 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/select/invalid-demo')),
                 'filePath': 'demo/styled/select/invalid-demo.tsx',
             },
+            'multiple-demo': {
+                'component': React.lazy(() => import('demo/styled/select/multiple-demo')),
+                'filePath': 'demo/styled/select/multiple-demo.tsx',
+            },
             'option-demo': {
                 'component': React.lazy(() => import('demo/styled/select/option-demo')),
                 'filePath': 'demo/styled/select/option-demo.tsx',

@@ -1,6 +1,5 @@
-import { Select } from '@primereact/ui/select';
-import * as React from 'react';
 import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Select } from '@primereact/ui/select';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -14,15 +13,21 @@ export default function FilledDemo() {
     return (
         <div className="flex justify-center">
             <Select.Root options={cities} optionLabel="name" variant="filled" className="w-full md:w-56">
-                <Select.Trigger placeholder="Select a City" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Select a City" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

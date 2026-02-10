@@ -1,6 +1,5 @@
-import { Select } from '@primereact/ui/select';
-import * as React from 'react';
 import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Select } from '@primereact/ui/select';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -14,41 +13,59 @@ export default function SizesDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <Select.Root options={cities} optionLabel="name" size="small" className="w-full md:w-56">
-                <Select.Trigger placeholder="Small" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Small" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
 
             <Select.Root options={cities} optionLabel="name" className="w-full md:w-56">
-                <Select.Trigger placeholder="Normal" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Normal" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
 
             <Select.Root options={cities} optionLabel="name" size="large" className="w-full md:w-56">
-                <Select.Trigger placeholder="Large" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Large" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

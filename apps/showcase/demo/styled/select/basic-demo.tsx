@@ -1,8 +1,8 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import type { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const languages = [
     { label: 'Select your language', value: '' },
@@ -29,14 +29,21 @@ export default function BasicDemo() {
                 optionValue="value"
                 className="w-full md:w-56"
             >
-                <Select.Trigger placeholder="Select a language" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Select a language" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
+
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '14rem' }} />
-                    </Select.List>
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '14rem' }} />
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

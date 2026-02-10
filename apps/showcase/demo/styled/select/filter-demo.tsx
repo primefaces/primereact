@@ -1,12 +1,12 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
+import { Search } from '@primeicons/react/search';
 import { SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { IconField } from '@primereact/ui/iconfield';
 import { InputText } from '@primereact/ui/inputtext';
 import { Select } from '@primereact/ui/select';
 import Image from 'next/image';
 import * as React from 'react';
-import { Search } from '@primeicons/react/search';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 type Country = {
     name: string;
@@ -44,44 +44,50 @@ export default function FilterDemo() {
                 onValueChange={(e: SelectValueChangeEvent) => setSelectedCountry(e.value as Country | null)}
                 className="w-full md:w-56"
             >
-                <Select.Trigger placeholder="Select a Country" />
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
+                <Select.Trigger>
+                    <Select.Value placeholder="Select a Country" />
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
+                </Select.Trigger>
 
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Header>
-                            <IconField.Root>
-                                <Select.Filter
-                                    as={InputText}
-                                    value={filterValue}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
-                                />
-                                <IconField.Icon>
-                                    <Search />
-                                </IconField.Icon>
-                            </IconField.Root>
-                        </Select.Header>
-                        <Select.Options style={{ maxHeight: '14rem' }}>
-                            {filteredCountries.map((country, index) => (
-                                <Select.Option key={country.code} index={index} uKey={country.code}>
-                                    <div className="flex items-center gap-2">
-                                        <Image
-                                            alt={country.name}
-                                            src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-                                            className={`flag flag-${country.code.toLowerCase()} mr-2`}
-                                            width={18}
-                                            height={12}
-                                            style={{ width: '18px', height: '12px' }}
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Header>
+                                    <IconField.Root>
+                                        <Select.Filter
+                                            as={InputText}
+                                            value={filterValue}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterValue(e.target.value)}
                                         />
-                                        <span>{country.name}</span>
-                                    </div>
-                                </Select.Option>
-                            ))}
-                        </Select.Options>
-                        <Select.Empty className="text-sm">No countries found</Select.Empty>
-                    </Select.List>
+                                        <IconField.Icon>
+                                            <Search />
+                                        </IconField.Icon>
+                                    </IconField.Root>
+                                </Select.Header>
+                                <Select.Options style={{ maxHeight: '14rem' }}>
+                                    {filteredCountries.map((country, index) => (
+                                        <Select.Option key={country.code} index={index} uKey={country.code}>
+                                            <div className="flex items-center gap-2">
+                                                <Image
+                                                    alt={country.name}
+                                                    src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+                                                    className={`flag flag-${country.code.toLowerCase()} mr-2`}
+                                                    width={18}
+                                                    height={12}
+                                                    style={{ width: '18px', height: '12px' }}
+                                                />
+                                                <span>{country.name}</span>
+                                            </div>
+                                        </Select.Option>
+                                    ))}
+                                </Select.Options>
+                                <Select.Empty className="text-sm">No countries found</Select.Empty>
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

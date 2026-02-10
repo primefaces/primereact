@@ -1,9 +1,9 @@
 'use client';
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import type { SelectOptionInstance, SelectValueChangeEvent } from '@primereact/types/shared/select';
 import { Avatar } from '@primereact/ui/avatar';
 import { Select } from '@primereact/ui/select';
 import * as React from 'react';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const teamMembers = [
     { id: 1, name: 'Sarah Chen', role: 'Engineering Lead', avatar: 'SC', status: 'away', className: 'bg-amber-400' },
@@ -29,55 +29,61 @@ export default function OptionDemo() {
                 className="w-full md:w-56"
             >
                 <Select.Trigger>
-                    {assignee ? (
-                        <span className="flex items-center gap-2">
-                            <span className={`inline-block w-2 h-2 rounded-full ${assignee.className}`} />
-                            <span>{assignee.name}</span>
-                        </span>
-                    ) : (
-                        <span className="text-surface-400">Select team member...</span>
-                    )}
+                    <Select.Value>
+                        {assignee ? (
+                            <span className="flex items-center gap-2">
+                                <span className={`inline-block w-2 h-2 rounded-full ${assignee.className}`} />
+                                <span>{assignee.name}</span>
+                            </span>
+                        ) : (
+                            <span className="text-surface-400">Select team member...</span>
+                        )}
+                    </Select.Value>
+                    <Select.Icon>
+                        <ChevronDown />
+                    </Select.Icon>
                 </Select.Trigger>
-                <Select.Dropdown>
-                    <ChevronDown />
-                </Select.Dropdown>
                 <Select.Portal>
-                    <Select.List>
-                        <Select.Options style={{ maxHeight: '16rem' }}>
-                            {teamMembers.map((member, index) => (
-                                <Select.Option key={member.id} index={index} uKey={String(member.id)}>
-                                    {(instance: SelectOptionInstance) => {
-                                        const { selected } = instance;
+                    <Select.Positioner>
+                        <Select.Panel>
+                            <Select.List>
+                                <Select.Options style={{ maxHeight: '16rem' }}>
+                                    {teamMembers.map((member, index) => (
+                                        <Select.Option key={member.id} index={index} uKey={String(member.id)}>
+                                            {(instance: SelectOptionInstance) => {
+                                                const { selected } = instance;
 
-                                        return (
-                                            <div className="flex items-center gap-3 py-1">
-                                                <div className="relative">
-                                                    <Avatar.Root shape="circle" className="w-8 h-8">
-                                                        <Avatar.Fallback>{member.avatar}</Avatar.Fallback>
-                                                    </Avatar.Root>
-                                                    <span
-                                                        className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${selected ? 'border-primary-emphasis' : 'border-surface-0 dark:border-surface-900'} ${member.className}`}
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <span
-                                                        className={`font-medium ${selected ? 'text-primary-contrast' : 'text-surface-900 dark:text-surface-0'}`}
-                                                    >
-                                                        {member.name}
-                                                    </span>
-                                                    <span
-                                                        className={`text-xs ${selected ? 'text-primary-contrast/70' : 'text-surface-500 dark:text-surface-400'}`}
-                                                    >
-                                                        {member.role}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        );
-                                    }}
-                                </Select.Option>
-                            ))}
-                        </Select.Options>
-                    </Select.List>
+                                                return (
+                                                    <div className="flex items-center gap-3 py-1">
+                                                        <div className="relative">
+                                                            <Avatar.Root shape="circle" className="w-8 h-8">
+                                                                <Avatar.Fallback>{member.avatar}</Avatar.Fallback>
+                                                            </Avatar.Root>
+                                                            <span
+                                                                className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${selected ? 'border-primary-emphasis' : 'border-surface-0 dark:border-surface-900'} ${member.className}`}
+                                                            />
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span
+                                                                className={`font-medium ${selected ? 'text-primary-contrast' : 'text-surface-900 dark:text-surface-0'}`}
+                                                            >
+                                                                {member.name}
+                                                            </span>
+                                                            <span
+                                                                className={`text-xs ${selected ? 'text-primary-contrast/70' : 'text-surface-500 dark:text-surface-400'}`}
+                                                            >
+                                                                {member.role}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }}
+                                        </Select.Option>
+                                    ))}
+                                </Select.Options>
+                            </Select.List>
+                        </Select.Panel>
+                    </Select.Positioner>
                 </Select.Portal>
             </Select.Root>
         </div>

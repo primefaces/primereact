@@ -1,7 +1,7 @@
+import { ChevronDown } from '@primeicons/react/chevron-down';
 import { IftaLabel } from '@primereact/ui/iftalabel';
 import { Label } from '@primereact/ui/label';
 import { Select } from '@primereact/ui/select';
-import { ChevronDown } from '@primeicons/react/chevron-down';
 
 const cities = [
     { name: 'New York', code: 'NY' },
@@ -16,15 +16,21 @@ export default function IftaLabelDemo() {
         <div className="flex justify-center">
             <IftaLabel>
                 <Select.Root options={cities} optionLabel="name" variant="filled" className="w-full md:w-56">
-                    <Select.Trigger id="select" />
-                    <Select.Dropdown>
-                        <ChevronDown />
-                    </Select.Dropdown>
+                    <Select.Trigger id="select">
+                        <Select.Value />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
 
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
 

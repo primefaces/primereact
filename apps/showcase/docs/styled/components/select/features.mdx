@@ -12,17 +12,23 @@ import { Select } from 'primereact/select';
 
 ```tsx
 <Select.Root>
-    <Select.Trigger />
-    <Select.Dropdown />
-    <Select.ClearIcon />
+    <Select.Trigger>
+        <Select.Value />
+        <Select.ClearIcon />
+        <Select.Icon />
+    </Select.Trigger>
     <Select.Portal>
-        <Select.Header />
-        <Select.Filter />
-        <Select.List>
-            <Select.Options />
-        </Select.List>
-        <Select.Footer />
-        <Select.Empty />
+        <Select.Positioner>
+            <Select.Panel>
+                <Select.Header />
+                <Select.Filter />
+                <Select.List>
+                    <Select.Options />
+                </Select.List>
+                <Select.Footer />
+                <Select.Empty />
+            </Select.Panel>
+        </Select.Positioner>
     </Select.Portal>
 </Select.Root>
 ```
@@ -74,6 +80,12 @@ When `Select.ClearIcon` component is used, a clear icon is added to reset the Se
 A checkmark icon is displayed next to the selected option when `checkmark` property is enabled.
 
 <DocDemoViewer name="select:checkmark-demo" />
+
+### Multiple
+
+When `multiple` prop is enabled, Select allows selecting multiple values. The panel stays open after each selection and the selected items are displayed with a summary text. Use `checkmark` to show selection indicators.
+
+<DocDemoViewer name="select:multiple-demo" />
 
 ### Sizes
 
