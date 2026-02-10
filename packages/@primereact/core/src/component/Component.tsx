@@ -18,7 +18,7 @@ export function Component<I extends ComponentInstance = ComponentInstance>(inPro
     const isFragment = AsComponent === React.Fragment;
 
     const { ref = instance?.elementRef, children, attrs: inAttrs, ...restAttrs } = props;
-    const attrs = { ...inAttrs, ...restAttrs } as React.HTMLAttributes<HTMLElement>;
+    const attrs = { ...inAttrs, ...restAttrs } as React.HTMLAttributes<HTMLElement> & React.RefAttributes<unknown>;
     // @ts-expect-error: Update resolve to handle attrs correctly
     const content = resolve(children, instance, attrs) as React.ReactNode;
     const styles = resolve(style || instance?.props?.style, instance) as React.CSSProperties | undefined;
@@ -35,10 +35,12 @@ export function Component<I extends ComponentInstance = ComponentInstance>(inPro
             className: cn(attrs.className, classNames)
         } as React.HTMLAttributes<HTMLElement>;
 
+        const asRef = attrs.ref ?? ref;
+
         return asProps.children ? (
-            <AsComponent {...asProps} ref={ref} />
+            <AsComponent {...asProps} ref={asRef} />
         ) : (
-            <AsComponent ref={ref} {...asProps}>
+            <AsComponent {...asProps} ref={asRef}>
                 {content}
             </AsComponent>
         );

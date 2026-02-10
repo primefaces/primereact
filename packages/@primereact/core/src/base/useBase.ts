@@ -72,6 +72,8 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
         combinedRefs(ref, inProps?.ref);
     }, [ref, inProps?.ref]);
 
+    combinedRefs(ref, inProps?.ref);
+
     React.useImperativeHandle(ref as React.Ref<Instance<typeof props, IProps, typeof instance.state, Exposes>>, () => instance, [instance]);
 
     return instance;
