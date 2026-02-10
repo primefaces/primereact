@@ -16,12 +16,16 @@ export default function FloatLabelDemo() {
         <div className="flex flex-wrap justify-center items-end gap-4">
             <FloatLabel>
                 <AutoComplete.Root options={items} onComplete={search}>
-                    <AutoComplete.Input id="over_label" />
+                    <AutoComplete.Value id="over_label" />
 
                     <AutoComplete.Portal>
-                        <AutoComplete.List>
-                            <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                        </AutoComplete.List>
+                        <AutoComplete.Positioner>
+                            <AutoComplete.Panel>
+                                <AutoComplete.List>
+                                    <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                                </AutoComplete.List>
+                            </AutoComplete.Panel>
+                        </AutoComplete.Positioner>
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 
@@ -30,12 +34,16 @@ export default function FloatLabelDemo() {
 
             <FloatLabel variant="in">
                 <AutoComplete.Root options={items} onComplete={search}>
-                    <AutoComplete.Input id="in_label" />
+                    <AutoComplete.Value id="in_label" />
 
                     <AutoComplete.Portal>
-                        <AutoComplete.List>
-                            <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                        </AutoComplete.List>
+                        <AutoComplete.Positioner>
+                            <AutoComplete.Panel>
+                                <AutoComplete.List>
+                                    <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                                </AutoComplete.List>
+                            </AutoComplete.Panel>
+                        </AutoComplete.Positioner>
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 
@@ -44,12 +52,16 @@ export default function FloatLabelDemo() {
 
             <FloatLabel variant="on">
                 <AutoComplete.Root options={items} onComplete={search}>
-                    <AutoComplete.Input id="on_label" />
+                    <AutoComplete.Value id="on_label" />
 
                     <AutoComplete.Portal>
-                        <AutoComplete.List>
-                            <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                        </AutoComplete.List>
+                        <AutoComplete.Positioner>
+                            <AutoComplete.Panel>
+                                <AutoComplete.List>
+                                    <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                                </AutoComplete.List>
+                            </AutoComplete.Panel>
+                        </AutoComplete.Positioner>
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 

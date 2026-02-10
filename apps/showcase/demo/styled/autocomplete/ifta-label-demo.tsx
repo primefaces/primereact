@@ -15,13 +15,17 @@ export default function IftaLabelDemo() {
     return (
         <div className="flex justify-center">
             <IftaLabel>
-                <AutoComplete.Root options={items} variant="filled" onComplete={search}>
-                    <AutoComplete.Input id="autocomplete" />
+                <AutoComplete.Root options={items} variant="filled" onComplete={search} className="w-full md:w-56">
+                    <AutoComplete.Value id="autocomplete" className="w-full" />
 
                     <AutoComplete.Portal>
-                        <AutoComplete.List>
-                            <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                        </AutoComplete.List>
+                        <AutoComplete.Positioner>
+                            <AutoComplete.Panel>
+                                <AutoComplete.List>
+                                    <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                                </AutoComplete.List>
+                            </AutoComplete.Panel>
+                        </AutoComplete.Positioner>
                     </AutoComplete.Portal>
                 </AutoComplete.Root>
 

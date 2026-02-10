@@ -49,7 +49,7 @@ export default function CheckmarkDemo() {
                                                     <span className="text-xs text-surface-500">{t.description}</span>
                                                 </div>
                                             </div>
-                                            <Select.Selection className={'ml-4'} />
+                                            <Select.Selection className="ml-4" />
                                         </Select.Option>
                                     ))}
                                 </Select.Options>

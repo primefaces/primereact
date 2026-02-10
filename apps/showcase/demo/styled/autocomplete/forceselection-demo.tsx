@@ -31,14 +31,25 @@ export default function ForceSelectionDemo() {
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={filteredCountries} optionKey="code" optionLabel="name" forceSelection onComplete={search}>
-                <AutoComplete.Input />
+            <AutoComplete.Root
+                options={filteredCountries}
+                optionKey="code"
+                optionLabel="name"
+                forceSelection
+                onComplete={search}
+                className="w-full md:w-56"
+            >
+                <AutoComplete.Value className="w-full" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                        <AutoComplete.Empty className="text-sm">No countries found</AutoComplete.Empty>
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                                <AutoComplete.Empty className="text-sm">No countries found</AutoComplete.Empty>
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

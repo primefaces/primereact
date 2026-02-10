@@ -75,14 +75,25 @@ export default function GroupDemo() {
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={filteredTech} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" onComplete={search}>
-                <AutoComplete.Input placeholder="Search technologies..." />
+            <AutoComplete.Root
+                options={filteredTech}
+                optionLabel="label"
+                optionGroupLabel="label"
+                optionGroupChildren="items"
+                onComplete={search}
+                className="w-full md:w-56"
+            >
+                <AutoComplete.Value placeholder="Search technologies..." className="w-full" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                        <AutoComplete.Empty className="text-sm">No option found</AutoComplete.Empty>
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                                <AutoComplete.Empty className="text-sm">No option found</AutoComplete.Empty>
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

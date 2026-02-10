@@ -14,18 +14,22 @@ export default function BasicDemo() {
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={items} onComplete={search}>
+            <AutoComplete.Root options={items} onComplete={search} className="w-full md:w-56">
                 <InputGroup.Root>
-                    <AutoComplete.Input />
+                    <AutoComplete.Value className="w-full" />
                     <InputGroup.Addon>
                         <Spinner className="animate-spin" />
                     </InputGroup.Addon>
                 </InputGroup.Root>
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

@@ -32,15 +32,14 @@ export default function ClearIconDemo() {
                 >
                     <Select.Trigger>
                         <Select.Value placeholder="Category" />
-                        {category && (
-                            <Select.ClearIcon>
-                                <Times />
-                            </Select.ClearIcon>
-                        )}
+                        <Select.ClearIcon>
+                            <Times />
+                        </Select.ClearIcon>
                         <Select.Icon>
                             <ChevronDown />
                         </Select.Icon>
                     </Select.Trigger>
+
                     <Select.Portal>
                         <Select.Positioner>
                             <Select.Panel>

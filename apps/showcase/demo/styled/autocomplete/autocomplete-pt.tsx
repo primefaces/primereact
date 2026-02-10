@@ -12,12 +12,16 @@ export default function AutoCompletePTDemo() {
 
     return (
         <AutoComplete.Root options={items} onComplete={search}>
-            <AutoComplete.Input />
+            <AutoComplete.Value />
 
             <AutoComplete.Portal>
-                <AutoComplete.List>
-                    <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                </AutoComplete.List>
+                <AutoComplete.Positioner>
+                    <AutoComplete.Panel>
+                        <AutoComplete.List>
+                            <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                        </AutoComplete.List>
+                    </AutoComplete.Panel>
+                </AutoComplete.Positioner>
             </AutoComplete.Portal>
         </AutoComplete.Root>
     );

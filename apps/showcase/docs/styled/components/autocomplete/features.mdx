@@ -15,12 +15,16 @@ import { AutoComplete } from 'primereact/autocomplete';
     <AutoComplete.Input />
     <AutoComplete.ClearIcon />
     <AutoComplete.Portal>
-        <AutoComplete.Header />
-        <AutoComplete.List>
-            <AutoComplete.Options />
-        </AutoComplete.List>
-        <AutoComplete.Footer />
-        <AutoComplete.Empty />
+        <AutoComplete.Positioner>
+            <AutoComplete.Panel>
+                <AutoComplete.Header />
+                <AutoComplete.List>
+                    <AutoComplete.Options />
+                </AutoComplete.List>
+                <AutoComplete.Footer />
+                <AutoComplete.Empty />
+            </AutoComplete.Panel>
+        </AutoComplete.Positioner>
     </AutoComplete.Portal>
 </AutoComplete.Root>
 ```

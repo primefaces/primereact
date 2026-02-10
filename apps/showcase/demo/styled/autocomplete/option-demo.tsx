@@ -1,92 +1,71 @@
 'use client';
-import type { AutoCompleteCompleteEvent, AutoCompleteValueChangeEvent } from '@primereact/types/shared/autocomplete';
+import type { AutoCompleteCompleteEvent } from '@primereact/types/shared/autocomplete';
 import { AutoComplete } from '@primereact/ui/autocomplete';
 import { Avatar } from '@primereact/ui/avatar';
-import { Tag } from '@primereact/ui/tag';
 import * as React from 'react';
 
-interface User {
+interface TeamMember {
     id: number;
-    username: string;
     name: string;
     role: string;
     avatar: string;
-    online: boolean;
+    status: 'online' | 'away' | 'offline';
+    statusClass: string;
 }
 
-const users: User[] = [
-    { id: 1, username: 'sarah_chen', name: 'Sarah Chen', role: 'Admin', avatar: 'SC', online: true },
-    { id: 2, username: 'alex_dev', name: 'Alex Rivera', role: 'Developer', avatar: 'AR', online: true },
-    { id: 3, username: 'jordan_ux', name: 'Jordan Kim', role: 'Designer', avatar: 'JK', online: false },
-    { id: 4, username: 'taylor_pm', name: 'Taylor Swift', role: 'PM', avatar: 'TS', online: true },
-    { id: 5, username: 'morgan_ops', name: 'Morgan Lee', role: 'DevOps', avatar: 'ML', online: false },
-    { id: 6, username: 'casey_qa', name: 'Casey Jones', role: 'QA', avatar: 'CJ', online: true },
-    { id: 7, username: 'riley_data', name: 'Riley Brown', role: 'Data Analyst', avatar: 'RB', online: false },
-    { id: 8, username: 'quinn_sec', name: 'Quinn Adams', role: 'Security', avatar: 'QA', online: true }
+const teamMembers: TeamMember[] = [
+    { id: 1, name: 'Sarah Chen', role: 'Engineering Lead', avatar: 'SC', status: 'online', statusClass: 'bg-green-400' },
+    { id: 2, name: 'Alex Rivera', role: 'Senior Developer', avatar: 'AR', status: 'online', statusClass: 'bg-green-400' },
+    { id: 3, name: 'Jordan Kim', role: 'UX Designer', avatar: 'JK', status: 'away', statusClass: 'bg-amber-400' },
+    { id: 4, name: 'Taylor Morgan', role: 'Product Manager', avatar: 'TM', status: 'offline', statusClass: 'bg-zinc-400' },
+    { id: 5, name: 'Morgan Lee', role: 'DevOps Engineer', avatar: 'ML', status: 'online', statusClass: 'bg-green-400' },
+    { id: 6, name: 'Casey Jones', role: 'QA Engineer', avatar: 'CJ', status: 'away', statusClass: 'bg-amber-400' }
 ];
 
 export default function OptionDemo() {
-    const [query, setQuery] = React.useState<string>('');
-    const [filteredUsers, setFilteredUsers] = React.useState<User[]>([]);
-    const [mentions, setMentions] = React.useState<User[]>([]);
+    const [filteredMembers, setFilteredMembers] = React.useState<TeamMember[]>([]);
 
     const search = (event: AutoCompleteCompleteEvent) => {
-        const q = event.query.toLowerCase().replace('@', '');
+        const query = event.query.toLowerCase();
 
-        if (!q.trim()) {
-            setFilteredUsers(users.filter((u) => !mentions.some((m) => m.id === u.id)));
-        } else {
-            setFilteredUsers(
-                users.filter(
-                    (u) => !mentions.some((m) => m.id === u.id) && (u.username.toLowerCase().includes(q) || u.name.toLowerCase().includes(q))
-                )
-            );
-        }
-    };
-
-    const handleSelect = (e: AutoCompleteValueChangeEvent) => {
-        const selectedName = e.value as string;
-        const selected = filteredUsers.find((u) => u.name === selectedName);
-
-        if (selected && !mentions.some((m) => m.id === selected.id)) {
-            setMentions([...mentions, selected]);
-        }
-
-        setQuery('');
+        setFilteredMembers(
+            query ? teamMembers.filter((m) => m.name.toLowerCase().includes(query) || m.role.toLowerCase().includes(query)) : [...teamMembers]
+        );
     };
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root value={query} options={filteredUsers} optionLabel="name" onComplete={search} onValueChange={handleSelect}>
-                <AutoComplete.Input placeholder="Type @ to mention" />
+            <AutoComplete.Root options={filteredMembers} optionLabel="name" onComplete={search} className="w-full md:w-56">
+                <AutoComplete.Value placeholder="Search team members..." className="w-full" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '16rem' }}>
-                            {filteredUsers.map((user, index) => (
-                                <AutoComplete.Option key={user.id} index={index} uKey={String(user.id)}>
-                                    <div className="flex items-center gap-3 py-1 w-full">
-                                        <div className="relative">
-                                            <Avatar.Root shape="circle" className="w-8 h-8">
-                                                <Avatar.Fallback>{user.avatar}</Avatar.Fallback>
-                                            </Avatar.Root>
-                                            <span
-                                                className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-surface-0 dark:border-surface-900 ${user.online ? 'bg-emerald-500' : 'bg-surface-400'}`}
-                                            />
-                                        </div>
-                                        <div className="flex flex-col flex-1">
-                                            <div className="flex items-center justify-between gap-2">
-                                                <span className="font-medium text-surface-900 dark:text-surface-0">{user.name}</span>
-                                                <Tag severity="info">{user.role}</Tag>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '16rem' }}>
+                                    {filteredMembers.map((member, index) => (
+                                        <AutoComplete.Option key={member.id} index={index} uKey={String(member.id)}>
+                                            <div className="flex items-center gap-3 py-1">
+                                                <div className="relative">
+                                                    <Avatar.Root shape="circle" className="w-8 h-8">
+                                                        <Avatar.Fallback>{member.avatar}</Avatar.Fallback>
+                                                    </Avatar.Root>
+                                                    <span
+                                                        className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-surface-0 dark:border-surface-900 ${member.statusClass}`}
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="font-medium text-surface-900 dark:text-surface-0">{member.name}</span>
+                                                    <span className="text-xs text-surface-500 dark:text-surface-400">{member.role}</span>
+                                                </div>
                                             </div>
-                                            <span className="text-sm text-surface-500 dark:text-surface-400">@{user.username}</span>
-                                        </div>
-                                    </div>
-                                </AutoComplete.Option>
-                            ))}
-                        </AutoComplete.Options>
-                        <AutoComplete.Empty className="text-sm">No users found</AutoComplete.Empty>
-                    </AutoComplete.List>
+                                        </AutoComplete.Option>
+                                    ))}
+                                </AutoComplete.Options>
+                                <AutoComplete.Empty className="text-sm">No members found</AutoComplete.Empty>
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

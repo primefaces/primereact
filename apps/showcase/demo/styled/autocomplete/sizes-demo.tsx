@@ -13,32 +13,44 @@ export default function SizesDemo() {
     return (
         <div className="flex flex-col items-center gap-4">
             <AutoComplete.Root options={items} size="small" placeholder="Small" onComplete={search}>
-                <AutoComplete.Input />
+                <AutoComplete.Value placeholder="Small" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
 
             <AutoComplete.Root options={items} placeholder="Normal" onComplete={search}>
-                <AutoComplete.Input />
+                <AutoComplete.Value placeholder="Normal" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
 
             <AutoComplete.Root options={items} size="large" placeholder="Large" onComplete={search}>
-                <AutoComplete.Input />
+                <AutoComplete.Value placeholder="Large" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

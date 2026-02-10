@@ -32,25 +32,29 @@ export default function BasicDemo() {
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={filteredCommands} optionLabel="label" onComplete={search}>
-                <AutoComplete.Input placeholder="Type a command..." />
+            <AutoComplete.Root options={filteredCommands} optionLabel="label" onComplete={search} className="w-full md:w-56">
+                <AutoComplete.Value placeholder="Type a command..." className="w-full" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }}>
-                            {filteredCommands.map((cmd, index) => (
-                                <AutoComplete.Option key={cmd.label} index={index} uKey={cmd.label}>
-                                    <div className="flex items-center justify-between w-full">
-                                        <span>{cmd.label}</span>
-                                        <kbd className="inline-flex items-center justify-center min-w-8 px-1.5 py-0.5 text-xs font-medium rounded bg-surface-100 dark:bg-surface-700 text-surface-600 dark:text-surface-300 border border-surface-200 dark:border-surface-600">
-                                            {cmd.shortcut}
-                                        </kbd>
-                                    </div>
-                                </AutoComplete.Option>
-                            ))}
-                        </AutoComplete.Options>
-                        <AutoComplete.Empty className="text-sm">No commands found</AutoComplete.Empty>
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }}>
+                                    {filteredCommands.map((cmd, index) => (
+                                        <AutoComplete.Option key={cmd.label} index={index} uKey={cmd.label}>
+                                            <div className="flex items-center justify-between w-full">
+                                                <span>{cmd.label}</span>
+                                                <kbd className="inline-flex items-center justify-center min-w-8 px-1.5 py-0.5 text-xs font-medium rounded bg-surface-100 dark:bg-surface-700 text-surface-600 dark:text-surface-300 border border-surface-200 dark:border-surface-600">
+                                                    {cmd.shortcut}
+                                                </kbd>
+                                            </div>
+                                        </AutoComplete.Option>
+                                    ))}
+                                </AutoComplete.Options>
+                                <AutoComplete.Empty className="text-sm">No commands found</AutoComplete.Empty>
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

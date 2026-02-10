@@ -12,13 +12,17 @@ export default function FilledDemo() {
 
     return (
         <div className="flex justify-center">
-            <AutoComplete.Root options={items} variant="filled" onComplete={search}>
-                <AutoComplete.Input />
+            <AutoComplete.Root options={items} variant="filled" onComplete={search} className="w-full md:w-56">
+                <AutoComplete.Value className="w-full" />
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>

@@ -14,16 +14,20 @@ export default function DropdownDemo() {
     return (
         <div className="flex justify-center">
             <AutoComplete.Root options={items} onComplete={search}>
-                <AutoComplete.Input />
+                <AutoComplete.Value />
 
                 <AutoComplete.Trigger>
                     <ChevronDown />
                 </AutoComplete.Trigger>
 
                 <AutoComplete.Portal>
-                    <AutoComplete.List>
-                        <AutoComplete.Options style={{ maxHeight: '14rem' }} />
-                    </AutoComplete.List>
+                    <AutoComplete.Positioner>
+                        <AutoComplete.Panel>
+                            <AutoComplete.List>
+                                <AutoComplete.Options style={{ maxHeight: '14rem' }} />
+                            </AutoComplete.List>
+                        </AutoComplete.Panel>
+                    </AutoComplete.Positioner>
                 </AutoComplete.Portal>
             </AutoComplete.Root>
         </div>
