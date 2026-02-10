@@ -7,16 +7,39 @@ const theme = /*css*/ `
 ${style}
 
 /* For PrimeReact */
-.p-select-list-container {
+.p-select-panel {
     background: dt('select.overlay.background');
     color: dt('select.overlay.color');
     border: 1px solid dt('select.overlay.border.color');
     border-radius: dt('select.overlay.border.radius');
     box-shadow: dt('select.overlay.shadow');
+    opacity: 0;
+    scale: 0.93;
+    transition: opacity 300ms cubic-bezier(.19,1,.22,1), scale 300ms cubic-bezier(.19,1,.22,1);
+    transform-origin: var(--transform-origin);
+
+    &[data-open]{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.p-select-trigger {
+    display: inline-flex;
+    width: 100%;
 }
 
 .p-select-list.p-listbox {
     border: unset;
+}
+
+.p-select-clear-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    color: dt('select.dropdown.color');
 }
 `;
 
@@ -38,6 +61,9 @@ export const styles = createStyles<SelectRootInstance>({
                 'p-select-lg p-inputfield-lg': props.size === 'large'
             }
         ],
+        clearIcon: 'p-select-clear-icon',
+        positioner: 'p-select-positioner',
+        trigger: 'p-select-trigger',
         label: ({ context }) => [
             'p-select-label',
             {
@@ -45,9 +71,8 @@ export const styles = createStyles<SelectRootInstance>({
                 'p-placeholder': context?.showPlaceholder
             }
         ],
-        clearIcon: 'p-select-clear-icon',
-        dropdown: 'p-select-dropdown',
-        panel: 'p-select-list-container',
+        icon: 'p-select-dropdown',
+        panel: 'p-select-panel',
         filter: 'p-select-filter',
         list: 'p-select-list',
         options: 'p-select-options',

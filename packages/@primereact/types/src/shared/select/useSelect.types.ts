@@ -8,6 +8,7 @@
  * @group headless
  *
  */
+import type { usePresence } from '@primereact/hooks/use-presence';
 import type { HeadlessInstance } from '@primereact/types/core';
 import type { useListboxInstance } from '@primereact/types/shared/listbox';
 import * as React from 'react';
@@ -136,6 +137,11 @@ export interface useSelectProps {
      */
     focusOnHover?: boolean;
     /**
+     * When enabled, allows multiple items to be selected.
+     * @defaultValue false
+     */
+    multiple?: boolean;
+    /**
      * When enabled, displays a filter input in the dropdown.
      * @defaultValue false
      */
@@ -199,6 +205,14 @@ export interface useSelectState {
      * The index of the currently focused option. -1 if no option is focused.
      */
     focusedOptionIndex: number;
+    /**
+     * The anchor (trigger) element.
+     */
+    anchorEl: HTMLElement | null;
+    /**
+     * The positioner element.
+     */
+    positionerEl: HTMLDivElement | null;
 }
 
 /**
@@ -214,17 +228,21 @@ export interface useSelectExposes {
      */
     listbox: useListboxInstance;
     /**
+     * The presence state for managing mount/unmount transitions.
+     */
+    presence: ReturnType<typeof usePresence>;
+    /**
      * Reference to the trigger element.
      */
     triggerRef: React.RefObject<HTMLElement | null>;
     /**
-     * Reference to the portal element.
+     * Sets the anchor (trigger) element reference.
      */
-    portalRef: React.RefObject<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>;
+    setAnchorRef: (node: HTMLElement | null) => void;
     /**
-     * Reference to the overlay element.
+     * Sets the positioner element reference.
      */
-    overlayRef: React.RefObject<HTMLDivElement | null>;
+    setPositionerRef: (node: HTMLDivElement | null) => void;
     /**
      * Callback when the container is clicked.
      * @param {React.MouseEvent<HTMLDivElement>} event - The mouse event.
@@ -246,23 +264,10 @@ export interface useSelectExposes {
      */
     onClearClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
     /**
-     * Callback when the overlay enters.
-     */
-    onOverlayEnter: () => void;
-    /**
-     * Callback after the overlay has entered.
-     */
-    onOverlayAfterEnter: () => void;
-    /**
      * Callback when an option is selected.
      * @param {object} event - The selection event from Listbox.
      */
     onOptionSelect: (event: { originalEvent: React.SyntheticEvent; value: unknown }) => void;
-    /**
-     * Changes the visibility state of the overlay.
-     * @param {boolean} isVisible - The new visibility state.
-     */
-    changeVisibleState: (isVisible: boolean) => void;
     /**
      * Gets the ID of the currently focused option for aria-activedescendant.
      * @returns {string | null} The focused option ID or null if no option is focused.

@@ -1,6 +1,6 @@
 /**
  *
- * SelectFooter is the footer container for the Select dropdown.
+ * SelectFooter is the footer container for the Select footer.
  *
  * [Live Demo](https://www.primereact.org/select/)
  *

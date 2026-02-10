@@ -1,8 +1,7 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
-import type { useOverlayOpenChangeEvent } from '@primereact/types/shared/overlay';
-import { mergeProps, resolve } from '@primeuix/utils';
-import { Overlay } from 'primereact/overlay';
+import { withComponent } from '@primereact/core/component';
+import { mergeProps } from '@primeuix/utils';
+import { Portal } from 'primereact/portal';
 import * as React from 'react';
 import { useSelectContext } from '../Select.context';
 import { defaultPortalProps } from './SelectPortal.props';
@@ -16,9 +15,9 @@ export const SelectPortal = withComponent({
         return { select };
     },
     render(instance) {
-        const { props, ptmi, select } = instance;
+        const { props, select, ptmi } = instance;
 
-        const rootProps = mergeProps(
+        const containerProps = mergeProps(
             {
                 className: select?.cx('portal')
             },
@@ -26,36 +25,6 @@ export const SelectPortal = withComponent({
             ptmi('root')
         );
 
-        const createPanel = () => {
-            const panelProps = mergeProps(
-                {
-                    className: select?.cx('panel')
-                },
-                ptmi('panel')
-            );
-
-            return (
-                <div ref={select?.overlayRef} {...panelProps}>
-                    {resolve(props.children, instance)}
-                </div>
-            );
-        };
-
-        return (
-            <Component instance={instance} attrs={rootProps}>
-                <Overlay
-                    ref={select?.portalRef}
-                    appendTo={select?.props.appendTo}
-                    target={select?.triggerRef?.current ?? undefined}
-                    type="overlay"
-                    open={select?.state.opened}
-                    onOpenChange={({ value }: useOverlayOpenChangeEvent) => select?.changeVisibleState(value)}
-                    onEnter={select?.onOverlayEnter}
-                    onAfterEnter={select?.onOverlayAfterEnter}
-                >
-                    {createPanel()}
-                </Overlay>
-            </Component>
-        );
+        return <Portal instance={instance} attrs={containerProps} children={props.children} appendTo={select?.props.appendTo} />;
     }
 });

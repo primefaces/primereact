@@ -1,6 +1,8 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useListbox } from '@primereact/headless/listbox';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
+import { useEventListener } from '@primereact/hooks/use-event-listener';
+import { usePresence } from '@primereact/hooks/use-presence';
 import type { useListboxValueChangeEvent } from '@primereact/types/shared/listbox';
 import { focus, getFirstFocusableElement, getFocusableElements, getOuterWidth, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
@@ -9,7 +11,7 @@ import { defaultProps } from './useSelect.props';
 export const useSelect = withHeadless({
     name: 'useSelect',
     defaultProps,
-    setup({ props, elementRef }) {
+    setup({ props, id, elementRef }) {
         const onListboxValueChange = React.useRef<((event: useListboxValueChangeEvent) => void) | null>(null);
         const listbox = useListbox({
             value: props.value,
@@ -26,15 +28,10 @@ export const useSelect = withHeadless({
             autoOptionFocus: props.autoOptionFocus,
             selectOnFocus: props.selectOnFocus,
             focusOnHover: props.focusOnHover,
-            multiple: false,
+            multiple: props.multiple,
             metaKeySelection: false,
             onValueChange: (event: useListboxValueChangeEvent) => onListboxValueChange.current?.(event)
         });
-
-        const triggerRef = React.useRef<HTMLElement | null>(null);
-        const portalRef = React.useRef<{ containerRef: { current: { elementRef: React.RefObject<HTMLDivElement> } } } | null>(null);
-        const overlayRef = React.useRef<HTMLDivElement | null>(null);
-        const focusOnShow = React.useRef<boolean>(false);
 
         const [valueState, setValueState] = useControlledState({
             value: props.value,
@@ -48,13 +45,36 @@ export const useSelect = withHeadless({
             onChange: props.onOpenChange
         });
 
+        const presence = usePresence(!!openState);
+
+        const focusOnShow = React.useRef<boolean>(false);
         const [focusedState, setFocusedState] = React.useState(false);
+
+        const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+        const [positionerEl, setPositionerEl] = React.useState<HTMLDivElement | null>(null);
+
+        const triggerRef = React.useRef<HTMLElement | null>(null);
+        const anchorRef = React.useRef<HTMLElement>(null);
+        const positionerRef = React.useRef<HTMLDivElement>(null);
+
+        const setAnchorRef = React.useCallback((node: HTMLElement | null) => {
+            anchorRef.current = node;
+            triggerRef.current = node;
+            setAnchorEl(node);
+        }, []);
+
+        const setPositionerRef = React.useCallback((node: HTMLDivElement | null) => {
+            positionerRef.current = node;
+            setPositionerEl(node);
+        }, []);
 
         const state = {
             value: valueState,
             opened: openState,
             focused: focusedState,
-            focusedOptionIndex: listbox.state.focusedOptionIndex
+            focusedOptionIndex: listbox.state.focusedOptionIndex,
+            anchorEl,
+            positionerEl
         };
 
         const show = () => {
@@ -75,11 +95,9 @@ export const useSelect = withHeadless({
         };
 
         const onContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
-            // Ignore clicks from inside the portal (React Portal event bubbling)
-            const portalElement = portalRef.current?.containerRef?.current?.elementRef?.current;
-            const target = event.target as Element;
+            const positionerElement = positionerRef.current;
 
-            if (portalElement?.contains(event.target as Node) || target.getAttribute?.('data-pc-name') === 'selectclearicon' || target.closest?.('[data-pc-name="selectclearicon"]')) {
+            if (positionerElement?.contains(event.target as Node)) {
                 return;
             }
 
@@ -198,23 +216,25 @@ export const useSelect = withHeadless({
                 if (focusedOptionIndex !== -1) {
                     listbox.onEnterKey(event);
 
-                    const focusedOption = listbox.getOptions()[focusedOptionIndex];
-                    const selected = listbox.isSelected(focusedOption);
+                    if (!props.multiple) {
+                        const focusedOption = listbox.getOptions()[focusedOptionIndex];
+                        const selected = listbox.isSelected(focusedOption);
 
-                    if (selected) {
-                        onOptionSelect({
-                            originalEvent: event,
-                            value: null
-                        });
-                    } else {
-                        onOptionSelect({
-                            originalEvent: event,
-                            value: listbox.getOptionValue(focusedOption)
-                        });
+                        if (selected) {
+                            onOptionSelect({
+                                originalEvent: event,
+                                value: null
+                            });
+                        } else {
+                            onOptionSelect({
+                                originalEvent: event,
+                                value: listbox.getOptionValue(focusedOption)
+                            });
+                        }
+
+                        hide();
                     }
                 }
-
-                hide();
             }
 
             event.preventDefault();
@@ -223,7 +243,7 @@ export const useSelect = withHeadless({
         const onTabKey = (event: React.KeyboardEvent<HTMLElement>) => {
             if (openState) {
                 if (hasFocusableElements()) {
-                    const firstFocusable = getFirstFocusableElement(overlayRef.current!, ':not([data-p-hidden-focusable="true"])');
+                    const firstFocusable = getFirstFocusableElement(positionerRef.current!, ':not([data-p-hidden-focusable="true"])');
 
                     if (firstFocusable) {
                         focus(firstFocusable as HTMLElement);
@@ -288,46 +308,24 @@ export const useSelect = withHeadless({
         };
 
         const onClearClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const emptyValue = props.multiple ? [] : null;
+
             setValueState([
-                null,
+                emptyValue,
                 {
                     originalEvent: event,
-                    value: null,
+                    value: emptyValue,
                     option: null
                 }
             ]);
 
-            listbox.updateModel(event, null);
+            listbox.updateModel(event, emptyValue);
 
             if (openState) {
                 hide();
-            }
-        };
-
-        const onOverlayEnter = () => {
-            if (portalRef?.current?.containerRef?.current?.elementRef?.current) {
-                const element = portalRef.current.containerRef.current.elementRef.current;
-
-                if (elementRef?.current) {
-                    element.style.minWidth = getOuterWidth(elementRef.current) + 'px';
-                }
-            }
-        };
-
-        const onOverlayAfterEnter = () => {
-            if (focusOnShow.current) {
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        if (isNotEmpty(state.value)) {
-                            const focusedOptionIndex = listbox.state.focusedOptionIndex;
-                            const indexToFocus = focusedOptionIndex !== -1 ? focusedOptionIndex : listbox.findFirstFocusedOptionIndex();
-
-                            listbox.changeFocusedOptionIndex(new Event('focus') as unknown as React.KeyboardEvent, indexToFocus);
-                        }
-
-                        focusOnShow.current = false;
-                    });
-                });
             }
         };
 
@@ -367,11 +365,19 @@ export const useSelect = withHeadless({
             }
         };
 
-        // Connect listbox onValueChange to onOptionSelect
-        onListboxValueChange.current = onOptionSelect;
-
-        const changeVisibleState = (isVisible: boolean) => {
-            setOpenState([isVisible, { value: isVisible }]);
+        // Connect listbox onValueChange to select
+        onListboxValueChange.current = (event: useListboxValueChangeEvent) => {
+            if (props.multiple) {
+                setValueState([
+                    event.value,
+                    {
+                        originalEvent: event.originalEvent,
+                        value: event.value
+                    }
+                ]);
+            } else {
+                onOptionSelect(event);
+            }
         };
 
         const getFocusedOptionId = () => {
@@ -379,38 +385,122 @@ export const useSelect = withHeadless({
         };
 
         const getSelectedOptionLabel = () => {
-            if (hasValue()) {
-                const selectedOption = listbox.getOptions().find((opt: unknown) => {
-                    const optValue = listbox.getOptionValue(opt);
-
-                    return listbox.isEquals(optValue, valueState);
-                });
-
-                return selectedOption ? listbox.getOptionLabel(selectedOption) : null;
+            if (!hasValue()) {
+                return null;
             }
 
-            return null;
+            if (props.multiple && Array.isArray(valueState)) {
+                return valueState
+                    .map((val: unknown) => {
+                        const opt = listbox.getOptions().find((o: unknown) => listbox.isEquals(listbox.getOptionValue(o), val));
+
+                        return opt ? listbox.getOptionLabel(opt) : null;
+                    })
+                    .filter(Boolean);
+            }
+
+            const selectedOption = listbox.getOptions().find((opt: unknown) => {
+                const optValue = listbox.getOptionValue(opt);
+
+                return listbox.isEquals(optValue, valueState);
+            });
+
+            return selectedOption ? listbox.getOptionLabel(selectedOption) : null;
         };
 
         const hasValue = () => {
+            if (props.multiple) {
+                return Array.isArray(valueState) && valueState.length > 0;
+            }
+
             return isNotEmpty(valueState);
         };
 
         const hasFocusableElements = () => {
-            if (!overlayRef.current) {
+            if (!positionerRef.current) {
                 return false;
             }
 
-            return getFocusableElements(overlayRef.current, ':not([data-p-hidden-focusable="true"])').length > 0;
+            return getFocusableElements(positionerRef.current, ':not([data-p-hidden-focusable="true"])').length > 0;
         };
+
+        const [bindLabelClick] = useEventListener({
+            target: () => document.querySelector(`label[for="${id}"]`) as HTMLElement,
+            type: 'click',
+            listener: () => {
+                if (triggerRef.current) {
+                    focus(triggerRef.current as HTMLElement);
+                }
+            }
+        });
+
+        const [bindOutsideClickListener, unbindOutsideClickListener] = useEventListener({
+            type: 'click',
+            listener: (event: Event) => {
+                const positionerElement = positionerRef.current;
+                const anchorElement = anchorRef.current;
+
+                if (openState && positionerElement && !positionerElement.contains(event.target as Node) && anchorElement && !anchorElement.contains(event.target as Node)) {
+                    hide();
+                }
+            }
+        });
+
+        const [bindResizeListener, unbindResizeListener] = useEventListener({
+            target: 'window',
+            type: 'resize',
+            listener: () => {
+                if (openState) {
+                    hide();
+                }
+            }
+        });
+
+        React.useEffect(() => {
+            bindLabelClick();
+        }, [id]);
+
+        React.useEffect(() => {
+            if (openState) {
+                bindOutsideClickListener();
+                bindResizeListener();
+            } else {
+                unbindOutsideClickListener();
+                unbindResizeListener();
+            }
+        }, [openState, bindOutsideClickListener, unbindOutsideClickListener, bindResizeListener, unbindResizeListener]);
+
+        React.useEffect(() => {
+            if (openState && positionerEl) {
+                if (elementRef?.current) {
+                    positionerEl.style.width = getOuterWidth(elementRef.current) + 'px';
+                }
+
+                if (focusOnShow.current) {
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            if (isNotEmpty(valueState)) {
+                                const focusedOptionIndex = listbox.state.focusedOptionIndex;
+                                const indexToFocus = focusedOptionIndex !== -1 ? focusedOptionIndex : listbox.findFirstFocusedOptionIndex();
+
+                                listbox.changeFocusedOptionIndex(new Event('focus') as unknown as React.KeyboardEvent, indexToFocus);
+                            }
+
+                            focusOnShow.current = false;
+                        });
+                    });
+                }
+            }
+        }, [openState, positionerEl]);
 
         return {
             state,
             listbox,
+            presence,
             // refs
             triggerRef,
-            portalRef,
-            overlayRef,
+            setAnchorRef,
+            setPositionerRef,
             // methods
             onContainerClick,
             onFocus,
@@ -418,10 +508,7 @@ export const useSelect = withHeadless({
             onKeyDown,
             onFilterKeyDown,
             onClearClick,
-            onOverlayEnter,
-            onOverlayAfterEnter,
             onOptionSelect,
-            changeVisibleState,
             getFocusedOptionId,
             getSelectedOptionLabel,
             hasValue,

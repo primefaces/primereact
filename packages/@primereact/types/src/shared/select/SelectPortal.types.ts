@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import type { PortalProps } from '@primereact/types/shared/portal';
 import type { SelectRootInstance } from './SelectRoot.types';
 
 /**
@@ -25,16 +26,12 @@ export interface SelectPortalPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: SelectPortalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to pass attributes to the panel's DOM element.
-     */
-    panel?: SelectPortalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
  * Defines valid properties in SelectPortal component.
  */
-export interface SelectPortalProps extends BaseComponentProps<SelectPortalInstance, unknown, SelectPortalPassThrough> {}
+export interface SelectPortalProps extends BaseComponentProps<SelectPortalInstance, PortalProps, SelectPortalPassThrough> {}
 
 /**
  * Defines valid state in SelectPortal component.

@@ -2,19 +2,27 @@ export * as Select from './UISelect.parts';
 
 // Named runtime exports to maximize tree-shaking
 export {
-    SelectClearIcon,
-    SelectPortal,
-    SelectProps,
-    SelectProvider,
     defaultClearIconProps,
     defaultEmptyProps,
     defaultFooterProps,
     defaultHeaderProps,
+    defaultIconProps,
     defaultListProps,
     defaultOptionsProps,
+    defaultPanelProps,
     defaultPortalProps,
+    defaultPositionerProps,
     defaultRootProps,
     defaultSelectionProps,
+    defaultValueProps,
+    SelectClearIcon,
+    SelectIcon,
+    SelectPanel,
+    SelectPortal,
+    SelectPositioner,
+    SelectProps,
+    SelectProvider,
+    SelectValue,
     useSelectContext
 } from 'primereact/select';
 export { UISelectEmpty as SelectEmpty } from './empty';

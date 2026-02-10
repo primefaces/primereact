@@ -1,6 +1,6 @@
 /**
  *
- * SelectHeader is the header container for the Select dropdown.
+ * SelectHeader is the header container for the Select header.
  *
  * [Live Demo](https://www.primereact.org/select/)
  *

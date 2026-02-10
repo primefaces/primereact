@@ -1,4 +1,4 @@
-export { SelectClearIcon as ClearIcon, SelectPortal as Portal, SelectTrigger as Trigger, SelectFilter as Filter, SelectDropdown as Dropdown } from 'primereact/select';
+export { SelectClearIcon as ClearIcon, SelectFilter as Filter, SelectIcon as Icon, SelectPanel as Panel, SelectPortal as Portal, SelectPositioner as Positioner, SelectTrigger as Trigger, SelectValue as Value } from 'primereact/select';
 export { UISelectEmpty as Empty } from './empty';
 export { UISelectFooter as Footer } from './footer';
 export { UISelectHeader as Header } from './header';

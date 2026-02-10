@@ -1,12 +1,15 @@
 export { defaultClearIconProps as ClearIconDefaults } from './clearicon';
-export { defaultDropdownProps as DropdownDefaults } from './dropdown';
 export { defaultEmptyProps as EmptyDefaults } from './empty';
 export { defaultFilterProps as FilterDefaults } from './filter';
 export { defaultFooterProps as FooterDefaults } from './footer';
 export { defaultHeaderProps as HeaderDefaults } from './header';
+export { defaultIconProps as IconDefaults } from './icon';
 export { defaultListProps as ListDefaults } from './list';
 export { defaultOptionProps as OptionDefaults } from './option';
 export { defaultOptionsProps as OptionsDefaults } from './options';
+export { defaultPanelProps as PanelDefaults } from './panel';
 export { defaultPortalProps as PortalDefaults } from './portal';
+export { defaultPositionerProps as PositionerDefaults } from './positioner';
 export { defaultRootProps as RootDefaults } from './root';
 export { defaultTriggerProps as TriggerDefaults } from './trigger';
+export { defaultValueProps as ValueDefaults } from './value';

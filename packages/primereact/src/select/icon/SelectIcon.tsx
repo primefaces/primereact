@@ -3,11 +3,11 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useSelectContext } from '../Select.context';
-import { defaultDropdownProps } from './SelectDropdown.props';
+import { defaultIconProps } from './SelectIcon.props';
 
-export const SelectDropdown = withComponent({
-    name: 'Select.Dropdown',
-    defaultProps: defaultDropdownProps,
+export const SelectIcon = withComponent({
+    name: 'Select.Icon',
+    defaultProps: defaultIconProps,
     setup() {
         const select = useSelectContext();
 
@@ -18,9 +18,9 @@ export const SelectDropdown = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: select?.cx('dropdown')
+                className: select?.cx('icon')
             },
-            select?.ptm('dropdown'),
+            select?.ptm('icon'),
             ptmi('root')
         );
 

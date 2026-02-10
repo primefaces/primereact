@@ -14,6 +14,7 @@ export const defaultProps: useSelectProps = {
     optionDisabled: undefined,
     optionGroupLabel: undefined,
     optionGroupChildren: undefined,
+    multiple: false,
     disabled: false,
     locale: undefined,
     autoOptionFocus: true,

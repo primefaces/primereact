@@ -30,12 +30,7 @@ export interface SelectTriggerPassThrough {
 /**
  * Defines valid properties in SelectTrigger component.
  */
-export interface SelectTriggerProps extends BaseComponentProps<SelectTriggerInstance, unknown, SelectTriggerPassThrough> {
-    /**
-     * Placeholder text to display when no option is selected.
-     */
-    placeholder?: string;
-}
+export interface SelectTriggerProps extends BaseComponentProps<SelectTriggerInstance, unknown, SelectTriggerPassThrough> {}
 
 /**
  * Defines valid state in SelectTrigger component.

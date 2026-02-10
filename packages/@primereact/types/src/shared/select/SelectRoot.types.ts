@@ -9,9 +9,8 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useSelectExposes, useSelectFilterValueChangeEvent, useSelectOpenChangeEvent, useSelectProps, useSelectState, useSelectValueChangeEvent } from './useSelect.types';
-import type { PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in Select component.
@@ -31,13 +30,25 @@ export interface SelectRootPassThrough {
      */
     trigger?: SelectRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Used to pass attributes to the dropdown's DOM element.
+     * Used to pass attributes to the value's DOM element.
      */
-    dropdown?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    value?: SelectRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the clear icon's DOM element.
+     */
+    clearIcon?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the icon's DOM element.
+     */
+    icon?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the portal's DOM element.
      */
     portal?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the positioner's DOM element.
+     */
+    positioner?: SelectRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the panel's DOM element.
      */
@@ -59,11 +70,7 @@ export interface SelectRootPassThrough {
      */
     option?: SelectRootPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
-     * Used to pass attributes to the clearIcon's DOM element.
-     */
-    clearIcon?: SelectRootPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Used to pass attributes to the clearIcon's DOM element.
+     * Used to pass attributes to the selection's DOM element.
      */
     selection?: SelectRootPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
@@ -121,6 +128,11 @@ export interface SelectOpenChangeEvent extends useSelectOpenChangeEvent {
  * Defines valid properties in Select component.
  */
 export interface SelectRootProps extends BaseComponentProps<SelectRootInstance, Omit<useSelectProps, 'onValueChange' | 'onFilterValueChange'>, SelectRootPassThrough> {
+    /**
+     * When enabled, allows multiple items to be selected.
+     * @defaultValue false
+     */
+    multiple?: boolean | undefined;
     /**
      * When enabled, displays a checkmark icon next to the selected option.
      * @defaultValue false

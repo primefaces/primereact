@@ -18,21 +18,29 @@ export const SelectClassNames = {
      */
     root: 'p-select',
     /**
-     * Class name of the dropdown element.
+     * Class name of the trigger element.
      */
-    dropdown: 'p-select-dropdown',
+    trigger: 'p-select-trigger',
     /**
      * Class name of the label element.
      */
     label: 'p-select-label',
     /**
+     * Class name of the icon element.
+     */
+    icon: 'p-select-dropdown',
+    /**
      * Class name of the clear icon element.
      */
     clearIcon: 'p-select-clear-icon',
     /**
+     * Class name of the positioner element.
+     */
+    positioner: 'p-select-positioner',
+    /**
      * Class name of the panel element.
      */
-    panel: 'p-select-list-container',
+    panel: 'p-select-panel',
     /**
      * Class name of the filter element.
      */
