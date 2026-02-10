@@ -1,4 +1,5 @@
 'use client';
+import { ChevronDown } from '@primeicons/react';
 import { EyeDropperIcon } from '@primereact/icons';
 import type { ColorSpace } from '@primereact/types/shared/colorpicker';
 import { SelectValueChangeEvent } from '@primereact/types/shared/select';
@@ -30,12 +31,20 @@ export default function AdvancedDemo() {
                     optionValue="value"
                     fluid
                 >
-                    <Select.Trigger placeholder="Select a format" />
-                    <Select.Dropdown></Select.Dropdown>
+                    <Select.Trigger>
+                        <Select.Value placeholder="Select a format" />
+                        <Select.Icon>
+                            <ChevronDown />
+                        </Select.Icon>
+                    </Select.Trigger>
                     <Select.Portal>
-                        <Select.List>
-                            <Select.Options style={{ maxHeight: '14rem' }} />
-                        </Select.List>
+                        <Select.Positioner>
+                            <Select.Panel>
+                                <Select.List>
+                                    <Select.Options style={{ maxHeight: '14rem' }} />
+                                </Select.List>
+                            </Select.Panel>
+                        </Select.Positioner>
                     </Select.Portal>
                 </Select.Root>
                 <ColorPicker.Root format={format}>

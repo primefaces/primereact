@@ -1,4 +1,5 @@
 'use client';
+import { ChevronDown } from '@primeicons/react';
 import { parseColor } from '@primereact/headless/colorpicker';
 import { EyeDropperIcon } from '@primereact/icons';
 import type { ColorSpace } from '@primereact/types/shared/colorpicker';
@@ -54,13 +55,22 @@ export default function Example() {
                         options={options}
                         optionLabel="label"
                         optionValue="value"
-                        className="w-full md:w-16"
+                        className="w-full md:w-26"
                     >
-                        <Select.Trigger placeholder="Select a format" />
+                        <Select.Trigger>
+                            <Select.Value placeholder="Select a format" />
+                            <Select.Icon>
+                                <ChevronDown />
+                            </Select.Icon>
+                        </Select.Trigger>
                         <Select.Portal>
-                            <Select.List>
-                                <Select.Options style={{ maxHeight: '14rem' }} />
-                            </Select.List>
+                            <Select.Positioner>
+                                <Select.Panel>
+                                    <Select.List>
+                                        <Select.Options style={{ maxHeight: '14rem' }} />
+                                    </Select.List>
+                                </Select.Panel>
+                            </Select.Positioner>
                         </Select.Portal>
                     </Select.Root>
                     <div className="flex-1">
