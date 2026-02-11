@@ -1,7 +1,7 @@
 'use client';
+import { menu, navigation } from '@/assets/menu/navigation';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { navigation, menu } from '@/assets/menu/navigation';
 import * as React from 'react';
 import { TailwindLogoIcon } from '../icons';
 
@@ -28,8 +28,9 @@ export default function DocSidebar() {
                 {navigation.map((nav, i) => (
                     <Link
                         key={nav.name + i}
-                        className="group h-8 rounded-lg px-3 flex items-center gap-3 text-sm font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-200/50 hover:text-surface-900 dark:hover:bg-surface-900 dark:hover:text-surface-0 data-active:bg-primary-500/10 dark:data-active:bg-primary-400/10 data-active:text-primary!"
+                        className="group h-8 rounded-lg px-3 flex items-center gap-3 text-sm font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-200/50 hover:text-surface-900 dark:hover:bg-surface-900 dark:hover:text-surface-0 data-active:bg-primary-500/10 dark:data-active:bg-primary-400/10 data-active:text-primary! aria-disabled:pointer-events-none"
                         href={nav.href}
+                        aria-disabled={nav.disabled}
                         {...(pathname.startsWith(nav.href) ? { 'data-active': '' } : {})}
                     >
                         {nav.icon === 'tailwind' ? (
@@ -40,6 +41,11 @@ export default function DocSidebar() {
                             <i className={`pi ${nav.icon} text-sm!`} />
                         )}
                         {nav.name}
+                        {'badge' in nav && nav?.badge && (
+                            <span className="uppercase flex items-center justify-center px-1 py-0.5 rounded-sm bg-primary-500/10 dark:bg-primary-400/10 border border-primary-500/15 dark:border-primary-400/15 text-primary font-bold text-[10px] tracking-tight leading-none ml-auto mr-0">
+                                {nav.badge}
+                            </span>
+                        )}
                     </Link>
                 ))}
             </div>

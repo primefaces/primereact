@@ -12,17 +12,23 @@ export const navigation = [
     {
         name: 'Tailwind',
         icon: 'tailwind',
-        href: '/docs/tailwind'
+        href: '/docs/tailwind',
+        disabled: true,
+        badge: 'Upcoming'
     },
     {
         name: 'Headless',
         icon: 'pi pi-hammer',
-        href: '/docs/headless'
+        href: '/docs/headless',
+        disabled: true,
+        badge: 'Upcoming'
     },
     {
         name: 'Primitives',
         icon: 'pi pi-bullseye',
-        href: '/docs/primitives'
+        href: '/docs/primitives',
+        disabled: true,
+        badge: 'Upcoming'
     }
 ];
 
