@@ -1,10 +1,10 @@
 'use client';
+import { Code } from '@primeicons/react/code';
+import { Times } from '@primeicons/react/times';
 import { cn } from '@primeuix/utils';
 import React from 'react';
 import DocCopyButton from './doc-copy-button';
 import { DocDemoViewerProps } from './doc-demo-viewer';
-import { Code } from '@primeicons/react/code';
-import { Times } from '@primeicons/react/times';
 
 const COMPONENT_PATH_REGEX = /'@\/components\/ui\/[a-zA-Z0-9\-_/]+'/g;
 
@@ -39,12 +39,12 @@ export default function DocDemoWrapper({
         : (highlightedCode as string);
 
     return (
-        <div className={cn('mb-16 mt-2 p-2 space-y-2 rounded-[14px] bg-surface-100 dark:bg-surface-800/75 shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]', className)} {...props}>
+        <div className={cn('mb-16 mt-2 p-2.25 space-y-2.25 rounded-[14px] bg-surface-100 dark:bg-surface-800/60 shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]', className)} {...props}>
             {component && (
-                <div className="flex flex-col overflow-hidden bg-surface-0 dark:bg-surface-950 rounded-[8px] shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.15)]">
+                <div className="flex flex-col overflow-hidden bg-(--code-figure-background) rounded-[8px] shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.15)]">
                     <div className="flex-1 pt-8 px-8 pb-5 md:pt-10 md:px-10 md:pb-7">{component}</div>
                     <div className="flex items-center gap-2 pl-2.5 pr-1.5 py-1.5">
-                        <span className="px-2 py-1.5 rounded-md bg-surface-100 dark:bg-surface-900 font-mono text-sm uppercase text-surface-400 dark:text-surface-500 whitespace-nowrap leading-3 tracking-tight">{demo}</span>
+                        <span className="px-2 py-1.5 rounded-md bg-surface-100 dark:bg-surface-800/75 font-mono text-sm uppercase text-surface-400 dark:text-surface-500 whitespace-nowrap leading-3 tracking-tight">{demo}</span>
                         <div className="flex items-center justify-end flex-1">
                             <div className="flex items-center gap-px">
                                 {mode === 'compact' ? (
