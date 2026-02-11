@@ -157,13 +157,13 @@ export const useConfirmPopup = withHeadless({
             let focusTarget;
 
             if (props.defaultFocus === undefined || props.defaultFocus === 'accept') {
-                focusTarget = acceptRef.current?.elementRef.current;
+                focusTarget = acceptRef.current?.elementRef?.current;
             } else if (props.defaultFocus === 'reject') {
-                focusTarget = rejectRef.current?.elementRef.current;
+                focusTarget = rejectRef.current?.elementRef?.current;
             }
 
             if (!focusTarget) {
-                focusTarget = findFocusableElement(motionRef.current?.elementRef.current ?? null);
+                focusTarget = findFocusableElement(motionRef.current?.elementRef?.current ?? null);
             }
 
             if (focusTarget) {
