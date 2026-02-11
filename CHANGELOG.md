@@ -1,5 +1,15 @@
 # Changelog
 
+## [11.0.0-alpha.10](https://github.com/primefaces/primereact/tree/11.0.0-alpha.10) (2025-02-11)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.9...11.0.0-alpha.10)
+
+**Implemented New Features and Enhancements:**
+
+- Completed an end-to-end structural audit across some components.
+- Synced styling layers with @primeuix/styles v3.0.0 and the refreshed themes.
+- Verified the showcase and docs for visual and behavioral parity post-update.
+
 ## [11.0.0-alpha.9](https://github.com/primefaces/primereact/tree/11.0.0-alpha.9) (2025-12-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/11.0.0-alpha.8...11.0.0-alpha.9)
