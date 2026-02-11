@@ -1,6 +1,6 @@
 {
     "name": "@primereact/monorepo",
-    "version": "11.0.0-alpha.9",
+    "version": "11.0.0-alpha.10",
     "author": "PrimeTek Informatics",
     "homepage": "https://primereact.org/",
     "repository": {
@@ -17,10 +17,10 @@
         "clean": "npx rimraf --glob **/node_modules **/dist **/.next ./pnpm-lock.yaml",
         "init": "pnpm install && husky",
         "link": "pnpm --filter './packages/*' dev:link",
-        "release": "pnpm run build && pnpm recursive publish --filter './packages/*' --no-git-checks --report-summary",
-        "release:alpha": "pnpm run build && pnpm recursive publish --filter './packages/*' --no-git-checks --report-summary --tag alpha",
-        "release:beta": "pnpm run build && pnpm recursive publish --filter './packages/*' --no-git-checks --report-summary --tag beta",
-        "release:rc": "pnpm run build && pnpm recursive publish --filter './packages/*' --no-git-checks --report-summary --tag rc",
+        "release": "pnpm run build && pnpm recursive publish --filter './packages/**' --no-git-checks --report-summary",
+        "release:alpha": "pnpm run build && pnpm recursive publish --filter './packages/**' --no-git-checks --report-summary --tag alpha",
+        "release:beta": "pnpm run build && pnpm recursive publish --filter './packages/**' --no-git-checks --report-summary --tag beta",
+        "release:rc": "pnpm run build && pnpm recursive publish --filter './packages/**' --no-git-checks --report-summary --tag rc",
         "build": "cross-env NODE_ENV=production pnpm run build:check && pnpm run build:packages",
         "build:check": "pnpm run format:check && pnpm run type:check && pnpm run security:check",
         "build:packages": "pnpm recursive run build",
@@ -43,9 +43,9 @@
         "format:check": "prettier --check .",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
-        "test": "pnpm --filter './packages/*' test",
-        "test:ui": "pnpm --filter './packages/*' test:ui",
-        "test:coverage": "pnpm --filter './packages/*' test:coverage"
+        "test": "pnpm --filter './packages/**' test",
+        "test:ui": "pnpm --filter './packages/**' test:ui",
+        "test:coverage": "pnpm --filter './packages/**' test:coverage"
     },
     "devDependencies": {
         "@commitlint/cli": "^19.7.1",
