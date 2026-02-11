@@ -25,16 +25,22 @@ export const usePopover = withHeadless({
         const arrowRef = React.useRef<HTMLDivElement>(null);
 
         const setAnchorRef = React.useCallback((node: HTMLElement | null) => {
+            if (node === anchorRef.current) return;
+
             anchorRef.current = node;
             setAnchorEl(node);
         }, []);
 
         const setPositionerRef = React.useCallback((node: HTMLDivElement | null) => {
+            if (node === positionerRef.current) return;
+
             positionerRef.current = node;
             setPositionerEl(node);
         }, []);
 
         const setArrowRef = React.useCallback((node: HTMLDivElement | null) => {
+            if (node === arrowRef.current) return;
+
             arrowRef.current = node;
             setArrowEl(node);
         }, []);

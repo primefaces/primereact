@@ -3,11 +3,11 @@ import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { usePopoverContext } from '../Popover.context';
-import { defaultContentProps } from './PopoverContent.props';
+import { defaultTitleProps } from './PopoverTitle.props';
 
-export const PopoverContent = withComponent({
-    name: 'Popover.Content',
-    defaultProps: defaultContentProps,
+export const PopoverTitle = withComponent({
+    name: 'Popover.Title',
+    defaultProps: defaultTitleProps,
     setup() {
         const popover = usePopoverContext();
 
@@ -18,9 +18,9 @@ export const PopoverContent = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: popover?.cx('content')
+                className: popover?.cx('title')
             },
-            popover?.ptm('content'),
+            popover?.ptm('title'),
             ptmi('root')
         );
 

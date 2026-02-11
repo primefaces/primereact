@@ -13,14 +13,18 @@ import { Popover } from '@primereact/ui/popover';
 ```
 
 ```tsx
-<Popover>
+<Popover.Root>
     <Popover.Trigger></Popover.Trigger>
     <Popover.Portal>
-        <Popover.Content>
-            <Popover.Close />
-        </Popover.Content>
+        <Popover.Positioner sideOffset={12} side="bottom" align="start">
+            <Popover.Popup>
+                <Popover.Content></Popover.Content>
+                <Popover.Close></Popover.Close>
+                <Popover.Arrow />
+            </Popover.Popup>
+        </Popover.Positioner>
     </Popover.Portal>
-</Popover>
+</Popover.Root>
 ```
 
 ## Examples
@@ -32,6 +36,8 @@ Use the `open` and `onOpenChange` props to control the popover state.
 <DocDemoViewer name="popover:controlled-demo" />
 
 ### Alignment
+
+Use the `side` and `align` props to align the popover. To give an offset to the popover, use the `sideOffset` and `alignOffset` props.
 
 <DocDemoViewer name="popover:alignment-demo" />
 

@@ -3,11 +3,11 @@ import type { PopoverRootInstance } from '@primereact/types/shared/popover';
 
 const theme = /*css*/ `
 .p-popover-positioner{
-z-index: 2000;
+    z-index: 2000;
 }
-.p-popover-content{
+
+.p-popover-popup{
     position: relative;
-    padding: 1rem;
     background: light-dark(var(--p-surface-0), var(--p-surface-900));
     border-radius: 0.5rem;
     border: 1px solid var(--p-content-border-color);
@@ -15,11 +15,43 @@ z-index: 2000;
     scale: 0.93;
     transition: opacity 250ms cubic-bezier(0.16, 1, 0.3, 1), scale 250ms cubic-bezier(0.16, 1, 0.3, 1);
     transform-origin: var(--transform-origin);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 0.05);
 
     &[data-open]{
         opacity: 1;
         scale: 1;
     }
+}
+
+.p-popover-content{
+    padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.p-popover-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1rem 0 1rem;
+}
+
+.p-popover-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.p-popover-title{
+    color: light-dark(var(--p-surface-900), var(--p-surface-0));
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.p-popover-description{
+    color: light-dark(var(--p-surface-500), var(--p-surface-400));
+    font-size: 0.875rem;
 }
 
 .p-popover-arrow{
@@ -62,8 +94,13 @@ export const styles = createStyles<PopoverRootInstance>({
     style: theme,
     classes: {
         overlay: 'p-popover p-component',
+        popup: 'p-popover-popup',
         content: 'p-popover-content',
         positioner: 'p-popover-positioner',
-        arrow: 'p-popover-arrow'
+        arrow: 'p-popover-arrow',
+        title: 'p-popover-title',
+        description: 'p-popover-description',
+        footer: 'p-popover-footer',
+        header: 'p-popover-header'
     }
 });

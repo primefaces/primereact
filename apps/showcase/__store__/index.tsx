@@ -1503,10 +1503,6 @@ export const Store: Record<string, Record<string, Record<string, { component: Re
                 'component': React.lazy(() => import('demo/styled/popover/controlled-demo')),
                 'filePath': 'demo/styled/popover/controlled-demo.tsx',
             },
-            'select-data-demo': {
-                'component': React.lazy(() => import('demo/styled/popover/select-data-demo')),
-                'filePath': 'demo/styled/popover/select-data-demo.tsx',
-            },
         },
         'progressbar': {
             'basic-demo': {

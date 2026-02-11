@@ -30,13 +30,7 @@ export interface PopoverContentPassThrough {
 /**
  * Defines valid properties in PopoverContent component.
  */
-export interface PopoverContentProps extends BaseComponentProps<PopoverContentInstance, unknown, PopoverContentPassThrough> {
-    /**
-     * Whether to focus the first focusable element when the popover is opened.
-     * @default true
-     */
-    autoFocus?: boolean;
-}
+export interface PopoverContentProps extends BaseComponentProps<PopoverContentInstance, unknown, PopoverContentPassThrough> {}
 
 /**
  * Defines valid state in PopoverContent component.

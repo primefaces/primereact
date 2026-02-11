@@ -1,7 +1,7 @@
+import { Times } from '@primeicons/react/times';
 import { Button } from '@primereact/ui/button';
 import { InputText } from '@primereact/ui/inputtext';
 import { Popover } from '@primereact/ui/popover';
-import { Times } from '@primeicons/react/times';
 
 export default function BasicDemo() {
     return (
@@ -12,15 +12,18 @@ export default function BasicDemo() {
                 </Popover.Trigger>
                 <Popover.Portal>
                     <Popover.Positioner sideOffset={12} side="bottom" align="start">
-                        <Popover.Content className="max-w-72 w-full">
-                            <div className="flex items-start justify-between w-full">
-                                <h3 className="text-surface-900 dark:text-surface-0 text-sm font-medium">Create a New Workspace</h3>
-                            </div>
-                            <p className="text-surface-500 dark:text-surface-400 text-sm mt-2">
-                                Name your workspace to get started. You can always change this later.
-                            </p>
-                            <InputText placeholder="Workspace Name" className="mt-3 w-full" />
-                            <div className="flex items-center mt-6">
+                        <Popover.Popup className="max-w-72 w-full">
+                            <Popover.Header>
+                                <Popover.Title>Create a New Workspace</Popover.Title>
+                                <Popover.Close as={Button} severity="secondary" variant="text" size="small" iconOnly>
+                                    <Times />
+                                </Popover.Close>
+                            </Popover.Header>
+                            <Popover.Content>
+                                <Popover.Description>Name your workspace to get started. You can always change this later.</Popover.Description>
+                                <InputText placeholder="Workspace Name" className="mt-3 w-full" />
+                            </Popover.Content>
+                            <Popover.Footer>
                                 <span className="text-xs text-surface-500 dark:text-surface-400 ">1 of 3</span>
                                 <div className="flex-1 flex items-center justify-end gap-2">
                                     <Button severity="secondary" variant="outlined" size="small">
@@ -28,12 +31,9 @@ export default function BasicDemo() {
                                     </Button>
                                     <Button size="small">Next</Button>
                                 </div>
-                            </div>
-                            <Popover.Close as={Button} severity="secondary" variant="text" size="small" iconOnly className="absolute top-2 right-2">
-                                <Times />
-                            </Popover.Close>
+                            </Popover.Footer>
                             <Popover.Arrow />
-                        </Popover.Content>
+                        </Popover.Popup>
                     </Popover.Positioner>
                 </Popover.Portal>
             </Popover.Root>

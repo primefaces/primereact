@@ -1,7 +1,12 @@
 export { PopoverArrow as Arrow } from './arrow';
 export { PopoverClose as Close } from './close';
 export { PopoverContent as Content } from './content';
+export { PopoverDescription as Description } from './description';
+export { PopoverFooter as Footer } from './footer';
+export { PopoverHeader as Header } from './header';
+export { PopoverPopup as Popup } from './popup';
 export { PopoverPortal as Portal } from './portal';
 export { PopoverPositioner as Positioner } from './positioner';
 export { PopoverRoot as Root } from './root';
+export { PopoverTitle as Title } from './title';
 export { PopoverTrigger as Trigger } from './trigger';
