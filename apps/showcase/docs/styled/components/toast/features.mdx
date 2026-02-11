@@ -10,26 +10,27 @@ component: toast
 
 ```tsx
 import { Toast } from '@primereact/ui/toast';
+import { Toaster, toast } from '@primereact/ui/toaster';
 ```
 
 ```tsx
-<Toast>
-    <Toast.Portal>
-        <Toast.Region>
+<Toaster.Root>
+    <Toaster.Portal>
+        <Toaster.Region>
             {({ toast }) =>
                 toast?.state.toasts.map((toast) => (
-                    <Toast.Item key={toast.id} data={toast}>
+                    <Toast.Root key={toast.id} toast={toast}>
                         <Toast.Icon />
                         <Toast.Title />
                         <Toast.Description />
                         <Toast.Action />
                         <Toast.Close />
-                    </Toast.Item>
+                    </Toast.Root>
                 ))
             }
-        </Toast.Region>
-    </Toast.Portal>
-</Toast>
+        </Toaster.Region>
+    </Toaster.Portal>
+</Toaster.Root>
 ```
 
 ## Examples

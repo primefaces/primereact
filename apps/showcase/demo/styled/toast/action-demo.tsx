@@ -1,58 +1,58 @@
 'use client';
+import { Camera } from '@primeicons/react/camera';
+import { Check } from '@primeicons/react/check';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { InfoCircle } from '@primeicons/react/info-circle';
+import { Spinner } from '@primeicons/react/spinner';
 import { Times } from '@primeicons/react/times';
-import { toast } from '@primereact/headless/toast';
-import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
+import { toast } from '@primereact/headless/toaster';
+import { ToasterRegionInstance, ToastType } from '@primereact/types/shared/toaster';
 import { Button } from '@primereact/ui/button';
 import { Toast } from '@primereact/ui/toast';
+import { Toaster } from '@primereact/ui/toaster';
 
 function ActionToast() {
     return (
-        <Toast.Root group="action">
-            <Toast.Portal>
-                <Toast.Region>
-                    {({ toast }: ToastRegionInstance) =>
-                        toast?.toasts.map((toast: ToastType) => (
-                            <Toast.Item key={toast.id} toast={toast}>
-                                <div className="flex items-start gap-2">
-                                    <Toast.Icon />
-                                    <div className="flex-1">
-                                        <Toast.Title className="mb-1 -mt-0.5" />
-                                        <Toast.Description />
-                                        <Toast.Action as={Button} size="small" className="mt-4" />
+        <Toaster.Root
+            group="action"
+            icons={{ success: <Check />, danger: <Times />, warn: <ExclamationTriangle />, info: <InfoCircle />, loading: <Spinner /> }}
+        >
+            <Toaster.Portal>
+                <Toaster.Region>
+                    {({ toaster }: ToasterRegionInstance) =>
+                        toaster?.toasts.map((toast: ToastType) => (
+                            <Toast.Root key={toast.id} toast={toast}>
+                                <div className="grid grid-cols-[auto_1fr] items-start gap-3">
+                                    <Toast.Icon className="[&>svg]:size-3.5 mt-1" />
+                                    <div>
+                                        <Toast.Title />
+                                        <Toast.Description className="mt-1" />
+                                        <Toast.Action as={Button} size="small" className="mt-3" />
                                     </div>
                                 </div>
-                                <Toast.Close
-                                    as={Button}
-                                    iconOnly
-                                    severity={'secondary'}
-                                    variant="text"
-                                    size="small"
-                                    className={'absolute top-2 right-2'}
-                                >
-                                    <Times></Times>
-                                </Toast.Close>
-                            </Toast.Item>
+                            </Toast.Root>
                         ))
                     }
-                </Toast.Region>
-            </Toast.Portal>
-        </Toast.Root>
+                </Toaster.Region>
+            </Toaster.Portal>
+        </Toaster.Root>
     );
 }
 
 function ActionDemo() {
     const handleCreateToast = () => {
         const id = toast({
-            title: 'Changes saved',
-            description: 'Are you sure you would like to remove this user? This action cannot be undone.',
+            title: 'Allow camera access',
+            description: 'We need access to your camera to scan QR codes.',
+            icon: <Camera />,
             group: 'action',
             action: {
-                children: 'Undo',
+                children: 'Enable camera',
                 onClick: () => {
                     toast.dismiss(id);
-                    toast({
-                        title: 'Changes saved',
-                        description: 'Are you sure you would like to remove this user? This action cannot be undone.',
+                    toast.success({
+                        title: 'Camera access granted',
+                        description: 'You can now scan QR codes.',
                         group: 'action'
                     });
                 }

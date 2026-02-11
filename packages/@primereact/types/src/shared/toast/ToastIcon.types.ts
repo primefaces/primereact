@@ -10,8 +10,6 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { ToastItemInstance } from './ToastItem.types';
-import type { ToastVariant } from './ToastManager.types';
 import type { ToastRootInstance } from './ToastRoot.types';
 
 /**
@@ -32,12 +30,7 @@ export interface ToastIconPassThrough {
 /**
  * Defines valid properties in ToastIcon component.
  */
-export interface ToastIconProps extends BaseComponentProps<ToastIconInstance, unknown, ToastIconPassThrough> {
-    /**
-     * Custom icons for each toast variant
-     */
-    icons?: Partial<Record<ToastVariant, React.ReactNode>>;
-}
+export interface ToastIconProps extends BaseComponentProps<ToastIconInstance, unknown, ToastIconPassThrough> {}
 
 /**
  * Defines valid state in ToastDescription component.
@@ -52,10 +45,6 @@ export interface ToastIconExposes {
      * The Toast component instance.
      */
     toast: ToastRootInstance | undefined | null;
-    /**
-     * The ToastItem component instance.
-     */
-    toastItem: ToastItemInstance | undefined | null;
 }
 
 /**

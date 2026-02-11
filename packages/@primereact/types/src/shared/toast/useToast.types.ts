@@ -1,6 +1,6 @@
 /**
  *
- * The useToast manages the state and functionality of a toast component.
+ * The useToast manages the state and functionality of a toast item component.
  *
  * [Live Demo](https://www.primereact.org/toast/)
  *
@@ -9,46 +9,31 @@
  *
  */
 import type { HeadlessInstance } from '@primereact/types/core';
-import type { ToastId, ToastType } from './ToastManager.types';
+import type { ToastType } from '@primereact/types/shared/toaster';
+import { ToasterRootInstance } from '@primereact/types/shared/toaster';
 
 /**
- * Toast position type
+ * Swipe direction type for toast item
  */
-export type ToastPosition = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+export type ToastSwipeDirection = 'up' | 'down' | 'left' | 'right';
 
 /**
- * Toast swipe direction type
+ * Swipe axis type for toast item
  */
-export type ToastSwipeDirection = 'left' | 'right' | 'up' | 'down';
+export type ToastSwipeAxis = 'x' | 'y';
 
 /**
  * Defines valid properties in useToast.
  */
 export interface useToastProps {
     /**
-     * Position of the toast container
-     * @default 'top-right'
+     * Toast data containing all toast information
      */
-    position?: ToastPosition;
+    toast: ToastType;
     /**
-     * Maximum number of toasts to be visible
-     * @default 3
+     * Reference to the parent Toaster instance
      */
-    limit?: number;
-    /**
-     * Gap between toasts in pixels
-     * @default 14
-     */
-    gap?: number;
-    /**
-     * Timeout for toast auto-dismiss (alias for duration)
-     * @default 6000
-     */
-    timeout?: number;
-    /**
-     * Group identifier for toast grouping
-     */
-    group?: string;
+    toaster?: ToasterRootInstance | undefined;
 }
 
 /**
@@ -56,17 +41,41 @@ export interface useToastProps {
  */
 export interface useToastState {
     /**
-     * Whether the toast container is expanded (showing all toasts)
+     * Indicates whether the toast is mounted
      */
-    isExpanded: boolean;
+    mounted: boolean;
     /**
-     * Whether user is currently interacting with toasts
+     * Indicates whether the user is swiping the toast
      */
-    isInteracting: boolean;
+    swiping: boolean;
     /**
-     * Cached heights of rendered toasts for stacking calculations
+     * Indicates whether the toast has been swiped out (dismissed)
      */
-    heights: Array<{ toastId: ToastId; height: number }>;
+    swipeOut: boolean;
+    /**
+     * Direction of swipe out animation
+     */
+    swipeOutDirection: ToastSwipeDirection | null;
+    /**
+     * Direction of swipe interaction
+     */
+    swipeDirection: ToastSwipeAxis | null;
+    /**
+     * Measured height of the toast content
+     */
+    initialHeight: number;
+    /**
+     * Whether the toast has been removed from the stack
+     */
+    removed: boolean;
+    /**
+     * Whether the toast has been swiped (even if not dismissed)
+     */
+    isSwiped: boolean;
+    /**
+     * Offset that should be preserved while the toast exits
+     */
+    offsetBeforeRemove: number;
 }
 
 /**
@@ -74,49 +83,53 @@ export interface useToastState {
  */
 export interface useToastExposes {
     /**
-     * Array of filtered toasts for the current group
+     * Vertical offset for stacking toasts
      */
-    toasts: ToastType[];
+    offset: number;
     /**
-     * Handler for mouse enter on the toast region
+     * Offset snapshot used during removal transitions
      */
-    onRegionMouseEnter: () => void;
+    offsetBeforeRemove: number;
     /**
-     * Handler for mouse move on the toast region
+     * Index of the toast in the stack
      */
-    onRegionMouseMove: () => void;
+    index: number;
     /**
-     * Handler for mouse leave on the toast region
+     * Index among currently visible toasts
      */
-    onRegionMouseLeave: () => void;
+    visibleIndex: number;
     /**
-     * Handler for drag end on the toast region
+     * Whether the toast is currently visible considering the limit
      */
-    onRegionDragEnd: () => void;
+    isVisible: boolean;
     /**
-     * Handler for pointer down on the toast region
+     * Whether the toast is in the front-most position
      */
-    onRegionPointerDown: (event: React.PointerEvent) => void;
+    isFront: boolean;
     /**
-     * Handler for pointer up on the toast region
+     * Reference to the parent Toaster instance
      */
-    onRegionPointerUp: () => void;
+    toaster?: ToasterRootInstance | undefined;
     /**
-     * Handler for focus events within the toast region
+     * Handler for pointer down events (swipe start)
      */
-    onRegionFocus: (event: React.FocusEvent<HTMLElement>) => void;
+    onPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
-     * Handler for blur events leaving the toast region
+     * Handler for pointer move events (swipe progress)
      */
-    onRegionBlur: (event: React.FocusEvent<HTMLElement>) => void;
+    onPointerMove: (event: React.PointerEvent<HTMLDivElement>) => void;
     /**
-     * Function to update the heights state
+     * Handler for pointer up events (swipe end)
      */
-    setHeights: React.Dispatch<React.SetStateAction<Array<{ height: number; toastId: ToastId }>>>;
+    onPointerUp: () => void;
     /**
-     * Handler for managing focus when a toast is dismissed
+     * Handler for drag end events
      */
-    handleFocusManagement: (toastElement: HTMLElement | null) => void;
+    onDragEnd: () => void;
+    /**
+     * Handler for close button click
+     */
+    handleCloseOnClick: () => void;
 }
 
 /**

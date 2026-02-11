@@ -2,8 +2,5 @@ export { defaultActionProps } from './action';
 export { defaultCloseProps } from './close';
 export { defaultDescriptionProps } from './description';
 export { defaultIconProps } from './icon';
-export { defaultItemProps } from './item';
-//export { defaultPortalProps } from './portal';
-export { defaultRegionProps } from './region';
 export { defaultRootProps } from './root';
 export { defaultTitleProps } from './title';

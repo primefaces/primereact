@@ -1,6 +1,6 @@
 /**
  *
- * Toast component is used to display messages.
+ * ToastItem component is used to display a toast item.
  *
  * [Live Demo](https://www.primereact.org/toast/)
  *
@@ -10,15 +10,15 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { useToastExposes, useToastProps, useToastState } from './useToast.types';
+import type { useToastExposes, useToastInstance, useToastProps, useToastState } from './useToast.types';
 
 /**
- * Defines passthrough(pt) options type in Toast component.
+ * Defines passthrough(pt) options type in ToastRoot component.
  */
 export type ToastRootPassThroughType<E> = PassThroughType<ToastRootInstance, E>;
 
 /**
- * Defines passthrough(pt) options of Toast component.
+ * Defines passthrough(pt) options of ToastRoot component.
  */
 export interface ToastRootPassThrough {
     /**
@@ -28,29 +28,26 @@ export interface ToastRootPassThrough {
 }
 
 /**
- * Defines valid properties in Toast component.
+ * Defines valid properties in ToastRoot component.
  */
-export interface ToastRootProps extends BaseComponentProps<ToastRootInstance, useToastProps, ToastRootPassThrough> {
-    /**
-     * Whether to show rich colors
-     * @default false
-     */
-    richColors?: boolean;
-}
+export interface ToastRootProps extends BaseComponentProps<ToastRootInstance, useToastProps, ToastRootPassThrough> {}
 
 /**
- * Defines valid state in Toast component.
- * @extends useToastState
+ * Defines valid state in ToastRoot component.
  */
 export interface ToastRootState extends useToastState {}
 
 /**
- * Defines the methods and properties exposed by Toast component.
- * @extends useToastExposes
+ * Defines the methods and properties exposed by ToastRoot component.
  */
-export interface ToastRootExposes extends useToastExposes {}
+export interface ToastRootExposes extends useToastExposes {
+    /**
+     * Reference to the parent Toast instance.
+     */
+    toast?: useToastInstance | undefined | null;
+}
 
 /**
- * Instance of Toast component.
+ * Instance of ToastRoot component.
  */
 export type ToastRootInstance = ComponentInstance<ToastRootProps, ToastRootState, ToastRootExposes>;

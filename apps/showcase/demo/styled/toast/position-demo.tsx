@@ -1,9 +1,14 @@
 'use client';
+import { Check } from '@primeicons/react/check';
+import { ExclamationTriangle } from '@primeicons/react/exclamation-triangle';
+import { InfoCircle } from '@primeicons/react/info-circle';
+import { Spinner } from '@primeicons/react/spinner';
 import { Times } from '@primeicons/react/times';
-import { toast } from '@primereact/headless/toast';
-import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
+import { toast } from '@primereact/headless/toaster';
+import { ToasterRegionInstance, ToastType } from '@primereact/types/shared/toaster';
 import { Button } from '@primereact/ui/button';
 import { Toast } from '@primereact/ui/toast';
+import { Toaster } from '@primereact/ui/toaster';
 
 function PositionToast({
     position = 'bottom-right'
@@ -11,18 +16,22 @@ function PositionToast({
     position: 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
 }) {
     return (
-        <Toast.Root position={position} group={position}>
-            <Toast.Portal>
-                <Toast.Region>
-                    {({ toast }: ToastRegionInstance) =>
-                        toast?.toasts.map((toast: ToastType) => (
-                            <Toast.Item key={toast.id} toast={toast}>
-                                <div className="flex items-start gap-2">
-                                    <Toast.Icon />
-                                    <div className="flex-1">
-                                        <Toast.Title className="mb-1 -mt-0.5" />
-                                        <Toast.Description />
-                                        <Toast.Action as={Button} size="small" className="mt-4" />
+        <Toaster.Root
+            position={position}
+            group={position}
+            icons={{ success: <Check />, danger: <Times />, warn: <ExclamationTriangle />, info: <InfoCircle />, loading: <Spinner /> }}
+        >
+            <Toaster.Portal>
+                <Toaster.Region>
+                    {({ toaster }: ToasterRegionInstance) =>
+                        toaster?.toasts.map((toast: ToastType) => (
+                            <Toast.Root key={toast.id} toast={toast}>
+                                <div className="grid grid-cols-[auto_1fr] items-start gap-3">
+                                    <Toast.Icon className="[&>svg]:size-3.5 mt-1" />
+                                    <div>
+                                        <Toast.Title />
+                                        <Toast.Description className="mt-1" />
+                                        <Toast.Action as={Button} size="small" className="mt-3" />
                                     </div>
                                 </div>
                                 <Toast.Close
@@ -33,22 +42,22 @@ function PositionToast({
                                     size="small"
                                     className={'absolute top-2 right-2'}
                                 >
-                                    <Times></Times>
+                                    <Times />
                                 </Toast.Close>
-                            </Toast.Item>
+                            </Toast.Root>
                         ))
                     }
-                </Toast.Region>
-            </Toast.Portal>
-        </Toast.Root>
+                </Toaster.Region>
+            </Toaster.Portal>
+        </Toaster.Root>
     );
 }
 
 function PositionDemo() {
     const createToast = (group: string) => {
         toast({
-            title: 'Changes saved',
-            description: 'Are you sure you would like to remove this user? This action cannot be undone.',
+            title: 'Successfully completed',
+            description: 'The task was completed successfully. You can now view the details.',
             group
         });
     };

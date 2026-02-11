@@ -18,14 +18,6 @@ export const ToastClassNames = {
      */
     root: 'p-toast p-component',
     /**
-     * Class name of the region element
-     */
-    region: 'p-toast-region',
-    /**
-     * Class name of the toast item element
-     */
-    item: 'p-toast',
-    /**
      * Class name of the icon element
      */
     icon: 'p-toast-icon',
