@@ -74,4 +74,5 @@ export interface ComponentPreviewType {
     componentSlug: string;
     styled: boolean;
     tailwind: boolean;
+    cover: string | undefined;
 }

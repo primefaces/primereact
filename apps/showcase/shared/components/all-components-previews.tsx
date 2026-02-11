@@ -1,13 +1,13 @@
 'use client';
 import { ComponentPreviewType } from '@/shared/types/App.types';
+import { Github } from '@primeicons/react/github';
+import { Search } from '@primeicons/react/search';
 import { Button } from '@primereact/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
-import { Github } from '@primeicons/react/github';
-import { Search } from '@primeicons/react/search';
 
-const TYPES = ['styled', 'tailwind'] as const;
+const TYPES = ['styled'] as const;
 
 export default function AllComponentPreviews({ components }: { components: ComponentPreviewType[] }) {
     const [search, setSearch] = React.useState('');
@@ -49,23 +49,31 @@ export default function AllComponentPreviews({ components }: { components: Compo
             <div className="my-4 w-full">
                 <div className="flex items-center w-full">
                     <span className="h-px flex-1 bg-(--border-color)" />
-                    <div className="relative flex items-center rounded-full bg-surface-0 dark:bg-surface-900 border border-(--border-color) shadow-xs max-w-xs w-full has-focus-visible:ring-2 has-focus-visible:ring-(--border-color)">
+                    <div className="relative flex items-center rounded-full bg-surface-0 dark:bg-surface-900 border border-(--border-color) shadow-xs max-w-3xs md:max-w-xs w-full has-focus-visible:ring-2 has-focus-visible:ring-(--border-color)">
                         <Search className="text-base absolute top-1/2 -translate-y-1/2 left-4 opacity-50 pointer-events-none"></Search>
-                        <input className="flex-1 text-lg pl-10 pr-6 py-2.5 rounded-full outline-none" placeholder="Search components..." value={search} onChange={(e) => setSearch(e.target.value)} autoFocus />
+                        <input className="flex-1 text-base md:text-lg pl-10 pr-6 py-2.5 rounded-full outline-none" placeholder="Search components..." value={search} onChange={(e) => setSearch(e.target.value)} autoFocus />
                     </div>
                     <span className="h-px flex-1 bg-(--border-color)" />
                 </div>
                 <div className="flex items-center justify-center mt-4"></div>
             </div>
-            <div className="container py-12 grid grid-cols-1 min-[684px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-6">
+            <div className="container py-12 grid grid-cols-1 min-[640px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                 {filteredResult.length > 0 ? (
                     filteredResult.map((component) => (
                         <div key={component.title} className="group relative overflow-hidden rounded-xl bg-surface-0 dark:bg-surface-900 border border-(--border-color)/50">
                             <div className="relative p-2 overflow-hidden flex flex-col group-hover:scale-[1.01] transition-transform ease-[cubic-bezier(0,.55,.45,1)] duration-200">
-                                <div className="relative aspect-[19.5/11.5625] w-full rounded-lg overflow-hidden bg-neutral-900 dark:bg-surface-950 flex items-center justify-center">
-                                    <Image className="mix-blend-" src="/images/background.png" alt="background" objectFit="cover" fill />
-                                    <Image className="mix-blend-color-dodge z-2" src="/images/light.png" alt="light" objectFit="cover" fill />
-                                    <Image className="opacity-40 z-3" src={`/images/covers/${component.title.toLowerCase().replace(' ', '-')}.png`} alt={component.title} objectFit="cover" fill />
+                                <div className="relative aspect-[19.5/11.5625] w-full rounded-lg overflow-hidden bg-surface-900 flex items-center justify-center">
+                                    <Image
+                                        className="z-3 mix-blend-luminosity opacity-90"
+                                        src={`https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/components/thumbnails/${(component.cover || component.title).toLowerCase().replace(' ', '-')}.png`}
+                                        alt={`${component.title} component preview`}
+                                        fill
+                                        sizes="(max-width: 684px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                                        style={{ objectFit: 'cover' }}
+                                        quality={85}
+                                        loading="lazy"
+                                        placeholder="empty"
+                                    />
                                 </div>
                                 <div className="lg:h-14 px-3 pt-2 lg:pb-2 pb-3 bg-surface-0 dark:bg-surface-900">
                                     <h3 className="font-medium">{component.title}</h3>

@@ -38,7 +38,15 @@ const nextConfig: NextConfig = {
         return config;
     },
     images: {
-        domains: ['primefaces.org']
+        domains: ['primefaces.org'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'fqjltiegiezfetthbags.supabase.co',
+                pathname: '/storage/v1/object/public/common.images/**'
+            }
+        ],
+        qualities: [75, 85, 90, 95]
     },
     async redirects() {
         const componentDirs = globSync('docs/components/**');

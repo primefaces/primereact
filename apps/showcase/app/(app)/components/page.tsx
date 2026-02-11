@@ -1,4 +1,5 @@
 import AllComponentPreviews from '@/shared/components/all-components-previews';
+import { ComponentPreviewType } from '@/shared/types/App.types';
 import { allDocs } from 'contentlayer/generated';
 import type { Metadata } from 'next';
 
@@ -16,23 +17,15 @@ const allComponents = [...styledComponents, ...tailwindComponents].reduce(
             description: doc.description,
             componentSlug: doc.componentSlug,
             styled: false,
-            tailwind: false
+            tailwind: false,
+            cover: doc?.cover ?? undefined
         };
 
         acc[name][type as 'styled' | 'tailwind'] = true;
 
         return acc;
     },
-    {} as Record<
-        string,
-        {
-            title: string;
-            description: string | undefined;
-            componentSlug: string;
-            styled: boolean;
-            tailwind: boolean;
-        }
-    >
+    {} as Record<string, ComponentPreviewType>
 );
 
 const result = Object.values(allComponents);
