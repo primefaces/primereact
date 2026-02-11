@@ -68,7 +68,7 @@ export default function DocDemoWrapper({
                 </div>
             )}
             {!isSourceNotAvailable && (mode !== 'collapsible' || isCollapsed) && (
-                <div className="rounded-[10px] bg-(--code-figure-background) overflow-hidden shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.15)]">
+                <div className="rounded-[8px] bg-(--code-figure-background) overflow-hidden shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.15)]">
                     <figure data-rehype-pretty-code-figure="in-wrapper" data-expanded={isExpanded} className={cn('', mode === 'compact' && 'data-[expanded=true]:[&_pre]:max-h-max [&_pre]:max-h-[300px]')}>
                         <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
                     </figure>
