@@ -18,6 +18,7 @@ export default function ControlledDemo() {
                 <Popover.Portal>
                     <Popover.Positioner sideOffset={12}>
                         <Popover.Popup className="max-w-72 w-full">
+                            <Popover.Arrow />
                             <Popover.Header>
                                 <Popover.Title>Create a New Workspace</Popover.Title>
                                 <Popover.Close as={Button} severity="secondary" variant="text" size="small" iconOnly>

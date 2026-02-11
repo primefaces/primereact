@@ -13,6 +13,7 @@ export default function BasicDemo() {
                 <Popover.Portal>
                     <Popover.Positioner sideOffset={12} side="bottom" align="start">
                         <Popover.Popup className="max-w-72 w-full">
+                            <Popover.Arrow />
                             <Popover.Header>
                                 <Popover.Title>Create a New Workspace</Popover.Title>
                                 <Popover.Close as={Button} severity="secondary" variant="text" size="small" iconOnly>
@@ -32,7 +33,6 @@ export default function BasicDemo() {
                                     <Button size="small">Next</Button>
                                 </div>
                             </Popover.Footer>
-                            <Popover.Arrow />
                         </Popover.Popup>
                     </Popover.Positioner>
                 </Popover.Portal>
