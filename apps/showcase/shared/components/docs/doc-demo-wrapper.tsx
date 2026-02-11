@@ -39,7 +39,7 @@ export default function DocDemoWrapper({
         : (highlightedCode as string);
 
     return (
-        <div className={cn('mb-16 mt-2 p-2.25 space-y-2.25 rounded-[14px] bg-surface-100 dark:bg-surface-800/60 shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]', className)} {...props}>
+        <div className={cn('mb-16 mt-2 p-2 space-y-2.25 rounded-[14px] bg-surface-100 dark:bg-surface-800/60 shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.2)]', className)} {...props}>
             {component && (
                 <div className="flex flex-col overflow-hidden bg-(--code-figure-background) rounded-[8px] shadow-[0_0_0_0.5px_rgba(0,0,0,0.2)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.15)]">
                     <div className="flex-1 pt-8 px-8 pb-5 md:pt-10 md:px-10 md:pb-7">{component}</div>

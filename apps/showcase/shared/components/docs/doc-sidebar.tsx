@@ -28,8 +28,8 @@ export default function DocSidebar() {
                 {navigation.map((nav, i) => (
                     <Link
                         key={nav.name + i}
-                        className="group h-8 rounded-lg px-3 flex items-center gap-3 text-sm font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-200/50 hover:text-surface-900 dark:hover:bg-surface-900 dark:hover:text-surface-0 data-active:bg-primary-500/10 dark:data-active:bg-primary-400/10 data-active:text-primary! aria-disabled:pointer-events-none"
-                        href={nav.href}
+                        className="group h-8 rounded-lg px-3 flex items-center gap-3 text-sm font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-200/50 hover:text-surface-900 dark:hover:bg-surface-900 dark:hover:text-surface-0 data-active:bg-primary-500/10 dark:data-active:bg-primary-400/10 data-active:text-primary! aria-disabled:pointer-events-none aria-disabled:select-none "
+                        href={nav.disabled ? '' : nav.href}
                         aria-disabled={nav.disabled}
                         {...(pathname.startsWith(nav.href) ? { 'data-active': '' } : {})}
                     >

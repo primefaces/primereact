@@ -183,13 +183,12 @@ export const menu = {
                 {
                     name: 'Next.js',
                     href: '/docs/styled/installation/nextjs'
+                },
+                {
+                    name: 'Configuration',
+                    href: '/docs/styled/installation/configuration'
                 }
             ]
-        },
-        {
-            name: 'Configuration',
-            icon: 'pi pi-cog',
-            href: '/docs/styled/configuration'
         },
         {
             name: 'Theming',

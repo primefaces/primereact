@@ -17,8 +17,8 @@ import { Toaster, toast } from '@primereact/ui/toaster';
 <Toaster.Root>
     <Toaster.Portal>
         <Toaster.Region>
-            {({ toast }) =>
-                toast?.state.toasts.map((toast) => (
+            {({ toaster }) =>
+                toaster?.toasts?.map((toast) => (
                     <Toast.Root key={toast.id} toast={toast}>
                         <Toast.Icon />
                         <Toast.Title />
