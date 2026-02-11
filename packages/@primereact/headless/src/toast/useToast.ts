@@ -1,139 +1,317 @@
+/**
+ * This toast system is inspired by Sonner by Emil Kowalski.
+ * The architecture and API ideas were adapted for this project.
+ * https://github.com/emilkowalski/sonner
+ */
+
 import { withHeadless } from '@primereact/core/headless';
-import type { ToastId, ToastType } from '@primereact/types/shared/toast';
+import { ToastStore } from '@primereact/headless/toaster';
+import { useMountEffect } from '@primereact/hooks/use-mount-effect';
+import { useVisibilityChange } from '@primereact/hooks/use-visibility-change';
 import * as React from 'react';
-import { ToastStore } from './toastStore';
 import { defaultProps } from './useToast.props';
+
+const SWIPE_THRESHOLD = 50;
+const VELOCITY_THRESHOLD = 0.11;
 
 export const useToast = withHeadless({
     name: 'useToast',
     defaultProps,
-    setup: ({ props }) => {
-        const toasts = React.useSyncExternalStore(
-            ToastStore.subscribe,
-            () => ToastStore.snapshot(),
-            () => ToastStore.snapshot()
-        );
+    setup: ({ props, elementRef }) => {
+        const { toast, toaster } = props;
 
-        const filteredToasts: ToastType[] = React.useMemo(() => {
-            if (props.group) {
-                return toasts.filter((toast) => toast.group === props.group);
-            }
+        const index = React.useMemo(() => {
+            if (!toaster?.toasts || !Array.isArray(toaster?.toasts)) return 0;
 
-            return toasts.filter((toast) => !toast.group);
-        }, [toasts, props.group]);
+            return toaster?.toasts.findIndex((t) => t.id === toast.id) || 0;
+        }, [toaster?.toasts, toast.id]);
 
-        const [heights, setHeights] = React.useState<{ height: number; toastId: ToastId }[]>([]);
-        const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
-        const [isInteracting, setIsInteracting] = React.useState<boolean>(false);
+        const isDocumentVisible = useVisibilityChange();
+        const [removed, setRemoved] = React.useState(false);
+        const [swipeDirection, setSwipeDirection] = React.useState<'x' | 'y' | null>(null);
+        const [swipeOutDirection, setSwipeOutDirection] = React.useState<'left' | 'right' | 'up' | 'down' | null>(null);
+        const [mounted, setMounted] = React.useState(false);
+        const [swiping, setSwiping] = React.useState(false);
+        const [swipeOut, setSwipeOut] = React.useState(false);
+        const [isSwiped, setIsSwiped] = React.useState(false);
+        const [offsetBeforeRemove, setOffsetBeforeRemove] = React.useState(0);
+        const [initialHeight, setInitialHeight] = React.useState(0);
 
-        const focusWithinRef = React.useRef<boolean>(false);
+        const dismissible = toast.dismissible !== false && toast.variant !== 'loading';
 
-        const state = {
-            isExpanded,
-            isInteracting,
-            heights
-        };
+        const remainingTimeRef = React.useRef(toast.duration || toaster?.props.timeout || 6000);
+        const swipeStartTimeRef = React.useRef<number>(0);
+        const pointerStartPositionRef = React.useRef<{ x: number; y: number } | null>(null);
 
-        const onRegionMouseEnter = () => {
-            setIsExpanded(true);
-        };
+        const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+        const timeoutStartTimeRef = React.useRef<number>(0);
+        const lastTimeoutStartTimeRef = React.useRef<number>(0);
 
-        const onRegionMouseMove = () => {
-            setIsExpanded(true);
-        };
+        const visibleIndex = React.useMemo(() => {
+            return toaster?.state.heights?.findIndex((h) => h.toastId === toast.id) ?? 0;
+        }, [toaster?.state.heights, toast.id]);
 
-        const onRegionMouseLeave = () => {
-            if (!isInteracting && !focusWithinRef.current) {
-                if (toasts.some((t) => t.removed === true)) return;
+        const duration = React.useMemo(() => {
+            return toast.duration || toaster?.props.timeout || 6000;
+        }, [toast.duration, toaster?.props.timeout]);
 
-                setIsExpanded(false);
-            }
-        };
+        const offset = React.useRef(0);
 
-        const onRegionDragEnd = () => {
-            setIsExpanded(false);
-        };
+        offset.current =
+            toaster?.state.heights?.reduce((prev, curr, reducerIndex) => {
+                if (reducerIndex >= visibleIndex) return prev;
 
-        const onRegionPointerDown = (event: React.PointerEvent) => {
-            if (event.target instanceof HTMLElement && event.target.dataset.dismissible === 'false') return;
+                return prev + curr.height;
+            }, 0) ?? 0;
 
-            setIsInteracting(true);
-        };
+        const disabled = toast.variant === 'loading';
 
-        const onRegionPointerUp = () => {
-            setIsInteracting(false);
-        };
+        React.useEffect(() => {
+            remainingTimeRef.current = duration;
+        }, [duration]);
 
-        const onRegionFocus = (event: React.FocusEvent<HTMLElement>) => {
-            const region = event.currentTarget;
-            const activeEl = document.activeElement as HTMLElement;
+        useMountEffect(() => {
+            setMounted(true);
+        });
 
-            if (activeEl && activeEl.matches(':focus-visible') && region.contains(activeEl)) {
-                focusWithinRef.current = true;
-                setIsExpanded(true);
-            }
-        };
+        React.useEffect(() => {
+            const toastNode = elementRef.current;
 
-        const onRegionBlur = (event: React.FocusEvent<HTMLElement>) => {
-            const region = event.currentTarget;
-            const related = event.relatedTarget as HTMLElement | null;
+            if (!toastNode || !toast.id) return;
 
-            if (related && region.contains(related)) {
-                return;
-            }
+            const height = toastNode.getBoundingClientRect().height;
 
-            focusWithinRef.current = false;
+            setInitialHeight(height);
 
-            if (isInteracting) return;
+            toaster?.setHeights((prev) => [{ toastId: toast.id!, height }, ...prev]);
 
-            if (toasts.some((t) => t.removed === true)) return;
+            return () => toaster?.setHeights((prev) => prev.filter((h) => h.toastId !== toast.id));
+        }, [toaster?.setHeights, toast.id]);
 
-            setIsExpanded(false);
-        };
+        React.useLayoutEffect(() => {
+            if (!mounted || !toast.id || !toaster?.setHeights) return;
 
-        const handleFocusManagement = (toastEl: HTMLElement | null) => {
-            if (!toastEl) return;
+            const toastNode = elementRef.current;
 
-            const activeEl = document.activeElement as HTMLElement;
+            if (!toastNode) return;
 
-            if (!toastEl.contains(activeEl)) {
-                return;
-            }
+            const originalHeight = toastNode.style.height;
 
-            const nextToastEl = toastEl.nextElementSibling as HTMLElement | null;
-            const prevToastEl = toastEl.previousElementSibling as HTMLElement | null;
+            toastNode.style.height = 'auto';
+            const newHeight = toastNode?.getBoundingClientRect().height;
+
+            toastNode.style.height = originalHeight;
+
+            setInitialHeight(newHeight);
+
+            toaster?.setHeights((prev) => {
+                const isAlreadyExists = prev.find((h) => h.toastId === toast.id);
+
+                if (!isAlreadyExists) {
+                    return [{ toastId: toast.id!, height: newHeight }, ...prev];
+                } else {
+                    return prev.map((h) => (h.toastId === toast.id ? { ...h, height: newHeight } : h));
+                }
+            });
+        }, [mounted, toast.title, toast.description, toast.id, toast.jsx, toast.action, toast.icon, toaster?.setHeights]);
+
+        const deleteToast = React.useCallback(() => {
+            toaster?.handleFocusManagement(elementRef.current);
+
+            setRemoved(true);
+            setOffsetBeforeRemove(offset.current);
+            toaster?.setHeights((prev) => prev.filter((h) => h.toastId !== toast.id));
 
             requestAnimationFrame(() => {
-                if (nextToastEl) nextToastEl.focus({ preventScroll: true });
-                else if (prevToastEl) prevToastEl.focus({ preventScroll: true });
+                const toastNode = elementRef.current;
+
+                if (!toastNode) return;
+
+                const computedStyle = getComputedStyle(toastNode);
+                const durationStr = computedStyle.transitionDuration;
+                const durationMs = parseFloat(durationStr) * (durationStr.includes('ms') ? 1 : 1000);
+
+                setTimeout(() => {
+                    ToastStore.remove(toast.id!);
+                }, durationMs ?? 10);
             });
+        }, [toast, toaster?.setHeights]);
+
+        React.useEffect(() => {
+            if (toast.removed) {
+                deleteToast();
+                toast.onDismiss?.(toast);
+            }
+        }, [toast.removed, deleteToast]);
+
+        const pauseTimer = React.useCallback(() => {
+            if (lastTimeoutStartTimeRef.current < timeoutStartTimeRef.current) {
+                const elapsedTime = new Date().getTime() - timeoutStartTimeRef.current;
+
+                remainingTimeRef.current = remainingTimeRef.current - elapsedTime;
+            }
+
+            lastTimeoutStartTimeRef.current = new Date().getTime();
+        }, []);
+
+        const startTimer = React.useCallback(() => {
+            if (remainingTimeRef.current === Infinity) return;
+
+            timeoutStartTimeRef.current = new Date().getTime();
+
+            timeoutRef.current = setTimeout(() => {
+                toast.onTimeout?.(toast);
+                deleteToast();
+            }, remainingTimeRef.current);
+        }, [toast, deleteToast]);
+
+        React.useEffect(() => {
+            if (toast.variant === 'loading' || toast.duration === Infinity) return;
+
+            if (toaster?.state.isExpanded || toaster?.state.isInteracting || !isDocumentVisible) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+
+            return () => {
+                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+            };
+        }, [toaster?.state.isExpanded, toaster?.state.isInteracting, toast, deleteToast, isDocumentVisible]);
+
+        const onDragEnd = () => {
+            setSwiping(false);
+            setSwipeDirection(null);
+            pointerStartPositionRef.current = null;
         };
 
-        React.useEffect(() => {
-            if (filteredToasts.length <= 1) {
-                setIsExpanded(false);
-            }
-        }, [filteredToasts]);
+        const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+            if (event.button !== 0) return;
 
-        React.useEffect(() => {
-            return () => {
-                ToastStore.clear(props.group);
+            if (disabled || !dismissible) return;
+
+            swipeStartTimeRef.current = new Date().getTime();
+            setOffsetBeforeRemove(offset.current);
+
+            (event.target as HTMLElement).setPointerCapture(event.pointerId);
+
+            setSwiping(true);
+            pointerStartPositionRef.current = { x: event.clientX, y: event.clientY };
+        };
+
+        const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+            if (!pointerStartPositionRef.current || !dismissible) return;
+
+            if ((window.getSelection()?.toString().length ?? 0) > 0) return;
+
+            const yDelta = event.clientY - pointerStartPositionRef.current.y;
+            const xDelta = event.clientX - pointerStartPositionRef.current.x;
+
+            const isRealSwipe = Math.abs(xDelta) > 1 || Math.abs(yDelta) > 1;
+
+            const position = (toaster?.props.position ?? 'bottom-right').split('-');
+            const side = position[0];
+            const align = position[1];
+
+            if (!swipeDirection && isRealSwipe) {
+                setSwipeDirection(Math.abs(xDelta) > Math.abs(yDelta) ? 'x' : 'y');
+            }
+
+            const swipeAmount = { x: 0, y: 0 };
+
+            const applyDampening = (delta: number) => {
+                const dampen = (delta: number) => {
+                    const factor = Math.abs(delta) / 20;
+
+                    return 1 / (1.5 + factor);
+                };
+
+                const dampenedDelta = delta * dampen(delta);
+
+                return Math.abs(dampenedDelta) < Math.abs(delta) ? dampenedDelta : delta;
             };
-        }, []);
+
+            if (swipeDirection === 'x') {
+                swipeAmount.x = (align === 'left' && xDelta < 0) || (align === 'right' && xDelta > 0) ? xDelta : applyDampening(xDelta);
+            } else if (swipeDirection === 'y') {
+                swipeAmount.y = (side === 'top' && yDelta < 0) || (side === 'bottom' && yDelta > 0) ? yDelta : applyDampening(yDelta);
+            }
+
+            if (Math.abs(swipeAmount.x) > 0 || Math.abs(swipeAmount.y) > 0) {
+                setIsSwiped(true);
+            }
+
+            (elementRef.current as HTMLElement).style.setProperty('--swipe-amount-x', `${swipeAmount.x}px`);
+            (elementRef.current as HTMLElement).style.setProperty('--swipe-amount-y', `${swipeAmount.y}px`);
+        };
+
+        const onPointerUp = () => {
+            if (swipeOut || !dismissible) return;
+
+            setSwiping(false);
+            pointerStartPositionRef.current = null;
+            const swipeAmountX = Number((elementRef.current as HTMLElement).style.getPropertyValue('--swipe-amount-x').replace('px', '') || 0);
+            const swipeAmountY = Number((elementRef.current as HTMLElement).style.getPropertyValue('--swipe-amount-y').replace('px', '') || 0);
+
+            const swipeAmount = swipeDirection === 'x' ? swipeAmountX : swipeAmountY;
+            const velocity = Math.abs(swipeAmount) / (new Date().getTime() - (swipeStartTimeRef.current ?? 0));
+
+            if (Math.abs(swipeAmount) >= SWIPE_THRESHOLD || velocity > VELOCITY_THRESHOLD) {
+                setOffsetBeforeRemove(offset.current);
+
+                if (swipeDirection === 'x') {
+                    setSwipeOutDirection(swipeAmountX > 0 ? 'right' : 'left');
+                } else {
+                    setSwipeOutDirection(swipeAmountY > 0 ? 'down' : 'up');
+                }
+
+                deleteToast();
+                toast.onDismiss?.(toast);
+                setSwipeOut(true);
+
+                return;
+            } else {
+                (elementRef.current as HTMLElement).style.setProperty('--swipe-amount-x', `0px`);
+                (elementRef.current as HTMLElement).style.setProperty('--swipe-amount-y', `0px`);
+            }
+
+            setIsSwiped(false);
+            setSwipeDirection(null);
+        };
+
+        const handleCloseOnClick = () => {
+            if (disabled || !dismissible) return;
+
+            deleteToast();
+            toast.onDismiss?.(toast);
+        };
+
+        const state = {
+            mounted,
+            swiping,
+            swipeOut,
+            swipeOutDirection,
+            swipeDirection,
+            initialHeight,
+            isSwiped,
+            offsetBeforeRemove,
+            removed
+        };
 
         return {
             state,
-            toasts: filteredToasts,
-            setHeights,
-            onRegionMouseEnter,
-            onRegionMouseMove,
-            onRegionMouseLeave,
-            onRegionDragEnd,
-            onRegionPointerDown,
-            onRegionPointerUp,
-            onRegionFocus,
-            onRegionBlur,
-            handleFocusManagement
+            offset: offset.current,
+            offsetBeforeRemove,
+            index,
+            visibleIndex,
+            isVisible: visibleIndex + 1 <= (toaster?.props.limit || 3),
+            isFront: index === 0,
+            toaster,
+            onPointerDown,
+            onPointerMove,
+            onPointerUp,
+            onDragEnd,
+            handleCloseOnClick
         };
     }
 });

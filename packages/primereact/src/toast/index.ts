@@ -7,8 +7,5 @@ export { defaultActionProps, ToastAction } from './action';
 export { defaultCloseProps, ToastClose } from './close';
 export { defaultDescriptionProps, ToastDescription } from './description';
 export { defaultIconProps, ToastIcon } from './icon';
-export { defaultItemProps, ToastItem } from './item';
-export { ToastPortal } from './portal';
-export { defaultRegionProps, ToastRegion } from './region';
 export { defaultRootProps, ToastRoot } from './root';
 export { defaultTitleProps, ToastTitle } from './title';

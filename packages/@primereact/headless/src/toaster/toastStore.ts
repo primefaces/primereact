@@ -1,4 +1,4 @@
-import type { ToastId, ToastPromiseType, ToastType } from '@primereact/types/shared/toast';
+import type { ToastId, ToastPromiseType, ToastType } from '@primereact/types/shared/toaster';
 import type * as React from 'react';
 
 type ToastStateAction = ToastType[] | ((prev: ToastType[]) => ToastType[]);

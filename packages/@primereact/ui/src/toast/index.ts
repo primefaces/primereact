@@ -6,18 +6,14 @@ export {
     defaultCloseProps,
     defaultDescriptionProps,
     defaultIconProps,
-    defaultItemProps,
-    defaultRegionProps,
     defaultRootProps,
     defaultTitleProps,
     ToastAction,
     ToastClose,
     ToastDescription,
     ToastIcon,
-    ToastItem,
     ToastProps,
     ToastProvider,
-    ToastRegion,
     ToastTitle,
     useToastContext
 } from 'primereact/toast';

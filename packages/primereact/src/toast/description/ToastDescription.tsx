@@ -2,7 +2,6 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { useToastItemContext } from '../item/ToastItem.context';
 import { useToastContext } from '../Toast.context';
 import { defaultDescriptionProps } from './ToastDescription.props';
 
@@ -10,22 +9,22 @@ export const ToastDescription = withComponent({
     name: 'Toast.Description',
     defaultProps: defaultDescriptionProps,
     setup() {
-        const toastItem = useToastItemContext();
         const toast = useToastContext();
 
-        return { toast, toastItem };
+        return { toast };
     },
     render(instance) {
-        const { props, toastItem, toast, ptmi } = instance;
+        const { props, toast, ptmi } = instance;
 
         const rootProps = mergeProps(
             {
-                className: toast?.cx('description')
+                className: toast?.cx('description'),
+                'data-variant': toast?.props.toast.variant
             },
             toast?.ptm('description'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children ?? toastItem?.props.toast.description} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children ?? toast?.props.toast.description} />;
     }
 });

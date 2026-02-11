@@ -2,14 +2,15 @@
 import { Plus } from '@primeicons/react/plus';
 import { Times } from '@primeicons/react/times';
 import { Upload } from '@primeicons/react/upload';
-import { toast } from '@primereact/headless/toast';
+import { toast } from '@primereact/headless/toaster';
 import { FileUploadRootInstance } from '@primereact/types/shared/fileupload';
-import { ToastRegionInstance, ToastType } from '@primereact/types/shared/toast';
+import { ToasterRegionInstance, ToastType } from '@primereact/types/shared/toaster';
 import { Button } from '@primereact/ui/button';
 import { FileUpload } from '@primereact/ui/fileupload';
 import { Message } from '@primereact/ui/message';
 import { ProgressBar } from '@primereact/ui/progressbar';
 import { Toast } from '@primereact/ui/toast';
+import { Toaster } from '@primereact/ui/toaster';
 
 export default function AdvancedDemo() {
     const onUpload = () => {
@@ -83,16 +84,18 @@ export default function AdvancedDemo() {
                 }}
             </FileUpload.Root>
 
-            <Toast.Root position="top-right" group="advanced-demo">
-                <Toast.Portal>
-                    <Toast.Region>
-                        {({ toast }: ToastRegionInstance) =>
-                            toast?.toasts.map((toast: ToastType) => (
-                                <Toast.Item key={toast.id} data={toast}>
-                                    <div className="flex items-start gap-2">
-                                        <div className="flex-1">
-                                            <Toast.Title className="mb-1 -mt-0.5" />
-                                            <Toast.Description />
+            <Toaster.Root position="top-right" group="advanced-demo">
+                <Toaster.Portal>
+                    <Toaster.Region>
+                        {({ toaster }: ToasterRegionInstance) =>
+                            toaster?.toasts.map((toast: ToastType) => (
+                                <Toast.Root key={toast.id} toast={toast}>
+                                    <div className="grid grid-cols-[auto_1fr] items-start gap-3">
+                                        <Toast.Icon className="[&>svg]:size-3.5 mt-1 " />
+                                        <div>
+                                            <Toast.Title />
+                                            <Toast.Description className="mt-1" />
+                                            <Toast.Action as={Button} size="small" className="mt-3" />
                                         </div>
                                     </div>
                                     <Toast.Close
@@ -103,14 +106,14 @@ export default function AdvancedDemo() {
                                         size="small"
                                         className={'absolute top-2 right-2'}
                                     >
-                                        <Times></Times>
+                                        <Times />
                                     </Toast.Close>
-                                </Toast.Item>
+                                </Toast.Root>
                             ))
                         }
-                    </Toast.Region>
-                </Toast.Portal>
-            </Toast.Root>
+                    </Toaster.Region>
+                </Toaster.Portal>
+            </Toaster.Root>
         </div>
     );
 }
