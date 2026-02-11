@@ -13,21 +13,25 @@ import { ColorPicker } from '@primereact/ui/colorpicker';
 ```
 
 ```tsx
-<ColorPicker>
-    <ColorPicker.Area />
-    <ColorPicker.Slider channel="hue" />
-    <ColorPicker.Input channel="hex" />
-    <ColorPicker.Swatch />
-    <ColorPicker.EyeDropper />
-
-    {/* depending on the style, add following components */}
-    <ColorPicker.AreaBackground />
-    <ColorPicker.AreaThumb />
-    <ColorPicker.SliderTrack />
-    <ColorPicker.SliderThumb />
-    <ColorPicker.SwatchBackground />
-    <ColorPicker.TransparencyGrid />
-</ColorPicker>
+<ColorPicker.Root>
+    <ColorPicker.Area>
+        <ColorPicker.AreaBackground />
+        <ColorPicker.AreaThumb />
+    </ColorPicker.Area>
+    <ColorPicker.Slider>
+        <ColorPicker.TransparencyGrid />
+        <ColorPicker.SliderTrack />
+        <ColorPicker.SliderThumb />
+    </ColorPicker.Slider>
+    <ColorPicker.Swatch>
+        <ColorPicker.TransparencyGrid />
+        <ColorPicker.SwatchBackground />
+    </ColorPicker.Swatch>
+    <ColorPicker.EyeDropper>
+        <EyeDropperIcon />
+    </ColorPicker.EyeDropper>
+    <ColorPicker.Input />
+</ColorPicker.Root>
 ```
 
 ## Examples
