@@ -27,7 +27,7 @@ export function isCssSupported(property: keyof CSSStyleDeclaration | string, val
 export function isCssSupported(condition: string): boolean;
 
 export function isCssSupported(input: keyof CSSStyleDeclaration | string, value?: string): boolean {
-    if (!CSS || !CSS.supports) {
+    if (typeof CSS === 'undefined' || !CSS.supports) {
         return false;
     }
 

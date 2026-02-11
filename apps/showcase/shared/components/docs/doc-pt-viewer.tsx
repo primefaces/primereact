@@ -83,7 +83,7 @@ export default function DocPtViewer({ components, className, name, __pathname__,
 
     if (!type || !componentName) return;
 
-    const Demo = Store[type]?.[componentName]?.[name].component;
+    const Demo = Store[type]?.[componentName]?.[name]?.component;
 
     if (!Demo) {
         return (
