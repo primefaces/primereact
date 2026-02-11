@@ -82,7 +82,6 @@ ${style}
 
 `;
 
-//TODO: rename for backdrop
 export const styles = createStyles<DialogRootInstance>({
     name: 'dialog',
     style: _style,

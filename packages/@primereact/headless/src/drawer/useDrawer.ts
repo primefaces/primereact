@@ -26,8 +26,14 @@ export const useDrawer = withHeadless({
         };
 
         useUnmountEffect(() => {
-            if (props.autoZIndex && maskRef.current) {
-                ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
+            if (props.autoZIndex) {
+                if (maskRef.current) {
+                    ZIndex.clear(maskRef.current?.elementRef.current as HTMLDivElement);
+                }
+
+                if (rootRef.current) {
+                    ZIndex.clear(rootRef.current?.elementRef.current as HTMLDivElement);
+                }
             }
         });
 
@@ -52,6 +58,10 @@ export const useDrawer = withHeadless({
             target.current = document.activeElement as HTMLElement;
             enableDocumentSettings();
             bindDocumentKeyDownListener();
+
+            if (props.autoZIndex && rootRef.current?.elementRef.current) {
+                ZIndex.set('modal', rootRef.current.elementRef.current, (props.baseZIndex as number) + ($primereact.config?.zIndex?.modal ?? 1100));
+            }
         };
 
         const onAfterEnter = () => {

@@ -26,9 +26,9 @@ export interface DrawerRootPassThrough {
      */
     root?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Used to pass attributes to the mask's DOM element.
+     * Used to pass attributes to the backdrop's DOM element.
      */
-    mask?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    backdrop?: DrawerRootPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the trigger's DOM element.
      */

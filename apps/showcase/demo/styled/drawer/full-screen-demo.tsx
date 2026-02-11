@@ -9,6 +9,7 @@ export default function FullScreenDemo() {
                 <Drawer.Trigger iconOnly>
                     <WindowMaximize />
                 </Drawer.Trigger>
+                <Drawer.Backdrop />
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Drawer</Drawer.Title>

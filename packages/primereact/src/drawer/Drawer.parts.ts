@@ -1,3 +1,4 @@
+export { DrawerBackdrop as Backdrop } from './backdrop';
 export { DrawerClose as Close } from './close';
 export { DrawerContent as Content } from './content';
 export { DrawerFooter as Footer } from './footer';

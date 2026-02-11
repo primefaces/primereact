@@ -47,6 +47,7 @@ export default function BasicDemo() {
                 <Drawer.Trigger iconOnly>
                     <Bars />
                 </Drawer.Trigger>
+                <Drawer.Backdrop />
                 <Drawer.Portal className="w-full md:w-80">
                     <Drawer.Header>
                         <Drawer.Title>Drawer Title</Drawer.Title>

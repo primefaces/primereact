@@ -1,8 +1,8 @@
 'use client';
-import { AngleDown } from '@primeicons/react/angle-down';
-import { AngleLeft } from '@primeicons/react/angle-left';
-import { AngleRight } from '@primeicons/react/angle-right';
-import { AngleUp } from '@primeicons/react/angle-up';
+import { ArrowDown } from '@primeicons/react/arrow-down';
+import { ArrowLeft } from '@primeicons/react/arrow-left';
+import { ArrowRight } from '@primeicons/react/arrow-right';
+import { ArrowUp } from '@primeicons/react/arrow-up';
 import { Times } from '@primeicons/react/times';
 import { DrawerRootChangeEvent } from '@primereact/types/shared/drawer';
 import { Button } from '@primereact/ui/button';
@@ -19,20 +19,21 @@ export default function PositionDemo() {
         <div>
             <div className="flex gap-2 justify-center">
                 <Button iconOnly onClick={() => setVisibleLeft(true)}>
-                    <AngleRight />
+                    <ArrowRight />
                 </Button>
                 <Button iconOnly onClick={() => setVisibleRight(true)}>
-                    <AngleLeft />
+                    <ArrowLeft />
                 </Button>
                 <Button iconOnly onClick={() => setVisibleTop(true)}>
-                    <AngleDown />
+                    <ArrowDown />
                 </Button>
                 <Button iconOnly onClick={() => setVisibleBottom(true)}>
-                    <AngleUp />
+                    <ArrowUp />
                 </Button>
             </div>
 
             <Drawer.Root open={visibleLeft} onOpenChange={(e: DrawerRootChangeEvent) => setVisibleLeft(e.value as boolean)}>
+                <Drawer.Backdrop />
                 <Drawer.Portal className="w-full md:w-80">
                     <Drawer.Header>
                         <Drawer.Title>Left Drawer</Drawer.Title>
@@ -50,6 +51,7 @@ export default function PositionDemo() {
             </Drawer.Root>
 
             <Drawer.Root position="right" open={visibleRight} onOpenChange={(e: DrawerRootChangeEvent) => setVisibleRight(e.value as boolean)}>
+                <Drawer.Backdrop />
                 <Drawer.Portal className="w-full md:w-80">
                     <Drawer.Header>
                         <Drawer.Title>Right Drawer</Drawer.Title>
@@ -72,6 +74,7 @@ export default function PositionDemo() {
                 onOpenChange={(e: DrawerRootChangeEvent) => setVisibleTop(e.value as boolean)}
                 style={{ height: 'auto' }}
             >
+                <Drawer.Backdrop />
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Top Drawer</Drawer.Title>
@@ -94,6 +97,7 @@ export default function PositionDemo() {
                 onOpenChange={(e: DrawerRootChangeEvent) => setVisibleBottom(e.value as boolean)}
                 style={{ height: 'auto' }}
             >
+                <Drawer.Backdrop />
                 <Drawer.Portal>
                     <Drawer.Header>
                         <Drawer.Title>Bottom Drawer</Drawer.Title>

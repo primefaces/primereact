@@ -14,9 +14,9 @@
  */
 export const DrawerClassNames = {
     /**
-     * Class name of the mask element
+     * Class name of the backdrop element
      */
-    mask: 'p-drawer-mask',
+    backdrop: 'p-drawer-backdrop',
     /**
      * Class name of the root element
      */

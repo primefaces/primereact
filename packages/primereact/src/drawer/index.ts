@@ -3,6 +3,7 @@ export * as Drawer from './Drawer.parts';
 export * as DrawerProps from './Drawer.props';
 
 // Named runtime exports to maximize tree-shaking
+export { defaultBackdropProps, DrawerBackdrop } from './backdrop';
 export { defaultCloseProps, DrawerClose } from './close';
 export { defaultContentProps, DrawerContent } from './content';
 export { defaultFooterProps, DrawerFooter } from './footer';

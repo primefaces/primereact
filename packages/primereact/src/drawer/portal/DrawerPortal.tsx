@@ -18,22 +18,6 @@ export const DrawerPortal = withComponent({
     render(instance) {
         const { drawer, props, ptmi, inProps } = instance;
 
-        const maskProps = mergeProps(
-            {
-                visible: drawer?.state.opened,
-                className: drawer?.cx('mask'),
-                style: drawer?.sx('mask'),
-                motionProps: {
-                    name: 'p-overlay-mask',
-                    appear: true,
-                    onEnter: drawer?.onMaskEnter
-                },
-                onMouseDown: drawer?.onMaskMouseDown,
-                onMouseUp: drawer?.onMaskMouseUp
-            },
-            drawer?.ptm('mask')
-        );
-
         const rootProps = mergeProps(
             {
                 id: drawer?.id,
@@ -63,10 +47,8 @@ export const DrawerPortal = withComponent({
         const portalProps = mergeProps(drawer?.ptm('portal'), ptmi('root'));
 
         const portalElement = (
-            <Backdrop {...maskProps} ref={drawer?.maskRef}>
-                <Backdrop {...rootProps} ref={drawer?.rootRef}>
-                    <Component instance={instance} attrs={portalProps} children={props.children} />
-                </Backdrop>
+            <Backdrop {...rootProps} ref={drawer?.rootRef}>
+                <Component instance={instance} attrs={portalProps} children={props.children} />
             </Backdrop>
         );
 

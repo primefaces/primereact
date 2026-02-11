@@ -12,7 +12,8 @@ export default function ResponsiveDemo() {
         <div className="flex justify-center">
             <Drawer.Root>
                 <Drawer.Trigger>Log in</Drawer.Trigger>
-                <Drawer.Portal className="w-80 sm:w-96 md:w-md lg:w-120">
+                <Drawer.Backdrop />
+                <Drawer.Portal className="w-full sm:w-96 md:w-md lg:w-120">
                     <Drawer.Header>
                         <Drawer.Title>Responsive Drawer</Drawer.Title>
                         <Drawer.Close>
