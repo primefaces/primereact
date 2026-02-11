@@ -1,4 +1,5 @@
 'use client';
+import { Times } from '@primeicons/react/times';
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps, omit, resolve } from '@primeuix/utils';
 import { Chip } from 'primereact/chip';
@@ -33,9 +34,9 @@ export const InputTagsItem = withComponent({
             omit(restProps, 'index'),
             {
                 className: inputtags?.cx('item', { focused: props.index === inputtags?.state.focusedItemIndex }),
-                'data-p-index': props.index,
                 role: 'option',
                 'aria-selected': props.index === inputtags?.state.focusedItemIndex,
+                'data-p-index': props.index,
                 onKeyDown: inputtags?.onKeyDown
             },
             inputtags?.ptm('item'),
@@ -49,7 +50,9 @@ export const InputTagsItem = withComponent({
                 ) : (
                     <>
                         <Chip.Label>{inputtags?.state.value[props.index]}</Chip.Label>
-                        <Chip.RemoveIcon ref={removeIconRef} onClick={() => inputtags?.onItemRemoveClick(props.index)} />
+                        <Chip.Icon ref={removeIconRef} className={inputtags?.cx('removeIcon')} onClick={() => inputtags?.onItemRemoveClick(props.index)}>
+                            <Times />
+                        </Chip.Icon>
                     </>
                 )}
             </Component>
