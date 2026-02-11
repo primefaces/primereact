@@ -28,7 +28,7 @@ const items = [
     {
         name: 'index',
         type: 'registry:style',
-        dependencies: ['primereact@11.0.0-alpha.1', '@primeuix/utils', '@primereact/types'],
+        dependencies: ['primereact@11.0.0-alpha.10', '@primeuix/utils', '@primereact/types'],
         registryDependencies: [REGISTRY_BASE('utils')],
         files: [],
         css: {

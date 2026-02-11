@@ -16,6 +16,7 @@ export const PaginatorPage = withComponent({
     render(instance) {
         const { id, props, ptmi, paginator, $primereact } = instance;
 
+        // @ts-expect-error - locale is not typed yet
         const ariaLabel = $primereact.config?.locale?.aria ? $primereact.config.locale.aria.pageLabel.replace(/{page}/g, props.value) : undefined;
         const disabled = paginator?.props.disabled || props.disabled;
         const rootProps = mergeProps(

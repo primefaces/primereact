@@ -33,6 +33,7 @@ export const TooltipPortal = withComponent({
 
         return (
             <Portal {...rootProps}>
+                {/* @ts-expect-error - remove */}
                 <Motion {...motionProps} ref={tooltip?.placer?.containerRef} children={props.children} />
             </Portal>
         );

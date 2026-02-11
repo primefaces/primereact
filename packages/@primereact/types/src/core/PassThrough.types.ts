@@ -1,5 +1,5 @@
 import type { AvatarRootPassThrough } from '@primereact/types/shared/avatar';
-import type { BadgeRootPassThrough } from '@primereact/types/shared/badge';
+import type { BadgePassThrough } from '@primereact/types/shared/badge';
 import type { ButtonPassThrough } from '@primereact/types/shared/button';
 import type { CheckboxRootPassThrough } from '@primereact/types/shared/checkbox';
 import type { ChipRootPassThrough } from '@primereact/types/shared/chip';
@@ -12,7 +12,7 @@ import type { ProgressSpinnerPassThrough } from '@primereact/types/shared/progre
 import type { RadioButtonRootPassThrough } from '@primereact/types/shared/radiobutton';
 import type { SkeletonPassThrough } from '@primereact/types/shared/skeleton';
 import type { StyleClassPassThrough } from '@primereact/types/shared/styleclass';
-import type { TagRootPassThrough } from '@primereact/types/shared/tag';
+import type { TagPassThrough } from '@primereact/types/shared/tag';
 
 /**
  * Defines the pass-through options.
@@ -51,7 +51,7 @@ export interface PassThroughProps extends PassThroughOptions {
      */
     value?: {
         avatar?: AvatarRootPassThrough;
-        badge?: BadgeRootPassThrough;
+        badge?: BadgePassThrough;
         button?: ButtonPassThrough;
         checkbox?: CheckboxRootPassThrough;
         chip?: ChipRootPassThrough;
@@ -64,6 +64,6 @@ export interface PassThroughProps extends PassThroughOptions {
         radiobutton?: RadioButtonRootPassThrough;
         skeleton?: SkeletonPassThrough;
         styleclass?: StyleClassPassThrough;
-        tag?: TagRootPassThrough;
+        tag?: TagPassThrough;
     };
 }

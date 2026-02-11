@@ -49,9 +49,9 @@ export interface useRadioButtonGroupProps {
  */
 export interface useRadioButtonGroupState {
     /**
-     * The checked state of the useRadioButtonGroup.
+     * The value state of the useRadioButtonGroup.
      */
-    checked: boolean | undefined;
+    value: unknown | undefined;
 }
 
 /**

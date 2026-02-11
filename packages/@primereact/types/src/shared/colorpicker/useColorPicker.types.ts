@@ -156,7 +156,7 @@ export interface useColorPickerExposes {
         min: number;
         max: number;
         step: number;
-        disabled: boolean;
+        disabled?: boolean | undefined;
         onValueChange: (event: useSliderChangeEvent) => void;
         onValueChangeEnd: (event: useSliderChangeEvent) => void;
     };

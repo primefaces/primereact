@@ -1,5 +1,5 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { FloatLabelInstance } from '@primereact/types/shared/label';
+import type { FloatLabelInstance } from '@primereact/types/shared/floatlabel';
 import { style } from '@primeuix/styles/floatlabel';
 
 export const styles = createStyles<FloatLabelInstance>({

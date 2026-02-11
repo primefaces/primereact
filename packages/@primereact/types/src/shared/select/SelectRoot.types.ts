@@ -147,6 +147,10 @@ export interface SelectRootProps extends BaseComponentProps<SelectRootInstance, 
      */
     variant?: 'outlined' | 'filled' | undefined;
     /**
+     *
+     */
+    filterValue?: string | undefined;
+    /**
      * Spans 100% width of the container when enabled.
      */
     fluid?: boolean | undefined;

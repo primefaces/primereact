@@ -1,4 +1,4 @@
-import { Select } from '@primereact/ui/select';
+/*import { Select } from '@primereact/ui/select';
 import * as React from 'react';
 import { ChevronDown } from '@primeicons/react/chevron-down';
 
@@ -26,3 +26,4 @@ export default function SelectPTDemo() {
         </Select.Root>
     );
 }
+*/

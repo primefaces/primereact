@@ -197,11 +197,11 @@ export const menu = {
                 {
                     name: 'Styled Mode',
                     href: '/docs/styled/theming/styled'
-                },
-                {
+                }
+                /*{
                     name: 'Unstyled Mode',
                     href: '/docs/styled/theming/unstyled'
-                }
+                }*/
             ]
         },
         {
@@ -544,14 +544,14 @@ export const menu = {
             name: 'Installation',
             icon: 'pi pi-cloud-download',
             children: [
-                {
+                /*{
                     name: 'Vite',
                     href: '/docs/tailwind/installation/vite'
                 },
                 {
                     name: 'Next.js',
                     href: '/docs/tailwind/installation/nextjs'
-                }
+                }*/
             ]
         },
         {

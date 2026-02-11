@@ -152,7 +152,7 @@ export const useSpeedDial = withHeadless({
             return styleMapper ? styleMapper(x, y) : {};
         };
 
-        const getItemStyle = (index: number) => ({
+        const getItemStyle = (index: number): React.CSSProperties => ({
             transitionDelay: `${calculateTransitionDelay(index)}ms`,
             ...calculatePointStyle(index)
         });

@@ -1,9 +1,9 @@
 import { createStyles } from '@primereact/styles/utils';
-import type { ToggleButtonGroupInstance } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonGroupInstance } from '@primereact/types/shared/togglebuttongroup';
 import { style } from '@primeuix/styles/selectbutton';
 
 export const styles = createStyles<ToggleButtonGroupInstance>({
-    name: 'selectbutton',
+    name: 'togglebuttongroup',
     style,
     classes: {
         root: ({ props }) => [

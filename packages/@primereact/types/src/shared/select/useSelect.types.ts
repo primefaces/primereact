@@ -190,13 +190,9 @@ export interface useSelectState {
      */
     value: unknown | undefined;
     /**
-     * The current filter text value.
-     */
-    filterValue: string;
-    /**
      * Whether the overlay is open.
      */
-    opened: boolean;
+    opened: boolean | undefined;
     /**
      * Whether the trigger is focused.
      */

@@ -490,7 +490,7 @@ export interface useDatePickerState {
     /**
      * Whether the overlay is open.
      */
-    opened: boolean;
+    opened: boolean | undefined;
     /**
      * Current view state information.
      */

@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { TimesIcon } from '@primereact/icons';
-import type { BadgeRootProps } from '@primereact/types/shared/badge';
+import type { BadgeProps } from '@primereact/types/shared/badge';
 import { mergeProps, resolve } from '@primeuix/utils';
 import { Badge } from 'primereact/badge';
 import { Button } from 'primereact/button';
@@ -10,7 +10,7 @@ import { useFileUploadContext } from '../FileUpload.context';
 import { defaultListProps } from './FileUploadList.props';
 
 interface FileUploadBadgeConfig {
-    severity: BadgeRootProps['severity'];
+    severity: BadgeProps['severity'];
     label: string;
 }
 

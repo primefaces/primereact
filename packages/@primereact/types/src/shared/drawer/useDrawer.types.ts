@@ -37,6 +37,11 @@ export interface useDrawerProps {
      */
     modal?: boolean | undefined;
     /**
+     * Whether to block scrolling when the drawer is open.
+     * @default false
+     */
+    blockScroll?: boolean | undefined;
+    /**
      * Whether clicking outside closes the drawer.
      * @default true
      */
