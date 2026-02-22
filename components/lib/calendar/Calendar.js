@@ -127,7 +127,7 @@ export const Calendar = React.memo(
         };
 
         const onInputKeyDown = (event) => {
-            // Allow only numeric, date/time separator characters, and control keys
+            // Should Intercept letters and other invalid characters before they're inserted.
             const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'NumpadEnter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'];
             const allowedCharsRegex = /^[0-9\/\-\.\s:,]$/;
 
