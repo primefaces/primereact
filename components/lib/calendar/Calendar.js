@@ -127,6 +127,16 @@ export const Calendar = React.memo(
         };
 
         const onInputKeyDown = (event) => {
+            // Allow only numeric, date/time separator characters, and control keys
+            const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'NumpadEnter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'];
+            const allowedCharsRegex = /^[0-9\/\-\.\s:,]$/;
+
+            if (!allowedKeys.includes(event.key) && !allowedCharsRegex.test(event.key) && !event.ctrlKey && !event.metaKey) {
+                event.preventDefault();
+
+                return;
+            }
+
             switch (event.code) {
                 case 'ArrowDown': {
                     if (!overlayVisibleState) {
