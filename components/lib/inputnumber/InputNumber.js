@@ -689,8 +689,15 @@ export const InputNumber = React.memo(
         };
 
         const isFloat = (val) => {
-            let formatter = new Intl.NumberFormat(_locale, getOptions());
-            let parseVal = parseValue(formatter.format(val));
+            let formattedVal = val;
+
+            if (typeof formattedVal !== 'string') {
+                let formatter = new Intl.NumberFormat(_locale, getOptions());
+
+                formattedVal = formatter.format(val);
+            }
+
+            let parseVal = parseValue(formattedVal);
 
             if (parseVal === null) {
                 return false;
