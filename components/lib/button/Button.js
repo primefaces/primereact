@@ -107,9 +107,9 @@ export const Button = React.memo(
         };
         const size = sizeMapping[props.size];
 
-        const icon = createIcon();
-        const label = createLabel();
-        const badge = createBadge();
+        const icon = React.useMemo(() => createIcon(), [props.icon, props.loading, props.iconPos, props.label, props.loadingIcon]);
+        const label = React.useMemo(() => createLabel(), [props.label, props.children]);
+        const badge = React.useMemo(() => createBadge(), [props.badge, props.badgeClassName, props.unstyled]);
         const defaultAriaLabel = props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label'];
 
         const rootProps = mergeProps(
