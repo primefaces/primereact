@@ -463,8 +463,14 @@ export const Tooltip = React.memo(
                 const position = getPosition(currentTargetRef.current);
                 const classname = getTargetOption(currentTargetRef.current, 'classname');
 
-                setPositionState(position);
-                setClassNameState(classname);
+                if (position !== positionState) {
+                    setPositionState(position);
+                }
+
+                if (classname !== classNameState) {
+                    setClassNameState(classname);
+                }
+
                 updateTooltipState(position);
 
                 bindWindowResizeListener();
