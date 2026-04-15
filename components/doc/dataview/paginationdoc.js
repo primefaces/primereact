@@ -152,7 +152,7 @@ export default function PaginationDemo() {
 }
         `,
         typescript: `
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
@@ -196,7 +196,7 @@ export default function PaginationDemo() {
         }
     };
 
-    const itemTemplate = (product, index) => {
+    const itemTemplate = (product: Product, index: number) => {
         return (
             <div className="col-12" key={product.id}>
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
@@ -223,7 +223,7 @@ export default function PaginationDemo() {
         );
     };
 
-    const listTemplate = (items: Product) => {
+    const listTemplate = (items: Product[]) => {
         if (!items || items.length === 0) return null;
 
         let list = items.map((product, index) => {
