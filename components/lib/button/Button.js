@@ -60,16 +60,7 @@ export const Button = React.memo(
             const iconValue = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
 
             return IconUtils.getJSXIcon(iconValue, { ...iconsProps }, { props });
-        }, [
-            props.icon,
-            props.loading,
-            props.iconPos,
-            props.loadingIcon,
-            props.label,
-            mergeProps,
-            ptm,
-            cx
-        ]);
+        }, [props.icon, props.loading, props.iconPos, props.loadingIcon, props.label, mergeProps, ptm, cx]);
 
         const label = React.useMemo(() => {
             const labelProps = mergeProps(
@@ -83,16 +74,8 @@ export const Button = React.memo(
                 return <span {...labelProps}>{props.label}</span>;
             }
 
-            return !props.children && !props.label && (
-                <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />
-            );
-        }, [
-            props.label,
-            props.children,
-            mergeProps,
-            ptm,
-            cx
-        ]);
+            return !props.children && !props.label && <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />;
+        }, [props.label, props.children, mergeProps, ptm, cx]);
 
         const badge = React.useMemo(() => {
             if (props.badge) {
@@ -110,14 +93,7 @@ export const Button = React.memo(
             }
 
             return null;
-        }, [
-            props.badge,
-            props.badgeClassName,
-            props.unstyled,
-            mergeProps,
-            ptm,
-            metaData
-        ]);
+        }, [props.badge, props.badgeClassName, props.unstyled, mergeProps, ptm, metaData]);
 
         // ✅ AFTER hooks (important)
         if (props.visible === false) {
@@ -134,9 +110,7 @@ export const Button = React.memo(
 
         const size = sizeMapping[props.size];
 
-        const defaultAriaLabel = props.label
-            ? props.label + (props.badge ? ' ' + props.badge : '')
-            : props['aria-label'];
+        const defaultAriaLabel = props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label'];
 
         const rootProps = mergeProps(
             {
@@ -159,14 +133,7 @@ export const Button = React.memo(
                     {badge}
                     <Ripple />
                 </button>
-                {hasTooltip && (
-                    <Tooltip
-                        target={elementRef}
-                        content={props.tooltip}
-                        pt={ptm('tooltip')}
-                        {...props.tooltipOptions}
-                    />
-                )}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
