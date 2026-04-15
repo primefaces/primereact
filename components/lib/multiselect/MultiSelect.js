@@ -32,6 +32,7 @@ export const MultiSelect = React.memo(
         const labelContainerRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const labelRef = React.useRef(null);
+        const mousedownInsideOverlay = React.useRef(false);
         const hasFilter = filterState && filterState.trim().length > 0;
         const empty = ObjectUtils.isEmpty(props.value);
         const equalityKey = props.optionValue ? null : props.dataKey;
@@ -46,15 +47,38 @@ export const MultiSelect = React.memo(
         const { ptm, cx, sx, isUnstyled } = MultiSelectBase.setMetaData(metaData);
 
         useHandleStyle(MultiSelectBase.css.styles, isUnstyled, { name: 'multiselect' });
+        const onOverlayMouseDown = React.useCallback((event) => {
+            mousedownInsideOverlay.current =
+                (overlayRef.current && overlayRef.current.contains(event.target)) ||
+                (elementRef.current && elementRef.current.contains(event.target));
+        }, []);
+
+        React.useEffect(() => {
+            if (overlayVisibleState) {
+                document.addEventListener('mousedown', onOverlayMouseDown);
+            } else {
+                document.removeEventListener('mousedown', onOverlayMouseDown);
+                mousedownInsideOverlay.current = false;
+            }
+
+            return () => {
+                document.removeEventListener('mousedown', onOverlayMouseDown);
+            };
+        }, [overlayVisibleState, onOverlayMouseDown]);
+
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
                     if (type === 'outside') {
-                        if (!isClearClicked(event) && !isSelectAllClicked(event)) {
+                        // Ignore clicks that are the tail end of a drag that started inside
+                        // the overlay (e.g. text-selection in the filter input).
+                        if (!mousedownInsideOverlay.current && !isClearClicked(event) && !isSelectAllClicked(event)) {
                             hide();
                         }
+
+                        mousedownInsideOverlay.current = false;
                     } else if (context.hideOverlaysOnDocumentScrolling) {
                         hide();
                     } else if (!DomHandler.isDocument(event.target)) {
