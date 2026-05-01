@@ -105,7 +105,7 @@ export const ConfirmDialog = React.memo(
         };
 
         const confirm = (updatedProps) => {
-            if (updatedProps.tagKey === props.tagKey) {
+            if (updatedProps.tagKey === props.tagKey && (updatedProps.group === undefined || updatedProps.group === props.group)) {
                 const isVisibleChanged = visibleState !== updatedProps.visible;
                 const targetChanged = getPropValue('target') !== updatedProps.target;
 
