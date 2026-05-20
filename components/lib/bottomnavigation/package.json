@@ -1,0 +1,7 @@
+{
+    "main": "./bottomnavigation.cjs.js",
+    "module": "./bottomnavigation.esm.js",
+    "unpkg": "./bottomnavigation.min.js",
+    "types": "./bottomnavigation.d.ts",
+    "sideEffects": false
+}

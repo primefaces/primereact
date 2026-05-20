@@ -12,6 +12,7 @@ import { AvatarPassThroughOptions } from '../avatar/avatar';
 import { AvatarGroupPassThroughOptions } from '../avatargroup/avatargroup';
 import { BadgePassThroughOptions } from '../badge/badge';
 import { BlockUIPassThroughOptions } from '../blockui/blockui';
+import { BottomNavigationPassThroughOptions } from '../bottomnavigation/bottomnavigation';
 import { BreadCrumbPassThroughOptions } from '../breadcrumb/breadcrumb';
 import { ButtonPassThroughOptions } from '../button/button';
 import { CalendarPassThroughOptions } from '../calendar/calendar';
@@ -321,6 +322,10 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for BlockUI.
      */
     blockui?: BlockUIPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for BottomNavigation.
+     */
+    bottomnavigation?: BottomNavigationPassThroughOptions;
     /**
      * Custom passthrough(pt) options for Breadcrumb.
      */
