@@ -3,4 +3,13 @@
         width: 1250px;
         box-shadow: var(--home-card-shadow);
     }
+
+    .p-checkbox.p-highlight .p-checkbox-box {
+        border-color: var(--primary-color, #06b6d4) !important;
+        background: var(--primary-color, #06b6d4) !important;
+        
+        .p-checkbox-icon {
+            color: var(--primary-color-text, #ffffff) !important;
+        }
+    }
 }
