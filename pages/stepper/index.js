@@ -6,6 +6,7 @@ import { ImportDoc } from '@/components/doc/stepper/importdoc';
 import { LinearDoc } from '@/components/doc/stepper/lineardoc';
 import { Wireframe } from '@/components/doc/stepper/pt/wireframe';
 import { StyledDoc } from '@/components/doc/stepper/theming/styleddoc';
+import { UnstyledDoc } from '@/components/doc/stepper/theming/unstyleddoc';
 import { TailwindDoc } from '@/components/doc/stepper/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/stepper/verticaldoc';
 import { HeaderDoc } from '@/components/doc/stepper/headerdoc';
@@ -70,14 +71,12 @@ const StepperDemo = () => {
         {
             id: 'unstyled',
             label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
+            component: UnstyledDoc
+        },
+        {
+            id: 'tailwind',
+            label: 'Tailwind',
+            component: TailwindDoc
         }
     ];
 
