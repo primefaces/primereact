@@ -6,6 +6,7 @@ export * from './avatar/Avatar';
 export * from './avatargroup/AvatarGroup';
 export * from './badge/Badge';
 export * from './blockui/BlockUI';
+export * from './bottomnavigation/BottomNavigation';
 export * from './breadcrumb/BreadCrumb';
 export * from './button/Button';
 export * from './calendar/Calendar';

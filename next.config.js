@@ -1,3 +1,9 @@
+// Polyfill Buffer.SlowBuffer for Node v24+ compatibility with Next.js 12 compiled jsonwebtoken
+const bufferModule = require('buffer');
+if (typeof bufferModule.SlowBuffer === 'undefined') {
+    bufferModule.SlowBuffer = class SlowBuffer extends bufferModule.Buffer {};
+}
+
 module.exports = {
     reactStrictMode: process.env.NODE_ENV === 'production' ? false : true,
     trailingSlash: true,

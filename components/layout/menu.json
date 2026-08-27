@@ -308,6 +308,10 @@
                     "name": "Menu",
                     "children": [
                         {
+                            "name": "Bottom Navigation Menu",
+                            "to": "/bottomnavigationmenu"
+                        },
+                        {
                             "name": "Breadcrumb",
                             "to": "/breadcrumb"
                         },

@@ -1926,6 +1926,52 @@ const Tailwind = {
             className: classNames('flex flex-col items-center justify-center relative overflow-hidden cursor-default', 'w-16 h-16')
         }
     },
+    bottomnavigation: {
+        root: ({ props }) => ({
+            className: classNames('relative flex overflow-visible', 'bg-white dark:bg-gray-900 border border-gray-300 dark:border-blue-900/40 rounded-2xl shadow-sm', {
+                'p-bottomnavigation-active-raised': props.activeItemDisplay === 'raised',
+                'p-bottomnavigation-active-highlight': props.activeItemDisplay === 'highlight'
+            })
+        }),
+        menu: {
+            className: classNames('flex items-center justify-around flex-nowrap w-full m-0 p-2 list-none outline-none')
+        },
+        menuitem: {
+            className: classNames('relative flex flex-1 justify-center min-w-0')
+        },
+        action: ({ context, props }) => ({
+            className: classNames(
+                'cursor-pointer select-none inline-flex flex-col items-center justify-center relative no-underline overflow-visible min-w-0 transition-all duration-200',
+                'w-14 h-12 rounded-xl text-gray-500 dark:text-white/70',
+                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
+                {
+                    'text-blue-500 dark:text-blue-300': context.active,
+                    'hover:text-gray-700 dark:hover:text-white/90': !context.active,
+                    '-translate-y-3 bg-blue-500 text-white shadow-md hover:text-white dark:bg-blue-400 dark:text-gray-900': context.active && props.activeItemDisplay === 'raised',
+                    'bg-blue-50 text-blue-600 dark:bg-blue-300/20 dark:text-blue-300': context.active && props.activeItemDisplay === 'highlight'
+                }
+            )
+        }),
+        icon: ({ context, props }) => ({
+            className: classNames({
+                'mb-1': props.showLabels,
+                'text-white dark:text-gray-900': context.active && props.activeItemDisplay === 'raised'
+            })
+        }),
+        label: ({ context, props }) => ({
+            className: classNames('text-xs leading-none truncate max-w-full', {
+                'font-semibold': context.active,
+                'text-white dark:text-gray-900': context.active && props.activeItemDisplay === 'raised'
+            })
+        }),
+        indicator: ({ context, props }) => ({
+            className: classNames('absolute hidden bg-blue-500 dark:bg-blue-300', {
+                block: context.active && props.indicator !== 'none',
+                'w-1 h-1 rounded-full -bottom-1': props.indicator === 'dot',
+                'h-0.5 rounded-full left-2 right-2 top-0': props.indicator === 'bar'
+            })
+        })
+    },
     menu: {
         root: 'py-1 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border border-gray-300 dark:border-blue-900/40 rounded-md w-48',
         menu: {
