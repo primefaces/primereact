@@ -1,5 +1,15 @@
 # Changelog
 
+## [10.9.9](https://github.com/primefaces/primereact/tree/10.9.9) (2026-08-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.9.8...10.9.9)
+
+**Security:**
+
+- ObjectUtils: Prototype pollution in `mutateFieldData` ([CVE-2026-15538](https://nvd.nist.gov/vuln/detail/CVE-2026-15538), [GHSA-vg36-rrrg-4wqv](https://github.com/advisories/GHSA-vg36-rrrg-4wqv)) [#8553](https://github.com/primefaces/primereact/issues/8553)
+
+Field paths containing `__proto__`, `constructor` or `prototype` are now rejected at every level of the path. Reported by [@Dremig](https://github.com/Dremig).
+
 ## [10.9.8](https://github.com/primefaces/primereact/tree/10.9.8) (2026-05-14)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.9.7...10.9.8)
