@@ -1,3 +1,5 @@
+const UNSAFE_FIELD_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 export default class ObjectUtils {
     static equals(obj1, obj2, field) {
         if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object') {
@@ -528,7 +530,7 @@ export default class ObjectUtils {
      * @param {any} value the value to have replaced in the field
      */
     static mutateFieldData(data, field, value) {
-        if (typeof data !== 'object' || typeof field !== 'string') {
+        if (data === null || typeof data !== 'object' || typeof field !== 'string') {
             // short circuit if there is nothing to resolve
             return;
         }
@@ -537,17 +539,27 @@ export default class ObjectUtils {
         let obj = data;
 
         for (let i = 0, len = fields.length; i < len; ++i) {
+            const key = fields[i];
+
+            if (!key || UNSAFE_FIELD_KEYS.has(key)) {
+                return;
+            }
+
             // Check if we are on the last field
             if (i + 1 - len === 0) {
-                obj[fields[i]] = value;
+                Object.defineProperty(obj, key, { value, writable: true, enumerable: true, configurable: true });
                 break;
             }
 
-            if (!obj[fields[i]]) {
-                obj[fields[i]] = {};
+            if (!Object.prototype.hasOwnProperty.call(obj, key) || !obj[key]) {
+                obj[key] = {};
             }
 
-            obj = obj[fields[i]];
+            obj = obj[key];
+
+            if (obj === null || typeof obj !== 'object') {
+                return;
+            }
         }
     }
 
