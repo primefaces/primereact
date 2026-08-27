@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cannot Replicate
-        uses: actions/stale@v9
+        uses: actions/stale@v11
         with:
           days-before-stale: 20
           days-before-close: 0
@@ -29,7 +29,7 @@ jobs:
           days-before-pr-close: -1
 
       - name: Needs Reproducer
-        uses: actions/stale@v9
+        uses: actions/stale@v11
         with:
           days-before-stale: 20
           days-before-close: 0
@@ -42,7 +42,7 @@ jobs:
           days-before-pr-close: -1
 
       - name: Duplicate
-        uses: actions/stale@v9
+        uses: actions/stale@v11
         with:
           days-before-stale: 20
           days-before-close: 0
