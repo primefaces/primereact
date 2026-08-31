@@ -1194,6 +1194,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             <TreeTableBody
                 hostName="TreeTable"
                 checkboxIcon={props.checkboxIcon}
+                checkboxPartialIcon={props.checkboxPartialIcon}
                 columns={columns}
                 contextMenuSelectionKey={props.contextMenuSelectionKey}
                 emptyMessage={props.emptyMessage}

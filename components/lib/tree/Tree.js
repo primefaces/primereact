@@ -423,6 +423,7 @@ export const Tree = React.memo(
                     last={last}
                     path={String(index)}
                     checkboxIcon={props.checkboxIcon}
+                    checkboxPartialIcon={props.checkboxPartialIcon}
                     collapseIcon={props.collapseIcon}
                     contextMenuSelectionKey={props.contextMenuSelectionKey}
                     cx={cx}

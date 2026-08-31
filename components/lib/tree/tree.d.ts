@@ -82,6 +82,10 @@ export interface TreePassThroughOptions {
      */
     checkboxIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the checkbox partial icon's DOM element.
+     */
+    checkboxPartialIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the node icon's DOM element.
      */
     nodeIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
@@ -512,6 +516,10 @@ export interface TreeProps {
      * Icon to display in the checkbox.
      */
     checkboxIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon to display for partially selected checkbox.
+     */
+    checkboxPartialIcon?: IconType<TreeProps> | undefined;
     /**
      * Icon of an expanded tab.
      */
