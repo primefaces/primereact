@@ -46,53 +46,55 @@ const styles = `
     .p-autocomplete {
         display: inline-flex;
         position: relative;
+        min-width: 0;
+        max-width: 100%;
     }
-    
+
     .p-autocomplete-loader {
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
     }
-    
+
     .p-autocomplete-dd .p-autocomplete-input {
         flex: 1 1 auto;
         width: 1%;
     }
-    
+
     .p-autocomplete-dd .p-autocomplete-input,
     .p-autocomplete-dd .p-autocomplete-multiple-container {
          border-top-right-radius: 0;
          border-bottom-right-radius: 0;
      }
-    
+
     .p-autocomplete-dd .p-autocomplete-dropdown {
          border-top-left-radius: 0;
          border-bottom-left-radius: 0px;
     }
-    
+
     .p-autocomplete .p-autocomplete-panel {
         min-width: 100%;
     }
-    
+
     .p-autocomplete-panel {
         position: absolute;
         top: 0;
         left: 0;
     }
-    
+
     .p-autocomplete-items {
         margin: 0;
         padding: 0;
         list-style-type: none;
     }
-    
+
     .p-autocomplete-item {
         cursor: pointer;
         white-space: nowrap;
         position: relative;
         overflow: hidden;
     }
-    
+
     .p-autocomplete-multiple-container {
         margin: 0;
         padding: 0;
@@ -102,24 +104,36 @@ const styles = `
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+        min-width: 0;
+        overflow: hidden;
     }
-    
+
     .p-autocomplete-token {
         cursor: default;
         display: inline-flex;
         align-items: center;
         flex: 0 0 auto;
+        max-width: 100%;
+        min-width: 0;
     }
-    
+
+    .p-autocomplete-token-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+    }
+
     .p-autocomplete-token-icon {
         cursor: pointer;
+        flex-shrink: 0
     }
-    
+
     .p-autocomplete-input-token {
         flex: 1 1 auto;
         display: inline-flex;
     }
-    
+
     .p-autocomplete-input-token input {
         border: 0 none;
         outline: 0 none;
@@ -130,18 +144,18 @@ const styles = `
         border-radius: 0;
         width: 100%;
     }
-    
+
     .p-fluid .p-autocomplete {
         display: flex;
     }
-    
+
     .p-fluid .p-autocomplete-dd .p-autocomplete-input {
         width: 1%;
     }
-    
+
     .p-autocomplete-items-wrapper {
         overflow: auto;
-    } 
+    }
 }
 `;
 
