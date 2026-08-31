@@ -1349,6 +1349,10 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     multiSortMeta?: DataTableSortMeta[] | null | undefined;
     /**
+     * Defines whether a range selection can cover multiple pages.
+     */
+    multiPageRangeSelection?: boolean;
+    /**
      * Number of page links to display.
      * @defaultValue 5
      */
