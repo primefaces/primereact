@@ -3411,7 +3411,6 @@ export const Calendar = React.memo(
         const createTitleYearElement = (metaYear) => {
             const viewDate = getViewDate();
             const viewYear = viewDate.getFullYear();
-            const displayYear = props.numberOfMonths > 1 || props.yearNavigator ? metaYear : currentYear;
 
             if (props.yearNavigator) {
                 let yearOptions = [];
@@ -3437,7 +3436,7 @@ export const Calendar = React.memo(
                     {
                         className: cx('select'),
                         onChange: (e) => onYearDropdownChange(e, e.target.value),
-                        value: displayYear
+                        value: metaYear
                     },
                     ptm('select')
                 );
@@ -3489,7 +3488,7 @@ export const Calendar = React.memo(
                 ptm('yearTitle')
             );
 
-            return currentView !== 'year' && <button {...yearTitleProps}>{displayYear}</button>;
+            return currentView !== 'year' && <button {...yearTitleProps}>{metaYear}</button>;
         };
 
         const createTitleDecadeElement = () => {
