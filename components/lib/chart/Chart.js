@@ -93,14 +93,14 @@ const PrimeReactChart = React.memo(
         const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
         const ariaLabel = props.ariaLabel || title;
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 style: sx('root'),
                 className: classNames(props.className, cx('root'))
             },
-            ChartBase.getOtherProps(props),
-            ptm('root')
+            ChartBase.getOtherProps(props)
         );
         const canvasProps = mergeProps(
             {

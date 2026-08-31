@@ -660,14 +660,14 @@ export const Tree = React.memo(
         const footer = createFooter();
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 style: props.style,
                 id: props.id
             },
-            TreeBase.getOtherProps(props),
-            ptm('root')
+            TreeBase.getOtherProps(props)
         );
 
         return (

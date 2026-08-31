@@ -47,6 +47,7 @@ export const Toolbar = React.memo(
         );
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
@@ -54,8 +55,7 @@ export const Toolbar = React.memo(
                 className: classNames(props.className, cx('root')),
                 role: 'toolbar'
             },
-            ToolbarBase.getOtherProps(props),
-            ptm('root')
+            ToolbarBase.getOtherProps(props)
         );
 
         return (

@@ -85,13 +85,13 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             ref: elementRef,
             style: props.style,
             className: classNames(props.className, cx('root', { imageFailed }))
         },
-        AvatarBase.getOtherProps(props),
-        ptm('root')
+        AvatarBase.getOtherProps(props)
     );
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();

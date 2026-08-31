@@ -162,6 +162,7 @@ export const UIMessage = React.memo(
         );
 
         const rootProps = mergeProps(
+            ptmo(pt, 'root', { ...params, hostName: props.hostName }),
             {
                 ref,
                 className: classNames(_className, cx('uimessage.root', { severity })),
@@ -171,8 +172,7 @@ export const UIMessage = React.memo(
                 'aria-atomic': 'true',
                 onClick
             },
-            getPTOptions('root', parentParams),
-            ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            getPTOptions('root', parentParams)
         );
 
         return (

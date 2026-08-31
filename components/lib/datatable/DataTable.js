@@ -2094,6 +2094,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const resizeHelper = createResizeHelper();
     const reorderIndicators = createReorderIndicators();
     const rootProps = mergeProps(
+        ptCallbacks.ptm('root'),
         {
             id: props.id,
             className: classNames(props.className, ptCallbacks.cx('root', { selectable })),
@@ -2101,8 +2102,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             'data-scrollselectors': '.p-datatable-wrapper',
             'data-showgridlines': props.showGridlines
         },
-        DataTableBase.getOtherProps(props),
-        ptCallbacks.ptm('root')
+        DataTableBase.getOtherProps(props)
     );
 
     return (

@@ -26,14 +26,14 @@ export const Skeleton = React.memo(
         const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 style: { ...style, ...sx('root') },
                 'aria-hidden': true
             },
-            SkeletonBase.getOtherProps(props),
-            ptm('root')
+            SkeletonBase.getOtherProps(props)
         );
 
         return <div {...rootProps} />;

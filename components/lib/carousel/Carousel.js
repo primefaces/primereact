@@ -805,6 +805,7 @@ export const Carousel = React.memo(
         const header = createHeader();
         const footer = createFooter();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
@@ -812,8 +813,7 @@ export const Carousel = React.memo(
                 style: props.style,
                 role: 'region'
             },
-            CarouselBase.getOtherProps(props),
-            ptm('root')
+            CarouselBase.getOtherProps(props)
         );
 
         const contentProps = mergeProps(

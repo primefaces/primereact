@@ -106,6 +106,7 @@ export const Checkbox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = CheckboxBase.getOtherProps(props);
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 className: classNames(props.className, cx('root', { checked, context })),
@@ -115,8 +116,7 @@ export const Checkbox = React.memo(
                 onContextMenu: props.onContextMenu,
                 onMouseDown: props.onMouseDown
             },
-            otherProps,
-            ptm('root')
+            otherProps
         );
 
         const createInputElement = () => {

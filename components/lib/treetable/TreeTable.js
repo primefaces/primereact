@@ -1417,6 +1417,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     );
 
     const rootProps = mergeProps(
+        ptCallbacks.ptm('root'),
         {
             role: 'table',
             id: props.id,
@@ -1424,8 +1425,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             style: props.style,
             'data-scrollselectors': '.p-treetable-wrapper'
         },
-        TreeTableBase.getOtherProps(props),
-        ptCallbacks.ptm('root')
+        TreeTableBase.getOtherProps(props)
     );
 
     return (

@@ -647,13 +647,13 @@ export const FileUpload = React.memo(
             }
 
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     id: props.id,
                     className: classNames(props.className, cx('root')),
                     style: props.style
                 },
-                FileUploadBase.getOtherProps(props),
-                ptm('root')
+                FileUploadBase.getOtherProps(props)
             );
 
             const contentProps = mergeProps(
@@ -715,12 +715,12 @@ export const FileUpload = React.memo(
             );
             const input = !hasFiles && <input {...inputProps} />;
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     className: classNames(props.className, cx('root')),
                     style: props.style
                 },
-                FileUploadBase.getOtherProps(props),
-                ptm('root')
+                FileUploadBase.getOtherProps(props)
             );
 
             const basicButtonProps = mergeProps(

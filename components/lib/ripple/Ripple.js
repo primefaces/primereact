@@ -114,12 +114,12 @@ export const Ripple = React.memo(
         }
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 'aria-hidden': true,
                 className: classNames(cx('root'))
             },
-            RippleBase.getOtherProps(props),
-            ptm('root')
+            RippleBase.getOtherProps(props)
         );
 
         return <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd} />;

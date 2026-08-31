@@ -212,14 +212,14 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     );
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: props.id,
             className: classNames(props.className, cx('root', { context })),
             style: props.style,
             role: 'complementary'
         },
-        SidebarBase.getOtherProps(props),
-        ptm('root')
+        SidebarBase.getOtherProps(props)
     );
 
     const headerProps = mergeProps(

@@ -326,12 +326,12 @@ export const Dock = React.memo(
         const list = createList();
         const footer = createFooter();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            DockBase.getOtherProps(props),
-            ptm('root')
+            DockBase.getOtherProps(props)
         );
 
         const containerProps = mergeProps(
