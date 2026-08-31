@@ -48,7 +48,23 @@ export function TemplateDoc(props) {
     const rightContent = <Button type="button" icon="pi pi-search" />;
 
     const template1 = {
-        layout: 'PrevPageLink PageLinks NextPageLink RowsPerPageDropdown CurrentPageReport',
+        layout: 'PrevPageLink PageLinks NextPageLink RowsPerPageDropdown CurrentPageReport MyButton',
+        MyButton: (op) => {
+            const p = op.props;
+            const firstPage = p.page === 0;
+            const lastPage = p.page === (p.totalPages - 1);
+        
+            return (
+                <div>
+                    <Button type="button" disabled={!(firstPage || lastPage) && !(firstPage && lastPage)}
+                        icon="pi pi-sync" label="Go to middle Page"
+                        tooltip='Button only on First and Last page. On click go to middle page'
+                        onClick={() => {
+                            p.onChange(Math.floor(p.totalPages / 2) * p.rows, p.rows)
+                        }}
+                    />
+                </div>);
+        },
         PrevPageLink: (options) => {
             return (
                 <button type="button" className={classNames(options.className, 'border-round')} onClick={options.onClick} disabled={options.disabled}>
