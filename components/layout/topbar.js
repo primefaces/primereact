@@ -1,6 +1,5 @@
 import { StyleClass } from '@/components/lib/styleclass/StyleClass';
 import { classNames } from '@/components/lib/utils/Utils';
-import { DocSearch } from '@docsearch/react';
 import Link from 'next/link';
 import pkg from 'package.json';
 import { useEffect, useRef } from 'react';
@@ -24,27 +23,6 @@ export default function Topbar(props) {
             url: 'https://v9.primereact.org'
         }
     ];
-
-    {
-        /* doc https://docsearch.algolia.com/docs/api/#transformitems */
-    }
-
-    function handleDocSearchTransformItems(items) {
-        const isLocalhost = process.env.NODE_ENV !== 'production';
-
-        return items.map((item) => {
-            if (isLocalhost) {
-                const url = new URL(item.url);
-
-                url.protocol = window.location.protocol;
-                url.hostname = window.location.hostname;
-                url.port = window.location.port;
-                item.url = url.toString();
-            }
-
-            return item;
-        });
-    }
 
     const onMenuButtonClick = () => {
         props.onMenuButtonClick();
@@ -173,9 +151,6 @@ export default function Topbar(props) {
                 </div>
 
                 <ul className="flex list-none m-0 p-0 gap-2 align-items-center">
-                    <li>
-                        <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} transformItems={handleDocSearchTransformItems} />
-                    </li>
                     <li>
                         <a
                             href="https://github.com/primefaces/primereact"
