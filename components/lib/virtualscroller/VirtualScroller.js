@@ -781,6 +781,7 @@ export const VirtualScroller = React.memo(
         const content = createContent();
         const spacer = createSpacer();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className,
@@ -788,8 +789,7 @@ export const VirtualScroller = React.memo(
                 style: props.style,
                 onScroll: (e) => onScroll(e)
             },
-            VirtualScrollerBase.getOtherProps(props),
-            ptm('root')
+            VirtualScrollerBase.getOtherProps(props)
         );
 
         return (

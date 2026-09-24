@@ -178,6 +178,7 @@ export const SlideMenu = React.memo(
             const wrapperStyle = { height: props.viewportHeight + 'px' };
             const backward = createBackward();
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     ref: menuRef,
                     id: props.id,
@@ -185,8 +186,7 @@ export const SlideMenu = React.memo(
                     style: props.style,
                     onClick: (e) => onPanelClick(e)
                 },
-                SlideMenuBase.getOtherProps(props),
-                ptm('root')
+                SlideMenuBase.getOtherProps(props)
             );
 
             const wrapperProps = mergeProps(

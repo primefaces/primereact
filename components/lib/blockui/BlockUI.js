@@ -120,6 +120,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const mask = createMask();
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: props.id,
             ref: elementRef,
@@ -127,8 +128,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
             className: classNames(props.containerClassName, cx('root')),
             'aria-busy': props.blocked
         },
-        BlockUIBase.getOtherProps(props),
-        ptm('root')
+        BlockUIBase.getOtherProps(props)
     );
 
     return (

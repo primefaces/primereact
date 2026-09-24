@@ -329,14 +329,14 @@ export const TabMenu = React.memo(
             );
 
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     id: props.id,
                     ref: elementRef,
                     className: classNames(props.className, cx('root')),
                     style: props.style
                 },
-                TabMenuBase.getOtherProps(props),
-                ptm('root')
+                TabMenuBase.getOtherProps(props)
             );
 
             return (

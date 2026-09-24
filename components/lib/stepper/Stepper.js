@@ -332,12 +332,12 @@ export const Stepper = React.memo(
         };
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 className: classNames(cx('root')),
                 role: 'tablist'
             },
-            StepperBase.getOtherProps(props),
-            ptm('root')
+            StepperBase.getOtherProps(props)
         );
 
         return (

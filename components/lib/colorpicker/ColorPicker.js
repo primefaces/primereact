@@ -641,14 +641,14 @@ export const ColorPicker = React.memo(
         const content = createContent();
         const input = createInput();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
                 className: classNames(props.className, cx('root'))
             },
-            ColorPickerBase.getOtherProps(props),
-            ptm('root')
+            ColorPickerBase.getOtherProps(props)
         );
 
         return (

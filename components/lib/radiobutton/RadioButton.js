@@ -110,14 +110,14 @@ export const RadioButton = React.memo(
         const otherProps = RadioButtonBase.getOtherProps(props);
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 'data-p-checked': props.checked
             },
-            otherProps,
-            ptm('root')
+            otherProps
         );
 
         delete rootProps.input;

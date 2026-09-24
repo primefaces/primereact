@@ -292,14 +292,14 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             id: props.id,
             ref: containerRef,
             style: props.style,
             className: classNames(props.className, cx('root'))
         },
-        ScrollPanelBase.getOtherProps(props),
-        ptm('root')
+        ScrollPanelBase.getOtherProps(props)
     );
 
     const wrapperProps = mergeProps(

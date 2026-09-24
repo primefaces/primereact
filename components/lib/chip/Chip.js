@@ -105,14 +105,14 @@ export const Chip = React.memo(
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     ref: elementRef,
                     style: props.style,
                     className: classNames(props.className, cx('root')),
                     'aria-label': props.label
                 },
-                ChipBase.getOtherProps(props),
-                ptm('root')
+                ChipBase.getOtherProps(props)
             );
 
             return (

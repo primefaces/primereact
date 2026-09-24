@@ -26,13 +26,13 @@ export const Badge = React.memo(
         }));
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 style: props.style,
                 className: classNames(props.className, cx('root'))
             },
-            BadgeBase.getOtherProps(props),
-            ptm('root')
+            BadgeBase.getOtherProps(props)
         );
 
         return <span {...rootProps}>{props.value}</span>;

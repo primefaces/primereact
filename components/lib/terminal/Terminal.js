@@ -200,6 +200,7 @@ export const Terminal = React.memo(
         const content = createContent();
         const prompt = createPromptContainer();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: props.id,
                 ref: elementRef,
@@ -207,8 +208,7 @@ export const Terminal = React.memo(
                 style: props.style,
                 onClick
             },
-            TerminalBase.getOtherProps(props),
-            ptm('root')
+            TerminalBase.getOtherProps(props)
         );
 
         return (

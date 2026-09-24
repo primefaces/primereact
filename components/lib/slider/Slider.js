@@ -356,13 +356,13 @@ export const Slider = React.memo(
 
         const content = props.range ? createRangeSlider() : createSingleSlider();
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 style: props.style,
                 className: classNames(props.className, cx('root', { vertical, horizontal })),
                 onClick: onBarClick
             },
-            SliderBase.getOtherProps(props),
-            ptm('root')
+            SliderBase.getOtherProps(props)
         );
 
         return (

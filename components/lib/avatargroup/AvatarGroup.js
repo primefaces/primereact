@@ -24,13 +24,13 @@ export const AvatarGroup = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             ref: elementRef,
             style: props.style,
             className: classNames(props.className, cx('root'))
         },
-        AvatarGroupBase.getOtherProps(props),
-        ptm('root')
+        AvatarGroupBase.getOtherProps(props)
     );
 
     return <div {...rootProps}>{props.children}</div>;

@@ -851,6 +851,7 @@ export const TreeSelect = React.memo(
             ptm('lastHiddenFocusableElementOnOverlay')
         );
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 ref: elementRef,
                 className: classNames(
@@ -865,8 +866,7 @@ export const TreeSelect = React.memo(
                 style: props.style,
                 onClick: onClick
             },
-            TreeSelectBase.getOtherProps(props),
-            ptm('root')
+            TreeSelectBase.getOtherProps(props)
         );
 
         const keyboardHelper = createKeyboardHelper();

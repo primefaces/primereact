@@ -25,6 +25,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
+        ptm('root'),
         {
             ref: elementRef,
             style: sx('root'),
@@ -32,8 +33,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
             'aria-orientation': props.layout,
             role: 'separator'
         },
-        DividerBase.getOtherProps(props),
-        ptm('root')
+        DividerBase.getOtherProps(props)
     );
 
     const contentProps = mergeProps(

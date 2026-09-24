@@ -520,6 +520,7 @@ export const Tooltip = React.memo(
         const createElement = () => {
             const empty = isTargetContentEmpty(currentTargetRef.current);
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     id: props.id,
                     className: classNames(props.className, cx('root', { positionState, classNameState })),
@@ -529,8 +530,7 @@ export const Tooltip = React.memo(
                     onMouseEnter: (e) => onMouseEnter(e),
                     onMouseLeave: (e) => onMouseLeave(e)
                 },
-                TooltipBase.getOtherProps(props),
-                ptm('root')
+                TooltipBase.getOtherProps(props)
             );
 
             const arrowProps = mergeProps(

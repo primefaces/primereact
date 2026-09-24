@@ -681,6 +681,7 @@ export const TieredMenu = React.memo(
 
         const createElement = () => {
             const rootProps = mergeProps(
+                ptm('root'),
                 {
                     ref: containerRef,
                     id: props.id,
@@ -688,8 +689,7 @@ export const TieredMenu = React.memo(
                     style: props.style,
                     onClick: onPanelClick
                 },
-                TieredMenuBase.getOtherProps(props),
-                ptm('root')
+                TieredMenuBase.getOtherProps(props)
             );
 
             const transitionProps = mergeProps(

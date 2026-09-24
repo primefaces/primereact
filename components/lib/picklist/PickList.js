@@ -612,14 +612,14 @@ export const PickList = React.memo(
         const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;
 
         const rootProps = mergeProps(
+            ptm('root'),
             {
                 id: attributeSelectorState,
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
                 style: props.style
             },
-            PickListBase.getOtherProps(props),
-            ptm('root')
+            PickListBase.getOtherProps(props)
         );
 
         return (
