@@ -34,11 +34,7 @@ export const Button = React.memo(
             ObjectUtils.combinedRefs(elementRef, ref);
         }, [elementRef, ref]);
 
-        if (props.visible === false) {
-            return null;
-        }
-
-        const createIcon = () => {
+        const icon = React.useMemo(() => {
             let className = classNames('p-button-icon p-c', {
                 [`p-button-icon-${props.iconPos}`]: props.label
             });
@@ -61,12 +57,12 @@ export const Button = React.memo(
                 ptm('loadingIcon')
             );
 
-            const icon = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
+            const iconValue = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
 
-            return IconUtils.getJSXIcon(icon, { ...iconsProps }, { props });
-        };
+            return IconUtils.getJSXIcon(iconValue, { ...iconsProps }, { props });
+        }, [props.icon, props.loading, props.iconPos, props.loadingIcon, props.label, mergeProps, ptm, cx]);
 
-        const createLabel = () => {
+        const label = React.useMemo(() => {
             const labelProps = mergeProps(
                 {
                     className: cx('label')
@@ -79,9 +75,9 @@ export const Button = React.memo(
             }
 
             return !props.children && !props.label && <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />;
-        };
+        }, [props.label, props.children, mergeProps, ptm, cx]);
 
-        const createBadge = () => {
+        const badge = React.useMemo(() => {
             if (props.badge) {
                 const badgeProps = mergeProps(
                     {
@@ -97,19 +93,23 @@ export const Button = React.memo(
             }
 
             return null;
-        };
+        }, [props.badge, props.badgeClassName, props.unstyled, mergeProps, ptm, metaData]);
+
+        // ✅ AFTER hooks (important)
+        if (props.visible === false) {
+            return null;
+        }
 
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
+
         const sizeMapping = {
             large: 'lg',
             small: 'sm'
         };
+
         const size = sizeMapping[props.size];
 
-        const icon = createIcon();
-        const label = createLabel();
-        const badge = createBadge();
         const defaultAriaLabel = props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label'];
 
         const rootProps = mergeProps(
