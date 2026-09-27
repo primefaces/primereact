@@ -134,7 +134,15 @@ export const InputNumber = React.memo(
             } else {
                 const formatter = new Intl.NumberFormat(_locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
 
-                prefixChar.current = formatter.format(1).split('1')[0];
+                // Use formatToParts instead of split('1') so that locales with
+                // non-ASCII numerals (e.g. Bengali ১) are handled correctly.
+                const parts = formatter.formatToParts(1);
+                const integerIndex = parts.findIndex((p) => p.type === 'integer');
+
+                prefixChar.current = parts
+                    .slice(0, integerIndex)
+                    .map((p) => p.value)
+                    .join('');
             }
 
             return new RegExp(`${escapeRegExp(prefixChar.current || '')}`, 'g');
@@ -153,7 +161,15 @@ export const InputNumber = React.memo(
                     roundingMode: props.roundingMode
                 });
 
-                suffixChar.current = formatter.format(1).split('1')[1];
+                // Use formatToParts instead of split('1') so that locales with
+                // non-ASCII numerals (e.g. Bengali ১) are handled correctly.
+                const parts = formatter.formatToParts(1);
+                const integerIndex = parts.findIndex((p) => p.type === 'integer');
+
+                suffixChar.current = parts
+                    .slice(integerIndex + 1)
+                    .map((p) => p.value)
+                    .join('');
             }
 
             return new RegExp(`${escapeRegExp(suffixChar.current || '')}`, 'g');
