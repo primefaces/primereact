@@ -31,6 +31,7 @@ export const Dropdown = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
+        const lastSelectedOption = React.useRef(null);
         const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
         const hasFilter = ObjectUtils.isNotEmpty(filterState);
         const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
@@ -930,7 +931,24 @@ export const Dropdown = React.memo(
         const getSelectedOption = () => {
             const index = getSelectedOptionIndex(props.options);
 
-            return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(props.options[index.group])[index.option] : props.options[index]) : null;
+            const currentOption = index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(props.options[index.group])[index.option] : props.options[index]) : null;
+            
+            // selected value not shown if not present in options list #8510
+            if (currentOption) {
+                lastSelectedOption.current = currentOption;
+
+                return currentOption;
+            }
+
+            if (props.value != null && lastSelectedOption.current != null) {
+                const key = equalityKey();
+
+                if (ObjectUtils.equals(props.value, getOptionValue(lastSelectedOption.current), key)) {
+                    return lastSelectedOption.current;
+                }
+            }
+
+            return null;
         };
 
         React.useImperativeHandle(ref, () => ({
