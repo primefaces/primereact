@@ -72,46 +72,40 @@ export const OrganizationChartNode = React.memo((props) => {
             return null;
         }
 
-        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+        const nodesProps = mergeProps(
+            {
+                className: cx('nodes'),
+                style: { visibility }
+            },
+            _ptm('nodes')
+        );
 
-        return rows.map((row, rowIndex) => {
-            const colspan = row.length * 2;
+        const nodeCellProps = mergeProps(
+            {
+                colSpan: '2'
+            },
+            _ptm('nodeCell')
+        );
 
-            const nodesProps = mergeProps(
-                {
-                    className: cx('nodes'),
-                    style: { visibility }
-                },
-                _ptm('nodes')
-            );
-
-            const nodeCellProps = mergeProps(
-                {
-                    colSpan: '2'
-                },
-                _ptm('nodeCell')
-            );
-
-            return (
-                <tr {...nodesProps} key={rowIndex}>
-                    {row.map((child, index) => (
-                        <td key={index} {...nodeCellProps}>
-                            <OrganizationChartNode
-                                node={child}
-                                nodeTemplate={props.nodeTemplate}
-                                selectionMode={props.selectionMode}
-                                onNodeClick={props.onNodeClick}
-                                isSelected={props.isSelected}
-                                togglerIcon={props.togglerIcon}
-                                ptm={ptm}
-                                cx={cx}
-                                sx={sx}
-                            />
-                        </td>
-                    ))}
-                </tr>
-            );
-        });
+        return (
+            <tr {...nodesProps}>
+                {row.map((child, index) => (
+                    <td key={index} {...nodeCellProps}>
+                        <OrganizationChartNode
+                            node={child}
+                            nodeTemplate={props.nodeTemplate}
+                            selectionMode={props.selectionMode}
+                            onNodeClick={props.onNodeClick}
+                            isSelected={props.isSelected}
+                            togglerIcon={props.togglerIcon}
+                            ptm={ptm}
+                            cx={cx}
+                            sx={sx}
+                        />
+                    </td>
+                ))}
+            </tr>
+        );
     };
 
     const createLinesMiddle = (row) => {
@@ -119,46 +113,42 @@ export const OrganizationChartNode = React.memo((props) => {
             return null;
         }
 
-        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+        const nodeChildLength = row.length;
 
-        return rows.map((row, rowIndex) => {
-            const nodeChildLength = row.length;
+        const linesProps = mergeProps(
+            {
+                className: cx('lines'),
+                style: { visibility }
+            },
+            _ptm('lines')
+        );
 
-            const linesProps = mergeProps(
-                {
-                    className: cx('lines'),
-                    style: { visibility }
-                },
-                _ptm('lines')
-            );
+        return (
+            <tr {...linesProps}>
+                {row.map((_, index) => {
+                    const lineLeftProps = mergeProps(
+                        {
+                            className: cx('lineLeft', { index })
+                        },
+                        getNodePTOptions(index !== 0, 'lineLeft')
+                    );
 
-            return (
-                <tr {...linesProps} key={rowIndex}>
-                    {row.map((_, index) => {
-                        const lineLeftProps = mergeProps(
-                            {
-                                className: cx('lineLeft', { index })
-                            },
-                            getNodePTOptions(index !== 0, 'lineLeft')
-                        );
+                    const lineRightProps = mergeProps(
+                        {
+                            className: cx('lineRight', { index, nodeChildLength })
+                        },
+                        getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
+                    );
 
-                        const lineRightProps = mergeProps(
-                            {
-                                className: cx('lineRight', { index, nodeChildLength })
-                            },
-                            getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
-                        );
-
-                        return (
-                            <React.Fragment key={index}>
-                                <td {...lineLeftProps}>&nbsp;</td>
-                                <td {...lineRightProps}>&nbsp;</td>
-                            </React.Fragment>
-                        );
-                    })}
-                </tr>
-            );
-        });
+                    return (
+                        <React.Fragment key={index}>
+                            <td {...lineLeftProps}>&nbsp;</td>
+                            <td {...lineRightProps}>&nbsp;</td>
+                        </React.Fragment>
+                    );
+                })}
+            </tr>
+        );
     };
 
     const createLinesDown = (row) => {
@@ -166,41 +156,37 @@ export const OrganizationChartNode = React.memo((props) => {
             return null;
         }
 
-        const rows = chunkArray(node.children, MAX_CHILDREN_PER_ROW);
+        const colspan = row.length * 2;
 
-        return rows.map((row, rowIndex) => {
-            const colspan = row.length * 2;
+        const linesProps = mergeProps(
+            {
+                className: cx('lines'),
+                style: { visibility }
+            },
+            _ptm('lines')
+        );
 
-            const linesProps = mergeProps(
-                {
-                    className: cx('lines'),
-                    style: { visibility }
-                },
-                _ptm('lines')
-            );
+        const lineCellProps = mergeProps(
+            {
+                colSpan: colspan
+            },
+            _ptm('lineCell')
+        );
 
-            const lineCellProps = mergeProps(
-                {
-                    colSpan: colspan
-                },
-                _ptm('lineCell')
-            );
+        const lineDownProps = mergeProps(
+            {
+                className: cx('lineDown')
+            },
+            _ptm('lineDown')
+        );
 
-            const lineDownProps = mergeProps(
-                {
-                    className: cx('lineDown')
-                },
-                _ptm('lineDown')
-            );
-
-            return (
-                <tr {...linesProps} key={rowIndex}>
-                    <td {...lineCellProps}>
-                        <div {...lineDownProps} />
-                    </td>
-                </tr>
-            );
-        });
+        return (
+            <tr {...linesProps}>
+                <td {...lineCellProps}>
+                    <div {...lineDownProps} />
+                </td>
+            </tr>
+        );
     };
 
     const createToggler = () => {
