@@ -190,6 +190,18 @@ const styles = `
     .p-fluid .p-multiselect {
         display: flex;
     }
+    .p-multiselect-group-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1.25rem;
+        cursor: pointer;
+    }
+}
+    .p-multiselect-group-header:hover{
+        background-color: var(--primary-100);
+   
+    }
 }
 `;
 
