@@ -74,10 +74,6 @@ export const TreeTableRow = React.memo((props) => {
         return ptm(key, rowMetadata);
     };
 
-    const isLeaf = () => {
-        return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
-    };
-
     const onTogglerClick = (event) => {
         expanded ? collapse(event) : expand(event);
 
@@ -336,7 +332,6 @@ export const TreeTableRow = React.memo((props) => {
 
     const onArrowRightKey = (event) => {
         const ishiddenIcon = DomHandler.findSingle(event.currentTarget, 'button').style.visibility === 'hidden';
-        const togglerElement = DomHandler.findSingle(elementRef.current, '[data-pc-section="rowtoggler"]');
 
         if (ishiddenIcon) {
             return;
@@ -354,7 +349,6 @@ export const TreeTableRow = React.memo((props) => {
 
         const currentTarget = event.currentTarget;
         const ishiddenIcon = DomHandler.findSingle(currentTarget, 'button').style.visibility === 'hidden';
-        const togglerElement = DomHandler.findSingle(currentTarget, '[data-pc-section="rowtoggler"]');
 
         if (expanded && !ishiddenIcon) {
             collapse(event);
