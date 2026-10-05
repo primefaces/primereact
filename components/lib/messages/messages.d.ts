@@ -92,7 +92,7 @@ export interface MessagesMessage {
     /**
      * Severity of the message.
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast' | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | 'contrast' | undefined;
     /**
      * Custom template of the message.
      */
