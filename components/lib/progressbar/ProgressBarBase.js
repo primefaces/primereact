@@ -25,6 +25,7 @@ const styles = `
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      min-width: max-content;
   }
   
   .p-progressbar-determinate .p-progressbar-label {
