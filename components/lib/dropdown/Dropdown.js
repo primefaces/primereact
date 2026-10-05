@@ -1100,7 +1100,8 @@ export const Dropdown = React.memo(
                 return <input {...inputProps} />;
             }
 
-            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || props.emptyMessage || <>&nbsp;</>;
+            const templateValue = selectedOption || props.value;
+            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, templateValue, props) : label || props.placeholder || props.emptyMessage || <>&nbsp;</>;
             const inputProps = mergeProps(
                 {
                     ref: inputRef,
@@ -1121,7 +1122,7 @@ export const Dropdown = React.memo(
         };
 
         const createClearIcon = () => {
-            if (props.value != null && props.showClear && !props.disabled && !ObjectUtils.isEmpty(props.options)) {
+            if (props.value != null && props.showClear && !props.disabled) {
                 const clearIconProps = mergeProps(
                     {
                         className: cx('clearIcon'),
