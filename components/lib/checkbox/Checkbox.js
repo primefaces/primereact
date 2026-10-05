@@ -136,6 +136,7 @@ export const Checkbox = React.memo(
                     required: props.required,
                     'aria-invalid': props.invalid,
                     checked: checked,
+                    value: props.value,
                     ...ariaProps
                 },
                 ptm('input')
