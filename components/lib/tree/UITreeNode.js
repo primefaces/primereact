@@ -430,13 +430,13 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onArrowRight = (event) => {
-        if (isLeaf || expanded) {
+        if (isLeaf) {
             return;
         }
 
         event.currentTarget.tabIndex = -1;
 
-        expand(event, true);
+        expand(event, expanded);
     };
 
     const onArrowLeft = (event) => {
