@@ -89,19 +89,7 @@ export const FocusTrap = React.memo(
             const { tabIndex = 0 } = props || {};
 
             const createFocusableElement = (inRef, onFocus, section) => {
-                return (
-                    <span
-                        ref={inRef}
-                        className={'p-hidden-accessible p-hidden-focusable'}
-                        tabIndex={tabIndex}
-                        role={'presentation'}
-                        aria-hidden={true}
-                        data-p-hidden-accessible={true}
-                        data-p-hidden-focusable={true}
-                        onFocus={onFocus}
-                        data-pc-section={section}
-                    />
-                );
+                return <span ref={inRef} className={'p-hidden-accessible p-hidden-focusable'} tabIndex={tabIndex} data-p-hidden-accessible={true} data-p-hidden-focusable={true} onFocus={onFocus} data-pc-section={section} />;
             };
 
             const firstFocusableElement = createFocusableElement(firstFocusableElementRef, onFirstHiddenElementFocus, 'firstfocusableelement');
